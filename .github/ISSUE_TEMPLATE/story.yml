@@ -1,0 +1,159 @@
+name: User Story
+description: Incremento implementável com critérios de aceite testáveis (sub-issue de uma Feature)
+title: "US-FX-NN: "
+labels: ["story"]
+body:
+  - type: input
+    id: feature_pai
+    attributes:
+      label: Feature pai
+      description: "Número da Feature à qual esta Story pertence (use `#` para referenciar, ex.: `#42`). Pode ser cross-repo: `unifesspa-edu-br/uniplus-api#42`."
+      placeholder: "#42"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo
+      description: Categoria de trabalho dominante da Story
+      options:
+        - frontend
+        - backend
+        - api-contract
+        - migration
+        - test
+        - infra
+        - docs
+        - refactor
+        - chore
+        - bugfix
+    validations:
+      required: true
+
+  - type: dropdown
+    id: prioridade
+    attributes:
+      label: Prioridade
+      options:
+        - Alta
+        - Média
+        - Baixa
+      default: 1
+    validations:
+      required: true
+
+  - type: input
+    id: estimativa
+    attributes:
+      label: Estimativa (Story Points)
+      description: Pontuação acordada na cerimônia de planning. Deixar em branco se ainda não pontuada.
+      placeholder: "5"
+    validations:
+      required: false
+
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Descrição
+      description: Narrativa no formato Como/Quero/Para
+      placeholder: |
+        **Como** [perfil do usuário],
+        **quero** [ação/funcionalidade],
+        **para** [valor de negócio/resultado esperado].
+    validations:
+      required: true
+
+  - type: textarea
+    id: criterios_aceite
+    attributes:
+      label: Critérios de aceite (CA)
+      description: Cada critério deve ser testável. CA-03 e CA-04 são obrigatórios em todas as Stories user-facing.
+      value: |
+        - [ ] **CA-01:** [Descrição da regra ou comportamento esperado].
+        - [ ] **CA-02:** [Regra de validação de dados ou erro].
+        - [ ] **CA-03:** Conforme a **LGPD**, dados sensíveis (PII — CPF, nome, endereço) são mascarados em logs e interfaces públicas.
+        - [ ] **CA-04:** A interface segue os padrões de acessibilidade **WCAG 2.1 AA** e **e-MAG 3.1**.
+    validations:
+      required: true
+
+  - type: textarea
+    id: bdd
+    attributes:
+      label: Cenários BDD (Gherkin)
+      description: Cenário principal de sucesso e ao menos um de erro/exceção. Linguagem pt-BR.
+      value: |
+        ```gherkin
+        # language: pt
+
+        Funcionalidade: [Título da funcionalidade]
+          [Breve descrição da funcionalidade]
+
+          Cenário: [Título do cenário de sucesso]
+            Dado [contexto ou estado inicial]
+            Quando [ação realizada pelo usuário]
+            Então [resultado esperado no sistema]
+
+          Cenário: [Título do cenário de erro/exceção]
+            Dado [contexto específico]
+            Quando [ação inválida]
+            Então [mensagem de erro ou bloqueio apresentada]
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: dor
+    attributes:
+      label: Definition of Ready (DoR) — pré-requisitos para iniciar
+      description: A Story só entra em sprint quando todos os itens estiverem atendidos.
+      value: |
+        - [ ] **Clareza:** o "para quê" (valor de negócio) está bem definido.
+        - [ ] **BDD:** cenários principais descritos em Gherkin e revisados.
+        - [ ] **UI/UX:** protótipos (se houver) anexados ou vinculados.
+        - [ ] **Dependências:** sem impedimentos técnicos externos bloqueando o início.
+        - [ ] **Estimativa:** time de desenvolvimento pontuou a Story.
+    validations:
+      required: false
+
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done (DoD) — critérios para conclusão
+      description: A Story só é considerada pronta quando todos os itens estiverem marcados.
+      value: |
+        - [ ] **Código:** revisado via Pull Request (revisão humana cruzada).
+        - [ ] **Testes:** cobertura de testes unitários/integração ≥ 80%.
+        - [ ] **Segurança:** PII masking e auditoria implementados (*LGPD by design*).
+        - [ ] **Documentação:** documentos técnicos atualizados em `docs/` (api/web/docs).
+        - [ ] **Deploy:** código integrado na `main` e disponível em ambiente de staging.
+        - [ ] **Validação:** P.O. validou os critérios de aceite.
+    validations:
+      required: false
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks (decomposição técnica)
+      description: Lista preliminar de Tasks — cada uma virará sub-issue com label `task`
+      placeholder: |
+        - [ ] Task 1
+        - [ ] Task 2
+    validations:
+      required: false
+
+  - type: textarea
+    id: dependencias
+    attributes:
+      label: Dependências
+      description: Issues ou decisões que bloqueiam esta Story
+    validations:
+      required: false
+
+  - type: textarea
+    id: notas
+    attributes:
+      label: Notas de implementação e referências
+      description: ADRs relacionados, RFs, RNs, legislação aplicável, links externos.
+    validations:
+      required: false
