@@ -3,6 +3,8 @@ import people from '@site/src/data/fake-people.json';
 
 interface Person {
   nome: string;
+  /** Nome social — presente apenas em parte das personas (RN02). */
+  nome_social?: string;
   idade: number;
   sexo: string;
   data_nasc: string;
@@ -20,10 +22,6 @@ interface Person {
   estado: string;
   telefone_fixo: string;
   celular: string;
-  altura: string;
-  peso: number | string;
-  tipo_sanguineo: string;
-  cor: string;
 }
 
 const data = people as Person[];
@@ -31,6 +29,7 @@ const data = people as Person[];
 /** Display labels (pt-BR) for every field shown in the details dialog. */
 const FIELD_LABELS: Record<keyof Person, string> = {
   nome: 'Nome',
+  nome_social: 'Nome social',
   idade: 'Idade',
   sexo: 'Sexo',
   data_nasc: 'Data de nascimento',
@@ -48,10 +47,6 @@ const FIELD_LABELS: Record<keyof Person, string> = {
   estado: 'UF',
   telefone_fixo: 'Telefone fixo',
   celular: 'Celular',
-  altura: 'Altura',
-  peso: 'Peso',
-  tipo_sanguineo: 'Tipo sanguíneo',
-  cor: 'Cor favorita',
 };
 
 const DETAIL_FIELDS = Object.keys(FIELD_LABELS) as (keyof Person)[];
@@ -62,31 +57,44 @@ function normalize(text: string): string {
   return text.toLowerCase().normalize('NFD').replace(COMBINING_MARKS, '');
 }
 
-/** Copies text to the clipboard, with a fallback for non-secure (http) contexts. */
-async function copyText(value: string): Promise<void> {
+/**
+ * Copies text to the clipboard, with a fallback for non-secure (http) contexts.
+ *
+ * The fallback textarea is appended to `container` (the open <dialog>) rather
+ * than to <body>: a modal dialog renders the rest of the document inert, so a
+ * textarea outside it cannot be selected and the copy silently fails. The
+ * execCommand result is checked so the caller never reports a false success.
+ */
+async function copyText(value: string, container?: HTMLElement): Promise<void> {
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(value);
     return;
   }
+  const root = container ?? document.body;
   const textarea = document.createElement('textarea');
   textarea.value = value;
-  textarea.style.position = 'fixed';
-  textarea.style.opacity = '0';
-  document.body.appendChild(textarea);
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'absolute';
+  textarea.style.left = '-9999px';
+  root.appendChild(textarea);
   textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textarea);
+  const ok = document.execCommand('copy');
+  root.removeChild(textarea);
+  if (!ok) throw new Error('Falha ao copiar para a área de transferência.');
 }
 
 function CopyButton({label, value}: {label: string; value: string}): React.ReactElement {
   const [copied, setCopied] = useState(false);
   const timer = useRef<number>(undefined);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
   const onCopy = useCallback(async () => {
     try {
-      await copyText(value);
+      // Append the fallback textarea inside the open dialog (not inert).
+      const container = buttonRef.current?.closest('dialog') as HTMLElement | null;
+      await copyText(value, container ?? undefined);
       setCopied(true);
       window.clearTimeout(timer.current);
       timer.current = window.setTimeout(() => setCopied(false), 1500);
@@ -97,6 +105,7 @@ function CopyButton({label, value}: {label: string; value: string}): React.React
 
   return (
     <button
+      ref={buttonRef}
       type="button"
       className="button button--sm button--outline button--primary"
       aria-label={`Copiar ${label}`}
@@ -160,7 +169,9 @@ function PersonDialog({
             </button>
           </header>
           <dl style={{margin: 0}}>
-            {DETAIL_FIELDS.map((field) => {
+            {DETAIL_FIELDS.filter(
+              (field) => person[field] !== undefined && person[field] !== '',
+            ).map((field) => {
               const value = String(person[field]);
               return (
                 <div
