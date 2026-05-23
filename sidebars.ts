@@ -14,7 +14,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Produto e domínio',
       collapsed: false,
-      items: ['produto/visao'],
+      items: ['produto/visao', 'produto/taxonomia-rastreabilidade-requisitos'],
     },
     {
       type: 'category',

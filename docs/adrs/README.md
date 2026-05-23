@@ -30,6 +30,7 @@ npx markdownlint-cli2 'docs/adrs/**/*.md'
 | ADR | Título | Status | Data |
 |-----|--------|--------|------|
 | [0001](0001-arquitetura-portal-desenvolvedores.md) | Arquitetura do portal de desenvolvedores — Docusaurus + Redoc embed em MDX + Gov.br DS theming | accepted | 2026-05-03 |
+| [0002](0002-governanca-editorial-fontes-canonicas-portal-publico.md) | Governança editorial e fontes canônicas do portal público | accepted | 2026-05-23 |
 
 ## Como adicionar um novo ADR
 
