@@ -28,5 +28,5 @@ A plataforma foi projetada para expandir além do CEPS — módulos futuros
 :::info Em construção
 As páginas detalhadas de **requisitos**, **regras de negócio** e **casos de uso**
 serão publicadas nas próximas entregas da trilha de Produto. Os exemplos usarão
-as [personas fictícias](../personas/pessoas-ficticias.md).
+as [personas fictícias](../personas/cadastros.mdx).
 :::

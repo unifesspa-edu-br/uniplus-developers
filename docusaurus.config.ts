@@ -105,7 +105,7 @@ const config: Config = {
           title: 'Documentação',
           items: [
             {label: 'Visão do produto', to: '/produto/visao'},
-            {label: 'Personas fictícias', to: '/personas/pessoas-ficticias'},
+            {label: 'Personas fictícias', to: '/personas/'},
             {label: 'Referência de API', to: '/referencia-api/proof-gate'},
           ],
         },

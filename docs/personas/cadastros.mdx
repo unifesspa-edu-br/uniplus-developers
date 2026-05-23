@@ -1,28 +1,30 @@
 ---
-sidebar_position: 2
-title: Cadastros (fake)
+slug: /personas/
+sidebar_position: 1
+title: Personas (cadastros fictícios)
 description: Catálogo de 30 cadastros de pessoas fictícias para testes de formulários, UI e integração.
 ---
 
-import PessoasFake from '@site/src/components/PessoasFake';
+import FakePeopleTable from '@site/src/components/FakePeopleTable';
 
-# Cadastros fictícios
+# Personas fictícias
 
-Catálogo de **30 pessoas fictícias** com perfil completo (documentos, endereço,
-contatos, dados físicos) para uso em **testes de formulários, telas e
-integração**. Todos os dados são **gerados e fictícios** — nenhuma pessoa real.
+Catálogo de **30 pessoas fictícias** com perfil completo para uso em **testes de
+formulários, telas e integração**. Todos os dados são **gerados e fictícios** —
+nenhuma pessoa real.
 
 :::warning Regra
-Use **apenas** estes cadastros nos exemplos. Não invente CPF, nome ou e-mail
-avulso. Para a lista enxuta usada nos exemplos de API (Ana, Bruno, Carla…),
-veja [Personas fictícias](pessoas-ficticias.md).
+Use **apenas** estas personas nos exemplos e testes. Não invente CPF, nome ou
+e-mail avulso — reutilize um cadastro desta lista para manter os exemplos
+consistentes e garantir que nenhum dado real entre na documentação.
 :::
 
 :::note Sobre os dados
-CPF, RG, CEP e telefones estão **mascarados** (formato de exibição). Os e-mails
-usam domínios genéricos fictícios. Senhas foram **omitidas** de propósito —
-não há valor em expor credenciais, mesmo fake, em página pública. Para um
-cenário de login em teste, defina a senha no próprio fixture do teste.
+A tabela mostra os campos principais; clique em **Detalhes** para abrir o perfil
+completo, com um botão para **copiar** cada campo (útil para colar em testes).
+CPF, RG, CEP e telefones estão mascarados; os e-mails usam domínios genéricos
+fictícios. Senhas foram omitidas de propósito — defina a senha no próprio
+fixture do teste quando precisar de um cenário de login.
 :::
 
-<PessoasFake />
+<FakePeopleTable />
