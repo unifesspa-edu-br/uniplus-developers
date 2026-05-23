@@ -1,0 +1,28 @@
+---
+sidebar_position: 2
+title: Cadastros (fake)
+description: Catálogo de 30 cadastros de pessoas fictícias para testes de formulários, UI e integração.
+---
+
+import PessoasFake from '@site/src/components/PessoasFake';
+
+# Cadastros fictícios
+
+Catálogo de **30 pessoas fictícias** com perfil completo (documentos, endereço,
+contatos, dados físicos) para uso em **testes de formulários, telas e
+integração**. Todos os dados são **gerados e fictícios** — nenhuma pessoa real.
+
+:::warning Regra
+Use **apenas** estes cadastros nos exemplos. Não invente CPF, nome ou e-mail
+avulso. Para a lista enxuta usada nos exemplos de API (Ana, Bruno, Carla…),
+veja [Personas fictícias](pessoas-ficticias.md).
+:::
+
+:::note Sobre os dados
+CPF, RG, CEP e telefones estão **mascarados** (formato de exibição). Os e-mails
+usam domínios genéricos fictícios. Senhas foram **omitidas** de propósito —
+não há valor em expor credenciais, mesmo fake, em página pública. Para um
+cenário de login em teste, defina a senha no próprio fixture do teste.
+:::
+
+<PessoasFake />

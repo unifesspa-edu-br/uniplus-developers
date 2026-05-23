@@ -20,7 +20,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Convenções',
       collapsed: false,
-      items: ['personas/pessoas-ficticias'],
+      items: ['personas/pessoas-ficticias', 'personas/cadastros'],
     },
   ],
 
