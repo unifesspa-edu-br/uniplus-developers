@@ -47,3 +47,10 @@ e-mails usam o domínio reservado `@exemplo.test`.
 Use UUIDs v7 fictícios para `id` em exemplos, ex.:
 `01890a5d-ac96-774b-bcce-b302099a8057`.
 :::
+
+## Catálogo completo
+
+A tabela acima é o conjunto enxuto para exemplos de API. Para **testes de
+formulários, telas e integração** há um catálogo de 30 cadastros fictícios com
+perfil completo (documentos, endereço, contatos): ver
+[**Cadastros (fake)**](cadastros.mdx).
