@@ -28,6 +28,9 @@
   /* Bordas. */
   --ifm-global-radius: var(--radius-govbr-sm);
 
+  /* Links sublinhados — distinguíveis sem depender só de cor (WCAG 1.4.1). */
+  --ifm-link-decoration: underline;
+
   --docusaurus-highlighted-code-line-bg: rgba(19, 81, 180, 0.1);
 }
 

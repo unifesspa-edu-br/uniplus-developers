@@ -5,6 +5,11 @@
 /build
 /.docusaurus
 
+# Playwright
+/test-results
+/playwright-report
+/playwright/.cache
+
 # Caches e logs
 .cache-loader
 npm-debug.log*
