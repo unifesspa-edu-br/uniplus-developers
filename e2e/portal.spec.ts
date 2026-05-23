@@ -91,7 +91,8 @@ test.describe('Personas (cadastros fictícios)', () => {
 
     const copyCpf = dialog.getByRole('button', {name: 'Copiar CPF'});
     await copyCpf.click();
-    await expect(copyCpf).toHaveText('Copiado!');
+    // O botão é icônico; o feedback de cópia é o nome acessível mudando.
+    await expect(dialog.getByRole('button', {name: 'CPF copiado'})).toBeVisible();
 
     // Verifica que copiou DE FATO (não apenas o rótulo do botão).
     const clipboard = await page.evaluate(() => navigator.clipboard.readText());
