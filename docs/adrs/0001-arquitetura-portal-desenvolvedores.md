@@ -155,7 +155,7 @@ Essa separação permite reuso liberal do código por outras instituições fede
 
 - **B (Redocusaurus preset).** Layout `1 spec → 1 page` opinionado não atende per-resource versioning + multi-módulo + jornadas; preset abstrai exatamente o controle que precisamos; preset é third-party e a verificação de manutenção foi flag de risco no spike.
 - **C (Astro Starlight + Scalar).** Versionamento de docs não é first-class no Starlight (2026-05); workaround manual viola critério de mandatory native support. Theming Scalar para Gov.br é mais difícil que Redoc (Scalar é mais opinionado visualmente).
-- **D (Hugo + Redocly).** Templating Go é fit ruim com skill set JS/TS do time CTIC; componentes interativos limitados; sem MDX equivalente; multi-version docs exige routing custom. Build speed é irrelevante na escala docs site.
+- **D (Hugo + Redocly).** Templating Go é fit ruim com as competências JS/TS do time CTIC; componentes interativos limitados; sem MDX equivalente; multi-version docs exige routing custom. Build speed é irrelevante na escala docs site.
 - **E (Redocly web component).** Hidratação de web component em Docusaurus tem pegadinhas conhecidas com Shadow DOM e propagação de variáveis CSS de tema. Theming Gov.br via Shadow DOM boundary é mais difícil que via Emotion. Sem vantagem de ecossistema sobre o React component (mesmo dono Redocly).
 - **F (SaaS).** Vendor lock-in inaceitável para portal institucional federal. Custo recorrente sem orçamento.
 

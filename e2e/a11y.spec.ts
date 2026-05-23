@@ -13,6 +13,10 @@ const WCAG_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'];
 const pages = [
   {name: 'home', url: '/'},
   {name: 'personas (cadastros)', url: '/personas/'},
+  {name: 'produto requisitos', url: '/produto/requisitos/'},
+  {name: 'produto regras de negócio', url: '/produto/regras-negocio/'},
+  {name: 'produto rastreabilidade', url: '/produto/rastreabilidade/'},
+  {name: 'produto MVP Seleção', url: '/produto/mvp-selecao/'},
 ];
 
 for (const {name, url} of pages) {

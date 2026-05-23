@@ -14,7 +14,14 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Produto e domínio',
       collapsed: false,
-      items: ['produto/visao', 'produto/taxonomia-rastreabilidade-requisitos'],
+      items: [
+        'produto/visao',
+        'produto/taxonomia-rastreabilidade-requisitos',
+        'produto/requisitos/index',
+        'produto/regras-negocio/index',
+        'produto/rastreabilidade/index',
+        'produto/mvp-selecao/index',
+      ],
     },
     {
       type: 'category',

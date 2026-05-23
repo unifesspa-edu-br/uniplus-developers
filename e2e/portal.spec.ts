@@ -23,6 +23,20 @@ test.describe('Portal — navegação e conteúdo', () => {
     ).toBeVisible();
   });
 
+  for (const {url, heading} of [
+    {url: '/produto/requisitos/', heading: 'Requisitos'},
+    {url: '/produto/regras-negocio/', heading: 'Regras de negócio'},
+    {url: '/produto/rastreabilidade/', heading: 'Rastreabilidade'},
+    {url: '/produto/mvp-selecao/', heading: 'MVP Seleção'},
+  ]) {
+    test(`a página ${url} abre`, async ({page}) => {
+      await page.goto(url);
+      await expect(
+        page.getByRole('heading', {name: heading, level: 1}),
+      ).toBeVisible();
+    });
+  }
+
   test('a página demo do scaffold não existe mais', async ({page}) => {
     const resp = await page.goto('/markdown-page');
     expect(resp?.status()).toBe(404);

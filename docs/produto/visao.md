@@ -25,8 +25,10 @@ A plataforma foi projetada para expandir além do CEPS — módulos futuros
 5. **Lançamento de notas** — registro por etapa.
 6. **Classificação e resultado** — cálculo da nota final, desempate e publicação.
 
-:::info[Em construção]
-As páginas detalhadas de **requisitos**, **regras de negócio** e **casos de uso**
-serão publicadas nas próximas entregas da trilha de Produto. Os exemplos usarão
-as [personas fictícias](../personas/cadastros.mdx).
+:::info[Estrutura de produto]
+As páginas-base de [requisitos](./requisitos/),
+[regras de negócio](./regras-negocio/),
+[rastreabilidade](./rastreabilidade/) e [MVP Seleção](./mvp-selecao/) já
+definem a estrutura editorial da trilha de Produto. Os exemplos públicos devem
+usar as [personas fictícias](../personas/cadastros.mdx).
 :::
