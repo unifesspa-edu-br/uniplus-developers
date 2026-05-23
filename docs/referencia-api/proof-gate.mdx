@@ -1,0 +1,27 @@
+---
+sidebar_position: 1
+title: Proof gate — theming Gov.br DS
+description: Página de validação visual do theming dual-layer (Docusaurus shell + Redoc embed).
+---
+
+import RedocSpec from '@site/src/components/RedocSpec';
+
+# Proof gate — theming Gov.br DS
+
+Esta página existe para o **proof gate** definido no ADR-0001 e na Story
+US-F9-01 (CA-05): antes de autorar o conteúdo do catálogo, uma página com o
+`<RedocSpec>` renderizado deve passar por **revisão visual** comparando o
+resultado com os tokens do Gov.br Design System.
+
+O que validar:
+
+- **Cores** — primária (`#1351b4`), verde de sucesso, vermelho de erro batem
+  entre o shell do Docusaurus (menu, links) e o painel do Redoc.
+- **Tipografia** — família e escala coerentes.
+- **Acessibilidade** — contraste e navegação por teclado (WCAG 2.1 AA / e-MAG).
+
+A especificação abaixo é um **exemplo fictício** (ver
+[personas fictícias](../personas/pessoas-ficticias.md)); o contrato real é
+sincronizado de `uniplus-api/contracts/`.
+
+<RedocSpec spec="example.json" />

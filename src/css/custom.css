@@ -1,0 +1,56 @@
+/**
+ * Camada 2 do theming dual-layer (ADR-0001): mapeia as variáveis do Infima
+ * (shell do Docusaurus) para os tokens Gov.br DS declarados em `govbr-tokens.css`
+ * (camada 1, fonte única). Nada de valores hard-coded aqui — só `var(--*-govbr-*)`.
+ */
+
+:root {
+  /* Primária Gov.br (blue-warm-vivid) mapeada na escala do Infima. */
+  --ifm-color-primary: var(--color-govbr-primary);
+  --ifm-color-primary-dark: var(--color-govbr-primary-hover);
+  --ifm-color-primary-darker: var(--color-govbr-primary-dark);
+  --ifm-color-primary-darkest: var(--color-govbr-primary-darkest);
+  --ifm-color-primary-light: var(--color-govbr-primary-light);
+  --ifm-color-primary-lighter: var(--color-govbr-primary-light);
+  --ifm-color-primary-lightest: var(--color-govbr-primary-lightest);
+
+  /* Feedback. */
+  --ifm-color-success: var(--color-govbr-success);
+  --ifm-color-warning: var(--color-govbr-warning);
+  --ifm-color-danger: var(--color-govbr-danger);
+  --ifm-color-info: var(--color-govbr-info);
+
+  /* Tipografia institucional. */
+  --ifm-font-family-base: var(--font-govbr);
+  --ifm-heading-font-family: var(--font-govbr);
+  --ifm-code-font-size: 95%;
+
+  /* Bordas. */
+  --ifm-global-radius: var(--radius-govbr-sm);
+
+  --docusaurus-highlighted-code-line-bg: rgba(19, 81, 180, 0.1);
+}
+
+/* Modo escuro — clarear a primária para manter contraste WCAG 2.1 AA. */
+[data-theme='dark'] {
+  --ifm-color-primary: var(--color-govbr-primary-light);
+  --ifm-color-primary-dark: var(--color-govbr-primary);
+  --ifm-color-primary-darker: var(--color-govbr-primary-hover);
+  --ifm-color-primary-darkest: var(--color-govbr-primary-dark);
+  --ifm-color-primary-light: var(--color-govbr-primary-lightest);
+  --ifm-color-primary-lighter: var(--color-govbr-primary-lightest);
+  --ifm-color-primary-lightest: var(--color-govbr-primary-lightest);
+  --docusaurus-highlighted-code-line-bg: rgba(38, 112, 232, 0.3);
+}
+
+/**
+ * Focus ring Gov.br DS — dourado tracejado (WCAG 2.1 AA / e-MAG 3.1).
+ * Aplicado a elementos interativos do shell.
+ */
+a:focus-visible,
+button:focus-visible,
+.navbar__link:focus-visible,
+.menu__link:focus-visible {
+  outline: 2px dashed var(--color-govbr-gold);
+  outline-offset: 2px;
+}
