@@ -108,7 +108,7 @@ export default function PessoasFake(): React.ReactElement {
               <td>{p.email}</td>
               <td>
                 <details>
-                  <summary>ver</summary>
+                  <summary aria-label={`Ver detalhes de ${p.nome}`}>ver</summary>
                   <ul style={{margin: '8px 0', paddingLeft: 18}}>
                     <li>Nascimento: {p.data_nasc} ({p.signo})</li>
                     <li>RG: {p.rg}</li>
