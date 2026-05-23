@@ -8,7 +8,6 @@ interface Person {
   idade: number;
   sexo: string;
   data_nasc: string;
-  signo: string;
   cpf: string;
   rg: string;
   mae: string;
@@ -33,7 +32,6 @@ const FIELD_LABELS: Record<keyof Person, string> = {
   idade: 'Idade',
   sexo: 'Sexo',
   data_nasc: 'Data de nascimento',
-  signo: 'Signo',
   cpf: 'CPF',
   rg: 'RG',
   mae: 'Mãe',
