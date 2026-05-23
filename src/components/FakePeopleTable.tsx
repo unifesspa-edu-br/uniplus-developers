@@ -80,12 +80,16 @@ async function copyText(value: string): Promise<void> {
 
 function CopyButton({label, value}: {label: string; value: string}): React.ReactElement {
   const [copied, setCopied] = useState(false);
+  const timer = useRef<number>(undefined);
+
+  useEffect(() => () => window.clearTimeout(timer.current), []);
 
   const onCopy = useCallback(async () => {
     try {
       await copyText(value);
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 1500);
+      window.clearTimeout(timer.current);
+      timer.current = window.setTimeout(() => setCopied(false), 1500);
     } catch {
       setCopied(false);
     }
