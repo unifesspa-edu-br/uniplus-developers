@@ -80,7 +80,7 @@ async function copyText(value: string, container?: HTMLElement): Promise<void> {
   textarea.select();
   const ok = document.execCommand('copy');
   root.removeChild(textarea);
-  if (!ok) throw new Error('Falha ao copiar para a área de transferência.');
+  if (!ok) throw new Error('Clipboard copy command failed.');
 }
 
 function CopyButton({label, value}: {label: string; value: string}): React.ReactElement {
@@ -93,8 +93,8 @@ function CopyButton({label, value}: {label: string; value: string}): React.React
   const onCopy = useCallback(async () => {
     try {
       // Append the fallback textarea inside the open dialog (not inert).
-      const container = buttonRef.current?.closest('dialog') as HTMLElement | null;
-      await copyText(value, container ?? undefined);
+      const container = buttonRef.current?.closest('dialog') ?? undefined;
+      await copyText(value, container);
       setCopied(true);
       window.clearTimeout(timer.current);
       timer.current = window.setTimeout(() => setCopied(false), 1500);
