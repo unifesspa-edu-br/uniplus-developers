@@ -107,8 +107,14 @@ function CopyButton({label, value}: {label: string; value: string}): React.React
       type="button"
       className="button button--sm button--outline button--primary"
       aria-label={`Copiar ${label}`}
+      title={`Copiar ${label}`}
+      style={{display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '0.25rem 0.5rem'}}
       onClick={onCopy}>
-      {copied ? 'Copiado!' : 'Copiar'}
+      {copied ? (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      ) : (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+      )}
     </button>
   );
 }
@@ -142,7 +148,7 @@ function PersonDialog({
         border: 'none',
         borderRadius: 'var(--radius-govbr-md, 8px)',
         padding: 0,
-        maxWidth: 560,
+        maxWidth: 720,
         width: '90vw',
       }}>
       {person && (
@@ -257,7 +263,7 @@ export default function FakePeopleTable(): React.ReactElement {
             <th>Sexo</th>
             <th>CPF</th>
             <th>Data de nascimento</th>
-            <th>Detalhes</th>
+            <th style={{textAlign: 'center'}}>Detalhes</th>
           </tr>
         </thead>
         <tbody>
@@ -269,13 +275,15 @@ export default function FakePeopleTable(): React.ReactElement {
                 <code>{person.cpf}</code>
               </td>
               <td>{person.data_nasc}</td>
-              <td>
+              <td style={{textAlign: 'center'}}>
                 <button
                   type="button"
                   className="button button--sm button--primary"
                   aria-label={`Ver detalhes de ${person.nome}`}
+                  title="Ver detalhes"
+                  style={{display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '0.25rem 0.5rem'}}
                   onClick={() => setSelected(person)}>
-                  Detalhes
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                 </button>
               </td>
             </tr>
