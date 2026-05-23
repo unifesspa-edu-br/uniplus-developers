@@ -38,7 +38,7 @@ Todos os exemplos deste portal — payloads, prints, tabelas — usam exclusivam
 a lista canônica de [**personas fictícias**](personas/cadastros.mdx).
 Nenhum dado de pessoa real aparece na documentação.
 
-:::note Domínios
+:::note[Domínios]
 Este conteúdo é servido no domínio de trabalho `developers.portaluni.com.br`.
 O domínio institucional `developers.uniplus.unifesspa.edu.br` é reservado para
 produção.

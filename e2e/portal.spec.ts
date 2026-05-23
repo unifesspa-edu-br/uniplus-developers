@@ -52,6 +52,16 @@ test.describe('Personas (cadastros fictícios)', () => {
     ]);
   });
 
+  test('as admonitions renderizam como caixa (sem marcador literal)', async ({
+    page,
+  }) => {
+    await page.goto('/personas/');
+    // As admonitions viram caixas com classe theme-admonition…
+    await expect(page.locator('.theme-admonition').first()).toBeVisible();
+    // …e o marcador de diretiva não aparece como texto na página.
+    await expect(page.getByText(':::', {exact: false})).toHaveCount(0);
+  });
+
   test('o filtro reduz a lista', async ({page}) => {
     await page.goto('/personas/');
     // Filtra por cidade (Campo Grande → Fernanda); a coluna cidade não aparece,
