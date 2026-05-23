@@ -62,10 +62,11 @@ test.describe('Personas (cadastros fictícios)', () => {
     expect(await linhas.count()).toBeLessThan(30);
   });
 
-  test('o botão de detalhes abre o modal e copia um campo', async ({page}) => {
-    await page.context().grantPermissions(['clipboard-write']);
+  test('o modal mostra o nome social e copia o CPF de fato', async ({page}) => {
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.goto('/personas/');
 
+    // A primeira persona tem nome social (RN02).
     await page
       .locator('tbody tr')
       .first()
@@ -74,11 +75,15 @@ test.describe('Personas (cadastros fictícios)', () => {
 
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
-    await expect(dialog.getByText('RG', {exact: true})).toBeVisible();
+    await expect(dialog.getByText('Nome social', {exact: true})).toBeVisible();
 
-    const copiarCpf = dialog.getByRole('button', {name: 'Copiar CPF'});
-    await copiarCpf.click();
-    await expect(copiarCpf).toHaveText('Copiado!');
+    const copyCpf = dialog.getByRole('button', {name: 'Copiar CPF'});
+    await copyCpf.click();
+    await expect(copyCpf).toHaveText('Copiado!');
+
+    // Verifica que copiou DE FATO (não apenas o rótulo do botão).
+    const clipboard = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboard).toMatch(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/);
 
     await dialog.getByRole('button', {name: 'Fechar'}).click();
     await expect(dialog).not.toBeVisible();
