@@ -1,0 +1,83 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Uni+ — API de Seleção (exemplo)",
+    "version": "1.0.0",
+    "description": "Especificação de exemplo usada no proof gate de theming Gov.br DS. Todos os dados são fictícios (ver Personas fictícias). Não representa o contrato real da API — esse é sincronizado de `uniplus-api/contracts/`.",
+    "license": {
+      "name": "CC-BY-4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  },
+  "servers": [
+    {"url": "https://developers.portaluni.com.br", "description": "Domínio de trabalho"}
+  ],
+  "tags": [
+    {"name": "Editais", "description": "Gestão do ciclo de vida de editais de processo seletivo."}
+  ],
+  "paths": {
+    "/api/selecao/editais": {
+      "get": {
+        "tags": ["Editais"],
+        "operationId": "listarEditais",
+        "summary": "Lista editais",
+        "description": "Retorna a lista paginada de editais cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Lista de editais.",
+            "content": {
+              "application/json": {
+                "schema": {"type": "array", "items": {"$ref": "#/components/schemas/Edital"}},
+                "example": [
+                  {"id": "01890a5d-ac96-774b-bcce-b302099a8057", "titulo": "Processo Seletivo SiSU 2026", "status": "Rascunho"}
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Editais"],
+        "operationId": "criarEdital",
+        "summary": "Cria um edital",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/NovoEdital"},
+              "example": {"titulo": "Processo Seletivo SiSU 2026", "anoLetivo": 2026}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Edital criado.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Edital"}}}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Edital": {
+        "type": "object",
+        "required": ["id", "titulo", "status"],
+        "properties": {
+          "id": {"type": "string", "format": "uuid", "description": "Identificador (UUID v7)."},
+          "titulo": {"type": "string", "examples": ["Processo Seletivo SiSU 2026"]},
+          "anoLetivo": {"type": "integer", "examples": [2026]},
+          "status": {"type": "string", "enum": ["Rascunho", "Publicado", "Encerrado"]}
+        }
+      },
+      "NovoEdital": {
+        "type": "object",
+        "required": ["titulo", "anoLetivo"],
+        "properties": {
+          "titulo": {"type": "string"},
+          "anoLetivo": {"type": "integer"}
+        }
+      }
+    }
+  }
+}
