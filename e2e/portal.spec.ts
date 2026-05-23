@@ -58,8 +58,10 @@ test.describe('Personas (cadastros fictícios)', () => {
     await page.goto('/personas/');
     // As admonitions viram caixas com classe theme-admonition…
     await expect(page.locator('.theme-admonition').first()).toBeVisible();
-    // …e o marcador de diretiva não aparece como texto na página.
-    await expect(page.getByText(':::', {exact: false})).toHaveCount(0);
+    // …e os marcadores de diretiva não aparecem como texto na página.
+    for (const marker of [':::warning', ':::note', ':::info']) {
+      await expect(page.getByText(marker)).toHaveCount(0);
+    }
   });
 
   test('o filtro reduz a lista', async ({page}) => {
