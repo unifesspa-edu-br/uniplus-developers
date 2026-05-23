@@ -35,7 +35,7 @@ Para integrar com a plataforma:
 ## Dados de exemplo
 
 Todos os exemplos deste portal — payloads, prints, tabelas — usam exclusivamente
-a lista canônica de [**personas fictícias**](personas/pessoas-ficticias.md).
+a lista canônica de [**personas fictícias**](personas/cadastros.mdx).
 Nenhum dado de pessoa real aparece na documentação.
 
 :::note Domínios

@@ -16,13 +16,6 @@ test.describe('Portal — navegação e conteúdo', () => {
     ).toBeVisible();
   });
 
-  test('a página de personas fictícias abre', async ({page}) => {
-    await page.goto('/personas/pessoas-ficticias');
-    await expect(
-      page.getByRole('heading', {name: 'Personas fictícias', level: 1}),
-    ).toBeVisible();
-  });
-
   test('a página de proof gate abre', async ({page}) => {
     await page.goto('/referencia-api/proof-gate');
     await expect(
@@ -36,28 +29,58 @@ test.describe('Portal — navegação e conteúdo', () => {
   });
 });
 
-test.describe('Cadastros fictícios', () => {
-  test('lista os 30 cadastros e filtra pela busca', async ({page}) => {
-    await page.goto('/personas/cadastros');
+test.describe('Personas (cadastros fictícios)', () => {
+  test('vive em /personas/ e lista os 30 cadastros com a tabela enxuta', async ({
+    page,
+  }) => {
+    await page.goto('/personas/');
     await expect(
-      page.getByRole('heading', {name: 'Cadastros fictícios', level: 1}),
+      page.getByRole('heading', {name: 'Personas fictícias', level: 1}),
     ).toBeVisible();
 
     // SSR renderiza todos os 30.
     await expect(page.getByText(/30 de 30 cadastros/)).toBeVisible();
 
-    // O filtro reduz a lista após a hidratação.
+    // Tabela enxuta: 5 colunas (Nome, Sexo, CPF, Data de nascimento, Detalhes).
+    const headers = page.locator('thead th');
+    await expect(headers).toHaveText([
+      'Nome',
+      'Sexo',
+      'CPF',
+      'Data de nascimento',
+      'Detalhes',
+    ]);
+  });
+
+  test('o filtro reduz a lista', async ({page}) => {
+    await page.goto('/personas/');
+    // Filtra por cidade (Campo Grande → Fernanda); a coluna cidade não aparece,
+    // mas o filtro busca nela, então a linha resultante traz o nome esperado.
     await page.getByRole('searchbox', {name: /Filtrar/}).fill('Campo Grande');
-    await expect(page.getByText(/de 30 cadastros/)).toBeVisible();
     const linhas = page.locator('tbody tr');
-    await expect(linhas.first()).toContainText('Campo Grande');
+    await expect(linhas.first()).toContainText('Fernanda');
     expect(await linhas.count()).toBeLessThan(30);
   });
 
-  test('expande os detalhes de um cadastro', async ({page}) => {
-    await page.goto('/personas/cadastros');
-    const primeira = page.locator('tbody tr').first();
-    await primeira.getByRole('group').getByText('ver').click();
-    await expect(primeira.getByText(/RG:/)).toBeVisible();
+  test('o botão de detalhes abre o modal e copia um campo', async ({page}) => {
+    await page.context().grantPermissions(['clipboard-write']);
+    await page.goto('/personas/');
+
+    await page
+      .locator('tbody tr')
+      .first()
+      .getByRole('button', {name: /Ver detalhes de/})
+      .click();
+
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByText('RG', {exact: true})).toBeVisible();
+
+    const copiarCpf = dialog.getByRole('button', {name: 'Copiar CPF'});
+    await copiarCpf.click();
+    await expect(copiarCpf).toHaveText('Copiado!');
+
+    await dialog.getByRole('button', {name: 'Fechar'}).click();
+    await expect(dialog).not.toBeVisible();
   });
 });
