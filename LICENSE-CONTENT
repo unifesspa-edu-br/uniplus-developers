@@ -1,0 +1,16 @@
+# Licença do conteúdo — Creative Commons Attribution 4.0 International (CC-BY-4.0)
+
+O **código** deste repositório (`src/`, componentes React, configurações,
+workflows) é licenciado sob a **MIT License** — ver `LICENSE`.
+
+O **conteúdo de documentação** (arquivos em `docs/`, páginas `.md`/`.mdx`,
+especificações OpenAPI em `static/openapi/`) é licenciado sob a
+**Creative Commons Attribution 4.0 International (CC-BY-4.0)**.
+
+Você pode compartilhar e adaptar o conteúdo para qualquer fim, inclusive
+comercial, desde que atribua o crédito apropriado à
+**Universidade Federal do Sul e Sudeste do Pará (Unifesspa) — CTIC**,
+forneça um link para a licença e indique se houve alterações.
+
+Texto completo da licença: https://creativecommons.org/licenses/by/4.0/legalcode.pt-br
+Resumo legível: https://creativecommons.org/licenses/by/4.0/deed.pt-br

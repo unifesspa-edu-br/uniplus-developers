@@ -1,0 +1,17 @@
+# Dependências
+/node_modules
+
+# Build do Docusaurus
+/build
+/.docusaurus
+
+# Caches e logs
+.cache-loader
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+
+# Ambiente
+.env.local
+.env.*.local
