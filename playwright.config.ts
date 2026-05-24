@@ -6,7 +6,9 @@ import {defineConfig, devices} from '@playwright/test';
  * roda antes (ver `.github/workflows/e2e.yml`); localmente, rode `npm run build`
  * antes de `npm run test:e2e`.
  */
-const PORT = 3000;
+// Porta do servidor de E2E. Sobrescrevível por env para não colidir com um
+// `docusaurus start` (dev server) já rodando localmente na 3000.
+const PORT = Number(process.env.E2E_PORT) || 3000;
 const baseURL = `http://localhost:${PORT}`;
 
 export default defineConfig({

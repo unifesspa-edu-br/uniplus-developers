@@ -102,6 +102,36 @@ test.describe('Requisitos (fonte pública curada)', () => {
   });
 });
 
+test.describe('Âncoras de requisito (UNI-REQ)', () => {
+  test('o ID canônico é uma âncora copiável que atualiza a URL', async ({
+    page,
+  }) => {
+    await page.goto('/produto/requisitos/');
+    const ancora = page.locator('a[id="UNI-REQ-0023"]');
+    await expect(ancora).toHaveCount(1);
+    await expect(ancora).toHaveAttribute('href', '#UNI-REQ-0023');
+    await ancora.click();
+    // A URL passa a apontar o ponto exato — copiável para compartilhar.
+    await expect(page).toHaveURL(/\/produto\/requisitos\/#UNI-REQ-0023$/);
+  });
+
+  test('na matriz, a coluna Pai liga à âncora canônica da mesma página', async ({
+    page,
+  }) => {
+    await page.goto('/produto/rastreabilidade/');
+    // A âncora canônica do pai existe uma única vez na página…
+    await expect(page.locator('a[id="UNI-REQ-0002"]')).toHaveCount(1);
+    // …e a referência na linha filha aponta para ela, sem duplicar o id.
+    const linhaFilha = page.getByRole('row', {
+      name: /UNI-REQ-0023 Ciclo-base da inscrição/,
+    });
+    const refPai = linhaFilha.locator('a[href="#UNI-REQ-0002"]');
+    await expect(refPai).toBeVisible();
+    await refPai.click();
+    await expect(page).toHaveURL(/\/produto\/rastreabilidade\/#UNI-REQ-0002$/);
+  });
+});
+
 test.describe('Personas (cadastros fictícios)', () => {
   test('vive em /personas/ e lista os 30 cadastros com a tabela enxuta', async ({
     page,
