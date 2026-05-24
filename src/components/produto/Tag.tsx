@@ -3,6 +3,12 @@ import type {Recorte, Status} from '@site/src/data/produto/taxonomia';
 
 // Etiquetas visuais reutilizadas pelas tabelas de produto. As cores derivam
 // dos tokens Gov.br (com fallback) para manter coerência com o tema do portal.
+//
+// Os fundos são sempre pastéis claros (tokens *-light), então o texto é
+// fixado em cinza escuro em vez de herdar a cor do tema. No tema escuro o texto
+// herdado ficaria claro sobre fundo claro (contraste ruim, sobretudo nos chips
+// verde e azul); a cor explícita garante leitura em ambos os temas (WCAG 1.4.3).
+const TEXTO_ESCURO = 'var(--color-govbr-gray-80, #333333)';
 
 const BASE: React.CSSProperties = {
   display: 'inline-block',
@@ -12,6 +18,7 @@ const BASE: React.CSSProperties = {
   fontWeight: 600,
   lineHeight: 1.5,
   whiteSpace: 'nowrap',
+  color: TEXTO_ESCURO,
   border: '1px solid var(--color-govbr-gray-20, #ccc)',
 };
 

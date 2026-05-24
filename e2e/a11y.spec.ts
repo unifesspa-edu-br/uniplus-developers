@@ -40,6 +40,24 @@ for (const {name, url, exclude} of pages) {
   });
 }
 
+test('a página de requisitos não tem violações de contraste no tema escuro', async ({
+  page,
+}) => {
+  // O portal usa respectPrefersColorScheme; emular o esquema escuro faz o
+  // Docusaurus aplicar o tema escuro no load. Cobre os dois ajustes de contraste
+  // do tema escuro: as etiquetas de status/recorte (fundo pastel, texto escuro)
+  // e a cor de link/breadcrumb do shell (azul clarificado).
+  await page.emulateMedia({colorScheme: 'dark'});
+  await page.goto('/produto/requisitos/');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+
+  const results = await new AxeBuilder({page})
+    .include('main')
+    .withTags(WCAG_TAGS)
+    .analyze();
+  expect(results.violations).toEqual([]);
+});
+
 test('o modal de detalhes da persona sem violações WCAG 2.1 A/AA', async ({
   page,
 }) => {

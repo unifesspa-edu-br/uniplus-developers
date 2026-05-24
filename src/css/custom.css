@@ -44,6 +44,30 @@
   --ifm-color-primary-lighter: var(--color-govbr-primary-lightest);
   --ifm-color-primary-lightest: var(--color-govbr-primary-lightest);
   --docusaurus-highlighted-code-line-bg: rgba(38, 112, 232, 0.3);
+
+  /*
+   * Cor de link no tema escuro. A primária Gov.br (mesmo o tom -light #2670e8)
+   * rende apenas ~3.3:1 sobre o fundo escuro do shell — abaixo de 4.5:1. Um azul
+   * mais claro, derivado do próprio token (mistura com branco puro Gov.br),
+   * mantém a identidade azul do link e cumpre o contraste de texto (WCAG 1.4.3).
+   * O hover usa o tom mais claro da escala para reforço.
+   */
+  --ifm-link-color: color-mix(
+    in srgb,
+    var(--color-govbr-primary-light) 50%,
+    var(--color-govbr-pure-0)
+  );
+  --ifm-link-hover-color: var(--color-govbr-primary-lightest);
+  --ifm-breadcrumb-color-active: color-mix(
+    in srgb,
+    var(--color-govbr-primary-light) 50%,
+    var(--color-govbr-pure-0)
+  );
+  --ifm-menu-color-active: color-mix(
+    in srgb,
+    var(--color-govbr-primary-light) 50%,
+    var(--color-govbr-pure-0)
+  );
 }
 
 /**
