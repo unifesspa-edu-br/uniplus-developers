@@ -1,0 +1,53 @@
+---
+sidebar_position: 3
+description: Registro público dos requisitos do Uni+ com IDs estáveis, status explícitos e rastreabilidade.
+fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
+estado_publicacao: "primeira fonte pública curada do MVP Seleção"
+---
+
+import RequisitosTable from '@site/src/components/produto/RequisitosTable';
+import {requisitosMvpSelecao} from '@site/src/data/produto/requisitos-mvp-selecao';
+
+# Requisitos
+
+Esta página é o ponto público de consulta dos requisitos do Uni+. A tabela abaixo
+publica o primeiro recorte curado do MVP do módulo Seleção, com identificadores
+estáveis, status honestos e os campos da taxonomia pública.
+
+:::info[Estado da publicação]
+Esta é a primeira fonte pública curada. Os registros nascem de dado estruturado
+versionado no `uniplus-developers`
+([`src/data/produto/requisitos-mvp-selecao.ts`](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/src/data/produto/requisitos-mvp-selecao.ts)),
+não da matriz interna de trabalho. Apenas campos públicos seguros são exibidos,
+sem dados reais.
+:::
+
+## Fonte canônica
+
+Os requisitos seguem a
+[taxonomia de rastreabilidade](../taxonomia-rastreabilidade-requisitos.md) e a
+[ADR-0002](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/docs/adrs/0002-governanca-editorial-fontes-canonicas-portal-publico.md).
+Cada registro nasce de dado estruturado versionado no `uniplus-developers`;
+páginas narrativas complementam o entendimento, mas não substituem o registro
+rastreável.
+
+## Requisitos do MVP Seleção
+
+Use a busca e os filtros para navegar por grupo, status e recorte. Cada linha
+abre os critérios de aceite, a verificação esperada e os metadados de backlog.
+
+<RequisitosTable requisitos={requisitosMvpSelecao} filtros={['grupo', 'tipo', 'status', 'recorte']} />
+
+## Critérios para publicar
+
+- O requisito possui `requisito_id`, grupo, tipo, nível, status e recorte.
+- O texto está livre de dados pessoais, anexos reais e histórico sensível.
+- Itens agregadores não são tratados como entrega implementável isolada.
+- Links para ADRs, código, contratos e testes apontam para a branch `main` do
+  repositório dono.
+- Lacunas de implementação aparecem como status explícito, não como omissão.
+
+## Próximo passo editorial
+
+A próxima evolução é ampliar o recorte com os requisitos de fundação e os demais
+incrementos, mantendo a integridade da árvore e os vínculos de rastreabilidade.

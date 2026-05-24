@@ -43,6 +43,44 @@ test.describe('Portal — navegação e conteúdo', () => {
   });
 });
 
+test.describe('Requisitos (fonte pública curada)', () => {
+  test('a tabela de requisitos lista os itens curados e o filtro reduz', async ({
+    page,
+  }) => {
+    await page.goto('/produto/requisitos/');
+
+    // SSR renderiza a tabela com um item conhecido do recorte.
+    await expect(page.getByRole('cell', {name: 'UNI-REQ-0023'})).toBeVisible();
+    const totalLinhas = await page.locator('tbody tr').count();
+    expect(totalLinhas).toBeGreaterThan(5);
+
+    // Filtrar por recorte de fundação reduz a lista (e some o item de MVP).
+    await page
+      .getByRole('combobox', {name: 'Recorte'})
+      .selectOption({label: 'Fundação'});
+    await expect(page.getByRole('cell', {name: 'UNI-REQ-0023'})).toHaveCount(0);
+    expect(await page.locator('tbody tr').count()).toBeLessThan(totalLinhas);
+  });
+
+  test('regras de negócio mostram apenas regras vinculadas', async ({page}) => {
+    await page.goto('/produto/regras-negocio/');
+    // Regra de negócio do recorte aparece.
+    await expect(page.getByRole('cell', {name: 'UNI-REQ-0032'})).toBeVisible();
+    // Requisito funcional puro não entra nesta página.
+    await expect(page.getByRole('cell', {name: 'UNI-REQ-0017'})).toHaveCount(0);
+  });
+
+  test('a matriz de rastreabilidade liga filho ao pai', async ({page}) => {
+    await page.goto('/produto/rastreabilidade/');
+    const linha = page.getByRole('row', {
+      name: /UNI-REQ-0023 Ciclo-base da inscrição/,
+    });
+    await expect(linha).toBeVisible();
+    // A inscrição (UNI-REQ-0023) é filha do fluxo primário (UNI-REQ-0002).
+    await expect(linha.getByText('UNI-REQ-0002')).toBeVisible();
+  });
+});
+
 test.describe('Personas (cadastros fictícios)', () => {
   test('vive em /personas/ e lista os 30 cadastros com a tabela enxuta', async ({
     page,

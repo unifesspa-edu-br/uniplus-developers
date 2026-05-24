@@ -1,0 +1,49 @@
+---
+sidebar_position: 4
+description: Regras de negócio publicáveis do domínio Uni+ vinculadas a requisitos, módulos e verificação.
+fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
+estado_publicacao: "primeira fonte pública curada do MVP Seleção"
+---
+
+import RequisitosTable from '@site/src/components/produto/RequisitosTable';
+import {requisitosMvpSelecao} from '@site/src/data/produto/requisitos-mvp-selecao';
+
+# Regras de negócio
+
+Esta página organiza as regras de negócio publicáveis do Uni+. O objetivo é
+oferecer uma leitura de domínio para analistas, desenvolvedores e áreas
+institucionais sem duplicar editais, normas internas ou evidências sensíveis.
+
+:::info[Estado da publicação]
+Esta é a primeira fonte pública curada das regras. Os registros derivam do mesmo
+dado estruturado dos requisitos, filtrados por `tipo = regra_negocio`, e cada
+regra mantém vínculo com o requisito agregador correspondente.
+:::
+
+## Fonte canônica
+
+As regras seguem a
+[taxonomia de rastreabilidade](../taxonomia-rastreabilidade-requisitos.md), com
+`tipo = regra_negocio` e, quando aplicável, `nivel = regra`. Quando a regra
+depender de decisão técnica, contrato ou ADR, o portal aponta para o arquivo
+publicado no GitHub do repositório dono.
+
+## Regras do MVP Seleção
+
+Cada linha abre os critérios de aceite e a verificação esperada. O recorte
+distingue regras do fluxo primário das que só serão processadas em incrementos
+posteriores (como o bônus regional na classificação).
+
+<RequisitosTable
+  requisitos={requisitosMvpSelecao.filter((r) => r.tipo === 'regra_negocio')}
+  filtros={['status', 'recorte']}
+/>
+
+## Critérios para publicar
+
+- A regra está vinculada a requisito, capacidade ou decisão rastreável.
+- O texto evita reproduzir conteúdo sensível além do necessário ao domínio.
+- Exceções, limites e dependências externas aparecem no próprio registro.
+- Regras aprovadas e planejadas para incremento aparecem com status explícito.
+- Regras com impacto em API, frontend ou dados apontam para artefatos dos
+  repositórios donos quando eles existirem.

@@ -1,0 +1,58 @@
+---
+sidebar_position: 6
+description: Recorte público do MVP do módulo Seleção, com escopo, fundações e incrementos planejados.
+fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
+estado_publicacao: "primeira fonte pública curada do MVP Seleção"
+---
+
+import RecorteResumo from '@site/src/components/produto/RecorteResumo';
+import {requisitosMvpSelecao} from '@site/src/data/produto/requisitos-mvp-selecao';
+
+# MVP Seleção
+
+Esta página descreve o recorte do MVP do módulo Seleção: a primeira fatia
+verificável do produto, sem afirmar que requisitos ou fluxos ainda não
+implementados estejam concluídos.
+
+:::info[Estado da publicação]
+Esta é a primeira visão pública curada do recorte. O resumo abaixo separa o que
+entra no fluxo primário, o que é fundação técnica e o que fica registrado como
+incremento planejado.
+:::
+
+## Fonte canônica
+
+O recorte usa a
+[taxonomia de rastreabilidade](../taxonomia-rastreabilidade-requisitos.md),
+principalmente os campos `recorte`, `status`, `politica_backlog`,
+`criterios_aceite` e `verificacao`. Os mesmos requisitos aparecem detalhados na
+[página de requisitos](../requisitos/index.mdx) e na
+[matriz de rastreabilidade](../rastreabilidade/index.mdx).
+
+## Recorte por fronteira de entrega
+
+<RecorteResumo requisitos={requisitosMvpSelecao} />
+
+## Fluxos de produto do MVP
+
+O fluxo primário do MVP acompanha o ciclo do processo seletivo:
+
+- **Edital e configuração do processo:** parâmetros, etapas, pesos, modalidades,
+  documentos exigidos, formulário e cascata de remanejamento, congelados na
+  publicação.
+- **Publicação:** snapshot imutável do edital, com retificação como novo
+  documento e bloqueio de mutação direta.
+- **Inscrição:** ciclo-base do rascunho ao submit, com upload de documentos,
+  gate documental, comprovante imutável, unicidade e nome social.
+
+Homologação, avaliação, classificação e recursos ficam registrados como
+incrementos planejados, consumindo a configuração congelada quando forem
+modelados.
+
+## Critérios para publicar itens do MVP
+
+- O item possui requisito `UNI-REQ-NNNN` publicado.
+- O status distingue item aprovado, proposto, dependente ou planejado.
+- O recorte indica se o item entra no `mvp`, em `fundacao` ou em incremento.
+- Critérios de aceite e verificação estão descritos em termos observáveis.
+- Não há dados pessoais, anexos reais nem referências a arquivos internos.
