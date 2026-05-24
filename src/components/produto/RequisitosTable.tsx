@@ -10,6 +10,7 @@ import {
   tipoIssueLabel,
 } from '@site/src/data/produto/taxonomia';
 import type {Requisito} from '@site/src/data/produto/taxonomia';
+import RequisitoId from './RequisitoId';
 import {RecorteTag, StatusTag} from './Tag';
 
 type FiltroCampo = 'grupo' | 'tipo' | 'status' | 'recorte';
@@ -168,7 +169,7 @@ export default function RequisitosTable({
           {filtrados.map((r) => (
             <tr key={r.requisito_id}>
               <td>
-                <code>{r.requisito_id}</code>
+                <RequisitoId id={r.requisito_id} />
               </td>
               <td>
                 <details>

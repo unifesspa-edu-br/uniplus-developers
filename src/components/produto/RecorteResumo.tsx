@@ -4,6 +4,7 @@ import {
   STATUS_LABEL,
 } from '@site/src/data/produto/taxonomia';
 import type {Recorte, Requisito} from '@site/src/data/produto/taxonomia';
+import RequisitoId from './RequisitoId';
 import {StatusTag} from './Tag';
 
 // Ordem editorial de apresentação dos recortes (do primário ao registrado).
@@ -43,7 +44,7 @@ export default function RecorteResumo({
           <ul style={{margin: 0}}>
             {itens.map((r) => (
               <li key={r.requisito_id} style={{marginBottom: 4}}>
-                <code>{r.requisito_id}</code> — {r.titulo}{' '}
+                <RequisitoId id={r.requisito_id} /> — {r.titulo}{' '}
                 <StatusTag status={r.status} label={STATUS_LABEL[r.status]} />
               </li>
             ))}

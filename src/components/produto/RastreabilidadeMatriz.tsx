@@ -5,6 +5,7 @@ import {
   STATUS_LABEL,
 } from '@site/src/data/produto/taxonomia';
 import type {Requisito} from '@site/src/data/produto/taxonomia';
+import RequisitoId from './RequisitoId';
 import {StatusTag} from './Tag';
 
 /**
@@ -36,11 +37,17 @@ export default function RastreabilidadeMatriz({
         {requisitos.map((r) => (
           <tr key={r.requisito_id}>
             <td>
-              <code>{r.requisito_id}</code>
+              <RequisitoId id={r.requisito_id} />
             </td>
             <td>{r.titulo}</td>
             <td>{NIVEL_LABEL[r.nivel]}</td>
-            <td>{r.parent_id ? <code>{r.parent_id}</code> : '—'}</td>
+            <td>
+              {r.parent_id ? (
+                <RequisitoId id={r.parent_id} comoReferencia />
+              ) : (
+                '—'
+              )}
+            </td>
             <td>
               <StatusTag status={r.status} label={STATUS_LABEL[r.status]} />
             </td>

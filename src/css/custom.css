@@ -57,3 +57,38 @@ button:focus-visible,
   outline: 2px dashed var(--color-govbr-gold);
   outline-offset: 2px;
 }
+
+/**
+ * Identificadores UNI-REQ como âncoras copiáveis. O link veste o código sem
+ * cor de link e revela o caráter de permalink no hover/focus. A margem de
+ * rolagem compensa a navbar fixa para que a linha ancorada não fique oculta ao
+ * abrir uma URL com `#UNI-REQ-NNNN`.
+ */
+.requisito-id {
+  color: inherit;
+  text-decoration: none;
+}
+
+.requisito-id--anchor {
+  scroll-margin-top: 5rem;
+}
+
+.requisito-id:hover,
+.requisito-id:focus-visible {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+/* Marca de permalink à direita do código, só na ocorrência canônica. */
+.requisito-id--anchor:hover code::after,
+.requisito-id--anchor:focus-visible code::after {
+  content: ' #';
+  color: var(--ifm-color-primary);
+}
+
+/* Realce passageiro ao chegar pela URL com fragmento. */
+:target.requisito-id--anchor code {
+  outline: 2px solid var(--color-govbr-gold);
+  outline-offset: 2px;
+}
