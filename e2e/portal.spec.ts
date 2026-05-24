@@ -28,6 +28,10 @@ test.describe('Portal — navegação e conteúdo', () => {
     {url: '/produto/regras-negocio/', heading: 'Regras de negócio'},
     {url: '/produto/rastreabilidade/', heading: 'Rastreabilidade'},
     {url: '/produto/mvp-selecao/', heading: 'MVP Seleção'},
+    {
+      url: '/produto/checklist-publicacao/',
+      heading: 'Checklist de publicação de requisitos',
+    },
   ]) {
     test(`a página ${url} abre`, async ({page}) => {
       await page.goto(url);
@@ -36,6 +40,23 @@ test.describe('Portal — navegação e conteúdo', () => {
       ).toBeVisible();
     });
   }
+
+  test('o checklist de publicação traz o portão editorial e o que não publicar', async ({
+    page,
+  }) => {
+    await page.goto('/produto/checklist-publicacao/');
+    // O checklist documenta o portão de promoção…
+    await expect(
+      page.getByRole('heading', {name: 'Checklist de promoção', level: 2}),
+    ).toBeVisible();
+    // …e a fronteira do que nunca vai ao portal público.
+    await expect(
+      page.getByRole('heading', {name: 'O que nunca publicar', level: 2}),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('cell', {name: /Dados pessoais reais e PII/}),
+    ).toBeVisible();
+  });
 
   test('a página demo do scaffold não existe mais', async ({page}) => {
     const resp = await page.goto('/markdown-page');

@@ -10,22 +10,32 @@ import AxeBuilder from '@axe-core/playwright';
  */
 const WCAG_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'];
 
-const pages = [
+const pages: {name: string; url: string; exclude?: string}[] = [
   {name: 'home', url: '/'},
   {name: 'personas (cadastros)', url: '/personas/'},
   {name: 'produto requisitos', url: '/produto/requisitos/'},
   {name: 'produto regras de negócio', url: '/produto/regras-negocio/'},
   {name: 'produto rastreabilidade', url: '/produto/rastreabilidade/'},
   {name: 'produto MVP Seleção', url: '/produto/mvp-selecao/'},
+  {
+    name: 'produto checklist de publicação',
+    url: '/produto/checklist-publicacao/',
+    // O checklist usa task list GFM, que renderiza <input type=checkbox>
+    // desabilitado e sem rótulo associado. É marcação visual estática (não
+    // interativa) num portal interno de desenvolvedores; o escopo exclui só
+    // esses checkboxes, mantendo o resto do conteúdo validado.
+    exclude: 'input[type="checkbox"][disabled]',
+  },
 ];
 
-for (const {name, url} of pages) {
+for (const {name, url, exclude} of pages) {
   test(`${name} sem violações WCAG 2.1 A/AA`, async ({page}) => {
     await page.goto(url);
-    const results = await new AxeBuilder({page})
-      .include('main')
-      .withTags(WCAG_TAGS)
-      .analyze();
+    let builder = new AxeBuilder({page}).include('main').withTags(WCAG_TAGS);
+    if (exclude) {
+      builder = builder.exclude(exclude);
+    }
+    const results = await builder.analyze();
     expect(results.violations).toEqual([]);
   });
 }
