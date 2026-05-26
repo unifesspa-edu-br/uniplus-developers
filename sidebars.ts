@@ -3,9 +3,11 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 // Roda em Node.js — não usar código client-side aqui.
 
 /**
- * Duas trilhas, conforme ADR-0001 e a decisão de produto:
- * - `produtoSidebar`  — requisitos, regras de negócio, casos de uso (PO + DEV)
- * - `apiSidebar`      — referência de API (integradores)
+ * Trilhas conforme ADR-0001 e a decisão de produto:
+ * - `produtoSidebar`     — requisitos, regras de negócio, casos de uso (PO + DEV)
+ * - `apiSidebar`         — referência de API (integradores)
+ * - `arquiteturaSidebar` — decisões estruturais e padrões (quem implementa/opera);
+ *                          indexa ADRs sem duplicar autoridade (ADR-0002).
  */
 const sidebars: SidebarsConfig = {
   produtoSidebar: [
@@ -38,6 +40,22 @@ const sidebars: SidebarsConfig = {
       label: 'Referência de API',
       collapsed: false,
       items: ['referencia-api/proof-gate'],
+    },
+  ],
+
+  arquiteturaSidebar: [
+    'arquitetura/visao',
+    {
+      type: 'category',
+      label: 'Persistência e eventos',
+      collapsed: false,
+      items: ['arquitetura/event-sourcing/index'],
+    },
+    {
+      type: 'category',
+      label: 'Decisões arquiteturais',
+      collapsed: false,
+      items: ['arquitetura/adrs/index'],
     },
   ],
 };
