@@ -92,6 +92,12 @@ const config: Config = {
           label: 'Referência de API',
         },
         {
+          type: 'docSidebar',
+          sidebarId: 'arquiteturaSidebar',
+          position: 'left',
+          label: 'Arquitetura',
+        },
+        {
           href: 'https://github.com/unifesspa-edu-br/uniplus-developers',
           label: 'GitHub',
           position: 'right',
@@ -107,6 +113,7 @@ const config: Config = {
             {label: 'Visão do produto', to: '/produto/visao'},
             {label: 'Personas fictícias', to: '/personas/'},
             {label: 'Referência de API', to: '/referencia-api/proof-gate'},
+            {label: 'Arquitetura', to: '/arquitetura/visao'},
           ],
         },
         {

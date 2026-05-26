@@ -1,0 +1,185 @@
+---
+sidebar_position: 2
+title: Event Sourcing e Event Store
+description: Quando e como o Uni+ usa histórico de eventos como fonte de verdade em agregados críticos — Marten sobre PostgreSQL, adoção seletiva, fronteira com CRUD e LGPD.
+fonte_canonica: "ADR-0069 do uniplus-api (Event Sourcing seletivo com Marten) — accepted, binding"
+---
+
+# Event Sourcing e Event Store
+
+O Uni+ decide o ingresso de candidatos na Unifesspa: homologação, pontuação,
+classificação, recursos e resultado. São decisões sujeitas a recurso
+administrativo, auditoria, normas de políticas afirmativas, LGPD e eventual
+contestação judicial — e que precisam ser **explicáveis anos depois**.
+
+Para esses fluxos, registrar apenas o *estado atual* não basta. É preciso
+preservar a **sequência de fatos de negócio** que levou a cada decisão. É aí que
+entra o **Event Sourcing**: em vez de sobrescrever o estado, o sistema guarda os
+eventos que o produziram, e o estado é uma projeção deles.
+
+:::info[Fonte canônica]
+A decisão completa, com drivers, alternativas e consequências, é a
+[**ADR-0069 — Event Sourcing seletivo com Marten**](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0069-event-sourcing-seletivo-marten-contextos-criticos.md)
+do `uniplus-api` (status **`accepted`**, *binding*). Esta página é uma síntese
+para desenvolvedores; em caso de divergência, o ADR prevalece.
+:::
+
+## Princípio: adoção seletiva, nunca padrão global
+
+Event Sourcing **não** é o estilo padrão do Uni+. A maior parte do sistema —
+cadastros, configuração, RBAC, conteúdo administrativo — permanece **CRUD
+tradicional** com EF Core, soft delete e audit trail. Isso é intencional: ES
+adiciona complexidade conceitual e operacional que só se paga onde o histórico
+importa.
+
+Um agregado só vira event-sourced por **decisão explícita**, quando ao menos uma
+condição forte vale:
+
+1. a sequência histórica importa tanto quanto o estado atual;
+2. a decisão pode ser objeto de recurso, auditoria ou contestação administrativa/judicial;
+3. há necessidade real de reconstrução temporal por data, versão ou etapa;
+4. projeções precisam ser recriáveis por *replay*;
+5. o evento precisa carregar a regra, versão, snapshot ou hash que produziu a decisão;
+6. correções posteriores precisam aparecer como **novos fatos**, não como alteração destrutiva do passado.
+
+Caso contrário, o agregado continua CRUD.
+
+### O centro de gravidade: o Processo Seletivo
+
+O conceito central que motiva o Event Sourcing no Uni+ é o **Processo Seletivo**
+— a entidade que orquestra o ciclo de decisões institucionais sobre candidatos
+(homologação, pontuação, classificação, recurso, resultado). É ele, e os fatos
+que o compõem, que demandam histórico canônico e reconstrução temporal; por isso,
+na modelagem em andamento, o Processo Seletivo é o conceito que adota Event
+Sourcing.
+
+O **Edital não é sinônimo de Processo Seletivo**: é **um dos elementos** que o
+compõem — o documento normativo que fixa parâmetros, etapas, pesos, cotas e
+regras, congelado na publicação como snapshot imutável. A configuração do Edital
+pode seguir CRUD; o que é event-sourced são as **decisões** tomadas ao longo do
+Processo Seletivo.
+
+### Candidatos e não-candidatos
+
+As decisões críticas abaixo pertencem ao ciclo de um **Processo Seletivo**:
+
+| Event-sourced (decisões críticas) | Permanecem CRUD |
+|---|---|
+| Homologação documental de inscrição | Cadastros auxiliares |
+| Julgamento de recurso | RBAC e permissões |
+| Cálculo de pontuação | Configuração (parâmetros, etapas, pesos e cotas do Edital) |
+| Classificação e desempate | Templates e conteúdo administrativo |
+| Publicação, retificação e republicação de resultado | Endpoints técnicos e *smoke tests* |
+| Convocação/matrícula com impacto jurídico | Read models e projeções derivadas |
+
+## Topologia: Marten como store auxiliar, sobre o PostgreSQL existente
+
+O Event Store é o **[Marten](https://martendb.io/events/)** rodando sobre o
+**mesmo PostgreSQL** já adotado — sem introduzir um Event Store dedicado como
+componente operacional novo. Marten pertence ao ecossistema JasperFx, com
+integração nativa ao Wolverine (o backbone CQRS/outbox do Uni+).
+
+A coabitação com o backbone CRUD segue uma topologia decidida e validada:
+
+- **EF Core / PostgreSQL permanece o *message store* `main`** — preserva o outbox
+  transacional atual.
+- **Marten entra como *store* `ancillary`** (auxiliar), **por-API e apenas onde há
+  agregado event-sourced** (Seleção e Ingresso). APIs sem agregado crítico não
+  recebem Marten.
+
+Não se adota Marten como `main`, e não se adota um Event Store separado.
+
+## Fluxo-alvo
+
+```text
+Command HTTP/API
+  -> ICommandBus / Wolverine
+  -> Handler de aplicação
+  -> Marten Event Store (append no stream do agregado)
+  -> Projeções / read models derivados
+  -> Evento de integração explícito
+  -> Wolverine outbox
+  -> Kafka
+```
+
+O *append* no Event Store e o *envelope* no outbox commitam na **mesma unidade
+transacional** (integração Marten/Wolverine): não existe append sem envelope nem
+envelope sem append marcado como sucesso.
+
+## Event Store ≠ Kafka
+
+Dois modelos distintos, que **não** se substituem:
+
+- **Marten Event Store** — fonte de verdade canônica do histórico de domínio.
+  *Replay* de estado canônico acontece a partir daqui.
+- **Kafka** — barramento de **integração** entre módulos. Recebe eventos de
+  integração versionados e compatíveis com os contratos públicos.
+
+É **proibido** modelar `Command → Kafka → reconstrução por consumidores` como
+fonte de verdade de um agregado. Eventos Kafka podem ser *derivados* dos eventos
+canônicos por tradução explícita, mas o Event Store é a verdade.
+
+## Convenções de evento
+
+- **Eventos são fatos de negócio em linguagem de domínio:**
+  `InscricaoHomologada`, `PontuacaoCalculada`, `RecursoDeferido`,
+  `ResultadoRepublicado`. Eventos genéricos (`EntityUpdated`, `StatusChanged`,
+  `RegistroAlterado`) são **proibidos** em streams críticos.
+- **Streams têm fronteira transacional enxuta** — `inscricao-{id}`,
+  `recurso-{id}`, `resultado-{processoSeletivoId}`. Streams gigantes são proibidos.
+- **Correções são novos fatos** (`PontuacaoRetificada`, `HomologacaoReavaliada`,
+  `ResultadoRepublicado`), nunca edição destrutiva de evento passado — o Uni+ não
+  muta o passado, registra novos fatos no presente.
+- **Eventos carregam a regra aplicada.** Cálculo, homologação, classificação ou
+  resultado registram a **versão/hash da regra** usada na decisão (alinhado ao
+  congelamento de parâmetros por edital). "Com qual regra este resultado foi
+  calculado?" deve ser respondível pelo próprio histórico.
+- **Projeções e read models são derivados e recriáveis** por *replay*; *snapshots*
+  são otimização de leitura, não fonte de verdade.
+- **Versionamento de eventos é disciplina permanente**: mudança incompatível
+  exige novo tipo/versão, *upcaster* ou plano de migração documentado.
+
+## LGPD e retenção
+
+Como o Event Store tende a ser **append-only**, o payload exige restrição mais
+forte que um CRUD mutável:
+
+- **não** armazenar documentos, anexos, laudos ou imagens no evento;
+- **não** duplicar PII sensível quando uma referência indireta basta;
+- mascarar, pseudonimizar ou cifrar campos sensíveis quando o dado for indispensável;
+- bloquear `UPDATE`/`DELETE` operacional nas tabelas de evento em produção,
+  registrando tentativa anômala como incidente;
+- documentar política de retenção compatível com o processo seletivo e a LGPD.
+
+Para o "direito ao esquecimento" sobre um log imutável, o padrão é
+**crypto-shredding**: o conteúdo sensível é cifrado por chave dedicada; destruir
+a chave torna o conteúdo irrecuperável, sem reescrever o histórico. O fato
+permanece; o dado pessoal, não.
+
+## Status atual
+
+A viabilidade técnica foi **comprovada** por um spike de gate
+([issue #540](https://github.com/unifesspa-edu-br/uniplus-api/issues/540),
+entregue no [PR #542](https://github.com/unifesspa-edu-br/uniplus-api/pull/542)):
+atomicidade append + outbox (incluindo falha controlada), crypto-shredding de PII,
+*replay*/rebuild de projeção, *upcasting*, fitness da fronteira EF Core × Marten,
+coabitação dos stores, cluster com *leader election*/*failover* e escala
+horizontal. Com isso, a **ADR-0069 foi promovida a `accepted`**.
+
+:::note[Piloto e hardening]
+O primeiro agregado event-sourced previsto é a **homologação documental de
+inscrição** (valor de auditoria claro, fluxo mais linear). Antes de produção,
+ainda se fecha o *hardening* operacional: externalização de chaves (Vault/KMS),
+eliminação de correlação pseudônima residual no shredding, recuperação
+pós-crash, DLQ/replay e posse das migrations. Esses itens **não** bloquearam o
+gate de viabilidade — são trabalho do piloto.
+:::
+
+## Leituras canônicas
+
+- [ADR-0069 — Event Sourcing seletivo com Marten](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0069-event-sourcing-seletivo-marten-contextos-criticos.md) (`uniplus-api`, decisão *binding*).
+- [ADR-0003 — Wolverine como backbone CQRS](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0003-wolverine-como-backbone-cqrs.md) (ADR emendada pela ADR-0069).
+- [ADR-0004 — Outbox transacional via Wolverine + EF Core](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0004-outbox-transacional-via-wolverine.md).
+- [ADR-0005 — Cascading messages como drenagem de domain events](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0005-cascading-messages-para-drenagem-de-domain-events.md).
+- [Marten — Event Store](https://martendb.io/events/) · [Wolverine + Marten](https://wolverinefx.net/guide/durability/marten/).
+- [Índice de ADRs do Uni+](../adrs/index.mdx).

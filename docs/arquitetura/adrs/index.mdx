@@ -1,0 +1,75 @@
+---
+sidebar_position: 3
+title: Índice de ADRs
+description: Mapa público das decisões arquiteturais do Uni+ por repositório, com link para o arquivo canônico no GitHub.
+fonte_canonica: "docs/adrs/ de cada repositório dono (uniplus-api, uniplus-web, uniplus-developers), indexado conforme ADR-0002 do portal"
+---
+
+# Índice de ADRs
+
+As decisões arquiteturais do Uni+ são registradas como **ADRs** (*Architecture
+Decision Records*) no formato [MADR 4.0](https://adr.github.io/madr/). Esta
+página é o **índice público** delas — um ponto de partida para navegar as
+decisões por repositório.
+
+:::warning[Esta página indexa, não duplica]
+Conforme a
+[ADR-0002 do portal](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/docs/adrs/0002-governanca-editorial-fontes-canonicas-portal-publico.md),
+o portal **indexa** ADRs sem duplicar autoridade. A verdade de cada decisão é o
+arquivo `docs/adrs/` no **repositório dono**. Os links abaixo apontam para o
+índice canônico de cada repositório no GitHub, sempre atualizado.
+:::
+
+## Índices canônicos por repositório
+
+| Repositório | Escopo das decisões | Índice canônico |
+|---|---|---|
+| `uniplus-api` | Backend .NET — arquitetura, persistência, mensageria, contrato REST, segurança | [docs/adrs/](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/README.md) |
+| `uniplus-web` | Frontend Angular — consumo de API, codegen, padrões de UI, autenticação | [docs/adrs/](https://github.com/unifesspa-edu-br/uniplus-web/blob/main/docs/adrs/README.md) |
+| `uniplus-developers` | Portal público — arquitetura do portal e governança editorial | [docs/adrs/](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/docs/adrs/README.md) |
+
+> Decisões de natureza institucional ou histórica sensível permanecem em
+> repositório privado e **não** são publicadas aqui; quando relevantes, aparecem
+> apenas como resumo público sem dados reais.
+
+## Decisões em destaque
+
+Um recorte curado das decisões com maior impacto para quem implementa, opera ou
+integra com o Uni+. Os links apontam para o arquivo canônico no GitHub.
+
+### Fundações de backend (`uniplus-api`)
+
+- [ADR-0001 — Monólito modular como estilo arquitetural](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0001-monolito-modular-como-estilo-arquitetural.md)
+- [ADR-0002 — Clean Architecture com quatro camadas por módulo](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0002-clean-architecture-com-quatro-camadas.md)
+- [ADR-0003 — Wolverine como backbone CQRS in-process](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0003-wolverine-como-backbone-cqrs.md)
+- [ADR-0004 — Outbox transacional via Wolverine + EF Core](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0004-outbox-transacional-via-wolverine.md)
+- [ADR-0005 — Cascading messages como drenagem de domain events](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0005-cascading-messages-para-drenagem-de-domain-events.md)
+- [ADR-0007 — PostgreSQL como banco primário](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0007-postgresql-18-como-banco-primario.md)
+- [ADR-0014 — Kafka como bus assíncrono inter-módulos](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0014-kafka-como-bus-assincrono-inter-modulos.md)
+
+### Persistência e eventos (`uniplus-api`)
+
+- [ADR-0069 — Event Sourcing seletivo com Marten em agregados críticos](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0069-event-sourcing-seletivo-marten-contextos-criticos.md) — sintetizada em [Event Sourcing e Event Store](../event-sourcing/index.mdx).
+
+### Contrato REST e integração (`uniplus-api`)
+
+- [ADR-0022 — Contrato REST canônico (umbrella)](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0022-contrato-rest-canonico-umbrella.md)
+- [ADR-0023 — Wire format de erro RFC 9457 (`ProblemDetails`)](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0023-wire-formato-erro-rfc-9457.md)
+- [ADR-0028 — Versionamento per-resource via content negotiation](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0028-versionamento-per-resource-content-negotiation.md)
+- [ADR-0030 — OpenAPI 3.1 contract-first](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0030-openapi-3-1-contract-first-microsoft-aspnetcore-openapi.md)
+
+### Frontend (`uniplus-web`)
+
+- [ADR-0011 — Consumer adapter para resultado de API](https://github.com/unifesspa-edu-br/uniplus-web/blob/main/docs/adrs/0011-consumer-adapter-api-result.md)
+- [ADR-0013 — Gerador OpenAPI Node-only](https://github.com/unifesspa-edu-br/uniplus-web/blob/main/docs/adrs/0013-gerador-openapi-node-only.md)
+
+### Portal (`uniplus-developers`)
+
+- [ADR-0001 — Arquitetura do portal de desenvolvedores](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/docs/adrs/0001-arquitetura-portal-desenvolvedores.md)
+- [ADR-0002 — Governança editorial e fontes canônicas](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/docs/adrs/0002-governanca-editorial-fontes-canonicas-portal-publico.md)
+
+:::note[Como o destaque é mantido]
+A lista de destaques é curada manualmente e não pretende ser exaustiva — o
+`uniplus-api` sozinho tem dezenas de ADRs. Para a relação completa e sempre
+atual, use os índices canônicos no topo desta página.
+:::
