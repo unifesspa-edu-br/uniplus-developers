@@ -17,6 +17,16 @@ const pages: {name: string; url: string; exclude?: string}[] = [
   {name: 'produto regras de negócio', url: '/produto/regras-negocio/'},
   {name: 'produto rastreabilidade', url: '/produto/rastreabilidade/'},
   {name: 'produto MVP Seleção', url: '/produto/mvp-selecao/'},
+  {name: 'produto domínio', url: '/produto/dominio/'},
+  {
+    name: 'produto regras de negócio (conceitos)',
+    url: '/produto/regras-negocio/conceitos',
+  },
+  {name: 'produto conformidade legal', url: '/produto/conformidade-legal/'},
+  {
+    name: 'arquitetura congelamento e snapshot',
+    url: '/arquitetura/congelamento-snapshot/',
+  },
   {
     name: 'produto checklist de publicação',
     url: '/produto/checklist-publicacao/',

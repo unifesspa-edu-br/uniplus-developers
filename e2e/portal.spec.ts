@@ -32,6 +32,16 @@ test.describe('Portal — navegação e conteúdo', () => {
       url: '/produto/checklist-publicacao/',
       heading: 'Checklist de publicação de requisitos',
     },
+    {url: '/produto/dominio/', heading: 'Domínio do processo seletivo'},
+    {
+      url: '/produto/regras-negocio/conceitos',
+      heading: 'Regras de negócio nomeadas',
+    },
+    {url: '/produto/conformidade-legal/', heading: 'Conformidade legal'},
+    {
+      url: '/arquitetura/congelamento-snapshot/',
+      heading: 'Congelamento na publicação',
+    },
   ]) {
     test(`a página ${url} abre`, async ({page}) => {
       await page.goto(url);
