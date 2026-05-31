@@ -710,7 +710,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
       'Existe um registro de Instituição com unidade_raiz_id apontando para a Reitoria.',
-    verificacao: 'fitness test',
+    verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
@@ -731,7 +731,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
       'CRUD de Unidade exige tipo e preserva hierarquia; escopo administrativo tem vigência e justificativa.',
-    verificacao: 'fitness test;fitness test',
+    verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
@@ -794,7 +794,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
       'Condição, recurso e tipo de deficiência são configurados no processo e solicitados na inscrição.',
-    verificacao: 'fitness test',
+    verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -815,7 +815,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
       'TipoDocumento tem apenas código, nome, descrição, categoria, formatos aceitos e tamanho máximo.',
-    verificacao: 'fitness test',
+    verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
@@ -856,8 +856,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'ADR candidata C1 contém algoritmo, ordenação de arrays, campos voláteis, schema_version e vetores de teste.',
-    verificacao: 'ADR C1;vetores app+banco',
+      'A canonicalização define algoritmo, ordenação de arrays, exclusão de campos voláteis e versão de schema, com vetores de teste reprodutíveis entre aplicação e banco.',
+    verificacao: 'Validação automatizada da canonicalização (vetores em aplicação e banco) (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
   },
@@ -878,7 +878,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
       'Solicitação só aceita itens do mesmo processo e tipo de deficiência sob a condição selecionada.',
-    verificacao: 'fitness test',
+    verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -899,7 +899,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
       'Inscrição permanece Submetida; pendência aparece em consulta e comprovante conforme documentos vigentes.',
-    verificacao: 'fitness test;fitness test',
+    verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -920,7 +920,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
       'Mesmo CPF não duplica candidato; inscrição carrega cpf_hash derivado.',
-    verificacao: 'fitness test;fitness test',
+    verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
@@ -941,7 +941,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
       'Nenhuma FK cruza banco; snapshots carregam origem_id quando aplicável.',
-    verificacao: 'fitness test;fitness test',
+    verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
   },
@@ -962,7 +962,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
       'As cinco invariantes existem como migrations e testes automatizados.',
-    verificacao: 'fitness test;fitness test',
+    verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
@@ -1159,7 +1159,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0057',
     titulo: 'Aplicabilidade da exigência documental (GERAL/CONDICIONAL)',
     enunciado:
-      'Cada documento exigido declara explicitamente a aplicabilidade GERAL (exigido de todos) ou CONDICIONAL (exigido de quem casa o gatilho DNF). Substitui a inferência por ausência de condição (band-aid \'universal\'). Em CONDICIONAL, 0 condições vivas = casa com ninguém (estado não-ambíguo). Congela em documentos_exigidos.exigencias[].aplicabilidade.',
+      'Cada documento exigido declara explicitamente sua aplicabilidade: GERAL (exigido de todos) ou CONDICIONAL (exigido de quem satisfaz o gatilho sobre os fatos da inscrição), substituindo a inferência pela ausência de condições. Em CONDICIONAL, zero condições significa exigido de ninguém (estado não-ambíguo). A aplicabilidade declarada congela no snapshot da publicação.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1171,8 +1171,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'aplicabilidade NOT NULL ∈ {GERAL,CONDICIONAL}; GERAL sem condição viva; condição exige CONDICIONAL; publicar CONDICIONAL-vazio obrigatória/consequência é bloqueado; fn_gatilho_casa(_snapshot) usam aplicabilidade.',
-    verificacao: 'fitness test (aplicabilidade e validação de publicação)',
+      'Aplicabilidade obrigatória ∈ {GERAL, CONDICIONAL}; GERAL não convive com condição viva; condição exige CONDICIONAL; publicar exigência CONDICIONAL sem condições que determina resultado é bloqueado.',
+    verificacao: 'Teste automatizado (aplicabilidade e validação de publicação) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -1180,7 +1180,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0058',
     titulo: 'Identidade congelada da exigência (exigencia_id)',
     enunciado:
-      'O snapshot congela o id estável da exigência como exigencia_id em documentos_exigidos.exigencias[]. A apresentação do candidato (documento_apresentado.documento_exigido_id) correlaciona-se à exigência congelada por esse id, sem reler documento_exigido viva. Paridade congelado↔vivo joina/ordena por exigencia_id (habilita ≥2 exigências do mesmo tipo).',
+      'O snapshot congela o identificador estável de cada exigência (exigencia_id). A apresentação do candidato referencia esse identificador, e a correlação apresentação↔exigência se dá por ele, sem reler a configuração viva. A paridade entre o congelado e o apresentado é célula a célula por exigencia_id (suporta duas ou mais exigências do mesmo tipo de documento).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1192,8 +1192,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'exigencia_id presente e estável no bloco; paridade célula-a-célula por exigencia_id; ≥2 exigências do mesmo tipo resolvem determinístico pelo fato vivo.',
-    verificacao: 'fitness test (paridade por exigencia_id)',
+      'exigencia_id presente e estável no snapshot; paridade célula a célula por exigencia_id; duas ou mais exigências do mesmo tipo resolvem de forma determinística pelo fato do candidato.',
+    verificacao: 'Teste automatizado (paridade por exigencia_id) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -1201,7 +1201,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0059',
     titulo: 'Base legal 1:N por exigência com validação de publicação',
     enunciado:
-      'Cada exigência pode ter N bases legais (documento_exigido_base_legal: referencia, tipo_abrangencia ∈ {FEDERAL,ESTADUAL,MUNICIPAL,INTERNA_NORMA,INTERNA_EDITAL}, status ∈ {PENDENTE,RESOLVIDO}). O validação de publicação fn_valida_base_legal_exigencias exige ≥1 base ativa RESOLVIDO para toda exigência que determina resultado (obrigatorio ∨ consequencia). Só RESOLVIDO congela em bases_legais[].',
+      'Cada exigência pode ter várias bases legais (1:N), com referência, abrangência (FEDERAL, ESTADUAL, MUNICIPAL, INTERNA_NORMA ou INTERNA_EDITAL) e status (PENDENTE ou RESOLVIDO). A validação de publicação exige ≥1 base ativa RESOLVIDO para toda exigência que determina resultado (obrigatória ou com consequência). Só bases RESOLVIDO congelam no snapshot.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1213,8 +1213,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      '≥1 base RESOLVIDO de qualquer dos 5 tipo_abrangencia p/ quem determina resultado; só-PENDENTE bloqueia publicação; demotion/reparent/delete da única RESOLVIDO apanhados na publicação; bases_legais[] congela só RESOLVIDO.',
-    verificacao: 'fitness test (validação de base legal na publicação)',
+      '≥1 base RESOLVIDO de qualquer das cinco abrangências para quem determina resultado; só-PENDENTE bloqueia a publicação; rebaixar, reassociar ou remover a única base RESOLVIDO é apanhado na publicação; só bases RESOLVIDO congelam.',
+    verificacao: 'Teste automatizado (validação de base legal na publicação) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -1222,7 +1222,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0060',
     titulo: 'Seletor de snapshot vigente e snapshot do ato',
     enunciado:
-      'fn_snapshot_vigente(processo, instante) retorna o snapshot_publicacao do edital vivo publicado com maior data_publicacao <= instante (escolhe o edital, depois o snapshot; sem snapshot ⇒ NULL, sem fallback). Índice único parcial (processo, data_publicacao) garante ordem total. O ato persiste comprovante_inscricao.snapshot_publicacao_id (snapshot que o governou). Instante explícito, nunca now().',
+      'Um seletor retorna o snapshot da publicação vigente do processo — a publicação viva com a maior data de publicação ≤ instante (escolhe o edital, depois o snapshot dele; sem publicação vigente, expõe a ausência, sem fallback). Um índice de unicidade sobre (processo, data de publicação) garante ordem total. O ato persiste o identificador do snapshot que o governou; o instante é sempre explícito, nunca o relógio interno.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1234,8 +1234,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'maior data_publicacao<=instante; empate impossível (índice); NULL sem edital vigente; schema-qualificado (search_path-proof); ato preserva snapshot_publicacao_id imutável; coerência de processo.',
-    verificacao: 'fitness test (seletor de snapshot; reprodução do resultado por instante)',
+      'Maior data de publicação ≤ instante; empate impossível por unicidade; ausência exposta quando não há publicação vigente; o ato preserva o snapshot que o governou, imutável; coerência de processo.',
+    verificacao: 'Teste automatizado (seletor de snapshot; reprodução do resultado por instante) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -1243,7 +1243,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0061',
     titulo: 'Identidade congelada nos fatos de atendimento especializado',
     enunciado:
-      'Cada fato de atendimento (solicitacao_condicao, solicitacao_recurso, solicitacao_tipo_deficiencia) carrega a identidade congelada copiada da oferta no ato (condicao_codigo/recurso_nome/tipo_deficiencia_nome + *_origem_id), imutável. fn_condicao_casa resolve CONDICAO_ATENDIMENTO pelo código congelado, sem reler oferta_condicao viva.',
+      'Cada fato de atendimento (condição, recurso ou tipo de deficiência) carrega a identidade congelada copiada da oferta no momento da solicitação (código e origem), imutável. O avaliador resolve o atendimento pelo código congelado, sem reler a oferta viva.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1255,16 +1255,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'fato carrega identidade fiel (snapshot-copy) imutável no UPDATE; recode/soft-delete da oferta viva não muda a validação; ADR-0067 ancorado no congelado; integridade do parent retratado.',
-    verificacao: 'fitness test (identidade congelada do atendimento)',
+      'O fato carrega a identidade fiel (snapshot-copy), imutável após o registro; recodificar ou retratar a oferta viva não muda a validação; o aninhamento de tipo de deficiência sob a condição PcD permanece ancorado no congelado (ADR-0067).',
+    verificacao: 'Teste automatizado (identidade congelada do atendimento) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
   {
     requisito_id: 'UNI-REQ-0062',
-    titulo: 'Runtime lê o snapshot congelado (Direção A) com imunidade pós-publicação (INV-A1)',
+    titulo: 'Validação documental em runtime lê o snapshot congelado (imunidade pós-publicação)',
     enunciado:
-      'A validação documental em runtime (rn03_documentos_pendentes, pendencias_vivas_pos_submit) lê as exigências do snapshot congelado ⋈ fatos vivos do candidato, recebendo o snapshot_publicacao_id explícito; NÃO lê documento_exigido/condicao_gatilho/documento_exigido_base_legal vivos. Mutar/inserir/soft-deletar a config viva de um processo PUBLICADO não altera o resultado do runtime (INV-A1).',
+      'A validação documental em runtime — no envio e no acompanhamento da inscrição — lê as exigências do snapshot congelado combinadas com os fatos vivos do candidato, recebendo o identificador do snapshot explicitamente; não lê as tabelas vivas de configuração de documentos. Mutar, inserir ou retratar a configuração viva de um processo já publicado não altera o resultado em runtime (imunidade pós-publicação).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1276,16 +1276,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'runtime lê só snapshot+fatos; matriz INV-A1 comportamental por superfície×atributo×read-path com contraprova observável; instante histórico divergente (rn03 difere por instante); lint de reconciliação (fecho de runtime não lê config viva por tabela/EXECUTE/view/operador).',
-    verificacao: 'fitness test (imunidade da validação; matriz comportamental)',
+      'Runtime lê apenas o snapshot e os fatos vivos; imunidade verificada por matriz comportamental (por superfície de configuração e atributo lido, com contraprova observável); a reavaliação por instante histórico reflete a publicação da época; verificação estática de que a validação em runtime não referencia as tabelas vivas de configuração.',
+    verificacao: 'Teste automatizado (imunidade da validação; matriz comportamental) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
   {
     requisito_id: 'UNI-REQ-0063',
-    titulo: 'Contrato do gatilho congelado lido em runtime (estrutural + semântico, 1:1 com a trava live)',
+    titulo: 'Contrato do snapshot lido em runtime espelha a validação da publicação (estrutural + semântico)',
     enunciado:
-      'fn_valida_documentos_exigidos_snapshot valida o contrato do snapshot ANTES de avaliar o gatilho: estrutura (chaves/tipos; exigencia_id com forma de UUID; gatilho de CONDICIONAL com cláusulas-objeto, condicoes não-vazio, condição com fato/operador/valor + forma por operador) e semântica INV-C7 espelhando 1:1 a trava live fn_condicao_gatilho_valida sobre o vocabulário global rol_de_fatos_candidato (fato∈rol; operador↔domínio; valor↔tipo via cast/trunc igual à live; valor∈valores_dominio). Snapshot NULL/inexistente/bloco ausente ⇒ runtime_sem_snapshot_vigente; item/gatilho inválido ⇒ runtime_exigencia_malformada — nunca 0-linhas silencioso.',
+      'Antes de avaliar o gatilho, a validação em runtime confere o contrato do snapshot — estrutura (chaves e tipos; identificador de exigência em forma de UUID; gatilho condicional bem-formado, com cláusulas e condições válidas) e semântica (cada condição referencia um fato existente no vocabulário global do sistema, com operador e valor compatíveis com o domínio do fato) — reproduzindo a mesma validação aplicada à configuração na publicação. Snapshot ausente ou inválido produz erro nomeado, nunca resultado vazio silencioso.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1297,8 +1297,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'NULL/inexistente/bloco ausente ⇒ runtime_sem_snapshot_vigente; item/gatilho mal-formado ou semanticamente inválido (fato/operador/valor) ⇒ runtime_exigencia_malformada em rn03 E pendencias; numérico 1:1 com a live (18.0 aceito, 18.5 rejeitado); gatilho válido não levanta.',
-    verificacao: 'fitness test (contrato do snapshot; paridade com a validação de publicação)',
+      'Snapshot ausente, inexistente ou sem o bloco de exigências produz erro nomeado; item ou gatilho mal-formado ou semanticamente inválido produz erro nomeado, no envio e no acompanhamento; o veredito coincide com o da validação de publicação; gatilho válido não levanta erro.',
+    verificacao: 'Teste automatizado (contrato do snapshot; paridade com a validação de publicação) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
