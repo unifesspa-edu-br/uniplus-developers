@@ -1,0 +1,48 @@
+---
+sidebar_position: 3
+title: Congelamento na publicação e validação documental
+description: Como o Uni+ congela a configuração do edital na publicação (RN08) e avalia a validação documental sobre o snapshot congelado, não sobre a configuração viva — garantindo imunidade pós-publicação e reprodução histórica fiel.
+fonte_canonica: "ADRs 0070-0076 do uniplus-api (validação documental sobre snapshot congelado) — accepted, binding"
+---
+
+# Congelamento na publicação e validação documental
+
+O Uni+ trata os parâmetros de um processo seletivo como **configuração congelável**. Pela regra de negócio **RN08**, ao publicar o edital toda a configuração (etapas, pesos, cotas, documentos exigidos, critérios) é **congelada num snapshot imutável**; alterações retroativas são proibidas, e mudanças válidas só ocorrem por **retificação** (nova publicação, novo snapshot).
+
+A consequência arquitetural decisiva está na **validação documental** — a verificação de quais documentos uma inscrição ainda deve apresentar. Se essa validação lesse a configuração **viva** (editável), mutar um processo já publicado mudaria **retroativamente** o resultado de inscrições já enviadas, ferindo a RN08 e a defensibilidade jurídica.
+
+:::info[Fonte canônica]
+A decisão completa está nas **ADRs 0070-0076** do `uniplus-api` (status **`accepted`**, *binding*). Esta página é uma síntese para desenvolvedores; em caso de divergência, os ADRs prevalecem. O portal **indexa, não duplica**.
+:::
+
+## Princípio: o runtime lê o congelado, nunca o vivo
+
+A validação documental em runtime resolve as exigências a partir do **snapshot da publicação**, cruzando-as com os fatos vivos do candidato — e **não** lê as tabelas vivas de configuração. Disso decorre a **imunidade pós-publicação**: mutar, inserir ou retratar a configuração viva de um processo já publicado **não altera** o resultado da validação.
+
+## As decisões
+
+| ADR | Decisão |
+|---|---|
+| [ADR-0070](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0070-validacao-runtime-avalia-snapshot-congelado.md) | A validação em runtime avalia o snapshot congelado, não a configuração viva (imunidade pós-publicação). |
+| [ADR-0071](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0071-aplicabilidade-exigencia-documental-explicita.md) | A aplicabilidade da exigência (`GERAL`/`CONDICIONAL`) é configuração explícita, não inferida da ausência de condições. |
+| [ADR-0072](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0072-correlacao-exigencia-por-id-congelado.md) | A apresentação correlaciona-se à exigência por uma identidade congelada (`exigencia_id`), não pelo tipo de documento. |
+| [ADR-0073](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0073-fatos-atendimento-com-identidade-congelada.md) | Os fatos de atendimento especializado carregam a identidade congelada da oferta; o avaliador lê o código congelado. |
+| [ADR-0074](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0074-base-legal-exigencia-1n-validacao-publicacao.md) | A base legal da exigência é 1:N, enforçada por uma validação de publicação (≥1 base resolvida para quem determina resultado). |
+| [ADR-0075](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0075-snapshot-do-ato-resolvido-no-instante.md) | O snapshot que governa um ato é resolvido deterministicamente no instante do ato e gravado nele — instante explícito, nunca o relógio interno. |
+| [ADR-0076](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0076-contrato-snapshot-runtime-espelha-publicacao.md) | A validação do snapshot lido em runtime reproduz integralmente a validação aplicada à configuração na publicação (erro nomeado, nunca resultado vazio silencioso). |
+
+## Por que importa
+
+- **Reprodução histórica fiel:** um ato é reavaliável contra o estado vigente na época em que ocorreu; uma retificação cria nova publicação que governa apenas atos novos.
+- **Defensibilidade jurídica e auditabilidade:** o resultado de cada inscrição é reproduzível a partir do snapshot congelado, imune a edições posteriores.
+- **Separação nítida:** tempo de configuração lê o vivo (pré-visualização e coerência); o runtime lê o congelado.
+
+## Requisitos relacionados
+
+A publicação com snapshot imutável é o requisito **UNI-REQ-0019**; as decisões de validação documental sobre o congelado são os requisitos **UNI-REQ-0057 a UNI-REQ-0063**, publicados na [tabela de requisitos](../../produto/requisitos/index.mdx) (referência editorial). A regra de congelamento é a **RN08**, detalhada em [Regras de negócio e domínio](../../produto/regras-negocio/conceitos.mdx).
+
+## Leituras canônicas
+
+- [ADRs 0070-0076 do `uniplus-api`](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/README.md) (decisões *binding*).
+- [Event Sourcing e Event Store](../event-sourcing/index.mdx) — as decisões do processo seletivo que consomem a configuração congelada.
+- [Índice de ADRs do Uni+](../adrs/index.mdx).

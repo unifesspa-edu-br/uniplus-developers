@@ -55,7 +55,10 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Persistência e eventos',
       collapsed: false,
-      items: ['arquitetura/event-sourcing/index'],
+      items: [
+        'arquitetura/event-sourcing/index',
+        'arquitetura/congelamento-snapshot/index',
+      ],
     },
     {
       type: 'category',
