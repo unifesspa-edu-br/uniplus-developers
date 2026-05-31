@@ -1,0 +1,27 @@
+---
+sidebar_position: 1
+title: Regras de negócio nomeadas (RN01-RN08)
+description: As regras de negócio institucionais do Uni+ (RN01-RN08), com enunciado público, mapeamento para os requisitos rastreáveis (UNI-REQ) e a legislação aplicável.
+fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
+---
+
+# Regras de negócio nomeadas (RN01-RN08)
+
+As **RN** são as regras de negócio institucionais do módulo Seleção, referenciadas por código estável (`RN01`…`RN08`). Esta página traz o enunciado público de cada uma e a liga aos **requisitos rastreáveis** (`UNI-REQ`) que a implementam — verificáveis na [tabela de requisitos](../requisitos/index.mdx) e na [matriz de rastreabilidade](../rastreabilidade/index.mdx).
+
+| Regra | Enunciado | Requisito(s) |
+|---|---|---|
+| **RN01** | Um CPF só pode realizar uma inscrição ativa por processo seletivo. | [UNI-REQ-0031](../requisitos/index.mdx) |
+| **RN02** | Nome social tem prioridade absoluta em listas públicas e documentos de identificação. | [UNI-REQ-0032](../requisitos/index.mdx) |
+| **RN03** | Inscrição bloqueada sem os documentos obrigatórios da modalidade. | [UNI-REQ-0028](../requisitos/index.mdx) |
+| **RN04** | Vagas de 1ª opção são processadas primeiro; vagas remanescentes são realocadas para a 2ª opção. | [UNI-REQ-0024](../requisitos/index.mdx), [UNI-REQ-0044](../requisitos/index.mdx) |
+| **RN05** | Bônus regional opcional, com percentual configurável por edital, aplicado sobre a nota final; sem comprovação de elegibilidade, o candidato é reclassificado sem o bônus (não eliminado). | [UNI-REQ-0046](../requisitos/index.mdx) |
+| **RN06** | O candidato pode cancelar e refazer a inscrição antes do encerramento. | [UNI-REQ-0033](../requisitos/index.mdx) |
+| **RN07** | Inserção na lista de espera conforme a opção indicada no ato da inscrição. | [UNI-REQ-0047](../requisitos/index.mdx) |
+| **RN08** | **Congelamento de parâmetros por edital** — todos os parâmetros configuráveis ficam congelados (snapshot) ao serem vinculados a um edital/processo; alterações retroativas são proibidas, e atualizações em parâmetros globais valem apenas para novos editais. | [UNI-REQ-0019](../requisitos/index.mdx), [UNI-REQ-0057](../requisitos/index.mdx)…[0063](../requisitos/index.mdx) |
+
+## RN08 e o congelamento na publicação
+
+A **RN08** é a regra mais estruturante para a arquitetura: ao publicar o edital, a configuração vira um **snapshot imutável**, e a validação documental passa a ser avaliada sobre esse snapshot — nunca sobre a configuração viva —, garantindo **imunidade pós-publicação** e **reprodução histórica fiel** do resultado. Os detalhes de arquitetura estão em [Congelamento na publicação e validação documental](../../arquitetura/congelamento-snapshot/index.mdx).
+
+> As regras acima são institucionais. A página [Regras de negócio](./index.mdx) lista as regras já decompostas como requisitos técnicos verificáveis (`tipo: regra de negócio`), filtráveis por recorte e status.

@@ -1,0 +1,52 @@
+---
+sidebar_position: 7
+title: Domínio do processo seletivo
+description: Conceitos de domínio do Uni+ — tipos de processo seletivo, concorrência dupla, sistema de cotas e modalidades, ciclo de vida em seis etapas e opções de curso.
+fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
+---
+
+# Domínio do processo seletivo
+
+Esta página reúne os conceitos de domínio que sustentam o módulo Seleção do Uni+. Eles dão o vocabulário comum entre produto, desenvolvimento e as áreas institucionais, e contextualizam os [requisitos](../requisitos/index.mdx) e as [regras de negócio](../regras-negocio/conceitos.mdx).
+
+## Nomenclatura
+
+| Contexto | Nome |
+|---|---|
+| Plataforma | **Uni+** |
+| Técnico (código, namespaces) | **UniPlus** |
+| Formal expandido | **Sistema Unificado Unifesspa (S2U)** |
+
+## Tipos de processo seletivo
+
+Cada tipo tem formulário e regras próprias, configurados como um processo seletivo distinto: **SiSU**, **PSIQ** (Indígena/Quilombola), **PSE Educação do Campo**, **PSVR** (Vestibular Remanescente) e **Transferências** (interna/externa), entre outros.
+
+## Concorrência dupla (Lei 14.723/2023)
+
+O candidato cotista concorre **simultaneamente** em ampla concorrência e na sua modalidade de vaga reservada, sendo classificado na situação mais favorável. No Uni+, a inscrição registra uma concorrência ampla e até uma reservada (regra detalhada em [Concorrência dupla na inscrição](../requisitos/index.mdx)).
+
+## Sistema de cotas e modalidades (Lei 12.711/2012, atualizada pela 14.723/2023)
+
+As modalidades de concorrência implementam a legislação de ações afirmativas. Categorias principais:
+
+- **LB_PPI, LB_Q, LB_PcD, LB_EP** — reservas com renda familiar bruta per capita ≤ 1 salário mínimo;
+- **LI_PPI, LI_Q, LI_PcD, LI_EP** — reservas independentes de renda;
+- **AC** — ampla concorrência;
+- **V** — pessoa com deficiência em ampla concorrência.
+
+Vagas não preenchidas em uma modalidade são remanejadas conforme ordem legalmente estabelecida — modelada como **cascata de remanejamento** congelável e ordenada ([UNI-REQ-0056](../requisitos/index.mdx)).
+
+## Ciclo de vida em seis etapas
+
+1. **Cadastro do edital** — parâmetros, etapas, pesos, cotas e locais de prova;
+2. **Configuração do processo** — datas, formulários, modalidades e regras de bônus;
+3. **Inscrição de candidatos** — cadastro online e envio de documentos;
+4. **Homologação** — análise administrativa dos documentos;
+5. **Lançamento de notas** — registro por etapa;
+6. **Classificação e resultado** — nota final, desempate e publicação.
+
+O recorte de MVP cobre as etapas **1 a 3** (configurar → publicar/congelar → inscrever); as etapas 4 a 6 são incrementos posteriores que consomem a configuração congelada — ver [MVP Seleção](../mvp-selecao/index.mdx).
+
+## Opções de curso
+
+Processos permitem **1 ou 2 opções** de curso por inscrição. Com duas opções, a ordem é: 1ª opção → realocação de 2ª opção → (somente PSIQ: remanejamento entre modalidades) → cadastro de reserva. A regra estrutural está em [Opções de curso](../requisitos/index.mdx).
