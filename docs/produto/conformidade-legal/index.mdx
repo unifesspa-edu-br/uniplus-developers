@@ -1,0 +1,21 @@
+---
+sidebar_position: 8
+title: Conformidade legal
+description: Mapa da legislação aplicável ao Uni+ e como cada norma se reflete em requisitos rastreáveis (UNI-REQ) e decisões de arquitetura (ADR).
+fonte_canonica: "Legislação pública aplicável e ADRs dos repositórios donos, indexadas conforme ADR-0002 do uniplus-developers"
+---
+
+# Conformidade legal
+
+O Uni+ é sistema de uma autarquia federal e nasce sob um conjunto de normas. Esta página mapeia a legislação aplicável aos pontos do produto onde ela se materializa — em **requisitos rastreáveis** (`UNI-REQ`) e em **decisões de arquitetura** (`ADR`, canônicas no `uniplus-api`).
+
+| Norma | O que exige | Onde se reflete |
+|---|---|---|
+| **LGPD** (Lei 13.709/2018) | Proteção de dados pessoais e sensíveis; minimização; auditoria de acesso. | [UNI-REQ-0035](../requisitos/index.mdx) (controles de PII), [0036](../requisitos/index.mdx) (auditoria e masking), [0050](../requisitos/index.mdx) (divulgação minimizada), [0051](../requisitos/index.mdx) (retenção); [ADR-0011](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0011-mascaramento-de-cpf-em-logs.md), [ADR-0019](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0019-proibir-pii-em-path-segments-de-url.md) |
+| **Lei de Cotas** (12.711/2012, atualizada pela 14.723/2023) | Reserva de vagas por modalidade; concorrência dupla; remanejamento. | [UNI-REQ-0011](../requisitos/index.mdx) (modalidades), [0025](../requisitos/index.mdx) (concorrência dupla), [0056](../requisitos/index.mdx) (cascata de remanejamento); [ADR-0058](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0058-obrigatoriedade-legal-validacao-data-driven.md) |
+| **LBI** (Lei 13.146/2015) | Inclusão da pessoa com deficiência; atendimento especializado. | [UNI-REQ-0012](../requisitos/index.mdx) (atendimento configurável), [0026](../requisitos/index.mdx) (solicitação); [ADR-0067](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0067-aninhamento-tipodeficiencia-sob-pcd.md) |
+| **Lei 14.129/2021** (Governo Digital) | Serviços digitais, transparência e prestação de contas. | [UNI-REQ-0050](../requisitos/index.mdx) (divulgação pública); reprodução histórica fiel do resultado via [congelamento na publicação](../../arquitetura/congelamento-snapshot/index.mdx) |
+| **Padrão Digital de Governo / Gov.br DS** (Portaria SEI-MCOM 540/2020; IN SGD/ME 94/2022) | Design system Gov.br; acessibilidade WCAG 2.1 AA / e-MAG. | Frontend Gov.br DS ([Estilos no Angular](../../arquitetura/frontend/estilos-angular.md)); o próprio portal segue WCAG 2.1 AA (testes axe-core) |
+| **Resoluções Unifesspa** (414/2020, 326/2019, 184/2017, 183/2017) | Normas internas que embasam exigências e procedimentos. | Base legal das exigências documentais — [UNI-REQ-0059](../requisitos/index.mdx) (base legal 1:N), [ADR-0074](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0074-base-legal-exigencia-1n-validacao-publicacao.md) |
+
+> A base legal de cada exigência documental é registrada e validada na publicação (1:N por exigência), de modo que toda exigência que determina resultado tenha embasamento resolvido e rastreável.
