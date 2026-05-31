@@ -47,6 +47,12 @@ const sidebars: SidebarsConfig = {
     'arquitetura/visao',
     {
       type: 'category',
+      label: 'Frontend Angular',
+      collapsed: false,
+      items: ['arquitetura/frontend/estilos-angular'],
+    },
+    {
+      type: 'category',
       label: 'Persistência e eventos',
       collapsed: false,
       items: ['arquitetura/event-sourcing/index'],

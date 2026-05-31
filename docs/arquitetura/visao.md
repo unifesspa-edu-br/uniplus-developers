@@ -26,6 +26,9 @@ divergirem, o ADR vence.
 - **[Event Sourcing e Event Store](./event-sourcing/index.mdx)** — quando e como
   o Uni+ usa histórico de eventos como fonte de verdade em agregados críticos
   (Marten sobre PostgreSQL), e por que a maior parte do sistema permanece CRUD.
+- **[Estilos no Angular](./frontend/estilos-angular.md)** — como o frontend
+  separa foundation CSS do Design System e autoria SCSS local em componentes
+  Angular.
 - **[Índice de ADRs](./adrs/index.mdx)** — mapa público das decisões
   arquiteturais por repositório, com link para o arquivo canônico no GitHub.
 
