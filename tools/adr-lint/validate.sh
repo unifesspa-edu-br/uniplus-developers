@@ -40,7 +40,12 @@ for FILE in "$DIR"/*.md; do
 
   if ! head -1 "$FILE" | grep -q '^---$'; then
     ERR+=("frontmatter YAML ausente (esperado --- na linha 1)")
-  elif ! tail -n +2 "$FILE" | head -n 50 | grep -q '^---$'; then
+  # awk standalone evita falso positivo por SIGPIPE: a versão antiga
+  # `tail | head -n 50 | grep -q` falhava sob `bash -e`/pipefail no CI porque o
+  # `tail` recebia SIGPIPE quando o `grep -q` saía cedo após o match, marcando
+  # ADR íntegro como sem delimitador. `NR<=51` preserva o contrato de sanidade
+  # (frontmatter MADR 4.0 fica em ~5-10 linhas; 50 é folga).
+  elif ! awk 'NR==1 && /^---$/{c=1; next} NR<=51 && c==1 && /^---$/{found=1; exit} END{exit found ? 0 : 1}' "$FILE"; then
     ERR+=("frontmatter YAML sem delimitador de fechamento (esperado --- após bloco YAML)")
   fi
 
