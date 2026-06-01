@@ -25,6 +25,7 @@ const sidebars: SidebarsConfig = {
         'produto/regras-negocio/conceitos',
         'produto/rastreabilidade/index',
         'produto/mvp-selecao/index',
+        'produto/casos-de-uso/index',
         'produto/conformidade-legal/index',
         'produto/checklist-publicacao/index',
       ],

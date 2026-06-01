@@ -1,0 +1,132 @@
+---
+sidebar_position: 7
+description: Casos de uso públicos do MVP do módulo Seleção — configurar processo, publicar edital e inscrever candidato — vinculados aos requisitos.
+fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
+estado_publicacao: "primeira fonte pública curada dos casos de uso do MVP Seleção"
+---
+
+# Casos de uso
+
+Esta página descreve os **casos de uso do MVP do módulo Seleção** em linguagem de
+produto — quem usa, o que precede, como o fluxo acontece e o que fica garantido ao
+final. Cada caso aponta os requisitos publicados que o sustentam, sem duplicar
+editais, normas internas ou dados sensíveis.
+
+:::info[Estado da publicação]
+Primeira fonte pública curada dos casos de uso. Os fluxos derivam do mesmo
+recorte do [MVP Seleção](../mvp-selecao/index.mdx) e dos
+[requisitos](../requisitos/index.mdx); os exemplos usam dados fictícios. As fases
+posteriores (homologação, avaliação, classificação, recursos) ficam registradas
+como incrementos planejados, fora deste recorte primário.
+:::
+
+## Fonte canônica
+
+Os casos de uso seguem a
+[taxonomia de rastreabilidade](../taxonomia-rastreabilidade-requisitos.md) e
+vinculam-se aos [requisitos do MVP Seleção](../requisitos/index.mdx) por
+`UNI-REQ`. Quando um passo depende de regra de negócio nomeada, o portal aponta
+para a página de [regras de negócio](../regras-negocio/index.mdx).
+
+## Atores
+
+- **Administrador da Unidade** — configura e publica o processo seletivo dentro da
+  Unidade que administra.
+- **Candidato** — preenche e submete a inscrição no portal público.
+
+## UC-01 — Configurar o processo seletivo
+
+**Ator:** Administrador da Unidade.
+
+**Pré-condição:** os cadastros de referência necessários (cursos, modalidades,
+condições de atendimento, tipos de documento) já existem; o processo está em
+rascunho, ainda não publicado.
+
+**Fluxo principal:**
+
+1. O administrador cria o processo seletivo e define seus parâmetros: etapas
+   pontuadas, pesos, critérios de desempate e bônus regional.
+2. Define as modalidades de concorrência (ampla e reservas legais) e o quadro de
+   vagas, incluindo a cascata de remanejamento de cotas.
+3. Configura os documentos exigidos — por aplicabilidade (de todos, ou condicional
+   a um gatilho sobre os fatos do candidato) e por fase.
+4. Monta o formulário de inscrição configurável do processo.
+5. Salva a configuração; enquanto em rascunho, tudo permanece editável.
+
+**Pós-condição:** o processo está configurado e pronto para publicação; nenhuma
+regra foi congelada ainda.
+
+**Requisitos relacionados:** UNI-REQ-0014 (configuração do processo),
+UNI-REQ-0015 (etapas, critérios e bônus), UNI-REQ-0016 (documentos exigidos),
+UNI-REQ-0056 (cascata de remanejamento), UNI-REQ-0017 (formulário de inscrição).
+
+## UC-02 — Publicar o edital
+
+**Ator:** Administrador da Unidade.
+
+**Pré-condição:** o processo está configurado e passou na validação de
+publicação (por exemplo, toda exigência que determina resultado tem base legal
+resolvida).
+
+**Fluxo principal:**
+
+1. O administrador solicita a publicação do edital do processo.
+2. O sistema valida a configuração e, estando conforme, **congela** os parâmetros
+   num registro imutável de publicação (snapshot), com a configuração congelada e
+   os hashes que garantem a reprodução histórica fiel.
+3. O edital passa a publicado; a configuração congelada governa todos os atos a
+   partir daí.
+
+**Fluxo alternativo — retificação:** para alterar um processo já publicado, o
+administrador emite uma **retificação**, que cria um novo edital e um novo
+snapshot, com o motivo registrado. A edição direta da configuração publicada é
+bloqueada.
+
+**Pós-condição:** existe um edital publicado com snapshot imutável; alterações só
+por retificação.
+
+**Requisitos relacionados:** UNI-REQ-0019 (publicação com snapshot imutável),
+UNI-REQ-0021 (retificação como novo edital), UNI-REQ-0022 (bloqueio de mutação
+direta após publicação).
+
+## UC-03 — Inscrever-se no processo
+
+**Ator:** Candidato.
+
+**Pré-condição:** existe um edital publicado e vigente; o período de inscrição
+está aberto.
+
+**Fluxo principal:**
+
+1. O candidato abre uma inscrição em rascunho e preenche o formulário do processo.
+2. Indica suas opções de curso (até duas) e suas modalidades de concorrência
+   (podendo concorrer em ampla e em reserva ao mesmo tempo).
+3. Quando aplicável, solicita atendimento especializado entre as opções ofertadas
+   pelo processo.
+4. Anexa os documentos exigidos; cada arquivo entra em quarentena para verificação
+   técnica de segurança.
+5. Submete a inscrição. O sistema valida a presença dos documentos obrigatórios
+   aplicáveis ao caso do candidato; faltando algum, a submissão é bloqueada.
+6. Com tudo presente, a inscrição passa a submetida e o sistema emite um
+   comprovante imutável com o relatório de documentos e pendências.
+
+**Regras observadas:** uma inscrição submetida é única por CPF, processo e nível
+de ensino; o nome social tem prioridade em exibições; o candidato pode cancelar e
+refazer a inscrição enquanto o período permitir.
+
+**Pós-condição:** a inscrição está submetida, com comprovante emitido; pendências
+técnicas de documento (quando houver) ficam registradas para acompanhamento.
+
+**Requisitos relacionados:** UNI-REQ-0023 (ciclo-base da inscrição),
+UNI-REQ-0024 (opções de curso), UNI-REQ-0025 (concorrência dupla),
+UNI-REQ-0026 (atendimento especializado), UNI-REQ-0027 (upload de documentos),
+UNI-REQ-0028 (validação documental no submit), UNI-REQ-0029 (comprovante
+imutável), UNI-REQ-0031 (unicidade por CPF e nível), UNI-REQ-0032 (nome social),
+UNI-REQ-0033 (cancelar e refazer).
+
+## Incrementos planejados
+
+Os casos de uso de **homologação documental**, **avaliação e lançamento de
+notas**, **classificação e resultado** e **recursos** ficam fora do recorte
+primário do MVP e serão publicados quando modelados, consumindo a configuração
+congelada do edital.
