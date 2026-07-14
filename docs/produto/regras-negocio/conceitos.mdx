@@ -1,13 +1,13 @@
 ---
 sidebar_position: 1
-title: Regras de negócio nomeadas (RN01-RN08)
-description: As regras de negócio institucionais do Uni+ (RN01-RN08), com enunciado público, mapeamento para os requisitos rastreáveis (UNI-REQ) e a legislação aplicável.
+title: Regras de negócio nomeadas (RN01-RN08, RN13-RN14)
+description: As regras de negócio institucionais do Uni+ (RN01-RN08 e RN13-RN14), com enunciado público, mapeamento para os requisitos rastreáveis (UNI-REQ) e a legislação aplicável.
 fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
 ---
 
-# Regras de negócio nomeadas (RN01-RN08)
+# Regras de negócio nomeadas (RN01-RN08, RN13-RN14)
 
-As **RN** são as regras de negócio institucionais do módulo Seleção, referenciadas por código estável (`RN01`…`RN08`). Esta página traz o enunciado público de cada uma e a liga aos **requisitos rastreáveis** (`UNI-REQ`) que a implementam — verificáveis na [tabela de requisitos](../requisitos/index.mdx) e na [matriz de rastreabilidade](../rastreabilidade/index.mdx).
+As **RN** são as regras de negócio institucionais do Uni+ — a maioria do módulo Seleção, algumas de escopo compartilhado ou do Ingresso —, referenciadas por código estável (`RN01`…`RN08`, mais `RN13`-`RN14`; `RN09`-`RN12` são lacunas em aberto no documento de Análise de Lacunas e não são regras consolidadas). Esta página traz o enunciado público de cada uma e a liga aos **requisitos rastreáveis** (`UNI-REQ`) que a implementam — verificáveis na [tabela de requisitos](../requisitos/index.mdx) e na [matriz de rastreabilidade](../rastreabilidade/index.mdx).
 
 | Regra | Enunciado | Requisito(s) |
 |---|---|---|
@@ -19,6 +19,8 @@ As **RN** são as regras de negócio institucionais do módulo Seleção, refere
 | **RN06** | O candidato pode cancelar e refazer a inscrição antes do encerramento. | [UNI-REQ-0033](../requisitos/index.mdx) |
 | **RN07** | Inserção na lista de espera conforme a opção indicada no ato da inscrição. | [UNI-REQ-0047](../requisitos/index.mdx) |
 | **RN08** | **Congelamento de parâmetros por edital** — todos os parâmetros configuráveis ficam congelados (snapshot) ao serem vinculados a um edital/processo; alterações retroativas são proibidas, e atualizações em parâmetros globais valem apenas para novos editais. | [UNI-REQ-0019](../requisitos/index.mdx), [UNI-REQ-0057](../requisitos/index.mdx)…[0063](../requisitos/index.mdx) |
+| **RN13** | **Recurso administrativo e efeito suspensivo** — o Uni+ conduz só a 1ª instância; a instância superior é julgada fora (administrativa na Seleção, judicial no Ingresso), mas registrada. O efeito suspensivo é configurável por instância e por fase (a ausência não bloqueia); o comportamento nunca ramifica por módulo em código. | [UNI-REQ-0080](../requisitos/index.mdx), [UNI-REQ-0081](../requisitos/index.mdx) |
+| **RN14** | **Matrícula compulsória por decisão judicial final** — quando uma decisão judicial final reconhece o direito a uma vaga já ocupada, o candidato é matriculado em vaga supranumerária, após as fases de habilitação, sem alterar o quadro nem a classificação congelada. | [UNI-REQ-0082](../requisitos/index.mdx) |
 
 ## RN08 e o congelamento na publicação
 
