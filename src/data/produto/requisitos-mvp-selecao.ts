@@ -1184,7 +1184,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
-    parent_id: 'UNI-REQ-0019',
+    parent_id: 'UNI-REQ-0016',
     modulo: 'Seleção',
     recorte: 'mvp',
     status: 'aprovado',
