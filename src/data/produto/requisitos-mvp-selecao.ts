@@ -886,7 +886,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0030',
     titulo: 'Pendência derivada pós-submit',
     enunciado:
-      'O sistema deve calcular pendência viva após submissão por ausência ou por documento em estado técnico diferente de limpo, sem mudar InscricaoStatus.',
+      'O sistema deve calcular pendência viva após submissão sem mudar InscricaoStatus. As causas são exemplificativas e não exaustivas: ausência de documento, documento em estado técnico diferente de limpo e, com a árvore de satisfação, exigência pendente, indeterminada, impossível ou com slot de cardinalidade pendente. A consulta e o comprovante distinguem esses estados.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -926,9 +926,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0037',
-    titulo: 'Isolamento cross-db e snapshot-copy',
+    titulo: 'Isolamento por schema e snapshot-copy',
     enunciado:
-      'O sistema deve manter bancos isolados por módulo e fazer referência cross-módulo por snapshot-copy com origem_id, sem FK cross-db.',
+      'O sistema é um monólito modular sobre um banco único (uniplus) com isolamento por schema por módulo (ADR-0097): cada módulo tem seu schema e não lê nem escreve nas tabelas de outro. A referência cross-módulo é por snapshot-copy com origem_id, sem foreign key cruzando a fronteira do módulo, preservando o desacoplamento mesmo com banco único.',
     grupo: 'dados',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -940,7 +940,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Nenhuma FK cruza banco; snapshots carregam origem_id quando aplicável.',
+      'Banco único com schema por módulo; nenhuma FK cruza a fronteira de módulo; a referência cross-módulo é snapshot-copy com origem_id quando aplicável.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
@@ -1159,7 +1159,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0057',
     titulo: 'Aplicabilidade da exigência documental (GERAL/CONDICIONAL)',
     enunciado:
-      'Cada documento exigido declara explicitamente sua aplicabilidade: GERAL (exigido de todos) ou CONDICIONAL (exigido de quem satisfaz o gatilho sobre os fatos da inscrição), substituindo a inferência pela ausência de condições. Em CONDICIONAL, zero condições significa exigido de ninguém (estado não-ambíguo). A aplicabilidade declarada congela no snapshot da publicação.',
+      'Cada documento exigido declara explicitamente sua aplicabilidade: GERAL (exigido de todos) ou CONDICIONAL (exigido de quem satisfaz o gatilho sobre os fatos resolvidos do sujeito no instante e na fase da avaliação — cobrindo fatos derivados, declarados e de integração, fases posteriores e sujeito-entidade), substituindo a inferência pela ausência de condições. Em CONDICIONAL, zero condições significa exigido de ninguém (estado não-ambíguo). A aplicabilidade declarada congela no snapshot da publicação.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1381,7 +1381,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Conjunto fechado de seis operadores (IGUAL/DIFERENTE, EM/NAO_EM, MAIOR_IGUAL/MENOR_IGUAL) com matriz operador×domínio (booleano só IGUAL/DIFERENTE; numérico +MAIOR_IGUAL/MENOR_IGUAL; categórico +EM/NAO_EM) e valor compatível com o domínio; DIFERENTE/NAO_EM aceitos onde IGUAL/EM valem; NAO_EM [] verdadeiro e EM [] falso com fato resolvido; MODALIDADE/CONDICAO_ATENDIMENTO multivalorados com IGUAL=pertinência, EM=interseção e negações por complemento; fato não resolvido resolve INDETERMINADO, propaga em E e entre cláusulas e mantém a exigência pendente (nunca descartada); condição que referencia fato de resolução posterior à fase é recusada no cadastro.',
+      'Conjunto fechado de seis operadores (IGUAL/DIFERENTE, EM/NAO_EM, MAIOR_IGUAL/MENOR_IGUAL) com matriz operador×domínio (booleano só IGUAL/DIFERENTE; numérico +MAIOR_IGUAL/MENOR_IGUAL; categórico +EM/NAO_EM) e valor compatível com o domínio; DIFERENTE/NAO_EM aceitos onde IGUAL/EM valem; NAO_EM [] verdadeiro e EM [] falso com fato resolvido; MODALIDADE/CONDICAO_ATENDIMENTO multivalorados com IGUAL=pertinência, EM=interseção e negações por complemento; precedência ternária normativa — numa cláusula E, FALSO vence INDETERMINADO (uma condição falsa torna a cláusula falsa mesmo com outra indeterminada); no DNF entre cláusulas, VERDADEIRO vence (satisfeito), senão INDETERMINADO se alguma cláusula é indeterminada, senão FALSO; fato não resolvido resolve INDETERMINADO e mantém a exigência pendente (nunca descartada); condição que referencia fato de resolução posterior à fase é recusada no cadastro.',
     verificacao:
       'Teste automatizado (matriz operador×domínio×valor; tabela-verdade de ausência com propagação em E/DNF; multivalorados e complemento; gate de fase) (planejado).',
     pagina_developers: '/produto/requisitos/',
@@ -1447,7 +1447,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Árvore E/OU aninhada com invariantes de cadastro (grupo não vazio; estrutura em árvore, sem ciclo e sem DAG; todos os nós de um grupo na mesma fase; profundidade não limitada pela semântica; cardinalidade por tipo de nó — folha N maior ou igual a 1, OU/N-de 1 a número de filhos, proibida em E); tabelas de decisão de E e de OU/N-de com cálculo de máximo atingível; impossível sinalizado (nunca pendente silencioso permanente); indeterminado na raiz permanece pendente; OU plano preservado como caso degenerado.',
+      'Árvore E/OU aninhada com invariantes de cadastro (grupo não vazio; estrutura em árvore, sem ciclo e sem DAG; todos os nós de um grupo na mesma fase; profundidade não limitada pela semântica; cardinalidade por tipo de nó — folha N maior ou igual a 1, OU/N-de 1 a número de filhos, proibida em E); tabela de decisão do E (todos os filhos não aplicáveis: NÃO_APLICÁVEL; senão IMPOSSIVEL se houver impossível; senão SATISFEITO se todos os restantes satisfeitos; senão PENDENTE se houver pendente; senão INDETERMINADO); tabela de decisão do OU/N-de (todos não aplicáveis: NÃO_APLICÁVEL; SATISFEITO se satisfeitos maior ou igual a N; IMPOSSIVEL se o máximo atingível — satisfeitos mais pendentes aplicáveis mais indeterminados — for menor que N; INDETERMINADO se houver indeterminado; senão PENDENTE); impossível sinalizado (nunca pendente silencioso permanente); indeterminado na raiz permanece pendente; OU plano preservado como caso degenerado.',
     verificacao:
       'Teste automatizado (satisfação recursiva; tabelas de E e OU/N-de; máximo atingível; recusa de grupo vazio/ciclo; degenerado) (planejado).',
     pagina_developers: '/produto/requisitos/',
@@ -1501,7 +1501,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0070',
     titulo: 'Consequência por nó e fronteira ativa de emissão',
     enunciado:
-      'A consequência da exigência é configurada por nó — em cada folha e em cada grupo OU/N-de, que é a unidade opaca de alternativas; o grupo E é transparente e não carrega consequência própria. O vocabulário é o da base (ELIMINA, RECLASSIFICA_AC, REMOVE_VANTAGEM, PENDENCIA_REENVIO) e os mesmos gates se aplicam: coerência com a ação da vaga, REMOVE_VANTAGEM exige vantagem viva, PENDENCIA_REENVIO exige fase com complementação (inclusive o gate reverso ao retirar a complementação) e a publicação exige ao menos uma base legal RESOLVIDO. Um grupo OU/N-de com consequência é exigência de primeira classe, com base legal própria, não derivada dos filhos. A consequência efetiva é emitida por fronteira ativa, do nó raiz para baixo: um nó satisfeito ou não aplicável suprime a subárvore; a folha pendente emite a sua; o OU/N-de opaco emite a própria, com os filhos apenas como orientação de pendência, não como consequência vigente; o E transparente não emite e desce para os filhos não satisfeitos. A ordem de severidade serve só para priorizar exibição, nunca para derivar ou agregar consequência.',
+      'A consequência da exigência é configurada por nó — em cada folha e em cada grupo OU/N-de, que é a unidade opaca de alternativas; o grupo E é transparente e não carrega consequência própria. O vocabulário é o da base (ELIMINA, RECLASSIFICA_AC, REMOVE_VANTAGEM, PENDENCIA_REENVIO) e os mesmos gates se aplicam: coerência com a ação da vaga, REMOVE_VANTAGEM exige vantagem viva, PENDENCIA_REENVIO exige fase com complementação (inclusive o gate reverso ao retirar a complementação) e a publicação exige ao menos uma base legal RESOLVIDO. Um grupo OU/N-de com consequência é exigência de primeira classe, com base legal própria, não derivada dos filhos. A consequência efetiva é emitida por fronteira ativa, do nó raiz para baixo: um nó satisfeito ou não aplicável suprime a subárvore; uma folha em estado ativo — pendente, indeterminado ou impossível — emite a sua consequência (a folha impossível a emite como inevitável); o OU/N-de opaco em estado ativo emite a própria, com os filhos apenas como orientação de pendência, não como consequência vigente; o E transparente não emite e desce para os filhos em estado ativo, isto é, não satisfeitos e não não aplicáveis (pendente, indeterminado ou impossível). A ordem de severidade serve só para priorizar exibição, nunca para derivar ou agregar consequência.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1513,7 +1513,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Consequência por nó em folha e em OU/N-de, com E transparente; vocabulário fechado da base; gates de ação da vaga, vantagem viva, complementação e gate reverso, e base legal RESOLVIDO para publicar; grupo OU/N-de opaco é exigência de primeira classe com base legal própria; emissão por fronteira ativa (nó satisfeito/não aplicável suprime a subárvore; sem dupla emissão; filhos de OU/N-de opaco são só orientação); ordem de severidade apenas para exibição, nunca para derivar consequência.',
+      'Consequência por nó em folha e em OU/N-de, com E transparente; vocabulário fechado da base; gates de ação da vaga, vantagem viva, complementação e gate reverso, e base legal RESOLVIDO para publicar; grupo OU/N-de opaco é exigência de primeira classe com base legal própria; emissão por fronteira ativa (nó satisfeito/não aplicável suprime a subárvore; folha em estado ativo — pendente, indeterminado ou impossível — emite, impossível como inevitável; E desce só para filhos em estado ativo, excluindo satisfeito e não aplicável; sem dupla emissão; filhos de OU/N-de opaco são só orientação); ordem de severidade apenas para exibição, nunca para derivar consequência.',
     verificacao:
       'Teste automatizado (emissão por fronteira; supressão; gates diretos e reverso; base legal própria do grupo; severidade só de exibição) (planejado).',
     pagina_developers: '/produto/requisitos/',
