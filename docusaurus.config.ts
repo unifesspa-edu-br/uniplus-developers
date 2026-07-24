@@ -65,6 +65,11 @@ const config: Config = {
         hashed: true,
         language: ['pt', 'en'],
         indexBlog: false,
+        // Os docs são servidos na raiz (`routeBasePath: '/'` no preset). Sem
+        // isto o plugin varre o seu default `/docs`, não encontra rota alguma
+        // para indexar e o build termina sem emitir o índice — a busca então
+        // pede um arquivo inexistente e recebe o HTML do 404.
+        docsRouteBasePath: '/',
       },
     ],
   ],
