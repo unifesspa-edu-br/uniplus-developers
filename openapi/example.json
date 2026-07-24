@@ -10,7 +10,7 @@
     }
   },
   "servers": [
-    {"url": "https://developers.portaluni.com.br", "description": "Domínio de trabalho"}
+    {"url": "https://unifesspa-edu-br.github.io/uniplus-developers", "description": "Portal publicado"}
   ],
   "tags": [
     {"name": "Editais", "description": "Gestão do ciclo de vida de editais de processo seletivo."}
