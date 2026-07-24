@@ -12,7 +12,7 @@ Portal **público** de documentação de desenvolvedores do Uni+, em **Docusauru
 
 ```bash
 npm ci                 # instala dependências (Node >= 20)
-npm start              # dev server em http://localhost:3000 (hot reload)
+npm start              # dev server em http://localhost:3000/uniplus-developers/ (hot reload; o subpath vem do baseUrl)
 npm run build          # build estático em ./build (onBrokenLinks: 'throw' — links quebrados falham o build)
 npm run serve          # serve ./build localmente
 npm run typecheck      # tsc sem emit
@@ -50,7 +50,7 @@ A ordem de carregamento importa: `govbr-tokens.css` é listado antes de `custom.
 Três workflows em `.github/workflows/`, todos com `concurrency` cancelando PRs em série:
 - `ci.yml` — adr-lint + markdownlint sobre `docs/adrs/`.
 - `e2e.yml` — `npm ci` → instala chromium → `npm run build` → `npm run test:e2e` (smoke + axe-core a11y).
-- `deploy.yml` — em PR só valida o build; em **push para main** publica `./build` na branch `gh-pages` via `peaceiris/actions-gh-pages`. Domínio custom vem de `static/CNAME` (`developers.portaluni.com.br` staging; institucional reservado).
+- `deploy.yml` — em PR só valida o build; em **push para main** publica `./build` na branch `gh-pages` via `peaceiris/actions-gh-pages`. O portal é servido em subpath do GitHub Pages (`https://unifesspa-edu-br.github.io/uniplus-developers/`), sem domínio custom — daí `baseUrl: '/uniplus-developers/'` no `docusaurus.config.ts` e o mesmo prefixo no `baseURL` do `playwright.config.ts`. Quando o CNAME institucional `developers.uniplus.unifesspa.edu.br` for provisionado, reintroduza `static/CNAME` e volte `url`/`baseUrl` para o domínio (ADR-0001, § Hosting e deploy).
 
 ## Licenciamento (duplo)
 

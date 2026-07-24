@@ -11,25 +11,25 @@ import AxeBuilder from '@axe-core/playwright';
 const WCAG_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'];
 
 const pages: {name: string; url: string; exclude?: string}[] = [
-  {name: 'home', url: '/'},
-  {name: 'personas (cadastros)', url: '/personas/'},
-  {name: 'produto requisitos', url: '/produto/requisitos/'},
-  {name: 'produto regras de negócio', url: '/produto/regras-negocio/'},
-  {name: 'produto rastreabilidade', url: '/produto/rastreabilidade/'},
-  {name: 'produto MVP Seleção', url: '/produto/mvp-selecao/'},
-  {name: 'produto domínio', url: '/produto/dominio/'},
+  {name: 'home', url: './'},
+  {name: 'personas (cadastros)', url: 'personas/'},
+  {name: 'produto requisitos', url: 'produto/requisitos/'},
+  {name: 'produto regras de negócio', url: 'produto/regras-negocio/'},
+  {name: 'produto rastreabilidade', url: 'produto/rastreabilidade/'},
+  {name: 'produto MVP Seleção', url: 'produto/mvp-selecao/'},
+  {name: 'produto domínio', url: 'produto/dominio/'},
   {
     name: 'produto regras de negócio (conceitos)',
-    url: '/produto/regras-negocio/conceitos',
+    url: 'produto/regras-negocio/conceitos',
   },
-  {name: 'produto conformidade legal', url: '/produto/conformidade-legal/'},
+  {name: 'produto conformidade legal', url: 'produto/conformidade-legal/'},
   {
     name: 'arquitetura congelamento e snapshot',
-    url: '/arquitetura/congelamento-snapshot/',
+    url: 'arquitetura/congelamento-snapshot/',
   },
   {
     name: 'produto checklist de publicação',
-    url: '/produto/checklist-publicacao/',
+    url: 'produto/checklist-publicacao/',
     // O checklist usa task list GFM, que renderiza <input type=checkbox>
     // desabilitado e sem rótulo associado. É marcação visual estática (não
     // interativa) num portal interno de desenvolvedores; o escopo exclui só
@@ -58,7 +58,7 @@ test('a página de requisitos não tem violações de contraste no tema escuro',
   // do tema escuro: as etiquetas de status/recorte (fundo pastel, texto escuro)
   // e a cor de link/breadcrumb do shell (azul clarificado).
   await page.emulateMedia({colorScheme: 'dark'});
-  await page.goto('/produto/requisitos/');
+  await page.goto('produto/requisitos/');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 
   const results = await new AxeBuilder({page})
@@ -71,7 +71,7 @@ test('a página de requisitos não tem violações de contraste no tema escuro',
 test('o modal de detalhes da persona sem violações WCAG 2.1 A/AA', async ({
   page,
 }) => {
-  await page.goto('/personas/');
+  await page.goto('personas/');
   await page
     .locator('tbody tr')
     .first()

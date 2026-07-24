@@ -9,7 +9,11 @@ import {defineConfig, devices} from '@playwright/test';
 // Porta do servidor de E2E. Sobrescrevível por env para não colidir com um
 // `docusaurus start` (dev server) já rodando localmente na 3000.
 const PORT = Number(process.env.E2E_PORT) || 3000;
-const baseURL = `http://localhost:${PORT}`;
+// O portal é publicado em subpath do GitHub Pages, e `docusaurus serve`
+// reproduz o `baseUrl` do build. O prefixo mora aqui (com a barra final, para
+// que os paths relativos dos specs resolvam dentro dele) e os specs navegam
+// por paths relativos — assim uma futura mudança de baseUrl toca um lugar só.
+const baseURL = `http://localhost:${PORT}/uniplus-developers/`;
 
 export default defineConfig({
   testDir: './e2e',

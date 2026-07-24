@@ -10,18 +10,18 @@ Consolida, em um só portal público:
 
 Arquitetura definida no [ADR-0001](docs/adrs/0001-arquitetura-portal-desenvolvedores.md).
 
-## Domínios
+## Endereços
 
-| Ambiente | Domínio |
+| Ambiente | Endereço |
 |---|---|
-| Trabalho (staging) | `developers.portaluni.com.br` |
-| Produção | `developers.uniplus.unifesspa.edu.br` (reservado) |
+| Publicado | `https://unifesspa-edu-br.github.io/uniplus-developers/` |
+| Produção | `developers.uniplus.unifesspa.edu.br` (reservado — depende do CNAME a ser provisionado pelo time de redes) |
 
 ## Desenvolvimento
 
 ```bash
 npm ci          # instala dependências
-npm start       # servidor local em http://localhost:3000
+npm start       # servidor local em http://localhost:3000/uniplus-developers/
 npm run build   # build estático em ./build
 npm run serve   # serve o build localmente
 ```
@@ -48,5 +48,12 @@ pessoas reais na documentação.
 ## Deploy
 
 Push para `main` dispara `.github/workflows/deploy.yml`: build + publicação na
-branch `gh-pages` via `peaceiris/actions-gh-pages`. O domínio custom é declarado
-em `static/CNAME`.
+branch `gh-pages` via `peaceiris/actions-gh-pages`. O portal é servido em
+subpath do GitHub Pages, sem domínio custom — o prefixo `/uniplus-developers/`
+vem do `baseUrl` em `docusaurus.config.ts`.
+
+Quando o CNAME institucional `developers.uniplus.unifesspa.edu.br` for
+provisionado pelo time de redes, reintroduza `static/CNAME` com o domínio e
+volte `url`/`baseUrl` para a raiz — o pipeline de build não muda
+([ADR-0001](docs/adrs/0001-arquitetura-portal-desenvolvedores.md), § Hosting e
+deploy).

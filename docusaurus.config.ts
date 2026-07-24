@@ -13,10 +13,12 @@ const config: Config = {
     v4: true, // Compatibilidade com o Docusaurus v4.
   },
 
-  // Domínio de trabalho (staging). O institucional
-  // `developers.uniplus.unifesspa.edu.br` é reservado para produção.
-  url: 'https://developers.portaluni.com.br',
-  baseUrl: '/',
+  // URL do GitHub Pages, servida em subpath do repositório. É a hospedagem
+  // prevista pelo ADR-0001 enquanto o CNAME institucional
+  // `developers.uniplus.unifesspa.edu.br` não é provisionado pelo time de
+  // redes — ao provisioná-lo, `url` volta para o domínio e `baseUrl` para '/'.
+  url: 'https://unifesspa-edu-br.github.io',
+  baseUrl: '/uniplus-developers/',
 
   organizationName: 'unifesspa-edu-br',
   projectName: 'uniplus-developers',

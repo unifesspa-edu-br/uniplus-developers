@@ -38,8 +38,9 @@ Todos os exemplos deste portal — payloads, prints, tabelas — usam exclusivam
 a lista canônica de [**personas fictícias**](personas/cadastros.mdx).
 Nenhum dado de pessoa real aparece na documentação.
 
-:::note[Domínios]
-Este conteúdo é servido no domínio de trabalho `developers.portaluni.com.br`.
-O domínio institucional `developers.uniplus.unifesspa.edu.br` é reservado para
-produção.
+:::note[Endereço do portal]
+Este conteúdo é servido em
+`https://unifesspa-edu-br.github.io/uniplus-developers/`. O domínio
+institucional `developers.uniplus.unifesspa.edu.br` é reservado para produção e
+entra no ar quando o CNAME for provisionado pelo time de redes da Unifesspa.
 :::
