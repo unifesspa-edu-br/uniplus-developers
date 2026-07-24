@@ -28,6 +28,15 @@ const sidebars: SidebarsConfig = {
         'produto/casos-de-uso/index',
         'produto/conformidade-legal/index',
         'produto/checklist-publicacao/index',
+        {
+          type: 'category',
+          label: 'Modelo de negócio',
+          items: [
+            'produto/modelo-negocio/selecao',
+            'produto/modelo-negocio/configurar-publicar',
+            'produto/modelo-negocio/coleta-fatos-derivacao',
+          ],
+        },
       ],
     },
     {
