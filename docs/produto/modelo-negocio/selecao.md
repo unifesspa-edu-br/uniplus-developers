@@ -8,9 +8,9 @@ description: Como o módulo Seleção funciona — configuração, publicação 
 
 Documento de referência funcional para Análise de Requisitos — como o sistema funciona, como se configura um processo seletivo, como as cotas são atendidas e como os dados do candidato são coletados.
 
-Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: ciclo de configuração, publicação e inscrição (primeira entrega do módulo).
+Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo da entrega atual: configuração e publicação; a inscrição é capacidade prevista pelos requisitos do MVP.
 
-> Esta página é a **visão geral de negócio** do módulo. Os catálogos canônicos e rastreáveis vivem em páginas dedicadas: o [domínio e as modalidades](../dominio/index.mdx), as [regras de negócio nomeadas](../regras-negocio/conceitos.mdx) (`RN`) e a [tabela de requisitos](../requisitos/index.mdx) (`UNI-REQ`). Onde este texto resumir um catálogo, a página dedicada é a fonte — exceto nos pontos ainda em aberto listados na seção **Questões em refinamento** abaixo, em que as fontes do projeto divergem e a decisão de negócio está pendente.
+> Esta página é a **visão geral de negócio** do módulo. Para comportamento já implementado, o código mergeado no `uniplus-api` é a fonte de verdade; para requisitos e regras de negócio, o registro estruturado versionado no portal é a fonte canônica conforme ADR-0002. A documentação narrativa sintetiza essas fontes. Os catálogos rastreáveis vivem em páginas dedicadas: o [domínio e as modalidades](../dominio/index.mdx), as [regras de negócio nomeadas](../regras-negocio/conceitos.mdx) (`RN`) e a [tabela de requisitos](../requisitos/index.mdx) (`UNI-REQ`). Os pontos ainda em aberto estão identificados na seção **Questões em refinamento**.
 
 ## Como ler este documento
 
@@ -18,9 +18,9 @@ Este texto descreve o comportamento de negócio do sistema em linguagem corrente
 
 ## Questões em refinamento
 
-Durante a revisão deste documento, foram identificadas divergências entre as próprias fontes normativas do projeto que precisam de decisão do Product Owner / jurídico antes de virarem requisito fechado. Não são erros de redação — são questões de negócio ainda em aberto:
+Durante a revisão deste documento, foram identificadas questões de negócio que precisam de decisão do Product Owner, com validação jurídica, antes de virarem requisito fechado. Não são erros de redação — são questões de negócio ainda em aberto:
 
-- Quantas cotas o candidato ocupa ao mesmo tempo. Há duas camadas que precisam ser conciliadas por interpretação, não uma contradição. A **derivação** (seção 7.5, `UNI-REQ-0076`, já implementada) produz o **conjunto** de modalidades a que o candidato é elegível — normalmente várias (por exemplo, cota de cor/raça e cota de renda juntas). O registro da **inscrição** (`UNI-REQ-0025`, "concorrência dupla na inscrição", ainda não implementado — não há agregado de inscrição) fala em registrar "no máximo uma de cada papel" (um papel de ampla, um de reservada), no espírito da Lei 14.723/2023. Falta definir, quando a inscrição for construída, como o papel reservado se relaciona com o conjunto derivado: um único código reservado, ou uma referência ao conjunto. É decisão de negócio (PO), a resolver na especificação da inscrição.
+- Quantas cotas o candidato ocupa ao mesmo tempo. Há duas camadas que precisam ser conciliadas por interpretação, não uma contradição. A **derivação** (seção 7.5, `UNI-REQ-0076`, já implementada) produz o **conjunto** de modalidades a que o candidato é elegível — normalmente várias (por exemplo, cota de cor/raça e cota de renda juntas). O registro da **inscrição** (`UNI-REQ-0025`, "concorrência dupla na inscrição", ainda não implementado — não há agregado de inscrição) fala em registrar "no máximo uma de cada papel" (um papel de ampla, um de reservada), no espírito da Lei 14.723/2023. Essa cardinalidade não limita o conjunto derivado. Falta definir, quando a inscrição for construída, como o papel reservado se relaciona com ele: um único código reservado, ou uma referência ao conjunto. A [Decisão sobre a representação reservada](../requisitos/index.mdx) está proposta para deliberação do PO, com validação jurídica, antes da implementação de UNI-REQ-0025.
 - Limite de renda na fronteira exata. A autodeclaração implementada no sistema pergunta "renda per capita **igual ou inferior** a 1 salário mínimo", aderente à Lei 12.711/2012 (art. 1º, parágrafo único). O registro de requisitos (`UNI-REQ-0076`) ainda descreve "inferior a" — divergência a reconciliar; o PO confirma o texto final e a fronteira (quem tem renda exatamente igual a 1 salário mínimo).
 - Documento condicionado a cor/raça para quem não é de escola pública. No modelo atual, a pergunta de cor/raça só aparece para egressos de escola pública. Uma exigência de documento que dependa de cor/raça (por exemplo, o exemplo de quitação militar da seção 9.5) pode não alcançar candidatos fora desse grupo. É preciso decidir se cor/raça deve ser coletada de todos os candidatos.
 
@@ -43,7 +43,7 @@ A plataforma foi concebida para crescer além dos processos seletivos. Módulos 
 - Lançamento de notas — registro de notas por etapa.
 - Classificação e resultado — cálculo da nota final, desempate e publicação.
 
-A entrega atual cobre as etapas 1 a 3 (configurar, publicar, inscrever). As etapas 4 a 6 são desenvolvimentos posteriores, já previstos, que reaproveitam a configuração congelada na publicação. Este documento descreve com profundidade o escopo atual e apresenta as etapas futuras de forma resumida, para dar visão de conjunto.
+A entrega atual cobre as etapas 1 e 2 (configurar e publicar). A etapa 3, de inscrição, é uma capacidade prevista pelos requisitos do MVP, ainda sem agregado implementado. As etapas 4 a 6 são desenvolvimentos posteriores, já previstos, que reaproveitarão a configuração congelada na publicação. Este documento descreve com profundidade o escopo atual e apresenta as etapas futuras de forma resumida, para dar visão de conjunto.
 
 ## 2. Glossário de negócio
 
@@ -111,12 +111,12 @@ Consequências práticas do congelamento, em linguagem de negócio:
 
 > Exemplo. Um edital exige comprovante de renda com no máximo 3 meses. Após a publicação, a área administrativa altera o cadastro geral para 6 meses. Os candidatos daquele edital continuam sob a regra de 3 meses (a que valia quando o edital foi publicado). Só os editais publicados depois da alteração usarão 6 meses.
 
-## 6. Como o candidato se inscreve
+## 6. Como o candidato se inscreverá
 
-A inscrição só é possível quando existe um edital publicado e vigente e o período de inscrição está aberto. O fluxo do candidato:
+Quando for implementada, a inscrição será possível quando existir um edital publicado e vigente e o período de inscrição estiver aberto. O fluxo esperado do candidato:
 
 - Abre a inscrição e preenche o formulário. A inscrição começa como rascunho. O candidato responde às perguntas do formulário do processo, incluindo as autodeclarações de cota (ver seção 8).
-- Escolhe opções de curso e responde às perguntas de cota. Indica até duas opções de curso. O candidato não escolhe a modalidade diretamente: ele concorre sempre em ampla concorrência e, conforme as respostas, o sistema calcula as reservas (cotas) a que ele passa a concorrer — que, pelo modelo de derivação descrito neste documento, podem ser mais de uma ao mesmo tempo. Ver concorrência dupla e cálculo de modalidades na seção 7. O número de reservas por inscrição é uma **questão em refinamento**: a fonte canônica atual (`UNI-REQ-0025` e a [página de domínio](../dominio/index.mdx)) registra no máximo uma reservada por inscrição — ver a seção Questões em refinamento no início desta página.
+- Escolhe opções de curso e responde às perguntas de cota. Indica até duas opções de curso. O candidato não escolhe a modalidade diretamente: ele concorre sempre em ampla concorrência e, para cada reserva, somente quando é elegível e opta por concorrer; então, o sistema calcula o conjunto de modalidades — que pode conter mais de uma reserva ao mesmo tempo. Ver concorrência dupla e cálculo de modalidades na seção 7. A futura inscrição terá, no máximo, um papel reservado de registro; essa cardinalidade não limita o conjunto derivado. A relação entre esse papel e o conjunto será definida pela decisão proposta na seção Questões em refinamento.
 - Solicita atendimento especializado, se necessário. Entre as opções que o processo oferece, o candidato pode solicitar condições, recursos ou informar tipo de deficiência.
 - Envia os documentos exigidos. Anexa os documentos que se aplicam ao seu caso. Cada arquivo passa por uma verificação técnica de segurança antes de ser considerado válido.
 - Submete a inscrição. O sistema confere se todos os documentos obrigatórios aplicáveis ao caso do candidato estão presentes. Faltando algum, a submissão é bloqueada com a indicação do que falta.
@@ -150,16 +150,16 @@ Esta é a área mais sensível do sistema, por implementar a legislação de aç
 | `LI_PPI` | Escola pública, mais preto, pardo ou indígena, independentemente de renda. |
 | `LI_Q` | Escola pública, mais quilombola, independentemente de renda. |
 | `LI_PCD` | Escola pública, mais pessoa com deficiência, independentemente de renda. |
-| `LB_EP` | Escola pública com renda familiar per capita igual ou inferior a 1 salário mínimo. |
-| `LB_PPI` | Escola pública, mais preto, pardo ou indígena, com renda igual ou inferior a 1 salário mínimo. |
-| `LB_Q` | Escola pública, mais quilombola, com renda igual ou inferior a 1 salário mínimo. |
-| `LB_PCD` | Escola pública, mais pessoa com deficiência, com renda igual ou inferior a 1 salário mínimo. |
+| `LB_EP` | Escola pública com o critério de renda familiar per capita aplicável ao processo. |
+| `LB_PPI` | Escola pública, mais preto, pardo ou indígena, com o critério de renda aplicável ao processo. |
+| `LB_Q` | Escola pública, mais quilombola, com o critério de renda aplicável ao processo. |
+| `LB_PCD` | Escola pública, mais pessoa com deficiência, com o critério de renda aplicável ao processo. |
 
-As modalidades com renda (grupo LB) também concorrem à modalidade equivalente independente de renda (grupo LI). Em outras palavras: quem tem direito à cota de renda concorre tanto na sua cota específica de baixa renda quanto na versão sem exigência de renda. A autodeclaração implementada no sistema pergunta "renda per capita igual ou inferior a 1 salário mínimo" (aderente à Lei 12.711/2012, art. 1º, parágrafo único); ver a nota sobre a reconciliação com o registro de requisitos na seção Questões em refinamento.
+As modalidades com renda (grupo LB) também concorrem à modalidade equivalente independente de renda (grupo LI). Em outras palavras: quem tem direito à cota de renda concorre tanto na sua cota específica de baixa renda quanto na versão sem exigência de renda. A fronteira exata do critério de renda permanece em refinamento pelo PO, com validação jurídica; ver a nota na seção Questões em refinamento.
 
 ### 7.2 Concorrência dupla (Lei 14.723/2023)
 
-> Concorrência simultânea. Todo candidato de cota concorre ao mesmo tempo em ampla concorrência e na sua modalidade de vaga reservada, sendo classificado na situação mais favorável. Por isso a ampla concorrência (AC) sempre entra no conjunto de modalidades do cotista — ela é a âncora presente para todos. Cada inscrição registra a concorrência ampla e, quando aplicável, as reservadas correspondentes.
+> Concorrência simultânea. Todo candidato concorre ao mesmo tempo em ampla concorrência e, para cada modalidade reservada, somente quando é elegível e opta por concorrer a ela, sendo classificado na situação mais favorável. Por isso a ampla concorrência (AC) sempre entra no conjunto de modalidades — ela é a âncora presente para todos. A derivação pode produzir várias reservas; quando implementada, a inscrição terá no máximo um papel de ampla e um papel reservado, sem limitar esse conjunto. A relação entre o papel reservado e o conjunto derivado será definida pela decisão proposta ao PO, com validação jurídica.
 
 ### 7.3 O formulário de cotas (as perguntas)
 
@@ -171,7 +171,7 @@ A definição das cotas segue o formulário real da Unifesspa. Para cada dimens�
 | Escola pública | Cursou todos os anos do ensino médio em escola pública (ou comunitária conveniada)? | Deseja concorrer às vagas reservadas a egressos de escola pública? |
 | Cor/raça | Como se autodeclara: amarela, branca, indígena, preta ou parda? | Deseja concorrer às vagas reservadas a pretos, pardos e indígenas? |
 | Quilombola | Você se autodeclara pessoa quilombola? | Deseja concorrer às vagas reservadas a quilombolas? |
-| Renda | Sua família tem renda per capita igual ou inferior a 1 salário mínimo? | Deseja concorrer às vagas reservadas por critério de renda? |
+| Renda | Sua família atende ao critério de renda per capita aplicável ao processo? | Deseja concorrer às vagas reservadas por critério de renda? |
 
 ### 7.4 Regras de exibição das perguntas
 
@@ -370,7 +370,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | `REQ-17` | Formulário configurável | Formulário de inscrição configurável por processo, com campos condicionais. |
 | `REQ-19` | Publicação com cópia congelada | Publicar o edital criando a cópia oficial imutável da configuração. |
 | `REQ-21 / 22` | Retificação e bloqueio de edição | Alterar edital publicado só por retificação (novo edital); edição direta bloqueada. |
-| `REQ-23` a 33 | Ciclo da inscrição | Rascunho, submissão, opções de curso, concorrência dupla, atendimento, documentos, comprovante, unicidade, nome social, cancelamento. |
+| `REQ-23` a 33 | Ciclo da inscrição previsto | Rascunho, submissão, opções de curso, concorrência dupla, atendimento, documentos, comprovante, unicidade, nome social, cancelamento. |
 | `REQ-56` | Cascata de remanejamento | Ordem congelada de migração de vagas de cota não preenchida entre modalidades (distinta da `RN04`). |
 | `REQ-57` a 71 | Documentos exigidos (detalhe) | Aplicabilidade geral/condicional, condições, base legal, formatos e idade, documentos alternativos, consequências, repetição por entidade e congelamento do conjunto. |
 | `REQ-72` a 78 | Coleta e cálculo de cotas | Autodeclaração mais opção de concorrer, campos condicionais, não se aplica versus pendente, cálculo de modalidade pela Lei de Cotas e ordem de coleta. |
@@ -387,7 +387,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Documentos exigidos por condição e fase | Entrega atual | Inclui base legal, consequências e documentos alternativos. |
 | Coleta de dados e cálculo de modalidades | Entrega atual | Formulário condicional e composição da Lei de Cotas por configuração. |
 | Publicação do edital e congelamento | Entrega atual | Cópia oficial imutável; retificação como novo edital. |
-| Inscrição do candidato (rascunho a comprovante) | Entrega atual | Envio de documentos, conferência e comprovante imutável. |
+| Inscrição do candidato (rascunho a comprovante) | Etapa futura | Requisitos aprovados; ainda não há agregado de inscrição implementado. |
 | Homologação documental (deferir/indeferir) | Etapa futura | Consome a configuração congelada. |
 | Ensalamento e locais exatos de prova | Etapa futura | — |
 | Lançamento de notas por etapa | Etapa futura | As etapas são configuradas agora; as notas são lançadas depois. |
@@ -402,7 +402,7 @@ O detalhamento por norma vive na página de [conformidade legal](../conformidade
 | Norma | O que exige e como o sistema atende |
 |---|---|
 | LGPD (Lei 13.709/2018) | Proteção e minimização de dados pessoais e sensíveis; auditoria de acesso; ocultação de dados nos registros; divulgação minimizada por padrão. |
-| Lei de Cotas (12.711/2012, atualizada pela 14.723/2023) | Reserva de vagas por modalidade, concorrência dupla e remanejamento, tudo por configuração congelável — sem regra de cota embutida no sistema. |
+| Lei de Cotas (12.711/2012, atualizada pela 14.723/2023) | Reserva de vagas por modalidade, concorrência dupla e remanejamento por configuração congelável; o motor genérico avalia a matriz normativa R0–R9 da Lei de Cotas, sem ramificação por tipo de processo. |
 | LBI (Lei 13.146/2015) | Inclusão da pessoa com deficiência e atendimento especializado configurável e solicitável na inscrição. |
 | Lei 14.129/2021 (Governo Digital) | Serviço digital, transparência e reprodução fiel do resultado, garantida pelo congelamento na publicação. |
 | Gov.br / Acessibilidade (Portaria SEI-MCOM 540/2020; IN SGD/ME 94/2022) | Uso do Design System do Gov.br e acessibilidade WCAG 2.1 AA / e-MAG (obrigação de autarquia federal). |

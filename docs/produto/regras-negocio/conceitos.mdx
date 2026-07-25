@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: Regras de negócio nomeadas (RN01-RN08, RN13-RN14)
 description: As regras de negócio institucionais do Uni+ (RN01-RN08 e RN13-RN14), com enunciado público, mapeamento para os requisitos rastreáveis (UNI-REQ) e a legislação aplicável.
-fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
+fonte_canonica: "código mergeado no uniplus-api para comportamento implementado; dados estruturados versionados para requisitos e regras; documentação narrativa como síntese"
 ---
 
 # Regras de negócio nomeadas (RN01-RN08, RN13-RN14)
@@ -21,6 +21,10 @@ As **RN** são as regras de negócio institucionais do Uni+ — a maioria do mó
 | **RN08** | **Congelamento de parâmetros por edital** — todos os parâmetros configuráveis ficam congelados (snapshot) ao serem vinculados a um edital/processo; alterações retroativas são proibidas, e atualizações em parâmetros globais valem apenas para novos editais. | [UNI-REQ-0019](../requisitos/index.mdx), [UNI-REQ-0057](../requisitos/index.mdx)…[0063](../requisitos/index.mdx), [UNI-REQ-0071](../requisitos/index.mdx), [UNI-REQ-0078](../requisitos/index.mdx) |
 | **RN13** | **Recurso administrativo e efeito suspensivo** — o Uni+ conduz só a 1ª instância; a instância superior é julgada fora (administrativa na Seleção, judicial no Ingresso), mas registrada. O efeito suspensivo é configurável por instância e por fase (a ausência não bloqueia); o comportamento nunca ramifica por módulo em código. | [UNI-REQ-0080](../requisitos/index.mdx), [UNI-REQ-0081](../requisitos/index.mdx) |
 | **RN14** | **Matrícula compulsória por decisão judicial final** — quando uma decisão judicial final reconhece o direito a uma vaga já ocupada, o candidato é matriculado em vaga supranumerária, após as fases de habilitação, sem alterar o quadro nem a classificação congelada. | [UNI-REQ-0082](../requisitos/index.mdx) |
+
+## Concorrência dupla e modalidade derivada
+
+A concorrência dupla reúne duas camadas distintas. A derivação de **MODALIDADE** produz, a partir de elegibilidade e opt-in, o conjunto multivalorado das modalidades de concorrência ativas; quando a inscrição for implementada, seu registro terá no máximo um papel de ampla concorrência e um papel reservado. A cardinalidade desses papéis não limita, substitui nem altera o conjunto derivado. A relação entre o papel reservado e o conjunto será definida pela [Decisão sobre a representação reservada](../requisitos/index.mdx), proposta ao PO com validação jurídica. Veja também [Concorrência dupla na inscrição](../requisitos/index.mdx) e [Derivação de modalidade de concorrência](../requisitos/index.mdx).
 
 ## RN08 e o congelamento na publicação
 

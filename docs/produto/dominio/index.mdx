@@ -2,7 +2,7 @@
 sidebar_position: 7
 title: Domínio do processo seletivo
 description: Conceitos de domínio do Uni+ — tipos de processo seletivo, concorrência dupla, sistema de cotas e modalidades, ciclo de vida em seis etapas e opções de curso.
-fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
+fonte_canonica: "código mergeado no uniplus-api para comportamento implementado; dados estruturados versionados para requisitos e regras; documentação narrativa como síntese"
 ---
 
 # Domínio do processo seletivo
@@ -23,13 +23,13 @@ Cada tipo tem formulário e regras próprias, configurados como um processo sele
 
 ## Concorrência dupla (Lei 14.723/2023)
 
-O candidato cotista concorre **simultaneamente** em ampla concorrência e na sua modalidade de vaga reservada, sendo classificado na situação mais favorável. No Uni+, a inscrição registra uma concorrência ampla e até uma reservada (regra detalhada em [Concorrência dupla na inscrição](../requisitos/index.mdx)).
+O candidato concorre **simultaneamente** em ampla concorrência e, para cada modalidade de vaga reservada, somente quando é elegível e opta por concorrer a ela, sendo classificado na situação mais favorável. A derivação de modalidade produz um conjunto multivalorado; por isso, a cardinalidade dos papéis da futura inscrição — um de ampla e, quando aplicável, um de reservada — não limita esse conjunto. A relação entre o papel reservado e o conjunto derivado depende da [Decisão sobre a representação reservada](../requisitos/index.mdx), proposta para o PO com validação jurídica (ver também [Concorrência dupla na inscrição](../requisitos/index.mdx) e [Derivação de modalidade de concorrência](../requisitos/index.mdx)).
 
 ## Sistema de cotas e modalidades (Lei 12.711/2012, atualizada pela 14.723/2023)
 
 As modalidades de concorrência implementam a legislação de ações afirmativas. Categorias principais:
 
-- **LB_PPI, LB_Q, LB_PCD, LB_EP** — reservas com renda familiar bruta per capita ≤ 1 salário mínimo;
+- **LB_PPI, LB_Q, LB_PCD, LB_EP** — reservas em que se aplica o critério de renda familiar per capita do processo;
 - **LI_PPI, LI_Q, LI_PCD, LI_EP** — reservas independentes de renda;
 - **AC** — ampla concorrência;
 - **AC_PCD** — pessoa com deficiência em ampla concorrência (rótulo de exibição no edital: **V** — não é um código de entrada).
@@ -45,7 +45,7 @@ Vagas não preenchidas em uma modalidade são remanejadas conforme ordem legalme
 5. **Lançamento de notas** — registro por etapa;
 6. **Classificação e resultado** — nota final, desempate e publicação.
 
-O recorte de MVP cobre as etapas **1 a 3** (configurar → publicar/congelar → inscrever); as etapas 4 a 6 são incrementos posteriores que consomem a configuração congelada — ver [MVP Seleção](../mvp-selecao/index.mdx).
+Na entrega atual, o recorte cobre as etapas **1 e 2** (configurar → publicar/congelar). A etapa **3**, de inscrição, permanece prevista pelos requisitos do MVP, mas ainda não possui agregado implementado; as etapas 4 a 6 são incrementos posteriores que consumirão a configuração congelada — ver [MVP Seleção](../mvp-selecao/index.mdx).
 
 ## Opções de curso
 

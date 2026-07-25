@@ -116,7 +116,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Modalidades incluem ampla concorrência e modalidades reservadas; a inscrição pode registrar concorrência ampla e reservada.',
+      'Modalidades incluem ampla concorrência e modalidades reservadas; a futura inscrição, quando implementada, observa os papéis de registro de UNI-REQ-0025 sem reduzir o conjunto de MODALIDADE DERIVADA de UNI-REQ-0076.',
     verificacao: 'Validação automatizada de modalidades (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -339,7 +339,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0025',
     titulo: 'Concorrência dupla na inscrição',
     enunciado:
-      'O sistema deve registrar concorrência ampla e reservada por inscrição, com no máximo uma de cada papel.',
+      'Quando a inscrição for implementada, o sistema deve registrar os papéis de concorrência ampla e reservada, com no máximo um registro de cada papel. Essa cardinalidade pertence à camada de registro e não limita, substitui nem altera o conjunto multivalorado de MODALIDADE DERIVADA de UNI-REQ-0076. A implementação deve observar a decisão registrada em UNI-REQ-0083.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -351,10 +351,31 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Segunda reservada ou papel inválido é bloqueado; concorrência ampla e reservada podem coexistir.',
+      'Segundo registro do mesmo papel ou papel inválido é bloqueado; os papéis de concorrência ampla e reservada podem coexistir; a validação não limita nem altera o conjunto multivalorado derivado por UNI-REQ-0076; a implementação observa a decisão registrada em UNI-REQ-0083.',
     verificacao: 'Validação automatizada de concorrência dupla (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0083',
+    titulo: 'Decisão sobre a representação reservada na inscrição',
+    enunciado:
+      'O PO, com validação jurídica, deve definir como o papel reservado da inscrição se relaciona com o conjunto de MODALIDADE DERIVADA de UNI-REQ-0076: por código reservado único ou por referência ao conjunto. A decisão deve preservar o conjunto multivalorado derivado e orientar a implementação de UNI-REQ-0025.',
+    grupo: 'governanca',
+    tipo: 'decisao',
+    nivel: 'decisao',
+    parent_id: 'UNI-REQ-0025',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'decisao',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A decisão registra a alternativa escolhida, a justificativa de negócio e jurídica, e a atualização necessária em UNI-REQ-0025 antes da implementação do agregado de inscrição.',
+    verificacao: 'Deliberação registrada pelo PO, com validação jurídica.',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'PO; Jurídico; Equipe backend; Equipe frontend',
   },
   {
     requisito_id: 'UNI-REQ-0027',
