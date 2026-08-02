@@ -1808,7 +1808,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0088',
     titulo: 'Base legal institucional de PCD_PURO fora do contexto SiSU/Resolução 532/2021',
     enunciado:
-      'A modalidade PCD_PURO (UNI-REQ-0085/RN-MOD-08) reserva vaga para pessoa com deficiência em processo sem as cotas da Lei 12.711 — cenário em que a base legal institucional hoje usada para AC_PCD (Resolução Unifesspa 532/2021, específica do contexto SiSU) não se aplica automaticamente. O projeto deve confirmar, com validação jurídica, a base legal que sustenta essa reserva antes de publicar qualquer processo real sob esta modalidade; até lá, o cadastro da modalidade permanece implementado com um placeholder textual honesto no campo de base legal, nunca uma citação fabricada.',
+      'A modalidade PCD_PURO (UNI-REQ-0085/RN-MOD-08) reserva vaga para pessoa com deficiência em processo sem as cotas da Lei 12.711 — cenário em que a base legal institucional hoje usada para AC_PCD (Resolução Unifesspa 532/2021, específica do contexto SiSU) não se aplica automaticamente. O projeto deve confirmar, com validação jurídica, a base legal que sustenta essa reserva antes de publicar qualquer processo real sob esta modalidade; até lá, o campo de base legal do cadastro deve conter um placeholder textual honesto de pendência, nunca uma citação fabricada.',
     grupo: 'conformidade',
     tipo: 'dependencia',
     nivel: 'dependencia',
@@ -1820,7 +1820,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'dependencia_externa',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Antes de publicar processo real sob PCD_PURO, a dependência tem base legal confirmada (norma ou deliberação institucional), dono e decisão registrados; até a confirmação, o campo de base legal do cadastro permanece com o placeholder explícito de pendência, e a publicação de um processo real sob PCD_PURO sem base legal confirmada não é uma entrega válida deste requisito.',
+      'Antes de publicar processo real sob PCD_PURO, a dependência tem base legal confirmada (norma ou deliberação institucional), dono e decisão registrados; até a confirmação, o campo de base legal do cadastro deve conter o placeholder explícito de pendência, e a publicação de um processo real sob PCD_PURO sem base legal confirmada não é uma entrega válida deste requisito.',
     verificacao: 'Revisão jurídica/institucional.',
     pagina_developers: '/produto/conformidade-legal/',
     owner: 'Equipe backend; Jurídico',
