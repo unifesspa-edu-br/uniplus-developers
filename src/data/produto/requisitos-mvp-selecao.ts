@@ -1740,9 +1740,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0085',
-    titulo: '`PCD_PURO`: reserva de vaga para pessoa com deficiência sem cotas da Lei 12.711 (RN-MOD-08)',
+    titulo: 'PCD_PURO: reserva de vaga para pessoa com deficiência sem cotas da Lei 12.711 (RN-MOD-08)',
     enunciado:
-      '`AC_PCD` não é "a modalidade de PcD" — é o caso particular de um processo que também tem as oito cotas da Lei 12.711, cuja condição de excluir quem cursou escola pública só existe para manter `AC_PCD` exclusiva das cotas da Lei. Um processo sem as cotas da Lei que também reserve vaga para pessoa com deficiência precisa de uma modalidade cujo critério seja só "é pessoa com deficiência e optou por concorrer", sem condição de origem escolar, cor/raça ou sexo. `PCD_PURO` é essa modalidade — cadastrada uma única vez em configuração de modalidades e reaproveitável por qualquer processo futuro nessa situação, nomeada pela própria semântica (como `AC`, `LB_PPI`, `LI_Q`), nunca pelo processo que a estreou.',
+      'AC_PCD não é "a modalidade de PcD" — é o caso particular de um processo que também tem as oito cotas da Lei 12.711, cuja condição de excluir quem cursou escola pública só existe para manter AC_PCD exclusiva das cotas da Lei. Um processo sem as cotas da Lei que também reserve vaga para pessoa com deficiência precisa de uma modalidade cujo critério seja só "é pessoa com deficiência e optou por concorrer", sem condição de origem escolar, cor/raça ou sexo. PCD_PURO é essa modalidade — cadastrada uma única vez em configuração de modalidades e reaproveitável por qualquer processo futuro nessa situação, nomeada pela própria semântica (como AC, LB_PPI, LI_Q), nunca pelo processo que a estreou.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1754,9 +1754,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      '`PCD_PURO` usa o mesmo mecanismo de remanejamento de `AC_PCD` com critério composto só por "é pessoa com deficiência" e "optou por concorrer à cota", sem átomo de escola pública; um candidato PcD egresso de escola pública satisfaz `PCD_PURO` mas não satisfaz `AC_PCD`, provando que o predicado é de fato diferente; todo candidato que satisfaz `AC_PCD` também satisfaz `PCD_PURO`, por ser estritamente mais permissiva. A base legal institucional que sustenta a reserva fora do contexto da Lei de Cotas é decisão própria, a confirmar antes de publicar um processo real sob esta modalidade.',
+      'PCD_PURO usa o mesmo mecanismo de remanejamento de AC_PCD com critério composto só por "é pessoa com deficiência" e "optou por concorrer à cota", sem átomo de escola pública; um candidato PcD egresso de escola pública satisfaz PCD_PURO mas não satisfaz AC_PCD, provando que o predicado é de fato diferente; todo candidato que satisfaz AC_PCD também satisfaz PCD_PURO, por ser estritamente mais permissiva. A base legal institucional que sustenta a reserva fora do contexto da Lei de Cotas é decisão própria, a confirmar antes de publicar um processo real sob esta modalidade.',
     verificacao:
-      'Teste automatizado (mecanismo idêntico ao de `AC_PCD`; critério com exatamente dois átomos; diferença de predicado provada com candidato real; `AC_PCD` estritamente mais restritiva que `PCD_PURO`) (planejado).',
+      'Teste automatizado (mecanismo idêntico ao de AC_PCD; critério com exatamente dois átomos; diferença de predicado provada com candidato real; AC_PCD estritamente mais restritiva que PCD_PURO) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -1850,7 +1850,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0090',
     titulo: 'Publicação não impede oferecer PCD_PURO junto com modalidades da Lei de Cotas no mesmo processo',
     enunciado:
-      'PCD_PURO (UNI-REQ-0085/RN-MOD-08) foi desenhada para processo sem nenhuma das oito cotas da Lei 12.711 — é nesse cenário que faz sentido reservar PcD sem a exclusão de escola pública que `AC_PCD` carrega. Hoje a publicação não impõe essa exclusividade: nada no cadastro de modalidades nem no gate de publicação recusa um processo que oferte PCD_PURO e, simultaneamente, `AC_PCD` ou qualquer outra modalidade da Lei de Cotas. Até esse invariante existir, misturar os dois grupos numa mesma configuração é estruturalmente aceito, ainda que semanticamente questionável — cabe à revisão humana da configuração, não a uma trava automática.',
+      'PCD_PURO (UNI-REQ-0085/RN-MOD-08) foi desenhada para processo sem nenhuma das oito cotas da Lei 12.711 — é nesse cenário que faz sentido reservar PcD sem a exclusão de escola pública que AC_PCD carrega. Hoje a publicação não impõe essa exclusividade: nada no cadastro de modalidades nem no gate de publicação recusa um processo que oferte PCD_PURO e, simultaneamente, AC_PCD ou qualquer outra modalidade da Lei de Cotas. Até esse invariante existir, misturar os dois grupos numa mesma configuração é estruturalmente aceito, ainda que semanticamente questionável — cabe à revisão humana da configuração, não a uma trava automática.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -1883,7 +1883,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Enquanto este incremento não é entregue, um termo exigido publicado não bloqueia nenhuma fase do candidato nem persiste evidência de aceite; entregar este incremento exige apresentar o termo congelado, bloquear a fase até o aceite só quando a flag `obrigatorio` congelada for verdadeira (termo opcional é apresentado, mas não bloqueia), e persistir o aceite correlacionado ao identificador próprio da exigência (UNI-REQ-0086) — nunca por nome ou código do termo, que dois itens do catálogo podem compartilhar —, junto com ator, data/hora, versão aceita e log de IP quando a forma de aceite exigir.',
+      'Enquanto este incremento não é entregue, um termo exigido publicado não bloqueia nenhuma fase do candidato nem persiste evidência de aceite; entregar este incremento exige apresentar o termo congelado, bloquear a fase até o aceite só quando a flag obrigatorio congelada for verdadeira (termo opcional é apresentado, mas não bloqueia), e persistir o aceite correlacionado ao identificador próprio da exigência (UNI-REQ-0086) — nunca por nome ou código do termo, que dois itens do catálogo podem compartilhar —, junto com ator, data/hora, versão aceita e log de IP quando a forma de aceite exigir.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
