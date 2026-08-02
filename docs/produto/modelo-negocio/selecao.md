@@ -145,7 +145,7 @@ Esta é a área mais sensível do sistema, por implementar a legislação de aç
 | Código | Quem concorre |
 |---|---|
 | AC | Ampla concorrência — todos os candidatos, independentemente de cota. |
-| `AC_PCD` | Pessoa com deficiência em ampla concorrência. O edital a apresenta com o rótulo V; V é apenas um rótulo de exibição, não um código próprio. |
+| `AC_PCD` | Pessoa com deficiência que **não** é egressa de escola pública — a exclusão existe para não sobrepor as subcotas de escola pública, que já cobrem pessoa com deficiência via `LI_PCD`/`LB_PCD`. O edital a apresenta com o rótulo V; V é apenas um rótulo de exibição, não um código próprio. |
 | `LI_EP` | Escola pública, independentemente de renda. |
 | `LI_PPI` | Escola pública, mais preto, pardo ou indígena, independentemente de renda. |
 | `LI_Q` | Escola pública, mais quilombola, independentemente de renda. |
@@ -194,8 +194,8 @@ A tabela abaixo é uma **amostra ilustrativa** dos casos mais representativos, p
 |---|---|
 | Não concorre a nenhuma cota (ou optou por não concorrer a nenhuma) | AC |
 | Concorre por deficiência; não é de escola pública | AC, `AC_PCD` |
-| Concorre por deficiência; é de escola pública; não concorre por renda | AC, `AC_PCD`, `LI_PCD` |
-| Concorre por deficiência; é de escola pública; concorre por renda | AC, `AC_PCD`, `LI_PCD`, `LB_PCD` |
+| Concorre por deficiência; é de escola pública; não concorre por renda | AC, `LI_PCD` |
+| Concorre por deficiência; é de escola pública; concorre por renda | AC, `LI_PCD`, `LB_PCD` |
 | É de escola pública e concorre por escola pública; não concorre por renda | AC, `LI_EP` |
 | É de escola pública e concorre por escola pública; concorre por renda | AC, `LI_EP`, `LB_EP` |
 | É de escola pública, mas opta por não concorrer a nenhuma subcota | AC |
@@ -206,7 +206,7 @@ A tabela abaixo é uma **amostra ilustrativa** dos casos mais representativos, p
 | Quilombola (não indígena), escola pública, concorre por Q; concorre por renda | AC, `LI_Q`, `LB_Q` |
 | Preto/pardo, escola pública, concorre por PPI e por Q; não concorre por renda | AC, `LI_PPI`, `LI_Q` |
 | Preto/pardo, escola pública, concorre por PPI e por Q; concorre por renda | AC, `LI_PPI`, `LB_PPI`, `LI_Q`, `LB_Q` |
-| Várias dimensões: concorre por deficiência, por escola pública e por PPI; escola pública; concorre por renda | AC, `AC_PCD`, `LI_PCD`, `LB_PCD`, `LI_PPI`, `LB_PPI`, `LI_EP`, `LB_EP` |
+| Várias dimensões: concorre por deficiência, por escola pública e por PPI; escola pública; concorre por renda | AC, `LI_PCD`, `LB_PCD`, `LI_PPI`, `LB_PPI`, `LI_EP`, `LB_EP` |
 
 Pontos de atenção que o formulário resolve automaticamente:
 
