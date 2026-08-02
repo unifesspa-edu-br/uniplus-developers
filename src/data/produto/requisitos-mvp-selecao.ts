@@ -1369,7 +1369,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0093',
     titulo: 'Recurso é resolvido pela versão vigente na publicação do ato recorrido (RN13)',
     enunciado:
-      'A regra de suspensividade (prazo de interposição da instância que o Uni+ conduz, par valor-unidade de suspensividade por instância — os campos congelados por UNI-REQ-0080, cada um com sua convenção de contagem) que rege um recurso é a que estava vigente quando o direito de recorrer nasceu — a publicação do ato recorrido —, nunca a vigente no instante em que o candidato interpõe, nem a vigente quando a banca julga. Uma retificação publicada depois do ato recorrido, mesmo antes da interposição se o prazo já estava aberto, não pode encurtar o prazo, mudar sua convenção de contagem, nem afrouxar o bloqueio de um recurso que venha a ser interposto contra aquele ato — equivalente ao princípio de irretroatividade: mudança de regra não retroage em prejuízo de quem já exercia o direito. Escopo do bloqueio e irreversibilidade do ato não integram esta garantia: nenhum dos dois é congelado por fase (UNI-REQ-0080) — o primeiro deriva do objeto de cada recurso, o segundo do cadastro do tipo de ato —, e nenhum dos dois muda com retificação de edital, porque nenhum dos dois é configuração de edital. Um recurso interposto contra um ato publicado sob a regra nova nasce, sim, sob a regra nova — não é congelamento perpétuo do processo inteiro, só imunidade retroativa por ato. Os campos que esta garantia precisa já são congelados desde o MVP por UNI-REQ-0080, justamente para que processos publicados antes deste motor existir não fiquem sem a garantia depois — este requisito cobre só o comportamento de resolução do motor de interposição (UNI-REQ-0081), não o congelamento em si, que não se aplica antes do motor existir. Base legal: dispositivo exato do prazo de interposição e do efeito suspensivo do recurso administrativo federal ainda não confirmado com validação jurídica — pendência a resolver antes de publicar processo real sob esta garantia, nunca citação aproximada.',
+      'A regra de suspensividade (prazo de interposição da instância que o Uni+ conduz, par valor-unidade de suspensividade por instância — os campos congelados por UNI-REQ-0080, cada um com sua convenção de contagem) que rege um recurso é a que estava vigente quando o direito de recorrer nasceu — a publicação do ato recorrido —, nunca a vigente no instante em que o candidato interpõe, nem a vigente quando a banca julga. Uma retificação publicada depois do ato recorrido, mesmo antes da interposição se o prazo já estava aberto, não pode encurtar o prazo, mudar sua convenção de contagem, nem afrouxar o bloqueio de um recurso que venha a ser interposto contra aquele ato — equivalente ao princípio de irretroatividade: mudança de regra não retroage em prejuízo de quem já exercia o direito. Escopo do bloqueio e irreversibilidade do ato não integram esta garantia: nenhum dos dois é congelado por fase (UNI-REQ-0080) — o primeiro deriva do objeto de cada recurso, o segundo do cadastro do tipo de ato —, e nenhum dos dois muda com retificação de edital, porque nenhum dos dois é configuração de edital. Um recurso interposto contra um ato publicado sob a regra nova nasce, sim, sob a regra nova — não é congelamento perpétuo do processo inteiro, só imunidade retroativa por ato. Os campos que esta garantia precisa já são congelados desde o MVP por UNI-REQ-0080, justamente para que processos publicados antes deste motor existir não fiquem sem a garantia depois — este requisito cobre só o comportamento de resolução do motor de interposição (UNI-REQ-0081), não o congelamento em si, que não se aplica antes do motor existir. A confirmação do dispositivo legal exato que sustenta prazo de interposição e efeito suspensivo é dependência externa própria (UNI-REQ-0095), que bloqueia publicar processo real sob esta garantia, independente do motor estar pronto.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1404,6 +1404,27 @@ export const requisitosMvpSelecao: Requisito[] = [
     criterios_aceite:
       'Uma tentativa de interposição contra um ato cuja versão publicada não tem os campos de recurso de UNI-REQ-0080 pra fase do ato é recusada com erro nomeado, seja porque a fase nunca aceitou recurso, seja porque uma retificação anterior ao ato deixou de configurá-la; essa recusa nunca se torna uma ausência silenciosa de bloqueio nem lê, por engano, a configuração de recurso de uma versão diferente da que publicou o ato; um ato publicado quando a fase já era configurada para aceitar recurso continua coberto por UNI-REQ-0093 e não é alcançado por esta recusa, mesmo que uma retificação posterior remova a configuração.',
     verificacao: 'Revisão futura.',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Tech Lead',
+  },
+  {
+    requisito_id: 'UNI-REQ-0095',
+    titulo: 'Base legal do prazo de interposição e do efeito suspensivo do recurso (RN13)',
+    enunciado:
+      'A garantia de anti-retroatividade do recurso (UNI-REQ-0093) e o contrato de congelamento que a sustenta (UNI-REQ-0080) pressupõem um prazo de interposição e um efeito suspensivo com base legal exata — lei, artigo e parágrafo — para o recurso administrativo no âmbito federal. Essa base ainda não foi confirmada com validação jurídica: o texto do requisito não cita dispositivo nenhum precisamente porque uma citação aproximada seria pior que a lacuna. O projeto deve confirmar a base legal exata antes de publicar qualquer processo real sob esta garantia; até lá, o campo de base legal do cadastro deve conter um placeholder textual honesto de pendência, nunca uma citação fabricada.',
+    grupo: 'conformidade',
+    tipo: 'dependencia',
+    nivel: 'dependencia',
+    parent_id: 'UNI-REQ-0093',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'dependencia_externa',
+    prioridade: 'must',
+    politica_backlog: 'dependencia_externa',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Antes de publicar processo real sob a garantia de UNI-REQ-0093, a dependência tem base legal confirmada (lei, artigo e parágrafo), dono e decisão registrados; até a confirmação, o campo de base legal do cadastro deve conter o placeholder explícito de pendência, e a publicação de um processo real sob essa garantia sem base legal confirmada não é uma entrega válida deste requisito.',
+    verificacao: 'Revisão jurídica/institucional.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
   },
