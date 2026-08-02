@@ -155,6 +155,8 @@ Esta é a área mais sensível do sistema, por implementar a legislação de aç
 | `LB_Q` | Escola pública, mais quilombola, com o critério de renda aplicável ao processo. |
 | `LB_PCD` | Escola pública, mais pessoa com deficiência, com o critério de renda aplicável ao processo. |
 
+Fora dessas dez, a modalidade `PCD_PURO` reserva vaga para pessoa com deficiência em processo **sem** nenhuma das oito cotas da Lei 12.711 acima — cenário em que nenhuma delas está em jogo, então o critério de PCD_PURO é só "é pessoa com deficiência e optou por concorrer" (ver [UNI-REQ-0085](../requisitos/index.mdx)).
+
 As modalidades com renda (grupo LB) também concorrem à modalidade equivalente independente de renda (grupo LI). Em outras palavras: quem tem direito à cota de renda concorre tanto na sua cota específica de baixa renda quanto na versão sem exigência de renda. A fronteira exata do critério de renda permanece em refinamento pelo PO, com validação jurídica; ver a nota na seção Questões em refinamento.
 
 ### 7.2 Concorrência dupla (Lei 14.723/2023)
@@ -186,7 +188,7 @@ As perguntas não aparecem todas de uma vez: a exibição de cada uma depende da
 
 A partir das autodeclarações e das opções de concorrer, o sistema aplica a composição da Lei de Cotas e produz o conjunto de modalidades a que o candidato concorre. Nas linhas abaixo, dizer que o candidato concorre por X significa que ele fez as duas coisas: autodeclarou-se elegível a X e optou por concorrer à cota X. Apenas autodeclarar-se não coloca ninguém na cota.
 
-A tabela abaixo é uma **amostra ilustrativa** dos casos mais representativos, para dar intuição do cálculo — não é a fonte normativa. O critério de aceite obrigatório é a regra de derivação congelada: as regras R0–R9 e todas as combinações da matriz completa são normativas por [`UNI-REQ-0076`](../requisitos/index.mdx), e o resultado exato de qualquer combinação (inclusive as omitidas desta amostra) é o que a regra congelada produz. Os conjuntos abaixo são calculados antes da restrição às modalidades ofertadas pelo processo (ver observação ao final da seção).
+A tabela abaixo é uma **amostra ilustrativa** dos casos mais representativos, para dar intuição do cálculo — não é a fonte normativa. O critério de aceite obrigatório é a regra de derivação congelada: as regras R0–R9 (as dez modalidades da Lei 12.711) e todas as combinações da matriz completa são normativas por [`UNI-REQ-0076`](../requisitos/index.mdx), e o resultado exato de qualquer combinação dessas dez (inclusive as omitidas desta amostra) é o que a regra congelada produz. `PCD_PURO` fica fora de R0–R9 — é regra independente, com o próprio cálculo descrito acima (§7.1). Os conjuntos abaixo são calculados antes da restrição às modalidades ofertadas pelo processo (ver observação ao final da seção).
 
 | Perfil do candidato (opções ativas) | Concorre a |
 |---|---|
