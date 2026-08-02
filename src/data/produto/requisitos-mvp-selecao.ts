@@ -1367,7 +1367,7 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0093',
-    titulo: 'Retificação publicada não retroage sobre recurso já em curso (RN13)',
+    titulo: 'Recurso é resolvido pela versão vigente na publicação do ato recorrido (RN13)',
     enunciado:
       'A regra de suspensividade (prazo de interposição, ancoragem, escopo do bloqueio) que rege um recurso é a que estava vigente quando o direito de recorrer nasceu — a publicação do ato recorrido —, nunca a vigente no instante em que o candidato interpõe, nem a vigente quando a banca julga. Uma retificação publicada depois do ato recorrido, mesmo antes da interposição se o prazo já estava aberto, não pode encurtar o prazo nem afrouxar a proteção de quem já tinha o direito em curso — equivalente ao princípio de irretroatividade: mudança de regra não retroage em prejuízo de quem já exercia o direito. Um recurso interposto contra um ato publicado sob a regra nova nasce, sim, sob a regra nova — não é congelamento perpétuo do processo inteiro, só imunidade retroativa por ato. Os campos que esta garantia precisa (prazo de interposição, ancoragem do ato, escopo do bloqueio) já são congelados desde o MVP por UNI-REQ-0080, justamente para que processos publicados antes deste motor existir não fiquem sem a garantia depois — este requisito cobre só o comportamento de resolução do motor de interposição (UNI-REQ-0081), não o congelamento em si, que não se aplica antes do motor existir. Base legal: dispositivo exato do prazo de interposição e do efeito suspensivo do recurso administrativo federal ainda não confirmado com validação jurídica — pendência a resolver antes de publicar processo real sob esta garantia, nunca citação aproximada.',
     grupo: 'negocio',
@@ -1381,7 +1381,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'A janela de suspensividade de um recurso é resolvida pelos campos já congelados por UNI-REQ-0080 na versão vigente quando o ato recorrido foi publicado, nunca pela vigente no instante da interposição nem no julgamento; uma retificação publicada entre a publicação do ato recorrido e a interposição não altera o prazo nem o escopo do bloqueio de um recurso que venha a ser interposto contra aquele ato; um recurso contra um ato publicado já sob a regra retificada é regido pela regra nova, sem herdar a proteção de atos anteriores; uma fase que perde a configuração de recurso numa retificação recusa nominalmente a tentativa de interposição contra um ato publicado já sob a configuração retificada — nunca contra um ato anterior, cujos campos já congelados por UNI-REQ-0080 permanecem intactos e não ficam silenciosamente sem bloqueio.',
+      'A janela de suspensividade de um recurso é resolvida pelos campos já congelados por UNI-REQ-0080 na versão vigente quando o ato recorrido foi publicado, nunca pela vigente no instante da interposição nem no julgamento; uma retificação publicada entre a publicação do ato recorrido e a interposição não altera o prazo nem o escopo do bloqueio de um recurso que venha a ser interposto contra aquele ato; um recurso contra um ato publicado já sob a regra retificada é regido pela regra nova, sem herdar a proteção de atos anteriores.',
+    verificacao: 'Revisão futura.',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Tech Lead',
+  },
+  {
+    requisito_id: 'UNI-REQ-0094',
+    titulo: 'Fase sem configuração de recurso recusa interposição nominalmente (RN13)',
+    enunciado:
+      'Quando uma retificação remove ou nunca teve a configuração de recurso (par de suspensividade e demais campos de UNI-REQ-0080) para uma fase, uma tentativa de interposição contra um ato publicado já sob essa configuração retificada é recusada com um erro nomeado, específico dessa ausência — nunca aceita silenciosamente sem bloqueio, e nunca confundida com a garantia de UNI-REQ-0093, que protege apenas ato publicado antes da retificação, sob configuração que ainda tinha recurso.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0048',
+    modulo: 'Compartilhado',
+    recorte: 'incremento_obrigatorio',
+    status: 'incremento_planejado',
+    prioridade: 'should',
+    politica_backlog: 'incremento_futuro',
+    tipo_issue_recomendado: 'None',
+    criterios_aceite:
+      'Uma fase cuja configuração retificada não tem par de suspensividade nem os demais campos de UNI-REQ-0080 recusa, com erro nomeado, qualquer tentativa de interposição contra um ato publicado já sob essa configuração; a recusa nunca se torna uma ausência silenciosa de bloqueio; um ato publicado antes da retificação, sob configuração que tinha recurso, continua coberto por UNI-REQ-0093 e não é alcançado por esta recusa.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
