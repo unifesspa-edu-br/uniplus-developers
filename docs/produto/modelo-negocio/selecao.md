@@ -377,7 +377,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | `REQ-56` | Cascata de remanejamento | Ordem congelada de migração de vagas de cota não preenchida entre modalidades (distinta da `RN04`). |
 | `REQ-57` a 71 | Documentos exigidos (detalhe) | Aplicabilidade geral/condicional, condições, base legal, formatos e idade, documentos alternativos, consequências, repetição por entidade e congelamento do conjunto. |
 | `REQ-72` a 78 | Coleta e cálculo de cotas | Autodeclaração mais opção de concorrer, campos condicionais, não se aplica versus pendente, cálculo de modalidade pela Lei de Cotas e ordem de coleta. |
-| `REQ-80` a 82 | Recurso e matrícula | Campos de suspensividade congelados, mecanismo do efeito suspensivo e matrícula compulsória. |
+| `REQ-80`, `81`, `93` a `95` e `82` | Recurso e matrícula | Campos de suspensividade congelados, mecanismo do efeito suspensivo, anti-retroatividade por versão do ato, recusa nominal sem configuração de recurso, dependência de base legal e matrícula compulsória. |
 
 ---
 
