@@ -1388,9 +1388,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0094',
-    titulo: 'Fase sem configuração de recurso recusa interposição nominalmente (RN13)',
+    titulo: 'Ato publicado sem configuração de recurso recusa interposição nominalmente (RN13)',
     enunciado:
-      'Quando uma retificação deixa de configurar uma fase para aceitar recurso — removendo os campos de UNI-REQ-0080 dessa fase, o mesmo estado de uma fase que nunca aceitou recurso —, uma tentativa de interposição contra um ato publicado já sob essa configuração retificada é recusada com um erro nomeado, específico dessa ausência de configuração — nunca aceita silenciosamente sem bloqueio, e nunca confundida com a garantia de UNI-REQ-0093, que protege apenas ato publicado antes da retificação, quando a fase ainda era configurada para aceitar recurso.',
+      'Um recurso é sempre resolvido pelos campos de UNI-REQ-0080 congelados na versão em que o ato recorrido foi publicado — nunca por uma configuração de outra versão, nem posterior (retificação que passa a configurar a fase) nem hipotética. Sempre que essa versão publicada não tiver os campos de recurso pra fase do ato — porque a fase nunca aceitou recurso, ou porque uma retificação anterior ao ato deixou de configurá-la —, uma tentativa de interposição contra esse ato é recusada com um erro nomeado, específico dessa ausência — nunca aceita silenciosamente sem bloqueio, e nunca resolvida por engano contra uma configuração de recurso de outra versão (nem anterior, coberta por UNI-REQ-0093, nem posterior).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1402,7 +1402,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Uma fase cuja configuração retificada deixou de ter os campos de recurso de UNI-REQ-0080 (não configurada para aceitar recurso) recusa, com erro nomeado, qualquer tentativa de interposição contra um ato publicado já sob essa configuração; a recusa nunca se torna uma ausência silenciosa de bloqueio; um ato publicado antes da retificação, quando a fase ainda era configurada para aceitar recurso, continua coberto por UNI-REQ-0093 e não é alcançado por esta recusa.',
+      'Uma tentativa de interposição contra um ato cuja versão publicada não tem os campos de recurso de UNI-REQ-0080 pra fase do ato é recusada com erro nomeado, seja porque a fase nunca aceitou recurso, seja porque uma retificação anterior ao ato deixou de configurá-la; essa recusa nunca se torna uma ausência silenciosa de bloqueio nem lê, por engano, a configuração de recurso de uma versão diferente da que publicou o ato; um ato publicado quando a fase já era configurada para aceitar recurso continua coberto por UNI-REQ-0093 e não é alcançado por esta recusa, mesmo que uma retificação posterior remova a configuração.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
