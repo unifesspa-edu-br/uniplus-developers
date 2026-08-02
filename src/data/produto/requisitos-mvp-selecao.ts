@@ -1864,7 +1864,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     criterios_aceite:
       'A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e qualquer uma das oito cotas reservadas da Lei 12.711 ou AC_PCD, com erro nomeado — o invariante vale por processo, não por curso; vaga conflitante já removida (soft-deletada) não dispara a recusa; processo que oferta só PCD_PURO com a ampla concorrência publica normalmente, assim como processo da Lei de Cotas que nunca ofertou PCD_PURO; ofertar as vagas suplementares institucionais junto com PCD_PURO não é recusado; migrar um processo de PCD_PURO para uma cota da Lei (removendo uma e adicionando a outra) é aceito — a regra recusa a coexistência, não a mudança de modalidade em si.',
     verificacao:
-      'Teste automatizado (as nove modalidades excluídas recusam publicação individualmente, com o mesmo erro nomeado; conflito detectado mesmo em oferta de curso diferente; conflito soft-deletado não dispara a recusa; processo real com PCD_PURO e ampla concorrência publica; processo real da Lei de Cotas sem PCD_PURO publica; falso positivo das vagas suplementares institucionais não dispara; migração de família aceita) (planejado).',
+      'Verificado durante a modelagem (as nove modalidades excluídas recusam publicação individualmente, com o mesmo erro nomeado; conflito detectado mesmo em oferta de curso diferente; conflito soft-deletado não dispara a recusa; processo real com PCD_PURO e ampla concorrência publica; processo real da Lei de Cotas sem PCD_PURO publica; falso positivo das vagas suplementares institucionais não dispara; migração de família aceita); teste automatizado no código do produto (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
