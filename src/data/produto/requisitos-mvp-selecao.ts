@@ -1995,4 +1995,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0097',
+    titulo: 'Dupla correção de redação/carta de intenção com terceiro corretor por discrepância (RN-COR-01/02/03)',
+    enunciado:
+      'Correção de prova (avaliação e lançamento de notas) ainda não é capacidade do MVP — permanece registrada como incremento planejado, consumindo a configuração congelada quando for modelada. A regra de negócio abaixo, porém, já está decidida pelo PO e deve ser preservada para quando essa capacidade for construída, em vez de re-perguntada. Dois corretores independentes avaliam o mesmo item; com dois corretores, a nota final é a média aritmética simples entre os dois. Se a diferença entre as duas notas for igual ou superior a 30% da nota máxima do componente — proporcional à escala, não um valor fixo de pontos (3 pontos numa escala 0-10, 30 numa escala 0-100, 300 numa escala 0-1.000) —, o item vai a uma terceira correção. Com três corretores, exclui-se a nota mais distante da nota do terceiro corretor, e a nota final é a média aritmética das duas notas que sobram (as mais próximas entre si). Se a nota do terceiro corretor ficar exatamente equidistante da maior e da menor — empate exato, sem como decidir qual excluir —, o caso vai a um quarto corretor, cuja nota SUBSTITUI a nota do terceiro corretor (não soma um quarto valor à conta); aplicada a substituição, a regra de exclusão de três corretores se repete normalmente. Se o novo empate persistir, a nota do quinto corretor substitui a do terceiro, e assim sucessivamente. A regra vale para redação, carta de intenção e provas discursivas em geral — qualquer item de correção humana subjetiva; não se aplica à prova objetiva, corrigida contra gabarito, sem corretor humano para divergir. A fonte da regra é o edital de abertura de cada processo seletivo; o requisito de Educação do Campo 2027 corrobora por escrito o mesmo limiar (3 pontos em escala 0-10) e o mesmo mecanismo.',
+    grupo: 'negocio',
+    tipo: 'incremento',
+    nivel: 'capacidade',
+    parent_id: 'UNI-REQ-0087',
+    modulo: 'Seleção',
+    recorte: 'incremento_obrigatorio',
+    status: 'incremento_planejado',
+    prioridade: 'must',
+    politica_backlog: 'incremento_futuro',
+    tipo_issue_recomendado: 'None',
+    criterios_aceite:
+      'Enquanto este incremento não é entregue, nenhum componente de nota tem apuração automática nem consolidação entre corretores. Ao entregar a capacidade de avaliação e lançamento de notas, a apuração de um componente configurado como correção humana dupla deve seguir, sem re-litigar: média simples com dois corretores; limiar de discrepância de 30% da nota máxima do componente, proporcional à escala; exclusão da nota mais distante da do terceiro corretor com três corretores; substituição (não soma) da nota do terceiro corretor pela do quarto em caso de empate exato, recursiva para quinto corretor e seguintes; escopo restrito a componentes de correção humana subjetiva, nunca a componentes objetivos corrigidos por gabarito.',
+    verificacao: 'Revisão futura / teste automatizado quando a capacidade de avaliação e lançamento de notas for modelada.',
+    pagina_developers: '/produto/mvp-selecao/',
+    owner: 'Tech Lead',
+  },
 ];
