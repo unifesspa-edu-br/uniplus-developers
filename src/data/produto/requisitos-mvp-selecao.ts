@@ -1913,7 +1913,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0090',
     titulo: 'PCD_PURO é mutuamente exclusiva das cotas da Lei — publicação recusa oferecer as duas famílias juntas (RN-MOD-09)',
     enunciado:
-      'PCD_PURO (UNI-REQ-0085/RN-MOD-08) foi desenhada para processo sem nenhuma das oito cotas da Lei 12.711 — é nesse cenário que faz sentido reservar PcD sem a exclusão de escola pública que AC_PCD carrega. Ofertar as duas famílias juntas tornaria AC_PCD redundante para todo candidato PcD elegível a PCD_PURO, sem que a publicação acusasse a sobreposição. A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e, ao mesmo tempo, qualquer uma das oito cotas reservadas da Lei ou AC_PCD, no mesmo processo — mesmo que em cursos diferentes. AC (ampla concorrência) e as vagas suplementares institucionais de povos indígenas/quilombolas não entram nessa exclusividade: convivem normalmente com PCD_PURO.',
+      'PCD_PURO (UNI-REQ-0085/RN-MOD-08) foi desenhada para processo sem nenhuma das oito cotas da Lei 12.711 — é nesse cenário que faz sentido reservar PcD sem a exclusão de escola pública que AC_PCD carrega. Ofertar as duas famílias juntas tornaria AC_PCD redundante para todo candidato PcD elegível a PCD_PURO, sem que a publicação acusasse a sobreposição. A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e, ao mesmo tempo, qualquer uma das oito cotas reservadas da Lei ou AC_PCD, no mesmo processo — mesmo que em cursos diferentes. AC (ampla concorrência) e as vagas suplementares institucionais AC_I/AC_Q, de povos indígenas e quilombolas (UNI-REQ-0096), não entram nessa exclusividade: convivem normalmente com PCD_PURO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1972,5 +1972,27 @@ export const requisitosMvpSelecao: Requisito[] = [
     verificacao: 'Revisão futura / teste automatizado quando um processo real usar PCD_PURO isoladamente.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
+  },
+  {
+    requisito_id: 'UNI-REQ-0096',
+    titulo: 'AC_I/AC_Q: modalidades institucionais indígena e quilombola, certame isolado permanente (RN-MOD-05)',
+    enunciado:
+      'AC_I (indígena) e AC_Q (quilombola) são modalidades institucionais suplementares ao total de vagas do curso — somam-se ao total ofertado, não retiram vaga de nenhuma outra modalidade. O critério é autodeclaração, opção expressa por concorrer e carta de lideranças da comunidade — sem exigência de escola pública nem de renda, diferente das cotas da Lei 12.711. Hoje só existem no PSIQ (Processo Seletivo Indígena e Quilombola), certame isolado dos demais processos seletivos da instituição. O isolamento é modelo permanente, não lacuna temporária de modelagem: não há plano de, no futuro, unificar AC_I/AC_Q com as cotas normais da Lei 12.711 (LB_Q/LI_Q etc.) no mesmo certame — o PSIQ segue um formato de seleção totalmente diferente dos demais por decisão institucional. Achado de projeção, registrado só como nota e sem motivar trabalho de modelagem agora: se essa premissa mudar algum dia e AC_Q passar a coexistir com LB_Q/LI_Q no mesmo certame, AC_Q precisaria de uma condição adicional (não ser egresso de escola pública), análoga à que UNI-REQ-0076 já aplica a AC_PCD em relação às cotas de PcD da Lei, para não duplicar quem já concorre pelas cotas da Lei.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0011',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'AC_I e AC_Q compõem o total de vagas ofertado (SUPLEMENTAR_AO_TOTAL), nunca uma composição que retire vaga de outra modalidade; o critério de elegibilidade é autodeclaração étnico-comunitária mutuamente exclusiva (indígena e quilombola nunca coexistem na mesma autodeclaração) mais opção expressa, sem átomo de escola pública nem de renda; nenhum processo fora do PSIQ oferta AC_I/AC_Q hoje; o predicado de escola pública para AC_Q permanece fora do critério enquanto AC_I/AC_Q só existirem em certame isolado das cotas da Lei 12.711.',
+    verificacao:
+      'Teste automatizado (AC_I/AC_Q somam ao total sem retirar vaga de outra modalidade; autodeclaração indígena e quilombola mutuamente exclusivas; critério sem átomo de escola pública/renda; PSIQ é o único processo que oferta as duas) (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
   },
 ];
