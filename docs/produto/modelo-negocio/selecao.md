@@ -221,9 +221,9 @@ Pontos de atenção que o formulário resolve automaticamente:
 Duas regras distintas atuam aqui:
 
 - Precedência de opções de curso (`RN04`). Vagas da 1ª opção de curso são processadas antes de qualquer realocação para a 2ª opção.
-- Cascata de remanejamento entre modalidades (`REQ-56`). Vagas de uma cota não preenchida migram para outra modalidade seguindo uma ordem semântica congelada por edital. Hoje congela-se a regra de remanejamento **por modalidade** herdada do quadro federal (destino, par e reserva final); a cascata plenamente configurável pelo administrador — com sequência ordenada arbitrária de destinos — é capacidade prevista (`REQ-56`) e ainda não tem bloco próprio no edital congelado — lacuna entre o requisito (já aprovado) e a implementação atual, a acompanhar.
+- Cascata de remanejamento entre modalidades (`REQ-56`). Vagas de uma cota não preenchida migram para outra modalidade conforme uma configuração congelada em bloco próprio do edital, com uma sequência ordenada de destinos para cada modalidade de origem. Essa ordem é semântica: reordená-la muda a modalidade para a qual a vaga migra primeiro e, portanto, quem é convocado.
 
-Regra por modalidade congelada na entrega atual; cascata configurável e processamento em etapa futura.
+A configuração da cascata já fica congelada no edital; o processamento do remanejamento permanece em etapa futura.
 
 ---
 
@@ -374,7 +374,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | `REQ-19` | Publicação com cópia congelada | Publicar o edital criando a cópia oficial imutável da configuração. |
 | `REQ-21 / 22` | Retificação e bloqueio de edição | Alterar edital publicado só por retificação (novo edital); edição direta bloqueada. |
 | `REQ-23` a 33 | Ciclo da inscrição previsto | Rascunho, submissão, opções de curso, concorrência dupla, atendimento, documentos, comprovante, unicidade, nome social, cancelamento. |
-| `REQ-56` | Cascata de remanejamento | Ordem congelada de migração de vagas de cota não preenchida entre modalidades (distinta da `RN04`). |
+| `REQ-56` | Cascata de remanejamento | Bloco próprio do edital com sequência ordenada de destinos por modalidade de origem; a ordem de migração é semântica e distinta da `RN04`. |
 | `REQ-57` a 71 | Documentos exigidos (detalhe) | Aplicabilidade geral/condicional, condições, base legal, formatos e idade, documentos alternativos, consequências, repetição por entidade e congelamento do conjunto. |
 | `REQ-72` a 78 | Coleta e cálculo de cotas | Autodeclaração mais opção de concorrer, campos condicionais, não se aplica versus pendente, cálculo de modalidade pela Lei de Cotas e ordem de coleta. |
 | `REQ-80`, `81`, `93` a `95` e `82` | Recurso e matrícula | Campos de suspensividade congelados, mecanismo do efeito suspensivo, anti-retroatividade por versão do ato, recusa nominal sem configuração de recurso, dependência de base legal e matrícula compulsória. |
@@ -394,7 +394,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Homologação documental (deferir/indeferir) | Etapa futura | Consome a configuração congelada. |
 | Ensalamento e locais exatos de prova | Etapa futura | — |
 | Lançamento de notas por etapa | Etapa futura | As etapas são configuradas agora; as notas são lançadas depois. |
-| Classificação, remanejamento, desempate, bônus e resultado | Etapa futura | Consome integralmente a configuração congelada. |
+| Processamento de classificação, remanejamento, desempate, bônus e resultado | Etapa futura | A configuração da cascata já está congelada em bloco próprio do edital; esta etapa executará o remanejamento conforme essa ordem. |
 | Recursos administrativos | Etapa futura | Base de suspensividade já configurada (`RN13`). |
 | Habilitação e chamadas de vagas (Ingresso/CRCA) | Etapa futura | Fronteira com o módulo Ingresso. |
 
