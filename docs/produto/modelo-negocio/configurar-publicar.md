@@ -82,10 +82,10 @@ Cada comportamento acima corresponde a um requisito com código estável no acer
 | `UNI-REQ-0017` | Formulário configurável de inscrição | Formulário e campos condicionais (2.8). |
 | `UNI-REQ-0056` | Configurar cascata de remanejamento de cotas | Ordem congelada de migração de vagas (2.4). |
 | `UNI-REQ-0059` | Base legal por exigência com validação de publicação | Base legal das exigências documentais (2.7). |
-| `UNI-REQ-0019` | Publicação do Edital com snapshot imutável | Publicação e cópia congelada (seção 3). |
+| `UNI-REQ-0019` | Publicação do Processo Seletivo com Versão de Configuração imutável | Publicação e cópia congelada (seção 3). |
 | `UNI-REQ-0020` | Canonicalização estável da configuração congelada | Reprodutibilidade da cópia congelada (seção 3). |
 | `UNI-REQ-0022` | Bloquear mutação direta após publicação | Configuração não editável após publicar (seção 4). |
 | `UNI-REQ-0062` / 0063 | Imunidade pós-publicação (runtime lê o snapshot) | Runtime lê a cópia congelada, não a viva (seção 4). |
-| `UNI-REQ-0021` | Retificação como novo Edital | Alteração de edital publicado só por retificação (seção 4). |
+| `UNI-REQ-0021` | Retificação do Processo Seletivo por novo Edital | Alteração de edital publicado só por retificação (seção 4). |
 
 > A coleta de fatos e a derivação de modalidade (2.8) têm modelo de negócio próprio na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md) (`UNI-REQ-0065`, `UNI-REQ-0070` a `UNI-REQ-0078`).

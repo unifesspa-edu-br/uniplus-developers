@@ -21,6 +21,8 @@ Esta página reúne os conceitos de domínio que sustentam o módulo Seleção d
 
 Cada tipo tem formulário e regras próprias, configurados como um processo seletivo distinto: **SiSU**, **PSIQ** (Indígena/Quilombola), **PSE Educação do Campo**, **PSVR** (Vestibular Remanescente) e **Transferências** (interna/externa), entre outros.
 
+Os tipos compõem um cadastro institucional configurável, não uma lista fixada em código. A Plataforma pode cadastrar, alterar e desativar tipos para Processos Seletivos futuros; o código de cada tipo é estável e não pode ser reutilizado. A criação recebe `tipoProcessoOrigemId`, resolve um tipo ativo e registra uma cópia por valor em `ProcessoSeletivo`, raiz de agregado do certame configurável. Ao publicar, `VersaoConfiguracao` congela essa cópia no bloco `tipoProcesso` do envelope. Mudanças posteriores no cadastro não alteram o Processo Seletivo nem suas Versões de Configuração já produzidas. Edital é o ato/documento normativo publicado, não sinônimo do agregado ou de sua versão. Veja [UNI-REQ-0098](../requisitos/index.mdx).
+
 ## Concorrência dupla (Lei 14.723/2023)
 
 O candidato concorre **simultaneamente** em ampla concorrência e, para cada modalidade de vaga reservada, somente quando é elegível e opta por concorrer a ela, sendo classificado na situação mais favorável. A derivação de modalidade produz um conjunto multivalorado; por isso, a cardinalidade dos papéis da futura inscrição — um de ampla e, quando aplicável, um de reservada — não limita esse conjunto. A relação entre o papel reservado e o conjunto derivado depende da [Decisão sobre a representação reservada](../requisitos/index.mdx), proposta para o PO com validação jurídica (ver também [Concorrência dupla na inscrição](../requisitos/index.mdx) e [Derivação de modalidade de concorrência](../requisitos/index.mdx)).
@@ -40,8 +42,8 @@ Vagas não preenchidas em uma modalidade são remanejadas conforme ordem legalme
 
 ## Ciclo de vida em seis etapas
 
-1. **Cadastro do edital** — parâmetros, etapas, pesos, cotas e locais de prova;
-2. **Configuração do processo** — datas, formulários, modalidades e regras de bônus;
+1. **Cadastro e configuração do Processo Seletivo** — tipo, unidade responsável, datas, etapas, pesos, cotas, formulários, modalidades e regras de bônus;
+2. **Publicação do Processo Seletivo** — registra o Edital como ato/documento normativo e produz a `VersaoConfiguracao` congelada;
 3. **Inscrição de candidatos** — cadastro online e envio de documentos;
 4. **Homologação** — análise administrativa dos documentos;
 5. **Lançamento de notas** — registro por etapa;

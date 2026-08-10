@@ -101,6 +101,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Equipe frontend',
   },
   {
+    requisito_id: 'UNI-REQ-0098',
+    titulo: 'Tipos de processo seletivo configuráveis',
+    enunciado:
+      'O sistema deve manter os tipos de processo seletivo em cadastro institucional no módulo Configuração, com código canônico imutável e não reutilizável. Somente tipo ativo pode ser vinculado a novo Processo Seletivo ou a obrigatoriedade legal específica; ProcessoSeletivo preserva uma cópia por valor do tipo e VersaoConfiguracao a congela no envelope publicado. Edital permanece o ato/documento normativo, não o agregado configurável.',
+    grupo: 'dados',
+    tipo: 'requisito_dados',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0006',
+    modulo: 'Configuração; Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Plataforma-admin cria, altera e desativa tipos; a listagem pública mostra somente ativos; código é único e imutável inclusive após desativação; Codigo, Nome e Descricao recusam U+0000 com erro 422; a criação de Processo Seletivo exige tipo ativo pelo campo tipoProcessoOrigemId, sem aceitar o contrato legado tipo; os oito tipos legados são semeados com os mesmos códigos e identificadores UUIDv7 determinísticos, e cada acesso fornece uma cópia independente para o agregado; ProcessoSeletivo preserva a cópia por valor; o envelope 0.0.7 contém exatamente 24 blocos, incluindo tipoProcesso; alterações ou desativação posteriores não mudam o Processo Seletivo nem as Versões de Configuração já produzidas.',
+    verificacao:
+      'Testes de domínio, validators e API para U+0000; prova dos oito UUIDv7 RFC 9562 únicos na carga inicial e nas constantes legadas; teste de persistência de dois Processos Seletivos do mesmo tipo no mesmo DbContext; migração dos tipos legados; criação com tipo ativo/inativo; contrato HTTP de tipoProcessoOrigemId; prova exaustiva dos 24 blocos e fixtures 0.0.7 do envelope.',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Tech Lead',
+  },
+  {
     requisito_id: 'UNI-REQ-0011',
     titulo: 'Modalidade de concorrência',
     enunciado:
@@ -231,9 +253,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0019',
-    titulo: 'Publicação do Edital com snapshot imutável',
+    titulo: 'Publicação do Processo Seletivo com Versão de Configuração imutável',
     enunciado:
-      'O sistema deve publicar o documento Edital criando um snapshot append-only com a configuração congelada, o hash da configuração, o hash do edital e o ator responsável.',
+      'O sistema deve publicar o Processo Seletivo, registrar o Edital como ato/documento normativo e criar uma VersaoConfiguracao append-only com a configuração congelada, o hash da configuração, a referência e o hash do ato criador e o ator responsável.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -245,16 +267,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'A publicação grava snapshot completo e imutável; a issue deve citar as regras filhas aplicáveis de canonicalização, retificação e bloqueio de mutação.',
+      'A publicação do Processo Seletivo grava uma VersaoConfiguracao completa e imutável vinculada ao ato criador; Edital não é tratado como agregado configurável; a issue deve citar as regras filhas aplicáveis de canonicalização, retificação e bloqueio de mutação.',
     verificacao: 'Validação automatizada de publicação e snapshot (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
   {
     requisito_id: 'UNI-REQ-0021',
-    titulo: 'Retificação como novo Edital',
+    titulo: 'Retificação do Processo Seletivo por novo Edital',
     enunciado:
-      'O sistema deve tratar alteração de configuração publicada como retificação, criando novo Edital, novo snapshot e motivo registrado.',
+      'O sistema deve tratar alteração da configuração publicada do Processo Seletivo como retificação, registrando novo Edital, nova VersaoConfiguracao e motivo.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -266,7 +288,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A retificação exige edital retificado e motivo; a abertura não carrega campos de retificação.',
+      'A retificação referencia o Edital anterior, exige motivo e produz nova VersaoConfiguracao; a publicação de abertura não carrega campos de retificação.',
     verificacao: 'Validação automatizada de retificação (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -844,7 +866,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0018',
     titulo: 'Validação config-time por motor de obrigatoriedades',
     enunciado:
-      'O sistema deve validar a configuração legal de obrigatoriedades antes da publicação usando motor data-driven.',
+      'O sistema deve validar a configuração legal de obrigatoriedades antes da publicação usando motor data-driven. Uma obrigatoriedade específica usa o código canônico de um tipo de processo seletivo ativo; "*" permanece o único código universal.',
     grupo: 'qualidade',
     tipo: 'requisito_qualidade',
     nivel: 'requisito',
@@ -856,7 +878,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Configuração incoerente é bloqueada antes da publicação com erro de domínio compreensível.',
+      'Configuração incoerente é bloqueada antes da publicação com erro de domínio compreensível; obrigatoriedade específica para código inexistente ou inativo é recusada, enquanto "*" continua válida como regra universal.',
     verificacao: 'testes de domínio planejados',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
