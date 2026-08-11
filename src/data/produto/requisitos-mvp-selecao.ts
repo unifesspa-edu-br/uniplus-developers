@@ -572,7 +572,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0050',
     titulo: 'Configuração de divulgação pública',
     enunciado:
-      'O sistema deve usar configuração de divulgação com default de minimização, permitindo ampliar campos públicos apenas com justificativa congelada no snapshot.',
+      'O sistema deve usar configuração de divulgação com default de minimização, permitindo ampliar para o nome abreviado sem justificativa ou para o nome completo mediante justificativa congelada no snapshot.',
     grupo: 'conformidade',
     tipo: 'requisito_conformidade',
     nivel: 'requisito',
@@ -584,7 +584,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O default publica o número de inscrição; ampliar campos exige justificativa, que fica no snapshot.',
+      'O default publica o número de inscrição; ampliar para o nome abreviado dispensa justificativa; ampliar para o nome completo exige justificativa, que fica no snapshot.',
     verificacao: 'Validação automatizada de divulgação (planejada); revisão LGPD.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend; DPO',
