@@ -48,6 +48,11 @@ Configuram-se os **documentos comprobatórios** exigidos, por **condição** e p
 ### 2.8 Formulário de inscrição e coleta de fatos
 Configura-se o **formulário de inscrição** do processo — as perguntas que o candidato responderá, com seus campos condicionais (`UNI-REQ-0017`). É aqui que se define a **coleta de fatos** (o que o candidato declara e em que ordem, com as pré-condições que decidem quando cada campo aparece) e as **regras de derivação da modalidade** (como o sistema calcula a modalidade a partir das respostas). O detalhamento de negócio da coleta e da derivação está na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md) (`UNI-REQ-0072` a `UNI-REQ-0078`).
 
+### 2.9 Taxa de inscrição e isenção
+O administrador declara se o processo **cobra taxa de inscrição** e, quando cobrar, o **valor**. A ausência de declaração bloqueia a publicação — nunca é interpretada como "não cobra" (`UNI-REQ-0099`). "Não cobrar" e "isentar" são decisões distintas e mutuamente exclusivas: um processo que não cobra não aceita nenhum critério de isenção configurado (`UNI-REQ-0100`). Um processo que cobra pode, opcionalmente, referenciar **fundamentos de isenção** — Cadastro Único e doação de medula óssea, os dois citados para o Curso de Medicina —, sem que isso decida ainda a forma de comprovação ou quem analisa o pedido (`UNI-REQ-0101`).
+
+> **O que ainda não existe.** Solicitar, comprovar, analisar, deferir e recorrer da isenção — e, após indeferimento, gerar e pagar a taxa normalmente — pertencem à frente de inscrição, que depende do agregado de Inscrição, ainda inexistente, e não fazem parte desta primeira publicação. A verificação por fundamento (SISTAC para Cadastro Único, documento com análise humana para doação de medula óssea), o recurso em instância única contra indeferimento e a continuidade da inscrição após indeferimento já têm decisão de negócio registrada, aguardando essa capacidade (`UNI-REQ-0102` a `UNI-REQ-0105`). O mecanismo de arrecadação (PagTesouro via Sistema Próprio) foi escolhido, mas depende de cadastro SISGRU ainda pendente na PROAD (`UNI-REQ-0109`); a base legal do fundamento Cadastro Único também está pendente de confirmação pelo Jurídico e pelo DPO (`UNI-REQ-0110`).
+
 ## 3. Revisão de conformidade e publicação
 
 Antes de publicar, o administrador revê o resumo da configuração e as **pendências de conformidade**. Há **duas conformidades** que precisam estar satisfeitas:
@@ -80,6 +85,9 @@ Cada comportamento acima corresponde a um requisito com código estável no acer
 | `UNI-REQ-0015` | Configurar etapas, critérios e bônus | Etapas, pesos, desempate, classificação e bônus (2.2, 2.6). |
 | `UNI-REQ-0016` | Configurar documentos exigidos por gatilho e fase | Documentos por condição e fase (2.7). |
 | `UNI-REQ-0017` | Formulário configurável de inscrição | Formulário e campos condicionais (2.8). |
+| `UNI-REQ-0099` | Taxa de inscrição e isenção | Declaração de cobrança e valor da taxa (2.9). |
+| `UNI-REQ-0100` | Não cobrar e isentar são mutuamente exclusivas | Processo sem cobrança não aceita isenção (2.9). |
+| `UNI-REQ-0101` | Fundamentos de isenção referenciáveis | Cadastro Único e doação de medula óssea configuráveis (2.9). |
 | `UNI-REQ-0056` | Configurar cascata de remanejamento de cotas | Ordem congelada de migração de vagas (2.4). |
 | `UNI-REQ-0059` | Base legal por exigência com validação de publicação | Base legal das exigências documentais (2.7). |
 | `UNI-REQ-0019` | Publicação do Processo Seletivo com Versão de Configuração imutável | Publicação e cópia congelada (seção 3). |
