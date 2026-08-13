@@ -1,0 +1,81 @@
+---
+title: Catálogo de erros
+sidebar_label: Visão geral
+description: Cada causa de recusa da API tem página própria, endereçada pelo código que o corpo de erro carrega.
+---
+
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/plugin-content-docs/client';
+
+# Catálogo de erros
+
+Toda resposta de erro da API do Uni+ segue a
+[RFC 9457](https://www.rfc-editor.org/rfc/rfc9457.html) — `application/problem+json`.
+Além dos campos da norma, o corpo carrega a extensão `code`, que identifica a
+**causa** da recusa de forma estável, e é a chave deste catálogo.
+
+Cada `code` tem página própria aqui. É para ela que o campo `type` do corpo de
+erro aponta: a referência existe para levar quem recebeu a recusa até a
+explicação da causa e do que fazer diante dela.
+
+## Como ler um corpo de erro
+
+```json
+{
+  "type": "https://developers.uniplus.unifesspa.edu.br/erros/uniplus.selecao.processo_seletivo.localidade_ausente",
+  "title": "A localidade do processo não foi declarada",
+  "status": 422,
+  "detail": "Declare a localidade antes de publicar.",
+  "instance": "01JBQ2X8YQ0000000000000000",
+  "code": "uniplus.selecao.processo_seletivo.localidade_ausente",
+  "traceId": "4bf92f3577b34da6a3ce929d0e0e4736"
+}
+```
+
+- **`code`** — a causa. Estável, e o que se deve tratar em código. Segue a
+  taxonomia `uniplus.<módulo>.<agregado>.<razão>`, sempre em minúsculas.
+- **`title`** — frase curta, a mesma para todas as instâncias do mesmo `code`.
+- **`detail`** — descreve a instância específica. Nunca ecoa o valor recusado.
+- **`instance`** — identificador opaco da requisição, para acionar o suporte.
+- **`traceId`** — correlaciona a recusa com o rastro distribuído da operação.
+
+Trate sempre pelo `code`, nunca pelo texto de `title` ou `detail`: esses são
+redigidos em português e podem ser reescritos sem que a causa mude.
+
+## Endereço das páginas
+
+O endereço canônico de uma entrada é
+`https://developers.uniplus.unifesspa.edu.br/erros/{code}`.
+
+Enquanto o domínio institucional não é provisionado, o portal responde em
+`https://unifesspa-edu-br.github.io/uniplus-developers/erros/{code}` — é o
+endereço em que estas páginas estão publicadas agora, e o campo `type` de cada
+entrada mostra o valor vigente. Quando o domínio entrar no ar, o endereço
+canônico passa a valer e o anterior redireciona para ele.
+
+A API emite hoje o `type` sob outra base, que não resolve para estas páginas.
+A correção tem trabalho próprio em
+[`uniplus-api#1138`](https://github.com/unifesspa-edu-br/uniplus-api/issues/1138);
+até ela entrar, monte o endereço a partir do `code`, que já é o valor definitivo.
+
+## Entradas em rascunho
+
+Uma entrada marcada como **rascunho** descreve uma causa cujo código já está
+fixado, mas que a API ainda não emite. Ela existe antes da implementação por
+exigência do contrato de erro: um código novo não entra em produção sem a
+explicação pública correspondente, e um mesmo Pull Request não atravessa os dois
+repositórios.
+
+Enquanto estiver em rascunho, uma entrada não descreve comportamento em vigor, e
+os valores ainda podem mudar. Não vale programar contra ela.
+
+## Cobertura
+
+O catálogo cobre as causas publicadas abaixo. Ele **não** cobre, ainda, todos os
+códigos que a API já emite — o preenchimento retroativo é trabalho próprio, em
+curso. Uma recusa cujo `code` não tem página aqui continua sendo tratável pelo
+próprio `code`.
+
+## Entradas
+
+<DocCardList items={useCurrentSidebarCategory().items} />

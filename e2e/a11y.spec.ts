@@ -27,6 +27,14 @@ const pages: {name: string; url: string; exclude?: string}[] = [
     name: 'arquitetura congelamento e snapshot',
     url: 'arquitetura/congelamento-snapshot/',
   },
+  {name: 'catálogo de erros (índice)', url: 'erros/'},
+  {
+    // Uma entrada representa as demais: todas saem do mesmo componente e da
+    // mesma forma de página, então a violação que existisse numa existiria em
+    // todas. Esta é a que exercita o aviso de rascunho e o `type` resolvido.
+    name: 'catálogo de erros (entrada)',
+    url: 'erros/uniplus.selecao.processo_seletivo.localidade_ausente',
+  },
   {
     name: 'produto checklist de publicação',
     url: 'produto/checklist-publicacao/',

@@ -1,0 +1,48 @@
+---
+title: Prazo de interposição em dias corridos não é aceito
+sidebar_label: Interposição em dias corridos
+description: Rascunho — o prazo de interposição corre exclusivamente em dia útil; dia corrido é recusado.
+code: uniplus.selecao.regra_recurso_fase.prazo_em_dias_corridos
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Configuração do cronograma — regra de recurso da fase
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de recurso de uma fase declarou o **prazo de interposição** em dias
+corridos. Essa unidade não é declarável nesse prazo.
+
+O prazo de interposição corre exclusivamente em dia útil. É o prazo que fecha a
+porta do candidato, e tempo que passa quando ele não tem como agir não pode
+consumir a janela. Declarar dia corrido é aceitar que a janela encolha sempre
+que calhar de cair em feriado.
+
+Só duas unidades são declaráveis na interposição:
+
+- **dias úteis**, em valor inteiro — cada dia não útil é pulado;
+- **horas** — apenas as horas situadas em dia útil avançam o relógio.
+
+## Como resolver
+
+Reescreva o prazo na unidade que o edital de fato usa. Se a minuta diz "dois
+dias úteis", declare dois dias úteis — não é mais preciso aproximar para dias
+corridos ao transpor o texto para o sistema.
+
+Se o prazo é menor que um dia, declare-o em horas: fração de dia útil também é
+recusada, com [causa própria](./uniplus.selecao.regra_recurso_fase.prazo_em_fracao_de_dia_util.mdx).
+
+Esta restrição vale só para o prazo de interposição. O **efeito suspensivo**
+aceita dias corridos, horas e dias úteis — são relógios distintos, com regras
+distintas.
