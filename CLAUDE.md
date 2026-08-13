@@ -43,6 +43,8 @@ Não há lint/test sobre `src/` além de `typecheck` e os E2E; o "teste" do port
 
 A ordem de carregamento importa: `govbr-tokens.css` é listado antes de `custom.css` no `customCss` do preset.
 
+**Realce de sintaxe** — os temas do Prism vêm de `src/css/prism-themes.ts`, derivados dos prontos com as cores abaixo de 4.5:1 substituídas. Nenhum tema pronto da biblioteca cumpre WCAG 1.4.3 em todos os tokens; o ajuste vive em TypeScript, e não em CSS, porque o Prism aplica cor por `style` inline.
+
 **Personas / dados fictícios** — toda documentação e exemplo usa exclusivamente personas fictícias. Fonte: `src/data/fake-people.json`, renderizado por `src/components/FakePeopleTable.tsx`, documentado em `docs/personas/`. Nunca use CPF, nome ou endereço de pessoa real. Os campos seguem o domínio Uni+ (incl. nome social — RN02); não são dados mascarados, são **formatados** para exibição.
 
 ## CI e deploy

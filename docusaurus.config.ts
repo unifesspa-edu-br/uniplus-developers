@@ -1,6 +1,6 @@
-import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import {prismTemaClaro, prismTemaEscuro} from './src/css/prism-themes';
 
 // Roda em Node.js — não usar código client-side aqui (APIs de browser, JSX...).
 
@@ -135,8 +135,10 @@ const config: Config = {
       copyright: `Conteúdo sob CC-BY-4.0 · Código sob MIT · © ${new Date().getFullYear()} Unifesspa — CTIC.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      // Temas com as cores de baixo contraste corrigidas — texto realçado em
+      // bloco de código é texto, e responde por WCAG 1.4.3 (ver o módulo).
+      theme: prismTemaClaro,
+      darkTheme: prismTemaEscuro,
     },
   } satisfies Preset.ThemeConfig,
 };
