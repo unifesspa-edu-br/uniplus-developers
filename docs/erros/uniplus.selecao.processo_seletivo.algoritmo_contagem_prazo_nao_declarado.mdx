@@ -1,0 +1,69 @@
+---
+title: O processo não declarou algoritmo de contagem de prazo
+sidebar_label: Algoritmo de contagem não declarado
+description: Rascunho — contagem que distingue dia útil exige que o processo declare qual convenção de contagem usa.
+code: uniplus.selecao.processo_seletivo.algoritmo_contagem_prazo_nao_declarado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0080
+  - UNI-REQ-0112
+rastreio:
+  - label: 'uniplus-api#1137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo tem prazo cuja contagem distingue dia útil de dia não útil, e não
+declarou **qual convenção de contagem** usa.
+
+Duas perguntas ficam em aberto a cada contagem, e as respostas mudam o instante
+em que a janela fecha:
+
+- o que "um dia útil" significa quando a âncora não cai à meia-noite;
+- o que acontece quando a âncora cai em dia não útil.
+
+Escolher entre as leituras é convenção jurídica de contagem, não decisão
+técnica. Por isso o sistema não elege uma: oferece convenções nomeadas no rol de
+regras, e o edital declara qual usa. Duas configurações idênticas sob convenções
+diferentes fecham a janela em instantes diferentes — e cada uma permanece
+reproduzível pelo que congelou.
+
+Não há valor por omissão. Escolher em silêncio produziria uma versão publicada
+imutável cujo prazo o sistema teria decidido no lugar do edital.
+
+Dependem da convenção declarada:
+
+- **todo prazo de interposição**, seja em dias úteis, seja em horas;
+- a **suspensividade em dias úteis**.
+
+Suspensividade em horas ou em dias corridos não depende, porque conta todos os
+dias sem distinguir úteis de não úteis.
+
+## Como resolver
+
+Declare o algoritmo de contagem na configuração do processo, informando **código
+e versão**. O servidor resolve a entrada no rol de regras e congela a identidade
+completa — código, versão e hash — na versão publicada; o hash é o que prova o
+conteúdo exato da definição.
+
+A declaração é **uma por processo**, não uma por fase: um mesmo certame conta
+todos os seus prazos pela mesma convenção.
+
+A partir da primeira versão de configuração que a referencia, aquela versão do
+algoritmo vira fato e não pode mais ser alterada nem removida. Evolução é versão
+nova, e as duas coexistem — publicar uma versão nova não altera prazo já aberto
+sob a anterior.
+
+Faltando também o calendário, a recusa é
+[outra, com correção própria](./uniplus.selecao.processo_seletivo.calendario_vigente_ausente.mdx).

@@ -1,0 +1,58 @@
+---
+title: Não há calendário de dias úteis vigente
+sidebar_label: Calendário vigente ausente
+description: Rascunho — contagem sobre dia útil exige calendário de dias úteis vigente cadastrado.
+code: uniplus.selecao.processo_seletivo.calendario_vigente_ausente
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo tem prazo cuja contagem distingue dia útil de dia não útil, e não há
+**calendário de dias úteis vigente** cadastrado.
+
+Contar em dia útil exige saber quais dias são úteis. Quem responde isso é o
+calendário: os feriados nacionais, mais os estaduais e municipais da localidade
+que o processo declara. Sem ele, não há como determinar o instante em que a
+janela fecha, e a publicação para em vez de aproximar em silêncio.
+
+A versão publicada congela o **identificador e a versão do dataset** do
+calendário, não apenas a constatação de que havia um. Guardar só "existia
+calendário" não reproduz contagem nenhuma: o calendário pode ganhar versão nova
+depois da publicação, e um recurso já em curso fecharia num instante diferente
+do que a versão prometeu.
+
+Dependem do calendário:
+
+- **todo prazo de interposição**, seja em dias úteis, seja em horas;
+- a **suspensividade em dias úteis**.
+
+Suspensividade em horas ou em dias corridos não depende — e uma janela que não
+seja de recurso, como a de solicitação de isenção, também não.
+
+## Como resolver
+
+Cadastre um calendário de dias úteis e coloque-o em vigência antes de publicar.
+Ele é dado institucional, compartilhado entre os certames — não é configurado
+dentro do processo seletivo.
+
+Esta causa é distinta da do
+[algoritmo de contagem não declarado](./uniplus.selecao.processo_seletivo.algoritmo_contagem_prazo_nao_declarado.mdx),
+e a correção é outra: lá falta a convenção que o edital escolhe, aqui falta o
+dado que diz quais dias são úteis. As duas podem faltar ao mesmo tempo, e cada
+uma é reportada por si.

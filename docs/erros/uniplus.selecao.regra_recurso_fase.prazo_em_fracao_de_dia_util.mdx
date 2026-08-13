@@ -1,0 +1,48 @@
+---
+title: Prazo de interposição em dias úteis exige valor inteiro
+sidebar_label: Interposição em fração de dia útil
+description: Rascunho — fração de dia útil não tem leitura unívoca e é recusada; para menos de um dia, use horas.
+code: uniplus.selecao.regra_recurso_fase.prazo_em_fracao_de_dia_util
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Configuração do cronograma — regra de recurso da fase
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **prazo de interposição** foi declarado em dias úteis com valor fracionário —
+por exemplo, `1,5` dias úteis.
+
+Fração de dia útil não tem leitura unívoca: meio dia útil pode significar meio
+expediente, doze horas contadas dentro do dia, ou a metade de um dia civil que,
+numa transição de horário, nem sempre tem vinte e quatro horas. Como as leituras
+fecham a janela em instantes diferentes, o sistema recusa a declaração em vez de
+eleger uma em silêncio.
+
+Quando a unidade é dias úteis, o valor é inteiro.
+
+## Como resolver
+
+Escolha uma das duas saídas:
+
+- **declare em horas**, se o prazo é menor que um dia ou não corresponde a um
+  número inteiro de dias — a contagem em horas consome apenas horas situadas em
+  dia útil, e atravessa a madrugada de um dia útil normalmente;
+- **use valor inteiro de dias úteis**, se o edital de fato conta dias.
+
+As duas unidades correm sobre dia útil. A diferença está na granularidade, não
+no que é pulado.
+
+Dia corrido continua recusado na interposição, com
+[causa própria](./uniplus.selecao.regra_recurso_fase.prazo_em_dias_corridos.mdx).

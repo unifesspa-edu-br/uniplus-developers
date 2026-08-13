@@ -1,0 +1,57 @@
+---
+title: A localidade que rege a contagem de prazos não foi declarada
+sidebar_label: Localidade ausente
+description: Rascunho — publicar, retificar ou fechar sessão editorial exige a localidade declarada na configuração.
+code: uniplus.selecao.processo_seletivo.localidade_ausente
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0111
+rastreio:
+  - label: 'uniplus-api#1139'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1139
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo seletivo chegou a uma transição que gera versão publicada sem ter
+declarado a **localidade** — o município cujo calendário rege a contagem dos
+prazos do certame.
+
+A localidade determina quais feriados estaduais e municipais incidem sobre as
+janelas de recurso. Ela varia de um certame para outro: a instituição pode
+publicar processo cujo calendário é o de outro município. Por isso o sistema não
+a atribui por omissão nem a deduz da unidade administradora, do campus de oferta
+ou da sede — deduzir devolveria a rigidez que a tornou configurável.
+
+Um rascunho pode existir sem ela; nenhuma versão publicada pode. Como a versão
+publicada é imutável, a informação precisa estar lá desde o começo: não há como
+completá-la depois.
+
+A recusa vale nas três transições que geram versão, e não só na tela de
+publicação — validar num caminho só deixaria os outros dois abertos.
+
+## Como resolver
+
+Declare a localidade na configuração do processo, com o trio já canônico no
+sistema:
+
+- **código IBGE** de sete dígitos, com prefixo coerente com a UF informada;
+- **nome** do município, não vazio;
+- **UF**.
+
+O código IBGE é o único valor normativo — é dele que se derivam o município e a
+unidade federativa cujos feriados incidem. Nome e UF persistidos são cache de
+exibição: se divergirem, o rótulo sai errado, nunca o prazo.
+
+O campo é editável enquanto o processo está em rascunho e dentro de sessão
+editorial aberta. Declarada a localidade, repita a operação.

@@ -43,6 +43,10 @@ Não há lint/test sobre `src/` além de `typecheck` e os E2E; o "teste" do port
 
 A ordem de carregamento importa: `govbr-tokens.css` é listado antes de `custom.css` no `customCss` do preset.
 
+**Catálogo público de erros** — `docs/erros/{code}.mdx`, uma página por `code` de `ProblemDetails`, nomeada com o próprio código para que a rota seja `/erros/{code}` — o valor que o campo `type` do corpo de erro carrega (ADR-0023 da `uniplus-api`). O frontmatter é a fonte dos metadados e é aplicado com `<ErrorCatalogEntry {...frontMatter} />` (`src/components/ErrorCatalogEntry.tsx`), que rende o cabeçalho de identidade; causa e remediação ficam em prosa, sob os headings fixos `## O que aconteceu` e `## Como resolver`, que o E2E assere. Entrada de código ainda não emitido pela API entra com `situacao: rascunho` — exigência da ADR-0024 da `uniplus-api`, que pede a entrada aberta antes do PR que introduz o código.
+
+O ponto no nome do arquivo tem consequência de infraestrutura: `docusaurus serve` trata o segmento como arquivo com extensão e responde 404, enquanto o GitHub Pages resolve o diretório. Por isso o `webServer` dos E2E é `tools/e2e-server.mjs`, servidor de arquivo cru fiel a produção — trocá-lo por `docusaurus serve` faz o portal parecer funcionar (a SPA monta a rota no cliente) com 404 no protocolo.
+
 **Realce de sintaxe** — os temas do Prism vêm de `src/css/prism-themes.ts`, derivados dos prontos com as cores abaixo de 4.5:1 substituídas. Nenhum tema pronto da biblioteca cumpre WCAG 1.4.3 em todos os tokens; o ajuste vive em TypeScript, e não em CSS, porque o Prism aplica cor por `style` inline.
 
 **Personas / dados fictícios** — toda documentação e exemplo usa exclusivamente personas fictícias. Fonte: `src/data/fake-people.json`, renderizado por `src/components/FakePeopleTable.tsx`, documentado em `docs/personas/`. Nunca use CPF, nome ou endereço de pessoa real. Os campos seguem o domínio Uni+ (incl. nome social — RN02); não são dados mascarados, são **formatados** para exibição.

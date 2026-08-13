@@ -1,4 +1,4 @@
-import {test, expect} from '@playwright/test';
+import {test, expect, type Page} from '@playwright/test';
 
 test.describe('Portal — navegação e conteúdo', () => {
   test('a home carrega com as duas trilhas no menu', async ({page}) => {
@@ -213,5 +213,108 @@ test.describe('Personas (cadastros fictícios)', () => {
 
     await dialog.getByRole('button', {name: 'Fechar'}).click();
     await expect(dialog).not.toBeVisible();
+  });
+});
+
+test.describe('Catálogo de erros', () => {
+  // A taxonomia do `code` é contrato (ADR-0023 do `uniplus-api`).
+  const TAXONOMIA_CODE = /^[a-z]+(\.[a-z_]+)+$/;
+
+  /** Códigos publicados, lidos do índice — a lista que os testes percorrem. */
+  async function codigosDoCatalogo(page: Page): Promise<string[]> {
+    await page.goto('erros/');
+    const hrefs = await page
+      .locator('main a.theme-doc-card-container')
+      .evaluateAll((links) =>
+        links.map((link) => (link as HTMLAnchorElement).getAttribute('href')),
+      );
+    return hrefs.map((href) => href!.replace(/\/$/, '').split('/').pop()!);
+  }
+
+  test('o catálogo é alcançável pela Referência de API', async ({page}) => {
+    await page.goto('./');
+    await page
+      .locator('.navbar')
+      .getByRole('link', {name: 'Referência de API', exact: true})
+      .click();
+    const catalogo = page
+      .locator('.theme-doc-sidebar-container')
+      .getByRole('link', {name: 'Catálogo de erros'});
+    await expect(catalogo).toBeVisible();
+    await catalogo.click();
+    await expect(
+      page.getByRole('heading', {name: 'Catálogo de erros', level: 1}),
+    ).toBeVisible();
+  });
+
+  test('o índice lista a leva e revela, ali mesmo, que são rascunho', async ({
+    page,
+  }) => {
+    const codigos = await codigosDoCatalogo(page);
+    expect(codigos.length).toBeGreaterThanOrEqual(6);
+    for (const code of codigos) {
+      expect(code).toMatch(TAXONOMIA_CODE);
+    }
+
+    // O estado precisa aparecer já no ponto de descoberta: quem varre a lista
+    // não pode confundir causa ainda não emitida com comportamento em vigor.
+    const cards = page.locator('main a.theme-doc-card-container');
+    const total = await cards.count();
+    expect(total).toBe(codigos.length);
+    for (let i = 0; i < total; i++) {
+      await expect(cards.nth(i)).toContainText('Rascunho —');
+    }
+  });
+
+  test('cada entrada traz causa, remediação, e um type que resolve nela mesma', async ({
+    page,
+  }) => {
+    const codigos = await codigosDoCatalogo(page);
+
+    for (const code of codigos) {
+      await page.goto(`erros/${code}`);
+      const main = page.locator('main');
+
+      // Um H1 só — o título que o corpo de erro emite para este `code`.
+      await expect(main.getByRole('heading', {level: 1})).toHaveCount(1);
+
+      // O código exibido é o mesmo que endereça a página. Se o frontmatter e o
+      // nome do arquivo divergirem, o `type` publicado aponta para outro lugar.
+      await expect(
+        main.locator('dl code', {hasText: new RegExp(`^${code}$`)}),
+      ).toHaveCount(1);
+
+      // O `type` declarado tem de resolver na própria página — é a função do
+      // campo, e o que o cenário de aceite da issue #86 cobra na prática.
+      const typeUri = await main
+        .locator('dl code', {hasText: /^https:\/\//})
+        .innerText();
+      expect(typeUri.endsWith(`/erros/${code}`)).toBe(true);
+      const alvo = await page.request.get(new URL(typeUri).pathname);
+      expect(alvo.status()).toBe(200);
+
+      // Causa e remediação, em toda entrada.
+      await expect(
+        main.getByRole('heading', {name: 'O que aconteceu', level: 2}),
+      ).toBeVisible();
+      await expect(
+        main.getByRole('heading', {name: 'Como resolver', level: 2}),
+      ).toBeVisible();
+    }
+  });
+
+  test('a entrada não rola na horizontal em viewport estreita', async ({
+    page,
+  }) => {
+    // Código e URI são cadeias longas sem espaço: sem quebra, estourariam a
+    // largura da viewport (WCAG 2.1 AA — 1.4.10, reflow a 320 px).
+    await page.setViewportSize({width: 320, height: 800});
+    await page.goto(
+      'erros/uniplus.selecao.processo_seletivo.localidade_ausente',
+    );
+    const estoura = await page.evaluate(
+      () => document.documentElement.scrollWidth > window.innerWidth,
+    );
+    expect(estoura).toBe(false);
   });
 });

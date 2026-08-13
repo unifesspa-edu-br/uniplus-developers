@@ -1,0 +1,63 @@
+---
+title: O fuso institucional aplicado não é uma zona reconhecida
+sidebar_label: Fuso institucional não reconhecido
+description: Rascunho — a publicação para quando o fuso institucional configurado não existe na base IANA.
+code: uniplus.selecao.processo_seletivo.fuso_institucional_nao_reconhecido
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0111
+rastreio:
+  - label: 'uniplus-api#1139'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1139
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Quem configura o processo **não declara** fuso horário: o sistema aplica o fuso
+institucional e o congela na versão publicada, ao lado da localidade. O motivo
+de não perguntar é que ele não varia entre certames — todas as unidades da
+instituição estão na mesma zona —, e o de congelar é que ele varia no tempo,
+porque quem determina o valor correto é a regra de horário de verão, que muda
+por decreto.
+
+Esta recusa acontece quando o identificador de zona configurado como fuso
+institucional não é reconhecido pela base IANA. Publicar assim produziria uma
+versão cuja âncora não converte para dia civil algum: o prazo ficaria
+irreproduzível dentro de uma versão que é imutável. Por isso a verificação
+acontece na publicação, antes de gerar a versão.
+
+É causa distinta da [localidade ausente](./uniplus.selecao.processo_seletivo.localidade_ausente.mdx):
+lá falta um dado que quem configura declara; aqui o dado existe e está errado na
+configuração da instalação.
+
+## Como resolver
+
+Não é corrigível por quem publica o processo — nenhum campo da configuração do
+certame produz esta recusa. Acione a equipe responsável pela instalação (CTIC)
+informando o `traceId` da resposta.
+
+Do lado da configuração institucional, o valor precisa ser um identificador de
+zona da base IANA. O fuso da instituição é `America/Belem`, a zona do estado em
+que ela opera.
+
+Ele **não** é "horário de Brasília". As duas coisas coincidem apenas enquanto não
+houver horário de verão, e divergiram nos períodos em que só a zona de Brasília o
+observava: ali, o mesmo instante caía em dias civis diferentes nas duas zonas — o
+que muda a contagem do prazo.
+
+## Status HTTP
+
+O status desta resposta ainda não foi decidido, e por isso não está declarado
+acima. A causa não está na requisição, e sim na configuração da instalação, o
+que torna a classificação uma decisão própria — tomada na implementação, em
+[`uniplus-api#1139`](https://github.com/unifesspa-edu-br/uniplus-api/issues/1139).
+Trate a recusa pelo `code`, que já é definitivo.
