@@ -27,11 +27,13 @@ A configuração é organizada em **dimensões independentes** (etapas, vagas, d
 ### 2.1 Dados gerais
 O administrador identifica o processo (nome, tipo de processo, origem dos candidatos). O tipo de processo (por exemplo, SiSU, vestibular remanescente, processo indígena/quilombola) traz suas próprias regras e formulários.
 
+Aqui também se declaram os dois dados que regem a contagem de prazos do certame: a **localidade** cujo calendário determina quais feriados incidem, por referência de cidade, e o **fuso horário** em que cada dia civil começa e termina (`UNI-REQ-0111`). Nenhum dos dois tem valor por omissão nem é deduzido da unidade administradora, do campus ou da cidade: quem configura informa. São obrigatórios para publicar, não para criar.
+
 ### 2.2 Etapas, pesos e critérios de desempate
 Configuram-se as **etapas** pontuadas (prova objetiva, redação, entrevista, análise de histórico, banca de heteroidentificação), cada uma com seu caráter (classificatória, eliminatória ou ambas), peso e nota mínima. Definem-se também os **critérios de desempate**, em ordem (por exemplo: idoso, maior nota em determinada etapa, data de nascimento) (`UNI-REQ-0015`). Um processo pode não ter etapa pontuada (caso do SiSU, com nota importada).
 
 ### 2.3 Cronograma de fases
-Monta-se o **cronograma** do certame — as fases (inscrição, resultado preliminar, recurso, resultado final, habilitação), com suas datas, as bancas requeridas e a regra de recurso de cada fase. As fases usam um vocabulário de fases já cadastrado; cada fase do processo se vincula a uma fase canônica.
+Monta-se o **cronograma** do certame — as fases (inscrição, resultado preliminar, recurso, resultado final, habilitação), com suas datas, as bancas requeridas e a regra de recurso de cada fase — cujo prazo de interposição corre exclusivamente em dia útil, declarado em dias úteis ou em horas de dia útil, e nunca em dias corridos (`UNI-REQ-0080`). Quando a contagem distingue dia útil de não útil, ela depende do calendário vigente e do **algoritmo de contagem** que o processo declara, escolhido entre os nomeados no catálogo. As fases usam um vocabulário de fases já cadastrado; cada fase do processo se vincula a uma fase canônica.
 
 ### 2.4 Vagas, modalidades e a cascata de remanejamento
 Para cada oferta de curso, configura-se a **distribuição de vagas**: o total, os parâmetros de cálculo e, quando o processo segue a Lei de Cotas, a referência demográfica e as modalidades ofertadas (ampla concorrência e as reservas legais) (`UNI-REQ-0011`). Configura-se também a **cascata de remanejamento** — a ordem congelada pela qual as vagas de uma cota não preenchida migram para outras modalidades (`UNI-REQ-0056`). Essa ordem é semântica e congela na publicação.
@@ -60,7 +62,7 @@ Antes de publicar, o administrador revê o resumo da configuração e as **pend�
 - **Conformidade estrutural** — as dimensões obrigatórias estão completas e coerentes (por exemplo, um critério de desempate não pode referenciar uma etapa que não existe; uma exigência que determina resultado precisa de base legal).
 - **Conformidade legal** — as regras de obrigatoriedade legal aplicáveis ao processo estão atendidas, avaliadas na data de referência do certame (o início do período de inscrição).
 
-Enquanto houver qualquer pendência, a **publicação fica bloqueada**, e as pendências são listadas de forma acionável. Para publicar, o administrador anexa o **documento oficial do edital** (o PDF) e informa os dados do ato (número do edital, período de inscrição). A publicação cria a **cópia oficial imutável** da configuração — o snapshot congelado (`UNI-REQ-0019`, `UNI-REQ-0020`, `RN08`).
+Publicar exige ainda que a localidade e o fuso estejam declarados, e que exista calendário vigente e algoritmo de contagem declarado sempre que alguma contagem distinga dia útil de não útil (`UNI-REQ-0080`, `UNI-REQ-0111`) — faltando qualquer um, a recusa é nomeada e específica. Enquanto houver qualquer pendência, a **publicação fica bloqueada**, e as pendências são listadas de forma acionável. Para publicar, o administrador anexa o **documento oficial do edital** (o PDF) e informa os dados do ato (número do edital, período de inscrição). A publicação cria a **cópia oficial imutável** da configuração — o snapshot congelado (`UNI-REQ-0019`, `UNI-REQ-0020`, `RN08`).
 
 > **Por que congelar.** A cópia congelada é o documento de maior peso jurídico do processo: é ela que sustenta o resultado do certame. Dois candidatos com as mesmas respostas obtêm o mesmo resultado, e qualquer reavaliação reflete exatamente a configuração vigente à época da publicação — mesmo que a configuração viva mude depois.
 
@@ -90,6 +92,8 @@ Cada comportamento acima corresponde a um requisito com código estável no acer
 | `UNI-REQ-0101` | Fundamentos de isenção referenciáveis | Cadastro Único e doação de medula óssea configuráveis (2.9). |
 | `UNI-REQ-0056` | Configurar cascata de remanejamento de cotas | Ordem congelada de migração de vagas (2.4). |
 | `UNI-REQ-0059` | Base legal por exigência com validação de publicação | Base legal das exigências documentais (2.7). |
+| `UNI-REQ-0080` | Campos de suspensividade e ancoragem do recurso no snapshot congelado | Prazo de recurso em dia útil e o que se congela para calculá-lo (2.3). |
+| `UNI-REQ-0111` | Localidade e fuso horário que regem a contagem de prazos | Os dois campos declarados que governam feriados e dia civil (2.1). |
 | `UNI-REQ-0019` | Publicação do Processo Seletivo com Versão de Configuração imutável | Publicação e cópia congelada (seção 3). |
 | `UNI-REQ-0020` | Canonicalização estável da configuração congelada | Reprodutibilidade da cópia congelada (seção 3). |
 | `UNI-REQ-0022` | Bloquear mutação direta após publicação | Configuração não editável após publicar (seção 4). |
