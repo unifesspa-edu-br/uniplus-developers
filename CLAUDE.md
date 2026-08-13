@@ -18,7 +18,7 @@ npm run serve          # serve ./build localmente
 npm run typecheck      # tsc sem emit
 npm run clear          # limpa cache do Docusaurus (.docusaurus/) — use ao depurar build estranho
 
-# E2E (Playwright): exige build prévio — webServer roda `npm run serve`
+# E2E (Playwright): exige build prévio — webServer roda `tools/e2e-server.mjs`
 npm run build && npm run test:e2e
 npx playwright test e2e/portal.spec.ts          # um arquivo
 npx playwright test -g "nome do teste"          # um teste por título

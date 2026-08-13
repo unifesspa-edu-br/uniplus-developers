@@ -1,7 +1,9 @@
 import {defineConfig, devices} from '@playwright/test';
 
 /**
- * E2E do portal contra o build estático servido por `docusaurus serve`.
+ * E2E do portal contra o build estático servido por `tools/e2e-server.mjs` —
+ * servidor de arquivo cru com resolução de diretório, que é o comportamento do
+ * GitHub Pages (o motivo de não usar `docusaurus serve` está no próprio módulo).
  * O servidor é iniciado pelo próprio Playwright (webServer). Em CI o build
  * roda antes (ver `.github/workflows/e2e.yml`); localmente, rode `npm run build`
  * antes de `npm run test:e2e`.
@@ -9,11 +11,12 @@ import {defineConfig, devices} from '@playwright/test';
 // Porta do servidor de E2E. Sobrescrevível por env para não colidir com um
 // `docusaurus start` (dev server) já rodando localmente na 3000.
 const PORT = Number(process.env.E2E_PORT) || 3000;
-// O portal é publicado em subpath do GitHub Pages, e `docusaurus serve`
-// reproduz o `baseUrl` do build. O prefixo mora aqui (com a barra final, para
-// que os paths relativos dos specs resolvam dentro dele) e os specs navegam
-// por paths relativos — assim uma futura mudança de baseUrl toca um lugar só.
-const baseURL = `http://localhost:${PORT}/uniplus-developers/`;
+// O portal é publicado em subpath do GitHub Pages, e o servidor de E2E monta o
+// build sob o mesmo prefixo. Ele mora aqui (com a barra final, para que os
+// paths relativos dos specs resolvam dentro dele) e os specs navegam por paths
+// relativos — assim uma futura mudança de baseUrl toca um lugar só.
+const BASE_PATH = '/uniplus-developers/';
+const baseURL = `http://localhost:${PORT}${BASE_PATH}`;
 
 export default defineConfig({
   testDir: './e2e',
@@ -29,7 +32,7 @@ export default defineConfig({
     {name: 'chromium', use: {...devices['Desktop Chrome']}},
   ],
   webServer: {
-    command: `npm run serve -- --port ${PORT} --no-open`,
+    command: `node tools/e2e-server.mjs --port ${PORT} --dir build --base ${BASE_PATH}`,
     url: baseURL,
     timeout: 120_000,
     reuseExistingServer: !process.env.CI,
