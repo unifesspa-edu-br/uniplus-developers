@@ -247,7 +247,7 @@ test.describe('Catálogo de erros', () => {
     ).toBeVisible();
   });
 
-  test('o índice lista a leva e revela, ali mesmo, que são rascunho', async ({
+  test('o índice revela, ali mesmo, quais entradas ainda são rascunho', async ({
     page,
   }) => {
     const codigos = await codigosDoCatalogo(page);
@@ -256,13 +256,29 @@ test.describe('Catálogo de erros', () => {
       expect(code).toMatch(TAXONOMIA_CODE);
     }
 
+    const cards = page.locator('main a.theme-doc-card-container');
+    expect(await cards.count()).toBe(codigos.length);
+
+    // O texto de cada card, colhido antes de sair da página do índice — os
+    // cards saem na mesma ordem em que `codigosDoCatalogo` os lê.
+    const textos = await cards.allInnerTexts();
+
     // O estado precisa aparecer já no ponto de descoberta: quem varre a lista
     // não pode confundir causa ainda não emitida com comportamento em vigor.
-    const cards = page.locator('main a.theme-doc-card-container');
-    const total = await cards.count();
-    expect(total).toBe(codigos.length);
-    for (let i = 0; i < total; i++) {
-      await expect(cards.nth(i)).toContainText('Rascunho —');
+    // Com o catálogo misto, a prova é a correspondência — o prefixo aparece
+    // exatamente nas entradas que a própria página declara em rascunho.
+    for (const [i, code] of codigos.entries()) {
+      await page.goto(`erros/${code}`);
+      const situacao = await page
+        .getByText('Situação', {exact: true})
+        .locator('xpath=following-sibling::dd[1]')
+        .innerText();
+      const ehRascunho = situacao.toLowerCase().includes('rascunho');
+
+      expect(
+        textos[i].includes('Rascunho —'),
+        `${code}: o card ${ehRascunho ? 'deveria' : 'não deveria'} anunciar rascunho`,
+      ).toBe(ehRascunho);
     }
   });
 
