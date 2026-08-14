@@ -97,9 +97,37 @@ test.describe('Registro de requisitos — integridade referencial', () => {
 test.describe('Regras institucionais e os requisitos que as implementam', () => {
   test('todo requisito citado na tabela existe no registro', async ({page}) => {
     await page.goto('produto/regras-negocio/conceitos');
-    const tabela = (await page.getByRole('table').first().textContent()) ?? '';
-    const citados = [...new Set(tabela.match(/UNI-REQ-\d{4}/g) ?? [])];
+    const tabela = page.getByRole('table').first();
 
+    // Os identificadores são lidos do rótulo de cada link, não do texto corrido
+    // da tabela: a célula da RN08 abrevia a faixa como `UNI-REQ-0057…0063`, e
+    // o segundo extremo é um link rotulado só `0063` — invisível para quem
+    // procurasse a forma completa no texto.
+    const citadosPorLink = (await tabela.getByRole('link').allTextContents())
+      .map((rotulo) => rotulo.trim())
+      .filter((rotulo) => /^(?:UNI-REQ-)?\d{4}$/.test(rotulo))
+      .map((rotulo) =>
+        rotulo.startsWith('UNI-REQ-') ? rotulo : `UNI-REQ-${rotulo}`,
+      );
+
+    // A abreviação também subentende os intermediários, que não são link
+    // nenhum: `0057…0063` promete que os sete existem, não apenas os extremos.
+    const texto = (await tabela.textContent()) ?? '';
+    const citadosPorFaixa: string[] = [];
+    for (const faixa of texto.matchAll(
+      /UNI-REQ-(\d{4})\s*(?:…|\.\.\.)\s*(?:UNI-REQ-)?(\d{4})/g,
+    )) {
+      const inicio = Number(faixa[1]);
+      const fim = Number(faixa[2]);
+      expect(fim, `faixa ${faixa[0]} termina antes de começar`).toBeGreaterThan(
+        inicio,
+      );
+      for (let n = inicio; n <= fim; n += 1) {
+        citadosPorFaixa.push(`UNI-REQ-${String(n).padStart(4, '0')}`);
+      }
+    }
+
+    const citados = [...new Set([...citadosPorLink, ...citadosPorFaixa])];
     // Sanidade do próprio teste: uma tabela que deixasse de citar requisito
     // nenhum tornaria a asserção seguinte vacuamente verdadeira.
     expect(citados.length).toBeGreaterThan(0);
