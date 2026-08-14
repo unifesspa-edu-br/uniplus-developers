@@ -1,18 +1,21 @@
 ---
 title: A localidade que rege a contagem de prazos não foi declarada
 sidebar_label: Localidade ausente
-description: Rascunho — publicar, retificar ou fechar sessão editorial exige a localidade declarada na configuração.
+description: Rascunho — criar, publicar, retificar ou fechar sessão editorial exige a localidade declarada na configuração.
 code: uniplus.selecao.processo_seletivo.localidade_ausente
 http_status: 422
 situacao: rascunho
 modulo: Seleção
 emitido_em:
+  - Criação do processo seletivo
   - Publicação inicial do processo seletivo
   - Retificação em ato único
   - Fechamento de sessão editorial
 requisitos:
   - UNI-REQ-0111
 rastreio:
+  - label: 'uniplus-api#1136'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1136
   - label: 'uniplus-api#1139'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1139
 ---
@@ -23,22 +26,33 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O processo seletivo chegou a uma transição que gera versão publicada sem ter
-declarado a **localidade** — o município cujo calendário rege a contagem dos
-prazos do certame.
+A operação foi recusada porque a **localidade** não foi declarada — o município
+cujo calendário rege a contagem dos prazos do certame. A recusa acontece na
+criação do processo e em cada transição que gera versão publicada; o campo
+`detail` da resposta diz qual delas foi recusada.
 
 A localidade determina quais feriados estaduais e municipais incidem sobre as
 janelas de recurso. Ela varia de um certame para outro: a instituição pode
-publicar processo cujo calendário é o de outro município. Por isso o sistema não
+publicar processo cujo calendário é o de outro município. Por isso o servidor não
 a atribui por omissão nem a deduz da unidade administradora, do campus de oferta
-ou da sede — deduzir devolveria a rigidez que a tornou configurável.
+ou da sede — deduzir devolveria a rigidez que a tornou configurável. O campo que
+a interface apresenta preenchido é sugestão, não valor atribuído: enquanto não
+submetido, nada foi declarado. Ter cidade
+cadastrada na unidade administradora não dispensa a declaração: o servidor não
+usa aquela cidade para completar esta.
 
-Um rascunho pode existir sem ela; nenhuma versão publicada pode. Como a versão
+Nenhum processo existe sem ela, nem em rascunho. O cadastro nasce junto com o
+edital de abertura, e é nele que a localidade regente está declarada — por isso
+a exigência começa na criação, e não na véspera de publicar. Como a versão
 publicada é imutável, a informação precisa estar lá desde o começo: não há como
 completá-la depois.
 
-A recusa vale nas três transições que geram versão, e não só na tela de
-publicação — validar num caminho só deixaria os outros dois abertos.
+Depois da criação, a recusa vale nas três transições que geram versão, e não só
+na tela de publicação — validar num caminho só deixaria os outros dois abertos.
+Como a localidade é exigida desde a criação e não pode ser removida, chegar a
+uma dessas transições sem ela não é estado alcançável pelo fluxo normal: a
+recusa está ali para defender a invariante de qualquer caminho de escrita que
+venha a contorná-la.
 
 ## Como resolver
 
@@ -53,5 +67,11 @@ O código IBGE é o único valor normativo — é dele que se derivam o municíp
 unidade federativa cujos feriados incidem. Nome e UF persistidos são cache de
 exibição: se divergirem, o rótulo sai errado, nunca o prazo.
 
-O campo é editável enquanto o processo está em rascunho e dentro de sessão
-editorial aberta. Declarada a localidade, repita a operação.
+Na criação, informe a localidade junto com os demais dados do cadastro inicial.
+Se a interface apresentar o campo já preenchido com a cidade da unidade
+administradora, confirme-a ou troque pelo município que o edital declara — o
+valor sugerido só vale como declaração depois de submetido.
+
+O campo continua editável enquanto o processo está em rascunho e, depois de
+publicado, dentro de sessão editorial aberta. Declarada a localidade, repita a
+operação.
