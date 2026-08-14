@@ -98,11 +98,18 @@ test.describe('Regras institucionais e os requisitos que as implementam', () => 
   test('todo requisito citado na tabela existe no registro', async ({page}) => {
     await page.goto('produto/regras-negocio/conceitos');
     const tabela = page.getByRole('table').first();
+    const texto = (await tabela.textContent()) ?? '';
 
-    // Os identificadores são lidos do rótulo de cada link, não do texto corrido
-    // da tabela: a célula da RN08 abrevia a faixa como `UNI-REQ-0057…0063`, e
-    // o segundo extremo é um link rotulado só `0063` — invisível para quem
-    // procurasse a forma completa no texto.
+    // Identificadores completos continuam sendo lidos do texto corrido: uma
+    // referência não deixa de existir só porque perdeu ou ainda não ganhou
+    // link. Sem esta fonte, um `UNI-REQ-NNNN` obsoleto em texto simples passa
+    // sem ser confrontado com o registro.
+    const citadosPorTexto = texto.match(/UNI-REQ-\d{4}/g) ?? [];
+
+    // Os rótulos dos links complementam o texto corrido: a célula da RN08
+    // abrevia a faixa como `UNI-REQ-0057…0063`, e o segundo extremo é um link
+    // rotulado só `0063` — invisível para quem procurasse apenas a forma
+    // completa no texto.
     const citadosPorLink = (await tabela.getByRole('link').allTextContents())
       .map((rotulo) => rotulo.trim())
       .filter((rotulo) => /^(?:UNI-REQ-)?\d{4}$/.test(rotulo))
@@ -112,7 +119,6 @@ test.describe('Regras institucionais e os requisitos que as implementam', () => 
 
     // A abreviação também subentende os intermediários, que não são link
     // nenhum: `0057…0063` promete que os sete existem, não apenas os extremos.
-    const texto = (await tabela.textContent()) ?? '';
     const citadosPorFaixa: string[] = [];
     for (const faixa of texto.matchAll(
       /UNI-REQ-(\d{4})\s*(?:…|\.\.\.)\s*(?:UNI-REQ-)?(\d{4})/g,
@@ -127,7 +133,13 @@ test.describe('Regras institucionais e os requisitos que as implementam', () => 
       }
     }
 
-    const citados = [...new Set([...citadosPorLink, ...citadosPorFaixa])];
+    const citados = [
+      ...new Set([
+        ...citadosPorTexto,
+        ...citadosPorLink,
+        ...citadosPorFaixa,
+      ]),
+    ];
     // Sanidade do próprio teste: uma tabela que deixasse de citar requisito
     // nenhum tornaria a asserção seguinte vacuamente verdadeira.
     expect(citados.length).toBeGreaterThan(0);
