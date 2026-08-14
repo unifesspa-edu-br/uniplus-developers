@@ -20,6 +20,14 @@ const identificadores = requisitosMvpSelecao.map((r) => r.requisito_id);
 /**
  * Regras institucionais que cada requisito declara implementar, lidas do
  * título — a convenção do registro é sufixá-lo com `(RNxx)`.
+ *
+ * O alcance disto é o que a convenção alcança, e ela não é universal: só as
+ * regras cujos requisitos sufixam o título entram aqui (hoje RN08, RN13 e
+ * RN14). As demais têm requisitos vinculados apenas pela prosa curada da
+ * página — `UNI-REQ-0031` implementa a RN01 sem dizê-lo no título —, e para
+ * elas não existe segunda fonte contra a qual conferir: retirar um requisito
+ * daquelas células não é detectável aqui. Fechar isso exige declarar o vínculo
+ * como dado do registro, e não como sufixo de texto.
  */
 const requisitosPorRegra = new Map<string, string[]>();
 for (const requisito of requisitosMvpSelecao) {
@@ -87,6 +95,24 @@ test.describe('Registro de requisitos — integridade referencial', () => {
 });
 
 test.describe('Regras institucionais e os requisitos que as implementam', () => {
+  test('todo requisito citado na tabela existe no registro', async ({page}) => {
+    await page.goto('produto/regras-negocio/conceitos');
+    const tabela = (await page.getByRole('table').first().textContent()) ?? '';
+    const citados = [...new Set(tabela.match(/UNI-REQ-\d{4}/g) ?? [])];
+
+    // Sanidade do próprio teste: uma tabela que deixasse de citar requisito
+    // nenhum tornaria a asserção seguinte vacuamente verdadeira.
+    expect(citados.length).toBeGreaterThan(0);
+
+    const inexistentes = citados.filter((id) => !identificadores.includes(id));
+    // Este sentido pega o que o outro não pega: citação a requisito que foi
+    // renumerado ou nunca existiu, em qualquer RN — inclusive nas que não usam
+    // o sufixo no título.
+    expect(inexistentes, 'requisitos citados que não estão no registro').toEqual(
+      [],
+    );
+  });
+
   for (const [regra, requisitos] of requisitosPorRegra) {
     test(`a célula da ${regra} lista todo requisito que a declara no título`, async ({
       page,
