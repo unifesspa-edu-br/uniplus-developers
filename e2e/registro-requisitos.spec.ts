@@ -7,10 +7,11 @@ import {requisitosMvpSelecao} from '../src/data/produto/requisitos-mvp-selecao';
  *
  * O registro é dado estruturado consumido por três páginas (tabela, matriz de
  * rastreabilidade e regras de negócio), e o `typecheck` só garante a forma de
- * cada item — não que os identificadores sejam únicos, que a árvore feche, nem
- * que a prosa curada em `conceitos.mdx` acompanhe o que o registro declara.
- * Essas três coisas já falharam na prática: a célula da RN13 ficou sem o
- * `UNI-REQ-0111` por uma edição que criou o requisito e não voltou à página.
+ * cada item — não que os identificadores sejam únicos, que a árvore feche numa
+ * única raiz sem componente solta, nem que a prosa curada em `conceitos.mdx`
+ * acompanhe o que o registro declara. Essas coisas já falharam na prática: a
+ * célula da RN13 ficou sem o `UNI-REQ-0111` por uma edição que criou o
+ * requisito e não voltou à página.
  */
 
 /** Identificadores declarados, na ordem do registro. */
@@ -53,6 +54,35 @@ test.describe('Registro de requisitos — integridade referencial', () => {
       .filter((r) => !r.parent_id)
       .map((r) => r.requisito_id);
     expect(raizes).toHaveLength(1);
+  });
+
+  test('todo requisito é alcançável descendo a partir da raiz', () => {
+    const filhosPorPai = new Map<string, string[]>();
+    for (const requisito of requisitosMvpSelecao) {
+      if (!requisito.parent_id) continue;
+      const filhos = filhosPorPai.get(requisito.parent_id) ?? [];
+      filhos.push(requisito.requisito_id);
+      filhosPorPai.set(requisito.parent_id, filhos);
+    }
+
+    const raiz = requisitosMvpSelecao.find((r) => !r.parent_id);
+    const alcancados = new Set<string>();
+    const pendentes = raiz ? [raiz.requisito_id] : [];
+    while (pendentes.length > 0) {
+      const atual = pendentes.pop() as string;
+      // Guarda contra revisitar: sem ela, um ciclo alcançável a partir da raiz
+      // faria a descida não terminar.
+      if (alcancados.has(atual)) continue;
+      alcancados.add(atual);
+      pendentes.push(...(filhosPorPai.get(atual) ?? []));
+    }
+
+    const inalcancaveis = identificadores.filter((id) => !alcancados.has(id));
+    // Unicidade, `parent_id` resolvível e raiz única não bastam: dois
+    // requisitos que se apontem como pai um do outro satisfazem os três e
+    // ainda assim formam um ciclo desligado da árvore, invisível na matriz de
+    // rastreabilidade, que só navega descendo.
+    expect(inalcancaveis, 'requisitos fora da árvore da raiz').toEqual([]);
   });
 });
 
