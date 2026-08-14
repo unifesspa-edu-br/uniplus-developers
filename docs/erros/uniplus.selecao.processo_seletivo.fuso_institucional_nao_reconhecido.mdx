@@ -1,9 +1,10 @@
 ---
 title: O fuso institucional aplicado não é uma zona reconhecida
 sidebar_label: Fuso institucional não reconhecido
-description: Rascunho — a publicação para quando o fuso institucional configurado não existe na base IANA.
+description: A publicação para quando o fuso institucional aplicado não existe na base IANA.
 code: uniplus.selecao.processo_seletivo.fuso_institucional_nao_reconhecido
-situacao: rascunho
+http_status: 500
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Publicação inicial do processo seletivo
@@ -53,11 +54,3 @@ Ele **não** é "horário de Brasília". As duas coisas coincidem apenas enquant
 houver horário de verão, e divergiram nos períodos em que só a zona de Brasília o
 observava: ali, o mesmo instante caía em dias civis diferentes nas duas zonas — o
 que muda a contagem do prazo.
-
-## Status HTTP
-
-O status desta resposta ainda não foi decidido, e por isso não está declarado
-acima. A causa não está na requisição, e sim na configuração da instalação, o
-que torna a classificação uma decisão própria — tomada na implementação, em
-[`uniplus-api#1139`](https://github.com/unifesspa-edu-br/uniplus-api/issues/1139).
-Trate a recusa pelo `code`, que já é definitivo.
