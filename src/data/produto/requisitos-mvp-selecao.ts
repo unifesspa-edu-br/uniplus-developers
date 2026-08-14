@@ -694,7 +694,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A decisão registra duas coisas distintas, cada uma sob a sua regra. A janela de solicitação de isenção é período do cronograma do processo, delimitado por datas, e não é interposição de recurso: não fica sujeita ao contrato de unidades de UNI-REQ-0113 nem depende de calendário ou algoritmo de contagem. O prazo de recurso contra o indeferimento, esse sim, é interposição, e a sua unidade e convenção de contagem seguem UNI-REQ-0113. Ambas registradas com justificativa, atualizando UNI-REQ-0104 antes da implementação.',
+      'A decisão registra duas coisas distintas, cada uma sob a sua regra. A janela de solicitação de isenção é período do cronograma do processo, delimitado por datas, e não é interposição de recurso: não fica sujeita ao contrato de unidades de UNI-REQ-0113 nem depende de calendário ou algoritmo de contagem. O prazo de recurso contra o indeferimento, esse sim, é interposição: a sua unidade segue UNI-REQ-0113 e a convenção de contagem, UNI-REQ-0112. Ambas registradas com justificativa, atualizando UNI-REQ-0104 antes da implementação.',
     verificacao: 'Deliberação registrada pelo PO.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO; Equipe backend; Equipe frontend',
