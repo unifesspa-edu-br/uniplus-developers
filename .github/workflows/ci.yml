@@ -34,3 +34,144 @@ jobs:
 
       - name: Markdown lint (markdownlint-cli2)
         run: npx --yes markdownlint-cli2 'docs/adrs/**/*.md'
+
+  catalogo-erros:
+    name: Contrato do catálogo de erros
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Validar páginas publicadas (docs/erros)
+        run: node tools/catalogo-erros/validar.mjs
+
+      - name: Prova do gate — fixture válida passa (inclui comentário inline)
+        run: node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/valida.mdx
+
+      - name: Prova do gate — requisito inexistente reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-requisito-inexistente.mdx; then
+            echo "ERRO: o validador aceitou UNI-REQ-9999 — a checagem de existência está quebrada" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — alias proibido reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-alias-proibido.mdx; then
+            echo "ERRO: o validador aceitou alias RNxx na prosa — a checagem de alias está quebrada" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — alias com ênfase Markdown reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-alias-formatado.mdx; then
+            echo "ERRO: o validador aceitou alias RNxx com _ênfase_ colada — a checagem de fronteira está quebrada" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — alias com marcação no meio do token reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-alias-dividido.mdx; then
+            echo "ERRO: o validador aceitou RN**13** — a normalização de ênfase está quebrada" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — alias dividido por link reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-alias-em-link.mdx; then
+            echo "ERRO: o validador aceitou RN[13](/regra) — não está lendo o texto renderizado" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — sublinhado literal não vira falso positivo
+        run: node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/valida-sublinhado-literal.mdx
+
+      - name: Prova do gate — fim de bloco não cola no início do próximo
+        run: node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/valida-fronteira-de-bloco.mdx
+
+      - name: Prova do gate — quebra de linha forçada não cola fragmentos
+        run: node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/valida-quebra-de-linha-forcada.mdx
+
+      - name: Prova do gate — sintaxe MDX não renderizada não conta como prosa
+        run: node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/valida-mdx-nao-renderizado.mdx
+
+      - name: Prova do gate — expressão MDX inline não conta como prosa
+        run: node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/valida-expressao-mdx-inline.mdx
+
+      - name: Prova do gate — alt de imagem reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-alias-em-alt-de-imagem.mdx; then
+            echo "ERRO: o validador ignorou alias no texto alternativo de imagem" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — alt de imagem por referência reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-alias-em-alt-de-imagem-por-referencia.mdx; then
+            echo "ERRO: o validador ignorou alias no alt de imagem por referência" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — item após linha em branco reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-requisito-apos-linha-em-branco.mdx; then
+            echo "ERRO: o validador ignorou item após linha em branco na lista — a checagem de existência está quebrada" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — item após comentário reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-requisito-apos-comentario.mdx; then
+            echo "ERRO: o validador ignorou item após comentário na lista — a checagem de existência está quebrada" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — item nulo reprova, sem esconder o item seguinte
+        run: |
+          saida="$(node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-item-nulo.mdx || true)"
+          echo "$saida"
+          if ! grep -q "item de lista malformado" <<< "$saida"; then
+            echo "ERRO: o item nulo não foi reportado — o gate está quebrado" >&2
+            exit 1
+          fi
+          if ! grep -q "UNI-REQ-9999" <<< "$saida"; then
+            echo "ERRO: o item nulo escondeu o UNI-REQ-9999 seguinte — a leitura parou nele" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — index.mdx aninhado não ganha a exceção da raiz
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/indice-aninhado; then
+            echo "ERRO: o validador ignorou index.mdx fora da raiz do alvo — a exceção está grande demais" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — hash dentro de escalar citado não vira comentário
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-requisito-citado-com-hash.mdx; then
+            echo "ERRO: o validador tratou # dentro de aspas como comentário — a checagem de sintaxe está quebrada" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — indentação de 4 espaços é aceita
+        run: node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/valida-indentacao-alternativa.mdx
+
+      - name: Prova do gate — página .md também é coletada e validada
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/pagina-md; then
+            echo "ERRO: o validador ignorou uma página .md — a varredura só cobria .mdx" >&2
+            exit 1
+          fi
