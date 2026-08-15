@@ -1,0 +1,28 @@
+---
+title: Fixture de validação — alias proibido com ênfase Markdown
+sidebar_label: Fixture inválida (alias formatado)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.invalida_alias_formatado
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture cita o alias proibido com ênfase Markdown: _RN13_. `_` é
+caractere de palavra em JavaScript, então `\b` não marca fronteira entre
+`_` e `R` — uma checagem baseada em `\b` deixaria passar o alias
+formatado, mesmo a prosa renderizada exibindo o texto para quem lê.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve reprová-la.

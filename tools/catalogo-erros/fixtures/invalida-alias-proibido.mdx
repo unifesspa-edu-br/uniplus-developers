@@ -1,0 +1,27 @@
+---
+title: Fixture de validação — alias de regra proibido
+sidebar_label: Fixture inválida (alias)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.invalida_alias
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture cita a RN13 na prosa em vez do `UNI-REQ-NNNN` correspondente.
+Prova que o validador reprova o alias de regra institucional (item 4 do
+contrato) mesmo com `requisitos: []` sintaticamente correto.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve reprová-la.

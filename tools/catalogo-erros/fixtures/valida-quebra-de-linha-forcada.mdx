@@ -1,0 +1,29 @@
+---
+title: Fixture de validação — quebra de linha forçada não cola fragmentos
+sidebar_label: Fixture válida (quebra forçada)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.valida_quebra_linha_forcada
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Este trecho termina em RN  
+13 é como a linha seguinte começa, com quebra de linha forçada (dois
+espaços ao final da linha anterior) — visualmente separado, dentro do
+mesmo parágrafo. Prova que a checagem trata a quebra como fronteira, não
+como concatenação direta.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve aceitá-la.

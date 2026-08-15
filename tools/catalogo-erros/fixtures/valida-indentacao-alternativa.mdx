@@ -1,0 +1,30 @@
+---
+title: Fixture de validação — indentação de 4 espaços na lista
+sidebar_label: Fixture válida (indentação alternativa)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.valida_indentacao_alternativa
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos:
+    - UNI-REQ-0001
+    - UNI-REQ-0002
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture indenta a lista `requisitos` com 4 espaços em vez de 2 — YAML
+válido, e o Docusaurus renderiza normalmente. Prova que o validador não
+rejeita a página só por causa da largura da indentação, algo fora do
+contrato que ele confere.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve aceitá-la.
