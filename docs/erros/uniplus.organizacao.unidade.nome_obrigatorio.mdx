@@ -1,0 +1,36 @@
+---
+title: O nome da unidade não foi informado
+sidebar_label: Nome da unidade obrigatório
+description: O cadastro de unidade organizacional exige o nome, ao lado da sigla e do código.
+code: uniplus.organizacao.unidade.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **nome** da unidade organizacional não
+foi informado.
+
+A unidade tem identidade rica — nome, sigla, código e slug, cada um com
+seu próprio papel. O nome é o rótulo por extenso (ex.: "Faculdade de
+Ciências Exatas"), obrigatório em toda unidade da hierarquia, da reitoria
+ao núcleo.
+
+## Como resolver
+
+Informe o nome da unidade. Se o nome estiver presente mas fora do tamanho
+aceito, a causa é outra: veja
+[nome da unidade excede o tamanho](./uniplus.organizacao.unidade.nome_tamanho.mdx).

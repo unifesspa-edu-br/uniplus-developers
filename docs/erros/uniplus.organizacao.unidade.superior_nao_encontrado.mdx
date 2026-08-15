@@ -1,0 +1,38 @@
+---
+title: A unidade superior informada não foi encontrada
+sidebar_label: Unidade superior não encontrada
+description: O Id declarado como unidade superior não corresponde a nenhuma unidade existente.
+code: uniplus.organizacao.unidade.superior_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos:
+  - UNI-REQ-0008
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **Id** declarado como unidade superior na hierarquia não corresponde a
+nenhuma unidade existente.
+
+A hierarquia organizacional é auto-referencial: cada unidade pode
+declarar uma unidade superior, formando a árvore que vai da reitoria aos
+núcleos. A unidade superior é opcional — só a reitoria, no topo, tipicamente
+não declara nenhuma — mas quando informada, precisa apontar para uma
+unidade real.
+
+## Como resolver
+
+Confira o Id informado como unidade superior. Se a unidade superior foi
+removida, escolha outra unidade viva na hierarquia, ou deixe o campo
+ausente se esta for a unidade de topo.

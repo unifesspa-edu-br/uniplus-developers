@@ -1,0 +1,38 @@
+---
+title: O código da unidade não foi informado
+sidebar_label: Código da unidade obrigatório
+description: O cadastro de unidade organizacional exige o código, um dos identificadores únicos entre unidades vivas.
+code: uniplus.organizacao.unidade.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **código** da unidade não foi
+informado.
+
+O código é um dos três identificadores únicos entre unidades vivas (ao
+lado da sigla e do slug), com a caixa preservada — diferente da sigla,
+que é normalizada para maiúsculas. Normalmente corresponde a um código de
+integração institucional (ex.: código SIAPE de lotação).
+
+## Como resolver
+
+Informe o código da unidade. Se o código estiver presente mas fora do
+tamanho aceito, a causa é outra: veja
+[código da unidade excede o tamanho](./uniplus.organizacao.unidade.codigo_tamanho.mdx).
+Se o código já pertence a outra unidade viva, veja
+[código já existe](./uniplus.organizacao.unidade.codigo_ja_existe.mdx).

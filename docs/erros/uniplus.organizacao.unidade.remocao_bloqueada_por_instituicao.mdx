@@ -1,0 +1,45 @@
+---
+title: Não é possível remover uma unidade que é raiz de uma instituição
+sidebar_label: Remoção bloqueada por instituição
+description: Uma unidade referenciada como unidade raiz (reitoria) de uma instituição viva não pode ser removida.
+code: uniplus.organizacao.unidade.remocao_bloqueada_por_instituicao
+http_status: 409
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Remoção de unidade
+requisitos:
+  - UNI-REQ-0007
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+  - label: 'uniplus-api#585'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/585
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A unidade que se tentou remover é a **unidade raiz** (o vínculo com a
+reitoria) de uma instituição viva.
+
+A instituição — o registro singleton que descreve a própria IES —
+referencia sua unidade raiz por Id. Remover essa unidade deixaria a
+instituição apontando para um registro inexistente, quebrando o vínculo
+que a identifica como reitoria.
+
+Esta é uma checagem *check-then-act*: sob concorrência entre a remoção
+desta unidade e o cadastro simultâneo de uma instituição que a escolhe
+como raiz, a janela entre a checagem e a gravação não é fechada por uma
+restrição de banco — é controle de concorrência ainda em aberto, tratado
+como cross-cutting comum a todos os cadastros, não específico desta
+operação.
+
+## Como resolver
+
+Antes de remover a unidade, atualize a instituição para apontar para
+outra unidade do tipo reitoria como raiz, ou remova a instituição
+primeiro, se for o caso.

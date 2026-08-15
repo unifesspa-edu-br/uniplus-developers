@@ -1,0 +1,34 @@
+---
+title: O alias da unidade excede o tamanho máximo
+sidebar_label: Alias da unidade excede o tamanho
+description: O alias da unidade organizacional, quando informado, é limitado a 100 caracteres.
+code: uniplus.organizacao.unidade.alias_tamanho
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **alias** informado excede 100 caracteres, o tamanho máximo aceito.
+
+O alias é opcional — só é validado quando presente — e serve como
+agrupamento popular da unidade, não um identificador único: diferente de
+sigla, código e slug, o mesmo alias pode se repetir em unidades
+distintas.
+
+## Como resolver
+
+Informe o alias dentro do limite de 100 caracteres, ou omita o campo —
+ele nunca é obrigatório.

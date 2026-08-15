@@ -1,0 +1,33 @@
+---
+title: O nome da unidade tem tamanho inválido
+sidebar_label: Nome da unidade fora do tamanho
+description: O nome da unidade organizacional deve ter entre 2 e 250 caracteres.
+code: uniplus.organizacao.unidade.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** da unidade tem tamanho fora do intervalo aceito: entre 2 e 250
+caracteres, aparados de espaço nas bordas.
+
+O mínimo descarta nomes de uma letra só; o máximo comporta nomes longos de
+unidades reais (ex.: "Pró-Reitoria de Assuntos Estudantis e
+Comunitários") sem virar campo de texto livre sem limite.
+
+## Como resolver
+
+Informe um nome com pelo menos 2 caracteres e no máximo 250.

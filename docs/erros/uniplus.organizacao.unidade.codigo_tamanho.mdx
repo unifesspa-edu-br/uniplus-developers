@@ -1,0 +1,29 @@
+---
+title: O código da unidade tem tamanho inválido
+sidebar_label: Código da unidade fora do tamanho
+description: O código da unidade organizacional deve ter entre 1 e 50 caracteres.
+code: uniplus.organizacao.unidade.codigo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** da unidade tem tamanho fora do intervalo aceito: entre 1 e
+50 caracteres, aparados de espaço nas bordas.
+
+## Como resolver
+
+Informe um código com pelo menos 1 caractere e no máximo 50.

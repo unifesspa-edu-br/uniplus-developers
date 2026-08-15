@@ -1,0 +1,34 @@
+---
+title: O slug da unidade tem tamanho inválido
+sidebar_label: Slug da unidade fora do tamanho
+description: O slug da unidade organizacional deve ter entre 3 e 64 caracteres.
+code: uniplus.organizacao.unidade.slug_tamanho
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **slug** da unidade tem tamanho fora do intervalo aceito: entre 3 e 64
+caracteres.
+
+O mínimo de 3 evita slugs curtos demais para ter significado num caminho
+de URL; o máximo de 64 mantém o identificador prático de usar em
+integrações e endereços.
+
+## Como resolver
+
+Informe um slug com pelo menos 3 caracteres e no máximo 64, no formato
+kebab-case.

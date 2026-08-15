@@ -1,0 +1,38 @@
+---
+title: O tipo de unidade informado é inválido
+sidebar_label: Tipo de unidade inválido
+description: O tipo da unidade organizacional precisa ser um dos valores definidos, diferente do sentinela Nenhum.
+code: uniplus.organizacao.unidade.tipo_invalido
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos:
+  - UNI-REQ-0008
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **tipo** da unidade não corresponde a um dos valores válidos, ou é o
+valor sentinela `Nenhum` (usado internamente para detectar corrupção de
+dado, nunca um tipo aceitável na entrada).
+
+O tipo classifica a unidade na hierarquia institucional — reitoria,
+pró-reitoria, centro, instituto, faculdade, departamento, coordenação,
+diretoria, divisão, núcleo ou outro. É um roster fechado: acrescentar um
+tipo novo exige deliberação, não é algo que a entrada da API decida.
+
+## Como resolver
+
+Informe um dos tipos de unidade válidos. Se o tipo que você precisa não
+existe na lista atual, a solicitação de um tipo novo é decisão de
+governança institucional, não algo resolvível ajustando a requisição.

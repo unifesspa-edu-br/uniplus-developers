@@ -1,0 +1,33 @@
+---
+title: Unidade não encontrada
+sidebar_label: Unidade não encontrada
+description: A unidade referenciada pelo Id não existe ou já foi removida.
+code: uniplus.organizacao.unidade.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Atualização de unidade
+  - Remoção de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **Id** informado não corresponde a nenhuma unidade existente — nunca
+existiu, ou já foi removida (a remoção é sempre soft-delete).
+
+Esta causa aparece apenas ao **atualizar** ou **remover** uma unidade por
+Id.
+
+## Como resolver
+
+Confira o Id informado. Liste as unidades vigentes para localizar o Id
+correto, se necessário.
