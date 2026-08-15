@@ -1,0 +1,42 @@
+---
+title: A mesma Idempotency-Key foi reusada com corpo diferente
+sidebar_label: Idempotency-Key reusada com corpo diferente
+description: A chave de idempotência já foi usada nesta janela de validade, mas com um corpo de requisição diferente do atual.
+code: uniplus.idempotency.body_mismatch
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint marcado como exigindo Idempotency-Key
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A `Idempotency-Key` informada já foi usada, dentro do prazo de validade da
+entrada em cache, mas com um **corpo de requisição diferente** do desta
+chamada.
+
+O contrato de idempotência é: mesma chave, mesmo corpo, mesmo endpoint, na
+janela de validade da entrada, é sempre um reenvio da mesma operação —
+retorna a resposta original, sem repetir o efeito colateral (replay
+verbatim). Mesma chave com corpo diferente não é reenvio; é uso incorreto da
+chave, e o servidor recusa em vez de decidir sozinho qual corpo deveria
+valer. A comparação de corpo usa o hash do conteúdo — dois corpos
+byte-a-byte diferentes nunca são tratados como o mesmo reenvio, ainda que a
+diferença seja irrelevante para o resultado da operação.
+
+## Como resolver
+
+Se a intenção era reenviar a mesma operação (por exemplo, após timeout de
+rede), reenvie com o corpo idêntico ao da tentativa original. Se a intenção
+é uma operação diferente, gere uma nova `Idempotency-Key` — reaproveitar o
+mesmo valor entre chamadas logicamente distintas é o uso incorreto que esta
+causa existe para recusar.

@@ -1,0 +1,41 @@
+---
+title: O header Idempotency-Key está malformado
+sidebar_label: Idempotency-Key malformada
+description: O header Idempotency-Key foi enviado mais de uma vez, ou seu valor tem caractere ou tamanho fora do aceito.
+code: uniplus.idempotency.key_malformada
+http_status: 400
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint marcado como exigindo Idempotency-Key
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O header **`Idempotency-Key`** foi enviado, mas de forma malformada. Duas
+situações caem nesta causa:
+
+1. **O header foi enviado mais de uma vez** na mesma requisição. O rascunho
+   da IETF define `Idempotency-Key` como um valor único (`sf-string`), não
+   uma lista — enviá-lo repetido é ambíguo (proxy duplicou? cliente com
+   bug?) e o servidor não tenta adivinhar qual valor vale.
+2. **O valor não passa na validação de formato**: precisa ser composto só de
+   caracteres ASCII imprimíveis (`0x21`–`0x7E`), sem vírgula nem
+   ponto-e-vírgula — proibidos por serem separadores de lista no protocolo —
+   e ter entre 1 e 255 caracteres.
+
+## Como resolver
+
+Envie o header `Idempotency-Key` uma única vez, com um valor dentro do
+formato aceito — tipicamente um UUID já atende a todas as restrições.
+Verifique se algum componente intermediário (proxy, gateway, biblioteca de
+cliente) não está duplicando o header ou injetando caractere fora do
+intervalo permitido.

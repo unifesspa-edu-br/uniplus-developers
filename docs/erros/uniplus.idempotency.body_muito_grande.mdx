@@ -1,0 +1,40 @@
+---
+title: O corpo da requisição excede o limite para endpoint idempotente
+sidebar_label: Corpo excede limite idempotente
+description: Endpoints que exigem Idempotency-Key limitam o tamanho do corpo aceito, para poder calcular o hash de deduplicação.
+code: uniplus.idempotency.body_muito_grande
+http_status: 413
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint marcado como exigindo Idempotency-Key
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O corpo da requisição excede o limite de tamanho aceito por endpoints que
+exigem `Idempotency-Key`.
+
+Para detectar reenvio, o servidor lê o corpo inteiro na memória e calcula um
+hash sobre ele, usado para comparar se uma repetição da mesma chave chegou
+com o mesmo corpo (replay legítimo) ou um corpo diferente (uso incorreto da
+chave). Esse limite existe para que a leitura em memória não seja vetor de
+esgotamento de recursos — é mais restritivo que o limite geral de corpo da
+API, específico dos endpoints idempotentes. O valor exato do limite é
+configurável por ambiente; o campo `detail` da resposta informa o valor
+vigente no momento da chamada.
+
+## Como resolver
+
+Reduza o tamanho do corpo enviado a este endpoint, ou confira se a operação
+deveria estar marcada como exigindo `Idempotency-Key` — cargas grandes
+geralmente indicam um endpoint de propósito diferente do que o protocolo de
+idempotência cobre (chamadas de mutação pontual, não de importação em lote).

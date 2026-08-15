@@ -1,0 +1,41 @@
+---
+title: O endpoint exige principal autenticado para usar Idempotency-Key
+sidebar_label: Idempotency-Key exige autenticação
+description: Endpoint marcado como exigindo Idempotency-Key não aceita requisição anônima.
+code: uniplus.idempotency.principal_requerido
+http_status: 401
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint marcado como exigindo Idempotency-Key, quando a requisição é anônima
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O endpoint exige `Idempotency-Key`, mas a requisição não tem um principal
+autenticado.
+
+O cache de idempotência é isolado por usuário: a chave de busca no
+armazenamento combina a `Idempotency-Key` recebida com a identidade de quem
+fez a requisição, para que duas pessoas diferentes possam usar o mesmo valor
+de chave sem colidir. Sem um principal autenticado, não há como aplicar esse
+isolamento — aceitar a requisição mesmo assim faria clientes anônimos
+compartilharem um único espaço de chaves, abrindo brecha para um cliente
+poluir ou colidir com o cache de outro (cache poisoning). Por isso um
+endpoint que exige `Idempotency-Key` exige, junto, autenticação: é
+inconsistência de configuração — não caso de uso suportado — marcar um
+endpoint anônimo como exigindo a chave.
+
+## Como resolver
+
+Autentique a requisição antes de chamar este endpoint. Se o endpoint deveria
+mesmo aceitar chamada anônima, o problema não está na requisição, e sim na
+configuração do endpoint — reporte à equipe responsável pelo módulo.

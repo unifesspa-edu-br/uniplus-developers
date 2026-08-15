@@ -1,0 +1,41 @@
+---
+title: Requisição com a mesma Idempotency-Key ainda em processamento
+sidebar_label: Idempotency-Key em processamento
+description: Uma requisição concorrente com a mesma Idempotency-Key ainda está sendo processada; a resposta não existe ainda.
+code: uniplus.idempotency.processing_conflict
+http_status: 409
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint marcado como exigindo Idempotency-Key
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma requisição concorrente com a mesma `Idempotency-Key` ainda está sendo
+processada — a operação original começou, mas ainda não terminou de gravar
+uma resposta para reenviar.
+
+Isso acontece tipicamente quando o cliente reenvia a mesma chamada antes que
+a primeira tentativa termine (retentativa disparada cedo demais, ou duas
+abas/processos enviando a mesma operação em paralelo). Como a resposta da
+tentativa original ainda não existe, o servidor não tem o que devolver em
+replay, e recusa a segunda tentativa em vez de processá-la também — processar
+as duas duplicaria o efeito da operação, o problema que a `Idempotency-Key`
+existe para evitar.
+
+## Como resolver
+
+Aguarde alguns segundos e tente novamente com a **mesma** `Idempotency-Key`.
+Quando a tentativa original terminar, o reenvio encontra a resposta pronta e
+recebe o replay dela — sem repetir o efeito da operação. Não gere uma nova
+chave só para contornar este erro: isso reabriria a chance de duplicar a
+operação, exatamente o que a chave existe para impedir.
