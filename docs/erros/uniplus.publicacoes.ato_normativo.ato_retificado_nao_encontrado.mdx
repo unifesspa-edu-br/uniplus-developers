@@ -1,0 +1,43 @@
+---
+title: O ato retificado não corresponde a nenhum ato registrado
+sidebar_label: Ato retificado não encontrado
+description: A retificação referencia um ato_retificado_id que não corresponde a nenhum ato registrado.
+code: uniplus.publicacoes.ato_normativo.ato_retificado_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo, quando o ato declara atoRetificadoId
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#796'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ato normativo declarado como retificação referencia um
+**`atoRetificadoId`** que não corresponde a nenhum ato registrado.
+
+Uma retificação é uma emenda a outro ato já existente — a cadeia é linear
+e emenda a cabeça, nunca uma raiz arbitrária. Sem o ato retificado, não há
+linhagem para emendar: não existe base contra a qual conferir a classe de
+congelamento, nem cabeça de cadeia contra a qual verificar a linearidade.
+
+Quando o registro chega por mensageria durável — um domínio publicando um
+ato que retifica outro do mesmo domínio, na mesma transação — esta causa
+específica não vai para a fila de erro imediatamente: o predecessor pode
+só ainda não ter chegado, já que publicar e retificar em sequência rápida
+colocam duas mensagens na fila sem garantia de ordem. Nesse caminho, o
+sistema tenta de novo por alguns segundos antes de desistir.
+
+## Como resolver
+
+Confira o `atoRetificadoId` informado. Se o ato que você pretende
+retificar acabou de ser registrado, é possível que a leitura tenha
+ocorrido antes da gravação terminar — tente novamente. Se o ato nunca
+existiu, corrija o identificador.

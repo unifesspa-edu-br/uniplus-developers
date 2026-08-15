@@ -1,0 +1,43 @@
+---
+title: O ato que se tentou retificar já foi retificado por outro
+sidebar_label: Raiz já retificada
+description: A cadeia de retificação é linear; uma nova retificação precisa emendar a cabeça da cadeia, não uma raiz já retificada.
+code: uniplus.publicacoes.ato_normativo.raiz_ja_retificada
+http_status: 409
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo, quando o ato declara atoRetificadoId
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#796'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ato que se tentou retificar **já foi retificado por outro ato**.
+
+A cadeia de retificação é linear: um ato é retificado no máximo uma vez, e
+a nova retificação empilha na cabeça da cadeia, não numa raiz já
+emendada. Retificar uma raiz já retificada criaria uma bifurcação — duas
+retificações concorrentes do mesmo ato original —, e não haveria como
+dizer qual delas é a versão vigente. Por isso é conflito (**409**), não
+invariante de formato: o payload em si está coerente, o que não cabe é
+junto do que já foi gravado. A mensagem de detalhe nomeia o ato que já
+retificou o alvo.
+
+Esta recusa também aparece quando duas requisições concorrentes tentam
+retificar a mesma raiz ao mesmo tempo: a garantia definitiva da
+linearidade é um índice único no banco, e a que perde a corrida recebe
+esta mesma causa em vez de um erro genérico.
+
+## Como resolver
+
+Retifique a **cabeça** da cadeia — o ato mais recente que já emenda o que
+você pretendia retificar — em vez do ato original. Consulte a cadeia de
+retificações do ato para identificar qual é a cabeça atual.

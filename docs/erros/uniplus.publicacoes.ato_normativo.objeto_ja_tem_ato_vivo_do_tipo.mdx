@@ -1,0 +1,52 @@
+---
+title: O objeto já é tratado por outra linhagem de atos deste tipo
+sidebar_label: Objeto já tem ato vivo do tipo
+description: O tipo admite um único ato vivo por objeto, e a entidade vinculada já é tratada por outra linhagem de atos deste tipo.
+code: uniplus.publicacoes.ato_normativo.objeto_ja_tem_ato_vivo_do_tipo
+http_status: 409
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo, para tipo marcado como único por objeto
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#796'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo do ato admite **um único ato vivo por objeto**
+(`unicoPorObjeto`), e a entidade vinculada já é tratada por outra
+linhagem de atos deste tipo.
+
+Alguns tipos de ato — um edital de abertura, por exemplo — só fazem
+sentido um por vez para o mesmo objeto: um certame não tem dois editais
+de abertura vivos simultaneamente. Quando o tipo carrega essa marca, o
+registro reserva, para cada entidade vinculada, a vaga da linhagem à qual
+o ato pertence. Uma segunda linhagem tentando tratar o mesmo objeto com o
+mesmo tipo colide com a vaga já reservada.
+
+Isto **não é o mesmo problema** que publicar uma nova versão de um ato já
+existente: isso é retificação, dentro da mesma linhagem, e não disputa vaga
+nenhuma — a vaga é da linhagem, não do ato. A colisão só acontece entre
+linhagens diferentes tentando tratar o mesmo objeto.
+
+Por ser conflito com o estado já gravado — o payload em si está coerente
+— o status é **409**, não 422. A mensagem de detalhe nomeia o ato ou a
+linhagem que já ocupa a vaga. Esta recusa também aparece quando duas
+requisições concorrentes disputam a mesma vaga ao mesmo tempo: o índice
+único que fecha a corrida produz a mesma causa para quem perde, em vez de
+um erro genérico.
+
+## Como resolver
+
+Se a intenção é registrar uma nova versão do ato já vivo para este
+objeto, **retifique a linhagem existente** — declare `atoRetificadoId`
+apontando para a cabeça dela — em vez de registrar um ato novo e
+independente. Consulte os atos já registrados para a entidade antes de
+reenviar.

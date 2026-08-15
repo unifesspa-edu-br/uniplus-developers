@@ -1,0 +1,46 @@
+---
+title: Não há versão vigente do tipo de ato na data de publicação
+sidebar_label: Tipo de ato sem versão vigente
+description: O tipo de ato informado não tem versão vigente na data de publicação declarada — não há de onde copiar os atributos de consequência.
+code: uniplus.publicacoes.ato_normativo.tipo_sem_versao_vigente
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo, quando o publicador não confere os atributos do tipo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#796'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de ato informado **não tem versão vigente** na data de publicação
+do ato.
+
+Ao registrar um ato, o servidor precisa saber se aquele tipo congela a
+configuração, se admite um único ato vivo por objeto e se o efeito é
+irreversível — os três atributos de consequência do tipo, copiados por
+valor no instante do registro. Sem uma versão vigente do tipo na data de
+publicação, não há de onde copiar esses atributos, e o registro é
+recusado.
+
+Este caminho de validação só roda quando quem registra **não** já
+confere os atributos do tipo junto com a requisição (o caminho em que
+outro domínio publica via mensageria durável e já resolveu os atributos
+no próprio instante da publicação, sob as regras vigentes então, passa por
+uma checagem equivalente — mas de existência do tipo no catálogo, não de
+vigência na data — e uma falha ali não produz esta resposta HTTP: vira
+falha de processamento assíncrono, tratada operacionalmente).
+
+## Como resolver
+
+Cadastre uma versão do tipo de ato cuja janela de vigência cubra a data de
+publicação informada, ou corrija a data de publicação para uma que caia
+dentro de uma janela já cadastrada. Se o tipo nunca foi cadastrado, é
+preciso criá-lo primeiro no catálogo de tipos de ato.
