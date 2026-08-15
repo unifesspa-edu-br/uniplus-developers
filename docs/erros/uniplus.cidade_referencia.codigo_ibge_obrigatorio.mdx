@@ -1,0 +1,53 @@
+---
+title: O código IBGE da cidade não foi informado
+sidebar_label: Código IBGE obrigatório
+description: A referência de cidade exige o código IBGE do município, ao lado do nome e da UF.
+code: uniplus.cidade_referencia.codigo_ibge_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Cadastro ou alteração de qualquer entidade que registre cidade por código IBGE
+  - Validação de endereço (CEP) que carrega o trio de cidade resolvido
+requisitos:
+  - UNI-REQ-0118
+rastreio:
+  - label: 'uniplus-api#661'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/661
+  - label: 'uniplus-api#686'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/686
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **código IBGE** da cidade não foi informado.
+
+O Uni+ referencia cidade por valor, não por chave estrangeira entre bancos: uma
+entidade que precisa saber em que município está guarda o código IBGE do
+município (sete dígitos) mais um cache de exibição — nome e UF — preenchido
+pelo cliente a partir do cadastro de localidades do serviço Geo. O código IBGE
+é o único campo normativo do trio; é dele que se derivam o município e a UF
+cujos feriados e demais regras territoriais se aplicam. Esse padrão é
+compartilhado por qualquer entidade que registre cidade dessa forma — Campus e
+Local de Oferta em Configuração, Instituição e Unidade em Organização
+Institucional, o retrato de unidade administradora em Seleção — e por qualquer
+endereço estruturado por CEP, cujo trio de cidade passa pela mesma validação.
+
+A validação é de formato: nenhum dos três campos do trio pode faltar quando
+algum dos outros está presente. O código IBGE é conferido primeiro, antes do
+nome e da UF — se mais de um campo estiver ausente ao mesmo tempo, é esta a
+causa relatada, e não as demais.
+
+## Como resolver
+
+Informe o código IBGE do município — sete dígitos numéricos — no campo que a
+operação espera. O valor normalmente vem da lista de municípios que a
+interface oferece a partir do serviço Geo; não é digitado livremente.
+
+Se o código estiver presente mas em formato diferente do esperado, a causa é
+outra: veja
+[código IBGE em formato inválido](./uniplus.cidade_referencia.codigo_ibge_formato_invalido.mdx).

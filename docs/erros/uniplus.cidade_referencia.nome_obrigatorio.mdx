@@ -1,0 +1,46 @@
+---
+title: O nome da cidade não foi informado
+sidebar_label: Nome da cidade obrigatório
+description: A referência de cidade exige o nome do município, ao lado do código IBGE e da UF.
+code: uniplus.cidade_referencia.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Cadastro ou alteração de qualquer entidade que registre cidade por código IBGE
+  - Validação de endereço (CEP) que carrega o trio de cidade resolvido
+requisitos:
+  - UNI-REQ-0118
+rastreio:
+  - label: 'uniplus-api#661'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/661
+  - label: 'uniplus-api#686'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/686
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **nome** da cidade não foi informado.
+
+O nome faz parte do cache de exibição da referência de cidade — código IBGE,
+nome e UF —, preenchido pelo cliente a partir do cadastro de localidades do
+Geo. Ele não entra em nenhum cálculo: quem determina o município de fato é o
+código IBGE. Ainda assim, o nome é obrigatório sempre que a referência está
+presente, porque o cache existe justamente para poupar quem lê a entidade de
+resolver o código contra o Geo só para exibir um rótulo — um cache incompleto
+frustraria esse propósito.
+
+## Como resolver
+
+Informe o nome do município junto com o código IBGE e a UF. O valor
+normalmente vem preenchido pela própria interface, a partir da escolha do
+município na lista do Geo — não é um campo digitado à parte.
+
+Se o nome estiver presente mas contiver o caractere nulo, ou exceder o
+tamanho máximo, a causa é outra — respectivamente
+[caractere nulo no nome da cidade](./uniplus.cidade_referencia.nome_caractere_nulo.mdx) e
+[nome da cidade excede o tamanho](./uniplus.cidade_referencia.nome_tamanho.mdx).

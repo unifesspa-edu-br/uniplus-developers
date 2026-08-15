@@ -1,0 +1,45 @@
+---
+title: A UF da cidade não foi informada
+sidebar_label: UF obrigatória
+description: A referência de cidade exige a UF do município, ao lado do código IBGE e do nome.
+code: uniplus.cidade_referencia.uf_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Cadastro ou alteração de qualquer entidade que registre cidade por código IBGE
+  - Validação de endereço (CEP) que carrega o trio de cidade resolvido
+requisitos:
+  - UNI-REQ-0118
+rastreio:
+  - label: 'uniplus-api#661'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/661
+  - label: 'uniplus-api#686'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/686
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque a **UF** da cidade não foi informada.
+
+A UF faz parte do cache de exibição da referência de cidade — código IBGE,
+nome e UF —, e a validação exige o trio completo sempre que qualquer fragmento
+dele está presente. A UF em si não é normativa: o código IBGE já determina a
+UF real do município, através do prefixo de dois dígitos. Ainda assim, ela é
+exigida como campo próprio porque a referência é composta no cliente a partir
+do cadastro de localidades do Geo, e o cache precisa estar completo — nunca
+com um dos três campos ausente enquanto os outros dois foram preenchidos.
+
+## Como resolver
+
+Informe a UF do município junto com o código IBGE e o nome. O valor
+normalmente vem preenchido pela própria interface, a partir da escolha do
+município na lista do Geo — não é um campo digitado à parte.
+
+Se a UF estiver presente mas não corresponder ao município que o código IBGE
+designa, a causa é outra:
+[UF incoerente com o código IBGE](./uniplus.cidade_referencia.uf_incoerente.mdx).

@@ -1,0 +1,43 @@
+---
+title: O nome da cidade contém o caractere nulo
+sidebar_label: Caractere nulo no nome da cidade
+description: O nome do município não pode conter o caractere nulo (U+0000).
+code: uniplus.cidade_referencia.nome_caractere_nulo
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Cadastro ou alteração de qualquer entidade que registre cidade por código IBGE
+  - Validação de endereço (CEP) que carrega o trio de cidade resolvido
+requisitos:
+  - UNI-REQ-0118
+rastreio:
+  - label: 'uniplus-api#661'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/661
+  - label: 'uniplus-api#686'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/686
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** da cidade contém o caractere nulo (`U+0000`).
+
+Esta é uma checagem de integridade, não de conteúdo linguístico: o caractere
+nulo não faz parte de nenhum nome de município real, e sua presença indica
+dado corrompido ou payload malformado — nunca uma variação legítima de
+grafia. A validação recusa o valor antes que ele chegue ao banco, onde o
+caractere nulo em coluna de texto é fonte de comportamento inconsistente entre
+camadas (o PostgreSQL, por exemplo, rejeita `\0` em colunas `text`/`varchar`
+por completo).
+
+## Como resolver
+
+Remova o caractere nulo do nome da cidade. Isso normalmente indica um
+problema na origem do dado — truncamento, encoding incorreto ou composição
+manual do payload — e não algo que o operador precise editar manualmente na
+interface, já que o nome normalmente vem do cadastro de localidades do Geo,
+que não produz esse caractere.
