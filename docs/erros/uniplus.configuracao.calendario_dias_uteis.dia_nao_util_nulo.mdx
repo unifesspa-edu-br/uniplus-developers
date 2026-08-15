@@ -1,0 +1,33 @@
+---
+title: Um item da lista de dias não úteis é nulo
+sidebar_label: Item de dia não útil nulo
+description: Nenhum item da lista de dias não úteis do calendário pode ser nulo.
+code: uniplus.configuracao.calendario_dias_uteis.dia_nao_util_nulo
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque um dos itens da lista de dias não úteis veio
+**nulo** — a lista em si foi enviada, mas um de seus elementos não é um dia
+não útil válido.
+
+A validação percorre a lista item a item e recusa no primeiro nulo
+encontrado; os demais itens da lista não chegam a ser conferidos.
+
+## Como resolver
+
+Revise a lista enviada e remova ou preencha o item nulo. Cada entrada precisa
+trazer abrangência, data e descrição.

@@ -1,0 +1,28 @@
+---
+title: A UF do dia não útil está em formato inválido
+sidebar_label: Formato de UF inválido
+description: A UF de um dia não útil de abrangência estadual precisa ser uma das 27 siglas válidas.
+code: uniplus.configuracao.calendario_dias_uteis.uf_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **UF** de um dia não útil de abrangência estadual não é uma das 27 siglas
+de unidade federativa válidas.
+
+## Como resolver
+
+Informe uma das 27 siglas de UF válidas (por exemplo, `PA`, `SP`, `RJ`).

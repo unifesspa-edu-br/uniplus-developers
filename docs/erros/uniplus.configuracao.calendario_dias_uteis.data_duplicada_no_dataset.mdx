@@ -1,0 +1,36 @@
+---
+title: Data duplicada no dataset do calendário
+sidebar_label: Data duplicada no dataset
+description: Duas entradas do mesmo dataset não podem repetir a mesma data, abrangência, município e UF.
+code: uniplus.configuracao.calendario_dias_uteis.data_duplicada_no_dataset
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O dataset trouxe duas entradas com a **mesma data, abrangência, município e
+UF** — uma repetição do mesmo dia não útil dentro do próprio envio.
+
+A checagem de duplicidade é sobre a combinação dos quatro campos, não só a
+data isolada: a mesma data pode aparecer mais de uma vez no dataset desde que
+represente abrangências diferentes (por exemplo, um feriado nacional e, na
+mesma data, um recesso institucional local) — o que não pode é repetir a
+exata mesma combinação duas vezes.
+
+## Como resolver
+
+Revise a lista de dias não úteis e remova a entrada duplicada, mantendo
+apenas uma ocorrência de cada combinação de data, abrangência, município e
+UF.

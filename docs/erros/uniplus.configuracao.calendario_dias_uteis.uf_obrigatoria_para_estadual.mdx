@@ -1,0 +1,31 @@
+---
+title: A UF é obrigatória para dia não útil de abrangência estadual
+sidebar_label: UF obrigatória para abrangência estadual
+description: Um dia não útil de abrangência ESTADUAL precisa declarar a UF — sem ela, feriados de estados diferentes seriam indistinguíveis.
+code: uniplus.configuracao.calendario_dias_uteis.uf_obrigatoria_para_estadual
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos dias não úteis tem abrangência `ESTADUAL`, mas não trouxe a **UF**.
+
+Um feriado estadual só identifica a que estado pertence pela UF declarada —
+sem ela, o mesmo dia não útil não teria como ser distinguido do feriado
+estadual de um estado diferente.
+
+## Como resolver
+
+Informe a UF do dia não útil de abrangência estadual.

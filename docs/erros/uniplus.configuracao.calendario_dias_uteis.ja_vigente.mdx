@@ -1,0 +1,39 @@
+---
+title: O dataset já é o vigente
+sidebar_label: Dataset já vigente
+description: Marcar como vigente um dataset de calendário que já é o vigente é recusado — chamar de novo sobre o mesmo dataset é erro do chamador, não um no-op silencioso.
+code: uniplus.configuracao.calendario_dias_uteis.ja_vigente
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Marcar um dataset de calendário de dias úteis como vigente
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação tentou marcar como vigente um dataset de calendário de dias úteis
+que **já é o vigente**.
+
+Marcar vigente é a operação que torna um dataset o calendário corrente — é
+por ela que a recusa
+[calendário vigente ausente](./uniplus.selecao.processo_seletivo.calendario_vigente_ausente.mdx),
+na Seleção, deixa de acontecer. Chamá-la de novo sobre o dataset que já está
+vigente não é tratado como repetição inofensiva: é sinal de que o chamador
+perdeu o estado atual, e a operação recusa em vez de responder sucesso sem
+ter mudado nada.
+
+## Como resolver
+
+Confira qual dataset está vigente antes de chamar a operação — não há
+necessidade de marcá-lo de novo. Se a intenção é trocar de dataset vigente,
+marque o dataset novo diretamente: a troca desmarca o anterior na mesma
+operação.
