@@ -1,0 +1,28 @@
+---
+title: A descrição do dia não útil excede o tamanho máximo
+sidebar_label: Tamanho da descrição do dia
+description: A descrição de um dia não útil do calendário tem no máximo 200 caracteres.
+code: uniplus.configuracao.calendario_dias_uteis.descricao_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **descrição** de um dos dias não úteis excede o tamanho máximo aceito: 200
+caracteres.
+
+## Como resolver
+
+Reduza a descrição desse dia não útil para até 200 caracteres.

@@ -1,0 +1,37 @@
+---
+title: O dataset vigente não pode ser removido
+sidebar_label: Dataset vigente não pode ser removido
+description: Remover o dataset de calendário atualmente vigente é recusado — trocar de vigente é operação explícita, nunca efeito colateral de uma remoção.
+code: uniplus.configuracao.calendario_dias_uteis.nao_remove_vigente
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Remoção de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação tentou remover um dataset de calendário de dias úteis que está
+**vigente**.
+
+Remover o vigente deixaria, no instante seguinte, nenhum calendário corrente
+— o que reabriria a mesma recusa de
+[calendário vigente ausente](./uniplus.selecao.processo_seletivo.calendario_vigente_ausente.mdx)
+para qualquer publicação de processo seletivo que dependa de contagem em dia
+útil. Trocar de dataset vigente é uma operação explícita e distinta (marcar
+outro dataset como vigente), nunca um efeito colateral automático de remover
+o atual.
+
+## Como resolver
+
+Marque outro dataset como vigente antes de remover este. Se não há outro
+dataset pronto, crie um novo e marque-o vigente primeiro.

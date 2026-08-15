@@ -1,0 +1,40 @@
+---
+title: Conflito de concorrência ao marcar o dataset como vigente
+sidebar_label: Conflito de concorrência ao marcar vigente
+description: Outra alteração concorrente modificou o mesmo dataset ou já marcou um dataset como vigente ao mesmo tempo.
+code: uniplus.configuracao.calendario_dias_uteis.conflito_de_concorrencia
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Marcar um dataset de calendário de dias úteis como vigente, quando outra ativação concorrente disputa o mesmo instante
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação de marcar um dataset como vigente esbarrou numa disputa
+concorrente — cobre dois cenários distintos:
+
+- **duas ativações concorrentes** disputando o mesmo "vigente = true" ao
+  mesmo tempo (reforçado por uma exclusion constraint de banco: no máximo um
+  dataset vigente por vez); ou
+- **este mesmo dataset foi modificado concorrentemente** — por exemplo,
+  removido — entre a leitura e a gravação desta operação.
+
+Nos dois casos a operação não decide sozinha qual das duas alterações
+concorrentes prevalece: ela recusa, e quem chamou tenta de novo com o estado
+atualizado.
+
+## Como resolver
+
+Tente a operação novamente. Se o conflito persistir, confira o estado atual
+do dataset e de qual é o vigente antes de repetir a chamada — outra alteração
+pode ter chegado primeiro.

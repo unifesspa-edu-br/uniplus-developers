@@ -1,0 +1,33 @@
+---
+title: UF informada fora de abrangência estadual
+sidebar_label: UF só em abrangência estadual
+description: A UF de um dia não útil só se aplica quando a abrangência é ESTADUAL.
+code: uniplus.configuracao.calendario_dias_uteis.uf_apenas_para_estadual
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos dias não úteis trouxe **UF** mesmo com abrangência diferente de
+`ESTADUAL`.
+
+A UF só faz sentido para ancorar um feriado a um estado — em `NACIONAL`,
+`MUNICIPAL` ou `INSTITUCIONAL`, informá-la é recusado. Em `MUNICIPAL`, a UF
+do município já vem dentro do snapshot de município, não deste campo.
+
+## Como resolver
+
+Se a abrangência do dia é `ESTADUAL`, mantenha a UF. Caso contrário, remova o
+campo — nenhuma outra abrangência o aceita.

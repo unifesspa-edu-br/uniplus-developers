@@ -1,0 +1,28 @@
+---
+title: A versão do dataset do calendário excede o tamanho máximo
+sidebar_label: Tamanho da versão do dataset
+description: A versão do dataset de calendário de dias úteis precisa ter entre 1 e 60 caracteres.
+code: uniplus.configuracao.calendario_dias_uteis.versao_dataset_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **versão do dataset** informada está fora do tamanho aceito: entre 1 e 60
+caracteres, contados após remover espaços nas pontas.
+
+## Como resolver
+
+Informe uma versão com até 60 caracteres.

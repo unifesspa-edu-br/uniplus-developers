@@ -1,0 +1,35 @@
+---
+title: Referência de município informada fora de abrangência municipal
+sidebar_label: Município só em abrangência municipal
+description: O snapshot de município (código IBGE, nome, UF) de um dia não útil só se aplica quando a abrangência é MUNICIPAL.
+code: uniplus.configuracao.calendario_dias_uteis.snapshot_municipal_apenas_para_municipal
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos dias não úteis trouxe código IBGE, nome ou UF de município mesmo com
+abrangência diferente de `MUNICIPAL`.
+
+O snapshot de município é o par (código IBGE, nome, UF) que ancora um feriado
+municipal a uma cidade específica. Ele só faz sentido quando a abrangência é
+`MUNICIPAL` — em `NACIONAL`, `ESTADUAL` ou `INSTITUCIONAL`, informar qualquer
+um dos três campos é recusado, mesmo que os outros dois estejam ausentes.
+
+## Como resolver
+
+Se a abrangência do dia é `MUNICIPAL`, mantenha o snapshot de município. Caso
+contrário, remova código IBGE, nome e UF do município desse item — nenhum dos
+três se aplica.

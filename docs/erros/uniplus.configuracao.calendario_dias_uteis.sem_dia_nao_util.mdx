@@ -1,0 +1,36 @@
+---
+title: O dataset do calendário não tem nenhum dia não útil
+sidebar_label: Dataset sem dia não útil
+description: Um dataset de calendário de dias úteis precisa declarar ao menos um dia não útil — um calendário vazio não conta nada.
+code: uniplus.configuracao.calendario_dias_uteis.sem_dia_nao_util
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o dataset foi enviado **sem nenhum dia não
+útil** na lista.
+
+Um calendário de dias úteis existe para responder "este dia é útil?" — um
+dataset sem um único feriado ou recesso declarado não distingue nada, e
+publicá-lo como vigente equivaleria a fingir que todo dia é útil sem dizer
+isso explicitamente. O cadastro recusa o dataset vazio em vez de aceitar essa
+ambiguidade.
+
+## Como resolver
+
+Inclua ao menos um dia não útil na lista antes de enviar a criação. Um
+calendário nacional típico tem os feriados nacionais do ano coberto, no
+mínimo.

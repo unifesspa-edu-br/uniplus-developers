@@ -1,0 +1,34 @@
+---
+title: A abrangência do dia não útil é inválida
+sidebar_label: Abrangência do dia inválida
+description: A abrangência de um dia não útil precisa ser um dos quatro tokens do domínio fechado — NACIONAL, ESTADUAL, MUNICIPAL ou INSTITUCIONAL.
+code: uniplus.configuracao.calendario_dias_uteis.abrangencia_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um dataset de calendário de dias úteis
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **abrangência** informada para um dos dias não úteis não é um dos quatro
+tokens do domínio fechado: `NACIONAL`, `ESTADUAL`, `MUNICIPAL` ou
+`INSTITUCIONAL`.
+
+A análise é por lista de tokens explícita (case-sensitive, sem tolerância a
+variação de grafia), não por conversão genérica de enum — um valor fora
+desses quatro, incluindo variação de caixa, é recusado.
+
+## Como resolver
+
+Use exatamente um dos quatro tokens válidos: `NACIONAL`, `ESTADUAL`,
+`MUNICIPAL` ou `INSTITUCIONAL`.

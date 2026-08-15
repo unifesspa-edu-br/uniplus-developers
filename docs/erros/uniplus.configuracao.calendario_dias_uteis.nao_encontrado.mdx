@@ -1,0 +1,31 @@
+---
+title: Calendário de dias úteis não encontrado
+sidebar_label: Calendário não encontrado
+description: O dataset de calendário de dias úteis identificado não existe ou já foi removido.
+code: uniplus.configuracao.calendario_dias_uteis.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Marcar um dataset de calendário de dias úteis como vigente, com identificador que não resolve
+  - Remoção de um dataset de calendário de dias úteis, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhum dataset de calendário de
+dias úteis existente — ou porque nunca existiu, ou porque já foi removido
+(soft delete).
+
+## Como resolver
+
+Confira o identificador do dataset. Se ele foi removido, cadastre um novo ou
+use outro já existente.
