@@ -1,0 +1,48 @@
+---
+title: A classe de congelamento do ato diverge da do ato retificado
+sidebar_label: Classe de congelamento divergente
+description: Um ato não congelante não pode retificar um congelante, nem o inverso — a classe de congelamento do retificador deve coincidir com a do retificado.
+code: uniplus.publicacoes.ato_normativo.classe_congelamento_divergente
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo, quando o ato declara atoRetificadoId
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#796'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **classe de congelamento** do ato que retifica não coincide com a do
+ato retificado — um ato não congelante retificando um congelante, ou o
+inverso.
+
+O que decide se um ato congela a configuração é a classe de
+congelamento — o `congelaConfiguracao` que foi copiado por valor do tipo
+de ato no instante em que cada um dos dois foi registrado —, não o rótulo
+do tipo em si. É essa classe, e não o nome do tipo, que protege a
+integridade da configuração publicada: uma retificação que mudasse a
+classe de congelamento no meio de uma cadeia deixaria ambíguo se a versão
+vigente da configuração é a que o ato original congelou ou a que a
+retificação teria congelado.
+
+A comparação é entre a classe do **retificador** — resolvida agora, do
+tipo vigente na data deste registro — e a classe que o **retificado**
+congelou no seu próprio registro, não o que o tipo dele diz hoje: o
+catálogo é editável, e a classe do ato já publicado não muda
+retroativamente se o cadastro do tipo mudar depois.
+
+## Como resolver
+
+Verifique o tipo de ato usado na retificação: ele precisa ter a mesma
+classe de congelamento (`congelaConfiguracao`) que o tipo do ato
+retificado tinha no instante em que este foi registrado. Um aviso pode
+retificar outro aviso; um edital que congela configuração só pode ser
+retificado por um ato cujo tipo também congela.

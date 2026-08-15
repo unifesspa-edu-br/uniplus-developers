@@ -1,0 +1,45 @@
+---
+title: A versão de configuração invocada veio incompleta
+sidebar_label: Versão invocada incompleta
+description: A referência à versão de configuração que o ato invoca é o par (id, hash) completo, ou nenhum dos dois.
+code: uniplus.publicacoes.ato_normativo.versao_invocada_incompleta
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo, quando o ato declara vínculo com uma versão de configuração
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#796'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ato normativo pode invocar a versão de configuração que ele governou no
+instante da publicação — um par **`{id, hash}`**, sem chave estrangeira
+entre módulos: o `id` aponta a versão no módulo de origem, e o `hash`
+prova que a definição aplicada não mudou depois. Um ato pode não invocar
+versão nenhuma (ato autônomo, sem vínculo com configuração), e nesse caso
+a referência simplesmente não existe.
+
+Esta causa cobre dois cenários distintos, ambos com este mesmo código:
+
+1. **O par veio pela metade** — um identificador sem hash, ou um hash sem
+   identificador. Metade da referência não prova nada: só o par completo
+   liga o ato a uma versão específica e comprova que ela não mudou.
+2. **O par veio completo, mas malformado** — o `id` é um GUID vazio, ou o
+   `hash` não tem o formato de um SHA-256 em hexadecimal minúsculo (64
+   caracteres). Neste caso, o `detail` da resposta descreve especificamente
+   qual dos dois falhou, em vez de repetir a mensagem sobre par incompleto.
+
+## Como resolver
+
+Envie o par `{id, hash}` completo e bem formado — um `id` de versão de
+configuração real e o `hash` SHA-256 correspondente, em hexadecimal
+minúsculo — ou omita os dois campos por completo quando o ato não invocar
+nenhuma versão de configuração.
