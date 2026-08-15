@@ -1,0 +1,37 @@
+---
+title: A regra de remanejamento da modalidade é inválida
+sidebar_label: Regra de remanejamento inválida
+description: A regra de remanejamento, quando informada, precisa ser um dos três tokens do domínio fechado — SEGUE_CASCATA, DESTINO_UNICO ou CRUZADO.
+code: uniplus.configuracao.modalidade.regra_remanejamento_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência
+  - Atualização de uma modalidade de concorrência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **regra de remanejamento** informada não é um dos três tokens do domínio
+fechado: `SEGUE_CASCATA`, `DESTINO_UNICO` ou `CRUZADO`.
+
+A regra de remanejamento é opcional (a modalidade pode não declarar
+nenhuma). Este erro só dispara quando um token é informado e não é um dos
+três válidos — para saber qual regra é exigida ou proibida conforme a
+natureza legal da modalidade, veja
+[natureza e remanejamento incoerentes](./uniplus.configuracao.modalidade.natureza_remanejamento_incoerente.mdx).
+
+## Como resolver
+
+Informe um dos três tokens válidos — `SEGUE_CASCATA`, `DESTINO_UNICO` ou
+`CRUZADO` — coerente com a natureza legal da modalidade, ou omita o campo se
+ela não remaneja.

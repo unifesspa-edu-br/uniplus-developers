@@ -1,0 +1,41 @@
+---
+title: O código está em formato inválido
+sidebar_label: Código em formato inválido
+description: O código da modalidade aceita só letras maiúsculas, dígitos e sublinhado, com no máximo 60 caracteres; o código de origem da composição RETIRA_DE só é conferido pelo tamanho.
+code: uniplus.configuracao.modalidade.codigo_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência, quando o código próprio é inválido
+  - Criação ou atualização de uma modalidade de concorrência, quando o código de origem da composição RETIRA_DE excede o tamanho máximo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Este código é compartilhado por duas causas distintas, que a entrada do
+catálogo não distingue no `detail`:
+
+- O **código da própria modalidade** não respeita o formato fechado —
+  `^[A-Z0-9_]+$` (letras maiúsculas, dígitos e sublinhado, sem hífen), com no
+  máximo 60 caracteres (ex.: `AC`, `LB_PPI`, `LI_Q`).
+- O **código de origem** da composição `RETIRA_DE` (`composicao_origem`)
+  excede 60 caracteres — este segundo caso só confere o tamanho, não o
+  formato: um código de origem com caracteres fora do padrão `^[A-Z0-9_]+$`
+  não é recusado aqui (a integridade referencial de que ele aponta para uma
+  modalidade viva é conferida à parte, ver
+  [referência inexistente ou inativa](./uniplus.configuracao.modalidade.referencia_inexistente_ou_inativa.mdx)).
+
+## Como resolver
+
+Se a causa é o código próprio: use apenas letras maiúsculas, dígitos e
+sublinhado, com até 60 caracteres. Se a causa é o código de origem da
+composição `RETIRA_DE`: reduza-o para até 60 caracteres.

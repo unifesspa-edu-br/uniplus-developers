@@ -1,0 +1,36 @@
+---
+title: A modalidade legal fixa não pode ser removida
+sidebar_label: Remoção bloqueada — código protegido
+description: As dez modalidades do catálogo legal fixo são o piso de ações afirmativas exigido por lei e não podem ser removidas.
+code: uniplus.configuracao.modalidade.remocao_bloqueada_codigo_protegido
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Remoção de uma modalidade do catálogo legal fixo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A modalidade que a operação tentou remover é uma das dez do **catálogo
+legal fixo** — as oito modalidades reservadas da Lei 12.711/2012 (redação
+da Lei 14.723/2023), a ampla concorrência (`AC`) e a modalidade de pessoa
+com deficiência fora da reserva federal (`AC_PCD`).
+
+Sem essas dez, não há como configurar a distribuição de vagas de um edital
+que aplique a lei de cotas. Esta checagem precede a de referência por outra
+modalidade — é determinística e não depende de consultar o banco.
+
+## Como resolver
+
+Uma modalidade do catálogo legal fixo não é removível por cadastro. Se a
+intenção é que ela não apareça mais em novos editais, isso é decisão de
+configuração do processo seletivo, não de remoção do cadastro.

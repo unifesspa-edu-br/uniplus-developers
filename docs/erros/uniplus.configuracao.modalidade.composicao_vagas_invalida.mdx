@@ -1,0 +1,36 @@
+---
+title: A composição de vagas da modalidade é inválida
+sidebar_label: Composição de vagas inválida
+description: A composição de vagas, quando informada, precisa ser um dos quatro tokens do domínio fechado — RESIDUAL_DO_VO, DENTRO_DO_VR, RETIRA_DE ou SUPLEMENTAR_AO_TOTAL.
+code: uniplus.configuracao.modalidade.composicao_vagas_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência
+  - Atualização de uma modalidade de concorrência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **composição de vagas** informada não é um dos quatro tokens do domínio
+fechado: `RESIDUAL_DO_VO`, `DENTRO_DO_VR`, `RETIRA_DE` ou
+`SUPLEMENTAR_AO_TOTAL`.
+
+A composição de vagas tem valor padrão: se omitida, a modalidade assume
+`RESIDUAL_DO_VO` silenciosamente. Este erro só dispara quando um token é
+informado e não é um dos quatro válidos.
+
+## Como resolver
+
+Informe um dos quatro tokens válidos — `RESIDUAL_DO_VO`, `DENTRO_DO_VR`,
+`RETIRA_DE` ou `SUPLEMENTAR_AO_TOTAL` — ou omita o campo para aceitar o
+padrão `RESIDUAL_DO_VO`.

@@ -1,0 +1,34 @@
+---
+title: Não é possível remover uma modalidade referenciada por outra
+sidebar_label: Remoção bloqueada por referência
+description: Uma modalidade viva referenciada por outra modalidade viva — como origem de composição ou destino/par/fallback de remanejamento — não pode ser removida.
+code: uniplus.configuracao.modalidade.remocao_bloqueada_por_referencia
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Remoção de uma modalidade de concorrência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A modalidade que a operação tentou remover é referenciada por outra
+modalidade **viva** — como código de origem de uma composição `RETIRA_DE`,
+ou como destino, par ou fallback de remanejamento.
+
+Removê-la deixaria a modalidade que referencia apontando para um código
+inexistente. A checagem exclui a própria modalidade — uma modalidade que
+referencia a si mesma não bloqueia a própria remoção por essa causa.
+
+## Como resolver
+
+Atualize (ou remova) primeiro a modalidade que faz a referência, para que
+ela deixe de apontar para esta — só então remova esta.

@@ -1,0 +1,38 @@
+---
+title: O código é reservado ao catálogo legal fixo
+sidebar_label: Criação bloqueada — código protegido
+description: Os dez códigos do catálogo legal fixo de modalidades só nascem do seed — criar uma modalidade com um desses códigos por cadastro é recusado.
+code: uniplus.configuracao.modalidade.criacao_bloqueada_codigo_protegido
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código informado é um dos dez do **catálogo legal fixo** — `AC`,
+`AC_PCD`, `LB_PPI`, `LB_Q`, `LB_PCD`, `LB_EP`, `LI_PPI`, `LI_Q`, `LI_PCD`,
+`LI_EP` — e a criação por cadastro foi recusada.
+
+Essa reserva precede até a checagem de unicidade de código: é propriedade do
+próprio código, não do estado atual do banco. Isso importa porque o índice
+de unicidade é parcial (só considera modalidades vivas) — sem esta reserva,
+remover uma dessas dez liberaria o código para ser recriado por cadastro com
+uma estrutura de vagas arbitrária, quando a estrutura das dez é ditada pela
+lei, não pela universidade.
+
+## Como resolver
+
+Não é possível criar uma modalidade com um destes dez códigos por cadastro.
+Se uma dessas dez está ausente ou foi corrompida, o canal de correção é o
+seed e uma migração — não a criação administrativa.

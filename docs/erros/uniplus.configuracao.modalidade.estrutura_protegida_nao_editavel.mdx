@@ -1,0 +1,39 @@
+---
+title: A modalidade legal fixa admite alterar só descrição e base legal
+sidebar_label: Estrutura protegida não editável
+description: Nas dez modalidades do catálogo legal fixo, a atualização só aceita descrição e base legal — natureza, composição, remanejamento, critérios e ação no indeferimento são fixados em lei.
+code: uniplus.configuracao.modalidade.estrutura_protegida_nao_editavel
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de uma modalidade do catálogo legal fixo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A modalidade é uma das dez do **catálogo legal fixo** — as oito modalidades
+reservadas da Lei 12.711/2012 (redação da Lei 14.723/2023), a ampla
+concorrência (`AC`) e a modalidade de pessoa com deficiência fora da reserva
+federal (`AC_PCD`) — e a atualização tentou mudar um campo além de descrição
+e base legal.
+
+Nessas dez, a estrutura de vagas (natureza legal, composição, remanejamento,
+critérios cumulativos, ação no indeferimento) vem da lei, não da
+universidade — só nasce do seed. Só descrição e base legal permanecem
+editáveis por cadastro; qualquer divergência em outro campo é recusada antes
+mesmo de conferir se o valor enviado seria, isoladamente, coerente.
+
+## Como resolver
+
+Envie a atualização só com descrição e/ou base legal. Mudar a estrutura de
+uma modalidade legal fixa exige alteração no seed e migração — o mesmo canal
+que a criou, não o cadastro administrativo.
