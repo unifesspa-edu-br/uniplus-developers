@@ -1,0 +1,29 @@
+---
+title: Fixture de validação — alias proibido dividido por marcação no meio do token
+sidebar_label: Fixture inválida (alias dividido)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.invalida_alias_dividido
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture cita o alias proibido com a marcação Markdown caindo dentro
+do próprio token: RN**13**. Renderizado, o negrito recai só sobre parte
+do número, mas o texto visível concatena as duas metades no que a regra
+proíbe — e na fonte bruta os asteriscos partem o token em dois pedaços
+que nenhuma regex casa sem normalizar a marcação primeiro.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve reprová-la.

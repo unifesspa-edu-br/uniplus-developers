@@ -1,0 +1,31 @@
+---
+title: Fixture de validação — fim de parágrafo e início do próximo não se colam
+sidebar_label: Fixture válida (fronteira de bloco)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.valida_fronteira_bloco
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Este parágrafo termina em RN
+
+13 é como o parágrafo seguinte começa, sem nenhuma relação com o
+anterior. Prova que extrair o texto por bloco não cola o fim de um
+parágrafo no começo do próximo — a página renderizada nunca junta os
+dois números lado a lado, e o gate não pode reprová-la como se
+juntasse.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve aceitá-la.

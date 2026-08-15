@@ -1,0 +1,31 @@
+---
+title: Fixture de validação — index.mdx aninhado, não é o índice do catálogo
+sidebar_label: Fixture inválida (índice aninhado)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.invalida_indice_aninhado
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos:
+  - UNI-REQ-9999
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Este arquivo se chama `index.mdx`, mas não está na raiz do alvo varrido
+(`tools/catalogo-erros/fixtures/indice-aninhado/`, e sim em
+`secao/` dentro dele). Só o `index.mdx` direto na raiz do alvo é o índice
+do catálogo, isento do contrato — este aqui é uma entrada normal e cita
+`UNI-REQ-9999`, que não existe. Prova que a exceção de nome não alcança
+profundidade além da raiz.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve reprová-la.

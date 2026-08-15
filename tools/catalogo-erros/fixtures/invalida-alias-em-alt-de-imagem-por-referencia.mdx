@@ -1,0 +1,34 @@
+---
+title: Fixture de validação — alias proibido no alt de imagem por referência
+sidebar_label: Fixture inválida (alt de imagem por referência)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.invalida_alias_alt_imagem_referencia
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture cita o alias proibido no alt de uma imagem por sintaxe de
+referência:
+
+![RN13][regra]
+
+[regra]: /img/inexistente.png
+
+Diferente de `![alt](url)` direto, essa forma gera um nó `imageReference`
+— mesmo texto acessível, tipo de nó diferente. Prova que a checagem
+cobre as duas sintaxes.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve reprová-la.

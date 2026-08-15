@@ -1,0 +1,30 @@
+---
+title: Fixture de validação — escalar citado com hash dentro das aspas
+sidebar_label: Fixture inválida (hash citado)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.invalida_hash_citado
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos:
+  - 'UNI-REQ-0001 # extra'
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture cita o item entre aspas simples: `'UNI-REQ-0001 # extra'`. Em
+YAML, o `#` dentro de um escalar citado é conteúdo — não inicia
+comentário. O valor real do item é `UNI-REQ-0001 # extra`, que não casa
+`^UNI-REQ-\d{4}$`. Prova que o validador não trata esse `#` como
+comentário e não aceita o item reduzido a `UNI-REQ-0001`.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve reprová-la.

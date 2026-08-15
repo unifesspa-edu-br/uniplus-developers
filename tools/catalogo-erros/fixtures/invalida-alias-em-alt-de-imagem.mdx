@@ -1,0 +1,32 @@
+---
+title: Fixture de validação — alias proibido no texto alternativo de imagem
+sidebar_label: Fixture inválida (alt de imagem)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.invalida_alias_alt_imagem
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture cita o alias proibido só no texto alternativo de uma
+imagem:
+
+![RN13](/img/inexistente.png)
+
+O `alt` é conteúdo acessível — aparece para leitor de tela e quando a
+imagem não carrega — mas mdast guarda em propriedade própria (`alt`),
+não em `value` nem `children`. Prova que a checagem inclui esse texto.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve reprová-la.

@@ -1,0 +1,33 @@
+---
+title: Fixture de validação — sintaxe MDX não renderizada não conta como prosa
+sidebar_label: Fixture válida (sintaxe MDX)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.valida_mdx_nao_renderizado
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} rotuloInterno="RN13" />
+
+{/* RN14 mencionado aqui é comentário MDX — nunca renderiza */}
+
+## O que aconteceu
+
+Esta fixture não menciona o alias na prosa. As três ocorrências acima
+são sintaxe MDX que nunca aparece ao leitor: um atributo JSX
+(`rotuloInterno`), um comentário `{/* */}`, e — logo abaixo, fora deste
+parágrafo — uma instrução `import`. Prova que a checagem de alias só
+olha para o texto renderizado, não para o código-fonte MDX inteiro.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve aceitá-la.
+
+import NuncaUsado from 'RN15-modulo-inexistente';

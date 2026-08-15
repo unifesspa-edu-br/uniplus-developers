@@ -1,0 +1,31 @@
+---
+title: Fixture de validação — item após linha em branco na lista
+sidebar_label: Fixture inválida (linha em branco)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.invalida_linha_branco
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos:
+  - UNI-REQ-0001
+
+  - UNI-REQ-9999
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture tem uma linha em branco no meio da lista `requisitos` — YAML
+válido dentro de uma sequência — seguida de `UNI-REQ-9999`, que não existe.
+Prova que o validador não trata a linha em branco como fim da lista e
+continua conferindo os itens depois dela.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve reprová-la.

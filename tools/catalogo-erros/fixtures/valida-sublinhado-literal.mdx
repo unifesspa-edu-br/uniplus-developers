@@ -1,0 +1,29 @@
+---
+title: Fixture de validação — sublinhado literal não é ênfase
+sidebar_label: Fixture válida (sublinhado literal)
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.valida_sublinhado_literal
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture cita RN_13 — sublinhado sem par, intra-palavra, que o
+CommonMark não interpreta como ênfase e mantém literal na renderização.
+Não é o alias proibido `RN\d{2}` (o sublinhado separa "RN" de "13") nem
+vira um por normalização ingênua de caractere. Prova que o gate não
+produz falso positivo aqui.
+
+## Como resolver
+
+Não se aplica — fixture de teste; o validador deve aceitá-la.

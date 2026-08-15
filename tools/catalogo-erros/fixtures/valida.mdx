@@ -1,0 +1,31 @@
+---
+title: Fixture de validação — página conforme
+sidebar_label: Fixture válida
+description: Fixture usada pelo validador do catálogo de erros — não é página publicada.
+code: uniplus.fixture.catalogo_erros.valida
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos:
+  - UNI-REQ-0001  # vínculo principal
+  - UNI-REQ-0002
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture existe só para o `tools/catalogo-erros/validar.mjs` ter um caso
+positivo contra o qual provar que o gate deixa passar página conforme —
+inclusive um item de `requisitos` com comentário inline não citado
+(`# vínculo principal`), sintaxe YAML válida que o valor bruto da linha por
+si só não reflete. Não descreve nenhum comportamento real da API.
+
+## Como resolver
+
+Não se aplica — fixture de teste.
