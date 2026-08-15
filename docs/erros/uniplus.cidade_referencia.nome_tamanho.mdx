@@ -1,0 +1,42 @@
+---
+title: O nome da cidade excede o tamanho máximo
+sidebar_label: Nome da cidade excede o tamanho
+description: O nome do município é limitado a 150 caracteres, o mesmo tamanho da coluna que o armazena.
+code: uniplus.cidade_referencia.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Cadastro ou alteração de qualquer entidade que registre cidade por código IBGE
+  - Validação de endereço (CEP) que carrega o trio de cidade resolvido
+requisitos:
+  - UNI-REQ-0118
+rastreio:
+  - label: 'uniplus-api#661'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/661
+  - label: 'uniplus-api#686'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/686
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** da cidade excede 150 caracteres — o tamanho máximo da coluna que o
+armazena.
+
+Esta checagem existe para evitar que um nome longo demais passe pela
+validação de domínio e só estoure na gravação, virando um erro genérico de
+banco em vez de uma recusa nomeada e recuperável. Nenhum nome de município
+brasileiro real chega perto desse limite; um valor que o ultrapassa indica
+payload malformado, concatenação indevida ou composição manual do campo, não
+uma variação legítima de nome.
+
+## Como resolver
+
+Informe o nome do município tal como o serviço Geo o expõe — dentro do
+limite de 150 caracteres. O valor normalmente vem preenchido pela própria
+interface, a partir da escolha do município na lista do Geo; a causa mais
+comum é composição manual do campo em vez de uso direto do valor resolvido.

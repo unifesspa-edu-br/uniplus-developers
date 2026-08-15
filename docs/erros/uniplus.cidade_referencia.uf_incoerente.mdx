@@ -1,0 +1,48 @@
+---
+title: A UF informada não corresponde ao código IBGE
+sidebar_label: UF incoerente com o código IBGE
+description: Os dois primeiros dígitos do código IBGE já determinam a UF; a UF informada precisa coincidir com ela.
+code: uniplus.cidade_referencia.uf_incoerente
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Cadastro ou alteração de qualquer entidade que registre cidade por código IBGE
+  - Validação de endereço (CEP) que carrega o trio de cidade resolvido
+requisitos:
+  - UNI-REQ-0118
+rastreio:
+  - label: 'uniplus-api#661'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/661
+  - label: 'uniplus-api#686'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/686
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código IBGE informado tem formato válido, mas a **UF** informada não é a
+que o código designa.
+
+Os dois primeiros dígitos do código IBGE já determinam a UF real do
+município — é um mapa fixo (prefixo → sigla), o mesmo que a validação usa
+para conferir se o próprio código tem formato válido. Nome e UF são cache de
+exibição preenchido pelo cliente, e por isso podem divergir do que o código
+efetivamente designa; a validação impede que essa divergência aconteça na UF,
+que faz parte da lógica de negócio derivada do código (feriados estaduais, por
+exemplo), e não apenas do rótulo exibido.
+
+O **nome** do município, ao contrário, não passa por esta checagem de
+coerência: um nome que diverge do município que o código designa é apenas
+rótulo de exibição errado, e a validação não o impede.
+
+## Como resolver
+
+Confira se a UF informada corresponde de fato ao município do código IBGE.
+Na prática, isso normalmente indica que a UF foi composta ou editada
+separadamente do código — o caminho correto é escolher o município na lista
+que o serviço Geo oferece, deixando código e UF virem juntos e coerentes por
+construção, em vez de montar os dois campos de fontes diferentes.

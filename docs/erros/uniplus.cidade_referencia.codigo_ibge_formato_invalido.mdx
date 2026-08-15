@@ -1,0 +1,53 @@
+---
+title: O código IBGE da cidade está em formato inválido
+sidebar_label: Código IBGE em formato inválido
+description: O código IBGE do município precisa ter sete dígitos numéricos com prefixo de UF reconhecido.
+code: uniplus.cidade_referencia.codigo_ibge_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Cadastro ou alteração de qualquer entidade que registre cidade por código IBGE
+  - Validação de endereço (CEP) que carrega o trio de cidade resolvido
+requisitos:
+  - UNI-REQ-0118
+rastreio:
+  - label: 'uniplus-api#661'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/661
+  - label: 'uniplus-api#686'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/686
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código IBGE** informado não tem o formato de um código de município
+válido.
+
+A validação exige exatamente sete dígitos numéricos, cujos dois primeiros
+compõem o prefixo de UF (11 a 53, com lacunas — as faixas reais dos estados
+brasileiros). Um valor com tamanho diferente de sete, com caractere não
+numérico, ou cujos dois primeiros dígitos não correspondem a prefixo de UF
+nenhum, cai nesta causa.
+
+A validação é só de **formato**: não há verificação de dígito verificador nem
+consulta ao serviço Geo para confirmar que o município existe de fato. Um
+código bem formado que não designe nenhum município real passa por aqui —
+essa é uma limitação conhecida e documentada do padrão de referência fraca por
+composição no cliente, não uma garantia que esta causa promete.
+
+## Como resolver
+
+Informe o código IBGE exatamente como o serviço Geo o expõe: sete dígitos
+numéricos, sem separador, sem espaço, com os dois primeiros dígitos
+correspondentes a uma UF brasileira real. Normalmente o valor já vem correto
+quando o cliente escolhe o município a partir da lista oferecida pelo Geo; a
+causa mais comum é edição manual do valor ou truncamento em algum ponto
+anterior do fluxo.
+
+Um código com sete dígitos e prefixo de UF válido, mas cuja UF declarada não
+combine com o prefixo, cai em causa distinta:
+[UF incoerente com o código IBGE](./uniplus.cidade_referencia.uf_incoerente.mdx).
