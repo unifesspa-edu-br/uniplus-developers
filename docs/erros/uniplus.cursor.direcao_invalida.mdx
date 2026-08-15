@@ -1,0 +1,42 @@
+---
+title: A direção de paginação informada é inválida
+sidebar_label: Direção de paginação inválida
+description: O parâmetro direction da listagem paginada só aceita next ou prev.
+code: uniplus.cursor.direcao_invalida
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Listagem paginada por cursor, quando o parâmetro direction está presente
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#656'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/656
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O parâmetro **`direction`** da listagem paginada tem um valor diferente de
+`next` ou `prev`.
+
+Listagens paginadas por cursor navegam nos dois sentidos: `next` (padrão,
+avança) e `prev` (retrocede). Quando `direction` não é informado, o servidor
+assume `next` — omitir o parâmetro nunca é a causa desta recusa. A recusa só
+acontece quando o parâmetro está presente com um valor que não é nenhum dos
+dois aceitos.
+
+Um cursor emitido para uma direção não pode ser reaproveitado na outra
+direção — essa incompatibilidade é uma causa distinta, coberta por
+[cursor inválido](./uniplus.cursor.invalido.mdx), e não por esta página: aqui
+o problema está no próprio valor de `direction`, antes de qualquer cursor
+entrar em jogo.
+
+## Como resolver
+
+Informe `direction=next` ou `direction=prev` — comparação sem diferenciar
+maiúsculas de minúsculas — ou omita o parâmetro para obter o comportamento
+padrão (`next`, primeira página em diante).
