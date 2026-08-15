@@ -1,0 +1,38 @@
+---
+title: O código e-MEC da instituição não foi informado
+sidebar_label: Código e-MEC obrigatório
+description: O cadastro da instituição exige o código de identificação regulatória e-MEC.
+code: uniplus.organizacao.instituicao.codigo_emec_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação da instituição
+  - Atualização da instituição
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#585'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/585
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **código e-MEC** da instituição não foi
+informado.
+
+O código e-MEC é o identificador regulatório da instituição de ensino
+superior junto ao Ministério da Educação, parte do cabeçalho institucional
+exibido em editais e comprovantes. A instituição é singleton — há no
+máximo um registro vivo por instância — e o código e-MEC não tem
+unicidade própria no banco, porque o cardinal de um já garante a
+identidade.
+
+## Como resolver
+
+Informe o código e-MEC da instituição. Se o código estiver presente mas
+exceder o tamanho aceito, a causa é outra: veja
+[código e-MEC excede o tamanho](./uniplus.organizacao.instituicao.codigo_emec_tamanho.mdx).

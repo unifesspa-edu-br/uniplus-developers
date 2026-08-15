@@ -1,0 +1,29 @@
+---
+title: A organização acadêmica da instituição excede o tamanho máximo
+sidebar_label: Organização acadêmica excede o tamanho
+description: A organização acadêmica da instituição é limitada a 100 caracteres.
+code: uniplus.organizacao.instituicao.organizacao_academica_tamanho
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação da instituição
+  - Atualização da instituição
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#585'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/585
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **organização acadêmica** informada excede 100 caracteres, o tamanho
+máximo aceito.
+
+## Como resolver
+
+Informe a organização acadêmica dentro do limite de 100 caracteres.

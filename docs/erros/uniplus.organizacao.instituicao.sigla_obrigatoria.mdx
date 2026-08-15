@@ -1,0 +1,31 @@
+---
+title: A sigla da instituição não foi informada
+sidebar_label: Sigla da instituição obrigatória
+description: O cadastro da instituição exige a sigla, ao lado do nome e do código e-MEC.
+code: uniplus.organizacao.instituicao.sigla_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação da instituição
+  - Atualização da instituição
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#585'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/585
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque a **sigla** da instituição não foi
+informada.
+
+## Como resolver
+
+Informe a sigla da instituição. Se a sigla estiver presente mas exceder o
+tamanho aceito, a causa é outra: veja
+[sigla da instituição excede o tamanho](./uniplus.organizacao.instituicao.sigla_tamanho.mdx).

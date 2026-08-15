@@ -1,0 +1,43 @@
+---
+title: Já existe uma instituição cadastrada
+sidebar_label: Instituição já existe
+description: A plataforma atende uma única instituição — o registro de Instituição é singleton.
+code: uniplus.organizacao.instituicao.ja_existe
+http_status: 409
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação da instituição
+requisitos:
+  - UNI-REQ-0007
+rastreio:
+  - label: 'uniplus-api#585'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/585
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe uma **instituição viva** cadastrada. O registro de Instituição
+é singleton: cada instância da plataforma atende uma única instituição de
+ensino, então há no máximo uma viva por vez.
+
+O cardinal de um é garantido em duas camadas: um guard de domínio checa
+o repositório antes de criar, e um índice único parcial de banco (sobre
+uma coluna sentinela, restrita aos registros vivos) fecha a corrida entre
+duas criações concorrentes — uma tentativa que passa pelo guard mas colide
+no índice recebe esta mesma causa, e não um erro genérico. Por ser
+conflito com o estado já gravado, o status é **409**, não 422.
+
+A remoção é sempre soft-delete e libera a vaga para um novo cadastro — uma
+instituição removida não conta para o limite.
+
+## Como resolver
+
+Não é possível criar uma nova instituição enquanto houver uma viva. Se a
+intenção é corrigir dados da instituição existente, use a operação de
+atualização em vez de criar um registro novo. Se o cadastro atual precisa
+mesmo ser substituído, remova-o primeiro.

@@ -1,0 +1,36 @@
+---
+title: A organização acadêmica da instituição não foi informada
+sidebar_label: Organização acadêmica obrigatória
+description: O cadastro da instituição exige a classificação de organização acadêmica (universidade, centro universitário, faculdade etc.).
+code: uniplus.organizacao.instituicao.organizacao_academica_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação da instituição
+  - Atualização da instituição
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#585'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/585
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque a **organização acadêmica** da instituição
+não foi informada.
+
+Organização acadêmica é a classificação regulatória e-MEC da instituição
+(ex.: universidade, centro universitário, faculdade, instituto federal) —
+um dado de texto validado só por obrigatoriedade e tamanho pelo domínio,
+não por uma lista fechada de valores.
+
+## Como resolver
+
+Informe a organização acadêmica da instituição. Se o valor estiver
+presente mas exceder o tamanho aceito, a causa é outra: veja
+[organização acadêmica excede o tamanho](./uniplus.organizacao.instituicao.organizacao_academica_tamanho.mdx).
