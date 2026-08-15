@@ -1,0 +1,44 @@
+---
+title: A cidade da sede é obrigatória quando há endereço estruturado
+sidebar_label: Cidade obrigatória com endereço
+description: A cidade da sede é opcional na instituição, mas se torna obrigatória quando o endereço estruturado é informado.
+code: uniplus.organizacao.endereco_referencia.cidade_obrigatoria_com_endereco
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação da instituição, quando o endereço da sede é informado sem cidade
+  - Atualização da instituição, quando o endereço da sede é informado sem cidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#726'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/726
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O endereço da sede foi informado, mas a **cidade da sede** não foi.
+
+A cidade da sede é, por si só, opcional na instituição — pode ficar
+totalmente ausente. Mas o CEP **sempre** resolve pelo menos até a cidade,
+então um endereço presente sem a cidade declarada é um estado
+inconsistente: o servidor teria o município via CEP, mas não teria a
+referência de cidade oficial da sede para comparar contra ele.
+
+Diferente das demais páginas do agregado `endereco_referencia`, esta
+causa é **exclusiva da Instituição**: o Campus e o Local de Oferta
+(Configuração), que reusam o mesmo `ReferenciaEnderecoGeo` para o
+endereço, já exigem a cidade incondicionalmente — nunca chegam a um
+estado de "endereço presente sem cidade" porque a cidade nunca falta
+neles em primeiro lugar.
+
+## Como resolver
+
+Ao informar o endereço da sede, informe também a cidade da sede (código
+IBGE, nome e UF) — coerente com o município que o CEP resolve. Se a
+intenção é não declarar endereço algum, omita o objeto de endereço por
+completo, não apenas a cidade dentro dele.
