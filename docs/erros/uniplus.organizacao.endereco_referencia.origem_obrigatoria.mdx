@@ -1,0 +1,44 @@
+---
+title: A origem da resolução do endereço não foi informada
+sidebar_label: Origem da resolução obrigatória
+description: O endereço estruturado exige a origem — a estratégia usada para resolver o CEP.
+code: uniplus.organizacao.endereco_referencia.origem_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação ou atualização da instituição, quando o endereço da sede é informado
+  - Criação ou atualização de campus, quando o endereço é informado (Configuração)
+  - Criação ou atualização de local de oferta, quando o endereço é informado (Configuração)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#726'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/726
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque a **origem** da resolução do endereço não
+foi informada.
+
+A origem registra qual estratégia resolveu o CEP no cliente — a busca de
+CEP pode seguir mais de um caminho (ramo da cascata de resolução do
+serviço Geo), e a origem documenta qual foi usado, para rastreabilidade.
+
+Esta validação é compartilhada pelo mesmo value object
+(`ReferenciaEnderecoGeo`, no Kernel) que valida o endereço de três
+cadastros distintos, em dois módulos: a sede da Instituição (Organização
+Institucional), o Campus e o Local de Oferta (Configuração). O código
+desta página é o que a API hoje emite para os três — a resolução do
+`type` segue a chave interna do validador compartilhado, comum aos três
+cadastros, e não distingue de qual módulo a chamada partiu.
+
+## Como resolver
+
+Informe a origem da resolução do endereço. Se o valor estiver presente
+mas exceder o tamanho aceito, a causa é outra: veja
+[origem da resolução excede o tamanho](./uniplus.organizacao.endereco_referencia.origem_tamanho.mdx).

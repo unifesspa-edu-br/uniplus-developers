@@ -1,0 +1,43 @@
+---
+title: O nível de resolução do endereço é inválido
+sidebar_label: Nível de resolução inválido
+description: O nível de resolução do endereço só aceita logradouro, bairro, distrito ou cidade.
+code: uniplus.organizacao.endereco_referencia.nivel_resolucao_invalido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação ou atualização da instituição, quando o endereço da sede é informado
+  - Criação ou atualização de campus, quando o endereço é informado (Configuração)
+  - Criação ou atualização de local de oferta, quando o endereço é informado (Configuração)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#726'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/726
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nível de resolução** informado não é um dos valores aceitos:
+`logradouro`, `bairro`, `distrito` ou `cidade`.
+
+Esses quatro valores formam o vocabulário fechado de até onde a
+resolução de um CEP pode chegar, do mais específico (logradouro) ao
+menos específico (cidade).
+
+Esta validação é compartilhada pelo mesmo value object
+(`ReferenciaEnderecoGeo`, no Kernel) que valida o endereço de três
+cadastros distintos, em dois módulos: a sede da Instituição (Organização
+Institucional), o Campus e o Local de Oferta (Configuração). O código
+desta página é o que a API hoje emite para os três — a resolução do
+`type` segue a chave interna do validador compartilhado, comum aos três
+cadastros, e não distingue de qual módulo a chamada partiu.
+
+## Como resolver
+
+Informe um dos quatro valores aceitos, correspondente a até onde o CEP
+efetivamente resolveu o endereço.
