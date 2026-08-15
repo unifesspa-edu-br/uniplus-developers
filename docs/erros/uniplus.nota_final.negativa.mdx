@@ -1,0 +1,36 @@
+---
+title: A nota final não pode ser negativa
+sidebar_label: Nota final inválida
+description: O value object de nota final recusa qualquer valor negativo.
+code: uniplus.nota_final.negativa
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer operação que registre nota final de candidato
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque a **nota final** informada é negativa.
+
+`NotaFinal` é o value object compartilhado do Kernel do Uni+ que representa a
+nota final de um candidato num processo seletivo. A única invariante que ele
+garante é essa: nota não pode ser negativa. O valor é arredondado para quatro
+casas decimais na criação; a escala e o significado da nota — se é média de
+provas, resultado de fórmula de classificação, ou outra composição — são
+definidos por quem calcula o valor antes de entregá-lo ao value object, não
+por ele.
+
+## Como resolver
+
+Informe um valor de nota final maior ou igual a zero. Se o valor negativo
+veio de um cálculo — subtração de pontos, por exemplo —, a causa provável
+está na fórmula que produziu o resultado, não no registro da nota em si:
+confira se o cálculo deveria ter aplicado um piso em zero antes de chegar
+aqui.

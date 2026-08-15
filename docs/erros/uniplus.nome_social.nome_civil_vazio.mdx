@@ -1,0 +1,35 @@
+---
+title: O nome civil não foi informado
+sidebar_label: Nome civil obrigatório
+description: O registro de nome social exige o nome civil, mesmo quando o nome social é o que será exibido.
+code: uniplus.nome_social.nome_civil_vazio
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer operação que registre nome de pessoa com suporte a nome social
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **nome civil** não foi informado.
+
+`NomeSocial` é o value object compartilhado do Kernel do Uni+ que representa
+o par nome civil + nome social opcional de uma pessoa. O nome civil é sempre
+obrigatório, mesmo quando a pessoa usa nome social: é ele que o sistema
+guarda como identidade de registro, ainda que a exibição — em lista,
+documento ou tela — priorize o nome social quando presente. Sem o nome civil,
+não há registro de nome válido para a operação, com ou sem nome social
+declarado.
+
+## Como resolver
+
+Informe o nome civil da pessoa no campo correspondente. O nome social, esse
+sim, permanece opcional: informe-o quando a pessoa o declarar, e deixe-o
+ausente quando não houver — a ausência de nome social nunca é a causa desta
+recusa.

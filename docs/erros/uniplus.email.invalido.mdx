@@ -1,0 +1,42 @@
+---
+title: O e-mail informado é inválido
+sidebar_label: E-mail inválido
+description: O e-mail precisa ter o formato usuário@domínio, com pelo menos um ponto no domínio.
+code: uniplus.email.invalido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer operação que receba e-mail como dado de contato
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O e-mail informado não tem formato válido.
+
+O value object `Email` normaliza o valor recebido — remove espaços nas
+bordas e converte para minúsculas — e então exige a forma
+`usuário@domínio`, com pelo menos um ponto na parte do domínio. A
+conversão para minúsculas é política de normalização do Uni+, não
+exigência da RFC 5321: a especificação trata como inerentemente
+insensível a caixa apenas a parte do domínio (herdando a convenção do
+DNS); a parte local, antes do `@`, é formalmente sensível a caixa, ainda
+que a maioria dos provedores de e-mail a trate como insensível na
+prática. A checagem é deliberadamente simples: não resolve o domínio via
+DNS nem confirma que a caixa postal existe, apenas recusa valores que não
+têm a forma mínima de um e-mail.
+
+## Como resolver
+
+Confira o e-mail informado: precisa ter exatamente um `@`, com conteúdo antes
+e depois dele, e o domínio depois do `@` precisa ter pelo menos um ponto
+(`usuario@dominio.exemplo`). A normalização para minúsculas é automática — não
+é necessário digitar em nenhum caso específico.
+
+Se o e-mail simplesmente não foi informado, a causa é outra: veja
+[e-mail obrigatório](./uniplus.email.vazio.mdx).

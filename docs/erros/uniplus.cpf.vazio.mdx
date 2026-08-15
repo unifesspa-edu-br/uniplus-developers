@@ -1,0 +1,37 @@
+---
+title: O CPF não foi informado
+sidebar_label: CPF obrigatório
+description: Qualquer operação que receba CPF como identificação de pessoa exige o campo preenchido.
+code: uniplus.cpf.vazio
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer operação que receba CPF como identificação de pessoa física
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **CPF** não foi informado.
+
+`Cpf` é um value object compartilhado do Kernel do Uni+, usado por qualquer
+módulo que precise identificar uma pessoa física por CPF — candidato,
+servidor, responsável. A validação acontece na fábrica do value object, antes
+de qualquer regra de negócio específica do módulo que a invoca: um CPF ausente
+nunca chega a ser avaliado quanto a dígito verificador ou unicidade, porque a
+recusa é anterior a essas checagens.
+
+## Como resolver
+
+Informe o CPF no campo que a operação espera. Se o campo é opcional no
+formulário mas a operação em questão o exige, confira a documentação
+daquela operação — a obrigatoriedade do CPF é decidida por quem chama o
+value object, não pelo `Cpf` em si.
+
+Se o CPF estiver presente mas não for um CPF válido, a causa é outra: veja
+[CPF inválido](./uniplus.cpf.invalido.mdx).

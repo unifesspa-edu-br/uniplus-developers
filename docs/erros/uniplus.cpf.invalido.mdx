@@ -1,0 +1,39 @@
+---
+title: O CPF informado é inválido
+sidebar_label: CPF inválido
+description: O CPF precisa ter 11 dígitos e dígitos verificadores corretos conforme o algoritmo oficial.
+code: uniplus.cpf.invalido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer operação que receba CPF como identificação de pessoa física
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O CPF informado não é um CPF válido.
+
+Depois de descartar tudo que não é dígito, o value object `Cpf` exige
+exatamente 11 dígitos que não sejam todos iguais entre si (`00000000000`,
+`11111111111` etc. — sequências repetidas nunca são CPF real, embora
+matematicamente pudessem satisfazer o cálculo de verificação em alguns casos)
+e cujos dois últimos dígitos conferem com o algoritmo oficial de dígito
+verificador. Qualquer desvio disso — tamanho diferente de 11 dígitos depois de
+limpo, sequência repetida, ou dígito verificador que não bate — cai nesta
+causa.
+
+## Como resolver
+
+Confira o CPF informado: 11 dígitos, sem repetição de um único algarismo, com
+os dois últimos dígitos válidos pelo algoritmo de verificação do CPF. Pontos,
+traços e espaços são aceitos na entrada e descartados antes da validação — o
+formato de digitação não é a causa.
+
+Se o CPF simplesmente não foi informado, a causa é outra: veja
+[CPF obrigatório](./uniplus.cpf.vazio.mdx).

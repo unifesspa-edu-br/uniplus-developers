@@ -1,0 +1,35 @@
+---
+title: O e-mail não foi informado
+sidebar_label: E-mail obrigatório
+description: Qualquer operação que receba e-mail como dado de contato exige o campo preenchido.
+code: uniplus.email.vazio
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer operação que receba e-mail como dado de contato
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **e-mail** não foi informado.
+
+`Email` é um value object compartilhado do Kernel do Uni+, usado por
+qualquer módulo que precise de um endereço de e-mail — contato de candidato,
+servidor ou responsável. A validação acontece na fábrica do value object,
+antes de qualquer regra de negócio específica do módulo que a invoca.
+
+## Como resolver
+
+Informe o e-mail no campo que a operação espera. Se o campo é opcional no
+formulário mas a operação em questão o exige, confira a documentação daquela
+operação — a obrigatoriedade do e-mail é decidida por quem chama o value
+object, não pelo `Email` em si.
+
+Se o e-mail estiver presente mas não tiver formato válido, a causa é outra:
+veja [e-mail inválido](./uniplus.email.invalido.mdx).
