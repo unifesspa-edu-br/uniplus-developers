@@ -1,0 +1,40 @@
+---
+title: O header Idempotency-Key é obrigatório neste endpoint
+sidebar_label: Idempotency-Key ausente
+description: O endpoint exige o header Idempotency-Key, e a requisição não o enviou.
+code: uniplus.idempotency.key_ausente
+http_status: 400
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint marcado como exigindo Idempotency-Key
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O endpoint exige o header **`Idempotency-Key`**, e a requisição não o
+enviou — ou o enviou vazio.
+
+Endpoints que criam ou mutam recurso de forma não naturalmente idempotente
+(a maioria das operações de escrita) marcam essa exigência explicitamente.
+O protocolo segue o rascunho da IETF para o header
+`Idempotency-Key`: o cliente gera um identificador único por tentativa
+lógica de operação — o mesmo valor em retentativas da mesma chamada, um valor
+novo para uma chamada logicamente diferente — e o servidor usa esse valor
+para detectar e responder de forma segura a reenvios, sem duplicar o efeito
+da operação.
+
+## Como resolver
+
+Envie o header `Idempotency-Key` com um identificador único gerado pelo
+cliente para esta tentativa de operação — tipicamente um UUID. Reenvie o
+mesmo valor em uma retentativa da mesma chamada (por exemplo, após timeout de
+rede); gere um valor novo para cada operação logicamente distinta.
