@@ -1,0 +1,33 @@
+---
+title: A descrição da modalidade excede o tamanho máximo
+sidebar_label: Tamanho da descrição
+description: A descrição da modalidade de concorrência, quando informada, tem no máximo 300 caracteres.
+code: uniplus.configuracao.modalidade.descricao_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência
+  - Atualização de uma modalidade de concorrência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **descrição** da modalidade excede o tamanho máximo aceito: 300
+caracteres.
+
+A descrição é um dos dois campos editáveis mesmo numa modalidade do catálogo
+legal fixo (o outro é a base legal) — esta validação de tamanho vale para
+todas as modalidades, fixas ou não.
+
+## Como resolver
+
+Reduza a descrição para até 300 caracteres.

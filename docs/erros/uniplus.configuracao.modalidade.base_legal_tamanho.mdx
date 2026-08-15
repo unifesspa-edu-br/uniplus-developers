@@ -1,0 +1,33 @@
+---
+title: A base legal da modalidade excede o tamanho máximo
+sidebar_label: Tamanho da base legal
+description: A base legal da modalidade de concorrência, quando informada, tem no máximo 500 caracteres.
+code: uniplus.configuracao.modalidade.base_legal_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência
+  - Atualização de uma modalidade de concorrência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **base legal** da modalidade excede o tamanho máximo aceito: 500
+caracteres.
+
+A base legal é um dos dois campos editáveis mesmo numa modalidade do
+catálogo legal fixo (o outro é a descrição) — esta validação de tamanho vale
+para todas as modalidades, fixas ou não.
+
+## Como resolver
+
+Reduza a base legal para até 500 caracteres.

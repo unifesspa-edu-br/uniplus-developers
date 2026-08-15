@@ -1,0 +1,36 @@
+---
+title: Um código de modalidade referenciado não existe ou está inativo
+sidebar_label: Referência inexistente ou inativa
+description: Todo código citado como origem de composição ou como destino/par/fallback de remanejamento precisa corresponder a uma modalidade viva.
+code: uniplus.configuracao.modalidade.referencia_inexistente_ou_inativa
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência
+  - Atualização de uma modalidade de concorrência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um ou mais códigos de modalidade referenciados — como origem da composição
+`RETIRA_DE`, ou como destino/par/fallback do remanejamento — não
+correspondem a nenhuma modalidade **viva**.
+
+Essas referências não têm chave estrangeira no banco (moram em colunas de
+texto e num jsonb) — a integridade é conferida pelo handler, consultando
+todos os códigos citados de uma vez contra as modalidades vivas.
+
+## Como resolver
+
+Confira os códigos referenciados. Se algum foi digitado errado ou aponta
+para uma modalidade removida, corrija-o ou cadastre a modalidade referenciada
+primeiro.

@@ -1,0 +1,42 @@
+---
+title: A regra de remanejamento é incoerente com a natureza legal
+sidebar_label: Natureza e remanejamento incoerentes
+description: Cada natureza legal exige ou proíbe uma regra de remanejamento específica — cota reservada exige SEGUE_CASCATA, ampla não admite regra nenhuma, suplementar/outra exige DESTINO_UNICO ou CRUZADO.
+code: uniplus.configuracao.modalidade.natureza_remanejamento_incoerente
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência
+  - Atualização de uma modalidade de concorrência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A combinação entre **natureza legal** e **regra de remanejamento**
+informadas não é uma das combinações válidas:
+
+| Natureza legal | Regra de remanejamento exigida |
+|---|---|
+| `COTA_RESERVADA` | `SEGUE_CASCATA` — nenhuma outra é aceita |
+| `AMPLA` | Nenhuma — informar qualquer regra é recusado |
+| `SUPLEMENTAR` ou `OUTRA_MODALIDADE` | `DESTINO_UNICO` ou `CRUZADO` |
+
+Vagas ociosas de uma cota reservada sempre seguem a cascata legal de
+remanejamento entre modalidades — não há escolha. A ampla concorrência é o
+destino final da cascata, não a origem de mais um remanejamento. Modalidades
+suplementares ou de outra natureza remanejam para um destino específico, por
+isso exigem uma das duas regras que declaram esse destino.
+
+## Como resolver
+
+Ajuste a regra de remanejamento conforme a natureza legal da modalidade, de
+acordo com a tabela acima.

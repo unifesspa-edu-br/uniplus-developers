@@ -1,0 +1,36 @@
+---
+title: A composição RETIRA_DE exige o código de origem
+sidebar_label: Origem obrigatória para RETIRA_DE
+description: Quando a composição de vagas é RETIRA_DE, o código de origem (composicao_origem) é obrigatório.
+code: uniplus.configuracao.modalidade.origem_obrigatoria_para_retira_de
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência, quando a composição é RETIRA_DE
+  - Atualização de uma modalidade de concorrência, quando a composição passa a ser RETIRA_DE
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A composição de vagas declarada é `RETIRA_DE`, mas o **código de origem**
+(`composicao_origem`) não foi informado.
+
+A composição `RETIRA_DE` significa que as vagas desta modalidade vêm de
+outra modalidade específica — sem dizer de qual, a composição não tem
+sentido. A equivalência é exata: `RETIRA_DE` sem origem é recusado, e origem
+informada com outra composição também é (ver
+[origem só é permitida em RETIRA_DE](./uniplus.configuracao.modalidade.origem_apenas_para_retira_de.mdx)).
+
+## Como resolver
+
+Informe o código da modalidade de origem, ou troque a composição de vagas
+para uma que não exija origem.

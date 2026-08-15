@@ -1,0 +1,35 @@
+---
+title: A natureza legal da modalidade é inválida
+sidebar_label: Natureza legal inválida
+description: A natureza legal, quando informada, precisa ser um dos quatro tokens do domínio fechado — COTA_RESERVADA, AMPLA, SUPLEMENTAR ou OUTRA_MODALIDADE.
+code: uniplus.configuracao.modalidade.natureza_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma modalidade de concorrência
+  - Atualização de uma modalidade de concorrência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **natureza legal** informada não é um dos quatro tokens do domínio
+fechado: `COTA_RESERVADA`, `AMPLA`, `SUPLEMENTAR` ou `OUTRA_MODALIDADE`.
+
+A natureza legal tem valor padrão: se omitida, a modalidade assume `AMPLA`
+silenciosamente. Este erro só dispara quando um token é informado e não é um
+dos quatro válidos.
+
+## Como resolver
+
+Informe um dos quatro tokens válidos — `COTA_RESERVADA`, `AMPLA`,
+`SUPLEMENTAR` ou `OUTRA_MODALIDADE` — ou omita o campo para aceitar o padrão
+`AMPLA`.
