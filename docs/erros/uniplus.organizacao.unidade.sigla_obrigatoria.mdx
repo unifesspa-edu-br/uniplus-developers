@@ -1,0 +1,36 @@
+---
+title: A sigla da unidade não foi informada
+sidebar_label: Sigla da unidade obrigatória
+description: O cadastro de unidade organizacional exige a sigla, um dos identificadores únicos entre unidades vivas.
+code: uniplus.organizacao.unidade.sigla_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque a **sigla** da unidade não foi informada.
+
+A sigla é um dos três identificadores únicos entre unidades vivas (ao
+lado do código e do slug) — normalizada para maiúsculas no cadastro. É
+obrigatória em toda unidade, independente do nível na hierarquia.
+
+## Como resolver
+
+Informe a sigla da unidade. Se a sigla estiver presente mas fora do
+tamanho aceito, a causa é outra: veja
+[sigla da unidade excede o tamanho](./uniplus.organizacao.unidade.sigla_tamanho.mdx).
+Se a sigla já pertence a outra unidade viva, veja
+[sigla já existe](./uniplus.organizacao.unidade.sigla_ja_existe.mdx).

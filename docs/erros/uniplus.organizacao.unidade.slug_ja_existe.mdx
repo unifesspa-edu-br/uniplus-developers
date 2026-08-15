@@ -1,0 +1,38 @@
+---
+title: Já existe uma unidade ativa com este slug
+sidebar_label: Slug da unidade já existe
+description: O slug é único entre unidades vivas; uma unidade removida não conta para essa restrição.
+code: uniplus.organizacao.unidade.slug_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade, quando o slug muda
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe uma **unidade viva** (não removida) com o mesmo slug.
+
+O slug é único entre unidades vivas — nunca entre todas as que já
+existiram: uma unidade removida (soft-delete) libera o slug para reuso.
+A comparação não distingue maiúsculas de minúsculas (o slug já é
+normalizado para minúsculas na validação de formato). Por ser conflito
+com o estado já gravado, o status é **409**, não 422.
+
+Na atualização, esta checagem só roda quando o slug efetivamente muda.
+
+## Como resolver
+
+Escolha um slug diferente para a unidade — como o slug não é derivado
+automaticamente, você pode ajustá-lo livremente para não colidir, sem
+precisar mudar sigla, código ou nome.

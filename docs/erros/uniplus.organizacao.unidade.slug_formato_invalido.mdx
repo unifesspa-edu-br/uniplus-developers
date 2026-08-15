@@ -1,0 +1,38 @@
+---
+title: O slug da unidade está em formato inválido
+sidebar_label: Formato do slug da unidade
+description: O slug precisa estar em kebab-case — minúsculas, dígitos e hífen único entre segmentos.
+code: uniplus.organizacao.unidade.slug_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **slug** informado não está no formato kebab-case exigido.
+
+O formato é: começa com letra minúscula, contém apenas letras
+minúsculas, dígitos e hífen, e termina com letra minúscula ou dígito —
+sem hífen duplo, sem hífen nas pontas, sem acento nem espaço (ex.:
+`ceps`, `faculdade-de-ciencias`). Diferente da sigla, que é normalizada
+automaticamente para maiúsculas, o slug não passa por conversão
+automática de caixa nem de acentuação — um valor fora do formato é
+recusado, não corrigido em silêncio.
+
+## Como resolver
+
+Reescreva o slug em kebab-case: tudo minúsculo, sem acento, palavras
+separadas por um único hífen. Um nome como "Faculdade de Ciências"
+normalmente vira `faculdade-de-ciencias`.

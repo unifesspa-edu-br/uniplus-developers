@@ -1,0 +1,37 @@
+---
+title: A data de encerramento de vigência é anterior ao início
+sidebar_label: Vigência da unidade invertida
+description: A data de encerramento de vigência da unidade não pode ser anterior à data de início.
+code: uniplus.organizacao.unidade.vigencia_fim_anterior_ao_inicio
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos:
+  - UNI-REQ-0008
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A data de encerramento de vigência informada é **anterior** à data de
+início da unidade.
+
+Diferente da janela de vigência do tipo de ato publicado (semiaberta e
+exclusiva no fim), aqui a checagem é mais permissiva: fim **igual** ao
+início é aceito — apenas fim anterior ao início é recusado. O fim é
+opcional; ausência dele significa vigência aberta, sem data de
+encerramento prevista.
+
+## Como resolver
+
+Informe uma data de encerramento igual ou posterior à data de início, ou
+omita o campo para deixar a vigência aberta.

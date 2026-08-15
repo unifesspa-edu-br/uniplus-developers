@@ -1,0 +1,35 @@
+---
+title: Não é possível remover uma unidade que possui subordinadas ativas
+sidebar_label: Remoção bloqueada por subordinadas
+description: Uma unidade com subordinadas vivas não pode ser removida — a hierarquia ficaria com um ramo órfão.
+code: uniplus.organizacao.unidade.remocao_bloqueada_por_subordinadas
+http_status: 409
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Remoção de unidade
+requisitos:
+  - UNI-REQ-0008
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A unidade que se tentou remover possui **unidades subordinadas ativas** —
+ao menos uma unidade viva a declara como superior.
+
+Remover uma unidade com subordinadas deixaria um ramo inteiro da
+hierarquia órfão, apontando para uma unidade superior inexistente. A
+recusa protege a integridade da árvore organizacional.
+
+## Como resolver
+
+Antes de remover a unidade, reatribua as subordinadas a outra unidade
+superior (editando o campo de unidade superior de cada uma), ou remova
+primeiro as subordinadas, das folhas da árvore em direção à raiz.

@@ -1,0 +1,41 @@
+---
+title: O slug da unidade não foi informado
+sidebar_label: Slug da unidade obrigatório
+description: O cadastro de unidade organizacional exige o slug, o identificador usado em caminhos de URL.
+code: uniplus.organizacao.unidade.slug_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **slug** da unidade não foi informado.
+
+O slug é o identificador kebab-case usado em caminhos de URL e
+integrações de identidade — o terceiro identificador único da unidade,
+ao lado da sigla e do código. Ele **não é derivado automaticamente** da
+sigla ou do nome: é escolhido e revisado no cadastro, porque siglas reais
+têm caixa mista e pontuação, e há colisões de normalização que exigem
+decisão humana (duas siglas diferentes podem normalizar para o mesmo
+slug).
+
+## Como resolver
+
+Informe o slug da unidade — kebab-case, ex.: `ceps`,
+`faculdade-de-ciencias`. Se o slug estiver presente mas em formato ou
+tamanho inválido, a causa é outra: veja
+[formato do slug inválido](./uniplus.organizacao.unidade.slug_formato_invalido.mdx)
+ou
+[slug excede o tamanho](./uniplus.organizacao.unidade.slug_tamanho.mdx).

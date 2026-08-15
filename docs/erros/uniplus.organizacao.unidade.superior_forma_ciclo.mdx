@@ -1,0 +1,44 @@
+---
+title: A unidade superior informada formaria ciclo na hierarquia
+sidebar_label: Ciclo na hierarquia de unidades
+description: Uma unidade não pode ser superior de si mesma, nem de uma unidade da qual ela própria descende.
+code: uniplus.organizacao.unidade.superior_forma_ciclo
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Atualização de unidade
+requisitos:
+  - UNI-REQ-0008
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A unidade superior informada **formaria um ciclo** na hierarquia — só
+acontece na atualização, nunca na criação, já que uma unidade recém-criada
+ainda não tem subordinadas capazes de fechar um ciclo.
+
+Dois casos caem nesta causa:
+
+1. **Auto-referência** — a unidade foi declarada como superior de si
+   mesma.
+2. **Ciclo indireto** — a unidade superior informada é, ela própria, uma
+   descendente (direta ou indireta) da unidade que está sendo editada. Se
+   isso fosse aceito, a árvore deixaria de ser árvore: subir na hierarquia
+   a partir dali levaria de volta ao ponto de partida, sem nunca chegar à
+   reitoria.
+
+## Como resolver
+
+Escolha uma unidade superior que não seja a própria unidade nem uma de
+suas subordinadas, diretas ou indiretas. Se a intenção é reorganizar a
+hierarquia de forma mais ampla (mover um ramo inteiro para outro lugar da
+árvore), pode ser necessário reordenar as edições em vários passos, começando
+pelas unidades mais distantes do ciclo.

@@ -1,0 +1,39 @@
+---
+title: Já existe uma unidade ativa com esta sigla
+sidebar_label: Sigla da unidade já existe
+description: A sigla é única entre unidades vivas; uma unidade removida não conta para essa restrição.
+code: uniplus.organizacao.unidade.sigla_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação de unidade
+  - Atualização de unidade, quando a sigla muda
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#586'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/586
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe uma **unidade viva** (não removida) com a mesma sigla.
+
+A sigla é única entre unidades vivas — nunca entre todas as que já
+existiram: uma unidade removida (soft-delete) libera a sigla para reuso.
+A comparação não distingue maiúsculas de minúsculas. Por ser conflito com
+o estado já gravado, e não invariante de formato, o status é **409**, não
+422.
+
+Na atualização, esta checagem só roda quando a sigla efetivamente muda —
+editar outros campos sem tocar na sigla nunca dispara esta causa.
+
+## Como resolver
+
+Escolha uma sigla diferente, ou verifique se a unidade viva que já a
+possui deveria ter sido removida — nesse caso, remova-a primeiro, o que
+libera a sigla para a operação atual.
