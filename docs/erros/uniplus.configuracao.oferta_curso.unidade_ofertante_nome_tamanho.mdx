@@ -1,0 +1,33 @@
+---
+title: O nome da unidade ofertante excede o tamanho máximo
+sidebar_label: Tamanho do nome da unidade ofertante
+description: O nome da unidade ofertante, no snapshot congelado na oferta de curso, tem no máximo 250 caracteres — o mesmo limite da coluna em Organização Institucional.
+code: uniplus.configuracao.oferta_curso.unidade_ofertante_nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** da unidade ofertante, lido da Unidade viva para compor o
+snapshot, excede 250 caracteres — o mesmo limite que a coluna de nome tem no
+cadastro de Unidade em Organização Institucional.
+
+Como o módulo de origem já aplica esse limite no próprio cadastro, esta
+validação sobre o snapshot é defensiva.
+
+## Como resolver
+
+Confira o cadastro da unidade em Organização Institucional — este campo não
+é preenchido diretamente na requisição de criação da oferta.

@@ -1,0 +1,34 @@
+---
+title: O nome da unidade ofertante é obrigatório
+sidebar_label: Nome da unidade ofertante obrigatório
+description: O snapshot da unidade ofertante congelado na oferta de curso precisa do nome da Unidade viva de origem.
+code: uniplus.configuracao.oferta_curso.unidade_ofertante_nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O snapshot-copy da unidade ofertante foi montado sem nome — o campo veio
+vazio na leitura cross-módulo da Unidade viva em Organização Institucional.
+
+Como o cadastro de Unidade já exige nome no próprio módulo de origem, esta
+validação sobre o snapshot é defensiva: na prática só dispara se a leitura
+cross-módulo devolver um valor inconsistente com o que o cadastro de origem
+deveria garantir.
+
+## Como resolver
+
+Confira o cadastro da unidade em Organização Institucional — este campo não
+é preenchido diretamente na requisição de criação da oferta.

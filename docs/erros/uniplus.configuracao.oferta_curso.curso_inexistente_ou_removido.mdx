@@ -1,0 +1,35 @@
+---
+title: O curso da oferta não existe ou foi removido
+sidebar_label: Curso inexistente ou removido
+description: Criar uma oferta de curso exige um curso vivo — inexistente e removido caem no mesmo erro.
+code: uniplus.configuracao.oferta_curso.curso_inexistente_ou_removido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador de curso informado não corresponde a um curso vivo — ou
+porque nunca existiu, ou porque foi removido (soft delete). O filtro global
+de exclusão lógica já exclui os removidos da leitura, então os dois casos
+caem no mesmo erro.
+
+Oferta de curso é a instância regulatória de um curso num campus — liga o
+curso (matriz curricular pura) a um local de oferta e à unidade ofertante.
+Ela não existe sem apontar para um curso vivo.
+
+## Como resolver
+
+Confira o identificador do curso. Se ele foi removido, a oferta não pode ser
+criada sobre ele — use outro curso, ou restaure/recrie o curso primeiro.

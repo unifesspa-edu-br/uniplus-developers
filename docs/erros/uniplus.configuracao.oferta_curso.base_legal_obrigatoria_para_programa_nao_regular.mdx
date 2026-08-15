@@ -1,0 +1,39 @@
+---
+title: A base legal é obrigatória para programa de oferta não Regular
+sidebar_label: Base legal obrigatória fora do Regular
+description: Quando o programa de oferta não é REGULAR, a base legal é obrigatória (ADR-0066).
+code: uniplus.configuracao.oferta_curso.base_legal_obrigatoria_para_programa_nao_regular
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso, quando o programa não é REGULAR
+  - Atualização de uma oferta de curso, quando o programa passa a não ser REGULAR
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O programa de oferta declarado é diferente de `REGULAR`, e a **base legal**
+não foi informada.
+
+Programas fora do regular (`FORMA_PARA`, `PARFOR`, `PRONERA`, `PEPETI`,
+`CONVENIO_OUTRO`, `OUTRO`) têm um fundamento normativo próprio que precisa
+ser registrado — a base legal é obrigatória sempre que o programa não é
+`REGULAR`, o único isento dessa exigência.
+
+Este guard é revalidado tanto na criação quanto na atualização: uma
+transição de `REGULAR` para qualquer outro programa sem informar base legal
+junto é recusada.
+
+## Como resolver
+
+Informe a base legal do programa junto com a criação ou a mudança de
+programa. Se o programa é `REGULAR`, a base legal continua opcional.

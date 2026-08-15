@@ -1,0 +1,29 @@
+---
+title: O ato de autorização MEC excede o tamanho máximo
+sidebar_label: Tamanho do ato de autorização MEC
+description: O ato de autorização MEC da oferta de curso, quando informado, tem no máximo 300 caracteres.
+code: uniplus.configuracao.oferta_curso.ato_autorizacao_mec_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **ato de autorização MEC** da oferta excede o tamanho máximo aceito: 300
+caracteres.
+
+## Como resolver
+
+Reduza o texto do ato de autorização MEC para até 300 caracteres.

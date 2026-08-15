@@ -1,0 +1,35 @@
+---
+title: Oferta de curso não encontrada
+sidebar_label: Oferta de curso não encontrada
+description: A oferta de curso identificada não existe ou já foi removida.
+code: uniplus.configuracao.oferta_curso.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de uma oferta de curso, com identificador que não resolve
+  - Remoção de uma oferta de curso, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhuma oferta de curso
+existente — ou porque nunca existiu, ou porque já foi removida (soft
+delete).
+
+A remoção de uma oferta de curso é soft-delete simples: diferente do que
+acontece com Curso e Unidade, ela não é bloqueada por snapshots congelados em
+outros módulos — as cópias que o módulo Seleção mantém são desacopladas.
+
+## Como resolver
+
+Confira o identificador da oferta. Se ela foi removida, cadastre uma nova ou
+use outra já existente.

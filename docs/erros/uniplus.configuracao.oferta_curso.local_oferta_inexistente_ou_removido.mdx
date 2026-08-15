@@ -1,0 +1,31 @@
+---
+title: O local de oferta não existe ou foi removido
+sidebar_label: Local de oferta inexistente ou removido
+description: Criar uma oferta de curso exige um local de oferta vivo — inexistente e removido caem no mesmo erro.
+code: uniplus.configuracao.oferta_curso.local_oferta_inexistente_ou_removido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador de local de oferta informado não corresponde a um local vivo
+— ou porque nunca existiu, ou porque foi removido (soft delete). O filtro
+global de exclusão lógica já exclui os removidos da leitura, então os dois
+casos caem no mesmo erro.
+
+## Como resolver
+
+Confira o identificador do local de oferta. Se ele foi removido, use outro
+local — ou cadastre-o novamente antes de criar a oferta.
