@@ -1,0 +1,37 @@
+---
+title: O tamanho de página informado é inválido
+sidebar_label: Tamanho de página inválido
+description: O parâmetro limit da listagem paginada está fora do intervalo aceito.
+code: uniplus.cursor.limit_invalido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Listagem paginada por cursor, quando o parâmetro limit está presente
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#288'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/288
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O parâmetro **`limit`** da listagem paginada não é um número dentro do
+intervalo aceito para esta coleção.
+
+O intervalo — mínimo e máximo de itens por página — é configurável por
+ambiente, e não um valor fixo; por isso não é repetido aqui. O campo `detail`
+da resposta traz os limites exatos vigentes no momento da chamada
+(`"O parâmetro 'limit' deve estar entre {mínimo} e {máximo}."`). Esta checagem
+acontece antes mesmo da leitura do cursor — um `limit` fora do intervalo é
+recusado sem gastar o processamento de decodificar o cursor, quando presente.
+
+## Como resolver
+
+Informe `limit` dentro do intervalo que o campo `detail` da resposta
+declarou. Se nenhum `limit` for informado, a listagem usa o tamanho de página
+padrão do ambiente — omitir o parâmetro nunca é a causa desta recusa.

@@ -1,0 +1,52 @@
+---
+title: O cursor de paginação informado é inválido
+sidebar_label: Cursor inválido
+description: O cursor de paginação não decodifica, não corresponde a este recurso, ou não é compatível com a requisição atual.
+code: uniplus.cursor.invalido
+http_status: 400
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Listagem paginada por cursor, quando o parâmetro cursor está presente
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#288'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/288
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **cursor** informado no parâmetro `cursor` da listagem paginada é inválido.
+
+O cursor é opaco por design: um valor cifrado que carrega, entre outros
+dados, a âncora da página (o identificador do último item visto) e uma
+etiqueta que identifica a que coleção ele pertence. O servidor nunca espera
+que o cliente monte ou interprete esse valor — ele só o devolve intacto,
+como recebeu na página anterior, para pedir a próxima.
+
+Esta causa cobre qualquer motivo pelo qual o cursor não é aceitável nesta
+requisição, deliberadamente sem distinguir qual: cifra corrompida ou
+adulterada, etiqueta de recurso que não corresponde à coleção sendo
+percorrida (um cursor emitido para editais não decodifica como cursor de
+inscrições), direção (`next`/`prev`) diferente da que o cursor foi emitido, ou
+— em coleções vinculadas ao usuário autenticado — um cursor sem vínculo de
+usuário, vinculado a outro usuário, ou usado por requisição anônima. Separar
+esses motivos em causas distintas vazaria informação a quem tenta adulterar um
+cursor: "cursor existe mas é de outro usuário" responde a uma pergunta que um
+atacante não deveria conseguir fazer.
+
+## Como resolver
+
+Não construa nem edite um cursor manualmente. Use sempre o valor exatamente
+como o servidor o devolveu na resposta anterior (`next`/`prev` no header
+`Link`), na mesma direção em que foi emitido e para a mesma listagem.
+
+Se o cursor é antigo, ele pode ter expirado em vez de estar inválido — nesse
+caso a causa é distinta: veja
+[cursor expirado](./uniplus.cursor.expirado.mdx). Se o problema não é o
+cursor em si, mas o parâmetro de direção, veja
+[direção de paginação inválida](./uniplus.cursor.direcao_invalida.mdx).

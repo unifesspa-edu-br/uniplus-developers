@@ -1,0 +1,40 @@
+---
+title: O cursor de paginação expirou
+sidebar_label: Cursor expirado
+description: O cursor de paginação foi emitido dentro do prazo de validade, e esse prazo já passou.
+code: uniplus.cursor.expirado
+http_status: 410
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Listagem paginada por cursor, quando o parâmetro cursor está presente
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#288'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/288
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **cursor** informado decodifica corretamente, mas o prazo de validade que
+ele carrega já passou.
+
+Todo cursor emitido pelo servidor carrega prazo de expiração — limitar por
+quanto tempo uma sessão de paginação pode ficar parada evita que uma âncora
+antiga percorra dados que mudaram substancialmente desde a primeira página, e
+limita o tempo em que um cursor capturado continua utilizável. O status HTTP
+desta causa é `410 Gone`, não `422` nem `400`: o cursor não está malformado
+nem foi mal utilizado — ele simplesmente não é mais válido, de forma
+definitiva e esperada, como qualquer recurso que expira.
+
+## Como resolver
+
+Reinicie a paginação a partir da primeira página — sem o parâmetro `cursor`
+— e navegue novamente a partir dali. Não há como retomar exatamente de onde
+o cursor expirado parou; se a listagem mudou entre as duas sessões, a nova
+primeira página reflete o estado atual, não o do momento em que o cursor
+anterior foi emitido.
