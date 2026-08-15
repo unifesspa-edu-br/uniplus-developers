@@ -1,0 +1,47 @@
+---
+title: Já existe uma versão viva deste tipo de ato no período informado
+sidebar_label: Vigência do tipo de ato sobreposta
+description: Duas versões vivas do mesmo código de tipo de ato não podem ter janelas de vigência que se sobrepõem.
+code: uniplus.publicacoes.tipo_ato.vigencia_sobreposta
+http_status: 409
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Criação de tipo de ato
+  - Atualização de tipo de ato, quando o código ou a janela de vigência muda
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe uma versão viva do **mesmo código** de tipo de ato cuja janela
+de vigência intercepta, ao menos em parte, o período informado.
+
+O código agrupa a série de versões de um tipo, e duas versões vivas do
+mesmo código não podem valer no mesmo dia — se pudessem, um ato deste tipo
+não saberia qual delas ler para saber se congela a configuração ou se tem
+efeito irreversível. O sistema garante isso em duas camadas: uma consulta
+prévia, que dá a mensagem legível no caso comum, e uma restrição de
+exclusão no próprio banco, que fecha a corrida entre duas requisições
+concorrentes tentando reservar a mesma janela ao mesmo tempo. É por isso
+que este é conflito (**409**), não invariante de formato (422): o payload
+em si está coerente — o que não cabe é junto do que já existe gravado.
+
+Na atualização, esta checagem só roda quando o código ou a janela de
+vigência mudam; alterar nome ou atributos de consequência não pode gerar
+conflito.
+
+## Como resolver
+
+Ajuste a janela de vigência para não interceptar nenhuma versão viva já
+cadastrada com o mesmo código — normalmente isso significa encerrar a
+versão anterior (dar-lhe um fim) antes de abrir a nova, ou escolher um
+início posterior ao fim da versão vigente. Consulte a série de versões do
+código para ver quais janelas já estão ocupadas.

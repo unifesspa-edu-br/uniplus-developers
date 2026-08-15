@@ -1,0 +1,40 @@
+---
+title: O código do tipo de ato está em formato inválido
+sidebar_label: Formato do código do tipo de ato
+description: O código do tipo de ato só aceita letras maiúsculas sem acento, separadas por underscore.
+code: uniplus.publicacoes.tipo_ato.codigo_formato
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Criação de tipo de ato
+  - Atualização de tipo de ato
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** do tipo de ato não segue o formato exigido: letras maiúsculas
+sem acento, separadas por underscore (ex.: `EDITAL_ABERTURA`).
+
+A caixa alta é **exigida, não imposta**: um código enviado em minúsculas
+(`edital_abertura`) é recusado em vez de convertido em silêncio para
+maiúsculas. Isso é deliberado — a coluna que guarda o código é comparada de
+forma sensível a caixa pelo banco, e normalizar a caixa silenciosamente
+esconderia do cliente que dois códigos que ele considerava distintos são,
+na prática, o mesmo.
+
+## Como resolver
+
+Reescreva o código só com letras maiúsculas de A a Z (sem acento, sem
+outro caractere), com palavras separadas por um único underscore — nunca
+começando, terminando ou duplicando o separador. Se o código está em
+minúsculas, converta antes de enviar; o servidor não faz essa conversão
+por você.

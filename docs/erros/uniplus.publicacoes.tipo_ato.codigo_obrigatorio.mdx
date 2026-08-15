@@ -1,0 +1,38 @@
+---
+title: O código do tipo de ato não foi informado
+sidebar_label: Código do tipo de ato obrigatório
+description: O cadastro de tipo de ato publicado exige o código, que é a identidade da série de vigências.
+code: uniplus.publicacoes.tipo_ato.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Criação de tipo de ato
+  - Atualização de tipo de ato
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **código** do tipo de ato não foi
+informado.
+
+O código é a identidade do tipo — não um rótulo. É por ele que a série de
+vigências se agrupa (a exclusion constraint do banco compara pelo código
+para impedir duas versões vivas no mesmo dia) e é por ele que um objeto
+reserva a vaga de uma linhagem de atos únicos por objeto. Sem código, não
+há como o cadastro saber a que série esta versão pertence.
+
+## Como resolver
+
+Informe o código do tipo de ato — letras maiúsculas sem acento, separadas
+por underscore (ex.: `EDITAL_ABERTURA`). Se o código estiver presente mas
+fora desse formato, a causa é outra: veja
+[formato do código inválido](./uniplus.publicacoes.tipo_ato.codigo_formato.mdx).

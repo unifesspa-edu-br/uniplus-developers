@@ -1,0 +1,37 @@
+---
+title: O nome do tipo de ato não foi informado
+sidebar_label: Nome do tipo de ato obrigatório
+description: O cadastro de tipo de ato publicado exige o nome, ao lado do código.
+code: uniplus.publicacoes.tipo_ato.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Criação de tipo de ato
+  - Atualização de tipo de ato
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **nome** do tipo de ato não foi
+informado.
+
+Diferente do código — a identidade estável, no vocabulário
+`MAIUSCULO_COM_UNDERSCORE` — o nome é a descrição legível do tipo (ex.:
+"Edital de abertura", "Convocação para matrícula"), usada em exibição.
+Ambos são obrigatórios: o código identifica, o nome descreve, e nenhum
+supre o outro.
+
+## Como resolver
+
+Informe o nome do tipo de ato. Se o nome estiver presente mas fora do
+tamanho aceito, a causa é outra: veja
+[nome do tipo de ato excede o tamanho](./uniplus.publicacoes.tipo_ato.nome_tamanho.mdx).

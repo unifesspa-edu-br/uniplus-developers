@@ -1,0 +1,38 @@
+---
+title: O fim da vigência não é posterior ao início
+sidebar_label: Vigência do tipo de ato invertida
+description: O fim da vigência de uma versão do tipo de ato é exclusivo e precisa ser posterior ao início.
+code: uniplus.publicacoes.tipo_ato.vigencia_fim_anterior_ao_inicio
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Criação de tipo de ato
+  - Atualização de tipo de ato
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de vigência informada tem **fim igual ou anterior ao início**.
+
+A vigência de uma versão do tipo de ato é uma janela semiaberta
+`[início, fim)`, com fim **exclusivo** — o mesmo formato que
+`ObrigatoriedadeLegal` já usa no sistema. Um fim exclusivo igual ao início
+não conteria dia nenhum, então é tratado como o mesmo erro que um fim
+anterior ao início: nos dois casos, a janela está vazia ou invertida. O
+campo `fim` é opcional — vigência sem fim declarado é uma vigência aberta,
+válida — mas quando informado precisa ser estritamente posterior ao
+início.
+
+## Como resolver
+
+Informe um fim de vigência posterior ao início, ou omita o campo para
+declarar vigência aberta (sem data de encerramento prevista).

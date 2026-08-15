@@ -1,0 +1,42 @@
+---
+title: O código do tipo de ato não pode ser alterado
+sidebar_label: Código do tipo de ato é imutável
+description: O código é a identidade do tipo de ato; renomear é criar um tipo novo, não editar o existente.
+code: uniplus.publicacoes.tipo_ato.codigo_imutavel
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Atualização de tipo de ato
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A atualização tentou trocar o **código** do tipo de ato. Essa recusa só
+existe na atualização — na criação não há código anterior para divergir.
+
+O código não é um rótulo editável: é a identidade do tipo. Duas coisas
+dependem de ele não mudar. A série de vigências se agrupa por ele — é o
+código que a exclusion constraint do banco compara para impedir duas
+versões vivas no mesmo dia —, então renomear uma versão a desgarraria das
+demais, partindo o tipo em dois sem que ninguém o tivesse pedido. E a vaga
+que um objeto reserva para uma linhagem de atos únicos por objeto é
+chaveada pelo código: renomeá-lo abriria uma vaga nova no mesmo objeto, e
+o certame acabaria com dois editais de abertura vivos.
+
+## Como resolver
+
+Se a intenção é corrigir a grafia do código, não é uma atualização — é um
+tipo novo: cadastre-o com o código correto e trate o antigo à parte
+(mantenha-o se já houver ato publicado sob ele, ou remova-o se nunca foi
+usado). Se a intenção era só editar nome, atributos de consequência,
+vigência ou base legal, reenvie a atualização com o código original,
+inalterado.
