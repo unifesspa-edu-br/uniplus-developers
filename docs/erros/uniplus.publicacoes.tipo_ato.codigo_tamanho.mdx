@@ -1,0 +1,37 @@
+---
+title: O código do tipo de ato excede o tamanho máximo
+sidebar_label: Código do tipo de ato excede o tamanho
+description: O código do tipo de ato é limitado a 60 caracteres.
+code: uniplus.publicacoes.tipo_ato.codigo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Criação de tipo de ato
+  - Atualização de tipo de ato
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** do tipo de ato excede 60 caracteres, o tamanho máximo aceito.
+
+O código é composto de palavras em maiúsculas separadas por underscore
+(ex.: `EDITAL_ABERTURA`, `CONVOCACAO_MATRICULA`) — um rótulo curto e
+estável, pensado para aparecer em código de integração e em consulta, não
+uma descrição. Um valor que ultrapassa 60 caracteres normalmente indica que
+o campo recebeu a descrição do tipo em vez do código propriamente dito.
+
+## Como resolver
+
+Informe um código dentro do limite de 60 caracteres. Se o que você quer
+registrar é uma descrição mais longa do tipo de ato, use o campo **nome**
+— o código é só o identificador estável, curto, no vocabulário
+`MAIUSCULO_COM_UNDERSCORE`.

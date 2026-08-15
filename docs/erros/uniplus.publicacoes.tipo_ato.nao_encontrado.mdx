@@ -1,0 +1,40 @@
+---
+title: Tipo de ato não encontrado
+sidebar_label: Tipo de ato não encontrado
+description: A versão de tipo de ato referenciada pelo Id não existe ou já foi removida.
+code: uniplus.publicacoes.tipo_ato.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Atualização de tipo de ato
+  - Remoção de tipo de ato
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **Id** informado não corresponde a nenhuma versão de tipo de ato
+existente — nunca existiu, ou já foi removida (a remoção é sempre
+soft-delete).
+
+Esta causa aparece apenas ao **atualizar** ou **remover** um tipo de ato
+por Id. A leitura (`GET`, por Id ou pela lista) usa o mecanismo padrão de
+404 do protocolo HTTP quando o recurso não existe, sem o campo `code` — a
+resposta ainda é 404, mas sem corpo `ProblemDetails` associado a esta
+entrada do catálogo.
+
+## Como resolver
+
+Confira o Id informado. Se o tipo de ato existia antes, é possível que
+tenha sido removido — remoção nunca é bloqueada por atos publicados sob
+ele, porque o ato copia os atributos do tipo por valor no instante da
+publicação, e continua legível mesmo depois. Liste os tipos de ato
+vigentes para localizar o Id correto.

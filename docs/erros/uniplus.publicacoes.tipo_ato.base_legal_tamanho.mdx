@@ -1,0 +1,36 @@
+---
+title: A base legal do tipo de ato excede o tamanho máximo
+sidebar_label: Base legal do tipo de ato excede o tamanho
+description: A base legal do tipo de ato é limitada a 500 caracteres.
+code: uniplus.publicacoes.tipo_ato.base_legal_tamanho
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Criação de tipo de ato
+  - Atualização de tipo de ato
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **base legal** informada excede 500 caracteres, o tamanho máximo aceito.
+
+A base legal é opcional — só é validada quando presente — e existe para
+registrar a lei, o artigo ou a resolução que fundamenta o tipo de ato. É
+uma citação de fundamento, não um texto normativo completo: 500 caracteres
+bastam para nomear a norma, não para transcrevê-la.
+
+## Como resolver
+
+Informe a base legal dentro do limite de 500 caracteres — a referência à
+norma (ex.: "Lei nº 12.711/2012, art. 3º"), não o texto integral dela. Se
+o campo não é obrigatório para este cadastro, você também pode
+simplesmente omiti-lo.

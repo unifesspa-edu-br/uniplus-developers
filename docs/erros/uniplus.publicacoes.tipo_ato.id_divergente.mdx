@@ -1,0 +1,36 @@
+---
+title: O identificador da URL não corresponde ao do corpo da requisição
+sidebar_label: Id divergente na atualização do tipo de ato
+description: Ao atualizar um tipo de ato, o Id da URL e o Id do corpo da requisição precisam ser o mesmo.
+code: uniplus.publicacoes.tipo_ato.id_divergente
+http_status: 400
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Atualização de tipo de ato
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#798'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/798
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **Id** que identifica o recurso na URL (`PUT /admin/tipos-ato/{id}`) é
+diferente do `Id` declarado no corpo da requisição.
+
+A checagem acontece no controller, antes de qualquer regra de negócio —
+uma requisição cujos dois identificadores divergem é ambígua sobre qual
+tipo de ato está sendo atualizado, e o servidor recusa em vez de escolher
+um dos dois em silêncio.
+
+## Como resolver
+
+Garanta que o `Id` no corpo da requisição seja idêntico ao `Id` que
+aparece na URL. O caso mais comum é o cliente montar o corpo a partir de
+um registro diferente do que o Id da URL identifica — confira a origem
+dos dois valores antes de reenviar.
