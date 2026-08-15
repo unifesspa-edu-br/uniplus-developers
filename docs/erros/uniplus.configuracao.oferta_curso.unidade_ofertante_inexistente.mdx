@@ -1,0 +1,35 @@
+---
+title: A unidade ofertante não existe ou foi removida
+sidebar_label: Unidade ofertante inexistente
+description: A criação de uma oferta de curso resolve a Unidade viva de Organização Institucional para congelar seu snapshot — sem identidade viva, não há o que congelar.
+code: uniplus.configuracao.oferta_curso.unidade_ofertante_inexistente
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador de unidade ofertante informado não resolve a uma Unidade viva
+em Organização Institucional — inexistente ou removida.
+
+A oferta de curso congela um snapshot-copy da unidade ofertante (sigla, nome
+e tipo) no ato da criação — mudanças posteriores na Unidade viva não
+retropropagam para ofertas já criadas. Esse congelamento parte de uma leitura
+cross-módulo da Unidade viva; sem identidade viva para ler, não há o que
+congelar, e a criação é recusada.
+
+## Como resolver
+
+Confira o identificador da unidade ofertante. Se ela foi removida em
+Organização Institucional, use outra unidade viva.

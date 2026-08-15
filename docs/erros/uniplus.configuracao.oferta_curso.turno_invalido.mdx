@@ -1,0 +1,33 @@
+---
+title: O turno da oferta é inválido
+sidebar_label: Turno inválido
+description: O turno da oferta, quando informado, precisa ser um dos quatro tokens do domínio fechado — MATUTINO, VESPERTINO, NOTURNO ou INTEGRAL.
+code: uniplus.configuracao.oferta_curso.turno_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **turno** informado não é um dos quatro tokens do domínio fechado:
+`MATUTINO`, `VESPERTINO`, `NOTURNO` ou `INTEGRAL`.
+
+O turno é opcional — a oferta pode não declará-lo. Este erro só dispara
+quando um token é informado e não é um dos quatro válidos.
+
+## Como resolver
+
+Informe um dos quatro tokens válidos — `MATUTINO`, `VESPERTINO`, `NOTURNO`
+ou `INTEGRAL` — ou omita o campo se a oferta não tem turno fixo.

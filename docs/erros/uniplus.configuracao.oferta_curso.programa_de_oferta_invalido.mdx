@@ -1,0 +1,34 @@
+---
+title: O programa de oferta é inválido
+sidebar_label: Programa de oferta inválido
+description: O programa de oferta precisa ser um dos sete tokens do domínio fechado — REGULAR, FORMA_PARA, PARFOR, PRONERA, PEPETI, CONVENIO_OUTRO ou OUTRO.
+code: uniplus.configuracao.oferta_curso.programa_de_oferta_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **programa de oferta** informado não é um dos sete tokens do domínio
+fechado: `REGULAR`, `FORMA_PARA`, `PARFOR`, `PRONERA`, `PEPETI`,
+`CONVENIO_OUTRO` ou `OUTRO`.
+
+Programa de oferta é obrigatório e não tem valor padrão — omiti-lo é
+recusado do mesmo jeito que informar um token fora do domínio.
+
+## Como resolver
+
+Informe um dos sete tokens válidos: `REGULAR`, `FORMA_PARA`, `PARFOR`,
+`PRONERA`, `PEPETI`, `CONVENIO_OUTRO` ou `OUTRO`.

@@ -1,0 +1,35 @@
+---
+title: A sigla da unidade ofertante é obrigatória
+sidebar_label: Sigla da unidade ofertante obrigatória
+description: O snapshot da unidade ofertante congelado na oferta de curso precisa da sigla da Unidade viva de origem.
+code: uniplus.configuracao.oferta_curso.unidade_ofertante_sigla_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O snapshot-copy da unidade ofertante foi montado sem sigla — o campo veio
+vazio na leitura cross-módulo da Unidade viva em Organização Institucional.
+
+Como o cadastro de Unidade já exige sigla no próprio módulo de origem, esta
+validação sobre o snapshot é defensiva: na prática só dispara se a leitura
+cross-módulo devolver um valor inconsistente com o que o cadastro de origem
+deveria garantir.
+
+## Como resolver
+
+Confira o cadastro da unidade em Organização Institucional. Se ela não tem
+sigla preenchida, corrija-a lá — este campo não é preenchido diretamente na
+requisição de criação da oferta.

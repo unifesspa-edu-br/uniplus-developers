@@ -1,0 +1,33 @@
+---
+title: A base legal da oferta de curso excede o tamanho máximo
+sidebar_label: Tamanho da base legal
+description: A base legal da oferta de curso, quando informada, tem no máximo 500 caracteres.
+code: uniplus.configuracao.oferta_curso.base_legal_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **base legal** da oferta excede o tamanho máximo aceito: 500 caracteres.
+
+Este é o mesmo campo cuja ausência, para programa diferente de `REGULAR`, é
+recusada pelo
+[erro de base legal obrigatória](./uniplus.configuracao.oferta_curso.base_legal_obrigatoria_para_programa_nao_regular.mdx)
+— aqui a causa é o tamanho excedido, não a ausência.
+
+## Como resolver
+
+Reduza a base legal para até 500 caracteres.

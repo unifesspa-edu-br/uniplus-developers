@@ -1,0 +1,34 @@
+---
+title: As vagas anuais autorizadas não podem ser negativas
+sidebar_label: Vagas anuais negativas
+description: O teto de vagas anuais autorizadas no e-MEC, quando informado, não pode ser negativo — zero é aceito.
+code: uniplus.configuracao.oferta_curso.vagas_anuais_negativas
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O valor informado para **vagas anuais autorizadas** é negativo.
+
+Este campo é o teto de vagas anuais autorizadas no e-MEC — **não** são as
+vagas de um certame específico, que pertencem ao edital, no módulo Seleção.
+O valor é opcional (a oferta pode não declarar um teto), mas quando
+informado precisa ser zero ou positivo.
+
+## Como resolver
+
+Informe um valor zero ou positivo, ou omita o campo se a oferta não tem teto
+de vagas e-MEC a declarar.

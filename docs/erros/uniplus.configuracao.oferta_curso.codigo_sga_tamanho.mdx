@@ -1,0 +1,32 @@
+---
+title: O código no sistema de gestão acadêmica excede o tamanho máximo
+sidebar_label: Tamanho do código SGA
+description: O código da oferta no sistema de gestão acadêmica, quando informado, tem no máximo 30 caracteres.
+code: uniplus.configuracao.oferta_curso.codigo_sga_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código no sistema de gestão acadêmica** da oferta excede o tamanho
+máximo aceito: 30 caracteres.
+
+O nome do campo é vendor-neutral por convenção — não amarra o contrato ao
+nome de um sistema de gestão acadêmica específico.
+
+## Como resolver
+
+Informe um código com até 30 caracteres.

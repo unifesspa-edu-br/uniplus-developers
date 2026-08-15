@@ -1,0 +1,34 @@
+---
+title: O formato pedagógico é inválido
+sidebar_label: Formato pedagógico inválido
+description: O formato pedagógico, quando informado, precisa ser um dos três tokens do domínio fechado — PRESENCIAL, SEMIPRESENCIAL ou EAD.
+code: uniplus.configuracao.oferta_curso.formato_pedagogico_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **formato pedagógico** informado não é um dos três tokens do domínio
+fechado: `PRESENCIAL`, `SEMIPRESENCIAL` ou `EAD`.
+
+Diferente de programa de oferta, formato pedagógico tem valor padrão: se
+omitido, a oferta assume `PRESENCIAL` silenciosamente. Este erro só dispara
+quando um token é informado e não é um dos três válidos.
+
+## Como resolver
+
+Informe um dos três tokens válidos — `PRESENCIAL`, `SEMIPRESENCIAL` ou
+`EAD` — ou omita o campo para aceitar o padrão `PRESENCIAL`.
