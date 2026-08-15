@@ -1,0 +1,35 @@
+---
+title: Instituição não encontrada
+sidebar_label: Instituição não encontrada
+description: A instituição referenciada pelo Id não existe ou já foi removida.
+code: uniplus.organizacao.instituicao.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Atualização da instituição
+  - Remoção da instituição
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#585'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/585
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **Id** informado não corresponde à instituição existente — nunca
+existiu, ou já foi removida (a remoção é sempre soft-delete, liberando a
+vaga do singleton para recadastramento).
+
+Esta causa aparece apenas ao **atualizar** ou **remover** a instituição
+por Id.
+
+## Como resolver
+
+Confira o Id informado. Como a instituição é singleton, consulte a
+leitura pública (que não exige Id) para obter o registro vigente, se
+houver algum.

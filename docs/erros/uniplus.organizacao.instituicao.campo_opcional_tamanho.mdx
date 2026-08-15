@@ -1,0 +1,46 @@
+---
+title: Um campo opcional da instituição excede o tamanho máximo
+sidebar_label: Campo opcional excede o tamanho
+description: Um dos campos opcionais do cadastro da instituição (CNPJ, mantenedora, situação, atos, conceito, IGC, website) excede o próprio limite de tamanho.
+code: uniplus.organizacao.instituicao.campo_opcional_tamanho
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Criação da instituição
+  - Atualização da instituição
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#585'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/585
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos campos **opcionais** do cadastro da instituição excede o próprio
+limite de tamanho. São nove campos, cada um com seu limite:
+
+| Campo | Limite |
+|---|---|
+| CNPJ | 100 caracteres |
+| Mantenedora | 250 caracteres |
+| Código e-MEC da mantenedora | 20 caracteres |
+| Situação | 100 caracteres |
+| Ato de credenciamento | 500 caracteres |
+| Ato de recredenciamento | 500 caracteres |
+| Conceito institucional | 100 caracteres |
+| IGC | 100 caracteres |
+| Website | 255 caracteres |
+
+A validação percorre os campos opcionais nesta ordem e recusa no
+primeiro que excede o próprio limite — **esta causa não identifica no
+`detail` qual dos campos foi o motivo**, apenas que um deles excedeu.
+
+## Como resolver
+
+Revise todos os campos opcionais informados contra a tabela acima e
+reduza o que estiver mais longo que o próprio limite.
