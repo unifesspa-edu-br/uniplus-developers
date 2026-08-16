@@ -1,0 +1,28 @@
+---
+title: Fixture de validação — H1 na prosa
+sidebar_label: Fixture inválida (H1)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.titulo_na_prosa
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+# Segundo título da página
+
+## O que aconteceu
+
+Esta fixture abre a prosa com um H1, que concorre com o título vindo do
+frontmatter. Prova que o validador reprova a hierarquia de heading quebrada.
+
+## Como resolver
+
+Não se aplica — fixture de teste.

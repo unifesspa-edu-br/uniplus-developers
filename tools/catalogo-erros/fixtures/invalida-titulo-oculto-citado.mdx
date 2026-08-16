@@ -1,0 +1,31 @@
+---
+title: Fixture de validação — título suprimido por valor citado
+hide_title: "true"
+sidebar_label: Fixture inválida (hide_title citado)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.titulo_oculto_citado
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos:
+  - UNI-REQ-0001  # vínculo principal
+  - UNI-REQ-0002
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture cita o valor de `hide_title`. O `gray-matter` entrega a cadeia
+`"true"`, mas o Docusaurus valida este frontmatter com schema booleano e a
+coage — a página renderizaria sem H1. Prova que a regra não compara com o
+booleano literal.
+
+## Como resolver
+
+Não se aplica — fixture de teste.

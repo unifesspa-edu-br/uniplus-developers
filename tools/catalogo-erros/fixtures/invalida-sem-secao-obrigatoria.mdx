@@ -1,0 +1,22 @@
+---
+title: Fixture de validação — seção obrigatória ausente
+sidebar_label: Fixture inválida (seção)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.secao_ausente
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture traz a causa e omite a remediação. Prova que o validador reprova
+a entrada que deixa quem recebeu a recusa sem saber o que fazer.

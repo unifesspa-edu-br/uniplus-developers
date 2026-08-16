@@ -1,0 +1,25 @@
+---
+title: Fixture de validação — página conforme e publicada
+sidebar_label: Fixture válida (publicada)
+description: Fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.publicada
+http_status: 422
+situacao: publicado
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture está publicada e não anuncia rascunho. Prova que a checagem de correspondência não reprova o caso conforme do outro lado do se-e-somente-se.
+
+## Como resolver
+
+Não se aplica — fixture de teste.

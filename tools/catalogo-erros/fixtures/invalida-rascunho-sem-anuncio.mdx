@@ -1,0 +1,25 @@
+---
+title: Fixture de validação — rascunho que não se anuncia
+sidebar_label: Fixture inválida (rascunho mudo)
+description: Fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.rascunho_mudo
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture está em rascunho e não anuncia isso no `description`. Prova que o validador reprova a entrada que se esconde de quem varre o índice.
+
+## Como resolver
+
+Não se aplica — fixture de teste.

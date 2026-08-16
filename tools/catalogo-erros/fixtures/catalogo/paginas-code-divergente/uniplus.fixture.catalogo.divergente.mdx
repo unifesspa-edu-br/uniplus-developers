@@ -1,0 +1,25 @@
+---
+title: Fixture de catálogo — code divergente do nome
+sidebar_label: Fixture de catálogo (divergente)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo.outro_code
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `code` declarado não é o nome do arquivo, então a rota publicada não é a que o campo type anuncia.
+
+## Como resolver
+
+Não se aplica — fixture de teste.

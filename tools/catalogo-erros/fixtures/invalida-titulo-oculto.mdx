@@ -1,0 +1,30 @@
+---
+title: Fixture de validação — título suprimido
+hide_title: true
+sidebar_label: Fixture inválida (título oculto)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.titulo_oculto
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos:
+  - UNI-REQ-0001  # vínculo principal
+  - UNI-REQ-0002
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture suprime o título pelo frontmatter. A página renderizaria sem H1
+nenhum, e a checagem de prosa — que rejeita H1 escrito à mão — não veria nada
+de errado. Prova que o validador reprova a entrada que fica sem título.
+
+## Como resolver
+
+Não se aplica — fixture de teste.
