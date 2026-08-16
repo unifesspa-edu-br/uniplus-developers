@@ -1,0 +1,35 @@
+---
+title: Complementação documental só é permitida nas fases de homologação e recursos
+sidebar_label: Complementação só em fases permitidas
+description: O sinalizador permite_complementacao só pode ser verdadeiro nas fases de código HOMOLOGACAO ou RECURSOS.
+code: uniplus.configuracao.fase_canonica.complementacao_apenas_fases_permitidas
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica, quando o código não é HOMOLOGACAO nem RECURSOS
+  - Atualização de uma fase canônica, quando o código não é HOMOLOGACAO nem RECURSOS
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O sinalizador **permite complementação** foi enviado como verdadeiro numa
+fase cujo código não é `HOMOLOGACAO` nem `RECURSOS`.
+
+A legislação permite complementação/reenvio documental só nessas duas fases
+— a habilitação é deliberadamente excluída (o SiSU veda complementação
+nessa fase).
+
+## Como resolver
+
+Envie `permite_complementacao: false`, ou — se a intenção é mesmo permitir
+complementação — isso só é válido nas fases de código `HOMOLOGACAO` ou
+`RECURSOS`.

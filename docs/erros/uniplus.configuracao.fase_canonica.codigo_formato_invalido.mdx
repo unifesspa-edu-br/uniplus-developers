@@ -1,0 +1,35 @@
+---
+title: O código da fase está em formato inválido
+sidebar_label: Código da fase em formato inválido
+description: O código da fase canônica aceita só letras maiúsculas e sublinhado — sem hífen e sem dígito —, com no máximo 60 caracteres.
+code: uniplus.configuracao.fase_canonica.codigo_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** informado não respeita o formato fechado — `^[A-Z_]+$`: apenas
+letras maiúsculas e sublinhado, **sem hífen e sem dígito** (diferente do
+código de modalidade de concorrência, que aceita dígito) —, com no máximo 60
+caracteres (ex.: `INSCRICAO`, `AVALIACAO`, `RECURSOS`).
+
+Esta validação é só de formato. Um código bem formado ainda pode não
+pertencer ao conjunto canônico das quatorze fases — ver
+[código fora do conjunto canônico](./uniplus.configuracao.fase_canonica.codigo_fora_do_conjunto_canonico.mdx).
+
+## Como resolver
+
+Use apenas letras maiúsculas e sublinhado, sem hífen e sem dígito, com até
+60 caracteres.

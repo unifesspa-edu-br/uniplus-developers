@@ -1,0 +1,30 @@
+---
+title: O dono típico da fase canônica não foi informado
+sidebar_label: Dono típico obrigatório
+description: O dono típico da fase canônica é obrigatório.
+code: uniplus.configuracao.fase_canonica.dono_tipico_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica
+  - Atualização de uma fase canônica
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **dono típico** da fase canônica não foi
+preenchido — assim como o nome, este campo é obrigatório (diferente da
+descrição, que é opcional).
+
+## Como resolver
+
+Informe o dono típico da fase canônica.

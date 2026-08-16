@@ -1,0 +1,33 @@
+---
+title: A origem da data da fase canônica não foi informada
+sidebar_label: Origem da data obrigatória
+description: A origem da data da fase canônica é obrigatória — decide se a janela da fase é obrigatória (PROPRIA) ou opcional (DELEGADA).
+code: uniplus.configuracao.fase_canonica.origem_data_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica
+  - Atualização de uma fase canônica
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque a **origem da data** da fase canônica não foi
+preenchida.
+
+Este campo decide quem controla a data da fase: `PROPRIA` (a fase tem janela
+própria, obrigatória) ou `DELEGADA` (a janela é opcional, controlada por
+outra fase). Não tem valor padrão — omiti-lo é recusado.
+
+## Como resolver
+
+Informe a origem da data da fase: `PROPRIA` ou `DELEGADA`.

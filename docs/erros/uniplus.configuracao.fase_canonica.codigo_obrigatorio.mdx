@@ -1,0 +1,32 @@
+---
+title: O código da fase canônica não foi informado
+sidebar_label: Código da fase obrigatório
+description: O código da fase canônica é a chave natural do cadastro e é obrigatório.
+code: uniplus.configuracao.fase_canonica.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **código** da fase canônica não foi
+preenchido.
+
+O código (ex.: `INSCRICAO`, `AVALIACAO`, `RECURSOS`) é a chave natural da
+fase — único entre fases vivas e imutável após a criação: o vocabulário
+canônico de fases do cronograma é fixo.
+
+## Como resolver
+
+Informe um código para a fase canônica.

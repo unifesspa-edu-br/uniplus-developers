@@ -1,0 +1,34 @@
+---
+title: Já existe uma fase canônica viva com este código
+sidebar_label: Código já existe
+description: O código da fase canônica é único entre fases vivas — índice único parcial que ignora as removidas.
+code: uniplus.configuracao.fase_canonica.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe uma fase canônica **viva** com o código informado.
+
+A unicidade é sobre fases vivas — um código de uma fase removida (soft
+delete) pode ser reutilizado. A checagem cobre tanto o caminho comum
+(consulta prévia) quanto a corrida entre duas criações concorrentes com o
+mesmo código: o índice único parcial do banco garante a exclusividade, e uma
+violação nele é traduzida para este mesmo erro.
+
+## Como resolver
+
+Use um código diferente, ou — se a intenção é a fase que já existe —
+atualize a fase viva existente em vez de criar uma nova.
