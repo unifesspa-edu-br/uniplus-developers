@@ -1,0 +1,34 @@
+---
+title: O código do tipo de processo seletivo já foi reservado
+sidebar_label: Código do tipo de processo já existe
+description: O código do tipo de processo seletivo é único e imutável para sempre — inclusive após o tipo ser desativado, o código não é liberado para reuso.
+code: uniplus.configuracao.tipo_processo.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de processo seletivo
+requisitos:
+  - UNI-REQ-0098
+rastreio:
+  - label: 'uniplus-api#1070'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1070
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código informado já foi reservado por outro tipo de processo seletivo.
+
+Diferente de cadastros com soft-delete (modalidade, fase canônica), o tipo
+de processo seletivo nunca é removido, só desativado — e a checagem de
+unicidade considera **todos** os registros, ativos ou não. Um código já
+usado por um tipo desativado continua indisponível para reuso.
+
+## Como resolver
+
+Use um código diferente. Um tipo de processo desativado não libera o código
+para uma nova criação.
