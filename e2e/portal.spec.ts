@@ -1,4 +1,7 @@
-import {test, expect, type Page} from '@playwright/test';
+import {readdirSync, readFileSync} from 'node:fs';
+import {basename, extname, join} from 'node:path';
+import matter from 'gray-matter';
+import {test, expect} from '@playwright/test';
 
 test.describe('Portal — navegação e conteúdo', () => {
   test('a home carrega com as duas trilhas no menu', async ({page}) => {
@@ -217,19 +220,33 @@ test.describe('Personas (cadastros fictícios)', () => {
 });
 
 test.describe('Catálogo de erros', () => {
-  // A taxonomia do `code` é contrato (ADR-0023 do `uniplus-api`).
-  const TAXONOMIA_CODE = /^[a-z]+(\.[a-z_]+)+$/;
+  // O que varia de entrada para entrada é dado de fonte — `code`, `situacao`,
+  // as seções da prosa —, e isso é contrato de página, conferido entrada a
+  // entrada por `tools/catalogo-erros/validar.mjs`. Aqui ficam as
+  // propriedades que só o portal servido pode provar: que cada endereço
+  // publicado responde, que o índice publica todas as entradas, e que o
+  // cabeçalho renderiza o que o frontmatter declara.
 
-  /** Códigos publicados, lidos do índice — a lista que os testes percorrem. */
-  async function codigosDoCatalogo(page: Page): Promise<string[]> {
-    await page.goto('erros/');
-    const hrefs = await page
-      .locator('main a.theme-doc-card-container')
-      .evaluateAll((links) =>
-        links.map((link) => (link as HTMLAnchorElement).getAttribute('href')),
-      );
-    return hrefs.map((href) => href!.replace(/\/$/, '').split('/').pop()!);
-  }
+  // A lista vem do disco, não da página do índice: uma entrada que suma da
+  // navegação precisa reprovar, e não apenas deixar de ser testada.
+  const DIR_CATALOGO = join(__dirname, '../docs/erros');
+
+  const ENTRADAS = readdirSync(DIR_CATALOGO)
+    .filter((nome) => /\.mdx?$/.test(nome) && !/^index\.mdx?$/.test(nome))
+    .map((nome) => {
+      const {data} = matter(readFileSync(join(DIR_CATALOGO, nome), 'utf8'));
+      return {
+        code: basename(nome, extname(nome)),
+        situacao: data.situacao as string,
+      };
+    })
+    // Ordenação binária dos dois lados da comparação: `localeCompare`
+    // despreza pontuação em pt-BR, e os `code` se distinguem justamente
+    // por ponto e sublinhado.
+    .sort((a, b) => (a.code < b.code ? -1 : a.code > b.code ? 1 : 0));
+
+  const RASCUNHO = ENTRADAS.filter((e) => e.situacao === 'rascunho');
+  const PUBLICADA = ENTRADAS.filter((e) => e.situacao === 'publicado');
 
   test('o catálogo é alcançável pela Referência de API', async ({page}) => {
     await page.goto('./');
@@ -247,77 +264,125 @@ test.describe('Catálogo de erros', () => {
     ).toBeVisible();
   });
 
-  test('o índice revela, ali mesmo, quais entradas ainda são rascunho', async ({
+  test('toda entrada resolve no endereço que o campo type anuncia', async ({
+    page,
+    request,
+  }) => {
+    // O endereço varrido vem do `type` renderizado numa entrada real, e não de
+    // uma URL remontada aqui: `siteConfig.url` e `baseUrl` valem para todas as
+    // páginas, então uma quebra em qualquer um deles muda o valor publicado —
+    // e é essa quebra que a varredura precisa flagrar, não um endereço que o
+    // próprio teste inventou e que continuaria resolvendo.
+    expect(ENTRADAS.length).toBeGreaterThan(0);
+    const referencia = ENTRADAS[0];
+    await page.goto(`erros/${referencia.code}`);
+    const typeUri = await page
+      .locator('main dl code', {hasText: /^https:\/\//})
+      .innerText();
+    expect(typeUri.endsWith(`/erros/${referencia.code}`)).toBe(true);
+    const prefixo = typeUri.slice(0, typeUri.length - referencia.code.length);
+
+    // Em lotes: abrir uma conexão por entrada de uma vez contra o servidor de
+    // arquivo do E2E trocaria o timeout por sobrecarga — outra forma de teste
+    // instável.
+    const naoResolveram: string[] = [];
+    const TAMANHO_DO_LOTE = 16;
+    for (let i = 0; i < ENTRADAS.length; i += TAMANHO_DO_LOTE) {
+      const lote = ENTRADAS.slice(i, i + TAMANHO_DO_LOTE);
+      const respostas = await Promise.all(
+        lote.map((entrada) =>
+          request.get(new URL(prefixo + entrada.code).pathname),
+        ),
+      );
+      respostas.forEach((resposta, indice) => {
+        if (resposta.status() !== 200) {
+          naoResolveram.push(`${lote[indice].code} → ${resposta.status()}`);
+        }
+      });
+    }
+    expect(naoResolveram).toEqual([]);
+  });
+
+  test('o índice lista todas as entradas e anuncia rascunho exatamente onde há', async ({
     page,
   }) => {
-    const codigos = await codigosDoCatalogo(page);
-    expect(codigos.length).toBeGreaterThanOrEqual(6);
-    for (const code of codigos) {
-      expect(code).toMatch(TAXONOMIA_CODE);
-    }
-
+    await page.goto('erros/');
     const cards = page.locator('main a.theme-doc-card-container');
-    expect(await cards.count()).toBe(codigos.length);
-
-    // O texto de cada card, colhido antes de sair da página do índice — os
-    // cards saem na mesma ordem em que `codigosDoCatalogo` os lê.
+    const hrefs = await cards.evaluateAll((links) =>
+      links.map((link) => (link as HTMLAnchorElement).getAttribute('href')),
+    );
     const textos = await cards.allInnerTexts();
+
+    // Antes de indexar por code: o Map colapsa href repetido, e card
+    // duplicado no índice sobreviveria à comparação de conjuntos.
+    expect(hrefs.length).toBe(ENTRADAS.length);
+
+    const noIndice = new Map<string, string>();
+    hrefs.forEach((href, indice) => {
+      noIndice.set(href!.replace(/\/$/, '').split('/').pop()!, textos[indice]);
+    });
+
+    // Entrada publicada e ausente do índice fica invisível para quem varre a
+    // lista; card sem página quebra o caminho de quem clica.
+    expect([...noIndice.keys()].sort()).toEqual(ENTRADAS.map((e) => e.code));
 
     // O estado precisa aparecer já no ponto de descoberta: quem varre a lista
     // não pode confundir causa ainda não emitida com comportamento em vigor.
-    // Com o catálogo misto, a prova é a correspondência — o prefixo aparece
-    // exatamente nas entradas que a própria página declara em rascunho.
-    for (const [i, code] of codigos.entries()) {
-      await page.goto(`erros/${code}`);
-      const situacao = await page
-        .getByText('Situação', {exact: true})
-        .locator('xpath=following-sibling::dd[1]')
-        .innerText();
-      const ehRascunho = situacao.toLowerCase().includes('rascunho');
-
-      expect(
-        textos[i].includes('Rascunho —'),
-        `${code}: o card ${ehRascunho ? 'deveria' : 'não deveria'} anunciar rascunho`,
-      ).toBe(ehRascunho);
-    }
+    // A prova é a correspondência — o prefixo aparece exatamente nas entradas
+    // que a própria fonte declara em rascunho.
+    const anunciamRascunho = [...noIndice.entries()]
+      .filter(([, texto]) => texto.includes('Rascunho —'))
+      .map(([code]) => code)
+      .sort();
+    expect(anunciamRascunho).toEqual(RASCUNHO.map((e) => e.code));
   });
 
-  test('cada entrada traz causa, remediação, e um type que resolve nela mesma', async ({
-    page,
-  }) => {
-    const codigos = await codigosDoCatalogo(page);
-
-    for (const code of codigos) {
-      await page.goto(`erros/${code}`);
+  // A renderização é a mesma função para toda entrada — o que muda de uma para
+  // outra é o frontmatter, conferido no gate de fonte. Duas entradas, uma de
+  // cada situação, provam que o cabeçalho publica o que foi declarado.
+  for (const [rotulo, entradas] of [
+    ['publicada', PUBLICADA],
+    ['em rascunho', RASCUNHO],
+  ] as const) {
+    test(`a entrada ${rotulo} publica o que o frontmatter declara`, async ({
+      page,
+    }) => {
+      // Rascunho é estado transitório por desenho (ADR-0024 da `uniplus-api`:
+      // a entrada abre antes do código existir). Quando não houver nenhuma, o
+      // certo é não ter o que exercitar — exigir uma obrigaria o catálogo a
+      // manter rascunho artificial só para o gate passar.
+      test.skip(entradas.length === 0, `catálogo sem entrada ${rotulo}`);
+      const entrada = entradas[0];
+      await page.goto(`erros/${entrada.code}`);
       const main = page.locator('main');
 
       // Um H1 só — o título que o corpo de erro emite para este `code`.
       await expect(main.getByRole('heading', {level: 1})).toHaveCount(1);
 
-      // O código exibido é o mesmo que endereça a página. Se o frontmatter e o
-      // nome do arquivo divergirem, o `type` publicado aponta para outro lugar.
-      await expect(
-        main.locator('dl code', {hasText: new RegExp(`^${code}$`)}),
-      ).toHaveCount(1);
+      // O código exibido é o mesmo que endereça a página. Comparação literal:
+      // montar um padrão a partir do `code` exigiria escapar toda a pontuação
+      // que ele carrega, e escape parcial é falso negativo esperando acontecer.
+      const codigosExibidos = await main.locator('dl code').allInnerTexts();
+      expect(
+        codigosExibidos.filter((texto) => texto.trim() === entrada.code),
+      ).toHaveLength(1);
 
-      // O `type` declarado tem de resolver na própria página — é a função do
-      // campo, e o que o cenário de aceite da issue #86 cobra na prática.
-      const typeUri = await main
-        .locator('dl code', {hasText: /^https:\/\//})
-        .innerText();
-      expect(typeUri.endsWith(`/erros/${code}`)).toBe(true);
-      const alvo = await page.request.get(new URL(typeUri).pathname);
-      expect(alvo.status()).toBe(200);
-
-      // Causa e remediação, em toda entrada.
       await expect(
         main.getByRole('heading', {name: 'O que aconteceu', level: 2}),
       ).toBeVisible();
       await expect(
         main.getByRole('heading', {name: 'Como resolver', level: 2}),
       ).toBeVisible();
-    }
-  });
+
+      const situacao = await main
+        .getByText('Situação', {exact: true})
+        .locator('xpath=following-sibling::dd[1]')
+        .innerText();
+      expect(situacao.toLowerCase()).toContain(
+        entrada.situacao === 'rascunho' ? 'rascunho' : 'publicado',
+      );
+    });
+  }
 
   test('a entrada não rola na horizontal em viewport estreita', async ({
     page,
