@@ -1,0 +1,33 @@
+---
+title: Recurso de acessibilidade não encontrado
+sidebar_label: Recurso de acessibilidade não encontrado
+description: O recurso de acessibilidade identificado não existe ou já foi removido.
+code: uniplus.configuracao.recurso_acessibilidade.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um recurso de acessibilidade, com identificador que não resolve
+  - Remoção de um recurso de acessibilidade, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhum recurso de
+acessibilidade existente — ou porque nunca existiu, ou porque já foi
+removido (soft delete).
+
+A remoção nunca é bloqueada por referência.
+
+## Como resolver
+
+Confira o identificador do recurso. Se ele foi removido, cadastre um novo
+ou use outro já existente.

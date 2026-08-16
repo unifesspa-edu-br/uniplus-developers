@@ -1,0 +1,34 @@
+---
+title: O nome do recurso de acessibilidade não foi informado
+sidebar_label: Nome do recurso obrigatório
+description: O nome do recurso de acessibilidade é a chave natural do cadastro e é obrigatório.
+code: uniplus.configuracao.recurso_acessibilidade.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um recurso de acessibilidade
+  - Atualização de um recurso de acessibilidade
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **nome** do recurso de acessibilidade não
+foi preenchido.
+
+Assim como em tipo de deficiência, não há campo de código separado — o
+nome (ex.: Ledor, Tempo Adicional, Prova Ampliada, Intérprete de Libras) é
+a própria chave natural do cadastro: único entre recursos vivos e
+editável.
+
+## Como resolver
+
+Informe um nome para o recurso de acessibilidade.
