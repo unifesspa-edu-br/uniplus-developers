@@ -1,0 +1,31 @@
+---
+title: Já existe um recurso de acessibilidade vivo com este nome
+sidebar_label: Nome do recurso já existe
+description: O nome do recurso de acessibilidade é único entre recursos vivos — índice único parcial que ignora os removidos.
+code: uniplus.configuracao.recurso_acessibilidade.nome_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um recurso de acessibilidade
+  - Atualização de um recurso de acessibilidade, quando o nome é alterado para um já em uso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe um recurso de acessibilidade **vivo** com o nome informado.
+
+O nome é editável, então esta checagem também roda na atualização, mas só
+quando o nome efetivamente muda.
+
+## Como resolver
+
+Use um nome diferente.
