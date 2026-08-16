@@ -1,0 +1,32 @@
+---
+title: O código da condição de atendimento está em formato inválido
+sidebar_label: Código da condição em formato inválido
+description: O código da condição de atendimento precisa iniciar com letra maiúscula e conter apenas letras maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres.
+code: uniplus.configuracao.condicao_atendimento.codigo_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma condição de atendimento especializado
+  - Atualização de uma condição de atendimento especializado
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** informado não respeita o formato fechado —
+`^[A-Z][A-Z0-9_]{1,49}$`: inicia com letra maiúscula, segue com letras
+maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres no total (ex.:
+`PCD`, `DISLEXIA`, `LACTANTE`).
+
+## Como resolver
+
+Use um código que comece com letra maiúscula e contenha apenas letras
+maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres.

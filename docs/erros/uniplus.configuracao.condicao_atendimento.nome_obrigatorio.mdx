@@ -1,0 +1,29 @@
+---
+title: O nome da condição de atendimento não foi informado
+sidebar_label: Nome da condição obrigatório
+description: O nome da condição de atendimento especializado é obrigatório.
+code: uniplus.configuracao.condicao_atendimento.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma condição de atendimento especializado
+  - Atualização de uma condição de atendimento especializado
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **nome** da condição de atendimento não
+foi preenchido.
+
+## Como resolver
+
+Informe um nome para a condição de atendimento.

@@ -1,0 +1,38 @@
+---
+title: O código da condição reservada não pode ser alterado
+sidebar_label: Código protegido não editável
+description: A condição de código PCD é reservada (ADR-0067) e não pode ter o código renomeado — nome e descrição continuam editáveis.
+code: uniplus.configuracao.condicao_atendimento.codigo_protegido_nao_editavel
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de uma condição de atendimento especializado, quando o código atual é PCD e a atualização tenta trocá-lo por outro
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação tentou alterar o código de uma condição cujo código atual é
+`PCD` — o único código reservado deste cadastro (ADR-0067) — para um código
+diferente.
+
+Diferente de modalidade e fase canônica, este cadastro não tem um conjunto
+fixo de códigos protegidos semeados: `PCD` só se torna protegida depois de
+existir uma condição viva com esse código, criada normalmente pelo
+cadastro. A partir daí, renomear essa condição para outro código é
+recusado — editar nome e descrição mantendo o código `PCD` continua
+permitido.
+
+## Como resolver
+
+Não é possível trocar o código de uma condição `PCD` por outro. Envie a
+atualização mantendo o código `PCD`, ou crie uma condição nova com o código
+desejado.

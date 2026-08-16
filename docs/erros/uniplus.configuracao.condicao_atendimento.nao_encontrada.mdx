@@ -1,0 +1,31 @@
+---
+title: Condição de atendimento não encontrada
+sidebar_label: Condição de atendimento não encontrada
+description: A condição de atendimento especializado identificada não existe ou já foi removida.
+code: uniplus.configuracao.condicao_atendimento.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de uma condição de atendimento especializado, com identificador que não resolve
+  - Remoção de uma condição de atendimento especializado, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhuma condição de
+atendimento existente — ou porque nunca existiu, ou porque já foi removida
+(soft delete).
+
+## Como resolver
+
+Confira o identificador da condição. Se ela foi removida, cadastre uma
+nova ou use outra já existente.

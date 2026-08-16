@@ -1,0 +1,31 @@
+---
+title: Já existe uma condição de atendimento viva com este código
+sidebar_label: Código da condição já existe
+description: O código da condição de atendimento é único entre condições vivas — índice único parcial que ignora as removidas.
+code: uniplus.configuracao.condicao_atendimento.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma condição de atendimento especializado
+  - Atualização de uma condição de atendimento especializado, quando o código é alterado para um já em uso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe uma condição de atendimento **viva** com o código informado.
+
+O código é editável, então esta checagem também roda na atualização, mas
+só quando o código efetivamente muda.
+
+## Como resolver
+
+Use um código diferente.

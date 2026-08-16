@@ -1,0 +1,28 @@
+---
+title: A condição reservada não pode ser removida
+sidebar_label: Remoção bloqueada — código protegido
+description: A condição de código PCD é reservada (ADR-0067) e não pode ser removida.
+code: uniplus.configuracao.condicao_atendimento.remocao_bloqueada_codigo_protegido
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Remoção de uma condição de atendimento especializado, quando o código é PCD
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação tentou remover a condição de código `PCD` — o único código
+reservado deste cadastro (ADR-0067), que a referencia literalmente.
+
+## Como resolver
+
+A condição `PCD` não é removível por cadastro.
