@@ -1,0 +1,32 @@
+---
+title: Já existe um tipo de banca vivo com este código
+sidebar_label: Código já existe
+description: O código do tipo de banca é único entre bancas vivas — índice único parcial que ignora as removidas.
+code: uniplus.configuracao.tipo_banca.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de banca
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe um tipo de banca **vivo** com o código informado.
+
+A unicidade é sobre bancas vivas — um código de uma banca removida (soft
+delete) pode ser reutilizado. Como o conjunto canônico tem só quatro
+códigos possíveis, este erro tende a aparecer ao tentar recriar um tipo que
+já está cadastrado e ativo.
+
+## Como resolver
+
+Se a intenção é a banca que já existe, atualize-a em vez de criar uma nova.

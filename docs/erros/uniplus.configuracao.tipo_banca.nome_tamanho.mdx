@@ -1,0 +1,28 @@
+---
+title: O nome do tipo de banca excede o tamanho máximo
+sidebar_label: Tamanho do nome do tipo de banca
+description: O nome do tipo de banca tem no máximo 200 caracteres.
+code: uniplus.configuracao.tipo_banca.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de banca
+  - Atualização de um tipo de banca
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** do tipo de banca excede o tamanho máximo aceito: 200 caracteres.
+
+## Como resolver
+
+Reduza o nome para até 200 caracteres.

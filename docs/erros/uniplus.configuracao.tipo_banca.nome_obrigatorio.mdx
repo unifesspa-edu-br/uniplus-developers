@@ -1,0 +1,29 @@
+---
+title: O nome do tipo de banca não foi informado
+sidebar_label: Nome do tipo de banca obrigatório
+description: O nome do tipo de banca é obrigatório.
+code: uniplus.configuracao.tipo_banca.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de banca
+  - Atualização de um tipo de banca
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **nome** do tipo de banca não foi
+preenchido.
+
+## Como resolver
+
+Informe um nome para o tipo de banca.
