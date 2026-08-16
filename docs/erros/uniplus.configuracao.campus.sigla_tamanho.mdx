@@ -1,0 +1,29 @@
+---
+title: A sigla do campus está fora do tamanho aceito
+sidebar_label: Tamanho da sigla do campus
+description: A sigla do campus precisa ter entre 1 e 20 caracteres.
+code: uniplus.configuracao.campus.sigla_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um campus
+  - Atualização de um campus
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **sigla** do campus está fora do tamanho aceito: entre 1 e 20
+caracteres.
+
+## Como resolver
+
+Informe uma sigla com até 20 caracteres.

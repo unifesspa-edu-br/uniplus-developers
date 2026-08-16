@@ -1,0 +1,28 @@
+---
+title: O nome do campus não foi informado
+sidebar_label: Nome do campus obrigatório
+description: O nome do campus é obrigatório.
+code: uniplus.configuracao.campus.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um campus
+  - Atualização de um campus
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **nome** do campus não foi preenchido.
+
+## Como resolver
+
+Informe um nome para o campus.
