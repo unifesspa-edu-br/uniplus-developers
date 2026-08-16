@@ -1,0 +1,33 @@
+---
+title: Não é possível remover um campus responsável por locais de oferta ativos
+sidebar_label: Remoção bloqueada por local de oferta
+description: Um campus que é responsável por locais de oferta vivos não pode ser removido.
+code: uniplus.configuracao.campus.remocao_bloqueada_por_local_oferta
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Remoção de um campus
+requisitos:
+  - UNI-REQ-0009
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campus que a operação tentou remover é responsável por pelo menos um
+**local de oferta** vivo — integridade do vínculo intra-banco entre os
+dois cadastros. `LocalOferta` sempre referencia o campus responsável por
+ele (UNI-REQ-0009); remover o campus sem antes desvincular ou realocar
+esses locais quebraria essa referência.
+
+## Como resolver
+
+Remova (ou transfira para outro campus) os locais de oferta vinculados
+antes de remover este campus.

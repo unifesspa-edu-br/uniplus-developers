@@ -1,0 +1,30 @@
+---
+title: Campus não encontrado
+sidebar_label: Campus não encontrado
+description: O campus identificado não existe ou já foi removido.
+code: uniplus.configuracao.campus.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um campus, com identificador que não resolve
+  - Remoção de um campus, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhum campus existente — ou
+porque nunca existiu, ou porque já foi removido (soft delete).
+
+## Como resolver
+
+Confira o identificador do campus. Se ele foi removido, cadastre um novo
+ou use outro já existente.

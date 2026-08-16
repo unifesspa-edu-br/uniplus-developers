@@ -1,0 +1,28 @@
+---
+title: A sigla do campus não foi informada
+sidebar_label: Sigla do campus obrigatória
+description: A sigla do campus é obrigatória.
+code: uniplus.configuracao.campus.sigla_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um campus
+  - Atualização de um campus
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque a **sigla** do campus não foi preenchida.
+
+## Como resolver
+
+Informe uma sigla para o campus.
