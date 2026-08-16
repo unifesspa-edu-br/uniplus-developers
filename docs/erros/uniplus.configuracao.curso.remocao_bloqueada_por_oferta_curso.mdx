@@ -1,0 +1,31 @@
+---
+title: Não é possível remover um curso referenciado por oferta de curso ativa
+sidebar_label: Remoção bloqueada por oferta de curso
+description: Um curso referenciado por uma oferta de curso viva não pode ser removido.
+code: uniplus.configuracao.curso.remocao_bloqueada_por_oferta_curso
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Remoção de um curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#588'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/588
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O curso que a operação tentou remover é referenciado por pelo menos
+uma **oferta de curso** viva — integridade do vínculo intra-banco
+entre os dois cadastros. O curso curricular sustenta a oferta
+concreta; removê-lo sem antes tratar as ofertas quebraria essa
+referência.
+
+## Como resolver
+
+Remova as ofertas de curso vinculadas antes de remover este curso.

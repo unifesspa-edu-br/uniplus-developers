@@ -1,0 +1,36 @@
+---
+title: O grupo de área do ENEM do curso é inválido
+sidebar_label: Grupo de área do ENEM inválido
+description: Quando informado, o grupo de área do ENEM do curso precisa ser um dos quatro valores canônicos da Res. INEP/ENEM 805/2024.
+code: uniplus.configuracao.curso.grupo_area_enem_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um curso, quando um grupo de área do ENEM é informado
+  - Atualização de um curso, quando um grupo de área do ENEM é informado
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#588'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/588
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **grupo de área do ENEM** informado não corresponde a nenhum dos
+quatro valores canônicos da Resolução INEP/ENEM 805/2024 (Anexo I):
+Tecnológica, Humanística I, Humanística II ou Saúde e Biológicas.
+
+O campo é opcional — nem todo curso classifica por área do ENEM — mas,
+quando informado, precisa pertencer a esse domínio fechado. É o mesmo
+vocabulário que o cadastro de peso por área do ENEM referencia por
+valor, sem chave estrangeira.
+
+## Como resolver
+
+Omita o campo, ou informe um dos quatro valores válidos: Tecnológica,
+Humanística I, Humanística II ou Saúde e Biológicas.

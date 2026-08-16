@@ -1,0 +1,30 @@
+---
+title: O grau do curso não foi informado
+sidebar_label: Grau do curso obrigatório
+description: O grau do curso é obrigatório.
+code: uniplus.configuracao.curso.grau_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um curso
+  - Atualização de um curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#588'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/588
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **grau** do curso não foi
+preenchido. Grau é texto livre (ex.: Bacharelado, Licenciatura,
+Tecnólogo) — não um domínio fechado.
+
+## Como resolver
+
+Informe o grau do curso.
