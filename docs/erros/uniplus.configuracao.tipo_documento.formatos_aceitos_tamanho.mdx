@@ -1,0 +1,33 @@
+---
+title: Os formatos aceitos do tipo de documento excedem o tamanho máximo
+sidebar_label: Tamanho dos formatos aceitos
+description: O texto de formatos aceitos do tipo de documento, quando informado, tem no máximo 200 caracteres.
+code: uniplus.configuracao.tipo_documento.formatos_aceitos_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#591'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/591
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O texto de **formatos aceitos** excede o tamanho máximo aceito: 200
+caracteres.
+
+Este campo é um default classificatório, sem efeito material em runtime —
+a regra que de fato vale numa inscrição é a que a exigência documental do
+edital congela, não a lida direto do cadastro.
+
+## Como resolver
+
+Reduza o texto de formatos aceitos para até 200 caracteres.

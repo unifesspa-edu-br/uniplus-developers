@@ -1,0 +1,29 @@
+---
+title: O nome do tipo de documento não foi informado
+sidebar_label: Nome do tipo de documento obrigatório
+description: O nome do tipo de documento é obrigatório.
+code: uniplus.configuracao.tipo_documento.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#591'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/591
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **nome** do tipo de documento não foi
+preenchido.
+
+## Como resolver
+
+Informe um nome para o tipo de documento.

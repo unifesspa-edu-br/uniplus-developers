@@ -1,0 +1,35 @@
+---
+title: O código do tipo de documento não foi informado
+sidebar_label: Código do tipo de documento obrigatório
+description: O código do tipo de documento é a chave natural do cadastro e é obrigatório.
+code: uniplus.configuracao.tipo_documento.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#591'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/591
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **código** do tipo de documento não foi
+preenchido.
+
+O código é a chave natural do cadastro — único entre tipos vivos —, mas,
+diferente do código de modalidade de concorrência, é **editável**: o
+consumo cross-módulo é por snapshot-copy desacoplado, então editar o código
+de um tipo vivo não altera o rótulo já congelado numa exigência documental
+existente.
+
+## Como resolver
+
+Informe um código para o tipo de documento.

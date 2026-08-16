@@ -1,0 +1,33 @@
+---
+title: O tamanho máximo em MB do tipo de documento deve ser positivo
+sidebar_label: Tamanho máximo inválido
+description: O tamanho máximo em MB do tipo de documento, quando informado, precisa ser positivo.
+code: uniplus.configuracao.tipo_documento.tamanho_maximo_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#591'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/591
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **tamanho máximo em MB** informado é zero ou negativo.
+
+Este campo é opcional (o tipo pode não declarar um teto), mas quando
+informado precisa ser estritamente positivo — assim como formatos aceitos,
+é um default classificatório, sem efeito material em runtime.
+
+## Como resolver
+
+Informe um valor positivo, ou omita o campo se o tipo não tem teto de
+tamanho a declarar.

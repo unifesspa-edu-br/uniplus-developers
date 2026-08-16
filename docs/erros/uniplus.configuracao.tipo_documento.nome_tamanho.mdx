@@ -1,0 +1,29 @@
+---
+title: O nome do tipo de documento está fora do tamanho aceito
+sidebar_label: Tamanho do nome do tipo de documento
+description: O nome do tipo de documento precisa ter entre 2 e 200 caracteres.
+code: uniplus.configuracao.tipo_documento.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#591'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/591
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** do tipo de documento está fora do tamanho aceito: entre 2 e 200
+caracteres.
+
+## Como resolver
+
+Informe um nome com entre 2 e 200 caracteres.
