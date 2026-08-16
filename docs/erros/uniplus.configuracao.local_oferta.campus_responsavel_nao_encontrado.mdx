@@ -1,0 +1,38 @@
+---
+title: O campus responsável informado não foi encontrado
+sidebar_label: Campus responsável não encontrado
+description: Quando um local de oferta declara um campus responsável, ele precisa existir vivo — o vínculo em si é opcional.
+code: uniplus.configuracao.local_oferta.campus_responsavel_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um local de oferta, quando um campus responsável é informado
+  - Atualização de um local de oferta, quando um campus responsável é informado
+requisitos:
+  - UNI-REQ-0009
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador de **campus responsável** informado não corresponde a
+nenhum campus vivo.
+
+O vínculo com um campus responsável é opcional — um local de oferta pode
+não declarar nenhum (por exemplo, um polo EaD sem campus associado). Mas
+quando o campo é informado, ele precisa apontar para um campus vivo; esta é
+a integridade referencial que sustenta o modelo *flat* de local de oferta
+(ADR-0065), ligando `LocalOferta` ao `Campus` responsável quando aplicável
+(UNI-REQ-0009).
+
+## Como resolver
+
+Confira o identificador do campus responsável, ou omita o campo se este
+local não tem campus associado.
