@@ -1,0 +1,33 @@
+---
+title: Tipo de etapa não encontrado
+sidebar_label: Tipo de etapa não encontrado
+description: O tipo de etapa identificado não existe.
+code: uniplus.configuracao.tipo_etapa.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um tipo de etapa, com identificador que não resolve
+  - Desativação de um tipo de etapa, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1071'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1071
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhum tipo de etapa
+existente.
+
+Diferente de outros cadastros do módulo, o tipo de etapa nunca é removido —
+só desativado. Um tipo desativado ainda é encontrado por este
+identificador; esta causa é exclusivamente de identificador inexistente.
+
+## Como resolver
+
+Confira o identificador do tipo de etapa.

@@ -1,0 +1,30 @@
+---
+title: O código do tipo de etapa excede o tamanho máximo
+sidebar_label: Tamanho do código do tipo de etapa
+description: O código do tipo de etapa tem no máximo 64 caracteres.
+code: uniplus.configuracao.tipo_etapa.codigo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de etapa
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1071'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1071
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** do tipo de etapa excede o tamanho máximo aceito: 64 caracteres
+— a contagem é feita após normalizar Unicode para a forma composta (NFC),
+para que duas grafias equivalentes do mesmo texto não sejam medidas de
+formas diferentes.
+
+## Como resolver
+
+Reduza o código para até 64 caracteres.

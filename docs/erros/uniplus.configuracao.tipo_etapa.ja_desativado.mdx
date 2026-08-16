@@ -1,0 +1,33 @@
+---
+title: O tipo de etapa já está desativado
+sidebar_label: Tipo de etapa já desativado
+description: Desativar um tipo de etapa que já está desativado é recusado — chamar de novo sobre o mesmo tipo é erro do chamador, não um no-op silencioso.
+code: uniplus.configuracao.tipo_etapa.ja_desativado
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Desativação de um tipo de etapa
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1071'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1071
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação tentou desativar um tipo de etapa que **já está desativado**.
+
+Diferente de um cadastro com soft-delete, aqui não há remoção — desativar é
+a única forma de retirar um tipo de circulação para novos vínculos, e
+chamar essa operação de novo sobre o mesmo tipo não é tratado como
+repetição inofensiva.
+
+## Como resolver
+
+Confira o estado do tipo de etapa antes de desativá-lo — não há
+necessidade de desativar de novo um tipo já desativado.

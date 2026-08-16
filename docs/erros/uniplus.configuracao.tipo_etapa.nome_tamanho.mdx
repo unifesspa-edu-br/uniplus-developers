@@ -1,0 +1,29 @@
+---
+title: O nome do tipo de etapa excede o tamanho máximo
+sidebar_label: Tamanho do nome do tipo de etapa
+description: O nome do tipo de etapa tem no máximo 200 caracteres.
+code: uniplus.configuracao.tipo_etapa.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de etapa
+  - Atualização de um tipo de etapa
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1071'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1071
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** do tipo de etapa excede o tamanho máximo aceito: 200 caracteres
+— a contagem é feita após normalizar Unicode para a forma composta (NFC).
+
+## Como resolver
+
+Reduza o nome para até 200 caracteres.
