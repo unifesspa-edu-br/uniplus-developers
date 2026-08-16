@@ -1,0 +1,32 @@
+---
+title: O código do tipo de etapa não foi informado
+sidebar_label: Código do tipo de etapa obrigatório
+description: O código do tipo de etapa é a chave natural do cadastro e é obrigatório.
+code: uniplus.configuracao.tipo_etapa.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de etapa
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1071'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1071
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **código** do tipo de etapa não foi
+preenchido.
+
+O código é a chave natural do cadastro — único e imutável para sempre,
+mesmo após o tipo ser desativado: desativar impede novos vínculos, mas não
+libera o código para reuso.
+
+## Como resolver
+
+Informe um código para o tipo de etapa.

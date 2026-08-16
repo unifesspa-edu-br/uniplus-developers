@@ -1,0 +1,33 @@
+---
+title: O código do tipo de etapa contém o caractere nulo
+sidebar_label: Código do tipo de etapa com caractere nulo
+description: O código do tipo de etapa não pode conter o caractere nulo (U+0000).
+code: uniplus.configuracao.tipo_etapa.codigo_com_caractere_nulo
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de etapa
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1071'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1071
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** do tipo de etapa contém o caractere nulo (`U+0000`).
+
+O código não segue um formato de vocabulário fechado — aceita qualquer
+composição de caracteres —, mas o caractere nulo é recusado explicitamente:
+ele corrompe strings em C (e em bancos e protocolos que tratam `\0` como
+terminador), então persistir um código que o contenha arrisca truncar o
+valor de forma silenciosa em alguma camada.
+
+## Como resolver
+
+Remova o caractere nulo do código.
