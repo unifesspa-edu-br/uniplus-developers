@@ -1,0 +1,33 @@
+---
+title: A fase típica do tipo de banca excede o tamanho máximo
+sidebar_label: Tamanho da fase típica
+description: A fase típica do tipo de banca, quando informada, tem no máximo 60 caracteres.
+code: uniplus.configuracao.tipo_banca.fase_tipica_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de banca
+  - Atualização de um tipo de banca
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O texto de **fase típica** excede o tamanho máximo aceito: 60 caracteres.
+
+Este campo é um rótulo orientativo — a fase em que a banca usualmente atua
+—, **não** uma referência para o cadastro de fase canônica: pode ficar
+nulo e pode conter um valor que não corresponda a nenhuma fase cadastrada,
+sem que isso seja conferido.
+
+## Como resolver
+
+Reduza o texto de fase típica para até 60 caracteres.

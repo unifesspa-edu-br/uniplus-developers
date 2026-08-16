@@ -1,0 +1,29 @@
+---
+title: A descrição do tipo de banca excede o tamanho máximo
+sidebar_label: Tamanho da descrição do tipo de banca
+description: A descrição do tipo de banca, quando informada, tem no máximo 300 caracteres.
+code: uniplus.configuracao.tipo_banca.descricao_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de banca
+  - Atualização de um tipo de banca
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **descrição** do tipo de banca excede o tamanho máximo aceito: 300
+caracteres.
+
+## Como resolver
+
+Reduza a descrição para até 300 caracteres.
