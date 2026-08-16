@@ -1,0 +1,29 @@
+---
+title: A descrição da condição de atendimento excede o tamanho máximo
+sidebar_label: Tamanho da descrição da condição
+description: A descrição da condição de atendimento especializado, quando informada, tem no máximo 1000 caracteres.
+code: uniplus.configuracao.condicao_atendimento.descricao_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma condição de atendimento especializado
+  - Atualização de uma condição de atendimento especializado
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **descrição** da condição de atendimento excede o tamanho máximo
+aceito: 1000 caracteres.
+
+## Como resolver
+
+Reduza a descrição para até 1000 caracteres.
