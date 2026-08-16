@@ -1,0 +1,29 @@
+---
+title: O nome do curso está fora do tamanho aceito
+sidebar_label: Tamanho do nome do curso
+description: O nome do curso precisa ter entre 2 e 200 caracteres.
+code: uniplus.configuracao.curso.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um curso
+  - Atualização de um curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#588'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/588
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** do curso está fora do tamanho aceito: entre 2 e 200
+caracteres.
+
+## Como resolver
+
+Informe um nome com entre 2 e 200 caracteres.

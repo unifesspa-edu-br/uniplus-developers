@@ -1,0 +1,33 @@
+---
+title: Já existe um curso vivo com este código
+sidebar_label: Código do curso já existe
+description: O código informado já pertence a outro curso vivo.
+code: uniplus.configuracao.curso.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um curso
+  - Atualização de um curso, quando o código muda para um valor já em uso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#588'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/588
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** informado já pertence a outro curso vivo. O código é a
+chave natural do curso, único entre cursos vivos (comparação
+sensível a maiúsculas/minúsculas) — mas **editável**, diferente de
+cadastros com código imutável: um curso removido não reserva o código
+para sempre.
+
+## Como resolver
+
+Escolha outro código, ou confira se o curso que já usa este código é
+o registro que você pretendia atualizar.

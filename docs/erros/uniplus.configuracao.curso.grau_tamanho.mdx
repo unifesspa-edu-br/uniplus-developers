@@ -1,0 +1,29 @@
+---
+title: O grau do curso está fora do tamanho aceito
+sidebar_label: Tamanho do grau do curso
+description: O grau do curso precisa ter entre 2 e 60 caracteres.
+code: uniplus.configuracao.curso.grau_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um curso
+  - Atualização de um curso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#588'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/588
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **grau** do curso está fora do tamanho aceito: entre 2 e 60
+caracteres.
+
+## Como resolver
+
+Informe um grau com entre 2 e 60 caracteres.

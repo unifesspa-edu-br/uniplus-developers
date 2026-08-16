@@ -1,0 +1,30 @@
+---
+title: Curso não encontrado
+sidebar_label: Curso não encontrado
+description: O curso identificado não existe ou já foi removido.
+code: uniplus.configuracao.curso.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um curso, com identificador que não resolve
+  - Remoção de um curso, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#588'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/588
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhum curso existente —
+ou porque nunca existiu, ou porque já foi removido (soft delete).
+
+## Como resolver
+
+Confira o identificador do curso. Se ele foi removido, cadastre um
+novo ou use outro já existente.
