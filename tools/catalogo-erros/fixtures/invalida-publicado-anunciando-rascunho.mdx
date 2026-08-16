@@ -1,0 +1,25 @@
+---
+title: Fixture de validação — publicada anunciando rascunho
+sidebar_label: Fixture inválida (anúncio indevido)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.anuncio_indevido
+http_status: 422
+situacao: publicado
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture está publicada e mesmo assim anuncia rascunho no `description`. Prova que a correspondência vale nos dois sentidos — o card não pode desacreditar comportamento em vigor.
+
+## Como resolver
+
+Não se aplica — fixture de teste.

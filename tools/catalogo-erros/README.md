@@ -21,9 +21,17 @@ casos que reimplementar à mão só reabrem um por um.
 ## Uso
 
 ```bash
-node tools/catalogo-erros/validar.mjs                  # valida docs/erros
-node tools/catalogo-erros/validar.mjs <arquivo|dir>...  # alvos explícitos
+node tools/catalogo-erros/validar.mjs                        # docs/erros + sidebars.ts
+node tools/catalogo-erros/validar.mjs <arquivo|dir>...       # só o contrato de página
+node tools/catalogo-erros/validar.mjs --sidebar=<arq> <dir>  # contrato + catálogo
 ```
+
+Sem argumento nenhum — a invocação que o CI roda — o validador confere o
+contrato de página de `docs/erros` **e** o contrato de catálogo contra
+`sidebars.ts`. Com alvos explícitos, confere só o contrato de página; é
+assim que as fixtures são exercitadas, já que nelas o nome do arquivo é
+descritivo e não um endereço público. `--sidebar=` liga o contrato de
+catálogo sobre os alvos informados.
 
 Saída:
 
@@ -40,6 +48,59 @@ Exit code != 0 quando houver pelo menos um erro.
 3. Cada item existe em `src/data/produto/requisitos-mvp-selecao.ts`.
 4. A prosa (fora do frontmatter) não usa o alias `RNxx`/`REQ-NN` — cita o
    `UNI-REQ-NNNN` correspondente.
+5. `code` existe e casa a taxonomia do identificador de causa
+   (`^[a-z]+(\.[a-z_]+)+$`, ADR-0023 da `uniplus-api`).
+6. `situacao` é `publicado` ou `rascunho` — os dois estados que
+   `ErrorCatalogEntry` sabe renderizar —, e o `description` começa com
+   `Rascunho —` **se e somente se** a página é rascunho. É o `description`
+   que vira o texto do card no índice: rascunho que não se anuncia engana
+   quem varre a lista, e entrada publicada anunciando rascunho desacredita
+   comportamento que já está em vigor.
+7. A prosa traz `## O que aconteceu` e `## Como resolver`, e nenhum H1 — o
+   título da página é o `title` do frontmatter, e um `#` na prosa cria um
+   segundo H1 concorrente (WCAG 1.3.1).
+8. A entrada invoca uma vez `<ErrorCatalogEntry {...frontMatter} />`, com o
+   espalhamento como **atributo único**, que é o cabeçalho de identidade da
+   página (code, título, status, campo `type`, situação). Sem ele, com props
+   avulsas no lugar do espalhamento, ou com qualquer prop depois dele — que
+   sobrescreveria o valor espalhado e publicaria um cabeçalho contradizendo
+   a própria rota —, a página perde a identidade e nada mais reprova: a
+   checagem de alias descarta JSX por construção, a rota continua
+   respondendo e o índice não muda. O espalhamento é reconhecido pela
+   estree do atributo, não pelo texto cru, para que `{ ...frontMatter }`
+   com espaço valha igual. O identificador também precisa vir de
+   `@site/src/components/ErrorCatalogEntry`: o nome da tag sozinho não
+   amarra qual componente renderiza, e importar outro com o mesmo nome
+   constrói sem erro.
+9. `title` existe e `hide_title` não é declarado — em nenhuma forma. O
+   Docusaurus deixa a página desligar o próprio título pelo frontmatter, e
+   aí a entrada renderiza sem H1 nenhum; a checagem de prosa não alcança
+   isso, porque não há H1 escrito à mão para rejeitar. A regra é a
+   presença do campo, não seu valor: o frontmatter passa por schema
+   booleano, que coage `"true"` citado e afins, enquanto o `gray-matter`
+   entrega a cadeia crua. Nenhuma entrada tem motivo para declarar o
+   campo, então recusar a presença fecha a classe inteira.
+
+E, no modo catálogo:
+
+10. O `code` é idêntico ao nome do arquivo. É isso que faz a rota
+   `/erros/{code}` existir e o campo `type` do corpo de erro resolver: se
+   os dois divergem, a página existe, responde 200, e publica um `type`
+   que aponta para outro lugar.
+11. As páginas de `docs/erros` e os itens da categoria do catálogo em
+   `sidebars.ts` são o mesmo conjunto, nos dois sentidos — é dessa
+   categoria que o `DocCardList` da visão geral tira a lista. Página fora
+   da navegação fica publicada e invisível; item sem página quebra o
+   caminho de quem clica.
+
+As regras 10 e 11 valem sobre o catálogo publicado, onde o nome do arquivo é
+o endereço público, e por isso ficam num modo explícito em vez de valer
+para todo alvo. A navegação é lida pela AST do `typescript`, e a categoria
+é identificada pelo `link` para `erros/index` — o vínculo que faz
+`useCurrentSidebarCategory()` resolvê-la —, não pelo rótulo, que é
+apresentação. Categoria ausente ou vazia **falha alto**: um gate que
+devolvesse lista vazia porque a forma do arquivo mudou passaria a aprovar
+qualquer coisa por comparação vacuosa.
 
 O escopo é só o que é passado como alvo: o gate de CI aponta para
 `docs/erros` e nunca alcança `docs/produto/` nem `src/data/`.
@@ -135,6 +196,41 @@ como trava contra qualquer regressão futura no parsing:
 - `valida-indentacao-alternativa.mdx` — lista `requisitos` indentada com 4
   espaços em vez de 2; prova que a largura da indentação (YAML válido,
   fora do contrato) não derruba a página.
+- `invalida-code-fora-da-taxonomia.mdx` — `code` com maiúsculas; prova a
+  regra 5.
+- `invalida-situacao-desconhecida.mdx` — `situacao` que o cabeçalho não
+  sabe renderizar; prova que valor fora do conjunto reprova em vez de a
+  etiqueta sumir da página.
+- `invalida-rascunho-sem-anuncio.mdx` e
+  `invalida-publicado-anunciando-rascunho.mdx` — os dois sentidos da
+  correspondência entre `situacao` e o `description` (regra 6).
+- `valida-publicada.mdx` — entrada publicada que não anuncia rascunho;
+  o caso conforme do outro lado do se-e-somente-se.
+- `invalida-sem-secao-obrigatoria.mdx` — traz a causa e omite a
+  remediação; prova a regra 7.
+- `invalida-h1-na-prosa.mdx` — abre a prosa com `#`, criando um segundo
+  H1 concorrente com o título do frontmatter.
+- `invalida-titulo-oculto.mdx`, `invalida-titulo-oculto-citado.mdx` e
+  `invalida-sem-titulo.mdx` — as formas de a entrada ficar sem H1 pelo
+  frontmatter (regra 9), incluindo o valor citado que só o schema do
+  Docusaurus coage.
+- `invalida-sem-cabecalho.mdx`, `invalida-cabecalho-sem-frontmatter.mdx` e
+  `invalida-cabecalho-com-prop-sobreposta.mdx` — as três formas de o
+  cabeçalho deixar de ser o frontmatter (regra 8): não invocar o
+  componente, invocá-lo com props escolhidas a dedo, e espalhar o
+  `frontMatter` mas sobrescrever um campo logo depois.
+- `invalida-cabecalho-de-outro-modulo.mdx` — importa outro componente com
+  o nome do cabeçalho; prova que o gate confere o import, não só a tag.
+- `catalogo/` — fixtures do modo catálogo: duas páginas conformes em
+  `paginas/`, uma com `code` divergente do nome em
+  `paginas-code-divergente/`, e uma navegação por caso —
+  `sidebars-conforme.ts` (passa), `sidebars-sem-a-segunda.ts` (página
+  fora da navegação), `sidebars-com-item-orfao.ts` (item sem página),
+  `sidebars-com-item-repetido.ts` (card duplicado no índice, que a
+  comparação de conjuntos sozinha não veria), `sidebars-divergente.ts`
+  (regra 9), `sidebars-sem-categoria.ts` e `sidebars-vazia.ts` (os dois
+  casos em que o validador precisa falhar alto em vez de comparar contra
+  lista vazia).
 - `pagina-md/invalida.md` — página `.md`, não `.mdx`, com `UNI-REQ-9999`;
   prova que a varredura recursiva cobre as duas extensões, já que o
   Docusaurus 3 processa ambas pelo mesmo pipeline MDX neste portal.

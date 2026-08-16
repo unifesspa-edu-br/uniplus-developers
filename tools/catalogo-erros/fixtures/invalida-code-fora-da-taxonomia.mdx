@@ -1,0 +1,25 @@
+---
+title: Fixture de validação — code fora da taxonomia
+sidebar_label: Fixture inválida (taxonomia)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: UNIPLUS.Fixture.CodeInvalido
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture declara um `code` com maiúsculas, que a taxonomia do identificador de causa não admite. Prova que o validador reprova o identificador fora do padrão.
+
+## Como resolver
+
+Não se aplica — fixture de teste.

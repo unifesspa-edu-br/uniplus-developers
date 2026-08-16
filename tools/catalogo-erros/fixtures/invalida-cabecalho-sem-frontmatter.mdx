@@ -1,0 +1,29 @@
+---
+title: Fixture de validação — cabeçalho com props avulsas
+sidebar_label: Fixture inválida (props avulsas)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.cabecalho_avulso
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos:
+  - UNI-REQ-0001  # vínculo principal
+  - UNI-REQ-0002
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry code="uniplus.fixture.catalogo_erros.outro" situacao="publicado" />
+
+## O que aconteceu
+
+Esta fixture passa props escolhidas a dedo em vez de espalhar o `frontMatter`.
+O cabeçalho publicado deixa de ser o que o frontmatter declara — que é
+justamente o que os gates conferem entrada a entrada.
+
+## Como resolver
+
+Não se aplica — fixture de teste.

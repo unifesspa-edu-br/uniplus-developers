@@ -55,7 +55,7 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Validar páginas publicadas (docs/erros)
+      - name: Validar páginas publicadas e a navegação do catálogo (docs/erros)
         run: node tools/catalogo-erros/validar.mjs
 
       - name: Prova do gate — fixture válida passa (inclui comentário inline)
@@ -173,5 +173,163 @@ jobs:
         run: |
           if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/pagina-md; then
             echo "ERRO: o validador ignorou uma página .md — a varredura só cobria .mdx" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — code fora da taxonomia reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-code-fora-da-taxonomia.mdx; then
+            echo "ERRO: o validador aceitou code fora da taxonomia de identificador de causa" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — situação desconhecida reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-situacao-desconhecida.mdx; then
+            echo "ERRO: o validador aceitou situacao que o cabeçalho da entrada não renderiza" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — rascunho que não se anuncia reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-rascunho-sem-anuncio.mdx; then
+            echo "ERRO: o validador aceitou rascunho sem anúncio no description — o card do índice não avisaria" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — entrada publicada anunciando rascunho reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-publicado-anunciando-rascunho.mdx; then
+            echo "ERRO: o validador aceitou anúncio de rascunho em entrada publicada — a correspondência só vale num sentido" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — entrada publicada conforme passa
+        run: node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/valida-publicada.mdx
+
+      - name: Prova do gate — seção obrigatória ausente reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-sem-secao-obrigatoria.mdx; then
+            echo "ERRO: o validador aceitou entrada sem '## Como resolver'" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — H1 na prosa reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-h1-na-prosa.mdx; then
+            echo "ERRO: o validador aceitou um segundo H1 concorrendo com o título do frontmatter" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — título suprimido pelo frontmatter reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-titulo-oculto.mdx; then
+            echo "ERRO: o validador aceitou hide_title — a entrada renderizaria sem H1 nenhum" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — entrada sem título reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-sem-titulo.mdx; then
+            echo "ERRO: o validador aceitou entrada sem title — é o H1 da página" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — entrada sem o cabeçalho de identidade reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-sem-cabecalho.mdx; then
+            echo "ERRO: o validador aceitou entrada sem <ErrorCatalogEntry> — publicaria prosa sem code, type nem situação" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — cabeçalho com props avulsas reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-cabecalho-sem-frontmatter.mdx; then
+            echo "ERRO: o validador aceitou <ErrorCatalogEntry> sem {...frontMatter} — o cabeçalho publicado divergiria do frontmatter" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — prop sobrepondo o frontmatter no cabeçalho reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-cabecalho-com-prop-sobreposta.mdx; then
+            echo "ERRO: o validador aceitou prop depois de {...frontMatter} — o cabeçalho publicado contradiria a rota da página" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — hide_title com valor citado reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-titulo-oculto-citado.mdx; then
+            echo "ERRO: o validador comparou hide_title com o booleano literal — o Docusaurus coage o valor citado e a página fica sem H1" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate — cabeçalho importado de outro módulo reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-cabecalho-de-outro-modulo.mdx; then
+            echo "ERRO: o validador reconheceu só o nome da tag — o identificador pode vir de qualquer componente" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate (catálogo) — navegação conforme passa
+        run: |
+          node tools/catalogo-erros/validar.mjs \
+            --sidebar=tools/catalogo-erros/fixtures/catalogo/sidebars-conforme.ts \
+            tools/catalogo-erros/fixtures/catalogo/paginas
+
+      - name: Prova do gate (catálogo) — página fora da navegação reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs \
+            --sidebar=tools/catalogo-erros/fixtures/catalogo/sidebars-sem-a-segunda.ts \
+            tools/catalogo-erros/fixtures/catalogo/paginas; then
+            echo "ERRO: o validador aceitou página publicada e ausente da navegação — ela não apareceria no índice" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate (catálogo) — item de navegação sem página reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs \
+            --sidebar=tools/catalogo-erros/fixtures/catalogo/sidebars-com-item-orfao.ts \
+            tools/catalogo-erros/fixtures/catalogo/paginas; then
+            echo "ERRO: o validador aceitou item de navegação sem página correspondente" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate (catálogo) — code divergente do nome do arquivo reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs \
+            --sidebar=tools/catalogo-erros/fixtures/catalogo/sidebars-divergente.ts \
+            tools/catalogo-erros/fixtures/catalogo/paginas-code-divergente; then
+            echo "ERRO: o validador aceitou code divergente do nome do arquivo — o campo type publicado apontaria para outro lugar" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate (catálogo) — item repetido na navegação reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs \
+            --sidebar=tools/catalogo-erros/fixtures/catalogo/sidebars-com-item-repetido.ts \
+            tools/catalogo-erros/fixtures/catalogo/paginas; then
+            echo "ERRO: o validador aceitou item repetido na navegação — o índice publicaria card duplicado" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate (catálogo) — categoria ausente na navegação falha alto
+        run: |
+          saida="$(node tools/catalogo-erros/validar.mjs \
+            --sidebar=tools/catalogo-erros/fixtures/catalogo/sidebars-sem-categoria.ts \
+            tools/catalogo-erros/fixtures/catalogo/paginas 2>&1 || true)"
+          echo "$saida"
+          if ! grep -q "não encontrada" <<< "$saida"; then
+            echo "ERRO: navegação sem a categoria do catálogo não falhou alto — o gate passaria a comparar contra lista vazia" >&2
+            exit 1
+          fi
+
+      - name: Prova do gate (catálogo) — categoria vazia na navegação falha alto
+        run: |
+          saida="$(node tools/catalogo-erros/validar.mjs \
+            --sidebar=tools/catalogo-erros/fixtures/catalogo/sidebars-vazia.ts \
+            tools/catalogo-erros/fixtures/catalogo/paginas 2>&1 || true)"
+          echo "$saida"
+          if ! grep -q "sem nenhuma entrada" <<< "$saida"; then
+            echo "ERRO: categoria vazia não falhou alto — catálogo vazio passaria por comparação vacuosa" >&2
             exit 1
           fi

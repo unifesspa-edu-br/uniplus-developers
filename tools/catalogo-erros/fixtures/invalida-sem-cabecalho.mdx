@@ -1,0 +1,26 @@
+---
+title: Fixture de validação — sem o cabeçalho de identidade
+sidebar_label: Fixture inválida (sem cabeçalho)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.sem_cabecalho
+http_status: 422
+situacao: rascunho
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos:
+  - UNI-REQ-0001  # vínculo principal
+  - UNI-REQ-0002
+rastreio: []
+---
+
+
+## O que aconteceu
+
+Esta fixture não invoca o cabeçalho de identidade. A página renderizaria só a
+prosa, sem `code`, sem campo `type`, sem status e sem situação — e nada mais
+reprovaria: a checagem de alias descarta JSX, e a rota continuaria respondendo.
+
+## Como resolver
+
+Não se aplica — fixture de teste.

@@ -1,0 +1,25 @@
+---
+title: Fixture de validação — situação desconhecida
+sidebar_label: Fixture inválida (situação)
+description: Rascunho — fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.situacao_desconhecida
+http_status: 422
+situacao: em_revisao
+modulo: Fixture
+emitido_em:
+  - Execução do validador em CI
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Esta fixture declara uma `situacao` que o cabeçalho da entrada não sabe renderizar. Prova que o validador reprova valor fora do conjunto conhecido, em vez de deixar a etiqueta sumir da página.
+
+## Como resolver
+
+Não se aplica — fixture de teste.
