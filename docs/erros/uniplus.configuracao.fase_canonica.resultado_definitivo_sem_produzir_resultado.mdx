@@ -1,0 +1,37 @@
+---
+title: Resultado definitivo exige que a fase também produza resultado
+sidebar_label: Resultado definitivo sem produzir resultado
+description: O sinalizador resultado_definitivo só pode ser verdadeiro quando produz_resultado também é verdadeiro.
+code: uniplus.configuracao.fase_canonica.resultado_definitivo_sem_produzir_resultado
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica
+  - Atualização de uma fase canônica
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O sinalizador **resultado definitivo** foi enviado como verdadeiro, mas
+**produz resultado** não foi.
+
+Resultado definitivo é verdadeiro quando o resultado produzido pela fase não
+admite recurso — um conceito que só faz sentido se a fase de fato produz
+resultado algum. Resultado definitivo implica produzir resultado; a
+implicação inversa não vale — uma fase pode produzir resultado sem que ele
+seja definitivo (por exemplo, resultado preliminar, sujeito a recurso).
+
+## Como resolver
+
+Envie `produz_resultado: true` junto com `resultado_definitivo: true`, ou
+envie `resultado_definitivo: false` se o resultado desta fase admite
+recurso.

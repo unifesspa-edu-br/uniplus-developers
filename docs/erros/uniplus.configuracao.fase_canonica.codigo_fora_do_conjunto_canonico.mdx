@@ -1,0 +1,37 @@
+---
+title: O código não pertence ao conjunto canônico das quatorze fases
+sidebar_label: Código fora do conjunto canônico
+description: Além do formato, o código da fase precisa ser um dos quatorze códigos do vocabulário fechado do ciclo de vida do processo seletivo.
+code: uniplus.configuracao.fase_canonica.codigo_fora_do_conjunto_canonico
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código informado respeita o formato (`^[A-Z_]+$`), mas não é um dos
+quatorze códigos do conjunto canônico:
+
+`INSCRICAO`, `HOMOLOGACAO`, `ENSALAMENTO`, `AVALIACAO`, `CLASSIFICACAO`,
+`RESULTADO_PRELIMINAR`, `RECURSOS`, `RESULTADO_FINAL`, `HABILITACAO`,
+`HETEROIDENTIFICACAO`, `MATRICULA`, `HOMOLOGACAO_RESULTADO_FINAL`,
+`LISTA_ESPERA`, `CHAMADA`.
+
+O cadastro é 100% administrado (sem seed) — os valores reais das quatorze
+fases são populados via endpoint admin, ato operacional pós-deploy — mas o
+próprio conjunto de códigos aceitos é fixo em código, não configurável.
+
+## Como resolver
+
+Use um dos quatorze códigos do conjunto canônico listados acima.

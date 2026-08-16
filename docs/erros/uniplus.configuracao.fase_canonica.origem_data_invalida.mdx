@@ -1,0 +1,29 @@
+---
+title: A origem da data da fase canônica é inválida
+sidebar_label: Origem da data inválida
+description: A origem da data da fase canônica precisa ser um dos dois tokens do domínio fechado — PROPRIA ou DELEGADA.
+code: uniplus.configuracao.fase_canonica.origem_data_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica
+  - Atualização de uma fase canônica
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **origem da data** informada não é um dos dois tokens do domínio fechado:
+`PROPRIA` ou `DELEGADA`.
+
+## Como resolver
+
+Informe um dos dois tokens válidos: `PROPRIA` ou `DELEGADA`.

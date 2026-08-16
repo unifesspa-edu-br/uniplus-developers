@@ -1,0 +1,29 @@
+---
+title: A descrição da fase canônica excede o tamanho máximo
+sidebar_label: Tamanho da descrição da fase
+description: A descrição da fase canônica, quando informada, tem no máximo 300 caracteres.
+code: uniplus.configuracao.fase_canonica.descricao_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica
+  - Atualização de uma fase canônica
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **descrição** da fase canônica excede o tamanho máximo aceito: 300
+caracteres.
+
+## Como resolver
+
+Reduza a descrição para até 300 caracteres.

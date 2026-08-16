@@ -1,0 +1,34 @@
+---
+title: Apenas a fase de avaliação agrupa etapas pontuadas
+sidebar_label: Agrupar etapas só em avaliação
+description: O sinalizador agrupa_etapas só pode ser verdadeiro na fase de código AVALIACAO.
+code: uniplus.configuracao.fase_canonica.agrupa_etapas_apenas_avaliacao
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma fase canônica, quando o código não é AVALIACAO
+  - Atualização de uma fase canônica, quando o código não é AVALIACAO
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O sinalizador **agrupa etapas** foi enviado como verdadeiro numa fase cujo
+código não é `AVALIACAO`.
+
+Fase canônica não é Etapa — a Etapa pontuada pertence a outro cadastro; este
+sinalizador só marca qual fase as agrupa, e no vocabulário de quatorze fases
+só a de avaliação cumpre esse papel.
+
+## Como resolver
+
+Envie `agrupa_etapas: false`, ou — se a intenção é mesmo agrupar etapas
+pontuadas — isso só é válido na fase de código `AVALIACAO`.

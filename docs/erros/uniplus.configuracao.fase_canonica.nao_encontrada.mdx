@@ -1,0 +1,34 @@
+---
+title: Fase canônica não encontrada
+sidebar_label: Fase canônica não encontrada
+description: A fase canônica identificada não existe ou já foi removida.
+code: uniplus.configuracao.fase_canonica.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de uma fase canônica, com identificador que não resolve
+  - Remoção de uma fase canônica, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhuma fase canônica existente
+— ou porque nunca existiu, ou porque já foi removida (soft delete).
+
+A remoção de uma fase canônica nunca é bloqueada — o único consumo é por
+snapshot-copy desacoplado no módulo Seleção (ADR-0061), sem chave
+estrangeira intra-banco apontando para esta entidade.
+
+## Como resolver
+
+Confira o identificador da fase. Se ela foi removida, cadastre uma nova ou
+use outra já existente.
