@@ -1,0 +1,29 @@
+---
+title: A descrição do tipo de documento excede o tamanho máximo
+sidebar_label: Tamanho da descrição do tipo de documento
+description: A descrição do tipo de documento, quando informada, tem no máximo 1000 caracteres.
+code: uniplus.configuracao.tipo_documento.descricao_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#591'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/591
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **descrição** do tipo de documento excede o tamanho máximo aceito: 1000
+caracteres.
+
+## Como resolver
+
+Reduza a descrição para até 1000 caracteres.

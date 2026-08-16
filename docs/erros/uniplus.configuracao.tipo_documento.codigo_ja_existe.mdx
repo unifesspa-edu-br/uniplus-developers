@@ -1,0 +1,36 @@
+---
+title: Já existe um tipo de documento vivo com este código
+sidebar_label: Código do tipo de documento já existe
+description: O código do tipo de documento é único entre tipos vivos — índice único parcial que ignora os removidos.
+code: uniplus.configuracao.tipo_documento.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento, quando o código é alterado para um já em uso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#591'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/591
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe um tipo de documento **vivo** com o código informado.
+
+O código é editável — diferente de modalidade de concorrência —, então esta
+checagem também roda na atualização, mas só quando o código efetivamente
+muda: reenviar o mesmo código do próprio registro na atualização não
+dispara este erro. A checagem cobre tanto o caminho comum quanto a corrida
+entre duas operações concorrentes com o mesmo código: o índice único
+parcial do banco garante a exclusividade, e uma violação nele é traduzida
+para este mesmo erro.
+
+## Como resolver
+
+Use um código diferente.

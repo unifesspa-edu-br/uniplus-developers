@@ -1,0 +1,35 @@
+---
+title: Tipo de documento não encontrado
+sidebar_label: Tipo de documento não encontrado
+description: O tipo de documento identificado não existe ou já foi removido.
+code: uniplus.configuracao.tipo_documento.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um tipo de documento, com identificador que não resolve
+  - Remoção de um tipo de documento, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#591'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/591
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhum tipo de documento
+existente — ou porque nunca existiu, ou porque já foi removido (soft
+delete).
+
+A remoção nunca é bloqueada por referência: outro tipo pode citar este como
+equivalente (rótulo, não relacionamento material) sem que isso impeça a
+remoção.
+
+## Como resolver
+
+Confira o identificador do tipo de documento. Se ele foi removido, cadastre
+um novo ou use outro já existente.
