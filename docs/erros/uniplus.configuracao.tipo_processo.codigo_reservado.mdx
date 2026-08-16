@@ -1,0 +1,29 @@
+---
+title: O código do tipo de processo seletivo é reservado
+sidebar_label: Código do tipo de processo reservado
+description: O código "*" é reservado para obrigatoriedade legal universal e não pode ser usado por um cadastro de tipo de processo seletivo.
+code: uniplus.configuracao.tipo_processo.codigo_reservado
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1070'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1070
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código informado é `*` — reservado para expressar obrigatoriedade legal
+**universal** (aplicável a todo tipo de processo, não a um tipo específico),
+não disponível para um cadastro de tipo de processo seletivo.
+
+## Como resolver
+
+Use um código diferente de `*` para o tipo de processo seletivo.

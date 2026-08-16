@@ -1,0 +1,30 @@
+---
+title: A descrição do tipo de processo seletivo contém o caractere nulo
+sidebar_label: Descrição do tipo de processo com caractere nulo
+description: A descrição do tipo de processo seletivo, quando informada, não pode conter o caractere nulo (U+0000).
+code: uniplus.configuracao.tipo_processo.descricao_com_caractere_nulo
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de processo seletivo
+  - Atualização de um tipo de processo seletivo
+requisitos:
+  - UNI-REQ-0098
+rastreio:
+  - label: 'uniplus-api#1070'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1070
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **descrição** do tipo de processo seletivo contém o caractere nulo
+(`U+0000`).
+
+## Como resolver
+
+Remova o caractere nulo da descrição.

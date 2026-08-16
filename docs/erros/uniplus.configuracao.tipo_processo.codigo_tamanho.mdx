@@ -1,0 +1,37 @@
+---
+title: O código do tipo de processo seletivo excede o tamanho máximo
+sidebar_label: Tamanho do código do tipo de processo
+description: O código do tipo de processo seletivo tem no máximo 64 caracteres.
+code: uniplus.configuracao.tipo_processo.codigo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1070'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1070
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** do tipo de processo seletivo excede o tamanho máximo aceito: 64
+caracteres.
+
+Diferente de outros cadastros de vocabulário fechado do módulo (como
+modalidade e fase canônica), o código do tipo de processo não segue um
+formato UPPER_SNAKE restrito — aceita qualquer caractere, exceto o caractere
+nulo (ver
+[código com caractere nulo](./uniplus.configuracao.tipo_processo.codigo_com_caractere_nulo.mdx)).
+Isso é sobre o conjunto de caracteres aceitos, não sobre todo valor: o
+código `*` é recusado por inteiro, reservado a outro propósito (ver
+[código reservado](./uniplus.configuracao.tipo_processo.codigo_reservado.mdx)).
+
+## Como resolver
+
+Reduza o código para até 64 caracteres.

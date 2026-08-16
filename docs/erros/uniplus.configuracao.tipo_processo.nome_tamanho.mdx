@@ -1,0 +1,29 @@
+---
+title: O nome do tipo de processo seletivo excede o tamanho máximo
+sidebar_label: Tamanho do nome do tipo de processo
+description: O nome do tipo de processo seletivo tem no máximo 200 caracteres.
+code: uniplus.configuracao.tipo_processo.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de processo seletivo
+  - Atualização de um tipo de processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1070'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1070
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** do tipo de processo seletivo excede o tamanho máximo aceito: 200
+caracteres.
+
+## Como resolver
+
+Reduza o nome para até 200 caracteres.

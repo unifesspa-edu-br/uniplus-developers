@@ -1,0 +1,33 @@
+---
+title: Tipo de processo seletivo não encontrado
+sidebar_label: Tipo de processo não encontrado
+description: O tipo de processo seletivo identificado não existe.
+code: uniplus.configuracao.tipo_processo.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um tipo de processo seletivo, com identificador que não resolve
+  - Desativação de um tipo de processo seletivo, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1070'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1070
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhum tipo de processo
+seletivo existente.
+
+Diferente de outros cadastros do módulo, o tipo de processo seletivo nunca
+é removido — só desativado. Um tipo desativado ainda é encontrado por este
+identificador; esta causa é exclusivamente de identificador inexistente.
+
+## Como resolver
+
+Confira o identificador do tipo de processo seletivo.
