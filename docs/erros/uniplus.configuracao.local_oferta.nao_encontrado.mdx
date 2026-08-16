@@ -1,0 +1,31 @@
+---
+title: Local de oferta não encontrado
+sidebar_label: Local de oferta não encontrado
+description: O local de oferta identificado não existe ou já foi removido.
+code: uniplus.configuracao.local_oferta.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um local de oferta, com identificador que não resolve
+  - Remoção de um local de oferta, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhum local de oferta
+existente — ou porque nunca existiu, ou porque já foi removido (soft
+delete).
+
+## Como resolver
+
+Confira o identificador do local de oferta. Se ele foi removido, cadastre
+um novo ou use outro já existente.

@@ -1,0 +1,31 @@
+---
+title: Não é possível remover um local de oferta referenciado por oferta de curso ativa
+sidebar_label: Remoção bloqueada por oferta de curso
+description: Um local de oferta referenciado por uma oferta de curso viva não pode ser removido.
+code: uniplus.configuracao.local_oferta.remocao_bloqueada_por_oferta_curso
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Remoção de um local de oferta
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O local de oferta que a operação tentou remover é referenciado por pelo
+menos uma **oferta de curso** viva — integridade do vínculo intra-banco
+entre os dois cadastros.
+
+## Como resolver
+
+Remova as ofertas de curso vinculadas antes de remover este local de
+oferta — o local de uma oferta de curso é imutável, então não é possível
+apenas realocar a oferta para outro local sem recriá-la.

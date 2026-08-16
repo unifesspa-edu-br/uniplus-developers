@@ -1,0 +1,29 @@
+---
+title: O código e-MEC do local de oferta excede o tamanho máximo
+sidebar_label: Tamanho do código e-MEC do local de oferta
+description: O código e-MEC do local de oferta, quando informado, tem no máximo 20 caracteres.
+code: uniplus.configuracao.local_oferta.codigo_emec_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um local de oferta
+  - Atualização de um local de oferta
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código e-MEC** do local de oferta excede o tamanho máximo aceito: 20
+caracteres.
+
+## Como resolver
+
+Informe um código e-MEC com até 20 caracteres.

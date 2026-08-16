@@ -1,0 +1,36 @@
+---
+title: O tipo de local de oferta é inválido
+sidebar_label: Tipo do local de oferta inválido
+description: O tipo do local de oferta é obrigatório e precisa ser um dos seis valores definidos, diferente do sentinela "nenhum".
+code: uniplus.configuracao.local_oferta.tipo_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um local de oferta
+  - Atualização de um local de oferta
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **tipo** do local de oferta não foi informado, ou foi informado como o
+valor sentinela `nenhum` — nos dois casos, o cadastro recusa.
+
+O tipo classifica a modalidade do local: campus sede, campus fora de sede,
+curso fora de sede, polo EaD, convênio de interiorização ou outro. É um
+roster fechado — um valor de texto desconhecido, que não corresponda a
+nenhum dos seis tipos válidos nem ao sentinela `nenhum`, é recusado antes
+de chegar aqui, na desserialização da requisição, com um erro genérico que
+não carrega este código.
+
+## Como resolver
+
+Informe um dos seis tipos válidos de local de oferta.
