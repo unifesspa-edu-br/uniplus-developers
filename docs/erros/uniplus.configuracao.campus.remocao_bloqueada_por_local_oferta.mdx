@@ -23,9 +23,10 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 O campus que a operação tentou remover é responsável por pelo menos um
 **local de oferta** vivo — integridade do vínculo intra-banco entre os
-dois cadastros. `LocalOferta` sempre referencia o campus responsável por
-ele (UNI-REQ-0009); remover o campus sem antes desvincular ou realocar
-esses locais quebraria essa referência.
+dois cadastros. O vínculo é opcional em `LocalOferta` (nem todo local
+declara um campus responsável), mas quando declarado (UNI-REQ-0009)
+remover o campus sem antes desvincular ou realocar esses locais
+quebraria essa referência.
 
 ## Como resolver
 
