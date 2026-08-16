@@ -1,0 +1,33 @@
+---
+title: Tipo de deficiência não encontrado
+sidebar_label: Tipo de deficiência não encontrado
+description: O tipo de deficiência identificado não existe ou já foi removido.
+code: uniplus.configuracao.tipo_deficiencia.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um tipo de deficiência, com identificador que não resolve
+  - Remoção de um tipo de deficiência, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado não corresponde a nenhum tipo de deficiência
+existente — ou porque nunca existiu, ou porque já foi removido (soft
+delete).
+
+A remoção nunca é bloqueada por referência.
+
+## Como resolver
+
+Confira o identificador do tipo de deficiência. Se ele foi removido,
+cadastre um novo ou use outro já existente.

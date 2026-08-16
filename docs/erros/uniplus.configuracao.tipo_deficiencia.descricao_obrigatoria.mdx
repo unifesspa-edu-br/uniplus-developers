@@ -1,0 +1,34 @@
+---
+title: A descrição do tipo de deficiência não foi informada
+sidebar_label: Descrição do tipo de deficiência obrigatória
+description: A descrição do tipo de deficiência é obrigatória — diferente de outros cadastros de tipo, aqui ela não é opcional.
+code: uniplus.configuracao.tipo_deficiencia.descricao_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de deficiência
+  - Atualização de um tipo de deficiência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque a **descrição** do tipo de deficiência não
+foi preenchida.
+
+Diferente de outros cadastros de tipo do módulo (onde descrição costuma ser
+opcional), aqui ela é obrigatória: serve também como a descrição por valor
+exigida para o fato `TIPO_DEFICIENCIA` do vocabulário de fatos do
+candidato.
+
+## Como resolver
+
+Informe uma descrição para o tipo de deficiência.

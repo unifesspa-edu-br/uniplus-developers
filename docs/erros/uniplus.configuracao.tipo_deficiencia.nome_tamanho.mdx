@@ -1,0 +1,29 @@
+---
+title: O nome do tipo de deficiência está fora do tamanho aceito
+sidebar_label: Tamanho do nome do tipo de deficiência
+description: O nome do tipo de deficiência precisa ter entre 2 e 200 caracteres.
+code: uniplus.configuracao.tipo_deficiencia.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de deficiência
+  - Atualização de um tipo de deficiência
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#590'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/590
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **nome** do tipo de deficiência está fora do tamanho aceito: entre 2 e
+200 caracteres.
+
+## Como resolver
+
+Informe um nome com entre 2 e 200 caracteres.
