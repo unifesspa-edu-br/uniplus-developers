@@ -1,6 +1,15 @@
 import React from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {
+  AVISO,
+  BLOCO,
+  ETIQUETA,
+  Item,
+  LISTA,
+  ListaDeLinks,
+  type RastreioEntrada,
+} from './catalogo/estiloCatalogo';
 
 /**
  * Estado da entrada no catálogo.
@@ -14,11 +23,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
  * vigor.
  */
 export type SituacaoEntrada = 'rascunho' | 'publicado';
-
-export interface RastreioEntrada {
-  label: string;
-  href: string;
-}
 
 /**
  * As propriedades espelham o frontmatter da página, em snake_case, para que a
@@ -66,71 +70,6 @@ const SITUACAO_STYLE: Record<SituacaoEntrada, React.CSSProperties> = {
   },
 };
 
-const ETIQUETA: React.CSSProperties = {
-  display: 'inline-block',
-  padding: '0.1rem 0.5rem',
-  borderRadius: 'var(--radius-govbr-sm, 4px)',
-  fontSize: '0.78rem',
-  fontWeight: 600,
-  lineHeight: 1.5,
-  whiteSpace: 'nowrap',
-  color: 'var(--color-govbr-gray-80, #333333)',
-  border: '1px solid var(--color-govbr-gray-20, #ccc)',
-};
-
-const BLOCO: React.CSSProperties = {
-  border: '1px solid var(--ifm-color-emphasis-300)',
-  borderRadius: 'var(--radius-govbr-md, 8px)',
-  padding: 'var(--spacing-govbr-4, 16px)',
-  marginBottom: 'var(--spacing-govbr-5, 24px)',
-};
-
-// Aviso de rascunho, emitido pelo próprio componente: a entrada é endereçável
-// direto pelo campo `type`, então quem chega aqui pode nunca passar pelo índice.
-// Deixá-lo a cargo de quem escreve a página abriria espaço para faltar em uma.
-const AVISO: React.CSSProperties = {
-  borderLeft: '4px solid var(--color-govbr-warning)',
-  background: 'var(--color-govbr-warning-light)',
-  color: 'var(--color-govbr-gray-80, #333333)',
-  borderRadius: 'var(--radius-govbr-sm, 4px)',
-  padding: 'var(--spacing-govbr-3, 12px) var(--spacing-govbr-4, 16px)',
-  marginBottom: 'var(--spacing-govbr-4, 16px)',
-};
-
-const LISTA: React.CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: 'minmax(9rem, max-content) 1fr',
-  gap: '0.35rem var(--spacing-govbr-4, 16px)',
-  margin: 0,
-};
-
-const ROTULO: React.CSSProperties = {
-  fontWeight: 600,
-  margin: 0,
-};
-
-// `code` e URI são cadeias longas sem espaço: sem a quebra, a viewport estreita
-// rola na horizontal (WCAG 1.4.10 — reflow a 320 px).
-const VALOR: React.CSSProperties = {
-  margin: 0,
-  overflowWrap: 'anywhere',
-};
-
-function Item({
-  rotulo,
-  children,
-}: {
-  rotulo: string;
-  children: React.ReactNode;
-}): React.ReactElement {
-  return (
-    <>
-      <dt style={ROTULO}>{rotulo}</dt>
-      <dd style={VALOR}>{children}</dd>
-    </>
-  );
-}
-
 /**
  * Cabeçalho de identidade de uma entrada do catálogo público de erros
  * (`/erros/{code}`), previsto na ADR-0001 deste repositório.
@@ -157,7 +96,7 @@ export default function ErrorCatalogEntry({
   const typeUri = `${siteConfig.url}${useBaseUrl(`/erros/${code}`)}`;
 
   return (
-    <div style={BLOCO}>
+    <article style={BLOCO}>
       {situacao === 'rascunho' && (
         <div style={AVISO} role="note">
           <strong>Entrada em rascunho.</strong> O código já está fixado, mas a
@@ -165,51 +104,48 @@ export default function ErrorCatalogEntry({
           vigor, e os valores ainda podem mudar. Não programe contra ela.
         </div>
       )}
-      <dl style={LISTA}>
-        <Item rotulo="Código">
-          <code>{code}</code>
-        </Item>
-        <Item rotulo="Título emitido">{title}</Item>
-        <Item rotulo="Status HTTP">
-          {http_status ?? 'a definir na implementação'}
-        </Item>
-        <Item rotulo="Campo type">
-          <code>{typeUri}</code>
-        </Item>
-        <Item rotulo="Situação">
-          <span style={{...ETIQUETA, ...SITUACAO_STYLE[situacao]}}>
-            {SITUACAO_LABEL[situacao]}
-          </span>
-        </Item>
-        <Item rotulo="Módulo">{modulo}</Item>
-        <Item rotulo="Onde aparece">
-          <ul style={{margin: 0, paddingLeft: '1.1rem'}}>
-            {emitido_em.map((onde) => (
-              <li key={onde}>{onde}</li>
-            ))}
-          </ul>
-        </Item>
-        {requisitos && requisitos.length > 0 && (
-          <Item rotulo="Requisitos">
-            {requisitos.map((requisito, indice) => (
-              <React.Fragment key={requisito}>
-                {indice > 0 && ', '}
-                <code>{requisito}</code>
-              </React.Fragment>
-            ))}
+      <header>
+        <dl style={LISTA}>
+          <Item rotulo="Código">
+            <code>{code}</code>
           </Item>
-        )}
-        {rastreio && rastreio.length > 0 && (
-          <Item rotulo="Rastreio">
-            {rastreio.map(({label, href}, indice) => (
-              <React.Fragment key={href}>
-                {indice > 0 && ', '}
-                <a href={href}>{label}</a>
-              </React.Fragment>
-            ))}
+          <Item rotulo="Título emitido">{title}</Item>
+          <Item rotulo="Status HTTP">
+            {http_status ?? 'a definir na implementação'}
           </Item>
-        )}
-      </dl>
-    </div>
+          <Item rotulo="Campo type">
+            <code>{typeUri}</code>
+          </Item>
+          <Item rotulo="Situação">
+            <span style={{...ETIQUETA, ...SITUACAO_STYLE[situacao]}}>
+              {SITUACAO_LABEL[situacao]}
+            </span>
+          </Item>
+          <Item rotulo="Módulo">{modulo}</Item>
+          <Item rotulo="Onde aparece">
+            <ul style={{margin: 0, paddingLeft: '1.1rem'}}>
+              {emitido_em.map((onde) => (
+                <li key={onde}>{onde}</li>
+              ))}
+            </ul>
+          </Item>
+          {requisitos && requisitos.length > 0 && (
+            <Item rotulo="Requisitos">
+              {requisitos.map((requisito, indice) => (
+                <React.Fragment key={requisito}>
+                  {indice > 0 && ', '}
+                  <code>{requisito}</code>
+                </React.Fragment>
+              ))}
+            </Item>
+          )}
+          {rastreio && rastreio.length > 0 && (
+            <Item rotulo="Rastreio">
+              <ListaDeLinks itens={rastreio} />
+            </Item>
+          )}
+        </dl>
+      </header>
+    </article>
   );
 }
