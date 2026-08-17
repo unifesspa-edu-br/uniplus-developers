@@ -35,6 +35,32 @@ jobs:
       - name: Markdown lint (markdownlint-cli2)
         run: npx --yes markdownlint-cli2 'docs/adrs/**/*.md'
 
+  component-tests:
+    name: Typecheck + testes de componente
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Testes de componente (Vitest)
+        run: npm run test
+
   catalogo-erros:
     name: Contrato do catálogo de erros
     runs-on: ubuntu-latest
