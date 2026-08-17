@@ -15,6 +15,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
+    "test": "vitest run",
     "test:e2e": "playwright test",
     "lint:catalogo-erros": "node tools/catalogo-erros/validar.mjs"
   },
@@ -30,20 +31,29 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "redoc": "^2.5.2",
-    "styled-components": "^6.1.0"
+    "styled-components": "^6.1.0",
+    "yaml": "^1.10.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",
     "@docusaurus/module-type-aliases": "3.10.1",
-    "@playwright/test": "^1.49.0",
     "@docusaurus/tsconfig": "3.10.1",
     "@docusaurus/types": "3.10.1",
+    "@playwright/test": "^1.49.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^19.0.0",
+    "@vitejs/plugin-react": "^5.2.0",
     "gray-matter": "^4.0.3",
+    "jsdom": "^28.1.0",
     "mdast-util-from-markdown": "^2.0.3",
     "mdast-util-mdx": "^3.0.0",
     "micromark-extension-mdxjs": "^3.0.0",
-    "typescript": "~6.0.2"
+    "typescript": "~6.0.2",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "yaml": "^1.10.0"
   },
   "browserslist": {
     "production": [
