@@ -1,0 +1,53 @@
+---
+title: O mesmo Id de etapa foi informado mais de uma vez no payload
+sidebar_label: Id de etapa duplicado
+description: O Id ecoado pelo cliente reconcilia a etapa com a instância existente — repeti-lo no mesmo payload torna essa reconciliação ambígua.
+code: uniplus.selecao.processo_seletivo.id_etapa_duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+  - label: 'uniplus-api#865'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/865
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O payload de definição de etapas informou o mesmo `Id` em mais de um item do
+array. Ao substituir a coleção de etapas, o sistema reconcilia por `Id`: uma
+etapa cujo `Id` (ecoado pelo cliente a partir de uma leitura anterior) ainda
+existe no processo é **atualizada** na mesma instância — o que preserva
+referências que critérios de desempate ou regras de eliminação já apontem para
+ela. Dois itens com o mesmo `Id` no mesmo payload tornam essa reconciliação
+ambígua: não há como decidir qual dos dois representa a etapa existente.
+
+Uma etapa **nova** não tem esse problema — o campo `Id` é opcional na criação,
+atribuído pelo sistema; a checagem só rejeita repetição entre `Id`s
+efetivamente informados.
+
+Este código também aparece no **descarte de retificação**: a restauração da
+configuração congelada prova o grafo inteiro antes de aplicá-lo, e o mesmo
+problema — agora no envelope congelado, não no payload do cliente — indicaria
+uma corrupção na versão para a qual o descarte está tentando voltar.
+
+## Como resolver
+
+Revise o array de etapas enviado e garanta que cada `Id` informado apareça no
+máximo uma vez. Etapas novas não precisam de `Id` — omita o campo em vez de
+inventar um valor, e deixe o sistema atribuir um na criação.
+
+Se o erro apareceu ao descartar uma retificação, o payload que você enviou não
+é a causa — é a configuração congelada para a qual o sistema está tentando
+voltar que já contém a duplicidade. Abra uma investigação em vez de tentar
+corrigir pelo descarte.

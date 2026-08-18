@@ -1,0 +1,68 @@
+---
+title: Tipo de etapa não encontrado ou não está ativo
+sidebar_label: Tipo de etapa não encontrado ou inativo
+description: O TipoEtapaOrigemId de uma etapa nova, ou que mudou de tipo, é resolvido contra o catálogo vivo de Configuração — sem vínculo ativo, a definição é recusada.
+code: uniplus.selecao.processo_seletivo.tipo_etapa_nao_encontrado_ou_inativo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1108'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1108
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `TipoEtapaOrigemId` de uma etapa do payload não existe no catálogo de tipos
+de etapa de Configuração, ou existe mas não está ativo. Esta resolução roda
+depois da passada de forma (ver
+[`etapa_processo.nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx))
+vir limpa para todas as etapas — só então o sistema consulta o catálogo, um a
+um, e para na primeira etapa cujo tipo não resolve.
+
+A resolução contra o catálogo só acontece quando o vínculo é **novo** ou
+**muda de tipo**. Uma etapa existente cujo `TipoEtapaOrigemId` não mudou
+reaproveita o snapshot já congelado, sem reconsultar — por dois motivos: (a)
+desativar um tipo já vinculado não pode bloquear qualquer `PUT` subsequente da
+coleção inteira, mesmo editando só o peso de uma etapa não relacionada; e (b)
+renomear um tipo ainda ativo não pode reescrever silenciosamente o snapshot já
+congelado de uma etapa que o cliente nem tocou — a cópia só muda quando o
+vínculo muda, não quando o cadastro de origem muda.
+
+**"Existente" aqui é definido pelo `Id` ecoado no payload, não por a etapa já
+estar salva no processo.** O `PUT` reconcilia por `Id` (ver
+[`processo_seletivo.id_etapa_duplicado`](./uniplus.selecao.processo_seletivo.id_etapa_duplicado.mdx));
+uma etapa cujo item do payload não traz `Id` é tratada como **nova**, mesmo
+que ela já exista no processo com o mesmo `TipoEtapaOrigemId` de sempre — e
+uma etapa nova sempre passa pela resolução contra o catálogo. Um `PUT`
+integral que não ecoa os `Id`s das etapas existentes reconsulta o catálogo
+para todas elas, e um tipo desativado nesse meio-tempo dispara este erro
+mesmo sem nenhuma mudança de tipo pretendida.
+
+> **Atenção ao título.** Existe um segundo código, de outro contexto, com o
+> mesmo título literal —
+> `uniplus.selecao.obrigatoriedade_legal.tipo_etapa_nao_encontrado_ou_inativo`,
+> do cadastro de obrigatoriedade legal, não da definição de etapas de um
+> processo. Os dois nunca aparecem na mesma resposta; o `code` do corpo de
+> erro distingue qual dos dois é este.
+
+## Como resolver
+
+Confirme, no catálogo de tipos de etapa de Configuração, que o
+`TipoEtapaOrigemId` declarado existe e está ativo. Se o tipo foi desativado
+recentemente, ou o `Id` está incorreto, corrija o payload antes de reenviar.
+
+Se a etapa já existia no processo com este mesmo tipo antes, e o erro só
+começou a aparecer agora, confirme que o payload está ecoando o `Id` dela —
+sem o `Id`, o `PUT` trata a etapa como nova e reconsulta o catálogo mesmo sem
+nenhuma mudança de tipo pretendida. Com o `Id` ecoado corretamente, a etapa
+continua válida enquanto você não tentar mudar o tipo dela; o problema só
+bloqueia etapas novas, etapas sem `Id` no payload, e realinhamentos de tipo.

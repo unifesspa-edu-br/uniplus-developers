@@ -1,0 +1,43 @@
+---
+title: A ordem da etapa, quando informada, deve ser maior que zero
+sidebar_label: Ordem da etapa inválida
+description: A ordem é opcional e só controla a posição de apresentação no envelope congelado — quando informada, precisa ser positiva.
+code: uniplus.selecao.etapa_processo.ordem_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1218'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1218
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do payload informou `ordem` menor ou igual a zero. O campo é
+opcional e só controla a posição de apresentação da etapa no envelope
+congelado (não entra na fórmula da nota); quando informado, precisa ser um
+valor positivo.
+
+Este código é sobre o valor de uma `ordem` isolada, não sobre repetição entre
+etapas — para duas etapas com o mesmo valor de `ordem`, ver
+[`processo_seletivo.ordem_etapa_duplicada`](./uniplus.selecao.processo_seletivo.ordem_etapa_duplicada.mdx).
+
+Esta é uma das seis checagens de forma que a definição de etapas acumula
+numa só passada, antes de resolver qualquer etapa contra o catálogo de tipos —
+ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)
+para o mecanismo completo de acumulação e a ordem em que as violações
+aparecem.
+
+## Como resolver
+
+Informe uma `ordem` positiva, ou omita o campo se a posição de apresentação
+da etapa não importa. Se a resposta trouxer mais de uma violação no array
+`errors[]`, corrija todas antes de reenviar.

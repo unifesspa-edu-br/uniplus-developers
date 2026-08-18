@@ -1,0 +1,46 @@
+---
+title: O peso da etapa, quando informado, deve ser maior que zero
+sidebar_label: Peso da etapa inválido
+description: O peso é opcional, mas quando informado precisa ser positivo — é ele, junto do caráter, que decide se a etapa compõe a nota final.
+code: uniplus.selecao.etapa_processo.peso_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1218'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1218
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do payload informou `peso` menor ou igual a zero. O campo é
+opcional — uma etapa sem peso é válida —, mas quando informado precisa ser
+positivo: é o peso, junto do caráter classificatória/ambas, que determina se a
+etapa entra na fórmula da nota final (`NOTA FINAL = Soma(Etapa × peso) /
+divisor`); um peso zero ou negativo não tem interpretação válida nessa
+fórmula.
+
+Esta é uma das seis checagens de forma que a definição de etapas acumula
+numa só passada, antes de resolver qualquer etapa contra o catálogo de tipos —
+ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)
+para o mecanismo completo de acumulação e a ordem em que as violações
+aparecem.
+
+O valor é persistido como `numeric(18,4)` — um peso positivo com mais de 4
+casas decimais é recusado antes desta checagem, por validação de payload
+(forma/rota, sem checagem de domínio equivalente), para que o banco nunca
+arredonde silenciosamente um peso que o cliente pretendia diferente de zero.
+
+## Como resolver
+
+Informe um `peso` positivo, ou omita o campo se a etapa não deve compor a nota
+final. Se a resposta trouxer mais de uma violação no array `errors[]`,
+corrija todas antes de reenviar.

@@ -1,0 +1,45 @@
+---
+title: Título do formulário de inscrição excede o tamanho máximo
+sidebar_label: Título do formulário excede o tamanho
+description: O título do formulário de inscrição é opcional, mas quando informado tem limite de 300 caracteres, o mesmo da coluna que o persiste.
+code: uniplus.selecao.processo_seletivo.formulario_titulo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do formulário de inscrição
+requisitos:
+  - UNI-REQ-0017
+rastreio:
+  - label: 'uniplus-api#1206'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1206
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `titulo` enviado para o formulário de inscrição do processo passa de 300
+caracteres — o mesmo limite da coluna que o persiste. O campo é opcional (um
+processo sem título de formulário é válido); a checagem só vale quando um
+valor é informado. Sem o limite verificado no domínio, um título mais longo
+passaria pela validação de payload e só falharia dentro de `SaveChanges`,
+como erro de banco em vez de um 422 claro.
+
+Esta checagem acumula com a de
+[`formulario_termo_aceite_texto_tamanho`](./uniplus.selecao.processo_seletivo.formulario_termo_aceite_texto_tamanho.mdx)
+— um payload que excede os dois campos ao mesmo tempo devolve as duas
+violações juntas, no array `errors[]` do corpo de erro; o `type`/`title` da
+raiz refletem a primeira das duas na ordem de checagem (título antes de termo
+de aceite).
+
+Título e termo de aceite só afetam a apresentação do formulário — nenhum dos
+dois participa de outra regra do processo (etapas, cotas, cronograma).
+
+## Como resolver
+
+Reduza o `titulo` do formulário para até 300 caracteres, ou omita o campo se
+o processo não precisa de um título customizado. Se a resposta trouxer também
+a violação de termo de aceite, corrija as duas antes de reenviar.

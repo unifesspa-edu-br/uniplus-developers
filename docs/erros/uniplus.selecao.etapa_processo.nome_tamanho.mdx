@@ -1,0 +1,38 @@
+---
+title: O nome da etapa excede o tamanho máximo permitido
+sidebar_label: Nome da etapa excede o tamanho
+description: O nome da etapa tem limite de 300 caracteres, o mesmo da coluna que o persiste — sem o limite no domínio, o erro só apareceria no banco.
+code: uniplus.selecao.etapa_processo.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1218'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1218
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `nome` de uma das etapas do payload passa de 300 caracteres — o mesmo limite
+da coluna que o persiste. Sem essa checagem no domínio, um nome mais longo
+passaria pela validação de payload e só falharia dentro de `SaveChanges`, como
+erro de banco em vez de um 422 claro sobre qual campo excedeu.
+
+Esta é uma das seis checagens de forma que a definição de etapas acumula
+numa só passada, antes de resolver qualquer etapa contra o catálogo de tipos —
+ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)
+para o mecanismo completo de acumulação e a ordem em que as violações
+aparecem.
+
+## Como resolver
+
+Reduza o `nome` da etapa para até 300 caracteres. Se a resposta trouxer mais
+de uma violação no array `errors[]`, corrija todas antes de reenviar.
