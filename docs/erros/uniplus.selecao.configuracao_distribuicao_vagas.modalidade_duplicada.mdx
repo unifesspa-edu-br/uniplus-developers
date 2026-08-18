@@ -46,7 +46,10 @@ fora da oferta) — todas no mesmo array `errors[]`, sob o campo
 Este código também aparece no **descarte de retificação**: reconstruir o
 grafo a partir do envelope congelado recomputa cada
 `ConfiguracaoDistribuicaoVagas` a partir dos mesmos insumos — a mesma
-checagem do domínio roda de novo sobre as modalidades congeladas.
+checagem do domínio roda de novo sobre as modalidades congeladas. Mas, nesse
+caminho, ela sai **sozinha**: o descarte propaga só a primeira violação
+encontrada, sem o array `errors[]` que a definição usa para acumular várias
+de uma vez — mesmo que a configuração congelada tenha mais de um problema.
 
 ## Como resolver
 
