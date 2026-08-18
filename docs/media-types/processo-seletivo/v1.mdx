@@ -23,6 +23,15 @@ Seleção (não confundir com o edital, o ato publicado; ver
 É o media type que `GET /api/selecao/processos-seletivos/{id}` negocia via
 `Accept` (ADR-0028 — versionamento per-resource) e emite em `Content-Type`.
 
+O mesmo vendor MIME cobre **duas formas** diferentes, conforme o endpoint:
+
+| Endpoint | Schema |
+|---|---|
+| `GET /api/selecao/processos-seletivos/{id}` (detalhe) | [`ProcessoSeletivoDto`](pathname:///openapi/selecao.json#/components/schemas/ProcessoSeletivoDto) — o schema declarado acima. |
+| `GET /api/selecao/processos-seletivos` (coleção, paginada) | [`ProcessoSeletivoResumoDto[]`](pathname:///openapi/selecao.json#/components/schemas/ProcessoSeletivoResumoDto) — array de resumo, não o mesmo shape do detalhe. |
+
+Validar uma resposta de coleção contra o schema do detalhe (ou vice-versa) falha — consulte a operação abaixo antes de fixar o schema no cliente.
+
 ## Operações
 
 <RedocSpec spec="selecao.json" tag="ProcessoSeletivo" />
