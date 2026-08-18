@@ -1,0 +1,51 @@
+---
+title: VO_base deve ser maior que zero
+sidebar_label: VO_base inválido
+description: VO_base é a vaga-oferta original de uma oferta de curso — o insumo que toda distribuição de vagas parte, sempre positivo.
+code: uniplus.selecao.configuracao_distribuicao_vagas.vo_base_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1219'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1219
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das distribuições de vagas do payload informou `voBase` menor ou igual a
+zero. `VO_base` (vaga-oferta original) é o número de vagas da oferta de
+curso antes de qualquer cálculo de distribuição — o insumo do qual toda a
+distribuição por modalidade parte (art. 10, II); um valor zero ou negativo
+não tem interpretação válida como ponto de partida.
+
+Esta checagem acumula com
+[`pr_fora_do_limite`](./uniplus.selecao.configuracao_distribuicao_vagas.pr_fora_do_limite.mdx)
+e
+[`modalidades_vazias`](./uniplus.selecao.configuracao_distribuicao_vagas.modalidades_vazias.mdx)
+— as três únicas checagens que não dependem de nenhum cadastro cross-módulo
+(oferta de curso, regra de distribuição, modalidades) já resolvido. Elas
+rodam numa primeira passada, sobre **todas** as distribuições do payload,
+antes de qualquer consulta aos cadastros vivos: um payload com duas
+distribuições, uma com `voBase` inválido e outra com `pr` fora da faixa,
+devolve as duas violações juntas no array `errors[]` do corpo de erro, cada
+item com seu `field` (`distribuicaoVagas[<índice>].voBase`, por exemplo).
+
+Esta checagem **não** acumula com
+[`modalidade_duplicada`](./uniplus.selecao.configuracao_distribuicao_vagas.modalidade_duplicada.mdx)
+— essa outra só é avaliada depois que a passada de forma vem inteiramente
+limpa para todas as distribuições, então as duas nunca aparecem juntas na
+mesma resposta.
+
+## Como resolver
+
+Informe um `voBase` positivo para cada distribuição de vagas do payload. Se
+a resposta trouxer mais de uma violação no array `errors[]`, corrija todas
+antes de reenviar.

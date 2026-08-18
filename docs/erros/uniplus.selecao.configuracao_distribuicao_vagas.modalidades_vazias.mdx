@@ -1,0 +1,50 @@
+---
+title: A oferta deve ter ao menos uma modalidade selecionada
+sidebar_label: Modalidades vazias na oferta
+description: Toda distribuição de vagas precisa de ao menos uma modalidade selecionada — sem nenhuma, não há o que distribuir.
+code: uniplus.selecao.configuracao_distribuicao_vagas.modalidades_vazias
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1219'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1219
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das distribuições de vagas do payload não declarou nenhuma modalidade em
+`modalidadeIds`. Diferente da lista de etapas do processo — onde uma lista
+vazia é um estado válido —, uma distribuição de vagas sem nenhuma modalidade
+não tem sentido: é a modalidade que recebe a vaga distribuída, sem nenhuma
+não há o que distribuir.
+
+Esta checagem conta os **Ids brutos** informados no payload, antes de
+resolver qualquer um deles contra o catálogo de modalidades — por isso roda
+na mesma primeira passada de
+[`vo_base_invalido`](./uniplus.selecao.configuracao_distribuicao_vagas.vo_base_invalido.mdx)
+e
+[`pr_fora_do_limite`](./uniplus.selecao.configuracao_distribuicao_vagas.pr_fora_do_limite.mdx),
+acumulando com as duas — ver aquela página para o mecanismo completo. Sem
+essa contagem bruta nesta primeira passada, um payload com `modalidadeIds`
+vazio **e** uma oferta de curso inexistente devolveria o erro de catálogo em
+vez deste, mesmo a checagem de forma não precisando de nenhum I/O para
+concluir que a lista está vazia.
+
+No corpo de erro, o campo desta violação aparece como
+`distribuicaoVagas[<índice>].modalidadeIds` — o nome do campo do payload do
+cliente, não `modalidades` (o nome da propriedade correspondente dentro do
+agregado).
+
+## Como resolver
+
+Informe ao menos um `modalidadeId` em `modalidadeIds` para cada distribuição
+de vagas do payload. Se a resposta trouxer mais de uma violação no array
+`errors[]`, corrija todas antes de reenviar.

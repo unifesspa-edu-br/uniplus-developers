@@ -1,0 +1,42 @@
+---
+title: Oferta de curso não encontrada ou não está mais viva
+sidebar_label: Oferta de curso não encontrada
+description: O OfertaCursoId de cada distribuição de vagas é resolvido contra o catálogo vivo de Configuração — sem correspondência ativa, a definição é recusada.
+code: uniplus.selecao.configuracao_distribuicao_vagas.oferta_curso_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `OfertaCursoId` de uma das distribuições de vagas do payload não existe no
+catálogo de ofertas de curso de Configuração, ou existe mas não está mais
+viva. Esta é a primeira consulta cross-módulo do processamento de cada
+distribuição — roda antes de resolver a regra de distribuição, a referência
+demográfica e as modalidades da mesma distribuição.
+
+O processamento é sequencial por distribuição: a primeira distribuição do
+payload cuja oferta não resolve interrompe a passada — as distribuições
+seguintes do mesmo payload não chegam a ser conferidas, e a resposta traz só
+esta violação, sem acumular com nenhuma outra.
+
+## Como resolver
+
+Confirme, no catálogo de ofertas de curso de Configuração, que o
+`OfertaCursoId` declarado existe e está ativo. Se a oferta foi encerrada
+recentemente, ou o `Id` está incorreto, corrija o payload antes de reenviar.
+
+Como o processamento para na primeira distribuição com problema, corrigir
+esta e reenviar pode revelar uma nova falha numa distribuição seguinte do
+mesmo payload — não é garantia de que o restante do payload está correto.
