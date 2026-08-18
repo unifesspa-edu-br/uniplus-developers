@@ -1,0 +1,53 @@
+---
+title: A ordem do destino deve ser ≥ 1
+sidebar_label: Ordem do destino inválida
+description: A posição de um destino na fila de remanejamento de uma origem não pode ser zero nem negativa.
+code: uniplus.selecao.configuracao_cascata_remanejamento.ordem_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `ordem` de uma posição da cascata é menor que 1. A ordem é a
+posição do destino na fila de remanejamento daquela origem — a vaga não
+preenchida é oferecida ao primeiro destino, depois ao segundo, e assim por
+diante; não existe posição zero ou negativa.
+
+Pode coexistir, no mesmo item, com
+[`codigo_invalido`](./uniplus.selecao.configuracao_cascata_remanejamento.codigo_invalido.mdx)
+(até duas ocorrências, uma por código) — as checagens do item são
+independentes entre si e acumulam (ADR-0125). Acumula também com os
+mesmos erros de outros itens da lista `destinos`, e, quando algum item
+falha, com as causas de fallback e de limites de origens/destinos que não
+dependem de os itens serem válidos — ver
+[`campos_obrigatorios`](./uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios.mdx).
+
+**Não** aparece no descarte de retificação — e é a única, dentre as
+causas de item desta série, com essa propriedade. No envelope congelado a
+`ordem` de cada destino não é lida como valor cru: é derivada da própria
+posição do item dentro da entrada de `ordens` a que ele pertence (o
+primeiro elemento é sempre ordem 1, o segundo ordem 2, e assim por
+diante, sempre a partir de 1) — o estado "ordem menor que 1" não é
+representável ali, em nenhuma circunstância. Já
+[`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx)
+**é** alcançável pelo descarte, por um caminho indireto que não se aplica
+aqui (a mesma origem espalhada por mais de uma entrada do envelope).
+
+## Como resolver
+
+Corrija `ordem` para um número inteiro maior ou igual a 1. Se a intenção
+era reordenar os destinos da mesma origem, renumere a sequência inteira a
+partir de 1, sem pular nem repetir posições.

@@ -1,0 +1,73 @@
+---
+title: O código de fallback é obrigatório e precisa casar com o vocabulário de modalidade
+sidebar_label: Fallback da cascata ausente ou inválido
+description: Toda cascata precisa de um destino final — a modalidade que recebe a vaga quando nenhum destino da fila é selecionado na oferta.
+code: uniplus.selecao.configuracao_cascata_remanejamento.fallback_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+`fallbackCodigo` está ausente, vazio, fora do vocabulário
+`^[A-Z0-9_]+$` ou excede 60 caracteres — o mesmo formato de código de
+modalidade usado no resto do módulo, e a mesma checagem que
+[`codigo_invalido`](./uniplus.selecao.configuracao_cascata_remanejamento.codigo_invalido.mdx)
+aplica a cada origem/destino, mas para o campo `fallbackCodigo`.
+
+O fallback é a modalidade de ampla concorrência que recebe a vaga quando
+nenhum destino da fila de remanejamento de uma origem está selecionado na
+oferta em questão — o "fim de linha" da cascata. Sem ele declarado, a
+cascata não tem para onde encaminhar uma vaga que a fila inteira não
+resolveu.
+
+É a primeira checagem dentro da validação de forma da cascata — roda antes
+de qualquer checagem sobre os destinos. Acumula (ADR-0125), mas o conjunto
+de causas com que pode coexistir muda conforme a lista `destinos` estiver
+vazia ou não:
+
+- Lista vazia: só pode coexistir com
+  [`sem_destinos`](./uniplus.selecao.configuracao_cascata_remanejamento.sem_destinos.mdx)
+  — sem nenhum destino, não há origem para verificar limite nem ordem.
+- Lista não vazia, todos os itens válidos: pode coexistir com
+  [`excede_limite_de_origens`](./uniplus.selecao.configuracao_cascata_remanejamento.excede_limite_de_origens.mdx),
+  [`excede_limite_de_destinos`](./uniplus.selecao.configuracao_cascata_remanejamento.excede_limite_de_destinos.mdx),
+  [`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx),
+  [`ordem_nao_contigua`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_nao_contigua.mdx)
+  e
+  [`destino_duplicado`](./uniplus.selecao.configuracao_cascata_remanejamento.destino_duplicado.mdx)
+  — nunca com `sem_destinos`.
+- Lista não vazia, algum item inválido: acumula com as causas de item e,
+  no máximo, com `excede_limite_de_origens`/`excede_limite_de_destinos` —
+  ver
+  [`campos_obrigatorios`](./uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios.mdx)
+  para o detalhe dessa composição alternativa.
+
+Alcançável nos dois caminhos, mas de forma mais restrita no descarte de
+retificação: o envelope lê `fallbackCodigo` sem exigência de não-vazio e
+sem reconferir o vocabulário `^[A-Z0-9_]+$`, mas o tamanho já é limitado
+pelo próprio schema do envelope (o mesmo limite de 60 caracteres da
+entidade) — um valor acima disso, ou a chave ausente, é recusado ainda na
+leitura, como `envelope_codec.envelope_malformado`, antes de chegar a esta
+causa. No descarte, portanto, só é alcançável por um valor vazio ou fora
+do vocabulário, nunca por excesso de tamanho. A reconstrução não acumula:
+para na primeira violação.
+
+## Como resolver
+
+Informe `fallbackCodigo` casando com `^[A-Z0-9_]+$`, com no máximo 60
+caracteres — o código de uma modalidade de ampla concorrência que de fato
+está selecionada nas ofertas que a cascata cobre.

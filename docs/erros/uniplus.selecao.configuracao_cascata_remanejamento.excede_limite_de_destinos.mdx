@@ -1,0 +1,56 @@
+---
+title: A cascata excede o limite de 56 destinos
+sidebar_label: Cascata excede limite de destinos
+description: A cascata não pode declarar mais de 56 posições ao todo, somando as filas de todas as origens.
+code: uniplus.selecao.configuracao_cascata_remanejamento.excede_limite_de_destinos
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `destinos` do payload de definição da cascata tem mais de 56
+posições ao todo — a soma de todas as filas de todas as origens, não só
+de uma. Com o limite de 8 origens
+([`excede_limite_de_origens`](./uniplus.selecao.configuracao_cascata_remanejamento.excede_limite_de_origens.mdx)),
+56 é o teto de uma matriz completa com 7 destinos por origem — folga
+suficiente para qualquer cascata real sem abrir espaço para um payload
+anormalmente grande.
+
+Pode coexistir, na mesma resposta, com
+[`fallback_obrigatorio`](./uniplus.selecao.configuracao_cascata_remanejamento.fallback_obrigatorio.mdx),
+com `excede_limite_de_origens` e, quando algum item da lista é inválido,
+com as causas de item — ver
+[`campos_obrigatorios`](./uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios.mdx).
+Quando todos os itens são válidos, pode coexistir também com
+[`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx),
+[`ordem_nao_contigua`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_nao_contigua.mdx)
+e
+[`destino_duplicado`](./uniplus.selecao.configuracao_cascata_remanejamento.destino_duplicado.mdx).
+Nunca coexiste com
+[`sem_destinos`](./uniplus.selecao.configuracao_cascata_remanejamento.sem_destinos.mdx)
+— exceder um limite exige destinos declarados.
+
+Alcançável nos dois caminhos: na definição, e no descarte de retificação
+(o envelope não limita quantas posições, ao todo, o array `ordens`
+declara). No descarte, a reconstrução não acumula: para na primeira
+violação que encontrar.
+
+## Como resolver
+
+Reduza o total de posições declaradas em `destinos` para no máximo 56,
+somando todas as origens. Revise se alguma origem tem destinos repetidos
+ou desnecessários antes de considerar a cascata incompleta.

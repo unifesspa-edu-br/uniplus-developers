@@ -1,0 +1,67 @@
+---
+title: Código de modalidade fora do vocabulário ^[A-Z0-9_]+$ ou acima de 60 caracteres
+sidebar_label: Código de modalidade da cascata inválido
+description: O código de origem ou de destino de uma posição da cascata precisa casar com o mesmo vocabulário de código de modalidade usado no resto do módulo.
+code: uniplus.selecao.configuracao_cascata_remanejamento.codigo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código de modalidade de origem ou de destino de uma posição da cascata
+não casa com `^[A-Z0-9_]+$` (só maiúsculas, dígitos e sublinhado) ou excede
+60 caracteres — o mesmo vocabulário de código de modalidade usado no resto
+do módulo Seleção.
+
+Uma posição da cascata (`modalidadeOrigemCodigo`+`ordem`+`modalidadeDestinoCodigo`)
+pode reprovar este código **até duas vezes ao mesmo tempo** — uma para o
+código de origem, outra para o de destino, cada uma com o campo (`field`)
+correspondente — se os dois vierem fora do vocabulário. Também pode
+coexistir, no mesmo item, com
+[`ordem_invalida`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_invalida.mdx):
+as três checagens do item são independentes entre si e acumulam (ADR-0125).
+Não coexiste com
+[`origem_igual_ao_destino`](./uniplus.selecao.configuracao_cascata_remanejamento.origem_igual_ao_destino.mdx)
+no mesmo par — essa causa só é conferida quando os dois códigos do item já
+são individualmente válidos.
+
+Na definição, o lote de erros de item acumula com os de outros itens da
+mesma lista `destinos`, e, se algum item falhar, também com as causas que
+não dependem de os itens serem válidos (fallback, limites de
+origens/destinos) — ver
+[`campos_obrigatorios`](./uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios.mdx)
+para o detalhe dessa composição.
+
+No descarte de retificação, o envelope congelado lê o código de origem e
+cada código de destino sem reconferir o vocabulário `^[A-Z0-9_]+$` — mas
+não os dois do mesmo jeito. Cada código de destino é lido com exigência de
+não ser vazio e de já vir sem espaço nas pontas — um valor que viole isso
+é recusado ainda na leitura, como `envelope_codec.envelope_malformado`,
+antes de chegar a esta causa; o vocabulário e o tamanho máximo, porém, não
+são reconferidos ali, e é por aí que um destino fora do vocabulário (ou
+acima de 60 caracteres) sobrevive à leitura. Já o código de origem é lido
+como texto cru, sem exigência de não-vazio — só o tamanho é limitado pelo
+próprio schema do envelope — então uma origem vazia, com espaço nas
+pontas ou fora do vocabulário também sobrevive à leitura, e só é recusada
+quando a entidade é reconstruída. Diferente da definição, o descarte não
+acumula: a reconstrução para na primeira violação que encontrar.
+
+## Como resolver
+
+Corrija o código de origem e/ou de destino para casar com
+`^[A-Z0-9_]+$` e ter no máximo 60 caracteres — o mesmo formato usado para
+declarar código de modalidade em qualquer outro payload do módulo.

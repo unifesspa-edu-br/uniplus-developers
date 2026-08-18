@@ -1,0 +1,85 @@
+---
+title: A mesma origem tem mais de um destino na mesma posição de ordem
+sidebar_label: Ordem duplicada na origem da cascata
+description: Duas ou mais posições da fila de remanejamento de uma mesma origem declaram o mesmo valor de ordem — a sequência de tentativa fica ambígua.
+code: uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas ou mais posições da cascata com o mesmo `modalidadeOrigemCodigo`
+declaram o mesmo valor de `ordem`. A ordem decide a sequência em que os
+destinos daquela origem são tentados — repetida, não há como saber qual
+destino vem primeiro.
+
+Esta checagem, e as duas causas irmãs que compartilham a mesma passada
+sobre cada origem —
+[`ordem_nao_contigua`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_nao_contigua.mdx)
+e
+[`destino_duplicado`](./uniplus.selecao.configuracao_cascata_remanejamento.destino_duplicado.mdx)
+—, só rodam depois de todos os itens de `destinos` já terem sido
+construídos individualmente com sucesso (ver
+[`codigo_invalido`](./uniplus.selecao.configuracao_cascata_remanejamento.codigo_invalido.mdx)
+e
+[`ordem_invalida`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_invalida.mdx)),
+já que dependem de agrupar os destinos por origem. Se qualquer item
+falhar, este código não roda — em vez dele, o lote acumula os erros de
+item mais fallback/limites, nunca as três causas por origem.
+
+Quando roda, acumula (ADR-0125): a mesma origem pode reprovar as três
+causas por origem ao mesmo tempo (ordem duplicada, sequência não contígua
+e destino repetido não se excluem entre si), e origens diferentes com
+problemas diferentes contribuem cada uma com seus próprios erros — todos
+com o campo (`field`) `destinos`, sem índice de item, porque nenhuma é
+uma violação de um único item isolado. Acumula também com
+[`fallback_obrigatorio`](./uniplus.selecao.configuracao_cascata_remanejamento.fallback_obrigatorio.mdx),
+[`excede_limite_de_origens`](./uniplus.selecao.configuracao_cascata_remanejamento.excede_limite_de_origens.mdx)
+e
+[`excede_limite_de_destinos`](./uniplus.selecao.configuracao_cascata_remanejamento.excede_limite_de_destinos.mdx).
+Nunca coexiste com
+[`sem_destinos`](./uniplus.selecao.configuracao_cascata_remanejamento.sem_destinos.mdx).
+
+Alcançável também no descarte de retificação, ainda que a `ordem` de cada
+destino não seja lida como valor cru ali: é derivada da posição do item
+dentro da entrada de `ordens` a que ele pertence (a primeira posição é
+sempre ordem 1, a segunda ordem 2, e assim por diante). Mas nada no
+envelope impede a **mesma origem** de aparecer em mais de uma entrada do
+array `ordens` — e cada entrada reinicia a numeração a partir de 1. Duas
+entradas para a mesma origem produzem, juntas, ordens repetidas quando a
+reconstrução agrupa os destinos por origem. Nesse cenário, a mesma origem
+também dispara internamente
+[`ordem_nao_contigua`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_nao_contigua.mdx)
+— mas, dentro do mesmo bloco daquela origem, esta checagem é conferida
+primeiro. Entre as duas, é sempre esta causa que "vence" para a origem que
+dispara ambas — `ordem_nao_contigua` nunca chega a ser a primeira violação
+da lista por causa dela. Isso não significa que esta causa seja sempre a
+resposta do descarte: se o mesmo envelope também violar
+[`fallback_obrigatorio`](./uniplus.selecao.configuracao_cascata_remanejamento.fallback_obrigatorio.mdx)
+ou os limites de origens/destinos — checados antes do laço por origem —,
+ou se outra origem, processada antes na iteração, contribuir
+[`destino_duplicado`](./uniplus.selecao.configuracao_cascata_remanejamento.destino_duplicado.mdx)
+primeiro, é essa outra causa que o descarte devolve.
+
+## Como resolver
+
+Revise a fila de destinos da origem apontada e atribua um valor de `ordem`
+distinto a cada posição, sem lacunas nem repetições. Se o erro veio de um
+descarte de retificação, o problema está na configuração congelada para a
+qual o descarte está tentando voltar — a mesma origem foi declarada em mais
+de uma entrada do envelope; isso indica uma inconsistência na versão
+publicada anterior, não algo que o payload do descarte em si controla.

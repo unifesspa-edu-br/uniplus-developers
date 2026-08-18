@@ -1,0 +1,60 @@
+---
+title: A mesma origem repete o mesmo destino mais de uma vez
+sidebar_label: Destino duplicado na origem da cascata
+description: A fila de remanejamento de uma origem não pode repetir a mesma modalidade de destino em mais de uma posição.
+code: uniplus.selecao.configuracao_cascata_remanejamento.destino_duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fila de destinos de uma mesma origem repete o mesmo
+`modalidadeDestinoCodigo` em mais de uma posição. Cada modalidade só pode
+ocupar uma posição na fila de uma origem — tentar a mesma modalidade duas
+vezes não muda o resultado do remanejamento, só confunde a leitura da
+sequência.
+
+Roda na mesma passada por origem que
+[`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx)
+e
+[`ordem_nao_contigua`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_nao_contigua.mdx),
+depois de todos os itens de `destinos` já terem sido construídos com
+sucesso — a mesma condição de alcançabilidade e o mesmo padrão de
+acumulação (ADR-0125) das duas causas irmãs se aplicam aqui, inclusive a
+possibilidade de as três coexistirem para a mesma origem.
+
+É alcançável no descarte de retificação, e da forma mais direta das três
+causas por origem: o envelope congelado lê a lista de destinos de cada
+origem um a um, sem exigir unicidade entre eles — a leitura confere que
+cada código não é vazio e já vem sem espaço nas pontas, mas não confere se
+o mesmo código aparece mais de uma vez; só a entidade, ao reconstruir,
+recusa a repetição. Diferente de
+[`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx),
+que só é alcançável ali por um caminho indireto (a mesma origem espalhada
+por mais de uma entrada do array `ordens`), esta dispara com uma única
+entrada — bastam dois códigos de destino iguais na mesma lista — e não
+arrasta `ordem_duplicada_na_origem` nem
+[`ordem_nao_contigua`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_nao_contigua.mdx)
+junto, já que a `ordem` de cada destino continua derivada da posição
+dentro da entrada, sempre única e contígua nesse cenário. No descarte,
+diferente da definição, a reconstrução não acumula: para na primeira
+violação que encontrar.
+
+## Como resolver
+
+Revise a fila de destinos da origem apontada e remova a repetição —
+cada modalidade de destino entra uma única vez por origem.
