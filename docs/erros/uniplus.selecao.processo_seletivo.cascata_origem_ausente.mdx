@@ -1,0 +1,53 @@
+---
+title: Uma modalidade SegueCascata não tem sequência de destinos declarada na cascata do processo
+sidebar_label: Origem ausente na cascata
+description: Toda modalidade com regraRemanejamento SEGUE_CASCATA precisa ser uma origem declarada na cascata do processo — sem isso, o remanejamento não sabe para onde encaminhar a vaga.
+code: uniplus.selecao.processo_seletivo.cascata_origem_ausente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade com `regraRemanejamento` igual a `SEGUE_CASCATA` não tem
+nenhuma sequência de destinos declarada para ela na cascata do processo
+(RN-CASCATA-2). Essa causa cobre dois cenários distintos:
+
+- O processo **não tem cascata de remanejamento configurada** —
+  nenhuma modalidade pode seguir uma cascata que não existe.
+- O processo **tem** cascata, mas ela não declara o código dessa
+  modalidade específica como origem — ela cobre outras origens, mas não
+  esta.
+
+O primeiro cenário é conferido uma vez por oferta, antes de examinar cada
+modalidade individualmente — a partir daí, se o processo tiver cascata, o
+segundo cenário é conferido para cada modalidade `SEGUE_CASCATA` da
+oferta, em ordem determinística (por código). Sequencial: a primeira
+oferta ou modalidade com essa inconsistência interrompe a avaliação de
+conformidade estrutural para publicação; nunca acumula com nenhuma outra
+causa desta série.
+
+Não aparece no descarte de retificação, pela mesma razão de
+[`cascata_fora_do_regime_federal`](./uniplus.selecao.processo_seletivo.cascata_fora_do_regime_federal.mdx):
+a checagem só roda ao gerar uma versão publicada nova.
+
+## Como resolver
+
+Configure a cascata de remanejamento do processo, se ainda não existir, ou
+adicione a modalidade apontada como origem na cascata já configurada —
+com ao menos um destino em sua fila. Se a modalidade não deveria seguir a
+cascata, corrija o `regraRemanejamento` dela.

@@ -1,0 +1,51 @@
+---
+title: Uma modalidade SegueCascata está numa oferta que não usa a regra de distribuição da Lei 12.711
+sidebar_label: Cascata fora do regime federal
+description: A cascata única do processo só cobre ofertas que usam a regra de distribuição de vagas da Lei 12.711/2012 — fora desse regime, o remanejamento SegueCascata não tem o que resolver.
+code: uniplus.selecao.processo_seletivo.cascata_fora_do_regime_federal
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma oferta de curso tem modalidade com `regraRemanejamento` igual a
+`SEGUE_CASCATA`, mas a oferta não usa a regra de distribuição de vagas da
+Lei 12.711/2012 (RN-CASCATA-2b). A cascata do processo é a sequência legal
+de remanejamento das cotas reservadas dessa lei — fora desse regime, não
+há reserva legal cuja vaga não preenchida precise ser remanejada por uma
+sequência congelada; `SEGUE_CASCATA` não tem o que resolver ali.
+
+Roda como parte da checagem de conformidade estrutural para publicação
+(`PendenciaDaCascata`), avaliada oferta por oferta, em ordem determinística
+(por `OfertaCursoOrigemId`). É a primeira condição conferida para cada
+oferta com ao menos uma modalidade `SEGUE_CASCATA` — antes de checar se o
+processo tem cascata configurada. Sequencial: a primeira oferta com essa
+inconsistência interrompe a avaliação; nunca acumula com nenhuma outra
+causa desta série.
+
+Não aparece no descarte de retificação — a checagem só roda como parte da
+avaliação de conformidade para gerar uma nova versão publicada (na
+publicação inicial, na retificação em ato único e no fechamento de sessão
+editorial), nunca na restauração de uma versão já congelada.
+
+## Como resolver
+
+Se a modalidade de fato pertence a uma cota reservada da Lei 12.711/2012,
+confirme que a oferta está configurada com a regra de distribuição de
+vagas correspondente. Se a oferta não segue esse regime, corrija o
+`regraRemanejamento` da modalidade para `DESTINO_UNICO` ou `CRUZADO`.

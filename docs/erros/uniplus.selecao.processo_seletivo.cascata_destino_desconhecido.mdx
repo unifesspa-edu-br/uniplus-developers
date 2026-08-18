@@ -1,0 +1,51 @@
+---
+title: A cascata declara destino que não é modalidade selecionada em nenhuma oferta do processo
+sidebar_label: Destino da cascata desconhecido
+description: Todo destino declarado na cascata precisa corresponder a uma modalidade de fato selecionada em alguma oferta do processo — senão a cascata remaneja para uma modalidade que não existe.
+code: uniplus.selecao.processo_seletivo.cascata_destino_desconhecido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A cascata do processo declara, como destino de alguma origem, um código
+de modalidade que não é modalidade selecionada em nenhuma oferta do
+processo — nem na oferta específica onde a origem `SEGUE_CASCATA` está
+(coberto por
+[`cascata_fallback_nao_selecionado_na_oferta`](./uniplus.selecao.processo_seletivo.cascata_fallback_nao_selecionado_na_oferta.mdx),
+quando é o único destino que resolveria ali), nem em oferta nenhuma. Um
+destino que não existe em lugar algum do processo é sempre um destino
+morto, mesmo que outra posição da mesma fila resolva numa oferta
+específica.
+
+Roda na mesma segunda passada de
+[`cascata_origem_nao_segue_cascata`](./uniplus.selecao.processo_seletivo.cascata_origem_nao_segue_cascata.mdx)
+— por origem, em ordem determinística, e para cada origem, por destino,
+também em ordem — logo depois de confirmar que a origem corresponde a uma
+modalidade `SEGUE_CASCATA` de fato ofertada. Sequencial: a primeira
+posição com essa inconsistência interrompe a avaliação; nunca acumula com
+nenhuma outra causa desta série.
+
+Não aparece no descarte de retificação — a checagem só roda ao gerar uma
+versão publicada nova.
+
+## Como resolver
+
+Corrija o código de destino apontado para uma modalidade que de fato está
+selecionada em alguma oferta do processo, ou remova a posição da fila se
+ela não corresponde a nenhuma modalidade real.
