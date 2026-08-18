@@ -1,0 +1,47 @@
+---
+title: Regra de remanejamento não encontrada no rol_de_regras
+sidebar_label: Regra da cascata não encontrada
+description: O código e a versão declarados para a regra de remanejamento não existem no rol_de_regras.
+code: uniplus.selecao.configuracao_cascata_remanejamento.regra_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `regraCodigo`/`regraVersao` declarado para a cascata de remanejamento não
+existe no `rol_de_regras`. Roda depois de a forma da cascata (fallback,
+formato de cada destino, coerência entre os destinos de uma mesma origem)
+já ter sido confirmada — a resolução contra o catálogo é a última etapa
+antes de a cascata ser efetivamente construída (RN-CASCATA-1..5, ordem
+entre forma e conteúdo).
+
+É sequencial: não acumula com nenhuma outra causa desta série — a
+resolução da regra é a primeira coisa que pode falhar depois de a forma já
+estar confirmada, e a falha aqui interrompe o processamento antes mesmo de
+[`regra_tipo_invalido`](./uniplus.selecao.configuracao_cascata_remanejamento.regra_tipo_invalido.mdx)
+ser conferida.
+
+Não aparece no descarte de retificação: o envelope congelado guarda a
+regra por valor (código, versão e hash já resolvidos na publicação
+original), sem reconsultar o `rol_de_regras` na restauração. Um código
+fora do vocabulário fechado esperado nessa posição do envelope produz, em
+vez disso, a causa própria do codec (`envelope_codec.regra_desconhecida`).
+
+## Como resolver
+
+Confirme, no catálogo de regras, que o código e a versão declarados para a
+regra de remanejamento existem e correspondem a uma regra do tipo
+`criterio_remanejamento`.
