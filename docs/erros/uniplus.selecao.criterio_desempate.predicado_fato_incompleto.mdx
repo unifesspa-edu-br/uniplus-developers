@@ -1,0 +1,43 @@
+---
+title: Fato, Operador e Valor são obrigatórios para a regra DESEMPATE-PREDICADO-FATO
+sidebar_label: Predicado de desempate incompleto
+description: O critério que desempata por uma condição sobre um fato do candidato precisa dos três elementos da condição — sem qualquer um deles, não há o que avaliar.
+code: uniplus.selecao.criterio_desempate.predicado_fato_incompleto
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#885'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/885
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um critério de desempate com a regra `DESEMPATE-PREDICADO-FATO` não
+informou `fato`, `operador` ou `valor` — os três elementos de uma condição
+sobre um fato do candidato (por exemplo, "modalidade igual a X"). Basta um
+dos três estar em branco para disparar; a checagem confere os três juntos,
+não separadamente.
+
+Este critério desempata por uma condição binária sobre o vocabulário
+fechado de fatos do candidato (ADR-0111) — sem os três elementos, não há
+condição para avaliar. A checagem de que o fato citado de fato pertence ao
+vocabulário vivo, e de que o operador é compatível com o tipo do fato, é
+separada e roda depois desta.
+
+Roda na montagem dos argumentos do critério, depois que a regra já foi
+resolvida contra o catálogo. Não acumula com nenhuma outra violação — é a
+primeira que falhar que interrompe o processamento.
+
+## Como resolver
+
+Informe `fato`, `operador` e `valor` para todo critério com a regra
+`DESEMPATE-PREDICADO-FATO`.

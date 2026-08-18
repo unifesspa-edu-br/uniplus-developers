@@ -1,0 +1,49 @@
+---
+title: Regra de desempate não encontrada no rol_de_regras
+sidebar_label: Regra de desempate não encontrada
+description: O código e a versão de cada critério de desempate são resolvidos contra o rol_de_regras — sem correspondência, a definição é recusada.
+code: uniplus.selecao.criterio_desempate.regra_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `regraCodigo`/`regraVersao` de um dos critérios de desempate do payload
+não existe no `rol_de_regras` — o mesmo catálogo interno ao módulo Seleção
+de onde vêm as demais regras tipadas do processo (distribuição de vagas,
+ajuste, cascata de remanejamento). Esta resolução só roda depois que a
+passada de forma (ordem de todos os critérios) vem inteiramente limpa — ver
+[`ordem_invalida`](./uniplus.selecao.criterio_desempate.ordem_invalida.mdx).
+
+O processamento é sequencial por critério: o primeiro que falhar interrompe
+a passada — os critérios seguintes do mesmo payload não chegam a ser
+conferidos, e a resposta traz só esta violação, sem acumular com nenhuma
+outra.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação — o envelope congelado guarda a regra por valor
+(código, versão e hash já resolvidos no momento da definição), sem
+reconsultar o `rol_de_regras` na restauração.
+
+## Como resolver
+
+Confirme, no catálogo de regras, que o código e a versão do critério de
+desempate declarados existem. Se a regra foi descontinuada recentemente, ou
+o código está incorreto, corrija o payload antes de reenviar.
+
+Como o processamento para no primeiro critério com problema, corrigir este
+e reenviar pode revelar uma nova falha num critério seguinte do mesmo
+payload — não é garantia de que o restante do payload está correto.

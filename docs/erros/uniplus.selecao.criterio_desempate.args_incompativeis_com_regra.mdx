@@ -1,0 +1,52 @@
+---
+title: Os args informados não correspondem à regra referenciada
+sidebar_label: Args incompatíveis com a regra
+description: Cada regra de desempate exige seu próprio formato de argumentos — checagem defensiva, já que tanto a definição quanto a restauração sempre montam os args a partir do código da regra.
+code: uniplus.selecao.criterio_desempate.args_incompativeis_com_regra
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um critério de desempate foi criado com um formato de argumentos
+(`ArgsCriterioDesempate`) que não corresponde à regra referenciada — por
+exemplo, argumentos de `DESEMPATE-IDOSO` associados a uma regra
+`DESEMPATE-MAIOR-NOTA-ETAPA`.
+
+Esta checagem é **genuinamente defensiva**: tanto a definição de critérios
+de desempate quanto a restauração da configuração congelada sempre montam
+os argumentos a partir do próprio código da regra resolvida — o formato
+nunca é escolhido independentemente da regra em nenhum dos dois caminhos.
+A checagem existe para que a criação do critério nunca dependa
+silenciosamente de essa correspondência já ter sido garantida em outro
+lugar — se um caminho futuro montar os argumentos de outro jeito, ela ainda
+protege.
+
+A criação do critério acumula esta checagem com
+[`idade_minima_invalida`](./uniplus.selecao.criterio_desempate.idade_minima_invalida.mdx)
+e com a validação do predicado de fato (ADR-0125) — mas, como explicado
+acima, esta nunca chega a disparar em nenhum dos dois caminhos com o
+comportamento atual, então nunca coexiste de fato com outra violação na
+mesma resposta.
+
+## Como resolver
+
+Este código, na prática, não deveria ocorrer com o comportamento atual do
+sistema. Se ele aparecer, é sinal de uma inconsistência mais profunda — um
+critério chegando à criação com argumentos que não foram montados a partir
+da própria regra. Reporte como incidente para investigação, em vez de
+tentar contornar pelo payload.

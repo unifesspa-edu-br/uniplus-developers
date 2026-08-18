@@ -1,0 +1,56 @@
+---
+title: A regra referenciada não é do tipo criterio_desempate
+sidebar_label: Regra de desempate de tipo inválido
+description: O código e versão declarados existem no rol_de_regras, mas não são de uma regra de desempate reconhecida — o catálogo é compartilhado por vários tipos de regra.
+code: uniplus.selecao.criterio_desempate.regra_tipo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Este código cobre duas situações distintas, ambas sobre a coerência de tipo
+da regra referenciada:
+
+- O `regraCodigo`/`regraVersao` de um critério de desempate existe no
+  `rol_de_regras`, mas o tipo cadastrado da regra não é
+  `criterio_desempate`. O catálogo é compartilhado por vários tipos de
+  regra do módulo Seleção — o código sozinho não garante o tipo certo.
+- A regra existe e é do tipo `criterio_desempate`, mas o código dela não
+  corresponde a nenhuma das quatro variantes reconhecidas
+  (`DESEMPATE-MAIOR-NOTA-ETAPA`, `DESEMPATE-MAIOR-IDADE`,
+  `DESEMPATE-IDOSO`, `DESEMPATE-PREDICADO-FATO`) — o vocabulário do tipo
+  `criterio_desempate` é fechado, e um código fora dele não tem
+  argumentos correspondentes para montar.
+
+Roda logo depois de
+[`regra_nao_encontrada`](./uniplus.selecao.criterio_desempate.regra_nao_encontrada.mdx)
+resolver a existência da regra. O processamento é sequencial por critério:
+o primeiro que falhar interrompe a passada, sem acumular com nenhuma outra
+violação.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação — o envelope congelado guarda a regra por valor,
+sem reconsultar o catálogo na restauração; e o vocabulário fechado de
+códigos é conferido na leitura do envelope por uma causa própria do codec
+(`envelope_codec.regra_desconhecida`), não por esta.
+
+## Como resolver
+
+Confirme, no catálogo de regras, que o código e a versão declarados são de
+fato uma regra do tipo `criterio_desempate`, com um código de uma das
+quatro variantes reconhecidas. Se a intenção era outra regra (distribuição
+de vagas, ajuste, cascata), reveja qual referência pertence a qual campo do
+payload.
