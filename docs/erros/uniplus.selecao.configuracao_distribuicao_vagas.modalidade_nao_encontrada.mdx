@@ -1,0 +1,51 @@
+---
+title: Modalidade não encontrada ou não está mais viva
+sidebar_label: Modalidade não encontrada
+description: Cada modalidade selecionada é resolvida contra o catálogo vivo de Configuração pelo Id — sem correspondência ativa, a definição é recusada.
+code: uniplus.selecao.configuracao_distribuicao_vagas.modalidade_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos `modalidadeIds` de uma distribuição de vagas do payload não existe no
+catálogo de modalidades de Configuração, ou existe mas não está mais viva.
+Esta consulta é a que resolve, para cada modalidade selecionada, os campos
+que este catálogo documenta como vindos do cadastro — `codigo`,
+`naturezaLegal`, `composicaoVagas`, `baseLegal`, e a coerência de
+composição/remanejamento (ver
+[`modalidade_selecionada.codigo_obrigatorio`](./uniplus.selecao.modalidade_selecionada.codigo_obrigatorio.mdx)).
+Sem essa resolução bem-sucedida, nenhum desses campos existe para conferir.
+
+O processamento é sequencial: a **primeira** modalidade do array
+`modalidadeIds` cuja resolução falhar interrompe a passada — as modalidades
+seguintes do mesmo array, e as distribuições seguintes do mesmo payload, não
+chegam a ser conferidas.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação — o envelope congelado guarda cada modalidade
+selecionada por valor (snapshot-copy), e a reconstrução do grafo recompõe
+essas modalidades direto do envelope, sem reconsultar o catálogo.
+
+## Como resolver
+
+Confirme, no catálogo de modalidades de Configuração, que cada `Id`
+declarado em `modalidadeIds` existe e está ativo. Se uma modalidade foi
+desativada recentemente, ou o `Id` está incorreto, corrija o payload antes
+de reenviar.
+
+Como o processamento para na primeira modalidade com problema, corrigir
+esta e reenviar pode revelar uma nova falha numa modalidade seguinte do
+mesmo payload — não é garantia de que o restante do payload está correto.

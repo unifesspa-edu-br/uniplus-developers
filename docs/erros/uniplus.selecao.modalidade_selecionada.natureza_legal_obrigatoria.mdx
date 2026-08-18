@@ -1,0 +1,62 @@
+---
+title: Natureza legal da modalidade é obrigatória
+sidebar_label: Natureza legal da modalidade ausente
+description: Toda modalidade selecionada precisa declarar sua natureza legal — é ela que decide, entre outras coisas, se a modalidade está sujeita à cascata legal de remanejamento.
+code: uniplus.selecao.modalidade_selecionada.natureza_legal_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade selecionada não declarou `naturezaLegal`. A natureza legal
+descreve **o que** a modalidade é perante a lei (ampla concorrência, cota
+reservada da Lei 12.711, entre outras) — é dela que depende, por exemplo, a
+obrigatoriedade de seguir a cascata legal de remanejamento (ver
+[`cota_reservada_exige_cascata`](./uniplus.selecao.modalidade_selecionada.cota_reservada_exige_cascata.mdx)).
+Roda antes das checagens de coerência de composição e remanejamento — sem
+uma natureza legal declarada, não há como avaliar essas coerências.
+
+**`naturezaLegal` não vem do payload da definição de distribuição de
+vagas** — é copiado do cadastro de modalidades de Configuração, no momento
+em que a modalidade é selecionada (`IModalidadeReader`). O cadastro nunca
+grava uma modalidade sem esse campo — quando ele é omitido no cadastro, um
+valor padrão (`AMPLA`) é aplicado; não existe modalidade cadastrada com
+natureza legal literalmente vazia. O que dispara este código, na prática, é
+o token de natureza legal do cadastro **não ser reconhecido** pelo
+vocabulário do módulo Seleção — hoje os dois vocabulários coincidem, então
+o cenário real é uma divergência futura entre eles (o cadastro evoluindo
+antes deste módulo), não um dado corrompido.
+
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe a criação da modalidade.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recria cada modalidade selecionada a
+partir dos mesmos campos — a mesma checagem roda de novo, sozinha.
+
+## Como resolver
+
+O campo não está no payload que você enviou — está na modalidade cadastrada
+em Configuração. Confira lá a natureza legal cadastrada; se ela parecer
+correta e o erro persistir, é sinal de que o token que o cadastro emite não
+é mais reconhecido pelo módulo Seleção — um problema de sincronização entre
+os dois vocabulários, não de dado ausente.
+
+Se o erro apareceu ao descartar uma retificação, o problema não está no
+payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar. Isso indica uma inconsistência na versão
+publicada anterior; abra uma investigação em vez de tentar corrigir pelo
+descarte.

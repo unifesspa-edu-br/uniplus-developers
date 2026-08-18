@@ -1,0 +1,50 @@
+---
+title: Regra de distribuição não encontrada no rol_de_regras
+sidebar_label: Regra de distribuição não encontrada
+description: O código e a versão da regra de distribuição de vagas de cada oferta são resolvidos contra o catálogo de regras — sem correspondência, a definição é recusada.
+code: uniplus.selecao.configuracao_distribuicao_vagas.regra_distribuicao_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `regraDistribuicaoCodigo`/`regraDistribuicaoVersao` de uma das
+distribuições de vagas do payload não existe no `rol_de_regras` — o
+catálogo tipado de regras (Story #772) de onde vêm tanto a regra de
+distribuição em si (Lei 12.711 ou institucional) quanto, no ramo federal, a
+regra de ajuste. Esta é a segunda consulta cross-módulo do processamento de
+cada distribuição — roda logo depois da resolução da oferta de curso (ver
+[`oferta_curso_nao_encontrada`](./uniplus.selecao.configuracao_distribuicao_vagas.oferta_curso_nao_encontrada.mdx)).
+
+O processamento é sequencial por distribuição: a primeira distribuição do
+payload cuja regra não resolve interrompe a passada — as distribuições
+seguintes do mesmo payload não chegam a ser conferidas, e a resposta traz
+só esta violação, sem acumular com nenhuma outra.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação: o envelope congelado guarda a regra por valor
+(código, versão e hash já resolvidos no momento da definição), e a
+reconstrução do grafo recompõe essa referência direto do envelope, sem
+reconsultar o `rol_de_regras`.
+
+## Como resolver
+
+Confirme, no catálogo de regras (`rol_de_regras`), que o código e a versão
+declarados existem. Se a regra foi descontinuada recentemente, ou o código
+está incorreto, corrija o payload antes de reenviar.
+
+Como o processamento para na primeira distribuição com problema, corrigir
+esta e reenviar pode revelar uma nova falha numa distribuição seguinte do
+mesmo payload — não é garantia de que o restante do payload está correto.

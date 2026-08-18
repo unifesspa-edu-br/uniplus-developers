@@ -1,0 +1,46 @@
+---
+title: Base legal da modalidade é obrigatória
+sidebar_label: Base legal da modalidade ausente
+description: Toda modalidade selecionada precisa citar o dispositivo legal ou normativo que a fundamenta — mesmo que o cadastro de Configuração aceite a modalidade sem esse campo.
+code: uniplus.selecao.modalidade_selecionada.base_legal_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade selecionada não tem `baseLegal`, ou tem o campo vazio. A base
+legal identifica o dispositivo — lei, decreto, resolução — que fundamenta a
+existência da modalidade, seja ela ampla concorrência, cota reservada da Lei
+12.711, ou uma modalidade institucional própria da Unifesspa.
+
+**`baseLegal` não vem do payload da definição de distribuição de vagas** —
+é copiada do cadastro de modalidades de Configuração, no momento em que a
+modalidade é selecionada (`IModalidadeReader`). Diferente da maioria dos
+outros campos obrigatórios desta série, **o cadastro de Configuração não
+exige base legal** — o campo é opcional lá (`string?`, sem checagem de
+obrigatoriedade em `Modalidade.Criar`/`Atualizar`, só um limite de tamanho).
+Uma modalidade cadastrada sem base legal é aceita normalmente em
+Configuração; é só ao ser **selecionada** numa distribuição de vagas que a
+ausência é recusada. Este não é um cenário de dado corrompido — é o
+caminho comum para quem cadastrou uma modalidade sem preencher esse campo.
+
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe a criação da modalidade.
+
+## Como resolver
+
+Preencha o campo `baseLegal` da modalidade no cadastro de Configuração —
+não é possível informá-lo pelo payload da definição de distribuição de
+vagas, que não recebe esse campo — e tente selecionar a modalidade de novo.
