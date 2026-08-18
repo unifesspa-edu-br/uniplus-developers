@@ -2517,7 +2517,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Existe catálogo por fundamento; criar, editar, ativar e desativar motivo exige autorização institucional própria, sem depender de nome de perfil no código; a decisão preserva o código e a descrição vigentes no momento em que foi proferida.',
     verificacao: 'Testes de manutenção do catálogo e de preservação histórica da decisão.',
     pagina_developers: '/produto/requisitos/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0121',
@@ -2538,7 +2538,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'O julgamento recusa motivo incompatível com o resultado escolhido; tentativa de alterar o resultado permitido de motivo já disponibilizado é recusada.',
     verificacao: 'Testes de recusa por incompatibilidade e de imutabilidade do vínculo.',
     pagina_developers: '/produto/regras-negocio/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0122',
@@ -2559,7 +2559,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Após a desativação, o motivo não aparece para novas publicações e continua selecionável no julgamento do processo publicado anterior.',
     verificacao: 'Testes sobre processo publicado e sobre processo em elaboração.',
     pagina_developers: '/produto/regras-negocio/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0123',
@@ -2580,7 +2580,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Publicação recusada quando faltar motivo de algum resultado; motivo criado depois não é propagado a processos já publicados.',
     verificacao: 'Testes de recusa de publicação e de ausência de propagação automática.',
     pagina_developers: '/produto/regras-negocio/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0124',
@@ -2601,7 +2601,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Inclusão sem justificativa é recusada; decisões anteriores permanecem inalteradas; a justificativa não integra o que o candidato consulta.',
     verificacao: 'Testes de inclusão, de imutabilidade das decisões anteriores e de escopo de acesso.',
     pagina_developers: '/produto/regras-negocio/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0125',
@@ -2643,7 +2643,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'O resultado preliminar distingue homologada de não homologada com motivo; a situação da inscrição permanece a existente; a janela de reconciliação nunca é inferior ao mínimo aprovado.',
     verificacao: 'Testes de publicação do resultado preliminar e de preservação do status.',
     pagina_developers: '/produto/requisitos/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0127',
@@ -2664,7 +2664,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Segundo recurso é recusado; a fase seguinte não inicia antes da publicação definitiva; após a publicação definitiva, alteração é recusada.',
     verificacao: 'Testes de unicidade do recurso, de bloqueio da fase seguinte e de imutabilidade.',
     pagina_developers: '/produto/regras-negocio/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0128',
@@ -2685,7 +2685,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Há no máximo uma tentativa ativa por obrigação; confirmação tardia de tentativa substituída satisfaz a obrigação; duas confirmações não produzem dupla satisfação.',
     verificacao: 'Testes de substituição, de confirmação tardia e de idempotência.',
     pagina_developers: '/produto/regras-negocio/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0129',
@@ -2706,7 +2706,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Rascunho não enviado não gera obrigação nem solicitação válida e não aparece em resultado; o encerramento do prazo não converte rascunho em inscrição.',
     verificacao: 'Testes sobre rascunho ao fim do prazo.',
     pagina_developers: '/produto/regras-negocio/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0130',
@@ -2731,9 +2731,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0131',
-    titulo: 'Retenção e destinação documental conforme a tabela de temporalidade',
+    titulo: 'Retenção e destinação documental conforme a tabela de temporalidade — Portaria AN nº 92/2011',
     enunciado:
-      'Documento apresentado na inscrição, inclusive a solicitação de isenção, segue a classe de inscrições da tabela de temporalidade das atividades-fim das instituições federais de ensino superior: fase corrente até a homologação do processo, um ano de fase intermediária e eliminação. Documento de recurso segue a classe de recursos, com a mesma contagem e guarda permanente como destinação final. Ação judicial em curso suspende a contagem e impede a eliminação. A eliminação é registrada de forma auditável, sem reproduzir o conteúdo eliminado.',
+      'Documento apresentado na inscrição, inclusive a solicitação de isenção, segue a classe de inscrições da tabela de temporalidade das atividades-fim das instituições federais de ensino superior, aprovada pela Portaria AN nº 92/2011 e de uso obrigatório nas IFES pela Portaria MEC nº 1.261/2013: fase corrente até a homologação do processo, um ano de fase intermediária e eliminação. Documento de recurso segue a classe de recursos, com a mesma contagem e guarda permanente como destinação final. Ação judicial em curso suspende a contagem e impede a eliminação. A eliminação é registrada de forma auditável, sem reproduzir o conteúdo eliminado.',
     grupo: 'conformidade',
     tipo: 'requisito_conformidade',
     nivel: 'requisito',
@@ -2748,7 +2748,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Os prazos e a destinação correspondem à classe aplicável; ação judicial suspende a eliminação; a eliminação produz registro auditável sem conteúdo.',
     verificacao: 'Testes de cálculo de prazo, de suspensão e de registro da eliminação.',
     pagina_developers: '/produto/requisitos/',
-    owner: 'Encarregado de dados',
+    owner: 'DPO',
   },
   {
     requisito_id: 'UNI-REQ-0132',
@@ -2769,7 +2769,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'O recurso não oferece coleta nem edição de fato; o conjunto congelado não é recalculado em atualização; grupo dependente de fato indeterminado não impede o protocolo.',
     verificacao: 'Testes de congelamento, de ausência de coleta no recurso e de grupo opcional.',
     pagina_developers: '/produto/regras-negocio/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0133',
@@ -2790,6 +2790,6 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Exigência da inscrição não é herdada; uma alternativa válida satisfaz o grupo obrigatório; quantidade mínima maior que um e grupos aninhados não são configuráveis no recurso.',
     verificacao: 'Testes de não herança, de satisfação por alternativa e de recusa de configuração inválida.',
     pagina_developers: '/produto/requisitos/',
-    owner: 'Product Owner',
+    owner: 'PO',
   },
 ];
