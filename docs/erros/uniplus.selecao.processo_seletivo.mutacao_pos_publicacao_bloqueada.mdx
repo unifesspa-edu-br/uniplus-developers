@@ -37,8 +37,10 @@ o handler lembrar de checar antes.
 Para alterar a configuração de um processo já publicado, abra uma
 **retificação** (`POST .../retificacao-em-curso`) antes de enviar os
 comandos `Definir*` — durante uma retificação em curso, os mesmos comandos
-alteram o rascunho da nova versão, não a versão publicada. Feche a
-retificação para congelar a nova versão.
+passam a alterar a configuração do processo diretamente (não há rascunho em
+staging: a versão já congelada permanece intocada até o fechamento). Feche a
+retificação para congelar a nova versão; descarte a retificação para
+restaurar a configuração publicada, se as alterações não devem valer.
 
 Se o processo ainda não foi publicado, o comando deveria ter funcionado —
 confirme o `id` enviado; um `id` de outro processo, já publicado, produz este
