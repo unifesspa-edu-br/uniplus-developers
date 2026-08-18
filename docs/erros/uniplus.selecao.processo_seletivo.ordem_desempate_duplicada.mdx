@@ -1,0 +1,63 @@
+---
+title: Cada critério de desempate deve ter uma ordem única dentro do processo
+sidebar_label: Ordem de desempate duplicada
+description: Dois ou mais critérios de desempate do mesmo processo declaram a mesma ordem — a sequência de aplicação do desempate fica ambígua.
+code: uniplus.selecao.processo_seletivo.ordem_desempate_duplicada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+  - label: 'uniplus-api#865'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/865
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Dois ou mais critérios de desempate na lista declarada repetem o mesmo
+valor de `ordem`. A ordem é o que decide a sequência em que os critérios
+são aplicados quando um empate persiste depois do primeiro — repetida, não
+há como saber qual critério vem antes.
+
+É a primeira checagem da lista completa de critérios de desempate — mas
+essa lista completa só chega até aqui depois que cada critério já foi
+construído individualmente. Na **definição**, o handler resolve todos os
+critérios um a um contra o `rol_de_regras` antes de repassar a lista para
+esta checagem; um código de regra inexistente em qualquer item da lista
+interrompe antes, com a causa própria dessa resolução — nunca chega a esta.
+Só depois de todos resolvidos é que esta causa (e, na sequência,
+[`etapa_ref_desempate_inexistente`](./uniplus.selecao.processo_seletivo.etapa_ref_desempate_inexistente.mdx))
+entra em jogo. No **descarte de retificação**, mesma posição relativa,
+dentro da reconstrução completa da configuração congelada — mas ali cada
+critério é construído a partir do envelope congelado, sem reconsultar o
+`rol_de_regras` (a regra é lida por valor, código e versão já resolvidos na
+publicação original). Nos dois caminhos é sequencial — não acumula com
+nenhuma outra causa desta série; a primeira falha interrompe o
+processamento.
+
+Distinta de
+[`ordem_invalida`](./uniplus.selecao.criterio_desempate.ordem_invalida.mdx),
+que confere se cada `ordem` individual é maior que zero. Na definição, essa
+checagem roda numa primeira passada sobre todos os critérios do payload —
+antes até de o `rol_de_regras` ser consultado — e acumula todas as
+violações de ordem de uma vez (ADR-0125); no descarte de retificação, ela é
+levantada dentro da recriação de cada critério a partir do envelope. Nos
+dois caminhos precede esta causa, que só compara as ordens **entre si**,
+depois que cada uma já é sabidamente válida isoladamente.
+
+## Como resolver
+
+Atribua um valor de `ordem` distinto a cada critério de desempate da lista.
+Se dois critérios de fato deveriam ser aplicados no mesmo momento, revise o
+desenho do desempate — o requisito (UNI-REQ-0015) não admite ordens
+simultâneas.
