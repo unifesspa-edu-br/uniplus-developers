@@ -1,0 +1,48 @@
+---
+title: Regra de eliminação não encontrada no rol_de_regras
+sidebar_label: Regra de eliminação não encontrada
+description: O código e a versão de cada regra de eliminação são resolvidos contra o rol_de_regras — sem correspondência, a definição é recusada.
+code: uniplus.selecao.regra_eliminacao.regra_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `regraCodigo`/`regraVersao` de uma das regras de eliminação do payload
+não existe no `rol_de_regras` — o mesmo catálogo interno ao módulo Seleção
+de onde vêm as demais regras tipadas do processo (distribuição de vagas,
+desempate, cálculo e ordem de alocação da classificação). Esta resolução
+roda depois das regras de cálculo, arredondamento e ordem de alocação da
+própria classificação já terem sido resolvidas.
+
+O processamento é sequencial por regra de eliminação: a primeira que
+falhar interrompe a passada — as regras seguintes do mesmo payload não
+chegam a ser conferidas, e a resposta traz só esta violação, sem acumular
+com nenhuma outra.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação — o envelope congelado guarda a regra por valor
+(código, versão e hash já resolvidos no momento da definição), sem
+reconsultar o `rol_de_regras` na restauração.
+
+## Como resolver
+
+Confirme, no catálogo de regras, que o código e a versão da regra de
+eliminação declarados existem. Se a regra foi descontinuada recentemente,
+ou o código está incorreto, corrija o payload antes de reenviar.
+
+Como o processamento para na primeira regra com problema, corrigir esta e
+reenviar pode revelar uma nova falha numa regra seguinte do mesmo payload
+— não é garantia de que o restante do payload está correto.

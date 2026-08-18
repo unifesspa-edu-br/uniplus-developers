@@ -1,0 +1,53 @@
+---
+title: A regra referenciada não é do tipo regra_eliminacao
+sidebar_label: Regra de eliminação de tipo inválido
+description: O código e versão declarados existem no rol_de_regras, mas não são de uma regra de eliminação reconhecida — o catálogo é compartilhado por vários tipos de regra.
+code: uniplus.selecao.regra_eliminacao.regra_tipo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Este código cobre duas situações distintas, ambas sobre a coerência de tipo
+da regra referenciada:
+
+- O `regraCodigo`/`regraVersao` de uma regra de eliminação existe no
+  `rol_de_regras`, mas o tipo cadastrado da regra não é `regra_eliminacao`.
+  O catálogo é compartilhado por vários tipos de regra do módulo Seleção —
+  o código sozinho não garante o tipo certo.
+- A regra existe e é do tipo `regra_eliminacao`, mas o código dela não
+  corresponde a nenhuma das três variantes reconhecidas
+  (`ELIM-NOTA-MINIMA-ETAPA`, `ELIM-CORTE-REDACAO`, `ELIM-ZERO-EM-AREA`) — o
+  vocabulário do tipo `regra_eliminacao` é fechado.
+
+Roda logo depois de
+[`regra_nao_encontrada`](./uniplus.selecao.regra_eliminacao.regra_nao_encontrada.mdx)
+resolver a existência da regra. O processamento é sequencial por regra de
+eliminação: a primeira que falhar interrompe a passada, sem acumular com
+nenhuma outra violação.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação — o envelope congelado guarda a regra por valor,
+sem reconsultar o catálogo na restauração; e o vocabulário fechado de
+códigos é conferido na leitura do envelope por uma causa própria do codec
+(`envelope_codec.regra_desconhecida`), não por esta.
+
+## Como resolver
+
+Confirme, no catálogo de regras, que o código e a versão declarados são de
+fato uma regra do tipo `regra_eliminacao`, com um código de uma das três
+variantes reconhecidas. Se a intenção era outra regra (distribuição de
+vagas, desempate, cálculo, ordem de alocação), reveja qual referência
+pertence a qual campo do payload.

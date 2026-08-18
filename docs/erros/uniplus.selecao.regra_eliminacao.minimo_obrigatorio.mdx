@@ -1,0 +1,39 @@
+---
+title: Minimo é obrigatório para a regra ELIM-CORTE-REDACAO
+sidebar_label: Mínimo ausente na eliminação
+description: A regra que elimina por corte de nota na redação precisa desse valor — e não aceita etapaRef nem notaMinima, que pertencem a outra regra.
+code: uniplus.selecao.regra_eliminacao.minimo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma regra de eliminação com o código `ELIM-CORTE-REDACAO` não informou
+`minimo`, ou informou `etapaRef`/`notaMinima` — campos que pertencem a
+`ELIM-NOTA-MINIMA-ETAPA`, não a esta regra. As três condições são
+conferidas juntas: `minimo` precisa estar presente, e `etapaRef`/
+`notaMinima` precisam estar ausentes.
+
+Esta checagem verifica só que o campo foi informado no lugar certo — o
+valor de `minimo` em si precisa ser não negativo, checagem separada, ver
+[`minimo_invalido`](./uniplus.selecao.regra_eliminacao.minimo_invalido.mdx).
+Roda na montagem dos argumentos da regra, depois que ela já foi resolvida
+contra o catálogo. Não acumula com nenhuma outra violação — é a primeira
+que falhar que interrompe o processamento.
+
+## Como resolver
+
+Informe `minimo`, e não informe `etapaRef` nem `notaMinima`, para toda
+regra de eliminação com o código `ELIM-CORTE-REDACAO`.
