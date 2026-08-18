@@ -320,6 +320,18 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.configuracao.curso.remocao_bloqueada_por_oferta_curso',
       ],
     },
+    {
+      type: 'category',
+      label: 'Media types',
+      collapsed: false,
+      items: ['media-types/processo-seletivo/v1'],
+    },
+    {
+      type: 'category',
+      label: 'Changelog',
+      collapsed: false,
+      items: ['changelog/v1.0.0'],
+    },
   ],
 
   arquiteturaSidebar: [

@@ -1,0 +1,29 @@
+---
+title: v1.0.0
+sidebar_label: v1.0.0
+description: Primeira entrada do changelog público — processo-seletivo v1 (application/vnd.uniplus.processo-seletivo.v1+json) documentado como media type corrente.
+---
+
+import ChangelogEntry from '@site/src/components/ChangelogEntry';
+
+<ChangelogEntry
+  versao="1.0.0"
+  data="2026-08-18"
+  tipo_mudanca="versao_nova"
+  recursos_afetados={['processo-seletivo/v1']}
+  resumo="Primeira entrada do changelog público. Documenta application/vnd.uniplus.processo-seletivo.v1+json (o agregado ProcessoSeletivo do módulo Seleção) como media type corrente do contrato REST canônico V1 da uniplus-api (ADR-0022)."
+/>
+
+## Contexto
+
+Esta é a primeira entrada do changelog do portal — registra a
+publicação do [media type `processo-seletivo v1`](../media-types/processo-seletivo/v1.mdx),
+correspondente ao endpoint `GET /api/selecao/processos-seletivos/{id}` e às
+demais operações do agregado `ProcessoSeletivo`.
+
+O [catálogo de erros](../erros/index.mdx) já cobre um número muito maior de
+causas de recusa em vários módulos (Seleção, Organização Institucional,
+Configuração, Publicações) — essas entradas não geram changelog individual
+porque não alteram um media type versionado; a primeira entrada aqui marca
+especificamente a publicação de um recurso versionado, não o início do
+catálogo de erros em si.

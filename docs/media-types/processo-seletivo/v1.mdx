@@ -1,0 +1,28 @@
+---
+title: processo-seletivo v1
+sidebar_label: processo-seletivo v1
+description: Vendor media type application/vnd.uniplus.processo-seletivo.v1+json — representação do agregado ProcessoSeletivo (módulo Seleção).
+---
+
+import MediaTypeCard from '@site/src/components/MediaTypeCard';
+import RedocSpec from '@site/src/components/RedocSpec';
+
+<MediaTypeCard
+  resource="processo-seletivo"
+  version="v1"
+  vendor_mime="application/vnd.uniplus.processo-seletivo.v1+json"
+  status="current"
+  schema_href="/openapi/selecao.json#/components/schemas/ProcessoSeletivoDto"
+/>
+
+## O que é
+
+Representação do agregado `ProcessoSeletivo` — o certame configurável do módulo
+Seleção (não confundir com o edital, o ato publicado; ver
+[Edital versus processo seletivo](../../produto/dominio/index.mdx#edital-versus-processo-seletivo)).
+É o media type que `GET /api/selecao/processos-seletivos/{id}` negocia via
+`Accept` (ADR-0028 — versionamento per-resource) e emite em `Content-Type`.
+
+## Operações
+
+<RedocSpec spec="selecao.json" tag="ProcessoSeletivo" />
