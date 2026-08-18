@@ -1,0 +1,47 @@
+---
+title: Um nó da árvore de satisfação restaurada tem um tipo desconhecido
+sidebar_label: Tipo de nó desconhecido na restauração
+description: Rascunho — defesa em profundidade contra um nó reconstruído com um tipo fora de folha, grupo E ou grupo OU; hoje nenhum envelope real chega a produzir esse estado.
+code: uniplus.selecao.processo_seletivo.no_exigencia_tipo_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao reconstruir recursivamente cada raiz da árvore restaurada pelas
+mesmas factories da escrita
+(`NoExigencia.CriarFolha`/`NoExigencia.CriarGrupo`), o nó tem um `Tipo`
+que não é nem folha nem um dos dois grupos — um ramo defensivo que
+existe porque o compilador exige exaustividade, não porque algum
+caminho real alimente esse estado.
+
+**Rascunho.** O tipo de cada nó já é resolvido para um enum fechado
+(`TipoNo`) na leitura do próprio envelope
+(`EnvelopeCodec.LerNo`): um código de `tipo` não reconhecido é recusado
+ainda ali, como `uniplus.selecao.envelope_codec.envelope_malformado` —
+um código de catálogo diferente deste, próprio do codec —, antes mesmo
+de a entidade ser reidratada. Por construção, todo `NoExigencia` que
+chega a existir em memória — seja pela escrita normal, seja pela
+reidratação do descarte — tem sempre um `Tipo` dentre os três valores
+válidos; não há caminho, hoje, para produzir um `NoExigencia` com tipo
+desconhecido e alimentar esta checagem.
+
+## Como resolver
+
+Este código não corresponde a um cenário produzível hoje. Se ele
+aparecer, o problema está na integridade do envelope ou numa mudança de
+código que introduziu um quarto valor de `TipoNo` sem atualizar este
+guard — não no payload do cliente.

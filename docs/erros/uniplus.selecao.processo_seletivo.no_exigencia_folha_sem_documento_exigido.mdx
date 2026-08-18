@@ -1,0 +1,43 @@
+---
+title: Uma folha da árvore de satisfação restaurada referencia um DocumentoExigido que não existe na configuração restaurada
+sidebar_label: Folha sem documento exigido correspondente
+description: O snapshot congelado reúne a árvore de satisfação e a lista de documentos exigidos como duas coleções à parte, ligadas por Id — uma folha cuja referência não resolve indica uma configuração incompleta ou corrompida.
+code: uniplus.selecao.processo_seletivo.no_exigencia_folha_sem_documento_exigido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0071
+rastreio:
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma folha da árvore restaurada referencia, por `DocumentoExigidoId`, um
+`DocumentoExigido` que não está entre os documentos exigidos da mesma
+configuração congelada. O envelope representa a árvore e a lista de
+documentos exigidos como duas coleções separadas — a folha só guarda o
+`id` do documento, sem duplicar o conteúdo — e é este vínculo cruzado
+que garante que o snapshot é autossuficiente: toda folha aponta para um
+documento que realmente está ali.
+
+Roda depois de todas as raízes terem sido reconstruídas com sucesso
+pelas mesmas factories da escrita (checagens estruturais e de
+canonicidade já publicadas nesta série) — é a primeira checagem que só
+a RAIZ inteira, com a lista de documentos exigidos ao lado, consegue
+provar.
+
+## Como resolver
+
+O payload que você enviou não é a causa — é a configuração congelada
+para a qual o sistema está tentando voltar que já contém a
+inconsistência. Abra uma investigação em vez de tentar corrigir pelo
+descarte.

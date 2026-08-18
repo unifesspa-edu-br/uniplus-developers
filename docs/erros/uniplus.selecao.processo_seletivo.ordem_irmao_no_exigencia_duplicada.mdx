@@ -1,0 +1,41 @@
+---
+title: Cada filho de um mesmo nó pai deve ter uma ordem única entre os irmãos
+sidebar_label: Ordem de irmãos duplicada na restauração
+description: Dois filhos do mesmo nó pai com a mesma ordem só falhariam depois, no SaveChanges, como violação do índice único do banco — esta causa nomeia a recusa antes disso.
+code: uniplus.selecao.processo_seletivo.ordem_irmao_no_exigencia_duplicada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O envelope congelado que uma retificação está descartando contém dois
+nós com o mesmo `noPaiId` e a mesma `ordem` entre si. É o mesmo
+invariante de
+[`ordem_raiz_no_exigencia_duplicada`](./uniplus.selecao.processo_seletivo.ordem_raiz_no_exigencia_duplicada.mdx),
+aplicado entre irmãos em vez de entre raízes — os nós são agrupados por
+pai, e cada grupo é conferido separadamente.
+
+Na escrita normal, a ordem de cada filho também é sempre derivada da
+posição no array `filhos` do nó pai — nunca dois filhos do mesmo pai
+recebem a mesma ordem. Sem esta checagem no descarte, a duplicidade só
+falharia depois, como violação do índice único
+`ux_nos_exigencia_irmaos_ordem`.
+
+## Como resolver
+
+O payload que você enviou não é a causa — é a configuração congelada
+para a qual o sistema está tentando voltar que já contém a duplicidade.
+Abra uma investigação em vez de tentar corrigir pelo descarte.
