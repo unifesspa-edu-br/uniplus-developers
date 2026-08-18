@@ -1,0 +1,49 @@
+---
+title: Consequência do grupo fora do domínio conhecido
+sidebar_label: Consequência de grupo inválida
+description: A consequência de um grupo OU/N-de só aceita quatro valores — ELIMINA, RECLASSIFICA_AC, REMOVE_VANTAGEM ou PENDENCIA_REENVIO — o mesmo vocabulário fechado usado em qualquer outra consequência de indeferimento do módulo.
+code: uniplus.selecao.no_exigencia.consequencia_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0070
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó grupo com `tipo` igual a `OU` declara `consequencia` fora do
+vocabulário fechado de quatro valores: `ELIMINA`, `RECLASSIFICA_AC`,
+`REMOVE_VANTAGEM` ou `PENDENCIA_REENVIO` — o mesmo catálogo usado em
+qualquer outra consequência de indeferimento do módulo Seleção.
+
+Roda só quando `consequencia` foi de fato informada (o campo é opcional
+em grupo `OU`) e depois de
+[`quantidade_minima_fora_dos_limites`](./uniplus.selecao.no_exigencia.quantidade_minima_fora_dos_limites.mdx)
+já ter passado. Sequencial: nunca acumula com nenhuma outra causa desta
+série.
+
+No descarte de retificação, é alcançável: o envelope congelado lê
+`consequencia` como texto cru para todo nó, sem reconferir o vocabulário.
+
+> **Lacuna conhecida.** Na definição, um payload com `consequencia` fora
+> do vocabulário é interceptado antes do handler por uma regra de
+> validação de payload equivalente — a resposta real é
+> `uniplus.validacao`, não esta entrada. Rastreado em `uniplus-api#1227`.
+
+## Como resolver
+
+Informe `consequencia` como um dos quatro valores do vocabulário, ou
+omita o campo se o grupo não emite consequência própria.

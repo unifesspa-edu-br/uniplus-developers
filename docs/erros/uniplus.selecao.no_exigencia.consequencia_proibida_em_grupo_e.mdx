@@ -1,0 +1,54 @@
+---
+title: Um grupo E é transparente e não carrega consequência própria
+sidebar_label: Consequência proibida em grupo E
+description: Um grupo E é transparente — a consequência ativa vem dos filhos em estado ativo, nunca do grupo em si. Só grupo OU/N-de é uma exigência de primeira classe com consequência própria.
+code: uniplus.selecao.no_exigencia.consequencia_proibida_em_grupo_e
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0070
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó grupo com `tipo` igual a `E` declara `consequencia`. Um grupo `E` é
+transparente para efeito de consequência: quando ele não está satisfeito,
+é cada filho em estado ativo que emite sua própria consequência — o
+grupo `E` nunca emite uma consequência própria, então declará-la nele
+não tem efeito nenhum, só confunde quem lê a configuração. Só o grupo
+`OU`/N-de é a unidade opaca que pode carregar consequência de primeira
+classe.
+
+Roda depois de
+[`quantidade_minima_proibida_em_grupo_e`](./uniplus.selecao.no_exigencia.quantidade_minima_proibida_em_grupo_e.mdx)
+e antes de
+[`base_legal_proibida_em_grupo_e`](./uniplus.selecao.no_exigencia.base_legal_proibida_em_grupo_e.mdx),
+as outras duas checagens de transparência do grupo `E`. Sequencial:
+nunca acumula com nenhuma outra causa desta série.
+
+No descarte de retificação, é alcançável: o envelope congelado lê
+`consequencia` como texto cru para todo nó, sem cruzar com o `tipo` do
+próprio nó.
+
+> **Lacuna conhecida.** Na definição, um payload com `tipo: "E"` e
+> `consequencia` presente é interceptado antes do handler por uma regra
+> de validação de payload equivalente — a resposta real é
+> `uniplus.validacao`, não esta entrada. Rastreado em `uniplus-api#1227`.
+
+## Como resolver
+
+Remova `consequencia` de todo nó com `tipo: "E"`. Se a intenção era que
+o grupo emitisse uma consequência própria, declare-o como `OU`/N-de.

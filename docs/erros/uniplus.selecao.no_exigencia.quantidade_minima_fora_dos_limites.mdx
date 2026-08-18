@@ -1,0 +1,57 @@
+---
+title: quantidadeMinima de um grupo OU/N-de deve estar entre 1 e o número de filhos
+sidebar_label: Quantidade mínima de grupo fora dos limites
+description: Em um grupo OU/N-de, quantidadeMinima conta quantos filhos precisam estar satisfeitos — não pode ser menor que 1 nem maior que o total de filhos declarados.
+code: uniplus.selecao.no_exigencia.quantidade_minima_fora_dos_limites
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó grupo com `tipo` igual a `OU` declara `quantidadeMinima` menor que
+1, ou maior que o número de filhos do próprio grupo. Em `OU`/N-de,
+`quantidadeMinima` conta quantos filhos precisam estar satisfeitos para
+o grupo inteiro ser satisfeito — pedir menos de 1 não exige nada, e
+pedir mais do que existem filhos é uma exigência que nenhuma combinação
+de respostas jamais cumpre.
+
+Diferente de um grupo `E` (que nunca tem cardinalidade própria — ver
+[`quantidade_minima_proibida_em_grupo_e`](./uniplus.selecao.no_exigencia.quantidade_minima_proibida_em_grupo_e.mdx)),
+esta é a checagem de cardinalidade do ramo `OU`. Roda como a primeira
+checagem específica desse ramo. Sequencial: nunca acumula com nenhuma
+outra causa desta série.
+
+No descarte de retificação, é alcançável pelos dois limites: o envelope
+congelado lê `quantidadeMinima` como número cru, sem reconferir nenhum
+dos dois contra o total de filhos.
+
+> **Lacuna conhecida.** Na definição, só o limite superior ("maior que o
+> número de filhos") chega a esta causa. O limite inferior ("menor que
+> 1") é interceptado antes do handler por uma regra de validação de
+> payload equivalente, comum a `OU` e a folha — a resposta real nesse
+> caso é `uniplus.validacao`, não esta entrada. O código de domínio
+> existe e está correto para os dois limites; o inferior só é
+> inalcançável pelo `PUT` porque a validação de payload o duplica.
+> Rastreado em `uniplus-api#1227`.
+
+## Como resolver
+
+Ajuste `quantidadeMinima` para um valor entre 1 e o número de filhos do
+grupo, inclusive. Um valor menor que 1 no `PUT` responde com
+`uniplus.validacao`, não com este código — mas a correção é a mesma.

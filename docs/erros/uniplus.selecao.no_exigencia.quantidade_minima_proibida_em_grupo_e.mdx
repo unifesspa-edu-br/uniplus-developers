@@ -1,0 +1,58 @@
+---
+title: Um grupo E não tem cardinalidade própria — quantidadeMinima é proibida
+sidebar_label: Quantidade mínima proibida em grupo E
+description: Um grupo E é transparente — todos os filhos precisam ser satisfeitos, sem cardinalidade própria a declarar. Só grupo OU/N-de aceita quantidadeMinima.
+code: uniplus.selecao.no_exigencia.quantidade_minima_proibida_em_grupo_e
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó grupo com `tipo` igual a `E` declara `quantidadeMinima`. Um grupo
+`E` é transparente: todos os filhos precisam ser satisfeitos, sem
+exceção — não há "quantos filhos bastam" a configurar, porque a resposta
+é sempre "todos". Só o grupo `OU`/N-de tem cardinalidade própria (quantos
+dos filhos satisfazem a exigência).
+
+Roda dentro do ramo específico de `E`, depois das checagens estruturais
+comuns aos dois tipos de grupo (
+[`grupo_vazio`](./uniplus.selecao.no_exigencia.grupo_vazio.mdx),
+[`arvore_com_ciclo`](./uniplus.selecao.no_exigencia.arvore_com_ciclo.mdx),
+[`grupo_com_fases_diferentes`](./uniplus.selecao.no_exigencia.grupo_com_fases_diferentes.mdx)
+e
+[`repeticao_de_entidade_aninhada`](./uniplus.selecao.no_exigencia.repeticao_de_entidade_aninhada.mdx)).
+É a primeira das três checagens de transparência do grupo `E`, antes de
+[`consequencia_proibida_em_grupo_e`](./uniplus.selecao.no_exigencia.consequencia_proibida_em_grupo_e.mdx)
+e
+[`base_legal_proibida_em_grupo_e`](./uniplus.selecao.no_exigencia.base_legal_proibida_em_grupo_e.mdx).
+Sequencial: nunca acumula com nenhuma outra causa desta série.
+
+No descarte de retificação, é alcançável: o envelope congelado lê
+`quantidadeMinima` como número cru para todo nó, sem cruzar com o
+`tipo` do próprio nó.
+
+> **Lacuna conhecida.** Na definição, um payload com `tipo: "E"` e
+> `quantidadeMinima` presente é interceptado antes do handler por uma
+> regra de validação de payload equivalente — a resposta real é
+> `uniplus.validacao`, não esta entrada. Rastreado em `uniplus-api#1227`.
+
+## Como resolver
+
+Remova `quantidadeMinima` de todo nó com `tipo: "E"`. Se a intenção era
+exigir só uma parte dos filhos, declare o grupo como `OU`/N-de.
