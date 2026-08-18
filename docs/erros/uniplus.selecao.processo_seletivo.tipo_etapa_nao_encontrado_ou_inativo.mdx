@@ -37,15 +37,19 @@ renomear um tipo ainda ativo não pode reescrever silenciosamente o snapshot já
 congelado de uma etapa que o cliente nem tocou — a cópia só muda quando o
 vínculo muda, não quando o cadastro de origem muda.
 
-**"Existente" aqui é definido pelo `Id` ecoado no payload, não por a etapa já
-estar salva no processo.** O `PUT` reconcilia por `Id` (ver
+**"Existente" aqui exige duas coisas ao mesmo tempo: o item do payload traz
+`Id` **e** esse `Id` corresponde a uma etapa já salva no processo.** O `PUT`
+reconcilia por `Id` (ver
 [`processo_seletivo.id_etapa_duplicado`](./uniplus.selecao.processo_seletivo.id_etapa_duplicado.mdx));
-uma etapa cujo item do payload não traz `Id` é tratada como **nova**, mesmo
-que ela já exista no processo com o mesmo `TipoEtapaOrigemId` de sempre — e
-uma etapa nova sempre passa pela resolução contra o catálogo. Um `PUT`
-integral que não ecoa os `Id`s das etapas existentes reconsulta o catálogo
-para todas elas, e um tipo desativado nesse meio-tempo dispara este erro
-mesmo sem nenhuma mudança de tipo pretendida.
+`Id` **omitido** — ou informado **sem correspondência** no processo — faz a
+etapa ser tratada como **nova**, mesmo que uma etapa com o mesmo
+`TipoEtapaOrigemId` já exista noutro lugar da coleção, e uma etapa nova
+sempre passa pela resolução contra o catálogo. Um `PUT` integral que não
+ecoa os `Id`s das etapas existentes reconsulta o catálogo para todas elas; e
+um `Id` ecoado a partir de uma leitura já defasada (a etapa foi removida, ou
+pertence a outro processo) tem o mesmo efeito — a etapa vira nova sem o
+cliente pretender isso, e um tipo desativado nesse meio-tempo dispara este
+erro mesmo sem nenhuma mudança de tipo pretendida.
 
 > **Atenção ao título.** Existe um segundo código, de outro contexto, com o
 > mesmo título literal —
@@ -61,8 +65,10 @@ Confirme, no catálogo de tipos de etapa de Configuração, que o
 recentemente, ou o `Id` está incorreto, corrija o payload antes de reenviar.
 
 Se a etapa já existia no processo com este mesmo tipo antes, e o erro só
-começou a aparecer agora, confirme que o payload está ecoando o `Id` dela —
-sem o `Id`, o `PUT` trata a etapa como nova e reconsulta o catálogo mesmo sem
-nenhuma mudança de tipo pretendida. Com o `Id` ecoado corretamente, a etapa
-continua válida enquanto você não tentar mudar o tipo dela; o problema só
-bloqueia etapas novas, etapas sem `Id` no payload, e realinhamentos de tipo.
+começou a aparecer agora, confirme que o payload está ecoando o `Id` **certo**
+dela — `Id` ausente, ou um `Id` que não corresponde a nenhuma etapa do
+processo (por exemplo, de uma leitura já defasada), faz o `PUT` tratar a
+etapa como nova e reconsultar o catálogo mesmo sem nenhuma mudança de tipo
+pretendida. Com o `Id` correto ecoado, a etapa continua válida enquanto você
+não tentar mudar o tipo dela; o problema só bloqueia etapas novas, etapas com
+`Id` ausente ou sem correspondência, e realinhamentos de tipo.
