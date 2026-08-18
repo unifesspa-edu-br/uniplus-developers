@@ -35,6 +35,10 @@ const pages: {name: string; url: string; exclude?: string}[] = [
     name: 'catálogo de erros (entrada)',
     url: 'erros/uniplus.selecao.processo_seletivo.localidade_ausente',
   },
+  {name: 'changelog (v1.0.0)', url: 'changelog/v1.0.0'},
+  // A entrada de media type embute <RedocSpec> (mesmo motivo da exclusão da
+  // proof gate acima) — fica fora do escopo aqui, coberta pela validação de
+  // site inteiro pós-deploy.
   {
     name: 'produto checklist de publicação',
     url: 'produto/checklist-publicacao/',

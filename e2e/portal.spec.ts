@@ -399,3 +399,45 @@ test.describe('Catálogo de erros', () => {
     expect(estoura).toBe(false);
   });
 });
+
+test.describe('Media types e changelog', () => {
+  test('a entrada de media type publica recurso, versão, vendor MIME e status', async ({
+    page,
+  }) => {
+    await page.goto('media-types/processo-seletivo/v1');
+    const main = page.locator('main');
+    await expect(
+      main.getByRole('heading', {name: 'processo-seletivo v1', level: 1}),
+    ).toBeVisible();
+    await expect(main.getByText('processo-seletivo', {exact: true})).toBeVisible();
+    await expect(main.getByText('v1', {exact: true})).toBeVisible();
+    await expect(
+      main.getByText('application/vnd.uniplus.processo-seletivo.v1+json'),
+    ).toBeVisible();
+    await expect(main.getByText('Em vigor')).toBeVisible();
+  });
+
+  test('a entrada de changelog publica versão, data e tipo de mudança', async ({
+    page,
+  }) => {
+    await page.goto('changelog/v1.0.0');
+    const main = page.locator('main');
+    await expect(main.getByRole('heading', {name: 'v1.0.0', level: 1})).toBeVisible();
+    await expect(main.getByText('2026-08-18')).toBeVisible();
+    await expect(main.getByText('Versão nova')).toBeVisible();
+    await expect(main.getByText('processo-seletivo/v1')).toBeVisible();
+    // Entrada de versão nova não exibe o banner de deprecation/sunset.
+    await expect(main.getByRole('note')).toHaveCount(0);
+  });
+
+  test('as duas entradas aparecem na navegação da Referência de API', async ({
+    page,
+  }) => {
+    await page.goto('referencia-api/proof-gate');
+    const sidebar = page.locator('.theme-doc-sidebar-container');
+    await expect(
+      sidebar.getByRole('link', {name: 'processo-seletivo v1'}),
+    ).toBeVisible();
+    await expect(sidebar.getByRole('link', {name: 'v1.0.0'})).toBeVisible();
+  });
+});
