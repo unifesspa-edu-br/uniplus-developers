@@ -1,0 +1,55 @@
+---
+title: Os args informados não correspondem à regra referenciada
+sidebar_label: Args incompatíveis com a regra de eliminação
+description: Cada regra de eliminação exige seu próprio formato de argumentos — para ELIM-ZERO-EM-AREA, o formato correto é não ter argumento nenhum.
+code: uniplus.selecao.regra_eliminacao.args_incompativeis_com_regra
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma regra de eliminação com o código `ELIM-ZERO-EM-AREA` informou
+`etapaRef`, `notaMinima` ou `minimo` — nenhum desses campos se aplica a
+essa regra. Diferente de `ELIM-NOTA-MINIMA-ETAPA` e `ELIM-CORTE-REDACAO`
+(que exigem argumentos próprios — ver
+[`etapa_ref_e_nota_minima_obrigatorios`](./uniplus.selecao.regra_eliminacao.etapa_ref_e_nota_minima_obrigatorios.mdx)
+e
+[`minimo_obrigatorio`](./uniplus.selecao.regra_eliminacao.minimo_obrigatorio.mdx)),
+`ELIM-ZERO-EM-AREA` não recebe nenhum — o formato correto para ela é não
+declarar nenhum dos três campos.
+
+Este código também é levantado, separadamente, dentro da criação da
+entidade `RegraEliminacao` — mas ali é uma checagem defensiva: como os
+argumentos sempre são montados a partir do próprio código da regra antes
+de chegar à criação (tanto na definição quanto na restauração da
+configuração congelada), essa segunda checagem nunca dispara em uso
+normal, nos dois caminhos. É o ponto na montagem dos argumentos a partir
+do payload da definição, exclusivo desse caminho, que de fato dispara.
+
+Este código também **aparece** no descarte de retificação, no sentido de
+que a checagem defensiva dentro da criação da entidade roda de novo ali —
+mas, pelo mesmo motivo, nunca chega a devolver essa violação: o envelope
+congelado também guarda os argumentos já montados a partir do código da
+regra.
+
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe o processamento.
+
+## Como resolver
+
+Remova `etapaRef`, `notaMinima` e `minimo` da regra de eliminação com
+código `ELIM-ZERO-EM-AREA`. Se a intenção era usar nota mínima ou corte de
+redação, reveja o código da regra declarado.

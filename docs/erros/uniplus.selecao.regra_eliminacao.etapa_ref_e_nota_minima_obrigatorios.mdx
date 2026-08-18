@@ -1,0 +1,42 @@
+---
+title: EtapaRef e NotaMinima são obrigatórios para a regra ELIM-NOTA-MINIMA-ETAPA
+sidebar_label: EtapaRef/NotaMinima ausentes na eliminação
+description: A regra que elimina por nota mínima numa etapa específica precisa dos dois campos juntos — e não aceita o campo minimo, que pertence a outra regra.
+code: uniplus.selecao.regra_eliminacao.etapa_ref_e_nota_minima_obrigatorios
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma regra de eliminação com o código `ELIM-NOTA-MINIMA-ETAPA` não informou
+`etapaRef`, não informou `notaMinima`, ou informou `minimo` — campo que
+pertence a `ELIM-CORTE-REDACAO`, não a esta regra. As três condições são
+conferidas juntas: `etapaRef` e `notaMinima` precisam estar presentes, e
+`minimo` precisa estar ausente.
+
+Esta checagem verifica só que os campos foram informados nos lugares
+certos — o valor de `notaMinima` em si precisa ser não negativo, checagem
+separada, ver
+[`nota_minima_invalida`](./uniplus.selecao.regra_eliminacao.nota_minima_invalida.mdx);
+e a existência da `etapaRef` no processo é conferida pela raiz do
+agregado, também separadamente. Roda na montagem dos argumentos da regra,
+depois que ela já foi resolvida contra o catálogo. Não acumula com
+nenhuma outra violação — é a primeira que falhar que interrompe o
+processamento.
+
+## Como resolver
+
+Informe `etapaRef` e `notaMinima`, e não informe `minimo`, para toda regra
+de eliminação com o código `ELIM-NOTA-MINIMA-ETAPA`.
