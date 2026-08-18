@@ -1,0 +1,56 @@
+---
+title: Casas de arredondamento não se aplicam quando a classificação é importada
+sidebar_label: Casas de arredondamento indevidas na classificação importada
+description: A precisão decimal do arredondamento só faz sentido junto de um cálculo local — quando a classificação é importada, não há nota local a arredondar.
+code: uniplus.selecao.configuracao_classificacao.casas_arredondamento_indevido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de cálculo declarada é `CLASSIFICACAO-IMPORTADA`, mas a configuração
+também informou `casasArredondamento`. É a metade do mesmo par de campos que
+[`arredondamento_indevido`](./uniplus.selecao.configuracao_classificacao.arredondamento_indevido.mdx)
+cobre para `regraArredondamentoCodigo` — as duas checagens são separadas
+propositalmente, cada uma atribuída ao campo que ela reprova, para que a
+resposta não aponte um campo pelo erro do outro quando só um dos dois vier
+preenchido.
+
+No caminho de definição, pode aparecer ao lado de `arredondamento_indevido`
+(quando os dois campos vêm preenchidos), de
+[`eliminacao_indevida`](./uniplus.selecao.configuracao_classificacao.eliminacao_indevida.mdx)
+e de
+[`eliminacao_enem_fora_de_processo_enem`](./uniplus.selecao.processo_seletivo.eliminacao_enem_fora_de_processo_enem.mdx)
+na mesma resposta (acumula, ADR-0125). Nunca coexiste com
+[`arredondamento_obrigatorio`](./uniplus.selecao.configuracao_classificacao.arredondamento_obrigatorio.mdx)
+nem com
+[`casas_arredondamento_obrigatorio`](./uniplus.selecao.configuracao_classificacao.casas_arredondamento_obrigatorio.mdx)
+— pertencem ao ramo oposto (cálculo local).
+
+No descarte de retificação, o codec só propaga ao chamador a primeira
+violação que a reconstrução acumular internamente. Dentro do ramo importado,
+`casas_arredondamento_indevido` é conferida depois de `arredondamento_indevido`
+e antes de `eliminacao_indevida` — perde a prioridade para a primeira (e para
+[`n_opcoes_invalido`](./uniplus.selecao.configuracao_classificacao.n_opcoes_invalido.mdx),
+sempre conferida antes de qualquer ramo), mas vence sobre `eliminacao_indevida`
+e `eliminacao_enem_fora_de_processo_enem` quando o mesmo envelope corrompido
+também as violaria.
+
+## Como resolver
+
+Remova `casasArredondamento` da configuração quando `regraCalculoCodigo` for
+`CLASSIFICACAO-IMPORTADA`. Se a intenção era arredondar localmente, declare
+`FORMULA-MEDIA-PONDERADA` como regra de cálculo.
