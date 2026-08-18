@@ -1,0 +1,66 @@
+---
+title: Modalidade de cota reservada deve seguir a cascata legal
+sidebar_label: Cota reservada exige cascata
+description: Uma modalidade de cota reservada da Lei 12.711 não pode trocar a cascata legal de remanejamento por destino único ou remanejamento cruzado — a lei fixa a ordem.
+code: uniplus.selecao.modalidade_selecionada.cota_reservada_exige_cascata
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+  - label: 'uniplus-api#865'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/865
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade selecionada tem `naturezaLegal: COTA_RESERVADA` (é uma das
+sub-reservas da Lei 12.711) mas declara `regraRemanejamento` diferente de
+`SEGUE_CASCATA`. Para modalidades de cota reservada, a lei já fixa para onde
+as vagas ociosas vão — a sequência ordenada de destinos e o fallback final
+(cascata legal, configurada à parte em `ConfiguracaoCascataRemanejamento`) —,
+e essa não é uma escolha administrativa que o cadastro possa substituir por
+`DESTINO_UNICO` ou `CRUZADO`.
+
+Natureza legal (`COTA_RESERVADA`, entre outras) descreve **o que** a
+modalidade é perante a lei; regra de remanejamento descreve **o que
+acontece** com as vagas ociosas dela. Este código é a ponte entre as duas: a
+primeira restringe os valores válidos da segunda. Não acumula com nenhuma
+outra violação — é a primeira que falhar que interrompe a criação da
+modalidade.
+
+**`naturezaLegal` e `regraRemanejamento` não vêm do payload da definição de
+distribuição de vagas** — são copiados do cadastro de modalidades de
+Configuração, no momento em que a modalidade é selecionada
+(`IModalidadeReader`). O próprio cadastro já impede esta incoerência na
+escrita (as invariantes cruzadas de `Modalidade`, tanto na criação quanto na
+atualização); pela definição de
+distribuição de vagas, este código só aparece se a modalidade estiver
+gravada no cadastro de um jeito que contorna essa validação — a checagem
+aqui é defesa em profundidade, não a primeira linha.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recria cada modalidade selecionada a
+partir dos mesmos campos — a mesma checagem roda de novo, sozinha.
+
+## Como resolver
+
+O vínculo incoerente não está no payload que você enviou — está na
+modalidade cadastrada em Configuração. Corrija lá: para uma modalidade de
+cota reservada, `regraRemanejamento` precisa ser `SEGUE_CASCATA`, com a
+cascata legal correspondente configurada; se a intenção era uma modalidade
+sem vínculo com a Lei 12.711, reveja a `naturezaLegal` cadastrada.
+
+Se o erro apareceu ao descartar uma retificação, o problema também não está
+no payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar, refletindo uma modalidade já incoerente no
+momento em que foi selecionada.
