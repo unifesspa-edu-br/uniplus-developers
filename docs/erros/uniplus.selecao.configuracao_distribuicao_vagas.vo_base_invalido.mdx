@@ -31,10 +31,11 @@ Esta checagem acumula com
 [`pr_fora_do_limite`](./uniplus.selecao.configuracao_distribuicao_vagas.pr_fora_do_limite.mdx)
 e
 [`modalidades_vazias`](./uniplus.selecao.configuracao_distribuicao_vagas.modalidades_vazias.mdx)
-— as três únicas checagens que não dependem de nenhum cadastro cross-módulo
-(oferta de curso, regra de distribuição, modalidades) já resolvido. Elas
-rodam numa primeira passada, sobre **todas** as distribuições do payload,
-antes de qualquer consulta aos cadastros vivos: um payload com duas
+— as três únicas checagens que não dependem de nenhuma resolução contra
+cadastro ou catálogo vivo já resolvida (oferta de curso e modalidades, em
+Configuração; regra de distribuição, no `rol_de_regras` do próprio módulo
+Seleção). Elas rodam numa primeira passada, sobre **todas** as distribuições
+do payload, antes de qualquer uma dessas consultas: um payload com duas
 distribuições, uma com `voBase` inválido e outra com `pr` fora da faixa,
 devolve as duas violações juntas no array `errors[]` do corpo de erro, cada
 item com seu `field` (`distribuicaoVagas[<índice>].voBase`, por exemplo).
