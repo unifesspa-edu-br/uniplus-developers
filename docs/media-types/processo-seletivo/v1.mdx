@@ -31,12 +31,20 @@ Este media type cobre **só as duas operações de leitura** do recurso —
 
 Validar uma resposta de coleção contra o schema do detalhe (ou vice-versa) falha.
 
-As demais operações do agregado (criação, retificação, conformidade, snapshot
-vigente etc.) **não** usam este vendor MIME — a criação negocia em JSON comum
-(`application/json`), e cada subrecurso tem o próprio media type versionado
-(ex.: `application/vnd.uniplus.retificacao-em-curso.v1+json`). Elas aparecem
-na referência abaixo só para dar contexto do agregado completo; não são
-descritas por esta entrada.
+As demais operações do agregado **não** usam este vendor MIME. Duas famílias
+distintas:
+
+- **Mutações** (criação, todas as atualizações por seção — etapas, cotas,
+  bônus etc. —, publicação, retificação) negociam em JSON comum
+  (`application/json`) e, quando têm corpo de resposta, não o versionam por
+  vendor MIME — a maioria responde `204 No Content`.
+- **Outras leituras** (`GET .../retificacao-em-curso`, `GET .../conformidade`,
+  `GET .../conformidade-legal`, `GET .../snapshot-vigente`) têm, cada uma, o
+  próprio media type versionado (ex.:
+  `application/vnd.uniplus.retificacao-em-curso.v1+json`) — não este.
+
+Elas aparecem na referência abaixo só para dar contexto do agregado completo;
+não são descritas por esta entrada.
 
 ## Referência completa do agregado
 
