@@ -1,0 +1,68 @@
+name: Sincronizar specs OpenAPI
+
+# Puxa contracts/openapi.<modulo>.json da uniplus-api (branch main) para
+# static/openapi/<modulo>.json e abre PR quando há diff — previsto na
+# ADR-0001 (§ Sincronização dos specs OpenAPI). A ação usada só cria/atualiza
+# PR quando o working tree tem mudança; sem diff, o job termina sem efeito.
+#
+# `repository_dispatch` escuta o merge para main da uniplus-api — o disparo
+# do lado de lá (repository_dispatch para este repo) é trabalho próprio,
+# fora deste workflow.
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [uniplus-api-openapi-updated]
+
+concurrency:
+  group: sync-specs-${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sincronizar specs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Baixar specs da uniplus-api (main)
+        run: |
+          set -euo pipefail
+          mkdir -p static/openapi
+          for modulo in selecao ingresso configuracao organizacao publicacoes; do
+            curl -fsSL \
+              "https://raw.githubusercontent.com/unifesspa-edu-br/uniplus-api/main/contracts/openapi.${modulo}.json" \
+              -o "static/openapi/${modulo}.json"
+          done
+
+      - name: Validar JSON baixado
+        run: |
+          set -euo pipefail
+          for modulo in selecao ingresso configuracao organizacao publicacoes; do
+            arquivo="static/openapi/${modulo}.json"
+            if ! python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$arquivo"; then
+              echo "ERRO: $arquivo não é JSON válido — abortando sem abrir PR" >&2
+              exit 1
+            fi
+          done
+
+      - name: Abrir PR com o diff, se houver
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'chore(openapi): sincroniza specs da uniplus-api'
+          title: 'chore(openapi): sincroniza specs da uniplus-api'
+          body: |
+            Specs OpenAPI atualizados a partir de `unifesspa-edu-br/uniplus-api@main` (`contracts/openapi.*.json`).
+
+            Revisar o diff contratual antes de mergear — mudança de schema aqui pode exigir nova entrada de changelog (`docs/changelog/`) ou nova versão de media type (`docs/media-types/`).
+          branch: chore/sync-openapi-specs
+          delete-branch: true
+          labels: documentation
