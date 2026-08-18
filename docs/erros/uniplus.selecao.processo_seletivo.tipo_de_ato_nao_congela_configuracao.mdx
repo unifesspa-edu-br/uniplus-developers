@@ -1,0 +1,48 @@
+---
+title: O ato que cria a versão da configuração precisa ser de um tipo que congela configuração
+sidebar_label: Tipo de ato não congela configuração
+description: Publicar e retificar sempre congelam uma nova versão de configuração (UNI-REQ-0019) — o tipo de ato usado precisa ser, no cadastro de Publicações, de um tipo que congela.
+code: uniplus.selecao.processo_seletivo.tipo_de_ato_nao_congela_configuracao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-api#827'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/827
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Publicar ou retificar um processo seletivo sempre congela uma nova
+`VersaoConfiguracao` (UNI-REQ-0019) — não é uma característica opcional do ato, é o
+que a transição faz por definição. O tipo de ato declarado no comando não
+está marcado, no catálogo de Publicações, como um tipo que congela
+configuração (`congela_configuracao`).
+
+A regra não compara o código do tipo contra uma lista fixa em código —
+pergunta ao catálogo se aquele tipo congela. Um tipo de ato pensado para
+outro propósito (por exemplo, uma comunicação informativa, sem efeito sobre a
+configuração) não serve para publicar nem retificar, mesmo que o código exista
+e esteja vigente.
+
+Sem esta conferência, a inconsistência não ficaria parada: a próxima
+retificação, com um tipo congelante de verdade, seria recusada por classe de
+ato divergente — deixando a retificação publicada sem ato correspondente.
+
+## Como resolver
+
+Use um tipo de ato marcado como congelante no cadastro de Publicações para
+publicar ou retificar. Se o tipo de ato que você pretendia usar não deveria
+congelar configuração, ele não é adequado para este comando — publicações e
+retificações de processo seletivo sempre exigem um tipo congelante, por
+definição de UNI-REQ-0019.

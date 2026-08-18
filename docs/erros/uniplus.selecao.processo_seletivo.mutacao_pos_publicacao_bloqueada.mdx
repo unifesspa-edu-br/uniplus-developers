@@ -1,0 +1,45 @@
+---
+title: Processo publicado não aceita mutação direta da configuração
+sidebar_label: Mutação pós-publicação bloqueada
+description: A configuração de um processo publicado é imutável — qualquer alteração precisa passar por retificação, nunca por Definir* direto.
+code: uniplus.selecao.processo_seletivo.mutacao_pos_publicacao_bloqueada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Qualquer comando Definir* sobre um processo já publicado
+requisitos:
+  - UNI-REQ-0022
+rastreio:
+  - label: 'uniplus-api#866'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/866
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um comando de configuração (`Definir*` — etapas, cotas, cronograma,
+documentos exigidos, e todos os demais) foi enviado contra um processo que já
+está **publicado e sem retificação em curso**. A configuração congelada na
+publicação (UNI-REQ-0019) é imutável por construção: nenhum comando de configuração
+grava sobre ela diretamente.
+
+Este guard é verificado duas vezes por desenho — uma vez no handler, logo
+após resolver o processo (a precondição precede a regra de negócio, ADR-0110
+D9), e de novo dentro do próprio domínio, como invariante que não depende de
+o handler lembrar de checar antes.
+
+## Como resolver
+
+Para alterar a configuração de um processo já publicado, abra uma
+**retificação** (`POST .../retificacao-em-curso`) antes de enviar os
+comandos `Definir*` — durante uma retificação em curso, os mesmos comandos
+alteram o rascunho da nova versão, não a versão publicada. Feche a
+retificação para congelar a nova versão.
+
+Se o processo ainda não foi publicado, o comando deveria ter funcionado —
+confirme o `id` enviado; um `id` de outro processo, já publicado, produz este
+mesmo erro.

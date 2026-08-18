@@ -1,0 +1,60 @@
+---
+title: Processo não conforme para publicação
+sidebar_label: Conformidade insuficiente para publicar
+description: Agrega toda pendência estrutural que bloqueia a publicação — a mensagem lista, por nome, cada item reprovado do checklist.
+code: uniplus.selecao.processo_seletivo.conformidade_insuficiente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-api#857'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/857
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo tentou congelar uma nova versão de configuração — publicar,
+retificar pelo atalho atômico, ou fechar uma sessão de retificação —, mas ao
+menos um item do checklist estrutural de conformidade reprovou. Esta é a
+causa **agregadora**: a mensagem lista, por nome, cada item reprovado, para
+que a resposta sozinha já diga o que falta, sem obrigar o cliente a
+inspecionar a configuração inteira em busca do problema. O mesmo checklist
+vale para as três transições, não só para a publicação.
+
+O checklist estrutural tem seis itens fixos — **Atendimento especializado**,
+**Distribuição de vagas**, **Classificação**, **Cronograma de fases**, **Taxa
+de inscrição e isenção** e **Base legal das exigências documentais** — mais
+um condicional, **Divisor da média**, que só entra quando a classificação usa
+fórmula de média ponderada local.
+
+A **cascata de remanejamento** e a coerência fina da árvore de exigências
+documentais (condicional vazia que determina resultado, consequência de
+indeferimento coerente com a ação da vaga) têm gates de conformidade
+próprios, com causas nomeadas específicas — não entram nesta lista, para que
+o erro específico de cada uma nunca fique mascarado pelo agregador genérico.
+
+## Como resolver
+
+Leia a lista de itens reprovados na mensagem — cada um nomeia a área da
+configuração que precisa de ajuste. Corrija cada item e tente a transição de
+novo; a resposta reflete o estado da configuração no momento da tentativa,
+então itens já corrigidos deixam de aparecer na próxima resposta.
+
+Para um diagnóstico mais amplo, consulte
+`GET /api/selecao/processos-seletivos/{id}/conformidade` — além dos mesmos
+seis itens (mais o condicional) desta causa, ela também mostra os itens dos
+outros gates estruturais (cascata de remanejamento, cronograma, coerência da
+árvore de exigências documentais, referência temporal de fatos e regras de
+derivação), que têm causas nomeadas próprias e não aparecem na mensagem desta
+entrada. É a mesma família de predicados, disponível como leitura sem tentar
+a transição.

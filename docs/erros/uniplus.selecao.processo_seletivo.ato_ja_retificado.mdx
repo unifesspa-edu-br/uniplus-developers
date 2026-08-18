@@ -1,0 +1,46 @@
+---
+title: O ato que esta retificação emendaria já foi retificado — a cadeia de atos é linear
+sidebar_label: Ato já retificado
+description: A cadeia de atos é linear — um ato é emendado no máximo uma vez. Conferido contra o registro de Publicações antes de registrar a retificação.
+code: uniplus.selecao.processo_seletivo.ato_ja_retificado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0021
+rastreio:
+  - label: 'uniplus-api#792'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/792
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A cadeia de atos que sucede as versões de configuração é **linear**: um ato é
+emendado no máximo uma vez (ADR-0103). O ato que esta retificação (pelo
+atalho atômico ou pelo fechamento de uma sessão editorial) tentaria emendar
+já foi retificado — por fora, pelo endpoint administrativo de Publicações,
+antes de este comando chegar.
+
+A conferência acontece antes de registrar a nova retificação. Sem ela, o
+registro recusaria a mensagem durável com a causa
+[`ato_normativo.raiz_ja_retificada`](./uniplus.publicacoes.ato_normativo.raiz_ja_retificada.mdx)
+de Publicações, e a retificação ficaria publicada no lado de Seleção sem o
+ato correspondente do outro lado — um estado inconsistente entre módulos que
+a conferência antecipada evita.
+
+## Como resolver
+
+Consulte o histórico de atos deste processo em Publicações para identificar
+qual ato já emenda o que você tentou retificar — a retificação seguinte
+precisa partir do ato mais recente da cadeia, não de um elo já emendado.
+
+Se a retificação que já existe não é a que você esperava, é possível que
+outra pessoa (ou outro processo administrativo) já tenha retificado o mesmo
+processo entre a leitura da versão atual e o envio deste comando.
