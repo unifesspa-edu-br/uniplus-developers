@@ -18,8 +18,10 @@ import ChangelogEntry from '@site/src/components/ChangelogEntry';
 
 Esta é a primeira entrada do changelog do portal — registra a
 publicação do [media type `processo-seletivo v1`](../media-types/processo-seletivo/v1.mdx),
-correspondente ao endpoint `GET /api/selecao/processos-seletivos/{id}` e às
-demais operações do agregado `ProcessoSeletivo`.
+correspondente às duas leituras do recurso — `GET /api/selecao/processos-seletivos/{id}`
+(detalhe) e `GET /api/selecao/processos-seletivos` (coleção). As demais
+operações do agregado `ProcessoSeletivo` (mutações e outras leituras) não
+usam este vendor MIME — ver o detalhamento na página do media type.
 
 O [catálogo de erros](../erros/index.mdx) já cobre um número muito maior de
 causas de recusa em vários módulos (Seleção, Organização Institucional,
