@@ -1,0 +1,44 @@
+---
+title: O mesmo Id de nó da árvore de satisfação não pode aparecer mais de uma vez na configuração restaurada
+sidebar_label: Id de nó duplicado na restauração
+description: A restauração de uma configuração congelada prova o grafo inteiro antes de aplicá-lo — um Id de nó repetido indicaria corrupção na versão para a qual o sistema está tentando voltar.
+code: uniplus.selecao.processo_seletivo.id_no_exigencia_duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O envelope congelado que uma retificação está descartando (voltando à
+versão anterior) contém dois nós da árvore de exigências com o mesmo
+`id`. É a primeira das checagens estruturais que provam o grafo restaurado
+inteiro antes de aplicá-lo — mesma disciplina de outras coleções do
+envelope
+([`id_etapa_duplicado`](./uniplus.selecao.processo_seletivo.id_etapa_duplicado.mdx)),
+mas para os nós da árvore de satisfação.
+
+Diferente do payload de definição de documentos exigidos — onde
+`NoExigenciaInput` não tem campo `id` algum, porque a árvore inteira é
+sempre substituída, nunca reconciliada nó a nó por identificador — esta
+causa só existe no envelope, que atribui um `id` interno a cada nó para
+poder referenciá-lo (pai/filho, folha/documento) dentro da própria
+estrutura serializada. Um `id` repetido ali não tem como vir de um
+cliente: é sempre um sinal de corrupção da versão congelada.
+
+## Como resolver
+
+O payload que você enviou não é a causa — é a configuração congelada
+para a qual o sistema está tentando voltar que já contém a duplicidade.
+Abra uma investigação em vez de tentar corrigir pelo descarte.
