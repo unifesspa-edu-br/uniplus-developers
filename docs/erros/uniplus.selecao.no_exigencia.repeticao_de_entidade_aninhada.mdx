@@ -1,0 +1,53 @@
+---
+title: Uma subárvore repetePorEntidade não pode conter outra — repetição não aninha
+sidebar_label: Repetição de entidade aninhada
+description: Um nó marcado como repetível por instância de entidade (membro do núcleo familiar, pessoa jurídica vinculada) não pode ter, entre seus descendentes, outro nó também marcado — a repetição não aninha.
+code: uniplus.selecao.no_exigencia.repeticao_de_entidade_aninhada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0069
+rastreio:
+  - label: 'uniplus-api#938'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/938
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó grupo com `repetePorEntidade` declarado tem, entre seus
+descendentes (em qualquer profundidade), outro nó que também declara
+`repetePorEntidade`. Uma subárvore marcada como repetível já avalia toda
+a sua própria descendência uma vez por instância da entidade — marcar um
+descendente dela como repetível de novo não tem semântica clara: por
+qual entidade a repetição interna repetiria?
+
+Como as checagens de ciclo e de fase comum, precisa olhar a árvore
+inteira, não só o nó sendo criado — a construção é bottom-up (filhos e
+grupos já existem prontos quando o pai é criado), então checar os
+descendentes já construídos é suficiente para pegar qualquer combinação
+de profundidade: o nó marcado mais próximo da raiz é sempre o último a
+ser criado.
+Sequencial: a primeira violação encontrada na criação do nó interrompe o
+processamento; nunca acumula com nenhuma outra causa desta série.
+
+Diferente da maioria das causas de grupo desta série, esta **não** é
+sombreada por uma regra de validação de payload equivalente — o
+aninhamento é invariante de árvore inteira, que uma regra local por
+campo não consegue conferir; o validator de payload delibera
+explicitamente deixar essa checagem com o domínio. Alcançável tanto na
+definição quanto no descarte de retificação: nos dois caminhos, cada nó
+é reconstruído bottom-up chamando a mesma checagem.
+
+## Como resolver
+
+Remova `repetePorEntidade` de um dos dois nós — o mais externo (mais
+próximo da raiz) ou os descendentes marcados — de modo que só um nó por
+subárvore declare o tipo de entidade que repete.

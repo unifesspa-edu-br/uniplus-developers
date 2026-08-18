@@ -1,0 +1,53 @@
+---
+title: Base legal de grupo só é permitida quando o grupo carrega consequência
+sidebar_label: Base legal sem consequência
+description: A base legal própria de um grupo OU/N-de ampara a consequência que ele emite — sem consequência declarada, não há o que a base legal fundamentar.
+code: uniplus.selecao.no_exigencia.base_legal_sem_consequencia
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0070
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó grupo com `tipo` igual a `OU` declara uma ou mais entradas em
+`basesLegais`, mas não declara `consequencia`. A base legal própria de
+um grupo `OU`/N-de é o fundamento legal da consequência que **esse
+grupo** emite — sem consequência declarada, não há o que a base legal
+esteja fundamentando ali.
+
+É a última checagem do ramo `OU`, depois de
+[`consequencia_invalida`](./uniplus.selecao.no_exigencia.consequencia_invalida.mdx)
+já ter passado (ou de `consequencia` estar ausente). Sequencial: nunca
+acumula com nenhuma outra causa desta série.
+
+No descarte de retificação, é alcançável: o envelope congelado lê
+`basesLegais` e `consequencia` de todo nó separadamente, sem cruzar os
+dois valores entre si.
+
+> **Lacuna conhecida.** Na definição, um payload com `consequencia`
+> ausente (ou em branco) e `basesLegais` não vazia é interceptado antes
+> do handler por uma regra de validação de payload equivalente — a
+> mesma regra que também recusa `basesLegais` em nó `E`/folha, por uma
+> condição mais ampla. A resposta real nesse caso é `uniplus.validacao`,
+> não esta entrada. Rastreado em `uniplus-api#1227`.
+
+## Como resolver
+
+Informe `consequencia` para o grupo que carrega `basesLegais`, ou remova
+`basesLegais` se o grupo não é uma exigência de primeira classe com
+consequência própria.

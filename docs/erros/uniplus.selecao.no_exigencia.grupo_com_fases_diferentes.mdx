@@ -1,0 +1,52 @@
+---
+title: Todos os nós de um grupo precisam pertencer à mesma fase do cronograma
+sidebar_label: Grupo com fases diferentes
+description: Todos os descendentes de um grupo E/OU precisam convergir para a mesma fase do cronograma — um grupo não pode combinar exigências de fases distintas.
+code: uniplus.selecao.no_exigencia.grupo_com_fases_diferentes
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Os descendentes de um nó grupo (`E` ou `OU`) não convergem para uma única
+fase do cronograma — a fase de uma folha é herdada do `DocumentoExigido`
+que ela envolve, e um grupo cuja árvore mistura documentos de fases
+diferentes não tem uma fase comum a atribuir a si mesmo. A fase de um
+grupo é sempre a fase comum de tudo que está abaixo dele, recursivamente
+— nunca uma escolha independente do grupo.
+
+Roda depois de
+[`grupo_vazio`](./uniplus.selecao.no_exigencia.grupo_vazio.mdx)
+e de
+[`arvore_com_ciclo`](./uniplus.selecao.no_exigencia.arvore_com_ciclo.mdx)
+já terem passado — a fase comum só pode ser calculada sobre uma lista de
+filhos não vazia e sem ciclo. Sequencial: a primeira violação encontrada
+na criação do nó interrompe o processamento; nunca acumula com nenhuma
+outra causa desta série.
+
+Alcançável tanto na definição quanto no descarte de retificação: nos
+dois caminhos, cada documento exigido declara sua própria fase
+separadamente, e nada na montagem da árvore confere essa coerência antes
+de a checagem do grupo rodar — nem o validator de payload (que não
+resolve documentos contra fases) nem a leitura do envelope.
+
+## Como resolver
+
+Revise os documentos exigidos que compõem o grupo apontado e confirme
+que todos — folhas e, recursivamente, os grupos aninhados — estão
+associados à mesma fase do cronograma. Se a intenção era cobrir fases
+diferentes, isso exige grupos separados, um por fase.

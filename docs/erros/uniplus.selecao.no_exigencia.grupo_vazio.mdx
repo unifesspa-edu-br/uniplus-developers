@@ -1,0 +1,55 @@
+---
+title: Um grupo E/OU não pode ter zero filhos
+sidebar_label: Grupo sem filhos
+description: Um nó grupo (E ou OU) da árvore de satisfação precisa de ao menos um filho — um conector sem filhos não tem o que combinar.
+code: uniplus.selecao.no_exigencia.grupo_vazio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó grupo (`E` ou `OU`) da árvore de satisfação de documentos foi criado
+sem nenhum filho. Um grupo conector sem filhos não tem o que combinar — é
+a raiz de uma exigência vazia, sem documento nenhum por trás.
+
+É a primeira checagem estrutural dentro da criação de um grupo — roda
+antes de qualquer checagem sobre ciclo ou fase comum. Sequencial: a
+primeira violação encontrada na criação do nó interrompe o processamento
+daquele nó; nunca acumula com nenhuma outra causa desta série.
+
+No descarte de retificação, é alcançável: o envelope congelado lê a lista
+`filhos` de cada nó sem exigir um mínimo — só quando o nó é reconstruído
+para validar invariantes é que a lista vazia é recusada. A reconstrução
+não acumula: para na primeira violação que encontrar.
+
+> **Lacuna conhecida.** Na definição, um payload com um nó `E`/`OU` sem
+> filhos é interceptado antes do handler por uma regra de validação de
+> payload equivalente — a resposta real é `uniplus.validacao`, não esta
+> entrada. O código de domínio existe e está correto; alcança o `PUT`
+> quando essa regra de validação de payload for removida em favor do
+> guard de domínio já existente, mesma frente da ADR-0125, rastreada em
+> `uniplus-api#1227`.
+
+## Como resolver
+
+Informe ao menos um filho para todo nó `E`/`OU`. Na definição, hoje um
+payload com grupo vazio responde com `uniplus.validacao`, não com este
+código — mas a correção é a mesma. Se o erro veio de um descarte de
+retificação, o problema está na configuração congelada para a qual o
+descarte está tentando voltar — investigue a versão publicada anterior.

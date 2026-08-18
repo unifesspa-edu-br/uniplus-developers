@@ -1,0 +1,49 @@
+---
+title: A árvore de satisfação não pode conter ciclos
+sidebar_label: Árvore com ciclo
+description: 'Rascunho — a estrutura da árvore de satisfação precisa ser uma árvore de verdade, sem ciclos, mas hoje nenhum caminho real chega a devolver esta causa.'
+code: uniplus.selecao.no_exigencia.arvore_com_ciclo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A estrutura declarada para um nó grupo da árvore de satisfação contém um
+ciclo — um nó que, descendo pelos filhos, volta a se referenciar. A
+árvore de satisfação precisa ser uma árvore de verdade: um nó grupo
+combina os resultados dos filhos, e um ciclo faria essa combinação nunca
+terminar.
+
+O código de domínio existe (checagem por identidade de referência dentro
+de `CriarGrupo`) — mas **nenhum caminho real chega a executá-lo hoje**,
+por isso a entrada é rascunho, não publicada.
+
+Tanto o payload de definição quanto o envelope congelado representam a
+árvore como uma estrutura JSON aninhada **por valor**: cada nó filho é
+uma instância nova, construída na própria desserialização. Um documento
+JSON, por construção, não consegue expressar um nó que aponta de volta
+para um ancestral — isso exigiria uma referência compartilhada que o
+formato não representa. A checagem é defesa em profundidade contra um
+cenário que só existiria se um chamador **interno** reusasse a mesma
+instância de nó em duas posições da árvore ao montá-la programaticamente
+— nunca alcançável a partir de um payload ou de um envelope real.
+
+## Como resolver
+
+Não aplicável a um payload real — se você está vendo este código, é
+sinal de um bug em código interno que constrói a árvore
+programaticamente reutilizando a mesma instância de nó, não algo que o
+payload em si possa expressar.
