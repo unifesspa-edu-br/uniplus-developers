@@ -1,0 +1,52 @@
+---
+title: A cascata declara origem que nenhuma oferta do processo marca como SegueCascata
+sidebar_label: Origem da cascata sem modalidade correspondente
+description: Toda origem declarada na cascata precisa corresponder a uma modalidade SegueCascata de fato ofertada em algum lugar do processo — senão a cascata configura remanejamento para uma modalidade que não existe com essa regra.
+code: uniplus.selecao.processo_seletivo.cascata_origem_nao_segue_cascata
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A cascata do processo declara, como origem, um código de modalidade que
+nenhuma oferta do processo marca com `regraRemanejamento` igual a
+`SEGUE_CASCATA`. É a checagem inversa de
+[`cascata_origem_ausente`](./uniplus.selecao.processo_seletivo.cascata_origem_ausente.mdx):
+lá, a modalidade `SEGUE_CASCATA` existe mas a cascata não a cobre; aqui, a
+cascata cobre uma origem que nenhuma modalidade `SEGUE_CASCATA` de fato
+usa — a fila de destinos daquela origem não tem para quê existir.
+
+Diferente das causas anteriores desta série, que rodam durante a
+avaliação oferta por oferta, esta roda **depois**, numa segunda passada
+que só acontece se nenhuma oferta reprovou nenhuma delas: percorre as
+origens da cascata, em ordem determinística, e confere cada uma contra o
+conjunto de todos os códigos de modalidade `SEGUE_CASCATA` do processo,
+somando todas as ofertas. Sequencial: a primeira origem com essa
+inconsistência interrompe a avaliação; nunca acumula com nenhuma outra
+causa desta série, e nunca coexiste com as quatro anteriores — se alguma
+delas tivesse disparado, a avaliação já teria parado antes de chegar
+aqui.
+
+Não aparece no descarte de retificação — a checagem só roda ao gerar uma
+versão publicada nova.
+
+## Como resolver
+
+Remova a origem apontada da cascata, ou configure alguma modalidade do
+processo com `regraRemanejamento` igual a `SEGUE_CASCATA` e o mesmo código
+dessa origem.

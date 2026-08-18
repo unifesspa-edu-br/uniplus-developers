@@ -1,0 +1,56 @@
+---
+title: O fallback (ou o destino resolvível) da cascata não é modalidade selecionada na oferta
+sidebar_label: Fallback ou destino não resolvível na oferta
+description: Para uma oferta com modalidade SegueCascata, o fallback da cascata e ao menos um destino da fila de cada origem precisam ser modalidades de fato selecionadas naquela oferta — senão o remanejamento não tem para onde ir ali.
+code: uniplus.selecao.processo_seletivo.cascata_fallback_nao_selecionado_na_oferta
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A cascata do processo é única, mas cada oferta de curso seleciona seu
+próprio subconjunto de modalidades — a fila de destinos de uma origem e o
+fallback só resolvem, numa oferta específica, se pelo menos uma das
+modalidades que a cascata cita ali estiver de fato selecionada. Esta causa
+cobre dois cenários:
+
+- O **fallback** da cascata não é modalidade selecionada na oferta — sem
+  ele, uma vaga que percorresse toda a fila de qualquer origem sem
+  preenchimento não teria onde parar.
+- **Nenhum destino da fila de uma origem** é modalidade selecionada na
+  oferta — a fila entera é resolvida contra as modalidades daquela oferta
+  específica, e se nenhuma posição resolver, o remanejamento também não
+  tem para onde ir.
+
+O primeiro cenário é conferido uma vez por oferta (depois de confirmar que
+o processo tem cascata — ver
+[`cascata_origem_ausente`](./uniplus.selecao.processo_seletivo.cascata_origem_ausente.mdx));
+o segundo é conferido para cada modalidade `SEGUE_CASCATA` da oferta, em
+ordem determinística. Sequencial: a primeira oferta ou modalidade com essa
+inconsistência interrompe a avaliação; nunca acumula com nenhuma outra
+causa desta série.
+
+Não aparece no descarte de retificação — a checagem só roda ao gerar uma
+versão publicada nova.
+
+## Como resolver
+
+Se o erro aponta o fallback, confirme que a modalidade de fallback da
+cascata está selecionada na oferta indicada. Se aponta uma origem, revise
+a fila de destinos dela na cascata — pelo menos um dos códigos precisa
+corresponder a uma modalidade selecionada naquela oferta.
