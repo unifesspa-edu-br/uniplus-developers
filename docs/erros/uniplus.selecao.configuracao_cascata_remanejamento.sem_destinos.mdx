@@ -1,0 +1,49 @@
+---
+title: A cascata precisa de ao menos um destino
+sidebar_label: Cascata sem destinos
+description: A lista de posições da cascata veio vazia — sem ao menos um destino declarado, não há fila de remanejamento nenhuma para configurar.
+code: uniplus.selecao.configuracao_cascata_remanejamento.sem_destinos
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `destinos` do payload de definição da cascata veio vazia. Uma
+cascata sem nenhuma posição não tem fila de remanejamento nenhuma — só o
+fallback, que sozinho não é uma cascata (se a intenção era não configurar
+cascata nenhuma, a operação correta é remover a configuração, não enviar
+uma lista vazia).
+
+Só pode coexistir, na mesma resposta, com
+[`fallback_obrigatorio`](./uniplus.selecao.configuracao_cascata_remanejamento.fallback_obrigatorio.mdx)
+— com a lista vazia, não há origem alguma para as demais checagens desta
+série (limite de origens/destinos, ordem, destino repetido) conferirem;
+nenhuma delas dispara.
+
+Alcançável nos dois caminhos: na definição, e no descarte de retificação
+(o envelope lê o array `ordens` — a lista de origens da cascata, cada uma
+com sua sublista de destinos — sem exigir que tenha ao menos um item; uma
+lista vazia atravessa a leitura e só é recusada quando a entidade é
+reconstruída). No descarte, se coexistir com `fallback_obrigatorio`, a
+reconstrução ainda assim devolve só uma causa por vez: acumula
+internamente, mas o codec só propaga o primeiro erro.
+
+## Como resolver
+
+Envie ao menos uma posição em `destinos`. Se a intenção era remover a
+cascata configurada, envie os quatro campos (`regraCodigo`, `regraVersao`,
+`fallbackCodigo`, `destinos`) como ausentes, em vez de uma lista vazia.

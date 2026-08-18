@@ -1,0 +1,63 @@
+---
+title: A cascata excede o limite de 8 origens
+sidebar_label: Cascata excede limite de origens
+description: A cascata não pode declarar mais de 8 modalidades de origem distintas — cada uma com sua própria fila de destinos.
+code: uniplus.selecao.configuracao_cascata_remanejamento.excede_limite_de_origens
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Os destinos declarados na cascata cobrem mais de 8 códigos distintos de
+`modalidadeOrigemCodigo`. O limite é estrutural, não de negócio por si só —
+protege contra um payload anormalmente grande, já que as origens
+tipicamente correspondem às sub-reservas de cota de um único regime legal
+(hoje, no máximo 8 sob a Lei 12.711/2012).
+
+Conferida sobre a contagem de origens **distintas** — uma origem com
+várias posições na própria fila (uma por destino) não conta mais de uma
+vez para este limite; o que não pode se repetir dentro da mesma origem é o
+valor de `ordem`
+([`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx))
+ou o código do destino
+([`destino_duplicado`](./uniplus.selecao.configuracao_cascata_remanejamento.destino_duplicado.mdx)).
+
+Pode coexistir, na mesma resposta, com
+[`fallback_obrigatorio`](./uniplus.selecao.configuracao_cascata_remanejamento.fallback_obrigatorio.mdx),
+com
+[`excede_limite_de_destinos`](./uniplus.selecao.configuracao_cascata_remanejamento.excede_limite_de_destinos.mdx)
+e, quando algum item da lista é inválido, com as causas de item — ver
+[`campos_obrigatorios`](./uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios.mdx).
+Quando todos os itens são válidos, pode coexistir também com
+[`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx),
+[`ordem_nao_contigua`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_nao_contigua.mdx)
+e
+[`destino_duplicado`](./uniplus.selecao.configuracao_cascata_remanejamento.destino_duplicado.mdx).
+Nunca coexiste com
+[`sem_destinos`](./uniplus.selecao.configuracao_cascata_remanejamento.sem_destinos.mdx)
+— exceder um limite exige destinos declarados.
+
+Alcançável nos dois caminhos: na definição, e no descarte de retificação
+(o envelope não limita quantas origens distintas o array `ordens`
+declara). No descarte, a reconstrução não acumula: para na primeira
+violação que encontrar.
+
+## Como resolver
+
+Reduza a cascata a no máximo 8 origens distintas. Se a intenção era cobrir
+mais sub-reservas, confirme o regime legal do processo — o limite reflete
+a estrutura hoje conhecida da Lei 12.711/2012, não uma escolha arbitrária.

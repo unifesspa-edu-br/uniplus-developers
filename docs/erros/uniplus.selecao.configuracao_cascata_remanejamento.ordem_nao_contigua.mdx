@@ -1,0 +1,57 @@
+---
+title: A sequência de ordens de uma origem não é contígua a partir de 1
+sidebar_label: Ordem não contígua na origem da cascata
+description: A fila de destinos de uma origem precisa começar em 1 e seguir sem pular números — uma lacuna na sequência deixa uma posição sem destino nenhum.
+code: uniplus.selecao.configuracao_cascata_remanejamento.ordem_nao_contigua
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fila de destinos de uma origem, ordenada por `ordem`, tem uma lacuna —
+por exemplo, ordens `1` e `3` sem o `2`. A fila precisa ser contígua a
+partir de 1: se uma posição da sequência não existe, o remanejamento não
+sabe o que tentar quando chega ali.
+
+Roda na mesma passada por origem que
+[`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx)
+e
+[`destino_duplicado`](./uniplus.selecao.configuracao_cascata_remanejamento.destino_duplicado.mdx),
+depois de todos os itens de `destinos` já terem sido construídos com
+sucesso — a mesma condição de alcançabilidade e o mesmo padrão de
+acumulação (ADR-0125) das duas causas irmãs se aplicam aqui. Como
+`ordem_duplicada_na_origem`, também para na primeira lacuna que encontrar
+dentro de uma mesma origem, contribuindo no máximo uma ocorrência por
+origem — outras origens com lacunas próprias contribuem cada uma com a
+sua.
+
+Diferente da maioria das causas desta série, esta **nunca é a resposta**
+de um descarte de retificação — embora a checagem rode ali, roda mas nunca
+vence. No envelope congelado, a `ordem` de cada destino é derivada da
+posição do item dentro da entrada de `ordens` a que ele pertence, sempre
+contígua a partir de 1 dentro de uma única entrada; a única forma de gerar
+uma lacuna nesse caminho é a mesma origem aparecer em mais de uma entrada
+do array (ver
+[`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx)),
+e esse cenário sempre dispara `ordem_duplicada_na_origem` para a mesma
+origem antes — dentro do mesmo bloco de checagem, essa causa é conferida
+primeiro. Como o descarte só devolve a primeira violação acumulada, esta
+causa nunca chega a ser a resposta ali, mesmo executando.
+
+## Como resolver
+
+Revise a fila de destinos da origem apontada e renumere a sequência
+inteira a partir de 1, sem pular posições.

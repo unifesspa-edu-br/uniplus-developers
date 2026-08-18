@@ -1,0 +1,52 @@
+---
+title: Uma modalidade não pode remanejar para si mesma
+sidebar_label: Origem igual ao destino na cascata
+description: Uma posição da cascata não pode declarar a mesma modalidade como origem e como destino — a vaga não preenchida não pode ser remanejada para a própria modalidade que a originou.
+code: uniplus.selecao.configuracao_cascata_remanejamento.origem_igual_ao_destino
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+`modalidadeOrigemCodigo` e `modalidadeDestinoCodigo` de uma posição da
+cascata são o mesmo código. Remanejar uma vaga não preenchida para a
+própria modalidade de origem não é remanejamento nenhum — a vaga
+simplesmente continuaria não preenchida.
+
+Só é conferida depois de os dois códigos já terem passado individualmente
+por
+[`codigo_invalido`](./uniplus.selecao.configuracao_cascata_remanejamento.codigo_invalido.mdx)
+— por isso nunca coexiste com ela no mesmo item: se um dos dois códigos já
+estiver fora do vocabulário, a comparação entre eles não roda. Pode
+coexistir com
+[`ordem_invalida`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_invalida.mdx)
+do mesmo item (checagens independentes, ADR-0125) e com os mesmos erros de
+outros itens da lista `destinos`.
+
+Alcançável tanto na definição quanto no descarte de retificação: nos dois
+caminhos os códigos de origem e destino de cada posição são lidos sem que
+a leitura compare um com o outro — a entidade é quem confere a igualdade,
+depois que os dois já chegaram até ela. No descarte, diferente da
+definição, a reconstrução não acumula: para na primeira violação que
+encontrar.
+
+## Como resolver
+
+Corrija `modalidadeDestinoCodigo` (ou `modalidadeOrigemCodigo`) para uma
+modalidade diferente. Se a intenção era declarar que a modalidade não
+remaneja — fica com a vaga vazia até o fallback —, remova a posição da
+cascata em vez de apontá-la para si mesma.
