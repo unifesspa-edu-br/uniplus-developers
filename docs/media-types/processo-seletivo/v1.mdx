@@ -20,18 +20,24 @@ import RedocSpec from '@site/src/components/RedocSpec';
 Representação do agregado `ProcessoSeletivo` — o certame configurável do módulo
 Seleção (não confundir com o edital, o ato publicado; ver
 [Edital versus processo seletivo](../../produto/dominio/index.mdx#edital-versus-processo-seletivo)).
-É o media type que `GET /api/selecao/processos-seletivos/{id}` negocia via
-`Accept` (ADR-0028 — versionamento per-resource) e emite em `Content-Type`.
-
-O mesmo vendor MIME cobre **duas formas** diferentes, conforme o endpoint:
+Este media type cobre **só as duas operações de leitura** do recurso —
+`GET /api/selecao/processos-seletivos/{id}` e `GET /api/selecao/processos-seletivos`
+(coleção, paginada) —, cada uma com o schema abaixo:
 
 | Endpoint | Schema |
 |---|---|
 | `GET /api/selecao/processos-seletivos/{id}` (detalhe) | [`ProcessoSeletivoDto`](pathname:///openapi/selecao.json#/components/schemas/ProcessoSeletivoDto) — o schema declarado acima. |
 | `GET /api/selecao/processos-seletivos` (coleção, paginada) | [`ProcessoSeletivoResumoDto[]`](pathname:///openapi/selecao.json#/components/schemas/ProcessoSeletivoResumoDto) — array de resumo, não o mesmo shape do detalhe. |
 
-Validar uma resposta de coleção contra o schema do detalhe (ou vice-versa) falha — consulte a operação abaixo antes de fixar o schema no cliente.
+Validar uma resposta de coleção contra o schema do detalhe (ou vice-versa) falha.
 
-## Operações
+As demais operações do agregado (criação, retificação, conformidade, snapshot
+vigente etc.) **não** usam este vendor MIME — a criação negocia em JSON comum
+(`application/json`), e cada subrecurso tem o próprio media type versionado
+(ex.: `application/vnd.uniplus.retificacao-em-curso.v1+json`). Elas aparecem
+na referência abaixo só para dar contexto do agregado completo; não são
+descritas por esta entrada.
+
+## Referência completa do agregado
 
 <RedocSpec spec="selecao.json" tag="ProcessoSeletivo" />
