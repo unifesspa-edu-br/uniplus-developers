@@ -37,8 +37,8 @@ renomear um tipo ainda ativo não pode reescrever silenciosamente o snapshot já
 congelado de uma etapa que o cliente nem tocou — a cópia só muda quando o
 vínculo muda, não quando o cadastro de origem muda.
 
-**"Existente" aqui exige duas coisas ao mesmo tempo: o item do payload traz
-`Id` **e** esse `Id` corresponde a uma etapa já salva no processo.** O `PUT`
+**"Existente" aqui exige duas coisas ao mesmo tempo:** o item do payload traz
+`Id`, **e** esse `Id` corresponde a uma etapa já salva no processo. O `PUT`
 reconcilia por `Id` (ver
 [`processo_seletivo.id_etapa_duplicado`](./uniplus.selecao.processo_seletivo.id_etapa_duplicado.mdx));
 `Id` **omitido** — ou informado **sem correspondência** no processo — faz a
