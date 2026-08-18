@@ -1,0 +1,45 @@
+---
+title: Tipo de nó inválido — esperado FOLHA, E ou OU
+sidebar_label: Tipo de nó inválido
+description: Rascunho — o tipo de um nó da árvore de exigências só aceita FOLHA, E ou OU; hoje a checagem nunca chega a responder por este código porque a validação de payload já a intercepta antes do handler.
+code: uniplus.selecao.no_exigencia.tipo_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `tipo` de um nó não é `FOLHA` nem mapeia para um dos dois tipos de
+grupo (`E`, `OU`). Como
+[`documento_obrigatorio_em_folha`](./uniplus.selecao.no_exigencia.documento_obrigatorio_em_folha.mdx),
+é uma checagem do handler de definição — a decisão de qual construtor do
+domínio chamar — não do domínio propriamente.
+
+> **Rascunho.** Uma regra de validação de payload equivalente
+> (`RuleFor(x => x.Tipo).Must(valor => TiposValidos.Contains(valor))`)
+> intercepta o mesmo cenário antes do handler — a resposta real é
+> `uniplus.validacao`, não este código. Não há segundo caminho de
+> alcance: o descarte de retificação nunca chama este handler — o
+> envelope congelado tem sua própria checagem de `tipo` no codec, uma
+> causa distinta de integridade do envelope, não esta. Rastreado em
+> `uniplus-api#1227`.
+
+## Como resolver
+
+Informe `tipo` como um dos três valores aceitos: `FOLHA`, `E` ou `OU`. No
+`PUT` real, um valor fora desse vocabulário responde com
+`uniplus.validacao`, não com este código — mas a correção é a mesma.

@@ -1,0 +1,53 @@
+---
+title: A referência da base legal é obrigatória
+sidebar_label: Referência de base legal ausente
+description: 'Toda base legal própria de um grupo OU/N-de precisa de uma referência textual institucional (ex.: "Lei 12.711/2012, art. 3º") — não pode ser vazia ou em branco.'
+code: uniplus.selecao.no_exigencia_base_legal.referencia_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0070
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um item de `basesLegais` de um grupo `OU`/N-de tem `referencia` vazia ou
+em branco. `NoExigenciaBaseLegal` é a base legal 1:N **própria** do
+grupo — mesmo formato e mensagens de `DocumentoExigidoBaseLegal` (a base
+legal de uma folha), mas para a exigência de primeira classe que um
+grupo opaco com consequência representa.
+
+Acumula (ADR-0125) com `abrangencia_obrigatoria` e `status_obrigatorio`
+dentro do mesmo item — as três checagens de forma de uma base legal
+rodam juntas, e todas as violações do mesmo item voltam de uma vez. Na
+definição, roda antes de qualquer I/O externo (vocabulário de fatos,
+tipo de documento): uma travessia pura da árvore confirma a forma de
+cada nó primeiro, então o primeiro item malformado responde sem nenhuma
+leitura externa ter acontecido.
+
+No descarte de retificação, o próprio leitor do envelope já exige um
+texto não vazio para `referencia` antes de a entidade ser reconstruída
+— um valor vazio ali é recusado na leitura, como
+`envelope_codec.envelope_malformado`, e esta causa nunca chega a ser
+avaliada. Diferente do sombreamento por regra de `FluentValidation`
+(rastreado em `uniplus-api#1227`), aqui quem intercepta é o próprio
+codec — não há regra de payload duplicando esta checagem: a validação
+de payload do comando não tem regras de forma para os itens de
+`basesLegais` de um grupo, propositalmente, para não sombrear a
+acumulação do domínio (mesmo raciocínio já aplicado às bases legais de
+folha).
+
+## Como resolver
+
+Informe uma referência textual não vazia para cada item de
+`basesLegais` do grupo — por exemplo, "Lei 12.711/2012, art. 3º".

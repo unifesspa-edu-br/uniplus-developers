@@ -1,0 +1,48 @@
+---
+title: O status da base legal é obrigatório
+sidebar_label: Status de base legal ausente
+description: Toda base legal própria de um grupo OU/N-de precisa declarar o status (pendente ou resolvido) do fundamento legal.
+code: uniplus.selecao.no_exigencia_base_legal.status_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0070
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um item de `basesLegais` de um grupo `OU`/N-de não declara `status` — ou
+declara um código fora do catálogo (`PENDENTE`, `RESOLVIDO`), que o
+handler resolve para o sentinela `Nenhuma` antes de chegar a esta
+checagem. Acumula (ADR-0125) com
+[`referencia_obrigatoria`](./uniplus.selecao.no_exigencia_base_legal.referencia_obrigatoria.mdx)
+e
+[`abrangencia_obrigatoria`](./uniplus.selecao.no_exigencia_base_legal.abrangencia_obrigatoria.mdx)
+dentro do mesmo item, na mesma travessia pura da árvore que roda antes
+de qualquer I/O.
+
+> **Só alcançável na definição.** No descarte de retificação, o próprio
+> codec já impõe uma regra mais estrita do que esta checagem de domínio:
+> uma base legal congelada só pode ter `status: RESOLVIDO` — uma base
+> legal `PENDENTE` (ou com qualquer outro valor) é recusada ainda na
+> leitura, como `envelope_codec.envelope_malformado`, antes de a entidade
+> ser reconstruída. Diferente do sombreamento por regra de
+> `FluentValidation` (rastreado em `uniplus-api#1227`), aqui não há
+> duplicação de regra de payload — é uma regra de negócio própria do
+> codec (só o status terminal é congelável) que, incidentalmente, torna
+> esta causa de domínio inalcançável por esse caminho.
+
+## Como resolver
+
+Informe `status` para cada item de `basesLegais` do grupo, com um dos
+dois valores do catálogo: `PENDENTE` ou `RESOLVIDO`.
