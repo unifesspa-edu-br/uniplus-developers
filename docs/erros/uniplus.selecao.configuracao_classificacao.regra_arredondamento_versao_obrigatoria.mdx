@@ -1,0 +1,59 @@
+---
+title: Versão da regra de arredondamento é obrigatória quando o código é informado
+sidebar_label: Versão da regra de arredondamento ausente
+description: 'Rascunho — um regraArredondamentoCodigo sem a versão correspondente é um par incompleto, mas hoje nenhum caminho real chega a devolver esta causa.'
+code: uniplus.selecao.configuracao_classificacao.regra_arredondamento_versao_obrigatoria
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O payload de definição de classificação informa `regraArredondamentoCodigo`
+sem informar `regraArredondamentoVersao`. Código e versão identificam uma
+regra do catálogo juntos — um sem o outro é uma referência incompleta, que
+não é resolvida contra o `rol_de_regras`. O código de domínio para essa
+recusa já existe, no handler — junto de
+[`regra_nao_encontrada`](./uniplus.selecao.configuracao_classificacao.regra_nao_encontrada.mdx)
+e
+[`regra_tipo_invalido`](./uniplus.selecao.configuracao_classificacao.regra_tipo_invalido.mdx),
+e não dentro de `ConfiguracaoClassificacao.Criar`, onde vivem as demais
+causas desta série — mas **nenhum caminho real chega a executá-lo hoje**,
+por isso a entrada é rascunho, não publicada.
+
+No `PUT` de definição de classificação, um payload com
+`regraArredondamentoCodigo` preenchido e `regraArredondamentoVersao` ausente
+é interceptado antes do handler por uma regra de validação de payload
+equivalente (`RuleFor(x => x.RegraArredondamentoVersao).NotEmpty().When(...)`)
+— a resposta real é `uniplus.validacao` (a mesma mensagem, mas outro
+`code`), e o guard de domínio nunca chega a rodar. Pelo descarte de
+retificação também não: esse caminho reconstrói a configuração chamando
+`Criar` diretamente, sem passar pelo handler onde este guard vive — e, no
+envelope congelado, código e versão de cada regra são sempre lidos como um
+bloco atômico, então o estado "código presente, versão ausente" nem chega a
+ser representável ali.
+
+Esta entrada existe para que o código de domínio, já registrado no
+catálogo, tenha uma página assim que o caminho até ele for destravado —
+remover a regra de validação de payload redundante, mesma frente da
+ADR-0125, rastreada em `uniplus-api#1227`.
+
+## Como resolver
+
+Informe `regraArredondamentoVersao` sempre que `regraArredondamentoCodigo`
+for informado. Hoje, um payload que omite a versão responde com
+`uniplus.validacao`, não com este código — mas a correção é a mesma:
+preencher os dois campos juntos.

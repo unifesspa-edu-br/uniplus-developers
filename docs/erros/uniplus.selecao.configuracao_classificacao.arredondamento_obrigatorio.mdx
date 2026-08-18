@@ -1,0 +1,55 @@
+---
+title: Cálculo local exige regra de arredondamento
+sidebar_label: Arredondamento ausente no cálculo local
+description: Quando a nota é calculada localmente por média ponderada, a configuração precisa declarar uma regra de arredondamento — não há um default implícito.
+code: uniplus.selecao.configuracao_classificacao.arredondamento_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de cálculo declarada é `FORMULA-MEDIA-PONDERADA` (cálculo local),
+mas a configuração não informou `regraArredondamentoCodigo`. Diferente da
+classificação importada — que dispensa arredondamento porque o resultado já
+vem pronto de fora —, o cálculo local produz uma nota que precisa de uma
+regra de precisão declarada explicitamente; não há um default aplicado
+silenciosamente.
+
+É a metade do mesmo par de campos que
+[`casas_arredondamento_obrigatorio`](./uniplus.selecao.configuracao_classificacao.casas_arredondamento_obrigatorio.mdx)
+cobre para `casasArredondamento` — as duas checagens são separadas
+propositalmente, cada uma atribuída ao campo que ela reprova. No caminho de
+definição, pode coexistir com ela e com
+[`eliminacao_enem_fora_de_processo_enem`](./uniplus.selecao.processo_seletivo.eliminacao_enem_fora_de_processo_enem.mdx)
+na mesma resposta (acumula, ADR-0125). Nunca coexiste com
+[`arredondamento_indevido`](./uniplus.selecao.configuracao_classificacao.arredondamento_indevido.mdx),
+[`casas_arredondamento_indevido`](./uniplus.selecao.configuracao_classificacao.casas_arredondamento_indevido.mdx)
+nem
+[`eliminacao_indevida`](./uniplus.selecao.configuracao_classificacao.eliminacao_indevida.mdx)
+— pertencem ao ramo oposto (classificação importada).
+
+No descarte de retificação, o codec só propaga ao chamador a primeira
+violação acumulada internamente. Dentro do ramo local, `arredondamento_obrigatorio`
+é conferida antes de `casas_arredondamento_obrigatorio` e de
+`eliminacao_enem_fora_de_processo_enem` — vence a prioridade sobre as duas
+quando o mesmo envelope corrompido também as violaria. Só perde para
+[`n_opcoes_invalido`](./uniplus.selecao.configuracao_classificacao.n_opcoes_invalido.mdx),
+sempre conferida antes de qualquer ramo.
+
+## Como resolver
+
+Informe `regraArredondamentoCodigo` (e a versão correspondente) sempre que
+`regraCalculoCodigo` for `FORMULA-MEDIA-PONDERADA`.

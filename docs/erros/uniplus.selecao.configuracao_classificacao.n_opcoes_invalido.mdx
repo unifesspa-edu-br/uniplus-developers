@@ -1,0 +1,52 @@
+---
+title: O número de opções de curso deve ser 1 ou 2 (RN04)
+sidebar_label: Número de opções de curso inválido
+description: A configuração de classificação aceita no máximo duas opções de curso por inscrição, nunca zero, nunca mais de duas.
+code: uniplus.selecao.configuracao_classificacao.n_opcoes_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0024
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O número de opções de curso (`nOpcoesAlocacao`) declarado na configuração de
+classificação não é 1 nem 2 — os dois únicos valores admitidos para quantas
+opções uma inscrição pode registrar (UNI-REQ-0024).
+
+Essa checagem roda numa passada própria, separada do restante da
+configuração, e o comportamento em torno dela **muda conforme o caminho**:
+
+- Na definição de classificação, ela roda primeiro, antes mesmo de qualquer
+  regra ser resolvida contra o `rol_de_regras` — se falhar, a requisição
+  para aí, e nenhuma outra causa desta série pode aparecer junto na mesma
+  resposta.
+- No descarte de retificação, não existe essa passada separada — a mesma
+  checagem roda como a primeira dentro da reconstrução completa da
+  configuração. Isso muda a razão pela qual ela nunca vem acompanhada de
+  outra causa nesse caminho: não é porque a reconstrução para nela (ela
+  continua acumulando outras violações internamente, ver
+  [`arredondamento_indevido`](./uniplus.selecao.configuracao_classificacao.arredondamento_indevido.mdx)
+  e as demais causas irmãs), mas porque o descarte só devolve ao chamador o
+  **primeiro** erro da lista acumulada — e, por ser a primeira checagem
+  dentro da reconstrução, `nOpcoesAlocacao` inválido é sempre esse primeiro
+  erro quando dispara ali, mesmo que outros campos do mesmo envelope também
+  estivessem incoerentes.
+
+## Como resolver
+
+Informe `nOpcoesAlocacao` igual a `1` ou `2`. Se a intenção era registrar
+mais de duas opções por inscrição, revise o desenho do processo — o
+requisito (UNI-REQ-0024) não admite isso.

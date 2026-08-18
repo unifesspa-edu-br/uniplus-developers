@@ -1,0 +1,70 @@
+---
+title: A regra de eliminação só se aplica quando a classificação está configurada como baseada em ENEM
+sidebar_label: Eliminação por ENEM fora de processo baseado em ENEM
+description: ELIM-CORTE-REDACAO e ELIM-ZERO-EM-AREA dependem da estrutura de pontuação por área do ENEM — sem baseadoEmEnem declarado, essas regras não têm o que verificar.
+code: uniplus.selecao.processo_seletivo.eliminacao_enem_fora_de_processo_enem
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A configuração de classificação declara uma ou mais regras de eliminação com
+código `ELIM-CORTE-REDACAO` ou `ELIM-ZERO-EM-AREA`, mas `baseadoEmEnem` é
+`false`. As duas regras dependem da estrutura de pontuação por área do
+ENEM — sem o processo estar marcado como baseado em ENEM, elas não têm nota
+por área contra a qual verificar o corte ou o zero. `ELIM-NOTA-MINIMA-ETAPA`
+não entra nessa checagem — depende só da nota de uma etapa do processo,
+independente de ENEM.
+
+Embora o código pareça pertencer à família `ConfiguracaoClassificacao` (é
+levantado dentro do `Criar` dela, sobre dois campos que são dela mesma —
+`RegrasEliminacao` e `BaseadoEmEnem`), o registro público classifica esta
+causa como `ProcessoSeletivo.*`. É resquício histórico: `BaseadoEmEnem`
+nasceu derivado de `ProcessoSeletivo.TipoProcesso` e só depois passou a ser
+um sinal declarado na própria configuração — o prefixo do código público
+ficou de quando a dependência ainda era do tipo do processo, não da
+configuração.
+
+Esta checagem roda de forma **independente** de a classificação ser local ou
+importada — corre sempre, por último, depois do bloco que confere coerência
+de arredondamento/eliminação para cada um dos dois tipos de cálculo. No
+caminho de definição, por isso, pode coexistir na mesma resposta com
+qualquer uma das causas desse bloco:
+[`eliminacao_indevida`](./uniplus.selecao.configuracao_classificacao.eliminacao_indevida.mdx)
+(uma configuração importada com regras de eliminação incoerentes E sem
+`baseadoEmEnem` reprova as duas ao mesmo tempo — reprovar por importação não
+esvazia a lista de regras que esta checagem também percorre),
+[`arredondamento_indevido`](./uniplus.selecao.configuracao_classificacao.arredondamento_indevido.mdx),
+[`casas_arredondamento_indevido`](./uniplus.selecao.configuracao_classificacao.casas_arredondamento_indevido.mdx),
+[`arredondamento_obrigatorio`](./uniplus.selecao.configuracao_classificacao.arredondamento_obrigatorio.mdx)
+e
+[`casas_arredondamento_obrigatorio`](./uniplus.selecao.configuracao_classificacao.casas_arredondamento_obrigatorio.mdx)
+(acumula, ADR-0125).
+
+No descarte de retificação, essa acumulação não é observável — o codec só
+propaga ao chamador a primeira violação que a reconstrução acumular
+internamente, e esta checagem é sempre a **última** conferida dentro de
+`Criar`. Por isso, no descarte, esta causa só aparece sozinha: se o mesmo
+envelope corrompido também violasse `n_opcoes_invalido` ou qualquer causa do
+bloco de arredondamento/eliminação, é sempre a outra causa que o descarte
+devolve — nunca esta.
+
+## Como resolver
+
+Marque a configuração como `baseadoEmEnem: true` se o processo de fato usa a
+estrutura de pontuação por área do ENEM. Caso contrário, remova as regras de
+eliminação `ELIM-CORTE-REDACAO`/`ELIM-ZERO-EM-AREA` — só
+`ELIM-NOTA-MINIMA-ETAPA` se aplica fora desse contexto.

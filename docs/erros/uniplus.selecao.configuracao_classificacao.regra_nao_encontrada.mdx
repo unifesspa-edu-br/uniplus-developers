@@ -1,0 +1,55 @@
+---
+title: Regra não encontrada no rol_de_regras
+sidebar_label: Regra da classificação não encontrada
+description: O código e a versão declarados para a regra de cálculo, de arredondamento ou de ordem de alocação não existem no rol_de_regras.
+code: uniplus.selecao.configuracao_classificacao.regra_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O par código/versão declarado para uma das três regras que a configuração de
+classificação referencia — a regra de cálculo (`regraCalculoCodigo`/
+`regraCalculoVersao`), a de arredondamento
+(`regraArredondamentoCodigo`/`regraArredondamentoVersao`, quando informada)
+ou a de ordem de alocação (`regraOrdemAlocacaoCodigo`/
+`regraOrdemAlocacaoVersao`) — não existe no `rol_de_regras`. Este único
+código cobre a mesma falha nos três pontos: o processamento resolve uma
+regra de cada vez, na ordem cálculo → arredondamento → ordem de alocação, e
+para na primeira que não for encontrada.
+
+Por isso nunca acumula com nenhuma outra causa desta série — é sempre a
+primeira falha que interrompe o processamento, e a mensagem devolvida cita
+o código e a versão que não foram encontrados, o que identifica qual das
+três regras é a origem.
+
+Este código também é levantado, com o mesmo nome, para as regras de
+eliminação — mas ali é uma causa própria de `RegraEliminacao` (ver
+[`uniplus.selecao.regra_eliminacao.regra_nao_encontrada`](./uniplus.selecao.regra_eliminacao.regra_nao_encontrada.mdx)),
+não esta.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação — o envelope congelado guarda cada regra por valor
+(código, versão e hash já resolvidos), sem reconsultar o `rol_de_regras` na
+restauração. Um código de regra fora do vocabulário fechado esperado em cada
+posição do envelope produz, em vez disso, a causa própria do codec
+(`envelope_codec.regra_desconhecida`).
+
+## Como resolver
+
+Confirme, no catálogo de regras, que o código e a versão declarados existem
+para a regra de cálculo, de arredondamento e de ordem de alocação. Se a
+intenção era outra regra do módulo (desempate, eliminação, distribuição de
+vagas), reveja qual referência pertence a qual campo do payload.
