@@ -1,4 +1,5 @@
 import React from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import {
   AVISO,
   AVISO_PERIGO,
@@ -78,6 +79,11 @@ export default function MediaTypeCard({
   sucessor,
   exemplos,
 }: MediaTypeCardProps): React.ReactElement {
+  // Caminhos internos (sem protocolo) precisam do baseUrl do portal — um
+  // href cru como "/openapi/..." navegaria para a raiz do domínio em vez do
+  // subpath do GitHub Pages. URLs externas passam por `useBaseUrl` inalteradas.
+  const schemaHref = useBaseUrl(schema_href);
+
   return (
     <article style={BLOCO}>
       {status !== 'current' && (
@@ -85,9 +91,13 @@ export default function MediaTypeCard({
           <strong>
             {status === 'sunset' ? 'Fora de operação.' : 'Descontinuado.'}
           </strong>{' '}
-          {status === 'sunset'
-            ? 'Esta versão não é mais servida.'
-            : 'Esta versão continua respondendo, mas tem substituta.'}{' '}
+          {status === 'sunset' ? (
+            'Esta versão não é mais servida.'
+          ) : sucessor ? (
+            'Esta versão continua respondendo, mas tem substituta.'
+          ) : (
+            'Esta versão continua respondendo, mas está descontinuada.'
+          )}{' '}
           {sucessor && (
             <>
               Use <code>{sucessor}</code>.
@@ -112,7 +122,7 @@ export default function MediaTypeCard({
             </span>
           </Item>
           <Item rotulo="Schema">
-            <a href={schema_href}>{schema_href}</a>
+            <a href={schemaHref}>{schema_href}</a>
           </Item>
           {descontinuado_em && (
             <Item rotulo="Descontinuado em">{descontinuado_em}</Item>

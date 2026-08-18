@@ -52,6 +52,13 @@ describe('MediaTypeCard', () => {
     expect(screen.getByRole('note')).toHaveTextContent('Fora de operação.');
   });
 
+  it('não afirma substituta quando sucessor não foi informado', () => {
+    render(<MediaTypeCard {...FRONTMATTER_MINIMO} status="deprecated" />);
+
+    expect(screen.getByRole('note')).not.toHaveTextContent('substituta');
+    expect(screen.queryByText(/^Use /)).toBeNull();
+  });
+
   it('renderiza exemplos quando presentes (frontmatter opcional)', () => {
     render(
       <MediaTypeCard
