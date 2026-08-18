@@ -1,0 +1,46 @@
+---
+title: PR deve estar entre 0,5 e 1,0 (art. 10, II)
+sidebar_label: PR fora do limite legal
+description: PR é o percentual de reserva sobre o VO_base — o art. 10, II fixa piso de 50% e teto de 100% para a proporção reservada às cotas.
+code: uniplus.selecao.configuracao_distribuicao_vagas.pr_fora_do_limite
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1219'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1219
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das distribuições de vagas do payload informou `pr` fora da faixa
+[0,5; 1,0]. `PR` é o percentual de reserva legal sobre o `VO_base` — o piso
+de 50% e o teto de 100% vêm diretamente do art. 10, II, não são um limite
+arbitrário do sistema.
+
+Esta checagem acumula com
+[`vo_base_invalido`](./uniplus.selecao.configuracao_distribuicao_vagas.vo_base_invalido.mdx)
+e
+[`modalidades_vazias`](./uniplus.selecao.configuracao_distribuicao_vagas.modalidades_vazias.mdx)
+— ver aquela página para o mecanismo completo de acumulação (primeira
+passada, sobre todas as distribuições do payload, antes de qualquer consulta
+aos cadastros vivos) e a ordem em que as violações aparecem no array
+`errors[]`.
+
+O valor é persistido como `numeric(5,4)` — um `pr` com mais de 4 casas
+decimais é recusado antes desta checagem, por validação de payload
+(forma/rota, sem checagem de domínio equivalente), para que o banco nunca
+arredonde silenciosamente o percentual de reserva.
+
+## Como resolver
+
+Informe um `pr` entre 0,5 e 1,0 (inclusive) para cada distribuição de vagas
+do payload. Se a resposta trouxer mais de uma violação no array `errors[]`,
+corrija todas antes de reenviar.

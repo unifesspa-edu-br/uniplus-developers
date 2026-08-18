@@ -1,0 +1,48 @@
+---
+title: Cada modalidade só pode ser selecionada uma vez por oferta
+sidebar_label: Modalidade duplicada na oferta
+description: O mesmo código de modalidade não pode aparecer duas vezes na lista de modalidades selecionadas de uma mesma oferta.
+code: uniplus.selecao.configuracao_distribuicao_vagas.modalidade_duplicada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas ou mais entradas de `modalidadeIds`, na mesma distribuição de vagas,
+resolveram para o mesmo código de modalidade. Cada modalidade participa de
+uma oferta no máximo uma vez.
+
+Esta checagem só roda **depois** que os Ids informados são resolvidos contra
+o catálogo de modalidades (por isso não acumula com
+[`vo_base_invalido`](./uniplus.selecao.configuracao_distribuicao_vagas.vo_base_invalido.mdx),
+[`pr_fora_do_limite`](./uniplus.selecao.configuracao_distribuicao_vagas.pr_fora_do_limite.mdx)
+e
+[`modalidades_vazias`](./uniplus.selecao.configuracao_distribuicao_vagas.modalidades_vazias.mdx)
+— essas três só liberam a passagem para esta consulta quando vêm limpas para
+**todas** as distribuições do payload, então nunca aparecem na mesma resposta
+que esta). A partir daqui, o processamento é por distribuição: a primeira
+distribuição do payload cuja resolução falhar interrompe a passada — as
+distribuições seguintes do mesmo payload não chegam a ser conferidas.
+
+Dentro de uma distribuição, porém, esta checagem **acumula** com outras
+violações de coerência do conjunto de modalidades já resolvido (por exemplo,
+uma referência cruzada de composição/remanejamento apontando para um código
+fora da oferta) — todas no mesmo array `errors[]`, sob o campo
+`distribuicaoVagas[<índice>].modalidadeIds`.
+
+## Como resolver
+
+Revise a lista `modalidadeIds` da distribuição indicada e garanta que cada
+modalidade apareça no máximo uma vez.
