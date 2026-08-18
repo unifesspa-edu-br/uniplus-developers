@@ -31,8 +31,8 @@ Esta checagem acumula com
 [`pr_fora_do_limite`](./uniplus.selecao.configuracao_distribuicao_vagas.pr_fora_do_limite.mdx)
 e
 [`modalidades_vazias`](./uniplus.selecao.configuracao_distribuicao_vagas.modalidades_vazias.mdx)
-— as três únicas checagens que não dependem de nenhuma resolução contra
-cadastro ou catálogo vivo já resolvida (oferta de curso e modalidades, em
+— as três únicas checagens que não dependem de nenhuma consulta a cadastro
+ou catálogo vivo já concluída (oferta de curso e modalidades, em
 Configuração; regra de distribuição, no `rol_de_regras` do próprio módulo
 Seleção). Elas rodam numa primeira passada, sobre **todas** as distribuições
 do payload, antes de qualquer uma dessas consultas: um payload com duas
