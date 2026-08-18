@@ -1,0 +1,54 @@
+---
+title: Código da modalidade é obrigatório
+sidebar_label: Código da modalidade ausente
+description: Toda modalidade selecionada precisa de um código — é ele que identifica a modalidade dentro da oferta e é referenciado por origem, destino, par e fallback.
+code: uniplus.selecao.modalidade_selecionada.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade selecionada não tem `codigo`, ou tem o campo vazio ou só com
+espaços em branco. É o primeiro campo conferido na criação de uma
+modalidade — antes de qualquer outra checagem, incluindo as de coerência de
+composição e remanejamento (ver
+[`composicao_origem_obrigatoria`](./uniplus.selecao.modalidade_selecionada.composicao_origem_obrigatoria.mdx)),
+porque o código é a identidade da modalidade dentro da oferta: é ele que
+`composicaoOrigemCodigo`, `remanejamentoDestino`, `remanejamentoPar` e
+`remanejamentoFallback` de outras modalidades referenciam.
+
+**`codigo` não vem do payload da definição de distribuição de vagas** — é
+copiado do cadastro de modalidades de Configuração, no momento em que a
+modalidade é selecionada (`IModalidadeReader`). O próprio cadastro já exige
+esse campo na escrita; pela definição de distribuição de vagas, este código
+só aparece se a modalidade estiver gravada no cadastro de um jeito que
+contorna essa validação — a checagem aqui é defesa em profundidade, não a
+primeira linha.
+
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe a criação da modalidade.
+
+**Este código não aparece no descarte de retificação.** O envelope
+congelado guarda o código de cada modalidade como texto — e a leitura do
+envelope já recusa um código vazio como envelope malformado, antes mesmo de
+`ModalidadeSelecionada.Criar` rodar; a checagem aqui só é alcançável pelo
+caminho de comando (definição de distribuição de vagas), com uma modalidade
+gravada no cadastro de um jeito que contorna a exigência do código lá.
+
+## Como resolver
+
+O campo que falta não está no payload que você enviou — está na modalidade
+cadastrada em Configuração. Corrija lá o código da modalidade, ou investigue
+como ela foi gravada sem essa coerência.
