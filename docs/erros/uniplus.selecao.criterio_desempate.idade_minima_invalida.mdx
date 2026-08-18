@@ -1,0 +1,61 @@
+---
+title: A idade mínima do critério IDOSO deve ser maior que zero
+sidebar_label: Idade mínima do critério inválida
+description: O critério DESEMPATE-IDOSO precisa de uma idade mínima positiva para ter interpretação válida como corte de desempate.
+code: uniplus.selecao.criterio_desempate.idade_minima_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um critério de desempate com a regra `DESEMPATE-IDOSO` informou
+`idadeMinima` menor ou igual a zero. A checagem de que o campo foi
+**informado** é separada — ver
+[`idade_minima_obrigatoria`](./uniplus.selecao.criterio_desempate.idade_minima_obrigatoria.mdx)
+—; esta é sobre o **valor** informado: uma idade mínima zero ou negativa
+não tem interpretação válida como corte de desempate por idade.
+
+A criação do critério acumula esta checagem com
+[`args_incompativeis_com_regra`](./uniplus.selecao.criterio_desempate.args_incompativeis_com_regra.mdx)
+e com a validação do predicado de fato — mas, na prática, na definição esta
+é a única das três que pode disparar **para um critério `DESEMPATE-IDOSO`**:
+a ordem já foi conferida numa passada anterior do handler, os argumentos
+são sempre montados a partir do próprio código da regra (nunca
+incompatíveis por construção), e a validação do predicado de fato só se
+aplica a argumentos de `DESEMPATE-PREDICADO-FATO` — uma variante distinta,
+nunca presente no mesmo critério que `DESEMPATE-IDOSO`. Como o handler para
+no primeiro critério do payload que falhar, também não há acúmulo entre
+critérios diferentes.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recria cada critério de desempate a
+partir dos mesmos campos — a mesma checagem roda de novo. Diferente da
+definição, o codec não confere a ordem antes de chamar a criação do
+critério; um envelope corrompido com ordem inválida **e** idade mínima
+inválida no mesmo critério devolve só a primeira violação da lista
+(`OrdemInvalida`, sempre antes de `IdadeMinimaInvalida` na ordem interna de
+checagem) — não as duas.
+
+## Como resolver
+
+Informe uma `idadeMinima` positiva para o critério `DESEMPATE-IDOSO`.
+
+Se o erro apareceu ao descartar uma retificação, o problema não está no
+payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar. Isso indica uma inconsistência na versão
+publicada anterior; abra uma investigação em vez de tentar corrigir pelo
+descarte.

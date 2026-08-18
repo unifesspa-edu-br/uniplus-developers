@@ -1,0 +1,38 @@
+---
+title: IdadeMinima é obrigatória para a regra DESEMPATE-IDOSO
+sidebar_label: IdadeMinima ausente no desempate
+description: O critério que prioriza candidatos a partir de uma idade mínima precisa dessa idade — sem ela, não há corte para aplicar.
+code: uniplus.selecao.criterio_desempate.idade_minima_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um critério de desempate com a regra `DESEMPATE-IDOSO` não informou
+`idadeMinima`. Este critério prioriza, no desempate, candidatos a partir de
+uma idade mínima — sem esse valor, não há corte para aplicar.
+
+Esta checagem verifica só que o campo foi **informado**; o valor em si
+precisa ser positivo — checagem separada, ver
+[`idade_minima_invalida`](./uniplus.selecao.criterio_desempate.idade_minima_invalida.mdx).
+Roda na montagem dos argumentos do critério, depois que a regra já foi
+resolvida contra o catálogo. Não acumula com nenhuma outra violação — é a
+primeira que falhar que interrompe o processamento.
+
+## Como resolver
+
+Informe `idadeMinima` (com um valor positivo) para todo critério com a
+regra `DESEMPATE-IDOSO`.

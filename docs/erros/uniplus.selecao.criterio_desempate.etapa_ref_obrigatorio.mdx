@@ -1,0 +1,43 @@
+---
+title: EtapaRef é obrigatório para a regra DESEMPATE-MAIOR-NOTA-ETAPA
+sidebar_label: EtapaRef ausente no desempate
+description: O critério que desempata pela maior nota numa etapa específica precisa dizer qual etapa — sem ela, não há o que comparar.
+code: uniplus.selecao.criterio_desempate.etapa_ref_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um critério de desempate com a regra `DESEMPATE-MAIOR-NOTA-ETAPA` não
+informou `etapaRef`. Este critério desempata comparando a nota que os
+candidatos empatados tiraram numa etapa específica — sem dizer qual etapa,
+não há o que comparar.
+
+Esta checagem roda na montagem dos argumentos do critério, depois que a
+regra já foi resolvida contra o catálogo — ver
+[`regra_nao_encontrada`](./uniplus.selecao.criterio_desempate.regra_nao_encontrada.mdx).
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe o processamento.
+
+Este código verifica só que o campo foi informado — não confere se a
+`etapaRef` de fato corresponde a uma etapa existente no processo (essa é
+uma checagem separada, feita pela raiz do agregado ao definir os
+critérios, contra as etapas do processo).
+
+## Como resolver
+
+Informe `etapaRef` com o `Id` de uma etapa do processo para todo critério
+com a regra `DESEMPATE-MAIOR-NOTA-ETAPA`.
