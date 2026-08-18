@@ -1,0 +1,45 @@
+---
+title: A regra referenciada não é do tipo criterio_remanejamento
+sidebar_label: Regra da cascata de tipo inválido
+description: O código e versão declarados existem no rol_de_regras, mas o tipo cadastrado da regra não é criterio_remanejamento — o catálogo é compartilhado por vários tipos de regra.
+code: uniplus.selecao.configuracao_cascata_remanejamento.regra_tipo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `regraCodigo`/`regraVersao` da cascata de remanejamento existe no
+`rol_de_regras`, mas o tipo cadastrado da regra não é
+`criterio_remanejamento`. O catálogo é compartilhado por vários tipos de
+regra do módulo Seleção — o código sozinho não garante o tipo certo.
+
+Roda logo depois de
+[`regra_nao_encontrada`](./uniplus.selecao.configuracao_cascata_remanejamento.regra_nao_encontrada.mdx)
+resolver a existência da regra, na mesma passada sequencial — a primeira
+falha interrompe o processamento; não acumula com nenhuma outra causa
+desta série.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação — o envelope congelado guarda a regra por valor,
+sem reconsultar o catálogo na restauração.
+
+## Como resolver
+
+Confirme, no catálogo de regras, que o código e a versão declarados são de
+fato uma regra do tipo `criterio_remanejamento`. Se a intenção era outra
+regra (cálculo, arredondamento, ordem de alocação, desempate, eliminação,
+distribuição de vagas), reveja qual referência pertence a qual campo do
+payload.

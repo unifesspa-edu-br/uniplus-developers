@@ -1,0 +1,55 @@
+---
+title: A cascata informada diverge do esquema_args da regra referenciada
+sidebar_label: Matriz da cascata divergente da regra
+description: A regra de remanejamento congela sua própria matriz de fallback e destinos (esquema_args) — o payload de definição da cascata precisa reproduzi-la célula a célula, não só ter a forma válida.
+code: uniplus.selecao.configuracao_cascata_remanejamento.matriz_divergente_da_regra
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `fallbackCodigo` e/ou os `destinos` declarados no payload de definição da
+cascata não reproduzem, célula a célula, o `esquema_args` congelado da
+versão da regra referenciada (RN-CASCATA-5). A regra de remanejamento não
+é só uma referência solta — a versão do catálogo já traz a matriz completa
+de fallback e destinos por origem, e o payload da definição precisa
+declará-la de volta, igual, não apenas em uma forma válida qualquer.
+
+É a distinção entre **forma** e **conteúdo** que a série inteira desta
+sub-fatia carrega: as demais causas conferem se a matriz é internamente
+coerente (fallback presente, destinos não vazios, ordens únicas e
+contíguas por origem, sem destino repetido) — esta confere se, além de
+coerente, a matriz é a **mesma** que a regra do catálogo já define. Uma
+matriz pode passar por todas as checagens de forma e ainda assim divergir
+do conteúdo esperado.
+
+Roda por último, depois de a regra já ter sido resolvida e confirmada como
+`criterio_remanejamento` — é a única checagem desta série que depende do
+`esquema_args` da regra, então não pode rodar antes dela ser resolvida.
+Sequencial: não acumula com nenhuma outra causa.
+
+Não aparece no descarte de retificação: essa comparação é exclusiva da
+definição. O envelope congelado guarda a cascata já validada como
+coerente com a regra no momento da publicação original — a restauração
+reconstrói a mesma estrutura, sem recomparar contra o `esquema_args` de
+novo.
+
+## Como resolver
+
+Confira, no catálogo de regras, o `esquema_args` da versão referenciada —
+ele lista o fallback e a matriz de destinos por origem esperados. Ajuste o
+payload de definição da cascata para reproduzir exatamente essa matriz,
+inclusive a ordem dos destinos dentro de cada origem.

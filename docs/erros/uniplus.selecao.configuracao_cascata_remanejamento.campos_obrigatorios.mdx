@@ -1,0 +1,66 @@
+---
+title: RegraCodigo, RegraVersao, FallbackCodigo e Destinos precisam estar todos presentes ou todos ausentes
+sidebar_label: Campos da cascata incompletos
+description: A cascata de remanejamento é definida ou removida por inteiro — um payload com só parte dos quatro campos preenchidos não corresponde a nenhuma das duas operações.
+code: uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de cascata de remanejamento do processo seletivo
+requisitos:
+  - UNI-REQ-0056
+rastreio:
+  - label: 'uniplus-api#1048'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1048
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O payload de definição de cascata de remanejamento tem uma mistura de
+campos presentes e ausentes entre `regraCodigo`, `regraVersao`,
+`fallbackCodigo` e `destinos`. Só duas combinações são válidas: os quatro
+ausentes (remove a cascata configurada, se houver) ou os quatro presentes
+(define uma cascata nova, substituindo a anterior por inteiro). Qualquer
+outra combinação não corresponde a nenhuma das duas operações.
+
+Este código também cobre, separadamente, um item nulo dentro da própria
+lista `destinos` — um payload malformado que não pode desreferenciar
+`null` e virar erro 500. Nesse caso, o erro vem com o índice do item
+prefixado (`destinos[2]`, por exemplo) e **acumula**, no mesmo lote, com os
+demais erros de item da mesma lista **e** com as causas de fallback
+ausente/inválido ou de excesso de origens/destinos, que não dependem de os
+itens serem válidos e continuam sendo conferidas mesmo quando algum item é
+inválido demais para participar das checagens de coerência entre origens
+(a causa de lista totalmente vazia não entra nesse lote — havendo ao menos
+um item nulo, a lista já não está vazia). É diferente da violação de nível
+superior
+(mistura entre os quatro campos), que é sempre um erro isolado, retornado
+sozinho.
+
+Não aparece no descarte de retificação: o envelope congelado representa a
+cascata como `{"presente": false}` ou a forma completa — a mistura parcial
+que esta causa recusa (e o item nulo em `destinos`) não são estados
+representáveis ali.
+
+> **Lacuna conhecida.** Uma das combinações que deveriam reprovar aqui —
+> `regraCodigo` presente sem `regraVersao` — é interceptada antes do
+> handler por uma regra de validação de payload equivalente
+> (`RuleFor(x => x.RegraVersao).NotEmpty().When(x => x.RegraCodigo is not null)`)
+> — a resposta real nesse caso específico é `uniplus.validacao`, não esta
+> entrada. As demais combinações (por exemplo, `regraCodigo`+`regraVersao`
+> presentes sem `fallbackCodigo`) continuam alcançando esta causa
+> normalmente — é sombreamento parcial, não total. Rastreado em
+> `uniplus-api#1227`.
+
+## Como resolver
+
+Envie os quatro campos preenchidos para definir a cascata, ou os quatro
+ausentes para removê-la. Se o erro veio com um índice de item
+(`destinos[N]`), remova o item nulo da lista ou preencha seus campos.
