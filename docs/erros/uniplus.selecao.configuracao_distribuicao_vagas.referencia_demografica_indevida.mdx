@@ -1,0 +1,55 @@
+---
+title: A referência de reserva demográfica só se aplica à distribuição pela Lei 12.711
+sidebar_label: Referência demográfica indevida
+description: Só uma oferta cuja regra de distribuição é a Lei 12.711 usa os percentuais demográficos — no ramo institucional, o quadro é fixado pelo edital, sem cálculo.
+code: uniplus.selecao.configuracao_distribuicao_vagas.referencia_demografica_indevida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma distribuição de vagas informou `referenciaReservaDemograficaId`, mas a
+`regraDistribuicaoCodigo` não é a Lei 12.711 — é a regra institucional, onde
+o quadro de vagas é inteiramente fixado pelo edital (`quantidadeDeclarada`
+de cada modalidade), sem nenhum cálculo por percentual. Este é o par
+simétrico de
+[`referencia_demografica_obrigatoria`](./uniplus.selecao.configuracao_distribuicao_vagas.referencia_demografica_obrigatoria.mdx):
+a mesma coerência, olhada do lado oposto — lá, o campo faltando quando devia
+estar presente; aqui, presente quando devia faltar.
+
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe a criação da configuração.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recomputa a `ConfiguracaoDistribuicaoVagas`
+inteira a partir dos mesmos insumos — não apenas essa checagem, o cálculo
+inteiro roda de novo. Como os insumos são bit-a-bit os mesmos que
+produziram o resultado originalmente congelado, o recálculo chega ao mesmo
+resultado; esta causa só reaparece no descarte sob envelope corrompido, ou
+se a lógica de cálculo mudou de versão entre o congelamento e o momento do
+descarte.
+
+## Como resolver
+
+Remova `referenciaReservaDemograficaId` de distribuições cuja regra não seja
+a Lei 12.711, ou reveja se a regra de distribuição declarada é de fato a
+pretendida para esta oferta.
+
+Se o erro apareceu ao descartar uma retificação, o problema não está no
+payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar. Isso indica uma inconsistência na versão
+publicada anterior; abra uma investigação em vez de tentar corrigir pelo
+descarte.

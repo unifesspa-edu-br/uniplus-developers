@@ -1,0 +1,46 @@
+---
+title: Código da modalidade da vaga ofertada é obrigatório
+sidebar_label: Código da vaga ofertada ausente
+description: Toda linha do quadro de vagas carrega o código da modalidade correspondente — checagem defensiva, já que o código sempre vem de uma modalidade já validada.
+code: uniplus.selecao.vaga_ofertada.modalidade_codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#890'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/890
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma linha do quadro de vagas (`VagaOfertada` — a quantidade ofertada de uma
+modalidade dentro de uma distribuição) foi criada sem código de modalidade.
+
+Esta checagem é **genuinamente defensiva**: em todo caminho normal, o
+código vem de uma `ModalidadeSelecionada.Codigo` já validada como não
+vazia — a obrigatoriedade de código de modalidade tem sua própria causa,
+[`modalidade_selecionada.codigo_obrigatorio`](./uniplus.selecao.modalidade_selecionada.codigo_obrigatorio.mdx),
+que já teria recusado a modalidade antes de o quadro chegar a ser montado.
+Este código só existe para que a factory de `VagaOfertada` não dependa
+silenciosamente de a modalidade já ter sido validada em outro lugar — se um
+caminho futuro chamar essa factory sem passar pela validação de modalidade,
+a checagem aqui ainda protege.
+
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe a montagem do quadro.
+
+## Como resolver
+
+Este código, na prática, não deveria ocorrer com o comportamento atual do
+sistema. Se ele aparecer, é sinal de uma inconsistência mais profunda —
+uma modalidade chegando à montagem do quadro sem ter passado pela
+validação normal de `ModalidadeSelecionada`. Reporte como incidente para
+investigação, em vez de tentar contornar pelo payload.

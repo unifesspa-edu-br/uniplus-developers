@@ -1,0 +1,45 @@
+---
+title: O quadro traz uma modalidade que não está selecionada nesta oferta
+sidebar_label: Modalidade do quadro não selecionada
+description: Toda entrada do bloco quadro precisa corresponder a um Id presente em modalidadeIds — o quadro só declara quantidade para modalidades que a oferta de fato seleciona.
+code: uniplus.selecao.configuracao_distribuicao_vagas.quadro_modalidade_nao_selecionada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#890'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/890
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das entradas do bloco `quadro` do payload traz um `ModalidadeId` que
+não está entre os `modalidadeIds` selecionados na mesma distribuição. O
+`quadro` só declara quantidade para modalidades que a oferta de fato
+seleciona — uma entrada órfã, sem modalidade correspondente, não tem o que
+descrever.
+
+Esta é uma reconciliação de **Ids brutos do payload**, sem consultar
+nenhum cadastro — roda antes de qualquer resolução contra o catálogo de
+modalidades, logo depois de resolver a regra de ajuste (quando informada).
+Não acumula com nenhuma outra violação — é a primeira entrada órfã que
+interrompe o processamento da distribuição.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação: é uma checagem sobre a forma do payload de
+comando (Ids crus antes da resolução), e o caminho de descarte não passa
+por este comando — ele reconstrói a configuração diretamente do envelope
+já congelado e consistente.
+
+## Como resolver
+
+Remova do `quadro` qualquer entrada cujo `ModalidadeId` não esteja em
+`modalidadeIds`, ou inclua a modalidade correspondente em `modalidadeIds`
+se a intenção era selecioná-la.

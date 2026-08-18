@@ -1,0 +1,57 @@
+---
+title: Uma retirada ou suplemento não pode usar o código de uma sub-reserva federal ou da ampla concorrência
+sidebar_label: Chave do quadro colide
+description: O código de uma retirada ou suplemento não pode coincidir com uma das 9 modalidades federais fixas — sobrescreveria o valor calculado sem erro, quebrando a conservação em silêncio.
+code: uniplus.selecao.configuracao_distribuicao_vagas.quadro_chave_colide
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#890'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/890
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade de retirada (`RETIRA_DE`) ou suplemento
+(`SUPLEMENTAR_AO_TOTAL`) tem um código que coincide com uma das 9
+modalidades federais fixas (as 8 sub-reservas mais `AC` — ver
+[`modalidades_federais_incompletas`](./uniplus.selecao.configuracao_distribuicao_vagas.modalidades_federais_incompletas.mdx)).
+
+O quadro calculado é montado como um mapa `código → quantidade`: se uma
+retirada ou suplemento usasse o mesmo código de uma sub-reserva, a
+quantidade declarada sobrescreveria a quantidade calculada no mapa **sem
+nenhum erro** — a conservação do `VO` ficaria quebrada silenciosamente, sem
+que a resposta acusasse nada de errado. Esta checagem existe para nunca
+deixar isso acontecer.
+
+> **Alcance real.** Pelo `PUT .../distribuicao-vagas`, esta causa não é
+> alcançável em uso normal: as 9 modalidades federais fixas têm a
+> composição de vagas protegida no cadastro de Configuração
+> (`EstruturaProtegidaNaoEditavel` — natureza legal, composição de vagas e
+> demais campos estruturais do catálogo legal fixo não são editáveis), então
+> nenhuma delas pode assumir `RETIRA_DE`/`SUPLEMENTAR_AO_TOTAL`. Uma
+> modalidade **repetida** com o mesmo código de uma federal cai antes em
+> [`modalidade_duplicada`](./uniplus.selecao.configuracao_distribuicao_vagas.modalidade_duplicada.mdx),
+> não aqui. A checagem é uma guarda de conservação de baixo nível, só
+> alcançável pelo **descarte de retificação**, sob envelope congelado
+> corrompido ou adulterado.
+
+Não acumula com nenhuma outra violação — é a primeira colisão encontrada
+que interrompe a reconstrução da configuração.
+
+## Como resolver
+
+Este código, na prática, não deveria ocorrer com o comportamento atual do
+sistema — o cadastro de Configuração impede a única combinação que o
+dispararia. Se ele aparecer ao descartar uma retificação, o problema não
+está no payload enviado agora — está na configuração congelada para a qual
+o descarte está tentando voltar. Reporte como incidente para investigação
+do envelope congelado, em vez de tentar contornar pelo descarte.

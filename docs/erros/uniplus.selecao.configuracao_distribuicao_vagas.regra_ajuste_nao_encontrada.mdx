@@ -1,0 +1,48 @@
+---
+title: Regra de ajuste não encontrada no rol_de_regras
+sidebar_label: Regra de ajuste não encontrada
+description: Quando informado, o código e a versão da regra de ajuste do art. 11 são resolvidos contra o rol_de_regras — sem correspondência, a definição é recusada.
+code: uniplus.selecao.configuracao_distribuicao_vagas.regra_ajuste_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#890'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/890
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `regraAjusteCodigo`/`regraAjusteVersao` de uma das distribuições de vagas
+do payload não existe no `rol_de_regras` — o mesmo catálogo interno ao
+módulo Seleção de onde vem a regra de distribuição em si (ver
+[`regra_distribuicao_nao_encontrada`](./uniplus.selecao.configuracao_distribuicao_vagas.regra_distribuicao_nao_encontrada.mdx)).
+Esta resolução só acontece quando o campo é informado — omiti-lo não
+dispara este código; a obrigatoriedade condicional ao ramo federal é
+conferida separadamente (ver
+[`regra_ajuste_obrigatoria`](./uniplus.selecao.configuracao_distribuicao_vagas.regra_ajuste_obrigatoria.mdx)).
+
+O processamento é sequencial por distribuição: a primeira que falhar
+interrompe a passada, sem acumular com nenhuma outra violação.
+
+Diferente da maioria dos códigos desta série, este **não** aparece no
+descarte de retificação — o envelope congelado guarda a regra de ajuste por
+valor (código, versão e hash já resolvidos no momento da definição), sem
+reconsultar o `rol_de_regras` na restauração.
+
+## Como resolver
+
+Confirme, no catálogo de regras, que o código e a versão de ajuste
+declarados existem. Se a regra foi descontinuada recentemente, ou o código
+está incorreto, corrija o payload antes de reenviar.
+
+Como o processamento para na primeira distribuição com problema, corrigir
+esta e reenviar pode revelar uma nova falha numa distribuição seguinte do
+mesmo payload — não é garantia de que o restante do payload está correto.

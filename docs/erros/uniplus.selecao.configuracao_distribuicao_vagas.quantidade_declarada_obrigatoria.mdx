@@ -1,0 +1,54 @@
+---
+title: A modalidade de retirada ou suplemento exige a quantidade fixada pelo edital
+sidebar_label: Quantidade declarada obrigatória
+description: Retiradas e suplementos do ramo federal não são calculados pela fórmula legal — o edital precisa declarar a quantidade de cada um explicitamente.
+code: uniplus.selecao.configuracao_distribuicao_vagas.quantidade_declarada_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#890'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/890
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Numa distribuição de vagas com `regraDistribuicaoCodigo` do tipo Lei 12.711,
+uma modalidade cuja composição é `RETIRA_DE` ou `SUPLEMENTAR_AO_TOTAL` não
+declara quantidade em `quadro`. Diferente das sub-reservas e da ampla
+concorrência — calculadas pela fórmula do art. 10 —, retiradas e
+suplementos são decisões do edital que a lei não prevê: o sistema não tem
+como inferir quantas vagas uma retirada tira, ou quantas um suplemento
+acrescenta, sem que o edital declare.
+
+Não acumula com nenhuma outra violação — é a primeira modalidade sem
+quantidade, na ordem em que foram selecionadas, que interrompe a criação da
+configuração.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recomputa a `ConfiguracaoDistribuicaoVagas`
+inteira a partir dos mesmos insumos — não apenas essa checagem, o cálculo
+inteiro roda de novo. Como os insumos são bit-a-bit os mesmos que
+produziram o resultado originalmente congelado, o recálculo chega ao mesmo
+resultado; esta causa só reaparece no descarte sob envelope corrompido, ou
+se a lógica de cálculo mudou de versão entre o congelamento e o momento do
+descarte.
+
+## Como resolver
+
+Informe a quantidade (via o bloco `quadro` do payload) para toda modalidade
+de retirada ou suplemento da oferta.
+
+Se o erro apareceu ao descartar uma retificação, o problema não está no
+payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar. Isso indica uma inconsistência na versão
+publicada anterior; abra uma investigação em vez de tentar corrigir pelo
+descarte.
