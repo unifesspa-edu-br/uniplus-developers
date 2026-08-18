@@ -1,4 +1,5 @@
 import React from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 /**
  * Estilos e o par `<dt>/<dd>` compartilhados pelos três componentes do
@@ -89,6 +90,17 @@ export interface RastreioEntrada {
   href: string;
 }
 
+// Componente próprio (em vez de resolver o href direto no .map() de
+// ListaDeLinks) porque useBaseUrl é hook — não pode ser chamado dentro de um
+// laço com número variável de iterações.
+function LinkItem({label, href}: RastreioEntrada): React.ReactElement {
+  // Caminhos internos do site (rastreio costuma ser externo — issues do
+  // GitHub — mas exemplos de payload podem ser locais) recebem o baseUrl do
+  // portal; URLs externas passam por useBaseUrl inalteradas.
+  const resolvedHref = useBaseUrl(href);
+  return <a href={resolvedHref}>{label}</a>;
+}
+
 export function ListaDeLinks({
   itens,
 }: {
@@ -99,7 +111,7 @@ export function ListaDeLinks({
       {itens.map(({label, href}, indice) => (
         <React.Fragment key={href}>
           {indice > 0 && ', '}
-          <a href={href}>{label}</a>
+          <LinkItem label={label} href={href} />
         </React.Fragment>
       ))}
     </>
