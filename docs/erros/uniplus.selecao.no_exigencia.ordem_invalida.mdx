@@ -1,0 +1,48 @@
+---
+title: A ordem do nó não pode ser negativa
+sidebar_label: Ordem do nó negativa
+description: Cada nó da árvore de exigências (folha ou grupo) carrega a própria posição entre os irmãos — um valor negativo não corresponde a nenhuma posição real.
+code: uniplus.selecao.no_exigencia.ordem_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó (folha ou grupo) da árvore de exigências foi construído com `ordem`
+menor que zero. `ordem` é a posição do nó entre seus irmãos — a mesma
+função que, no modelo plano anterior, cabia a um índice de lista; aqui é
+um campo próprio de cada nó porque a árvore não é mais uma lista.
+
+É a primeira checagem tanto da construção de uma folha quanto da
+construção de um grupo — compartilhada pelos dois tipos de nó, antes de
+qualquer checagem específica de folha ou de grupo. Sequencial: nunca
+acumula com nenhuma outra causa desta série.
+
+> **Só alcançável no descarte de retificação.** Na definição de
+> documentos exigidos, o handler nunca lê `ordem` do payload — a deriva
+> da própria posição do nó no array (`Filhos`/`Raizes`), incrementando um
+> contador a partir de zero. Não existe payload que faça o handler passar
+> um valor negativo para `CriarFolha`/`CriarGrupo`: a checagem é
+> estruturalmente inalcançável por ali, não por sombreamento de validação.
+> No descarte, o envelope congelado lê `ordem` como um inteiro cru — sem
+> reconferir o sinal — e é aí que esta causa se torna alcançável.
+
+## Como resolver
+
+Este código não é acionado por um `PUT` malformado — a ordem de cada nó
+é sempre derivada da posição no array pelo próprio handler. Se ele
+aparecer numa restauração, o problema está na integridade do envelope
+congelado, não no payload do cliente.

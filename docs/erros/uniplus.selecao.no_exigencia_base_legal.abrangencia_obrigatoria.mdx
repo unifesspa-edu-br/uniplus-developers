@@ -1,0 +1,50 @@
+---
+title: A abrangência da base legal é obrigatória
+sidebar_label: Abrangência de base legal ausente
+description: Toda base legal própria de um grupo OU/N-de precisa declarar a abrangência (federal, estadual, institucional) do fundamento legal que ampara.
+code: uniplus.selecao.no_exigencia_base_legal.abrangencia_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0070
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um item de `basesLegais` de um grupo `OU`/N-de não declara `abrangencia`
+— ou declara um código fora do catálogo fechado, que o handler resolve
+para o sentinela `Nenhuma` antes de chegar a esta checagem. Acumula
+(ADR-0125) com
+[`referencia_obrigatoria`](./uniplus.selecao.no_exigencia_base_legal.referencia_obrigatoria.mdx)
+e `status_obrigatorio` dentro do mesmo item.
+
+Na definição, roda na mesma travessia pura da árvore que confirma a
+forma de todo nó antes de qualquer I/O — a validação de payload do
+comando não tem regra própria para `abrangencia` dos itens de
+`basesLegais` de um grupo (propositalmente, para não sombrear a
+acumulação do domínio), então um código fora do catálogo chega inteiro
+até aqui.
+
+No descarte de retificação, também é alcançável: o envelope congelado lê
+`abrangencia` como texto cru e resolve o código sem reconferir contra o
+catálogo antes de reconstruir a entidade — diferente de `chaveDistincao`
+e `repetePorEntidade` (que têm um gate próprio do codec para o mesmo
+sentinela), `abrangencia` não tem esse gate, e um código não reconhecido
+atravessa a leitura até `NoExigenciaBaseLegal.Criar`.
+
+## Como resolver
+
+Informe `abrangencia` para cada item de `basesLegais` do grupo, com um
+dos cinco valores do catálogo fechado: `FEDERAL`, `ESTADUAL`,
+`MUNICIPAL`, `INTERNA_NORMA` ou `INTERNA_EDITAL`.

@@ -1,0 +1,47 @@
+---
+title: Um nó do tipo FOLHA precisa declarar 'documento'
+sidebar_label: Documento ausente em folha
+description: Rascunho — um nó marcado como FOLHA precisa trazer a definição do documento que representa; hoje a checagem nunca chega a responder por este código porque a validação de payload já a intercepta antes do handler.
+code: uniplus.selecao.no_exigencia.documento_obrigatorio_em_folha
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0067
+rastreio:
+  - label: 'uniplus-api#936'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/936
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó com `tipo` igual a `FOLHA` não declara `documento`. Diferente da
+maioria das causas desta série, esta não é uma checagem do domínio
+(`NoExigencia.CriarFolha`/`CriarGrupo`) — é uma checagem do **handler**,
+que decide qual construtor chamar (folha ou grupo) a partir do `tipo`
+recebido, antes mesmo de montar os argumentos da árvore.
+
+> **Rascunho.** Uma regra de validação de payload equivalente
+> (`RuleFor(x => x.Documento).NotNull().When(Tipo == "FOLHA")`)
+> intercepta o mesmo cenário antes do handler — a resposta real é
+> `uniplus.validacao`, não este código. Diferente das causas de grupo já
+> publicadas nesta série, este código não tem um segundo caminho de
+> alcance: ele só existe dentro do handler de definição, e o descarte de
+> retificação não o reconstrói — o envelope congelado exige `exigenciaId`
+> em todo nó FOLHA por uma checagem própria do codec (uma causa distinta,
+> de integridade do envelope, não esta). Rastreado em
+> `uniplus-api#1227`.
+
+## Como resolver
+
+Declare `documento` para todo nó com `tipo: "FOLHA"`. No `PUT` real, a
+ausência responde com `uniplus.validacao`, não com este código — mas a
+correção é a mesma.

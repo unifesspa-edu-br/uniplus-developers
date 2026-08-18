@@ -1,0 +1,62 @@
+---
+title: repetePorEntidade fora do catálogo fechado
+sidebar_label: Tipo de entidade fora do catálogo
+description: 'Rascunho — repetePorEntidade de um nó só aceita dois valores, mas hoje nenhum caminho real chega a devolver esta causa.'
+code: uniplus.selecao.no_exigencia.tipo_entidade_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0069
+rastreio:
+  - label: 'uniplus-api#938'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/938
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `repetePorEntidade` de um nó (folha ou grupo) não corresponde a
+nenhum dos dois valores do catálogo fechado: `MEMBRO_NUCLEO_FAMILIAR` ou
+`PESSOA_JURIDICA_VINCULADA`. Diferente das demais checagens de
+`repetePorEntidade` desta série — que são invariantes de árvore inteira
+—, esta é local a um único nó: só confere se o valor pertence ao
+catálogo, antes de qualquer checagem de aninhamento.
+
+O código de domínio para essa recusa existe (`!Enum.IsDefined` dentro de
+`ValidarCatalogoTipoEntidade`, compartilhado por `CriarFolha` e
+`CriarGrupo`) — mas **nenhum caminho real chega a executá-lo hoje**, por
+isso a entrada é rascunho, não publicada.
+
+No `PUT` de documentos exigidos, um payload com `repetePorEntidade` fora
+do catálogo é interceptado antes do handler por uma regra de validação
+de payload equivalente — a resposta real é `uniplus.validacao`, não esta
+entrada. Mesmo que essa regra fosse contornada, o handler resolve o
+código através de `TipoEntidadeCodigo.FromCodigo`, que mapeia qualquer
+valor não reconhecido para o sentinela `Nenhuma` — um membro **definido**
+do enum — então o guard de domínio nunca encontra um valor indefinido
+para recusar; o nó simplesmente é criado como "sem repetição". Pelo
+descarte de retificação também não: o envelope congelado lê
+`repetePorEntidade` contra o mesmo catálogo fechado, e um código não
+reconhecido ali é recusado ainda na leitura, como
+`envelope_codec.envelope_malformado`, antes de a entidade ser
+reconstruída.
+
+Esta entrada existe para que o código de domínio, já registrado no
+catálogo, tenha uma página assim que algum dos dois caminhos for
+destravado — mesma frente da ADR-0125, rastreada em `uniplus-api#1227`.
+
+## Como resolver
+
+Informe `repetePorEntidade` como um dos dois valores do catálogo —
+`MEMBRO_NUCLEO_FAMILIAR` ou `PESSOA_JURIDICA_VINCULADA` — ou omita o
+campo se o nó não repete por instância de entidade. Hoje, um valor fora
+do catálogo responde com `uniplus.validacao`, não com este código — mas
+a correção é a mesma.
