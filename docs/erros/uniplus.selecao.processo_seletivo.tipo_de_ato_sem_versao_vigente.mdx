@@ -1,0 +1,47 @@
+---
+title: Não há versão vigente do tipo de ato declarado na data de publicação
+sidebar_label: Tipo de ato sem versão vigente
+description: O catálogo de tipos de ato (módulo Publicações) é consultado antes de publicar ou retificar — sem versão vigente na data declarada, a transição é recusada.
+code: uniplus.selecao.processo_seletivo.tipo_de_ato_sem_versao_vigente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-api#827'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/827
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Publicar ou retificar um processo seletivo registra um ato normativo no
+módulo Publicações (por mensagem durável). Antes disso, o tipo de ato
+declarado é conferido no catálogo — a mesma leitura cross-módulo que valida
+se o tipo existe e está vigente na data de publicação informada.
+
+Esta conferência acontece **antes** de tentar registrar o ato. Sem ela, um
+tipo inválido só seria recusado no consumo assíncrono da fila: o processo já
+publicado, o cliente já com a resposta de sucesso na mão, e a recusa virando
+mensagem morta (dead letter) — um estado inconsistente que só apareceria como
+incidente operacional depois. O que dá para recusar com 422, na hora, não
+pode virar esse tipo de incidente.
+
+## Como resolver
+
+Confirme, no catálogo de tipos de ato de Publicações, que o código declarado
+tem uma versão vigente na data de publicação enviada — tipos de ato têm
+vigência própria, e um código válido hoje pode não ter versão vigente na data
+retroativa ou futura que o comando declarou.
+
+Se o tipo de ato não existe no catálogo, é preciso cadastrá-lo antes — ver
+[`tipo_ato.nao_encontrado`](./uniplus.publicacoes.tipo_ato.nao_encontrado.mdx)
+para o comportamento equivalente no cadastro direto de Publicações.

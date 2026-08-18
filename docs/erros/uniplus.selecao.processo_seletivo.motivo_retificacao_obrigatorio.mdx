@@ -1,0 +1,56 @@
+---
+title: O motivo da retificação é obrigatório
+sidebar_label: Motivo da retificação ausente
+description: O atalho atômico de retificação exige o motivo em texto, nunca vazio ou só espaços — no fechamento de sessão, o motivo já vem congelado da abertura.
+code: uniplus.selecao.processo_seletivo.motivo_retificacao_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Retificação do processo seletivo (atalho atômico)
+requisitos:
+  - UNI-REQ-0021
+rastreio:
+  - label: 'uniplus-api#792'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/792
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O comando de **retificação pelo atalho atômico**
+(`POST .../retificacoes`) foi enviado sem o motivo, ou com o motivo em branco
+(vazio ou só espaços). O motivo fica congelado, junto com a nova versão, como
+parte permanente do histórico do processo (UNI-REQ-0019): é o registro de por
+que a configuração mudou depois de publicada.
+
+Esta causa **não** aparece no fechamento de uma sessão de retificação
+(`POST .../retificacao-em-curso/fechamento`) — esse comando não recebe motivo
+próprio; ele reaproveita o motivo já validado na abertura da sessão
+(`POST .../retificacao-em-curso`). Um motivo em branco na abertura recusa com
+outra causa, `uniplus.selecao.retificacao.motivo_obrigatorio`.
+
+> **Lacuna conhecida.** Hoje, um motivo vazio é interceptado antes de
+> qualquer um dos dois códigos de domínio por uma regra de validação de
+> payload equivalente — no atalho atômico, na abertura de retificação, e na
+> alteração de motivo de uma sessão já aberta. Nos três casos a resposta real
+> é `uniplus.validacao`, não esta entrada nem
+> `uniplus.selecao.retificacao.motivo_obrigatorio`. O código de domínio
+> descrito aqui existe e está correto, mas ainda não é alcançável por um
+> cliente HTTP real; alcança quando os comandos migrarem para o padrão de
+> validação centrada no domínio (mesma frente da ADR-0125 do `uniplus-api`,
+> rastreada em `uniplus-api#1227`).
+
+## Como resolver
+
+No atalho atômico, envie o campo de motivo preenchido com um texto não
+vazio, descrevendo por que a retificação está sendo feita. Um valor só com
+espaços em branco é tratado como ausente.
+
+Se o erro apareceu ao fechar uma sessão de retificação, o problema não é este
+comando — confira o motivo que foi enviado na abertura da sessão.

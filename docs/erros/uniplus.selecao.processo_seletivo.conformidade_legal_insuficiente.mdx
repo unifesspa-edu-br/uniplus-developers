@@ -1,0 +1,52 @@
+---
+title: Processo não conforme às obrigatoriedades legais vigentes
+sidebar_label: Conformidade legal insuficiente
+description: As obrigatoriedades legais vigentes para o tipo de processo, na data de início do período de inscrição, foram avaliadas contra a configuração, e ao menos uma reprovou.
+code: uniplus.selecao.processo_seletivo.conformidade_legal_insuficiente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0018
+rastreio:
+  - label: 'uniplus-api#889'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/889
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Antes de congelar a configuração — seja publicando, retificando pelo atalho
+atômico, ou fechando uma sessão de retificação —, o sistema resolve as
+obrigatoriedades legais vigentes para o tipo do processo **na data de início
+do período de inscrição declarado no comando** (`periodoInscricaoInicio`), e
+avalia cada uma contra a configuração montada. Se qualquer regra reprova, a
+transição é recusada antes da canonicalização — o mesmo momento em que o gate
+estrutural de conformidade recusaria, para que as duas frentes (estrutural e
+legal) sejam checadas juntas.
+
+A mensagem lista os códigos das regras reprovadas. É a mesma avaliação —
+mesmo repositório de obrigatoriedades, mesmo avaliador — que a consulta
+pública de conformidade legal expõe como leitura: a regra que a consulta
+mostra reprovada é exatamente a que bloqueia a transição.
+
+## Como resolver
+
+Consulte `GET /api/selecao/processos-seletivos/{id}/conformidade-legal?dataReferencia={periodoInscricaoInicio}`
+— informando a **mesma data de início do período de inscrição** que a
+transição usaria — para ver, com o mesmo veredito, quais obrigatoriedades
+legais estão vigentes para o tipo do processo e qual delas reprovou. Uma data
+de referência diferente (por exemplo, a data de hoje) pode aprovar regras que
+a transição recusaria, ou vice-versa. Ajuste a configuração do processo para
+atender a cada regra reprovada.
+
+Se a regra em si estiver incorreta — por exemplo, vigente para o tipo de
+processo errado, ou com a data de início/fim mal ajustada —, a correção é no
+cadastro de obrigatoriedades legais, não na configuração deste processo.

@@ -1,0 +1,47 @@
+---
+title: Este Processo Seletivo já tem um ato vivo do tipo declarado, de outra linhagem
+sidebar_label: Ato vivo do tipo já existe
+description: Quando o tipo de ato é único por objeto, a vaga é monotônica — uma vez ocupada por uma linhagem, não se libera para outra.
+code: uniplus.selecao.processo_seletivo.objeto_ja_tem_ato_vivo_do_tipo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-api#827'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/827
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Alguns tipos de ato são marcados, no cadastro de Publicações, como **únicos
+por objeto** (`unico_por_objeto`) — só um ato vivo desse tipo pode existir
+para um mesmo processo seletivo. A vaga é monotônica: uma vez ocupada, não se
+libera. Este processo já tem um ato vivo do tipo declarado, criado por uma
+**linhagem diferente** da que está tentando publicar ou retificar agora — por
+exemplo, um ato registrado por fora, pelo endpoint administrativo de
+Publicações.
+
+Uma retificação da **própria** linhagem nunca dispara este erro: ela não
+disputa a vaga que já ocupa. A conferência é feita sobre o histórico completo
+de atos da linhagem, não só sobre a tabela de vagas — porque `unico_por_objeto`
+é um atributo editável do tipo de ato: um ato registrado quando o tipo ainda
+não era único não reservou vaga, e ainda assim conflitaria se o tipo passasse
+a ser único depois.
+
+## Como resolver
+
+Verifique, no módulo Publicações, se já existe um ato vivo do tipo declarado
+para este processo, criado por outra linhagem. Se o ato existente estiver
+correto, use-o como base para retificação em vez de tentar criar um novo — ou
+escolha um tipo de ato que não seja único por objeto, se o caso de uso
+realmente permitir múltiplos atos vivos do mesmo tipo.
