@@ -1,0 +1,59 @@
+---
+title: Par/fallback de remanejamento só se aplicam à regra CRUZADO
+sidebar_label: Remanejamento cruzado indevido
+description: Só uma modalidade com remanejamento CRUZADO declara par e fallback — nas demais regras, os dois campos não se aplicam.
+code: uniplus.selecao.modalidade_selecionada.remanejamento_cruzado_indevido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+  - label: 'uniplus-api#865'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/865
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade selecionada declarou `remanejamentoPar`, `remanejamentoFallback`,
+ou os dois, sem ter `regraRemanejamento: CRUZADO`. Este é o par simétrico de
+[`remanejamento_cruzado_incompleto`](./uniplus.selecao.modalidade_selecionada.remanejamento_cruzado_incompleto.mdx):
+a mesma coerência, olhada do lado oposto — lá, os campos faltando quando
+deviam estar presentes; aqui, presentes quando deviam faltar. Basta um dos
+dois campos estar preenchido fora da regra `CRUZADO` para disparar.
+
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe a criação da modalidade.
+
+**`regraRemanejamento`, `remanejamentoPar` e `remanejamentoFallback` não vêm
+do payload da definição de distribuição de vagas** — são copiados do
+cadastro de modalidades de Configuração, no momento em que a modalidade é
+selecionada (`IModalidadeReader`). O próprio cadastro já impede esta
+incoerência na escrita (as invariantes cruzadas de `Modalidade`, tanto na criação quanto na atualização); pela
+definição de distribuição de vagas, este código só aparece se a modalidade
+estiver gravada no cadastro de um jeito que contorna essa validação — a
+checagem aqui é defesa em profundidade, não a primeira linha.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recria cada modalidade selecionada a
+partir dos mesmos campos — a mesma checagem roda de novo, sozinha.
+
+## Como resolver
+
+Os campos em excesso não estão no payload que você enviou — estão na
+modalidade cadastrada em Configuração. Corrija lá a regra de remanejamento
+ou remova o par/fallback indevido, ou investigue como a modalidade foi
+gravada sem essa coerência.
+
+Se o erro apareceu ao descartar uma retificação, o problema também não está
+no payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar, refletindo uma modalidade já incoerente no
+momento em que foi selecionada.

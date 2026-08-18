@@ -1,0 +1,65 @@
+---
+title: Modalidade com remanejamento DESTINO_UNICO exige o destino
+sidebar_label: Destino de remanejamento ausente
+description: Uma modalidade cuja regra de remanejamento é DESTINO_UNICO precisa declarar para qual outra modalidade suas vagas ociosas vão.
+code: uniplus.selecao.modalidade_selecionada.remanejamento_destino_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+  - label: 'uniplus-api#865'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/865
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade selecionada declarou `regraRemanejamento: DESTINO_UNICO` sem
+declarar `remanejamentoDestino`. Ao contrário da cascata legal (obrigatória
+para cota reservada, ver
+[`cota_reservada_exige_cascata`](./uniplus.selecao.modalidade_selecionada.cota_reservada_exige_cascata.mdx)),
+`DESTINO_UNICO` é um remanejamento simples, de uma modalidade para uma única
+outra — mas precisa dizer qual; sem o destino, as vagas ociosas não têm para
+onde ir.
+
+Regra de remanejamento (`DESTINO_UNICO`, `CRUZADO`, `SEGUE_CASCATA`, entre
+outras) é independente da composição de vagas (`RETIRA_DE`, ver
+[`composicao_origem_obrigatoria`](./uniplus.selecao.modalidade_selecionada.composicao_origem_obrigatoria.mdx))
+— a primeira decide o destino das vagas ociosas da modalidade; a segunda,
+como ela entra no cálculo do quadro. Não acumula com nenhuma outra violação
+— é a primeira que falhar que interrompe a criação da modalidade.
+
+**`regraRemanejamento` e `remanejamentoDestino` não vêm do payload da
+definição de distribuição de vagas** — são copiados do cadastro de
+modalidades de Configuração, no momento em que a modalidade é selecionada
+(`IModalidadeReader`). O próprio cadastro já impede esta incoerência na
+escrita (as invariantes cruzadas de `Modalidade`, tanto na criação quanto na
+atualização); pela definição de
+distribuição de vagas, este código só aparece se a modalidade estiver
+gravada no cadastro de um jeito que contorna essa validação — a checagem
+aqui é defesa em profundidade, não a primeira linha.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recria cada modalidade selecionada a
+partir dos mesmos campos — a mesma checagem roda de novo, sozinha.
+
+## Como resolver
+
+O campo que falta não está no payload que você enviou — está na modalidade
+cadastrada em Configuração. Corrija lá o vínculo entre `regraRemanejamento:
+DESTINO_UNICO` e o destino, ou investigue como a modalidade foi gravada sem
+essa coerência.
+
+Se o erro apareceu ao descartar uma retificação, o problema também não está
+no payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar, refletindo uma modalidade já incoerente no
+momento em que foi selecionada.

@@ -1,0 +1,71 @@
+---
+title: Modalidade com composição RETIRA_DE exige o código de origem
+sidebar_label: Composição de origem ausente
+description: Uma modalidade cuja composição de vagas é RETIRA_DE precisa declarar de qual outra modalidade ela retira.
+code: uniplus.selecao.modalidade_selecionada.composicao_origem_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+  - label: 'uniplus-api#865'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/865
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade selecionada declarou `composicaoVagas: RETIRA_DE` sem
+declarar `composicaoOrigemCodigo`. A composição de vagas é a dimensão que
+decide como a modalidade entra na aritmética do quadro de vagas — `RETIRA_DE`
+significa que ela não tem quadro próprio, ela **subtrai** vagas de outra
+modalidade selecionada na mesma oferta; sem saber de qual, a subtração não
+tem como ser calculada.
+
+Composição de vagas (`RETIRA_DE`, entre outras) e regra de remanejamento
+(`DESTINO_UNICO`, `CRUZADO`, entre outras — ver
+[`remanejamento_destino_obrigatorio`](./uniplus.selecao.modalidade_selecionada.remanejamento_destino_obrigatorio.mdx))
+são duas dimensões independentes da mesma modalidade: a primeira decide como
+ela entra no cálculo do quadro; a segunda, o que acontece com as vagas dela
+que sobram sem candidato aprovado. Este código é só sobre a primeira.
+
+Esta checagem roda dentro da criação da modalidade, verificando só os campos
+dela mesma — não confere se o código de origem declarado de fato corresponde
+a outra modalidade selecionada nesta oferta (essa é uma checagem separada, ver
+[`configuracao_distribuicao_vagas.composicao_origem_nao_selecionada`](./uniplus.selecao.configuracao_distribuicao_vagas.composicao_origem_nao_selecionada.mdx)).
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe a criação da modalidade.
+
+**`composicaoVagas` e `composicaoOrigemCodigo` não vêm do payload da
+definição de distribuição de vagas** — são copiados do cadastro de
+modalidades de Configuração, no momento em que a modalidade é selecionada
+(`IModalidadeReader`). O próprio cadastro já impede esta incoerência na
+escrita (as invariantes cruzadas de `Modalidade`, tanto na criação quanto na
+atualização); pela definição de
+distribuição de vagas, este código só aparece se a modalidade estiver
+gravada no cadastro de um jeito que contorna essa validação — a checagem
+aqui é defesa em profundidade, não a primeira linha.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recria cada modalidade selecionada a
+partir dos mesmos campos — a mesma checagem roda de novo, sozinha.
+
+## Como resolver
+
+O campo que falta não está no payload que você enviou — está na modalidade
+cadastrada em Configuração. Corrija lá o vínculo entre `composicaoVagas:
+RETIRA_DE` e o código de origem da modalidade indicada, ou investigue como
+ela foi gravada sem essa coerência.
+
+Se o erro apareceu ao descartar uma retificação, o problema também não está
+no payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar, refletindo uma modalidade já incoerente no
+momento em que foi selecionada.
