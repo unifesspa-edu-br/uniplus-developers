@@ -23,9 +23,9 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 Uma distribuição de vagas informou `referenciaReservaDemograficaId`, mas a
 `regraDistribuicaoCodigo` não é a Lei 12.711 — é a regra institucional, onde
-o quadro de vagas é inteiramente fixado pelo edital (`quantidadeDeclarada`
-de cada modalidade), sem nenhum cálculo por percentual. Este é o par
-simétrico de
+o quadro de vagas é inteiramente fixado pelo edital (a quantidade de cada
+modalidade vem direto do payload, sem nenhum cálculo por percentual). Este
+é o par simétrico de
 [`referencia_demografica_obrigatoria`](./uniplus.selecao.configuracao_distribuicao_vagas.referencia_demografica_obrigatoria.mdx):
 a mesma coerência, olhada do lado oposto — lá, o campo faltando quando devia
 estar presente; aqui, presente quando devia faltar.
