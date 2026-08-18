@@ -1,4 +1,5 @@
 import React from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import {
   AVISO,
   BLOCO,
@@ -72,6 +73,11 @@ export default function ChangelogEntry({
   diff_schema_href,
   rastreio,
 }: ChangelogEntryProps): React.ReactElement {
+  // Caminhos internos (sem protocolo) precisam do baseUrl do portal — ver
+  // mesmo tratamento em MediaTypeCard. Chamado incondicionalmente (regra dos
+  // hooks); o valor só é usado quando diff_schema_href está presente.
+  const diffSchemaHref = useBaseUrl(diff_schema_href ?? '');
+
   return (
     <article style={BLOCO}>
       {(tipo_mudanca === 'deprecation' || tipo_mudanca === 'sunset') && (
@@ -107,7 +113,7 @@ export default function ChangelogEntry({
           <Item rotulo="Resumo">{resumo}</Item>
           {diff_schema_href && (
             <Item rotulo="Diff de schema">
-              <a href={diff_schema_href}>{diff_schema_href}</a>
+              <a href={diffSchemaHref}>{diff_schema_href}</a>
             </Item>
           )}
           {rastreio && rastreio.length > 0 && (
