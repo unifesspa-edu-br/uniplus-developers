@@ -1,0 +1,53 @@
+---
+title: O nome da etapa é obrigatório
+sidebar_label: Nome da etapa ausente
+description: Toda etapa do payload precisa de nome — vazio, ausente ou só espaços não passa. A checagem acumula com as demais violações de forma do payload inteiro.
+code: uniplus.selecao.etapa_processo.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1218'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1218
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do payload de definição de etapas não tem `nome`, ou tem o
+campo vazio, ou só com espaços em branco.
+
+Esta checagem — e as cinco outras que ela compartilha mecanismo com
+([`nome_tamanho`](./uniplus.selecao.etapa_processo.nome_tamanho.mdx),
+[`carater_obrigatorio`](./uniplus.selecao.etapa_processo.carater_obrigatorio.mdx),
+[`peso_invalido`](./uniplus.selecao.etapa_processo.peso_invalido.mdx),
+[`nota_minima_invalida`](./uniplus.selecao.etapa_processo.nota_minima_invalida.mdx),
+[`ordem_invalida`](./uniplus.selecao.etapa_processo.ordem_invalida.mdx)) — roda
+numa primeira passada que confere a **forma** de todas as etapas do payload
+**antes** de resolver qualquer uma contra o catálogo de tipos de etapa. A
+passada acumula toda violação de forma encontrada, de todas as etapas, em vez
+de recusar na primeira: um payload com uma etapa sem nome e outra com peso
+negativo devolve as duas violações juntas, no array `errors[]` do corpo de
+erro — cada item com seu `field` (`etapas[<índice>].nome`, por exemplo) e seu
+próprio `code`. O `type`/`title` da raiz do corpo de erro refletem a
+**primeira** violação encontrada, na ordem: entre etapas, a ordem do array do
+payload; dentro de uma etapa, nome → caráter → peso → nota mínima → ordem.
+Nome ausente e nome muito longo são mutuamente exclusivos — a mesma etapa
+nunca aciona os dois ao mesmo tempo, só um por vez.
+
+## Como resolver
+
+Preencha o campo `nome` de cada etapa do payload com um texto não vazio. Um
+valor só com espaços em branco é tratado como ausente.
+
+Se a resposta trouxer mais de uma violação no array `errors[]`, corrija todas
+antes de reenviar — a passada de forma só libera a etapa para seguir à
+resolução do tipo de etapa quando **nenhuma** etapa do payload tem violação de
+forma pendente.

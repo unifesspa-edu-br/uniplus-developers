@@ -1,0 +1,43 @@
+---
+title: Termo de aceite do formulário de inscrição excede o tamanho máximo
+sidebar_label: Termo de aceite do formulário excede o tamanho
+description: O termo de aceite do formulário de inscrição é opcional, mas quando informado tem limite de 4000 caracteres, o mesmo da coluna que o persiste.
+code: uniplus.selecao.processo_seletivo.formulario_termo_aceite_texto_tamanho
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do formulário de inscrição
+requisitos:
+  - UNI-REQ-0017
+rastreio:
+  - label: 'uniplus-api#1206'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1206
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `termoAceiteTexto` enviado para o formulário de inscrição do processo passa
+de 4000 caracteres — o mesmo limite da coluna que o persiste. O campo é
+opcional (um processo sem termo de aceite customizado é válido); a checagem
+só vale quando um valor é informado. Sem o limite verificado no domínio, um
+texto mais longo passaria pela validação de payload e só falharia dentro de
+`SaveChanges`, como erro de banco em vez de um 422 claro.
+
+Esta checagem acumula com a de
+[`formulario_titulo_tamanho`](./uniplus.selecao.processo_seletivo.formulario_titulo_tamanho.mdx)
+— um payload que excede os dois campos ao mesmo tempo devolve as duas
+violações juntas, no array `errors[]` do corpo de erro; o `type`/`title` da
+raiz refletem a primeira das duas na ordem de checagem (título antes de termo
+de aceite) — então este código só aparece como `type` da raiz quando o título
+não tem violação.
+
+## Como resolver
+
+Reduza o `termoAceiteTexto` para até 4000 caracteres, ou omita o campo se o
+processo não precisa de um termo de aceite customizado. Se a resposta trouxer
+também a violação de título, corrija as duas antes de reenviar.

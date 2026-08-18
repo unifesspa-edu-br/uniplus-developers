@@ -1,0 +1,44 @@
+---
+title: A nota mínima, quando informada, não pode ser negativa
+sidebar_label: Nota mínima da etapa inválida
+description: A nota mínima é opcional, mas quando informada controla o corte de eliminação da etapa — não pode ser negativa.
+code: uniplus.selecao.etapa_processo.nota_minima_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1218'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1218
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do payload informou `notaMinima` negativa. O campo é opcional
+— uma etapa sem nota mínima não elimina por nota nesta etapa —, mas quando
+informado controla o corte de eliminação (etapas de caráter eliminatória ou
+ambas): um valor negativo não tem interpretação válida como corte de nota.
+
+Esta é uma das seis checagens de forma que a definição de etapas acumula
+numa só passada, antes de resolver qualquer etapa contra o catálogo de tipos —
+ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)
+para o mecanismo completo de acumulação e a ordem em que as violações
+aparecem.
+
+O valor é persistido como `numeric(18,4)` — uma nota mínima com mais de 4
+casas decimais é recusada antes desta checagem, por validação de payload
+(forma/rota, sem checagem de domínio equivalente), para que o banco nunca
+arredonde silenciosamente o limiar de eliminação.
+
+## Como resolver
+
+Informe uma `notaMinima` maior ou igual a zero, ou omita o campo se a etapa
+não deve eliminar por nota. Se a resposta trouxer mais de uma violação no
+array `errors[]`, corrija todas antes de reenviar.

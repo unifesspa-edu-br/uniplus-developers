@@ -1,0 +1,40 @@
+---
+title: Caráter da etapa é obrigatório (classificatória, eliminatória ou ambas)
+sidebar_label: Caráter da etapa ausente
+description: Toda etapa precisa declarar se é classificatória, eliminatória ou ambas — é o caráter que decide se ela entra na nota e/ou pode eliminar o candidato.
+code: uniplus.selecao.etapa_processo.carater_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1218'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1218
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do payload não declarou `carater`, ou declarou um valor que não
+corresponde a nenhuma opção do enum. O caráter decide o papel da etapa:
+classificatória (compõe a nota final), eliminatória (pode eliminar o
+candidato por nota mínima), ou ambas — não há valor padrão, toda etapa
+precisa declarar o próprio caráter explicitamente.
+
+Esta é uma das seis checagens de forma que a definição de etapas acumula
+numa só passada, antes de resolver qualquer etapa contra o catálogo de tipos —
+ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)
+para o mecanismo completo de acumulação e a ordem em que as violações
+aparecem.
+
+## Como resolver
+
+Preencha o campo `carater` da etapa com um dos valores válidos do enum
+(classificatória, eliminatória, ou ambas). Se a resposta trouxer mais de uma
+violação no array `errors[]`, corrija todas antes de reenviar.
