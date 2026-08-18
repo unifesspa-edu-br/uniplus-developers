@@ -1,0 +1,55 @@
+---
+title: A distribuição pela Lei 12.711 exige a regra de ajuste (art. 11 §único)
+sidebar_label: Regra de ajuste obrigatória
+description: O art. 11, parágrafo único, exige uma regra explícita para reconciliar a garantia mínima das sete sub-reservas garantidas quando a soma das oito excede o VO da oferta.
+code: uniplus.selecao.configuracao_distribuicao_vagas.regra_ajuste_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#890'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/890
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma distribuição de vagas com `regraDistribuicaoCodigo` do tipo Lei 12.711
+não informou `regraAjusteCodigo`. O art. 11, parágrafo único, prevê que,
+quando a soma das demandas das oito sub-reservas excede o `VO` da oferta
+(escassez de vagas), a reconciliação segue uma regra própria — hoje sempre
+`RECONCILIACAO-VAGAS-ART11-PU`, a única cadastrada no catálogo. A regra
+precisa estar referenciada mesmo quando a oferta específica não chega a
+sofrer escassez: a distribuição não sabe, no momento da definição, se o
+cálculo vai precisar dela.
+
+Não acumula com nenhuma outra violação — é a primeira que falhar que
+interrompe a criação da configuração.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recomputa a `ConfiguracaoDistribuicaoVagas`
+inteira a partir dos mesmos insumos — não apenas essa checagem, o cálculo
+inteiro roda de novo. Como os insumos são bit-a-bit os mesmos que
+produziram o resultado originalmente congelado, o recálculo chega ao mesmo
+resultado; esta causa só reaparece no descarte sob envelope corrompido, ou
+se a lógica de cálculo mudou de versão entre o congelamento e o momento do
+descarte.
+
+## Como resolver
+
+Informe `regraAjusteCodigo`/`regraAjusteVersao` para toda distribuição cuja
+regra de distribuição seja a Lei 12.711, mesmo que a oferta não pareça
+sujeita a escassez de vagas.
+
+Se o erro apareceu ao descartar uma retificação, o problema não está no
+payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar. Isso indica uma inconsistência na versão
+publicada anterior; abra uma investigação em vez de tentar corrigir pelo
+descarte.

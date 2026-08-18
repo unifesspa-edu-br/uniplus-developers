@@ -1,0 +1,56 @@
+---
+title: A distribuição pela Lei 12.711 exige as 8 modalidades federais e AC
+sidebar_label: Modalidades federais incompletas
+description: Uma oferta pela Lei 12.711 precisa selecionar as 8 sub-reservas legais mais a ampla concorrência — o cálculo do quadro depende do conjunto completo.
+code: uniplus.selecao.configuracao_distribuicao_vagas.modalidades_federais_incompletas
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma distribuição de vagas com `regraDistribuicaoCodigo` do tipo Lei 12.711
+não selecionou todas as 8 sub-reservas legais mais a ampla concorrência
+(`AC`) — o conjunto fixo de 9 modalidades que a lei prevê: `LB_PPI`, `LB_Q`,
+`LB_PCD`, `LB_EP`, `LI_PPI`, `LI_Q`, `LI_PCD`, `LI_EP`, mais `AC`. O cálculo
+do quadro federal (art. 10) reparte o `VO` entre esses 9 grupos numa única
+operação — não há como calcular a reserva de um subconjunto: ausência de
+qualquer um deles invalida a distribuição inteira.
+
+A mensagem de erro lista, dinamicamente, quais códigos estão faltando —
+diferente do `title`, que é fixo. Não acumula com nenhuma outra violação —
+é a primeira que falhar que interrompe a criação da configuração.
+
+Este código também aparece no **descarte de retificação**: reconstruir o
+grafo a partir do envelope congelado recomputa a `ConfiguracaoDistribuicaoVagas`
+inteira a partir dos mesmos insumos — não apenas essa checagem, o cálculo
+inteiro roda de novo. Como os insumos são bit-a-bit os mesmos que
+produziram o resultado originalmente congelado, o recálculo chega ao mesmo
+resultado; esta causa só reaparece no descarte sob envelope corrompido, ou
+se a lógica de cálculo mudou de versão entre o congelamento e o momento do
+descarte.
+
+## Como resolver
+
+Selecione as 9 modalidades federais fixas na distribuição de vagas de
+ofertas cuja regra seja a Lei 12.711 — as 8 sub-reservas mais a ampla
+concorrência. Modalidades adicionais (retiradas, suplementos) podem
+coexistir com as 9, mas não substituem nenhuma delas.
+
+Se o erro apareceu ao descartar uma retificação, o problema não está no
+payload enviado agora — está na configuração congelada para a qual o
+descarte está tentando voltar. Isso indica uma inconsistência na versão
+publicada anterior; abra uma investigação em vez de tentar corrigir pelo
+descarte.
