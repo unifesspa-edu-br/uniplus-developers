@@ -17,6 +17,17 @@ Esta página reúne os conceitos de domínio que sustentam o módulo Seleção d
 | Técnico (código, namespaces) | **UniPlus** |
 | Formal expandido | **Sistema Unificado Unifesspa (S2U)** |
 
+### Edital versus processo seletivo
+
+Os dois termos não são sinônimos, e a troca entre eles é erro de domínio, não de estilo:
+
+- **Processo seletivo** é o agregado que carrega a configuração (etapas, cotas, vagas, documentos, formulário). É ele que se configura, publica e retifica. Use este termo — ou "certame" — sempre que o assunto for a configuração, o ciclo de vida ou o comportamento do sistema.
+- **Edital** é o **ato publicado** — o documento normativo que oficializa uma versão do processo seletivo. Vive no módulo Publicações e é referenciado por valor, sem chave estrangeira. Use este termo só quando o assunto for o próprio documento: "o edital foi retificado", "o hash do ato", "o edital declara o algoritmo de contagem".
+
+O congelamento acontece na **`VersaoConfiguracao`** do processo seletivo — o edital não "contém blocos" nem é editado diretamente; uma mudança pós-publicação sai como retificação, que gera uma nova versão e um novo edital.
+
+`RN08` mantém o nome histórico "Congelamento de parâmetros por edital" — é citada fora deste repositório (ADRs e código do `uniplus-api`) e não foi renomeada. Tecnicamente, o congelamento ocorre por **processo seletivo** (a `VersaoConfiguracao`); o edital é o ato que a publica.
+
 ## Tipos de processo seletivo
 
 Cada tipo tem formulário e regras próprias, configurados como um processo seletivo distinto: **SiSU**, **PSIQ** (Indígena/Quilombola), **PSE Educação do Campo**, **PSVR** (Vestibular Remanescente) e **Transferências** (interna/externa), entre outros.
