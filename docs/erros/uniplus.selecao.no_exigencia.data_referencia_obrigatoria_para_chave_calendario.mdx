@@ -1,0 +1,50 @@
+---
+title: dataReferencia é obrigatória quando chaveDistincao é COMPETENCIA_MENSAL ou EXERCICIO_ANUAL
+sidebar_label: Data de referência ausente na folha
+description: As chaves de calendário derivam os slots esperados a partir de uma âncora — sem dataReferencia, não há "últimos N" a calcular.
+code: uniplus.selecao.no_exigencia.data_referencia_obrigatoria_para_chave_calendario
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó folha com `chaveDistincao` igual a `COMPETENCIA_MENSAL` ou
+`EXERCICIO_ANUAL` não informou `dataReferencia`. As duas chaves de
+calendário derivam os slots esperados como "as N unidades regulares
+(meses ou anos) imediatamente anteriores ou iguais à âncora" — sem a
+âncora, não há como calcular quais unidades são essas.
+
+É a checagem inversa de
+[`data_referencia_indevida_para_chave`](./uniplus.selecao.no_exigencia.data_referencia_indevida_para_chave.mdx).
+Roda como a primeira checagem específica do ramo de chave de calendário,
+antes de
+[`ocorrencias_esperadas_indevidas_para_chave`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_indevidas_para_chave.mdx)
+e de
+[`quantidade_minima_excede_janela_representavel`](./uniplus.selecao.no_exigencia.quantidade_minima_excede_janela_representavel.mdx).
+Sequencial: a primeira violação encontrada na criação do nó interrompe o
+processamento; nunca acumula com nenhuma outra causa desta série.
+
+Alcançável tanto na definição quanto no descarte de retificação: o
+envelope congelado lê `dataReferencia` como valor opcional cru, sem
+cruzar com a `chaveDistincao` do mesmo nó.
+
+## Como resolver
+
+Informe `dataReferencia` para toda folha com `chaveDistincao` igual a
+`COMPETENCIA_MENSAL` ou `EXERCICIO_ANUAL`.

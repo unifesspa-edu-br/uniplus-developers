@@ -1,0 +1,53 @@
+---
+title: quantidadeMinima excede o calendário representável a partir de dataReferencia
+sidebar_label: Quantidade mínima excede a janela de calendário
+description: Para uma chave de calendário, os N slots regulares imediatamente anteriores à âncora precisam existir dentro do próprio calendário — quantidadeMinima não pode exigir mais unidades do que há entre a âncora e o início do calendário representável.
+code: uniplus.selecao.no_exigencia.quantidade_minima_excede_janela_representavel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó folha com `chaveDistincao` igual a `COMPETENCIA_MENSAL` ou
+`EXERCICIO_ANUAL` declara `quantidadeMinima` grande demais para o
+calendário representável a partir de `dataReferencia`: as N unidades
+regulares (meses ou anos) imediatamente anteriores ou iguais à âncora
+recuariam antes do início do tipo de data usado internamente (ano 1, mês
+1) — um ponto que nenhuma âncora real alcança, mas que o cálculo
+precisa proteger.
+
+É a última checagem do ramo de chave de calendário, depois de
+[`data_referencia_obrigatoria_para_chave_calendario`](./uniplus.selecao.no_exigencia.data_referencia_obrigatoria_para_chave_calendario.mdx)
+e de
+[`ocorrencias_esperadas_indevidas_para_chave`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_indevidas_para_chave.mdx)
+já terem passado — só é conferida quando já existe `dataReferencia` para
+calcular a janela contra ela. Sequencial: a primeira violação encontrada
+na criação do nó interrompe o processamento; nunca acumula com nenhuma
+outra causa desta série.
+
+Alcançável tanto na definição quanto no descarte de retificação: o
+cálculo da janela depende só de `quantidadeMinima` e `dataReferencia`, os
+dois lidos crus pelo envelope congelado, sem essa validação cruzada.
+
+## Como resolver
+
+Reduza `quantidadeMinima` ou informe uma `dataReferencia` mais recente,
+de modo que as N unidades regulares anteriores à âncora caibam dentro do
+calendário. Na prática, isso só ocorre com datas de referência
+extremamente antigas combinadas a quantidades muito grandes.

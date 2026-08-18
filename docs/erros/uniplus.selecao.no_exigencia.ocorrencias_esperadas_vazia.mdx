@@ -1,0 +1,51 @@
+---
+title: ocorrenciasEsperadas, quando presente, não pode ser vazia
+sidebar_label: Ocorrências esperadas vazia
+description: Uma folha com chaveDistincao OCORRENCIA pode omitir ocorrenciasEsperadas para cair em distinção pura, mas não pode declará-la como uma lista vazia — isso não corresponde a nenhum dos dois modos.
+code: uniplus.selecao.no_exigencia.ocorrencias_esperadas_vazia
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó folha com `chaveDistincao` igual a `OCORRENCIA` declara
+`ocorrenciasEsperadas` como uma lista vazia. A chave `OCORRENCIA` admite
+dois modos — **presente**, com slots concretos a cobrir (cada
+identificador é uma apresentação obrigatória), ou **ausente**, distinção
+pura (bastam N apresentações diferentes, sem exigir quais). Uma lista
+vazia não é nenhum dos dois: não declara slot nenhum, mas também não é
+a ausência que sinalizaria distinção pura.
+
+Roda como a primeira checagem sobre `ocorrenciasEsperadas` dentro do
+ramo `OCORRENCIA`, só quando o campo foi de fato informado (`null`
+segue para o modo de distinção pura sem passar por aqui). Sequencial: a
+primeira violação encontrada na criação do nó interrompe o
+processamento; nunca acumula com nenhuma outra causa desta série.
+
+Alcançável tanto na definição quanto no descarte de retificação: no
+envelope congelado a chave `ocorrenciasEsperadas` é sempre exigida (a
+ausência da chave em si é recusada como envelope malformado), mas o
+valor distingue ausência (`null`) de uma lista vazia (`[]`) — as duas
+formas atravessam a leitura sem diferença de tratamento, e só a criação
+do nó recusa a segunda.
+
+## Como resolver
+
+Remova o campo `ocorrenciasEsperadas` para usar distinção pura, ou
+informe ao menos um identificador de ocorrência esperada.

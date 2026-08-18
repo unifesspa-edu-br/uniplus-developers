@@ -1,0 +1,51 @@
+---
+title: quantidadeMinima deve ser igual ao número de ocorrenciasEsperadas
+sidebar_label: Quantidade mínima divergente das ocorrências
+description: Quando ocorrenciasEsperadas está presente, cada slot da lista é uma apresentação obrigatória — quantidadeMinima precisa ser exatamente o tamanho da lista, nem mais nem menos.
+code: uniplus.selecao.no_exigencia.ocorrencias_esperadas_quantidade_minima_divergente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nó folha com `chaveDistincao` igual a `OCORRENCIA` e
+`ocorrenciasEsperadas` presente declara `quantidadeMinima` diferente do
+número de identificadores da lista. Quando os slots são concretos (a
+lista está presente), cada um é uma apresentação obrigatória — a
+cardinalidade não é uma escolha independente, é derivada do tamanho da
+própria lista.
+
+É a última checagem do ramo `OCORRENCIA`, depois de
+[`ocorrencias_esperadas_vazia`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_vazia.mdx),
+[`ocorrencias_esperadas_com_id_vazio`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_com_id_vazio.mdx)
+e
+[`ocorrencias_esperadas_com_ids_duplicados`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_com_ids_duplicados.mdx)
+já terem passado. Sequencial: a primeira violação encontrada na criação
+do nó interrompe o processamento; nunca acumula com nenhuma outra causa
+desta série.
+
+Alcançável tanto na definição quanto no descarte de retificação: o
+envelope congelado lê `quantidadeMinima` e `ocorrenciasEsperadas`
+separadamente, sem cruzar os dois valores entre si.
+
+## Como resolver
+
+Ajuste `quantidadeMinima` para ser igual ao número de identificadores em
+`ocorrenciasEsperadas`, ou ajuste a lista para ter o número de slots que
+`quantidadeMinima` de fato exige.

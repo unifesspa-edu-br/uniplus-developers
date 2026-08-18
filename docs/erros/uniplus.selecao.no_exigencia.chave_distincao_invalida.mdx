@@ -1,0 +1,66 @@
+---
+title: chaveDistincao fora do catálogo fechado
+sidebar_label: Chave de distinção fora do catálogo
+description: 'Rascunho — chaveDistincao de uma folha só aceita três valores, mas hoje nenhum caminho real chega a devolver esta causa.'
+code: uniplus.selecao.no_exigencia.chave_distincao_invalida
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `chaveDistincao` de um nó folha não corresponde a nenhum dos três
+valores do catálogo fechado: `COMPETENCIA_MENSAL`, `EXERCICIO_ANUAL` ou
+`OCORRENCIA`. A chave qualifica **como** as apresentações distintas de
+uma exigência se distinguem entre si — calendário derivável (as duas
+primeiras) ou uma lista de ocorrências congeladas (a terceira). Omitir o
+campo é válido — significa contagem bruta de apresentações, sem
+qualificação nenhuma.
+
+O código de domínio para essa recusa existe (`!Enum.IsDefined` dentro de
+`CriarFolha`, logo depois de
+[`quantidade_minima_de_folha_invalida`](./uniplus.selecao.no_exigencia.quantidade_minima_de_folha_invalida.mdx)) —
+mas **nenhum caminho real chega a executá-lo hoje**, por isso a entrada
+é rascunho, não publicada.
+
+No `PUT` de documentos exigidos, um payload com `chaveDistincao` fora do
+catálogo é interceptado antes do handler por uma regra de validação de
+payload equivalente — a resposta real é `uniplus.validacao`, não esta
+entrada. Mesmo que essa regra fosse contornada, o handler resolve o
+código através de `ChaveDistincaoCodigo.FromCodigo`, que mapeia qualquer
+valor não reconhecido para o sentinela `Nenhuma` — um membro **definido**
+do enum — então o guard de domínio (`!Enum.IsDefined`) nunca encontra um
+valor indefinido para recusar; a folha simplesmente é criada como "sem
+qualificação". Pelo descarte de retificação também não: o envelope
+congelado lê `chaveDistincao` contra o mesmo catálogo fechado, e um
+código não reconhecido ali é recusado ainda na leitura, como
+`envelope_codec.envelope_malformado`, antes de a entidade ser
+reconstruída.
+
+Esta entrada existe para que o código de domínio, já registrado no
+catálogo, tenha uma página assim que algum dos dois caminhos for
+destravado — por exemplo, se a regra de validação de payload for
+removida em favor do guard de domínio já existente, mesma frente da
+ADR-0125, rastreada em `uniplus-api#1227`.
+
+## Como resolver
+
+Informe `chaveDistincao` como um dos três valores do catálogo —
+`COMPETENCIA_MENSAL`, `EXERCICIO_ANUAL` ou `OCORRENCIA` — ou omita o
+campo se a exigência não precisa distinguir apresentações por um padrão
+específico. Hoje, um valor fora do catálogo responde com
+`uniplus.validacao`, não com este código — mas a correção é a mesma.

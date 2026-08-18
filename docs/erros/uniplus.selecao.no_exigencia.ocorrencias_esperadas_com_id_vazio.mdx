@@ -1,0 +1,48 @@
+---
+title: Os identificadores de ocorrenciasEsperadas não podem ser vazios ou em branco
+sidebar_label: Identificador de ocorrência vazio
+description: Cada identificador na lista de ocorrências esperadas de uma folha precisa ser um texto não vazio — é ele que nomeia o slot que uma apresentação precisa cobrir.
+code: uniplus.selecao.no_exigencia.ocorrencias_esperadas_com_id_vazio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um ou mais identificadores da lista `ocorrenciasEsperadas` de um nó
+folha são vazios ou só espaço em branco. Cada identificador nomeia um
+slot concreto que uma apresentação precisa cobrir (por exemplo, as duas
+eleições que o edital determina) — um identificador vazio não nomeia
+slot nenhum.
+
+Roda depois de
+[`ocorrencias_esperadas_vazia`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_vazia.mdx)
+confirmar que a lista não é vazia, e antes de
+[`ocorrencias_esperadas_com_ids_duplicados`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_com_ids_duplicados.mdx).
+Sequencial: a primeira violação encontrada na criação do nó interrompe
+o processamento; nunca acumula com nenhuma outra causa desta série.
+
+Diferente da maioria das causas desta série, esta **não** aparece no
+descarte de retificação — o envelope congelado já exige que cada
+identificador da lista seja um texto não vazio e sem espaço nas pontas
+ao ler `ocorrenciasEsperadas`; um valor em branco é recusado ainda na
+leitura, como `envelope_codec.envelope_malformado`, antes de chegar a
+esta causa.
+
+## Como resolver
+
+Remova os identificadores vazios ou em branco da lista
+`ocorrenciasEsperadas`, ou preencha-os com o nome do slot que
+representam.

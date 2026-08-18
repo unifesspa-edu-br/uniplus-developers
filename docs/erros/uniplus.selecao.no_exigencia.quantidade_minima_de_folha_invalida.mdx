@@ -1,0 +1,70 @@
+---
+title: quantidadeMinima de uma folha, quando presente, deve ser maior ou igual a 1
+sidebar_label: Quantidade mínima de folha inválida
+description: Em uma folha da árvore de satisfação, quantidadeMinima conta apresentações distintas da mesma exigência — não pode ser zero, negativa, nem exceder o teto operacional de 366.
+code: uniplus.selecao.no_exigencia.quantidade_minima_de_folha_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+  - label: 'uniplus-api#1227'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+  - label: 'uniplus-api#1241'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1241
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `quantidadeMinima` de um nó folha da árvore de satisfação de
+documentos é menor que 1, ou maior que 366. Em folha, `quantidadeMinima`
+conta **apresentações** distintas da mesma exigência — frente e verso do
+mesmo documento contam como uma apresentação só, não duas. O teto de 366
+não é regra de negócio (o domínio não limita quantas apresentações uma
+exigência pode pedir) — é proteção operacional contra um valor
+desproporcional que faria o cálculo de competências/exercícios (ver
+[`quantidade_minima_excede_janela_representavel`](./uniplus.selecao.no_exigencia.quantidade_minima_excede_janela_representavel.mdx))
+percorrer um calendário absurdamente longo.
+
+É a primeira checagem de cardinalidade dentro da criação de uma folha —
+roda antes de qualquer checagem sobre `chaveDistincao`. Sequencial: a
+primeira violação encontrada na criação do nó interrompe o processamento
+daquele nó; nunca acumula com nenhuma outra causa desta série.
+
+No descarte de retificação, é alcançável pelas duas metades: o envelope
+congelado lê `quantidadeMinima` como número cru, sem reconferir nenhum
+dos dois limites — só quando o nó é reconstruído para validar
+invariantes é que um valor fora do intervalo é recusado. A reconstrução
+não acumula: para na primeira violação que encontrar.
+
+> **Lacuna conhecida.** Na definição, só a metade "maior que 366" chega
+> a esta causa. A metade "menor que 1" é interceptada antes do handler
+> por uma regra de validação de payload equivalente — a resposta real
+> nesse caso é `uniplus.validacao`, não esta entrada. O código de
+> domínio existe e está correto para as duas metades; a metade inferior
+> só é inalcançável pelo `PUT` porque a validação de payload a duplica.
+> Rastreado em `uniplus-api#1227`.
+>
+> O título acima ("deve ser maior ou igual a 1") é literal ao que a API
+> registra publicamente — mas descreve só o piso. Na prática, pelo `PUT`,
+> quem recebe este código sempre violou o teto (366), nunca o piso, pela
+> lacuna acima. Título incompleto rastreado em `uniplus-api#1241`.
+
+## Como resolver
+
+Informe `quantidadeMinima` como um número inteiro entre 1 e 366, ou
+omita o campo para usar o padrão (1 apresentação). Um valor menor que 1
+no `PUT` responde com `uniplus.validacao`, não com este código — mas a
+correção é a mesma.

@@ -1,0 +1,54 @@
+---
+title: ocorrenciasEsperadas só é aceita quando chaveDistincao é OCORRENCIA
+sidebar_label: Ocorrências esperadas indevidas na folha
+description: ocorrenciasEsperadas só se aplica quando chaveDistincao é OCORRENCIA — não quando a chave está ausente, nem quando é uma chave de calendário.
+code: uniplus.selecao.no_exigencia.ocorrencias_esperadas_indevidas_para_chave
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `ocorrenciasEsperadas` de um nó folha foi informado, mas a
+`chaveDistincao` do nó não é `OCORRENCIA`. Cobre dois cenários:
+
+- `chaveDistincao` está **ausente** — sem qualificação, não há slots
+  esperados a declarar.
+- `chaveDistincao` é uma chave de calendário
+  (`COMPETENCIA_MENSAL`/`EXERCICIO_ANUAL`) — essas chaves derivam os
+  slots a partir de
+  [`dataReferencia`](./uniplus.selecao.no_exigencia.data_referencia_indevida_para_chave.mdx),
+  não de uma lista congelada.
+
+Só `OCORRENCIA` usa `ocorrenciasEsperadas`, e mesmo assim como campo
+opcional — presente, exige slots concretos (cada um é uma apresentação
+obrigatória); ausente, cai em distinção pura (bastam N apresentações
+diferentes, sem exigir quais). Sequencial: a primeira violação
+encontrada na criação do nó interrompe o processamento; nunca acumula
+com nenhuma outra causa desta série.
+
+Alcançável tanto na definição quanto no descarte de retificação: o
+envelope congelado lê `ocorrenciasEsperadas` como array cru, sem cruzar
+com a `chaveDistincao` do mesmo nó — essa coerência só é conferida
+quando o nó é reconstruído para validar invariantes.
+
+## Como resolver
+
+Remova `ocorrenciasEsperadas` se `chaveDistincao` estiver ausente ou for
+uma chave de calendário. Se a intenção era declarar uma lista fixa de
+ocorrências esperadas, informe `chaveDistincao` como `OCORRENCIA`.
