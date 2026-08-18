@@ -1,0 +1,71 @@
+---
+title: A regra de eliminação referencia uma etapa que não existe neste processo
+sidebar_label: Etapa da eliminação inexistente
+description: Uma regra de eliminação ELIM-NOTA-MINIMA-ETAPA referencia uma etapa por identificador — se ela não estiver entre as etapas do processo, não há nota para comparar contra o mínimo.
+code: uniplus.selecao.processo_seletivo.etapa_ref_eliminacao_inexistente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+  - label: 'uniplus-api#865'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/865
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma regra de eliminação com código `ELIM-NOTA-MINIMA-ETAPA` referencia, em
+`etapaRef`, um identificador de etapa que não existe entre as etapas já
+definidas do processo (INV-B4). É a mesma classe de checagem de
+[`etapa_ref_desempate_inexistente`](./uniplus.selecao.processo_seletivo.etapa_ref_desempate_inexistente.mdx),
+aqui para a eliminação em vez do desempate — e a inversa de
+[`etapa_referenciada_por_classificacao`](./uniplus.selecao.processo_seletivo.etapa_referenciada_por_classificacao.mdx).
+
+Esta checagem roda na raiz do agregado, não dentro de
+`ConfiguracaoClassificacao.Criar` — é a invariante que depende de OUTRA
+dimensão do processo (as etapas), por isso só a raiz, que enxerga as duas
+dimensões, pode validá-la. As invariantes internas da própria configuração
+(coerência entre regra de cálculo e arredondamento, limites de opções de
+alocação, eliminação por ENEM) já foram validadas antes, dentro de
+`ConfiguracaoClassificacao.Criar` — ver, por exemplo,
+[`n_opcoes_invalido`](./uniplus.selecao.configuracao_classificacao.n_opcoes_invalido.mdx)
+e as demais causas irmãs dela.
+
+Esta é uma das três causas desta série levantadas em **dois pontos**
+distintos do código, e o comportamento muda entre eles:
+
+- Na **definição de classificação**, roda por último — depois de a
+  configuração de classificação já ter sido validada internamente e
+  resolvida contra o `rol_de_regras` — sequencial, sem acumular com
+  nenhuma outra causa. Confere `etapaRef` contra as etapas do agregado
+  corrente.
+- No **descarte de retificação**, roda dentro da reconstrução completa da
+  configuração congelada — última das três causas desta série ali (depois
+  de
+  [`ordem_desempate_duplicada`](./uniplus.selecao.processo_seletivo.ordem_desempate_duplicada.mdx)
+  e
+  [`etapa_ref_desempate_inexistente`](./uniplus.selecao.processo_seletivo.etapa_ref_desempate_inexistente.mdx)),
+  mas não a última checagem da reconstrução como um todo — outras
+  invariantes do grafo (cronograma de fases, árvore de exigências) ainda
+  são conferidas depois. A checagem de eliminação por ENEM **não** se
+  repete nesse caminho: o grafo
+  chega com a classificação já construída por
+  `ConfiguracaoClassificacao.Criar`, então, se o envelope violasse essa
+  invariante, a decodificação já teria falhado antes de a restauração
+  chegar até aqui. Um cliente HTTP nunca recebe mais de uma causa por vez
+  nesse caminho: a reconstrução para na primeira violação que encontrar.
+
+## Como resolver
+
+Corrija `etapaRef` para apontar para uma etapa que de fato existe entre as
+etapas já definidas do processo. Se a intenção era referenciar uma etapa
+nova, defina as etapas primeiro.

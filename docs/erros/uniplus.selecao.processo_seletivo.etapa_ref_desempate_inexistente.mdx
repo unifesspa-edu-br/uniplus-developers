@@ -1,0 +1,57 @@
+---
+title: O critério de desempate referencia uma etapa que não existe neste processo
+sidebar_label: Etapa do desempate inexistente
+description: Um critério de desempate DESEMPATE-MAIOR-NOTA-ETAPA referencia uma etapa por identificador — se ela não estiver entre as etapas do processo, o desempate não tem o que comparar.
+code: uniplus.selecao.processo_seletivo.etapa_ref_desempate_inexistente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+  - label: 'uniplus-api#865'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/865
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um critério de desempate com código `DESEMPATE-MAIOR-NOTA-ETAPA` referencia,
+em `etapaRef`, um identificador de etapa que não existe entre as etapas já
+definidas do processo (INV-B6). Esta é a checagem inversa de
+[`etapa_referenciada_por_desempate`](./uniplus.selecao.processo_seletivo.etapa_referenciada_por_desempate.mdx):
+lá, a etapa some primeiro e o desempate fica órfão; aqui, o desempate chega
+primeiro já apontando para uma etapa que nunca existiu (ou já foi removida
+antes).
+
+Esta é uma das três causas desta série levantadas em **dois pontos**
+distintos do código — as outras são
+[`ordem_desempate_duplicada`](./uniplus.selecao.processo_seletivo.ordem_desempate_duplicada.mdx)
+e
+[`etapa_ref_eliminacao_inexistente`](./uniplus.selecao.processo_seletivo.etapa_ref_eliminacao_inexistente.mdx)
+—, e o comportamento muda entre os dois pontos:
+
+- Na **definição de critérios de desempate**, roda depois de
+  [`ordem_desempate_duplicada`](./uniplus.selecao.processo_seletivo.ordem_desempate_duplicada.mdx)
+  — sequencial, a primeira falha interrompe. Confere `etapaRef` contra as
+  etapas do agregado corrente.
+- No **descarte de retificação**, roda dentro da reconstrução completa da
+  configuração congelada, na mesma posição relativa (depois da checagem de
+  ordem única de desempate) — mas confere `etapaRef` contra as etapas do
+  próprio grafo restaurado, não contra o agregado corrente. Um cliente HTTP
+  nunca recebe mais de uma causa por vez nesse caminho: a reconstrução para
+  na primeira violação que encontrar.
+
+## Como resolver
+
+Corrija `etapaRef` para apontar para uma etapa que de fato existe entre as
+etapas já definidas do processo. Se a intenção era referenciar uma etapa
+nova, defina as etapas primeiro.

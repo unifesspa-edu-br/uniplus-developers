@@ -1,0 +1,62 @@
+---
+title: Etapa referenciada por regra de eliminação da classificação
+sidebar_label: Etapa referenciada por classificação
+description: Redefinir as etapas do processo não pode deixar uma regra de eliminação ELIM-NOTA-MINIMA-ETAPA da classificação apontando para uma etapa que deixou de existir.
+code: uniplus.selecao.processo_seletivo.etapa_referenciada_por_classificacao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#781'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/781
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo já tem uma configuração de classificação definida, com uma
+regra de eliminação de código `ELIM-NOTA-MINIMA-ETAPA`, e o novo payload de
+definição de etapas omite a etapa que essa regra referencia (`etapaRef`).
+É a mesma proteção de
+[`etapa_referenciada_por_desempate`](./uniplus.selecao.processo_seletivo.etapa_referenciada_por_desempate.mdx)
+(INV-B6), aqui para a classificação (INV-B4): substituir a lista de etapas
+sem revalidar deixaria a regra de eliminação apontando para uma etapa
+removida.
+
+Só é conferida quando o processo já tem classificação definida — antes
+disso, não há o que proteger. Roda por último dentre as checagens da
+substituição de etapas: depois de
+[`ordem_etapa_duplicada`](./uniplus.selecao.processo_seletivo.ordem_etapa_duplicada.mdx),
+[`nenhuma_etapa_compoe_nota`](./uniplus.selecao.processo_seletivo.nenhuma_etapa_compoe_nota.mdx)
+e
+[`etapa_referenciada_por_desempate`](./uniplus.selecao.processo_seletivo.etapa_referenciada_por_desempate.mdx)
+já terem passado. Não acumula com nenhuma delas — a primeira que falhar
+interrompe a substituição.
+
+Não aparece no descarte de retificação, pelo mesmo motivo de
+`etapa_referenciada_por_desempate`: a restauração da configuração
+congelada não tem o conceito de editar só as etapas preservando o resto —
+é essa edição parcial, exclusiva do `PUT` de etapas, que esta causa
+protege.
+
+## Como resolver
+
+O gatilho mais comum não é uma remoção intencional: o `PUT` de etapas
+reconcilia a lista inteira **pelo campo `id`** de cada item — uma etapa
+existente reenviada sem `id` (ou com um `id` que não bate com nenhuma
+etapa atual) não é reconhecida como a mesma etapa, e vira uma etapa nova,
+com identificador novo, mesmo que os demais campos sejam idênticos. Se a
+intenção era só editar outro campo de uma etapa que a classificação já
+referencia (peso, nota mínima, nome), confira que o `id` dela foi ecoado no
+payload — sem alterá-lo, o `etapaRef` continua resolvendo, e a mudança
+segue sem precisar tocar na classificação.
+
+Se a remoção da etapa é de fato intencional, reconfigure a classificação
+antes — redirecione a regra de eliminação para outra etapa, troque o
+código da regra, ou remova a regra. Só então redefina as etapas.

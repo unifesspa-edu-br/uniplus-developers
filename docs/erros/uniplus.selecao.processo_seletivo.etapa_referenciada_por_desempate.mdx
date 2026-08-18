@@ -1,0 +1,65 @@
+---
+title: A etapa é referenciada por um critério de desempate e não pode ser removida sem antes reconfigurar o desempate
+sidebar_label: Etapa referenciada por desempate
+description: Redefinir as etapas do processo não pode deixar um critério de desempate DESEMPATE-MAIOR-NOTA-ETAPA apontando para uma etapa que deixou de existir.
+code: uniplus.selecao.processo_seletivo.etapa_referenciada_por_desempate
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo já tem um ou mais critérios de desempate definidos com o código
+`DESEMPATE-MAIOR-NOTA-ETAPA`, e o novo payload de definição de etapas omite
+uma etapa que um desses critérios referencia (`etapaRef`). Substituir a
+lista de etapas sem revalidar deixaria o critério apontando para uma etapa
+removida — um desempate inexecutável, que só apareceria no momento de
+calcular o resultado.
+
+A checagem (INV-B6) roda como parte da própria substituição das etapas —
+por isso rejeita a troca em vez de silenciosamente invalidar o desempate
+existente: quem administra o processo reconfigura o desempate primeiro,
+depois redefine as etapas.
+
+É sequencial: roda depois de
+[`ordem_etapa_duplicada`](./uniplus.selecao.processo_seletivo.ordem_etapa_duplicada.mdx)
+e
+[`nenhuma_etapa_compoe_nota`](./uniplus.selecao.processo_seletivo.nenhuma_etapa_compoe_nota.mdx)
+já terem passado, e antes de
+[`etapa_referenciada_por_classificacao`](./uniplus.selecao.processo_seletivo.etapa_referenciada_por_classificacao.mdx)
+(a mesma proteção, para a classificação) — não acumula com nenhuma delas; a
+primeira que falhar interrompe a substituição.
+
+Não aparece no descarte de retificação: a restauração da configuração
+congelada reconstrói todas as dimensões do processo de uma vez, a partir de
+um estado já congelado coerente — não existe, nesse caminho, o conceito de
+substituir só as etapas preservando o resto. É essa edição parcial,
+exclusiva do `PUT` de etapas, que esta causa protege.
+
+## Como resolver
+
+O gatilho mais comum não é uma remoção intencional: o `PUT` de etapas
+reconcilia a lista inteira **pelo campo `id`** de cada item — uma etapa
+existente reenviada sem `id` (ou com um `id` que não bate com nenhuma
+etapa atual) não é reconhecida como a mesma etapa, e vira uma etapa nova,
+com identificador novo, mesmo que os demais campos sejam idênticos. Se a
+intenção era só editar outro campo de uma etapa que o desempate já
+referencia (peso, nota mínima, nome), confira que o `id` dela foi ecoado no
+payload — sem alterá-lo, o `etapaRef` continua resolvendo, e a mudança
+segue sem precisar tocar no desempate.
+
+Se a remoção da etapa é de fato intencional, reconfigure o critério de
+desempate antes — redirecione-o para outra etapa ou troque o código do
+critério. Só então redefina as etapas.
