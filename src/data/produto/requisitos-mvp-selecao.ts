@@ -231,6 +231,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend',
   },
   {
+    requisito_id: 'UNI-REQ-0134',
+    titulo: 'Configurar distribuição de vagas por oferta de curso',
+    enunciado:
+      'O sistema deve configurar, por oferta de curso do Processo Seletivo, a distribuição de vagas como VO_base (vaga-oferta original, sempre positivo) e PR (percentual de reserva sobre o VO_base, entre 0,5 e 1,0 — art. 10, II), associados às modalidades de concorrência selecionadas, cuja oferta de curso é resolvida contra o catálogo cross-módulo de Configuração. É a estrutura básica da distribuição, anterior e distinta do cálculo do quadro de vagas do ramo federal (Lei 12.711).',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0014',
+    modulo: 'Configuração; Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Cada distribuição declara VO_base positivo, PR entre 0,5 e 1,0 e ao menos uma modalidade selecionada, sem repetição de modalidade na mesma oferta; o identificador da oferta de curso resolve contra o catálogo vivo de Configuração; o processo publicável exige ao menos uma distribuição configurada; cada oferta de curso participa de no máximo uma distribuição no mesmo processo.',
+    verificacao:
+      'Validação automatizada de forma (VO_base, PR, modalidades não vazias/duplicadas) e de resolução cross-módulo da oferta de curso; testes de unicidade de oferta por processo (planejados).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
     requisito_id: 'UNI-REQ-0017',
     titulo: 'Formulário configurável de inscrição',
     enunciado:
