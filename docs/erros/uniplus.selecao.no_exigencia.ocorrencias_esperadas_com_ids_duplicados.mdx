@@ -1,0 +1,46 @@
+---
+title: Os identificadores de ocorrenciasEsperadas devem ser únicos
+sidebar_label: Identificadores de ocorrência duplicados
+description: A mesma ocorrência não pode aparecer duas vezes na lista de slots esperados de uma folha — cada identificador nomeia um slot distinto.
+code: uniplus.selecao.no_exigencia.ocorrencias_esperadas_com_ids_duplicados
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `ocorrenciasEsperadas` de um nó folha repete o mesmo
+identificador em mais de uma posição. Cada identificador nomeia um slot
+distinto que uma apresentação precisa cobrir — repetido, não há um
+segundo slot a mais, só uma redundância que confunde a contagem.
+
+Roda depois de
+[`ocorrencias_esperadas_com_id_vazio`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_com_id_vazio.mdx)
+confirmar que nenhum identificador é vazio, e antes de
+[`ocorrencias_esperadas_quantidade_minima_divergente`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_quantidade_minima_divergente.mdx).
+Sequencial: a primeira violação encontrada na criação do nó interrompe
+o processamento; nunca acumula com nenhuma outra causa desta série.
+
+Alcançável tanto na definição quanto no descarte de retificação: o
+envelope congelado lê cada identificador da lista sem exigir unicidade
+entre eles — só a criação do nó recusa a repetição.
+
+## Como resolver
+
+Remova os identificadores repetidos da lista `ocorrenciasEsperadas`,
+mantendo cada slot uma única vez.

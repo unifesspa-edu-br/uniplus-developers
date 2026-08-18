@@ -1,0 +1,55 @@
+---
+title: dataReferencia não é aceita para a chaveDistincao informada
+sidebar_label: Data de referência indevida na folha
+description: dataReferencia só se aplica quando chaveDistincao é COMPETENCIA_MENSAL ou EXERCICIO_ANUAL — não quando a chave está ausente, nem quando é OCORRENCIA.
+code: uniplus.selecao.no_exigencia.data_referencia_indevida_para_chave
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0068
+rastreio:
+  - label: 'uniplus-api#937'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/937
+  - label: 'uniplus-api#939'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/939
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `dataReferencia` de um nó folha foi informado, mas a
+`chaveDistincao` do nó não é uma das duas chaves de calendário
+(`COMPETENCIA_MENSAL`/`EXERCICIO_ANUAL`) que dependem dela. Cobre dois
+cenários:
+
+- `chaveDistincao` está **ausente** — sem qualificação, não há âncora de
+  calendário para derivar nada.
+- `chaveDistincao` é `OCORRENCIA` — essa chave usa uma lista de
+  identificadores congelados
+  ([`ocorrenciasEsperadas`](./uniplus.selecao.no_exigencia.ocorrencias_esperadas_indevidas_para_chave.mdx)),
+  não uma data de referência.
+
+Só as chaves de calendário (`COMPETENCIA_MENSAL`/`EXERCICIO_ANUAL`) usam
+`dataReferencia` — ver
+[`data_referencia_obrigatoria_para_chave_calendario`](./uniplus.selecao.no_exigencia.data_referencia_obrigatoria_para_chave_calendario.mdx),
+a checagem inversa. Sequencial: a primeira violação encontrada na
+criação do nó interrompe o processamento; nunca acumula com nenhuma
+outra causa desta série.
+
+Alcançável tanto na definição quanto no descarte de retificação: o
+envelope congelado lê `dataReferencia` como valor cru, sem cruzar com a
+`chaveDistincao` do mesmo nó — essa coerência só é conferida quando o nó
+é reconstruído para validar invariantes.
+
+## Como resolver
+
+Remova `dataReferencia` se `chaveDistincao` estiver ausente ou for
+`OCORRENCIA`. Se a intenção era distinguir apresentações por calendário,
+informe `chaveDistincao` como `COMPETENCIA_MENSAL` ou `EXERCICIO_ANUAL`.
