@@ -24,8 +24,11 @@ O `regraDistribuicaoCodigo`/`regraDistribuicaoVersao` de uma das
 distribuições de vagas do payload não existe no `rol_de_regras` — o
 catálogo tipado de regras (Story #772) de onde vêm tanto a regra de
 distribuição em si (Lei 12.711 ou institucional) quanto, no ramo federal, a
-regra de ajuste. Esta é a segunda consulta cross-módulo do processamento de
-cada distribuição — roda logo depois da resolução da oferta de curso (ver
+regra de ajuste. `rol_de_regras` é um catálogo interno do próprio módulo
+Seleção, não de Configuração — diferente da oferta de curso e das
+modalidades, que vêm de cadastros de outro módulo. Esta é a segunda
+resolução do processamento de cada distribuição — roda logo depois da
+resolução da oferta de curso (ver
 [`oferta_curso_nao_encontrada`](./uniplus.selecao.configuracao_distribuicao_vagas.oferta_curso_nao_encontrada.mdx)).
 
 O processamento é sequencial por distribuição: a primeira distribuição do

@@ -50,5 +50,9 @@ gravada no cadastro de um jeito que contorna a exigência do código lá.
 ## Como resolver
 
 O campo que falta não está no payload que você enviou — está na modalidade
-cadastrada em Configuração. Corrija lá o código da modalidade, ou investigue
-como ela foi gravada sem essa coerência.
+cadastrada em Configuração. Diferente de outros campos desta série, o
+`Codigo` de uma modalidade é **imutável**: o comando de atualização do
+cadastro não o aceita como campo editável, então não há como corrigi-lo na
+mesma modalidade. Investigue como ela foi gravada sem esse campo; a
+correção provável é recriar a modalidade com o código preenchido, em vez de
+tentar editar a existente.
