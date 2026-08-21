@@ -2,6 +2,8 @@
   {
     "nome": "Fernanda Laura Nicole Drumond",
     "nome_social": "Ariel Drumond",
+    "username": "fernanda.drumond",
+    "perfil": "candidato",
     "idade": 56,
     "sexo": "Feminino",
     "data_nasc": "02/02/1970",
@@ -22,6 +24,8 @@
   {
     "nome": "Kevin Anderson Carvalho",
     "nome_social": "Valentina Carvalho",
+    "username": "kevin.carvalho",
+    "perfil": "candidato",
     "idade": 42,
     "sexo": "Masculino",
     "data_nasc": "17/03/1984",
@@ -41,6 +45,8 @@
   },
   {
     "nome": "Helena Bianca Sueli Rezende",
+    "username": "helena.rezende",
+    "perfil": "candidato",
     "idade": 72,
     "sexo": "Feminino",
     "data_nasc": "12/05/1954",
@@ -60,6 +66,8 @@
   },
   {
     "nome": "Erick Isaac Ramos",
+    "username": "erick.ramos",
+    "perfil": "candidato",
     "idade": 57,
     "sexo": "Masculino",
     "data_nasc": "13/02/1969",
@@ -79,6 +87,8 @@
   },
   {
     "nome": "Diogo Bruno Filipe Souza",
+    "username": "diogo.souza",
+    "perfil": "privilegiado",
     "idade": 33,
     "sexo": "Masculino",
     "data_nasc": "22/05/1993",
@@ -98,6 +108,8 @@
   },
   {
     "nome": "Leandro Caleb Viana",
+    "username": "leandro.viana",
+    "perfil": "candidato",
     "idade": 79,
     "sexo": "Masculino",
     "data_nasc": "16/05/1947",
@@ -117,6 +129,8 @@
   },
   {
     "nome": "Breno Lucca Samuel Novaes",
+    "username": "breno.novaes",
+    "perfil": "candidato",
     "idade": 66,
     "sexo": "Masculino",
     "data_nasc": "21/04/1960",
@@ -136,6 +150,8 @@
   },
   {
     "nome": "Marlene Márcia Emily Martins",
+    "username": "marlene.martins",
+    "perfil": "candidato",
     "idade": 77,
     "sexo": "Feminino",
     "data_nasc": "06/01/1949",
@@ -155,6 +171,8 @@
   },
   {
     "nome": "Evelyn Gabriela Moraes",
+    "username": "evelyn.moraes",
+    "perfil": "candidato",
     "idade": 77,
     "sexo": "Feminino",
     "data_nasc": "10/04/1949",
@@ -174,6 +192,8 @@
   },
   {
     "nome": "Cecília Ester Aurora Moura",
+    "username": "cecilia.moura",
+    "perfil": "candidato",
     "idade": 27,
     "sexo": "Feminino",
     "data_nasc": "20/05/1999",
@@ -193,6 +213,8 @@
   },
   {
     "nome": "Lúcia Bruna Maya Almeida",
+    "username": "lucia.almeida",
+    "perfil": "candidato",
     "idade": 34,
     "sexo": "Feminino",
     "data_nasc": "13/03/1992",
@@ -212,6 +234,8 @@
   },
   {
     "nome": "Felipe Manuel da Cruz",
+    "username": "felipe.cruz",
+    "perfil": "candidato",
     "idade": 22,
     "sexo": "Masculino",
     "data_nasc": "14/01/2004",
@@ -231,6 +255,8 @@
   },
   {
     "nome": "Bruna Isis Peixoto",
+    "username": "bruna.peixoto",
+    "perfil": "candidato",
     "idade": 48,
     "sexo": "Feminino",
     "data_nasc": "22/02/1978",
@@ -250,6 +276,8 @@
   },
   {
     "nome": "Caroline Stefany Jesus",
+    "username": "caroline.jesus",
+    "perfil": "candidato",
     "idade": 22,
     "sexo": "Feminino",
     "data_nasc": "05/04/2004",
@@ -269,6 +297,8 @@
   },
   {
     "nome": "Lavínia Andreia Duarte",
+    "username": "lavinia.duarte",
+    "perfil": "candidato",
     "idade": 43,
     "sexo": "Feminino",
     "data_nasc": "22/03/1983",
@@ -288,6 +318,8 @@
   },
   {
     "nome": "Betina Marina Valentina das Neves",
+    "username": "betina.neves",
+    "perfil": "privilegiado",
     "idade": 42,
     "sexo": "Feminino",
     "data_nasc": "21/02/1984",
@@ -307,6 +339,8 @@
   },
   {
     "nome": "Yasmin Lara Eduarda Assunção",
+    "username": "yasmin.assuncao",
+    "perfil": "candidato",
     "idade": 46,
     "sexo": "Feminino",
     "data_nasc": "09/02/1980",
@@ -326,6 +360,8 @@
   },
   {
     "nome": "Aline Débora Lima",
+    "username": "aline.lima",
+    "perfil": "candidato",
     "idade": 79,
     "sexo": "Feminino",
     "data_nasc": "06/02/1947",
@@ -345,6 +381,8 @@
   },
   {
     "nome": "Leonardo Fernando Francisco Lopes",
+    "username": "leonardo.lopes",
+    "perfil": "candidato",
     "idade": 22,
     "sexo": "Masculino",
     "data_nasc": "05/01/2004",
@@ -364,6 +402,8 @@
   },
   {
     "nome": "Catarina Alícia Rocha",
+    "username": "catarina.rocha",
+    "perfil": "candidato",
     "idade": 38,
     "sexo": "Feminino",
     "data_nasc": "07/03/1988",
@@ -383,6 +423,8 @@
   },
   {
     "nome": "Cecília Emilly Assis",
+    "username": "cecilia.assis",
+    "perfil": "candidato",
     "idade": 57,
     "sexo": "Feminino",
     "data_nasc": "04/05/1969",
@@ -402,6 +444,8 @@
   },
   {
     "nome": "José Luan Moreira",
+    "username": "jose.moreira",
+    "perfil": "candidato",
     "idade": 73,
     "sexo": "Masculino",
     "data_nasc": "23/04/1953",
@@ -421,6 +465,8 @@
   },
   {
     "nome": "Sophie Eliane Farias",
+    "username": "sophie.farias",
+    "perfil": "candidato",
     "idade": 51,
     "sexo": "Feminino",
     "data_nasc": "12/01/1975",
@@ -440,6 +486,8 @@
   },
   {
     "nome": "Camila Isabelly Betina Nunes",
+    "username": "camila.nunes",
+    "perfil": "candidato",
     "idade": 25,
     "sexo": "Feminino",
     "data_nasc": "21/03/2001",
@@ -459,6 +507,8 @@
   },
   {
     "nome": "Aline Alícia Maitê Nogueira",
+    "username": "aline.nogueira",
+    "perfil": "candidato",
     "idade": 20,
     "sexo": "Feminino",
     "data_nasc": "01/04/2006",
@@ -478,6 +528,8 @@
   },
   {
     "nome": "Paulo Iago Leonardo da Conceição",
+    "username": "paulo.conceicao",
+    "perfil": "candidato",
     "idade": 57,
     "sexo": "Masculino",
     "data_nasc": "21/05/1969",
@@ -497,6 +549,8 @@
   },
   {
     "nome": "Isabella Priscila Figueiredo",
+    "username": "isabella.figueiredo",
+    "perfil": "privilegiado",
     "idade": 80,
     "sexo": "Feminino",
     "data_nasc": "04/03/1946",
@@ -516,6 +570,8 @@
   },
   {
     "nome": "Manoel Guilherme Raul Aparício",
+    "username": "manoel.aparicio",
+    "perfil": "candidato",
     "idade": 48,
     "sexo": "Masculino",
     "data_nasc": "22/03/1978",
@@ -535,6 +591,8 @@
   },
   {
     "nome": "Stefany Bruna da Cunha",
+    "username": "stefany.cunha",
+    "perfil": "candidato",
     "idade": 30,
     "sexo": "Feminino",
     "data_nasc": "14/03/1996",
@@ -554,6 +612,8 @@
   },
   {
     "nome": "Jéssica Jaqueline Costa",
+    "username": "jessica.costa",
+    "perfil": "candidato",
     "idade": 64,
     "sexo": "Feminino",
     "data_nasc": "27/03/1962",
