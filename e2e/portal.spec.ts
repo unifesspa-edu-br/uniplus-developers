@@ -157,10 +157,14 @@ test.describe('Personas (cadastros fictícios)', () => {
     // SSR renderiza todos os 30.
     await expect(page.getByText(/30 de 30 cadastros/)).toBeVisible();
 
-    // Tabela enxuta: 5 colunas (Nome, Sexo, CPF, Data de nascimento, Detalhes).
+    // Tabela enxuta: 7 colunas (Nome, Username, Perfil, Sexo, CPF, Data de
+    // nascimento, Detalhes) — Username/Perfil identificam a conta real das
+    // personas em HML, sem expor senha (issue #180).
     const headers = page.locator('thead th');
     await expect(headers).toHaveText([
       'Nome',
+      'Username (HML)',
+      'Perfil',
       'Sexo',
       'CPF',
       'Data de nascimento',
@@ -216,6 +220,28 @@ test.describe('Personas (cadastros fictícios)', () => {
 
     await dialog.getByRole('button', {name: 'Fechar'}).click();
     await expect(dialog).not.toBeVisible();
+  });
+
+  test('mostra username e perfil de acesso na tabela e no dialog (issue #180)', async ({
+    page,
+  }) => {
+    await page.goto('personas/');
+
+    // Primeira linha (Fernanda) é candidato — só acesso ao Portal.
+    const primeiraLinha = page.locator('tbody tr').first();
+    await expect(primeiraLinha.locator('code').first()).toHaveText('fernanda.drumond');
+    await expect(primeiraLinha.getByText('Candidato', {exact: true})).toBeVisible();
+
+    // Filtra por um dos 3 perfis privilegiados e confirma o badge.
+    await page.getByRole('searchbox', {name: /Filtrar/}).fill('diogo.souza');
+    const linhaPrivilegiada = page.locator('tbody tr').first();
+    await expect(linhaPrivilegiada.getByText('Privilegiado', {exact: true})).toBeVisible();
+
+    // O dialog de detalhes também expõe os dois campos.
+    await linhaPrivilegiada.getByRole('button', {name: /Ver detalhes de/}).click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByText('Username (HML)', {exact: true})).toBeVisible();
+    await expect(dialog.getByText('Perfil de acesso (HML)', {exact: true})).toBeVisible();
   });
 });
 

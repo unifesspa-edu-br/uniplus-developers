@@ -24,12 +24,26 @@ A tabela mostra os campos principais; clique em **Detalhes** para abrir o perfil
 completo, com um botão para **copiar** cada campo (útil para colar em testes).
 CPF, RG, CEP e telefones aparecem **completos**, apenas formatados com a
 pontuação usual — como os dados são fictícios, não há mascaramento. Os e-mails
-usam domínios genéricos fictícios. Senhas foram omitidas de propósito — defina a
-senha no próprio fixture do teste quando precisar de um cenário de login.
+usam domínios genéricos fictícios. **Senhas foram omitidas de propósito** — não
+fazem parte deste catálogo nem em nenhum outro lugar publicado; defina a sua no
+próprio fixture do teste quando precisar de um cenário de login.
 
 Uma parte das personas tem **nome social** (RN02 — prioridade absoluta em
 listas e documentos), com nome de sexo oposto ou neutro, para exercitar esse
 fluxo nos testes.
+:::
+
+:::note[Contas reais em HML]
+As 30 personas também existem como usuários reais no Keycloak do ambiente HML
+(`uniplus-hml.unifesspa.edu.br`), cada uma com um **username** e um **perfil de
+acesso** — úteis pra escolher qual conta usar em cada cenário de teste:
+
+- **Candidato** (27 de 30) — acesso só ao Portal do Candidato.
+- **Privilegiado** (3 de 30) — acesso aos 4 apps web (Portal, Seleção,
+  Ingresso, Configuração), sem acesso a serviços internos (Kafka UI, Grafana).
+
+Username e perfil não são segredo — identificam a conta, não dão acesso
+sozinhos. A senha, essa sim, continua fora de qualquer catálogo publicado.
 :::
 
 <FakePeopleTable />

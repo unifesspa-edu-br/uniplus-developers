@@ -5,6 +5,15 @@ interface Person {
   nome: string;
   /** Nome social — presente apenas em parte das personas (RN02). */
   nome_social?: string;
+  /** Username da conta real em HML (Keycloak) — não é segredo, só identifica a conta. */
+  username: string;
+  /**
+   * Perfil de acesso HML: `candidato` só acessa o Portal do Candidato;
+   * `privilegiado` acessa os 4 apps web (Portal, Seleção, Ingresso,
+   * Configuração), sem acesso a serviços internos (Kafka UI, Grafana).
+   * Senha não faz parte deste catálogo — defina a sua no fixture do teste.
+   */
+  perfil: 'candidato' | 'privilegiado';
   idade: number;
   sexo: string;
   data_nasc: string;
@@ -29,6 +38,8 @@ const data = people as Person[];
 const FIELD_LABELS: Record<keyof Person, string> = {
   nome: 'Nome',
   nome_social: 'Nome social',
+  username: 'Username (HML)',
+  perfil: 'Perfil de acesso (HML)',
   idade: 'Idade',
   sexo: 'Sexo',
   data_nasc: 'Data de nascimento',
@@ -116,6 +127,28 @@ function CopyButton({label, value}: {label: string; value: string}): React.React
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
       )}
     </button>
+  );
+}
+
+/**
+ * Texto simples com borda (sem fundo colorido) — evita depender de um par
+ * cor-de-fundo/cor-de-texto que não foi auditado contra WCAG 1.4.3, mesmo
+ * padrão de cautela do restante do portal (ver nota sobre os temas do Prism
+ * no CLAUDE.md).
+ */
+function ProfileBadge({perfil}: {perfil: Person['perfil']}): React.ReactElement {
+  return (
+    <span
+      style={{
+        display: 'inline-block',
+        padding: '2px 8px',
+        border: '1px solid var(--color-govbr-gray-20, #ccc)',
+        borderRadius: 'var(--radius-govbr-sm, 4px)',
+        fontSize: '0.85em',
+        whiteSpace: 'nowrap',
+      }}>
+      {perfil === 'candidato' ? 'Candidato' : 'Privilegiado'}
+    </span>
   );
 }
 
@@ -226,7 +259,7 @@ export default function FakePeopleTable(): React.ReactElement {
     const digits = q.replace(/\D/g, '');
     return data.filter((person) => {
       const haystack = normalize(
-        `${person.nome} ${person.cidade} ${person.estado} ${person.email}`,
+        `${person.nome} ${person.cidade} ${person.estado} ${person.email} ${person.username} ${person.perfil}`,
       );
       const cpfDigits = person.cpf.replace(/\D/g, '');
       return haystack.includes(q) || (digits.length >= 3 && cpfDigits.includes(digits));
@@ -236,7 +269,7 @@ export default function FakePeopleTable(): React.ReactElement {
   return (
     <div>
       <label htmlFor="people-search" style={{display: 'block', marginBottom: 8}}>
-        <strong>Filtrar</strong> (nome, cidade, UF, e-mail ou CPF):
+        <strong>Filtrar</strong> (nome, cidade, UF, e-mail, CPF, username ou perfil):
       </label>
       <input
         id="people-search"
@@ -260,6 +293,8 @@ export default function FakePeopleTable(): React.ReactElement {
         <thead>
           <tr>
             <th>Nome</th>
+            <th>Username (HML)</th>
+            <th>Perfil</th>
             <th>Sexo</th>
             <th>CPF</th>
             <th>Data de nascimento</th>
@@ -270,6 +305,12 @@ export default function FakePeopleTable(): React.ReactElement {
           {filtered.map((person) => (
             <tr key={person.cpf}>
               <td>{person.nome}</td>
+              <td>
+                <code>{person.username}</code>
+              </td>
+              <td>
+                <ProfileBadge perfil={person.perfil} />
+              </td>
               <td>{person.sexo}</td>
               <td>
                 <code>{person.cpf}</code>
