@@ -66,6 +66,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.processo_seletivo.fuso_institucional_nao_reconhecido',
         'erros/uniplus.selecao.processo_seletivo.algoritmo_contagem_prazo_nao_declarado',
         'erros/uniplus.selecao.processo_seletivo.calendario_vigente_ausente',
+        'erros/uniplus.selecao.calendario_vigente.forma_territorial_invalida',
         'erros/uniplus.selecao.regra_recurso_fase.prazo_em_dias_corridos',
         'erros/uniplus.selecao.regra_recurso_fase.prazo_em_fracao_de_dia_util',
         'erros/uniplus.selecao.processo_seletivo.transicao_invalida',

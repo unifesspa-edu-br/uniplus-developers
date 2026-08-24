@@ -1,0 +1,61 @@
+---
+title: O calendário vigente traz dia com recorte territorial incoerente
+sidebar_label: Forma territorial inválida
+description: Rascunho — cada abrangência admite um conjunto próprio de campos territoriais, e o dia lido trouxe outro.
+code: uniplus.selecao.calendario_vigente.forma_territorial_invalida
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A publicação foi recusada porque o calendário de dias úteis vigente traz um dia cujos
+campos territoriais não correspondem à abrangência declarada nele.
+
+Cada abrangência admite um conjunto próprio, e só ele:
+
+| Abrangência | Campos que o dia carrega |
+|---|---|
+| `NACIONAL` | nenhum — incide em todo o território |
+| `INSTITUCIONAL` | nenhum — vale para a instituição inteira |
+| `ESTADUAL` | a UF, e nenhum campo de município |
+| `MUNICIPAL` | código IBGE, nome e UF do município |
+
+Um dia municipal que também trouxesse UF estadual, ou um dia nacional com município,
+seria contraditório: dois campos afirmariam territórios diferentes para a mesma data.
+
+## Por que a recusa, e não o descarte do campo a mais
+
+A versão publicada congela o calendário **por valor**, e é imutável. Descartar em silêncio
+o campo que sobra faria a contradição do cadastro desaparecer dentro de um artefato que
+ninguém mais pode corrigir — e a versão passaria a afirmar um território que o calendário
+de origem não declarou.
+
+## Como resolver
+
+O dado vem do cadastro de calendários de dias úteis, no módulo Configuração, não da
+configuração do processo seletivo. Quem publica não tem campo a corrigir aqui.
+
+Corrija o dataset na origem e publique-o novamente: o cadastro recusa cada uma dessas
+combinações na criação, com erro próprio — [snapshot municipal apenas para
+municipal](./uniplus.configuracao.calendario_dias_uteis.snapshot_municipal_apenas_para_municipal.mdx),
+[UF apenas para estadual](./uniplus.configuracao.calendario_dias_uteis.uf_apenas_para_estadual.mdx)
+e [UF obrigatória para
+estadual](./uniplus.configuracao.calendario_dias_uteis.uf_obrigatoria_para_estadual.mdx).
+
+Um dataset vigente que chegue nessa forma indica que ele foi gravado por caminho que não
+passou por essas verificações.
