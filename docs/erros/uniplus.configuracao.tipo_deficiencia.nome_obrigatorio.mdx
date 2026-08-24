@@ -1,7 +1,7 @@
 ---
 title: O nome do tipo de deficiência não foi informado
 sidebar_label: Nome do tipo de deficiência obrigatório
-description: O nome do tipo de deficiência é a chave natural do cadastro e é obrigatório.
+description: O nome do tipo de deficiência é o rótulo legível do cadastro e é obrigatório.
 code: uniplus.configuracao.tipo_deficiencia.nome_obrigatorio
 http_status: 422
 situacao: publicado
@@ -24,10 +24,10 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 A operação foi recusada porque o **nome** do tipo de deficiência não foi
 preenchido.
 
-Diferente da maioria dos cadastros de tipo do módulo, aqui não há campo de
-código separado — o **nome** (ex.: Visual, Auditiva, TEA, Física,
-Intelectual) é a própria chave natural do cadastro: único entre tipos vivos
-e editável.
+O **nome** (ex.: Visual, Auditiva, TEA, Física, Intelectual) é o rótulo
+legível do cadastro: único entre tipos vivos e editável. A identidade
+semântica é o código, campo próprio e também obrigatório — é ele que os
+fatos de atendimento congelam.
 
 ## Como resolver
 
