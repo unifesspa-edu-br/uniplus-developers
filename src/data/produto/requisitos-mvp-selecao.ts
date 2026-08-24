@@ -18,7 +18,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0001',
     titulo: 'Módulo Seleção',
     enunciado:
-      'O primeiro módulo do Uni+ deve gerenciar o ciclo de vida dos processos seletivos, da configuração à publicação de resultados, com o MVP limitado ao fluxo primário aprovado.',
+        'O primeiro módulo do Uni+ deve gerenciar o ciclo de vida dos processos seletivos, da configuração à publicação de resultados, com o MVP limitado ao fluxo primário aprovado.',
     grupo: 'negocio',
     tipo: 'requisito_negocio',
     nivel: 'modulo',
@@ -30,7 +30,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'agregador',
     tipo_issue_recomendado: 'Epic',
     criterios_aceite:
-      'O módulo possui fronteira de MVP explícita e requisitos filhos rastreáveis para as capacidades aprovadas.',
+        'O módulo possui fronteira de MVP explícita e requisitos filhos rastreáveis para as capacidades aprovadas.',
     verificacao: 'Revisão documental da árvore de requisitos.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -39,7 +39,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0002',
     titulo: 'Fluxo primário do MVP de Seleção',
     enunciado:
-      'O MVP deve entregar o fluxo primário de Seleção por meio de requisitos filhos rastreáveis para configuração do Processo Seletivo, publicação do Edital e inscrição do candidato.',
+        'O MVP deve entregar o fluxo primário de Seleção por meio de requisitos filhos rastreáveis para configuração do Processo Seletivo, publicação do Edital e inscrição do candidato.',
     grupo: 'negocio',
     tipo: 'requisito_negocio',
     nivel: 'capacidade',
@@ -51,9 +51,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'agregador',
     tipo_issue_recomendado: 'Epic',
     criterios_aceite:
-      'Configuração, publicação e inscrição existem como requisitos filhos com critérios próprios de aceite e verificação.',
+        'Configuração, publicação e inscrição existem como requisitos filhos com critérios próprios de aceite e verificação.',
     verificacao:
-      'Revisão da decomposição; testes E2E nos requisitos filhos implementáveis.',
+        'Revisão da decomposição; testes E2E nos requisitos filhos implementáveis.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
   },
@@ -61,7 +61,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0003',
     titulo: 'Conjunto de incrementos pós-inscrição',
     enunciado:
-      'Homologação, ensalamento, avaliação, classificação e recursos devem ser modelados como incrementos obrigatórios posteriores que consomem a configuração congelada.',
+        'Homologação, ensalamento, avaliação, classificação e recursos devem ser modelados como incrementos obrigatórios posteriores que consomem a configuração congelada.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -73,7 +73,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Incrementos permanecem identificados como fora do backlog do MVP até nova rodada de modelagem.',
+        'Incrementos permanecem identificados como fora do backlog do MVP até nova rodada de modelagem.',
     verificacao: 'Revisão documental.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -82,7 +82,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0006',
     titulo: 'Cadastros base do processo seletivo',
     enunciado:
-      'O MVP deve prover cadastros base necessários à configuração do Processo Seletivo, decompostos em requisitos filhos para cada conceito estrutural.',
+        'O MVP deve prover cadastros base necessários à configuração do Processo Seletivo, decompostos em requisitos filhos para cada conceito estrutural.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -94,9 +94,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'agregador',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'Cada cadastro estrutural necessário ao MVP possui requisito filho com validação e responsável definidos.',
+        'Cada cadastro estrutural necessário ao MVP possui requisito filho com validação e responsável definidos.',
     verificacao:
-      'Revisão da decomposição; testes de API nos requisitos filhos implementáveis.',
+        'Revisão da decomposição; testes de API nos requisitos filhos implementáveis.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -104,7 +104,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0098',
     titulo: 'Tipos de processo seletivo configuráveis',
     enunciado:
-      'O sistema deve manter os tipos de processo seletivo em cadastro institucional no módulo Configuração, com código canônico imutável e não reutilizável. Somente tipo ativo pode ser vinculado a novo Processo Seletivo ou a obrigatoriedade legal específica; ProcessoSeletivo preserva uma cópia por valor do tipo e VersaoConfiguracao a congela no envelope publicado. Edital permanece o ato/documento normativo, não o agregado configurável.',
+        'O sistema deve manter os tipos de processo seletivo em cadastro institucional no módulo Configuração, com código canônico imutável e não reutilizável. Somente tipo ativo pode ser vinculado a novo Processo Seletivo ou a obrigatoriedade legal específica; ProcessoSeletivo preserva uma cópia por valor do tipo e VersaoConfiguracao a congela no envelope publicado. Edital permanece o ato/documento normativo, não o agregado configurável.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -116,9 +116,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Plataforma-admin cria, altera e desativa tipos; a listagem pública mostra somente ativos; código é único e imutável inclusive após desativação; Codigo, Nome e Descricao recusam U+0000 com erro 422; a criação de Processo Seletivo exige tipo ativo pelo campo tipoProcessoOrigemId, sem aceitar o contrato legado tipo; os oito tipos legados são semeados com os mesmos códigos e identificadores UUIDv7 determinísticos, e cada acesso fornece uma cópia independente para o agregado; ProcessoSeletivo preserva a cópia por valor; o envelope 0.0.7 contém exatamente 24 blocos, incluindo tipoProcesso; alterações ou desativação posteriores não mudam o Processo Seletivo nem as Versões de Configuração já produzidas.',
+        'Plataforma-admin cria, altera e desativa tipos; a listagem pública mostra somente ativos; código é único e imutável inclusive após desativação; Codigo, Nome e Descricao recusam U+0000 com erro 422; a criação de Processo Seletivo exige tipo ativo pelo campo tipoProcessoOrigemId, sem aceitar o contrato legado tipo; os oito tipos legados são semeados com os mesmos códigos e identificadores UUIDv7 determinísticos, e cada acesso fornece uma cópia independente para o agregado; ProcessoSeletivo preserva a cópia por valor; o envelope 0.0.7 contém exatamente 24 blocos, incluindo tipoProcesso; alterações ou desativação posteriores não mudam o Processo Seletivo nem as Versões de Configuração já produzidas.',
     verificacao:
-      'Testes de domínio, validators e API para U+0000; prova dos oito UUIDv7 RFC 9562 únicos na carga inicial e nas constantes legadas; teste de persistência de dois Processos Seletivos do mesmo tipo no mesmo DbContext; migração dos tipos legados; criação com tipo ativo/inativo; contrato HTTP de tipoProcessoOrigemId; prova exaustiva dos 24 blocos e fixtures 0.0.7 do envelope.',
+        'Testes de domínio, validators e API para U+0000; prova dos oito UUIDv7 RFC 9562 únicos na carga inicial e nas constantes legadas; teste de persistência de dois Processos Seletivos do mesmo tipo no mesmo DbContext; migração dos tipos legados; criação com tipo ativo/inativo; contrato HTTP de tipoProcessoOrigemId; prova exaustiva dos 24 blocos e fixtures 0.0.7 do envelope.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Tech Lead',
   },
@@ -126,7 +126,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0011',
     titulo: 'Modalidade de concorrência',
     enunciado:
-      'O sistema deve tratar modalidades como modalidades de concorrência, incluindo ampla concorrência e reservas legais.',
+        'O sistema deve tratar modalidades como modalidades de concorrência, incluindo ampla concorrência e reservas legais.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -138,7 +138,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Modalidades incluem ampla concorrência e modalidades reservadas; a futura inscrição, quando implementada, observa os papéis de registro de UNI-REQ-0025 sem reduzir o conjunto de MODALIDADE DERIVADA de UNI-REQ-0076.',
+        'Modalidades incluem ampla concorrência e modalidades reservadas; a futura inscrição, quando implementada, observa os papéis de registro de UNI-REQ-0025 sem reduzir o conjunto de MODALIDADE DERIVADA de UNI-REQ-0076.',
     verificacao: 'Validação automatizada de modalidades (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -147,7 +147,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0014',
     titulo: 'Configuração do Processo Seletivo',
     enunciado:
-      'O sistema deve permitir configurar um Processo Seletivo em rascunho por meio de requisitos filhos para etapas, vagas, modalidades, critérios, bônus, atendimento, documentos, formulário e validações.',
+        'O sistema deve permitir configurar um Processo Seletivo em rascunho por meio de requisitos filhos para etapas, vagas, modalidades, critérios, bônus, atendimento, documentos, formulário e validações.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -159,9 +159,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'agregador',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'A configuração está decomposta em requisitos filhos implementáveis; uma issue de entrega deve apontar o filho efetivamente alterado.',
+        'A configuração está decomposta em requisitos filhos implementáveis; uma issue de entrega deve apontar o filho efetivamente alterado.',
     verificacao:
-      'Revisão da decomposição; testes E2E planejados nos filhos implementáveis.',
+        'Revisão da decomposição; testes E2E planejados nos filhos implementáveis.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -169,7 +169,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0015',
     titulo: 'Configurar etapas, critérios e bônus',
     enunciado:
-      'O sistema deve configurar etapas pontuadas, pesos, critérios de desempate e bônus regional como configuração congelável do processo.',
+        'O sistema deve configurar etapas pontuadas, pesos, critérios de desempate e bônus regional como configuração congelável do processo.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -181,9 +181,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Etapas, critérios e bônus aparecem na configuração e no snapshot de publicação.',
+        'Etapas, critérios e bônus aparecem na configuração e no snapshot de publicação.',
     verificacao:
-      'Validação automatizada de configuração e snapshot (planejada).',
+        'Validação automatizada de configuração e snapshot (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -191,7 +191,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0016',
     titulo: 'Configurar documentos exigidos por gatilho e fase',
     enunciado:
-      'O sistema deve permitir configurar documentos exigidos por gatilho sobre fatos tipados do candidato e do processo (por exemplo modalidade, condição de atendimento, nacionalidade, sexo, faixa etária, raça, tipo de deficiência e fatos futuros por cadastro) e por fase do processo. É um agregador decomposto em requisitos filhos implementáveis para aplicabilidade, identidade, base legal, operadores/DNF, vocabulário de fatos, formatos e idade, árvore de satisfação, consequência, cardinalidade, repetição por entidade, snapshot conjunto, e ainda a coleta condicional por pré-condições, o estado tipado dos fatos, a derivação declarativa de modalidade, o grafo conjunto/ordem de coleta e a máscara de emissão antes da fronteira do fato.',
+        'O sistema deve permitir configurar documentos exigidos por gatilho sobre fatos tipados do candidato e do processo (por exemplo modalidade, condição de atendimento, nacionalidade, sexo, faixa etária, raça, tipo de deficiência e fatos futuros por cadastro) e por fase do processo. É um agregador decomposto em requisitos filhos implementáveis para aplicabilidade, identidade, base legal, operadores/DNF, vocabulário de fatos, formatos e idade, árvore de satisfação, consequência, cardinalidade, repetição por entidade, snapshot conjunto, e ainda a coleta condicional por pré-condições, o estado tipado dos fatos, a derivação declarativa de modalidade, o grafo conjunto/ordem de coleta e a máscara de emissão antes da fronteira do fato.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -203,7 +203,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'agregador',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'A configuração de documentos exigidos está decomposta em requisitos filhos implementáveis (aplicabilidade, identidade, base legal, operadores/DNF, vocabulário de fatos, formatos e idade, árvore de satisfação, consequência, cardinalidade, repetição por entidade, snapshot conjunto, coleta condicional por pré-condições, estado tipado de fatos, derivação declarativa de modalidade, grafo conjunto/ordem de coleta e máscara de emissão); uma issue de entrega aponta o filho efetivamente alterado, e o fechamento do agregador deriva do fechamento dos filhos.',
+        'A configuração de documentos exigidos está decomposta em requisitos filhos implementáveis (aplicabilidade, identidade, base legal, operadores/DNF, vocabulário de fatos, formatos e idade, árvore de satisfação, consequência, cardinalidade, repetição por entidade, snapshot conjunto, coleta condicional por pré-condições, estado tipado de fatos, derivação declarativa de modalidade, grafo conjunto/ordem de coleta e máscara de emissão); uma issue de entrega aponta o filho efetivamente alterado, e o fechamento do agregador deriva do fechamento dos filhos.',
     verificacao: 'Revisão da decomposição; testes nos requisitos filhos implementáveis.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -212,7 +212,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0056',
     titulo: 'Configurar cascata de remanejamento de cotas',
     enunciado:
-      'O sistema deve configurar a cascata de remanejamento de vagas de cota como configuração congelável e ordenada: por modalidade de origem, a sequência ordenada de destinos mais a cota de fallback. A ordem é semântica e congelada no snapshot de publicação.',
+        'O sistema deve configurar a cascata de remanejamento de vagas de cota como configuração congelável e ordenada: por modalidade de origem, a sequência ordenada de destinos mais a cota de fallback. A ordem é semântica e congelada no snapshot de publicação.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -224,9 +224,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Cascata por origem, ordem e destino com ordem única; fallback definido; bloco de remanejamento congelado no snapshot com ordem preservada e consistência bidirecional comprovada.',
+        'Cascata por origem, ordem e destino com ordem única; fallback definido; bloco de remanejamento congelado no snapshot com ordem preservada e consistência bidirecional comprovada.',
     verificacao:
-      'Validação automatizada da cascata congelada (planejada); revisão de modelagem.',
+        'Validação automatizada da cascata congelada (planejada); revisão de modelagem.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
@@ -234,7 +234,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0134',
     titulo: 'Configurar distribuição de vagas por oferta de curso',
     enunciado:
-      'O sistema deve configurar, por oferta de curso do Processo Seletivo, a distribuição de vagas como VO_base (vaga-oferta original, sempre positivo) e PR (percentual de reserva sobre o VO_base, entre 0,5 e 1,0 — art. 10, II), associados às modalidades de concorrência selecionadas, cuja oferta de curso é resolvida contra o catálogo cross-módulo de Configuração. É a estrutura básica da distribuição, anterior e distinta do cálculo do quadro de vagas do ramo federal (Lei 12.711).',
+        'O sistema deve configurar, por oferta de curso do Processo Seletivo, a distribuição de vagas como VO_base (vaga-oferta original, sempre positivo) e PR (percentual de reserva sobre o VO_base, entre 0,5 e 1,0 — art. 10, II), associados às modalidades de concorrência selecionadas, cuja oferta de curso é resolvida contra o catálogo cross-módulo de Configuração. É a estrutura básica da distribuição, anterior e distinta do cálculo do quadro de vagas do ramo federal (Lei 12.711).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -246,9 +246,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cada distribuição declara VO_base positivo, PR entre 0,5 e 1,0 e ao menos uma modalidade selecionada, sem repetição de modalidade na mesma oferta; o identificador da oferta de curso resolve contra o catálogo vivo de Configuração; o processo publicável exige ao menos uma distribuição configurada; cada oferta de curso participa de no máximo uma distribuição no mesmo processo.',
+        'Cada distribuição declara VO_base positivo, PR entre 0,5 e 1,0 e ao menos uma modalidade selecionada, sem repetição de modalidade na mesma oferta; o identificador da oferta de curso resolve contra o catálogo vivo de Configuração; o processo publicável exige ao menos uma distribuição configurada; cada oferta de curso participa de no máximo uma distribuição no mesmo processo.',
     verificacao:
-      'Validação automatizada de forma (VO_base, PR, modalidades não vazias/duplicadas) e de resolução cross-módulo da oferta de curso; testes de unicidade de oferta por processo (planejados).',
+        'Validação automatizada de forma (VO_base, PR, modalidades não vazias/duplicadas) e de resolução cross-módulo da oferta de curso; testes de unicidade de oferta por processo (planejados).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -256,7 +256,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0017',
     titulo: 'Formulário configurável de inscrição',
     enunciado:
-      'O sistema deve permitir um formulário de inscrição configurável por Processo Seletivo, com campos condicionais por modalidade quando necessário.',
+        'O sistema deve permitir um formulário de inscrição configurável por Processo Seletivo, com campos condicionais por modalidade quando necessário.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -268,7 +268,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O portal renderiza o formulário em runtime a partir do processo publicado.',
+        'O portal renderiza o formulário em runtime a partir do processo publicado.',
     verificacao: 'Teste E2E planejado da inscrição.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -277,7 +277,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0019',
     titulo: 'Publicação do Processo Seletivo com Versão de Configuração imutável',
     enunciado:
-      'O sistema deve publicar o Processo Seletivo, registrar o Edital como ato/documento normativo e criar uma VersaoConfiguracao append-only com a configuração congelada, o hash da configuração, a referência e o hash do ato criador e o ator responsável.',
+        'O sistema deve publicar o Processo Seletivo, registrar o Edital como ato/documento normativo e criar uma VersaoConfiguracao append-only com a configuração congelada, o hash da configuração, a referência e o hash do ato criador e o ator responsável.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -289,7 +289,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'A publicação do Processo Seletivo grava uma VersaoConfiguracao completa e imutável vinculada ao ato criador; Edital não é tratado como agregado configurável; a issue deve citar as regras filhas aplicáveis de canonicalização, retificação e bloqueio de mutação.',
+        'A publicação do Processo Seletivo grava uma VersaoConfiguracao completa e imutável vinculada ao ato criador; Edital não é tratado como agregado configurável; a issue deve citar as regras filhas aplicáveis de canonicalização, retificação e bloqueio de mutação.',
     verificacao: 'Validação automatizada de publicação e snapshot (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -298,7 +298,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0021',
     titulo: 'Retificação do Processo Seletivo por novo Edital',
     enunciado:
-      'O sistema deve tratar alteração da configuração publicada do Processo Seletivo como retificação, registrando novo Edital, nova VersaoConfiguracao e motivo.',
+        'O sistema deve tratar alteração da configuração publicada do Processo Seletivo como retificação, registrando novo Edital, nova VersaoConfiguracao e motivo.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -310,7 +310,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A retificação referencia o Edital anterior, exige motivo e produz nova VersaoConfiguracao; a publicação de abertura não carrega campos de retificação.',
+        'A retificação referencia o Edital anterior, exige motivo e produz nova VersaoConfiguracao; a publicação de abertura não carrega campos de retificação.',
     verificacao: 'Validação automatizada de retificação (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -319,7 +319,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0022',
     titulo: 'Bloquear mutação direta após publicação',
     enunciado:
-      'O sistema deve bloquear edição direta de configuração já publicada, exigindo retificação para mudança de prazo, vagas, cota, peso, bônus, documentos ou formulário.',
+        'O sistema deve bloquear edição direta de configuração já publicada, exigindo retificação para mudança de prazo, vagas, cota, peso, bônus, documentos ou formulário.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -331,7 +331,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A tentativa de alterar processo publicado retorna erro de domínio e orienta a retificação.',
+        'A tentativa de alterar processo publicado retorna erro de domínio e orienta a retificação.',
     verificacao: 'Testes de API planejados.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -340,7 +340,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0023',
     titulo: 'Ciclo-base da inscrição',
     enunciado:
-      'O sistema deve criar inscrição em rascunho e permitir sua submissão, sem incluir aqui as regras de documentos, atendimento, comprovante, cancelamento e unicidade, que possuem requisitos próprios.',
+        'O sistema deve criar inscrição em rascunho e permitir sua submissão, sem incluir aqui as regras de documentos, atendimento, comprovante, cancelamento e unicidade, que possuem requisitos próprios.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -352,9 +352,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'Rascunho não conta para a restrição de unicidade; a submissão muda o status de rascunho para submetida sem criar nova inscrição.',
+        'Rascunho não conta para a restrição de unicidade; a submissão muda o status de rascunho para submetida sem criar nova inscrição.',
     verificacao:
-      'Validação automatizada do ciclo da inscrição (planejada); E2E planejado.',
+        'Validação automatizada do ciclo da inscrição (planejada); E2E planejado.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -362,7 +362,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0024',
     titulo: 'Opções de curso estruturais',
     enunciado:
-      'O sistema deve permitir até duas opções de curso por inscrição, com ordem única e mesmo nível de ensino da inscrição.',
+        'O sistema deve permitir até duas opções de curso por inscrição, com ordem única e mesmo nível de ensino da inscrição.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -374,7 +374,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Ordem fora de 1 ou 2, ordem duplicada e nível incompatível são bloqueados.',
+        'Ordem fora de 1 ou 2, ordem duplicada e nível incompatível são bloqueados.',
     verificacao: 'Validação automatizada de opções de curso (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -383,7 +383,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0025',
     titulo: 'Concorrência dupla na inscrição',
     enunciado:
-      'Quando a inscrição for implementada, o sistema deve registrar os papéis de concorrência ampla e reservada, com no máximo um registro de cada papel. Essa cardinalidade pertence à camada de registro e não limita, substitui nem altera o conjunto multivalorado de MODALIDADE DERIVADA de UNI-REQ-0076. A implementação deve observar a decisão registrada em UNI-REQ-0083.',
+        'Quando a inscrição for implementada, o sistema deve registrar os papéis de concorrência ampla e reservada, com no máximo um registro de cada papel. Essa cardinalidade pertence à camada de registro e não limita, substitui nem altera o conjunto multivalorado de MODALIDADE DERIVADA de UNI-REQ-0076. A implementação deve observar a decisão registrada em UNI-REQ-0083.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -395,7 +395,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Segundo registro do mesmo papel ou papel inválido é bloqueado; os papéis de concorrência ampla e reservada podem coexistir; a validação não limita nem altera o conjunto multivalorado derivado por UNI-REQ-0076; a implementação observa a decisão registrada em UNI-REQ-0083.',
+        'Segundo registro do mesmo papel ou papel inválido é bloqueado; os papéis de concorrência ampla e reservada podem coexistir; a validação não limita nem altera o conjunto multivalorado derivado por UNI-REQ-0076; a implementação observa a decisão registrada em UNI-REQ-0083.',
     verificacao: 'Validação automatizada de concorrência dupla (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -404,7 +404,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0083',
     titulo: 'Decisão sobre a representação reservada na inscrição',
     enunciado:
-      'O PO, com validação jurídica, deve definir como o papel reservado da inscrição se relaciona com o conjunto de MODALIDADE DERIVADA de UNI-REQ-0076: por código reservado único ou por referência ao conjunto. A decisão deve preservar o conjunto multivalorado derivado e orientar a implementação de UNI-REQ-0025.',
+        'O PO, com validação jurídica, deve definir como o papel reservado da inscrição se relaciona com o conjunto de MODALIDADE DERIVADA de UNI-REQ-0076: por código reservado único ou por referência ao conjunto. A decisão deve preservar o conjunto multivalorado derivado e orientar a implementação de UNI-REQ-0025.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -416,7 +416,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A decisão registra a alternativa escolhida, a justificativa de negócio e jurídica, e a atualização necessária em UNI-REQ-0025 antes da implementação do agregado de inscrição.',
+        'A decisão registra a alternativa escolhida, a justificativa de negócio e jurídica, e a atualização necessária em UNI-REQ-0025 antes da implementação do agregado de inscrição.',
     verificacao: 'Deliberação registrada pelo PO, com validação jurídica.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO; Jurídico; Equipe backend; Equipe frontend',
@@ -425,7 +425,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0027',
     titulo: 'Upload de documentos da inscrição',
     enunciado:
-      'O candidato deve poder anexar documentos exigidos na fase de inscrição por fluxo de URL pré-assinada para storage em quarentena.',
+        'O candidato deve poder anexar documentos exigidos na fase de inscrição por fluxo de URL pré-assinada para storage em quarentena.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -437,7 +437,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O documento é salvo sem dados pessoais no caminho, em quarentena, com hash e estado técnico controlado.',
+        'O documento é salvo sem dados pessoais no caminho, em quarentena, com hash e estado técnico controlado.',
     verificacao: 'Validação automatizada de upload (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend; Infraestrutura',
@@ -446,7 +446,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0028',
     titulo: 'Validação documental no submit',
     enunciado:
-      'O sistema deve bloquear a submissão quando faltar documento obrigatório da fase de inscrição cujo gatilho se aplica à inscrição.',
+        'O sistema deve bloquear a submissão quando faltar documento obrigatório da fase de inscrição cujo gatilho se aplica à inscrição.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -458,7 +458,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A ausência bloqueia o submit; documento presente, ainda em quarentena, permite o submit e gera pendência viva.',
+        'A ausência bloqueia o submit; documento presente, ainda em quarentena, permite o submit e gera pendência viva.',
     verificacao: 'Validação automatizada da validação documental (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -467,7 +467,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0029',
     titulo: 'Comprovante de inscrição imutável',
     enunciado:
-      'O sistema deve emitir comprovante imutável no submit, contendo relatório de documentos, pendências e implicações por escrito.',
+        'O sistema deve emitir comprovante imutável no submit, contendo relatório de documentos, pendências e implicações por escrito.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -479,7 +479,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O comprovante é append-only; a reemissão cria novo registro sem alterar o anterior.',
+        'O comprovante é append-only; a reemissão cria novo registro sem alterar o anterior.',
     verificacao: 'Validação automatizada do comprovante (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -488,7 +488,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0031',
     titulo: 'Unicidade de inscrição por CPF e nível',
     enunciado:
-      'O sistema deve impedir mais de uma inscrição submetida para o mesmo CPF, processo seletivo e nível de ensino.',
+        'O sistema deve impedir mais de uma inscrição submetida para o mesmo CPF, processo seletivo e nível de ensino.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -500,7 +500,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Segunda inscrição submetida no mesmo nível é bloqueada; nível distinto é permitido.',
+        'Segunda inscrição submetida no mesmo nível é bloqueada; nível distinto é permitido.',
     verificacao: 'Validação automatizada de unicidade (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -509,7 +509,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0032',
     titulo: 'Prioridade do nome social',
     enunciado:
-      'Quando o nome for exibido em lista, documento ou tela pública ou administrativa, o nome social deve ter prioridade sobre o nome civil, conforme a regra aplicável.',
+        'Quando o nome for exibido em lista, documento ou tela pública ou administrativa, o nome social deve ter prioridade sobre o nome civil, conforme a regra aplicável.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -521,7 +521,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Campos e listas respeitam o nome social sempre que exibem nome.',
+        'Campos e listas respeitam o nome social sempre que exibem nome.',
     verificacao: 'Lacuna conhecida: criar teste de regressão para nome social.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -530,7 +530,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0033',
     titulo: 'Cancelar e refazer inscrição',
     enunciado:
-      'O candidato ou a administração autorizada deve poder cancelar a inscrição com motivo, data e ator, liberando nova inscrição conforme a restrição de unicidade.',
+        'O candidato ou a administração autorizada deve poder cancelar a inscrição com motivo, data e ator, liberando nova inscrição conforme a restrição de unicidade.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -542,7 +542,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Cancelamento sem motivo, data ou ator é bloqueado; status diferente de cancelada não carrega dados de cancelamento.',
+        'Cancelamento sem motivo, data ou ator é bloqueado; status diferente de cancelada não carrega dados de cancelamento.',
     verificacao: 'Validação automatizada de cancelamento (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -551,7 +551,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0099',
     titulo: 'Taxa de inscrição e isenção',
     enunciado:
-      'O sistema deve permitir que cada Processo Seletivo declare, na configuração, se cobra taxa de inscrição e, quando cobrar, o valor da taxa. Um processo que cobra pode, opcionalmente, oferecer isenção completa a candidatos elegíveis por fundamento — a isenção nunca é comportamento padrão nem obrigatória.',
+        'O sistema deve permitir que cada Processo Seletivo declare, na configuração, se cobra taxa de inscrição e, quando cobrar, o valor da taxa. Um processo que cobra pode, opcionalmente, oferecer isenção completa a candidatos elegíveis por fundamento — a isenção nunca é comportamento padrão nem obrigatória.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -563,9 +563,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Publicar processo que não declarou se cobra taxa é recusado com erro nomeado — ausência nunca é interpretada como "não cobra". Processo que declara cobrança exige valor positivo; valor ausente ou não positivo recusa a publicação. Processo que declara não cobrar aceita ausência de valor. Zero fundamentos de isenção configurados é estado válido para processo que cobra.',
+        'Publicar processo que não declarou se cobra taxa é recusado com erro nomeado — ausência nunca é interpretada como "não cobra". Processo que declara cobrança exige valor positivo; valor ausente ou não positivo recusa a publicação. Processo que declara não cobrar aceita ausência de valor. Zero fundamentos de isenção configurados é estado válido para processo que cobra.',
     verificacao:
-      'Testes de integração da publicação do Processo Seletivo (planejados).',
+        'Testes de integração da publicação do Processo Seletivo (planejados).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -573,7 +573,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0100',
     titulo: 'Não cobrar e isentar são decisões distintas e mutuamente exclusivas',
     enunciado:
-      'Processo que declara não cobrar taxa não aceita nenhuma configuração de critério de isenção. "Não cobrar" é decisão do processo (afeta todo candidato igualmente); "isentar" é decisão por candidato dentro de um processo que cobra. Não existe isenção universal — os dois conceitos não coexistem no mesmo processo.',
+        'Processo que declara não cobrar taxa não aceita nenhuma configuração de critério de isenção. "Não cobrar" é decisão do processo (afeta todo candidato igualmente); "isentar" é decisão por candidato dentro de um processo que cobra. Não existe isenção universal — os dois conceitos não coexistem no mesmo processo.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -585,7 +585,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Tentar configurar qualquer fundamento de isenção em processo que declarou não cobrar é bloqueado com erro nomeado.',
+        'Tentar configurar qualquer fundamento de isenção em processo que declarou não cobrar é bloqueado com erro nomeado.',
     verificacao: 'Validação automatizada da exclusividade (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -594,7 +594,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0101',
     titulo: 'Fundamentos de isenção referenciáveis pela configuração',
     enunciado:
-      'A configuração de um processo que cobra taxa deve permitir referenciar os fundamentos de isenção Cadastro Único (Lei nº 13.656/2018 e Decreto nº 6.593/2008 — família de baixa renda inscrita no Cadastro Único, renda familiar per capita de até meio salário mínimo, verificada pelo SISTAC do MDS) e doação de medula óssea, ambos citados pelo PO para o Curso de Medicina. Referenciar um fundamento nesta camada não decide a origem do fato, a forma de comprovação, deferimento automático nem análise humana — essas decisões pertencem à verificação de cada fundamento (UNI-REQ-0102) e à frente de inscrição.',
+        'A configuração de um processo que cobra taxa deve permitir referenciar os fundamentos de isenção Cadastro Único (Lei nº 13.656/2018 e Decreto nº 6.593/2008 — família de baixa renda inscrita no Cadastro Único, renda familiar per capita de até meio salário mínimo, verificada pelo SISTAC do MDS) e doação de medula óssea, ambos citados pelo PO para o Curso de Medicina. Referenciar um fundamento nesta camada não decide a origem do fato, a forma de comprovação, deferimento automático nem análise humana — essas decisões pertencem à verificação de cada fundamento (UNI-REQ-0102) e à frente de inscrição.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -606,9 +606,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Processo que cobra pode referenciar zero, um ou os dois fundamentos (Cadastro Único, doação de medula óssea). Processo diferente do Curso de Medicina não referencia esses fundamentos sem confirmação própria registrada.',
+        'Processo que cobra pode referenciar zero, um ou os dois fundamentos (Cadastro Único, doação de medula óssea). Processo diferente do Curso de Medicina não referencia esses fundamentos sem confirmação própria registrada.',
     verificacao:
-      'Validação automatizada dos fundamentos referenciáveis (planejada).',
+        'Validação automatizada dos fundamentos referenciáveis (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -616,7 +616,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0102',
     titulo: 'Verificação própria por fundamento de isenção',
     enunciado:
-      'Quando a frente de inscrição existir, cada fundamento de isenção deve ter mecanismo de verificação próprio: o fundamento Cadastro Único é conferido contra a base federal por meio do SISTAC — troca de arquivo em lote fornecida pelo MDS, não API online; o fundamento doação de medula óssea é comprovado por documento anexado pelo candidato, com análise humana.',
+        'Quando a frente de inscrição existir, cada fundamento de isenção deve ter mecanismo de verificação próprio: o fundamento Cadastro Único é conferido contra a base federal por meio do SISTAC — troca de arquivo em lote fornecida pelo MDS, não API online; o fundamento doação de medula óssea é comprovado por documento anexado pelo candidato, com análise humana.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -628,9 +628,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Verificação do fundamento Cadastro Único consome o layout de arquivo vigente do SISTAC, em lote, sem chamada síncrona a API externa. Verificação do fundamento doação de medula óssea exige documento anexado e decisão humana registrada, nunca deferimento automático.',
+        'Verificação do fundamento Cadastro Único consome o layout de arquivo vigente do SISTAC, em lote, sem chamada síncrona a API externa. Verificação do fundamento doação de medula óssea exige documento anexado e decisão humana registrada, nunca deferimento automático.',
     verificacao:
-      'Não verificável hoje — depende do agregado de Inscrição, ainda inexistente; planejado como incremento.',
+        'Não verificável hoje — depende do agregado de Inscrição, ainda inexistente; planejado como incremento.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO; Equipe backend',
   },
@@ -638,7 +638,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0103',
     titulo: 'NIS não é coletado na manifestação de isenção por Cadastro Único',
     enunciado:
-      'O sistema não deve coletar o Número de Identificação Social (NIS) do candidato para o fundamento de isenção Cadastro Único — apenas a manifestação de vontade de concorrer por esse fundamento, com alerta de que nome completo, CPF e data de nascimento precisam estar idênticos ao registro no Cadastro Único. O NIS não é chave de consulta no layout vigente do SISTAC, e coletá-lo reteria dado pessoal sem finalidade — contrário à minimização exigida pela LGPD.',
+        'O sistema não deve coletar o Número de Identificação Social (NIS) do candidato para o fundamento de isenção Cadastro Único — apenas a manifestação de vontade de concorrer por esse fundamento, com alerta de que nome completo, CPF e data de nascimento precisam estar idênticos ao registro no Cadastro Único. O NIS não é chave de consulta no layout vigente do SISTAC, e coletá-lo reteria dado pessoal sem finalidade — contrário à minimização exigida pela LGPD.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -650,39 +650,61 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Nenhum campo de NIS existe no formulário de manifestação do fundamento Cadastro Único; o alerta de conferência de identidade (nome completo, CPF, data de nascimento) é exibido ao candidato antes da manifestação.',
+        'Nenhum campo de NIS existe no formulário de manifestação do fundamento Cadastro Único; o alerta de conferência de identidade (nome completo, CPF, data de nascimento) é exibido ao candidato antes da manifestação.',
     verificacao:
-      'Não verificável hoje — depende do agregado de Inscrição, ainda inexistente; planejado como incremento.',
+        'Não verificável hoje — depende do agregado de Inscrição, ainda inexistente; planejado como incremento.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO; DPO; Equipe backend; Equipe frontend',
   },
   {
-    requisito_id: 'UNI-REQ-0104',
-    titulo: 'Recurso contra indeferimento de isenção em instância única',
+    requisito_id: 'UNI-REQ-0135',
+    titulo: 'Janela de solicitação de isenção vinculada às inscrições gerais',
     enunciado:
-      'Quando a frente de inscrição existir, o candidato deve poder recorrer contra o indeferimento do pedido de isenção, em instância única — não há segunda instância de recurso para isenção.',
+        'Todo Processo Seletivo que ofereça isenção deve publicar uma janela própria de solicitação com data e horário completos no fuso institucional America/Belem. A janela começa no mesmo instante da abertura das inscrições gerais: seu início deriva desse instante e não é configurado independentemente. A solicitação fica disponível desde a abertura, mas o dia da abertura é excluído da contagem do mínimo; contam-se cinco dias corridos a partir do dia seguinte, e o quinto dia termina às 23:59:59 em America/Belem. O término é configurado explicitamente, não pode ser anterior a esse limite mínimo e deve ser estritamente anterior ao encerramento das inscrições gerais. Como se trata de período explícito do cronograma, a janela não usa unidade, calendário de dias úteis nem algoritmo de contagem de recursos. Depois da publicação, o término somente pode ser prorrogado por alteração formal e auditável realizada antes de seu encerramento, nunca reduzido ou reaberto, e a prorrogação deve preservar o término anterior ao fim das inscrições.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
     parent_id: 'UNI-REQ-0099',
     modulo: 'Seleção',
     recorte: 'incremento_obrigatorio',
-    status: 'incremento_planejado',
+    status: 'aprovado',
     prioridade: 'should',
-    politica_backlog: 'incremento_futuro',
-    tipo_issue_recomendado: 'None',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O candidato pode registrar um único recurso contra o indeferimento de cada manifestação de isenção; nova tentativa de recurso sobre a mesma manifestação já recorrida é bloqueada.',
+        'Processo que ofereça isenção exige início derivado exatamente do início das inscrições e término explícito; a publicação recusa início divergente, ausência de término, término anterior a 23:59:59 do quinto dia corrido contado a partir do dia seguinte à abertura, ou término igual ou posterior ao fim das inscrições; data e horário completos são interpretados e congelados em America/Belem; feriados, sábados e domingos não alteram os cinco dias; a solicitação fica disponível desde a abertura; depois da publicação, somente prorrogação formal e auditável anterior ao encerramento é aceita, sem redução, reabertura ou violação do término anterior ao das inscrições; encerrada a isenção, a inscrição comum continua disponível até seu próprio término e segue sujeita ao pagamento.',
     verificacao:
-      'Não verificável hoje — depende do agregado de Inscrição, ainda inexistente; planejado como incremento.',
+        'Deliberações registradas em unifesspa-edu-br/uniplus-developers#148 em 21 de agosto de 2026; validações automatizadas de publicação, disponibilidade, limites temporais e prorrogação (planejadas).',
     pagina_developers: '/produto/regras-negocio/',
-    owner: 'Equipe backend; Equipe frontend',
+    owner: 'PO; Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0104',
+    titulo: 'Recurso único contra indeferimento de isenção com prazo mínimo de dois dias úteis',
+    enunciado:
+        'O candidato pode interpor um único recurso contra o indeferimento inicial de cada manifestação de isenção, sem segunda instância administrativa. O edital declara o prazo em dias úteis, respeitado o mínimo institucional específico de dois dias úteis. A publicação do resultado inicial é a âncora: o dia da publicação é excluído, a contagem começa às 00:00 do próximo dia útil segundo o calendário aplicável congelado na versão publicada e encerra às 23:59:59 do último dia útil, no fuso institucional America/Belem. Para esse recurso, a configuração usa a convenção por exclusão do dia de início descrita em UNI-REQ-0112; prazo superior ao mínimo pode ser declarado, mas prazo inferior é recusado. Esse piso é próprio do recurso de isenção e não cria mínimo geral para recursos de outras fases, preservando UNI-REQ-0095.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0099',
+    modulo: 'Seleção',
+    recorte: 'incremento_obrigatorio',
+    status: 'aprovado',
+    prioridade: 'should',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+        'Cada indeferimento inicial admite no máximo um recurso; a publicação recusa unidade diferente de dias úteis, valor inferior a dois ou convenção diferente da exclusão do dia de início; o dia da publicação do resultado inicial é excluído, sábados, domingos e feriados aplicáveis não são contados, o primeiro dia contado é o próximo dia útil e o último termina às 23:59:59 em America/Belem; valor superior declarado no edital é preservado e congelado com a versão do processo; nova tentativa sobre manifestação já recorrida é bloqueada; não existe segunda instância; o mínimo específico da isenção não é aplicado automaticamente a recurso de outra fase.',
+    verificacao:
+        'Deliberações registradas em unifesspa-edu-br/uniplus-developers#148 em 21 de agosto de 2026; validações automatizadas de publicação, calendário, limite mínimo, término e unicidade do recurso (planejadas).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'PO; Equipe backend; Equipe frontend',
   },
   {
     requisito_id: 'UNI-REQ-0105',
     titulo: 'Indeferimento de isenção não invalida a inscrição',
     enunciado:
-      'Quando a frente de inscrição existir, o indeferimento do pedido de isenção não deve invalidar a inscrição do candidato: o sistema deve permitir gerar a guia da taxa e registrar o pagamento sem exigir que o candidato refaça a inscrição.',
+        'Quando a frente de inscrição existir, o indeferimento do pedido de isenção não deve invalidar a inscrição do candidato: o sistema deve permitir gerar a guia da taxa e registrar o pagamento sem exigir que o candidato refaça a inscrição.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -694,30 +716,53 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Após indeferimento (inclusive esgotado o recurso de UNI-REQ-0104), a inscrição permanece com status válido, habilitada a gerar guia de pagamento da taxa.',
+        'Após indeferimento (inclusive esgotado o recurso de UNI-REQ-0104), a inscrição permanece com status válido, habilitada a gerar guia de pagamento da taxa.',
     verificacao:
-      'Não verificável hoje — depende do agregado de Inscrição, ainda inexistente; planejado como incremento.',
+        'Não verificável hoje — depende do agregado de Inscrição, ainda inexistente; planejado como incremento.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
   {
-    requisito_id: 'UNI-REQ-0106',
-    titulo: 'Decisão pendente: janela de solicitação e prazo de recurso de isenção',
+    requisito_id: 'UNI-REQ-0136',
+    titulo: 'Resultado definitivo da isenção e prazo mínimo para pagamento',
     enunciado:
-      'O PO deve definir a janela própria de solicitação de isenção dentro do cronograma do processo e a magnitude do prazo de recurso contra indeferimento (UNI-REQ-0104), antes de a frente de inscrição implementar o fluxo de isenção.',
+        'A etapa de isenção deve produzir e publicar resultado definitivo mesmo quando nenhum candidato interpuser recurso. Essa publicação é a âncora obrigatória do prazo final aplicável à regularização financeira dos candidatos sem isenção deferida. Exclui-se o dia da publicação e, a partir do dia seguinte, devem ser garantidos no mínimo dez dias corridos para pagamento da taxa; o décimo dia termina às 23:59:59 no fuso America/Belem. Sábados, domingos e feriados integram a contagem. O cronograma e suas alterações formais devem preservar esse intervalo, sem exigir nova inscrição do candidato.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0105',
+    modulo: 'Seleção',
+    recorte: 'incremento_obrigatorio',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+        'A etapa sempre publica resultado definitivo, inclusive quando não houver recursos; a ausência de recursos não antecipa nem elimina o ato; a data e o horário da publicação e do vencimento são completos e interpretados em America/Belem; o dia da publicação é excluído; o primeiro dia contado é o dia civil seguinte; o prazo final de pagamento não pode ser anterior a 23:59:59 do décimo dia corrido; feriados, sábados e domingos não interrompem a contagem; configuração, alteração formal ou avanço do cronograma que não preserve o intervalo mínimo é recusado com erro nomeado; candidato com isenção indeferida regulariza a mesma inscrição, sem refazê-la.',
+    verificacao:
+        'Deliberação consolidada em 21 de agosto de 2026; testes automatizados de publicação obrigatória com zero ou mais recursos, âncora, contagem civil, fuso, limite mínimo e preservação da inscrição (planejados).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'PO; Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0106',
+    titulo: 'Decisão institucional sobre as janelas do ciclo de isenção',
+    enunciado:
+        'A janela de solicitação é período explícito do cronograma, começa junto com as inscrições gerais, dura no mínimo cinco dias corridos contados a partir do dia seguinte à abertura, encerra o quinto dia às 23:59:59 em America/Belem e termina antes das inscrições, conforme UNI-REQ-0135. O recurso contra o indeferimento permanece em instância única e possui mínimo específico de dois dias úteis: o dia da publicação do resultado inicial é excluído, a contagem começa no próximo dia útil e o último dia termina às 23:59:59 em America/Belem, conforme UNI-REQ-0104. A etapa publica resultado definitivo mesmo sem recursos e, excluído o dia dessa publicação, garante no mínimo dez dias corridos para pagamento, com término às 23:59:59 do décimo dia em America/Belem, conforme UNI-REQ-0136. A solicitação e a regularização financeira usam contagem civil explícita; o recurso usa o calendário institucional aplicável e a convenção por exclusão do dia de início. Com essas deliberações, não resta decisão temporal pendente neste requisito.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
-    parent_id: 'UNI-REQ-0104',
+    parent_id: 'UNI-REQ-0099',
     modulo: 'Seleção',
     recorte: 'incremento_obrigatorio',
-    status: 'proposto',
+    status: 'aprovado',
     prioridade: 'should',
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A decisão registra duas coisas distintas, cada uma sob a sua regra. A janela de solicitação de isenção é período do cronograma do processo, delimitado por datas, e não é interposição de recurso: não fica sujeita ao contrato de unidades de UNI-REQ-0113 nem depende de calendário ou algoritmo de contagem. O prazo de recurso contra o indeferimento, esse sim, é interposição: a sua unidade segue UNI-REQ-0113 e a convenção de contagem, UNI-REQ-0112. Ambas registradas com justificativa, atualizando UNI-REQ-0104 antes da implementação.',
-    verificacao: 'Deliberação registrada pelo PO.',
+        'A janela de solicitação possui requisito próprio aprovado e separado do recurso; UNI-REQ-0104 registra instância única, mínimo de dois dias úteis, âncora, exclusão do dia inicial, calendário, convenção e término; UNI-REQ-0136 registra a obrigatoriedade do resultado definitivo e o intervalo mínimo de dez dias corridos para pagamento; todos os instantes usam data e horário completos em America/Belem; a solicitação e a regularização financeira permanecem fora do calendário de dias úteis e do algoritmo de recurso; nenhuma página ou issue continua apresentando essas definições como decisão pendente.',
+    verificacao:
+        'Deliberações consolidadas em 21 de agosto de 2026 e refletidas em UNI-REQ-0135, UNI-REQ-0104 e UNI-REQ-0136.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO; Equipe backend; Equipe frontend',
   },
@@ -725,7 +770,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0107',
     titulo: 'Decisão pendente: múltiplos fundamentos de isenção na mesma inscrição',
     enunciado:
-      'O PO deve definir se uma inscrição pode manifestar mais de um fundamento de isenção simultaneamente (Cadastro Único e doação de medula óssea) e, se puder, como o resultado se compõe quando um fundamento é deferido e o outro é indeferido.',
+        'O PO deve definir se uma inscrição pode manifestar mais de um fundamento de isenção simultaneamente (Cadastro Único e doação de medula óssea) e, se puder, como o resultado se compõe quando um fundamento é deferido e o outro é indeferido.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -737,7 +782,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A decisão registra se múltiplos fundamentos são permitidos na mesma manifestação e a regra de composição do resultado, atualizando UNI-REQ-0101 e UNI-REQ-0102 antes da implementação da frente de inscrição.',
+        'A decisão registra se múltiplos fundamentos são permitidos na mesma manifestação e a regra de composição do resultado, atualizando UNI-REQ-0101 e UNI-REQ-0102 antes da implementação da frente de inscrição.',
     verificacao: 'Deliberação registrada pelo PO.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO; Equipe backend; Equipe frontend',
@@ -746,7 +791,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0108',
     titulo: 'Decisão pendente: processos além do Curso de Medicina que cobrarão taxa',
     enunciado:
-      'O PO deve confirmar se, além do Curso de Medicina, outros Processos Seletivos cobrarão taxa de inscrição, informando o planejamento de rollout da capacidade descrita em UNI-REQ-0099.',
+        'O PO deve confirmar se, além do Curso de Medicina, outros Processos Seletivos cobrarão taxa de inscrição, informando o planejamento de rollout da capacidade descrita em UNI-REQ-0099.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -758,7 +803,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A decisão registra quais processos, além de Medicina, cobrarão taxa, e em que ciclo.',
+        'A decisão registra quais processos, além de Medicina, cobrarão taxa, e em que ciclo.',
     verificacao: 'Deliberação registrada pelo PO.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO',
@@ -767,7 +812,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0109',
     titulo: 'Decisão pendente: mecanismo de arrecadação da taxa (PagTesouro/SISGRU)',
     enunciado:
-      'A instituição escolheu o PagTesouro via Sistema Próprio como mecanismo de arrecadação da taxa de inscrição, mas o cadastro no SISGRU, o código de serviço e o token de integração dependem de trâmite pela PROAD ainda não concluído — pré-requisito para implementar a geração de guia e o registro de pagamento.',
+        'A instituição escolheu o PagTesouro via Sistema Próprio como mecanismo de arrecadação da taxa de inscrição, mas o cadastro no SISGRU, o código de serviço e o token de integração dependem de trâmite pela PROAD ainda não concluído — pré-requisito para implementar a geração de guia e o registro de pagamento.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -779,7 +824,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O cadastro SISGRU, o código de serviço e o token de integração do PagTesouro estão disponíveis e documentados antes de iniciar a implementação da geração de guia e do registro de pagamento.',
+        'O cadastro SISGRU, o código de serviço e o token de integração do PagTesouro estão disponíveis e documentados antes de iniciar a implementação da geração de guia e do registro de pagamento.',
     verificacao: 'Confirmação institucional pela PROAD/Infraestrutura.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PROAD; Infraestrutura; PO',
@@ -788,7 +833,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0110',
     titulo: 'Decisão pendente: base legal da isenção por Cadastro Único — conflito a resolver com Jurídico/DPO',
     enunciado:
-      'O fundamento de isenção Cadastro Único (UNI-REQ-0101) foi apresentado com base na Lei nº 13.656/2018 e no Decreto nº 6.593/2008 — que tratam de isenção de taxa em CONCURSO PÚBLICO federal (Lei nº 8.112/1990), não de processo seletivo de admissão discente. O art. 1º, §1º, I, do Decreto nº 6.593/2008 exige que o requerimento de isenção contenha o Número de Identificação Social (NIS) do candidato, atribuído pelo CadÚnico — o que contradiz diretamente a decisão do PO registrada em UNI-REQ-0103 (o sistema não coleta o NIS). O Jurídico e o DPO precisam confirmar se esta norma se aplica por analogia ao processo seletivo discente ou se existe base legal própria (ex.: norma do MEC ou resolução institucional) mais adequada, e como reconciliar a exigência de NIS do decreto com a decisão de minimização de dados já tomada.',
+        'O fundamento de isenção Cadastro Único (UNI-REQ-0101) foi apresentado com base na Lei nº 13.656/2018 e no Decreto nº 6.593/2008 — que tratam de isenção de taxa em CONCURSO PÚBLICO federal (Lei nº 8.112/1990), não de processo seletivo de admissão discente. O art. 1º, §1º, I, do Decreto nº 6.593/2008 exige que o requerimento de isenção contenha o Número de Identificação Social (NIS) do candidato, atribuído pelo CadÚnico — o que contradiz diretamente a decisão do PO registrada em UNI-REQ-0103 (o sistema não coleta o NIS). O Jurídico e o DPO precisam confirmar se esta norma se aplica por analogia ao processo seletivo discente ou se existe base legal própria (ex.: norma do MEC ou resolução institucional) mais adequada, e como reconciliar a exigência de NIS do decreto com a decisão de minimização de dados já tomada.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -800,7 +845,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A decisão registra a base legal efetivamente aplicável ao fundamento Cadastro Único (confirmando, substituindo ou complementando a Lei nº 13.656/2018 e o Decreto nº 6.593/2008) e como ela se concilia com a não coleta do NIS decidida em UNI-REQ-0103, antes de a verificação via SISTAC (UNI-REQ-0102) ser implementada.',
+        'A decisão registra a base legal efetivamente aplicável ao fundamento Cadastro Único (confirmando, substituindo ou complementando a Lei nº 13.656/2018 e o Decreto nº 6.593/2008) e como ela se concilia com a não coleta do NIS decidida em UNI-REQ-0103, antes de a verificação via SISTAC (UNI-REQ-0102) ser implementada.',
     verificacao: 'Deliberação registrada pelo Jurídico e pelo DPO.',
     pagina_developers: '/produto/conformidade-legal/',
     owner: 'PO; Jurídico; DPO; Equipe backend',
@@ -809,7 +854,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0111',
     titulo: 'Localidade declarada e fuso institucional que regem a contagem de prazos (RN13)',
     enunciado:
-      'Todo Processo Seletivo declara, na sua configuração, a localidade cujo calendário rege a contagem de prazos do certame, como a referência de cidade já canônica no sistema: código IBGE de sete dígitos, nome e UF — o mesmo trio que Campus e Local de Oferta persistem e validam, com prefixo do código coerente com a UF informada e nome não vazio, em que o **código IBGE é o único valor normativo**: é dele que se derivam o município cujos feriados locais se aplicam e a UF cujos feriados estaduais se aplicam, porque o prefixo do código determina a unidade federativa. O **fuso horário** em que o dia civil começa e termina não é perguntado a quem configura: o sistema aplica o fuso institucional e o **congela na versão publicada**, ao lado da localidade. A razão de não perguntar é que ele não varia entre certames — todas as unidades da instituição estão no mesmo fuso —, e a de congelar é que ele varia no tempo: quem determina o valor correto é a regra de horário de verão, que muda por decreto. Congelado, uma mudança futura do padrão institucional não reescreve versão já publicada; se o padrão mudar, muda para as próximas. O que o congelamento **não** alcança hoje é a regra temporal da própria zona: a base de fusos é atualizada quando governos alteram regras, e guardar apenas o identificador deixa o resultado dependente da versão dessa base no momento do cálculo. É a mesma lacuna do calendário congelado por identificador, e pertence ao mesmo trabalho de congelamento por valor — enquanto ele não vier, a reprodutibilidade prometida vale para mudança do padrão institucional, não para mudança da própria definição da zona. O fuso é `America/Belem`, a zona do estado em que a instituição opera. Ele **não** é "horário de Brasília": as duas coisas coincidem apenas enquanto não houver horário de verão, e divergiram durante os períodos em que apenas a zona de Brasília observava. O nome e a UF persistidos são cache de exibição e não entram em cálculo nenhum — divergirem do município que o código designa é defeito de exibição, corrigível atualizando o cache, e jamais altera quais feriados incidem. O nome não é conferido contra o código, e não precisa ser: se divergirem, a versão exibe um município e conta pelos feriados do que o código designa — rótulo errado, prazo certo. Prometer coerência nominal seria prometer uma verificação que não existe. A **localidade** é sempre obrigatória, qualquer que seja a unidade dos prazos configurados: não admite ausência, e processo sem ela não é criável nem publicável. Não é condicional porque todo prazo de interposição — inclusive em horas — passou a depender do calendário desde a primeira publicação (UNI-REQ-0116), de modo que não existe processo publicável em que ela seja dispensável. O servidor não a atribui por omissão: recebida ausente, a criação é recusada — nunca completada a partir da unidade administradora, do campus de oferta ou da sede da instituição. A interface, essa sim, pode apresentar o campo já preenchido com a cidade que a unidade administradora escolhida registra no próprio cadastro (UNI-REQ-0118), e que é a localidade regente na quase totalidade dos certames; o valor sugerido só se torna declaração quando o operador submete o formulário em que o viu, e trocá-lo por outro município é operação de um passo. Sugerir não é deduzir: o que a interface propõe o operador confirma ou substitui, enquanto deduzir seria o servidor decidir sozinho por quem configura. Já o fuso o sistema atribui, porque perguntar um valor que é o mesmo em todo certame só transferiria ao operador a chance de errá-lo. Um processo com ofertas em municípios diferentes tem uma única localidade regente, declarada no edital. Localidade e fuso são congelados em toda versão publicada; nas fases configuradas para aceitar recurso, UNI-REQ-0080 congela também o identificador do calendário e o código, a versão e o hash do algoritmo de contagem declarado. A localidade é declarada já na criação do processo e permanece editável enquanto ele está em rascunho, além de alterável em sessão editorial aberta. Exigi-la desde a criação não antecipa decisão que ainda não foi tomada: o cadastro nasce junto com o edital de abertura, e é nele que a localidade regente está declarada. O fuso não é editável nem obrigatório de preencher: o sistema o aplica na publicação.',
+        'Todo Processo Seletivo declara, na sua configuração, a localidade cujo calendário rege a contagem de prazos do certame, como a referência de cidade já canônica no sistema: código IBGE de sete dígitos, nome e UF — o mesmo trio que Campus e Local de Oferta persistem e validam, com prefixo do código coerente com a UF informada e nome não vazio, em que o **código IBGE é o único valor normativo**: é dele que se derivam o município cujos feriados locais se aplicam e a UF cujos feriados estaduais se aplicam, porque o prefixo do código determina a unidade federativa. O **fuso horário** em que o dia civil começa e termina não é perguntado a quem configura: o sistema aplica o fuso institucional e o **congela na versão publicada**, ao lado da localidade. A razão de não perguntar é que ele não varia entre certames — todas as unidades da instituição estão no mesmo fuso —, e a de congelar é que ele varia no tempo: quem determina o valor correto é a regra de horário de verão, que muda por decreto. Congelado, uma mudança futura do padrão institucional não reescreve versão já publicada; se o padrão mudar, muda para as próximas. O que o congelamento **não** alcança hoje é a regra temporal da própria zona: a base de fusos é atualizada quando governos alteram regras, e guardar apenas o identificador deixa o resultado dependente da versão dessa base no momento do cálculo. É a mesma lacuna do calendário congelado por identificador, e pertence ao mesmo trabalho de congelamento por valor — enquanto ele não vier, a reprodutibilidade prometida vale para mudança do padrão institucional, não para mudança da própria definição da zona. O fuso é `America/Belem`, a zona do estado em que a instituição opera. Ele **não** é "horário de Brasília": as duas coisas coincidem apenas enquanto não houver horário de verão, e divergiram durante os períodos em que apenas a zona de Brasília observava. O nome e a UF persistidos são cache de exibição e não entram em cálculo nenhum — divergirem do município que o código designa é defeito de exibição, corrigível atualizando o cache, e jamais altera quais feriados incidem. O nome não é conferido contra o código, e não precisa ser: se divergirem, a versão exibe um município e conta pelos feriados do que o código designa — rótulo errado, prazo certo. Prometer coerência nominal seria prometer uma verificação que não existe. A **localidade** é sempre obrigatória, qualquer que seja a unidade dos prazos configurados: não admite ausência, e processo sem ela não é criável nem publicável. Não é condicional porque todo prazo de interposição — inclusive em horas — passou a depender do calendário desde a primeira publicação (UNI-REQ-0116), de modo que não existe processo publicável em que ela seja dispensável. O servidor não a atribui por omissão: recebida ausente, a criação é recusada — nunca completada a partir da unidade administradora, do campus de oferta ou da sede da instituição. A interface, essa sim, pode apresentar o campo já preenchido com a cidade que a unidade administradora escolhida registra no próprio cadastro (UNI-REQ-0118), e que é a localidade regente na quase totalidade dos certames; o valor sugerido só se torna declaração quando o operador submete o formulário em que o viu, e trocá-lo por outro município é operação de um passo. Sugerir não é deduzir: o que a interface propõe o operador confirma ou substitui, enquanto deduzir seria o servidor decidir sozinho por quem configura. Já o fuso o sistema atribui, porque perguntar um valor que é o mesmo em todo certame só transferiria ao operador a chance de errá-lo. Um processo com ofertas em municípios diferentes tem uma única localidade regente, declarada no edital. Localidade e fuso são congelados em toda versão publicada; nas fases configuradas para aceitar recurso, UNI-REQ-0080 congela também o identificador do calendário e o código, a versão e o hash do algoritmo de contagem declarado. A localidade é declarada já na criação do processo e permanece editável enquanto ele está em rascunho, além de alterável em sessão editorial aberta. Exigi-la desde a criação não antecipa decisão que ainda não foi tomada: o cadastro nasce junto com o edital de abertura, e é nele que a localidade regente está declarada. O fuso não é editável nem obrigatório de preencher: o sistema o aplica na publicação.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -821,9 +866,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Criar processo sem localidade é recusado com erro nomeado, e nenhum processo é criado; a recusa vale mesmo quando a unidade administradora escolhida tem cidade cadastrada (UNI-REQ-0118), porque o servidor não completa o campo a partir dela — declarada uma localidade diferente da cidade da unidade, é a declarada que persiste. Publicar processo sem localidade é recusado com erro nomeado, qualquer que seja a unidade dos prazos configurados; a mesma recusa vale nas três transições que geram versão — publicação inicial, retificação em ato único e fechamento de sessão editorial —, nunca só na interface. As duas recusas partilham o mesmo código de erro, por terem a mesma causa e a mesma correção, e se distinguem pelo detalhe, que nomeia a operação recusada. Exigida na criação e nunca removível depois, a localidade ausente numa das três transições deixa de ser estado alcançável pelo fluxo público: a recusa ali é defesa da invariante contra caminho de escrita que a contorne, e permanece exigida por isso — o teste que a exercita prepara o estado diretamente, em vez de chegar a ele criando e publicando. O trio é validado quanto à forma e à coerência interna — sete dígitos, prefixo de código compatível com a UF informada, nome presente —, do mesmo modo que o sistema já valida a cidade de Campus e Local de Oferta; a escolha do município parte da lista apresentada ao operador, e este requisito não promete verificação de existência no momento da gravação — a cidade é dado de outro serviço, e o sistema não mantém cadastro próprio para cruzar. A consequência fica declarada em vez de silenciosa: um código bem formado que não designe município real é gravável, e o defeito só aparece quando os feriados municipais forem resolvidos, tornando a versão irreproduzível. Fechar essa porta exige verificar a existência do código junto ao serviço que detém o cadastro, no gate de publicação — mesma etapa em que a cobertura do calendário é aferida, e mesmo trabalho. Como o nome não é conferido contra o código, a coerência do cálculo não pode depender dele: o município e a UF que governam a contagem são derivados do código IBGE, nunca lidos dos campos informados, de modo que um nome divergente produz rótulo errado e nunca prazo errado. O fuso aplicado é identificador de zona da base IANA reconhecido, verificado na publicação: aplicar zona não reconhecida produziria versão publicada cuja âncora não converte para dia civil algum, prazo irreprodutível numa versão imutável. Ele não é deduzido da cidade nem da UF do processo — a coincidência entre a zona da cidade e a institucional é circunstancial, e deduzir tornaria o valor refém dessa coincidência. Toda versão publicada carrega localidade e fuso, de modo que uma retificação que mude a unidade de um prazo nunca precisa completar dado da versão anterior. Dois processos com localidades cujo conjunto de dias não úteis aplicáveis difira por ao menos um feriado situado dentro da janela produzem fins diferentes para a mesma âncora e o mesmo prazo; localidades que não difiram dentro da janela produzem o mesmo fim, e isso não é falha. Duas versões publicadas sob fusos institucionais diferentes, com o mesmo prazo e a mesma âncora em instante absoluto, podem atribuir esse instante a dias civis distintos e produzir fins distintos, e cada uma permanece reproduzível pelo que congelou. Alterar a localidade em retificação, ou mudar o fuso institucional, não altera prazo de recurso já aberto sob a versão anterior.',
+        'Criar processo sem localidade é recusado com erro nomeado, e nenhum processo é criado; a recusa vale mesmo quando a unidade administradora escolhida tem cidade cadastrada (UNI-REQ-0118), porque o servidor não completa o campo a partir dela — declarada uma localidade diferente da cidade da unidade, é a declarada que persiste. Publicar processo sem localidade é recusado com erro nomeado, qualquer que seja a unidade dos prazos configurados; a mesma recusa vale nas três transições que geram versão — publicação inicial, retificação em ato único e fechamento de sessão editorial —, nunca só na interface. As duas recusas partilham o mesmo código de erro, por terem a mesma causa e a mesma correção, e se distinguem pelo detalhe, que nomeia a operação recusada. Exigida na criação e nunca removível depois, a localidade ausente numa das três transições deixa de ser estado alcançável pelo fluxo público: a recusa ali é defesa da invariante contra caminho de escrita que a contorne, e permanece exigida por isso — o teste que a exercita prepara o estado diretamente, em vez de chegar a ele criando e publicando. O trio é validado quanto à forma e à coerência interna — sete dígitos, prefixo de código compatível com a UF informada, nome presente —, do mesmo modo que o sistema já valida a cidade de Campus e Local de Oferta; a escolha do município parte da lista apresentada ao operador, e este requisito não promete verificação de existência no momento da gravação — a cidade é dado de outro serviço, e o sistema não mantém cadastro próprio para cruzar. A consequência fica declarada em vez de silenciosa: um código bem formado que não designe município real é gravável, e o defeito só aparece quando os feriados municipais forem resolvidos, tornando a versão irreproduzível. Fechar essa porta exige verificar a existência do código junto ao serviço que detém o cadastro, no gate de publicação — mesma etapa em que a cobertura do calendário é aferida, e mesmo trabalho. Como o nome não é conferido contra o código, a coerência do cálculo não pode depender dele: o município e a UF que governam a contagem são derivados do código IBGE, nunca lidos dos campos informados, de modo que um nome divergente produz rótulo errado e nunca prazo errado. O fuso aplicado é identificador de zona da base IANA reconhecido, verificado na publicação: aplicar zona não reconhecida produziria versão publicada cuja âncora não converte para dia civil algum, prazo irreprodutível numa versão imutável. Ele não é deduzido da cidade nem da UF do processo — a coincidência entre a zona da cidade e a institucional é circunstancial, e deduzir tornaria o valor refém dessa coincidência. Toda versão publicada carrega localidade e fuso, de modo que uma retificação que mude a unidade de um prazo nunca precisa completar dado da versão anterior. Dois processos com localidades cujo conjunto de dias não úteis aplicáveis difira por ao menos um feriado situado dentro da janela produzem fins diferentes para a mesma âncora e o mesmo prazo; localidades que não difiram dentro da janela produzem o mesmo fim, e isso não é falha. Duas versões publicadas sob fusos institucionais diferentes, com o mesmo prazo e a mesma âncora em instante absoluto, podem atribuir esse instante a dias civis distintos e produzir fins distintos, e cada uma permanece reproduzível pelo que congelou. Alterar a localidade em retificação, ou mudar o fuso institucional, não altera prazo de recurso já aberto sob a versão anterior.',
     verificacao:
-      'Teste de contrato: criação recusada sem localidade, inclusive quando a unidade administradora tem cidade cadastrada, sem que nenhum processo seja criado; criação com localidade diferente da cidade da unidade persistindo a declarada; as duas recusas devolvendo o mesmo código e detalhes distintos, um nomeando a criação e outro a transição recusada; interface apresentando o campo preenchido com a cidade da unidade e aceitando a troca por outro município antes do envio; publicação recusada sem localidade em processo com prazos em horas e em dias úteis, nas três transições que geram versão; localidade nunca deduzida pelo servidor de cidade, UF ou unidade administradora; fuso aplicado sem intervenção do operador e congelado na versão publicada; publicação recusada quando o fuso aplicado não for zona reconhecida; trio incoerente (prefixo × UF, código fora de sete dígitos, nome vazio) recusado; localidade e fuso presentes e imutáveis na versão publicada, com retificação de qualquer um dos dois não alterando prazo já aberto sob a versão anterior; duas localidades que difiram por um feriado dentro da janela produzindo fins distintos para a mesma âncora e o mesmo prazo; uma referência cujo nome persistido divirja do município designado pelo código produzindo o mesmo fim que a referência correta, provando que o cálculo não lê o cache de exibição; e duas versões publicadas sob fusos institucionais diferentes, com a mesma âncora absoluta, produzindo fins distintos quando o instante cai em dias civis diferentes, cada uma reproduzível pelo que congelou (planejado).',
+        'Teste de contrato: criação recusada sem localidade, inclusive quando a unidade administradora tem cidade cadastrada, sem que nenhum processo seja criado; criação com localidade diferente da cidade da unidade persistindo a declarada; as duas recusas devolvendo o mesmo código e detalhes distintos, um nomeando a criação e outro a transição recusada; interface apresentando o campo preenchido com a cidade da unidade e aceitando a troca por outro município antes do envio; publicação recusada sem localidade em processo com prazos em horas e em dias úteis, nas três transições que geram versão; localidade nunca deduzida pelo servidor de cidade, UF ou unidade administradora; fuso aplicado sem intervenção do operador e congelado na versão publicada; publicação recusada quando o fuso aplicado não for zona reconhecida; trio incoerente (prefixo × UF, código fora de sete dígitos, nome vazio) recusado; localidade e fuso presentes e imutáveis na versão publicada, com retificação de qualquer um dos dois não alterando prazo já aberto sob a versão anterior; duas localidades que difiram por um feriado dentro da janela produzindo fins distintos para a mesma âncora e o mesmo prazo; uma referência cujo nome persistido divirja do município designado pelo código produzindo o mesmo fim que a referência correta, provando que o cálculo não lê o cache de exibição; e duas versões publicadas sob fusos institucionais diferentes, com a mesma âncora absoluta, produzindo fins distintos quando o instante cai em dias civis diferentes, cada uma reproduzível pelo que congelou (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
   },
@@ -831,7 +876,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0112',
     titulo: 'Convenções de contagem de prazo disponíveis para declaração (RN13)',
     enunciado:
-      'O prazo de interposição corre sobre dia útil (UNI-REQ-0113), e duas perguntas ficam em aberto a cada contagem: o que "um dia útil" significa quando a âncora não cai à meia-noite — avançar uma data útil, consumir vinte e quatro horas situadas em dia útil, ou excluir o dia do começo e contar o seguinte por inteiro são leituras que fecham a janela em instantes diferentes —, e o que acontece quando a âncora cai em dia não útil. As respostas mudam o instante em que a janela fecha, e escolher entre elas é convenção jurídica de contagem, não decisão técnica. Por isso o sistema não elege uma: ele oferece **três convenções**, e o edital declara qual usa. Cada convenção precisa ser total: o prazo de interposição é declarável em dias úteis **ou** em horas (UNI-REQ-0113), e uma convenção que só respondesse por uma das unidades deixaria a outra indefinida. A primeira, **por exclusão do dia de início**, começa a contar às 00:00 do primeiro dia útil posterior ao dia da âncora — o que resolve as duas perguntas de uma vez, porque o dia da âncora nunca conta, caia ele em dia útil ou não, e não há dupla exclusão quando a âncora já está em dia não útil. A partir desse início, um prazo em dias úteis consome dias inteiros e encerra ao fim do último; um prazo em horas consome as horas situadas em dia útil. A segunda, **por horas úteis desde a âncora**, começa a contar no instante exato da âncora e só avança sobre horas situadas em dia útil, sem deslocar nada: se a âncora cai em dia não útil, o relógio simplesmente não avança até o próximo dia útil. Nela, um prazo em horas consome as horas declaradas, e um prazo em dias úteis consome vinte e quatro horas úteis por dia declarado — sempre horas reais, somadas uma a uma, nunca um bloco de dia creditado de uma vez: um dia civil de transição de horário contribui para esse total com as vinte e três ou vinte e cinco horas que de fato tem, e as que faltarem para completar o prazo vêm do dia seguinte, de modo que a janela fecha uma hora antes ou depois da hora local da âncora em vez de acompanhar a fronteira do dia encurtado ou alongado. A terceira, **por avanço de data útil**, também parte do instante exato da âncora, mas conta em datas: um prazo em dias úteis fecha na mesma hora da âncora, N datas úteis adiante, pulando cada data não útil — e se a âncora cai em dia não útil, ela desloca para o próximo dia útil na mesma hora antes de começar. Em horas ela **coincide com a segunda**, porque nessa unidade não há data a avançar: consome as horas situadas em dia útil desde a âncora, sem deslocar o início. A distinção entre as duas está inteira na unidade dias úteis, onde uma soma vinte e quatro horas úteis por dia declarado e a outra salta de data em data preservando a hora. A transição de fuso precisa de resposta declarada, porque preservar a hora da âncora deixa de determinar um instante único, e isso vale nos **dois** pontos em que a terceira resolve uma hora nominal numa data: o início deslocado, quando a âncora cai em dia não útil, e o fechamento. Nos dois, se a hora não existir naquela data, vale o primeiro instante válido seguinte; se ocorrer duas vezes, vale a primeira ocorrência. A regra é única de propósito — o instante mais cedo compatível com a hora nominal —, porque duas respostas diferentes para o mesmo problema em pontos distintos do cálculo produziriam prazos que dependem de onde a ambiguidade aparece. No fuso institucional aplicado hoje (UNI-REQ-0111 declara a localidade e congela a zona com a versão) nenhuma das duas situações é alcançável, porque a zona não observa horário de verão; a resposta está declarada para que a definição continue total se um fuso com transição vier a ser aplicado, e para que duas implementações não divirjam nesse ponto. A diferença entre as três é observável: a primeira descarta a hora da âncora, porque o seu início é sempre a meia-noite do primeiro dia útil posterior — em dias úteis ela encerra na fronteira final de um dia civil, e em horas, na hora contada desde essa meia-noite, que só coincide com o fim do dia quando o valor declarado é múltiplo de vinte e quatro; a segunda e a terceira preservam a hora da âncora, e é dela que o fechamento deriva, mas divergem entre si em dias úteis — a segunda acumula horas úteis, a terceira conta datas úteis. Existirem três, e não uma, é consequência direta do fundamento aprovado em UNI-REQ-0095: é o edital que fixa o prazo e declara a convenção aplicável, então eleger uma leitura como universal tiraria do edital uma escolha que a decisão institucional lhe atribui — enquanto várias permitem que certames com convenções distintas coexistam sem o projeto decidir por todos. As convenções vivem no rol de regras que o sistema já mantém, como mais um tipo de regra e não como cadastro próprio: itens com código, versão, tipo, definição e base legal, referenciados pela configuração congelada e identificados nela por código, versão e hash (UNI-REQ-0080). Congelar essa identidade só reproduz o prazo se a versão referenciada for imutável: **a partir da primeira versão de configuração que a referencie, a entrada vira fato e não pode ser alterada nem removida**; evolução é versão nova, que coexiste com a anterior. Ao contrário do calendário, cuja reprodutibilidade se resolveria copiando os dias por valor, a convenção é lógica executável e não há o que copiar para dentro do snapshot — a imutabilidade da versão referenciada é a única garantia possível, e por isso é condição do próprio congelamento. Elas são escolhidas, nunca parametrizadas — não recebem argumentos preenchidos por quem cadastra, porque o que as distingue é a definição, não valores de entrada. A base legal de cada uma declara o fundamento aprovado em UNI-REQ-0095 — a convenção aplicável é a que o edital declara, e é o edital que fixa o prazo —, apresentado como decisão institucional juridicamente orientada, nunca como jurisprudência consolidada. Nenhuma delas afirma coisa alguma sobre efeito suspensivo, cuja confirmação continua pendente em UNI-REQ-0117.',
+        'O prazo de interposição corre sobre dia útil (UNI-REQ-0113), e duas perguntas ficam em aberto a cada contagem: o que "um dia útil" significa quando a âncora não cai à meia-noite — avançar uma data útil, consumir vinte e quatro horas situadas em dia útil, ou excluir o dia do começo e contar o seguinte por inteiro são leituras que fecham a janela em instantes diferentes —, e o que acontece quando a âncora cai em dia não útil. As respostas mudam o instante em que a janela fecha, e escolher entre elas é convenção jurídica de contagem, não decisão técnica. Por isso o sistema não elege uma: ele oferece **três convenções**, e o edital declara qual usa. Cada convenção precisa ser total: o prazo de interposição é declarável em dias úteis **ou** em horas (UNI-REQ-0113), e uma convenção que só respondesse por uma das unidades deixaria a outra indefinida. A primeira, **por exclusão do dia de início**, começa a contar às 00:00 do primeiro dia útil posterior ao dia da âncora — o que resolve as duas perguntas de uma vez, porque o dia da âncora nunca conta, caia ele em dia útil ou não, e não há dupla exclusão quando a âncora já está em dia não útil. A partir desse início, um prazo em dias úteis consome dias inteiros e encerra ao fim do último; um prazo em horas consome as horas situadas em dia útil. A segunda, **por horas úteis desde a âncora**, começa a contar no instante exato da âncora e só avança sobre horas situadas em dia útil, sem deslocar nada: se a âncora cai em dia não útil, o relógio simplesmente não avança até o próximo dia útil. Nela, um prazo em horas consome as horas declaradas, e um prazo em dias úteis consome vinte e quatro horas úteis por dia declarado — sempre horas reais, somadas uma a uma, nunca um bloco de dia creditado de uma vez: um dia civil de transição de horário contribui para esse total com as vinte e três ou vinte e cinco horas que de fato tem, e as que faltarem para completar o prazo vêm do dia seguinte, de modo que a janela fecha uma hora antes ou depois da hora local da âncora em vez de acompanhar a fronteira do dia encurtado ou alongado. A terceira, **por avanço de data útil**, também parte do instante exato da âncora, mas conta em datas: um prazo em dias úteis fecha na mesma hora da âncora, N datas úteis adiante, pulando cada data não útil — e se a âncora cai em dia não útil, ela desloca para o próximo dia útil na mesma hora antes de começar. Em horas ela **coincide com a segunda**, porque nessa unidade não há data a avançar: consome as horas situadas em dia útil desde a âncora, sem deslocar o início. A distinção entre as duas está inteira na unidade dias úteis, onde uma soma vinte e quatro horas úteis por dia declarado e a outra salta de data em data preservando a hora. A transição de fuso precisa de resposta declarada, porque preservar a hora da âncora deixa de determinar um instante único, e isso vale nos **dois** pontos em que a terceira resolve uma hora nominal numa data: o início deslocado, quando a âncora cai em dia não útil, e o fechamento. Nos dois, se a hora não existir naquela data, vale o primeiro instante válido seguinte; se ocorrer duas vezes, vale a primeira ocorrência. A regra é única de propósito — o instante mais cedo compatível com a hora nominal —, porque duas respostas diferentes para o mesmo problema em pontos distintos do cálculo produziriam prazos que dependem de onde a ambiguidade aparece. No fuso institucional aplicado hoje (UNI-REQ-0111 declara a localidade e congela a zona com a versão) nenhuma das duas situações é alcançável, porque a zona não observa horário de verão; a resposta está declarada para que a definição continue total se um fuso com transição vier a ser aplicado, e para que duas implementações não divirjam nesse ponto. A diferença entre as três é observável: a primeira descarta a hora da âncora, porque o seu início é sempre a meia-noite do primeiro dia útil posterior — em dias úteis ela encerra na fronteira final de um dia civil, e em horas, na hora contada desde essa meia-noite, que só coincide com o fim do dia quando o valor declarado é múltiplo de vinte e quatro; a segunda e a terceira preservam a hora da âncora, e é dela que o fechamento deriva, mas divergem entre si em dias úteis — a segunda acumula horas úteis, a terceira conta datas úteis. Existirem três, e não uma, é consequência direta do fundamento aprovado em UNI-REQ-0095: é o edital que fixa o prazo e declara a convenção aplicável, então eleger uma leitura como universal tiraria do edital uma escolha que a decisão institucional lhe atribui — enquanto várias permitem que certames com convenções distintas coexistam sem o projeto decidir por todos. As convenções vivem no rol de regras que o sistema já mantém, como mais um tipo de regra e não como cadastro próprio: itens com código, versão, tipo, definição e base legal, referenciados pela configuração congelada e identificados nela por código, versão e hash (UNI-REQ-0080). Congelar essa identidade só reproduz o prazo se a versão referenciada for imutável: **a partir da primeira versão de configuração que a referencie, a entrada vira fato e não pode ser alterada nem removida**; evolução é versão nova, que coexiste com a anterior. Ao contrário do calendário, cuja reprodutibilidade se resolveria copiando os dias por valor, a convenção é lógica executável e não há o que copiar para dentro do snapshot — a imutabilidade da versão referenciada é a única garantia possível, e por isso é condição do próprio congelamento. Elas são escolhidas, nunca parametrizadas — não recebem argumentos preenchidos por quem cadastra, porque o que as distingue é a definição, não valores de entrada. A base legal de cada uma declara o fundamento aprovado em UNI-REQ-0095 — a convenção aplicável é a que o edital declara, e é o edital que fixa o prazo —, apresentado como decisão institucional juridicamente orientada, nunca como jurisprudência consolidada. Nenhuma delas afirma coisa alguma sobre efeito suspensivo, cuja confirmação continua pendente em UNI-REQ-0117.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -843,9 +888,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O rol de regras oferece as três convenções, cada uma declarando o seu comportamento para as duas unidades declaráveis e para as duas posições de âncora — fora da meia-noite e em dia não útil —, de modo que duas implementações do mesmo texto produzam o mesmo instante de fechamento em qualquer das seis combinações. Nenhuma combinação de convenção e unidade é proibida: as seis têm resultado definido, e duas delas coincidem por construção — em horas, a convenção por avanço de data útil e a por horas úteis desde a âncora produzem o mesmo instante, porque nessa unidade não há data a avançar. Uma configuração que declare convenção inexistente é recusada com erro nomeado. Nenhuma das três aceita argumentos de configuração: tentar parametrizá-las é recusado, porque a definição é o que as distingue. A base legal das três declara o fundamento de UNI-REQ-0095 sem exceder o que a decisão sustenta: não a qualifica como jurisprudência consolidada, não converte o dispositivo geral em fonte do prazo do certame, e nada afirma sobre efeito suspensivo. Dois processos que declarem convenções diferentes, com o mesmo prazo, a mesma âncora e o mesmo calendário, podem fechar em instantes distintos, e cada um permanece reproduzível pelo que a sua versão congelou. Alterar ou remover uma versão de convenção já referenciada por versão de configuração publicada é recusado; publicar uma versão nova da mesma convenção não altera o fechamento de recurso já aberto sob a anterior.',
+        'O rol de regras oferece as três convenções, cada uma declarando o seu comportamento para as duas unidades declaráveis e para as duas posições de âncora — fora da meia-noite e em dia não útil —, de modo que duas implementações do mesmo texto produzam o mesmo instante de fechamento em qualquer das seis combinações. Nenhuma combinação de convenção e unidade é proibida: as seis têm resultado definido, e duas delas coincidem por construção — em horas, a convenção por avanço de data útil e a por horas úteis desde a âncora produzem o mesmo instante, porque nessa unidade não há data a avançar. Uma configuração que declare convenção inexistente é recusada com erro nomeado. Nenhuma das três aceita argumentos de configuração: tentar parametrizá-las é recusado, porque a definição é o que as distingue. A base legal das três declara o fundamento de UNI-REQ-0095 sem exceder o que a decisão sustenta: não a qualifica como jurisprudência consolidada, não converte o dispositivo geral em fonte do prazo do certame, e nada afirma sobre efeito suspensivo. Dois processos que declarem convenções diferentes, com o mesmo prazo, a mesma âncora e o mesmo calendário, podem fechar em instantes distintos, e cada um permanece reproduzível pelo que a sua versão congelou. Alterar ou remover uma versão de convenção já referenciada por versão de configuração publicada é recusado; publicar uma versão nova da mesma convenção não altera o fechamento de recurso já aberto sob a anterior.',
     verificacao:
-      'Teste de contrato do rol de regras: as três convenções presentes e recuperáveis por código e versão; cada uma com as duas resoluções de âncora declaradas na definição; contraprova por convenção e por unidade — seis combinações —, com resultado declarado para âncora em sexta às 18h e para âncora em domingo às 18h, obrigatórias inclusive na unidade dias úteis, hoje não exercitáveis sobre processo publicado porque nenhum prazo de interposição é publicável sem algoritmo declarado (UNI-REQ-0116); prova de que, na segunda convenção, um prazo em dias úteis que atravesse dia de transição de horário fecha ao completar vinte e quatro horas reais por dia declarado — deslocando em uma hora a hora local do fechamento —, e não ao fim do dia civil encurtado ou alongado; prova de que, na primeira, um prazo em horas cujo valor não seja múltiplo de vinte e quatro fecha no meio de um dia civil, e não na sua fronteira final; prova de que, em dias úteis, a convenção por avanço de data útil preserva a hora da âncora e salta datas, fechando em instante distinto do da convenção por horas úteis, que acumula vinte e quatro horas úteis por dia declarado; prova de que, em horas, essas duas coincidem — e que a coincidência é da unidade, não das convenções; e prova de que as três fecham em instantes diferentes para a mesma entrada em dias úteis; recusa nomeada ao declarar convenção inexistente; tentativa de alterar ou remover versão já referenciada por configuração publicada recusada, e versão nova publicada coexistindo com a anterior sem alterar o fim de recurso já aberto sob ela; base legal das três declarando o fundamento de UNI-REQ-0095, e recusa de texto que a apresente como jurisprudência consolidada ou que afirme regra de efeito suspensivo (planejado).',
+        'Teste de contrato do rol de regras: as três convenções presentes e recuperáveis por código e versão; cada uma com as duas resoluções de âncora declaradas na definição; contraprova por convenção e por unidade — seis combinações —, com resultado declarado para âncora em sexta às 18h e para âncora em domingo às 18h, obrigatórias inclusive na unidade dias úteis, hoje não exercitáveis sobre processo publicado porque nenhum prazo de interposição é publicável sem algoritmo declarado (UNI-REQ-0116); prova de que, na segunda convenção, um prazo em dias úteis que atravesse dia de transição de horário fecha ao completar vinte e quatro horas reais por dia declarado — deslocando em uma hora a hora local do fechamento —, e não ao fim do dia civil encurtado ou alongado; prova de que, na primeira, um prazo em horas cujo valor não seja múltiplo de vinte e quatro fecha no meio de um dia civil, e não na sua fronteira final; prova de que, em dias úteis, a convenção por avanço de data útil preserva a hora da âncora e salta datas, fechando em instante distinto do da convenção por horas úteis, que acumula vinte e quatro horas úteis por dia declarado; prova de que, em horas, essas duas coincidem — e que a coincidência é da unidade, não das convenções; e prova de que as três fecham em instantes diferentes para a mesma entrada em dias úteis; recusa nomeada ao declarar convenção inexistente; tentativa de alterar ou remover versão já referenciada por configuração publicada recusada, e versão nova publicada coexistindo com a anterior sem alterar o fim de recurso já aberto sob ela; base legal das três declarando o fundamento de UNI-REQ-0095, e recusa de texto que a apresente como jurisprudência consolidada ou que afirme regra de efeito suspensivo (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
   },
@@ -853,7 +898,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0035',
     titulo: 'Controles de proteção de PII e dados sensíveis',
     enunciado:
-      'O sistema deve proteger dados pessoais e sensíveis por meio de requisitos filhos para cifra, masking, auditoria, divulgação minimizada e decisão de retenção.',
+        'O sistema deve proteger dados pessoais e sensíveis por meio de requisitos filhos para cifra, masking, auditoria, divulgação minimizada e decisão de retenção.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -865,9 +910,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'agregador',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'Cada controle de proteção possui requisito filho ou dependência explícita; nenhuma issue genérica fecha esta capacidade sozinha.',
+        'Cada controle de proteção possui requisito filho ou dependência explícita; nenhuma issue genérica fecha esta capacidade sozinha.',
     verificacao:
-      'Revisão da decomposição; testes de segurança nos filhos implementáveis.',
+        'Revisão da decomposição; testes de segurança nos filhos implementáveis.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Infraestrutura',
   },
@@ -875,7 +920,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0036',
     titulo: 'Auditoria e masking operacional',
     enunciado:
-      'O sistema deve registrar auditoria das ações relevantes e mascarar dados pessoais e sensíveis em logs e respostas.',
+        'O sistema deve registrar auditoria das ações relevantes e mascarar dados pessoais e sensíveis em logs e respostas.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -887,7 +932,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O acesso a dados sensíveis é auditável e os logs não contêm CPF, nome ou documentos em claro.',
+        'O acesso a dados sensíveis é auditável e os logs não contêm CPF, nome ou documentos em claro.',
     verificacao: 'Testes de logging e masking planejados.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Infraestrutura',
@@ -896,7 +941,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0050',
     titulo: 'Configuração de divulgação pública',
     enunciado:
-      'O sistema deve usar configuração de divulgação com default de minimização, permitindo ampliar para o nome abreviado sem justificativa ou para o nome completo mediante justificativa congelada no snapshot.',
+        'O sistema deve usar configuração de divulgação com default de minimização, permitindo ampliar para o nome abreviado sem justificativa ou para o nome completo mediante justificativa congelada no snapshot.',
     grupo: 'conformidade',
     tipo: 'requisito_conformidade',
     nivel: 'requisito',
@@ -908,7 +953,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O default publica o número de inscrição; ampliar para o nome abreviado dispensa justificativa; ampliar para o nome completo exige justificativa, que fica no snapshot.',
+        'O default publica o número de inscrição; ampliar para o nome abreviado dispensa justificativa; ampliar para o nome completo exige justificativa, que fica no snapshot.',
     verificacao: 'Validação automatizada de divulgação (planejada); revisão LGPD.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend; DPO',
@@ -917,7 +962,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0041',
     titulo: 'Homologação documental',
     enunciado:
-      'Incremento futuro deve analisar documentos apresentados, deferir ou indeferir com motivo e publicar resultado de homologação.',
+        'Incremento futuro deve analisar documentos apresentados, deferir ou indeferir com motivo e publicar resultado de homologação.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -929,7 +974,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'O plano cita a capacidade como incremento, sem backlog detalhado no MVP.',
+        'O plano cita a capacidade como incremento, sem backlog detalhado no MVP.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -938,7 +983,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0043',
     titulo: 'Avaliação e lançamento de notas',
     enunciado:
-      'Incremento futuro deve registrar notas por etapa configurável e manter trilha auditável de avaliação.',
+        'Incremento futuro deve registrar notas por etapa configurável e manter trilha auditável de avaliação.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -950,7 +995,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'As etapas são configuradas no MVP, mas o lançamento de notas é posterior.',
+        'As etapas são configuradas no MVP, mas o lançamento de notas é posterior.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -959,7 +1004,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0044',
     titulo: 'Classificação e resultado',
     enunciado:
-      'Incremento futuro deve processar resultado com motor determinístico, concorrência dupla, remanejamento, desempate, bônus regional e publicação auditável.',
+        'Incremento futuro deve processar resultado com motor determinístico, concorrência dupla, remanejamento, desempate, bônus regional e publicação auditável.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -971,7 +1016,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'O MVP congela a configuração que o motor consumirá; o processamento fica fora do recorte primário.',
+        'O MVP congela a configuração que o motor consumirá; o processamento fica fora do recorte primário.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -980,7 +1025,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0046',
     titulo: 'Aplicar bônus regional na classificação',
     enunciado:
-      'O incremento de Classificação deve aplicar o bônus regional configurado e reclassificar sem bônus quando a elegibilidade não for comprovada.',
+        'O incremento de Classificação deve aplicar o bônus regional configurado e reclassificar sem bônus quando a elegibilidade não for comprovada.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -992,7 +1037,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'A configuração do bônus é MVP; o cálculo e a reclassificação são posteriores, vinculados à configuração congelada.',
+        'A configuração do bônus é MVP; o cálculo e a reclassificação são posteriores, vinculados à configuração congelada.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
@@ -1001,7 +1046,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0053',
     titulo: 'Publicar documentação de requisitos no portal',
     enunciado:
-      'A documentação de produto e domínio deve ser publicada no portal de desenvolvedores, incluindo requisitos, regras de negócio, casos de uso, glossário e rastreabilidade.',
+        'A documentação de produto e domínio deve ser publicada no portal de desenvolvedores, incluindo requisitos, regras de negócio, casos de uso, glossário e rastreabilidade.',
     grupo: 'governanca',
     tipo: 'requisito_governanca',
     nivel: 'requisito',
@@ -1013,7 +1058,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'governanca',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'As páginas de requisitos e rastreabilidade existem no sidebar de Produto e usam apenas dados fictícios.',
+        'As páginas de requisitos e rastreabilidade existem no sidebar de Produto e usam apenas dados fictícios.',
     verificacao: 'Build do Docusaurus; verificação de links.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe de documentação',
@@ -1022,7 +1067,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0004',
     titulo: 'Autorização por Unidade',
     enunciado:
-      'O sistema deve restringir operações administrativas por Unidade administrada, com distinção para administrador de plataforma e escopo de auditoria.',
+        'O sistema deve restringir operações administrativas por Unidade administrada, com distinção para administrador de plataforma e escopo de auditoria.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1034,7 +1079,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Endpoints administrativos respeitam UnidadesAdministradas, IsPlataformaAdmin e EscopoAuditoria.',
+        'Endpoints administrativos respeitam UnidadesAdministradas, IsPlataformaAdmin e EscopoAuditoria.',
     verificacao: 'testes API de autorização planejados',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1043,7 +1088,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0005',
     titulo: 'Identidade via Keycloak',
     enunciado:
-      'O sistema deve usar Keycloak como provedor de autenticação, com brokering Gov.br tratado como configuração de realm de produção.',
+        'O sistema deve usar Keycloak como provedor de autenticação, com brokering Gov.br tratado como configuração de realm de produção.',
     grupo: 'integracao',
     tipo: 'requisito_integracao',
     nivel: 'requisito',
@@ -1055,7 +1100,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Login administrativo e do candidato usam o provedor configurado; brokering Gov.br não é código de aplicação.',
+        'Login administrativo e do candidato usam o provedor configurado; brokering Gov.br não é código de aplicação.',
     verificacao: 'testes integração auth planejados',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1064,7 +1109,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0007',
     titulo: 'Instituição singleton',
     enunciado:
-      'O sistema deve manter o registro institucional da IES hospedeira como singleton, com vínculo à Unidade raiz.',
+        'O sistema deve manter o registro institucional da IES hospedeira como singleton, com vínculo à Unidade raiz.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1076,7 +1121,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Existe um registro de Instituição com unidade_raiz_id apontando para a Reitoria.',
+        'Existe um registro de Instituição com unidade_raiz_id apontando para a Reitoria.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1085,7 +1130,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0008',
     titulo: 'Unidade hierárquica com tipo',
     enunciado:
-      'O sistema deve manter Unidades hierárquicas com tipo obrigatório e escopo explícito de administração, sem herança implícita.',
+        'O sistema deve manter Unidades hierárquicas com tipo obrigatório e escopo explícito de administração, sem herança implícita.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1097,7 +1142,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'CRUD de Unidade exige tipo e preserva hierarquia; escopo administrativo tem vigência e justificativa.',
+        'CRUD de Unidade exige tipo e preserva hierarquia; escopo administrativo tem vigência e justificativa.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1106,7 +1151,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0118',
     titulo: 'Referência de cidade na Unidade organizacional',
     enunciado:
-      'A Unidade organizacional registra em que município está, pela mesma referência de cidade que Campus e Local de Oferta já usam (UNI-REQ-0009): código IBGE de sete dígitos, nome e UF, em que o **código é o identificador** e nome e UF são cache de exibição, preenchidos por quem cadastra a partir do cadastro de localidades: divergirem do município que o código designa é defeito de rótulo, jamais de identidade. A referência não cruza o limite entre contextos por chave estrangeira — o serviço que mantém as localidades é dono do município, e a Unidade guarda a referência por valor. Ela é **opcional, e opcional por inteiro**: Unidade sem cidade é estado válido, e qualquer fragmento presente passa a exigir o trio completo; ausente, a referência não deixa resto — os três campos ficam nulos, nunca texto em branco ocupando o lugar de um deles. Não é obrigatória em toda Unidade porque nem toda unidade administra certame: a hierarquia vai da reitoria à divisão e ao núcleo, e exigir município de todas encheria o cadastro de dado que ninguém lê. Exigi-la é assunto de cada **ponto de uso**, e não deste requisito — a criação de Processo Seletivo hoje a exige, sob fundamento que está em reexame (UNI-REQ-0119). O que este requisito garante do lado do processo é outra coisa, e independe daquela exigência: quando a unidade administradora tem cidade, ela é copiada por valor para o processo na criação e permanece ali inalterada depois que a unidade passa a registrar outro município. O que esta referência **não** é: ela descreve onde a unidade fica, e não determina quais feriados incidem na contagem de prazos do certame — isso é a localidade regente, que o processo declara por conta própria e que o servidor nunca deduz da unidade (UNI-REQ-0111). A distinção precisa estar registrada porque a origem do atributo foi justamente a contagem de dias úteis: enquanto se supunha que a localidade viria da unidade administradora, cidade da unidade e localidade regente eram a mesma coisa; deixaram de ser quando a declaração explícita prevaleceu, e o atributo permaneceu descrevendo a unidade, que é o que sempre descreveu. A cidade da unidade pode servir de sugestão ao operador que declara a localidade, e sugerir não é deduzir. Como em UNI-REQ-0111, a existência do município não é verificada no momento da gravação: um código bem formado que não designe município real é gravável, e o sistema não mantém cadastro próprio para cruzar.',
+        'A Unidade organizacional registra em que município está, pela mesma referência de cidade que Campus e Local de Oferta já usam (UNI-REQ-0009): código IBGE de sete dígitos, nome e UF, em que o **código é o identificador** e nome e UF são cache de exibição, preenchidos por quem cadastra a partir do cadastro de localidades: divergirem do município que o código designa é defeito de rótulo, jamais de identidade. A referência não cruza o limite entre contextos por chave estrangeira — o serviço que mantém as localidades é dono do município, e a Unidade guarda a referência por valor. Ela é **opcional, e opcional por inteiro**: Unidade sem cidade é estado válido, e qualquer fragmento presente passa a exigir o trio completo; ausente, a referência não deixa resto — os três campos ficam nulos, nunca texto em branco ocupando o lugar de um deles. Não é obrigatória em toda Unidade porque nem toda unidade administra certame: a hierarquia vai da reitoria à divisão e ao núcleo, e exigir município de todas encheria o cadastro de dado que ninguém lê. Exigi-la é assunto de cada **ponto de uso**, e não deste requisito — a criação de Processo Seletivo hoje a exige, sob fundamento que está em reexame (UNI-REQ-0119). O que este requisito garante do lado do processo é outra coisa, e independe daquela exigência: quando a unidade administradora tem cidade, ela é copiada por valor para o processo na criação e permanece ali inalterada depois que a unidade passa a registrar outro município. O que esta referência **não** é: ela descreve onde a unidade fica, e não determina quais feriados incidem na contagem de prazos do certame — isso é a localidade regente, que o processo declara por conta própria e que o servidor nunca deduz da unidade (UNI-REQ-0111). A distinção precisa estar registrada porque a origem do atributo foi justamente a contagem de dias úteis: enquanto se supunha que a localidade viria da unidade administradora, cidade da unidade e localidade regente eram a mesma coisa; deixaram de ser quando a declaração explícita prevaleceu, e o atributo permaneceu descrevendo a unidade, que é o que sempre descreveu. A cidade da unidade pode servir de sugestão ao operador que declara a localidade, e sugerir não é deduzir. Como em UNI-REQ-0111, a existência do município não é verificada no momento da gravação: um código bem formado que não designe município real é gravável, e o sistema não mantém cadastro próprio para cruzar.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1118,18 +1163,18 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cadastrar Unidade com o trio completo persiste a referência, e o nome e a UF ficam disponíveis para exibição sem entrar em cálculo nenhum. Cadastrar Unidade sem cidade alguma é aceito, e a ausência fica registrada como os três campos nulos, nunca como texto em branco. Cadastrar Unidade com trio incompleto ou incoerente — qualquer fragmento sozinho, código fora de sete dígitos, prefixo de código incompatível com a UF informada, nome vazio — é recusado, do mesmo modo que já o é em Campus e Local de Oferta; a recusa informa o trio exigido, e não promete apontar qual dos três campos falhou. Alterar a Unidade removendo a cidade zera os três campos juntos. Copiada para o processo na criação, a cidade da unidade administradora não muda mais junto com o cadastro da unidade. A cidade da unidade nunca é lida como localidade regente: um processo cuja unidade administradora está num município e cuja localidade declarada é outro conta os prazos pelos feriados do município declarado, e não pelos da unidade.',
+        'Cadastrar Unidade com o trio completo persiste a referência, e o nome e a UF ficam disponíveis para exibição sem entrar em cálculo nenhum. Cadastrar Unidade sem cidade alguma é aceito, e a ausência fica registrada como os três campos nulos, nunca como texto em branco. Cadastrar Unidade com trio incompleto ou incoerente — qualquer fragmento sozinho, código fora de sete dígitos, prefixo de código incompatível com a UF informada, nome vazio — é recusado, do mesmo modo que já o é em Campus e Local de Oferta; a recusa informa o trio exigido, e não promete apontar qual dos três campos falhou. Alterar a Unidade removendo a cidade zera os três campos juntos. Copiada para o processo na criação, a cidade da unidade administradora não muda mais junto com o cadastro da unidade. A cidade da unidade nunca é lida como localidade regente: um processo cuja unidade administradora está num município e cuja localidade declarada é outro conta os prazos pelos feriados do município declarado, e não pelos da unidade.',
     verificacao:
-      'Testes automatizados cobrem hoje o cadastro de Unidade com o trio completo, sem cidade alguma e com cada fragmento isolado — este último recusado —, o trio de UF incoerente recusado, e a alteração que remove a cidade zerando os três campos; do lado do processo, cobrem a cidade da unidade preservada na cópia congelada dela mesmo quando a localidade declarada é outra, provando que uma não supre a outra. Permanecem planejados o exercício da cópia congelada depois de a unidade mudar de município — hoje garantida por construção, e não por teste próprio — e a contagem que confirma serem os feriados do município declarado, e não os da unidade, que fecham o prazo, dependente do motor de contagem ainda em implementação.',
+        'Testes automatizados cobrem hoje o cadastro de Unidade com o trio completo, sem cidade alguma e com cada fragmento isolado — este último recusado —, o trio de UF incoerente recusado, e a alteração que remove a cidade zerando os três campos; do lado do processo, cobrem a cidade da unidade preservada na cópia congelada dela mesmo quando a localidade declarada é outra, provando que uma não supre a outra. Permanecem planejados o exercício da cópia congelada depois de a unidade mudar de município — hoje garantida por construção, e não por teste próprio — e a contagem que confirma serem os feriados do município declarado, e não os da unidade, que fecham o prazo, dependente do motor de contagem ainda em implementação.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
   {
     requisito_id: 'UNI-REQ-0119',
     titulo:
-      'Cidade obrigatória na unidade administradora ao criar Processo Seletivo — fundamento a reconfirmar',
+        'Cidade obrigatória na unidade administradora ao criar Processo Seletivo — fundamento a reconfirmar',
     enunciado:
-      'Criar Processo Seletivo indicando como administradora uma Unidade sem cidade cadastrada (UNI-REQ-0118) é recusado, com erro nomeado próprio e sem que processo algum seja criado. O código dessa recusa é distinto do que recusa a criação sem localidade declarada (UNI-REQ-0111), porque as duas se corrigem em lugares diferentes — uma no cadastro da unidade, a outra no formulário do processo —, e compartilhar o código mandaria o operador procurar a correção no lugar errado. A regra está no ar, e é por isso que está registrada; o que falta é reconfirmar **por que** ela existe. Ela nasceu quando se supunha que a localidade que rege a contagem de prazos viria da unidade administradora: sem cidade na unidade, não haveria como contar dia útil. Essa premissa caiu quando a localidade passou a ser declarada pelo processo (UNI-REQ-0111), e a exigência sobreviveu sem que a razão de ser fosse reexaminada. Duas leituras seguem abertas, e nenhuma é obviamente a certa: ou a exigência se justifica por si — a unidade que administra um certame é sempre situada, e cadastro institucional que não sabe onde ela fica está incompleto —, ou virou rigor sem função, que recusa a criação de um processo por causa de um dado que já não decide coisa alguma nele. A escolha não é trivial, e a razão está no desenho do congelamento: o processo nasce em rascunho e só depois recebe cronograma e regra de recurso, mas a unidade administradora é copiada por valor **na criação** e permanece imutável pela vida do processo, sem operação de revinculação. Trocar a recusa incondicional por uma exigência tardia — cobrar a cidade apenas quando a configuração passar a precisar dela — não é implementável sem antes decidir como a cópia congelada se completaria; sem essa decisão, a exigência tardia só saberia recusar. Enquanto não houver deliberação, este registro descreve a regra vigente sem afirmá-la aprovada.',
+        'Criar Processo Seletivo indicando como administradora uma Unidade sem cidade cadastrada (UNI-REQ-0118) é recusado, com erro nomeado próprio e sem que processo algum seja criado. O código dessa recusa é distinto do que recusa a criação sem localidade declarada (UNI-REQ-0111), porque as duas se corrigem em lugares diferentes — uma no cadastro da unidade, a outra no formulário do processo —, e compartilhar o código mandaria o operador procurar a correção no lugar errado. A regra está no ar, e é por isso que está registrada; o que falta é reconfirmar **por que** ela existe. Ela nasceu quando se supunha que a localidade que rege a contagem de prazos viria da unidade administradora: sem cidade na unidade, não haveria como contar dia útil. Essa premissa caiu quando a localidade passou a ser declarada pelo processo (UNI-REQ-0111), e a exigência sobreviveu sem que a razão de ser fosse reexaminada. Duas leituras seguem abertas, e nenhuma é obviamente a certa: ou a exigência se justifica por si — a unidade que administra um certame é sempre situada, e cadastro institucional que não sabe onde ela fica está incompleto —, ou virou rigor sem função, que recusa a criação de um processo por causa de um dado que já não decide coisa alguma nele. A escolha não é trivial, e a razão está no desenho do congelamento: o processo nasce em rascunho e só depois recebe cronograma e regra de recurso, mas a unidade administradora é copiada por valor **na criação** e permanece imutável pela vida do processo, sem operação de revinculação. Trocar a recusa incondicional por uma exigência tardia — cobrar a cidade apenas quando a configuração passar a precisar dela — não é implementável sem antes decidir como a cópia congelada se completaria; sem essa decisão, a exigência tardia só saberia recusar. Enquanto não houver deliberação, este registro descreve a regra vigente sem afirmá-la aprovada.',
     grupo: 'negocio',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -1141,9 +1186,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A deliberação registra se a exigência permanece e sob que fundamento — a completude do cadastro institucional, algum uso posterior da cidade da unidade, ou nenhum, caso em que a exigência cai e criar processo com unidade sem cidade passa a ser aceito. Se o fundamento escolhido depender de a cidade ser cobrada mais tarde, e não na criação, a deliberação diz também como a cópia congelada da unidade se completa depois — hoje não há operação que a revincule. Até que ela ocorra, o comportamento vigente é o que este requisito descreve: recusa com erro nomeado próprio, distinto do de localidade ausente, sem que nenhum processo seja criado.',
+        'A deliberação registra se a exigência permanece e sob que fundamento — a completude do cadastro institucional, algum uso posterior da cidade da unidade, ou nenhum, caso em que a exigência cai e criar processo com unidade sem cidade passa a ser aceito. Se o fundamento escolhido depender de a cidade ser cobrada mais tarde, e não na criação, a deliberação diz também como a cópia congelada da unidade se completa depois — hoje não há operação que a revincule. Até que ela ocorra, o comportamento vigente é o que este requisito descreve: recusa com erro nomeado próprio, distinto do de localidade ausente, sem que nenhum processo seja criado.',
     verificacao:
-      'Deliberação registrada pelo PO, com o registro atualizado em seguida. O comportamento vigente já é exercitado por teste automatizado, que confirma a recusa com código próprio e sem nada persistido.',
+        'Deliberação registrada pelo PO, com o registro atualizado em seguida. O comportamento vigente já é exercitado por teste automatizado, que confirma a recusa com código próprio e sem nada persistido.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO; Tech Lead',
   },
@@ -1151,7 +1196,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0009',
     titulo: 'Cidade, Campus e LocalOferta',
     enunciado:
-      'O sistema deve modelar Cidade, Campus e LocalOferta como conceitos distintos, com LocalOferta ligado ao Campus responsável e à cidade real da oferta.',
+        'O sistema deve modelar Cidade, Campus e LocalOferta como conceitos distintos, com LocalOferta ligado ao Campus responsável e à cidade real da oferta.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1163,7 +1208,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'OfertaCurso aponta para LocalOferta; Campus e LocalOferta referenciam Cidade corretamente.',
+        'OfertaCurso aponta para LocalOferta; Campus e LocalOferta referenciam Cidade corretamente.',
     verificacao: 'testes API planejados',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1172,7 +1217,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0010',
     titulo: 'Curso e OfertaCurso',
     enunciado:
-      'O sistema deve separar Curso curricular puro de OfertaCurso, que liga Curso a LocalOferta, Unidade ofertante e atributos regulatórios da oferta.',
+        'O sistema deve separar Curso curricular puro de OfertaCurso, que liga Curso a LocalOferta, Unidade ofertante e atributos regulatórios da oferta.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1184,7 +1229,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Curso não carrega local; OfertaCurso carrega LocalOferta, Unidade e nível de ensino.',
+        'Curso não carrega local; OfertaCurso carrega LocalOferta, Unidade e nível de ensino.',
     verificacao: 'testes API planejados',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1193,7 +1238,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0012',
     titulo: 'Atendimento especializado configurável',
     enunciado:
-      'O sistema deve separar oferta de atendimento especializado no Processo da solicitação feita na Inscrição.',
+        'O sistema deve separar oferta de atendimento especializado no Processo da solicitação feita na Inscrição.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1205,7 +1250,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Condição, recurso e tipo de deficiência são configurados no processo e solicitados na inscrição.',
+        'Condição, recurso e tipo de deficiência são configurados no processo e solicitados na inscrição.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1214,7 +1259,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0013',
     titulo: 'TipoDocumento classificatório',
     enunciado:
-      'O sistema deve manter TipoDocumento apenas como cadastro classificatório do que o documento é, sem validade material, assinatura ou regra de lideranças. Os formatos aceitos e o tamanho máximo são apenas defaults classificatórios, sem efeito material em runtime: a lista de formatos permitidos, os limites por formato e o limite global valem quando congelados na exigência (UNI-REQ-0066), fonte de verdade única do que é validado.',
+        'O sistema deve manter TipoDocumento apenas como cadastro classificatório do que o documento é, sem validade material, assinatura ou regra de lideranças. Os formatos aceitos e o tamanho máximo são apenas defaults classificatórios, sem efeito material em runtime: a lista de formatos permitidos, os limites por formato e o limite global valem quando congelados na exigência (UNI-REQ-0066), fonte de verdade única do que é validado.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1226,7 +1271,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'TipoDocumento tem apenas código, nome, descrição, categoria e, como defaults classificatórios, formatos aceitos e tamanho máximo; esses defaults não são a regra material de runtime, que vem da exigência congelada (UNI-REQ-0066).',
+        'TipoDocumento tem apenas código, nome, descrição, categoria e, como defaults classificatórios, formatos aceitos e tamanho máximo; esses defaults não são a regra material de runtime, que vem da exigência congelada (UNI-REQ-0066).',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1235,7 +1280,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0018',
     titulo: 'Validação config-time por motor de obrigatoriedades',
     enunciado:
-      'O sistema deve validar a configuração legal de obrigatoriedades antes da publicação usando motor data-driven. Uma obrigatoriedade específica usa o código canônico de um tipo de processo seletivo ativo; "*" permanece o único código universal.',
+        'O sistema deve validar a configuração legal de obrigatoriedades antes da publicação usando motor data-driven. Uma obrigatoriedade específica usa o código canônico de um tipo de processo seletivo ativo; "*" permanece o único código universal.',
     grupo: 'qualidade',
     tipo: 'requisito_qualidade',
     nivel: 'requisito',
@@ -1247,7 +1292,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Configuração incoerente é bloqueada antes da publicação com erro de domínio compreensível; obrigatoriedade específica para código inexistente ou inativo é recusada, enquanto "*" continua válida como regra universal.',
+        'Configuração incoerente é bloqueada antes da publicação com erro de domínio compreensível; obrigatoriedade específica para código inexistente ou inativo é recusada, enquanto "*" continua válida como regra universal.',
     verificacao: 'testes de domínio planejados',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1256,7 +1301,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0020',
     titulo: 'Canonicalização estável da configuração congelada',
     enunciado:
-      'O sistema define um perfil de canonicalização (chaves reordenadas por comparação ordinal, strings de negócio normalizadas em NFC, número e booleano preservados, null explícito distinto de campo ausente, escape mínimo) para a configuração congelada e seu hash — SHA-256 sobre a forma canônica —, versionado por schema_version, reprodutível entre aplicação e banco.',
+        'O sistema define um perfil de canonicalização (chaves reordenadas por comparação ordinal, strings de negócio normalizadas em NFC, número e booleano preservados, null explícito distinto de campo ausente, escape mínimo) para a configuração congelada e seu hash — SHA-256 sobre a forma canônica —, versionado por schema_version, reprodutível entre aplicação e banco.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1268,9 +1313,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A canonicalização define algoritmo (digest SHA-256 sobre JSON canônico), ordenação de arrays e chaves, tratamento de campos voláteis/opcionais e versão de schema; fixtures golden cobrem a forma canônica reproduzida de forma idêntica entre aplicação e banco, inclusive sob permutação de entrada. Enquanto não há produção, a forma evolui livremente por reescrita de fixture — a imutabilidade "um perfil não muda depois de emitir" passa a valer na primeira emissão de produção.',
+        'A canonicalização define algoritmo (digest SHA-256 sobre JSON canônico), ordenação de arrays e chaves, tratamento de campos voláteis/opcionais e versão de schema; fixtures golden cobrem a forma canônica reproduzida de forma idêntica entre aplicação e banco, inclusive sob permutação de entrada. Enquanto não há produção, a forma evolui livremente por reescrita de fixture — a imutabilidade "um perfil não muda depois de emitir" passa a valer na primeira emissão de produção.',
     verificacao:
-      'Testes golden automatizados (PerfilCanonicoV1GoldenTests, EnvelopeCanonicoGoldenTests) cobrem a forma canônica reproduzida entre aplicação e banco.',
+        'Testes golden automatizados (PerfilCanonicoV1GoldenTests, EnvelopeCanonicoGoldenTests) cobrem a forma canônica reproduzida entre aplicação e banco.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
   },
@@ -1278,7 +1323,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0026',
     titulo: 'Solicitar atendimento especializado',
     enunciado:
-      'O candidato deve poder solicitar condições, recursos e tipos de deficiência ofertados para o processo seletivo da inscrição.',
+        'O candidato deve poder solicitar condições, recursos e tipos de deficiência ofertados para o processo seletivo da inscrição.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1290,7 +1335,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Solicitação só aceita itens do mesmo processo e tipo de deficiência sob a condição selecionada.',
+        'Solicitação só aceita itens do mesmo processo e tipo de deficiência sob a condição selecionada.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1299,7 +1344,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0030',
     titulo: 'Pendência derivada pós-submit',
     enunciado:
-      'O sistema deve calcular pendência viva após submissão sem mudar InscricaoStatus. As causas são exemplificativas e não exaustivas: ausência de documento, documento em estado técnico diferente de limpo e, com a árvore de satisfação, exigência pendente, indeterminada, impossível ou com slot de cardinalidade pendente. A consulta e o comprovante distinguem esses estados.',
+        'O sistema deve calcular pendência viva após submissão sem mudar InscricaoStatus. As causas são exemplificativas e não exaustivas: ausência de documento, documento em estado técnico diferente de limpo e, com a árvore de satisfação, exigência pendente, indeterminada, impossível ou com slot de cardinalidade pendente. A consulta e o comprovante distinguem esses estados.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1311,7 +1356,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Inscrição permanece Submetida; pendência aparece em consulta e comprovante conforme documentos vigentes.',
+        'Inscrição permanece Submetida; pendência aparece em consulta e comprovante conforme documentos vigentes.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1320,7 +1365,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0034',
     titulo: 'Deduplicação de candidato por CPF hash',
     enunciado:
-      'O sistema deve representar candidato como pessoa física deduplicada por cpf_hash global e copiar cpf_hash para inscrição como otimização operacional.',
+        'O sistema deve representar candidato como pessoa física deduplicada por cpf_hash global e copiar cpf_hash para inscrição como otimização operacional.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1332,7 +1377,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Mesmo CPF não duplica candidato; inscrição carrega cpf_hash derivado.',
+        'Mesmo CPF não duplica candidato; inscrição carrega cpf_hash derivado.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1341,7 +1386,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0037',
     titulo: 'Isolamento por schema e snapshot-copy',
     enunciado:
-      'O sistema é um monólito modular sobre um banco único (uniplus) com isolamento por schema por módulo (ADR-0097): cada módulo tem seu schema e não lê nem escreve nas tabelas de outro. A referência cross-módulo é por snapshot-copy com origem_id, sem foreign key cruzando a fronteira do módulo, preservando o desacoplamento mesmo com banco único.',
+        'O sistema é um monólito modular sobre um banco único (uniplus) com isolamento por schema por módulo (ADR-0097): cada módulo tem seu schema e não lê nem escreve nas tabelas de outro. A referência cross-módulo é por snapshot-copy com origem_id, sem foreign key cruzando a fronteira do módulo, preservando o desacoplamento mesmo com banco único.',
     grupo: 'dados',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -1353,7 +1398,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Banco único com schema por módulo; nenhuma FK cruza a fronteira de módulo; a referência cross-módulo é snapshot-copy com origem_id quando aplicável.',
+        'Banco único com schema por módulo; nenhuma FK cruza a fronteira de módulo; a referência cross-módulo é snapshot-copy com origem_id quando aplicável.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
@@ -1362,7 +1407,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0038',
     titulo: 'Invariantes relacionais de coerência de processo',
     enunciado:
-      'O banco deve impedir que documentos e solicitações de atendimento cruzem processos seletivos por referências válidas isoladamente, mas incoerentes em conjunto.',
+        'O banco deve impedir que documentos e solicitações de atendimento cruzem processos seletivos por referências válidas isoladamente, mas incoerentes em conjunto.',
     grupo: 'dados',
     tipo: 'restricao',
     nivel: 'regra',
@@ -1374,7 +1419,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'As cinco invariantes existem como migrations e testes automatizados.',
+        'As cinco invariantes existem como migrations e testes automatizados.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1383,7 +1428,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0039',
     titulo: 'Mapear violação relacional para erro de domínio',
     enunciado:
-      'A API deve converter check_violation das invariantes relacionais em erro de domínio, preferencialmente HTTP 422, nunca 500.',
+        'A API deve converter check_violation das invariantes relacionais em erro de domínio, preferencialmente HTTP 422, nunca 500.',
     grupo: 'qualidade',
     tipo: 'requisito_qualidade',
     nivel: 'requisito',
@@ -1395,7 +1440,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Violação de trigger retorna mensagem segura ao usuário e detalhe técnico apenas em log interno.',
+        'Violação de trigger retorna mensagem segura ao usuário e detalhe técnico apenas em log interno.',
     verificacao: 'testes API erro 422 planejados',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1404,7 +1449,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0040',
     titulo: 'Cobertura de regressão das regras de negócio na implementação',
     enunciado:
-      'A implementação deve cobrir, com testes automatizados no repositório dono, as regras de negócio que determinam o resultado (unicidade, congelamento, documentos, atendimento, LGPD, publicação).',
+        'A implementação deve cobrir, com testes automatizados no repositório dono, as regras de negócio que determinam o resultado (unicidade, congelamento, documentos, atendimento, LGPD, publicação).',
     grupo: 'qualidade',
     tipo: 'requisito_qualidade',
     nivel: 'requisito',
@@ -1416,7 +1461,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Toda alteração em unicidade, validação documental, snapshot, documentos, atendimento, LGPD ou publicação ajusta teste correspondente.',
+        'Toda alteração em unicidade, validação documental, snapshot, documentos, atendimento, LGPD ou publicação ajusta teste correspondente.',
     verificacao: 'testes API/integração planejados',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
@@ -1425,7 +1470,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0042',
     titulo: 'Ensalamento e locais exatos de prova',
     enunciado:
-      'Incremento futuro deve gerenciar salas, capacidade, distribuição de candidatos e locais exatos de prova.',
+        'Incremento futuro deve gerenciar salas, capacidade, distribuição de candidatos e locais exatos de prova.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -1437,7 +1482,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Plano cita como incremento, sem backlog detalhado no MVP.',
+        'Plano cita como incremento, sem backlog detalhado no MVP.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -1446,7 +1491,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0045',
     titulo: 'Processar realocação de 2ª opção',
     enunciado:
-      'Incremento de Classificação deve processar vagas de 1ª opção antes da realocação para 2ª opção conforme saldo de vagas.',
+        'Incremento de Classificação deve processar vagas de 1ª opção antes da realocação para 2ª opção conforme saldo de vagas.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1458,7 +1503,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Regra aparece como processamento futuro, vinculada ao suporte estrutural UNI-REQ-0024.',
+        'Regra aparece como processamento futuro, vinculada ao suporte estrutural UNI-REQ-0024.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1467,7 +1512,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0047',
     titulo: 'Lista de espera',
     enunciado:
-      'Incremento de Classificação deve inserir candidatos em lista de espera conforme opção indicada no ato da inscrição e regras do edital.',
+        'Incremento de Classificação deve inserir candidatos em lista de espera conforme opção indicada no ato da inscrição e regras do edital.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1479,7 +1524,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Regra aparece como processamento futuro, sem backlog no MVP.',
+        'Regra aparece como processamento futuro, sem backlog no MVP.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1488,7 +1533,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0048',
     titulo: 'Recursos administrativos',
     enunciado:
-      'Incremento futuro deve prover recurso eletrônico reutilizável para homologação, notas, classificação e habilitação, com protocolo e análise.',
+        'Incremento futuro deve prover recurso eletrônico reutilizável para homologação, notas, classificação e habilitação, com protocolo e análise.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -1500,7 +1545,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Plano cita como incremento transversal, sem backlog detalhado no MVP.',
+        'Plano cita como incremento transversal, sem backlog detalhado no MVP.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -1509,7 +1554,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0049',
     titulo: 'Habilitação e chamadas de vagas',
     enunciado:
-      'Habilitação e chamadas de vagas pertencem à fronteira Ingresso/CRCA e ficam fora do módulo Seleção MVP.',
+        'Habilitação e chamadas de vagas pertencem à fronteira Ingresso/CRCA e ficam fora do módulo Seleção MVP.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -1521,7 +1566,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Plano marca fronteira Seleção x Ingresso.',
+        'Plano marca fronteira Seleção x Ingresso.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -1530,7 +1575,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0051',
     titulo: 'Retenção de documentos de processo seletivo',
     enunciado:
-      'O projeto deve confirmar prazo de retenção e expurgo para documentos de processo seletivo conforme Tabela de Temporalidade das IFES e orientação DPO/jurídico.',
+        'O projeto deve confirmar prazo de retenção e expurgo para documentos de processo seletivo conforme Tabela de Temporalidade das IFES e orientação DPO/jurídico.',
     grupo: 'conformidade',
     tipo: 'dependencia',
     nivel: 'dependencia',
@@ -1542,7 +1587,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'dependencia_externa',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Antes de divulgação/produção, dependência tem dono, decisão e impacto registrados.',
+        'Antes de divulgação/produção, dependência tem dono, decisão e impacto registrados.',
     verificacao: 'revisão DPO/jurídico',
     pagina_developers: '/produto/conformidade-legal/',
     owner: 'Equipe backend; DPO',
@@ -1551,7 +1596,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0052',
     titulo: 'Seed sintético mínimo no MVP',
     enunciado:
-      'O MVP deve nascer com seed sintético mínimo para desenvolvimento e teste, sem carga real ampla de cursos, ofertas ou unidades.',
+        'O MVP deve nascer com seed sintético mínimo para desenvolvimento e teste, sem carga real ampla de cursos, ofertas ou unidades.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -1563,7 +1608,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Exemplos usam CPFs fictícios e personas canônicas; carga real ampla fica como incremento futuro.',
+        'Exemplos usam CPFs fictícios e personas canônicas; carga real ampla fica como incremento futuro.',
     verificacao: 'revisão documental',
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
@@ -1572,7 +1617,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0057',
     titulo: 'Aplicabilidade da exigência documental (GERAL/CONDICIONAL)',
     enunciado:
-      'Cada documento exigido declara explicitamente sua aplicabilidade: GERAL (exigido de todos) ou CONDICIONAL (exigido de quem satisfaz o gatilho sobre os fatos resolvidos do sujeito no instante e na fase da avaliação — cobrindo fatos derivados, declarados e de integração, fases posteriores e sujeito-entidade), substituindo a inferência pela ausência de condições. Em CONDICIONAL, zero condições significa exigido de ninguém (estado não-ambíguo). A aplicabilidade declarada congela no snapshot da publicação.',
+        'Cada documento exigido declara explicitamente sua aplicabilidade: GERAL (exigido de todos) ou CONDICIONAL (exigido de quem satisfaz o gatilho sobre os fatos resolvidos do sujeito no instante e na fase da avaliação — cobrindo fatos derivados, declarados e de integração, fases posteriores e sujeito-entidade), substituindo a inferência pela ausência de condições. Em CONDICIONAL, zero condições significa exigido de ninguém (estado não-ambíguo). A aplicabilidade declarada congela no snapshot da publicação.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1584,7 +1629,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Aplicabilidade obrigatória ∈ {GERAL, CONDICIONAL}; GERAL não convive com condição viva; condição exige CONDICIONAL; publicar exigência CONDICIONAL sem condições que determina resultado é bloqueado.',
+        'Aplicabilidade obrigatória ∈ {GERAL, CONDICIONAL}; GERAL não convive com condição viva; condição exige CONDICIONAL; publicar exigência CONDICIONAL sem condições que determina resultado é bloqueado.',
     verificacao: 'Teste automatizado (aplicabilidade e validação de publicação) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1593,7 +1638,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0058',
     titulo: 'Identidade congelada da exigência (exigencia_id)',
     enunciado:
-      'O snapshot congela o identificador estável de cada exigência (exigencia_id), que é a dimensão básica da correlação apresentação↔exigência, sem reler a configuração viva. Quando a exigência repete por entidade (UNI-REQ-0069), essa dimensão é estendida pela identidade da instância: a correlação passa a ser (exigencia_id, tipoEntidade, entidade_id), de modo que exigencia_id sozinho identifica o molde e a tripla identifica a instância a satisfazer. A paridade entre o congelado e o apresentado é célula a célula por essa identidade (suporta duas ou mais exigências do mesmo tipo de documento e a repetição por entidade).',
+        'O snapshot congela o identificador estável de cada exigência (exigencia_id), que é a dimensão básica da correlação apresentação↔exigência, sem reler a configuração viva. Quando a exigência repete por entidade (UNI-REQ-0069), essa dimensão é estendida pela identidade da instância: a correlação passa a ser (exigencia_id, tipoEntidade, entidade_id), de modo que exigencia_id sozinho identifica o molde e a tripla identifica a instância a satisfazer. A paridade entre o congelado e o apresentado é célula a célula por essa identidade (suporta duas ou mais exigências do mesmo tipo de documento e a repetição por entidade).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1605,7 +1650,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'exigencia_id presente e estável no snapshot; correlação por exigencia_id no caso comum e por (exigencia_id, tipoEntidade, entidade_id) quando repetePorEntidade está ativo; paridade célula a célula por essa identidade; duas ou mais exigências do mesmo tipo resolvem de forma determinística pelo fato do candidato.',
+        'exigencia_id presente e estável no snapshot; correlação por exigencia_id no caso comum e por (exigencia_id, tipoEntidade, entidade_id) quando repetePorEntidade está ativo; paridade célula a célula por essa identidade; duas ou mais exigências do mesmo tipo resolvem de forma determinística pelo fato do candidato.',
     verificacao: 'Teste automatizado (paridade por exigencia_id) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1614,7 +1659,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0059',
     titulo: 'Base legal 1:N por exigência com validação de publicação',
     enunciado:
-      'Cada exigência pode ter várias bases legais (1:N), com referência, abrangência (FEDERAL, ESTADUAL, MUNICIPAL, INTERNA_NORMA ou INTERNA_EDITAL) e status (PENDENTE ou RESOLVIDO). A validação de publicação exige ≥1 base ativa RESOLVIDO para toda exigência que determina resultado (obrigatória ou com consequência). Só bases RESOLVIDO congelam no snapshot.',
+        'Cada exigência pode ter várias bases legais (1:N), com referência, abrangência (FEDERAL, ESTADUAL, MUNICIPAL, INTERNA_NORMA ou INTERNA_EDITAL) e status (PENDENTE ou RESOLVIDO). A validação de publicação exige ≥1 base ativa RESOLVIDO para toda exigência que determina resultado (obrigatória ou com consequência). Só bases RESOLVIDO congelam no snapshot.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1626,7 +1671,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      '≥1 base RESOLVIDO de qualquer das cinco abrangências para quem determina resultado; só-PENDENTE bloqueia a publicação; rebaixar, reassociar ou remover a única base RESOLVIDO é apanhado na publicação; só bases RESOLVIDO congelam.',
+        '≥1 base RESOLVIDO de qualquer das cinco abrangências para quem determina resultado; só-PENDENTE bloqueia a publicação; rebaixar, reassociar ou remover a única base RESOLVIDO é apanhado na publicação; só bases RESOLVIDO congelam.',
     verificacao: 'Teste automatizado (validação de base legal na publicação) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1635,7 +1680,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0060',
     titulo: 'Seletor de snapshot vigente e snapshot do ato',
     enunciado:
-      'Um seletor retorna o snapshot da publicação vigente do processo — a publicação viva com a maior data de publicação ≤ instante (escolhe o edital, depois o snapshot dele; sem publicação vigente, expõe a ausência, sem fallback). Um índice de unicidade sobre (processo, data de publicação) garante ordem total. O ato persiste o identificador do snapshot que o governou; o instante é sempre explícito, nunca o relógio interno.',
+        'Um seletor retorna o snapshot da publicação vigente do processo — a publicação viva com a maior data de publicação ≤ instante (escolhe o edital, depois o snapshot dele; sem publicação vigente, expõe a ausência, sem fallback). Um índice de unicidade sobre (processo, data de publicação) garante ordem total. O ato persiste o identificador do snapshot que o governou; o instante é sempre explícito, nunca o relógio interno.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1647,7 +1692,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Maior data de publicação ≤ instante; empate impossível por unicidade; ausência exposta quando não há publicação vigente; o ato preserva o snapshot que o governou, imutável; coerência de processo.',
+        'Maior data de publicação ≤ instante; empate impossível por unicidade; ausência exposta quando não há publicação vigente; o ato preserva o snapshot que o governou, imutável; coerência de processo.',
     verificacao: 'Teste automatizado (seletor de snapshot; reprodução do resultado por instante) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1656,7 +1701,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0061',
     titulo: 'Identidade congelada nos fatos de atendimento especializado',
     enunciado:
-      'Cada fato de atendimento (condição, recurso ou tipo de deficiência) carrega a identidade congelada copiada da oferta no momento da solicitação (código e origem), imutável. O avaliador resolve o atendimento pelo código congelado, sem reler a oferta viva.',
+        'Cada fato de atendimento (condição, recurso ou tipo de deficiência) carrega a identidade congelada copiada da oferta no momento da solicitação (código e origem), imutável. O avaliador resolve o atendimento pelo código congelado, sem reler a oferta viva.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1668,7 +1713,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O fato carrega a identidade fiel (snapshot-copy), imutável após o registro; recodificar ou retratar a oferta viva não muda a validação; o aninhamento de tipo de deficiência sob a condição PcD permanece ancorado no congelado (ADR-0067).',
+        'O fato carrega a identidade fiel (snapshot-copy), imutável após o registro; recodificar ou retratar a oferta viva não muda a validação; o aninhamento de tipo de deficiência sob a condição PcD permanece ancorado no congelado (ADR-0067).',
     verificacao: 'Teste automatizado (identidade congelada do atendimento) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1677,7 +1722,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0062',
     titulo: 'Validação documental em runtime lê o snapshot congelado (imunidade pós-publicação)',
     enunciado:
-      'A validação documental em runtime — no envio e no acompanhamento da inscrição — lê as exigências do snapshot congelado combinadas com os fatos vivos do candidato, recebendo o identificador do snapshot explicitamente; não lê as tabelas vivas de configuração de documentos. Mutar, inserir ou retratar a configuração viva de um processo já publicado não altera o resultado em runtime (imunidade pós-publicação).',
+        'A validação documental em runtime — no envio e no acompanhamento da inscrição — lê as exigências do snapshot congelado combinadas com os fatos vivos do candidato, recebendo o identificador do snapshot explicitamente; não lê as tabelas vivas de configuração de documentos. Mutar, inserir ou retratar a configuração viva de um processo já publicado não altera o resultado em runtime (imunidade pós-publicação).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1689,7 +1734,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Runtime lê apenas o snapshot e os fatos vivos; imunidade verificada por matriz comportamental (por superfície de configuração e atributo lido, com contraprova observável); a reavaliação por instante histórico reflete a publicação da época; verificação estática de que a validação em runtime não referencia as tabelas vivas de configuração.',
+        'Runtime lê apenas o snapshot e os fatos vivos; imunidade verificada por matriz comportamental (por superfície de configuração e atributo lido, com contraprova observável); a reavaliação por instante histórico reflete a publicação da época; verificação estática de que a validação em runtime não referencia as tabelas vivas de configuração.',
     verificacao: 'Teste automatizado (imunidade da validação; matriz comportamental) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1698,7 +1743,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0063',
     titulo: 'Contrato do snapshot lido em runtime espelha a validação da publicação (estrutural + semântico)',
     enunciado:
-      'Antes de avaliar o gatilho, a validação em runtime confere o contrato do snapshot — estrutura (chaves e tipos; identificador de exigência em forma de UUID; gatilho condicional bem-formado, com cláusulas e condições válidas) e semântica (cada condição referencia um fato cujo domínio, cardinalidade, origem, binding e ponto de resolução estão congelados no próprio snapshot — não relendo o catálogo global vivo —, com operador e valor compatíveis com esse domínio congelado) — reproduzindo a mesma validação aplicada à configuração na publicação. O catálogo global de fatos só é fonte no cadastro e na publicação; em runtime, a fonte é a versão congelada, preservando a imunidade pós-publicação (UNI-REQ-0062). Snapshot ausente ou inválido produz erro nomeado, nunca resultado vazio silencioso.',
+        'Antes de avaliar o gatilho, a validação em runtime confere o contrato do snapshot — estrutura (chaves e tipos; identificador de exigência em forma de UUID; gatilho condicional bem-formado, com cláusulas e condições válidas) e semântica (cada condição referencia um fato cujo domínio, cardinalidade, origem, binding e ponto de resolução estão congelados no próprio snapshot — não relendo o catálogo global vivo —, com operador e valor compatíveis com esse domínio congelado) — reproduzindo a mesma validação aplicada à configuração na publicação. O catálogo global de fatos só é fonte no cadastro e na publicação; em runtime, a fonte é a versão congelada, preservando a imunidade pós-publicação (UNI-REQ-0062). Snapshot ausente ou inválido produz erro nomeado, nunca resultado vazio silencioso.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1710,7 +1755,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Snapshot ausente, inexistente ou sem o bloco de exigências produz erro nomeado; item ou gatilho mal-formado ou semanticamente inválido produz erro nomeado, no envio e no acompanhamento; a validação semântica usa o vocabulário congelado no snapshot, nunca o catálogo global vivo (retirar valor ou alterar binding no catálogo não muda a avaliação de edital publicado); o veredito coincide com o da validação de publicação; gatilho válido não levanta erro.',
+        'Snapshot ausente, inexistente ou sem o bloco de exigências produz erro nomeado; item ou gatilho mal-formado ou semanticamente inválido produz erro nomeado, no envio e no acompanhamento; a validação semântica usa o vocabulário congelado no snapshot, nunca o catálogo global vivo (retirar valor ou alterar binding no catálogo não muda a avaliação de edital publicado); o veredito coincide com o da validação de publicação; gatilho válido não levanta erro.',
     verificacao: 'Teste automatizado (contrato do snapshot; paridade com a validação de publicação) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1719,7 +1764,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0080',
     titulo: 'Campos de suspensividade e ancoragem do recurso no snapshot congelado (RN13)',
     enunciado:
-      'A configuração do processo congela, por fase configurada para aceitar recurso, o prazo de interposição — como um par valor-unidade, com a convenção de contagem explícita, nunca um valor numérico sozinho, pois o mesmo número conta prazos diferentes conforme a convenção — referente à ÚNICA interposição que o Uni+ conduz (a primeira instância; UNI-REQ-0081), nunca à instância superior, que é externa e não tem interposição própria dentro do sistema. Junto com ele, congela, por instância (primeira e segunda) nessa mesma fase, o efeito suspensivo como um par valor-unidade com convenção de contagem — cuja ausência (nulo) significa que a pendência não bloqueia. E congela, ainda, os quatro dados sem os quais nenhum dos dois se recalcula: o identificador da versão do calendário de dias úteis; o código, a versão e o hash do algoritmo de contagem declarado — o algoritmo é a convenção catalogada de UNI-REQ-0112, e o hash é o que prova o conteúdo exato da definição congelada, sem o qual a identidade não reproduz a regra; e a localidade que o processo declara junto do fuso institucional vigente na publicação (UNI-REQ-0111), porque a localidade determina quais feriados de abrangência estadual e municipal se aplicam e o fuso, onde cada dia civil começa e termina, e sem os dois um mesmo calendário produz janelas diferentes conforme quem calcula. Nenhum dos quatro pode ser recalculado depois — não só quando a unidade é "dias úteis" — porque tanto o calendário quanto o algoritmo escolhido podem ganhar versão nova depois da publicação, e sem prendê-los à versão congelada um recurso já em curso poderia fechar num instante diferente do que a garantia de UNI-REQ-0093 promete. Este requisito diz o que congela; o significado de cada campo congelado é de requisitos próprios: quais unidades o prazo de interposição admite é UNI-REQ-0113; o que "dia útil" é e como a contagem avança sobre instantes, UNI-REQ-0114; o que a âncora é e como se declara, UNI-REQ-0115; que catálogo fornece o algoritmo de contagem e sob que imutabilidade, UNI-REQ-0112; e em que condições uma contagem sobre dia útil é publicável, UNI-REQ-0116. O escopo do bloqueio e a irreversibilidade do ato **não** são desses campos: o escopo deriva do objeto de cada recurso (UNI-REQ-0081) — erga omnes trava o processo inteiro, individual trava só o alcance afetado —; a irreversibilidade é classificação do TIPO de ato (por exemplo, convocação sempre consome vaga escassa), não um atributo configurável por edital nem por fase. As duas são regras estruturais, não configuração que uma retificação possa alterar — por isso não entram no snapshot. Os campos que entram — o prazo de interposição e o par de suspensividade por instância, mais os quatro dados que permitem calculá-los — vão pro snapshot imutável na publicação e não podem ser adiados: o motor que os avalia vem depois (UNI-REQ-0081), mas a informação que ele exigirá precisa estar congelada desde já (RN08) — inclusive para processos publicados antes de o motor existir, já que a versão publicada é imutável e não há como completá-la depois (UNI-REQ-0093). Uma fase que não é configurada para aceitar recurso simplesmente não tem esses campos — isso não invalida a publicação (UNI-REQ-0094).',
+        'A configuração do processo congela, por fase configurada para aceitar recurso, o prazo de interposição — como um par valor-unidade, com a convenção de contagem explícita, nunca um valor numérico sozinho, pois o mesmo número conta prazos diferentes conforme a convenção — referente à ÚNICA interposição que o Uni+ conduz (a primeira instância; UNI-REQ-0081), nunca à instância superior, que é externa e não tem interposição própria dentro do sistema. Junto com ele, congela, por instância (primeira e segunda) nessa mesma fase, o efeito suspensivo como um par valor-unidade com convenção de contagem — cuja ausência (nulo) significa que a pendência não bloqueia. E congela, ainda, os quatro dados sem os quais nenhum dos dois se recalcula: o identificador da versão do calendário de dias úteis; o código, a versão e o hash do algoritmo de contagem declarado — o algoritmo é a convenção catalogada de UNI-REQ-0112, e o hash é o que prova o conteúdo exato da definição congelada, sem o qual a identidade não reproduz a regra; e a localidade que o processo declara junto do fuso institucional vigente na publicação (UNI-REQ-0111), porque a localidade determina quais feriados de abrangência estadual e municipal se aplicam e o fuso, onde cada dia civil começa e termina, e sem os dois um mesmo calendário produz janelas diferentes conforme quem calcula. Nenhum dos quatro pode ser recalculado depois — não só quando a unidade é "dias úteis" — porque tanto o calendário quanto o algoritmo escolhido podem ganhar versão nova depois da publicação, e sem prendê-los à versão congelada um recurso já em curso poderia fechar num instante diferente do que a garantia de UNI-REQ-0093 promete. Este requisito diz o que congela; o significado de cada campo congelado é de requisitos próprios: quais unidades o prazo de interposição admite é UNI-REQ-0113; o que "dia útil" é e como a contagem avança sobre instantes, UNI-REQ-0114; o que a âncora é e como se declara, UNI-REQ-0115; que catálogo fornece o algoritmo de contagem e sob que imutabilidade, UNI-REQ-0112; e em que condições uma contagem sobre dia útil é publicável, UNI-REQ-0116. O escopo do bloqueio e a irreversibilidade do ato **não** são desses campos: o escopo deriva do objeto de cada recurso (UNI-REQ-0081) — erga omnes trava o processo inteiro, individual trava só o alcance afetado —; a irreversibilidade é classificação do TIPO de ato (por exemplo, convocação sempre consome vaga escassa), não um atributo configurável por edital nem por fase. As duas são regras estruturais, não configuração que uma retificação possa alterar — por isso não entram no snapshot. Os campos que entram — o prazo de interposição e o par de suspensividade por instância, mais os quatro dados que permitem calculá-los — vão pro snapshot imutável na publicação e não podem ser adiados: o motor que os avalia vem depois (UNI-REQ-0081), mas a informação que ele exigirá precisa estar congelada desde já (RN08) — inclusive para processos publicados antes de o motor existir, já que a versão publicada é imutável e não há como completá-la depois (UNI-REQ-0093). Uma fase que não é configurada para aceitar recurso simplesmente não tem esses campos — isso não invalida a publicação (UNI-REQ-0094).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1731,9 +1776,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O snapshot congelado carrega, por fase configurada para aceitar recurso, o prazo de interposição — valor, unidade e convenção de contagem, nas unidades que UNI-REQ-0113 admite — referente só à interposição que o Uni+ conduz, nunca um prazo de interposição para a instância superior, que não tem essa etapa dentro do sistema (UNI-REQ-0081) e por isso não precisa desse campo. A mesma fase carrega também, por instância (primeira e segunda), o par de suspensividade (valor, unidade e convenção de contagem — corridos, horas ou úteis —, ou nulo para não bloquear). Sempre que a contagem distinguir dia útil de não útil (UNI-REQ-0116), o snapshot carrega ainda o identificador da versão do calendário, o código, a versão e o hash do algoritmo de contagem declarado, a localidade e o fuso — todos vigentes na publicação, nenhum dos quatro recalculado depois. Um processo com uma fase configurada para aceitar recurso mas publicado sem o prazo de interposição, sem convenção de contagem em qualquer um dos pares congelados, ou com valor zero ou negativo em qualquer um dos dois, é rejeitado, pois a versão é imutável e o gate futuro não teria como reconstruí-los; uma fase que não é configurada para aceitar recurso não precisa desses campos, e sua ausência nesse caso não é falha de publicação. Nem escopo do bloqueio nem irreversibilidade do ato entram no snapshot por fase: o primeiro é resolvido do objeto de cada recurso, o segundo do cadastro do tipo de ato — nenhum dos dois é configuração por edital. A configuração é a mesma para Seleção e Ingresso; a diferença de bloqueio decorre só dos valores congelados, nunca de ramificação por módulo em código.',
+        'O snapshot congelado carrega, por fase configurada para aceitar recurso, o prazo de interposição — valor, unidade e convenção de contagem, nas unidades que UNI-REQ-0113 admite — referente só à interposição que o Uni+ conduz, nunca um prazo de interposição para a instância superior, que não tem essa etapa dentro do sistema (UNI-REQ-0081) e por isso não precisa desse campo. A mesma fase carrega também, por instância (primeira e segunda), o par de suspensividade (valor, unidade e convenção de contagem — corridos, horas ou úteis —, ou nulo para não bloquear). Sempre que a contagem distinguir dia útil de não útil (UNI-REQ-0116), o snapshot carrega ainda o identificador da versão do calendário, o código, a versão e o hash do algoritmo de contagem declarado, a localidade e o fuso — todos vigentes na publicação, nenhum dos quatro recalculado depois. Um processo com uma fase configurada para aceitar recurso mas publicado sem o prazo de interposição, sem convenção de contagem em qualquer um dos pares congelados, ou com valor zero ou negativo em qualquer um dos dois, é rejeitado, pois a versão é imutável e o gate futuro não teria como reconstruí-los; uma fase que não é configurada para aceitar recurso não precisa desses campos, e sua ausência nesse caso não é falha de publicação. Nem escopo do bloqueio nem irreversibilidade do ato entram no snapshot por fase: o primeiro é resolvido do objeto de cada recurso, o segundo do cadastro do tipo de ato — nenhum dos dois é configuração por edital. A configuração é a mesma para Seleção e Ingresso; a diferença de bloqueio decorre só dos valores congelados, nunca de ramificação por módulo em código.',
     verificacao:
-      'Teste de contrato do snapshot (prazo de interposição e par de suspensividade presentes e imutáveis após publicação para fase configurada com recurso, com convenção de contagem sempre explícita; valor zero ou negativo recusado nos dois; identificador de calendário, código, versão e hash do algoritmo declarado, mais a localidade e o fuso, congelados sempre que a contagem distinguir dia útil de não útil e imunes a correção posterior de qualquer um dos quatro; escopo do bloqueio e irreversibilidade do ato ausentes dos campos congelados por fase, em processo de Seleção e de Ingresso, com a diferença de bloqueio decorrendo só dos valores; instância superior publica sem prazo de interposição próprio; fase sem recurso publica sem eles) (planejado).',
+        'Teste de contrato do snapshot (prazo de interposição e par de suspensividade presentes e imutáveis após publicação para fase configurada com recurso, com convenção de contagem sempre explícita; valor zero ou negativo recusado nos dois; identificador de calendário, código, versão e hash do algoritmo declarado, mais a localidade e o fuso, congelados sempre que a contagem distinguir dia útil de não útil e imunes a correção posterior de qualquer um dos quatro; escopo do bloqueio e irreversibilidade do ato ausentes dos campos congelados por fase, em processo de Seleção e de Ingresso, com a diferença de bloqueio decorrendo só dos valores; instância superior publica sem prazo de interposição próprio; fase sem recurso publica sem eles) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
   },
@@ -1741,7 +1786,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0113',
     titulo: 'Unidades declaráveis do prazo de interposição do recurso (RN13)',
     enunciado:
-      'O prazo de interposição corre exclusivamente em dia útil: é o prazo que fecha a porta do candidato, e tempo que passa quando ele não tem como agir não pode consumir a janela. Só duas unidades são declaráveis — **dias úteis**, em que cada dia não útil é pulado, e **horas**, em que apenas as horas situadas em dia útil avançam o relógio. Dia corrido é recusado nessa convenção, porque declará-lo é aceitar que a janela encolha ao calhar de cair em feriado. O valor declarado em dias úteis é inteiro: fração de dia útil é recusada, porque não tem leitura unívoca — para janela menor que um dia, a unidade declarável é horas. As duas recusas são nomeadas, cada uma específica da sua causa. O que "dia útil" significa e como o relógio avança em cada uma das duas unidades é UNI-REQ-0114; qual instante fecha a janela depende ainda da convenção de contagem que o edital declara (UNI-REQ-0112). A restrição é do prazo de interposição, não do par de suspensividade, que admite também dias corridos — os dois são campos distintos do mesmo snapshot congelado (UNI-REQ-0080).',
+        'O prazo de interposição corre exclusivamente em dia útil: é o prazo que fecha a porta do candidato, e tempo que passa quando ele não tem como agir não pode consumir a janela. Só duas unidades são declaráveis — **dias úteis**, em que cada dia não útil é pulado, e **horas**, em que apenas as horas situadas em dia útil avançam o relógio. Dia corrido é recusado nessa convenção, porque declará-lo é aceitar que a janela encolha ao calhar de cair em feriado. O valor declarado em dias úteis é inteiro: fração de dia útil é recusada, porque não tem leitura unívoca — para janela menor que um dia, a unidade declarável é horas. As duas recusas são nomeadas, cada uma específica da sua causa. O que "dia útil" significa e como o relógio avança em cada uma das duas unidades é UNI-REQ-0114; qual instante fecha a janela depende ainda da convenção de contagem que o edital declara (UNI-REQ-0112). A restrição é do prazo de interposição, não do par de suspensividade, que admite também dias corridos — os dois são campos distintos do mesmo snapshot congelado (UNI-REQ-0080).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1753,9 +1798,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Um prazo de interposição declarado em dias corridos é sempre rejeitado, com erro nomeado, tanto na configuração da regra de recurso da fase quanto na publicação. Um prazo de interposição declarado em dias úteis com valor fracionário é rejeitado com erro nomeado próprio, distinto do anterior. Dias úteis em valor inteiro e horas são as duas únicas unidades aceitas, e ambas são aceitas em qualquer processo — a escolha entre elas é do edital, não do sistema. O par de suspensividade não é alcançado por esta restrição: nele dias corridos continua declarável, porque ele conta todos os dias sem distinguir úteis de não úteis.',
+        'Um prazo de interposição declarado em dias corridos é sempre rejeitado, com erro nomeado, tanto na configuração da regra de recurso da fase quanto na publicação. Um prazo de interposição declarado em dias úteis com valor fracionário é rejeitado com erro nomeado próprio, distinto do anterior. Dias úteis em valor inteiro e horas são as duas únicas unidades aceitas, e ambas são aceitas em qualquer processo — a escolha entre elas é do edital, não do sistema. O par de suspensividade não é alcançado por esta restrição: nele dias corridos continua declarável, porque ele conta todos os dias sem distinguir úteis de não úteis.',
     verificacao:
-      'Teste de contrato da regra de recurso da fase (prazo de interposição em dias corridos recusado com erro nomeado; prazo de interposição em fração de dia útil recusado com erro nomeado distinto do anterior; prazo em dias úteis com valor inteiro e prazo em horas aceitos; suspensividade declarada em dias corridos aceita, provando que a recusa é específica do prazo de interposição) (planejado).',
+        'Teste de contrato da regra de recurso da fase (prazo de interposição em dias corridos recusado com erro nomeado; prazo de interposição em fração de dia útil recusado com erro nomeado distinto do anterior; prazo em dias úteis com valor inteiro e prazo em horas aceitos; suspensividade declarada em dias corridos aceita, provando que a recusa é específica do prazo de interposição) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
   },
@@ -1763,7 +1808,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0114',
     titulo: 'Dia útil e avanço da contagem sobre instantes (RN13)',
     enunciado:
-      'Dia útil é o dia civil inteiro no fuso institucional congelado na versão publicada (UNI-REQ-0111), tomado como o intervalo fechado no início e aberto no fim — este requisito não fixa zona horária alguma: fixá-la aqui a tornaria imune ao congelamento e, portanto, capaz de mudar sob recurso já em curso quando a regra de horário de verão mudasse. Feriado é sempre o dia civil completo, nunca meio expediente: esta convenção **não é horário comercial**, e uma janela em horas atravessa a madrugada de um dia útil normalmente. O fuso congelado continua sendo o que delimita cada dia civil inclusive nos dias de transição de horário, que têm vinte e três ou vinte e cinco horas — a contagem não presume dia de vinte e quatro horas, porque avança sobre instantes situados em dia útil, nunca sobre blocos fixos de dia. Em qualquer das duas unidades declaráveis (UNI-REQ-0113), a contagem do prazo de interposição ignora os instantes de dia não útil segundo a versão do calendário cujo identificador foi congelado no snapshot (UNI-REQ-0080), nunca o calendário vigente no momento do cálculo. Onde a contagem começa — e como resolve âncora fora da meia-noite ou em dia não útil — é do algoritmo de contagem declarado (UNI-REQ-0112), não deste requisito: uma janela de 48 horas aberta numa sexta às 18h, com o fim de semana não útil, fecha na terça às 18h pela convenção que conta desde a âncora e na quarta às 00:00 pela que exclui o dia de início — o exemplo mostra o efeito de pular o dia não útil, não um resultado único, porque qual dos dois vale é o que a convenção declarada pelo edital decide.',
+        'Dia útil é o dia civil inteiro no fuso institucional congelado na versão publicada (UNI-REQ-0111), tomado como o intervalo fechado no início e aberto no fim — este requisito não fixa zona horária alguma: fixá-la aqui a tornaria imune ao congelamento e, portanto, capaz de mudar sob recurso já em curso quando a regra de horário de verão mudasse. Feriado é sempre o dia civil completo, nunca meio expediente: esta convenção **não é horário comercial**, e uma janela em horas atravessa a madrugada de um dia útil normalmente. O fuso congelado continua sendo o que delimita cada dia civil inclusive nos dias de transição de horário, que têm vinte e três ou vinte e cinco horas — a contagem não presume dia de vinte e quatro horas, porque avança sobre instantes situados em dia útil, nunca sobre blocos fixos de dia. Em qualquer das duas unidades declaráveis (UNI-REQ-0113), a contagem do prazo de interposição ignora os instantes de dia não útil segundo a versão do calendário cujo identificador foi congelado no snapshot (UNI-REQ-0080), nunca o calendário vigente no momento do cálculo. Onde a contagem começa — e como resolve âncora fora da meia-noite ou em dia não útil — é do algoritmo de contagem declarado (UNI-REQ-0112), não deste requisito: uma janela de 48 horas aberta numa sexta às 18h, com o fim de semana não útil, fecha na terça às 18h pela convenção que conta desde a âncora e na quarta às 00:00 pela que exclui o dia de início — o exemplo mostra o efeito de pular o dia não útil, não um resultado único, porque qual dos dois vale é o que a convenção declarada pelo edital decide.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1775,9 +1820,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O dia civil que delimita dia útil é resolvido no fuso congelado na versão publicada, tomado como intervalo fechado no início e aberto no fim, e nenhuma zona horária é fixada por esta regra. Feriado bloqueia o dia civil inteiro, e uma janela em horas avança normalmente pela madrugada de um dia útil. Um prazo que atravesse dia de transição de horário fecha ao completar as horas úteis que a convenção declarada exige, ainda que o dia civil da transição tenha vinte e três ou vinte e cinco horas — a contagem soma instantes, não blocos de vinte e quatro horas. Duas versões publicadas sob fusos institucionais distintos, com a mesma âncora em instante absoluto, podem atribuir esse instante a dias civis diferentes e produzir fins diferentes, e cada uma permanece reproduzível pelo que congelou. A contagem usa sempre a versão do calendário congelada no snapshot, nunca a vigente no momento do cálculo.',
+        'O dia civil que delimita dia útil é resolvido no fuso congelado na versão publicada, tomado como intervalo fechado no início e aberto no fim, e nenhuma zona horária é fixada por esta regra. Feriado bloqueia o dia civil inteiro, e uma janela em horas avança normalmente pela madrugada de um dia útil. Um prazo que atravesse dia de transição de horário fecha ao completar as horas úteis que a convenção declarada exige, ainda que o dia civil da transição tenha vinte e três ou vinte e cinco horas — a contagem soma instantes, não blocos de vinte e quatro horas. Duas versões publicadas sob fusos institucionais distintos, com a mesma âncora em instante absoluto, podem atribuir esse instante a dias civis diferentes e produzir fins diferentes, e cada uma permanece reproduzível pelo que congelou. A contagem usa sempre a versão do calendário congelada no snapshot, nunca a vigente no momento do cálculo.',
     verificacao:
-      'Teste de contagem (janela que atravessa uma transição de horário fechando pelo mesmo total de horas úteis, ainda que o dia civil da transição tenha vinte e três ou vinte e cinco horas; duas versões publicadas sob fusos institucionais distintos, com a mesma âncora em instante absoluto, atribuindo o instante a dias civis diferentes e produzindo fins diferentes; contagem sobre a versão congelada do calendário produzindo o mesmo fim depois de o calendário ganhar versão nova; contraprovas numéricas da contagem em horas sobre dia útil, cada uma com o instante de fechamento declarado nos dois resultados que essa unidade admite entre as convenções de UNI-REQ-0112 — por horas úteis desde a âncora, que a convenção por avanço de data útil reproduz em horas, e por exclusão do dia de início —, porque a hipótese sozinha não determina o resultado: 48 horas ancoradas numa sexta às 18h, com sábado e domingo não úteis, fecham na terça às 18h contando desde a âncora e na quarta às 00:00 excluído o dia de início; 24 horas ancoradas às 00:00 de uma segunda útil, sendo terça e quarta úteis, fecham às 00:00 de terça desde a âncora e às 00:00 de quarta excluído o dia de início; 24 horas ancoradas às 00:00 de um domingo não avançam no domingo e, sendo a segunda útil, fecham às 00:00 de terça pelos dois resultados — única hipótese em que eles coincidem, e por coincidência: excluir o domingo e não avançar nele levam ambas ao mesmo primeiro instante útil; 30 horas ancoradas numa segunda útil às 00:00, com terça feriado e quarta e quinta úteis, fecham na quarta às 06:00 desde a âncora e na quinta às 06:00 excluído o dia de início, que só passa a contar na quarta por pular o feriado; e 24 horas nessa mesma âncora fecham às 00:00 de terça desde a âncora, primeiro instante do feriado, porque o saldo zerou antes de o feriado precisar ser pulado, e às 00:00 de quinta excluído o dia de início) (planejado).',
+        'Teste de contagem (janela que atravessa uma transição de horário fechando pelo mesmo total de horas úteis, ainda que o dia civil da transição tenha vinte e três ou vinte e cinco horas; duas versões publicadas sob fusos institucionais distintos, com a mesma âncora em instante absoluto, atribuindo o instante a dias civis diferentes e produzindo fins diferentes; contagem sobre a versão congelada do calendário produzindo o mesmo fim depois de o calendário ganhar versão nova; contraprovas numéricas da contagem em horas sobre dia útil, cada uma com o instante de fechamento declarado nos dois resultados que essa unidade admite entre as convenções de UNI-REQ-0112 — por horas úteis desde a âncora, que a convenção por avanço de data útil reproduz em horas, e por exclusão do dia de início —, porque a hipótese sozinha não determina o resultado: 48 horas ancoradas numa sexta às 18h, com sábado e domingo não úteis, fecham na terça às 18h contando desde a âncora e na quarta às 00:00 excluído o dia de início; 24 horas ancoradas às 00:00 de uma segunda útil, sendo terça e quarta úteis, fecham às 00:00 de terça desde a âncora e às 00:00 de quarta excluído o dia de início; 24 horas ancoradas às 00:00 de um domingo não avançam no domingo e, sendo a segunda útil, fecham às 00:00 de terça pelos dois resultados — única hipótese em que eles coincidem, e por coincidência: excluir o domingo e não avançar nele levam ambas ao mesmo primeiro instante útil; 30 horas ancoradas numa segunda útil às 00:00, com terça feriado e quarta e quinta úteis, fecham na quarta às 06:00 desde a âncora e na quinta às 06:00 excluído o dia de início, que só passa a contar na quarta por pular o feriado; e 24 horas nessa mesma âncora fecham às 00:00 de terça desde a âncora, primeiro instante do feriado, porque o saldo zerou antes de o feriado precisar ser pulado, e às 00:00 de quinta excluído o dia de início) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
   },
@@ -1785,7 +1830,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0115',
     titulo: 'Âncora do prazo de interposição como instante absoluto (RN13)',
     enunciado:
-      'A âncora do prazo de interposição é o instante de publicação declarado pelo ato, e é **instante absoluto**: data, hora e o deslocamento em relação a UTC efetivamente aplicado, nunca uma hora local acompanhada apenas do nome do fuso. A distinção não é formalismo — numa transição de horário de verão, uma hora local pode não existir ou ocorrer duas vezes, e só o deslocamento congelado resolve qual das duas. Uma hora local declarada que caia em salto ou em repetição é recusada na entrada, com erro nomeado, em vez de ajustada por conta própria. A âncora também nunca é o instante em que o registro foi gravado no sistema, que é dado de auditoria e deslocaria a janela do candidato sempre que o registro atrasasse. Sendo instante absoluto, a âncora e o instante de fechamento derivado dela são o mesmo tipo de dado em toda comparação, de modo que duas leituras do mesmo snapshot cheguem ao mesmo resultado.',
+        'A âncora do prazo de interposição é o instante de publicação declarado pelo ato, e é **instante absoluto**: data, hora e o deslocamento em relação a UTC efetivamente aplicado, nunca uma hora local acompanhada apenas do nome do fuso. A distinção não é formalismo — numa transição de horário de verão, uma hora local pode não existir ou ocorrer duas vezes, e só o deslocamento congelado resolve qual das duas. Uma hora local declarada que caia em salto ou em repetição é recusada na entrada, com erro nomeado, em vez de ajustada por conta própria. A âncora também nunca é o instante em que o registro foi gravado no sistema, que é dado de auditoria e deslocaria a janela do candidato sempre que o registro atrasasse. Sendo instante absoluto, a âncora e o instante de fechamento derivado dela são o mesmo tipo de dado em toda comparação, de modo que duas leituras do mesmo snapshot cheguem ao mesmo resultado.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1797,9 +1842,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A âncora é registrada como data, hora e deslocamento em relação a UTC efetivamente aplicado; uma âncora declarada apenas como hora local acompanhada do nome do fuso é recusada. Hora local inexistente por salto de horário de verão é recusada com erro nomeado, e hora local repetida na volta é recusada com erro nomeado, em vez de resolvida por escolha implícita de deslocamento. O instante de gravação do registro nunca substitui a âncora declarada pelo ato: um ato gravado com atraso produz a mesma janela que um gravado no instante da publicação. A âncora e o instante de fechamento são comparados como instantes absolutos, de modo que duas leituras do mesmo snapshot cheguem ao mesmo resultado.',
+        'A âncora é registrada como data, hora e deslocamento em relação a UTC efetivamente aplicado; uma âncora declarada apenas como hora local acompanhada do nome do fuso é recusada. Hora local inexistente por salto de horário de verão é recusada com erro nomeado, e hora local repetida na volta é recusada com erro nomeado, em vez de resolvida por escolha implícita de deslocamento. O instante de gravação do registro nunca substitui a âncora declarada pelo ato: um ato gravado com atraso produz a mesma janela que um gravado no instante da publicação. A âncora e o instante de fechamento são comparados como instantes absolutos, de modo que duas leituras do mesmo snapshot cheguem ao mesmo resultado.',
     verificacao:
-      'Teste de contrato da âncora (âncora declarada em hora local que não existe no fuso, por salto de horário de verão, recusada com erro nomeado, e o mesmo para hora local repetida na volta; âncora declarada sem deslocamento explícito recusada; dois atos com a mesma âncora declarada e instantes de gravação distintos produzindo o mesmo instante de fechamento) (planejado).',
+        'Teste de contrato da âncora (âncora declarada em hora local que não existe no fuso, por salto de horário de verão, recusada com erro nomeado, e o mesmo para hora local repetida na volta; âncora declarada sem deslocamento explícito recusada; dois atos com a mesma âncora declarada e instantes de gravação distintos produzindo o mesmo instante de fechamento) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
   },
@@ -1807,7 +1852,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0116',
     titulo: 'Regime condicional de publicação da contagem sobre dia útil (RN13)',
     enunciado:
-      'Contagem que distingue dia útil de não útil só é publicável quando existirem, ao mesmo tempo, um **calendário de dias úteis vigente** cadastrado e um **algoritmo de contagem declarado** pelo processo, escolhido entre os cadastrados no rol de regras (UNI-REQ-0112). Dependem dos dois exatamente dois casos, e nenhum outro: todo prazo de interposição, seja em dias úteis, seja em horas — porque ele corre exclusivamente em dia útil nas duas unidades (UNI-REQ-0113) —, e a suspensividade quando declarada em dias úteis. Suspensividade em horas ou em dias corridos não depende de nenhum dos dois, porque conta todos os dias sem distinguir úteis de não úteis. Faltando calendário vigente ou algoritmo declarado, a publicação é recusada, com erro nomeado e específico por causa, nunca aproximada em silêncio: nenhuma implementação elege convenção por conta própria.',
+        'Contagem que distingue dia útil de não útil só é publicável quando existirem, ao mesmo tempo, um **calendário de dias úteis vigente** cadastrado e um **algoritmo de contagem declarado** pelo processo, escolhido entre os cadastrados no rol de regras (UNI-REQ-0112). Dependem dos dois exatamente dois casos, e nenhum outro: todo prazo de interposição, seja em dias úteis, seja em horas — porque ele corre exclusivamente em dia útil nas duas unidades (UNI-REQ-0113) —, e a suspensividade quando declarada em dias úteis. Suspensividade em horas ou em dias corridos não depende de nenhum dos dois, porque conta todos os dias sem distinguir úteis de não úteis. Faltando calendário vigente ou algoritmo declarado, a publicação é recusada, com erro nomeado e específico por causa, nunca aproximada em silêncio: nenhuma implementação elege convenção por conta própria.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1819,9 +1864,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Toda fase configurada para aceitar recurso exige, para publicação, calendário de dias úteis vigente cadastrado e algoritmo de contagem declarado: a regra de recurso sempre carrega prazo de interposição, em dias úteis ou em horas, e esse prazo depende dos dois. Faltando calendário vigente ou algoritmo declarado, a publicação é recusada com erro nomeado próprio da sua causa, nunca por recusa genérica que não diga qual dos dois falta — inclusive quando a suspensividade estiver declarada em horas ou em dias corridos, que não dependem deles para o próprio cálculo. Nenhum prazo é aproximado, arredondado ou contado por convenção implícita quando qualquer um dos dois falta.',
+        'Toda fase configurada para aceitar recurso exige, para publicação, calendário de dias úteis vigente cadastrado e algoritmo de contagem declarado: a regra de recurso sempre carrega prazo de interposição, em dias úteis ou em horas, e esse prazo depende dos dois. Faltando calendário vigente ou algoritmo declarado, a publicação é recusada com erro nomeado próprio da sua causa, nunca por recusa genérica que não diga qual dos dois falta — inclusive quando a suspensividade estiver declarada em horas ou em dias corridos, que não dependem deles para o próprio cálculo. Nenhum prazo é aproximado, arredondado ou contado por convenção implícita quando qualquer um dos dois falta.',
     verificacao:
-      'Teste do gate de publicação e da projeção por componente (prazo de interposição em horas e em dias úteis, e suspensividade em dias úteis, recusados sempre que faltar calendário vigente ou algoritmo de contagem declarado, com erro nomeado distinto por causa; em fase com regra de recurso, prazo de interposição e suspensividade em horas ou em dias corridos, a ausência dos dois deixa o componente do prazo pendente, o da suspensividade satisfeito e independente, e a publicação recusada por causa do prazo; nenhuma publicação concluída com regra de recurso na ausência de qualquer um deles) (planejado).',
+        'Teste do gate de publicação e da projeção por componente (prazo de interposição em horas e em dias úteis, e suspensividade em dias úteis, recusados sempre que faltar calendário vigente ou algoritmo de contagem declarado, com erro nomeado distinto por causa; em fase com regra de recurso, prazo de interposição e suspensividade em horas ou em dias corridos, a ausência dos dois deixa o componente do prazo pendente, o da suspensividade satisfeito e independente, e a publicação recusada por causa do prazo; nenhuma publicação concluída com regra de recurso na ausência de qualquer um deles) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
   },
@@ -1829,7 +1874,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0081',
     titulo: 'Motor do efeito suspensivo e registro do recurso de instância superior (RN13)',
     enunciado:
-      'O sistema conduz apenas a primeira instância de recurso (abre a janela, recebe a interposição, registra o julgamento). A instância superior é julgada fora do sistema — administrativa na Seleção (ex.: Câmara de Ensino) ou judicial no Ingresso —, mas sua existência, pendência e desfecho são registrados, com o documento do órgão julgador (o órgão é dado declarado, nunca fixado em código). O motor lê os campos congelados e trava atos irreversíveis enquanto pende recurso, conforme a suspensividade configurada. A classificação de irreversibilidade (UNI-REQ-0080) é dado do cadastro do tipo de ato, não do edital — e o cadastro pode evoluir a qualquer momento, independente de qualquer processo seletivo. A pergunta "este ato é irreversível" (feita ANTES de produzi-lo, para decidir se bloqueia) e a classificação de fato gravada NO ato quando ele é criado precisam vir da mesma resposta — nunca duas leituras independentes do cadastro, uma pra decidir e outra pra gravar, que uma evolução do cadastro entre as duas poderia fazer divergir.',
+        'O sistema conduz apenas a primeira instância de recurso (abre a janela, recebe a interposição, registra o julgamento). A instância superior é julgada fora do sistema — administrativa na Seleção (ex.: Câmara de Ensino) ou judicial no Ingresso —, mas sua existência, pendência e desfecho são registrados, com o documento do órgão julgador (o órgão é dado declarado, nunca fixado em código). O motor lê os campos congelados e trava atos irreversíveis enquanto pende recurso, conforme a suspensividade configurada. A classificação de irreversibilidade (UNI-REQ-0080) é dado do cadastro do tipo de ato, não do edital — e o cadastro pode evoluir a qualquer momento, independente de qualquer processo seletivo. A pergunta "este ato é irreversível" (feita ANTES de produzi-lo, para decidir se bloqueia) e a classificação de fato gravada NO ato quando ele é criado precisam vir da mesma resposta — nunca duas leituras independentes do cadastro, uma pra decidir e outra pra gravar, que uma evolução do cadastro entre as duas poderia fazer divergir.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1841,7 +1886,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'São dois relógios distintos: o prazo de interposição (o tempo para o candidato recorrer) é contado a partir da publicação do ato recorrido; o timer de suspensividade começa quando um recurso é efetivamente interposto e dura o par congelado (UNI-REQ-0080), encerrando no julgamento ou no fim do timer, o que vier primeiro, com motivo legível. O prazo de interposição fecha conforme UNI-REQ-0114 — avançando apenas sobre instantes situados em dia útil, tanto em dias úteis quanto em horas, com o dia civil delimitado no fuso institucional congelado na versão publicada (UNI-REQ-0111) — nunca um fuso resolvido no momento do cálculo. Os timers de suspensividade, esses sim, fecham por soma direta do valor congelado sobre o seu instante-âncora — a interposição —, salvo quando a unidade deles é dias úteis, caso em que também pulam os dias não úteis. Em todos, o instante-âncora tem fuso, nunca é uma data sem hora: o instante-âncora e o instante de fechamento são os mesmos dados absolutos em toda comparação, garantindo que duas leituras do mesmo snapshot cheguem ao mesmo resultado. Quando a suspensividade usa dias úteis, o avanço pula os dias não úteis do calendário cuja versão foi congelada (UNI-REQ-0080) — nunca do calendário vigente no momento do cálculo —, e o valor congelado é sempre estritamente positivo: zero ou negativo tornaria o prazo inutilizável desde a publicação, e a versão publicada não tem como ser corrigida depois. A escolha do avanço — se um instante-âncora em dia não útil desloca o início da contagem pro primeiro dia útil seguinte, ou se conta a partir do instante-âncora original ignorando só os períodos não úteis — não é decisão deste requisito: é o que distingue um algoritmo de contagem de outro, junto com a resolução de âncora fora da meia-noite (UNI-REQ-0112). Cada algoritmo do catálogo define as duas, e o processo declara qual usa; a convenção declarada precisa existir no rol de regras, e por isso nenhuma contagem que dependa delas é publicável. Esta garantia exige só que o resultado seja determinístico e dependa unicamente do calendário e do algoritmo congelados, nunca que um algoritmo específico seja o único admitido — a lacuna é registrada explicitamente, não descoberta em produção. Na Seleção ambas as instâncias bloqueiam; na Habilitação/Ingresso a primeira bloqueia e a segunda, judicial e de prazo indeterminado, não bloqueia — diferença que vem só da configuração, nunca do código. O escopo do bloqueio deriva do objeto do recurso: recurso erga omnes trava o processo inteiro; recurso individual trava apenas o alcance afetado (curso, modalidade ou a vaga em disputa). A decisão de bloquear um ato candidato e a classificação gravada nesse mesmo ato, quando efetivamente criado, resolvem a mesma consulta ao cadastro do tipo — nunca cópias ou leituras independentes que uma mudança no cadastro, entre a decisão e a criação, pudesse fazer discordar uma da outra.',
+        'São dois relógios distintos: o prazo de interposição (o tempo para o candidato recorrer) é contado a partir da publicação do ato recorrido; o timer de suspensividade começa quando um recurso é efetivamente interposto e dura o par congelado (UNI-REQ-0080), encerrando no julgamento ou no fim do timer, o que vier primeiro, com motivo legível. O prazo de interposição fecha conforme UNI-REQ-0114 — avançando apenas sobre instantes situados em dia útil, tanto em dias úteis quanto em horas, com o dia civil delimitado no fuso institucional congelado na versão publicada (UNI-REQ-0111) — nunca um fuso resolvido no momento do cálculo. Os timers de suspensividade, esses sim, fecham por soma direta do valor congelado sobre o seu instante-âncora — a interposição —, salvo quando a unidade deles é dias úteis, caso em que também pulam os dias não úteis. Em todos, o instante-âncora tem fuso, nunca é uma data sem hora: o instante-âncora e o instante de fechamento são os mesmos dados absolutos em toda comparação, garantindo que duas leituras do mesmo snapshot cheguem ao mesmo resultado. Quando a suspensividade usa dias úteis, o avanço pula os dias não úteis do calendário cuja versão foi congelada (UNI-REQ-0080) — nunca do calendário vigente no momento do cálculo —, e o valor congelado é sempre estritamente positivo: zero ou negativo tornaria o prazo inutilizável desde a publicação, e a versão publicada não tem como ser corrigida depois. A escolha do avanço — se um instante-âncora em dia não útil desloca o início da contagem pro primeiro dia útil seguinte, ou se conta a partir do instante-âncora original ignorando só os períodos não úteis — não é decisão deste requisito: é o que distingue um algoritmo de contagem de outro, junto com a resolução de âncora fora da meia-noite (UNI-REQ-0112). Cada algoritmo do catálogo define as duas, e o processo declara qual usa; a convenção declarada precisa existir no rol de regras, e por isso nenhuma contagem que dependa delas é publicável. Esta garantia exige só que o resultado seja determinístico e dependa unicamente do calendário e do algoritmo congelados, nunca que um algoritmo específico seja o único admitido — a lacuna é registrada explicitamente, não descoberta em produção. Na Seleção ambas as instâncias bloqueiam; na Habilitação/Ingresso a primeira bloqueia e a segunda, judicial e de prazo indeterminado, não bloqueia — diferença que vem só da configuração, nunca do código. O escopo do bloqueio deriva do objeto do recurso: recurso erga omnes trava o processo inteiro; recurso individual trava apenas o alcance afetado (curso, modalidade ou a vaga em disputa). A decisão de bloquear um ato candidato e a classificação gravada nesse mesmo ato, quando efetivamente criado, resolvem a mesma consulta ao cadastro do tipo — nunca cópias ou leituras independentes que uma mudança no cadastro, entre a decisão e a criação, pudesse fazer discordar uma da outra.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
@@ -1850,7 +1895,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0093',
     titulo: 'Recurso é resolvido pela versão vigente na publicação do ato recorrido (RN13)',
     enunciado:
-      'A regra de suspensividade (prazo de interposição da instância que o Uni+ conduz, par valor-unidade de suspensividade por instância — os campos congelados por UNI-REQ-0080, cada um com sua convenção de contagem) que rege um recurso é a que estava vigente quando o direito de recorrer nasceu — a publicação do ato recorrido —, nunca a vigente no instante em que o candidato interpõe, nem a vigente quando a banca julga. Uma retificação publicada depois do ato recorrido, mesmo antes da interposição se o prazo já estava aberto, não pode encurtar o prazo, mudar sua convenção de contagem, nem afrouxar o bloqueio de um recurso que venha a ser interposto contra aquele ato — equivalente ao princípio de irretroatividade: mudança de regra não retroage em prejuízo de quem já exercia o direito. Escopo do bloqueio e irreversibilidade do ato não integram esta garantia: nenhum dos dois é congelado por fase (UNI-REQ-0080) — o primeiro deriva do objeto de cada recurso, o segundo do cadastro do tipo de ato —, e nenhum dos dois muda com retificação de edital, porque nenhum dos dois é configuração de edital. Um recurso interposto contra um ato publicado sob a regra nova nasce, sim, sob a regra nova — não é congelamento perpétuo do processo inteiro, só imunidade retroativa por ato. Os campos que esta garantia precisa já são congelados desde o MVP por UNI-REQ-0080, justamente para que processos publicados antes deste motor existir não fiquem sem a garantia depois — este requisito cobre só o comportamento de resolução do motor de interposição (UNI-REQ-0081), não o congelamento em si, que não se aplica antes do motor existir. O fundamento institucional do prazo de interposição está aprovado em UNI-REQ-0095. A confirmação jurídica do efeito suspensivo configurável permanece como dependência externa própria em UNI-REQ-0117 e bloqueia publicar processo real que dependa dessa garantia enquanto não for encerrada.',
+        'A regra de suspensividade (prazo de interposição da instância que o Uni+ conduz, par valor-unidade de suspensividade por instância — os campos congelados por UNI-REQ-0080, cada um com sua convenção de contagem) que rege um recurso é a que estava vigente quando o direito de recorrer nasceu — a publicação do ato recorrido —, nunca a vigente no instante em que o candidato interpõe, nem a vigente quando a banca julga. Uma retificação publicada depois do ato recorrido, mesmo antes da interposição se o prazo já estava aberto, não pode encurtar o prazo, mudar sua convenção de contagem, nem afrouxar o bloqueio de um recurso que venha a ser interposto contra aquele ato — equivalente ao princípio de irretroatividade: mudança de regra não retroage em prejuízo de quem já exercia o direito. Escopo do bloqueio e irreversibilidade do ato não integram esta garantia: nenhum dos dois é congelado por fase (UNI-REQ-0080) — o primeiro deriva do objeto de cada recurso, o segundo do cadastro do tipo de ato —, e nenhum dos dois muda com retificação de edital, porque nenhum dos dois é configuração de edital. Um recurso interposto contra um ato publicado sob a regra nova nasce, sim, sob a regra nova — não é congelamento perpétuo do processo inteiro, só imunidade retroativa por ato. Os campos que esta garantia precisa já são congelados desde o MVP por UNI-REQ-0080, justamente para que processos publicados antes deste motor existir não fiquem sem a garantia depois — este requisito cobre só o comportamento de resolução do motor de interposição (UNI-REQ-0081), não o congelamento em si, que não se aplica antes do motor existir. O fundamento institucional do prazo de interposição está aprovado em UNI-REQ-0095. A confirmação jurídica do efeito suspensivo configurável permanece como dependência externa própria em UNI-REQ-0117 e bloqueia publicar processo real que dependa dessa garantia enquanto não for encerrada.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1862,7 +1907,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'O prazo de interposição e o par de suspensividade de um recurso, com suas convenções de contagem, são resolvidos, todos juntos, pelos campos já congelados por UNI-REQ-0080 na versão vigente quando o ato recorrido foi publicado, nunca pela vigente no instante da interposição nem no julgamento; uma retificação publicada entre a publicação do ato recorrido e a interposição não altera nenhum desses campos para um recurso que venha a ser interposto contra aquele ato; um recurso contra um ato publicado já sob a regra retificada é regido pela regra nova, sem herdar a proteção de atos anteriores; escopo do bloqueio e irreversibilidade do ato seguem resolvidos como sempre (objeto do recurso e cadastro do tipo de ato, respectivamente), sem relação com qual versão publicou o ato recorrido.',
+        'O prazo de interposição e o par de suspensividade de um recurso, com suas convenções de contagem, são resolvidos, todos juntos, pelos campos já congelados por UNI-REQ-0080 na versão vigente quando o ato recorrido foi publicado, nunca pela vigente no instante da interposição nem no julgamento; uma retificação publicada entre a publicação do ato recorrido e a interposição não altera nenhum desses campos para um recurso que venha a ser interposto contra aquele ato; um recurso contra um ato publicado já sob a regra retificada é regido pela regra nova, sem herdar a proteção de atos anteriores; escopo do bloqueio e irreversibilidade do ato seguem resolvidos como sempre (objeto do recurso e cadastro do tipo de ato, respectivamente), sem relação com qual versão publicou o ato recorrido.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
@@ -1871,7 +1916,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0094',
     titulo: 'Ato publicado sem configuração de recurso recusa interposição nominalmente (RN13)',
     enunciado:
-      'Um recurso é sempre resolvido pelos campos de UNI-REQ-0080 congelados na versão em que o ato recorrido foi publicado — nunca por uma configuração de outra versão, nem posterior (retificação que passa a configurar a fase) nem hipotética. Sempre que essa versão publicada não tiver os campos de recurso pra fase do ato — porque a fase nunca aceitou recurso, ou porque uma retificação anterior ao ato deixou de configurá-la —, uma tentativa de interposição contra esse ato é recusada com um erro nomeado, específico dessa ausência — nunca aceita silenciosamente sem bloqueio, e nunca resolvida por engano contra uma configuração de recurso de outra versão (nem anterior, coberta por UNI-REQ-0093, nem posterior).',
+        'Um recurso é sempre resolvido pelos campos de UNI-REQ-0080 congelados na versão em que o ato recorrido foi publicado — nunca por uma configuração de outra versão, nem posterior (retificação que passa a configurar a fase) nem hipotética. Sempre que essa versão publicada não tiver os campos de recurso pra fase do ato — porque a fase nunca aceitou recurso, ou porque uma retificação anterior ao ato deixou de configurá-la —, uma tentativa de interposição contra esse ato é recusada com um erro nomeado, específico dessa ausência — nunca aceita silenciosamente sem bloqueio, e nunca resolvida por engano contra uma configuração de recurso de outra versão (nem anterior, coberta por UNI-REQ-0093, nem posterior).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1883,7 +1928,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Uma tentativa de interposição contra um ato cuja versão publicada não tem os campos de recurso de UNI-REQ-0080 pra fase do ato é recusada com erro nomeado, seja porque a fase nunca aceitou recurso, seja porque uma retificação anterior ao ato deixou de configurá-la; essa recusa nunca se torna uma ausência silenciosa de bloqueio nem lê, por engano, a configuração de recurso de uma versão diferente da que publicou o ato; um ato publicado quando a fase já era configurada para aceitar recurso continua coberto por UNI-REQ-0093 e não é alcançado por esta recusa, mesmo que uma retificação posterior remova a configuração.',
+        'Uma tentativa de interposição contra um ato cuja versão publicada não tem os campos de recurso de UNI-REQ-0080 pra fase do ato é recusada com erro nomeado, seja porque a fase nunca aceitou recurso, seja porque uma retificação anterior ao ato deixou de configurá-la; essa recusa nunca se torna uma ausência silenciosa de bloqueio nem lê, por engano, a configuração de recurso de uma versão diferente da que publicou o ato; um ato publicado quando a fase já era configurada para aceitar recurso continua coberto por UNI-REQ-0093 e não é alcançado por esta recusa, mesmo que uma retificação posterior remova a configuração.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
@@ -1892,7 +1937,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0095',
     titulo: 'Edital como fundamento institucional do prazo de interposição (RN13)',
     enunciado:
-      'Em 14 de agosto de 2026, o PO Jairo Oliveira registrou, a partir da orientação comunicada pelo procurador Glauber, da Procuradoria da Unifesspa, a decisão institucional aplicável aos processos seletivos do Uni+: na ausência de norma específica aplicável ao certame que fixe outro prazo, o edital de abertura é o fundamento normativo do prazo de interposição de recurso e pode estabelecer prazo próprio, inclusive inferior a dez dias, desde que o declare expressamente e preserve tempo razoável para o contraditório e a ampla defesa. Para esse recorte institucional, o art. 59 da Lei nº 9.784/1999 não gera validação sistêmica de um piso geral de dez dias. O sistema não julga a razoabilidade da escolha: congela e reproduz o valor, a unidade e a convenção declarados no edital, conforme UNI-REQ-0080. Depois de publicada, a regra vincula o certame e uma retificação não altera recurso cujo direito já nasceu sob versão anterior (UNI-REQ-0093). Eventual norma interna futura rege os casos abrangidos pelo seu próprio alcance temporal, sem que este requisito presuma validação ou invalidação automática de editais anteriores. A decisão está registrada em unifesspa-edu-br/uniplus-developers#100 como orientação institucional juridicamente orientada, sem qualificá-la como parecer formal ou jurisprudência consolidada. O efeito suspensivo não integra esta decisão e permanece separado em UNI-REQ-0117.',
+        'Em 14 de agosto de 2026, o PO Jairo Oliveira registrou, a partir da orientação comunicada pelo procurador Glauber, da Procuradoria da Unifesspa, a decisão institucional aplicável aos processos seletivos do Uni+: na ausência de norma específica aplicável ao certame que fixe outro prazo, o edital de abertura é o fundamento normativo do prazo de interposição de recurso e pode estabelecer prazo próprio, inclusive inferior a dez dias, desde que o declare expressamente e preserve tempo razoável para o contraditório e a ampla defesa. Para esse recorte institucional, o art. 59 da Lei nº 9.784/1999 não gera validação sistêmica de um piso geral de dez dias. O sistema não julga a razoabilidade da escolha: congela e reproduz o valor, a unidade e a convenção declarados no edital, conforme UNI-REQ-0080. Depois de publicada, a regra vincula o certame e uma retificação não altera recurso cujo direito já nasceu sob versão anterior (UNI-REQ-0093). Eventual norma interna futura rege os casos abrangidos pelo seu próprio alcance temporal, sem que este requisito presuma validação ou invalidação automática de editais anteriores. A decisão está registrada em unifesspa-edu-br/uniplus-developers#100 como orientação institucional juridicamente orientada, sem qualificá-la como parecer formal ou jurisprudência consolidada. O efeito suspensivo não integra esta decisão e permanece separado em UNI-REQ-0117.',
     grupo: 'conformidade',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -1904,9 +1949,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'decisao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Toda versão publicada que configure recurso preserva o prazo de interposição declarado pelo edital como valor, unidade e convenção, sem impor mínimo sistêmico geral de dez dias; a proveniência institucional da decisão, a data, o PO e a orientação da Procuradoria permanecem registradas; o sistema reproduz a regra escolhida e não substitui a aprovação jurídica e editorial do edital quanto à razoabilidade; nenhuma afirmação deste requisito encerra a dependência própria do efeito suspensivo em UNI-REQ-0117.',
+        'Toda versão publicada que configure recurso preserva o prazo de interposição declarado pelo edital como valor, unidade e convenção, sem impor mínimo sistêmico geral de dez dias; a proveniência institucional da decisão, a data, o PO e a orientação da Procuradoria permanecem registradas; o sistema reproduz a regra escolhida e não substitui a aprovação jurídica e editorial do edital quanto à razoabilidade; nenhuma afirmação deste requisito encerra a dependência própria do efeito suspensivo em UNI-REQ-0117.',
     verificacao:
-      'Decisão institucional registrada em unifesspa-edu-br/uniplus-developers#100 em 14 de agosto de 2026: comunicação do PO Jairo Oliveira sobre orientação do procurador Glauber, da Procuradoria da Unifesspa.',
+        'Decisão institucional registrada em unifesspa-edu-br/uniplus-developers#100 em 14 de agosto de 2026: comunicação do PO Jairo Oliveira sobre orientação do procurador Glauber, da Procuradoria da Unifesspa.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO; Procuradoria; Tech Lead',
   },
@@ -1914,7 +1959,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0117',
     titulo: 'Confirmação jurídica do efeito suspensivo configurável por fase e instância (RN13)',
     enunciado:
-      'O contrato de congelamento (UNI-REQ-0080) e o motor de recurso (UNI-REQ-0081) modelam o efeito suspensivo como configuração por fase e por instância: a ausência não bloqueia, e, quando presente, o bloqueio dura até o julgamento ou o fim do prazo congelado. A orientação institucional registrada em UNI-REQ-0095 respondeu somente ao prazo de interposição e não confirmou esse modelo de efeito suspensivo. O art. 61 da Lei nº 9.784/1999 estabelece como regra a ausência de efeito suspensivo e admite sua concessão, de ofício ou a pedido, diante de justo receio de prejuízo de difícil ou incerta reparação. O projeto deve confirmar com a Procuradoria se e em quais condições o edital pode predeterminar efeito suspensivo por fase e instância, inclusive duração, concessão e eventual necessidade de decisão fundamentada no caso concreto. Até essa resposta, a configuração continua tecnicamente descrita e congelável, mas não autoriza publicar processo real que dependa juridicamente desse bloqueio.',
+        'O contrato de congelamento (UNI-REQ-0080) e o motor de recurso (UNI-REQ-0081) modelam o efeito suspensivo como configuração por fase e por instância: a ausência não bloqueia, e, quando presente, o bloqueio dura até o julgamento ou o fim do prazo congelado. A orientação institucional registrada em UNI-REQ-0095 respondeu somente ao prazo de interposição e não confirmou esse modelo de efeito suspensivo. O art. 61 da Lei nº 9.784/1999 estabelece como regra a ausência de efeito suspensivo e admite sua concessão, de ofício ou a pedido, diante de justo receio de prejuízo de difícil ou incerta reparação. O projeto deve confirmar com a Procuradoria se e em quais condições o edital pode predeterminar efeito suspensivo por fase e instância, inclusive duração, concessão e eventual necessidade de decisão fundamentada no caso concreto. Até essa resposta, a configuração continua tecnicamente descrita e congelável, mas não autoriza publicar processo real que dependa juridicamente desse bloqueio.',
     grupo: 'conformidade',
     tipo: 'dependencia',
     nivel: 'dependencia',
@@ -1926,9 +1971,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'dependencia_externa',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Antes de publicar processo real que dependa de efeito suspensivo configurado, a decisão jurídica registra se o edital pode predeterminá-lo por fase e instância, em quais hipóteses, com qual duração e se a concessão exige decisão fundamentada no caso concreto; a decisão tem dono, data e impacto explícitos sobre UNI-REQ-0080, UNI-REQ-0081 e UNI-REQ-0093; a resposta sobre prazo de interposição em UNI-REQ-0095 nunca é usada como substituta desta confirmação.',
+        'Antes de publicar processo real que dependa de efeito suspensivo configurado, a decisão jurídica registra se o edital pode predeterminá-lo por fase e instância, em quais hipóteses, com qual duração e se a concessão exige decisão fundamentada no caso concreto; a decisão tem dono, data e impacto explícitos sobre UNI-REQ-0080, UNI-REQ-0081 e UNI-REQ-0093; a resposta sobre prazo de interposição em UNI-REQ-0095 nunca é usada como substituta desta confirmação.',
     verificacao:
-      'Consulta jurídica/institucional própria em unifesspa-edu-br/uniplus-developers#110, rastreada separadamente da decisão sobre o prazo de interposição.',
+        'Consulta jurídica/institucional própria em unifesspa-edu-br/uniplus-developers#110, rastreada separadamente da decisão sobre o prazo de interposição.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO; Procuradoria; Tech Lead',
   },
@@ -1936,7 +1981,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0082',
     titulo: 'Matrícula compulsória por decisão judicial final em vaga supranumerária (RN14)',
     enunciado:
-      'Quando a instância superior no Ingresso é judicial e não bloqueia (RN13/UNI-REQ-0081) e uma decisão judicial final reconhece ao candidato o direito a uma vaga já ocupada — tipicamente com o curso em andamento —, a universidade o matricula em vaga supranumerária, adicional ao quadro, após o cumprimento das fases de habilitação e verificação documental exigidas de qualquer ingressante.',
+        'Quando a instância superior no Ingresso é judicial e não bloqueia (RN13/UNI-REQ-0081) e uma decisão judicial final reconhece ao candidato o direito a uma vaga já ocupada — tipicamente com o curso em andamento —, a universidade o matricula em vaga supranumerária, adicional ao quadro, após o cumprimento das fases de habilitação e verificação documental exigidas de qualquer ingressante.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1948,7 +1993,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'A vaga é adicional ao quadro: o quadro de vagas não é alterado, ninguém é desclassificado e a classificação congelada permanece íntegra. A matrícula supranumerária não dispensa as fases de habilitação e verificação documental. É ato excepcional, auditável, com a própria decisão judicial como base legal declarada. É o caso confirmado com o CRCA; o remédio para decisões favoráveis tardias de outra natureza (nota, classificação) ou anteriores ao consumo da vaga é questão aberta com o PO, não matrícula supranumerária automática.',
+        'A vaga é adicional ao quadro: o quadro de vagas não é alterado, ninguém é desclassificado e a classificação congelada permanece íntegra. A matrícula supranumerária não dispensa as fases de habilitação e verificação documental. É ato excepcional, auditável, com a própria decisão judicial como base legal declarada. É o caso confirmado com o CRCA; o remédio para decisões favoráveis tardias de outra natureza (nota, classificação) ou anteriores ao consumo da vaga é questão aberta com o PO, não matrícula supranumerária automática.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
@@ -1957,7 +2002,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0064',
     titulo: 'Operadores de exclusão e avaliação ternária fail-closed do gatilho',
     enunciado:
-      'O gatilho da exigência documental é um DNF (OU de cláusulas, E de condições) sobre um conjunto fechado e simétrico de operadores — IGUAL/DIFERENTE, EM/NAO_EM, MAIOR_IGUAL/MENOR_IGUAL —, cada condição validada por operador×domínio×valor. O resultado da cláusula e do DNF é ternário (verdadeiro/falso/INDETERMINADO) e fail-closed; o átomo segue os quatro resultados de UNI-REQ-0074 (verdadeiro/falso/NÃO_APLICÁVEL/INDETERMINADO), com NÃO_APLICÁVEL colapsando como falso definitivo na cláusula E: fato não resolvido produz INDETERMINADO, que se propaga em E e entre as cláusulas do DNF e mantém a exigência pendente, nunca a descarta silenciosamente. Fatos multivalorados de escopo-processo (MODALIDADE, CONDICAO_ATENDIMENTO) usam pertinência: IGUAL é pertencer, EM é interseção não vazia, e DIFERENTE/NAO_EM são os complementos correspondentes; EM [] é falso e NAO_EM [] é verdadeiro com fato resolvido. A negação só inverte com fato resolvido (DIFERENTE/NAO_EM não são !IGUAL/!EM sobre ausência). Uma condição não pode referenciar fato cujo ponto de resolução seja posterior à fase da exigência (gate de fase).',
+        'O gatilho da exigência documental é um DNF (OU de cláusulas, E de condições) sobre um conjunto fechado e simétrico de operadores — IGUAL/DIFERENTE, EM/NAO_EM, MAIOR_IGUAL/MENOR_IGUAL —, cada condição validada por operador×domínio×valor. O resultado da cláusula e do DNF é ternário (verdadeiro/falso/INDETERMINADO) e fail-closed; o átomo segue os quatro resultados de UNI-REQ-0074 (verdadeiro/falso/NÃO_APLICÁVEL/INDETERMINADO), com NÃO_APLICÁVEL colapsando como falso definitivo na cláusula E: fato não resolvido produz INDETERMINADO, que se propaga em E e entre as cláusulas do DNF e mantém a exigência pendente, nunca a descarta silenciosamente. Fatos multivalorados de escopo-processo (MODALIDADE, CONDICAO_ATENDIMENTO) usam pertinência: IGUAL é pertencer, EM é interseção não vazia, e DIFERENTE/NAO_EM são os complementos correspondentes; EM [] é falso e NAO_EM [] é verdadeiro com fato resolvido. A negação só inverte com fato resolvido (DIFERENTE/NAO_EM não são !IGUAL/!EM sobre ausência). Uma condição não pode referenciar fato cujo ponto de resolução seja posterior à fase da exigência (gate de fase).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1969,9 +2014,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Conjunto fechado de seis operadores (IGUAL/DIFERENTE, EM/NAO_EM, MAIOR_IGUAL/MENOR_IGUAL) com matriz operador×domínio (booleano só IGUAL/DIFERENTE; numérico +MAIOR_IGUAL/MENOR_IGUAL; categórico +EM/NAO_EM) e valor compatível com o domínio; DIFERENTE/NAO_EM aceitos onde IGUAL/EM valem; NAO_EM [] verdadeiro e EM [] falso com fato resolvido; MODALIDADE/CONDICAO_ATENDIMENTO multivalorados com IGUAL=pertinência, EM=interseção e negações por complemento; precedência ternária normativa — numa cláusula E, FALSO vence INDETERMINADO (uma condição falsa torna a cláusula falsa mesmo com outra indeterminada); no DNF entre cláusulas, VERDADEIRO vence (satisfeito), senão INDETERMINADO se alguma cláusula é indeterminada, senão FALSO; fato não resolvido resolve INDETERMINADO e mantém a exigência pendente (nunca descartada); condição que referencia fato de resolução posterior à fase é recusada no cadastro.',
+        'Conjunto fechado de seis operadores (IGUAL/DIFERENTE, EM/NAO_EM, MAIOR_IGUAL/MENOR_IGUAL) com matriz operador×domínio (booleano só IGUAL/DIFERENTE; numérico +MAIOR_IGUAL/MENOR_IGUAL; categórico +EM/NAO_EM) e valor compatível com o domínio; DIFERENTE/NAO_EM aceitos onde IGUAL/EM valem; NAO_EM [] verdadeiro e EM [] falso com fato resolvido; MODALIDADE/CONDICAO_ATENDIMENTO multivalorados com IGUAL=pertinência, EM=interseção e negações por complemento; precedência ternária normativa — numa cláusula E, FALSO vence INDETERMINADO (uma condição falsa torna a cláusula falsa mesmo com outra indeterminada); no DNF entre cláusulas, VERDADEIRO vence (satisfeito), senão INDETERMINADO se alguma cláusula é indeterminada, senão FALSO; fato não resolvido resolve INDETERMINADO e mantém a exigência pendente (nunca descartada); condição que referencia fato de resolução posterior à fase é recusada no cadastro.',
     verificacao:
-      'Teste automatizado (matriz operador×domínio×valor; tabela-verdade de ausência com propagação em E/DNF; multivalorados e complemento; gate de fase) (planejado).',
+        'Teste automatizado (matriz operador×domínio×valor; tabela-verdade de ausência com propagação em E/DNF; multivalorados e complemento; gate de fase) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -1979,7 +2024,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0065',
     titulo: 'Vocabulário de fatos multi-fonte com domínio descritível',
     enunciado:
-      'Os fatos que alimentam o gatilho devem ser multi-fonte (derivado, declarado ou de integração), cada um com origem, cardinalidade, ponto de resolução e binding, e um domínio de valores descritível (código mais descrição, obrigatória para fatos declarados). O vocabulário é extensível por configuração, sem código, e inclui NACIONALIDADE e TIPO_DEFICIENCIA.',
+        'Os fatos que alimentam o gatilho devem ser multi-fonte (derivado, declarado ou de integração), cada um com origem, cardinalidade, ponto de resolução e binding, e um domínio de valores descritível (código mais descrição, obrigatória para fatos declarados). O vocabulário é extensível por configuração, sem código, e inclui NACIONALIDADE e TIPO_DEFICIENCIA.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1991,9 +2036,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Fato carrega origem, cardinalidade, ponto de resolução e binding; valores de domínio têm código único por fato e descrição, obrigatória para fatos declarados; um novo fato é usável no gatilho sem alteração de código; a origem não ramifica o resolvedor.',
+        'Fato carrega origem, cardinalidade, ponto de resolução e binding; valores de domínio têm código único por fato e descrição, obrigatória para fatos declarados; um novo fato é usável no gatilho sem alteração de código; a origem não ramifica o resolvedor.',
     verificacao:
-      'Teste automatizado (fato novo sem alteração de código; descrição por valor exigida; projeção do domínio) (planejado).',
+        'Teste automatizado (fato novo sem alteração de código; descrição por valor exigida; projeção do domínio) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2001,7 +2046,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0066',
     titulo: 'Formatos permitidos por exigência como lista e exceção de idade por gatilho',
     enunciado:
-      'Cada exigência documental declara os formatos aceitos como lista de formatos permitidos (formatosPermitidos), em que o limite de tamanho por formato é opcional, além de um limite global opcional da exigência; alternativamente, um token de qualquer formato com teto default opcional, mutuamente exclusivo dos formatos específicos. A lista, os limites e a escolha são congelados na exigência. A regra de idade de emissão do documento é tudo-nulo (sem regra) ou completa (Valor, Unidade, ReferenciaTipo e a fase quando aplicável), ancorada na fase, e funciona como aviso, não bloqueia a presença. A exceção do laudo de deficiência permanente decorre de gatilho sobre o tipo de deficiência, sem campo booleano especial: modela-se por duas exigências do mesmo documento, uma com regra de idade gatilhada por tipos não permanentes e outra sem idade gatilhada por tipos permanentes, com a classificação permanente vinda do catálogo de tipos de deficiência e os códigos concretos congelados no gatilho.',
+        'Cada exigência documental declara os formatos aceitos como lista de formatos permitidos (formatosPermitidos), em que o limite de tamanho por formato é opcional, além de um limite global opcional da exigência; alternativamente, um token de qualquer formato com teto default opcional, mutuamente exclusivo dos formatos específicos. A lista, os limites e a escolha são congelados na exigência. A regra de idade de emissão do documento é tudo-nulo (sem regra) ou completa (Valor, Unidade, ReferenciaTipo e a fase quando aplicável), ancorada na fase, e funciona como aviso, não bloqueia a presença. A exceção do laudo de deficiência permanente decorre de gatilho sobre o tipo de deficiência, sem campo booleano especial: modela-se por duas exigências do mesmo documento, uma com regra de idade gatilhada por tipos não permanentes e outra sem idade gatilhada por tipos permanentes, com a classificação permanente vinda do catálogo de tipos de deficiência e os códigos concretos congelados no gatilho.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2013,9 +2058,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'formatosPermitidos como lista com limite por formato opcional e limite global opcional, ou token de qualquer formato com teto default opcional, mutuamente exclusivos, congelados na exigência; regra de idade tudo-nula ou completa (Valor, Unidade, ReferenciaTipo, fase), ancorada na fase e tratada como aviso (não bloqueia presença); a exceção do laudo permanente é modelada por duas exigências do mesmo documento (uma com idade por tipos não permanentes, outra sem idade por tipos permanentes), com permanente vindo do catálogo de tipos e códigos congelados no gatilho; tipo ausente mantém as exigências pendentes.',
+        'formatosPermitidos como lista com limite por formato opcional e limite global opcional, ou token de qualquer formato com teto default opcional, mutuamente exclusivos, congelados na exigência; regra de idade tudo-nula ou completa (Valor, Unidade, ReferenciaTipo, fase), ancorada na fase e tratada como aviso (não bloqueia presença); a exceção do laudo permanente é modelada por duas exigências do mesmo documento (uma com idade por tipos não permanentes, outra sem idade por tipos permanentes), com permanente vindo do catálogo de tipos e códigos congelados no gatilho; tipo ausente mantém as exigências pendentes.',
     verificacao:
-      'Teste automatizado (formatos config-time com limites opcional/global/default; regra de idade completa/tudo-nula como aviso; duas exigências por gatilho de tipo permanente/não permanente) (planejado).',
+        'Teste automatizado (formatos config-time com limites opcional/global/default; regra de idade completa/tudo-nula como aviso; duas exigências por gatilho de tipo permanente/não permanente) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2023,7 +2068,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0067',
     titulo: 'Árvore de satisfação de documentos e álgebra de cinco estados',
     enunciado:
-      'O grupo de satisfação deve ser uma árvore de conectores E/OU aninhados, escopada por processo e fase, preservando o OU plano como caso degenerado. A satisfação é uma álgebra de cinco estados — satisfeito, pendente, indeterminado, não aplicável, impossível — que compõe com o gatilho de cada folha (aplicável, não aplicável, indeterminado). Em E, filhos não aplicáveis são ignorados e o nó é impossível se algum restante é impossível; em OU/N-de, o nó é satisfeito com pelo menos N filhos satisfeitos, impossível quando o máximo atingível (satisfeitos mais pendentes aplicáveis mais indeterminados) é menor que N, e todos os filhos não aplicáveis tornam o nó não aplicável. Indeterminado na raiz permanece pendente (fail-closed) e impossível é sinalizado explicitamente, nunca pendente silencioso.',
+        'O grupo de satisfação deve ser uma árvore de conectores E/OU aninhados, escopada por processo e fase, preservando o OU plano como caso degenerado. A satisfação é uma álgebra de cinco estados — satisfeito, pendente, indeterminado, não aplicável, impossível — que compõe com o gatilho de cada folha (aplicável, não aplicável, indeterminado). Em E, filhos não aplicáveis são ignorados e o nó é impossível se algum restante é impossível; em OU/N-de, o nó é satisfeito com pelo menos N filhos satisfeitos, impossível quando o máximo atingível (satisfeitos mais pendentes aplicáveis mais indeterminados) é menor que N, e todos os filhos não aplicáveis tornam o nó não aplicável. Indeterminado na raiz permanece pendente (fail-closed) e impossível é sinalizado explicitamente, nunca pendente silencioso.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2035,9 +2080,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Árvore E/OU aninhada com invariantes de cadastro (grupo não vazio; estrutura em árvore, sem ciclo e sem DAG; todos os nós de um grupo na mesma fase; profundidade não limitada pela semântica; cardinalidade por tipo de nó — folha N maior ou igual a 1, OU/N-de 1 a número de filhos, proibida em E); tabela de decisão do E (todos os filhos não aplicáveis: NÃO_APLICÁVEL; senão IMPOSSIVEL se houver impossível; senão SATISFEITO se todos os restantes satisfeitos; senão PENDENTE se houver pendente; senão INDETERMINADO); tabela de decisão do OU/N-de (todos não aplicáveis: NÃO_APLICÁVEL; SATISFEITO se satisfeitos maior ou igual a N; IMPOSSIVEL se o máximo atingível — satisfeitos mais pendentes aplicáveis mais indeterminados — for menor que N; INDETERMINADO se houver indeterminado; senão PENDENTE); impossível sinalizado (nunca pendente silencioso permanente); indeterminado na raiz permanece pendente; OU plano preservado como caso degenerado.',
+        'Árvore E/OU aninhada com invariantes de cadastro (grupo não vazio; estrutura em árvore, sem ciclo e sem DAG; todos os nós de um grupo na mesma fase; profundidade não limitada pela semântica; cardinalidade por tipo de nó — folha N maior ou igual a 1, OU/N-de 1 a número de filhos, proibida em E); tabela de decisão do E (todos os filhos não aplicáveis: NÃO_APLICÁVEL; senão IMPOSSIVEL se houver impossível; senão SATISFEITO se todos os restantes satisfeitos; senão PENDENTE se houver pendente; senão INDETERMINADO); tabela de decisão do OU/N-de (todos não aplicáveis: NÃO_APLICÁVEL; SATISFEITO se satisfeitos maior ou igual a N; IMPOSSIVEL se o máximo atingível — satisfeitos mais pendentes aplicáveis mais indeterminados — for menor que N; INDETERMINADO se houver indeterminado; senão PENDENTE); impossível sinalizado (nunca pendente silencioso permanente); indeterminado na raiz permanece pendente; OU plano preservado como caso degenerado.',
     verificacao:
-      'Teste automatizado (satisfação recursiva; tabelas de E e OU/N-de; máximo atingível; recusa de grupo vazio/ciclo; degenerado) (planejado).',
+        'Teste automatizado (satisfação recursiva; tabelas de E e OU/N-de; máximo atingível; recusa de grupo vazio/ciclo; degenerado) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2045,7 +2090,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0068',
     titulo: 'Cardinalidade qualificada da exigência documental',
     enunciado:
-      'A exigência deve distinguir apresentação (unidade lógica, multi-arquivo) de arquivo, contando apresentações na quantidade mínima. Para os padrões de distinção, a chave de distinção pertence a um catálogo fechado: chaves de calendário derivável (competência mensal, exercício anual) definem os últimos N slots regulares até a âncora; a chave de ocorrência usa uma lista de slots esperados congelada quando a recência precisa ser verificável (por exemplo, os dois últimos comprovantes), ou distinção pura quando não.',
+        'A exigência deve distinguir apresentação (unidade lógica, multi-arquivo) de arquivo, contando apresentações na quantidade mínima. Para os padrões de distinção, a chave de distinção pertence a um catálogo fechado: chaves de calendário derivável (competência mensal, exercício anual) definem os últimos N slots regulares até a âncora; a chave de ocorrência usa uma lista de slots esperados congelada quando a recência precisa ser verificável (por exemplo, os dois últimos comprovantes), ou distinção pura quando não.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2057,9 +2102,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Frente e verso contam como uma apresentação; competências regulares até a âncora são congeladas e omitir a mais recente deixa o slot pendente; a lista de slots esperados de ocorrência é não vazia, com identificadores únicos e tamanho igual à quantidade mínima; sem a lista, bastam N ocorrências distintas.',
+        'Frente e verso contam como uma apresentação; competências regulares até a âncora são congeladas e omitir a mais recente deixa o slot pendente; a lista de slots esperados de ocorrência é não vazia, com identificadores únicos e tamanho igual à quantidade mínima; sem a lista, bastam N ocorrências distintas.',
     verificacao:
-      'Teste automatizado (apresentação vs arquivo; slots de calendário e de ocorrência) (planejado).',
+        'Teste automatizado (apresentação vs arquivo; slots de calendário e de ocorrência) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2067,7 +2112,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0069',
     titulo: 'Repetição de exigência por entidade com identidade determinística',
     enunciado:
-      'Uma subárvore de exigências deve poder repetir por entidade de um catálogo fechado de tipos (membro do núcleo familiar, com atributos; pessoa jurídica vinculada, como repetição pura), com schema de atributos fechado e congelado por tipo. A correlação da apresentação se dá por identidade de instância, e o gatilho interno pode avaliar atributos da entidade. Não há aninhamento de repetição.',
+        'Uma subárvore de exigências deve poder repetir por entidade de um catálogo fechado de tipos (membro do núcleo familiar, com atributos; pessoa jurídica vinculada, como repetição pura), com schema de atributos fechado e congelado por tipo. A correlação da apresentação se dá por identidade de instância, e o gatilho interno pode avaliar atributos da entidade. Não há aninhamento de repetição.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2079,9 +2124,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Catálogo fechado de tipos de entidade com schema fechado e congelado; a apresentação satisfaz a instância certa pela identidade (exigência, tipo de entidade, instância); o gatilho interno avalia atributo da entidade; o aninhamento de repetição é recusado no cadastro.',
+        'Catálogo fechado de tipos de entidade com schema fechado e congelado; a apresentação satisfaz a instância certa pela identidade (exigência, tipo de entidade, instância); o gatilho interno avalia atributo da entidade; o aninhamento de repetição é recusado no cadastro.',
     verificacao:
-      'Teste automatizado (correlação por instância; gatilho por atributo da entidade; recusa de aninhamento) (planejado).',
+        'Teste automatizado (correlação por instância; gatilho por atributo da entidade; recusa de aninhamento) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2089,7 +2134,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0070',
     titulo: 'Consequência por nó e fronteira ativa de emissão',
     enunciado:
-      'A consequência da exigência é configurada por nó — em cada folha e em cada grupo OU/N-de, que é a unidade opaca de alternativas; o grupo E é transparente e não carrega consequência própria. O vocabulário é o da base (ELIMINA, RECLASSIFICA_AC, REMOVE_VANTAGEM, PENDENCIA_REENVIO) e os mesmos gates se aplicam: coerência com a ação da vaga, REMOVE_VANTAGEM exige vantagem viva, PENDENCIA_REENVIO exige fase com complementação (inclusive o gate reverso ao retirar a complementação) e a publicação exige ao menos uma base legal RESOLVIDO. Um grupo OU/N-de com consequência é exigência de primeira classe, com base legal própria, não derivada dos filhos. A consequência efetiva é emitida por fronteira ativa, do nó raiz para baixo: um nó satisfeito ou não aplicável suprime a subárvore; uma folha em estado ativo — pendente, indeterminado ou impossível — emite a sua consequência (a folha impossível a emite como inevitável); o OU/N-de opaco em estado ativo emite a própria, com os filhos apenas como orientação de pendência, não como consequência vigente; o E transparente não emite e desce para os filhos em estado ativo, isto é, não satisfeitos e não não aplicáveis (pendente, indeterminado ou impossível). A ordem de severidade serve só para priorizar exibição, nunca para derivar ou agregar consequência.',
+        'A consequência da exigência é configurada por nó — em cada folha e em cada grupo OU/N-de, que é a unidade opaca de alternativas; o grupo E é transparente e não carrega consequência própria. O vocabulário é o da base (ELIMINA, RECLASSIFICA_AC, REMOVE_VANTAGEM, PENDENCIA_REENVIO) e os mesmos gates se aplicam: coerência com a ação da vaga, REMOVE_VANTAGEM exige vantagem viva, PENDENCIA_REENVIO exige fase com complementação (inclusive o gate reverso ao retirar a complementação) e a publicação exige ao menos uma base legal RESOLVIDO. Um grupo OU/N-de com consequência é exigência de primeira classe, com base legal própria, não derivada dos filhos. A consequência efetiva é emitida por fronteira ativa, do nó raiz para baixo: um nó satisfeito ou não aplicável suprime a subárvore; uma folha em estado ativo — pendente, indeterminado ou impossível — emite a sua consequência (a folha impossível a emite como inevitável); o OU/N-de opaco em estado ativo emite a própria, com os filhos apenas como orientação de pendência, não como consequência vigente; o E transparente não emite e desce para os filhos em estado ativo, isto é, não satisfeitos e não não aplicáveis (pendente, indeterminado ou impossível). A ordem de severidade serve só para priorizar exibição, nunca para derivar ou agregar consequência.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2101,9 +2146,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Consequência por nó em folha e em OU/N-de, com E transparente; vocabulário fechado da base; gates de ação da vaga, vantagem viva, complementação e gate reverso, e base legal RESOLVIDO para publicar; grupo OU/N-de opaco é exigência de primeira classe com base legal própria; emissão por fronteira ativa (nó satisfeito/não aplicável suprime a subárvore; folha em estado ativo — pendente, indeterminado ou impossível — emite, impossível como inevitável; E desce só para filhos em estado ativo, excluindo satisfeito e não aplicável; sem dupla emissão; filhos de OU/N-de opaco são só orientação); ordem de severidade apenas para exibição, nunca para derivar consequência.',
+        'Consequência por nó em folha e em OU/N-de, com E transparente; vocabulário fechado da base; gates de ação da vaga, vantagem viva, complementação e gate reverso, e base legal RESOLVIDO para publicar; grupo OU/N-de opaco é exigência de primeira classe com base legal própria; emissão por fronteira ativa (nó satisfeito/não aplicável suprime a subárvore; folha em estado ativo — pendente, indeterminado ou impossível — emite, impossível como inevitável; E desce só para filhos em estado ativo, excluindo satisfeito e não aplicável; sem dupla emissão; filhos de OU/N-de opaco são só orientação); ordem de severidade apenas para exibição, nunca para derivar consequência.',
     verificacao:
-      'Teste automatizado (emissão por fronteira; supressão; gates diretos e reverso; base legal própria do grupo; severidade só de exibição) (planejado).',
+        'Teste automatizado (emissão por fronteira; supressão; gates diretos e reverso; base legal própria do grupo; severidade só de exibição) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2111,7 +2156,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0071',
     titulo: 'Snapshot conjunto autossuficiente de documentos exigidos (RN08)',
     enunciado:
-      'A publicação congela um snapshot conjunto e autossuficiente de tudo que determina o resultado documental, de modo que o runtime nunca releia a configuração viva. O snapshot reúne, por exigência, a versão congelada de fatos, bindings, domínios, descrições, cardinalidade, origem, ponto de resolução e formatos (cobertura), e reúne a árvore de satisfação com conectores, cardinalidade por nó, chave de distinção e janela, ocorrências esperadas, repetição por entidade e schemas de atributos, a consequência de cada nó, a base legal própria de cada nó que a carrega e a ordem de severidade (composição). A quantidade de instâncias e de apresentações permanece em runtime, fora do snapshot. O conteúdo é único e versionado, com hash estável, e é a fonte de verdade que o contrato de runtime (UNI-REQ-0063) confere; alterar o catálogo vivo não afeta editais publicados.',
+        'A publicação congela um snapshot conjunto e autossuficiente de tudo que determina o resultado documental, de modo que o runtime nunca releia a configuração viva. O snapshot reúne, por exigência, a versão congelada de fatos, bindings, domínios, descrições, cardinalidade, origem, ponto de resolução e formatos (cobertura), e reúne a árvore de satisfação com conectores, cardinalidade por nó, chave de distinção e janela, ocorrências esperadas, repetição por entidade e schemas de atributos, a consequência de cada nó, a base legal própria de cada nó que a carrega e a ordem de severidade (composição). A quantidade de instâncias e de apresentações permanece em runtime, fora do snapshot. O conteúdo é único e versionado, com hash estável, e é a fonte de verdade que o contrato de runtime (UNI-REQ-0063) confere; alterar o catálogo vivo não afeta editais publicados.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2123,9 +2168,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Snapshot conjunto autossuficiente com a folha por exigência (fatos, bindings, domínios, descrições, cardinalidade, origem, ponto de resolução, formatos) e a árvore (conectores, cardinalidade por nó, chave de distinção e janela, ocorrências esperadas, repetição por entidade e schemas, consequência por nó, base legal própria por nó, ordem de severidade); quantidades de instâncias/apresentações ficam em runtime; conteúdo único, versionado e com hash estável; alterar catálogo vivo (incluindo consequência, ocorrências esperadas ou ordem de severidade) não altera edital publicado; é a fonte única que UNI-REQ-0063 confere em runtime.',
+        'Snapshot conjunto autossuficiente com a folha por exigência (fatos, bindings, domínios, descrições, cardinalidade, origem, ponto de resolução, formatos) e a árvore (conectores, cardinalidade por nó, chave de distinção e janela, ocorrências esperadas, repetição por entidade e schemas, consequência por nó, base legal própria por nó, ordem de severidade); quantidades de instâncias/apresentações ficam em runtime; conteúdo único, versionado e com hash estável; alterar catálogo vivo (incluindo consequência, ocorrências esperadas ou ordem de severidade) não altera edital publicado; é a fonte única que UNI-REQ-0063 confere em runtime.',
     verificacao:
-      'Teste automatizado (autossuficiência e completude do snapshot conjunto; hash estável; imutabilidade a mudanças de catálogo) (planejado).',
+        'Teste automatizado (autossuficiência e completude do snapshot conjunto; hash estável; imutabilidade a mudanças de catálogo) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2133,7 +2178,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0072',
     titulo: 'Fatos declarados da inscrição por par elegibilidade e opt-in',
     enunciado:
-      'Os fatos que o candidato declara na inscrição são vocabulário de configuração, coletados no padrão par elegibilidade + opt-in: cada cota gera dois fatos independentes — um de elegibilidade (autodeclaração: pessoa com deficiência, escola pública, cor/raça, quilombola, baixa renda) e um de opt-in (a escolha de concorrer). A elegibilidade sozinha não coloca o candidato na cota; o opt-in é a escolha explícita. Cada fato DECLARADO é produzido por seleção sobre FatoValorDominio {id, fatoId, codigo, descricao, ordem, ativo}, nunca por texto livre, com unicidade (fatoId, codigo) e ordenação estável por ordem; cada valor carrega a descrição do significado (obrigatória para fato declarado). Elegibilidade + opt-in habilita a contribuição da modalidade correspondente; a concorrência efetiva resulta da derivação e da interseção com a oferta definida em UNI-REQ-0076, não do par isoladamente. Os fatos, seus valores de domínio e descrições congelam na publicação (RN08).',
+        'Os fatos que o candidato declara na inscrição são vocabulário de configuração, coletados no padrão par elegibilidade + opt-in: cada cota gera dois fatos independentes — um de elegibilidade (autodeclaração: pessoa com deficiência, escola pública, cor/raça, quilombola, baixa renda) e um de opt-in (a escolha de concorrer). A elegibilidade sozinha não coloca o candidato na cota; o opt-in é a escolha explícita. Cada fato DECLARADO é produzido por seleção sobre FatoValorDominio {id, fatoId, codigo, descricao, ordem, ativo}, nunca por texto livre, com unicidade (fatoId, codigo) e ordenação estável por ordem; cada valor carrega a descrição do significado (obrigatória para fato declarado). Elegibilidade + opt-in habilita a contribuição da modalidade correspondente; a concorrência efetiva resulta da derivação e da interseção com a oferta definida em UNI-REQ-0076, não do par isoladamente. Os fatos, seus valores de domínio e descrições congelam na publicação (RN08).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2145,9 +2190,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cada cota do formulário produz dois fatos declarados independentes (elegibilidade e opt-in), cada um selecionado sobre FatoValorDominio {id, fatoId, codigo, descricao, ordem, ativo} com unicidade (fatoId, codigo) e ordenação estável por ordem, mais binding de campo; elegibilidade sem opt-in não concorre à cota; elegibilidade + opt-in habilita a contribuição da modalidade, cuja concorrência efetiva depende da derivação e da interseção com a oferta (UNI-REQ-0076); valores de domínio carregam descrição do significado (obrigatória para fato declarado); fatos, valores e descrições congelam na publicação e não mudam em edital publicado.',
+        'Cada cota do formulário produz dois fatos declarados independentes (elegibilidade e opt-in), cada um selecionado sobre FatoValorDominio {id, fatoId, codigo, descricao, ordem, ativo} com unicidade (fatoId, codigo) e ordenação estável por ordem, mais binding de campo; elegibilidade sem opt-in não concorre à cota; elegibilidade + opt-in habilita a contribuição da modalidade, cuja concorrência efetiva depende da derivação e da interseção com a oferta (UNI-REQ-0076); valores de domínio carregam descrição do significado (obrigatória para fato declarado); fatos, valores e descrições congelam na publicação e não mudam em edital publicado.',
     verificacao:
-      'Teste automatizado (elegibilidade sem opt-in não concorre; elegibilidade mais opt-in concorre; domínio descritível e binding; congelamento na publicação) (planejado).',
+        'Teste automatizado (elegibilidade sem opt-in não concorre; elegibilidade mais opt-in concorre; domínio descritível e binding; congelamento na publicação) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2155,7 +2200,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0073',
     titulo: 'Grafo de pré-condições da coleta (aplicabilidade condicional) e gate de escola pública',
     enunciado:
-      'A visibilidade e a aplicabilidade de cada campo ou fato dependem de fatos anteriores, expressas por um predicado de pré-condição no mesmo vocabulário e operadores do gatilho — nunca por ramo em código. O grafo de pré-condições é acíclico e congelado na publicação. As exclusões mútuas do domínio são pré-condição (candidato indígena não abre o bloco quilombola). O gate de escola pública é materializado como pré-condição de todos os campos e opt-ins das subcotas de escola pública — exceto a dimensão de pessoa com deficiência, que independe do gate por conservar ampla concorrência para PcD mesmo sem escola pública. Assim o candidato de escola não pública tem esses campos não aplicáveis e não vê perguntas que a regra manda ocultar.',
+        'A visibilidade e a aplicabilidade de cada campo ou fato dependem de fatos anteriores, expressas por um predicado de pré-condição no mesmo vocabulário e operadores do gatilho — nunca por ramo em código. O grafo de pré-condições é acíclico e congelado na publicação. As exclusões mútuas do domínio são pré-condição (candidato indígena não abre o bloco quilombola). O gate de escola pública é materializado como pré-condição de todos os campos e opt-ins das subcotas de escola pública — exceto a dimensão de pessoa com deficiência, que independe do gate por conservar ampla concorrência para PcD mesmo sem escola pública. Assim o candidato de escola não pública tem esses campos não aplicáveis e não vê perguntas que a regra manda ocultar.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2167,9 +2212,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cada campo/fato declara pré-condição (predicado sobre fatos anteriores) no vocabulário e operadores do gatilho; o grafo é acíclico e ciclo é recusado no cadastro; exclusão indígena versus quilombola é pré-condição, não código; o gate de escola pública é pré-condição de todos os campos/opt-ins de subcota de escola pública, exceto a dimensão PcD; o campo com pré-condição falsa não é apresentado; o grafo de pré-condição entre FATOS congela na publicação como parte do grafo conjunto de UNI-REQ-0078, para fato de qualquer origem. A pré-condição de CAMPO do formulário (campo condicionado a fato, não fato condicionado a fato) tem cobertura mais estreita hoje — só fato DECLARADO — ver UNI-REQ-0084/RN-COL-04 e a lacuna explícita em UNI-REQ-0089 para campo condicionado a fato derivado ou de integração.',
+        'Cada campo/fato declara pré-condição (predicado sobre fatos anteriores) no vocabulário e operadores do gatilho; o grafo é acíclico e ciclo é recusado no cadastro; exclusão indígena versus quilombola é pré-condição, não código; o gate de escola pública é pré-condição de todos os campos/opt-ins de subcota de escola pública, exceto a dimensão PcD; o campo com pré-condição falsa não é apresentado; o grafo de pré-condição entre FATOS congela na publicação como parte do grafo conjunto de UNI-REQ-0078, para fato de qualquer origem. A pré-condição de CAMPO do formulário (campo condicionado a fato, não fato condicionado a fato) tem cobertura mais estreita hoje — só fato DECLARADO — ver UNI-REQ-0084/RN-COL-04 e a lacuna explícita em UNI-REQ-0089 para campo condicionado a fato derivado ou de integração.',
     verificacao:
-      'Teste automatizado (opt-in condicionado à elegibilidade não aparece; ciclo recusado; gate de escola pública oculta subcotas para não-EP; exclusão indígena versus quilombola) (planejado).',
+        'Teste automatizado (opt-in condicionado à elegibilidade não aparece; ciclo recusado; gate de escola pública oculta subcotas para não-EP; exclusão indígena versus quilombola) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2177,7 +2222,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0074',
     titulo: 'Estado tipado não-aplicável versus indeterminado e tabela-verdade por átomo',
     enunciado:
-      'Cada fato tem um estado de resolução tipado — NÃO_APLICÁVEL, INDETERMINADO ou RESOLVIDO (com valor) — explícito por um discriminador obrigatório, nunca inferido só do valor nulo: valor nulo sozinho jamais distingue NÃO_APLICÁVEL de INDETERMINADO. Pré-condição falsa resolve NÃO_APLICÁVEL (o candidato não concorre); pré-condição verdadeira e fato respondido resolve RESOLVIDO (com valor); pré-condição verdadeira e fato não respondido é INDETERMINADO (fail-closed); pré-condição INDETERMINADO é INDETERMINADO. O átomo do gatilho ganha quatro resultados (verdadeiro/falso/NÃO_APLICÁVEL/INDETERMINADO) a partir do estado do fato, para qualquer operador — a negação não vira verdadeira sobre a inaplicabilidade. Os quatro resultados existem só no átomo: na cláusula E o NÃO_APLICÁVEL colapsa como falso resolvido (definitivo) e o DNF do gatilho permanece ternário; um fato NÃO_APLICÁVEL dispensa a exigência (não-exigida), um INDETERMINADO a mantém pendente. Um produtor suprimido por pré-condição falsa torna o fato vinculado NÃO_APLICÁVEL imediatamente. Quando uma mudança a montante torna um campo/fato dependente NÃO_APLICÁVEL, a resposta anteriormente gravada nesse campo/fato a jusante é invalidada; a resposta do fato a montante que determinou a transição é preservada.',
+        'Cada fato tem um estado de resolução tipado — NÃO_APLICÁVEL, INDETERMINADO ou RESOLVIDO (com valor) — explícito por um discriminador obrigatório, nunca inferido só do valor nulo: valor nulo sozinho jamais distingue NÃO_APLICÁVEL de INDETERMINADO. Pré-condição falsa resolve NÃO_APLICÁVEL (o candidato não concorre); pré-condição verdadeira e fato respondido resolve RESOLVIDO (com valor); pré-condição verdadeira e fato não respondido é INDETERMINADO (fail-closed); pré-condição INDETERMINADO é INDETERMINADO. O átomo do gatilho ganha quatro resultados (verdadeiro/falso/NÃO_APLICÁVEL/INDETERMINADO) a partir do estado do fato, para qualquer operador — a negação não vira verdadeira sobre a inaplicabilidade. Os quatro resultados existem só no átomo: na cláusula E o NÃO_APLICÁVEL colapsa como falso resolvido (definitivo) e o DNF do gatilho permanece ternário; um fato NÃO_APLICÁVEL dispensa a exigência (não-exigida), um INDETERMINADO a mantém pendente. Um produtor suprimido por pré-condição falsa torna o fato vinculado NÃO_APLICÁVEL imediatamente. Quando uma mudança a montante torna um campo/fato dependente NÃO_APLICÁVEL, a resposta anteriormente gravada nesse campo/fato a jusante é invalidada; a resposta do fato a montante que determinou a transição é preservada.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2189,9 +2234,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Discriminador de estado obrigatório (NÃO_APLICÁVEL/INDETERMINADO/RESOLVIDO); valor nulo sozinho não distingue NÃO_APLICÁVEL de INDETERMINADO; tabela-verdade por átomo propaga o estado do fato para qualquer operador (negação não vira verdadeira sobre inaplicabilidade); na cláusula E o NÃO_APLICÁVEL colapsa como falso definitivo e o DNF permanece ternário; NÃO_APLICÁVEL dispensa o dependente, INDETERMINADO o mantém pendente; produtor suprimido torna o fato NÃO_APLICÁVEL imediatamente; a resposta gravada no campo/fato dependente a jusante que se tornou NÃO_APLICÁVEL é invalidada, preservando a resposta a montante que causou a transição.',
+        'Discriminador de estado obrigatório (NÃO_APLICÁVEL/INDETERMINADO/RESOLVIDO); valor nulo sozinho não distingue NÃO_APLICÁVEL de INDETERMINADO; tabela-verdade por átomo propaga o estado do fato para qualquer operador (negação não vira verdadeira sobre inaplicabilidade); na cláusula E o NÃO_APLICÁVEL colapsa como falso definitivo e o DNF permanece ternário; NÃO_APLICÁVEL dispensa o dependente, INDETERMINADO o mantém pendente; produtor suprimido torna o fato NÃO_APLICÁVEL imediatamente; a resposta gravada no campo/fato dependente a jusante que se tornou NÃO_APLICÁVEL é invalidada, preservando a resposta a montante que causou a transição.',
     verificacao:
-      'Teste automatizado (não-aplicável dispensa definitivo; indeterminado mantém pendente; negação sobre inaplicabilidade; distinção só pelo discriminador; invalidação de resposta obsoleta) (planejado).',
+        'Teste automatizado (não-aplicável dispensa definitivo; indeterminado mantém pendente; negação sobre inaplicabilidade; distinção só pelo discriminador; invalidação de resposta obsoleta) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2199,7 +2244,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0075',
     titulo: 'Fato derivado com regra de derivação de schema fechado e congelada',
     enunciado:
-      'Um fato DERIVADO tem como binding uma regra de derivação de estrutura fechada (dado, não script): uma lista de regras {quando, contribui} em que quando é um predicado DNF no mesmo vocabulário e operadores do gatilho, sem referência entre regras e sem construção fora do schema; a única forma incondicional é o DNF cuja lista de cláusulas é vazia (verdadeiro), sem literal textual. O binding declara explicitamente a lista de fatos dependentes, que SHALL ser exatamente a união dos fatos citados nos quando — a publicação recusa tanto dependência usada e não declarada quanto dependência declarada em excesso. A avaliação une (união de conjunto, idempotente, sem conflito) as contribuições das regras cujo quando é VERDADEIRO; regra FALSO ou NÃO_APLICÁVEL não contribui; nenhuma regra aplicável produz conjunto vazio; todo código contribuído é canônico e pertence ao domínio congelado do fato, senão é recusado. Um fato derivado só resolve quando todas as dependências resolveram (RESOLVIDO ou NÃO_APLICÁVEL); dependência INDETERMINADO torna o derivado INDETERMINADO. O snapshot congela, além dos dados da regra, a versão semântica do interpretador, de modo que a evolução do motor não altere editais publicados (RN08).',
+        'Um fato DERIVADO tem como binding uma regra de derivação de estrutura fechada (dado, não script): uma lista de regras {quando, contribui} em que quando é um predicado DNF no mesmo vocabulário e operadores do gatilho, sem referência entre regras e sem construção fora do schema; a única forma incondicional é o DNF cuja lista de cláusulas é vazia (verdadeiro), sem literal textual. O binding declara explicitamente a lista de fatos dependentes, que SHALL ser exatamente a união dos fatos citados nos quando — a publicação recusa tanto dependência usada e não declarada quanto dependência declarada em excesso. A avaliação une (união de conjunto, idempotente, sem conflito) as contribuições das regras cujo quando é VERDADEIRO; regra FALSO ou NÃO_APLICÁVEL não contribui; nenhuma regra aplicável produz conjunto vazio; todo código contribuído é canônico e pertence ao domínio congelado do fato, senão é recusado. Um fato derivado só resolve quando todas as dependências resolveram (RESOLVIDO ou NÃO_APLICÁVEL); dependência INDETERMINADO torna o derivado INDETERMINADO. O snapshot congela, além dos dados da regra, a versão semântica do interpretador, de modo que a evolução do motor não altere editais publicados (RN08).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2211,9 +2256,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Regra de derivação de schema fechado (lista {quando, contribui}, quando em DNF no vocabulário do gatilho, sem referência entre regras; única forma incondicional = DNF de lista de cláusulas vazia); lista de dependências explícita igual à união dos fatos citados nos quando — ausência ou excesso recusado; união idempotente das contribuições, conjunto vazio quando nenhuma aplica, código contribuído fora do domínio canônico recusado; derivado só resolve com todas as dependências RESOLVIDO/NÃO_APLICÁVEL, senão INDETERMINADO; versão semântica do interpretador congelada preserva o resultado de editais publicados.',
+        'Regra de derivação de schema fechado (lista {quando, contribui}, quando em DNF no vocabulário do gatilho, sem referência entre regras; única forma incondicional = DNF de lista de cláusulas vazia); lista de dependências explícita igual à união dos fatos citados nos quando — ausência ou excesso recusado; união idempotente das contribuições, conjunto vazio quando nenhuma aplica, código contribuído fora do domínio canônico recusado; derivado só resolve com todas as dependências RESOLVIDO/NÃO_APLICÁVEL, senão INDETERMINADO; versão semântica do interpretador congelada preserva o resultado de editais publicados.',
     verificacao:
-      'Teste automatizado (união e conjunto vazio; dependência indeterminada; código fora do domínio; imunidade à evolução do motor por versão semântica) (planejado).',
+        'Teste automatizado (união e conjunto vazio; dependência indeterminada; código fora do domínio; imunidade à evolução do motor por versão semântica) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2221,7 +2266,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0076',
     titulo: 'Derivação de modalidade de concorrência por configuração (Lei de Cotas)',
     enunciado:
-      'A MODALIDADE de concorrência é um fato DERIVADO multivalorado — o conjunto de modalidades a que o candidato concorre — computado pela regra de derivação a partir dos pares elegibilidade e opt-in, e nunca declarado diretamente. O domínio canônico é {AC, AC_PCD, LI_EP, LB_EP, LI_PPI, LB_PPI, LI_Q, LB_Q, LI_PCD, LB_PCD, PCD_PURO} (o V do corpus é rótulo de exibição de AC_PCD no edital, nunca um código de entrada — não há tradução de alias). PCD_PURO (UNI-REQ-0085/RN-MOD-08) é reserva de PcD independente da Lei de Cotas, fora da composição R0–R9 abaixo, para processo que reserva vaga PcD sem as oito cotas da Lei 12.711. As dependências da regra são {PCD, CONCORRER_PCD, EGRESSO_ESCOLA_PUBLICA, CONCORRER_EP, CONCORRER_PPI, CONCORRER_Q, CONCORRER_RENDA} — PCD entra porque tanto AC_PCD quanto PCD_PURO condicionam à elegibilidade em si, não só ao opt-in. A composição da Lei de Cotas é configuração congelada, não ramificação por tipo de processo em código: AC como âncora (regra de DNF vazio); concorrência dupla (o cotista também concorre em AC); as modalidades LB_*, com critério de renda per capita igual ou inferior a um salário mínimo, também concorrem às respectivas LI_*; as subcotas de escola pública exigem EGRESSO_ESCOLA_PUBLICA; AC_PCD exige, além da elegibilidade e do opt-in por deficiência, NÃO ser egresso de escola pública — a condição existe para manter AC_PCD exclusiva de quem não se enquadra em nenhuma das oito cotas da Lei, já que a pessoa com deficiência egressa de escola pública concorre por LI_PCD (e LB_PCD, se elegível à renda) em vez de AC_PCD; indígena não gera cota quilombola. A regra é o conjunto de regras {quando, contribui} R0 a R9 (cada LB_* repete os átomos da LI_* irmã mais o átomo de renda), modelo todo-positivo cujo resultado é a UNIÃO das contribuições ativas, restrito às modalidades ofertadas pelo processo por recusa antecipada na configuração — uma regra que contribui código fora do domínio ofertado é recusada na publicação, nunca filtrada em runtime. A configuração concreta R0–R9 e a matriz completa de combinações alcançáveis são normativas (não fixtures exemplificativas) e correspondem ao formulário real de definição de cotas, com as correções editoriais assumidas do corpus (referências cruzadas deslocadas 2.2/3.1/3.2 lidas pelo bloco correto; LI_PPI/LB_PPI presentes na lista; AC_PCD canônico com V como rótulo de exibição, não alias).',
+        'A MODALIDADE de concorrência é um fato DERIVADO multivalorado — o conjunto de modalidades a que o candidato concorre — computado pela regra de derivação a partir dos pares elegibilidade e opt-in, e nunca declarado diretamente. O domínio canônico é {AC, AC_PCD, LI_EP, LB_EP, LI_PPI, LB_PPI, LI_Q, LB_Q, LI_PCD, LB_PCD, PCD_PURO} (o V do corpus é rótulo de exibição de AC_PCD no edital, nunca um código de entrada — não há tradução de alias). PCD_PURO (UNI-REQ-0085/RN-MOD-08) é reserva de PcD independente da Lei de Cotas, fora da composição R0–R9 abaixo, para processo que reserva vaga PcD sem as oito cotas da Lei 12.711. As dependências da regra são {PCD, CONCORRER_PCD, EGRESSO_ESCOLA_PUBLICA, CONCORRER_EP, CONCORRER_PPI, CONCORRER_Q, CONCORRER_RENDA} — PCD entra porque tanto AC_PCD quanto PCD_PURO condicionam à elegibilidade em si, não só ao opt-in. A composição da Lei de Cotas é configuração congelada, não ramificação por tipo de processo em código: AC como âncora (regra de DNF vazio); concorrência dupla (o cotista também concorre em AC); as modalidades LB_*, com critério de renda per capita igual ou inferior a um salário mínimo, também concorrem às respectivas LI_*; as subcotas de escola pública exigem EGRESSO_ESCOLA_PUBLICA; AC_PCD exige, além da elegibilidade e do opt-in por deficiência, NÃO ser egresso de escola pública — a condição existe para manter AC_PCD exclusiva de quem não se enquadra em nenhuma das oito cotas da Lei, já que a pessoa com deficiência egressa de escola pública concorre por LI_PCD (e LB_PCD, se elegível à renda) em vez de AC_PCD; indígena não gera cota quilombola. A regra é o conjunto de regras {quando, contribui} R0 a R9 (cada LB_* repete os átomos da LI_* irmã mais o átomo de renda), modelo todo-positivo cujo resultado é a UNIÃO das contribuições ativas, restrito às modalidades ofertadas pelo processo por recusa antecipada na configuração — uma regra que contribui código fora do domínio ofertado é recusada na publicação, nunca filtrada em runtime. A configuração concreta R0–R9 e a matriz completa de combinações alcançáveis são normativas (não fixtures exemplificativas) e correspondem ao formulário real de definição de cotas, com as correções editoriais assumidas do corpus (referências cruzadas deslocadas 2.2/3.1/3.2 lidas pelo bloco correto; LI_PPI/LB_PPI presentes na lista; AC_PCD canônico com V como rótulo de exibição, não alias).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2233,9 +2278,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'MODALIDADE é fato DERIVADO multivalorado (cadastro como DECLARADO é recusado) com domínio canônico {AC, AC_PCD, LI_EP, LB_EP, LI_PPI, LB_PPI, LI_Q, LB_Q, LI_PCD, LB_PCD, PCD_PURO} e dependências {PCD, CONCORRER_PCD, EGRESSO_ESCOLA_PUBLICA, CONCORRER_EP, CONCORRER_PPI, CONCORRER_Q, CONCORRER_RENDA}; PCD_PURO (UNI-REQ-0085) é regra independente de R0–R9, sem composição com a Lei de Cotas; AC_PCD exige NÃO ser egresso de escola pública além da elegibilidade e do opt-in por deficiência — candidato com deficiência egresso de escola pública concorre por LI_PCD (e LB_PCD, se elegível à renda), nunca por AC_PCD; as regras R0–R9 (AC por DNF vazio; LB_* = átomos da LI_* irmã mais CONCORRER_RENDA) e todas as linhas da matriz normativa de combinações alcançáveis são critérios de aceite, não fixtures; V é rótulo de exibição de AC_PCD (não alias; um código não canônico é recusado, não traduzido); correções editoriais do corpus assumidas (refs 2.2/3.1/3.2 deslocadas; LI_PPI/LB_PPI presentes); união todo-positivo restrita às modalidades ofertadas por recusa antecipada na configuração — regra que contribui código fora do domínio ofertado é recusada na publicação, não filtrada em runtime; verde de ponta a ponta (não-EP com deficiência resolve a {AC, AC_PCD}; EP com deficiência resolve a {AC, LI_PCD}, sem AC_PCD; renda NÃO_APLICÁVEL mantém só as LI_*; PPI+Q simultâneos e múltiplas dimensões; expansão LB_* para LI_*).',
+        'MODALIDADE é fato DERIVADO multivalorado (cadastro como DECLARADO é recusado) com domínio canônico {AC, AC_PCD, LI_EP, LB_EP, LI_PPI, LB_PPI, LI_Q, LB_Q, LI_PCD, LB_PCD, PCD_PURO} e dependências {PCD, CONCORRER_PCD, EGRESSO_ESCOLA_PUBLICA, CONCORRER_EP, CONCORRER_PPI, CONCORRER_Q, CONCORRER_RENDA}; PCD_PURO (UNI-REQ-0085) é regra independente de R0–R9, sem composição com a Lei de Cotas; AC_PCD exige NÃO ser egresso de escola pública além da elegibilidade e do opt-in por deficiência — candidato com deficiência egresso de escola pública concorre por LI_PCD (e LB_PCD, se elegível à renda), nunca por AC_PCD; as regras R0–R9 (AC por DNF vazio; LB_* = átomos da LI_* irmã mais CONCORRER_RENDA) e todas as linhas da matriz normativa de combinações alcançáveis são critérios de aceite, não fixtures; V é rótulo de exibição de AC_PCD (não alias; um código não canônico é recusado, não traduzido); correções editoriais do corpus assumidas (refs 2.2/3.1/3.2 deslocadas; LI_PPI/LB_PPI presentes); união todo-positivo restrita às modalidades ofertadas por recusa antecipada na configuração — regra que contribui código fora do domínio ofertado é recusada na publicação, não filtrada em runtime; verde de ponta a ponta (não-EP com deficiência resolve a {AC, AC_PCD}; EP com deficiência resolve a {AC, LI_PCD}, sem AC_PCD; renda NÃO_APLICÁVEL mantém só as LI_*; PPI+Q simultâneos e múltiplas dimensões; expansão LB_* para LI_*).',
     verificacao:
-      'Teste automatizado / matriz de aceitação (cada combinação de respostas para o conjunto de modalidades esperado, incluindo R0–R9 e todas as linhas da matriz; MODALIDADE não declarável; V recusado como código não canônico, não traduzido; restrição pela oferta) (planejado).',
+        'Teste automatizado / matriz de aceitação (cada combinação de respostas para o conjunto de modalidades esperado, incluindo R0–R9 e todas as linhas da matriz; MODALIDADE não declarável; V recusado como código não canônico, não traduzido; restrição pela oferta) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2243,7 +2288,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0077',
     titulo: 'Ordem de coleta, grafo conjunto de dependência e máscara de emissão bloqueada',
     enunciado:
-      'A ordem de coleta decorre de um grafo de dependência executável cujos nós são fatos, campos e exigências, com quatro classes de aresta: produção (o campo produtor do fato DECLARADO), pré-condição, derivação (dependências da regra) e referência de gatilho. O grafo conjunto é acíclico. A garantia de que nenhum documento é solicitado antes do fato que o dispara vale em dois níveis: fase (o ponto de resolução do fato não é posterior à fase da exigência) e intra-fase (a aresta de produção/derivação precede o consumo). A fronteira do fato é alcançada somente quando o produtor foi executado ou suprimido/ultrapassado E o gate de fase foi satisfeito. Antes disso, o consumidor BLOQUEADO projeta-se em INDETERMINADO para agregação, não é solicitado como faltante e tem a emissão de consequência suprimida — governada por um predicado recursivo emissionBlocked (folha BLOQUEADO não emite; grupo é bloqueado quando possui ao menos um filho decisivo e todos os filhos que ainda podem mudar seu resultado são recursivamente bloqueados; estado já decidido tem precedência e o IMPOSSIVEL continua emitindo o inevitável). O emissionBlocked compõe com a fronteira ativa de emissão de UNI-REQ-0070 e é a fonte única de supressão, sem regra concorrente por ancestral. BLOQUEADO não é um estado novo da árvore de satisfação, que permanece exaustiva em cinco estados; ao desbloquear, reavalia sem retenção.',
+        'A ordem de coleta decorre de um grafo de dependência executável cujos nós são fatos, campos e exigências, com quatro classes de aresta: produção (o campo produtor do fato DECLARADO), pré-condição, derivação (dependências da regra) e referência de gatilho. O grafo conjunto é acíclico. A garantia de que nenhum documento é solicitado antes do fato que o dispara vale em dois níveis: fase (o ponto de resolução do fato não é posterior à fase da exigência) e intra-fase (a aresta de produção/derivação precede o consumo). A fronteira do fato é alcançada somente quando o produtor foi executado ou suprimido/ultrapassado E o gate de fase foi satisfeito. Antes disso, o consumidor BLOQUEADO projeta-se em INDETERMINADO para agregação, não é solicitado como faltante e tem a emissão de consequência suprimida — governada por um predicado recursivo emissionBlocked (folha BLOQUEADO não emite; grupo é bloqueado quando possui ao menos um filho decisivo e todos os filhos que ainda podem mudar seu resultado são recursivamente bloqueados; estado já decidido tem precedência e o IMPOSSIVEL continua emitindo o inevitável). O emissionBlocked compõe com a fronteira ativa de emissão de UNI-REQ-0070 e é a fonte única de supressão, sem regra concorrente por ancestral. BLOQUEADO não é um estado novo da árvore de satisfação, que permanece exaustiva em cinco estados; ao desbloquear, reavalia sem retenção.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2255,9 +2300,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Grafo conjunto de quatro arestas (produção campo-fato, pré-condição, derivação, gatilho) acíclico; aresta de produção põe o campo antes do fato; fronteira do fato = produtor executado/suprimido/ultrapassado E gate de fase satisfeito; ordem garante documento nunca antes do fato (fase mais intra-fase); nó BLOQUEADO projeta INDETERMINADO, não é solicitado como faltante e não emite/propaga consequência; predicado emissionBlocked recursivo (folha bloqueada não emite; grupo bloqueado quando tem ao menos um filho decisivo e todos os decisivos são recursivamente bloqueados; IMPOSSIVEL decidido emite; fronteira decisiva não vazia) compondo com a fronteira ativa de UNI-REQ-0070 como fonte única, sem regra concorrente por ancestral; desbloqueio reavalia sem retenção; a árvore de satisfação permanece em cinco estados.',
+        'Grafo conjunto de quatro arestas (produção campo-fato, pré-condição, derivação, gatilho) acíclico; aresta de produção põe o campo antes do fato; fronteira do fato = produtor executado/suprimido/ultrapassado E gate de fase satisfeito; ordem garante documento nunca antes do fato (fase mais intra-fase); nó BLOQUEADO projeta INDETERMINADO, não é solicitado como faltante e não emite/propaga consequência; predicado emissionBlocked recursivo (folha bloqueada não emite; grupo bloqueado quando tem ao menos um filho decisivo e todos os decisivos são recursivamente bloqueados; IMPOSSIVEL decidido emite; fronteira decisiva não vazia) compondo com a fronteira ativa de UNI-REQ-0070 como fonte única, sem regra concorrente por ancestral; desbloqueio reavalia sem retenção; a árvore de satisfação permanece em cinco estados.',
     verificacao:
-      'Teste automatizado (aresta de produção; documento não pedido antes do fato; folha bloqueada não emite e irmão emite; grupo com todos decisivos bloqueados suprime versus razão alcançada emite; impossível emite; desbloqueio reavalia) (planejado).',
+        'Teste automatizado (aresta de produção; documento não pedido antes do fato; folha bloqueada não emite e irmão emite; grupo com todos decisivos bloqueados suprime versus razão alcançada emite; impossível emite; desbloqueio reavalia) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2265,7 +2310,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0078',
     titulo: 'Determinismo e congelamento conjunto do grafo de coleta e derivação (RN08)',
     enunciado:
-      'O mesmo snapshot conjunto e autossuficiente de UNI-REQ-0071 é estendido, na publicação, para congelar de forma determinística o vocabulário e os domínios de todos os fatos, independentemente da origem — inclusive os fatos DERIVADOS e o domínio canônico de MODALIDADE usado para validar contribuições (V é rótulo de exibição de AC_PCD, não um código de entrada: um código não canônico é recusado, não traduzido) e intersectar a oferta —, além dos fatos coletados, do grafo de dependência (as quatro arestas), das regras de derivação, da versão semântica do interpretador, da ordem topológica total e do conjunto de modalidades ofertadas usado na interseção. A ordem topológica é total por uma chave canônica: todo nó tem código estável obrigatório único no seu tipo (tipoDeNo); o rótulo canônico serializado no snapshot é tipoDeNo/codigo em UTF-8 NFC com comparação ordinal — o escopo de processo é implícito no envelope, sem repetir o id do processo em cada nó —, nunca identificador de runtime; a chave total é (faseTopologica, ordem, rótulo canônico). A canonicalização para o hash usa as chaves e ordens fechadas da spec para todos os conjuntos — nós pela chave total, arestas por (tipoAresta, origem, destino), dependências, valores de EM/NAO_EM ordenados sem duplicatas, átomos por (fato, operador, valorCanônico), cláusulas e DNF por sequência ordenada, regras por (contribui, dnf) e oferta —, com os códigos validados contra o domínio congelado (sem tradução de alias) antes de persistir e hashear. A schema_version congelada seleciona um perfil de JSON canônico byte a byte que fixa chaves ordenadas, NFC, ausência de espaço insignificante, tabela de escapes e de caracteres de controle, ausência distinta de nulo (null em campo opcional não anulável é recusado) e forma numérica canônica, de modo que o mesmo conteúdo semântico produz os mesmos bytes e o mesmo hash em qualquer implementação conforme. A publicação recusa código de fato duplicado, mais de um binding de derivação ativo por fato derivado, referência a nó fora do snapshot, ciclo no grafo conjunto, dependência não declarada, código de modalidade não canônico e colisão de rótulo canônico. Alterar o grafo, a regra ou o domínio vivo não afeta editais publicados.',
+        'O mesmo snapshot conjunto e autossuficiente de UNI-REQ-0071 é estendido, na publicação, para congelar de forma determinística o vocabulário e os domínios de todos os fatos, independentemente da origem — inclusive os fatos DERIVADOS e o domínio canônico de MODALIDADE usado para validar contribuições (V é rótulo de exibição de AC_PCD, não um código de entrada: um código não canônico é recusado, não traduzido) e intersectar a oferta —, além dos fatos coletados, do grafo de dependência (as quatro arestas), das regras de derivação, da versão semântica do interpretador, da ordem topológica total e do conjunto de modalidades ofertadas usado na interseção. A ordem topológica é total por uma chave canônica: todo nó tem código estável obrigatório único no seu tipo (tipoDeNo); o rótulo canônico serializado no snapshot é tipoDeNo/codigo em UTF-8 NFC com comparação ordinal — o escopo de processo é implícito no envelope, sem repetir o id do processo em cada nó —, nunca identificador de runtime; a chave total é (faseTopologica, ordem, rótulo canônico). A canonicalização para o hash usa as chaves e ordens fechadas da spec para todos os conjuntos — nós pela chave total, arestas por (tipoAresta, origem, destino), dependências, valores de EM/NAO_EM ordenados sem duplicatas, átomos por (fato, operador, valorCanônico), cláusulas e DNF por sequência ordenada, regras por (contribui, dnf) e oferta —, com os códigos validados contra o domínio congelado (sem tradução de alias) antes de persistir e hashear. A schema_version congelada seleciona um perfil de JSON canônico byte a byte que fixa chaves ordenadas, NFC, ausência de espaço insignificante, tabela de escapes e de caracteres de controle, ausência distinta de nulo (null em campo opcional não anulável é recusado) e forma numérica canônica, de modo que o mesmo conteúdo semântico produz os mesmos bytes e o mesmo hash em qualquer implementação conforme. A publicação recusa código de fato duplicado, mais de um binding de derivação ativo por fato derivado, referência a nó fora do snapshot, ciclo no grafo conjunto, dependência não declarada, código de modalidade não canônico e colisão de rótulo canônico. Alterar o grafo, a regra ou o domínio vivo não afeta editais publicados.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2277,9 +2322,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Estende o snapshot autossuficiente de UNI-REQ-0071; congela vocabulário/domínios de todos os fatos (inclusive DERIVADOS e o domínio canônico de MODALIDADE), fatos coletados, grafo de quatro arestas, regras de derivação, versão semântica, ordem topológica total e modalidades ofertadas; todo nó com código estável e rótulo canônico serializado tipoDeNo/codigo (escopo de processo implícito no envelope, sem repetir o id do processo por nó; UTF-8 NFC ordinal; não runtime); chave total (faseTopologica, ordem, rótulo canônico); canonicalização com as chaves fechadas da spec (arestas por (tipoAresta, origem, destino); átomo (fato, operador, valorCanônico); EM/NAO_EM ordenado sem duplicatas; cláusula/DNF ordenados; regra (contribui, dnf)); V é rótulo de exibição de AC_PCD, não alias — código não canônico é recusado, não traduzido; schema_version seleciona o perfil JSON canônico byte a byte (chaves ordenadas, NFC, escapes e controles fixos, ausência distinta de null, null em opcional não anulável recusado, número canônico); publicação recusa código duplicado, mais de um binding ativo por derivado, referência fora do snapshot, ciclo, dependência não declarada, código não canônico e colisão de rótulo canônico; mudança no vivo não altera edital publicado.',
+        'Estende o snapshot autossuficiente de UNI-REQ-0071; congela vocabulário/domínios de todos os fatos (inclusive DERIVADOS e o domínio canônico de MODALIDADE), fatos coletados, grafo de quatro arestas, regras de derivação, versão semântica, ordem topológica total e modalidades ofertadas; todo nó com código estável e rótulo canônico serializado tipoDeNo/codigo (escopo de processo implícito no envelope, sem repetir o id do processo por nó; UTF-8 NFC ordinal; não runtime); chave total (faseTopologica, ordem, rótulo canônico); canonicalização com as chaves fechadas da spec (arestas por (tipoAresta, origem, destino); átomo (fato, operador, valorCanônico); EM/NAO_EM ordenado sem duplicatas; cláusula/DNF ordenados; regra (contribui, dnf)); V é rótulo de exibição de AC_PCD, não alias — código não canônico é recusado, não traduzido; schema_version seleciona o perfil JSON canônico byte a byte (chaves ordenadas, NFC, escapes e controles fixos, ausência distinta de null, null em opcional não anulável recusado, número canônico); publicação recusa código duplicado, mais de um binding ativo por derivado, referência fora do snapshot, ciclo, dependência não declarada, código não canônico e colisão de rótulo canônico; mudança no vivo não altera edital publicado.',
     verificacao:
-      'Teste automatizado / golden test (hash idêntico a permutação de cada conjunto — nós, arestas inclusive mesmo par com tipoAresta distinto, dependências, EM/NAO_EM, átomos, cláusulas, regras, oferta, V recusado como código não canônico (rótulo, não alias), Unicode escapado versus literal, caracteres de controle, números equivalentes; recusa de null inválido e de colisão de rótulo canônico; imutabilidade a mudanças de catálogo) (planejado).',
+        'Teste automatizado / golden test (hash idêntico a permutação de cada conjunto — nós, arestas inclusive mesmo par com tipoAresta distinto, dependências, EM/NAO_EM, átomos, cláusulas, regras, oferta, V recusado como código não canônico (rótulo, não alias), Unicode escapado versus literal, caracteres de controle, números equivalentes; recusa de null inválido e de colisão de rótulo canônico; imutabilidade a mudanças de catálogo) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2287,7 +2332,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0084',
     titulo: 'Formulário de inscrição imune a mudança após publicação (RN-COL-04)',
     enunciado:
-      'Publicar um Processo Seletivo congela, por versão de configuração, quais campos do formulário produzem fato, em que ordem o candidato os vê e sob qual pré-condição cada um aparece — a mesma imunidade pós-publicação já aplicada a documentos exigidos e modalidades, agora estendida à coleta em si. A pré-condição de campo usa o mesmo predicado (cláusulas em OU, condições em E) já usado no gatilho de documento, e só pode referenciar fato declarado pelo próprio candidato — nunca um veredito de banca, um fato derivado (como MODALIDADE) ou um fato de integração (como NACIONALIDADE importada) — um campo não pode condicionar sua exibição a algo que veio de fora da resposta do próprio candidato. O gatilho de documento (UNI-REQ-0064/0065/0073) continua multi-fonte, como sempre foi; esta restrição vale só para a pré-condição de CAMPO do formulário nesta fase de congelamento. Um campo cuja exibição dependeria de fato derivado ou de integração não migra para este congelamento por ora: permanece no mecanismo legado de exibição, sem esta imunidade (UNI-REQ-0089). Mudar o formulário depois de publicado não altera o que uma inscrição em curso, ou já submetida, já viu: o seletor de UNI-REQ-0060 resolve a versão de configuração vigente uma única vez, no nascimento do rascunho da inscrição, e essa versão fica imutável na própria inscrição — não é recalculada a cada leitura —, então uma retificação publicada depois não muda qual snapshot essa inscrição já em curso continua lendo; só a próxima inscrição, aberta depois da retificação, lê a nova versão.',
+        'Publicar um Processo Seletivo congela, por versão de configuração, quais campos do formulário produzem fato, em que ordem o candidato os vê e sob qual pré-condição cada um aparece — a mesma imunidade pós-publicação já aplicada a documentos exigidos e modalidades, agora estendida à coleta em si. A pré-condição de campo usa o mesmo predicado (cláusulas em OU, condições em E) já usado no gatilho de documento, e só pode referenciar fato declarado pelo próprio candidato — nunca um veredito de banca, um fato derivado (como MODALIDADE) ou um fato de integração (como NACIONALIDADE importada) — um campo não pode condicionar sua exibição a algo que veio de fora da resposta do próprio candidato. O gatilho de documento (UNI-REQ-0064/0065/0073) continua multi-fonte, como sempre foi; esta restrição vale só para a pré-condição de CAMPO do formulário nesta fase de congelamento. Um campo cuja exibição dependeria de fato derivado ou de integração não migra para este congelamento por ora: permanece no mecanismo legado de exibição, sem esta imunidade (UNI-REQ-0089). Mudar o formulário depois de publicado não altera o que uma inscrição em curso, ou já submetida, já viu: o seletor de UNI-REQ-0060 resolve a versão de configuração vigente uma única vez, no nascimento do rascunho da inscrição, e essa versão fica imutável na própria inscrição — não é recalculada a cada leitura —, então uma retificação publicada depois não muda qual snapshot essa inscrição já em curso continua lendo; só a próxima inscrição, aberta depois da retificação, lê a nova versão.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2299,9 +2344,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A publicação recusa formulário com produtor duplicado por fato, fato de pré-condição não declarado pelo candidato (inclusive fato derivado ou de integração — ver UNI-REQ-0089 para o campo que hoje depende de um desses), campo fora do universo do processo, ou campo dependente ordenado antes do seu produtor; o snapshot publicado carrega o formulário congelado (campo, fato produzido, ordem, pré-condição); alterar o cadastro vivo do formulário depois de publicado não muda o snapshot de uma versão já publicada; a inscrição grava a versão de configuração vigente no momento em que o rascunho nasce, de forma imutável, e usa essa mesma versão para toda leitura subsequente do formulário — nunca recalcula "a vigente agora" —, independentemente de retificações publicadas depois.',
+        'A publicação recusa formulário com produtor duplicado por fato, fato de pré-condição não declarado pelo candidato (inclusive fato derivado ou de integração — ver UNI-REQ-0089 para o campo que hoje depende de um desses), campo fora do universo do processo, ou campo dependente ordenado antes do seu produtor; o snapshot publicado carrega o formulário congelado (campo, fato produzido, ordem, pré-condição); alterar o cadastro vivo do formulário depois de publicado não muda o snapshot de uma versão já publicada; a inscrição grava a versão de configuração vigente no momento em que o rascunho nasce, de forma imutável, e usa essa mesma versão para toda leitura subsequente do formulário — nunca recalcula "a vigente agora" —, independentemente de retificações publicadas depois.',
     verificacao:
-      'Teste automatizado (as quatro recusas de publicação; shape do envelope congelado contra processo real publicado; nenhum caminho de runtime lê a configuração viva do formulário; versão da inscrição imutável mesmo após retificação publicada durante o preenchimento) (planejado).',
+        'Teste automatizado (as quatro recusas de publicação; shape do envelope congelado contra processo real publicado; nenhum caminho de runtime lê a configuração viva do formulário; versão da inscrição imutável mesmo após retificação publicada durante o preenchimento) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -2309,7 +2354,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0085',
     titulo: 'PCD_PURO: reserva de vaga para pessoa com deficiência sem cotas da Lei 12.711 (RN-MOD-08)',
     enunciado:
-      'AC_PCD não é "a modalidade de PcD" — é o caso particular de um processo que também tem as oito cotas da Lei 12.711, cuja condição de excluir quem cursou escola pública só existe para manter AC_PCD exclusiva das cotas da Lei. Um processo sem as cotas da Lei que também reserve vaga para pessoa com deficiência precisa de uma modalidade cujo critério seja só "é pessoa com deficiência e optou por concorrer", sem condição de origem escolar, cor/raça ou sexo. PCD_PURO é essa modalidade — cadastrada uma única vez em configuração de modalidades e reaproveitável por qualquer processo futuro nessa situação, nomeada pela própria semântica (como AC, LB_PPI, LI_Q), nunca pelo processo que a estreou.',
+        'AC_PCD não é "a modalidade de PcD" — é o caso particular de um processo que também tem as oito cotas da Lei 12.711, cuja condição de excluir quem cursou escola pública só existe para manter AC_PCD exclusiva das cotas da Lei. Um processo sem as cotas da Lei que também reserve vaga para pessoa com deficiência precisa de uma modalidade cujo critério seja só "é pessoa com deficiência e optou por concorrer", sem condição de origem escolar, cor/raça ou sexo. PCD_PURO é essa modalidade — cadastrada uma única vez em configuração de modalidades e reaproveitável por qualquer processo futuro nessa situação, nomeada pela própria semântica (como AC, LB_PPI, LI_Q), nunca pelo processo que a estreou.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2321,9 +2366,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'PCD_PURO usa o mesmo mecanismo de remanejamento de AC_PCD com critério composto só por "é pessoa com deficiência" e "optou por concorrer à cota", sem átomo de escola pública; um candidato PcD egresso de escola pública satisfaz PCD_PURO mas não satisfaz AC_PCD, provando que o predicado é de fato diferente; todo candidato que satisfaz AC_PCD também satisfaz PCD_PURO, por ser estritamente mais permissiva. A base legal institucional que sustenta a reserva fora do contexto da Lei de Cotas é decisão própria, a confirmar antes de publicar um processo real sob esta modalidade.',
+        'PCD_PURO usa o mesmo mecanismo de remanejamento de AC_PCD com critério composto só por "é pessoa com deficiência" e "optou por concorrer à cota", sem átomo de escola pública; um candidato PcD egresso de escola pública satisfaz PCD_PURO mas não satisfaz AC_PCD, provando que o predicado é de fato diferente; todo candidato que satisfaz AC_PCD também satisfaz PCD_PURO, por ser estritamente mais permissiva. A base legal institucional que sustenta a reserva fora do contexto da Lei de Cotas é decisão própria, a confirmar antes de publicar um processo real sob esta modalidade.',
     verificacao:
-      'Teste automatizado (mecanismo idêntico ao de AC_PCD; critério com exatamente dois átomos; diferença de predicado provada com candidato real; AC_PCD estritamente mais restritiva que PCD_PURO) (planejado).',
+        'Teste automatizado (mecanismo idêntico ao de AC_PCD; critério com exatamente dois átomos; diferença de predicado provada com candidato real; AC_PCD estritamente mais restritiva que PCD_PURO) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -2331,7 +2376,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0086',
     titulo: 'Cadastro de termos de consentimento/declaração por fase, imune após publicação (RN-COL-05)',
     enunciado:
-      'O Processo Seletivo pode exigir, em qualquer fase do cronograma — inclusive fase cujo dono institucional não é a Seleção, como a Habilitação sob responsabilidade do CRCA —, a aceitação de um ou mais termos de consentimento ou declaração, escolhidos de um catálogo administrável, nunca digitados como texto livre no processo. Cada termo tem uma forma de aceite de domínio fechado — A_DEFINIR (placeholder que a publicação recusa), REGISTRO_DIGITAL_SEM_LOG_IP ou REGISTRO_DIGITAL_COM_LOG_IP — e, quando exigido, congela no snapshot de publicação, por termo exigido, um identificador próprio da exigência — estável mesmo entre dois termos catalogados com nome idêntico —, a fase em que é exigido, se é obrigatório, a forma de aceite, o texto, a base legal e o hash da versão vigente no momento do congelamento — a mesma imunidade pós-publicação já aplicada a documentos exigidos, modalidades e formulário: mudar a fase, a obrigatoriedade ou a forma de aceite no catálogo depois de publicar não altera o que já foi congelado. O texto de uma versão promovida é imutável por construção: corrigi-lo exige nova versão, nunca edição da existente; o caminho até a promoção passa por um rascunho mutável que só se torna versão através de um portão explícito, que recusa promover rascunho sem termo, sem texto, sem base legal ou ainda não marcado como institucionalmente revisado — essa marca, por sua vez, só é gravada por outro portão. O papel de aplicação só edita texto/base legal/observação de revisão do rascunho: nem a marca de revisão nem o termo do catálogo ao qual o rascunho pertence são graváveis por ele — privilégio de coluna, não convenção de aplicação, porque a decisão de quem revisou o quê precisa ser rastreável de verdade. Editar texto ou base legal do rascunho depois de marcado revisado devolve automaticamente o rascunho a EM_ELABORACAO e limpa a marca: a revisão sempre se refere ao conteúdo exato que foi promovido, nunca a uma edição posterior por trás dela, nem a um termo diferente do que foi revisado. Esta regra cobre cadastro, versionamento e congelamento do termo; o fluxo de aceite do candidato em runtime (apresentar o termo, bloquear a fase até o aceite, persistir ator/data/evidência) é capacidade à parte, ainda não implementada (UNI-REQ-0091).',
+        'O Processo Seletivo pode exigir, em qualquer fase do cronograma — inclusive fase cujo dono institucional não é a Seleção, como a Habilitação sob responsabilidade do CRCA —, a aceitação de um ou mais termos de consentimento ou declaração, escolhidos de um catálogo administrável, nunca digitados como texto livre no processo. Cada termo tem uma forma de aceite de domínio fechado — A_DEFINIR (placeholder que a publicação recusa), REGISTRO_DIGITAL_SEM_LOG_IP ou REGISTRO_DIGITAL_COM_LOG_IP — e, quando exigido, congela no snapshot de publicação, por termo exigido, um identificador próprio da exigência — estável mesmo entre dois termos catalogados com nome idêntico —, a fase em que é exigido, se é obrigatório, a forma de aceite, o texto, a base legal e o hash da versão vigente no momento do congelamento — a mesma imunidade pós-publicação já aplicada a documentos exigidos, modalidades e formulário: mudar a fase, a obrigatoriedade ou a forma de aceite no catálogo depois de publicar não altera o que já foi congelado. O texto de uma versão promovida é imutável por construção: corrigi-lo exige nova versão, nunca edição da existente; o caminho até a promoção passa por um rascunho mutável que só se torna versão através de um portão explícito, que recusa promover rascunho sem termo, sem texto, sem base legal ou ainda não marcado como institucionalmente revisado — essa marca, por sua vez, só é gravada por outro portão. O papel de aplicação só edita texto/base legal/observação de revisão do rascunho: nem a marca de revisão nem o termo do catálogo ao qual o rascunho pertence são graváveis por ele — privilégio de coluna, não convenção de aplicação, porque a decisão de quem revisou o quê precisa ser rastreável de verdade. Editar texto ou base legal do rascunho depois de marcado revisado devolve automaticamente o rascunho a EM_ELABORACAO e limpa a marca: a revisão sempre se refere ao conteúdo exato que foi promovido, nunca a uma edição posterior por trás dela, nem a um termo diferente do que foi revisado. Esta regra cobre cadastro, versionamento e congelamento do termo; o fluxo de aceite do candidato em runtime (apresentar o termo, bloquear a fase até o aceite, persistir ator/data/evidência) é capacidade à parte, ainda não implementada (UNI-REQ-0091).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2343,9 +2388,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A publicação recusa termo exigido incompleto (versão não resolvida, ou forma de aceite ainda A_DEFINIR — só REGISTRO_DIGITAL_SEM_LOG_IP e REGISTRO_DIGITAL_COM_LOG_IP são formas resolvidas e publicáveis); a promoção de rascunho para versão recusa rascunho órfão, sem texto, sem base legal ou não marcado REVISADO; editar texto ou base legal de um rascunho já REVISADO limpa a marca e devolve o rascunho a EM_ELABORACAO — a promoção nunca aceita revisão referente a um conteúdo diferente do que está sendo promovido; o snapshot publicado carrega, por termo exigido, um identificador próprio da exigência, a fase, a obrigatoriedade, a forma de aceite, o texto, a base legal e o hash da versão vigente no momento do congelamento; alterar o catálogo (incluindo fase, obrigatoriedade e forma de aceite) depois de publicar não afeta processo já publicado; a transição de rascunho para revisado só é gravada por um portão que registra o ator explícito da chamada, nunca por escrita direta da aplicação, que também não tem privilégio para reatribuir o rascunho a outro termo do catálogo; a estrutura aceita termo em fase de dono institucional diferente da Seleção sem exigir nem inventar o conteúdo do termo dessa fase; nenhum critério deste requisito cobre apresentar o termo ao candidato, bloquear a fase até o aceite, ou persistir evidência de aceite — isso é UNI-REQ-0091.',
+        'A publicação recusa termo exigido incompleto (versão não resolvida, ou forma de aceite ainda A_DEFINIR — só REGISTRO_DIGITAL_SEM_LOG_IP e REGISTRO_DIGITAL_COM_LOG_IP são formas resolvidas e publicáveis); a promoção de rascunho para versão recusa rascunho órfão, sem texto, sem base legal ou não marcado REVISADO; editar texto ou base legal de um rascunho já REVISADO limpa a marca e devolve o rascunho a EM_ELABORACAO — a promoção nunca aceita revisão referente a um conteúdo diferente do que está sendo promovido; o snapshot publicado carrega, por termo exigido, um identificador próprio da exigência, a fase, a obrigatoriedade, a forma de aceite, o texto, a base legal e o hash da versão vigente no momento do congelamento; alterar o catálogo (incluindo fase, obrigatoriedade e forma de aceite) depois de publicar não afeta processo já publicado; a transição de rascunho para revisado só é gravada por um portão que registra o ator explícito da chamada, nunca por escrita direta da aplicação, que também não tem privilégio para reatribuir o rascunho a outro termo do catálogo; a estrutura aceita termo em fase de dono institucional diferente da Seleção sem exigir nem inventar o conteúdo do termo dessa fase; nenhum critério deste requisito cobre apresentar o termo ao candidato, bloquear a fase até o aceite, ou persistir evidência de aceite — isso é UNI-REQ-0091.',
     verificacao:
-      'Teste automatizado (imutabilidade de versão promovida; recusa de termo incompleto na publicação; promoção recusa rascunho não revisado; privilégio de coluna barra escrita direta de aplicação na marca de revisão; congelamento da forma de aceite/texto/base legal/hash no snapshot) (planejado).',
+        'Teste automatizado (imutabilidade de versão promovida; recusa de termo incompleto na publicação; promoção recusa rascunho não revisado; privilégio de coluna barra escrita direta de aplicação na marca de revisão; congelamento da forma de aceite/texto/base legal/hash no snapshot) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -2353,7 +2398,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0087',
     titulo: 'Identidade estável de componente de nota e de verificação no snapshot congelado (D3)',
     enunciado:
-      'O snapshot de publicação de um Processo Seletivo, além do tipo/categoria de cada componente de nota e de cada verificação de modalidade (banca, forma, fase), congela também a identidade própria de cada um — o mesmo identificador da linha viva correspondente, estável entre retificações do mesmo processo, já que componente de nota e verificação de modalidade não são versionados por linha: uma retificação atualiza a mesma linha, e é a versão do snapshot, não um novo identificador, que distingue qual congelamento estava em vigor numa publicação. Essa identidade é o que permite, no futuro, referenciar de volta uma nota ou um veredito de banca específico — para recurso, auditoria ou histórico — em vez de só saber que "algum componente desse tipo" foi usado. É rastreabilidade auditável, no mesmo espírito que já motiva a imutabilidade e os snapshots do restante da configuração congelada; não inclui nenhum mecanismo de apuração de nota nem de registro de veredito em si, que permanecem fora do escopo desta capacidade.',
+        'O snapshot de publicação de um Processo Seletivo, além do tipo/categoria de cada componente de nota e de cada verificação de modalidade (banca, forma, fase), congela também a identidade própria de cada um — o mesmo identificador da linha viva correspondente, estável entre retificações do mesmo processo, já que componente de nota e verificação de modalidade não são versionados por linha: uma retificação atualiza a mesma linha, e é a versão do snapshot, não um novo identificador, que distingue qual congelamento estava em vigor numa publicação. Essa identidade é o que permite, no futuro, referenciar de volta uma nota ou um veredito de banca específico — para recurso, auditoria ou histórico — em vez de só saber que "algum componente desse tipo" foi usado. É rastreabilidade auditável, no mesmo espírito que já motiva a imutabilidade e os snapshots do restante da configuração congelada; não inclui nenhum mecanismo de apuração de nota nem de registro de veredito em si, que permanecem fora do escopo desta capacidade.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2365,9 +2410,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O snapshot publicado carrega um identificador presente e não nulo em cada componente de nota e em cada verificação de modalidade, correspondendo 1:1 à linha viva de origem; ao republicar o mesmo processo (retificação) sem excluir/recriar a linha, o identificador permanece igual entre as duas versões do snapshot, enquanto os demais campos mutáveis (rótulo, forma) podem divergir; um componente importado sem critério de avaliação próprio também carrega identificador, mesmo não aparecendo no bloco de critérios.',
+        'O snapshot publicado carrega um identificador presente e não nulo em cada componente de nota e em cada verificação de modalidade, correspondendo 1:1 à linha viva de origem; ao republicar o mesmo processo (retificação) sem excluir/recriar a linha, o identificador permanece igual entre as duas versões do snapshot, enquanto os demais campos mutáveis (rótulo, forma) podem divergir; um componente importado sem critério de avaliação próprio também carrega identificador, mesmo não aparecendo no bloco de critérios.',
     verificacao:
-      'Teste automatizado (identificador presente e correspondente 1:1 em componentes e verificações; identidade preservada e conteúdo divergente entre duas versões do mesmo processo retificado; componente importado sem critério ainda carrega identificador) (planejado).',
+        'Teste automatizado (identificador presente e correspondente 1:1 em componentes e verificações; identidade preservada e conteúdo divergente entre duas versões do mesmo processo retificado; componente importado sem critério ainda carrega identificador) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -2375,7 +2420,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0088',
     titulo: 'Base legal institucional de PCD_PURO — Resolução 532/2021, art. 1º (confirmada)',
     enunciado:
-      'A modalidade PCD_PURO (UNI-REQ-0085/RN-MOD-08) reserva vaga para pessoa com deficiência em processo sem as cotas da Lei 12.711. O PO confirmou (03/08/2026) que a base legal é a mesma Resolução Unifesspa 532/2021, art. 1º, já usada por AC_PCD — não precisa de norma institucional própria. A Resolução não condiciona a reserva à origem escolar do candidato (nenhum artigo cita escola pública ou privada); a ausência dessa condição no critério de PCD_PURO é decisão consciente de área de negócio, não lacuna de modelagem, válida até que norma futura diga o contrário. Achado de escopo, também registrado: o art. 1º reserva a vaga só para o "Processo Seletivo realizado via SiSU" — texto anterior à capacidade de ofertar vagas fora do SiSU; o PO vai solicitar retificação da Resolução para estender a "todos os cursos ofertados pela Unifesspa", ainda em elaboração. Até a retificação sair, um processo puramente institucional sem nenhum vínculo com o SiSU ficaria, a rigor, fora da cobertura literal do art. 1º — não há processo real nessa situação hoje.',
+        'A modalidade PCD_PURO (UNI-REQ-0085/RN-MOD-08) reserva vaga para pessoa com deficiência em processo sem as cotas da Lei 12.711. O PO confirmou (03/08/2026) que a base legal é a mesma Resolução Unifesspa 532/2021, art. 1º, já usada por AC_PCD — não precisa de norma institucional própria. A Resolução não condiciona a reserva à origem escolar do candidato (nenhum artigo cita escola pública ou privada); a ausência dessa condição no critério de PCD_PURO é decisão consciente de área de negócio, não lacuna de modelagem, válida até que norma futura diga o contrário. Achado de escopo, também registrado: o art. 1º reserva a vaga só para o "Processo Seletivo realizado via SiSU" — texto anterior à capacidade de ofertar vagas fora do SiSU; o PO vai solicitar retificação da Resolução para estender a "todos os cursos ofertados pela Unifesspa", ainda em elaboração. Até a retificação sair, um processo puramente institucional sem nenhum vínculo com o SiSU ficaria, a rigor, fora da cobertura literal do art. 1º — não há processo real nessa situação hoje.',
     grupo: 'conformidade',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2387,7 +2432,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O cadastro de PCD_PURO registra a Resolução Unifesspa 532/2021, art. 1º, como base legal — substituindo o placeholder textual de pendência que o cadastro carregava até esta decisão. Nenhum critério de elegibilidade de PCD_PURO cita origem escolar (escola pública/privada), refletindo que a Resolução não impõe essa condição. A retificação da Resolução (extensão de "via SiSU" para "todos os cursos ofertados pela Unifesspa") é acompanhada como nota, não bloqueia a publicação de processos que também correm no SiSU.',
+        'O cadastro de PCD_PURO registra a Resolução Unifesspa 532/2021, art. 1º, como base legal — substituindo o placeholder textual de pendência que o cadastro carregava até esta decisão. Nenhum critério de elegibilidade de PCD_PURO cita origem escolar (escola pública/privada), refletindo que a Resolução não impõe essa condição. A retificação da Resolução (extensão de "via SiSU" para "todos os cursos ofertados pela Unifesspa") é acompanhada como nota, não bloqueia a publicação de processos que também correm no SiSU.',
     verificacao: 'Confirmação institucional do PO (03/08/2026), citando a Resolução Unifesspa 532/2021, art. 1º.',
     pagina_developers: '/produto/conformidade-legal/',
     owner: 'Equipe backend',
@@ -2396,7 +2441,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0089',
     titulo: 'Congelamento de campo condicionado a fato não-DECLARADO (derivado ou de integração) fora do escopo de RN-COL-04',
     enunciado:
-      'A imunidade pós-publicação do formulário (UNI-REQ-0084/RN-COL-04) só cobre campo cuja pré-condição cita fato DECLARADO pelo próprio candidato. Campo cuja exibição depende de um fato DERIVADO — por exemplo, um campo que só aparece para quem a derivação de MODALIDADE (UNI-REQ-0076) já classificou numa cota específica — ou de um fato de INTEGRAÇÃO — por exemplo, um campo condicionado a NACIONALIDADE importada de outro sistema — permanece fora desse congelamento: continua no mecanismo legado de condição de exibição em texto livre, sem a mesma garantia de imunidade nem de shape estruturado. Migrar esses campos para o congelamento estruturado exige primeiro provar o grafo conjunto de produção, pré-condição e derivação — não só o grafo interno de pré-condição —, escopo maior que a fase que fechou RN-COL-04.',
+        'A imunidade pós-publicação do formulário (UNI-REQ-0084/RN-COL-04) só cobre campo cuja pré-condição cita fato DECLARADO pelo próprio candidato. Campo cuja exibição depende de um fato DERIVADO — por exemplo, um campo que só aparece para quem a derivação de MODALIDADE (UNI-REQ-0076) já classificou numa cota específica — ou de um fato de INTEGRAÇÃO — por exemplo, um campo condicionado a NACIONALIDADE importada de outro sistema — permanece fora desse congelamento: continua no mecanismo legado de condição de exibição em texto livre, sem a mesma garantia de imunidade nem de shape estruturado. Migrar esses campos para o congelamento estruturado exige primeiro provar o grafo conjunto de produção, pré-condição e derivação — não só o grafo interno de pré-condição —, escopo maior que a fase que fechou RN-COL-04.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -2408,7 +2453,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Enquanto este incremento não é entregue, nenhum campo do formulário com pré-condição sobre fato DERIVADO ou de INTEGRAÇÃO conta com a imunidade pós-publicação nem entra no snapshot congelado; a lacuna é registrada explicitamente, não descoberta em produção.',
+        'Enquanto este incremento não é entregue, nenhum campo do formulário com pré-condição sobre fato DERIVADO ou de INTEGRAÇÃO conta com a imunidade pós-publicação nem entra no snapshot congelado; a lacuna é registrada explicitamente, não descoberta em produção.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -2417,7 +2462,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0090',
     titulo: 'PCD_PURO é mutuamente exclusiva das cotas da Lei — publicação recusa oferecer as duas famílias juntas (RN-MOD-09)',
     enunciado:
-      'PCD_PURO (UNI-REQ-0085/RN-MOD-08) foi desenhada para processo sem nenhuma das oito cotas da Lei 12.711 — é nesse cenário que faz sentido reservar PcD sem a exclusão de escola pública que AC_PCD carrega. Ofertar as duas famílias juntas tornaria AC_PCD redundante para todo candidato PcD elegível a PCD_PURO, sem que a publicação acusasse a sobreposição. A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e, ao mesmo tempo, qualquer uma das oito cotas reservadas da Lei ou AC_PCD, no mesmo processo — mesmo que em cursos diferentes. AC (ampla concorrência) e as vagas suplementares institucionais AC_I/AC_Q, de povos indígenas e quilombolas (UNI-REQ-0096), não entram nessa exclusividade: convivem normalmente com PCD_PURO.',
+        'PCD_PURO (UNI-REQ-0085/RN-MOD-08) foi desenhada para processo sem nenhuma das oito cotas da Lei 12.711 — é nesse cenário que faz sentido reservar PcD sem a exclusão de escola pública que AC_PCD carrega. Ofertar as duas famílias juntas tornaria AC_PCD redundante para todo candidato PcD elegível a PCD_PURO, sem que a publicação acusasse a sobreposição. A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e, ao mesmo tempo, qualquer uma das oito cotas reservadas da Lei ou AC_PCD, no mesmo processo — mesmo que em cursos diferentes. AC (ampla concorrência) e as vagas suplementares institucionais AC_I/AC_Q, de povos indígenas e quilombolas (UNI-REQ-0096), não entram nessa exclusividade: convivem normalmente com PCD_PURO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2429,9 +2474,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e qualquer uma das oito cotas reservadas da Lei 12.711 ou AC_PCD, com erro nomeado — o invariante vale por processo, não por curso; vaga conflitante já removida (soft-deletada) não dispara a recusa; processo que oferta só PCD_PURO com a ampla concorrência publica normalmente, assim como processo da Lei de Cotas que nunca ofertou PCD_PURO; ofertar as vagas suplementares institucionais junto com PCD_PURO não é recusado; migrar um processo de PCD_PURO para uma cota da Lei (removendo uma e adicionando a outra) é aceito — a regra recusa a coexistência, não a mudança de modalidade em si.',
+        'A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e qualquer uma das oito cotas reservadas da Lei 12.711 ou AC_PCD, com erro nomeado — o invariante vale por processo, não por curso; vaga conflitante já removida (soft-deletada) não dispara a recusa; processo que oferta só PCD_PURO com a ampla concorrência publica normalmente, assim como processo da Lei de Cotas que nunca ofertou PCD_PURO; ofertar as vagas suplementares institucionais junto com PCD_PURO não é recusado; migrar um processo de PCD_PURO para uma cota da Lei (removendo uma e adicionando a outra) é aceito — a regra recusa a coexistência, não a mudança de modalidade em si.',
     verificacao:
-      'Teste automatizado (as nove modalidades excluídas recusam publicação individualmente, com o mesmo erro nomeado; conflito detectado mesmo em oferta de curso diferente; conflito soft-deletado não dispara a recusa; processo real com PCD_PURO e ampla concorrência publica; processo real da Lei de Cotas sem PCD_PURO publica; falso positivo das vagas suplementares institucionais não dispara; migração de família aceita) (planejado).',
+        'Teste automatizado (as nove modalidades excluídas recusam publicação individualmente, com o mesmo erro nomeado; conflito detectado mesmo em oferta de curso diferente; conflito soft-deletado não dispara a recusa; processo real com PCD_PURO e ampla concorrência publica; processo real da Lei de Cotas sem PCD_PURO publica; falso positivo das vagas suplementares institucionais não dispara; migração de família aceita) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -2439,7 +2484,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0091',
     titulo: 'Fluxo de aceite de termo de consentimento em runtime fora do escopo de RN-COL-05',
     enunciado:
-      'RN-COL-05 (UNI-REQ-0086) cobre cadastro, versionamento e congelamento de termo de consentimento/declaração — a configuração que existe antes de qualquer candidato interagir, incluindo a fase em que cada termo é exigido e se é obrigatório, já congelados no snapshot. Apresentar o termo congelado ao candidato na fase congelada, bloquear essa fase até o aceite quando o termo é obrigatório (só apresentar, sem bloquear, quando não é), e persistir o ator, a data/hora, a versão/snapshot aceito e a evidência de log de IP quando a forma de aceite exigir (REGISTRO_DIGITAL_COM_LOG_IP) é fluxo de runtime que ainda não existe neste harness — consistente com o restante do harness, que modela configuração e congelamento, não motor de candidato.',
+        'RN-COL-05 (UNI-REQ-0086) cobre cadastro, versionamento e congelamento de termo de consentimento/declaração — a configuração que existe antes de qualquer candidato interagir, incluindo a fase em que cada termo é exigido e se é obrigatório, já congelados no snapshot. Apresentar o termo congelado ao candidato na fase congelada, bloquear essa fase até o aceite quando o termo é obrigatório (só apresentar, sem bloquear, quando não é), e persistir o ator, a data/hora, a versão/snapshot aceito e a evidência de log de IP quando a forma de aceite exigir (REGISTRO_DIGITAL_COM_LOG_IP) é fluxo de runtime que ainda não existe neste harness — consistente com o restante do harness, que modela configuração e congelamento, não motor de candidato.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -2451,7 +2496,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Enquanto este incremento não é entregue, um termo exigido publicado não bloqueia nenhuma fase do candidato nem persiste evidência de aceite; entregar este incremento exige apresentar o termo congelado, bloquear a fase até o aceite só quando a flag obrigatorio congelada for verdadeira (termo opcional é apresentado, mas não bloqueia), e persistir o aceite correlacionado ao identificador próprio da exigência (UNI-REQ-0086) — nunca por nome ou código do termo, que dois itens do catálogo podem compartilhar —, junto com ator, data/hora, versão aceita e log de IP quando a forma de aceite exigir.',
+        'Enquanto este incremento não é entregue, um termo exigido publicado não bloqueia nenhuma fase do candidato nem persiste evidência de aceite; entregar este incremento exige apresentar o termo congelado, bloquear a fase até o aceite só quando a flag obrigatorio congelada for verdadeira (termo opcional é apresentado, mas não bloqueia), e persistir o aceite correlacionado ao identificador próprio da exigência (UNI-REQ-0086) — nunca por nome ou código do termo, que dois itens do catálogo podem compartilhar —, junto com ator, data/hora, versão aceita e log de IP quando a forma de aceite exigir.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -2460,7 +2505,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0092',
     titulo: 'Resolução de MODALIDADE em processo sem nenhuma cota da Lei 12.711 não está verificada',
     enunciado:
-      'PCD_PURO (UNI-REQ-0085) foi pensada para processo sem nenhuma das oito cotas da Lei 12.711 — mas a lista de dependências declaradas da regra de derivação de MODALIDADE (UNI-REQ-0076) inclui fatos ligados a essas cotas (EGRESSO_ESCOLA_PUBLICA, CONCORRER_PPI, CONCORRER_Q, CONCORRER_EP, CONCORRER_RENDA), e MODALIDADE só resolve quando toda dependência declarada resolveu, RESOLVIDO ou NÃO_APLICÁVEL (UNI-REQ-0075). O gate de escola pública (UNI-REQ-0073) suprime os produtores de PPI/Q/EP/RENDA quando EGRESSO_ESCOLA_PUBLICA não é escola pública, o que resolveria essas dependências como NÃO_APLICÁVEL automaticamente — mas isso pressupõe que EGRESSO_ESCOLA_PUBLICA em si tenha produtor no formulário do processo. Um processo cujo formulário simplesmente não inclui campo para EGRESSO_ESCOLA_PUBLICA, por não ter nenhuma cota que dependa dele, não foi verificado: não há prova de que a ausência total de produtor resolve a dependência (NÃO_APLICÁVEL) em vez de deixá-la permanentemente INDETERMINADO, travando MODALIDADE — e portanto PCD_PURO — indefinidamente.',
+        'PCD_PURO (UNI-REQ-0085) foi pensada para processo sem nenhuma das oito cotas da Lei 12.711 — mas a lista de dependências declaradas da regra de derivação de MODALIDADE (UNI-REQ-0076) inclui fatos ligados a essas cotas (EGRESSO_ESCOLA_PUBLICA, CONCORRER_PPI, CONCORRER_Q, CONCORRER_EP, CONCORRER_RENDA), e MODALIDADE só resolve quando toda dependência declarada resolveu, RESOLVIDO ou NÃO_APLICÁVEL (UNI-REQ-0075). O gate de escola pública (UNI-REQ-0073) suprime os produtores de PPI/Q/EP/RENDA quando EGRESSO_ESCOLA_PUBLICA não é escola pública, o que resolveria essas dependências como NÃO_APLICÁVEL automaticamente — mas isso pressupõe que EGRESSO_ESCOLA_PUBLICA em si tenha produtor no formulário do processo. Um processo cujo formulário simplesmente não inclui campo para EGRESSO_ESCOLA_PUBLICA, por não ter nenhuma cota que dependa dele, não foi verificado: não há prova de que a ausência total de produtor resolve a dependência (NÃO_APLICÁVEL) em vez de deixá-la permanentemente INDETERMINADO, travando MODALIDADE — e portanto PCD_PURO — indefinidamente.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -2472,7 +2517,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Antes de publicar um processo real só com PCD_PURO, sem nenhuma cota da Lei 12.711, verificar e provar automaticamente que MODALIDADE resolve para o conjunto ofertado mesmo quando o formulário do processo não produz EGRESSO_ESCOLA_PUBLICA/CONCORRER_PPI/CONCORRER_Q/CONCORRER_EP/CONCORRER_RENDA; se a ausência de produtor não resolver essas dependências automaticamente, decidir e implementar o mecanismo que resolve (produtor obrigatório mesmo que irrelevante ao processo, ou lista de dependências escopada pela oferta do processo).',
+        'Antes de publicar um processo real só com PCD_PURO, sem nenhuma cota da Lei 12.711, verificar e provar automaticamente que MODALIDADE resolve para o conjunto ofertado mesmo quando o formulário do processo não produz EGRESSO_ESCOLA_PUBLICA/CONCORRER_PPI/CONCORRER_Q/CONCORRER_EP/CONCORRER_RENDA; se a ausência de produtor não resolver essas dependências automaticamente, decidir e implementar o mecanismo que resolve (produtor obrigatório mesmo que irrelevante ao processo, ou lista de dependências escopada pela oferta do processo).',
     verificacao: 'Revisão futura / teste automatizado quando um processo real usar PCD_PURO isoladamente.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -2481,7 +2526,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0096',
     titulo: 'AC_I/AC_Q: modalidades institucionais indígena e quilombola, certame isolado permanente (RN-MOD-05)',
     enunciado:
-      'AC_I (indígena) e AC_Q (quilombola) são modalidades institucionais suplementares ao total de vagas do curso — somam-se ao total ofertado, não retiram vaga de nenhuma outra modalidade. O critério é autodeclaração, opção expressa por concorrer e carta de lideranças da comunidade — sem exigência de escola pública nem de renda, diferente das cotas da Lei 12.711. Hoje só existem no PSIQ (Processo Seletivo Indígena e Quilombola), certame isolado dos demais processos seletivos da instituição. O isolamento é modelo permanente, não lacuna temporária de modelagem: não há plano de, no futuro, unificar AC_I/AC_Q com as cotas normais da Lei 12.711 (LB_Q/LI_Q etc.) no mesmo certame — o PSIQ segue um formato de seleção totalmente diferente dos demais por decisão institucional. Achado de projeção, registrado só como nota e sem motivar trabalho de modelagem agora: se essa premissa mudar algum dia e AC_Q passar a coexistir com LB_Q/LI_Q no mesmo certame, AC_Q precisaria de uma condição adicional (não ser egresso de escola pública), análoga à que UNI-REQ-0076 já aplica a AC_PCD em relação às cotas de PcD da Lei, para não duplicar quem já concorre pelas cotas da Lei.',
+        'AC_I (indígena) e AC_Q (quilombola) são modalidades institucionais suplementares ao total de vagas do curso — somam-se ao total ofertado, não retiram vaga de nenhuma outra modalidade. O critério é autodeclaração, opção expressa por concorrer e carta de lideranças da comunidade — sem exigência de escola pública nem de renda, diferente das cotas da Lei 12.711. Hoje só existem no PSIQ (Processo Seletivo Indígena e Quilombola), certame isolado dos demais processos seletivos da instituição. O isolamento é modelo permanente, não lacuna temporária de modelagem: não há plano de, no futuro, unificar AC_I/AC_Q com as cotas normais da Lei 12.711 (LB_Q/LI_Q etc.) no mesmo certame — o PSIQ segue um formato de seleção totalmente diferente dos demais por decisão institucional. Achado de projeção, registrado só como nota e sem motivar trabalho de modelagem agora: se essa premissa mudar algum dia e AC_Q passar a coexistir com LB_Q/LI_Q no mesmo certame, AC_Q precisaria de uma condição adicional (não ser egresso de escola pública), análoga à que UNI-REQ-0076 já aplica a AC_PCD em relação às cotas de PcD da Lei, para não duplicar quem já concorre pelas cotas da Lei.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2493,9 +2538,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'AC_I e AC_Q compõem o total de vagas ofertado (SUPLEMENTAR_AO_TOTAL), nunca uma composição que retire vaga de outra modalidade; o critério de elegibilidade é autodeclaração étnico-comunitária mutuamente exclusiva (indígena e quilombola nunca coexistem na mesma autodeclaração) mais opção expressa, sem átomo de escola pública nem de renda; nenhum processo fora do PSIQ oferta AC_I/AC_Q hoje; o predicado de escola pública para AC_Q permanece fora do critério enquanto AC_I/AC_Q só existirem em certame isolado das cotas da Lei 12.711.',
+        'AC_I e AC_Q compõem o total de vagas ofertado (SUPLEMENTAR_AO_TOTAL), nunca uma composição que retire vaga de outra modalidade; o critério de elegibilidade é autodeclaração étnico-comunitária mutuamente exclusiva (indígena e quilombola nunca coexistem na mesma autodeclaração) mais opção expressa, sem átomo de escola pública nem de renda; nenhum processo fora do PSIQ oferta AC_I/AC_Q hoje; o predicado de escola pública para AC_Q permanece fora do critério enquanto AC_I/AC_Q só existirem em certame isolado das cotas da Lei 12.711.',
     verificacao:
-      'Teste automatizado (AC_I/AC_Q somam ao total sem retirar vaga de outra modalidade; autodeclaração indígena e quilombola mutuamente exclusivas; critério sem átomo de escola pública/renda; PSIQ é o único processo que oferta as duas) (planejado).',
+        'Teste automatizado (AC_I/AC_Q somam ao total sem retirar vaga de outra modalidade; autodeclaração indígena e quilombola mutuamente exclusivas; critério sem átomo de escola pública/renda; PSIQ é o único processo que oferta as duas) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -2503,7 +2548,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0097',
     titulo: 'Dupla correção de redação/carta de intenção com terceiro corretor por discrepância (RN-COR-01/02/03)',
     enunciado:
-      'Correção de prova (avaliação e lançamento de notas) ainda não é capacidade do MVP — permanece registrada como incremento planejado, consumindo a configuração congelada quando for modelada. A regra de negócio abaixo, porém, já está decidida pelo PO e deve ser preservada para quando essa capacidade for construída, em vez de re-perguntada. Dois corretores independentes avaliam o mesmo item; com dois corretores, a nota final é a média aritmética simples entre os dois. Se a diferença entre as duas notas for igual ou superior a 30% da nota máxima do componente — proporcional à escala, não um valor fixo de pontos (3 pontos numa escala 0-10, 30 numa escala 0-100, 300 numa escala 0-1.000) —, o item vai a uma terceira correção. Com três corretores, exclui-se a nota mais distante da nota do terceiro corretor, e a nota final é a média aritmética das duas notas que sobram (as mais próximas entre si). Se a nota do terceiro corretor ficar exatamente equidistante da maior e da menor — empate exato, sem como decidir qual excluir —, o caso vai a um quarto corretor, cuja nota SUBSTITUI a nota do terceiro corretor (não soma um quarto valor à conta); aplicada a substituição, a regra de exclusão de três corretores se repete normalmente. Se o novo empate persistir, a nota do quinto corretor substitui a do terceiro, e assim sucessivamente. A regra vale para redação, carta de intenção e provas discursivas em geral — qualquer item de correção humana subjetiva; não se aplica à prova objetiva, corrigida contra gabarito, sem corretor humano para divergir. A fonte da regra é o edital de abertura de cada processo seletivo; o requisito de Educação do Campo 2027 corrobora por escrito o mesmo limiar (3 pontos em escala 0-10) e o mesmo mecanismo.',
+        'Correção de prova (avaliação e lançamento de notas) ainda não é capacidade do MVP — permanece registrada como incremento planejado, consumindo a configuração congelada quando for modelada. A regra de negócio abaixo, porém, já está decidida pelo PO e deve ser preservada para quando essa capacidade for construída, em vez de re-perguntada. Dois corretores independentes avaliam o mesmo item; com dois corretores, a nota final é a média aritmética simples entre os dois. Se a diferença entre as duas notas for igual ou superior a 30% da nota máxima do componente — proporcional à escala, não um valor fixo de pontos (3 pontos numa escala 0-10, 30 numa escala 0-100, 300 numa escala 0-1.000) —, o item vai a uma terceira correção. Com três corretores, exclui-se a nota mais distante da nota do terceiro corretor, e a nota final é a média aritmética das duas notas que sobram (as mais próximas entre si). Se a nota do terceiro corretor ficar exatamente equidistante da maior e da menor — empate exato, sem como decidir qual excluir —, o caso vai a um quarto corretor, cuja nota SUBSTITUI a nota do terceiro corretor (não soma um quarto valor à conta); aplicada a substituição, a regra de exclusão de três corretores se repete normalmente. Se o novo empate persistir, a nota do quinto corretor substitui a do terceiro, e assim sucessivamente. A regra vale para redação, carta de intenção e provas discursivas em geral — qualquer item de correção humana subjetiva; não se aplica à prova objetiva, corrigida contra gabarito, sem corretor humano para divergir. A fonte da regra é o edital de abertura de cada processo seletivo; o requisito de Educação do Campo 2027 corrobora por escrito o mesmo limiar (3 pontos em escala 0-10) e o mesmo mecanismo.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -2515,7 +2560,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Enquanto este incremento não é entregue, nenhum componente de nota tem apuração automática nem consolidação entre corretores. Ao entregar a capacidade de avaliação e lançamento de notas, a apuração de um componente configurado como correção humana dupla deve seguir, sem re-litigar: média simples com dois corretores; limiar de discrepância de 30% da nota máxima do componente, proporcional à escala; exclusão da nota mais distante da do terceiro corretor com três corretores; substituição (não soma) da nota do terceiro corretor pela do quarto em caso de empate exato, recursiva para quinto corretor e seguintes; escopo restrito a componentes de correção humana subjetiva, nunca a componentes objetivos corrigidos por gabarito.',
+        'Enquanto este incremento não é entregue, nenhum componente de nota tem apuração automática nem consolidação entre corretores. Ao entregar a capacidade de avaliação e lançamento de notas, a apuração de um componente configurado como correção humana dupla deve seguir, sem re-litigar: média simples com dois corretores; limiar de discrepância de 30% da nota máxima do componente, proporcional à escala; exclusão da nota mais distante da do terceiro corretor com três corretores; substituição (não soma) da nota do terceiro corretor pela do quarto em caso de empate exato, recursiva para quinto corretor e seguintes; escopo restrito a componentes de correção humana subjetiva, nunca a componentes objetivos corrigidos por gabarito.',
     verificacao: 'Revisão futura / teste automatizado quando a capacidade de avaliação e lançamento de notas for modelada.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -2524,7 +2569,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0120',
     titulo: 'Catálogo institucional de motivos de decisão de isenção',
     enunciado:
-      'O sistema deve manter, por fundamento de isenção, um catálogo institucional de motivos de decisão, com código e descrição estáveis, disponível para seleção pelo processo seletivo e utilizável tanto na análise inicial quanto no julgamento de recurso do mesmo fundamento.',
+        'O sistema deve manter, por fundamento de isenção, um catálogo institucional de motivos de decisão, com código e descrição estáveis, disponível para seleção pelo processo seletivo e utilizável tanto na análise inicial quanto no julgamento de recurso do mesmo fundamento.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2536,7 +2581,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Existe catálogo por fundamento; criar, editar, ativar e desativar motivo exige autorização institucional própria, sem depender de nome de perfil no código; a decisão preserva o código e a descrição vigentes no momento em que foi proferida.',
+        'Existe catálogo por fundamento; criar, editar, ativar e desativar motivo exige autorização institucional própria, sem depender de nome de perfil no código; a decisão preserva o código e a descrição vigentes no momento em que foi proferida.',
     verificacao: 'Testes de manutenção do catálogo e de preservação histórica da decisão.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO',
@@ -2545,7 +2590,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0121',
     titulo: 'Motivo de decisão declara um único resultado permitido',
     enunciado:
-      'Cada motivo pertence a exatamente um resultado permitido, deferimento ou indeferimento, e esse vínculo torna-se imutável depois que o motivo é disponibilizado a processo publicado.',
+        'Cada motivo pertence a exatamente um resultado permitido, deferimento ou indeferimento, e esse vínculo torna-se imutável depois que o motivo é disponibilizado a processo publicado.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2557,7 +2602,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O julgamento recusa motivo incompatível com o resultado escolhido; tentativa de alterar o resultado permitido de motivo já disponibilizado é recusada.',
+        'O julgamento recusa motivo incompatível com o resultado escolhido; tentativa de alterar o resultado permitido de motivo já disponibilizado é recusada.',
     verificacao: 'Testes de recusa por incompatibilidade e de imutabilidade do vínculo.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -2566,7 +2611,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0122',
     titulo: 'Desativação de motivo alcança apenas novas publicações',
     enunciado:
-      'Motivo desativado deixa de compor novas publicações, mas permanece elegível nos julgamentos dos processos publicados em que já havia sido disponibilizado.',
+        'Motivo desativado deixa de compor novas publicações, mas permanece elegível nos julgamentos dos processos publicados em que já havia sido disponibilizado.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2578,7 +2623,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Após a desativação, o motivo não aparece para novas publicações e continua selecionável no julgamento do processo publicado anterior.',
+        'Após a desativação, o motivo não aparece para novas publicações e continua selecionável no julgamento do processo publicado anterior.',
     verificacao: 'Testes sobre processo publicado e sobre processo em elaboração.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -2587,7 +2632,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0123',
     titulo: 'Seleção explícita de motivos e cobertura mínima na publicação',
     enunciado:
-      'O administrador seleciona explicitamente, entre os motivos institucionais, os aplicáveis a cada fundamento habilitado no processo seletivo; nenhum motivo é associado automaticamente, e a publicação exige ao menos um motivo de deferimento e um de indeferimento por fundamento habilitado.',
+        'O administrador seleciona explicitamente, entre os motivos institucionais, os aplicáveis a cada fundamento habilitado no processo seletivo; nenhum motivo é associado automaticamente, e a publicação exige ao menos um motivo de deferimento e um de indeferimento por fundamento habilitado.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2599,7 +2644,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Publicação recusada quando faltar motivo de algum resultado; motivo criado depois não é propagado a processos já publicados.',
+        'Publicação recusada quando faltar motivo de algum resultado; motivo criado depois não é propagado a processos já publicados.',
     verificacao: 'Testes de recusa de publicação e de ausência de propagação automática.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -2608,7 +2653,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0124',
     titulo: 'Evolução aditiva do catálogo em processo publicado',
     enunciado:
-      'Em processo publicado, o conjunto de motivos evolui apenas por inclusão, válida para julgamentos posteriores, sem criar critério material novo e sem alterar decisões já proferidas. A inclusão exige justificativa textual de manutenção, restrita a perfis administrativos e não apresentada ao candidato.',
+        'Em processo publicado, o conjunto de motivos evolui apenas por inclusão, válida para julgamentos posteriores, sem criar critério material novo e sem alterar decisões já proferidas. A inclusão exige justificativa textual de manutenção, restrita a perfis administrativos e não apresentada ao candidato.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2620,7 +2665,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Inclusão sem justificativa é recusada; decisões anteriores permanecem inalteradas; a justificativa não integra o que o candidato consulta.',
+        'Inclusão sem justificativa é recusada; decisões anteriores permanecem inalteradas; a justificativa não integra o que o candidato consulta.',
     verificacao: 'Testes de inclusão, de imutabilidade das decisões anteriores e de escopo de acesso.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -2629,7 +2674,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0125',
     titulo: 'Consulta auditável da trilha de manutenção sem conceder escrita',
     enunciado:
-      'A consulta da justificativa de manutenção e da trilha protegida do catálogo é uma operação própria, concedível a qualquer perfil autorizado, que não habilita criar, alterar, ativar ou desativar motivo nem julgar recurso.',
+        'A consulta da justificativa de manutenção e da trilha protegida do catálogo é uma operação própria, concedível a qualquer perfil autorizado, que não habilita criar, alterar, ativar ou desativar motivo nem julgar recurso.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -2641,7 +2686,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Quem possui apenas a consulta lê a trilha e não executa escrita; ausência, revogação ou expiração da concessão causa recusa fechada e auditada.',
+        'Quem possui apenas a consulta lê a trilha e não executa escrita; ausência, revogação ou expiração da concessão causa recusa fechada e auditada.',
     verificacao: 'Testes de autorização e de falha fechada.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
@@ -2650,7 +2695,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0126',
     titulo: 'Resultado preliminar de homologação por regularização financeira',
     enunciado:
-      'Ao término do limite de regularização, composto pelo fim das inscrições, pelo prazo de pagamento e por janela de reconciliação com o provedor de arrecadação, a fase de inscrição publica resultado preliminar de homologação. Inscrição sem pagamento confirmado nem isenção deferida consta como não homologada pelo motivo de falta de pagamento da taxa; a publicação não cria novo status de inscrição.',
+        'Ao término do limite de regularização, composto pelo fim das inscrições, pelo prazo de pagamento e por janela de reconciliação com o provedor de arrecadação, a fase de inscrição publica resultado preliminar de homologação. Inscrição sem pagamento confirmado nem isenção deferida consta como não homologada pelo motivo de falta de pagamento da taxa; a publicação não cria novo status de inscrição.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2662,7 +2707,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O resultado preliminar distingue homologada de não homologada com motivo; a situação da inscrição permanece a existente; a janela de reconciliação nunca é inferior ao mínimo aprovado.',
+        'O resultado preliminar distingue homologada de não homologada com motivo; a situação da inscrição permanece a existente; a janela de reconciliação nunca é inferior ao mínimo aprovado.',
     verificacao: 'Testes de publicação do resultado preliminar e de preservação do status.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO',
@@ -2671,7 +2716,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0127',
     titulo: 'Recurso contra a não homologação e resultado definitivo imutável',
     enunciado:
-      'Candidato não homologado pode interpor um único recurso tempestivo. Julgados os recursos, publica-se o resultado definitivo de homologação, que é imutável, não admite revogação administrativa nem novo recurso sobre a homologação, e é pré-requisito para iniciar a fase seguinte.',
+        'Candidato não homologado pode interpor um único recurso tempestivo. Julgados os recursos, publica-se o resultado definitivo de homologação, que é imutável, não admite revogação administrativa nem novo recurso sobre a homologação, e é pré-requisito para iniciar a fase seguinte.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2683,7 +2728,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Segundo recurso é recusado; a fase seguinte não inicia antes da publicação definitiva; após a publicação definitiva, alteração é recusada.',
+        'Segundo recurso é recusado; a fase seguinte não inicia antes da publicação definitiva; após a publicação definitiva, alteração é recusada.',
     verificacao: 'Testes de unicidade do recurso, de bloqueio da fase seguinte e de imutabilidade.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -2692,7 +2737,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0128',
     titulo: 'Troca de forma de pagamento sem ato formal de cancelamento',
     enunciado:
-      'Enquanto o prazo de regularização estiver vigente, o candidato pode iniciar novo pagamento em outra forma a qualquer momento: a nova tentativa passa a ser a única ativa, a anterior é encerrada automaticamente e o histórico é preservado. Confirmação de tentativa encerrada por substituição, relativa a pagamento realizado no prazo, satisfaz a obrigação; mais de uma confirmação a satisfaz uma única vez, e o valor pago a maior segue o procedimento administrativo do edital.',
+        'Enquanto o prazo de regularização estiver vigente, o candidato pode iniciar novo pagamento em outra forma a qualquer momento: a nova tentativa passa a ser a única ativa, a anterior é encerrada automaticamente e o histórico é preservado. Confirmação de tentativa encerrada por substituição, relativa a pagamento realizado no prazo, satisfaz a obrigação; mais de uma confirmação a satisfaz uma única vez, e o valor pago a maior segue o procedimento administrativo do edital.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2704,7 +2749,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Há no máximo uma tentativa ativa por obrigação; confirmação tardia de tentativa substituída satisfaz a obrigação; duas confirmações não produzem dupla satisfação.',
+        'Há no máximo uma tentativa ativa por obrigação; confirmação tardia de tentativa substituída satisfaz a obrigação; duas confirmações não produzem dupla satisfação.',
     verificacao: 'Testes de substituição, de confirmação tardia e de idempotência.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -2713,7 +2758,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0129',
     titulo: 'Inscrição em rascunho não enviada fica sem efeito',
     enunciado:
-      'Inscrição que permanece em rascunho e não é enviada até o encerramento do prazo fica sem efeito: não se torna inscrição, não constitui obrigação de pagamento nem manifestação de isenção válida e não produz resultado. Retenção e descarte seguem a política institucional aplicável.',
+        'Inscrição que permanece em rascunho e não é enviada até o encerramento do prazo fica sem efeito: não se torna inscrição, não constitui obrigação de pagamento nem manifestação de isenção válida e não produz resultado. Retenção e descarte seguem a política institucional aplicável.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2725,7 +2770,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Rascunho não enviado não gera obrigação nem solicitação válida e não aparece em resultado; o encerramento do prazo não converte rascunho em inscrição.',
+        'Rascunho não enviado não gera obrigação nem solicitação válida e não aparece em resultado; o encerramento do prazo não converte rascunho em inscrição.',
     verificacao: 'Testes sobre rascunho ao fim do prazo.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -2734,7 +2779,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0130',
     titulo: 'Acesso restrito ao documento apresentado pelo candidato',
     enunciado:
-      'O documento de comprovação e o anexo de recurso são acessíveis somente ao próprio candidato, quanto aos seus, ao integrante autorizado da banca no escopo em que atua e por operação administrativa auditada. Conteúdo e localização técnica não aparecem em log, evento ou resposta destinada a terceiro.',
+        'O documento de comprovação e o anexo de recurso são acessíveis somente ao próprio candidato, quanto aos seus, ao integrante autorizado da banca no escopo em que atua e por operação administrativa auditada. Conteúdo e localização técnica não aparecem em log, evento ou resposta destinada a terceiro.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -2746,7 +2791,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Acesso sem autorização é recusado sem revelar dados do candidato; logs e eventos não contêm conteúdo nem caminho técnico do documento.',
+        'Acesso sem autorização é recusado sem revelar dados do candidato; logs e eventos não contêm conteúdo nem caminho técnico do documento.',
     verificacao: 'Testes de autorização e inspeção de logs e eventos.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
@@ -2755,7 +2800,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0131',
     titulo: 'Retenção e destinação documental conforme a tabela de temporalidade — Portaria AN nº 92/2011',
     enunciado:
-      'Documento apresentado na inscrição, inclusive a solicitação de isenção, segue a classe de inscrições da tabela de temporalidade das atividades-fim das instituições federais de ensino superior, aprovada pela Portaria AN nº 92/2011 e de uso obrigatório nas IFES pela Portaria MEC nº 1.261/2013: fase corrente até a homologação do processo, um ano de fase intermediária e eliminação. Documento de recurso segue a classe de recursos, com a mesma contagem e guarda permanente como destinação final. Ação judicial em curso suspende a contagem e impede a eliminação. A eliminação é registrada de forma auditável, sem reproduzir o conteúdo eliminado.',
+        'Documento apresentado na inscrição, inclusive a solicitação de isenção, segue a classe de inscrições da tabela de temporalidade das atividades-fim das instituições federais de ensino superior, aprovada pela Portaria AN nº 92/2011 e de uso obrigatório nas IFES pela Portaria MEC nº 1.261/2013: fase corrente até a homologação do processo, um ano de fase intermediária e eliminação. Documento de recurso segue a classe de recursos, com a mesma contagem e guarda permanente como destinação final. Ação judicial em curso suspende a contagem e impede a eliminação. A eliminação é registrada de forma auditável, sem reproduzir o conteúdo eliminado.',
     grupo: 'conformidade',
     tipo: 'requisito_conformidade',
     nivel: 'requisito',
@@ -2767,7 +2812,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Os prazos e a destinação correspondem à classe aplicável; ação judicial suspende a eliminação; a eliminação produz registro auditável sem conteúdo.',
+        'Os prazos e a destinação correspondem à classe aplicável; ação judicial suspende a eliminação; a eliminação produz registro auditável sem conteúdo.',
     verificacao: 'Testes de cálculo de prazo, de suspensão e de registro da eliminação.',
     pagina_developers: '/produto/requisitos/',
     owner: 'DPO',
@@ -2776,7 +2821,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0132',
     titulo: 'Fatos usados pelo recurso são os da inscrição enviada',
     enunciado:
-      'Os fatos do candidato usados por qualquer recurso são exclusivamente os coletados e resolvidos na inscrição enviada, imutáveis após o envio. O recurso não abre nova coleta nem admite corrigir, complementar ou substituir fato; no protocolo, o conjunto vigente é lido da inscrição e congelado, e atualizações posteriores não o recalculam. Fato ausente ou indeterminado não é convertido em não aplicável: o grupo documental que dele depende permanece aplicável, porém opcional, e não bloqueia o protocolo.',
+        'Os fatos do candidato usados por qualquer recurso são exclusivamente os coletados e resolvidos na inscrição enviada, imutáveis após o envio. O recurso não abre nova coleta nem admite corrigir, complementar ou substituir fato; no protocolo, o conjunto vigente é lido da inscrição e congelado, e atualizações posteriores não o recalculam. Fato ausente ou indeterminado não é convertido em não aplicável: o grupo documental que dele depende permanece aplicável, porém opcional, e não bloqueia o protocolo.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2788,7 +2833,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O recurso não oferece coleta nem edição de fato; o conjunto congelado não é recalculado em atualização; grupo dependente de fato indeterminado não impede o protocolo.',
+        'O recurso não oferece coleta nem edição de fato; o conjunto congelado não é recalculado em atualização; grupo dependente de fato indeterminado não impede o protocolo.',
     verificacao: 'Testes de congelamento, de ausência de coleta no recurso e de grupo opcional.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -2797,7 +2842,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0133',
     titulo: 'Exigência documental própria do recurso',
     enunciado:
-      'A exigência documental de recurso possui finalidade própria, distinta da exigência da inscrição, e não é herdada automaticamente da inscrição nem da decisão contestada. Tipos documentais alternativos para a mesma comprovação compõem grupo de alternativas simples, em que a obrigatoriedade pertence ao grupo: grupo obrigatório exige exatamente uma alternativa válida e grupo opcional não bloqueia o protocolo. Comprovações distintas usam grupos obrigatórios independentes.',
+        'A exigência documental de recurso possui finalidade própria, distinta da exigência da inscrição, e não é herdada automaticamente da inscrição nem da decisão contestada. Tipos documentais alternativos para a mesma comprovação compõem grupo de alternativas simples, em que a obrigatoriedade pertence ao grupo: grupo obrigatório exige exatamente uma alternativa válida e grupo opcional não bloqueia o protocolo. Comprovações distintas usam grupos obrigatórios independentes.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2809,7 +2854,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Exigência da inscrição não é herdada; uma alternativa válida satisfaz o grupo obrigatório; quantidade mínima maior que um e grupos aninhados não são configuráveis no recurso.',
+        'Exigência da inscrição não é herdada; uma alternativa válida satisfaz o grupo obrigatório; quantidade mínima maior que um e grupos aninhados não são configuráveis no recurso.',
     verificacao: 'Testes de não herança, de satisfação por alternativa e de recusa de configuração inválida.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO',
