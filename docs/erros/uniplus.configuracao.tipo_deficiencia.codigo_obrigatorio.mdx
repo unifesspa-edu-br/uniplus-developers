@@ -1,0 +1,40 @@
+---
+title: O código do tipo de deficiência não foi informado
+sidebar_label: Código do tipo de deficiência obrigatório
+description: O código do tipo de deficiência é a identidade semântica do cadastro e é obrigatório.
+code: uniplus.configuracao.tipo_deficiencia.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de deficiência
+  - Atualização de um tipo de deficiência
+requisitos:
+  - UNI-REQ-0061
+  - UNI-REQ-0012
+rastreio:
+  - label: 'uniplus-api#1239'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1239
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação foi recusada porque o **código** do tipo de deficiência não foi
+preenchido.
+
+O código (ex.: `DEFICIENCIA_VISUAL`, `TEA`, `SURDOCEGUEIRA`) é a identidade
+semântica do cadastro: é ele que os fatos de atendimento congelam junto com
+a origem, e é por ele que a solicitação é resolvida depois. O nome continua
+sendo o rótulo legível, e também é único entre tipos vivos, mas não faz as
+vezes de identidade.
+
+O código é informado por quem cadastra — o sistema não o gera a partir do
+nome.
+
+## Como resolver
+
+Informe um código para o tipo de deficiência.

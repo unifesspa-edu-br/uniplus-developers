@@ -1,0 +1,39 @@
+---
+title: O código do tipo de deficiência está em formato inválido
+sidebar_label: Código do tipo de deficiência em formato inválido
+description: O código do tipo de deficiência precisa iniciar com letra maiúscula e conter apenas letras maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres.
+code: uniplus.configuracao.tipo_deficiencia.codigo_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de deficiência
+  - Atualização de um tipo de deficiência
+requisitos:
+  - UNI-REQ-0061
+  - UNI-REQ-0012
+rastreio:
+  - label: 'uniplus-api#1239'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1239
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** informado não respeita o formato fechado —
+`^[A-Z][A-Z0-9_]{1,49}$`: inicia com letra maiúscula, segue com letras
+maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres no total (ex.:
+`DEFICIENCIA_VISUAL`, `TEA`, `SURDOCEGUEIRA`).
+
+São recusados, entre outros, o código em caixa baixa
+(`deficiencia_visual`), o que começa por dígito (`1_DEFICIENCIA`), o que
+traz caractere acentuado (`DEFICIÊNCIA_VISUAL`), o que usa hífen no lugar
+do sublinhado (`DEFICIENCIA-VISUAL`) e o de um único caractere (`D`).
+
+## Como resolver
+
+Use um código que comece com letra maiúscula e contenha apenas letras
+maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres.

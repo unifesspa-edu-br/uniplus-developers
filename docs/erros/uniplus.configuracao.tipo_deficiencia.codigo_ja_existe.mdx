@@ -1,0 +1,41 @@
+---
+title: Já existe um tipo de deficiência vivo com este código
+sidebar_label: Código do tipo de deficiência já existe
+description: O código do tipo de deficiência é único entre tipos vivos — índice único parcial que ignora os removidos.
+code: uniplus.configuracao.tipo_deficiencia.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de deficiência
+  - Atualização de um tipo de deficiência, quando o código é alterado para um já em uso
+requisitos:
+  - UNI-REQ-0061
+  - UNI-REQ-0012
+rastreio:
+  - label: 'uniplus-api#1239'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1239
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe um tipo de deficiência **vivo** com o código informado.
+
+A unicidade vale apenas entre os tipos vivos: o código de um tipo removido
+fica livre e pode ser reaproveitado por um cadastro novo.
+
+O código é editável, então esta checagem também roda na atualização, mas só
+quando o código efetivamente muda — reenviar o mesmo código do próprio
+registro não dispara este erro. A comparação é sensível a
+maiúsculas/minúsculas.
+
+Uma colisão de **nome** é recusada à parte, por
+`uniplus.configuracao.tipo_deficiencia.nome_ja_existe`.
+
+## Como resolver
+
+Use um código diferente.
