@@ -1,7 +1,7 @@
 ---
 title: A versão do dataset do calendário não foi informada
 sidebar_label: Versão do dataset obrigatória
-description: Ao criar um dataset de calendário de dias úteis, a versão é obrigatória — é o identificador que a versão publicada de um processo seletivo congela.
+description: Ao criar um dataset de calendário de dias úteis, a versão é obrigatória — é o que identifica a remessa e a distingue das anteriores.
 code: uniplus.configuracao.calendario_dias_uteis.versao_dataset_obrigatoria
 http_status: 422
 situacao: publicado
@@ -26,10 +26,9 @@ criar um calendário de dias úteis.
 O calendário de dias úteis é reference data versionada por dataset inteiro,
 não por linha: uma correção nos feriados publica um dataset novo, com a lista
 completa de dias não úteis — nunca edita a lista de um dataset existente. Não
-existe operação de atualização por design. A versão é o identificador desse
-dataset, e é ela (junto com o próprio identificador do registro) que a versão
-publicada de um processo seletivo congela quando a contagem de prazo distingue
-dia útil de não útil — sem uma versão declarada, não há o que congelar.
+existe operação de atualização por design. A versão é o que identifica essa remessa e a distingue das anteriores: sem ela,
+dois datasets do mesmo calendário ficariam indistinguíveis, e nenhum registro
+que aponte para um deles diria de qual remessa de feriados se trata.
 
 ## Como resolver
 
