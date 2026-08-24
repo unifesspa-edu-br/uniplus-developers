@@ -31,11 +31,16 @@ calendário: os feriados nacionais, mais os estaduais e municipais da localidade
 que o processo declara. Sem ele, não há como determinar o instante em que a
 janela fecha, e a publicação para em vez de aproximar em silêncio.
 
-A versão publicada congela o **identificador e a versão do dataset** do
-calendário, não apenas a constatação de que havia um. Guardar só "existia
-calendário" não reproduz contagem nenhuma: o calendário pode ganhar versão nova
-depois da publicação, e um recurso já em curso fecharia num instante diferente
-do que a versão prometeu.
+A versão publicada congela o **conteúdo** do calendário — a lista de dias não
+úteis vigente no momento da publicação —, e não apenas a constatação de que
+havia um. O identificador e a versão do dataset de origem ficam guardados ao
+lado, como rastreio, e nunca são relidos para recontar.
+
+Guardar só a referência não reproduz contagem nenhuma. O calendário pode ganhar
+versão nova depois da publicação, e o dataset que deixa de ser vigente pode ser
+removido do cadastro; nos dois casos, um recurso já em curso fecharia num
+instante diferente do que a versão prometeu, ou não teria como ser recontado.
+A versão publicada é imutável e não admite completar depois o dado que sumiu.
 
 Dependem do calendário:
 
