@@ -1,0 +1,60 @@
+---
+title: A quantidade de turnos não corresponde ao regime declarado
+sidebar_label: Turnos incompatíveis com o regime
+description: REGULAR exige exatamente um turno e INTEGRAL exige exatamente dois — a quantidade informada precisa corresponder ao regime declarado.
+code: uniplus.configuracao.oferta_curso.cardinalidade_turnos_incompativel_com_regime
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos:
+  - UNI-REQ-0137
+rastreio:
+  - label: 'uniplus-api#1286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A quantidade de turnos informada não é a que o `regimeDeTurno` declarado exige:
+
+| Regime declarado | Turnos exigidos |
+|---|---|
+| `REGULAR` | exatamente 1 |
+| `INTEGRAL` | exatamente 2, distintos |
+
+O regime é **declarado, nunca inferido**. Enviar dois turnos com
+`regimeDeTurno: "REGULAR"` é recusado — a oferta não é promovida a `INTEGRAL`
+por conta própria. Isso é proposital: inferir o regime pela contagem tornaria
+impossível distinguir um turno informado por engano de uma oferta que
+realmente funciona em dois períodos.
+
+A mensagem do erro nomeia o regime declarado e quantos turnos ele exige.
+
+## Como resolver
+
+Corrija **o lado que estava errado** — pode ser o regime ou a lista.
+
+Se a oferta realmente ocupa dois períodos, o regime é que estava errado:
+
+```json
+{
+  "regimeDeTurno": "INTEGRAL",
+  "turnos": ["MATUTINO", "VESPERTINO"]
+}
+```
+
+Se ocupa um só, sobra turno na lista:
+
+```json
+{
+  "regimeDeTurno": "REGULAR",
+  "turnos": ["MATUTINO"]
+}
+```

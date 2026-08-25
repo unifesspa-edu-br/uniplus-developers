@@ -1,0 +1,46 @@
+---
+title: A oferta precisa declarar seus turnos
+sidebar_label: Turnos obrigatórios
+description: A lista de turnos da oferta não pode estar ausente nem vazia — nenhum formato pedagógico dispensa o turno.
+code: uniplus.configuracao.oferta_curso.turnos_obrigatorios
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos:
+  - UNI-REQ-0137
+rastreio:
+  - label: 'uniplus-api#1286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `turnos` veio ausente, nulo ou como lista vazia.
+
+**Nenhum formato pedagógico abre exceção.** A oferta a distância (`EAD`) e a
+semipresencial declaram turno como a presencial — a decisão institucional é
+que o curso funciona em períodos específicos, independentemente de onde a aula
+acontece. Não existe caminho na API que aceite uma oferta sem turno.
+
+## Como resolver
+
+Informe os turnos conforme o regime declarado:
+
+```json
+{
+  "formatoPedagogico": "EAD",
+  "regimeDeTurno": "REGULAR",
+  "turnos": ["NOTURNO"]
+}
+```
+
+Quantos turnos informar depende do `regimeDeTurno`: um sob `REGULAR`, dois
+distintos sob `INTEGRAL`. Enviar quantidade diferente da exigida é
+[`cardinalidade_turnos_incompativel_com_regime`](uniplus.configuracao.oferta_curso.cardinalidade_turnos_incompativel_com_regime.mdx).
