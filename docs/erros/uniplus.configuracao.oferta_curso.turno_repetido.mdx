@@ -1,0 +1,50 @@
+---
+title: Os turnos da oferta precisam ser distintos
+sidebar_label: Turno repetido
+description: A lista de turnos não pode repetir o mesmo período — uma oferta integral ocupa dois turnos diferentes.
+code: uniplus.configuracao.oferta_curso.turno_repetido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos:
+  - UNI-REQ-0137
+rastreio:
+  - label: 'uniplus-api#1286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O mesmo turno aparece mais de uma vez em `turnos` — por exemplo,
+`["MATUTINO", "MATUTINO"]`.
+
+Um curso integral ocupa **dois períodos diferentes** do dia. Repetir o mesmo
+turno não descreve uma oferta integral; descreve uma oferta de um turno só,
+informada duas vezes.
+
+## Como resolver
+
+Se a oferta ocupa dois períodos, nomeie os dois:
+
+```json
+{
+  "regimeDeTurno": "INTEGRAL",
+  "turnos": ["MATUTINO", "VESPERTINO"]
+}
+```
+
+Se ocupa apenas um, declare o regime correspondente:
+
+```json
+{
+  "regimeDeTurno": "REGULAR",
+  "turnos": ["MATUTINO"]
+}
+```

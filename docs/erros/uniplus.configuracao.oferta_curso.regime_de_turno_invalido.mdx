@@ -1,0 +1,43 @@
+---
+title: O regime de turno da oferta é inválido
+sidebar_label: Regime de turno inválido
+description: O regime de turno precisa ser um dos dois tokens do domínio fechado — REGULAR ou INTEGRAL.
+code: uniplus.configuracao.oferta_curso.regime_de_turno_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos:
+  - UNI-REQ-0137
+rastreio:
+  - label: 'uniplus-api#1286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `regimeDeTurno` informado não é `REGULAR` nem `INTEGRAL`.
+
+Dois enganos comuns levam a este erro:
+
+- **Enviar um turno no lugar do regime** (`MATUTINO`, `NOTURNO`). Turno é o
+  período do dia e vai em `turnos`; regime é quantos períodos a oferta ocupa.
+- **Confundir com `programaDeOferta`**, que também tem um token `REGULAR`, mas
+  com outro sentido: lá ele distingue a oferta regular da vinculada a programas
+  especiais (`PARFOR`, `PRONERA`, `FORMA_PARA`…). São campos independentes.
+
+O parsing é sensível a maiúsculas e minúsculas: `Regular` e `regular` são
+recusados.
+
+## Como resolver
+
+Informe um dos dois tokens válidos:
+
+- `REGULAR` — a oferta funciona em **um** turno.
+- `INTEGRAL` — a oferta funciona em **dois** turnos distintos.

@@ -1,7 +1,7 @@
 ---
 title: O turno da oferta é inválido
 sidebar_label: Turno inválido
-description: O turno da oferta, quando informado, precisa ser um dos quatro tokens do domínio fechado — MATUTINO, VESPERTINO, NOTURNO ou INTEGRAL.
+description: Cada turno da oferta precisa ser um dos três tokens do domínio fechado — MATUTINO, VESPERTINO ou NOTURNO.
 code: uniplus.configuracao.oferta_curso.turno_invalido
 http_status: 422
 situacao: publicado
@@ -9,10 +9,13 @@ modulo: Configuração
 emitido_em:
   - Criação de uma oferta de curso
   - Atualização de uma oferta de curso
-requisitos: []
+requisitos:
+  - UNI-REQ-0137
 rastreio:
   - label: 'uniplus-api#749'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+  - label: 'uniplus-api#1286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1286
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -21,13 +24,28 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O **turno** informado não é um dos quatro tokens do domínio fechado:
-`MATUTINO`, `VESPERTINO`, `NOTURNO` ou `INTEGRAL`.
+Um dos turnos informados em `turnos` não é um dos três tokens do domínio
+fechado: `MATUTINO`, `VESPERTINO` ou `NOTURNO`.
 
-O turno é opcional — a oferta pode não declará-lo. Este erro só dispara
-quando um token é informado e não é um dos quatro válidos.
+`INTEGRAL` **não é turno**. Uma oferta que funciona em dois períodos declara
+`regimeDeTurno: "INTEGRAL"` e nomeia os dois em `turnos` — o rótulo sozinho
+não diria quais são.
+
+O turno é obrigatório em todo formato pedagógico, a distância inclusive: não
+existe oferta sem turno. Se a lista estiver ausente ou vazia, o erro é
+[`turnos_obrigatorios`](uniplus.configuracao.oferta_curso.turnos_obrigatorios.mdx),
+não este.
 
 ## Como resolver
 
-Informe um dos quatro tokens válidos — `MATUTINO`, `VESPERTINO`, `NOTURNO`
-ou `INTEGRAL` — ou omita o campo se a oferta não tem turno fixo.
+Informe apenas tokens válidos em `turnos`:
+
+```json
+{
+  "regimeDeTurno": "INTEGRAL",
+  "turnos": ["MATUTINO", "VESPERTINO"]
+}
+```
+
+A resposta devolve os turnos em ordem canônica — matutino, vespertino,
+noturno — qualquer que tenha sido a ordem de envio.

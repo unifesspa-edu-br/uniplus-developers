@@ -1,0 +1,45 @@
+---
+title: O regime de turno da oferta é obrigatório
+sidebar_label: Regime de turno obrigatório
+description: Toda oferta de curso declara em que regime funciona — REGULAR, num único turno, ou INTEGRAL, em dois turnos distintos.
+code: uniplus.configuracao.oferta_curso.regime_de_turno_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos:
+  - UNI-REQ-0137
+rastreio:
+  - label: 'uniplus-api#1286'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1286
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `regimeDeTurno` não foi informado. Ele é obrigatório e não tem valor
+padrão: nenhuma oferta funciona sem declarar se ocupa um turno ou dois.
+
+Informar um token fora do domínio é outro erro —
+[`regime_de_turno_invalido`](uniplus.configuracao.oferta_curso.regime_de_turno_invalido.mdx).
+A distinção é proposital: quem não informou nada precisa de orientação
+diferente de quem informou o token errado.
+
+## Como resolver
+
+Declare o regime junto com os turnos correspondentes:
+
+```json
+{
+  "regimeDeTurno": "REGULAR",
+  "turnos": ["NOTURNO"]
+}
+```
+
+- `REGULAR` — a oferta funciona em **um** turno.
+- `INTEGRAL` — a oferta funciona em **dois** turnos distintos.
