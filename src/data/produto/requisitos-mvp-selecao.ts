@@ -1190,6 +1190,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend',
   },
   {
+    requisito_id: 'UNI-REQ-0137',
+    titulo: 'Regime de turno da oferta de curso',
+    enunciado:
+      'Toda oferta de curso declara o regime em que funciona e os turnos correspondentes, e a declaração é obrigatória: REGULAR quando a oferta funciona num único turno, INTEGRAL quando funciona em dois turnos distintos, escolhidos entre matutino, vespertino e noturno. A exigência não abre exceção por formato pedagógico: oferta a distância e semipresencial declaram turno como qualquer outra, porque o que se declara é quando o curso funciona, e não como a aula acontece. INTEGRAL deixa de ser um turno ao lado dos três e passa a ser o regime que exige dois deles; não existe mais valor de turno homônimo, e a oferta que funcionava no integral passa a nomear quais dois turnos ocupa. O regime é declarado, não deduzido da quantidade de turnos informada: ainda que a cardinalidade denuncie a intenção, é o valor declarado que rege a recusa, e a recusa fala do regime que a oferta declarou. Duas fronteiras precisam ficar registradas porque a leitura cruzada é fácil. A primeira: este REGULAR não é o REGULAR do programa de oferta, que distingue a oferta regular da instituição das ofertas vinculadas a Forma Pará, Parfor, Pronera, PEPETI e convênios, são dois vocabulários fechados que coincidem numa palavra e nada mais. A segunda: turno é atributo da oferta, e não do processo seletivo; o processo referencia a oferta (UNI-REQ-0134) e exibe os turnos que ela declara, sem atribuir turno próprio nem sobrescrever o dela.',
+    grupo: 'dados',
+    tipo: 'requisito_dados',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0010',
+    modulo: 'Configuração; Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Cadastrar oferta sem regime, sem turno algum ou com turno repetido é recusado. Regime REGULAR com exatamente um turno é aceito, e com dois ou mais é recusado. Regime INTEGRAL com exatamente dois turnos distintos é aceito, e com um só ou com três é recusado. A recusa por cardinalidade nomeia o regime declarado e quantos turnos ele exige. Oferta de formato a distância ou semipresencial é recusada quando não declara turno, do mesmo modo que a presencial. Nenhum valor de turno chamado INTEGRAL é aceito, e o regime é lido do campo próprio, nunca inferido da quantidade de turnos. A leitura da oferta devolve o regime e a lista de turnos em ordem canônica estável, de modo que dois cadastros do mesmo par devolvem a mesma sequência.',
+    verificacao:
+      'Planejada, e nada implementado até aqui: o cadastro existente trata turno como valor único e opcional, com INTEGRAL entre os turnos. A verificação prevista cobre as invariantes de regime e de cardinalidade no agregado da oferta, o domínio fechado de regime e de turno no contrato, a recusa da oferta a distância que não declara turno e a ordem canônica estável devolvida na leitura.',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
     requisito_id: 'UNI-REQ-0012',
     titulo: 'Atendimento especializado configurável',
     enunciado:
