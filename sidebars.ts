@@ -453,6 +453,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.configuracao.recurso_acessibilidade.nao_encontrado',
         'erros/uniplus.configuracao.campus.sigla_obrigatoria',
         'erros/uniplus.configuracao.campus.sigla_tamanho',
+        'erros/uniplus.configuracao.campus.sigla_acentuacao_invalida',
         'erros/uniplus.configuracao.campus.sigla_ja_existe',
         'erros/uniplus.configuracao.campus.nome_obrigatorio',
         'erros/uniplus.configuracao.campus.nome_tamanho',
