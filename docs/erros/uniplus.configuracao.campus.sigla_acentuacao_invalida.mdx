@@ -1,0 +1,42 @@
+---
+title: A sigla do campus contém acentuação gráfica
+sidebar_label: Acentuação da sigla do campus
+description: A sigla do campus não pode conter acentuação gráfica.
+code: uniplus.configuracao.campus.sigla_acentuacao_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um campus
+  - Atualização de um campus
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#587'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/587
+  - label: 'uniplus-api#1304'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1304
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **sigla** informada contém acentuação gráfica. A sigla do campus é um
+identificador institucional e é formada sem acento, para que duas siglas
+visualmente semelhantes não coexistam.
+
+A regra reconhece tanto o caractere acentuado pré-composto quanto a
+representação formada por letra seguida de marca combinante — as duas
+formas de escrever `CÁMAR` em Unicode são recusadas.
+
+## Como resolver
+
+Reenvie a sigla sem acentuação. A API não remove o acento nem substitui o
+caractere: o valor informado é preservado para correção, porque removê-lo
+alteraria o dado enviado e poderia colidir com a sigla de outro campus.
+
+Letras sem acentuação, números e hífen continuam válidos (`CMB`,
+`CMRB-I`), e a conversão para maiúsculas segue acontecendo (`camar` é
+gravado como `CAMAR`).
