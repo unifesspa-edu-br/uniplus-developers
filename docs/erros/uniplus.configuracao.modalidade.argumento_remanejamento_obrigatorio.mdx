@@ -27,15 +27,18 @@ combinam com a regra declarada:
 | Regra | Destino | Par | Fallback |
 |---|---|---|---|
 | `DESTINO_UNICO` | obrigatório | proibido | proibido |
-| `CRUZADO` | proibido | obrigatório | obrigatório |
+| `CRUZADO` | proibido | obrigatório | opcional |
 | `SEGUE_CASCATA` ou nenhuma | proibido | proibido | proibido |
 
 `DESTINO_UNICO` remaneja sempre para o mesmo lugar — só faz sentido com um
 destino, nunca com par/fallback (esses dois só existem na troca cruzada).
-`CRUZADO` troca vagas ociosas entre duas modalidades pareadas, com um
-terceiro destino de reserva se nenhuma delas absorver — por isso exige par e
-fallback juntos, e não usa destino. `SEGUE_CASCATA` segue a cascata legal
-fixa e não aceita nenhum dos três argumentos.
+`CRUZADO` troca vagas ociosas entre duas modalidades pareadas: exige o par,
+que é o que define o cruzamento, e não usa destino. O fallback — um terceiro
+destino de reserva, para quando nenhuma das duas absorver a vaga — é
+opcional, e a ausência dele declara que o par não tem destino final: a vaga
+permanece ociosa, como no certame isolado que não oferta ampla concorrência.
+`SEGUE_CASCATA` segue a cascata legal fixa e não aceita nenhum dos três
+argumentos.
 
 ## Como resolver
 
