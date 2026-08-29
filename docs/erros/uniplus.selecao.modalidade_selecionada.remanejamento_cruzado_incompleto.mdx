@@ -1,7 +1,7 @@
 ---
-title: Modalidade com remanejamento CRUZADO exige par e fallback
+title: Modalidade com remanejamento CRUZADO exige o par
 sidebar_label: Remanejamento cruzado incompleto
-description: O remanejamento CRUZADO troca vagas ociosas entre um par de modalidades e precisa de um fallback para quando o par também não tiver candidato.
+description: O remanejamento CRUZADO troca vagas ociosas entre duas modalidades e precisa saber qual é o par — sem ele não há cruzamento.
 code: uniplus.selecao.modalidade_selecionada.remanejamento_cruzado_incompleto
 http_status: 422
 situacao: publicado
@@ -15,6 +15,8 @@ rastreio:
     href: https://github.com/unifesspa-edu-br/uniplus-api/pull/778
   - label: 'uniplus-api#865'
     href: https://github.com/unifesspa-edu-br/uniplus-api/pull/865
+  - label: 'uniplus-api#1317'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1317
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -24,14 +26,21 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 ## O que aconteceu
 
 Uma modalidade selecionada declarou `regraRemanejamento: CRUZADO` sem
-declarar `remanejamentoPar`, sem declarar `remanejamentoFallback`, ou sem
-declarar nenhum dos dois. Diferente de `DESTINO_UNICO` (ver
+declarar `remanejamentoPar`. Diferente de `DESTINO_UNICO` (ver
 [`remanejamento_destino_obrigatorio`](./uniplus.selecao.modalidade_selecionada.remanejamento_destino_obrigatorio.mdx)),
 que precisa de um único destino, `CRUZADO` é o remanejamento recíproco entre
-duas modalidades (ex.: IND↔QUIL, no tipo de processo indígena/quilombola) —
-precisa das duas peças: o **par** (a outra modalidade do cruzamento) e o
-**fallback** (para onde a vaga vai se nem a modalidade nem o par tiverem
-candidato aprovado).
+duas modalidades (ex.: `AC_I`↔`AC_Q`, no processo seletivo indígena e
+quilombola): a vaga que sobra numa migra para a outra. O **par** é a outra
+modalidade do cruzamento, e sem ele não há o que cruzar.
+
+O `remanejamentoFallback` — para onde a vaga vai quando nem a modalidade nem
+o par tiverem candidato aprovado — é **opcional**, e a ausência dele é uma
+declaração, não uma omissão: o par não tem destino final, e a vaga que
+nenhuma das duas modalidades preencher permanece ociosa. É o caso do certame
+isolado, que não oferta ampla concorrência para receber essa sobra. Declarar
+`remanejamentoFallback` sem `regraRemanejamento: CRUZADO`, esse sim, é
+recusado — por
+[`remanejamento_cruzado_indevido`](./uniplus.selecao.modalidade_selecionada.remanejamento_cruzado_indevido.mdx).
 
 Não acumula com nenhuma outra violação — é a primeira que falhar que
 interrompe a criação da modalidade.
@@ -51,10 +60,10 @@ partir dos mesmos campos — a mesma checagem roda de novo, sozinha.
 
 ## Como resolver
 
-Os campos que faltam não estão no payload que você enviou — estão na
-modalidade cadastrada em Configuração. Corrija lá o vínculo entre
-`regraRemanejamento: CRUZADO` e o par/fallback, ou investigue como a
-modalidade foi gravada sem essa coerência.
+O campo que falta não está no payload que você enviou — está na modalidade
+cadastrada em Configuração. Corrija lá o vínculo entre
+`regraRemanejamento: CRUZADO` e o par, ou investigue como a modalidade foi
+gravada sem essa coerência.
 
 Se o erro apareceu ao descartar uma retificação, o problema também não está
 no payload enviado agora — está na configuração congelada para a qual o
