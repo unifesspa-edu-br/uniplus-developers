@@ -27,9 +27,8 @@ Uma modalidade com `regraRemanejamento: CRUZADO` declara um
 `remanejamentoPar` que existe no cadastro de modalidades, mas **não está
 entre as modalidades selecionadas nesta mesma oferta**. A validação de
 [`modalidade_selecionada.remanejamento_cruzado_incompleto`](./uniplus.selecao.modalidade_selecionada.remanejamento_cruzado_incompleto.mdx)
-só prova que os campos foram preenchidos — esta checagem, separada, prova
-que o par declarado aponta para algo que de fato existe **nesta**
-distribuição. O remanejamento cruzado é recíproco entre duas modalidades da
+só prova que o par foi preenchido — esta checagem, separada, prova que ele
+aponta para algo que de fato existe **nesta** distribuição. O remanejamento cruzado é recíproco entre duas modalidades da
 mesma oferta; não pode cruzar com uma que a oferta nem tem.
 
 Esta checagem roda depois que todas as modalidades da distribuição já foram
