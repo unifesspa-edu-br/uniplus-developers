@@ -551,7 +551,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0099',
     titulo: 'Taxa de inscrição e isenção',
     enunciado:
-      'O sistema deve permitir que cada Processo Seletivo declare, na configuração, se cobra taxa de inscrição e, quando cobrar, o valor da taxa. Um processo que cobra pode, opcionalmente, oferecer isenção completa a candidatos elegíveis por fundamento — a isenção nunca é comportamento padrão nem obrigatória.',
+      'O sistema deve permitir que cada Processo Seletivo declare, na configuração, se cobra taxa de inscrição e, quando cobrar, o valor da taxa. Processo que declara cobrança deve declarar também ao menos um fundamento de isenção: é a configuração que registra sob quais fundamentos o processo admitirá isenção quando a frente de inscrição existir, e um processo que cobra sem declarar nenhum não admitiria nenhum. Processo que declara não cobrar não configura fundamento algum (UNI-REQ-0100).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -563,7 +563,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Publicar processo que não declarou se cobra taxa é recusado com erro nomeado — ausência nunca é interpretada como "não cobra". Processo que declara cobrança exige valor positivo; valor ausente ou não positivo recusa a publicação. Processo que declara não cobrar aceita ausência de valor. Zero fundamentos de isenção configurados é estado válido para processo que cobra.',
+      'Publicar processo que não declarou se cobra taxa é recusado com erro nomeado — ausência nunca é interpretada como "não cobra". Processo que declara cobrança exige valor positivo; valor ausente ou não positivo recusa a publicação. Processo que declara não cobrar aceita ausência de valor. Processo que declara cobrança exige ao menos um fundamento de isenção: gravar a configuração com nenhum fundamento é recusado com erro nomeado, e configuração gravada antes desta regra não publica enquanto o fundamento não for declarado.',
     verificacao:
       'Testes de integração da publicação do Processo Seletivo (planejados).',
     pagina_developers: '/produto/requisitos/',
@@ -606,7 +606,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Processo que cobra pode referenciar zero, um ou os dois fundamentos (Cadastro Único, doação de medula óssea). Processo diferente do Curso de Medicina não referencia esses fundamentos sem confirmação própria registrada.',
+      'Processo que cobra referencia ao menos um dos fundamentos reconhecidos — Cadastro Único, doação de medula óssea e carência socioeconômica —, podendo referenciar todos. A obrigatoriedade alcança todo processo que cobra, não apenas o Curso de Medicina que motivou o registro dos primeiros fundamentos. Fundamento repetido é deduplicado e o conjunto é guardado em ordem canônica. Fundamento fora do vocabulário reconhecido é recusado com erro nomeado, sem ecoar o valor rejeitado.',
     verificacao:
       'Validação automatizada dos fundamentos referenciáveis (planejada).',
     pagina_developers: '/produto/regras-negocio/',
@@ -704,7 +704,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0106',
     titulo: 'Decisão pendente: janela de solicitação e prazo de recurso de isenção',
     enunciado:
-      'O PO deve definir a janela própria de solicitação de isenção dentro do cronograma do processo e a magnitude do prazo de recurso contra indeferimento (UNI-REQ-0104), antes de a frente de inscrição implementar o fluxo de isenção.',
+      'O PO deve definir a janela própria de solicitação de isenção dentro do cronograma do processo e a magnitude do prazo de recurso contra indeferimento (UNI-REQ-0104), antes de a frente de inscrição implementar o fluxo de isenção. A obrigatoriedade de fundamento em todo processo que cobra (UNI-REQ-0099) amplia o alcance desta decisão: ela deixa de valer para alguns processos e passa a valer para todos os que cobram. O que a decisão resolve continua em aberto — inclusive se a solicitação terá janela própria ou correrá dentro do período de inscrição.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
