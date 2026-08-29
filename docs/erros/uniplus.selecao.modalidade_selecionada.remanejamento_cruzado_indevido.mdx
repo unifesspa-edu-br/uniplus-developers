@@ -26,9 +26,10 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 Uma modalidade selecionada declarou `remanejamentoPar`, `remanejamentoFallback`,
 ou os dois, sem ter `regraRemanejamento: CRUZADO`. Este é o par simétrico de
 [`remanejamento_cruzado_incompleto`](./uniplus.selecao.modalidade_selecionada.remanejamento_cruzado_incompleto.mdx):
-a mesma coerência, olhada do lado oposto — lá, os campos faltando quando
-deviam estar presentes; aqui, presentes quando deviam faltar. Basta um dos
-dois campos estar preenchido fora da regra `CRUZADO` para disparar.
+a mesma coerência, olhada do lado oposto — lá, o par faltando quando devia
+estar presente; aqui, par ou fallback presentes quando deviam faltar. Basta
+um dos dois campos estar preenchido fora da regra `CRUZADO` para disparar,
+inclusive o fallback, que dentro do `CRUZADO` é opcional.
 
 Não acumula com nenhuma outra violação — é a primeira que falhar que
 interrompe a criação da modalidade.
