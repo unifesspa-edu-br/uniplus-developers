@@ -704,7 +704,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0106',
     titulo: 'Decisão pendente: janela de solicitação e prazo de recurso de isenção',
     enunciado:
-      'O PO deve definir a janela própria de solicitação de isenção dentro do cronograma do processo e a magnitude do prazo de recurso contra indeferimento (UNI-REQ-0104), antes de a frente de inscrição implementar o fluxo de isenção. A obrigatoriedade de fundamento em todo processo que cobra (UNI-REQ-0099) amplia o alcance desta decisão: ela deixa de valer para alguns processos e passa a valer para todos os que cobram. O que a decisão resolve continua em aberto — inclusive se a solicitação terá janela própria ou correrá dentro do período de inscrição.',
+      'O PO deve definir a janela própria de solicitação de isenção dentro do cronograma do processo e a magnitude do prazo de recurso contra indeferimento (UNI-REQ-0104), antes de a frente de inscrição implementar o fluxo de isenção. A obrigatoriedade de fundamento em todo processo que cobra (UNI-REQ-0099) amplia o alcance desta decisão: ela deixa de valer para alguns processos e passa a valer para todos os que cobram. O conteúdo da decisão continua em aberto; o que esta nota registra é apenas quantos processos ela alcança.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
