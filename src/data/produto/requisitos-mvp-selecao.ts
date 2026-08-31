@@ -702,7 +702,7 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0106',
-    titulo: 'Janela de solicitação de isenção e prazo de recurso contra indeferimento (RN13)',
+    titulo: 'Janela de solicitação de isenção e prazo de recurso contra indeferimento',
     enunciado:
       'A solicitação de isenção tem janela própria no cronograma do processo, e ela é derivada das inscrições em um extremo e declarada no outro: começa no mesmo instante em que as inscrições abrem e termina em instante declarado, anterior ao encerramento delas. Dura no mínimo cinco dias corridos. Os dois extremos usam data e horário completos no fuso institucional que a versão publicada congela (UNI-REQ-0111), porque um prazo que se mede em dias corridos a partir de um instante não se resolve com data isolada. A janela pode ser prorrogada por alteração formal e auditável, sempre antes do término e preservando tanto a duração mínima quanto a anterioridade ao fim das inscrições; não pode ser reduzida nem reaberta depois de encerrada — quem não solicitou no prazo continua podendo se inscrever, pagando a taxa. A fase produz ato publicado não definitivo e admite recurso pela regra geral de recurso da fase, em instância única, sem mecanismo recursal próprio para isenção. A obrigatoriedade de fundamento em todo processo que cobra (UNI-REQ-0099) faz esta regra alcançar todos eles.',
     grupo: 'negocio',
