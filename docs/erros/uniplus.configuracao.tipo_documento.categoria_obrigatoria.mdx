@@ -1,0 +1,33 @@
+---
+title: A categoria do tipo de documento é obrigatória
+sidebar_label: Categoria do tipo de documento obrigatória
+description: Todo tipo de documento precisa declarar a categoria que o classifica.
+code: uniplus.configuracao.tipo_documento.categoria_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos:
+  - UNI-REQ-0013
+rastreio:
+  - label: 'uniplus-api#1343'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1343
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **categoria** não foi informada, ou veio em branco. Ela é o que agrupa o tipo
+de documento na navegação do cadastro e no formulário de exigências, e por isso
+não tem valor padrão: um tipo sem categoria não apareceria em nenhum filtro.
+
+## Como resolver
+
+Informe o código de uma categoria existente. O catálogo de categorias vivas
+está em `GET /api/configuracao/categorias-documento`, e no cadastro pela
+interface ele preenche a lista do campo.

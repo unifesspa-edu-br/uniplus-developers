@@ -1,0 +1,39 @@
+---
+title: Nenhuma categoria viva com o código informado
+sidebar_label: Categoria do tipo de documento não encontrada
+description: O código da categoria está bem formado, mas não corresponde a nenhuma categoria viva no cadastro.
+code: uniplus.configuracao.tipo_documento.categoria_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos:
+  - UNI-REQ-0013
+rastreio:
+  - label: 'uniplus-api#1343'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1343
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código da **categoria** está bem formado, mas não há categoria viva com ele no
+cadastro. É o caso de um código correto que foi removido, ou de um que nunca
+existiu.
+
+A categoria do tipo de documento deixou de ser um vocabulário fechado em código
+e passou a ser um cadastro administrado: o conjunto de categorias muda sem
+implantação de versão nova, conforme a instituição precise.
+
+## Como resolver
+
+Consulte as categorias vivas em `GET /api/configuracao/categorias-documento` e
+escolha uma delas — ou cadastre a categoria que falta, se ela deve existir.
+
+Esta página não enumera as categorias de propósito: o catálogo é administrado e
+qualquer lista escrita aqui nasceria desatualizada.
