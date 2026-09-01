@@ -1,0 +1,47 @@
+---
+title: A exigência de atendimento disponível não lista nenhum tipo de deficiência
+sidebar_label: Atendimento disponível sem tipo de deficiência
+description: Uma obrigatoriedade legal do tipo atendimento disponível precisa listar ao menos um tipo de deficiência.
+code: uniplus.selecao.obrigatoriedade_legal.atendimento_disponivel_vazio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos:
+  - UNI-REQ-0018
+rastreio:
+  - label: 'uniplus-api#1355'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1355
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra é do tipo **atendimento disponível** — exige que o processo ofereça
+atendimento especializado para um conjunto de tipos de deficiência —, mas a
+lista veio vazia.
+
+## Por que é recusado
+
+Uma lista vazia é satisfeita por qualquer processo, inclusive por um que não
+ofereça atendimento a ninguém: não há nada a conferir. A cláusula legal ficaria
+aprovada por vacuidade, e o edital publicaria sob uma exigência que na prática
+não cobra nada.
+
+É o oposto do que a regra pretende. Quem cadastra uma exigência de atendimento
+disponível quer justamente impedir que um processo seja publicado sem oferecer
+o atendimento que a norma manda oferecer.
+
+A recusa sai da conferência de forma do predicado, antes de qualquer consulta ao
+cadastro — não é o caso de um código que não foi encontrado, é o caso de não
+haver código nenhum a procurar.
+
+## Como resolver
+
+Liste ao menos um tipo de deficiência — ou remova a regra, se a exigência não se
+aplica ao tipo de processo.
