@@ -7,13 +7,13 @@ fonte_canonica: "código mergeado no uniplus-api para o formato aceito por cada 
 
 # Código de cadastro institucional
 
-Todo cadastro institucional do Uni+ — modalidade, tipo de documento, tipo de
-deficiência, condição de atendimento, categoria de documento, fato do candidato —
-tem um **código**: a identidade curta pela qual o registro é referenciado no
-resto do sistema.
+Os cadastros institucionais do Uni+ identificam cada registro por um **código**:
+a identidade curta pela qual ele é referenciado no resto do sistema.
 
 Esta página reúne a convenção que vale para escolher esse código, e o motivo de
-ela existir.
+ela existir. Ela **não** descreve todos os cadastros existentes: alguns são
+anteriores à convenção e ainda aceitam texto livre, e a tabela de variações mais
+abaixo diz quais são.
 
 ## Formato canônico
 
@@ -66,7 +66,12 @@ Duas consequências que valem para quem cadastra:
 
 ## Quem informa o código
 
-**O operador**, sempre. Não há geração automática no servidor.
+Nos cadastros que a interface administrativa escreve, **o operador** — sempre.
+Não há geração automática no servidor.
+
+A ressalva é necessária porque nem todo cadastro é administrável: o **fato do
+candidato**, por exemplo, é somente leitura na API, e seu código vem do próprio
+vocabulário do sistema, não de um formulário.
 
 A interface **sugere** um código derivado do nome — sem acento, em maiúsculas,
 com sublinhado no lugar dos separadores — e a sugestão permanece **editável**.
@@ -120,27 +125,42 @@ e a mensagem aponta o campo.
 Nem todos os cadastros aplicam o formato canônico. As diferenças abaixo são
 conhecidas e valem enquanto não forem unificadas:
 
-| Cadastro | Formato aceito | Diferença |
-|---|---|---|
-| Condição de atendimento | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
-| Fato do candidato | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
-| Tipo de deficiência | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
-| Categoria de documento | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
-| Tipo de documento | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
-| Tipo de banca | `^[A-Z_]+$` | **não aceita dígito** em posição alguma |
-| Fase canônica | `^[A-Z_]+$` | **não aceita dígito** em posição alguma |
-| Modalidade | `^[A-Z0-9_]+$` | **aceita dígito como primeiro caractere** |
+| Cadastro | Formato aceito | Tamanho | Diferença |
+|---|---|---|---|
+| Condição de atendimento | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
+| Fato do candidato | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico, mas o cadastro é somente leitura |
+| Tipo de deficiência | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
+| Categoria de documento | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
+| Tipo de documento | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
+| Tipo de banca | `^[A-Z_]+$` | até 60 | **não aceita dígito** em posição alguma |
+| Fase canônica | `^[A-Z_]+$` | até 60 | **não aceita dígito** em posição alguma |
+| Modalidade | `^[A-Z0-9_]+$` | até 60 | **aceita dígito como primeiro caractere** |
+| Tipo de processo | — | até 64 | **texto livre**, sem formato fechado |
+| Tipo de etapa | — | até 64 | **texto livre**, sem formato fechado |
+| Curso | — | 1 a 60 | **texto livre**, sem formato fechado |
+
+Duas leituras importantes desta tabela:
+
+- Nos três formatos legados, **a expressão não expressa o limite de tamanho** —
+  ele existe à parte, em 60 caracteres. Um código de 61 caracteres que casa com
+  `^[A-Z_]+$` ainda assim é recusado.
+- Os três últimos cadastros **não têm formato fechado**: aceitam minúscula,
+  acento e espaço. Não é permissão, é dívida — são anteriores à convenção.
 
 Ao cadastrar em tipo de banca ou fase canônica, portanto, `LEI_12711` seria
-recusado — nesses dois o código é puramente alfabético. Já a modalidade aceita
-um código começando por dígito, o que o formato canônico não permite.
+recusado: nesses dois o código é puramente alfabético. Já a modalidade aceita um
+código começando por dígito, o que o formato canônico não permite.
 
-Quem estiver implementando um cadastro **novo** deve adotar o formato canônico:
-as três variações acima são anteriores à convenção, não alternativas a ela.
+Quem estiver implementando um cadastro **novo** deve adotar o formato canônico.
+Todas as variações acima são anteriores à convenção, não alternativas a ela.
 
 ## Onde o erro aparece
 
-Um código fora do formato é recusado na escrita, com código de erro próprio por
-cadastro — `uniplus.configuracao.<cadastro>.codigo_formato_invalido` —,
-distinguível do erro de código ausente e do de código já existente. Cada um tem
-página no [catálogo de erros](/erros/).
+Nos cadastros com formato fechado, um código fora do formato é recusado na
+escrita com código de erro próprio — `uniplus.configuracao.<cadastro>.codigo_formato_invalido`
+—, distinguível do erro de código ausente e do de código já existente.
+
+Têm página publicada no [catálogo de erros](/erros/) os de condição de
+atendimento, fase canônica, modalidade, tipo de banca, tipo de deficiência e
+tipo de documento. Os cadastros de texto livre não emitem esse erro: neles o
+único limite é o de tamanho.
