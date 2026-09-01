@@ -1,0 +1,55 @@
+---
+title: O critério de desempate citado pela regra legal não existe no catálogo de regras
+sidebar_label: Critério de desempate da regra legal não encontrado
+description: O predicado da obrigatoriedade legal referencia um critério de desempate que o catálogo de regras não publica.
+code: uniplus.selecao.obrigatoriedade_legal.criterio_desempate_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos:
+  - UNI-REQ-0018
+rastreio:
+  - label: 'uniplus-api#1355'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1355
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra exige que o desempate do processo inclua um determinado **critério**, e
+o código citado não existe entre os critérios de desempate do catálogo de
+regras.
+
+## A fonte não é um cadastro
+
+Diferente da modalidade, do tipo de documento e do tipo de deficiência — que
+vivem em cadastros editáveis —, os critérios de desempate vêm do **catálogo de
+regras**, que é governado por carga inicial e só cresce: uma versão publicada
+não é editada nem removida.
+
+O catálogo é versionado, mas o predicado cita apenas o código, sem versão.
+Basta existir uma versão dele para a regra ser avaliável — qual versão vale num
+certame é decisão de quem configura o processo seletivo, não da obrigatoriedade
+legal.
+
+## Por que é recusado na escrita
+
+Antes desta conferência, um código inexistente era aceito no cadastro da regra e
+só cobrava o preço na publicação: **toda** tentativa era reprovada com a
+mensagem "critério de desempate ausente", que descreve o processo seletivo e
+manda o operador procurar o defeito na configuração do certame — quando ele está
+na regra legal, escrita em outro dia, possivelmente por outra pessoa.
+
+Recusar na escrita põe o erro onde ele nasceu.
+
+## Como resolver
+
+Confira o código do critério no catálogo de regras e corrija o predicado. A
+comparação é exata: espaço supérfluo nas pontas do código faz o critério ser
+dado como inexistente.
