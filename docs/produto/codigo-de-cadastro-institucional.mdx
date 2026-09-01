@@ -159,5 +159,9 @@ escrita com código de erro próprio — `uniplus.configuracao.<cadastro>.codigo
 
 Têm página publicada no [catálogo de erros](/erros/) os de condição de
 atendimento, fase canônica, modalidade, tipo de banca, tipo de deficiência e
-tipo de documento. Os cadastros de texto livre não emitem esse erro: neles o
-único limite é o de tamanho.
+tipo de documento.
+
+Os cadastros de texto livre não emitem esse erro, mas **não são irrestritos**:
+recusam caractere nulo, e o tipo de processo ainda reserva o valor `*`. Um código
+curto e bem-comportado ainda pode ser recusado por essas regras — as entradas
+`codigo_com_caractere_nulo` e `codigo_reservado` do catálogo cobrem cada caso.
