@@ -161,7 +161,13 @@ Têm página publicada no [catálogo de erros](/erros/) os de condição de
 atendimento, fase canônica, modalidade, tipo de banca, tipo de deficiência e
 tipo de documento.
 
-Os cadastros de texto livre não emitem esse erro, mas **não são irrestritos**:
-recusam caractere nulo, e o tipo de processo ainda reserva o valor `*`. Um código
-curto e bem-comportado ainda pode ser recusado por essas regras — as entradas
-`codigo_com_caractere_nulo` e `codigo_reservado` do catálogo cobrem cada caso.
+Os cadastros de texto livre não emitem esse erro, mas nem por isso aceitam
+qualquer coisa dentro do limite de tamanho — e o que cada um recusa a mais varia:
+
+- **Tipo de processo** recusa caractere nulo e reserva o valor `*`.
+- **Tipo de etapa** recusa caractere nulo.
+- **Curso** publica apenas as recusas de código ausente, de tamanho e de
+  duplicidade.
+
+As entradas `codigo_com_caractere_nulo` e `codigo_reservado` do catálogo cobrem
+os dois primeiros casos.
