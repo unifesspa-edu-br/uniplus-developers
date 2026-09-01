@@ -1,0 +1,49 @@
+---
+title: Uma regra legal vigente não pode ser avaliada
+sidebar_label: Regra legal não avaliável
+description: A publicação foi recusada porque uma regra legal vigente referencia um cadastro que não existe mais, e por isso não pode ser conferida.
+code: uniplus.selecao.processo_seletivo.regra_legal_inavaliavel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação de um processo seletivo
+  - Consulta de conformidade legal do processo
+requisitos:
+  - UNI-REQ-0018
+rastreio:
+  - label: 'uniplus-api#1336'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1336
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao conferir as regras legais vigentes para publicar o processo, o sistema
+encontrou uma cujo predicado referencia um cadastro que **não existe mais** —
+uma modalidade, um tipo de documento ou um tipo de etapa removido depois que a
+regra foi escrita.
+
+A regra não é aprovada nem reprovada por mérito: ela não pode ser avaliada, e a
+publicação é recusada por isso.
+
+## Por que recusar em vez de ignorar
+
+Ignorar a regra inavaliável seria aprovar por omissão. O edital seria publicado
+sob a aparência de conformidade com uma cláusula legal que ninguém chegou a
+conferir — e a publicação congela essa aparência no registro imutável do
+processo.
+
+Recusar deixa o problema visível enquanto ele ainda é corrigível.
+
+## Como resolver
+
+A correção é na **regra**, não no processo seletivo. Localize a obrigatoriedade
+legal apontada na mensagem e corrija o predicado para referenciar um cadastro
+vivo — ou encerre a vigência da regra, se ela não se aplica mais.
+
+A consulta de conformidade legal do processo mostra a mesma reprovação, o que
+permite conferir o efeito da correção antes de tentar publicar de novo.

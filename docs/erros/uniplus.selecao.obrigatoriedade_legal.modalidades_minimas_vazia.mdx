@@ -1,0 +1,41 @@
+---
+title: A exigência de modalidades mínimas não lista nenhuma modalidade
+sidebar_label: Modalidades mínimas sem modalidade
+description: Uma obrigatoriedade legal do tipo modalidades mínimas precisa listar ao menos uma modalidade.
+code: uniplus.selecao.obrigatoriedade_legal.modalidades_minimas_vazia
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos:
+  - UNI-REQ-0018
+rastreio:
+  - label: 'uniplus-api#1356'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1356
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra é do tipo **modalidades mínimas** — exige que o processo ofereça um
+conjunto de modalidades —, mas a lista veio vazia.
+
+## Por que é recusado
+
+Uma lista vazia é satisfeita por qualquer processo, inclusive por um que não
+ofereça modalidade alguma: não há nada a conferir. A cláusula legal ficaria
+aprovada por vacuidade, e o edital publicaria sob uma exigência que na prática
+não existe.
+
+É o oposto do que a regra pretende: quem cadastra modalidades mínimas quer
+justamente impedir a publicação de um processo que não as ofereça.
+
+## Como resolver
+
+Liste ao menos uma modalidade — ou remova a regra, se a exigência não se aplica
+ao tipo de processo.
