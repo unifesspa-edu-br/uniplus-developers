@@ -96,7 +96,7 @@ Aqui a convenção **não** é uniforme, e a diferença importa:
 | Tipo de documento | editável |
 | Tipo de deficiência | editável |
 | Categoria de documento | editável |
-| Condição de atendimento | editável |
+| Condição de atendimento | editável, **exceto** o código `PCD` |
 | Modalidade | **imutável** |
 | Fato do candidato | **imutável** |
 | Tipo de banca | **imutável** |
@@ -111,14 +111,29 @@ Onde é imutável, o motivo é o oposto — são códigos que o sistema referenc
 literalmente em regra, cálculo ou vocabulário fixo, e que por isso não podem
 mudar sob os pés de quem os cita.
 
+A condição de atendimento tem uma exceção dentro de si: o código `PCD` é
+reservado e não pode ser renomeado nem removido depois que passa a existir, por
+ser referenciado literalmente na regra de reserva de vagas para pessoa com
+deficiência. As demais condições continuam com código editável. Modalidade e
+fase canônica também têm códigos protegidos, semeados desde o início.
+
 ## Unicidade
 
-O código é único **entre os registros vivos** de cada cadastro. Um registro
-inativado libera o código para ser reaproveitado por outro — o histórico
-permanece, mas o slot volta a ficar disponível.
+O código é único dentro de cada cadastro, mas **o que acontece com o código de um
+registro desativado varia**:
 
-Tentar salvar um código já em uso por um registro vivo é recusado com conflito,
-e a mensagem aponta o campo.
+- Nos cadastros com exclusão lógica — tipo de documento, tipo de deficiência,
+  categoria de documento, condição de atendimento, modalidade, fase canônica —
+  a unicidade vale **entre os vivos**. Inativar um registro libera o código para
+  ser reaproveitado: o histórico permanece, mas o slot volta a ficar disponível.
+- **Tipo de processo e tipo de etapa nunca são removidos, só desativados**, e a
+  checagem de unicidade considera todos os registros, ativos ou não. Um código já
+  usado por um registro desativado **continua indisponível para sempre**.
+
+Tentar salvar um código já em uso é recusado com conflito, e a mensagem aponta o
+campo. A diferença acima muda o que fazer diante desse conflito: no primeiro
+grupo, reativar ou reaproveitar é possível; no segundo, é preciso escolher outro
+código.
 
 ## Variações por cadastro
 
