@@ -1237,7 +1237,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0013',
     titulo: 'TipoDocumento classificatório',
     enunciado:
-      'O sistema deve manter TipoDocumento apenas como cadastro classificatório do que o documento é, sem validade material, assinatura ou regra de lideranças. Os formatos aceitos e o tamanho máximo são apenas defaults classificatórios, sem efeito material em runtime: a lista de formatos permitidos, os limites por formato e o limite global valem quando congelados na exigência (UNI-REQ-0066), fonte de verdade única do que é validado.',
+      'O sistema deve manter TipoDocumento apenas como cadastro classificatório do que o documento é, sem validade material, assinatura ou regra de lideranças. Os formatos aceitos e o tamanho máximo são apenas defaults classificatórios, sem efeito material em runtime: a lista de formatos permitidos, os limites por formato e o limite global valem quando congelados na exigência (UNI-REQ-0066), fonte de verdade única do que é validado. O código do tipo, porém, não é rótulo de exibição: é ele que identifica o tipo na avaliação de conformidade legal da publicação (UNI-REQ-0018), comparado por igualdade exata — diferença de caixa, acento ou espaço faz a comparação falhar. Código, nome e categoria são congelados no snapshot do processo e entram no cálculo do hash do envelope publicado, de modo que editá-los no cadastro depois não altera o que já foi publicado.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1249,7 +1249,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'TipoDocumento tem apenas código, nome, descrição, categoria e, como defaults classificatórios, formatos aceitos e tamanho máximo; esses defaults não são a regra material de runtime, que vem da exigência congelada (UNI-REQ-0066).',
+      'TipoDocumento tem apenas código, nome, descrição, categoria e, como defaults classificatórios, formatos aceitos e tamanho máximo; esses defaults não são a regra material de runtime, que vem da exigência congelada (UNI-REQ-0066). O código segue a convenção de código de cadastro institucional, é comparado por igualdade exata na conferência de conformidade legal e, junto com nome e categoria, é congelado no snapshot e no hash do envelope de publicação.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',

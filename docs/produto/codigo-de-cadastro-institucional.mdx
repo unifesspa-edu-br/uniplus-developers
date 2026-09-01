@@ -1,0 +1,146 @@
+---
+sidebar_position: 12
+title: Código de cadastro institucional
+description: Como escolher o código de um cadastro institucional do Uni+ — formato canônico, por que ele é fechado, quem o informa, o que acontece ao editá-lo e as variações por cadastro.
+fonte_canonica: "código mergeado no uniplus-api para o formato aceito por cada cadastro; esta página é a síntese da convenção"
+---
+
+# Código de cadastro institucional
+
+Todo cadastro institucional do Uni+ — modalidade, tipo de documento, tipo de
+deficiência, condição de atendimento, categoria de documento, fato do candidato —
+tem um **código**: a identidade curta pela qual o registro é referenciado no
+resto do sistema.
+
+Esta página reúne a convenção que vale para escolher esse código, e o motivo de
+ela existir.
+
+## Formato canônico
+
+```
+^[A-Z][A-Z0-9_]{1,49}$
+```
+
+Em palavras: começa com **letra maiúscula**; segue com letras maiúsculas,
+dígitos e sublinhado; tem **de 2 a 50 caracteres**. Sem acento, sem espaço, sem
+hífen, sem caractere de pontuação.
+
+| Exemplo | Resultado | Por quê |
+|---|---|---|
+| `RG` | aceito | mínimo de dois caracteres |
+| `LAUDO_MEDICO` | aceito | grafia canônica |
+| `DECLARACAO_IRPF_2025` | aceito | dígito depois da inicial |
+| `LEI_12711` | aceito | número da lei faz parte do nome |
+| `01` | **recusado** | começa com dígito |
+| `laudo_medico` | **recusado** | caixa baixa |
+| `LAUDO-MEDICO` | **recusado** | hífen não pertence ao alfabeto aceito |
+| `LAUDO_MÉDICO` | **recusado** | acento — token de domínio não leva acento |
+| `L` | **recusado** | menos de dois caracteres |
+
+### Por que o dígito é proibido só na primeira posição
+
+É a restrição que separa o código semântico da numeração sequencial. Ela
+preserva os usos legítimos de número — `DECLARACAO_IRPF_2025`, onde o número é o
+exercício fiscal; `LEI_12711`, onde é o número da lei — e recusa `01`, `02`,
+`03`, que não identificam nada por si.
+
+A distinção não é estética. Um cadastro preenchido com códigos sequenciais só é
+legível para quem tem a tabela de correspondência à mão; um preenchido com
+códigos semânticos se explica sozinho, inclusive dentro de um edital publicado
+meses depois.
+
+## Por que o formato é fechado
+
+O código não é rótulo de exibição. Em vários cadastros ele é comparado por
+**igualdade exata** — caractere a caractere, sem tolerância a caixa, acento ou
+espaço — nas conferências que decidem se um edital pode ser publicado. E, nos
+cadastros consumidos pelo edital, ele é **congelado** no registro da publicação,
+junto com o nome e a classificação do momento.
+
+Duas consequências que valem para quem cadastra:
+
+1. **Uma diferença invisível quebra a comparação.** Um espaço sobrando no fim do
+   código não aparece na tela e faz a regra deixar de casar.
+2. **O que foi publicado não muda mais.** Corrigir o código no cadastro depois
+   não corrige o edital que já o congelou.
+
+## Quem informa o código
+
+**O operador**, sempre. Não há geração automática no servidor.
+
+A interface **sugere** um código derivado do nome — sem acento, em maiúsculas,
+com sublinhado no lugar dos separadores — e a sugestão permanece **editável**.
+Ela acompanha o nome enquanto está sendo digitado e para no instante em que o
+operador escolhe outro código. Em edição de registro já salvo, nunca escreve.
+
+Quando o nome não produz um código válido — `21 de abril` daria `21_DE_ABRIL`,
+que começa com dígito —, a interface não sugere nada, em vez de propor algo que
+o próprio formulário recusaria.
+
+A escolha de não gerar no servidor é deliberada: a geração automática arrasta
+casos de borda sem resposta boa — colisão depois da normalização, nome que
+reduz a menos de dois caracteres — e desempatar com sufixo numérico gravaria
+identidade sem intenção semântica, que é exatamente o que a convenção evita.
+
+## O código é editável — em parte dos cadastros
+
+Aqui a convenção **não** é uniforme, e a diferença importa:
+
+| Cadastro | Código depois de criado |
+|---|---|
+| Tipo de documento | editável |
+| Tipo de deficiência | editável |
+| Categoria de documento | editável |
+| Condição de atendimento | editável |
+| Modalidade | **imutável** |
+| Fato do candidato | **imutável** |
+| Tipo de banca | **imutável** |
+| Fase canônica | **imutável** |
+
+Onde é editável, isso é possível justamente porque o consumo é por cópia
+congelada: quem já consumiu guarda o valor do momento, não uma referência viva.
+Editar o código afeta o que for configurado dali em diante, nunca o que já foi
+publicado.
+
+Onde é imutável, o motivo é o oposto — são códigos que o sistema referencia
+literalmente em regra, cálculo ou vocabulário fixo, e que por isso não podem
+mudar sob os pés de quem os cita.
+
+## Unicidade
+
+O código é único **entre os registros vivos** de cada cadastro. Um registro
+inativado libera o código para ser reaproveitado por outro — o histórico
+permanece, mas o slot volta a ficar disponível.
+
+Tentar salvar um código já em uso por um registro vivo é recusado com conflito,
+e a mensagem aponta o campo.
+
+## Variações por cadastro
+
+Nem todos os cadastros aplicam o formato canônico. As diferenças abaixo são
+conhecidas e valem enquanto não forem unificadas:
+
+| Cadastro | Formato aceito | Diferença |
+|---|---|---|
+| Condição de atendimento | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
+| Fato do candidato | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
+| Tipo de deficiência | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
+| Categoria de documento | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
+| Tipo de documento | `^[A-Z][A-Z0-9_]{1,49}$` | canônico |
+| Tipo de banca | `^[A-Z_]+$` | **não aceita dígito** em posição alguma |
+| Fase canônica | `^[A-Z_]+$` | **não aceita dígito** em posição alguma |
+| Modalidade | `^[A-Z0-9_]+$` | **aceita dígito como primeiro caractere** |
+
+Ao cadastrar em tipo de banca ou fase canônica, portanto, `LEI_12711` seria
+recusado — nesses dois o código é puramente alfabético. Já a modalidade aceita
+um código começando por dígito, o que o formato canônico não permite.
+
+Quem estiver implementando um cadastro **novo** deve adotar o formato canônico:
+as três variações acima são anteriores à convenção, não alternativas a ela.
+
+## Onde o erro aparece
+
+Um código fora do formato é recusado na escrita, com código de erro próprio por
+cadastro — `uniplus.configuracao.<cadastro>.codigo_formato_invalido` —,
+distinguível do erro de código ausente e do de código já existente. Cada um tem
+página no [catálogo de erros](/erros/).

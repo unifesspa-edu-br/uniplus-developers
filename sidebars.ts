@@ -28,6 +28,7 @@ const sidebars: SidebarsConfig = {
         'produto/casos-de-uso/index',
         'produto/conformidade-legal/index',
         'produto/checklist-publicacao/index',
+        'produto/codigo-de-cadastro-institucional',
         {
           type: 'category',
           label: 'Modelo de negócio',
