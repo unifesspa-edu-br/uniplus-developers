@@ -87,53 +87,31 @@ casos de borda sem resposta boa — colisão depois da normalização, nome que
 reduz a menos de dois caracteres — e desempatar com sufixo numérico gravaria
 identidade sem intenção semântica, que é exatamente o que a convenção evita.
 
-## O código é editável — em parte dos cadastros
+## Editabilidade e unicidade seguem o cadastro, não a convenção
 
-Aqui a convenção **não** é uniforme, e a diferença importa:
+Duas perguntas que a convenção **não** responde sozinha, porque a resposta varia:
 
-| Cadastro | Código depois de criado |
-|---|---|
-| Tipo de documento | editável |
-| Tipo de deficiência | editável |
-| Categoria de documento | editável |
-| Condição de atendimento | editável, **exceto** o código `PCD` |
-| Modalidade | **imutável** |
-| Fato do candidato | **imutável** |
-| Tipo de banca | **imutável** |
-| Fase canônica | **imutável** |
+**O código pode ser alterado depois de criado?** Depende. Tipo de documento,
+tipo de deficiência e categoria de documento aceitam; modalidade não. Há ainda
+códigos individualmente protegidos — a condição de atendimento de código `PCD`
+não pode ser renomeada nem removida, por ser referenciada literalmente na regra
+de reserva de vagas para pessoa com deficiência.
 
-Onde é editável, isso é possível justamente porque o consumo é por cópia
-congelada: quem já consumiu guarda o valor do momento, não uma referência viva.
-Editar o código afeta o que for configurado dali em diante, nunca o que já foi
-publicado.
+Onde a alteração é permitida, ela é segura porque o consumo é por cópia
+congelada: quem já consumiu o código guarda o valor do momento, não uma
+referência viva. Editar afeta o que for configurado dali em diante, nunca o que
+já foi publicado.
 
-Onde é imutável, o motivo é o oposto — são códigos que o sistema referencia
-literalmente em regra, cálculo ou vocabulário fixo, e que por isso não podem
-mudar sob os pés de quem os cita.
+**Um código liberado pode ser reaproveitado?** Também depende. Nos cadastros com
+exclusão lógica, a unicidade vale entre os registros vivos, e um código removido
+volta a ficar disponível para uma nova criação. Já o tipo de processo e o tipo de
+etapa nunca são removidos, só desativados, e a checagem considera todos os
+registros — ali o código fica indisponível para sempre.
 
-A condição de atendimento tem uma exceção dentro de si: o código `PCD` é
-reservado e não pode ser renomeado nem removido depois que passa a existir, por
-ser referenciado literalmente na regra de reserva de vagas para pessoa com
-deficiência. As demais condições continuam com código editável. Modalidade e
-fase canônica também têm códigos protegidos, semeados desde o início.
-
-## Unicidade
-
-O código é único dentro de cada cadastro, mas **o que acontece com o código de um
-registro desativado varia**:
-
-- Nos cadastros com exclusão lógica — tipo de documento, tipo de deficiência,
-  categoria de documento, condição de atendimento, modalidade, fase canônica —
-  a unicidade vale **entre os vivos**. Inativar um registro libera o código para
-  ser reaproveitado: o histórico permanece, mas o slot volta a ficar disponível.
-- **Tipo de processo e tipo de etapa nunca são removidos, só desativados**, e a
-  checagem de unicidade considera todos os registros, ativos ou não. Um código já
-  usado por um registro desativado **continua indisponível para sempre**.
-
-Tentar salvar um código já em uso é recusado com conflito, e a mensagem aponta o
-campo. A diferença acima muda o que fazer diante desse conflito: no primeiro
-grupo, reativar ou reaproveitar é possível; no segundo, é preciso escolher outro
-código.
+Esta página não replica a matriz completa dessas duas respostas: ela envelhece a
+cada cadastro novo, e a fonte por cadastro é a entrada correspondente do
+[catálogo de erros](/erros/) — `codigo_ja_existe` para a unicidade,
+`codigo_protegido_nao_editavel` e equivalentes para a proteção.
 
 ## Variações por cadastro
 
@@ -147,18 +125,22 @@ conhecidas e valem enquanto não forem unificadas:
 | Tipo de deficiência | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
 | Categoria de documento | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
 | Tipo de documento | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
-| Tipo de banca | `^[A-Z_]+$` | até 60 | **não aceita dígito** em posição alguma |
-| Fase canônica | `^[A-Z_]+$` | até 60 | **não aceita dígito** em posição alguma |
+| Tipo de banca | `^[A-Z_]+$` | até 60 | sem dígito, e **conjunto fechado de 4 códigos** |
+| Fase canônica | `^[A-Z_]+$` | até 60 | sem dígito, e **conjunto fechado de 14 códigos** |
 | Modalidade | `^[A-Z0-9_]+$` | até 60 | **aceita dígito como primeiro caractere** |
 | Tipo de processo | — | até 64 | **texto livre**, sem formato fechado |
 | Tipo de etapa | — | até 64 | **texto livre**, sem formato fechado |
 | Curso | — | 1 a 60 | **texto livre**, sem formato fechado |
 
-Duas leituras importantes desta tabela:
+Três leituras importantes desta tabela:
 
 - Nos três formatos legados, **a expressão não expressa o limite de tamanho** —
   ele existe à parte, em 60 caracteres. Um código de 61 caracteres que casa com
   `^[A-Z_]+$` ainda assim é recusado.
+- Em tipo de banca e fase canônica, **o formato não é o único filtro**: esses dois
+  aceitam apenas os códigos de um conjunto fechado, definido pelo vocabulário do
+  domínio. `MINHA_BANCA` respeita a expressão e mesmo assim é recusado. Os
+  conjuntos estão nas páginas `codigo_fora_do_conjunto_canonico` de cada um.
 - Os três últimos cadastros **não têm formato fechado**: aceitam minúscula,
   acento e espaço. Não é permissão, é dívida — são anteriores à convenção.
 
