@@ -1,0 +1,42 @@
+---
+title: A modalidade citada pela regra legal não existe no cadastro
+sidebar_label: Modalidade da regra legal não encontrada
+description: O predicado da obrigatoriedade legal referencia uma modalidade que não está entre as vivas do cadastro.
+code: uniplus.selecao.obrigatoriedade_legal.modalidade_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos:
+  - UNI-REQ-0018
+rastreio:
+  - label: 'uniplus-api#1336'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1336
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O predicado da regra legal cita uma **modalidade** por código, e esse código não
+corresponde a nenhuma modalidade viva no cadastro. Costuma ser erro de digitação
+ou referência a uma modalidade que foi removida.
+
+## Por que é recusado na escrita
+
+Uma regra que cita modalidade inexistente nunca poderia ser satisfeita — nenhuma
+oferta jamais casaria com aquele código. Antes desta validação, a regra era
+aceita e a consequência aparecia lá adiante, na avaliação de conformidade do
+edital, longe de onde o erro foi cometido.
+
+Recusar no cadastro põe a mensagem onde o operador pode agir: no momento em que
+ele escreve o código.
+
+## Como resolver
+
+Confira o código da modalidade no cadastro e corrija o predicado. As modalidades
+vivas estão em `GET /api/configuracao/modalidades`.

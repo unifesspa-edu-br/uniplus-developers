@@ -1,0 +1,42 @@
+---
+title: O predicado da regra legal veio com código em branco
+sidebar_label: Predicado da regra legal com código em branco
+description: O predicado da obrigatoriedade legal precisa informar o código que referencia — ausente ou em branco, ele não é avaliável.
+code: uniplus.selecao.obrigatoriedade_legal.predicado_com_codigo_em_branco
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos:
+  - UNI-REQ-0018
+rastreio:
+  - label: 'uniplus-api#1336'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1336
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos códigos que o predicado da regra referencia — modalidade, tipo de
+documento ou tipo de etapa — veio ausente, vazio ou só com espaços.
+
+## Por que importa
+
+Código em branco não é o mesmo que "qualquer um": a comparação é por igualdade
+exata, então o vazio simplesmente nunca casa. A regra ficaria gravada com
+aparência de válida e sem efeito prático — pior que uma regra ausente, porque
+dá a impressão de que a exigência legal está coberta.
+
+Vale também para o espaço supérfluo: um código gravado com espaço nas pontas
+seria aparado na conferência e mesmo assim não casaria na avaliação, que compara
+o texto exato.
+
+## Como resolver
+
+Informe o código completo, sem espaços nas pontas, exatamente como ele consta no
+cadastro correspondente.
