@@ -66,9 +66,13 @@ Quem cobra também declara **quando** o candidato pode pedir a isenção: a jane
 Antes de publicar, o administrador revê o resumo da configuração e as **pendências de conformidade**. Há **duas conformidades** que precisam estar satisfeitas:
 
 - **Conformidade estrutural** — as dimensões obrigatórias estão completas e coerentes (por exemplo, um critério de desempate não pode referenciar uma etapa que não existe; uma exigência que determina resultado precisa de base legal).
-- **Conformidade legal** — as regras de obrigatoriedade legal aplicáveis ao processo estão atendidas, avaliadas na data de referência do certame (o início do período de inscrição).
+- **Conformidade legal** — as regras de obrigatoriedade legal aplicáveis ao processo estão atendidas, avaliadas na data de referência do certame: o dia em que o período de inscrição começa, no fuso institucional.
 
-Publicar exige ainda que a localidade esteja declarada, e que exista calendário vigente e algoritmo de contagem declarado sempre que alguma contagem distinga dia útil de não útil (`UNI-REQ-0111`, `UNI-REQ-0116`) — faltando qualquer um, a recusa é nomeada e específica. O fuso institucional é aplicado e congelado na mesma operação. Enquanto houver qualquer pendência, a **publicação fica bloqueada**, e as pendências são listadas de forma acionável. Para publicar, o administrador anexa o **documento oficial do edital** (o PDF) e informa os dados do ato (número do edital, período de inscrição). A publicação cria a **cópia oficial imutável** da configuração — o snapshot congelado (`UNI-REQ-0019`, `UNI-REQ-0020`, `RN08`).
+Publicar exige ainda que a localidade esteja declarada, e que exista calendário vigente e algoritmo de contagem declarado sempre que alguma contagem distinga dia útil de não útil (`UNI-REQ-0111`, `UNI-REQ-0116`) — faltando qualquer um, a recusa é nomeada e específica. O fuso institucional é aplicado e congelado na mesma operação. Enquanto houver qualquer pendência, a **publicação fica bloqueada**, e as pendências são listadas de forma acionável. Para publicar, o administrador anexa o **documento oficial do edital** (o PDF) e informa os dados do ato (número do edital).
+
+O **período de inscrição não é informado** quando o cronograma tem fase que coleta inscrição: ele é o prazo declarado na janela dessa fase, e o Edital publica exatamente aquilo. Informá-lo aqui é recusado — aceitar um valor e descartá-lo em silêncio esconderia o desencontro entre o que o ato diz e o que o cronograma marca. Quando o certame **não** coleta inscrição pelo sistema — candidatos vindos de importação externa —, não há janela de onde derivar, e aí o período continua sendo informado no ato.
+
+A publicação cria a **cópia oficial imutável** da configuração — o snapshot congelado (`UNI-REQ-0019`, `UNI-REQ-0020`, `RN08`).
 
 > **Por que congelar.** A cópia congelada é o documento de maior peso jurídico do processo: é ela que sustenta o resultado do certame. Dois candidatos com as mesmas respostas obtêm o mesmo resultado, e qualquer reavaliação reflete exatamente a configuração vigente à época da publicação — mesmo que a configuração viva mude depois.
 
