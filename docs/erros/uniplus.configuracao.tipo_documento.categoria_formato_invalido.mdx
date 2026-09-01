@@ -1,0 +1,39 @@
+---
+title: A categoria do tipo de documento está em formato inválido
+sidebar_label: Categoria do tipo de documento em formato inválido
+description: A categoria precisa ser um código no formato de cadastro — letra maiúscula inicial, depois maiúsculas, dígitos e sublinhado, de 2 a 50 caracteres.
+code: uniplus.configuracao.tipo_documento.categoria_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos:
+  - UNI-REQ-0013
+rastreio:
+  - label: 'uniplus-api#1343'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1343
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **categoria** informada não tem a forma de um código de cadastro —
+`^[A-Z][A-Z0-9_]{1,49}$`. São recusados, entre outros, o valor em caixa baixa
+(`renda`), o que traz acento (`RAÇA_ETNIA`), o que usa hífen (`RACA-ETNIA`) e o
+que começa por dígito.
+
+Este erro é sobre a **forma** do valor, não sobre o conjunto: mesmo bem escrito,
+um código sem categoria correspondente no cadastro é recusado por
+[categoria não encontrada](./uniplus.configuracao.tipo_documento.categoria_nao_encontrada).
+A distinção existe para que o operador saiba se errou a grafia ou se a categoria
+simplesmente não existe.
+
+## Como resolver
+
+Corrija a grafia — maiúsculas, dígitos e sublinhado, começando por letra — e
+confirme o código no catálogo de categorias.

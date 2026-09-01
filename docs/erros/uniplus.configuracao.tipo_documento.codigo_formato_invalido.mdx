@@ -1,0 +1,60 @@
+---
+title: O código do tipo de documento está em formato inválido
+sidebar_label: Código do tipo de documento em formato inválido
+description: O código do tipo de documento precisa iniciar com letra maiúscula e conter apenas letras maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres.
+code: uniplus.configuracao.tipo_documento.codigo_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos:
+  - UNI-REQ-0013
+rastreio:
+  - label: 'uniplus-api#1337'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1337
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** informado não respeita o formato fechado —
+`^[A-Z][A-Z0-9_]{1,49}$`: inicia com letra maiúscula, segue com letras
+maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres no total (ex.: `RG`,
+`LAUDO_MEDICO`, `DECLARACAO_IRPF_2025`).
+
+São recusados, entre outros, o código em caixa baixa (`laudo_medico`), o que
+começa por dígito (`01`), o que traz caractere acentuado (`LAUDO_MÉDICO`), o
+que usa hífen no lugar do sublinhado (`LAUDO-MEDICO`) e o de um único
+caractere (`L`).
+
+O dígito é aceito em qualquer posição **menos a primeira**. É essa restrição
+que separa o código semântico da numeração sequencial: preserva usos legítimos
+como `DECLARACAO_IRPF_2025`, onde o número é o exercício fiscal, e `LEI_12711`,
+onde é o número da lei — e recusa `01`, que não identifica nada por si.
+
+## Por que o formato é fechado
+
+O código do tipo de documento não é rótulo de exibição. É a chave de igualdade
+com que o sistema decide se as exigências documentais de um edital satisfazem a
+regra legal aplicável, e é congelado no registro imutável da publicação. Um
+edital publicado guarda o código tal como estava no momento em que foi
+congelado, de modo que corrigir o cadastro depois não corrige o edital já
+publicado.
+
+Daí a exigência de um código que se explique por leitura: `LAUDO_MEDICO`
+identifica o documento em qualquer contexto; `01` só faz sentido para quem tem
+a tabela de correspondência à mão.
+
+## Como resolver
+
+Informe um código que comece com letra maiúscula e contenha apenas letras
+maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres — e que nomeie o
+documento, não a sua posição numa lista.
+
+No cadastro pela interface, o código é sugerido a partir do nome e permanece
+editável antes de salvar.

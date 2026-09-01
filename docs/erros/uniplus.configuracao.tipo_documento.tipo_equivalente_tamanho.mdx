@@ -1,7 +1,7 @@
 ---
 title: O tipo equivalente excede o tamanho máximo
 sidebar_label: Tamanho do tipo equivalente
-description: O código do tipo equivalente, quando informado, tem no máximo 60 caracteres.
+description: O código do tipo equivalente, quando informado, tem no máximo 50 caracteres.
 code: uniplus.configuracao.tipo_documento.tipo_equivalente_tamanho
 http_status: 422
 situacao: publicado
@@ -13,6 +13,8 @@ requisitos: []
 rastreio:
   - label: 'uniplus-api#591'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/591
+  - label: 'uniplus-api#1337'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1337
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -21,8 +23,9 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O **tipo equivalente** informado excede o tamanho máximo aceito: 60
-caracteres — o mesmo limite do código de um tipo de documento.
+O **tipo equivalente** informado excede o tamanho máximo aceito: 50
+caracteres — o mesmo limite do código de um tipo de documento, que é o que ele
+guarda.
 
 Tipo equivalente é um rótulo classificatório (por exemplo, RG ≡ CIN), não
 um relacionamento material: guarda o código de outro tipo, sem chave
@@ -33,4 +36,4 @@ sem alvo vivo.
 
 ## Como resolver
 
-Reduza o código do tipo equivalente para até 60 caracteres.
+Reduza o código do tipo equivalente para até 50 caracteres.
