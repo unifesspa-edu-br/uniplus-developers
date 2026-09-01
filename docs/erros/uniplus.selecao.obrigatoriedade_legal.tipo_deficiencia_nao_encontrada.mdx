@@ -47,5 +47,8 @@ confere.
 Confira o código do tipo de deficiência no cadastro e corrija o predicado. Os
 tipos vivos estão em `GET /api/configuracao/tipos-deficiencia`.
 
-A comparação é exata: código com espaço supérfluo nas pontas ou escrito em forma
-Unicode decomposta cai neste erro mesmo parecendo idêntico ao cadastrado.
+Diferença de espaço nas pontas ou de forma Unicode **não** é a causa deste erro:
+o código é aparado e normalizado antes da busca, e gravado já normalizado —
+justamente para que a avaliação de conformidade, que compara de forma exata, não
+deixe de casar depois. Se o erro apareceu, o código realmente não está entre os
+tipos vivos.
