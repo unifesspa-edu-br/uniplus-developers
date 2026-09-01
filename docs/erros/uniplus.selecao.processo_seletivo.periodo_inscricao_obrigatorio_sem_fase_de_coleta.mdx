@@ -1,0 +1,44 @@
+---
+title: O período de inscrição precisa ser informado quando não há fase que o colete
+sidebar_label: Período obrigatório sem fase de coleta
+description: Sem fase que colete inscrição no cronograma, não há janela de onde projetar o prazo — ele vem do ato.
+code: uniplus.selecao.processo_seletivo.periodo_inscricao_obrigatorio_sem_fase_de_coleta
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0106
+rastreio:
+  - label: 'uniplus-api#1350'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1350
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo não tem fase de cronograma que colete inscrição, e o ato não informou o
+período. Não há de onde tirá-lo: sem fase de coleta, não existe janela para
+projetar.
+
+É o caso do certame cujos candidatos vêm de importação externa — o sistema não
+coleta a inscrição, mas o Edital ainda declara o prazo em que ela ocorre.
+
+## Como resolver
+
+Informe o período de inscrição no ato de publicação.
+
+Se o certame **deveria** coletar inscrição pelo sistema, o que falta não é o
+campo: é a fase no cronograma. Nesse caso, acrescente ao cronograma a fase que
+coleta inscrição, com sua janela, e publique sem informar o período — ele passa a
+vir de lá.
+
+Processo cuja origem de candidatos é inscrição própria e que não tem fase de
+coleta é recusado antes desta verificação, por um gate próprio do cronograma —
+nesse caso a mensagem aponta a falta da fase, não a do período.

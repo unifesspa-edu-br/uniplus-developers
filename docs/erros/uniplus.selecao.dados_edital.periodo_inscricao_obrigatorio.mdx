@@ -1,0 +1,46 @@
+---
+title: O período de inscrição exige início e fim definidos
+sidebar_label: Período de inscrição obrigatório
+description: Um período com instante zerado restauraria um certame cujo prazo de inscrição é impossível.
+code: uniplus.selecao.dados_edital.periodo_inscricao_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Reidratação de uma versão publicada
+requisitos:
+  - UNI-REQ-0106
+rastreio:
+  - label: 'uniplus-api#1350'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1350
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O período de inscrição chegou com um dos extremos **zerado** — `0001-01-01`, que é
+como um instante ausente se materializa.
+
+A recusa não é redundante com a de campo obrigatório. Um período zerado satisfaz a
+checagem de que o fim não antecede o início, atravessaria a publicação e ficaria
+congelado numa versão imutável, restaurando depois um certame cujo prazo de
+inscrição é impossível.
+
+Por isso a checagem vive no ponto por onde passam os dois caminhos que produzem um
+período: a publicação, que o projeta da fase do cronograma, e a decodificação de
+uma versão já publicada.
+
+## Como resolver
+
+Confira a janela da fase que coleta inscrição — é dela que o período é projetado
+quando o certame coleta inscrição pelo sistema.
+
+Se o erro apareceu ao reidratar uma versão publicada, o envelope daquela versão
+está com o período zerado, e o caso é de investigação: nenhum caminho de
+publicação atual produz esse estado.
