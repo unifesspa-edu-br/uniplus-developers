@@ -1,0 +1,46 @@
+---
+title: A fase que coleta inscrição está sem início e fim definidos
+sidebar_label: Fase de inscrição sem janela
+description: É da janela dessa fase que o Edital tira o prazo de inscrição, então ela precisa estar datada para publicar.
+code: uniplus.selecao.processo_seletivo.fase_que_coleta_inscricao_sem_janela
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0106
+rastreio:
+  - label: 'uniplus-api#1350'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1350
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cronograma tem uma fase que coleta inscrição, e ela está sem início, sem fim, ou
+sem os dois. É dessa janela que o Edital declara o prazo de inscrição, e um Edital
+que admite inscrição sem dizer até quando não se sustenta.
+
+A regra vale **mesmo quando a origem da data é delegada**. Nas demais fases, a
+data pode ficar em aberto: o setor responsável não congela data que não controla,
+e é legítimo publicar um cronograma cujas etapas seguem calendário de terceiro.
+A fase que coleta inscrição é a exceção, junto da que coleta solicitação de
+isenção — são as que abrem prazo para o candidato agir.
+
+## Como resolver
+
+Informe início e fim da janela dessa fase no cronograma, e publique.
+
+O prazo é declarado com **data e hora completas, até o segundo**. Isso não é
+preciosismo: o último instante de um dia é `23:59:59`, e uma fronteira em minuto
+encurta o prazo em 59 segundos. Em janela contada em dias corridos, o candidato
+que enviar no último minuto do último dia fica de fora.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_fase_que_coleta_inscricao_sem_janela`.
