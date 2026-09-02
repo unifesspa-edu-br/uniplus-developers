@@ -1,0 +1,44 @@
+---
+title: A solicitação de isenção não termina antes das inscrições
+sidebar_label: Isenção não fecha antes da inscrição
+description: Quem tem o pedido indeferido ainda precisa de prazo para se inscrever pagando a taxa.
+code: uniplus.selecao.processo_seletivo.janela_de_isencao_nao_termina_antes_da_inscricao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0106
+rastreio:
+  - label: 'uniplus-api#1349'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1349
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de solicitação de isenção termina junto com as inscrições, ou depois
+delas.
+
+O prazo precisa fechar **antes** por uma razão prática: quem tem o pedido
+indeferido continua podendo se inscrever, pagando a taxa. Se a isenção fechasse no
+mesmo instante que as inscrições, o candidato indeferido descobriria o resultado
+com as inscrições já encerradas — sem tempo de pagar, e sem tempo de recorrer.
+
+Terminar **junto** é recusado tanto quanto terminar depois: no mesmo instante, não
+sobra prazo nenhum.
+
+## Como resolver
+
+Antecipe o término da fase de solicitação de isenção, deixando margem suficiente
+para a análise do pedido, o recurso contra o indeferimento e o pagamento da taxa
+por quem for indeferido.
+
+Quanto de margem é decisão de quem monta o cronograma — o sistema exige apenas que
+haja alguma.
