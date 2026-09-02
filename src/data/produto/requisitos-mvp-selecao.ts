@@ -123,6 +123,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Tech Lead',
   },
   {
+    requisito_id: 'UNI-REQ-0138',
+    titulo: 'Vocabulário fechado de fases canônicas e tipos de banca',
+    enunciado:
+      'O sistema deve manter, no módulo Configuração, dois vocabulários fechados e correlatos do ciclo do processo seletivo: as fases canônicas do seu ciclo de vida e os tipos de banca que nele atuam. Cada fase e cada banca referencia um código do respectivo domínio fechado, validado em guarda de domínio, na aplicação e em CHECK constraint de banco; os demais atributos — nome, descrição e base legal em ambos, e em fase canônica também dono típico, origem da data, produção e definitividade de resultado, coleta de inscrição, agrupamento de etapas e permissão de complementação documental — permanecem administráveis via CRUD. A fase típica de uma banca é informação orientativa em texto livre, sem vínculo estrutural (chave estrangeira) com o cadastro de fases.',
+    grupo: 'dados',
+    tipo: 'requisito_dados',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0006',
+    modulo: 'Configuração; Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O conjunto de fases canônicas contém dezesseis códigos, em ordem cronológica aproximada do certame: INSCRICAO, SOLICITACAO_ISENCAO, HOMOLOGACAO, ENSALAMENTO, AVALIACAO, CLASSIFICACAO, RESULTADO_PRELIMINAR, RECURSOS, RESULTADO_FINAL, HETEROIDENTIFICACAO, AVALIACAO_BIOPSICOSSOCIAL, HABILITACAO, MATRICULA, HOMOLOGACAO_RESULTADO_FINAL, LISTA_ESPERA e CHAMADA. O conjunto de tipos de banca contém seis códigos: BANCA_ANALISE_DOCUMENTAL, BANCA_ENTREVISTA, BANCA_CORRECAO_REDACOES, BANCA_ANALISE_RECURSOS, BANCA_HETEROIDENTIFICACAO e BANCA_BIOPSICOSSOCIAL. A fase HETEROIDENTIFICACAO é a fase típica orientativa da banca BANCA_HETEROIDENTIFICACAO; a fase AVALIACAO_BIOPSICOSSOCIAL é a fase típica orientativa da banca BANCA_BIOPSICOSSOCIAL. A fase AVALIACAO_BIOPSICOSSOCIAL tem dono típico CEPS, origem de data própria, produz resultado não definitivo, não coleta inscrição, não agrupa etapas, não permite complementação documental, e base legal Lei nº 13.146/2015 (Estatuto da Pessoa com Deficiência), art. 2º §1º (avaliação biopsicossocial por equipe multiprofissional e interdisciplinar) e art. 30 (atendimento em processo seletivo para ingresso no ensino superior), combinada com a Lei nº 12.711/2012 e a Lei nº 13.409/2016 (reserva de vagas para pessoas com deficiência). Nenhuma precedência obrigatória é definida para a nova fase por este requisito: ela fica disponível para configuração do grafo de precedências sem arestas predefinidas, no mesmo padrão do restante do vocabulário. Nenhum vínculo obrigatório (chave estrangeira) é criado entre tipo de banca e fase canônica.',
+    verificacao:
+      'Testes de domínio (TipoBancaCatalogo.EhCanonico, FaseCanonicaCatalogo.EhCanonico) para os dezesseis e seis códigos; testes das CHECK constraints de tipo_banca, fase_canonica e precedencia_fase; teste de migration da nova fase em base vazia e em base já semeada com as quinze fases anteriores; teste do contrato OpenAPI publicado.',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend',
+  },
+  {
     requisito_id: 'UNI-REQ-0011',
     titulo: 'Modalidade de concorrência',
     enunciado:
