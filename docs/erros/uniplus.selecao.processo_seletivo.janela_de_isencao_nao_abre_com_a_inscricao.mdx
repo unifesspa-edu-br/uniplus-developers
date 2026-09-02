@@ -1,0 +1,42 @@
+---
+title: A janela de isenção não abre junto com as inscrições
+sidebar_label: Isenção não abre com a inscrição
+description: A solicitação de isenção abre no mesmo instante em que abrem as inscrições — o início não é declarado à parte.
+code: uniplus.selecao.processo_seletivo.janela_de_isencao_nao_abre_com_a_inscricao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0106
+rastreio:
+  - label: 'uniplus-api#1349'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1349
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fase que abre a solicitação de isenção começa em instante diferente do da fase
+que coleta inscrição.
+
+O prazo de isenção não é uma janela independente: ele existe **dentro** do período
+de inscrição, e abre com ele. Um candidato que precisa da isenção para se
+inscrever não pode encontrar as inscrições abertas e o pedido de isenção ainda
+fechado — nesse intervalo, quem não pode pagar simplesmente não tem por onde
+começar.
+
+## Como resolver
+
+Ajuste o início da fase de solicitação de isenção para o mesmo instante em que a
+fase de inscrição abre.
+
+O início não é declarado separadamente por escolha: ele **deriva** da abertura das
+inscrições. Se as duas datas divergem, é a de isenção que está errada — mudar a
+abertura das inscrições para casar com ela deslocaria o certame inteiro.

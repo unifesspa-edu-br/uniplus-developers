@@ -1,0 +1,49 @@
+---
+title: A janela de isenção tem menos de cinco dias corridos
+sidebar_label: Isenção com menos de cinco dias
+description: O prazo mínimo é de cinco dias corridos, contados do dia seguinte à abertura, e não passa pelo calendário de dias úteis.
+code: uniplus.selecao.processo_seletivo.janela_de_isencao_menor_que_cinco_dias
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0106
+rastreio:
+  - label: 'uniplus-api#1349'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1349
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de solicitação de isenção dura menos de cinco dias corridos.
+
+Reunir o que a isenção exige leva tempo: o candidato precisa localizar o número do
+Cadastro Único, ou o comprovante de doação de medula óssea, e nem sempre tem esses
+documentos à mão. Um prazo curto exclui na prática quem a isenção deveria alcançar.
+
+## Como resolver
+
+Estenda o término da fase até completar ao menos cinco dias.
+
+**A contagem tem duas particularidades**, e ambas mudam a data final:
+
+- o **dia da abertura é excluído**. Abrindo em 2 de março, o primeiro dia é 3 de
+  março e o quinto é 7 de março;
+- o quinto dia **só se completa no último instante do dia**, no fuso institucional
+  — encerrar às 18h do quinto dia é encerrar antes da hora.
+
+A contagem é em **dias corridos**: não consulta o calendário de dias úteis nem o
+algoritmo de contagem declarado pelo processo. Uma janela de cinco dias que
+atravessa feriado ou fim de semana é válida.
+
+Essa é a diferença que mais confunde, porque a mesma fase tem as duas contagens: o
+**recurso** contra o indeferimento conta em dias úteis e segue a convenção do
+processo; a **janela de solicitação**, não.
