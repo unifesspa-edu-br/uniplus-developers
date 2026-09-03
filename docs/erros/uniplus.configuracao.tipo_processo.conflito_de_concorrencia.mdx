@@ -1,0 +1,41 @@
+---
+title: O tipo de processo seletivo foi alterado concorrentemente
+sidebar_label: Tipo de processo alterado concorrentemente
+description: Duas alterações simultâneas sobre o mesmo tipo de processo seletivo foram detectadas — a que confirmou por último é recusada em vez de sobrescrever a outra em silêncio.
+code: uniplus.configuracao.tipo_processo.conflito_de_concorrencia
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Alteração de um tipo de processo seletivo
+  - Desativação de um tipo de processo seletivo
+  - Reativação de um tipo de processo seletivo
+requisitos:
+  - UNI-REQ-0098
+rastreio:
+  - label: 'uniplus-api#1415'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1415
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas escritas sobre o **mesmo** tipo de processo seletivo aconteceram ao
+mesmo tempo — por exemplo, uma reativação e uma edição de nome, ou duas
+reativações disparadas em paralelo. As duas leram o mesmo estado, e a que
+tentou confirmar por último encontrou o registro já modificado.
+
+A recusa é deliberada. Sem ela, a segunda escrita sobrescreveria a primeira
+sem que ninguém percebesse, e uma reativação simultânea a outra responderia
+sucesso duas vezes, contrariando a regra de que reativar um tipo já ativo é
+recusado.
+
+## Como resolver
+
+Releia o tipo de processo seletivo, confira se a alteração que você pretendia
+ainda faz sentido diante do estado atual e repita a operação. Não é um erro
+permanente: nada foi gravado pela requisição recusada, e uma nova tentativa
+sobre o estado atualizado é aceita normalmente.

@@ -412,6 +412,8 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.configuracao.tipo_processo.descricao_tamanho',
         'erros/uniplus.configuracao.tipo_processo.descricao_com_caractere_nulo',
         'erros/uniplus.configuracao.tipo_processo.ja_desativado',
+        'erros/uniplus.configuracao.tipo_processo.ja_ativo',
+        'erros/uniplus.configuracao.tipo_processo.conflito_de_concorrencia',
         'erros/uniplus.configuracao.tipo_processo.nao_encontrado',
         'erros/uniplus.configuracao.tipo_documento.codigo_obrigatorio',
         'erros/uniplus.configuracao.tipo_documento.codigo_formato_invalido',

@@ -1,0 +1,37 @@
+---
+title: O tipo de processo seletivo já está ativo
+sidebar_label: Tipo de processo já ativo
+description: Reativar um tipo de processo seletivo que já está ativo é recusado — a operação é auditada, e aceitar o que não muda estado registraria uma reativação que não houve.
+code: uniplus.configuracao.tipo_processo.ja_ativo
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Reativação de um tipo de processo seletivo
+requisitos:
+  - UNI-REQ-0098
+rastreio:
+  - label: 'uniplus-api#1415'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1415
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação tentou reativar um tipo de processo seletivo que **já está ativo**.
+
+A reativação existe para devolver à circulação um tipo que havia sido
+desativado. Ela é auditada — registra quem a realizou e quando —, então
+aceitar em silêncio uma chamada que não muda estado algum gravaria uma
+reativação que não aconteceu. Por isso a repetição é recusada, em vez de
+tratada como inofensiva.
+
+## Como resolver
+
+Confira a situação do tipo antes de reativá-lo. A visão de manutenção do
+cadastro, restrita a quem administra a Plataforma, mostra tanto os tipos
+ativos quanto os desativados — é ali que se identifica qual tipo de fato
+precisa voltar. Um tipo já ativo não exige ação alguma.
