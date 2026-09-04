@@ -275,6 +275,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Equipe frontend',
   },
   {
+    requisito_id: 'UNI-REQ-0140',
+    titulo: 'Rol de modalidades por regra de distribuição de vagas',
+    enunciado:
+      'A regra de distribuição de vagas de uma oferta determina o conjunto de modalidades que ela admite — não é uma lista que o operador filtra livremente, é a regra que fixa o conjunto inteiro. Uma regra de `tipo=regra_distribuicao_vagas` declara, no `esquema_args`, a chave `modalidades_admitidas` como o rol fechado que reconhece; ausência da chave, ou valor nulo, é rol aberto, e nada é restringido por ela. Rol fechado exige igualdade exata com as modalidades selecionadas na oferta — não apenas ausência de excedente: falta uma modalidade do rol é recusada do mesmo jeito que sobra uma modalidade fora dele. O rol viaja no `esquema_args` porque já participa do hash de conteúdo-endereçável da definição da regra (`RegraCatalogo`); a camada de aplicação o projeta também como campo tipado (`modalidadesAdmitidas`, nulo ou lista) no DTO de leitura do catálogo — leitura derivada, que não altera o hash.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0134',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Cinco regras de `tipo=regra_distribuicao_vagas`, todas em v1, com os rols: `DISTRIB-VAGAS-LEI-12711` (ramo federal, art. 10) admite as 8 sub-reservas mais AC — 9 códigos; `DISTRIB-VAGAS-LEI-12711-COM-AC-PCD` (ramo federal) admite as mesmas 9 mais `AC_PCD` — 10 códigos; `DISTRIB-VAGAS-COM-PCD-PURO` (quadro fixo) admite `AC` e `PCD_PURO`; `DISTRIB-VAGAS-PSIQ` (quadro fixo, certame exclusivo de vagas por acréscimo) admite `AC_I` e `AC_Q`; `DISTRIB-VAGAS-INSTITUCIONAL` (quadro fixo) não declara `modalidades_admitidas` — rol aberto, composição livre entre as modalidades do catálogo. Não existe variação que combine `PCD_PURO` com qualquer uma das 8 cotas da Lei ou com `AC_PCD` — UNI-REQ-0090 já declara essa exclusividade mútua, e nenhum rol fechado a contradiz. `DISTRIB-VAGAS-COM-PCD-PURO` generaliza o antigo `DISTRIB-VAGAS-EDU-CAMPO`: o rol já era `AC` + `PCD_PURO`, só o nome amarrava ao PSE Educação do Campo, enquanto UNI-REQ-0085 descreve `PCD_PURO` como a reserva de qualquer processo que não oferta as cotas federais — nenhuma página do portal referencia `DISTRIB-VAGAS-EDU-CAMPO` como regra vigente. Em `DISTRIB-VAGAS-COM-PCD-PURO`, `AC` está no rol por construção, não por escolha do operador: `PCD_PURO` retira de `AC` e remaneja de volta para `AC`, então a modalidade base é inerente à fórmula, não uma opção que poderia faltar. `AC_PCD` retira da ampla concorrência e não acresce ao total publicado — ao contrário das suplementares institucionais `AC_I`/`AC_Q` (UNI-REQ-0096), que somam ao total; é essa distinção de composição de vagas, não o rol em si, que decide se a modalidade consome o total da oferta. A criação e a reidratação de uma configuração de distribuição de vagas recusam tanto modalidade fora do rol fechado quanto modalidade do rol ausente entre as selecionadas.',
+    verificacao:
+      'Testes de domínio da factory de ConfiguracaoDistribuicaoVagas cobrindo rol fechado com excedente e com falta, para cada uma das cinco regras; teste de domínio da partição EhRamoFederal/EhQuadroFixo sobre RegraDistribuicaoVagasCodigo.Todos; teste de integração da reidratação de envelope congelado com rol incompleto; teste de contrato do campo `modalidadesAdmitidas` no DTO de leitura do catálogo.',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
     requisito_id: 'UNI-REQ-0017',
     titulo: 'Formulário configurável de inscrição',
     enunciado:

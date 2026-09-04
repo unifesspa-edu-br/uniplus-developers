@@ -128,6 +128,8 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.configuracao_distribuicao_vagas.modalidade_nao_encontrada',
         'erros/uniplus.selecao.configuracao_distribuicao_vagas.referencia_demografica_obrigatoria',
         'erros/uniplus.selecao.configuracao_distribuicao_vagas.modalidades_federais_incompletas',
+        'erros/uniplus.selecao.configuracao_distribuicao_vagas.modalidade_nao_admitida_pela_regra',
+        'erros/uniplus.selecao.configuracao_distribuicao_vagas.modalidade_do_rol_ausente',
         'erros/uniplus.selecao.configuracao_distribuicao_vagas.referencia_demografica_indevida',
         'erros/uniplus.selecao.configuracao_distribuicao_vagas.regra_ajuste_obrigatoria',
         'erros/uniplus.selecao.configuracao_distribuicao_vagas.retirada_federal_deve_ser_de_ampla_concorrencia',
