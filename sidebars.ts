@@ -420,7 +420,6 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.configuracao.fase_canonica.base_legal_tamanho',
         'erros/uniplus.configuracao.fase_canonica.origem_data_obrigatoria',
         'erros/uniplus.configuracao.fase_canonica.origem_data_invalida',
-        'erros/uniplus.configuracao.fase_canonica.resultado_definitivo_sem_produzir_resultado',
         'erros/uniplus.configuracao.fase_canonica.nao_encontrada',
         'erros/uniplus.configuracao.tipo_processo.codigo_obrigatorio',
         'erros/uniplus.configuracao.tipo_processo.codigo_tamanho',
