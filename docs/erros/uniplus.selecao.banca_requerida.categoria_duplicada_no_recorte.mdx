@@ -1,0 +1,52 @@
+---
+title: A banca declara a mesma categoria de documento mais de uma vez
+sidebar_label: Categoria repetida no recorte
+description: Cada categoria aparece uma única vez no recorte de competência de uma banca.
+code: uniplus.selecao.banca_requerida.categoria_duplicada_no_recorte
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1428'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1428
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma banca requerida pela fase cita a mesma categoria de documento duas ou mais
+vezes no recorte de competência.
+
+O recorte é o conjunto do que aquela banca julga. Repetir uma categoria não
+acrescenta competência nenhuma — e deixa a declaração ambígua sobre ter sido engano
+de digitação ou intenção de dizer outra coisa. Como o recorte vai congelado na
+configuração publicada e responde por parecer e recurso do certame inteiro, a
+ambiguidade é recusada na origem em vez de resolvida por conta própria.
+
+Esta recusa vale para qualquer banca da fase, tenha ela outras bancas do mesmo tipo
+ou não.
+
+## Como resolver
+
+Remova a repetição — a recusa nomeia o código da banca cujo recorte a contém.
+
+Se a intenção era dar à banca competência sobre mais de uma matéria, declare
+categorias **distintas**, uma para cada. Se era corrigir a categoria declarada,
+troque-a em vez de acrescentar a nova ao lado da anterior.
+
+Havendo outra banca do mesmo tipo na fase, os dois recortes ainda precisam ser
+[diferentes entre si](./uniplus.selecao.banca_requerida.recorte_de_competencia_duplicado.mdx)
+depois da correção.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_recorte_de_competencia_das_bancas`.
