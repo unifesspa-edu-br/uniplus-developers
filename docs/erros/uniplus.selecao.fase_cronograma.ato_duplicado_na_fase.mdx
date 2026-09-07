@@ -1,0 +1,42 @@
+---
+title: A fase declara o mesmo tipo de ato mais de uma vez
+sidebar_label: Ato repetido na fase
+description: Cada tipo de ato aparece uma única vez entre os produtos que a fase publica.
+code: uniplus.selecao.fase_cronograma.ato_duplicado_na_fase
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma fase do cronograma declara, entre os produtos que publica, o mesmo tipo de ato
+duas ou mais vezes.
+
+O tipo de ato é o que identifica cada publicação dentro da fase. Declarado duas
+vezes, a fase passa a ter duas intenções sobre a mesma publicação — e podem ser
+intenções divergentes, uma dando papel preliminar e a outra papel definitivo ao
+mesmo ato. Não há como eleger uma das duas sem inventar critério.
+
+Publicar o preliminar e o definitivo da mesma matéria **não** cai aqui: são tipos
+de ato distintos no catálogo, com códigos distintos, e a fase pode declarar os dois.
+
+## Como resolver
+
+Remova a declaração repetida. A mensagem da recusa nomeia o código do ato que
+aparece mais de uma vez na fase.
+
+Se a intenção era anunciar duas publicações diferentes da fase — um gabarito e um
+resultado, por exemplo —, declare o tipo de ato de cada uma. Se era anunciar o
+preliminar e o definitivo da mesma matéria, declare os dois tipos de ato que o
+catálogo tem para isso, cada um com o seu papel.

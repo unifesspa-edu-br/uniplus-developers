@@ -1,0 +1,45 @@
+---
+title: A fase declara a si mesma como concluinte do próprio ciclo
+sidebar_label: Fase declarada concluinte de si mesma
+description: A fase concluinte é sempre outra; para concluir o próprio ciclo, a fase publica o definitivo.
+code: uniplus.selecao.processo_seletivo.conclusao_declarada_em_fase_que_se_conclui
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma fase do cronograma aponta o próprio código no campo da fase concluinte.
+
+A declaração de fase concluinte existe para descrever uma travessia: o ciclo abre
+numa fase e fecha em **outra**, posterior. Apontar para si mesma não descreve
+travessia nenhuma. Ou a fase conclui a própria matéria — e então publica o
+resultado definitivo, sem nada a declarar —, ou não conclui, e quem conclui é outra
+fase do cronograma.
+
+## Como resolver
+
+Dois caminhos, conforme o desenho do certame:
+
+- **A fase publica o preliminar e o definitivo da mesma matéria.** Apague a
+  declaração de fase concluinte: a conclusão já está nos produtos que ela publica.
+- **Quem conclui é outra fase**, tipicamente a que vem depois do prazo de recurso.
+  Troque o código pelo dela. Essa fase precisa estar no cronograma, publicar
+  resultado definitivo e não anteceder a fase que ela encerra.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_conclusao_do_ciclo_recursal`.

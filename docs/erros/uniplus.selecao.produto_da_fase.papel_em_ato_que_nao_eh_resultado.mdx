@@ -1,0 +1,64 @@
+---
+title: Só ato que é resultado recebe papel preliminar ou definitivo
+sidebar_label: Papel em ato que não é resultado
+description: Ser resultado é classificação do tipo de ato no catálogo; preliminar ou definitivo é declaração do edital.
+code: uniplus.selecao.produto_da_fase.papel_em_ato_que_nao_eh_resultado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um produto da fase recebeu papel preliminar ou definitivo, e o tipo de ato declarado
+não é classificado como resultado no catálogo de tipos de ato publicados.
+
+As duas perguntas vivem em lugares diferentes, de propósito:
+
+- **Se a publicação é ou não um resultado** é intrínseco ao tipo de ato e fica no
+  catálogo — não muda de edital para edital. Uma convocação nunca vira resultado
+  porque um processo seletivo assim declarou.
+- **Se aquele resultado é preliminar ou definitivo** é desenho de certame, e por
+  isso é declarado por fase, no cronograma de cada processo.
+
+Dar papel a um ato que não é resultado misturaria as duas: o edital estaria
+reclassificando o catálogo.
+
+A classificação negativa é **proibição permanente**, não ausência de
+configuração: um tipo marcado como não sendo resultado nunca integra ciclo
+recursal, em edital nenhum. Sete tipos do catálogo estão nessa condição hoje —
+o edital de abertura, o edital de retificação, o aviso, o comunicado, a
+errata, a convocação e a chamada.
+
+Três dessas classificações costumam surpreender, e a razão de cada uma é a
+mesma: o recurso cabe contra a decisão, não contra o documento que a executa
+ou corrige.
+
+- **Convocação e chamada** concedem o direito de ocupar a vaga, ato que não se
+  desfaz. O recurso do candidato não é contra a convocação — é contra a não
+  comprovação, o resultado da habilitação, que a antecede.
+- **Errata** que corrige resultado já publicado altera a situação do
+  candidato, mas o recurso cabe contra o **resultado corrigido**, não contra a
+  errata.
+
+## Como resolver
+
+A mensagem da recusa nomeia o código do ato. Três desfechos possíveis:
+
+- **O ato de fato não é resultado** — é aviso, convocação ou publicação semelhante.
+  Apenas omita o papel: a fase continua declarando que publica esse ato.
+- **O ato deveria ser resultado.** Corrija a classificação no cadastro do tipo de
+  ato, no módulo Publicações. A correção vale para todos os processos, porque a
+  classificação é do tipo.
+- **O ato citado não era o pretendido.** Declare o tipo de ato de resultado que a
+  fase publica, e dê a ele o papel.

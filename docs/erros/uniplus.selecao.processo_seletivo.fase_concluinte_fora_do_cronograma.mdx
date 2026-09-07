@@ -1,0 +1,52 @@
+---
+title: A fase declarada como concluinte não está no cronograma
+sidebar_label: Fase concluinte fora do cronograma
+description: A conclusão do ciclo aponta para um código que nenhuma fase do cronograma tem.
+code: uniplus.selecao.processo_seletivo.fase_concluinte_fora_do_cronograma
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma fase do cronograma declara como concluinte um código de fase que nenhuma fase
+deste cronograma tem.
+
+A conclusão do ciclo recursal precisa ser alcançável dentro do próprio cronograma:
+é lá que o candidato lê quando a matéria se encerra. Apontar para uma fase que não
+está publicada no cronograma deixa o ciclo sem desfecho verificável.
+
+## Como resolver
+
+A mensagem da recusa mostra o código declarado. Compare-o com os códigos das fases
+que estão no cronograma — a comparação diferencia maiúsculas de minúsculas, então
+grafia divergente já é suficiente para não encontrar a fase.
+
+Três desfechos possíveis:
+
+- **Erro de grafia.** Corrija o código para o da fase que de fato conclui o ciclo.
+- **A fase que conclui ainda não foi incluída.** Acrescente-a ao cronograma em
+  posição **posterior** à fase que ela encerra, com o resultado definitivo entre os
+  produtos que ela publica. As duas condições são conferidas em seguida, cada uma
+  com recusa própria. Inserir uma fase renumera o cronograma: a ordem resultante
+  ainda precisa respeitar as precedências declaradas no cadastro de fases
+  canônicas, conferidas à parte.
+- **A conclusão é da própria fase.** Remova a declaração e acrescente o resultado
+  definitivo aos produtos dela.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_conclusao_do_ciclo_recursal`.

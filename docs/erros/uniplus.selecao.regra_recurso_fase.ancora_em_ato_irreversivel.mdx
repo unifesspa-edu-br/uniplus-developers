@@ -1,0 +1,49 @@
+---
+title: Não cabe recurso contra ato de efeito irreversível
+sidebar_label: Âncora em ato irreversível
+description: Recurso contra ato que já consumiu vaga não teria o que reverter; recorre-se do resultado que o fundamenta.
+code: uniplus.selecao.regra_recurso_fase.ancora_em_ato_irreversivel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de recurso de uma fase ancora o prazo de interposição num tipo de ato que o
+catálogo classifica como de **efeito irreversível**.
+
+Ato de efeito irreversível concede um direito que não se desfaz: a convocação, por
+exemplo, consome vaga escassa, e a vaga passa a ter dono. Um recurso contra ele não
+teria o que reverter — a decisão que se quer atacar já produziu efeito em terceiro.
+O recurso cabível é contra o **resultado que fundamenta** o ato, e é nele que o
+prazo ancora.
+
+A classificação é lida do catálogo a cada configuração do cronograma, e não de uma
+cópia guardada na fase: se o cadastro do tipo de ato muda, a conferência acompanha.
+
+## Como resolver
+
+A mensagem da recusa nomeia o tipo de ato âncora. Aponte o prazo para o resultado
+preliminar que fundamenta aquele ato — a âncora é sempre um dos produtos da
+**própria fase** que declara a regra de recurso. A âncora nunca é publicação de outra fase:
+o prazo corre a partir do instante em que aquela fase publica.
+
+Dois caminhos, conforme onde esse preliminar sai:
+
+- **A própria fase o publica.** Ancore nele. Se ele ainda não está declarado,
+  acrescente-o aos produtos da fase, com papel preliminar, e ancore nele.
+- **Quem o publica é outra fase.** Mova para lá a regra de recurso — é a fase que
+  publica o preliminar que abre a janela de interposição, e é da publicação dela
+  que o prazo do candidato conta.

@@ -1,0 +1,53 @@
+---
+title: A fase concluinte antecede na ordem a fase que ela encerra
+sidebar_label: Concluinte antes na ordem
+description: O resultado definitivo não pode sair antes do preliminar que ele encerra.
+code: uniplus.selecao.processo_seletivo.fase_concluinte_antecede_a_concluida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fase declarada como concluinte ocupa, na ordem do cronograma, posição anterior à
+da fase que ela deveria encerrar — ou a mesma posição.
+
+O ciclo recursal tem sentido: o preliminar sai, o candidato tem prazo para recorrer,
+e só então sai o definitivo. Um cronograma em que a fase do definitivo vem antes
+publicaria o encerramento de uma matéria que ainda não foi aberta.
+
+A regra vale sobre a **ordem declarada no cronograma**, e não sobre as datas. É a
+ordem que decide também quando a fase não tem janela datada — o que é estado válido
+para fase cuja data é delegada a terceiro.
+
+## Como resolver
+
+A mensagem da recusa mostra as duas fases com as respectivas ordens. Dois caminhos:
+
+- **Reordene o cronograma** para que a fase concluinte venha depois da fase que ela
+  encerra. A nova ordem ainda precisa respeitar as precedências declaradas no
+  cadastro de fases canônicas, que são conferidas à parte — vale conferi-las antes
+  de mover, para não trocar uma recusa por outra.
+- **Aponte a fase correta**, se a concluinte pretendida era outra — normalmente a
+  que vem depois do prazo de recurso.
+
+Com a ordem acertada, as janelas das duas fases ainda são comparadas: a concluinte
+não pode **começar** antes da fase que encerra, o que tem
+[recusa própria](./uniplus.selecao.processo_seletivo.fase_concluinte_comeca_antes_da_concluida.mdx).
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_conclusao_do_ciclo_recursal`.
