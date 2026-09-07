@@ -1,0 +1,44 @@
+---
+title: A fase admite recurso e não publica resultado preliminar
+sidebar_label: Fase sem produto preliminar
+description: Rascunho — o prazo de recurso ancora num resultado preliminar, e a fase não declara nenhum.
+code: uniplus.selecao.regra_recurso_fase.fase_sem_produto_preliminar
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos:
+  - UNI-REQ-0115
+rastreio:
+  - label: 'uniplus-api#1427'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1427
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fase do cronograma declara regra de recurso, e nenhum dos produtos que ela publica
+tem papel **preliminar**.
+
+O recurso é contra o resultado preliminar: é ele que abre a janela de interposição,
+e é do instante em que é publicado que o prazo do candidato começa a correr. Uma
+fase que publica apenas o resultado definitivo encerra a matéria em vez de abri-la;
+e uma que não publica resultado nenhum não tem decisão a contestar. Em nenhum dos
+dois casos há a que prender o prazo.
+
+## Como resolver
+
+Dois caminhos, conforme o que a fase de fato faz:
+
+- **É nessa fase que o candidato recorre.** Declare, entre os produtos dela, o
+  resultado preliminar em que o prazo ancora, com papel preliminar. Em seguida
+  aponte a regra de recurso para esse produto.
+- **Não é nessa fase que o candidato recorre.** Remova a regra de recurso: quem a
+  declara é a fase que publica o preliminar contestável.
+
+Fase que publica preliminar e ainda assim precisa dizer onde o ciclo se encerra tem
+[recusa própria](./uniplus.selecao.processo_seletivo.conclusao_nao_declarada.mdx).

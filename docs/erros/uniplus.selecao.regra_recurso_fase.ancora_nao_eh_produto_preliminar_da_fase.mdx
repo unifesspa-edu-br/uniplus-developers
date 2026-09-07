@@ -1,0 +1,58 @@
+---
+title: A âncora do recurso não é um produto preliminar da própria fase
+sidebar_label: Âncora fora dos preliminares da fase
+description: Rascunho — o prazo conta da publicação preliminar que a própria fase faz, não de outra.
+code: uniplus.selecao.regra_recurso_fase.ancora_nao_eh_produto_preliminar_da_fase
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0115
+rastreio:
+  - label: 'uniplus-api#1427'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1427
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de recurso da fase aponta como âncora do prazo um ato que não está entre os
+produtos **preliminares** que a própria fase publica.
+
+Duas exigências se somam aqui, e a recusa vale para as duas:
+
+- **A âncora é da própria fase.** O prazo de interposição corre a partir do instante
+  em que aquela publicação sai. Duas fases do mesmo cronograma podem publicar o
+  mesmo tipo de ato — situação corriqueira num certame com várias etapas
+  avaliativas —, e o tipo sozinho não diz de qual das duas publicações o prazo
+  conta. A âncora é a publicação que aquela fase faz.
+- **A âncora é preliminar.** O resultado definitivo encerra a matéria; ancorar nele
+  daria prazo para recorrer daquilo que já não admite recurso.
+
+A recusa lista os produtos preliminares que a fase publica, para que a escolha seja
+feita sobre o conjunto real.
+
+Ela também aparece ao **descartar uma retificação**: a configuração congelada é
+restaurada como estava, e uma âncora gravada que não corresponda a nenhum preliminar
+da fase é recusada nominalmente em vez de restaurada em silêncio.
+
+## Como resolver
+
+Três caminhos, conforme onde está o resultado certo:
+
+- **O preliminar certo está na lista da mensagem.** Aponte a regra de recurso para
+  ele.
+- **O ato pretendido é publicado por outra fase.** Mova a regra de recurso para essa
+  fase — é ela que abre a janela, e o prazo corre da publicação que ela faz.
+- **O preliminar ainda não está declarado.** Acrescente-o aos produtos da fase, com
+  papel preliminar, e ancore nele.
+
+Fase que declara recurso sem publicar nenhum preliminar tem
+[recusa própria](./uniplus.selecao.regra_recurso_fase.fase_sem_produto_preliminar.mdx),
+que sai antes desta.

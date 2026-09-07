@@ -71,6 +71,8 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.regra_recurso_fase.prazo_em_dias_corridos',
         'erros/uniplus.selecao.regra_recurso_fase.prazo_em_fracao_de_dia_util',
         'erros/uniplus.selecao.regra_recurso_fase.ancora_em_ato_irreversivel',
+        'erros/uniplus.selecao.regra_recurso_fase.fase_sem_produto_preliminar',
+        'erros/uniplus.selecao.regra_recurso_fase.ancora_nao_eh_produto_preliminar_da_fase',
         'erros/uniplus.selecao.produto_da_fase.ato_nao_encontrado_no_catalogo',
         'erros/uniplus.selecao.produto_da_fase.papel_desconhecido',
         'erros/uniplus.selecao.produto_da_fase.papel_em_ato_que_nao_eh_resultado',
