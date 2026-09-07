@@ -39,7 +39,12 @@ grafia divergente já é suficiente para não encontrar a fase.
 Três desfechos possíveis:
 
 - **Erro de grafia.** Corrija o código para o da fase que de fato conclui o ciclo.
-- **A fase que conclui ainda não foi incluída.** Acrescente-a ao cronograma, com o
-  resultado definitivo entre os produtos que ela publica.
+- **A fase que conclui ainda não foi incluída.** Acrescente-a ao cronograma em
+  posição **posterior** à fase que ela encerra, com o resultado definitivo entre os
+  produtos que ela publica. As duas condições são conferidas em seguida, cada uma
+  com recusa própria.
 - **A conclusão é da própria fase.** Remova a declaração e acrescente o resultado
   definitivo aos produtos dela.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_conclusao_do_ciclo_recursal`.

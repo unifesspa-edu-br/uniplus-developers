@@ -39,6 +39,15 @@ para fase cuja data é delegada a terceiro.
 A mensagem da recusa mostra as duas fases com as respectivas ordens. Dois caminhos:
 
 - **Reordene o cronograma** para que a fase concluinte venha depois da fase que ela
-  encerra.
+  encerra. A nova ordem ainda precisa respeitar as precedências declaradas no
+  cadastro de fases canônicas, que são conferidas à parte — vale conferi-las antes
+  de mover, para não trocar uma recusa por outra.
 - **Aponte a fase correta**, se a concluinte pretendida era outra — normalmente a
   que vem depois do prazo de recurso.
+
+Com a ordem acertada, as janelas das duas fases ainda são comparadas: a concluinte
+não pode **começar** antes da fase que encerra, o que tem
+[recusa própria](./uniplus.selecao.processo_seletivo.fase_concluinte_comeca_antes_da_concluida.mdx).
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_conclusao_do_ciclo_recursal`.
