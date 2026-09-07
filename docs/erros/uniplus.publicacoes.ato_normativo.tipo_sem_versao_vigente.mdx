@@ -25,10 +25,20 @@ do ato.
 
 Ao registrar um ato, o servidor precisa saber se aquele tipo congela a
 configuração, se admite um único ato vivo por objeto e se o efeito é
-irreversível — os três atributos de consequência do tipo, copiados por
-valor no instante do registro. Sem uma versão vigente do tipo na data de
-publicação, não há de onde copiar esses atributos, e o registro é
-recusado.
+irreversível — três dos quatro atributos de consequência do tipo, e os que
+o ato copia **por valor** no instante do registro. Sem uma versão vigente
+do tipo na data de publicação, não há de onde copiar esses atributos, e o
+registro é recusado.
+
+O quarto atributo — **se o ato é resultado**, isto é, se ele determina a
+situação do candidato — não é copiado para o ato registrado: ele é lido do
+catálogo no momento em que alguma configuração precisa dele. É esse
+atributo que decide se um tipo pode receber papel preliminar ou definitivo
+entre os produtos de uma fase do cronograma, e por isso a sua leitura
+acompanha o cadastro em vez de ficar congelada. Um tipo marcado como não
+sendo resultado nunca integra ciclo recursal, em edital nenhum — a recusa
+correspondente é
+[papel em ato que não é resultado](./uniplus.selecao.produto_da_fase.papel_em_ato_que_nao_eh_resultado.mdx).
 
 Este caminho de validação só roda quando quem registra **não** já
 confere os atributos do tipo junto com a requisição (o caminho em que

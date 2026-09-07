@@ -26,8 +26,8 @@ de vigência intercepta, ao menos em parte, o período informado.
 
 O código agrupa a série de versões de um tipo, e duas versões vivas do
 mesmo código não podem valer no mesmo dia — se pudessem, um ato deste tipo
-não saberia qual delas ler para saber se congela a configuração ou se tem
-efeito irreversível. O sistema garante isso em duas camadas: uma consulta
+não saberia qual delas ler para saber se congela a configuração, se tem
+efeito irreversível ou se é resultado. O sistema garante isso em duas camadas: uma consulta
 prévia, que dá a mensagem legível no caso comum, e uma restrição de
 exclusão no próprio banco, que fecha a corrida entre duas requisições
 concorrentes tentando reservar a mesma janela ao mesmo tempo. É por isso
