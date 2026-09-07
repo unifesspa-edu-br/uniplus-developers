@@ -1,0 +1,44 @@
+---
+title: A fase declara uma concluinte sem publicar resultado preliminar
+sidebar_label: Conclusão declarada sem preliminar
+description: Não há ciclo recursal a concluir numa fase que não publica resultado preliminar.
+code: uniplus.selecao.processo_seletivo.conclusao_declarada_sem_preliminar
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma fase do cronograma declara qual fase a conclui, e não publica nenhum produto
+com papel **preliminar**.
+
+Quem abre um ciclo recursal é o resultado preliminar — é ele que admite
+contestação. A fase que não publica preliminar não abriu ciclo nenhum, e apontar
+uma fase concluinte descreveria um encerramento sem começo.
+
+## Como resolver
+
+Dois caminhos, conforme o que a fase de fato publica:
+
+- **A fase publica o preliminar e a declaração dos produtos é que está
+  incompleta.** Declare esse produto na fase e dê a ele o papel preliminar. A
+  conclusão declarada volta a fazer sentido.
+- **A fase não publica preliminar** — publica só o definitivo, ou nenhum resultado.
+  Remova dela a fase concluinte.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_conclusao_do_ciclo_recursal`.

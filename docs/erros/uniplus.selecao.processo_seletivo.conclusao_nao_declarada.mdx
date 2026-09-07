@@ -1,0 +1,48 @@
+---
+title: A fase publica resultado preliminar e o ciclo não tem conclusão declarada
+sidebar_label: Conclusão do ciclo não declarada
+description: Quem abre um ciclo recursal precisa dizer onde ele se encerra.
+code: uniplus.selecao.processo_seletivo.conclusao_nao_declarada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma fase do cronograma publica um resultado **preliminar**, não publica nenhum
+resultado **definitivo**, e também não declara qual fase do cronograma a conclui.
+O cronograma abre um ciclo recursal sem dizer onde ele fecha.
+
+Resultado preliminar é, por definição, o que ainda admite contestação; quem encerra
+a matéria é o resultado definitivo. Enquanto o cronograma não disser em que fase a
+definitiva sai, o candidato não tem como saber até quando a sua situação pode mudar,
+e o edital publicaria uma etapa sem desfecho previsto.
+
+## Como resolver
+
+Dois caminhos, e o desenho do certame decide qual:
+
+- **A própria fase conclui.** Acrescente aos produtos dela o resultado definitivo
+  da matéria, com papel definitivo. Nesse caso não há fase concluinte a declarar —
+  a conclusão já está nos produtos da fase.
+- **Outra fase conclui**, que é o arranjo usual quando existe uma fase de recursos
+  entre as duas publicações. Declare, na fase que publica o preliminar, o código da
+  fase que a conclui. Essa fase precisa estar no cronograma, publicar resultado
+  definitivo e não anteceder a fase que ela encerra.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_conclusao_do_ciclo_recursal`.

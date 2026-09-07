@@ -1,0 +1,40 @@
+---
+title: A fase promete parecer individual e não publica resultado
+sidebar_label: Parecer individual sem resultado
+description: Sem resultado publicado não há decisão a fundamentar no parecer.
+code: uniplus.selecao.fase_cronograma.parecer_individual_sem_resultado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fase do cronograma está marcada para emitir parecer individual, e nenhum dos
+produtos que ela declara publicar tem papel de resultado — nem preliminar, nem
+definitivo.
+
+O parecer individual é o que entrega ao candidato a fundamentação da decisão que o
+alcança, e é dele que sai a base para recorrer. Sem resultado publicado não existe
+decisão a fundamentar nem prazo a correr: a promessa do edital ficaria sem objeto.
+
+## Como resolver
+
+Dois caminhos, conforme o que a fase de fato faz:
+
+- **A fase decide sobre candidatos.** Declare, entre os produtos dela, o resultado
+  que ela publica, com o papel correspondente (preliminar ou definitivo). É esse
+  resultado que o parecer individual fundamenta.
+- **A fase não decide** — é de preparação, de divulgação ou de recebimento de
+  documentos. Desmarque o parecer individual: ele pertence à fase que publica o
+  resultado.

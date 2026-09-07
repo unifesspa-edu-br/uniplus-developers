@@ -1,0 +1,41 @@
+---
+title: A fase declarada como concluinte não publica resultado definitivo
+sidebar_label: Fase concluinte sem definitivo
+description: Quem encerra o ciclo recursal de outra fase publica o resultado definitivo da matéria.
+code: uniplus.selecao.processo_seletivo.fase_concluinte_sem_resultado_definitivo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1426'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fase declarada como concluinte existe no cronograma, mas nenhum dos produtos que
+ela publica tem papel **definitivo**.
+
+O que encerra um ciclo recursal é a publicação do resultado definitivo da matéria.
+Uma fase sem nenhum produto definitivo não tem como encerrar o ciclo que a outra
+abriu — o preliminar continuaria sendo a última palavra do cronograma.
+
+## Como resolver
+
+A mensagem da recusa nomeia as duas fases: a que abre o ciclo e a que foi declarada
+para concluí-lo. Dois caminhos:
+
+- **A fase concluinte é a certa e a declaração de produtos é que está incompleta.**
+  Acrescente a ela o resultado definitivo, com papel definitivo.
+- **A fase concluinte é outra** — a que de fato publica o definitivo. Corrija o
+  código na fase que abre o ciclo.
