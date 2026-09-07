@@ -1,0 +1,52 @@
+---
+title: A categoria de documento do recorte de competência não foi encontrada
+sidebar_label: Categoria do recorte não encontrada
+description: O recorte de competência da banca só cita categoria que existe e está viva no cadastro.
+code: uniplus.selecao.fase_cronograma.categoria_documento_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1428'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1428
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das categorias de documento declaradas no recorte de competência de uma banca
+não existe no cadastro, ou já não está viva.
+
+O recorte de competência é a lista das categorias de documento que aquela banca
+julga. Ele é resolvido contra o cadastro vivo e congelado por valor na configuração
+do certame, do mesmo modo que o tipo da banca — e é esse recorte congelado que
+responde, pelo certame inteiro, por qual banca julgou o quê. Parecer e recurso se
+referem a ele. Uma categoria que saiu do cadastro não pode entrar no edital: o
+documento publicado citaria um recorte que já não se consegue interpretar.
+
+A recusa interrompe a gravação na primeira ocorrência. A resolução da categoria
+falhou, e seguir adiante conferindo o resto do cronograma produziria diagnóstico
+sobre um estado que não chegou a existir.
+
+## Como resolver
+
+A recusa nomeia o identificador da categoria que não foi encontrada. Dois desfechos
+possíveis:
+
+- **A categoria é a certa, e não está cadastrada ou foi desativada.** Cadastre-a ou
+  reative-a no cadastro de categorias de documento, no módulo Configuração, e repita
+  a definição do cronograma.
+- **O identificador não é o pretendido.** Consulte o cadastro e declare o
+  identificador da categoria que a banca de fato julga.
+
+Com o recorte resolvido, a fase ainda confere duas coisas sobre ele, cada uma com
+recusa própria: que a mesma categoria não aparece
+[duas vezes no mesmo recorte](./uniplus.selecao.banca_requerida.categoria_duplicada_no_recorte.mdx),
+e que duas bancas do mesmo tipo não declaram
+[recortes iguais](./uniplus.selecao.banca_requerida.recorte_de_competencia_duplicado.mdx).

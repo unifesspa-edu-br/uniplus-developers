@@ -1,0 +1,59 @@
+---
+title: Duas bancas do mesmo tipo declaram o mesmo recorte de competência
+sidebar_label: Recorte de competência duplicado
+description: Recortes iguais não distinguem uma banca da outra, que é justamente o que o recorte existe para resolver.
+code: uniplus.selecao.banca_requerida.recorte_de_competencia_duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1428'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1428
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas bancas do mesmo tipo na mesma fase declaram exatamente as mesmas categorias de
+documento.
+
+Declarar o recorte serve para distinguir bancas que o tipo sozinho não distingue.
+Duas bancas de análise documental com o mesmo recorte continuam indistinguíveis: o
+parecer que o candidato recebe não diz qual delas o julgou, e o recurso não sabe
+contra quem se dirige. Preencher as duas com o mesmo conteúdo cumpre a letra da
+exigência sem cumprir o efeito, e por isso é recusado junto com a omissão.
+
+A comparação é feita como **conjunto**: a ordem em que as categorias são declaradas
+não importa, e duas bancas que citam as mesmas categorias em ordens diferentes
+declaram o mesmo recorte.
+
+A recusa nomeia o código da banca e lista as categorias do recorte repetido.
+
+## Como resolver
+
+Dois caminhos, conforme o desenho da fase:
+
+- **As duas bancas julgam coisas diferentes.** Reparta as categorias entre elas,
+  conforme o que cada uma de fato analisa. Cada categoria continua podendo aparecer
+  [uma única vez](./uniplus.selecao.banca_requerida.categoria_duplicada_no_recorte.mdx)
+  dentro de um mesmo recorte.
+- **As duas julgam o mesmo conjunto.** Então não são duas bancas — remova a
+  repetida. Com uma banca do tipo na fase, o recorte deixa de ser exigido.
+
+Não há um terceiro caminho: esvaziar o recorte de uma das duas para desfazer a
+igualdade devolve a
+[recusa por recorte ausente](./uniplus.selecao.banca_requerida.recorte_de_competencia_obrigatorio.mdx),
+porque a fase continua com duas bancas do mesmo tipo.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_recorte_de_competencia_das_bancas`.

@@ -1,0 +1,60 @@
+---
+title: A fase requer duas bancas do mesmo tipo e uma delas não declara o que julga
+sidebar_label: Recorte de competência obrigatório
+description: Com mais de uma banca do mesmo tipo na fase, cada uma precisa declarar as categorias de documento que julga.
+code: uniplus.selecao.banca_requerida.recorte_de_competencia_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1428'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1428
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fase do cronograma exige mais de uma banca do mesmo tipo, e ao menos uma delas
+não declara nenhuma categoria de documento — não diz o que julga.
+
+Enquanto a fase tem uma banca de cada tipo, o próprio tipo já identifica quem
+julgou: "a banca de heteroidentificação" não é ambíguo. Com duas bancas do mesmo
+tipo, o tipo deixa de distinguir. Numa fase de análise documental, uma banca pode
+analisar a comprovação de renda e outra a autodeclaração étnico-racial — são
+julgamentos distintos, com composição e prazo próprios, e o parecer entregue ao
+candidato precisa dizer de qual delas veio. O recorte de competência é o que dá
+esse nome.
+
+A exigência é **condicional**: banca única do seu tipo na fase não precisa declarar
+recorte, porque não há de quem distinguir. O agrupamento que decide "mesmo tipo" usa
+o código da banca — o mesmo que aparece no edital publicado, que é por onde quem lê
+diferencia uma da outra.
+
+## Como resolver
+
+Dois caminhos, conforme o desenho da fase:
+
+- **As duas bancas existem mesmo.** Declare, em cada uma, as categorias de documento
+  que ela julga. Três condições são conferidas em seguida, e vale atendê-las de uma
+  vez: os recortes das duas precisam ser
+  [diferentes entre si](./uniplus.selecao.banca_requerida.recorte_de_competencia_duplicado.mdx);
+  cada categoria aparece
+  [uma única vez](./uniplus.selecao.banca_requerida.categoria_duplicada_no_recorte.mdx)
+  dentro de um recorte; e cada categoria citada precisa
+  [existir e estar viva](./uniplus.selecao.fase_cronograma.categoria_documento_nao_encontrada.mdx)
+  no cadastro.
+- **A fase não precisa de duas bancas do mesmo tipo.** Remova a repetida. Com uma
+  banca do tipo, o recorte deixa de ser exigido, e nada mais precisa ser declarado.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_recorte_de_competencia_das_bancas`.
