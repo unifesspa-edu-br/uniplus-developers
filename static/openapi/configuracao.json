@@ -99,6 +99,485 @@
         ]
       }
     },
+    "/api/configuracao/base-legal-bonus-regional": {
+      "get": {
+        "tags": [
+          "BaseLegalBonusRegional"
+        ],
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Cursor opaco AES-GCM emitido pelo servidor no header Link da p\u00E1gina anterior. Ausente na primeira p\u00E1gina. Cliente trata como string opaca \u2014 n\u00E3o decodificar (ADR-0026, ADR-0031).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Tamanho m\u00E1ximo da janela de resultados. Limites configurados em CursorPaginationOptions; valores fora do range retornam 422 com code uniplus.pagination.limit_invalido (ADR-0026).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "Dire\u00E7\u00E3o de navega\u00E7\u00E3o keyset (ADR-0089): \u0027next\u0027 (default) avan\u00E7a, \u0027prev\u0027 retrocede. Normalmente o cliente apenas segue o cursor opaco do rel=\u0022prev\u0022/rel=\u0022next\u0022 do header Link \u2014 que j\u00E1 inclui o direction correto.",
+            "schema": {
+              "enum": [
+                "next",
+                "prev"
+              ],
+              "type": "string",
+              "default": "next"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Link": {
+                "description": "Links de navega\u00E7\u00E3o da pagina\u00E7\u00E3o (RFC 5988/8288). rel=\u0022self\u0022 sempre presente; rel=\u0022prev\u0022/rel=\u0022next\u0022 quando h\u00E1 p\u00E1gina anterior/pr\u00F3xima (ADR-0089). Cada link carrega o cursor opaco no par\u00E2metro \u0060cursor\u0060 e o \u0060direction\u0060 correspondente (ADR-0026).",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Page-Size": {
+                "description": "Quantidade de itens retornados na p\u00E1gina atual (sempre menor ou igual ao limit efetivo).",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/vnd.uniplus.base-legal-bonus-regional.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BaseLegalBonusRegionalDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-uniplus-paginated": true
+      }
+    },
+    "/api/configuracao/base-legal-bonus-regional/{id}": {
+      "get": {
+        "tags": [
+          "BaseLegalBonusRegional"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.base-legal-bonus-regional.v1\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseLegalBonusRegionalDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/admin/base-legal-bonus-regional": {
+      "post": {
+        "tags": [
+          "BaseLegalBonusRegional"
+        ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Chave opaca (1-255 ASCII printable, sem \u0027,\u0027 ou \u0027;\u0027) para retry seguro do comando. Replay com mesma key \u002B mesmo body retorna response cacheada (ADR-0027).",
+            "required": true,
+            "schema": {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[\\x21-\\x2B\\x2D-\\x3A\\x3C-\\x7E]\u002B$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarBaseLegalBonusRegionalCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarBaseLegalBonusRegionalCommand"
+              }
+            },
+            "application/*\u002Bjson": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarBaseLegalBonusRegionalCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Requisi\u00E7\u00E3o concorrente com a mesma Idempotency-Key ainda em processamento (uniplus.idempotency.processing_conflict). Repetir depois \u2014 a opera\u00E7\u00E3o anterior ainda n\u00E3o concluiu.",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Corpo acima do limite dos endpoints idempotentes (uniplus.idempotency.body_muito_grande). O limite \u00E9 do filtro, n\u00E3o do servidor.",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-uniplus-idempotent": true
+      }
+    },
+    "/api/configuracao/admin/base-legal-bonus-regional/{id}": {
+      "put": {
+        "tags": [
+          "BaseLegalBonusRegional"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Chave opaca (1-255 ASCII printable, sem \u0027,\u0027 ou \u0027;\u0027) para retry seguro do comando. Replay com mesma key \u002B mesmo body retorna response cacheada (ADR-0027).",
+            "required": true,
+            "schema": {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[\\x21-\\x2B\\x2D-\\x3A\\x3C-\\x7E]\u002B$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AtualizarBaseLegalBonusRegionalCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AtualizarBaseLegalBonusRegionalCommand"
+              }
+            },
+            "application/*\u002Bjson": {
+              "schema": {
+                "$ref": "#/components/schemas/AtualizarBaseLegalBonusRegionalCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Requisi\u00E7\u00E3o concorrente com a mesma Idempotency-Key ainda em processamento (uniplus.idempotency.processing_conflict). Repetir depois \u2014 a opera\u00E7\u00E3o anterior ainda n\u00E3o concluiu.",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Corpo acima do limite dos endpoints idempotentes (uniplus.idempotency.body_muito_grande). O limite \u00E9 do filtro, n\u00E3o do servidor.",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-uniplus-idempotent": true
+      },
+      "delete": {
+        "tags": [
+          "BaseLegalBonusRegional"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/configuracao/calendarios-dias-uteis": {
       "get": {
         "tags": [
@@ -478,6 +957,174 @@
           },
           "422": {
             "description": "Mesma Idempotency-Key reusada com corpo diferente (uniplus.idempotency.body_mismatch) \u2014 a chave identifica a requisi\u00E7\u00E3o pelo hash do corpo."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-uniplus-idempotent": true
+      }
+    },
+    "/api/configuracao/admin/calendarios-dias-uteis/{id}/dias-nao-uteis": {
+      "post": {
+        "tags": [
+          "CalendariosDiasUteis"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Chave opaca (1-255 ASCII printable, sem \u0027,\u0027 ou \u0027;\u0027) para retry seguro do comando. Replay com mesma key \u002B mesmo body retorna response cacheada (ADR-0027).",
+            "required": true,
+            "schema": {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[\\x21-\\x2B\\x2D-\\x3A\\x3C-\\x7E]\u002B$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiaNaoUtilCommandItem"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiaNaoUtilCommandItem"
+                  }
+                ]
+              }
+            },
+            "application/*\u002Bjson": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DiaNaoUtilCommandItem"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarioDiasUteisDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarioDiasUteisDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarioDiasUteisDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Corpo acima do limite dos endpoints idempotentes (uniplus.idempotency.body_muito_grande). O limite \u00E9 do filtro, n\u00E3o do servidor.",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1045,6 +1692,407 @@
         ]
       }
     },
+    "/api/configuracao/categorias-documento": {
+      "get": {
+        "tags": [
+          "CategoriasDocumento"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.categoria-documento.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaDocumentoDto"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/categorias-documento/{id}": {
+      "get": {
+        "tags": [
+          "CategoriasDocumento"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.categoria-documento.v1\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaDocumentoDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/admin/categorias-documento": {
+      "post": {
+        "tags": [
+          "CategoriasDocumento"
+        ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Chave opaca (1-255 ASCII printable, sem \u0027,\u0027 ou \u0027;\u0027) para retry seguro do comando. Replay com mesma key \u002B mesmo body retorna response cacheada (ADR-0027).",
+            "required": true,
+            "schema": {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[\\x21-\\x2B\\x2D-\\x3A\\x3C-\\x7E]\u002B$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCategoriaDocumentoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCategoriaDocumentoCommand"
+              }
+            },
+            "application/*\u002Bjson": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCategoriaDocumentoCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Corpo acima do limite dos endpoints idempotentes (uniplus.idempotency.body_muito_grande). O limite \u00E9 do filtro, n\u00E3o do servidor.",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-uniplus-idempotent": true
+      }
+    },
+    "/api/configuracao/admin/categorias-documento/{id}": {
+      "put": {
+        "tags": [
+          "CategoriasDocumento"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Chave opaca (1-255 ASCII printable, sem \u0027,\u0027 ou \u0027;\u0027) para retry seguro do comando. Replay com mesma key \u002B mesmo body retorna response cacheada (ADR-0027).",
+            "required": true,
+            "schema": {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[\\x21-\\x2B\\x2D-\\x3A\\x3C-\\x7E]\u002B$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AtualizarCategoriaDocumentoCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AtualizarCategoriaDocumentoCommand"
+              }
+            },
+            "application/*\u002Bjson": {
+              "schema": {
+                "$ref": "#/components/schemas/AtualizarCategoriaDocumentoCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Corpo acima do limite dos endpoints idempotentes (uniplus.idempotency.body_muito_grande). O limite \u00E9 do filtro, n\u00E3o do servidor.",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-uniplus-idempotent": true
+      },
+      "delete": {
+        "tags": [
+          "CategoriasDocumento"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/configuracao/condicoes-atendimento": {
       "get": {
         "tags": [
@@ -1540,6 +2588,22 @@
           "Cursos"
         ],
         "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Texto pesquisado. Insens\u00EDvel a caixa e a acentua\u00E7\u00E3o. At\u00E9 200 caracteres.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Campos de ordena\u00E7\u00E3o separados por v\u00EDrgula, na ordem de prioridade; \u0027-\u0027 prefixa o campo decrescente. Exemplo: sort=nome,-grau. Campos aceitos: nome, codigo, grau, nivelEnsino, criadoEm. Sem o par\u00E2metro, vale a ordem alfab\u00E9tica padr\u00E3o.",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "cursor",
             "in": "query",
@@ -3573,6 +4637,22 @@
             "schema": {
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Texto pesquisado. Insens\u00EDvel a caixa e a acentua\u00E7\u00E3o. At\u00E9 200 caracteres.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Campos de ordena\u00E7\u00E3o separados por v\u00EDrgula, na ordem de prioridade; \u0027-\u0027 prefixa o campo decrescente. Exemplo: sort=cursoNome,-programaDeOferta. Campos aceitos: cursoNome, cursoCodigo, unidadeOfertanteSigla, programaDeOferta, formatoPedagogico, regimeDeFuncionamento, regimeDeTurno, criadoEm. Sem o par\u00E2metro, vale a ordem alfab\u00E9tica padr\u00E3o.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -8758,6 +9838,147 @@
       }
     },
     "/api/configuracao/admin/tipos-processo": {
+      "get": {
+        "tags": [
+          "TiposProcesso"
+        ],
+        "parameters": [
+          {
+            "name": "apenasAtivos",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Cursor opaco AES-GCM emitido pelo servidor no header Link da p\u00E1gina anterior. Ausente na primeira p\u00E1gina. Cliente trata como string opaca \u2014 n\u00E3o decodificar (ADR-0026, ADR-0031).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Tamanho m\u00E1ximo da janela de resultados. Limites configurados em CursorPaginationOptions; valores fora do range retornam 422 com code uniplus.pagination.limit_invalido (ADR-0026).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "Dire\u00E7\u00E3o de navega\u00E7\u00E3o keyset (ADR-0089): \u0027next\u0027 (default) avan\u00E7a, \u0027prev\u0027 retrocede. Normalmente o cliente apenas segue o cursor opaco do rel=\u0022prev\u0022/rel=\u0022next\u0022 do header Link \u2014 que j\u00E1 inclui o direction correto.",
+            "schema": {
+              "enum": [
+                "next",
+                "prev"
+              ],
+              "type": "string",
+              "default": "next"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Link": {
+                "description": "Links de navega\u00E7\u00E3o da pagina\u00E7\u00E3o (RFC 5988/8288). rel=\u0022self\u0022 sempre presente; rel=\u0022prev\u0022/rel=\u0022next\u0022 quando h\u00E1 p\u00E1gina anterior/pr\u00F3xima (ADR-0089). Cada link carrega o cursor opaco no par\u00E2metro \u0060cursor\u0060 e o \u0060direction\u0060 correspondente (ADR-0026).",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Page-Size": {
+                "description": "Quantidade de itens retornados na p\u00E1gina atual (sempre menor ou igual ao limit efetivo).",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/vnd.uniplus.tipo-processo.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoProcessoDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-uniplus-paginated": true
+      },
       "post": {
         "tags": [
           "TiposProcesso"
@@ -8890,6 +10111,80 @@
       }
     },
     "/api/configuracao/admin/tipos-processo/{id}": {
+      "get": {
+        "tags": [
+          "TiposProcesso"
+        ],
+        "operationId": "ObterTipoProcessoParaManutencao",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.tipo-processo.v1\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProcessoDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
       "put": {
         "tags": [
           "TiposProcesso"
@@ -9068,6 +10363,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -9085,10 +10390,253 @@
           }
         ]
       }
+    },
+    "/api/configuracao/admin/tipos-processo/{id}/ativacao": {
+      "post": {
+        "tags": [
+          "TiposProcesso"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Chave opaca (1-255 ASCII printable, sem \u0027,\u0027 ou \u0027;\u0027) para retry seguro do comando. Replay com mesma key \u002B mesmo body retorna response cacheada (ADR-0027).",
+            "required": true,
+            "schema": {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[\\x21-\\x2B\\x2D-\\x3A\\x3C-\\x7E]\u002B$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Idempotency-Key ausente ou malformada (uniplus.idempotency.key_ausente, uniplus.idempotency.key_malformada), ou corpo JSON inv\u00E1lido."
+          },
+          "413": {
+            "description": "Corpo acima do limite dos endpoints idempotentes (uniplus.idempotency.body_muito_grande). O limite \u00E9 do filtro, n\u00E3o do servidor.",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-uniplus-idempotent": true
+      }
+    },
+    "/api/configuracao/vocabularios/tipos-banca": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-tipo-banca.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoBancaVocabularioDto"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/fases-canonicas": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-fase-canonica.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FaseCanonicaVocabularioDto"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/tipos-instrumento-normativo": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-tipo-instrumento-normativo.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoInstrumentoNormativoVocabularioDto"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AtualizarBaseLegalBonusRegionalCommand": {
+        "required": [
+          "id",
+          "tipoInstrumento",
+          "identificacao",
+          "descricao",
+          "municipios"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tipoInstrumento": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "identificacao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "municipios": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/CriarBaseLegalBonusRegionalMunicipioCommand"
+            }
+          }
+        }
+      },
       "AtualizarCampusCommand": {
         "required": [
           "id",
@@ -9151,6 +10699,47 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "AtualizarCategoriaDocumentoCommand": {
+        "required": [
+          "id",
+          "codigo",
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "codigo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nome": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ordem": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
           }
         }
       },
@@ -9274,15 +10863,11 @@
               "string"
             ]
           },
-          "produzResultado": {
-            "type": "boolean",
-            "default": false
-          },
-          "resultadoDefinitivo": {
-            "type": "boolean",
-            "default": false
-          },
           "coletaInscricao": {
+            "type": "boolean",
+            "default": false
+          },
+          "coletaSolicitacaoIsencao": {
             "type": "boolean",
             "default": false
           },
@@ -9442,6 +11027,7 @@
         "required": [
           "id",
           "programaDeOferta",
+          "regimeDeFuncionamento",
           "regimeDeTurno",
           "turnos"
         ],
@@ -9452,6 +11038,12 @@
             "format": "uuid"
           },
           "programaDeOferta": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "regimeDeFuncionamento": {
             "type": [
               "null",
               "string"
@@ -9899,6 +11491,70 @@
           }
         }
       },
+      "BaseLegalBonusRegionalDto": {
+        "required": [
+          "id",
+          "tipoInstrumento",
+          "identificacao",
+          "descricao",
+          "municipios",
+          "criadoEm"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tipoInstrumento": {
+            "type": "string"
+          },
+          "identificacao": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "municipios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BaseLegalBonusRegionalMunicipioDto"
+            }
+          },
+          "criadoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "_links": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BaseLegalBonusRegionalMunicipioDto": {
+        "required": [
+          "codigoIbge",
+          "nome",
+          "uf"
+        ],
+        "type": "object",
+        "properties": {
+          "codigoIbge": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "uf": {
+            "type": "string"
+          }
+        }
+      },
       "CalendarioDiasUteisDto": {
         "required": [
           "id",
@@ -10030,6 +11686,56 @@
           }
         }
       },
+      "CategoriaDocumentoDto": {
+        "required": [
+          "id",
+          "codigo",
+          "nome",
+          "descricao",
+          "ordem",
+          "criadoEm"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ordem": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "criadoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "_links": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "CidadeReferenciaDto": {
         "required": [
           "codigoIbge",
@@ -10131,6 +11837,72 @@
           }
         }
       },
+      "CriarBaseLegalBonusRegionalCommand": {
+        "required": [
+          "tipoInstrumento",
+          "identificacao",
+          "descricao",
+          "municipios"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoInstrumento": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "identificacao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "municipios": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/CriarBaseLegalBonusRegionalMunicipioCommand"
+            }
+          }
+        }
+      },
+      "CriarBaseLegalBonusRegionalMunicipioCommand": {
+        "required": [
+          "codigoIbge",
+          "nome",
+          "uf"
+        ],
+        "type": "object",
+        "properties": {
+          "codigoIbge": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nome": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "uf": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "CriarCalendarioDiasUteisCommand": {
         "required": [
           "versaoDataset",
@@ -10212,6 +11984,42 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "CriarCategoriaDocumentoCommand": {
+        "required": [
+          "codigo",
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nome": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ordem": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
           }
         }
       },
@@ -10327,15 +12135,11 @@
               "string"
             ]
           },
-          "produzResultado": {
-            "type": "boolean",
-            "default": false
-          },
-          "resultadoDefinitivo": {
-            "type": "boolean",
-            "default": false
-          },
           "coletaInscricao": {
+            "type": "boolean",
+            "default": false
+          },
+          "coletaSolicitacaoIsencao": {
             "type": "boolean",
             "default": false
           },
@@ -10494,6 +12298,7 @@
           "localOfertaId",
           "unidadeOfertanteOrigemId",
           "programaDeOferta",
+          "regimeDeFuncionamento",
           "regimeDeTurno",
           "turnos"
         ],
@@ -10512,6 +12317,12 @@
             "format": "uuid"
           },
           "programaDeOferta": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "regimeDeFuncionamento": {
             "type": [
               "null",
               "string"
@@ -11336,9 +13147,8 @@
           "agrupaEtapas",
           "permiteComplementacao",
           "baseLegal",
-          "produzResultado",
-          "resultadoDefinitivo",
           "coletaInscricao",
+          "coletaSolicitacaoIsencao",
           "origemData",
           "criadoEm"
         ],
@@ -11375,13 +13185,10 @@
               "string"
             ]
           },
-          "produzResultado": {
-            "type": "boolean"
-          },
-          "resultadoDefinitivo": {
-            "type": "boolean"
-          },
           "coletaInscricao": {
+            "type": "boolean"
+          },
+          "coletaSolicitacaoIsencao": {
             "type": "boolean"
           },
           "origemData": {
@@ -11399,6 +13206,21 @@
             "additionalProperties": {
               "type": "string"
             }
+          }
+        }
+      },
+      "FaseCanonicaVocabularioDto": {
+        "required": [
+          "codigo",
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
           }
         }
       },
@@ -11669,6 +13491,7 @@
           "unidadeOfertante",
           "programaDeOferta",
           "formatoPedagogico",
+          "regimeDeFuncionamento",
           "regimeDeTurno",
           "turnos",
           "eMecCodigo",
@@ -11699,6 +13522,9 @@
             "type": "string"
           },
           "formatoPedagogico": {
+            "type": "string"
+          },
+          "regimeDeFuncionamento": {
             "type": "string"
           },
           "regimeDeTurno": {
@@ -12210,6 +14036,21 @@
           }
         }
       },
+      "TipoBancaVocabularioDto": {
+        "required": [
+          "codigo",
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
       "TipoDeficienciaDto": {
         "required": [
           "id",
@@ -12369,6 +14210,25 @@
           }
         }
       },
+      "TipoInstrumentoNormativoVocabularioDto": {
+        "required": [
+          "codigo",
+          "nome",
+          "descricao"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      },
       "TipoLocalOferta": {
         "enum": [
           "nenhum",
@@ -12524,10 +14384,16 @@
       "name": "Profile"
     },
     {
+      "name": "BaseLegalBonusRegional"
+    },
+    {
       "name": "CalendariosDiasUteis"
     },
     {
       "name": "Campi"
+    },
+    {
+      "name": "CategoriasDocumento"
     },
     {
       "name": "CondicoesAtendimento"
@@ -12579,6 +14445,9 @@
     },
     {
       "name": "TiposProcesso"
+    },
+    {
+      "name": "Vocabularios"
     }
   ]
 }
