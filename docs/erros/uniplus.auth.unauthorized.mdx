@@ -1,0 +1,38 @@
+---
+title: A requisição não está autenticada
+sidebar_label: Não autenticado
+description: Requisição requer autenticação válida — token Bearer ausente, malformado, expirado ou com assinatura inválida.
+code: uniplus.auth.unauthorized
+http_status: 401
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint marcado com [Authorize], quando a requisição não traz um token Bearer válido
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#322'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/322
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O endpoint exige autenticação, e a requisição não trouxe um token Bearer
+válido — o header `Authorization` está ausente, o token está malformado,
+expirou ou tem assinatura inválida.
+
+A resposta não distingue qual dessas causas ocorreu: o corpo do erro e o
+header `WWW-Authenticate: Bearer` não trazem `error`/`error_description`
+detalhando o motivo da falha de validação do JWT. É decisão deliberada —
+expor a causa exata de uma falha de autenticação amplia a superfície para
+quem está tentando adivinhar credenciais válidas.
+
+## Como resolver
+
+Obtenha um token de acesso válido pelo fluxo de autenticação institucional
+(Keycloak/OIDC) e inclua-o no header `Authorization: Bearer <token>` da
+requisição. Se você já tinha um token, ele provavelmente expirou — autentique
+novamente para obter um novo.

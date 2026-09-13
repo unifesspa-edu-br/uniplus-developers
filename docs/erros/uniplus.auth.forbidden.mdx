@@ -1,0 +1,35 @@
+---
+title: O acesso ao recurso foi negado
+sidebar_label: Acesso negado
+description: Token autenticado e válido, mas sem a role ou claim exigida pelo endpoint.
+code: uniplus.auth.forbidden
+http_status: 403
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint com política de autorização (role ou claim) que o token autenticado não atende
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#322'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/322
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O token enviado é válido e a requisição está autenticada, mas o endpoint
+exige uma role ou claim que este token não carrega. É diferente de
+[`uniplus.auth.unauthorized`](/erros/uniplus.auth.unauthorized): ali não
+havia identidade reconhecível; aqui a identidade é reconhecida, e mesmo
+assim não tem a permissão exigida para este recurso específico.
+
+## Como resolver
+
+Se você acredita que deveria ter acesso a este recurso, o problema não está
+na requisição — é a role ou o vínculo institucional da sua conta que precisa
+ser ajustado. Procure quem administra permissões no seu órgão/setor para
+verificar seu perfil de acesso. Repetir a requisição com o mesmo token não
+muda o resultado.
