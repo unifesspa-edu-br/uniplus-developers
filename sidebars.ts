@@ -296,6 +296,8 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.idempotency.processing_conflict',
         'erros/uniplus.idempotency.principal_requerido',
         'erros/uniplus.idempotency.body_muito_grande',
+        'erros/uniplus.auth.unauthorized',
+        'erros/uniplus.auth.forbidden',
         'erros/uniplus.organizacao.unidade.nome_obrigatorio',
         'erros/uniplus.organizacao.unidade.nome_tamanho',
         'erros/uniplus.organizacao.unidade.sigla_obrigatoria',
