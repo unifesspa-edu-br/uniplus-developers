@@ -1257,6 +1257,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Equipe frontend',
   },
   {
+    requisito_id: 'UNI-REQ-0138',
+    titulo: 'Regime de funcionamento da oferta de curso',
+    enunciado:
+      'Toda oferta de curso declara, em campo próprio e obrigatório, o regime em que funciona, escolhido entre os três nomeados pelo Regulamento do Ensino de Graduação da Unifesspa, instituído pela Resolução nº 034/2018 do CONSEPE. EXTENSIVO é a modalidade regular, cujas atividades acadêmicas e disciplinas se distribuem de forma contínua ao longo de um período letivo regular, semestral. INTENSIVO é a oferta concentrada, em que a carga horária de uma ou mais disciplinas é cumprida em tempo reduzido, geralmente em períodos de férias letivas ou turmas especiais. ALTERNANCIA_PEDAGOGICA é o regime estruturado na alternância entre etapas presenciais na instituição, o Tempo-Universidade, e etapas presenciais e práticas desenvolvidas na comunidade ou no meio social e profissional de origem, o Tempo-Comunidade — modelo padrão de cursos como a Licenciatura em Educação do Campo. O regime de funcionamento é dimensão própria e não substitui nenhuma das outras que a oferta já carrega, e as quatro fronteiras precisam ficar registradas porque a leitura cruzada é fácil: não é o regime de turno do UNI-REQ-0137, que responde em quantos turnos a oferta funciona; não é o programa de oferta, que distingue a oferta regular da instituição das vinculadas a Forma Pará, Parfor, Pronera, PEPETI e convênios; não é o formato pedagógico, que diz como a aula acontece; e não é o turno, que diz quando ela acontece. Entre as duas dimensões de regime há uma única regra de compatibilidade, decisão complementar do Product Owner de 26 de agosto de 2026: a oferta INTENSIVA só existe sob regime de turno INTEGRAL, enquanto EXTENSIVO e ALTERNANCIA_PEDAGOGICA aceitam tanto REGULAR quanto INTEGRAL. São cinco combinações válidas, e INTENSIVO com REGULAR é recusado. O regime é declarado, nunca inferido da quantidade de turnos, do regime de turno, do formato pedagógico ou do programa: a combinação incompatível é recusada como veio, e nenhuma das duas dimensões é convertida para acomodar a outra.',
+    grupo: 'dados',
+    tipo: 'requisito_dados',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0010',
+    modulo: 'Configuração; Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Cadastrar oferta sem regime de funcionamento é recusado, e informar valor fora do conjunto EXTENSIVO, INTENSIVO e ALTERNANCIA_PEDAGOGICA também — são recusas distintas, porque quem não informou nada precisa de orientação diferente de quem informou valor errado. As cinco combinações válidas são aceitas: EXTENSIVO com REGULAR, EXTENSIVO com INTEGRAL, ALTERNANCIA_PEDAGOGICA com REGULAR, ALTERNANCIA_PEDAGOGICA com INTEGRAL e INTENSIVO com INTEGRAL. INTENSIVO com REGULAR é recusado por incompatibilidade, com erro distinto do de valor inválido, e a recusa nomeia o regime declarado e o regime de turno que ele exige. A recusa não altera nada do que foi informado: nem o regime de funcionamento, nem o regime de turno, nem os turnos. A cardinalidade de turnos continua regida pelo UNI-REQ-0137 e não muda em função do regime de funcionamento. A leitura da oferta devolve o regime declarado, e nenhuma oferta já cadastrada recebe regime por omissão.',
+    verificacao:
+      'Implementada no backend, com os três regimes. Cobrem o requisito os testes de unidade do vocabulário fechado e da regra de compatibilidade, os testes de contrato que exercitam o ciclo de cadastro, edição e leitura de cada regime e recusam a combinação inválida por código de erro próprio, e os testes de persistência em que o próprio banco recusa valor fora do conjunto e a combinação INTENSIVO com REGULAR. O cadastro no painel de Configuração ainda não oferece a alternância pedagógica: a inclusão na interface é trabalho próprio, acompanhado por issue do frontend.',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
     requisito_id: 'UNI-REQ-0012',
     titulo: 'Atendimento especializado configurável',
     enunciado:
