@@ -1,0 +1,60 @@
+---
+title: Regime de funcionamento fora do domínio fechado
+sidebar_label: Regime de funcionamento inválido
+description: O regime de funcionamento precisa ser um dos três tokens do domínio fechado — EXTENSIVO, INTENSIVO ou ALTERNANCIA_PEDAGOGICA.
+code: uniplus.configuracao.oferta_curso.regime_de_funcionamento_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos:
+  - UNI-REQ-0138
+rastreio:
+  - label: 'uniplus-api#1305'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1305
+  - label: 'uniplus-api#1507'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1507
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `regimeDeFuncionamento` informado não é `EXTENSIVO`, `INTENSIVO` nem
+`ALTERNANCIA_PEDAGOGICA`. O domínio é fechado, e o valor é aceito por
+correspondência textual exata com um desses três tokens.
+
+Três enganos previsíveis levam a este erro:
+
+- **Enviar um token do regime de turno.** `REGULAR` e `INTEGRAL` são o
+  vocabulário da outra dimensão, que responde em *quantos turnos* a oferta
+  funciona — não em que regime ela funciona.
+- **Enviar um token do formato pedagógico ou do programa de oferta.**
+  `PRESENCIAL`, `SEMIPRESENCIAL` e `EAD` dizem **como** a aula acontece;
+  `REGULAR`, `PARFOR`, `PRONERA`, `FORMA_PARA`, `PEPETI`, `CONVENIO_OUTRO` e
+  `OUTRO` dizem a que programa a oferta se vincula. São campos independentes,
+  cada um com o seu.
+- **Escrever a alternância com acento, espaço ou caixa diferente.** O token é
+  `ALTERNANCIA_PEDAGOGICA` — caixa alta, sem acento, com sublinhado.
+  `Alternância Pedagógica`, `Alternancia Pedagogica` e
+  `alternancia_pedagogica` são recusados.
+
+O parsing é sensível a maiúsculas e minúsculas e não aceita valor numérico.
+Espaço em volta do token é tolerado; qualquer outra variação, não.
+
+## Como resolver
+
+Informe um dos três tokens válidos:
+
+| Token | O que significa |
+|---|---|
+| `EXTENSIVO` | Modalidade regular: as atividades e disciplinas se distribuem de forma contínua ao longo de um período letivo regular, semestral. |
+| `INTENSIVO` | Oferta concentrada: a carga horária de uma ou mais disciplinas é cumprida em tempo reduzido, geralmente em férias letivas ou turmas especiais. |
+| `ALTERNANCIA_PEDAGOGICA` | Alternância entre etapas presenciais na instituição (Tempo-Universidade) e etapas desenvolvidas na comunidade ou no meio profissional de origem (Tempo-Comunidade) — modelo padrão de cursos como a Licenciatura em Educação do Campo. |
+
+Se o campo não foi informado de forma alguma, a causa é outra:
+[regime de funcionamento obrigatório](./uniplus.configuracao.oferta_curso.regime_de_funcionamento_obrigatorio.mdx).
