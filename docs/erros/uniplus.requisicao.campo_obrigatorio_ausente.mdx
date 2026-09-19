@@ -1,0 +1,60 @@
+---
+title: A requisição não declara campo obrigatório do contrato
+sidebar_label: Campo obrigatório ausente
+description: A requisição não trouxe campo do corpo ou parâmetro que o contrato do endpoint exige declarar.
+code: uniplus.requisicao.campo_obrigatorio_ausente
+http_status: 400
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint, na leitura da requisição — antes de o comando existir
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1566'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1566
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Algo que o contrato do endpoint exige declarar não veio na requisição. O campo
+`detail` da resposta nomeia o que falta — é sempre pelo menos um nome, porque
+esta causa só é reivindicada quando há o que nomear.
+
+A ausência tem duas origens, e as duas caem aqui:
+
+1. **Campo obrigatório do corpo.** O documento chegou e foi lido, e o
+   desserializador não encontrou propriedade que o contrato marca como
+   obrigatória.
+2. **Parâmetro fora do corpo.** Um parâmetro de query, header ou formulário que
+   o endpoint exige e para o qual a requisição não trouxe valor nenhum.
+
+O `detail` traz apenas os nomes dos campos, e nada do texto que o framework
+produziu ao recusar. Essa mensagem carrega o nome completo do tipo interno que
+receberia o documento — namespace e camada da aplicação —, e repassá-la
+publicaria estrutura interna a qualquer cliente que mandasse uma carga
+incompleta.
+
+Quando há campo nomeável faltando, esta causa prevalece sobre as demais recusas
+de leitura da requisição: dizer o que falta é a orientação mais útil que a
+resposta consegue dar.
+
+## Como resolver
+
+Acrescente à requisição os campos que o `detail` nomeia e repita a chamada. O
+contrato de cada endpoint — quais campos são obrigatórios, e sob que nome —
+está na referência de API do módulo correspondente.
+
+Se o campo foi declarado e ainda assim a requisição é recusada, a causa é
+outra:
+
+- valor dentro do documento que não vira o tipo declarado é
+  [requisição malformada](./uniplus.requisicao.malformada.mdx);
+- valor de parâmetro declarado fora do corpo — rota, query, header, formulário —
+  que não vira o tipo declarado é
+  [valor inválido](./uniplus.requisicao.valor_invalido.mdx);
+- requisição que não trouxe documento algum é
+  [corpo ausente](./uniplus.requisicao.corpo_ausente.mdx).
