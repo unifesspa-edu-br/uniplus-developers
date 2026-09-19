@@ -1,0 +1,60 @@
+---
+title: Regime de funcionamento é obrigatório
+sidebar_label: Regime de funcionamento obrigatório
+description: Toda oferta de curso declara seu regime de funcionamento — EXTENSIVO, INTENSIVO ou ALTERNANCIA_PEDAGOGICA. O campo não tem valor padrão.
+code: uniplus.configuracao.oferta_curso.regime_de_funcionamento_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos:
+  - UNI-REQ-0138
+rastreio:
+  - label: 'uniplus-api#1305'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1305
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `regimeDeFuncionamento` não foi informado. Ele é obrigatório e **não
+tem valor padrão**: nenhuma oferta recebe regime por omissão, nem na criação
+nem na atualização.
+
+É diferente de informar um token fora do vocabulário, que tem código próprio —
+[`regime_de_funcionamento_invalido`](./uniplus.configuracao.oferta_curso.regime_de_funcionamento_invalido.mdx).
+A distinção é proposital: quem não declarou nada precisa saber que a dimensão
+existe e o que ela significa; quem declarou o token errado já sabe disso e
+precisa é do vocabulário correto.
+
+O regime de funcionamento é **dimensão própria**. Ele não é derivado do regime
+de turno, do formato pedagógico, do programa de oferta nem da quantidade de
+turnos — ter declarado esses campos não dispensa declarar este.
+
+## Como resolver
+
+Declare o regime em que a oferta funciona, escolhendo entre os três que o
+Regulamento do Ensino de Graduação da Unifesspa nomeia:
+
+| Token | O que significa |
+|---|---|
+| `EXTENSIVO` | Modalidade regular: as atividades e disciplinas se distribuem de forma contínua ao longo de um período letivo regular, semestral. |
+| `INTENSIVO` | Oferta concentrada: a carga horária de uma ou mais disciplinas é cumprida em tempo reduzido, geralmente em férias letivas ou turmas especiais. |
+| `ALTERNANCIA_PEDAGOGICA` | Alternância entre etapas presenciais na instituição (Tempo-Universidade) e etapas desenvolvidas na comunidade ou no meio profissional de origem (Tempo-Comunidade) — modelo padrão de cursos como a Licenciatura em Educação do Campo. |
+
+```json
+{
+  "regimeDeFuncionamento": "EXTENSIVO",
+  "regimeDeTurno": "REGULAR",
+  "turnos": ["NOTURNO"]
+}
+```
+
+Ao escolher `INTENSIVO`, confira também o regime de turno: essa é a única
+combinação restrita entre as duas dimensões, descrita em
+[regime de funcionamento incompatível com o regime de turno](./uniplus.configuracao.oferta_curso.regime_de_funcionamento_incompativel_com_regime_de_turno.mdx).

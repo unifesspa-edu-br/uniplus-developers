@@ -1,0 +1,87 @@
+---
+title: Regime de funcionamento incompatível com o regime de turno declarado
+sidebar_label: Regime incompatível com o de turno
+description: A oferta INTENSIVO só existe sob regime de turno INTEGRAL — é a única restrição entre as duas dimensões, e nenhuma delas é convertida para acomodar a outra.
+code: uniplus.configuracao.oferta_curso.regime_de_funcionamento_incompativel_com_regime_de_turno
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de uma oferta de curso
+  - Atualização de uma oferta de curso
+requisitos:
+  - UNI-REQ-0138
+rastreio:
+  - label: 'uniplus-api#1305'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1305
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O regime de funcionamento e o regime de turno declarados na mesma oferta não
+combinam. Há **uma única** regra de compatibilidade entre as duas dimensões: a
+oferta `INTENSIVO` só existe sob regime de turno `INTEGRAL`.
+
+São cinco as combinações válidas:
+
+| `regimeDeFuncionamento` | `regimeDeTurno` | Resultado |
+|---|---|---|
+| `EXTENSIVO` | `REGULAR` | válida |
+| `EXTENSIVO` | `INTEGRAL` | válida |
+| `ALTERNANCIA_PEDAGOGICA` | `REGULAR` | válida |
+| `ALTERNANCIA_PEDAGOGICA` | `INTEGRAL` | válida |
+| `INTENSIVO` | `INTEGRAL` | válida |
+| `INTENSIVO` | `REGULAR` | **recusada** — é esta página |
+
+A recusa **não converte nada**. Declarar `INTENSIVO` com `REGULAR` não promove
+a oferta a `INTEGRAL` nem rebaixa o regime de funcionamento: a combinação é
+devolvida como veio, e a correção é de quem declarou. Inferir uma dimensão a
+partir da outra apagaria a diferença entre um engano de digitação e uma oferta
+que realmente funciona daquele jeito.
+
+A mensagem do erro nomeia o regime de funcionamento declarado, o regime de
+turno que ele exige e o que foi declarado no lugar.
+
+Esta causa só é avaliada quando os **dois** regimes são reconhecidos. Se um
+deles está fora do vocabulário, a recusa é de valor inválido — veja
+[regime de funcionamento inválido](./uniplus.configuracao.oferta_curso.regime_de_funcionamento_invalido.mdx)
+e
+[regime de turno inválido](./uniplus.configuracao.oferta_curso.regime_de_turno_invalido.mdx).
+
+## Como resolver
+
+Há dois caminhos, e a escolha depende de como a oferta realmente funciona.
+
+**Se a oferta é mesmo concentrada**, o regime de turno é que precisa mudar — e
+mudar para `INTEGRAL` traz junto uma exigência de turnos: `INTEGRAL` pede
+**exatamente dois turnos distintos**. Trocar só o regime, deixando um turno na
+lista, leva à recusa seguinte,
+[turnos incompatíveis com o regime](./uniplus.configuracao.oferta_curso.cardinalidade_turnos_incompativel_com_regime.mdx).
+Os dois campos mudam juntos:
+
+```json
+{
+  "regimeDeFuncionamento": "INTENSIVO",
+  "regimeDeTurno": "INTEGRAL",
+  "turnos": ["MATUTINO", "VESPERTINO"]
+}
+```
+
+**Se a oferta ocupa um turno só**, ela não é concentrada, e o que estava errado
+é o regime de funcionamento. `EXTENSIVO` e `ALTERNANCIA_PEDAGOGICA` aceitam
+`REGULAR`, e nesse caso a lista de turnos permanece como está:
+
+```json
+{
+  "regimeDeFuncionamento": "EXTENSIVO",
+  "regimeDeTurno": "REGULAR",
+  "turnos": ["NOTURNO"]
+}
+```
+
+A cardinalidade de turnos é regida pelo regime de **turno**, e não muda em
+função do regime de funcionamento.
