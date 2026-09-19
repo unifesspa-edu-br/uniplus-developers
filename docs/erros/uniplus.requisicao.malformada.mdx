@@ -1,0 +1,64 @@
+---
+title: A requisição não pôde ser lida
+sidebar_label: Requisição malformada
+description: O corpo chegou e não pôde ser lido — JSON inválido, ou valor que não vira o tipo declarado dentro do documento.
+code: uniplus.requisicao.malformada
+http_status: 400
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint que receba corpo, quando o documento enviado não desserializa
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1566'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1566
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Houve documento no corpo da requisição, e ele não pôde ser lido. Duas formas
+caem aqui:
+
+- o **JSON não é sintaticamente válido** — chave sem aspas, vírgula sobrando,
+  documento truncado;
+- um **valor dentro do documento não vira o tipo** que o contrato declara para
+  aquele campo — texto onde se espera número, número onde se espera data.
+
+Nos dois casos a leitura parou antes de existir comando: nada do que a
+requisição pedia chegou a ser avaliado.
+
+**Houve documento** é o que separa esta causa de
+[corpo ausente](./uniplus.requisicao.corpo_ausente.mdx). A distinção não é
+cosmética: quando o corpo vem e não desserializa, o parâmetro que o receberia
+também é reprovado, e uma resposta que não desempatasse mandaria acrescentar
+corpo a quem já mandou um.
+
+**O defeito é do documento**, e não do que vem fora dele — é o que separa esta
+causa de [valor inválido](./uniplus.requisicao.valor_invalido.mdx), onde quem
+não converte é um parâmetro declarado fora do corpo (rota, query, header ou
+formulário). São lugares diferentes a corrigir.
+
+A resposta não aponta em que posição do documento a leitura falhou, nem repassa
+a mensagem do desserializador: é dessa mensagem que sai o nome do tipo interno
+que receberia a carga, e o envelope de erro não publica estrutura interna.
+
+## Como resolver
+
+Confira o documento que está sendo enviado:
+
+1. **Valide o JSON** antes de enviar — uma ferramenta de validação aponta a
+   posição do defeito de sintaxe, que a resposta deliberadamente não traz.
+2. **Confira o tipo de cada valor** contra o schema do endpoint na referência de
+   API: número enviado como texto (`"10"` em vez de `10`), data fora do formato
+   declarado e booleano escrito por extenso são os enganos mais comuns.
+3. Se o documento é montado por uma biblioteca de cliente, verifique se a
+   serialização não está convertendo tipos por conta própria.
+
+Se o problema não é a forma do documento, mas um campo que não foi declarado,
+a causa é
+[campo obrigatório ausente](./uniplus.requisicao.campo_obrigatorio_ausente.mdx),
+e a resposta nomeia o que falta.

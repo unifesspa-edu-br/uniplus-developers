@@ -1,0 +1,73 @@
+---
+title: A requisição traz valor que não corresponde ao tipo declarado
+sidebar_label: Valor inválido
+description: Parâmetro declarado fora do corpo — rota, query, header ou formulário — cujo valor não vira o tipo que o contrato declara.
+code: uniplus.requisicao.valor_invalido
+http_status: 400
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint com parâmetro declarado fora do corpo, quando o valor enviado não converte para o tipo declarado
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1575'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1575
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um parâmetro declarado **fora do corpo** veio com valor presente, e esse valor
+não vira o tipo que o contrato declara — `?vigentes=abc` onde se espera um
+booleano, `?data=ontem` onde se espera uma data.
+
+O recorte é a origem do valor, e não o lugar específico: vale para rota, query,
+header e campo de formulário. Na prática a grande maioria das ocorrências é de
+query, porque é ali que o cliente digita valor com mais liberdade — mas a causa
+é a mesma, e a resposta é a mesma, seja qual for a origem.
+
+O `detail` nomeia o **parâmetro**, e não a posição dentro dele: quando vários
+elementos de uma coleção não convertem, a correção é a mesma para todos — os
+valores precisam caber no tipo —, e enumerar cada posição não acrescenta
+instrução nenhuma. O `detail` também **não chama o parâmetro de obrigatório**:
+um parâmetro de query com valor padrão é opcional, e o que faltou aqui foi o
+valor caber no tipo, não a declaração. E não ecoa o valor recusado.
+
+**O corpo fica fora desta causa**, de propósito — é o que a separa de
+[requisição malformada](./uniplus.requisicao.malformada.mdx), que responde pelo
+valor que não converte dentro do documento. A recusa de leitura do corpo já
+distingue documento ilegível, campo não declarado e documento inexistente, três
+situações que o cliente corrige de formas diferentes; trazê-las para cá as
+achataria numa só.
+
+### Não confundir com validação reprovada
+
+Esta causa é anterior à validação. Aqui o valor **não chegou a virar o tipo**;
+numa validação reprovada ele virou, e foi o conteúdo que não serviu — um formato
+que a expressão regular do parâmetro recusa, um intervalo fora da faixa aceita.
+
+A diferença importa porque a resposta de validação traz **mensagem específica**,
+escrita para aquele parâmetro, dizendo qual é o formato esperado — orientação
+que esta página genérica não teria como dar. Por isso, quando uma mesma
+requisição reúne um valor que não converteu e um valor que a validação reprovou,
+é a mensagem da validação que prevalece: entre as duas, responde quem tem mais a
+dizer.
+
+## Como resolver
+
+Corrija o valor do parâmetro que o `detail` nomeia, onde quer que ele esteja
+sendo enviado — no caminho ou na query da URL, num header, ou num campo do
+formulário —, conferindo o tipo declarado para ele no schema do endpoint:
+
+- **booleano** aceita `true` e `false`, e não `1`, `0`, `sim` ou `não`;
+- **data e data-hora** seguem o formato declarado no contrato do parâmetro;
+- **identificador** precisa estar completo e sem caracteres de formatação
+  acrescentados;
+- **número** não aceita separador de milhar nem unidade junto.
+
+Se o parâmetro não foi declarado de forma alguma, e o endpoint o exige, a causa
+é
+[campo obrigatório ausente](./uniplus.requisicao.campo_obrigatorio_ausente.mdx).

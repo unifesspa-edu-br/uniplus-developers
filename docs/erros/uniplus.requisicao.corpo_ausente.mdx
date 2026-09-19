@@ -1,0 +1,62 @@
+---
+title: A requisição não traz corpo
+sidebar_label: Corpo ausente
+description: O recurso exige corpo e a requisição não trouxe documento algum — ausência demonstrada, não presumida.
+code: uniplus.requisicao.corpo_ausente
+http_status: 400
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer endpoint que exija corpo, quando é possível demonstrar que a requisição não trouxe nenhum
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1566'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1566
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O recurso exige um documento no corpo, e a requisição não trouxe nenhum.
+
+Esta causa só é afirmada quando a ausência é **demonstrável**, e não deduzida.
+Quem demonstra é o servidor, que sabe se esta requisição podia trazer corpo;
+onde esse sinal não existe, só um `Content-Length` zero declarado prova
+ausência. Comprimento desconhecido não é comprimento zero — um documento em
+`chunked`, ou um corpo HTTP/2, que não usa codificação de transferência, chega
+sem comprimento declarado e existe. Na dúvida a recusa não afirma ausência, e a
+resposta sai por outro caminho.
+
+**Documento `null` é corpo.** Enviar `null` deixa o parâmetro vazio exatamente
+como não enviar nada, mas o cliente enviou algo — e mandá-lo acrescentar um
+corpo que ele já mandou não leva a lugar nenhum. Nesse caso a recusa é de
+conteúdo: quem reprova é a exigência de não-nulidade do parâmetro, já com o
+documento lido, e a resposta dela tem mensagem própria, que não passa por esta
+página.
+
+É diferente de
+[requisição malformada](./uniplus.requisicao.malformada.mdx): ali há documento e
+ele está errado; aqui não há documento.
+
+## Como resolver
+
+Envie no corpo o documento que o contrato do endpoint declara, com o
+`Content-Type` que aquele recurso aceita — a referência de API do módulo traz
+os dois.
+
+Quando o documento parece ter sido montado, o engano costuma estar entre a
+montagem e o envio:
+
+1. **A biblioteca de cliente não enviou o corpo.** Várias descartam o corpo em
+   métodos onde ele é incomum — `GET` e `DELETE` —, e algumas o perdem ao
+   seguir um redirecionamento automaticamente.
+2. **A serialização produziu documento vazio** — o objeto a enviar estava nulo,
+   e o que saiu na rede foi uma carga de comprimento zero.
+
+Se o documento está sendo enviado e mesmo assim a requisição é recusada, a
+causa é outra: confira
+[requisição malformada](./uniplus.requisicao.malformada.mdx) e
+[campo obrigatório ausente](./uniplus.requisicao.campo_obrigatorio_ausente.mdx).
