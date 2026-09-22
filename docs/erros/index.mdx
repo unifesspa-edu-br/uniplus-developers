@@ -38,9 +38,50 @@ explicação da causa e do que fazer diante dela.
 - **`detail`** — descreve a instância específica. Nunca ecoa o valor recusado.
 - **`instance`** — identificador opaco da requisição, para acionar o suporte.
 - **`traceId`** — correlaciona a recusa com o rastro distribuído da operação.
+- **`retryable`** — só aparece em conflito, e só quando vale `true`. Diz que a
+  mesma requisição, repetida sem alteração, pode agora ter outro desfecho,
+  porque o conflito descrevia uma corrida que já passou. **Ausência não é
+  `false`**: o campo simplesmente não viaja no caso comum.
 
 Trate sempre pelo `code`, nunca pelo texto de `title` ou `detail`: esses são
 redigidos em português e podem ser reescritos sem que a causa mude.
+
+## Quando vale repetir
+
+Um conflito que traz `retryable: true` pode ser repetido **preservando a
+`Idempotency-Key`**: a reserva daquela chave é liberada em vez de guardada,
+justamente para que a repetição alcance o servidor. Sem o campo, repetir com a
+mesma chave devolve a mesma recusa enquanto a entrada estiver em cache.
+
+O campo é declarado no schema `ProblemDetails` dos contratos da API, como
+booleano **opcional** — opcional porque só viaja quando é `true`, e um cliente
+que o exigisse presente leria o caso comum como violação de contrato. Os
+arquivos OpenAPI exibidos neste portal são cópias sincronizadas da API por
+rotina própria, então podem levar um ciclo até refletir a declaração.
+
+O critério que separa os dois casos é o que evita generalizar errado:
+
+> É seguro repetir a operação cujo alvo a requisição **nomeia**.
+> Não é seguro repetir aquela cujo alvo sai do **estado corrente** — porque é
+> justamente esse estado que a corrida mudou.
+
+Marcar vigente um dataset, ativar um motivo, gravar um rascunho: todos nomeiam o
+que tocam, e repetir faz a mesma coisa. Já "aprovo o texto que está lá" e
+"retifico a versão que está valendo" não nomeiam nada — o que elas tocam pode ter
+mudado por causa da mesma corrida que as recusou, e repetir aplicaria o efeito a
+outro alvo.
+
+Por isso a declaração é do código **no contexto das operações que o emitem**, e
+não do código sozinho: um mesmo código usado por várias operações só é declarado
+retentável se a repetição preservar o efeito pedido em todas elas. O padrão é
+não declarar.
+
+A ausência do campo, portanto, diz que aquele conflito não foi declarado
+retentável — não que repetir esteja descartado. Quando a resposta não o traz,
+vale o que o `detail` dela orienta.
+
+O campo não promete nada sobre **quantas vezes** repetir nem **em quanto tempo**.
+Não há `Retry-After`.
 
 ## Endereço das páginas
 
