@@ -1,7 +1,7 @@
 ---
 title: A modalidade legal fixa não pode ser removida
 sidebar_label: Remoção bloqueada — código protegido
-description: As dez modalidades do catálogo legal fixo são o piso de ações afirmativas exigido por lei e não podem ser removidas.
+description: As doze modalidades do catálogo legal fixo — as cotas da Lei 12.711, a ampla concorrência e as ações afirmativas da Resolução nº 532/2021 — não podem ser removidas.
 code: uniplus.configuracao.modalidade.remocao_bloqueada_codigo_protegido
 http_status: 409
 situacao: publicado
@@ -12,6 +12,8 @@ requisitos: []
 rastreio:
   - label: 'uniplus-api#589'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+  - label: 'uniplus-api#1670'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1670
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -20,13 +22,13 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A modalidade que a operação tentou remover é uma das dez do **catálogo
-legal fixo** — as oito modalidades reservadas da Lei 12.711/2012 (redação
-da Lei 14.723/2023), a ampla concorrência (`AC`) e a modalidade de pessoa
-com deficiência fora da reserva federal (`AC_PCD`).
+A modalidade que a operação tentou remover é uma das doze do **catálogo
+legal fixo** — as oito cotas da Lei 12.711/2012 (redação da Lei 14.723/2023), a ampla
+concorrência (`AC`) e as três ações afirmativas institucionais da
+Resolução nº 532/2021 (`AC_PCD`, `AC_I` e `AC_Q`).
 
-Sem essas dez, não há como configurar a distribuição de vagas de um edital
-que aplique a lei de cotas. Esta checagem precede a de referência por outra
+Sem essas doze, não há como configurar a distribuição de vagas de um edital
+que aplique a lei de cotas ou as ações afirmativas da instituição. Esta checagem precede a de referência por outra
 modalidade — é determinística e não depende de consultar o banco.
 
 ## Como resolver

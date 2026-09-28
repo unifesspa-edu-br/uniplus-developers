@@ -1,7 +1,7 @@
 ---
 title: A modalidade legal fixa admite alterar só descrição e base legal
 sidebar_label: Estrutura protegida não editável
-description: Nas dez modalidades do catálogo legal fixo, a atualização só aceita descrição e base legal — natureza, composição, remanejamento, critérios e ação no indeferimento são fixados em lei.
+description: Nas doze modalidades do catálogo legal fixo, a atualização só aceita descrição e base legal — natureza, composição, remanejamento, critérios e ação no indeferimento são fixados pela norma que institui cada uma.
 code: uniplus.configuracao.modalidade.estrutura_protegida_nao_editavel
 http_status: 422
 situacao: publicado
@@ -12,6 +12,8 @@ requisitos: []
 rastreio:
   - label: 'uniplus-api#589'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+  - label: 'uniplus-api#1670'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1670
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -20,15 +22,15 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A modalidade é uma das dez do **catálogo legal fixo** — as oito modalidades
-reservadas da Lei 12.711/2012 (redação da Lei 14.723/2023), a ampla
-concorrência (`AC`) e a modalidade de pessoa com deficiência fora da reserva
-federal (`AC_PCD`) — e a atualização tentou mudar um campo além de descrição
+A modalidade é uma das doze do **catálogo legal fixo** — as oito cotas da Lei 12.711/2012 (redação da Lei 14.723/2023), a ampla
+concorrência (`AC`) e as três ações afirmativas institucionais da
+Resolução nº 532/2021 (`AC_PCD`, `AC_I` e `AC_Q`) — e a atualização tentou mudar um campo além de descrição
 e base legal.
 
-Nessas dez, a estrutura de vagas (natureza legal, composição, remanejamento,
-critérios cumulativos, ação no indeferimento) vem da lei, não da
-universidade — só nasce do seed. Só descrição e base legal permanecem
+Nessas doze, a estrutura de vagas (natureza legal, composição, remanejamento,
+critérios cumulativos, ação no indeferimento) vem da norma que institui a
+modalidade — a lei de cotas ou a resolução do conselho superior —, não do
+cadastro administrativo, e só nasce do seed. Só descrição e base legal permanecem
 editáveis por cadastro; qualquer divergência em outro campo é recusada antes
 mesmo de conferir se o valor enviado seria, isoladamente, coerente.
 
