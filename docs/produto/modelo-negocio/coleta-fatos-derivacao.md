@@ -18,7 +18,7 @@ O texto descreve o comportamento de negócio em linguagem corrente. Cada assunto
 
 - **Quantas cotas o candidato ocupa ao mesmo tempo.** Uma fonte limita a inscrição a uma reserva; outra, mais recente, define um conjunto de várias reservas simultâneas (por exemplo, cor/raça e renda juntas). Este documento adota o conjunto múltiplo, alinhado à Lei 14.723/2023 — a confirmar na especificação.
 - **Limite de renda na fronteira exata.** A autodeclaração implementada no sistema pergunta "renda per capita **igual ou inferior** a 1 salário mínimo", aderente à Lei 12.711/2012 (art. 1º, parágrafo único). O registro de requisitos (`UNI-REQ-0076`) ainda descreve "inferior a" — divergência a reconciliar; o PO confirma o texto final e o tratamento de quem tem renda exatamente igual a 1 salário mínimo.
-- **Cor/raça de quem não é de escola pública.** Hoje a pergunta de cor/raça só aparece para egressos de escola pública. Se um documento passar a depender de cor/raça para outros candidatos, é preciso decidir se cor/raça deve ser coletada de todos.
+- **Cor/raça de quem não é de escola pública.** Hoje a pergunta de cor/raça só aparece para quem optou pelas cotas da lei — egresso de escola pública que deseja concorrer às vagas de escola pública. Se um documento passar a depender de cor/raça para outros candidatos, é preciso decidir se cor/raça deve ser coletada de todos.
 
 ---
 
@@ -49,7 +49,7 @@ Nem toda pergunta aparece para todo candidato. Cada campo pode ter **pré-condi�
 
 - abrir a pergunta "concorrer à cota X?" só depois do "sim" na autodeclaração de X;
 - ocultar o bloco quilombola para quem se declara indígena (exclusão mútua);
-- só perguntar renda para quem é de escola pública (gate de escola pública).
+- só perguntar cor/raça, quilombola e renda para quem optou pelas cotas da lei, isto é, é de escola pública e deseja concorrer às vagas de escola pública (gate de escola pública). A pergunta de deficiência fica fora do gate: quem não optou pelas cotas pode concorrer à ação afirmativa `AC_PCD` (`UNI-REQ-0142`).
 
 As pré-condições são **configuradas**, não programadas, e ficam congeladas na publicação. Uma regra importante de integridade: uma pergunta só pode depender de respostas **anteriores** — o formulário tem uma ordem, e nenhuma pergunta depende de algo que ainda virá (seção 6).
 
@@ -71,7 +71,7 @@ Uma consequência importante da transição para **não se aplica**: quando uma 
 
 A **modalidade é um fato derivado**: o sistema a calcula a partir das autodeclarações e opt-ins, aplicando a composição da Lei de Cotas expressa como **configuração** (`UNI-REQ-0075`, `UNI-REQ-0076`).
 
-A regra de derivação é uma **lista de regrinhas** do tipo "**quando** tais condições valem, **contribui** com tal modalidade". A avaliação **soma** (une) as modalidades de todas as regrinhas cujas condições são verdadeiras; regra falsa ou não-aplicável não contribui. A composição da Lei de Cotas — o par autodeclaração+concorrer, a concorrência dupla (Lei 14.723/2023), a relação entre cotas de renda e independentes de renda, as exclusões mútuas, o gate de escola pública — é toda expressa nessas regrinhas, não em código que ramifica por tipo de processo.
+A regra de derivação é uma **lista de regrinhas** do tipo "**quando** tais condições valem, **contribui** com tal modalidade". A avaliação **soma** (une) as modalidades de todas as regrinhas cujas condições são verdadeiras; regra falsa ou não-aplicável não contribui. A composição da Lei de Cotas — o par autodeclaração+concorrer, a concorrência dupla (Lei 14.723/2023), a relação entre cotas de renda e independentes de renda, as exclusões mútuas, o gate de escola pública, a exclusividade entre cota da lei e ação afirmativa (`UNI-REQ-0142`) — é toda expressa nessas regrinhas, não em código que ramifica por tipo de processo.
 
 Dois pontos de negócio importantes:
 
@@ -88,7 +88,7 @@ Internamente, as dependências entre campos (o que produz um fato), pré-condiç
 
 Há ainda uma proteção adicional: enquanto o fato que dispararia um documento ainda não pode ser resolvido, aquele documento fica com a emissão **bloqueada** — não é cobrado prematuramente (`UNI-REQ-0077`, que compõe com a fronteira ativa de emissão do `UNI-REQ-0070`).
 
-> Exemplo. Uma exigência de comprovante de renda é cobrada de quem concorre à cota de renda. Mas a pergunta "concorrer à cota de renda?" só aparece depois de o candidato declarar que é egresso de escola pública. Enquanto ele ainda não respondeu à pergunta de escola pública, não se sabe se a cota de renda se aplica ao seu caso — então a exigência de renda fica **bloqueada**: não é listada como documento faltante (não se cobra prematuramente) nem é dispensada em silêncio. Quando o candidato responde à pergunta de escola pública, a de renda passa a valer, e só então o comprovante de renda passa a ser exigido. A fronteira do fato também avança por **supressão**: se o candidato responde que não é de escola pública, a pergunta de renda deixa de se aplicar e a exigência de renda é dispensada — sem ficar à espera de uma resposta que nunca virá. E, uma vez que uma exigência aplicável fique pendente, ela é **mostrada como pendente**, nunca escondida. O mesmo vale entre fases: um documento preso a um fato que só se resolve na habilitação nunca é cobrado já na inscrição.
+> Exemplo. Uma exigência de comprovante de renda é cobrada de quem concorre à cota de renda. Mas a pergunta "concorrer à cota de renda?" só aparece depois de o candidato optar pelas cotas da lei — declarar que é egresso de escola pública e que deseja concorrer às vagas de escola pública. Enquanto ele ainda não respondeu às perguntas de escola pública, não se sabe se a cota de renda se aplica ao seu caso — então a exigência de renda fica **bloqueada**: não é listada como documento faltante (não se cobra prematuramente) nem é dispensada em silêncio. Quando o candidato opta pelas cotas da lei, a pergunta de renda passa a valer, e só então o comprovante de renda passa a ser exigido. A fronteira do fato também avança por **supressão**: se o candidato responde que não é de escola pública, ou que não deseja concorrer às vagas de escola pública, a pergunta de renda deixa de se aplicar e a exigência de renda é dispensada — sem ficar à espera de uma resposta que nunca virá. E, uma vez que uma exigência aplicável fique pendente, ela é **mostrada como pendente**, nunca escondida. O mesmo vale entre fases: um documento preso a um fato que só se resolve na habilitação nunca é cobrado já na inscrição.
 
 ## 7. Tudo congela na publicação
 
