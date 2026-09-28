@@ -211,6 +211,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.processo_seletivo.cascata_fallback_nao_selecionado_na_oferta',
         'erros/uniplus.selecao.processo_seletivo.cascata_origem_nao_segue_cascata',
         'erros/uniplus.selecao.processo_seletivo.cascata_destino_desconhecido',
+        'erros/uniplus.selecao.processo_seletivo.cota_e_acao_afirmativa_derivaveis_juntas',
         'erros/uniplus.selecao.no_exigencia.quantidade_minima_de_folha_invalida',
         'erros/uniplus.selecao.no_exigencia.chave_distincao_invalida',
         'erros/uniplus.selecao.no_exigencia.data_referencia_indevida_para_chave',
