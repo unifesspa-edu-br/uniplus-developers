@@ -55,8 +55,10 @@ Termos usados ao longo do documento, com o sentido que têm no Uni+.
 |---|---|
 | Processo seletivo | O certame em si (por exemplo, o SiSU 2026 ou o Vestibular Indígena/Quilombola). Reúne toda a configuração: etapas, cotas, vagas, documentos e formulário. É ele que se configura, publica e retifica — os dois termos não são sinônimos. |
 | Edital | O documento oficial emitido quando um processo seletivo é publicado — o ato que fecha e oficializa a configuração. Não é editado diretamente: uma mudança pós-publicação sai como retificação, que gera um novo edital. |
-| Modalidade de concorrência | A fila em que o candidato disputa a vaga: ampla concorrência ou uma das reservas legais (cotas). Ver seção 7. |
-| Cota | Reserva de vagas para grupos definidos em lei. As dimensões declaradas (renda, cor/raça, deficiência, escola pública, quilombola) **combinam-se** em modalidades compostas — uma dimensão não corresponde a uma única modalidade (por exemplo, escola pública, baixa renda e deficiência juntas produzem `LI_PCD` e `LB_PCD`, nunca `AC_PCD`, que é exclusiva de quem não é egresso de escola pública). Ver seção 7. |
+| Modalidade de concorrência | A fila em que o candidato disputa a vaga: ampla concorrência, uma cota da Lei 12.711/2012 ou uma ação afirmativa institucional. Ver seção 7. |
+| Ampla concorrência | A modalidade `AC`, aberta a todos os candidatos. Todo candidato concorre nela, inclusive o cotista. |
+| Cota | Reserva de vagas definida pela Lei 12.711/2012, sempre condicionada a ter cursado o ensino médio em escola pública: as oito modalidades `LB_*` e `LI_*`. As dimensões declaradas (renda, cor/raça, deficiência, quilombola) **combinam-se** com a escola pública em modalidades compostas — por exemplo, escola pública, baixa renda e deficiência juntas produzem `LI_EP`, `LB_EP`, `LI_PCD` e `LB_PCD`. Ver seção 7. |
+| Ação afirmativa | Reserva de vagas instituída por norma da Unifesspa (Resolução nº 532/2021), sem condição de escola pública nem de renda: `AC_PCD` para pessoa com deficiência, e `AC_I` e `AC_Q` no processo seletivo indígena e quilombola. Não é cota, e quem opta pelas cotas da lei não concorre a ela. Ver seção 7. |
 | Dado do candidato | Qualquer informação usada para decidir o que se aplica a ele: alguns são informados por ele (autodeclarações, opções), outros são calculados pelo sistema a partir dos primeiros (ver seção 8). |
 | Condição de exigência | A regra que determina de quem um documento é exigido — por exemplo, apenas de quem concorre à cota de renda. É montada a partir dos dados do candidato. |
 | Fase | Momento do cronograma do processo (inscrição, homologação, habilitação etc.). Cada exigência de documento é vinculada à fase em que se aplica. |
@@ -140,30 +142,30 @@ Quando for implementada, a inscrição será possível quando existir um process
 
 ## 7. Cotas e modalidades de concorrência
 
-Esta é a área mais sensível do sistema, por implementar a legislação de ações afirmativas (Lei 12.711/2012, atualizada pela Lei 14.723/2023). O princípio geral: o candidato nunca escolhe diretamente uma cota como `LB_PPI`. Ele responde a um conjunto de perguntas simples (autodeclarações e opções de concorrer), e o sistema calcula automaticamente todas as modalidades a que ele passa a concorrer.
+Esta é a área mais sensível do sistema, por implementar a Lei de Cotas (Lei 12.711/2012, atualizada pela Lei 14.723/2023) e as ações afirmativas institucionais da Unifesspa (Resolução nº 532/2021). O princípio geral: o candidato nunca escolhe diretamente uma cota como `LB_PPI`. Ele responde a um conjunto de perguntas simples (autodeclarações e opções de concorrer), e o sistema calcula automaticamente todas as modalidades a que ele passa a concorrer.
 
 ### 7.1 As modalidades de concorrência
 
-| Código | Quem concorre |
-|---|---|
-| AC | Ampla concorrência — todos os candidatos, independentemente de cota. |
-| `AC_PCD` | Pessoa com deficiência que **não** é egressa de escola pública — a exclusão existe para não sobrepor as subcotas de escola pública, que já cobrem pessoa com deficiência via `LI_PCD`/`LB_PCD`. O edital a apresenta com o rótulo V; V é apenas um rótulo de exibição, não um código próprio. |
-| `LI_EP` | Escola pública, independentemente de renda. |
-| `LI_PPI` | Escola pública, mais preto, pardo ou indígena, independentemente de renda. |
-| `LI_Q` | Escola pública, mais quilombola, independentemente de renda. |
-| `LI_PCD` | Escola pública, mais pessoa com deficiência, independentemente de renda. |
-| `LB_EP` | Escola pública com o critério de renda familiar per capita aplicável ao processo. |
-| `LB_PPI` | Escola pública, mais preto, pardo ou indígena, com o critério de renda aplicável ao processo. |
-| `LB_Q` | Escola pública, mais quilombola, com o critério de renda aplicável ao processo. |
-| `LB_PCD` | Escola pública, mais pessoa com deficiência, com o critério de renda aplicável ao processo. |
+| Código | Natureza | Quem concorre |
+|---|---|---|
+| AC | Ampla concorrência | Todos os candidatos, independentemente de cota. |
+| `AC_PCD` | Ação afirmativa | Pessoa com deficiência que **não** optou pelas cotas da lei — por não ter estudado em escola pública ou por ter recusado as cotas —, independentemente de renda. As vagas saem da ampla concorrência (Resolução nº 532/2021, art. 1º). O edital a apresenta com o rótulo V; V é apenas um rótulo de exibição, não um código próprio. |
+| `LI_EP` | Cota | Escola pública, independentemente de renda. |
+| `LI_PPI` | Cota | Escola pública, mais preto, pardo ou indígena, independentemente de renda. |
+| `LI_Q` | Cota | Escola pública, mais quilombola, independentemente de renda. |
+| `LI_PCD` | Cota | Escola pública, mais pessoa com deficiência, independentemente de renda. |
+| `LB_EP` | Cota | Escola pública com o critério de renda familiar per capita aplicável ao processo. |
+| `LB_PPI` | Cota | Escola pública, mais preto, pardo ou indígena, com o critério de renda aplicável ao processo. |
+| `LB_Q` | Cota | Escola pública, mais quilombola, com o critério de renda aplicável ao processo. |
+| `LB_PCD` | Cota | Escola pública, mais pessoa com deficiência, com o critério de renda aplicável ao processo. |
 
-Fora dessas dez, a modalidade `PCD_PURO` reserva vaga para pessoa com deficiência em processo **sem** nenhuma das oito cotas da Lei 12.711 acima — cenário em que nenhuma delas está em jogo, então o critério de PCD_PURO é só "é pessoa com deficiência e optou por concorrer" (ver [UNI-REQ-0085](../requisitos/index.mdx)).
+A natureza de cada modalidade está em [UNI-REQ-0141](../requisitos/index.mdx). Além dessas dez, `AC_I` e `AC_Q` são as ações afirmativas do processo seletivo indígena e quilombola, com vagas por acréscimo ao total do curso (Resolução nº 532/2021, art. 2º; [UNI-REQ-0096](../requisitos/index.mdx)). Em processo que não oferta as cotas da lei, como o PSE Educação do Campo, a reserva de pessoa com deficiência também usa `AC_PCD`, pela regra de distribuição `DISTRIB-VAGAS-COM-AC-PCD` ([UNI-REQ-0140](../requisitos/index.mdx)).
 
 As modalidades com renda (grupo LB) também concorrem à modalidade equivalente independente de renda (grupo LI). Em outras palavras: quem tem direito à cota de renda concorre tanto na sua cota específica de baixa renda quanto na versão sem exigência de renda. A fronteira exata do critério de renda permanece em refinamento pelo PO, com validação jurídica; ver a nota na seção Questões em refinamento.
 
 ### 7.2 Concorrência dupla (Lei 14.723/2023)
 
-> Concorrência simultânea. Todo candidato concorre ao mesmo tempo em ampla concorrência e, para cada modalidade reservada, somente quando é elegível e opta por concorrer a ela, sendo classificado na situação mais favorável. Por isso a ampla concorrência (AC) sempre entra no conjunto de modalidades — ela é a âncora presente para todos. A derivação pode produzir várias reservas; quando implementada, a inscrição terá no máximo um papel de ampla e um papel reservado, sem limitar esse conjunto. A relação entre o papel reservado e o conjunto derivado será definida pela decisão proposta ao PO, com validação jurídica.
+> Concorrência simultânea. Todo candidato concorre ao mesmo tempo em ampla concorrência e, para cada modalidade reservada, somente quando é elegível e opta por concorrer a ela, sendo classificado na situação mais favorável. Por isso a ampla concorrência (AC) sempre entra no conjunto de modalidades — ela é a âncora presente para todos. Cota da lei e ação afirmativa, porém, não se somam: quem opta pelas cotas da lei não concorre a `AC_PCD` ([UNI-REQ-0142](../requisitos/index.mdx)). A derivação pode produzir várias reservas; quando implementada, a inscrição terá no máximo um papel de ampla e um papel reservado, sem limitar esse conjunto. A relação entre o papel reservado e o conjunto derivado será definida pela decisão proposta ao PO, com validação jurídica.
 
 ### 7.3 O formulário de cotas (as perguntas)
 
@@ -177,12 +179,14 @@ A definição das cotas segue o formulário real da Unifesspa. Para cada dimens�
 | Quilombola | Você se autodeclara pessoa quilombola? | Deseja concorrer às vagas reservadas a quilombolas? |
 | Renda | Sua família atende ao critério de renda per capita aplicável ao processo? | Deseja concorrer às vagas reservadas por critério de renda? |
 
+A opção de concorrer às vagas de escola pública é a **opção pelas cotas da lei**: todas as oito cotas dependem dela, inclusive `LI_PCD` e `LB_PCD`. O candidato não escolhe modalidade — responde às perguntas, e o sistema o enquadra em todas as modalidades que as respostas permitem.
+
 ### 7.4 Regras de exibição das perguntas
 
 As perguntas não aparecem todas de uma vez: a exibição de cada uma depende das respostas anteriores. Essas regras vêm do próprio formulário oficial:
 
 - A opção de concorrer a uma cota só aparece se a autodeclaração correspondente foi sim.
-- Se o candidato responde que não estudou em escola pública, as subcotas de escola pública não aparecem — ele segue para a ampla concorrência. A dimensão de deficiência é exceção: a pessoa com deficiência concorre à modalidade `AC_PCD` (rotulada V) mesmo sem escola pública.
+- Se o candidato responde que não estudou em escola pública, ou que estudou mas não deseja concorrer às vagas de escola pública, as perguntas de cor/raça, quilombola e renda não aparecem — ele não optou pelas cotas da lei e segue para a ampla concorrência. A dimensão de deficiência é exceção: a pessoa com deficiência que deseja concorrer como tal concorre também à ação afirmativa `AC_PCD` (rotulada V), qualquer que seja a escola em que estudou.
 - Se o candidato se declara amarela ou branca, a pergunta de concorrer à cota de cor/raça não aparece.
 - Se o candidato se declara indígena, a dimensão quilombola não aparece — a legislação não permite acumular as duas.
 
@@ -190,31 +194,31 @@ As perguntas não aparecem todas de uma vez: a exibição de cada uma depende da
 
 A partir das autodeclarações e das opções de concorrer, o sistema aplica a composição da Lei de Cotas e produz o conjunto de modalidades a que o candidato concorre. Nas linhas abaixo, dizer que o candidato concorre por X significa que ele fez as duas coisas: autodeclarou-se elegível a X e optou por concorrer à cota X. Apenas autodeclarar-se não coloca ninguém na cota.
 
-A tabela abaixo é uma **amostra ilustrativa** dos casos mais representativos, para dar intuição do cálculo — não é a fonte normativa. O critério de aceite obrigatório é a regra de derivação congelada: as regras R0–R9 (as dez modalidades da Lei 12.711) e todas as combinações da matriz completa são normativas por [`UNI-REQ-0076`](../requisitos/index.mdx), e o resultado exato de qualquer combinação dessas dez (inclusive as omitidas desta amostra) é o que a regra congelada produz. `PCD_PURO` fica fora de R0–R9 — é regra independente, com o próprio cálculo descrito acima (§7.1). Os conjuntos abaixo são calculados antes da restrição às modalidades ofertadas pelo processo (ver observação ao final da seção).
+A tabela abaixo é uma **amostra ilustrativa** dos casos mais representativos, para dar intuição do cálculo — não é a fonte normativa. O critério de aceite obrigatório é a regra de derivação congelada: as regras R0–R9 (a ampla concorrência, a ação afirmativa `AC_PCD` e as oito cotas da Lei 12.711) e todas as combinações da matriz completa são normativas por [`UNI-REQ-0076`](../requisitos/index.mdx), e o resultado exato de qualquer combinação dessas dez (inclusive as omitidas desta amostra) é o que a regra congelada produz. "Opta pelas cotas da lei" significa ser de escola pública e responder que deseja concorrer às vagas de escola pública (§7.3). Os conjuntos abaixo são calculados antes da restrição às modalidades ofertadas pelo processo (ver observação ao final da seção).
 
 | Perfil do candidato (opções ativas) | Concorre a |
 |---|---|
-| Não concorre a nenhuma cota (ou optou por não concorrer a nenhuma) | AC |
+| Não opta pelas cotas da lei e não concorre por deficiência | AC |
 | Concorre por deficiência; não é de escola pública | AC, `AC_PCD` |
-| Concorre por deficiência; é de escola pública; não concorre por renda | AC, `LI_PCD` |
-| Concorre por deficiência; é de escola pública; concorre por renda | AC, `LI_PCD`, `LB_PCD` |
-| É de escola pública e concorre por escola pública; não concorre por renda | AC, `LI_EP` |
-| É de escola pública e concorre por escola pública; concorre por renda | AC, `LI_EP`, `LB_EP` |
-| É de escola pública, mas opta por não concorrer a nenhuma subcota | AC |
-| Preto/pardo/indígena, escola pública, concorre por PPI; não concorre por renda | AC, `LI_PPI` |
-| Preto/pardo/indígena, escola pública, concorre por PPI; concorre por renda | AC, `LI_PPI`, `LB_PPI` |
-| Preto/pardo/indígena elegível, escola pública, opta por não concorrer por PPI, mas concorre por escola pública | AC, `LI_EP` |
-| Quilombola (não indígena), escola pública, concorre por Q; não concorre por renda | AC, `LI_Q` |
-| Quilombola (não indígena), escola pública, concorre por Q; concorre por renda | AC, `LI_Q`, `LB_Q` |
-| Preto/pardo, escola pública, concorre por PPI e por Q; não concorre por renda | AC, `LI_PPI`, `LI_Q` |
-| Preto/pardo, escola pública, concorre por PPI e por Q; concorre por renda | AC, `LI_PPI`, `LB_PPI`, `LI_Q`, `LB_Q` |
-| Várias dimensões: concorre por deficiência, por escola pública e por PPI; escola pública; concorre por renda | AC, `LI_PCD`, `LB_PCD`, `LI_PPI`, `LB_PPI`, `LI_EP`, `LB_EP` |
+| Concorre por deficiência; é de escola pública, mas não opta pelas cotas da lei | AC, `AC_PCD` |
+| Concorre por deficiência; opta pelas cotas da lei; não concorre por renda | AC, `LI_EP`, `LI_PCD` |
+| Concorre por deficiência; opta pelas cotas da lei; concorre por renda | AC, `LI_EP`, `LB_EP`, `LI_PCD`, `LB_PCD` |
+| Opta pelas cotas da lei; não concorre por renda | AC, `LI_EP` |
+| Opta pelas cotas da lei; concorre por renda | AC, `LI_EP`, `LB_EP` |
+| Preto/pardo/indígena, opta pelas cotas da lei, concorre por PPI; não concorre por renda | AC, `LI_EP`, `LI_PPI` |
+| Preto/pardo/indígena, opta pelas cotas da lei, concorre por PPI; concorre por renda | AC, `LI_EP`, `LB_EP`, `LI_PPI`, `LB_PPI` |
+| Preto/pardo/indígena elegível, opta pelas cotas da lei, mas não concorre por PPI; não concorre por renda | AC, `LI_EP` |
+| Quilombola (não indígena), opta pelas cotas da lei, concorre por Q; não concorre por renda | AC, `LI_EP`, `LI_Q` |
+| Quilombola (não indígena), opta pelas cotas da lei, concorre por Q; concorre por renda | AC, `LI_EP`, `LB_EP`, `LI_Q`, `LB_Q` |
+| Preto/pardo, opta pelas cotas da lei, concorre por PPI e por Q; não concorre por renda | AC, `LI_EP`, `LI_PPI`, `LI_Q` |
+| Preto/pardo, opta pelas cotas da lei, concorre por PPI e por Q; concorre por renda | AC, `LI_EP`, `LB_EP`, `LI_PPI`, `LB_PPI`, `LI_Q`, `LB_Q` |
+| Várias dimensões: concorre por deficiência e por PPI; opta pelas cotas da lei; concorre por renda | AC, `LI_EP`, `LB_EP`, `LI_PCD`, `LB_PCD`, `LI_PPI`, `LB_PPI` |
 
 Pontos de atenção que o formulário resolve automaticamente:
 
-- Autodeclarar não é concorrer. Quem se declara com deficiência mas opta por não concorrer à cota não entra na modalidade.
+- Autodeclarar não é concorrer. Quem se declara com deficiência mas responde que não deseja concorrer como tal não entra em `AC_PCD` nem em `LI_PCD`/`LB_PCD`.
 - Renda amplia, não substitui. Quem concorre por renda (grupo LB) concorre também à versão sem renda (grupo LI). Quem não opta por concorrer por renda mantém apenas as modalidades independentes de renda.
-- Deficiência sem escola pública concorre a `AC_PCD` (a modalidade rotulada V no edital), mas não às subcotas de escola pública.
+- Cota da lei e ação afirmativa não se somam. A pessoa com deficiência que não opta pelas cotas da lei — por não ser de escola pública ou por recusá-las — concorre a `AC_PCD` (a modalidade rotulada V no edital); a que opta concorre a `LI_PCD` (e `LB_PCD`, se concorre por renda) e nunca a `AC_PCD` ([UNI-REQ-0142](../requisitos/index.mdx)).
 - Indígena nunca gera cota quilombola (exclusão prevista em lei).
 - Restrição pela oferta. As modalidades a que o candidato pode concorrer são exatamente as que o processo oferece — a união de todas as configurações de distribuição de vagas do processo (todas as ofertas de curso), não apenas as dos cursos que o candidato escolheu (a restrição por curso específico ocorre mais tarde, na classificação). Essa restrição é garantida na origem: uma regra de derivação que contribua uma modalidade fora da oferta é recusada na configuração e barrada na publicação (fail-closed), não filtrada em silêncio — de modo que o candidato nunca concorre a uma modalidade não ofertada. (O registro `UNI-REQ-0076` ainda descreve essa restrição como interseção "no último passo"; o comportamento implementado é a recusa antecipada na configuração — divergência de redação a reconciliar no registro.)
 
