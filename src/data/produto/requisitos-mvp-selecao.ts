@@ -148,7 +148,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0011',
     titulo: 'Modalidade de concorrência',
     enunciado:
-      'O sistema deve tratar modalidades como modalidades de concorrência, incluindo ampla concorrência e reservas legais.',
+      'O sistema deve tratar modalidades como modalidades de concorrência, de três naturezas: ampla concorrência, cotas da Lei 12.711/2012 e ações afirmativas institucionais (UNI-REQ-0141).',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -160,7 +160,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Modalidades incluem ampla concorrência e modalidades reservadas; a futura inscrição, quando implementada, observa os papéis de registro de UNI-REQ-0025 sem reduzir o conjunto de MODALIDADE DERIVADA de UNI-REQ-0076.',
+      'Modalidades incluem ampla concorrência, cotas da Lei 12.711/2012 e ações afirmativas institucionais, cada uma com a sua natureza (UNI-REQ-0141); a futura inscrição, quando implementada, observa os papéis de registro de UNI-REQ-0025 sem reduzir o conjunto de MODALIDADE DERIVADA de UNI-REQ-0076.',
     verificacao: 'Validação automatizada de modalidades (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -290,10 +290,55 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cinco regras de `tipo=regra_distribuicao_vagas`, todas em v1, com os rols: `DISTRIB-VAGAS-LEI-12711` (ramo federal, art. 10) admite as 8 sub-reservas mais AC — 9 códigos; `DISTRIB-VAGAS-LEI-12711-COM-AC-PCD` (ramo federal) admite as mesmas 9 mais `AC_PCD` — 10 códigos; `DISTRIB-VAGAS-COM-PCD-PURO` (quadro fixo) admite `AC` e `PCD_PURO`; `DISTRIB-VAGAS-PSIQ` (quadro fixo, certame exclusivo de vagas por acréscimo) admite `AC_I` e `AC_Q`; `DISTRIB-VAGAS-INSTITUCIONAL` (quadro fixo) não declara `modalidades_admitidas` — rol aberto, composição livre entre as modalidades do catálogo. Não existe variação que combine `PCD_PURO` com qualquer uma das 8 cotas da Lei ou com `AC_PCD` — UNI-REQ-0090 já declara essa exclusividade mútua, e nenhum rol fechado a contradiz. `DISTRIB-VAGAS-COM-PCD-PURO` generaliza o antigo `DISTRIB-VAGAS-EDU-CAMPO`: o rol já era `AC` + `PCD_PURO`, só o nome amarrava ao PSE Educação do Campo, enquanto UNI-REQ-0085 descreve `PCD_PURO` como a reserva de qualquer processo que não oferta as cotas federais — nenhuma página do portal referencia `DISTRIB-VAGAS-EDU-CAMPO` como regra vigente. Em `DISTRIB-VAGAS-COM-PCD-PURO`, `AC` está no rol por construção, não por escolha do operador: `PCD_PURO` retira de `AC` e remaneja de volta para `AC`, então a modalidade base é inerente à fórmula, não uma opção que poderia faltar. `AC_PCD` retira da ampla concorrência e não acresce ao total publicado — ao contrário das suplementares institucionais `AC_I`/`AC_Q` (UNI-REQ-0096), que somam ao total; é essa distinção de composição de vagas, não o rol em si, que decide se a modalidade consome o total da oferta. A criação e a reidratação de uma configuração de distribuição de vagas recusam tanto modalidade fora do rol fechado quanto modalidade do rol ausente entre as selecionadas.',
+      'Cinco regras de `tipo=regra_distribuicao_vagas`, todas em v1, com os rols: `DISTRIB-VAGAS-LEI-12711` (ramo federal, art. 10) admite as 8 cotas da lei mais AC — 9 códigos; `DISTRIB-VAGAS-LEI-12711-COM-AC-PCD` (ramo federal) admite as mesmas 9 mais `AC_PCD` — 10 códigos; `DISTRIB-VAGAS-COM-AC-PCD` (quadro fixo) admite `AC` e `AC_PCD`, para o processo que reserva vaga de pessoa com deficiência sem ofertar as cotas da lei, como o PSE Educação do Campo; `DISTRIB-VAGAS-PSIQ` (quadro fixo, certame exclusivo de vagas por acréscimo) admite `AC_I` e `AC_Q`; `DISTRIB-VAGAS-INSTITUCIONAL` (quadro fixo) não declara `modalidades_admitidas` — rol aberto, composição livre entre as modalidades do catálogo. Ofertar `AC_PCD` junto das cotas da lei, em `DISTRIB-VAGAS-LEI-12711-COM-AC-PCD`, é válido: a exclusividade entre cota da lei e ação afirmativa vale por inscrição, não por oferta (UNI-REQ-0142). `DISTRIB-VAGAS-COM-AC-PCD` substitui `DISTRIB-VAGAS-COM-PCD-PURO`, retirada junto com a modalidade `PCD_PURO`. Em `DISTRIB-VAGAS-COM-AC-PCD`, `AC` está no rol por construção, não por escolha do operador: `AC_PCD` retira de `AC` e remaneja de volta para `AC`, então a modalidade base é inerente à fórmula, não uma opção que poderia faltar. `AC_PCD` retira da ampla concorrência e não acresce ao total publicado — ao contrário de `AC_I`/`AC_Q` (UNI-REQ-0096), que somam ao total; é essa distinção de composição de vagas, não o rol em si, que decide se a modalidade consome o total da oferta. A criação e a reidratação de uma configuração de distribuição de vagas recusam tanto modalidade fora do rol fechado quanto modalidade do rol ausente entre as selecionadas.',
     verificacao:
       'Testes de domínio da factory de ConfiguracaoDistribuicaoVagas cobrindo rol fechado com excedente e com falta, para cada uma das cinco regras; teste de domínio da partição EhRamoFederal/EhQuadroFixo sobre RegraDistribuicaoVagasCodigo.Todos; teste de integração da reidratação de envelope congelado com rol incompleto; teste de contrato do campo `modalidadesAdmitidas` no DTO de leitura do catálogo.',
     pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0141',
+    titulo:
+      'Natureza da modalidade: cota da Lei 12.711, ação afirmativa institucional ou ampla concorrência',
+    enunciado:
+      'Toda modalidade de concorrência tem exatamente uma natureza. Cota é a vaga reservada pela Lei 12.711/2012 (redação da Lei 14.723/2023): as oito modalidades LB_* e LI_*, todas condicionadas a ter cursado o ensino médio em escola pública. Ação afirmativa institucional é a vaga instituída por norma da Unifesspa, sem condição de escola pública nem de renda: AC_PCD, pela Resolução nº 532/2021, art. 1º, com vagas retiradas da ampla concorrência; AC_I e AC_Q, pela Resolução nº 532/2021, art. 2º, com vagas por acréscimo ao total do curso. Ampla concorrência é AC. A natureza pode ser consultada em cada modalidade e congela com ela na publicação. O art. 1º da Resolução nº 532/2021 fala em processo seletivo realizado via SiSU; a instituição o aplica também a processos próprios pelo edital, como o PSE Educação do Campo (Edital CEPS nº 04/2026, item 3.3), e o PO solicitou a retificação da resolução para estendê-la a todos os cursos. As Resoluções nº 22/2014 e nº 64/2015 foram revogadas pelo art. 3º da Resolução nº 532/2021 e não fundamentam nenhuma modalidade.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0011',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Toda modalidade do catálogo tem uma das três naturezas; as oito LB_*/LI_* são cota, AC_PCD, AC_I e AC_Q são ação afirmativa e AC é ampla concorrência; a consulta de uma modalidade devolve a natureza; ação afirmativa aceita remanejamento de destino único ou cruzado e recusa a cascata da lei; a base legal de ação afirmativa cita a Resolução nº 532/2021 (art. 1º para AC_PCD, art. 2º para AC_I e AC_Q), nunca a Lei 12.711/2012 nem resolução revogada.',
+    verificacao:
+      'Teste automatizado (natureza de cada modalidade do catálogo; coerência entre natureza e remanejamento; base legal das ações afirmativas) (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0142',
+    titulo: 'Cota da Lei 12.711 e ação afirmativa não coexistem na mesma inscrição',
+    enunciado:
+      'Optar pelas cotas da Lei 12.711/2012 é declarar ter cursado o ensino médio em escola pública e responder que deseja concorrer às vagas de escola pública. Quem faz essa opção concorre em AC e em todas as cotas que as demais respostas permitem, e não concorre a nenhuma ação afirmativa institucional (UNI-REQ-0141): as cotas da lei prevalecem. Quem não faz essa opção — por ter estudado em escola privada ou por ter recusado as cotas — concorre em AC e, se se declara pessoa com deficiência e responde que deseja concorrer como tal, também em AC_PCD, independentemente de renda. O candidato não seleciona modalidades: o sistema as define a partir das respostas (UNI-REQ-0076). A exclusividade vale por inscrição, não por oferta: um processo pode ofertar AC_PCD junto das cotas da lei (UNI-REQ-0140). A publicação recusa a configuração de derivação que permita derivar, para o mesmo candidato, uma cota da lei e uma ação afirmativa.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0076',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Pessoa com deficiência de escola privada resolve a {AC, AC_PCD}; pessoa com deficiência de escola pública que recusou as cotas resolve a {AC, AC_PCD}; pessoa com deficiência de escola pública que optou pelas cotas resolve a AC mais as cotas compatíveis, com LI_PCD e sem AC_PCD; candidato sem deficiência que não optou pelas cotas resolve a {AC}; em processo sem cota da lei ofertada, AC_PCD depende só da declaração e do opt-in por deficiência; a publicação recusa, com erro nomeado, a configuração de derivação que derive cota da lei e ação afirmativa para o mesmo candidato; um processo que oferta AC_PCD junto das cotas da lei publica normalmente.',
+    verificacao:
+      'Teste automatizado dos cinco perfis e da recusa na publicação (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
   {
@@ -2222,7 +2267,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0072',
     titulo: 'Fatos declarados da inscrição por par elegibilidade e opt-in',
     enunciado:
-      'Os fatos que o candidato declara na inscrição são vocabulário de configuração, coletados no padrão par elegibilidade + opt-in: cada cota gera dois fatos independentes — um de elegibilidade (autodeclaração: pessoa com deficiência, escola pública, cor/raça, quilombola, baixa renda) e um de opt-in (a escolha de concorrer). A elegibilidade sozinha não coloca o candidato na cota; o opt-in é a escolha explícita. Cada fato DECLARADO é produzido por seleção sobre FatoValorDominio {id, fatoId, codigo, descricao, ordem, ativo}, nunca por texto livre, com unicidade (fatoId, codigo) e ordenação estável por ordem; cada valor carrega a descrição do significado (obrigatória para fato declarado). Elegibilidade + opt-in habilita a contribuição da modalidade correspondente; a concorrência efetiva resulta da derivação e da interseção com a oferta definida em UNI-REQ-0076, não do par isoladamente. Os fatos, seus valores de domínio e descrições congelam na publicação (RN08).',
+      'Os fatos que o candidato declara na inscrição são vocabulário de configuração, coletados no padrão par elegibilidade + opt-in: cada cota gera dois fatos independentes — um de elegibilidade (autodeclaração: pessoa com deficiência, escola pública, cor/raça, quilombola, baixa renda) e um de opt-in (a escolha de concorrer). A elegibilidade sozinha não coloca o candidato na cota; o opt-in é a escolha explícita. O opt-in de escola pública, respondido por quem é egresso de escola pública, é a opção pelas cotas da Lei 12.711/2012: condiciona todas as cotas da lei, inclusive a de pessoa com deficiência, e exclui a ação afirmativa AC_PCD (UNI-REQ-0142). Os demais opt-ins (deficiência, cor/raça, quilombola, renda) continuam respondidos um a um, e o candidato não escolhe modalidade: o sistema deriva todas as que as respostas permitem (UNI-REQ-0076). Cada fato DECLARADO é produzido por seleção sobre FatoValorDominio {id, fatoId, codigo, descricao, ordem, ativo}, nunca por texto livre, com unicidade (fatoId, codigo) e ordenação estável por ordem; cada valor carrega a descrição do significado (obrigatória para fato declarado). Elegibilidade + opt-in habilita a contribuição da modalidade correspondente; a concorrência efetiva resulta da derivação e da interseção com a oferta definida em UNI-REQ-0076, não do par isoladamente. Os fatos, seus valores de domínio e descrições congelam na publicação (RN08).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2234,7 +2279,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cada cota do formulário produz dois fatos declarados independentes (elegibilidade e opt-in), cada um selecionado sobre FatoValorDominio {id, fatoId, codigo, descricao, ordem, ativo} com unicidade (fatoId, codigo) e ordenação estável por ordem, mais binding de campo; elegibilidade sem opt-in não concorre à cota; elegibilidade + opt-in habilita a contribuição da modalidade, cuja concorrência efetiva depende da derivação e da interseção com a oferta (UNI-REQ-0076); valores de domínio carregam descrição do significado (obrigatória para fato declarado); fatos, valores e descrições congelam na publicação e não mudam em edital publicado.',
+      'Cada cota do formulário produz dois fatos declarados independentes (elegibilidade e opt-in), cada um selecionado sobre FatoValorDominio {id, fatoId, codigo, descricao, ordem, ativo} com unicidade (fatoId, codigo) e ordenação estável por ordem, mais binding de campo; elegibilidade sem opt-in não concorre à cota; o opt-in de escola pública é a opção pelas cotas da lei e condiciona todas elas; elegibilidade + opt-in habilita a contribuição da modalidade, cuja concorrência efetiva depende da derivação e da interseção com a oferta (UNI-REQ-0076); valores de domínio carregam descrição do significado (obrigatória para fato declarado); fatos, valores e descrições congelam na publicação e não mudam em edital publicado.',
     verificacao:
       'Teste automatizado (elegibilidade sem opt-in não concorre; elegibilidade mais opt-in concorre; domínio descritível e binding; congelamento na publicação) (planejado).',
     pagina_developers: '/produto/requisitos/',
@@ -2244,7 +2289,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0073',
     titulo: 'Grafo de pré-condições da coleta (aplicabilidade condicional) e gate de escola pública',
     enunciado:
-      'A visibilidade e a aplicabilidade de cada campo ou fato dependem de fatos anteriores, expressas por um predicado de pré-condição no mesmo vocabulário e operadores do gatilho — nunca por ramo em código. O grafo de pré-condições é acíclico e congelado na publicação. As exclusões mútuas do domínio são pré-condição (candidato indígena não abre o bloco quilombola). O gate de escola pública é materializado como pré-condição de todos os campos e opt-ins das subcotas de escola pública — exceto a dimensão de pessoa com deficiência, que independe do gate por conservar ampla concorrência para PcD mesmo sem escola pública. Assim o candidato de escola não pública tem esses campos não aplicáveis e não vê perguntas que a regra manda ocultar.',
+      'A visibilidade e a aplicabilidade de cada campo ou fato dependem de fatos anteriores, expressas por um predicado de pré-condição no mesmo vocabulário e operadores do gatilho — nunca por ramo em código. O grafo de pré-condições é acíclico e congelado na publicação. As exclusões mútuas do domínio são pré-condição (candidato indígena não abre o bloco quilombola). O gate de escola pública é o par egresso de escola pública e opção pelas cotas da lei (UNI-REQ-0142), materializado como pré-condição de todos os campos e opt-ins de cor/raça, quilombola e renda. A dimensão de pessoa com deficiência independe do gate, porque serve tanto à ação afirmativa AC_PCD, de quem não optou pelas cotas da lei, quanto às cotas LI_PCD/LB_PCD, de quem optou. Assim o candidato que não estudou em escola pública, ou que estudou e não optou pelas cotas, tem esses campos não aplicáveis e não vê perguntas que a regra manda ocultar.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2256,9 +2301,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cada campo/fato declara pré-condição (predicado sobre fatos anteriores) no vocabulário e operadores do gatilho; o grafo é acíclico e ciclo é recusado no cadastro; exclusão indígena versus quilombola é pré-condição, não código; o gate de escola pública é pré-condição de todos os campos/opt-ins de subcota de escola pública, exceto a dimensão PcD; o campo com pré-condição falsa não é apresentado; o grafo de pré-condição entre FATOS congela na publicação como parte do grafo conjunto de UNI-REQ-0078, para fato de qualquer origem. A pré-condição de CAMPO do formulário (campo condicionado a fato, não fato condicionado a fato) tem cobertura mais estreita hoje — só fato DECLARADO — ver UNI-REQ-0084/RN-COL-04 e a lacuna explícita em UNI-REQ-0089 para campo condicionado a fato derivado ou de integração.',
+      'Cada campo/fato declara pré-condição (predicado sobre fatos anteriores) no vocabulário e operadores do gatilho; o grafo é acíclico e ciclo é recusado no cadastro; exclusão indígena versus quilombola é pré-condição, não código; o gate de escola pública (egresso de escola pública e opção pelas cotas da lei) é pré-condição de todos os campos/opt-ins de cor/raça, quilombola e renda, e não da dimensão PcD; o campo com pré-condição falsa não é apresentado; o grafo de pré-condição entre FATOS congela na publicação como parte do grafo conjunto de UNI-REQ-0078, para fato de qualquer origem. A pré-condição de CAMPO do formulário (campo condicionado a fato, não fato condicionado a fato) tem cobertura mais estreita hoje — só fato DECLARADO — ver UNI-REQ-0084/RN-COL-04 e a lacuna explícita em UNI-REQ-0089 para campo condicionado a fato derivado ou de integração.',
     verificacao:
-      'Teste automatizado (opt-in condicionado à elegibilidade não aparece; ciclo recusado; gate de escola pública oculta subcotas para não-EP; exclusão indígena versus quilombola) (planejado).',
+      'Teste automatizado (opt-in condicionado à elegibilidade não aparece; ciclo recusado; gate de escola pública oculta cor/raça, quilombola e renda para quem não é EP ou não optou pelas cotas; exclusão indígena versus quilombola) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2310,7 +2355,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0076',
     titulo: 'Derivação de modalidade de concorrência por configuração (Lei de Cotas)',
     enunciado:
-      'A MODALIDADE de concorrência é um fato DERIVADO multivalorado — o conjunto de modalidades a que o candidato concorre — computado pela regra de derivação a partir dos pares elegibilidade e opt-in, e nunca declarado diretamente. O domínio canônico é {AC, AC_PCD, LI_EP, LB_EP, LI_PPI, LB_PPI, LI_Q, LB_Q, LI_PCD, LB_PCD, PCD_PURO} (o V do corpus é rótulo de exibição de AC_PCD no edital, nunca um código de entrada — não há tradução de alias). PCD_PURO (UNI-REQ-0085/RN-MOD-08) é reserva de PcD independente da Lei de Cotas, fora da composição R0–R9 abaixo, para processo que reserva vaga PcD sem as oito cotas da Lei 12.711. As dependências da regra são {PCD, CONCORRER_PCD, EGRESSO_ESCOLA_PUBLICA, CONCORRER_EP, CONCORRER_PPI, CONCORRER_Q, CONCORRER_RENDA} — PCD entra porque tanto AC_PCD quanto PCD_PURO condicionam à elegibilidade em si, não só ao opt-in. A composição da Lei de Cotas é configuração congelada, não ramificação por tipo de processo em código: AC como âncora (regra de DNF vazio); concorrência dupla (o cotista também concorre em AC); as modalidades LB_*, com critério de renda per capita igual ou inferior a um salário mínimo, também concorrem às respectivas LI_*; as subcotas de escola pública exigem EGRESSO_ESCOLA_PUBLICA; AC_PCD exige, além da elegibilidade e do opt-in por deficiência, NÃO ser egresso de escola pública — a condição existe para manter AC_PCD exclusiva de quem não se enquadra em nenhuma das oito cotas da Lei, já que a pessoa com deficiência egressa de escola pública concorre por LI_PCD (e LB_PCD, se elegível à renda) em vez de AC_PCD; indígena não gera cota quilombola. A regra é o conjunto de regras {quando, contribui} R0 a R9 (cada LB_* repete os átomos da LI_* irmã mais o átomo de renda), modelo todo-positivo cujo resultado é a UNIÃO das contribuições ativas, restrito às modalidades ofertadas pelo processo por recusa antecipada na configuração — uma regra que contribui código fora do domínio ofertado é recusada na publicação, nunca filtrada em runtime. A configuração concreta R0–R9 e a matriz completa de combinações alcançáveis são normativas (não fixtures exemplificativas) e correspondem ao formulário real de definição de cotas, com as correções editoriais assumidas do corpus (referências cruzadas deslocadas 2.2/3.1/3.2 lidas pelo bloco correto; LI_PPI/LB_PPI presentes na lista; AC_PCD canônico com V como rótulo de exibição, não alias).',
+      'A MODALIDADE de concorrência é um fato DERIVADO multivalorado — o conjunto de modalidades a que o candidato concorre — computado pela regra de derivação a partir dos pares elegibilidade e opt-in, e nunca declarado diretamente: o candidato responde às perguntas e o sistema o enquadra em todas as modalidades que as respostas permitem, sem que ele escolha parte delas. O domínio canônico é {AC, AC_PCD, LI_EP, LB_EP, LI_PPI, LB_PPI, LI_Q, LB_Q, LI_PCD, LB_PCD} (o V do corpus é rótulo de exibição de AC_PCD no edital, nunca um código de entrada — não há tradução de alias). As dependências da regra são {PCD, CONCORRER_PCD, EGRESSO_ESCOLA_PUBLICA, CONCORRER_EP, CONCORRER_PPI, CONCORRER_Q, CONCORRER_RENDA} — PCD entra porque AC_PCD condiciona à elegibilidade por deficiência em si, não só ao opt-in. A composição é configuração congelada, não ramificação por tipo de processo em código: AC como âncora (regra de DNF vazio); concorrência dupla (o cotista também concorre em AC); optar pelas cotas da Lei 12.711/2012 é ser egresso de escola pública e optar por concorrer às vagas de escola pública (EGRESSO_ESCOLA_PUBLICA e CONCORRER_EP), e toda cota da lei exige essa opção — LI_EP decorre dela diretamente, e LI_PCD, LI_PPI e LI_Q somam o opt-in da própria dimensão; as modalidades LB_*, com critério de renda per capita igual ou inferior a um salário mínimo, repetem a LI_* irmã mais o opt-in de renda e por isso também concorrem a ela; AC_PCD é ação afirmativa institucional (UNI-REQ-0141) e exige elegibilidade e opt-in por deficiência e NÃO ter optado pelas cotas da lei — por não ser egresso de escola pública ou por ter recusado as cotas —, sem condição de renda, de modo que nunca é derivada junto de cota da lei (UNI-REQ-0142); indígena não gera cota quilombola. Em processo que não oferta nenhuma cota da lei, a regra de AC_PCD depende só da elegibilidade e do opt-in por deficiência, porque escola pública e opção pelas cotas não são coletadas ali. A regra é o conjunto de regras {quando, contribui} R0 a R9, cujo resultado é a UNIÃO das contribuições ativas, restrito às modalidades ofertadas pelo processo por recusa antecipada na configuração — uma regra que contribui código fora do domínio ofertado é recusada na publicação, nunca filtrada em runtime. A configuração concreta R0–R9 e a matriz completa de combinações alcançáveis são normativas (não fixtures exemplificativas) e correspondem ao formulário de definição de cotas validado pelo PO, com as correções editoriais assumidas do corpus (referências cruzadas deslocadas 2.2/3.1/3.2 lidas pelo bloco correto; LI_PPI/LB_PPI presentes na lista; AC_PCD canônico com V como rótulo de exibição, não alias).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2322,9 +2367,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'MODALIDADE é fato DERIVADO multivalorado (cadastro como DECLARADO é recusado) com domínio canônico {AC, AC_PCD, LI_EP, LB_EP, LI_PPI, LB_PPI, LI_Q, LB_Q, LI_PCD, LB_PCD, PCD_PURO} e dependências {PCD, CONCORRER_PCD, EGRESSO_ESCOLA_PUBLICA, CONCORRER_EP, CONCORRER_PPI, CONCORRER_Q, CONCORRER_RENDA}; PCD_PURO (UNI-REQ-0085) é regra independente de R0–R9, sem composição com a Lei de Cotas; AC_PCD exige NÃO ser egresso de escola pública além da elegibilidade e do opt-in por deficiência — candidato com deficiência egresso de escola pública concorre por LI_PCD (e LB_PCD, se elegível à renda), nunca por AC_PCD; as regras R0–R9 (AC por DNF vazio; LB_* = átomos da LI_* irmã mais CONCORRER_RENDA) e todas as linhas da matriz normativa de combinações alcançáveis são critérios de aceite, não fixtures; V é rótulo de exibição de AC_PCD (não alias; um código não canônico é recusado, não traduzido); correções editoriais do corpus assumidas (refs 2.2/3.1/3.2 deslocadas; LI_PPI/LB_PPI presentes); união todo-positivo restrita às modalidades ofertadas por recusa antecipada na configuração — regra que contribui código fora do domínio ofertado é recusada na publicação, não filtrada em runtime; verde de ponta a ponta (não-EP com deficiência resolve a {AC, AC_PCD}; EP com deficiência resolve a {AC, LI_PCD}, sem AC_PCD; renda NÃO_APLICÁVEL mantém só as LI_*; PPI+Q simultâneos e múltiplas dimensões; expansão LB_* para LI_*).',
+      'MODALIDADE é fato DERIVADO multivalorado (cadastro como DECLARADO é recusado) com domínio canônico {AC, AC_PCD, LI_EP, LB_EP, LI_PPI, LB_PPI, LI_Q, LB_Q, LI_PCD, LB_PCD} e dependências {PCD, CONCORRER_PCD, EGRESSO_ESCOLA_PUBLICA, CONCORRER_EP, CONCORRER_PPI, CONCORRER_Q, CONCORRER_RENDA}; toda cota da lei exige EGRESSO_ESCOLA_PUBLICA e CONCORRER_EP; AC_PCD exige elegibilidade e opt-in por deficiência e não ter optado pelas cotas da lei, e nunca é derivada junto de cota da lei; em processo sem cota da lei ofertada, a regra de AC_PCD não cita EGRESSO_ESCOLA_PUBLICA nem CONCORRER_EP; as regras R0–R9 (AC por DNF vazio; LB_* = átomos da LI_* irmã mais CONCORRER_RENDA) e todas as linhas da matriz normativa de combinações alcançáveis são critérios de aceite, não fixtures; V é rótulo de exibição de AC_PCD (não alias; um código não canônico é recusado, não traduzido); correções editoriais do corpus assumidas (refs 2.2/3.1/3.2 deslocadas; LI_PPI/LB_PPI presentes); união restrita às modalidades ofertadas por recusa antecipada na configuração — regra que contribui código fora do domínio ofertado é recusada na publicação, não filtrada em runtime; verde de ponta a ponta (pessoa com deficiência que não é EP resolve a {AC, AC_PCD}; pessoa com deficiência EP que recusou as cotas resolve a {AC, AC_PCD}; pessoa com deficiência EP que optou pelas cotas, sem renda, resolve a {AC, LI_EP, LI_PCD}, sem AC_PCD; candidato sem deficiência que não optou pelas cotas resolve a {AC}; renda NÃO_APLICÁVEL mantém só as LI_*; PPI+Q simultâneos e múltiplas dimensões; expansão LB_* para LI_*).',
     verificacao:
-      'Teste automatizado / matriz de aceitação (cada combinação de respostas para o conjunto de modalidades esperado, incluindo R0–R9 e todas as linhas da matriz; MODALIDADE não declarável; V recusado como código não canônico, não traduzido; restrição pela oferta) (planejado).',
+      'Teste automatizado / matriz de aceitação (cada combinação de respostas para o conjunto de modalidades esperado, incluindo R0–R9 e todas as linhas da matriz; AC_PCD nunca junto de cota da lei; MODALIDADE não declarável; V recusado como código não canônico, não traduzido; restrição pela oferta) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2398,17 +2443,17 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0085',
     titulo: 'PCD_PURO: reserva de vaga para pessoa com deficiência sem cotas da Lei 12.711 (RN-MOD-08)',
     enunciado:
-      'AC_PCD não é "a modalidade de PcD" — é o caso particular de um processo que também tem as oito cotas da Lei 12.711, cuja condição de excluir quem cursou escola pública só existe para manter AC_PCD exclusiva das cotas da Lei. Um processo sem as cotas da Lei que também reserve vaga para pessoa com deficiência precisa de uma modalidade cujo critério seja só "é pessoa com deficiência e optou por concorrer", sem condição de origem escolar, cor/raça ou sexo. PCD_PURO é essa modalidade — cadastrada uma única vez em configuração de modalidades e reaproveitável por qualquer processo futuro nessa situação, nomeada pela própria semântica (como AC, LB_PPI, LI_Q), nunca pelo processo que a estreou.',
+      'Retirado: PCD_PURO deixou de existir por decisão do PO (24/09/2026). A reserva de pessoa com deficiência em processo sem cotas da Lei 12.711/2012 passa a usar AC_PCD, ação afirmativa independente de escola e de renda (UNI-REQ-0141, UNI-REQ-0142 e UNI-REQ-0140). Registro anterior, mantido para rastreabilidade: AC_PCD não é "a modalidade de PcD" — é o caso particular de um processo que também tem as oito cotas da Lei 12.711, cuja condição de excluir quem cursou escola pública só existe para manter AC_PCD exclusiva das cotas da Lei. Um processo sem as cotas da Lei que também reserve vaga para pessoa com deficiência precisa de uma modalidade cujo critério seja só "é pessoa com deficiência e optou por concorrer", sem condição de origem escolar, cor/raça ou sexo. PCD_PURO é essa modalidade — cadastrada uma única vez em configuração de modalidades e reaproveitável por qualquer processo futuro nessa situação, nomeada pela própria semântica (como AC, LB_PPI, LI_Q), nunca pelo processo que a estreou.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
     parent_id: 'UNI-REQ-0011',
     modulo: 'Seleção',
-    recorte: 'mvp',
-    status: 'aprovado',
+    recorte: 'fora_escopo',
+    status: 'historico',
     prioridade: 'must',
-    politica_backlog: 'implementavel',
-    tipo_issue_recomendado: 'Task',
+    politica_backlog: 'governanca',
+    tipo_issue_recomendado: 'None',
     criterios_aceite:
       'PCD_PURO usa o mesmo mecanismo de remanejamento de AC_PCD com critério composto só por "é pessoa com deficiência" e "optou por concorrer à cota", sem átomo de escola pública; um candidato PcD egresso de escola pública satisfaz PCD_PURO mas não satisfaz AC_PCD, provando que o predicado é de fato diferente; todo candidato que satisfaz AC_PCD também satisfaz PCD_PURO, por ser estritamente mais permissiva. A base legal institucional que sustenta a reserva fora do contexto da Lei de Cotas é decisão própria, a confirmar antes de publicar um processo real sob esta modalidade.',
     verificacao:
@@ -2464,17 +2509,17 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0088',
     titulo: 'Base legal institucional de PCD_PURO — Resolução 532/2021, art. 1º (confirmada)',
     enunciado:
-      'A modalidade PCD_PURO (UNI-REQ-0085/RN-MOD-08) reserva vaga para pessoa com deficiência em processo sem as cotas da Lei 12.711. O PO confirmou (03/08/2026) que a base legal é a mesma Resolução Unifesspa 532/2021, art. 1º, já usada por AC_PCD — não precisa de norma institucional própria. A Resolução não condiciona a reserva à origem escolar do candidato (nenhum artigo cita escola pública ou privada); a ausência dessa condição no critério de PCD_PURO é decisão consciente de área de negócio, não lacuna de modelagem, válida até que norma futura diga o contrário. Achado de escopo, também registrado: o art. 1º reserva a vaga só para o "Processo Seletivo realizado via SiSU" — texto anterior à capacidade de ofertar vagas fora do SiSU; o PO vai solicitar retificação da Resolução para estender a "todos os cursos ofertados pela Unifesspa", ainda em elaboração. Até a retificação sair, um processo puramente institucional sem nenhum vínculo com o SiSU ficaria, a rigor, fora da cobertura literal do art. 1º — não há processo real nessa situação hoje.',
+      'Retirado: PCD_PURO deixou de existir por decisão do PO (24/09/2026). A reserva de pessoa com deficiência em processo sem cotas da Lei 12.711/2012 passa a usar AC_PCD, ação afirmativa independente de escola e de renda (UNI-REQ-0141, UNI-REQ-0142 e UNI-REQ-0140). Registro anterior, mantido para rastreabilidade: A modalidade PCD_PURO (UNI-REQ-0085/RN-MOD-08) reserva vaga para pessoa com deficiência em processo sem as cotas da Lei 12.711. O PO confirmou (03/08/2026) que a base legal é a mesma Resolução Unifesspa 532/2021, art. 1º, já usada por AC_PCD — não precisa de norma institucional própria. A Resolução não condiciona a reserva à origem escolar do candidato (nenhum artigo cita escola pública ou privada); a ausência dessa condição no critério de PCD_PURO é decisão consciente de área de negócio, não lacuna de modelagem, válida até que norma futura diga o contrário. Achado de escopo, também registrado: o art. 1º reserva a vaga só para o "Processo Seletivo realizado via SiSU" — texto anterior à capacidade de ofertar vagas fora do SiSU; o PO vai solicitar retificação da Resolução para estender a "todos os cursos ofertados pela Unifesspa", ainda em elaboração. Até a retificação sair, um processo puramente institucional sem nenhum vínculo com o SiSU ficaria, a rigor, fora da cobertura literal do art. 1º — não há processo real nessa situação hoje.',
     grupo: 'conformidade',
     tipo: 'regra_negocio',
     nivel: 'regra',
     parent_id: 'UNI-REQ-0085',
     modulo: 'Seleção',
-    recorte: 'mvp',
-    status: 'aprovado',
+    recorte: 'fora_escopo',
+    status: 'historico',
     prioridade: 'must',
-    politica_backlog: 'implementavel',
-    tipo_issue_recomendado: 'Task',
+    politica_backlog: 'governanca',
+    tipo_issue_recomendado: 'None',
     criterios_aceite:
       'O cadastro de PCD_PURO registra a Resolução Unifesspa 532/2021, art. 1º, como base legal — substituindo o placeholder textual de pendência que o cadastro carregava até esta decisão. Nenhum critério de elegibilidade de PCD_PURO cita origem escolar (escola pública/privada), refletindo que a Resolução não impõe essa condição. A retificação da Resolução (extensão de "via SiSU" para "todos os cursos ofertados pela Unifesspa") é acompanhada como nota, não bloqueia a publicação de processos que também correm no SiSU.',
     verificacao: 'Confirmação institucional do PO (03/08/2026), citando a Resolução Unifesspa 532/2021, art. 1º.',
@@ -2506,17 +2551,17 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0090',
     titulo: 'PCD_PURO é mutuamente exclusiva das cotas da Lei — publicação recusa oferecer as duas famílias juntas (RN-MOD-09)',
     enunciado:
-      'PCD_PURO (UNI-REQ-0085/RN-MOD-08) foi desenhada para processo sem nenhuma das oito cotas da Lei 12.711 — é nesse cenário que faz sentido reservar PcD sem a exclusão de escola pública que AC_PCD carrega. Ofertar as duas famílias juntas tornaria AC_PCD redundante para todo candidato PcD elegível a PCD_PURO, sem que a publicação acusasse a sobreposição. A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e, ao mesmo tempo, qualquer uma das oito cotas reservadas da Lei ou AC_PCD, no mesmo processo — mesmo que em cursos diferentes. AC (ampla concorrência) e as vagas suplementares institucionais AC_I/AC_Q, de povos indígenas e quilombolas (UNI-REQ-0096), não entram nessa exclusividade: convivem normalmente com PCD_PURO.',
+      'Retirado: PCD_PURO deixou de existir por decisão do PO (24/09/2026). A reserva de pessoa com deficiência em processo sem cotas da Lei 12.711/2012 passa a usar AC_PCD, ação afirmativa independente de escola e de renda (UNI-REQ-0141, UNI-REQ-0142 e UNI-REQ-0140). Registro anterior, mantido para rastreabilidade: PCD_PURO (UNI-REQ-0085/RN-MOD-08) foi desenhada para processo sem nenhuma das oito cotas da Lei 12.711 — é nesse cenário que faz sentido reservar PcD sem a exclusão de escola pública que AC_PCD carrega. Ofertar as duas famílias juntas tornaria AC_PCD redundante para todo candidato PcD elegível a PCD_PURO, sem que a publicação acusasse a sobreposição. A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e, ao mesmo tempo, qualquer uma das oito cotas reservadas da Lei ou AC_PCD, no mesmo processo — mesmo que em cursos diferentes. AC (ampla concorrência) e as vagas suplementares institucionais AC_I/AC_Q, de povos indígenas e quilombolas (UNI-REQ-0096), não entram nessa exclusividade: convivem normalmente com PCD_PURO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
     parent_id: 'UNI-REQ-0085',
     modulo: 'Seleção',
-    recorte: 'mvp',
-    status: 'aprovado',
+    recorte: 'fora_escopo',
+    status: 'historico',
     prioridade: 'must',
-    politica_backlog: 'criterio_verificacao',
-    tipo_issue_recomendado: 'Task',
+    politica_backlog: 'governanca',
+    tipo_issue_recomendado: 'None',
     criterios_aceite:
       'A publicação recusa processo cuja oferta de vagas contenha PCD_PURO e qualquer uma das oito cotas reservadas da Lei 12.711 ou AC_PCD, com erro nomeado — o invariante vale por processo, não por curso; vaga conflitante já removida (soft-deletada) não dispara a recusa; processo que oferta só PCD_PURO com a ampla concorrência publica normalmente, assim como processo da Lei de Cotas que nunca ofertou PCD_PURO; ofertar as vagas suplementares institucionais junto com PCD_PURO não é recusado; migrar um processo de PCD_PURO para uma cota da Lei (removendo uma e adicionando a outra) é aceito — a regra recusa a coexistência, não a mudança de modalidade em si.',
     verificacao:
@@ -2549,11 +2594,11 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0092',
     titulo: 'Resolução de MODALIDADE em processo sem nenhuma cota da Lei 12.711 não está verificada',
     enunciado:
-      'PCD_PURO (UNI-REQ-0085) foi pensada para processo sem nenhuma das oito cotas da Lei 12.711 — mas a lista de dependências declaradas da regra de derivação de MODALIDADE (UNI-REQ-0076) inclui fatos ligados a essas cotas (EGRESSO_ESCOLA_PUBLICA, CONCORRER_PPI, CONCORRER_Q, CONCORRER_EP, CONCORRER_RENDA), e MODALIDADE só resolve quando toda dependência declarada resolveu, RESOLVIDO ou NÃO_APLICÁVEL (UNI-REQ-0075). O gate de escola pública (UNI-REQ-0073) suprime os produtores de PPI/Q/EP/RENDA quando EGRESSO_ESCOLA_PUBLICA não é escola pública, o que resolveria essas dependências como NÃO_APLICÁVEL automaticamente — mas isso pressupõe que EGRESSO_ESCOLA_PUBLICA em si tenha produtor no formulário do processo. Um processo cujo formulário simplesmente não inclui campo para EGRESSO_ESCOLA_PUBLICA, por não ter nenhuma cota que dependa dele, não foi verificado: não há prova de que a ausência total de produtor resolve a dependência (NÃO_APLICÁVEL) em vez de deixá-la permanentemente INDETERMINADO, travando MODALIDADE — e portanto PCD_PURO — indefinidamente.',
+      'Em processo sem nenhuma das oito cotas da Lei 12.711/2012 que reserve vaga para pessoa com deficiência — como o PSE Educação do Campo, pela regra DISTRIB-VAGAS-COM-AC-PCD (UNI-REQ-0140) —, a regra de AC_PCD depende só da elegibilidade e do opt-in por deficiência (UNI-REQ-0076). A lista de dependências declaradas da regra de derivação de MODALIDADE, porém, inclui fatos ligados às cotas (EGRESSO_ESCOLA_PUBLICA, CONCORRER_EP, CONCORRER_PPI, CONCORRER_Q, CONCORRER_RENDA), e MODALIDADE só resolve quando toda dependência declarada resolveu, RESOLVIDO ou NÃO_APLICÁVEL (UNI-REQ-0075). Um processo cujo formulário não inclui campo para esses fatos, por não ofertar nenhuma cota que dependa deles, não foi verificado: não há prova de que a ausência total de produtor resolve a dependência (NÃO_APLICÁVEL) em vez de deixá-la permanentemente INDETERMINADO, travando MODALIDADE — e portanto AC_PCD — indefinidamente.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
-    parent_id: 'UNI-REQ-0085',
+    parent_id: 'UNI-REQ-0076',
     modulo: 'Seleção',
     recorte: 'incremento_obrigatorio',
     status: 'incremento_planejado',
@@ -2561,16 +2606,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Antes de publicar um processo real só com PCD_PURO, sem nenhuma cota da Lei 12.711, verificar e provar automaticamente que MODALIDADE resolve para o conjunto ofertado mesmo quando o formulário do processo não produz EGRESSO_ESCOLA_PUBLICA/CONCORRER_PPI/CONCORRER_Q/CONCORRER_EP/CONCORRER_RENDA; se a ausência de produtor não resolver essas dependências automaticamente, decidir e implementar o mecanismo que resolve (produtor obrigatório mesmo que irrelevante ao processo, ou lista de dependências escopada pela oferta do processo).',
-    verificacao: 'Revisão futura / teste automatizado quando um processo real usar PCD_PURO isoladamente.',
+      'Antes de publicar um processo real sem nenhuma cota da Lei 12.711/2012, verificar e provar automaticamente que MODALIDADE resolve para o conjunto ofertado ({AC, AC_PCD}) mesmo quando o formulário do processo não produz EGRESSO_ESCOLA_PUBLICA/CONCORRER_EP/CONCORRER_PPI/CONCORRER_Q/CONCORRER_RENDA; se a ausência de produtor não resolver essas dependências automaticamente, decidir e implementar o mecanismo que resolve (produtor obrigatório mesmo que irrelevante ao processo, ou lista de dependências escopada pela oferta do processo).',
+    verificacao: 'Teste automatizado da derivação de MODALIDADE em processo que oferta só AC e AC_PCD (planejado).',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
   },
   {
     requisito_id: 'UNI-REQ-0096',
-    titulo: 'AC_I/AC_Q: modalidades institucionais indígena e quilombola, certame isolado permanente (RN-MOD-05)',
+    titulo: 'AC_I/AC_Q: ações afirmativas institucionais indígena e quilombola, em certame isolado permanente',
     enunciado:
-      'AC_I (indígena) e AC_Q (quilombola) são modalidades institucionais suplementares ao total de vagas do curso — somam-se ao total ofertado, não retiram vaga de nenhuma outra modalidade. O critério é autodeclaração, opção expressa por concorrer e carta de lideranças da comunidade — sem exigência de escola pública nem de renda, diferente das cotas da Lei 12.711. Hoje só existem no PSIQ (Processo Seletivo Indígena e Quilombola), certame isolado dos demais processos seletivos da instituição. O isolamento é modelo permanente, não lacuna temporária de modelagem: não há plano de, no futuro, unificar AC_I/AC_Q com as cotas normais da Lei 12.711 (LB_Q/LI_Q etc.) no mesmo certame — o PSIQ segue um formato de seleção totalmente diferente dos demais por decisão institucional. Achado de projeção, registrado só como nota e sem motivar trabalho de modelagem agora: se essa premissa mudar algum dia e AC_Q passar a coexistir com LB_Q/LI_Q no mesmo certame, AC_Q precisaria de uma condição adicional (não ser egresso de escola pública), análoga à que UNI-REQ-0076 já aplica a AC_PCD em relação às cotas de PcD da Lei, para não duplicar quem já concorre pelas cotas da Lei.',
+      'AC_I (indígena) e AC_Q (quilombola) são ações afirmativas institucionais (UNI-REQ-0141), fundamentadas na Resolução Unifesspa nº 532/2021, art. 2º, com vagas por acréscimo ao total do curso — somam-se ao total ofertado, não retiram vaga de nenhuma outra modalidade. O critério é autodeclaração, opção expressa por concorrer e carta de lideranças da comunidade — sem exigência de escola pública nem de renda, diferente das cotas da Lei 12.711. Hoje só existem no PSIQ (Processo Seletivo Indígena e Quilombola), certame isolado dos demais processos seletivos da instituição. O isolamento é modelo permanente, não lacuna temporária de modelagem: não há plano de, no futuro, unificar AC_I/AC_Q com as cotas da Lei 12.711 (LB_Q/LI_Q etc.) no mesmo certame — o PSIQ segue um formato de seleção totalmente diferente dos demais por decisão institucional. Se essa premissa mudar algum dia, vale a regra geral de UNI-REQ-0142: quem opta pelas cotas da lei não concorre a ação afirmativa.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2582,7 +2627,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'AC_I e AC_Q compõem o total de vagas ofertado (SUPLEMENTAR_AO_TOTAL), nunca uma composição que retire vaga de outra modalidade; o critério de elegibilidade é autodeclaração étnico-comunitária mutuamente exclusiva (indígena e quilombola nunca coexistem na mesma autodeclaração) mais opção expressa, sem átomo de escola pública nem de renda; nenhum processo fora do PSIQ oferta AC_I/AC_Q hoje; o predicado de escola pública para AC_Q permanece fora do critério enquanto AC_I/AC_Q só existirem em certame isolado das cotas da Lei 12.711.',
+      'AC_I e AC_Q compõem o total de vagas ofertado (SUPLEMENTAR_AO_TOTAL), nunca uma composição que retire vaga de outra modalidade; o critério de elegibilidade é autodeclaração étnico-comunitária mutuamente exclusiva (indígena e quilombola nunca coexistem na mesma autodeclaração) mais opção expressa, sem átomo de escola pública nem de renda; nenhum processo fora do PSIQ oferta AC_I/AC_Q hoje; a base legal cita a Resolução nº 532/2021, art. 2º; a coexistência com as cotas da Lei 12.711, se um dia ocorrer, segue UNI-REQ-0142.',
     verificacao:
       'Teste automatizado (AC_I/AC_Q somam ao total sem retirar vaga de outra modalidade; autodeclaração indígena e quilombola mutuamente exclusivas; critério sem átomo de escola pública/renda; PSIQ é o único processo que oferta as duas) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
