@@ -1,0 +1,57 @@
+---
+title: As regras de derivação dão cota e ação afirmativa ao mesmo candidato
+sidebar_label: Cota e ação afirmativa derivadas juntas
+description: A publicação foi recusada porque as regras de derivação de modalidade permitem que um mesmo candidato concorra a uma cota da Lei 12.711 e a uma ação afirmativa institucional.
+code: uniplus.selecao.processo_seletivo.cota_e_acao_afirmativa_derivaveis_juntas
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação de um processo seletivo
+requisitos:
+  - UNI-REQ-0142
+rastreio:
+  - label: 'uniplus-api#1672'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1672
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+As modalidades de cada candidato não são escolhidas por ele: o sistema as
+define a partir das respostas da inscrição, seguindo as **regras de derivação
+de modalidade** do processo. Ao conferir essas regras para publicar, o sistema
+encontrou uma combinação de respostas que dá ao mesmo candidato uma **cota da
+Lei 12.711/2012** (`LI_*` ou `LB_*`) e uma **ação afirmativa institucional**
+(como `AC_PCD`). A mensagem nomeia o par.
+
+Quem opta pelas cotas da lei — declara ter cursado o ensino médio em escola
+pública e responde que deseja concorrer às vagas de escola pública — concorre
+às cotas e não concorre a nenhuma ação afirmativa. Quem não faz essa opção pode
+concorrer à ação afirmativa. As duas coisas não convivem na mesma inscrição.
+
+## Por que recusar na publicação
+
+Publicado assim, o edital classificaria candidatos em vagas a que eles não têm
+direito ao mesmo tempo, e cada vaga ocupada dessa forma seria tirada de quem só
+tem uma das vias. A conferência olha só as regras, sem depender de inscrição
+nenhuma: se existe uma resposta possível que dê as duas modalidades, a
+publicação é recusada.
+
+Ofertar as duas no mesmo processo continua válido. A exclusividade é por
+inscrição, não por oferta.
+
+## Como resolver
+
+Corrija as regras de derivação de modalidade para que toda regra de ação
+afirmativa contradiga a opção pelas cotas que as regras de cota exigem. A
+proposta normativa do processo já vem nessa forma: `AC_PCD` vale para a pessoa
+com deficiência que não é egressa de escola pública **ou** que respondeu que
+não deseja concorrer às vagas de escola pública. Recuperar a proposta e
+gravá-la de novo desfaz a combinação que causou a recusa.
+
+O item correspondente no checklist de conformidade do processo mostra a mesma
+pendência, o que permite conferir a correção antes de tentar publicar de novo.
