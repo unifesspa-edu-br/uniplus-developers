@@ -1,7 +1,7 @@
 ---
 title: A natureza legal da modalidade é inválida
 sidebar_label: Natureza legal inválida
-description: A natureza legal, quando informada, precisa ser um dos quatro tokens do domínio fechado — COTA_RESERVADA, AMPLA, SUPLEMENTAR ou OUTRA_MODALIDADE.
+description: A natureza legal, quando informada, precisa ser um dos três tokens do domínio fechado — AMPLA, COTA_RESERVADA ou ACAO_AFIRMATIVA.
 code: uniplus.configuracao.modalidade.natureza_invalida
 http_status: 422
 situacao: publicado
@@ -9,10 +9,12 @@ modulo: Configuração
 emitido_em:
   - Criação de uma modalidade de concorrência
   - Atualização de uma modalidade de concorrência
-requisitos: []
+requisitos: ['UNI-REQ-0141']
 rastreio:
   - label: 'uniplus-api#589'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+  - label: 'uniplus-api#1671'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1671
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -21,15 +23,19 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A **natureza legal** informada não é um dos quatro tokens do domínio
-fechado: `COTA_RESERVADA`, `AMPLA`, `SUPLEMENTAR` ou `OUTRA_MODALIDADE`.
+A **natureza legal** informada não é um dos três tokens do domínio
+fechado: `AMPLA` (ampla concorrência), `COTA_RESERVADA` (cota da Lei
+12.711/2012) ou `ACAO_AFIRMATIVA` (ação afirmativa institucional). Os tokens
+`SUPLEMENTAR` e `OUTRA_MODALIDADE` deixaram de existir e também são recusados.
 
 A natureza legal tem valor padrão: se omitida, a modalidade assume `AMPLA`
 silenciosamente. Este erro só dispara quando um token é informado e não é um
-dos quatro válidos.
+dos três válidos.
 
 ## Como resolver
 
-Informe um dos quatro tokens válidos — `COTA_RESERVADA`, `AMPLA`,
-`SUPLEMENTAR` ou `OUTRA_MODALIDADE` — ou omita o campo para aceitar o padrão
-`AMPLA`.
+Informe um dos três tokens válidos — `AMPLA`, `COTA_RESERVADA` ou
+`ACAO_AFIRMATIVA` — ou omita o campo para aceitar o padrão `AMPLA`. Uma
+modalidade institucional que antes seria `SUPLEMENTAR` ou `OUTRA_MODALIDADE`,
+como a reserva para pessoa com deficiência ou as vagas por acréscimo do
+processo indígena e quilombola, é `ACAO_AFIRMATIVA`.

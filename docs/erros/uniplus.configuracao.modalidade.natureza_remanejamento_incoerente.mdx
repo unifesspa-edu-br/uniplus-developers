@@ -1,7 +1,7 @@
 ---
 title: A regra de remanejamento é incoerente com a natureza legal
 sidebar_label: Natureza e remanejamento incoerentes
-description: Cada natureza legal exige ou proíbe uma regra de remanejamento específica — cota reservada exige SEGUE_CASCATA, ampla não admite regra nenhuma, suplementar/outra exige DESTINO_UNICO ou CRUZADO.
+description: Cada natureza legal exige ou proíbe uma regra de remanejamento específica — cota reservada exige SEGUE_CASCATA, ampla não admite regra nenhuma, ação afirmativa exige DESTINO_UNICO ou CRUZADO.
 code: uniplus.configuracao.modalidade.natureza_remanejamento_incoerente
 http_status: 422
 situacao: publicado
@@ -9,10 +9,12 @@ modulo: Configuração
 emitido_em:
   - Criação de uma modalidade de concorrência
   - Atualização de uma modalidade de concorrência
-requisitos: []
+requisitos: ['UNI-REQ-0141']
 rastreio:
   - label: 'uniplus-api#589'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+  - label: 'uniplus-api#1671'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1671
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -28,13 +30,17 @@ informadas não é uma das combinações válidas:
 |---|---|
 | `COTA_RESERVADA` | `SEGUE_CASCATA` — nenhuma outra é aceita |
 | `AMPLA` | Nenhuma — informar qualquer regra é recusado |
-| `SUPLEMENTAR` ou `OUTRA_MODALIDADE` | `DESTINO_UNICO` ou `CRUZADO` |
+| `ACAO_AFIRMATIVA` | `DESTINO_UNICO` ou `CRUZADO` |
 
 Vagas ociosas de uma cota reservada sempre seguem a cascata legal de
 remanejamento entre modalidades — não há escolha. A ampla concorrência é o
-destino final da cascata, não a origem de mais um remanejamento. Modalidades
-suplementares ou de outra natureza remanejam para um destino específico, por
-isso exigem uma das duas regras que declaram esse destino.
+destino final da cascata, não a origem de mais um remanejamento. A ação
+afirmativa nunca segue a cascata da lei: a vaga não preenchida vai para um
+destino que a própria modalidade declara. A reserva para pessoa com
+deficiência (`AC_PCD`) usa `DESTINO_UNICO` e devolve a vaga à ampla
+concorrência, de onde ela saiu. As vagas por acréscimo do processo indígena e
+quilombola (`AC_I` e `AC_Q`) usam `CRUZADO`: a vaga de uma passa à outra,
+porque nesse processo não há ampla concorrência para recebê-la.
 
 ## Como resolver
 
