@@ -57,7 +57,7 @@ Termos usados ao longo do documento, com o sentido que têm no Uni+.
 | Edital | O documento oficial emitido quando um processo seletivo é publicado — o ato que fecha e oficializa a configuração. Não é editado diretamente: uma mudança pós-publicação sai como retificação, que gera um novo edital. |
 | Modalidade de concorrência | A fila em que o candidato disputa a vaga: ampla concorrência, uma cota da Lei 12.711/2012 ou uma ação afirmativa institucional. Ver seção 7. |
 | Ampla concorrência | A modalidade `AC`, aberta a todos os candidatos. Todo candidato concorre nela, inclusive o cotista. |
-| Cota | Reserva de vagas definida pela Lei 12.711/2012, sempre condicionada a ter cursado o ensino médio em escola pública: as oito modalidades `LB_*` e `LI_*`. As dimensões declaradas (renda, cor/raça, deficiência, quilombola) **combinam-se** com a escola pública em modalidades compostas — por exemplo, escola pública, baixa renda e deficiência juntas produzem `LI_EP`, `LB_EP`, `LI_PCD` e `LB_PCD`. Ver seção 7. |
+| Cota | Reserva de vagas definida pela Lei 12.711/2012, sempre condicionada a ser egresso de escola pública, o que o sistema calcula de onde e como o candidato cursou o ensino médio (`UNI-REQ-0148`): as oito modalidades `LB_*` e `LI_*`. As dimensões declaradas (renda, cor/raça, deficiência, quilombola) **combinam-se** com a escola pública em modalidades compostas — por exemplo, escola pública, baixa renda e deficiência juntas produzem `LI_EP`, `LB_EP`, `LI_PCD` e `LB_PCD`. Ver seção 7. |
 | Ação afirmativa | Reserva de vagas instituída por norma da Unifesspa (Resolução nº 532/2021), sem condição de escola pública nem de renda: `AC_PCD` para pessoa com deficiência, e `AC_I` e `AC_Q` no processo seletivo indígena e quilombola. Não é cota, e quem opta pelas cotas da lei não concorre a ela. Ver seção 7. |
 | Dado do candidato | Qualquer informação usada para decidir o que se aplica a ele: alguns são informados por ele (autodeclarações, opções), outros são calculados pelo sistema a partir dos primeiros (ver seção 8). |
 | Condição de exigência | A regra que determina de quem um documento é exigido — por exemplo, apenas de quem concorre à cota de renda. É montada a partir dos dados do candidato. |
@@ -93,7 +93,7 @@ A configuração é feita pelo Administrador da Unidade enquanto o processo est�
 - Etapas, pesos e critérios de resultado. Definem-se as etapas pontuadas (por exemplo, prova objetiva, redação, entrevista), o peso de cada uma, os critérios de desempate e o bônus regional, quando houver. A fórmula de nota final e os critérios de desempate ficam registrados na configuração e serão aplicados na etapa de classificação.
 - Modalidades de concorrência e quadro de vagas. Definem-se quais modalidades o processo oferece (ampla concorrência e as cotas aplicáveis) e o número de vagas de cada uma, por oferta de curso. Também se define a ordem de remanejamento: para onde as vagas de uma cota não preenchida devem migrar (ver seção 7).
 - Documentos exigidos. Para cada documento, define-se de quem é exigido (de todos, ou apenas de quem satisfaz uma condição), em que fase, se é obrigatório, qual a consequência de não apresentá-lo, a base legal que o embasa e as regras de formato, tamanho e validade. Ver seção 9.
-- Formulário de inscrição. Monta-se o formulário que o candidato preencherá, incluindo as perguntas de cota (autodeclarações e opções de concorrer) e os campos que só aparecem em função de respostas anteriores. Ver seção 8.
+- Formulários por finalidade. Monta-se, a partir dos modelos do tipo de processo, sempre o formulário de inscrição; o de isenção da taxa quando o processo cobra taxa, exigido a partir da frente de inscrição; e o de habilitação quando o cronograma tem a fase de habilitação, exigido a partir da frente de habilitação (`UNI-REQ-0144`). O de inscrição traz as perguntas de cota (autodeclarações, origem escolar e opções de concorrer); em todos, há campos que só aparecem, ou só são obrigatórios, em função de respostas anteriores. Ver seção 8.
 - Atendimento especializado. Define-se quais condições, recursos e tipos de deficiência o processo oferece como atendimento especializado, para que o candidato possa solicitá-los na inscrição.
 - Salvar e revisar. Enquanto em rascunho, tudo permanece editável. Quando a configuração está completa e coerente, o administrador solicita a publicação.
 
@@ -149,7 +149,7 @@ Esta é a área mais sensível do sistema, por implementar a Lei de Cotas (Lei 1
 | Código | Natureza | Quem concorre |
 |---|---|---|
 | AC | Ampla concorrência | Todos os candidatos, independentemente de cota. |
-| `AC_PCD` | Ação afirmativa | Pessoa com deficiência que **não** optou pelas cotas da lei — por não ter estudado em escola pública ou por ter recusado as cotas —, independentemente de renda. As vagas saem da ampla concorrência (Resolução nº 532/2021, art. 1º). O edital a apresenta com o rótulo V; V é apenas um rótulo de exibição, não um código próprio. |
+| `AC_PCD` | Ação afirmativa | Pessoa com deficiência que **não** optou pelas cotas da lei — por não ser egresso de escola pública (`UNI-REQ-0148`) ou por ter recusado as cotas —, independentemente de renda. As vagas saem da ampla concorrência (Resolução nº 532/2021, art. 1º). O edital a apresenta com o rótulo V; V é apenas um rótulo de exibição, não um código próprio. |
 | `LI_EP` | Cota | Escola pública, independentemente de renda. |
 | `LI_PPI` | Cota | Escola pública, mais preto, pardo ou indígena, independentemente de renda. |
 | `LI_Q` | Cota | Escola pública, mais quilombola, independentemente de renda. |
@@ -169,12 +169,12 @@ As modalidades com renda (grupo LB) também concorrem à modalidade equivalente 
 
 ### 7.3 O formulário de cotas (as perguntas)
 
-A definição das cotas segue o formulário real da Unifesspa. Para cada dimensão de cota, há sempre duas perguntas: uma de autodeclaração (você é / você se enquadra?) e uma de opção de concorrer (você deseja concorrer a essa cota?). Autodeclarar-se não basta: a cota só entra se o candidato escolher concorrer a ela.
+A definição das cotas segue o formulário da Unifesspa, com a origem escolar em duas perguntas definida pelo `UNI-REQ-0148`. Para cada dimensão de cota, há uma elegibilidade e uma opção de concorrer (você deseja concorrer a essa cota?). A elegibilidade é uma autodeclaração (você é / você se enquadra?), exceto a de escola pública, que não é perguntada: é calculada de onde e como o candidato cursou o ensino médio (`UNI-REQ-0148`). Ser elegível não basta: a cota só entra se o candidato escolher concorrer a ela.
 
 | Dimensão | Autodeclaração | Opção de concorrer |
 |---|---|---|
 | Deficiência | Você se autodeclara pessoa com deficiência? | Deseja concorrer às vagas reservadas a pessoas com deficiência? |
-| Escola pública | Cursou todos os anos do ensino médio em escola pública (ou comunitária conveniada)? | Deseja concorrer às vagas reservadas a egressos de escola pública? |
+| Escola pública | Não é perguntada: é calculada de onde e como o candidato cursou o ensino médio (`UNI-REQ-0148`). | Deseja concorrer às vagas reservadas a egressos de escola pública? |
 | Cor/raça | Como se autodeclara: amarela, branca, indígena, preta ou parda? | Deseja concorrer às vagas reservadas a pretos, pardos e indígenas? |
 | Quilombola | Você se autodeclara pessoa quilombola? | Deseja concorrer às vagas reservadas a quilombolas? |
 | Renda | Sua família atende ao critério de renda per capita aplicável ao processo? | Deseja concorrer às vagas reservadas por critério de renda? |
@@ -185,16 +185,16 @@ A opção de concorrer às vagas de escola pública é a **opção pelas cotas d
 
 As perguntas não aparecem todas de uma vez: a exibição de cada uma depende das respostas anteriores. Essas regras vêm do próprio formulário oficial:
 
-- A opção de concorrer a uma cota só aparece se a autodeclaração correspondente foi sim.
-- Se o candidato responde que não estudou em escola pública, ou que estudou mas não deseja concorrer às vagas de escola pública, as perguntas de cor/raça, quilombola e renda não aparecem — ele não optou pelas cotas da lei e segue para a ampla concorrência. A dimensão de deficiência é exceção: a pessoa com deficiência que deseja concorrer como tal concorre também à ação afirmativa `AC_PCD` (rotulada V), qualquer que seja a escola em que estudou.
+- A opção de concorrer a uma cota só aparece para quem é elegível a ela — pela autodeclaração ou, no caso da escola pública, pelo cálculo a partir da origem escolar.
+- Se as respostas de origem escolar mostram que o candidato não é egresso de escola pública, ou ele é egresso mas não deseja concorrer às vagas de escola pública, as perguntas de cor/raça, quilombola e renda não aparecem — ele não optou pelas cotas da lei e segue para a ampla concorrência. A dimensão de deficiência é exceção: a pessoa com deficiência que deseja concorrer como tal concorre também à ação afirmativa `AC_PCD` (rotulada V), qualquer que seja a escola em que estudou.
 - Se o candidato se declara amarela ou branca, a pergunta de concorrer à cota de cor/raça não aparece.
 - Se o candidato se declara indígena, a dimensão quilombola não aparece — a legislação não permite acumular as duas.
 
 ### 7.5 Como o sistema calcula as modalidades a partir das respostas
 
-A partir das autodeclarações e das opções de concorrer, o sistema aplica a composição da Lei de Cotas e produz o conjunto de modalidades a que o candidato concorre. Nas linhas abaixo, dizer que o candidato concorre por X significa que ele fez as duas coisas: autodeclarou-se elegível a X e optou por concorrer à cota X. Apenas autodeclarar-se não coloca ninguém na cota.
+A partir das autodeclarações e das opções de concorrer, o sistema aplica a composição da Lei de Cotas e produz o conjunto de modalidades a que o candidato concorre. Nas linhas abaixo, dizer que o candidato concorre por X significa que ele fez as duas coisas: é elegível a X — por autodeclaração ou, na escola pública, pelo cálculo da origem escolar — e optou por concorrer à cota X. Apenas ser elegível não coloca ninguém na cota.
 
-A tabela abaixo é uma **amostra ilustrativa** dos casos mais representativos, para dar intuição do cálculo — não é a fonte normativa. O critério de aceite obrigatório é a regra de derivação congelada: as regras R0–R9 (a ampla concorrência, a ação afirmativa `AC_PCD` e as oito cotas da Lei 12.711) e todas as combinações da matriz completa são normativas por [`UNI-REQ-0076`](../requisitos/index.mdx), e o resultado exato de qualquer combinação dessas dez (inclusive as omitidas desta amostra) é o que a regra congelada produz. "Opta pelas cotas da lei" significa ser de escola pública e responder que deseja concorrer às vagas de escola pública (§7.3). Os conjuntos abaixo são calculados antes da restrição às modalidades ofertadas pelo processo (ver observação ao final da seção).
+A tabela abaixo é uma **amostra ilustrativa** dos casos mais representativos, para dar intuição do cálculo — não é a fonte normativa. O critério de aceite obrigatório é a regra de derivação congelada: as regras R0–R9 (a ampla concorrência, a ação afirmativa `AC_PCD` e as oito cotas da Lei 12.711) e todas as combinações da matriz completa são normativas por [`UNI-REQ-0076`](../requisitos/index.mdx), e o resultado exato de qualquer combinação dessas dez (inclusive as omitidas desta amostra) é o que a regra congelada produz. "Opta pelas cotas da lei" significa ser egresso de escola pública e responder que deseja concorrer às vagas de escola pública (§7.3). Os conjuntos abaixo são calculados antes da restrição às modalidades ofertadas pelo processo (ver observação ao final da seção).
 
 | Perfil do candidato (opções ativas) | Concorre a |
 |---|---|
@@ -218,7 +218,7 @@ Pontos de atenção que o formulário resolve automaticamente:
 
 - Autodeclarar não é concorrer. Quem se declara com deficiência mas responde que não deseja concorrer como tal não entra em `AC_PCD` nem em `LI_PCD`/`LB_PCD`.
 - Renda amplia, não substitui. Quem concorre por renda (grupo LB) concorre também à versão sem renda (grupo LI). Quem não opta por concorrer por renda mantém apenas as modalidades independentes de renda.
-- Cota da lei e ação afirmativa não se somam. A pessoa com deficiência que não opta pelas cotas da lei — por não ser de escola pública ou por recusá-las — concorre a `AC_PCD` (a modalidade rotulada V no edital); a que opta concorre a `LI_PCD` (e `LB_PCD`, se concorre por renda) e nunca a `AC_PCD` ([UNI-REQ-0142](../requisitos/index.mdx)).
+- Cota da lei e ação afirmativa não se somam. A pessoa com deficiência que não opta pelas cotas da lei — por não ser egresso de escola pública ou por recusá-las — concorre a `AC_PCD` (a modalidade rotulada V no edital); a que opta concorre a `LI_PCD` (e `LB_PCD`, se concorre por renda) e nunca a `AC_PCD` ([UNI-REQ-0142](../requisitos/index.mdx)).
 - Indígena nunca gera cota quilombola (exclusão prevista em lei).
 - Restrição pela oferta. As modalidades a que o candidato pode concorrer são exatamente as que o processo oferece — a união de todas as configurações de distribuição de vagas do processo (todas as ofertas de curso), não apenas as dos cursos que o candidato escolheu (a restrição por curso específico ocorre mais tarde, na classificação). Essa restrição é garantida na origem: uma regra de derivação que contribua uma modalidade fora da oferta é recusada na configuração e barrada na publicação (fail-closed), não filtrada em silêncio — de modo que o candidato nunca concorre a uma modalidade não ofertada. (O registro `UNI-REQ-0076` ainda descreve essa restrição como interseção "no último passo"; o comportamento implementado é a recusa antecipada na configuração — divergência de redação a reconciliar no registro.)
 
@@ -241,25 +241,26 @@ Esta seção explica como o sistema entende e organiza as respostas do candidato
 
 O sistema distingue três tipos de informação sobre o candidato:
 
-- Dados informados pelo candidato — as respostas do formulário: autodeclarações (deficiência, cor/raça, quilombola, renda, escola pública) e opções de concorrer. O candidato sempre seleciona valores de uma lista pré-definida, nunca digita texto livre. Cada valor da lista traz uma descrição do seu significado, para orientar a escolha.
-- Dados calculados pelo sistema (derivados) — informações que o sistema deduz automaticamente dos dados informados, seguindo regras configuradas. O exemplo central é a modalidade de concorrência: o candidato responde às perguntas de cota e o sistema calcula o conjunto de modalidades (seção 7.5). Outro exemplo é a faixa etária, derivada da data de nascimento, usada para decidir exigências de documento.
+- Dados informados pelo candidato — as respostas do formulário: autodeclarações (deficiência, cor/raça, quilombola, renda), onde e como cursou o ensino médio, e opções de concorrer. Essas respostas são escolhidas numa lista pré-definida; dados como nome, datas e endereço são digitados, com formato validado; nome, textos e endereço nunca entram em regra — do endereço, entram só a UF e o município, por derivação; data entra só por meio de derivado relativo à data de referência, como a faixa etária. Egresso de escola pública não é perguntado: é calculado a partir de onde e como o candidato cursou o ensino médio. Cada valor da lista traz uma descrição do seu significado, para orientar a escolha.
+- Dados calculados pelo sistema (derivados) — informações que o sistema deduz automaticamente dos dados informados, por regra configurada ou por mecanismo do próprio sistema (`UNI-REQ-0075`). O exemplo central de regra configurada é a modalidade de concorrência: o candidato responde às perguntas de cota e o sistema calcula o conjunto de modalidades (seção 7.5). São calculados pelo próprio sistema, sem configuração do administrador, a faixa etária (da data de nascimento, usada para decidir exigências de documento), a UF e o município (do endereço) e o egresso de escola pública (da origem escolar, `UNI-REQ-0148`).
 - Dados de integração — informações vindas de outra fonte ou sistema (por exemplo, atributos do candidato importados), com origem própria e resolvidas como os demais fatos. A natureza é suportada no modelo desde já; o que ainda não existe é uma fonte concreta de integração conectada. Não são respostas do formulário nem resultado de derivação; um dado como a nacionalidade só é usado como fato quando tem uma origem definida (informado ou de integração). Ver as três naturezas de fato na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md).
 
 > Por que essa distinção importa. Modelar a modalidade como dado calculado — e não como uma escolha direta do candidato — evita erros e fraudes, garante que a Lei de Cotas seja aplicada de forma uniforme e permite mudar as regras de composição por configuração, sem desenvolvimento. A regra de cálculo é parte da configuração e é congelada na publicação (`RN08`).
 
 ### 8.2 Campos condicionais (o que aparece depende do que foi respondido)
 
-Cada campo do formulário pode ter pré-condições: ele só é apresentado ao candidato quando as respostas anteriores as satisfazem. Isso é o que faz o formulário abrir a pergunta de concorrer só depois do sim na autodeclaração, ou ocultar o bloco quilombola para quem se declara indígena. As pré-condições são configuradas (não programadas) e ficam congeladas na publicação.
+Cada campo do formulário pode ter pré-condições: ele só é apresentado ao candidato quando as respostas anteriores as satisfazem. Isso é o que faz o formulário abrir a pergunta de concorrer só para quem é elegível à cota, ou ocultar o bloco quilombola para quem se declara indígena. As pré-condições são configuradas (não programadas) e ficam congeladas na publicação.
 
 ### 8.3 Não se aplica é diferente de pendente
 
-Uma sutileza importante de negócio: nem toda pergunta em branco significa a mesma coisa. O sistema distingue três situações, e a diferença entre elas decide se algo é dispensado ou fica pendente:
+Uma sutileza importante de negócio: nem toda pergunta em branco significa a mesma coisa. O sistema distingue quatro situações, e a diferença entre elas decide se algo é dispensado, fica pendente ou segue como não informado:
 
 | Situação | Estado | Efeito de negócio |
 |---|---|---|
 | Pré-condição da pergunta é comprovadamente falsa (a pergunta não se aplica ao caso — por exemplo, a pergunta de renda para quem não é de escola pública) | Não se aplica | Resultado definitivo. Aquela cota, ou aquele caminho de exigência, é dispensado — o candidato não concorre por ali / não precisa daquele documento por aquele motivo. |
-| A pergunta se aplica, apareceu, mas ainda não foi respondida | Pendente | O item fica pendente, nunca dispensado silenciosamente. O sistema mantém a exigência sinalizada até haver resposta. |
+| A pergunta se aplica, apareceu e ainda não foi respondida — obrigatória, ou opcional com a etapa em aberto | Pendente | O item fica pendente, nunca dispensado silenciosamente. O sistema mantém a exigência sinalizada até haver resposta. |
 | Ainda não se sabe se a pergunta se aplica, porque depende de outra resposta que falta | Pendente | Também fica pendente — não se conclui não se aplica enquanto houver dúvida. Só a pré-condição comprovadamente falsa dispensa. |
+| A pergunta é opcional, apareceu e foi deixada em branco, com a etapa concluída | Não informado | Resolvido sem valor: não trava as regras seguintes, e nenhuma condição sobre ele é verdadeira. Só pode ser opcional o campo que não alimenta derivação nem é citado por negação; o campo que alimenta é obrigatório sempre que aparece (`UNI-REQ-0074`). |
 
 Uma ressalva importante: um documento pode ser exigido por mais de um motivo. Quando um caminho deixa de exigir o documento, isso afeta apenas aquele caminho — o documento pode continuar exigido por outro. A exigência é dispensada quando **nenhum** caminho que poderia torná-la necessária está ativo — ou seja, cada caminho resultou em não se aplica **ou** em falso (as respostas simplesmente não satisfazem o gatilho, como um candidato que não concorre àquela cota). Basta **um** caminho indeterminado (dúvida ainda não resolvida) para manter a exigência pendente.
 
@@ -267,7 +268,7 @@ Uma ressalva importante: um documento pode ser exigido por mais de um motivo. Qu
 
 ### 8.4 Ordem de coleta
 
-O sistema garante uma ordem lógica: um documento nunca é solicitado antes de existir a informação que o dispara. Se um documento só é exigido de quem concorre à cota de renda, ele não aparece antes de o candidato responder à pergunta de renda. Da mesma forma, uma informação usada apenas em uma fase posterior (por exemplo, na habilitação) não pode disparar exigência de documento na fase de inscrição.
+O sistema garante uma ordem lógica: um documento nunca é solicitado antes de existir a informação que o dispara. Se, na inscrição, um documento só é exigido de quem concorre à cota de renda, ele não aparece antes de o candidato responder à pergunta de renda. Da mesma forma, uma informação usada apenas em uma fase posterior (por exemplo, na habilitação) não pode disparar exigência de documento na fase de inscrição.
 
 ---
 
@@ -376,7 +377,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | `REQ-14` | Configuração do processo | Configurar um processo em rascunho: etapas, vagas, modalidades, critérios, bônus, atendimento, documentos e formulário. |
 | `REQ-15` | Etapas, critérios e bônus | Configurar etapas pontuadas, pesos, critérios de desempate e bônus regional. |
 | `REQ-16` | Documentos por condição e fase | Configurar documentos exigidos por condição sobre dados do candidato e por fase do processo. |
-| `REQ-17` | Formulário configurável | Formulário de inscrição configurável por processo, com campos condicionais. |
+| `REQ-17` | Formulário configurável | Formulário configurável por finalidade (inscrição, isenção, habilitação), a partir de modelos por tipo de processo, com campos condicionais. |
 | `REQ-19` | Publicação com cópia congelada | Publicar o processo seletivo, criando a cópia oficial imutável da configuração e emitindo o edital. |
 | `REQ-21 / 22` | Retificação e bloqueio de edição | Alterar processo seletivo publicado só por retificação (nova publicação, novo edital); edição direta bloqueada. |
 | `REQ-23` a 33 | Ciclo da inscrição previsto | Rascunho, submissão, opções de curso, concorrência dupla, atendimento, documentos, comprovante, unicidade, nome social, cancelamento. |

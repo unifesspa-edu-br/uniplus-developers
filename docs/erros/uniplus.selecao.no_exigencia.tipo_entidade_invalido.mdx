@@ -30,6 +30,11 @@ nenhum dos dois valores do catálogo fechado: `MEMBRO_NUCLEO_FAMILIAR` ou
 —, esta é local a um único nó: só confere se o valor pertence ao
 catálogo, antes de qualquer checagem de aninhamento.
 
+> O `UNI-REQ-0069` prevê que as entidades da repetição passem a vir das
+> ocorrências de uma lista do formulário. Esta entrada descreve o
+> catálogo fechado que a API usa hoje e muda junto com essa
+> implementação.
+
 O código de domínio para essa recusa existe (`!Enum.IsDefined` dentro de
 `ValidarCatalogoTipoEntidade`, compartilhado por `CriarFolha` e
 `CriarGrupo`) — mas **nenhum caminho real chega a executá-lo hoje**, por
