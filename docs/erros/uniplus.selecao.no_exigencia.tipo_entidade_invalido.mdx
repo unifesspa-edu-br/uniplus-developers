@@ -1,20 +1,21 @@
 ---
-title: repetePorEntidade fora do catálogo fechado
-sidebar_label: Tipo de entidade fora do catálogo
-description: 'Rascunho — repetePorEntidade de um nó só aceita dois valores, mas hoje nenhum caminho real chega a devolver esta causa.'
+title: repetePorEntidade não nomeia grupo repetível do processo
+sidebar_label: Grupo da repetição inexistente
+description: A exigência repetida por entidade repete pelas ocorrências de um grupo repetível dos formulários do processo, e o código informado não é de nenhum deles.
 code: uniplus.selecao.no_exigencia.tipo_entidade_invalido
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
+  - Publicação e retificação do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0069
+  - UNI-REQ-0146
 rastreio:
-  - label: 'uniplus-api#938'
-    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/938
-  - label: 'uniplus-api#1227'
-    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1227
+  - label: 'uniplus-api#1703'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1703
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -23,45 +24,38 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O campo `repetePorEntidade` de um nó (folha ou grupo) não corresponde a
-nenhum dos dois valores do catálogo fechado: `MEMBRO_NUCLEO_FAMILIAR` ou
-`PESSOA_JURIDICA_VINCULADA`. Diferente das demais checagens de
-`repetePorEntidade` desta série — que são invariantes de árvore inteira
-—, esta é local a um único nó: só confere se o valor pertence ao
-catálogo, antes de qualquer checagem de aninhamento.
+Um nó da árvore de documentos exigidos (folha ou grupo) declara
+`repetePorEntidade`, mas o valor não é o código de nenhum grupo
+repetível dos formulários do processo.
 
-> O `UNI-REQ-0069` prevê que as entidades da repetição passem a vir das
-> ocorrências de uma lista do formulário. Esta entrada descreve o
-> catálogo fechado que a API usa hoje e muda junto com essa
-> implementação.
+A exigência repetida por entidade (UNI-REQ-0069) é pedida uma vez por
+ocorrência de uma lista coletada no formulário — por exemplo, um
+documento por membro da composição familiar (UNI-REQ-0146). O campo
+`repetePorEntidade` nomeia essa lista pelo **código do grupo**, o mesmo
+código declarado no grupo do formulário. A lista de pessoas jurídicas
+vinculadas ao candidato também é um grupo do formulário, declarado pelo
+processo como qualquer outro; não há tipo de entidade fixo.
 
-O código de domínio para essa recusa existe (`!Enum.IsDefined` dentro de
-`ValidarCatalogoTipoEntidade`, compartilhado por `CriarFolha` e
-`CriarGrupo`) — mas **nenhum caminho real chega a executá-lo hoje**, por
-isso a entrada é rascunho, não publicada.
+A conferência acontece em três momentos:
 
-No `PUT` de documentos exigidos, um payload com `repetePorEntidade` fora
-do catálogo é interceptado antes do handler por uma regra de validação
-de payload equivalente — a resposta real é `uniplus.validacao`, não esta
-entrada. Mesmo que essa regra fosse contornada, o handler resolve o
-código através de `TipoEntidadeCodigo.FromCodigo`, que mapeia qualquer
-valor não reconhecido para o sentinela `Nenhuma` — um membro **definido**
-do enum — então o guard de domínio nunca encontra um valor indefinido
-para recusar; o nó simplesmente é criado como "sem repetição". Pelo
-descarte de retificação também não: o envelope congelado lê
-`repetePorEntidade` contra o mesmo catálogo fechado, e um código não
-reconhecido ali é recusado ainda na leitura, como
-`envelope_codec.envelope_malformado`, antes de a entidade ser
-reconstruída.
-
-Esta entrada existe para que o código de domínio, já registrado no
-catálogo, tenha uma página assim que algum dos dois caminhos for
-destravado — mesma frente da ADR-0125, rastreada em `uniplus-api#1227`.
+- **Na definição dos documentos exigidos**, antes de qualquer recusa do
+  gatilho que cite um campo do grupo.
+- **Na publicação e na retificação**, porque o grupo pode ter sido
+  retirado do formulário depois que a exigência foi definida. O mesmo
+  item aparece no checklist de conformidade.
+- **No descarte de retificação**, ao restaurar a configuração congelada.
 
 ## Como resolver
 
-Informe `repetePorEntidade` como um dos dois valores do catálogo —
-`MEMBRO_NUCLEO_FAMILIAR` ou `PESSOA_JURIDICA_VINCULADA` — ou omita o
-campo se o nó não repete por instância de entidade. Hoje, um valor fora
-do catálogo responde com `uniplus.validacao`, não com este código — mas
-a correção é a mesma.
+- Use o código de um grupo repetível que já está num formulário do
+  processo (o `codigo` do grupo no formulário, como `COMPOSICAO_FAMILIAR`).
+- Se a lista ainda não existe, declare primeiro o grupo no formulário da
+  finalidade em que ela é coletada, com os campos de que o gatilho
+  precisa, e depois defina a exigência.
+- Se o grupo foi retirado do formulário, devolva-o ou retire a
+  repetição da exigência.
+
+O grupo também precisa ser conhecido até a fase em que o documento é
+exigido: repetir, numa exigência da inscrição, por um grupo coletado só
+na habilitação é recusado com
+`uniplus.selecao.documento_exigido.fato_resolvido_em_fase_posterior`.
