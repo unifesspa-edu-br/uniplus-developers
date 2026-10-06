@@ -18,7 +18,7 @@ O texto descreve o comportamento de negócio em linguagem corrente. Cada assunto
 
 - **Quantas cotas o candidato ocupa ao mesmo tempo.** Uma fonte limita a inscrição a uma reserva; outra, mais recente, define um conjunto de várias reservas simultâneas (por exemplo, cor/raça e renda juntas). Este documento adota o conjunto múltiplo, alinhado à Lei 14.723/2023 — a confirmar na especificação.
 - **Limite de renda na fronteira exata.** A autodeclaração implementada no sistema pergunta "renda per capita **igual ou inferior** a 1 salário mínimo", aderente à Lei 12.711/2012 (art. 1º, parágrafo único). O registro de requisitos (`UNI-REQ-0076`) ainda descreve "inferior a" — divergência a reconciliar; o PO confirma o texto final e o tratamento de quem tem renda exatamente igual a 1 salário mínimo.
-- **Cor/raça de quem não é de escola pública.** Hoje a pergunta de cor/raça só aparece para quem optou pelas cotas da lei — egresso de escola pública que deseja concorrer às vagas de escola pública. Se um documento passar a depender de cor/raça para outros candidatos, é preciso decidir se cor/raça deve ser coletada de todos.
+- **Cor/raça de quem não é de escola pública.** Decidido pelo PO em 06/10/2026: a autodeclaração de cor/raça faz parte do conjunto básico (`UNI-REQ-0151`) e é coletada de todos os candidatos; só o opt-in de concorrer às vagas de pretos, pardos e indígenas segue o gate de escola pública.
 
 ---
 
@@ -49,7 +49,7 @@ Nem toda pergunta aparece para todo candidato. Cada campo pode ter **pré-condi�
 
 - abrir a pergunta "concorrer à cota X?" só para quem é elegível a X — pelo "sim" na autodeclaração ou, no caso da escola pública, pelo cálculo a partir da origem escolar;
 - ocultar o bloco quilombola para quem se declara indígena (exclusão mútua);
-- só perguntar cor/raça, quilombola e renda para quem optou pelas cotas da lei, isto é, é de escola pública e deseja concorrer às vagas de escola pública (gate de escola pública). A pergunta de deficiência fica fora do gate: quem não optou pelas cotas pode concorrer à ação afirmativa `AC_PCD` (`UNI-REQ-0142`).
+- só perguntar o opt-in de cor/raça e as perguntas de quilombola e renda para quem optou pelas cotas da lei, isto é, é de escola pública e deseja concorrer às vagas de escola pública (gate de escola pública). A pergunta de deficiência fica fora do gate: quem não optou pelas cotas pode concorrer à ação afirmativa `AC_PCD` (`UNI-REQ-0142`).
 
 A mesma dependência vale para as outras regras do campo (`UNI-REQ-0145`): uma pergunta pode ser **obrigatória** só para quem deu determinada resposta antes, e as **opções** de uma pergunta podem vir de respostas anteriores — os municípios da UF escolhida, ou a opção de lista de espera escolhida entre as opções de curso que o próprio candidato marcou. A regra pertence ao formulário, não ao dado: o mesmo dado pode ter regras diferentes em outro modelo de formulário ou em outro processo.
 

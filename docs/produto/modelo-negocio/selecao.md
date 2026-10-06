@@ -22,7 +22,7 @@ Durante a revisão deste documento, foram identificadas questões de negócio qu
 
 - Quantas cotas o candidato ocupa ao mesmo tempo. Há duas camadas que precisam ser conciliadas por interpretação, não uma contradição. A **derivação** (seção 7.5, `UNI-REQ-0076`, já implementada) produz o **conjunto** de modalidades a que o candidato é elegível — normalmente várias (por exemplo, cota de cor/raça e cota de renda juntas). O registro da **inscrição** (`UNI-REQ-0025`, "concorrência dupla na inscrição", ainda não implementado — não há agregado de inscrição) fala em registrar "no máximo uma de cada papel" (um papel de ampla, um de reservada), no espírito da Lei 14.723/2023. Essa cardinalidade não limita o conjunto derivado. Falta definir, quando a inscrição for construída, como o papel reservado se relaciona com ele: um único código reservado, ou uma referência ao conjunto. A [Decisão sobre a representação reservada](../requisitos/index.mdx) está proposta para deliberação do PO, com validação jurídica, antes da implementação de UNI-REQ-0025.
 - Limite de renda na fronteira exata. A autodeclaração implementada no sistema pergunta "renda per capita **igual ou inferior** a 1 salário mínimo", aderente à Lei 12.711/2012 (art. 1º, parágrafo único). O registro de requisitos (`UNI-REQ-0076`) ainda descreve "inferior a" — divergência a reconciliar; o PO confirma o texto final e a fronteira (quem tem renda exatamente igual a 1 salário mínimo).
-- Documento condicionado a cor/raça para quem não é de escola pública. No modelo atual, a pergunta de cor/raça só aparece para quem optou pelas cotas da lei — egresso de escola pública que deseja concorrer às vagas de escola pública. Uma exigência de documento que dependa de cor/raça (por exemplo, o exemplo de quitação militar da seção 9.5) pode não alcançar candidatos fora desse grupo. É preciso decidir se cor/raça deve ser coletada de todos os candidatos.
+- Documento condicionado a cor/raça para quem não é de escola pública. Decidido pelo PO em 06/10/2026: a autodeclaração de cor/raça é coletada de todos os candidatos, no conjunto básico (`UNI-REQ-0151`), e uma exigência de documento que dependa dela alcança também quem não é de escola pública.
 
 ---
 
@@ -186,9 +186,10 @@ A opção de concorrer às vagas de escola pública é a **opção pelas cotas d
 As perguntas não aparecem todas de uma vez: a exibição de cada uma depende das respostas anteriores. Essas regras vêm do próprio formulário oficial:
 
 - A opção de concorrer a uma cota só aparece para quem é elegível a ela — pela autodeclaração ou, no caso da escola pública, pelo cálculo a partir da origem escolar.
-- Se as respostas de origem escolar mostram que o candidato não é egresso de escola pública, ou ele é egresso mas não deseja concorrer às vagas de escola pública, as perguntas de cor/raça, quilombola e renda não aparecem — ele não optou pelas cotas da lei e segue para a ampla concorrência. A dimensão de deficiência é exceção: a pessoa com deficiência que deseja concorrer como tal concorre também à ação afirmativa `AC_PCD` (rotulada V), qualquer que seja a escola em que estudou.
+- Se as respostas de origem escolar mostram que o candidato não é egresso de escola pública, ou ele é egresso mas não deseja concorrer às vagas de escola pública, as perguntas de opt-in de cor/raça, quilombola e renda não aparecem (a autodeclaração de cor/raça do conjunto básico continua) — ele não optou pelas cotas da lei e segue para a ampla concorrência. A dimensão de deficiência é exceção: a pessoa com deficiência que deseja concorrer como tal concorre também à ação afirmativa `AC_PCD` (rotulada V), qualquer que seja a escola em que estudou.
 - Se o candidato se declara amarela ou branca, a pergunta de concorrer à cota de cor/raça não aparece.
 - Se o candidato se declara indígena, a dimensão quilombola não aparece — a legislação não permite acumular as duas.
+- A condição de indígena é dado próprio de elegibilidade (`UNI-REQ-0147`): na habilitação exige a declaração de pertencimento e não passa por heteroidentificação, apenas por análise de documentos.
 
 ### 7.5 Como o sistema calcula as modalidades a partir das respostas
 
