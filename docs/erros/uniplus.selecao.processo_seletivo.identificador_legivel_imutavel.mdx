@@ -1,0 +1,27 @@
+---
+title: O identificador legível já consta em versão publicada e não pode ser alterado
+sidebar_label: Identificador legível imutável
+description: Depois de publicado, o identificador não muda, porque o endereço público e a chave no acervo dependem dele.
+code: uniplus.selecao.processo_seletivo.identificador_legivel_imutavel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Alteração do identificador legível do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1479'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1479
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A versão publicada do processo já carrega um identificador, e o endereço da página do certame e a chave do documento no acervo derivam dele. Trocá-lo depois quebraria os links já divulgados no edital. Por isso a operação de definir o identificador é recusada para qualquer valor, inclusive o atual.
+
+## Como resolver
+
+O identificador não se altera pelo cadastro depois da publicação. Não envie a operação de definir o identificador durante a retificação: o valor publicado permanece. Se o valor gravado está errado, não há correção pelo cadastro: a versão publicada o fixou.

@@ -1,0 +1,30 @@
+---
+title: O identificador legível deve ter entre 3 e 64 caracteres
+sidebar_label: Identificador legível com tamanho inválido
+description: O identificador legível do processo precisa ter de 3 a 64 caracteres.
+code: uniplus.selecao.processo_seletivo.identificador_legivel_tamanho
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação do processo seletivo
+  - Alteração do identificador legível do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1479'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1479
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O valor informado como identificador legível tem menos de 3 ou mais de 64 caracteres, contados depois de retirados os espaços das pontas.
+
+O identificador legível é escolhido por quem cadastra o processo e deriva dele o endereço da página pública do certame e a chave do documento no acervo. Por isso ele segue um formato fechado: de 3 a 64 caracteres, em kebab-case (letras minúsculas sem acento, dígitos e hífens, começando por letra, terminando em letra ou dígito e sem hífens consecutivos) e sem a forma de um identificador técnico (Guid).
+
+## Como resolver
+
+Informe um identificador com 3 a 64 caracteres, por exemplo `medicina-2027`. O processo continua como estava até que um valor válido seja gravado.

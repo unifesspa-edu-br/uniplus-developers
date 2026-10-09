@@ -1,0 +1,29 @@
+---
+title: O processo que aplica o bônus regional precisa da configuração do bônus
+sidebar_label: Bônus regional sem configuração
+description: Declarar que o bônus se aplica exige informar a regra, o fator e a base legal do bônus.
+code: uniplus.selecao.processo_seletivo.bonus_regional_aplica_sem_configuracao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração do bônus regional do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1850'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1850
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A declaração do bônus regional diz que o processo **aplica** o bônus, mas chegou sem a regra do bônus (`regraCodigo`). O processo declara se aplica ou não o bônus, como declara a cobrança da taxa de inscrição; ausência de configuração não significa "sem bônus".
+
+## Como resolver
+
+- **Se o bônus se aplica:** envie junto da declaração a regra (`regraCodigo` e `regraVersao`), o `fator`, a base legal (`baseLegalBonusRegionalId`, de onde vêm os municípios) e, se houver, o `teto`.
+- **Se o bônus não se aplica:** declare `aplica: false` e não envie nenhum outro campo do bônus.

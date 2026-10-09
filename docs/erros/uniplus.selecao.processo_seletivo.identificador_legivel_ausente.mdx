@@ -1,0 +1,35 @@
+---
+title: O identificador legível é obrigatório
+sidebar_label: Identificador legível ausente
+description: O processo seletivo precisa nascer com o identificador legível e não pode ficar sem ele.
+code: uniplus.selecao.processo_seletivo.identificador_legivel_ausente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação do processo seletivo
+  - Alteração do identificador legível do processo seletivo
+  - Publicação do processo seletivo
+  - Retificação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1845'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1845
+  - label: 'uniplus-api#1479'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1479
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo seletivo é criado exigindo o identificador legível, e depois de gravado ele não pode ser removido. A recusa ocorre quando a criação chega sem o campo, quando uma alteração tenta esvaziá-lo ou quando a publicação encontra um processo anterior a essa regra sem identificador: sem ele o certame não teria endereço público nem chave no acervo.
+
+Enquanto o processo está em rascunho, as demais dimensões podem faltar; o identificador, não.
+
+## Como resolver
+
+- **Ao criar:** informe o identificador no passo de Identificação, por exemplo `medicina-2027`.
+- **Em processo anterior à regra:** declare o identificador no passo de Identificação antes de publicar ou retificar; o item `identificador_legivel_nao_declarado` do preflight mostra a pendência.

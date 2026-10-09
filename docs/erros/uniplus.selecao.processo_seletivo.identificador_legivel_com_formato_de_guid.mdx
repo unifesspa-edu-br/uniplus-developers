@@ -1,0 +1,30 @@
+---
+title: O identificador legível não pode ter a forma de um identificador técnico
+sidebar_label: Identificador legível com forma de Guid
+description: Um valor no formato de Guid se confundiria com o identificador técnico do processo.
+code: uniplus.selecao.processo_seletivo.identificador_legivel_com_formato_de_guid
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação do processo seletivo
+  - Alteração do identificador legível do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1479'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1479
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O valor informado tem a forma de um Guid (por exemplo `f47ac10b-58cc-4372-a567-0e02b2c3d479`). A leitura pública localiza o certame tanto pelo identificador técnico quanto pelo legível, e os dois só são distinguíveis pela forma; um legível com forma de Guid tornaria a busca ambígua.
+
+O identificador legível é escolhido por quem cadastra o processo e deriva dele o endereço da página pública do certame e a chave do documento no acervo. Por isso ele segue um formato fechado: de 3 a 64 caracteres, em kebab-case (letras minúsculas sem acento, dígitos e hífens, começando por letra, terminando em letra ou dígito e sem hífens consecutivos) e sem a forma de um identificador técnico (Guid).
+
+## Como resolver
+
+Escolha um identificador com palavras que descrevam o certame, por exemplo `medicina-2027`, e não um valor gerado.
