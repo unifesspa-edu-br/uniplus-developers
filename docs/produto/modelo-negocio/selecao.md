@@ -362,7 +362,7 @@ Consolidação das regras institucionais nomeadas. O enunciado público e o mape
 | `RN02` | Prioridade do nome social | Nome social tem prioridade absoluta em listas públicas e documentos de identificação. | Entrega atual |
 | `RN03` | Documentos obrigatórios | Inscrição bloqueada sem os documentos obrigatórios aplicáveis ao caso do candidato. | Entrega atual |
 | `RN04` | Precedência de opções de curso | Vagas de 1ª opção de curso são processadas primeiro; as remanescentes são realocadas para a 2ª opção. A cascata de remanejamento entre modalidades é regra própria (`REQ-56`), não parte da `RN04`. | Etapa futura |
-| `RN05` | Bônus regional | Bônus regional opcional, com percentual configurável por processo seletivo, aplicado sobre a nota final; sem comprovação de elegibilidade, o candidato é reclassificado sem o bônus (não eliminado). | Etapa futura |
+| `RN05` | Bônus regional | Bônus regional, que cada processo declara se aplica ou não (a declaração é obrigatória para publicar), com percentual configurável por processo seletivo, aplicado sobre a nota final; sem comprovação de elegibilidade, o candidato é reclassificado sem o bônus (não eliminado). | Etapa futura |
 | `RN06` | Cancelar e refazer | O candidato pode cancelar e refazer a inscrição antes do encerramento, com registro de motivo, data e autor. | Entrega atual |
 | `RN07` | Lista de espera | Inserção na lista de espera conforme a opção indicada no ato da inscrição. | Etapa futura |
 | `RN08` | Congelamento por edital *(nome histórico — tecnicamente, por processo seletivo)* | Todos os parâmetros ficam congelados na publicação do processo seletivo; alterações retroativas são proibidas e atualizações globais valem só para processos futuros. | Entrega atual |
