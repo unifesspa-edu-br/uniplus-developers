@@ -191,7 +191,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0015',
     titulo: 'Configurar etapas, critérios e bônus',
     enunciado:
-      'O sistema deve configurar etapas pontuadas, pesos, critérios de desempate e bônus regional como configuração congelável do processo. O processo deve declarar se aplica ou não o bônus regional, como declara a cobrança de taxa de inscrição: a declaração é obrigatória para publicar, "não aplica" é uma resposta válida, e a ausência de configuração não equivale a "sem bônus". Os critérios de desempate são obrigatórios quando a inscrição é feita no sistema; quando o resultado é importado, a lista já vem classificada e o desempate não se aplica. Enquanto o processo está em rascunho, a falta de qualquer um dos dois não impede a gravação das demais dimensões; ela bloqueia a publicação e a retificação. Definição repassada pelo líder técnico em 08/10/2026.',
+      'O sistema deve configurar etapas pontuadas, pesos, critérios de desempate e bônus regional como configuração congelável do processo. O processo deve declarar se aplica ou não o bônus regional, como declara a cobrança de taxa de inscrição: a declaração é obrigatória para publicar, "não aplica" é uma resposta válida, e a ausência de configuração não equivale a "sem bônus". Os critérios de desempate são obrigatórios quando a inscrição é feita no sistema; quando o resultado é importado, a lista já vem classificada e o desempate não é obrigatório. Enquanto o processo está em rascunho, a falta de qualquer um dos dois não impede a gravação das demais dimensões; ela bloqueia a publicação e a retificação. Definição repassada pelo líder técnico em 08/10/2026.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
