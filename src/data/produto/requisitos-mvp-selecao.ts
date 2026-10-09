@@ -620,6 +620,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Equipe frontend',
   },
   {
+    requisito_id: 'UNI-REQ-0152',
+    titulo: 'Situação temporal do processo seletivo na vitrine pública',
+    enunciado:
+        'Todo Processo Seletivo publicado exibido na vitrine pública pertence a exatamente uma situação temporal, derivada da janela de inscrições: EM_BREVE, INSCRICOES_ABERTAS, ULTIMOS_DIAS ou ENCERRADO. Antes do início das inscrições, o processo permanece EM_BREVE e a vitrine informa a data de abertura para que o candidato possa consultar previamente suas informações e regras. Iniciadas as inscrições, o processo permanece INSCRICOES_ABERTAS até entrar nos três últimos dias corridos da janela. ULTIMOS_DIAS é uma regra institucional única e fixa para todos os processos seletivos: começa às 00:00 do primeiro dos três últimos dias civis da inscrição, nunca por subtração de 72 horas do instante de encerramento, e permanece enquanto a inscrição ainda estiver aberta. Encerrado o prazo, a situação passa a ENCERRADO. A determinação do dia civil utiliza o fuso institucional America/Belem, conforme UNI-REQ-0111. A mesma classificação governa o rótulo apresentado no item da vitrine, os filtros e seus contadores, para que uma mesma situação tenha significado único em toda a consulta pública. Definição do PO consolidada na unifesspa-edu-br/uniplus-developers#254.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0019',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+        'Processo publicado cuja inscrição ainda não começou é classificado como EM_BREVE e a vitrine exibe a data de início das inscrições; iniciado o período e antes do limiar dos três últimos dias, é classificado como INSCRICOES_ABERTAS; para encerramento às 23:59:59 do dia 20, ULTIMOS_DIAS começa às 00:00 do dia 18 no fuso America/Belem; o limiar é fixo em três dias corridos para todos os processos e não é configurável por processo seletivo; ultrapassado o instante final da inscrição, a situação é ENCERRADO; as quatro situações são mutuamente exclusivas e todo processo exibido pertence a exatamente uma delas; rótulo, filtro e contador utilizam a mesma classificação e produzem resultados coerentes entre si.',
+    verificacao:
+        'Testes automatizados das fronteiras temporais (antes da abertura; instante de abertura; instante imediatamente anterior ao início de ULTIMOS_DIAS; 00:00 do primeiro dos três últimos dias; instante final da inscrição; instante posterior ao encerramento), no fuso America/Belem; teste de que o limiar é fixo em três dias e não varia por processo; testes de contrato dos filtros e contadores contra a mesma classificação; E2E da vitrine para EM_BREVE com data de abertura e para os quatro rótulos (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
     requisito_id: 'UNI-REQ-0023',
     titulo: 'Ciclo-base da inscrição',
     enunciado:
