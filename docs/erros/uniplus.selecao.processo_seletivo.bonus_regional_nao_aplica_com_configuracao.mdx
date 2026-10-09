@@ -1,0 +1,29 @@
+---
+title: O processo que não aplica o bônus regional não pode ter a configuração do bônus
+sidebar_label: Bônus regional dispensado com configuração
+description: Declarar que o bônus não se aplica é incompatível com enviar a configuração dele.
+code: uniplus.selecao.processo_seletivo.bonus_regional_nao_aplica_com_configuracao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração do bônus regional do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1850'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1850
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A declaração do bônus regional diz que o processo **não aplica** o bônus, mas chegou com algum campo de configuração (`regraCodigo`, `regraVersao`, `fator`, `teto` ou `baseLegalBonusRegionalId`). A declaração e a configuração não podem divergir: a recusa evita que um corpo mal formado seja descartado em silêncio.
+
+## Como resolver
+
+- **Se o bônus não se aplica:** envie só `aplica: false`, sem nenhum outro campo do bônus.
+- **Se o bônus se aplica:** declare `aplica: true` e envie a regra, o fator, a base legal e, se houver, o teto.

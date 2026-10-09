@@ -1,0 +1,30 @@
+---
+title: O identificador legível deve estar em kebab-case
+sidebar_label: Identificador legível fora do formato
+description: O identificador legível aceita só letras minúsculas sem acento, dígitos e hífens.
+code: uniplus.selecao.processo_seletivo.identificador_legivel_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação do processo seletivo
+  - Alteração do identificador legível do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1479'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1479
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O valor informado tem maiúsculas, acentos, espaços, outro símbolo, hífens consecutivos, ou não começa por letra, ou não termina em letra ou dígito. Exemplos recusados: `PSIQ-2026`, `psiq 2026`, `seleção-26`, `psiq--2026`, `-psiq`.
+
+O identificador legível é escolhido por quem cadastra o processo e deriva dele o endereço da página pública do certame e a chave do documento no acervo. Por isso ele segue um formato fechado: de 3 a 64 caracteres, em kebab-case (letras minúsculas sem acento, dígitos e hífens, começando por letra e terminando em letra ou dígito) e sem a forma de um identificador técnico (Guid).
+
+## Como resolver
+
+Reescreva o valor só com letras minúsculas sem acento, dígitos e hífens, começando por letra, terminando em letra ou dígito e com um único hífen entre os trechos, por exemplo `psiq-2026`.

@@ -1,0 +1,28 @@
+---
+title: O identificador legível já é usado por outro processo seletivo
+sidebar_label: Identificador legível já em uso
+description: O identificador legível é único entre todos os processos seletivos.
+code: uniplus.selecao.processo_seletivo.identificador_legivel_em_uso
+http_status: 409
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação do processo seletivo
+  - Alteração do identificador legível do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1479'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1479
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Outro processo seletivo já usa o identificador informado. A unicidade é global, e não por unidade administradora ou ano, porque o identificador forma o endereço público do certame e a chave do documento no acervo.
+
+## Como resolver
+
+Escolha outro identificador, por exemplo acrescentando o ano ou a modalidade (`medicina-2027-ampla`). Se o processo que já o usa é o mesmo certame, abra-o em vez de criar outro.
