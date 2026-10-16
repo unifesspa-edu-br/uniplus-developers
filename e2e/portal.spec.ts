@@ -146,7 +146,7 @@ test.describe('Âncoras de requisito (UNI-REQ)', () => {
 });
 
 test.describe('Personas (cadastros fictícios)', () => {
-  test('vive em /personas/ e lista os 30 cadastros com a tabela enxuta', async ({
+  test('vive em /personas/ e lista os 60 cadastros com a tabela enxuta', async ({
     page,
   }) => {
     await page.goto('personas/');
@@ -154,8 +154,8 @@ test.describe('Personas (cadastros fictícios)', () => {
       page.getByRole('heading', {name: 'Personas fictícias', level: 1}),
     ).toBeVisible();
 
-    // SSR renderiza todos os 30.
-    await expect(page.getByText(/30 de 30 cadastros/)).toBeVisible();
+    // SSR renderiza todos os 60.
+    await expect(page.getByText(/60 de 60 cadastros/)).toBeVisible();
 
     // Tabela enxuta: 7 colunas (Nome, Username, Perfil, Sexo, CPF, Data de
     // nascimento, Detalhes) — Username/Perfil identificam a conta real das
@@ -191,7 +191,7 @@ test.describe('Personas (cadastros fictícios)', () => {
     await page.getByRole('searchbox', {name: /Filtrar/}).fill('Campo Grande');
     const linhas = page.locator('tbody tr');
     await expect(linhas.first()).toContainText('Fernanda');
-    expect(await linhas.count()).toBeLessThan(30);
+    expect(await linhas.count()).toBeLessThan(60);
   });
 
   test('o modal mostra o nome social e copia o CPF de fato', async ({page}) => {
