@@ -8,7 +8,7 @@ description: A jornada do administrador para cadastrar, configurar e publicar um
 
 Documento de referência funcional para Análise de Requisitos. Descreve, em linguagem de negócio (sem termos de programação), **a jornada do administrador do CEPS para cadastrar, configurar e publicar um Processo Seletivo** — a experiência administrativa de montar um edital até torná-lo oficial. É um aprofundamento do modelo geral do módulo Seleção, voltado à validação e ao refinamento pela área de negócio.
 
-Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: da criação à primeira publicação, e também as publicações seguintes, de documentos e resultados (as telas operacionais posteriores — inscrição, homologação, notas, classificação, recursos — são etapas seguintes; a jornada completa da alteração por retificação tem detalhamento próprio, fora deste primeiro recorte; aqui constam apenas os anexos, a cadeia de correção e a classe de congelamento dos atos publicados depois do edital).
+Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: da criação à primeira publicação, e também as publicações seguintes, de documentos e resultados (as telas operacionais posteriores — inscrição, homologação, notas, classificação e o julgamento dos recursos — são etapas seguintes; a página trata do ciclo recursal só no que toca à publicação dos resultados; a jornada completa da alteração por retificação tem detalhamento próprio, fora deste primeiro recorte; aqui constam apenas os anexos, a cadeia de correção e a classe de congelamento dos atos publicados depois do edital).
 
 ## Como ler este documento
 
@@ -82,7 +82,7 @@ Publicado o processo, a configuração **não pode mais ser editada diretamente*
 
 Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que aponta o ato retificado e registra o motivo, com um **novo snapshot congelado**, preservando o histórico: o ato retificado continua publicado (`UNI-REQ-0021`). A capacidade já é suportada; o detalhamento da sua jornada está fora do escopo desta primeira publicação.
 
-### Documentos e resultados publicados depois do edital
+### 4.1 Documentos e resultados publicados depois do edital
 
 Além do edital de abertura, o administrador publica, pela interface:
 
@@ -133,10 +133,10 @@ Cada comportamento acima corresponde a um requisito com código estável no acer
 | `UNI-REQ-0022` | Bloquear mutação direta após publicação | Configuração não editável após publicar (seção 4). |
 | `UNI-REQ-0062` / 0063 | Imunidade pós-publicação (runtime lê o snapshot) | Runtime lê a cópia congelada, não a viva (seção 4). |
 | `UNI-REQ-0021` | Retificação do Processo Seletivo como relação entre atos | Alteração de edital publicado só por retificação (seção 4). |
-| `UNI-REQ-0154` | Anexos do edital de abertura e do edital de retificação | Formatos, tamanho e herança dos anexos na retificação (seção 4). |
-| `UNI-REQ-0155` | Documento avulso do processo seletivo | Aviso, comunicado e errata na linha do tempo do certame (seção 4). |
-| `UNI-REQ-0156` | Correção de ato publicado por novo ato | Ato publicado não se altera; a correção é um novo ato, uma vez por ato (seção 4). |
-| `UNI-REQ-0157` | Publicação de resultado declarado no edital | Preliminar e definitivo declarados pela fase e pela etapa (seção 4). |
-| `UNI-REQ-0158` | Política de divulgação confirmada na publicação de resultado | Confirmação da política de divulgação antes de publicar (seção 4). |
+| `UNI-REQ-0154` | Anexos do edital de abertura e do edital de retificação | Formatos, tamanho e herança dos anexos na retificação (seção 4.1). |
+| `UNI-REQ-0155` | Documento avulso do processo seletivo | Aviso, comunicado e errata na linha do tempo do certame (seção 4.1). |
+| `UNI-REQ-0156` | Correção de ato publicado por novo ato | Ato publicado não se altera; a correção é um novo ato, uma vez por ato (seção 4.1). |
+| `UNI-REQ-0157` | Publicação de resultado declarado no edital | Preliminar e definitivo declarados pela fase e pela etapa (seção 4.1). |
+| `UNI-REQ-0158` | Política de divulgação confirmada na publicação de resultado | Confirmação da política de divulgação antes de publicar (seção 4.1). |
 
 > A coleta de fatos e a derivação de modalidade (2.8) têm modelo de negócio próprio na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md) (`UNI-REQ-0065`, `UNI-REQ-0070` a `UNI-REQ-0078`).

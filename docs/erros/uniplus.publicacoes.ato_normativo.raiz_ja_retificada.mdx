@@ -24,7 +24,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 O ato que se tentou retificar **já foi retificado por outro ato**.
 
 A cadeia de retificação é linear: um ato é retificado no máximo uma vez, e
-a nova retificação empilha na cabeça da cadeia, não numa raiz já
+um ato já corrigido, por errata ou por retificação, não recebe outra correção
+(UNI-REQ-0156); a correção recai sobre o ato mais recente. A nova retificação empilha na cabeça da cadeia, não numa raiz já
 emendada. Retificar uma raiz já retificada criaria uma bifurcação — duas
 retificações concorrentes do mesmo ato original —, e não haveria como
 dizer qual delas é a versão vigente. Por isso é conflito (**409**), não
