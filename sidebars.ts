@@ -538,6 +538,9 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.configuracao.curso.grupo_area_enem_invalido',
         'erros/uniplus.configuracao.curso.nao_encontrado',
         'erros/uniplus.configuracao.curso.remocao_bloqueada_por_oferta_curso',
+        'erros/uniplus.configuracao.fato_valor_dominio.ordem_com_codigo_desconhecido',
+        'erros/uniplus.configuracao.fato_valor_dominio.ordem_com_codigo_repetido',
+        'erros/uniplus.configuracao.fato_valor_dominio.ordem_sem_todos_os_valores',
       ],
     },
     {

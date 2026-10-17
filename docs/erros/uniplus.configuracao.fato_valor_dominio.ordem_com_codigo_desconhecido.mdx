@@ -1,0 +1,30 @@
+---
+title: A ordem cita um valor que o fato não tem
+sidebar_label: Ordem com código desconhecido ou em branco
+description: Rascunho — a lista de ordem traz um código que não pertence ao fato ou um código em branco.
+code: uniplus.configuracao.fato_valor_dominio.ordem_com_codigo_desconhecido
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Reordenação dos valores de um fato do catálogo
+requisitos:
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1966'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1966
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador enviou a nova ordem dos valores de um fato (`PUT /api/configuracao/admin/fatos-candidato/{id}/ordem-dos-valores`) com um código que não pertence ao fato, ou com um código em branco. A ordem só reorganiza os valores que o fato já tem; o código de um valor não muda e um valor novo não entra por aqui. A correção da ordem das opções de um fato é regra do UNI-REQ-0159; a lista completa e sem repetição é a forma que a API exige para aplicá-la de uma vez.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `codigos`, e a mensagem diz o que corrigir. A ordem dos valores do fato não é alterada. Se a lista tiver mais de um problema, cada um vem numa entrada própria da mesma resposta, e o mesmo código de erro pode aparecer em mais de uma entrada. Os espaços nas pontas de cada código são desconsiderados, mas maiúsculas e minúsculas contam: `eja` não é o mesmo valor que `EJA`.
+
+## Como resolver
+
+A mensagem desta recusa cita os códigos que o fato não tem; quando a lista tem código em branco, ela diz isso sem citar código. Troque cada código em branco ou desconhecido pelo código certo do valor, ou retire-o. Depois envie a lista completa, com todos os valores do fato, ativos e desativados, cada um uma vez. Para incluir uma opção nova, cadastre-a como valor do fato e reordene em seguida.
