@@ -26,8 +26,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 A cadeia de atos que sucede as versões de configuração é **linear**: um ato é
 emendado no máximo uma vez (ADR-0103). O ato que esta retificação (pelo
 atalho atômico ou pelo fechamento de uma sessão editorial) tentaria emendar
-já foi retificado — por fora, pelo endpoint administrativo de Publicações,
-antes de este comando chegar.
+já foi retificado antes de este comando chegar.
 
 A conferência acontece antes de registrar a nova retificação. Sem ela, o
 registro recusaria a mensagem durável com a causa
@@ -45,3 +44,9 @@ precisa partir do ato mais recente da cadeia, não de um elo já emendado.
 Se a retificação que já existe não é a que você esperava, é possível que
 outra pessoa (ou outro processo administrativo) já tenha retificado o mesmo
 processo entre a leitura da versão atual e o envio deste comando.
+
+Esse "por fora" vale para ato de outro vínculo: o endpoint administrativo de
+Publicações não registra ato de processo seletivo
+([`vinculo_exige_registro_pelo_dominio`](./uniplus.publicacoes.ato_normativo.vinculo_exige_registro_pelo_dominio.mdx)). Num processo seletivo, a
+retificação anterior veio de outra sessão ou de outra pessoa pela própria
+Seleção, e é por ela que a próxima retificação deve seguir.

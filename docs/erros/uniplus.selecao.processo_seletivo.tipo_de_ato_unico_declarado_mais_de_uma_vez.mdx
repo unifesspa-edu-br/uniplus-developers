@@ -27,7 +27,7 @@ Um tipo de ato que só pode ser publicado **uma vez por processo** está
 declarado mais de uma vez. Cada produto declarado no cronograma vira uma
 publicação esperada, e um tipo de publicação única não tem como atender a duas.
 
-Contam como declaração, todas juntas:
+Contam como declaração:
 
 - os **produtos de fase** do cronograma;
 - os **produtos de etapa**, com a etapa identificada por nome e ordem;
@@ -38,9 +38,15 @@ Contam como declaração, todas juntas:
   volta a declará-lo, a declaração repete a vaga que o edital de abertura já
   ocupa.
 
-Quem decide se o tipo é único é sempre o **catálogo vigente**: tipo que o
-catálogo não marca como único não gera esta recusa, e o ato da operação só
-conta quando o tipo dele é único.
+O ato da operação e o ato já registrado do mesmo tipo ocupam a **mesma vaga** e
+contam **uma vez só**, porque a retificação continua a linhagem do ato
+registrado. O que repete é a declaração do cronograma sobre essa vaga.
+
+A unicidade vem do catálogo de tipos de ato, mas em datas diferentes. A do ato
+da operação vem do tipo conferido na **data de publicação do ato**. A dos
+produtos do cronograma e dos atos já registrados vem do catálogo na **data de
+hoje**, no fuso institucional. Tipo que o catálogo não marca como único nessas
+datas não gera esta recusa.
 
 A mensagem de detalhe nomeia o tipo pelo nome do catálogo (por exemplo,
 "Resultado final") e diz onde ele repete: em qual fase, em qual etapa (com a
@@ -56,7 +62,7 @@ Escolha a saída que cabe:
 - **Declare o tipo uma vez só.** Mantenha-o no produto em que ele de fato sai e
   retire a declaração dos demais.
 - **Use, nos dois papéis (preliminar e definitivo), o tipo não único da mesma
-  matéria.** Por exemplo, "Resultado da homologação"
+  matéria.** Por exemplo, "Resultado da homologação das inscrições"
   (`RESULTADO_HOMOLOGACAO`) no lugar de "Homologação das inscrições"
   (`HOMOLOGACAO_INSCRICOES`): ele admite mais de uma publicação e serve às duas
   declarações.

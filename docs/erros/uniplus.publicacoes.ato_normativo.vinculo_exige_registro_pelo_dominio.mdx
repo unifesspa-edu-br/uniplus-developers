@@ -41,9 +41,13 @@ próprio domínio, inclusive a retificação.
 A recusa vale para o vínculo **declarado** e para o vínculo **herdado** da
 retificação. O declarado é recusado antes de qualquer consulta ao banco e da
 validação da cadeia. O herdado só se conhece depois de resolvida a cadeia, então
-sai **depois das conferências da cadeia de retificação**: se o ato retificado
-não existe, se a classe de congelamento diverge ou se ele já foi retificado, a
-resposta é o erro dessas conferências, e não este.
+sai **depois** destas recusas, que têm precedência:
+
+- [`tipo_sem_versao_vigente`](./uniplus.publicacoes.ato_normativo.tipo_sem_versao_vigente.mdx);
+- [`versao_invocada_incompleta`](./uniplus.publicacoes.ato_normativo.versao_invocada_incompleta.mdx);
+- [`ato_retificado_nao_encontrado`](./uniplus.publicacoes.ato_normativo.ato_retificado_nao_encontrado.mdx);
+- [`classe_congelamento_divergente`](./uniplus.publicacoes.ato_normativo.classe_congelamento_divergente.mdx);
+- [`raiz_ja_retificada`](./uniplus.publicacoes.ato_normativo.raiz_ja_retificada.mdx).
 
 O status é **422** porque o pedido, tal como chega ou como resulta da herança,
 pede o que este endpoint não pode fazer; não há conflito com estado gravado.
