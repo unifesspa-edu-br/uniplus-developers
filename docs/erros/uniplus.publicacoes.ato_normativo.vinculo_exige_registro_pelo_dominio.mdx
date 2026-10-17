@@ -1,7 +1,7 @@
 ---
 title: O ato deste objeto é registrado pelo módulo dono dele
 sidebar_label: Vínculo exige registro pelo domínio
-description: 'Rascunho — o endpoint administrativo de Publicações recebeu um ato vinculado a processo seletivo, diretamente ou por retificar um ato que já tinha esse vínculo; esses atos são registrados pela Seleção.'
+description: 'Rascunho — o endpoint administrativo de Publicações recebeu um ato vinculado a processo seletivo, declarado ou herdado da retificação; esses atos são registrados pela Seleção.'
 code: uniplus.publicacoes.ato_normativo.vinculo_exige_registro_pelo_dominio
 http_status: 422
 situacao: rascunho
@@ -34,9 +34,19 @@ ato de processo seletivo registrado por ali ficaria **sem documento**. Quem
 guarda o arquivo e o leva ao acervo público é o módulo dono do objeto, a
 Seleção.
 
-A mensagem de detalhe nomeia o tipo de entidade vinculada. A recusa vem do
-próprio pedido, que pede o que este endpoint não pode fazer, e não de um estado
-gravado em disputa. Por isso o status é **422**, e não 409.
+A mensagem de detalhe é genérica e nomeia o rótulo da entidade vinculada
+(`PROCESSO_SELETIVO`), explicando que os atos desse objeto são registrados pelo
+próprio domínio, inclusive a retificação.
+
+A recusa vale para o vínculo **declarado** e para o vínculo **herdado** da
+retificação. O declarado é recusado antes de qualquer consulta ao banco e da
+validação da cadeia. O herdado só se conhece depois de resolvida a cadeia, então
+sai **depois das conferências da cadeia de retificação**: se o ato retificado
+não existe, se a classe de congelamento diverge ou se ele já foi retificado, a
+resposta é o erro dessas conferências, e não este.
+
+O status é **422** porque o pedido, tal como chega ou como resulta da herança,
+pede o que este endpoint não pode fazer; não há conflito com estado gravado.
 
 ## Como resolver
 
