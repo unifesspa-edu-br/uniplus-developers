@@ -187,6 +187,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.regra_eliminacao.regra_tipo_invalido',
         'erros/uniplus.selecao.regra_eliminacao.etapa_ref_e_nota_minima_obrigatorios',
         'erros/uniplus.selecao.regra_eliminacao.minimo_obrigatorio',
+        'erros/uniplus.selecao.retificacao.eixo_do_fato_ja_coletado_alterado',
         'erros/uniplus.selecao.configuracao_classificacao.n_opcoes_invalido',
         'erros/uniplus.selecao.configuracao_classificacao.arredondamento_indevido',
         'erros/uniplus.selecao.configuracao_classificacao.casas_arredondamento_indevido',

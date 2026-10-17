@@ -1,0 +1,93 @@
+---
+title: A retificação não troca o eixo de fato já coletado por versão publicada
+sidebar_label: Eixo de fato já coletado alterado
+description: Rascunho — a retificação é recusada quando a versão nova congelaria, num fato que alguma versão publicada já coletou, uma definição diferente da publicada.
+code: uniplus.selecao.retificacao.eixo_do_fato_ja_coletado_alterado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição dos itens de um formulário do processo
+  - Retificação em ato único
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0159
+  - UNI-REQ-0144
+rastreio:
+  - label: 'uniplus-api#1967'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1967
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao retificar um processo já publicado, a versão nova congelaria um fato com
+definição diferente da que alguma versão publicada já coletou. A retificação é
+recusada com **422**. A mensagem vem no campo `detail` da resposta (não em
+`errors`) e cita o fato (ou o resumo de grupo), o eixo que mudou e os dois
+valores, o publicado e o novo.
+
+A recusa sai em operações diferentes, conforme o eixo:
+
+- **eixos do campo que coleta o fato**: são conferidos ao gravar os itens de
+  qualquer formulário do processo (`PUT .../formularios/{finalidade}/itens`, para
+  inscrição, isenção ou habilitação) na sessão de retificação e, de novo, no
+  fechamento da sessão. São quatro: o **tipo de renderização** (como o campo é
+  desenhado), a **origem dos valores** (de onde vêm as opções), o **formato** (do
+  texto) e a **classificação de proteção** (o nível de proteção do dado);
+- **eixos do fato citado em condição de documento exigido**: vêm do catálogo
+  atual na hora de congelar. São três: o **domínio** (o tipo de dado do fato), a
+  **cardinalidade** (se o fato guarda um valor ou vários) e o **ponto de
+  resolução** (a fase em que o fato é resolvido);
+- **operação do agregado**, isto é, a operação do resumo de grupo (a conta que o
+  resumo faz sobre os campos do grupo): também vem do catálogo na hora de
+  congelar.
+
+Os eixos do catálogo são conferidos na retificação em ato único e no fechamento
+da sessão. Por isso a recusa sai mesmo sem regravar nenhum campo, se o catálogo
+mudou depois da publicação.
+
+A recusa da operação vale para qualquer resumo de grupo cuja operação alguma
+versão publicada tenha congelado; a API não exige que o campo de membro tenha
+sido coletado.
+
+A lista protegida é a do que a versão publicada congela do fato. O UNI-REQ-0159
+fala em definição do fato; a finalidade e a base legal ficam fora da recusa. Quem
+responde o fato (candidato ou membro de grupo) já é recusado por outra regra de
+coletabilidade, e não por este código.
+
+O motivo é de negócio: candidatos podem ter respondido o fato em qualquer
+versão publicada, e as respostas de todas as versões são lidas juntas na
+classificação e na elegibilidade (UNI-REQ-0144). Trocar o eixo no meio do
+caminho faria respostas dadas sob uma definição serem lidas sob outra.
+
+Não contam como troca de eixo: a descrição, a orientação e a ordem das opções,
+nem o rótulo e a ajuda do campo — esses podem ser retificados normalmente.
+
+A definição corrigida no catálogo vale para os processos ainda em rascunho,
+quando forem publicados, e para os processos novos (UNI-REQ-0159).
+
+## Como resolver
+
+**Eixo do campo.** Se o que mudou foi o tipo de renderização escolhido para o
+campo, volte a enviá-lo como estava na versão publicada. A origem dos valores, o
+formato e a classificação de proteção não vêm do pedido: ao gravar os itens, o
+campo é montado a partir do catálogo atual. Se eles mudaram no catálogo, a saída
+é a mesma do caso abaixo — desfazer a correção daquele fato no catálogo enquanto
+o processo precisar ser retificado. O fato que o formulário de inscrição já
+coleta não pode ser retirado dele, então lá trocá-lo por outro fato não resolve.
+
+**Eixo vindo do catálogo (condição de documento ou resumo de grupo).** Não há
+campo a manter: a recusa decorre da mudança feita no catálogo. Enquanto o
+processo precisar ser retificado, desfaça a correção daquele fato no catálogo;
+ela pode ser refeita quando o processo não precisar mais ser retificado
+(encerrado ou cancelado), e então vale para os processos em rascunho e os novos. No caso do
+fato citado em condição de documento, outra saída é retirar da versão nova a
+condição de documento que cita o fato; a retificação permite reescrever os
+documentos exigidos, e o fato que a versão nova não cita numa condição não é
+comparado. Atenção: retirar a condição muda a exigência de documento para quem
+preencher a finalidade depois da retificação (UNI-REQ-0144), então só faça isso
+se a mudança for intencional.
