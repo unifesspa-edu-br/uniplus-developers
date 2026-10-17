@@ -1,0 +1,30 @@
+---
+title: A ordem repete um valor
+sidebar_label: Ordem com código repetido
+description: Rascunho — a lista de ordem traz o mesmo código mais de uma vez.
+code: uniplus.configuracao.fato_valor_dominio.ordem_com_codigo_repetido
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Reordenação dos valores de um fato do catálogo
+requisitos:
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1966'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1966
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador enviou a nova ordem dos valores de um fato (`PUT /api/configuracao/admin/fatos-candidato/{id}/ordem-dos-valores`) com o mesmo código mais de uma vez. Cada valor ocupa uma única posição na ordem, então a lista não pode repeti-lo. A correção da ordem das opções de um fato é regra do UNI-REQ-0159; a lista completa e sem repetição é a forma que a API exige para aplicá-la de uma vez.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `codigos`, e a mensagem diz o que corrigir. A ordem dos valores do fato não é alterada. Se a lista tiver mais de um problema, cada um vem numa entrada própria da mesma resposta. Os espaços nas pontas de cada código são desconsiderados, mas maiúsculas e minúsculas contam: `eja` não é o mesmo valor que `EJA`.
+
+## Como resolver
+
+Deixe cada código uma única vez, na posição em que o valor deve aparecer, e envie a lista de novo. Os códigos repetidos vêm citados na mensagem desta recusa. A lista continua precisando trazer todos os valores do fato, ativos e desativados, e só códigos do fato.
