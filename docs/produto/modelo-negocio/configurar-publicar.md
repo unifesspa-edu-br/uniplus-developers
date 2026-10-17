@@ -80,7 +80,19 @@ A publicação cria a **cópia oficial imutável** da configuração — o snaps
 
 Publicado o processo, a configuração **não pode mais ser editada diretamente** (`UNI-REQ-0022`). Toda a validação em runtime (a inscrição do candidato, a exigência de documentos, o cálculo da modalidade) passa a ler a **cópia congelada**, não a configuração viva — de modo que mexer na configuração de um processo já publicado não altera o resultado (imunidade pós-publicação, `UNI-REQ-0062`, `UNI-REQ-0063`).
 
-Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que cria um **novo Edital**, com um **novo snapshot congelado** e o motivo registrado, preservando o histórico (`UNI-REQ-0021`). A capacidade já é suportada; o detalhamento da sua jornada está fora do escopo desta primeira publicação.
+Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que aponta o ato retificado e registra o motivo, com um **novo snapshot congelado**, preservando o histórico: o ato retificado continua publicado (`UNI-REQ-0021`). A capacidade já é suportada; o detalhamento da sua jornada está fora do escopo desta primeira publicação.
+
+### Documentos e resultados publicados depois do edital
+
+Além do edital de abertura, o administrador publica, pela interface:
+
+- **Anexos do edital** (`UNI-REQ-0154`). O edital de abertura e o de retificação podem ter anexos em PDF, DOCX ou ODT, de até 20 MB cada. Na retificação, a nova versão traz os anexos da anterior, e o administrador pode trocar, incluir ou retirar; a versão anterior conserva os seus. Os anexos aparecem na página pública do certame com o edital da mesma versão.
+- **Documento avulso do processo** (`UNI-REQ-0155`). Aviso, comunicado e errata, com documento principal em PDF e anexos, aparecem na linha do tempo do certame. Convocação e chamada não são documento avulso: pertencem ao Ingresso.
+- **Resultado declarado no edital** (`UNI-REQ-0157`). Cada fase e etapa declara os atos que publica e o papel de cada um: preliminar, que abre o prazo de recurso; definitivo, que o encerra; ou nenhum. Não se publica resultado que o edital não declara, e o definitivo de uma matéria só sai depois do preliminar dela. Antes de publicar, o administrador vê a política de divulgação do certame e confirma que o PDF a segue (`UNI-REQ-0158`, `UNI-REQ-0050`); o sistema não confere o conteúdo do PDF.
+
+Um ato publicado não é apagado nem alterado. A correção é um novo ato, errata ou retificação, que aponta o ato corrigido e o motivo, e cada ato só é corrigido uma vez (`UNI-REQ-0156`).
+
+> **Fora do escopo: assinatura digital.** O sistema não exige, não aplica e não verifica assinatura digital nos documentos publicados. O PDF assinado fora do sistema é publicado sem alteração de nenhum byte, e a assinatura continua válida.
 
 ---
 
@@ -120,6 +132,11 @@ Cada comportamento acima corresponde a um requisito com código estável no acer
 | `UNI-REQ-0020` | Canonicalização estável da configuração congelada | Reprodutibilidade da cópia congelada (seção 3). |
 | `UNI-REQ-0022` | Bloquear mutação direta após publicação | Configuração não editável após publicar (seção 4). |
 | `UNI-REQ-0062` / 0063 | Imunidade pós-publicação (runtime lê o snapshot) | Runtime lê a cópia congelada, não a viva (seção 4). |
-| `UNI-REQ-0021` | Retificação do Processo Seletivo por novo Edital | Alteração de edital publicado só por retificação (seção 4). |
+| `UNI-REQ-0021` | Retificação do Processo Seletivo como relação entre atos | Alteração de edital publicado só por retificação (seção 4). |
+| `UNI-REQ-0154` | Anexos do edital de abertura e do edital de retificação | Formatos, tamanho e herança dos anexos na retificação (seção 4). |
+| `UNI-REQ-0155` | Documento avulso do processo seletivo | Aviso, comunicado e errata na linha do tempo do certame (seção 4). |
+| `UNI-REQ-0156` | Correção de ato publicado por novo ato | Ato publicado não se altera; a correção é um novo ato, uma vez por ato (seção 4). |
+| `UNI-REQ-0157` | Publicação de resultado declarado no edital | Preliminar e definitivo declarados pela fase e pela etapa (seção 4). |
+| `UNI-REQ-0158` | Política de divulgação confirmada na publicação de resultado | Confirmação da política de divulgação antes de publicar (seção 4). |
 
 > A coleta de fatos e a derivação de modalidade (2.8) têm modelo de negócio próprio na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md) (`UNI-REQ-0065`, `UNI-REQ-0070` a `UNI-REQ-0078`).
