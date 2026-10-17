@@ -603,7 +603,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0021',
     titulo: 'Retificação do Processo Seletivo como relação entre atos',
     enunciado:
-      'O sistema deve tratar alteração da configuração publicada do Processo Seletivo como retificação: um novo ato, que aponta o ato retificado e registra o motivo, e uma nova VersaoConfiguracao congelada. A retificação é relação entre atos, e não a criação de um novo Edital avulso; o ato retificado permanece publicado, e a relação não exige que os dois atos sejam do mesmo tipo (um aviso pode retificar um edital). A cadeia de atos é linear (UNI-REQ-0156).',
+      'O sistema deve tratar alteração da configuração publicada do Processo Seletivo como retificação: um novo ato, que aponta o ato retificado e registra o motivo, e uma nova VersaoConfiguracao congelada. A retificação é relação entre atos, e não a criação de um novo Edital avulso; o ato retificado permanece publicado. O ato retificador pode ser de outro tipo, desde que tenha a mesma classe de congelamento do retificado. A cadeia de atos é linear (UNI-REQ-0156).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -645,7 +645,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0154',
     titulo: 'Anexos do edital de abertura e do edital de retificação',
     enunciado:
-      'O edital de abertura e o edital de retificação podem ter anexos, em PDF, DOCX ou ODT, de até 20 MB cada. O anexo publicado é idêntico, byte a byte, ao enviado, sem conversão. Na retificação, a nova versão traz os anexos da versão anterior, e o administrador pode trocar, incluir ou retirar anexos; a versão anterior conserva os seus. Os anexos aparecem na página pública do certame junto com o edital da mesma versão (UNI-REQ-0019, UNI-REQ-0021). Definição do PO repassada pelo LT, 17/10/2026.',
+      'O edital de abertura e o edital de retificação podem ter anexos, em PDF, DOCX ou ODT, de até 20 MB cada. O anexo publicado é idêntico, byte a byte, ao enviado, sem conversão. Na retificação, a nova versão traz os anexos da versão anterior, e o administrador pode trocar, incluir ou retirar anexos; a versão anterior conserva os seus. Os anexos aparecem na página pública do certame junto com o edital da mesma versão (UNI-REQ-0019, UNI-REQ-0021).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -667,7 +667,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0155',
     titulo: 'Documento avulso do processo seletivo',
     enunciado:
-      'O administrador do processo publica atos que não são resultado nem congelam configuração, como aviso, comunicado e errata, com um documento principal em PDF e anexos. A errata sempre aponta o ato corrigido e registra o motivo (UNI-REQ-0156). Convocação e chamada não são documento avulso: pertencem ao Ingresso. O ato publicado aparece, com os seus documentos, na linha do tempo do certame. Definição do PO repassada pelo LT, 17/10/2026.',
+      'O administrador do processo publica atos que não são resultado nem congelam configuração, como aviso, comunicado e errata, com um documento principal em PDF e anexos. A errata sempre aponta o ato corrigido e registra o motivo (UNI-REQ-0156). Convocação e chamada não são documento avulso: pertencem ao Ingresso. O ato publicado aparece, com os seus documentos, na linha do tempo do certame.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -689,7 +689,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0156',
     titulo: 'Correção de ato publicado por novo ato',
     enunciado:
-      'Um ato publicado não é apagado nem alterado. A correção é um novo ato, errata ou retificação, que aponta o ato corrigido e registra o motivo, como relação entre atos. Errata e retificação do ato dividem a mesma cadeia: o ato é corrigido no máximo uma vez, por errata ou por retificação, e a correção seguinte recai sobre o ato mais recente da cadeia. A correção de ato é distinta da retificação do edital que altera a configuração (UNI-REQ-0021): não cria nova versão de configuração. Definição do PO repassada pelo LT, 17/10/2026.',
+      'Um ato publicado não é apagado nem alterado. A correção é um novo ato, errata ou retificação, que aponta o ato corrigido e registra o motivo, como relação entre atos. O ato corretor tem a mesma classe de congelamento do corrigido: errata e documento avulso só corrigem ato que não congela configuração, e o edital, que congela, só se corrige por retificação com nova versão de configuração (UNI-REQ-0021). A cadeia é linear nos dois casos, com ou sem nova versão de configuração: o ato é corrigido no máximo uma vez, por errata ou por retificação, e a correção seguinte recai sobre o ato mais recente da cadeia. O que distingue os casos é só se a correção cria nova versão de configuração.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -701,9 +701,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Não existe operação que apague ou altere ato publicado; a correção exige indicar o ato corrigido e o motivo; ato já corrigido, por errata ou por retificação, não admite segunda correção direta, e a correção seguinte aponta o ato mais recente da cadeia; o ato corrigido permanece consultável; a correção de ato não cria versão de configuração.',
+      'Não existe operação que apague ou altere ato publicado; a correção exige indicar o ato corrigido e o motivo; o ato corretor com classe de congelamento diferente da do corrigido é recusado; errata e documento avulso não corrigem edital; ato já corrigido, por errata ou por retificação, não admite segunda correção direta, e a correção seguinte aponta o ato mais recente da cadeia; o ato corrigido permanece consultável; só a retificação que congela configuração cria nova versão de configuração.',
     verificacao:
-      'Testes automatizados (recusa de alteração e exclusão de ato publicado; motivo obrigatório; recusa da segunda correção sobre o mesmo ato, misturando errata e retificação; encadeamento linear; ausência de nova versão de configuração) (planejado).',
+      'Testes automatizados (recusa de alteração e exclusão de ato publicado; motivo obrigatório; recusa de classe de congelamento divergente; recusa da segunda correção sobre o mesmo ato, misturando errata e retificação; encadeamento linear; nova versão de configuração apenas na retificação que congela) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -711,7 +711,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0157',
     titulo: 'Publicação de resultado declarado no edital',
     enunciado:
-      'Cada fase e etapa do cronograma declara os atos que publica e o papel de cada um: preliminar, que abre o prazo de recurso; definitivo, publicado depois do ciclo recursal; ou nenhum. O prazo de recurso não é encerrado pela publicação do definitivo: conta-se da âncora, a publicação do ato, somada à duração declarada em dias úteis (UNI-REQ-0113, UNI-REQ-0115, UNI-REQ-0116). O administrador publica cada item declarado com o PDF correspondente. Não se publica resultado que o edital não declara; se for preciso, faz-se por retificação do edital (UNI-REQ-0021). O definitivo de uma matéria só sai depois do preliminar dela quando a mesma fase ou etapa declara os dois; quem declara só o definitivo, sem ciclo recursal, o publica direto. Cada item é publicado uma vez. A correção de resultado publicado é errata ou retificação do ato, como relação entre atos e sem nova versão de configuração (UNI-REQ-0156), distinta da retificação do edital; o recurso cabe contra o resultado corrigido, e não contra a errata. O sistema não exige, não aplica nem verifica assinatura digital: o PDF assinado fora do sistema é publicado sem alteração de nenhum byte, e a assinatura continua válida. Definição do PO repassada pelo LT, 17/10/2026.',
+      'Cada fase e etapa do cronograma declara os atos que publica e o papel de cada um: preliminar, que abre o prazo de recurso; definitivo, publicado depois do ciclo recursal; ou nenhum. O prazo de recurso é contado a partir da publicação do preliminar, conforme as regras de prazo do edital (UNI-REQ-0113 a UNI-REQ-0116); a publicação do definitivo não é o que encerra o prazo. O administrador publica cada item declarado com o PDF correspondente. Não se publica resultado que o edital não declara; se for preciso, faz-se por retificação do edital (UNI-REQ-0021). O definitivo de uma matéria só sai depois do preliminar dela quando a mesma fase ou etapa declara os dois; quem declara só o definitivo, sem ciclo recursal, o publica direto. Cada item é publicado uma vez. A correção de resultado publicado é errata ou retificação do ato, como relação entre atos e sem nova versão de configuração (UNI-REQ-0156), distinta da retificação do edital; o recurso cabe contra o resultado corrigido, e não contra a errata. O sistema não exige, não aplica nem verifica assinatura digital: o PDF assinado fora do sistema é publicado sem alteração de nenhum byte, e a assinatura continua válida.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -723,9 +723,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O administrador publica somente os itens que a fase ou a etapa declara; item não declarado é recusado com orientação para retificar o edital; o definitivo é recusado enquanto o preliminar da mesma matéria não foi publicado, quando a fase ou a etapa declara os dois; a fase ou a etapa que declara só o definitivo o publica sem preliminar; a publicação do preliminar abre o prazo de recurso, contado da publicação do ato; item já publicado não é publicado de novo; a correção de resultado publicado passa por errata ou retificação do ato; o PDF publicado é idêntico, byte a byte, ao enviado.',
+      'O administrador publica somente os itens que a fase ou a etapa declara; item não declarado é recusado com orientação para retificar o edital; o definitivo é recusado enquanto o preliminar da mesma matéria não foi publicado, quando a fase ou a etapa declara os dois; a fase ou a etapa que declara só o definitivo o publica sem preliminar; a publicação do preliminar abre o prazo de recurso, contado conforme as regras de prazo do edital, e a publicação do definitivo não o encerra; item já publicado não é publicado de novo; a correção de resultado publicado passa por errata ou retificação do ato; o PDF publicado é idêntico, byte a byte, ao enviado.',
     verificacao:
-      'Testes automatizados (publicação apenas de item declarado; ordem preliminar e definitivo quando os dois são declarados; definitivo sem preliminar quando só ele é declarado; publicação única do item; arquivo publicado idêntico ao enviado) (planejado).',
+      'Testes automatizados (publicação apenas de item declarado, com recusa orientando a retificar o edital quando o item não está declarado; ordem preliminar e definitivo quando os dois são declarados; definitivo sem preliminar quando só ele é declarado; abertura do prazo de recurso pela publicação do preliminar, sem encerramento pelo definitivo; publicação única do item; correção de resultado publicado por errata ou retificação do ato; arquivo publicado idêntico ao enviado) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -733,7 +733,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0158',
     titulo: 'Política de divulgação confirmada na publicação de resultado',
     enunciado:
-      'Antes de publicar um resultado, o administrador vê a política de divulgação do certame, a da versão vigente congelada na publicação, e não a do cadastro (UNI-REQ-0050, UNI-REQ-0062, UNI-REQ-0063), e confirma que o PDF a segue. A confirmação fica registrada. O sistema não confere o conteúdo do PDF. Definição do PO repassada pelo LT, 17/10/2026.',
+      'Antes de publicar um resultado, o administrador vê a política de divulgação do certame, a da versão vigente congelada na publicação, e não a do cadastro (UNI-REQ-0050, UNI-REQ-0062, UNI-REQ-0063), e confirma que o PDF a segue. A confirmação fica registrada. O sistema não confere o conteúdo do PDF.',
     grupo: 'conformidade',
     tipo: 'requisito_conformidade',
     nivel: 'requisito',
