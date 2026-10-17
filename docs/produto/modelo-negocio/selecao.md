@@ -54,7 +54,7 @@ Termos usados ao longo do documento, com o sentido que têm no Uni+.
 | Termo | Significado |
 |---|---|
 | Processo seletivo | O certame em si (por exemplo, o SiSU 2026 ou o Vestibular Indígena/Quilombola). Reúne toda a configuração: etapas, cotas, vagas, documentos e formulário. É ele que se configura, publica e retifica — os dois termos não são sinônimos. |
-| Edital | O documento oficial emitido quando um processo seletivo é publicado — o ato que fecha e oficializa a configuração. Não é editado diretamente: uma mudança pós-publicação sai como retificação, que gera um novo edital. |
+| Edital | O documento oficial emitido quando um processo seletivo é publicado — o ato que fecha e oficializa a configuração. Não é editado diretamente: uma mudança pós-publicação sai como retificação, um novo ato que aponta o edital retificado. |
 | Modalidade de concorrência | A fila em que o candidato disputa a vaga: ampla concorrência, uma cota da Lei 12.711/2012 ou uma ação afirmativa institucional. Ver seção 7. |
 | Ampla concorrência | A modalidade `AC`, aberta a todos os candidatos. Todo candidato concorre nela, inclusive o cotista. |
 | Cota | Reserva de vagas definida pela Lei 12.711/2012, sempre condicionada a ser egresso de escola pública, o que o sistema calcula de onde e como o candidato cursou o ensino médio (`UNI-REQ-0148`): as oito modalidades `LB_*` e `LI_*`. As dimensões declaradas (renda, cor/raça, deficiência, quilombola) **combinam-se** com a escola pública em modalidades compostas — por exemplo, escola pública, baixa renda e deficiência juntas produzem `LI_EP`, `LB_EP`, `LI_PCD` e `LB_PCD`. Ver seção 7. |
@@ -63,7 +63,7 @@ Termos usados ao longo do documento, com o sentido que têm no Uni+.
 | Condição de exigência | A regra que determina de quem um documento é exigido — por exemplo, apenas de quem concorre à cota de renda. É montada a partir dos dados do candidato. |
 | Fase | Momento do cronograma do processo (inscrição, homologação, habilitação etc.). Cada exigência de documento é vinculada à fase em que se aplica. |
 | Versão congelada (cópia oficial) | Quando o processo seletivo é publicado, o sistema tira uma fotografia imutável de toda a configuração. A partir daí, é essa cópia — e não a configuração viva — que governa inscrições, análises e resultados. Ver seção 5. |
-| Retificação | A forma oficial de alterar a configuração de um processo seletivo já publicado: emite-se um novo edital, com novo motivo registrado. A configuração publicada não é editada diretamente. |
+| Retificação | A forma oficial de alterar a configuração de um processo seletivo já publicado: emite-se um novo ato que aponta o ato retificado e registra o motivo, com nova versão congelada; o ato retificado continua publicado. A configuração publicada não é editada diretamente. |
 | Administrador da Unidade | Servidor que configura e publica processos dentro da unidade que administra (por exemplo, o CEPS). |
 | Candidato | Pessoa que preenche e submete a inscrição no portal público. |
 
@@ -73,7 +73,7 @@ Do ponto de vista de negócio, o módulo Seleção opera em três grandes moment
 
 Enquanto o processo está em rascunho, o administrador monta livremente toda a configuração e pode alterar qualquer parte. Nada ainda produz efeito para o candidato.
 
-Ao publicar o processo seletivo, o sistema valida a configuração e, estando tudo conforme, oficializa e congela os parâmetros, emitindo o edital que torna a publicação pública. Desse instante em diante, a configuração viva não muda mais o que já foi publicado; qualquer alteração exige retificação (nova publicação, com novo edital).
+Ao publicar o processo seletivo, o sistema valida a configuração e, estando tudo conforme, oficializa e congela os parâmetros, emitindo o edital que torna a publicação pública. Desse instante em diante, a configuração viva não muda mais o que já foi publicado; qualquer alteração exige retificação (novo ato que aponta o retificado, com nova versão congelada).
 
 Durante a inscrição, o candidato responde ao formulário do processo, indica opções de curso e responde às perguntas de cota, envia documentos e submete a inscrição. O sistema decide o que se aplica a ele sempre com base na cópia oficial congelada do processo seletivo, garantindo que todos os candidatos de um mesmo processo seletivo sejam tratados exatamente pelas mesmas regras, mesmo que a configuração seja alterada depois para processos futuros.
 
@@ -110,7 +110,7 @@ A publicação é o ato central do módulo. É quando a configuração deixa de 
 Consequências práticas do congelamento, em linguagem de negócio:
 
 - Imunidade após a publicação. Se, depois de publicar, alguém alterar um cadastro geral (por exemplo, a descrição de um tipo de documento ou a lista de valores de uma pergunta), o processo seletivo publicado continua funcionando como antes. A mudança só alcança processos seletivos novos.
-- Alteração só por retificação. Para mudar prazo, vagas, cotas, pesos, Fator de Atenuação, documentos ou formulário de um processo seletivo já publicado, emite-se uma retificação, que republica o processo com um novo edital e o motivo registrado. A edição direta da configuração já publicada é bloqueada (`REQ-21`, `REQ-22`).
+- Alteração só por retificação. Para mudar prazo, vagas, cotas, pesos, Fator de Atenuação, documentos ou formulário de um processo seletivo já publicado, emite-se uma retificação, que registra um novo ato apontando o ato retificado, com o motivo e uma nova versão congelada; o ato retificado continua publicado. A edição direta da configuração já publicada é bloqueada (`REQ-21`, `REQ-22`).
 - Qual versão vale em cada momento. Quando há mais de uma versão (por retificações), o sistema sabe identificar qual versão do processo seletivo — e qual edital — estava vigente em cada data, para avaliar cada ato pela regra correta da época.
 
 > Exemplo. Um processo seletivo exige comprovante de renda com no máximo 3 meses. Após a publicação, a área administrativa altera o cadastro geral para 6 meses. Os candidatos daquele processo seletivo continuam sob a regra de 3 meses (a que valia quando ele foi publicado). Só os processos publicados depois da alteração usarão 6 meses.
@@ -381,7 +381,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | `REQ-16` | Documentos por condição e fase | Configurar documentos exigidos por condição sobre dados do candidato e por fase do processo. |
 | `REQ-17` | Formulário configurável | Formulário configurável por finalidade (inscrição, isenção, habilitação), a partir de modelos por tipo de processo, com campos condicionais. |
 | `REQ-19` | Publicação com cópia congelada | Publicar o processo seletivo, criando a cópia oficial imutável da configuração e emitindo o edital. |
-| `REQ-21 / 22` | Retificação e bloqueio de edição | Alterar processo seletivo publicado só por retificação (nova publicação, novo edital); edição direta bloqueada. |
+| `REQ-21 / 22` | Retificação e bloqueio de edição | Alterar processo seletivo publicado só por retificação (novo ato que aponta o retificado, nova versão congelada); edição direta bloqueada. |
 | `REQ-23` a 33 | Ciclo da inscrição previsto | Rascunho, submissão, opções de curso, concorrência dupla, atendimento, documentos, comprovante, unicidade, nome social, cancelamento. |
 | `REQ-56` | Cascata de remanejamento | Congelada no snapshot de publicação: por modalidade de origem, sequência ordenada de destinos mais a cota de fallback. A ordem de migração é semântica e distinta da `RN04`. |
 | `REQ-57` a 71 | Documentos exigidos (detalhe) | Aplicabilidade geral/condicional, condições, base legal, formatos e idade, documentos alternativos, consequências, repetição por entidade e congelamento do conjunto. |
