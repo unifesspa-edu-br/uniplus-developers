@@ -1,0 +1,54 @@
+---
+title: O tipo de ato que só sai uma vez por processo está declarado mais de uma vez
+sidebar_label: Tipo de ato único declarado mais de uma vez
+description: 'Rascunho — um tipo de ato que só pode ser publicado uma vez por processo aparece em mais de um produto de fase ou etapa do cronograma, ou no cronograma e no ato que está sendo registrado.'
+code: uniplus.selecao.processo_seletivo.tipo_de_ato_unico_declarado_mais_de_uma_vez
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1959'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1959
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cronograma declara o mesmo tipo de ato em mais de um produto de fase ou
+etapa, e esse tipo só pode ser publicado **uma vez por processo**. É o caso de
+tipos como `RESULTADO_FINAL`, `HOMOLOGACAO_INSCRICOES` ou `EDITAL_ABERTURA`:
+cada produto declarado vira uma publicação esperada, e um tipo que admite uma
+única publicação não tem como atender a duas.
+
+A conta inclui o **ato que está sendo registrado na operação**. Na publicação
+inicial e na retificação, o tipo desse ato também ocupa a vaga do tipo único;
+se o cronograma já o declara em outro produto, a declaração repete.
+
+A mensagem de detalhe diz qual tipo repete e onde: em qual fase, em qual etapa
+(com a ordem) ou no ato em registro.
+
+A recusa é do próprio conteúdo do cronograma, e não de um estado já gravado.
+Por isso o status é **422**, e não 409.
+
+## Como resolver
+
+Escolha uma das saídas:
+
+- **Declare o tipo uma vez só.** Mantenha-o no produto em que ele de fato
+  sai e retire a declaração dos demais.
+- **Use, nos dois papéis, o tipo não único da mesma matéria.** Por exemplo,
+  `RESULTADO_HOMOLOGACAO` no lugar de `HOMOLOGACAO_INSCRICOES`: ele admite
+  mais de uma publicação e serve às duas declarações.
+
+Depois, publique ou retifique de novo. O preflight de conformidade mostra esta
+pendência antes da publicação, no item
+`cronograma_tipo_de_ato_unico_declarado_uma_vez`.
