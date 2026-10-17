@@ -1,0 +1,32 @@
+---
+title: A alteração deixaria de valer o agregado do fato
+sidebar_label: Alteração quebra o agregado do fato
+description: Rascunho — a alteração deixaria de valer o resumo de grupo (agregado) deste fato de membro.
+code: uniplus.configuracao.fato_candidato.alteracao_quebra_agregado_do_fato
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador enviou a nova definição de um fato do catálogo (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`), mas há um resumo de grupo (agregado) que tem este fato como membro, e a definição nova o deixaria inválido. O resumo infere do fato de membro o tipo de dado, a quantidade de valores e a origem das opções, e não pode proteger menos nem resolver antes dele. Mudar o tipo de dado ou a origem das opções do membro, tirá-lo de fato declarado de membro de grupo, elevar a proteção de dados dele acima da do resumo ou adiar o ponto de resolução dele para depois do do resumo desfaz essa coerência. A recusa só conta o que a alteração causa: o resumo que já estava inválido antes não trava. A correção da definição de um fato é regra do UNI-REQ-0159, e a API recusa a alteração que deixaria inválido algo que já cita o fato, em vez de alterá-lo em silêncio. Nada é gravado: o fato continua com a definição anterior.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `citacoes.agregados.<código do agregado>`, uma entrada por agregado afetado. A mensagem cita o motivo.
+
+## Como resolver
+
+Escolha uma das saídas. Escolha uma definição que mantenha o resumo válido: mantenha o tipo de dado, a origem das opções e a condição de fato declarado de membro de grupo, não eleve a proteção de dados do membro acima da do resumo nem adie o ponto de resolução do membro para depois do do resumo. Se é preciso elevar a proteção ou adiar o ponto de resolução do membro, eleve antes a proteção ou adie antes o ponto de resolução do resumo de grupo (os únicos eixos que ele aceita alterar), para que ele continue protegendo pelo menos tanto quanto o membro e resolvendo depois dele. A mudança de tipo de dado ou de origem das opções do membro não tem como ser acompanhada pelo resumo: ela exige outro fato de membro. Desativar o resumo não basta, porque ele continua sendo conferido.
+
+A definição corrigida vale para os rascunhos e para os processos novos; a versão já publicada de um processo não muda.

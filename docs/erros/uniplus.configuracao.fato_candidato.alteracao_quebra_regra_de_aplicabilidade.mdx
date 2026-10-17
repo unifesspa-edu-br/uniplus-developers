@@ -1,0 +1,32 @@
+---
+title: A alteração deixaria de valer a regra de aplicabilidade de uma modalidade
+sidebar_label: Alteração quebra a regra de aplicabilidade
+description: Rascunho — a alteração deixaria de valer a regra de aplicabilidade de uma modalidade que cita este fato.
+code: uniplus.configuracao.fato_candidato.alteracao_quebra_regra_de_aplicabilidade
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador enviou a nova definição de um fato do catálogo (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`), mas a regra de aplicabilidade de uma modalidade cita este fato, e a definição nova a deixaria inválida, por exemplo ao trocar o tipo de dado em que a condição se apoia. A recusa só conta o que a alteração causa: a regra que já era inválida antes da alteração não trava. A correção da definição de um fato é regra do UNI-REQ-0159, e a API recusa a alteração que deixaria inválido algo que já cita o fato, em vez de alterá-lo em silêncio. Nada é gravado: o fato continua com a definição anterior.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `citacoes.modalidades.<código da modalidade>`, uma entrada por modalidade afetada. A mensagem cita o que deixaria de valer.
+
+## Como resolver
+
+Escolha uma das saídas. Ajuste a regra de aplicabilidade da modalidade citada para que ela valha com a definição nova, ou retire dela a condição que cita este fato, e reenvie a alteração; ou escolha uma definição que a mantenha válida. Todas as modalidades vivas são conferidas, sem exceção: só a modalidade excluída deixa de ser conferida.
+
+A definição corrigida vale para os rascunhos e para os processos novos; a versão já publicada de um processo não muda.

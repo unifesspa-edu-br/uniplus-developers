@@ -1,0 +1,32 @@
+---
+title: A alteração deixaria de valer a regra padrão de outro fato
+sidebar_label: Alteração quebra a regra padrão de outro fato
+description: Rascunho — a alteração deixaria de valer a regra padrão de outro fato que cita este.
+code: uniplus.configuracao.fato_candidato.alteracao_quebra_regra_padrao_de_outro_fato
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador enviou a nova definição de um fato do catálogo (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`), mas a regra padrão de outro fato (um derivado por regra) cita este fato, e a definição nova a deixaria inválida, por exemplo ao trocar o tipo de dado de que a condição depende. A recusa só conta o que a alteração causa: a regra que já era inválida antes da alteração não trava. A correção da definição de um fato é regra do UNI-REQ-0159, e a API recusa a alteração que deixaria inválido algo que já cita o fato, em vez de alterá-lo em silêncio. Nada é gravado: o fato continua com a definição anterior.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `citacoes.regrasPadrao.<código do fato derivado>`, uma entrada por fato afetado. A mensagem cita o que deixaria de valer.
+
+## Como resolver
+
+Escolha uma das saídas. Ajuste a regra padrão do fato derivado citado, para que ela valha com a definição nova, ou remova dela a condição que cita este fato, e reenvie a alteração. Desativar o fato derivado não basta, porque a regra dele continua sendo conferida. Se a regra deve continuar como está, escolha uma definição que a mantenha válida.
+
+A definição corrigida vale para os rascunhos e para os processos novos; a versão já publicada de um processo não muda.

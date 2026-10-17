@@ -1,0 +1,32 @@
+---
+title: Eixo que o tipo do fato não permite alterar
+sidebar_label: Eixo não editável no tipo do fato
+description: Rascunho — o corpo informa um eixo que o tipo do fato não permite alterar.
+code: uniplus.configuracao.fato_candidato.eixo_nao_editavel_no_tipo_do_fato
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador enviou a nova definição de um fato do catálogo (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) informando um eixo que o tipo daquele fato não permite alterar. Cada tipo de fato aceita um subconjunto da definição: o fato declarado aceita todos os eixos; o fato derivado por regra aceita o tipo de dado (`dominio`, só booleano ou categórico), o escopo, o ponto de resolução e a proteção de dados, pois a cardinalidade, a origem das opções e o formato são inferidos do tipo de dado (booleano ou categórico), e não da regra; o resumo de grupo (agregado) aceita só o ponto de resolução e a proteção de dados, pois o restante é inferido do fato de membro. Código, origem e vínculo nunca mudam. A correção da definição de um fato é regra do UNI-REQ-0159.
+
+A recusa vem na lista `errors` da resposta, com `field` igual ao eixo informado a mais (`dominio`, `cardinalidade`, `fonteValores`, `formato` ou `escopo`), uma entrada por eixo. Nada é gravado.
+
+## Como resolver
+
+Reenvie a definição sem o eixo apontado: deixe `cardinalidade`, `fonteValores` e `formato` fora do corpo de um fato derivado por regra, e deixe também `dominio` e `escopo` fora do corpo de um resumo de grupo. O ponto de resolução e a proteção de dados são enviados sempre, em qualquer tipo de fato; no fato declarado e no derivado por regra, o tipo de dado (`dominio`) e o escopo também são enviados sempre. Se o que você precisa mudar é a cardinalidade, a origem das opções ou o formato de um derivado por regra, troque o tipo de dado (booleano ou categórico), que é de onde eles são inferidos; no resumo de grupo, a mudança é feita no fato de membro.
+
+A definição corrigida vale para os rascunhos e para os processos novos; a versão já publicada de um processo não muda.
