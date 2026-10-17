@@ -45,8 +45,8 @@ Para cada oferta de curso, configura-se a **distribuição de vagas**: o total, 
 ### 2.5 Atendimento especializado
 Configura-se a **oferta de atendimento especializado** — as condições (por exemplo, pessoa com deficiência), os recursos de acessibilidade (ledor, prova ampliada, intérprete) e os tipos de deficiência, sendo que tipo de deficiência só é aceito sob a condição de pessoa com deficiência.
 
-### 2.6 Classificação e bônus regional
-Define-se a **fórmula de classificação** (como a nota final é composta a partir das etapas e seus pesos e o arredondamento) e as **regras de eliminação** (nota mínima por etapa, corte de redação, etc.) (`UNI-REQ-0015`). A ordem de alocação de vagas tem duas partes distintas: a precedência entre 1ª e 2ª opção de curso é **regra fixa** (`RN04`), não configurável; apenas a cascata de remanejamento entre modalidades (`UNI-REQ-0056`) é configurada e congelada por edital. O administrador declara se o processo **aplica o bônus regional** — um acréscimo percentual à nota final, com seu critério de elegibilidade — e, quando aplica, o configura. A declaração é obrigatória: a ausência bloqueia a publicação e nunca é interpretada como "sem bônus", e "não aplica" é uma resposta válida (`UNI-REQ-0015`).
+### 2.6 Classificação e Fator de Atenuação das Desigualdades de Acesso
+Define-se a **fórmula de classificação** (como a nota final é composta a partir das etapas e seus pesos e o arredondamento) e as **regras de eliminação** (nota mínima por etapa, corte de redação, etc.) (`UNI-REQ-0015`). A ordem de alocação de vagas tem duas partes distintas: a precedência entre 1ª e 2ª opção de curso é **regra fixa** (`RN04`), não configurável; apenas a cascata de remanejamento entre modalidades (`UNI-REQ-0056`) é configurada e congelada por edital. O administrador declara se o processo **aplica o Fator de Atenuação das Desigualdades de Acesso** — um acréscimo percentual à nota final, com seu critério de elegibilidade — e, quando aplica, o configura. A declaração é obrigatória: a ausência bloqueia a publicação e nunca é interpretada como "sem Fator de Atenuação", e "não aplica" é uma resposta válida (`UNI-REQ-0015`).
 
 ### 2.7 Documentos exigidos
 Configuram-se os **documentos comprobatórios** exigidos, por **condição** e por **fase** (`UNI-REQ-0016`). Cada exigência declara de quem é cobrada — de todos, ou de quem satisfaz um **gatilho** sobre os fatos do candidato (por exemplo, na inscrição, "exigido de quem concorre a uma cota de renda"; na habilitação, a cobrança segue o grupo em que a pessoa foi convocada, `UNI-REQ-0147`). Definem-se a base legal de cada exigência (`UNI-REQ-0059`), os formatos e o tamanho aceitos, a idade máxima de emissão, e a estrutura da comprovação (documentos alternativos, grupos "um dos seguintes", repetição por membro do núcleo familiar). Quando um documento depende da idade do candidato, configura-se a **referência temporal** que resolve a idade (a data e a fase de referência).
@@ -65,7 +65,7 @@ Quem cobra também declara **quando** o candidato pode pedir a isenção: a jane
 
 Antes de publicar, o administrador revê o resumo da configuração e as **pendências de conformidade**. Há **duas conformidades** que precisam estar satisfeitas:
 
-- **Conformidade estrutural** — as dimensões obrigatórias estão completas e coerentes (por exemplo, um critério de desempate não pode referenciar uma etapa que não existe; uma exigência que determina resultado precisa de base legal; o bônus regional precisa estar declarado, aplicado ou não; a inscrição feita no sistema precisa de critério de desempate).
+- **Conformidade estrutural** — as dimensões obrigatórias estão completas e coerentes (por exemplo, um critério de desempate não pode referenciar uma etapa que não existe; uma exigência que determina resultado precisa de base legal; o Fator de Atenuação das Desigualdades de Acesso precisa estar declarado, aplicado ou não; a inscrição feita no sistema precisa de critério de desempate).
 - **Conformidade legal** — as regras de obrigatoriedade legal aplicáveis ao processo estão atendidas, avaliadas na data de referência do certame: o dia em que o período de inscrição começa, no fuso institucional.
 
 Publicar exige ainda que a localidade esteja declarada, e que exista calendário vigente e algoritmo de contagem declarado sempre que alguma contagem distinga dia útil de não útil (`UNI-REQ-0111`, `UNI-REQ-0116`) — faltando qualquer um, a recusa é nomeada e específica. O fuso institucional é aplicado e congelado na mesma operação. Enquanto houver qualquer pendência, a **publicação fica bloqueada**, e as pendências são listadas de forma acionável. Para publicar, o administrador anexa o **documento oficial do edital** (o PDF) e informa os dados do ato (número do edital).
@@ -80,7 +80,7 @@ A publicação cria a **cópia oficial imutável** da configuração — o snaps
 
 Publicado o processo, a configuração **não pode mais ser editada diretamente** (`UNI-REQ-0022`). Toda a validação em runtime (a inscrição do candidato, a exigência de documentos, o cálculo da modalidade) passa a ler a **cópia congelada**, não a configuração viva — de modo que mexer na configuração de um processo já publicado não altera o resultado (imunidade pós-publicação, `UNI-REQ-0062`, `UNI-REQ-0063`).
 
-Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, bônus, documentos ou formulário) só acontece por **retificação** — um novo ato que cria um **novo Edital**, com um **novo snapshot congelado** e o motivo registrado, preservando o histórico (`UNI-REQ-0021`). A capacidade já é suportada; o detalhamento da sua jornada está fora do escopo desta primeira publicação.
+Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que cria um **novo Edital**, com um **novo snapshot congelado** e o motivo registrado, preservando o histórico (`UNI-REQ-0021`). A capacidade já é suportada; o detalhamento da sua jornada está fora do escopo desta primeira publicação.
 
 ---
 
@@ -94,7 +94,7 @@ Cada comportamento acima corresponde a um requisito com código estável no acer
 | `UNI-REQ-0009` | Cidade, Campus e LocalOferta | Cadastros de localidade e oferta. |
 | `UNI-REQ-0011` | Modalidade de concorrência | Modalidades (ampla + reservas legais) usadas na distribuição de vagas (2.4). |
 | `UNI-REQ-0014` | Configuração do Processo Seletivo | O rascunho editável e suas dimensões (seções 1–2). |
-| `UNI-REQ-0015` | Configurar etapas, critérios e bônus | Etapas, pesos, desempate, classificação e bônus (2.2, 2.6). |
+| `UNI-REQ-0015` | Configurar etapas, critérios e Fator de Atenuação das Desigualdades de Acesso | Etapas, pesos, desempate, classificação e Fator de Atenuação (2.2, 2.6). |
 | `UNI-REQ-0016` | Configurar documentos exigidos por gatilho e fase | Documentos por condição e fase (2.7). |
 | `UNI-REQ-0147` | Documentos da habilitação seguem o grupo de vagas da convocação | Cobrança na habilitação pelo grupo da convocação (2.7). |
 | `UNI-REQ-0017` | Formulário configurável por finalidade | Formulário por finalidade e campos condicionais (2.8). |

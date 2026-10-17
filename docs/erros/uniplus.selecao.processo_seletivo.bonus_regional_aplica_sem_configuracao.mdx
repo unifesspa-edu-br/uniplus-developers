@@ -1,13 +1,13 @@
 ---
-title: O processo que aplica o bônus regional precisa da configuração do bônus
-sidebar_label: Bônus regional sem configuração
-description: Declarar que o bônus se aplica exige informar a regra, o fator e a base legal do bônus.
+title: O processo que aplica o Fator de Atenuação das Desigualdades de Acesso precisa da configuração do fator
+sidebar_label: Fator de Atenuação sem configuração
+description: Declarar que o Fator de Atenuação se aplica exige informar a regra, o multiplicador da nota e a base legal do fator.
 code: uniplus.selecao.processo_seletivo.bonus_regional_aplica_sem_configuracao
 http_status: 422
 situacao: publicado
 modulo: Seleção
 emitido_em:
-  - Declaração do bônus regional do processo seletivo
+  - Declaração do Fator de Atenuação das Desigualdades de Acesso do processo seletivo
 requisitos:
   - UNI-REQ-0015
 rastreio:
@@ -21,9 +21,9 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A declaração do bônus regional diz que o processo **aplica** o bônus, mas chegou sem a regra do bônus (`regraCodigo`). O processo declara se aplica ou não o bônus, como declara a cobrança da taxa de inscrição; ausência de configuração não significa "sem bônus".
+A declaração do Fator de Atenuação das Desigualdades de Acesso diz que o processo **aplica** o fator, mas chegou sem a regra do fator (`regraCodigo`). O processo declara se aplica ou não o Fator de Atenuação, como declara a cobrança da taxa de inscrição; ausência de configuração não significa "sem Fator de Atenuação".
 
 ## Como resolver
 
-- **Se o bônus se aplica:** envie junto da declaração a regra (`regraCodigo` e `regraVersao`), o `fator`, a base legal (`baseLegalBonusRegionalId`, de onde vêm os municípios) e, se houver, o `teto`.
-- **Se o bônus não se aplica:** declare `aplica: false` e não envie nenhum outro campo do bônus.
+- **Se o Fator de Atenuação se aplica:** envie junto da declaração a regra (`regraCodigo` e `regraVersao`), o multiplicador da nota (`fator`), a base legal (`baseLegalBonusRegionalId`, de onde vêm os municípios) e, se houver, o `teto`.
+- **Se o Fator de Atenuação não se aplica:** declare `aplica: false` e não envie nenhum outro campo do fator.

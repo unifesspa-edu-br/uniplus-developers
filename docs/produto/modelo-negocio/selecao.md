@@ -38,7 +38,7 @@ A plataforma foi concebida para crescer além dos processos seletivos. Módulos 
 
 > Vocabulário: "processo seletivo" é o certame configurável; "edital" é o ato/documento que a publicação emite. Ver [Edital versus processo seletivo](../dominio/index.mdx#edital-versus-processo-seletivo).
 
-- Cadastro e configuração do processo seletivo — parâmetros, etapas, pesos, cotas, locais de prova, datas, formulários, modalidades e regras de bônus.
+- Cadastro e configuração do processo seletivo — parâmetros, etapas, pesos, cotas, locais de prova, datas, formulários, modalidades e regras do Fator de Atenuação das Desigualdades de Acesso.
 - Publicação do processo seletivo — registra o edital como ato/documento normativo e produz a versão de configuração congelada.
 - Inscrição de candidatos — cadastro online e envio de documentos.
 - Homologação — análise administrativa dos documentos apresentados.
@@ -90,7 +90,7 @@ O acesso administrativo é restrito por unidade: um administrador só enxerga e 
 
 A configuração é feita pelo Administrador da Unidade enquanto o processo está em rascunho. Ela é composta por várias dimensões, que juntas descrevem integralmente o certame.
 
-- Etapas, pesos e critérios de resultado. Definem-se as etapas pontuadas (por exemplo, prova objetiva, redação, entrevista), o peso de cada uma, os critérios de desempate e o bônus regional, quando houver. A fórmula de nota final e os critérios de desempate ficam registrados na configuração e serão aplicados na etapa de classificação.
+- Etapas, pesos e critérios de resultado. Definem-se as etapas pontuadas (por exemplo, prova objetiva, redação, entrevista), o peso de cada uma, os critérios de desempate e o Fator de Atenuação das Desigualdades de Acesso, quando houver. A fórmula de nota final e os critérios de desempate ficam registrados na configuração e serão aplicados na etapa de classificação.
 - Modalidades de concorrência e quadro de vagas. Definem-se quais modalidades o processo oferece (ampla concorrência e as cotas aplicáveis) e o número de vagas de cada uma, por oferta de curso. Também se define a ordem de remanejamento: para onde as vagas de uma cota não preenchida devem migrar (ver seção 7).
 - Documentos exigidos. Para cada documento, define-se de quem é exigido (de todos, ou apenas de quem satisfaz uma condição), em que fase, se é obrigatório, qual a consequência de não apresentá-lo, a base legal que o embasa e as regras de formato, tamanho e validade. Ver seção 9.
 - Formulários por finalidade. Monta-se, a partir dos modelos do tipo de processo, sempre o formulário de inscrição; o de isenção da taxa quando o processo cobra taxa, a partir de modelo que serve a qualquer tipo de processo, exigido a partir da frente de inscrição; e o de habilitação quando o cronograma tem a fase de habilitação, exigido a partir da frente de habilitação (`UNI-REQ-0144`). O de inscrição traz as perguntas de cota (autodeclarações, origem escolar e opções de concorrer); em todos, há campos que só aparecem, ou só são obrigatórios, em função de respostas anteriores. Ver seção 8.
@@ -110,7 +110,7 @@ A publicação é o ato central do módulo. É quando a configuração deixa de 
 Consequências práticas do congelamento, em linguagem de negócio:
 
 - Imunidade após a publicação. Se, depois de publicar, alguém alterar um cadastro geral (por exemplo, a descrição de um tipo de documento ou a lista de valores de uma pergunta), o processo seletivo publicado continua funcionando como antes. A mudança só alcança processos seletivos novos.
-- Alteração só por retificação. Para mudar prazo, vagas, cotas, pesos, bônus, documentos ou formulário de um processo seletivo já publicado, emite-se uma retificação, que republica o processo com um novo edital e o motivo registrado. A edição direta da configuração já publicada é bloqueada (`REQ-21`, `REQ-22`).
+- Alteração só por retificação. Para mudar prazo, vagas, cotas, pesos, Fator de Atenuação, documentos ou formulário de um processo seletivo já publicado, emite-se uma retificação, que republica o processo com um novo edital e o motivo registrado. A edição direta da configuração já publicada é bloqueada (`REQ-21`, `REQ-22`).
 - Qual versão vale em cada momento. Quando há mais de uma versão (por retificações), o sistema sabe identificar qual versão do processo seletivo — e qual edital — estava vigente em cada data, para avaliar cada ato pela regra correta da época.
 
 > Exemplo. Um processo seletivo exige comprovante de renda com no máximo 3 meses. Após a publicação, a área administrativa altera o cadastro geral para 6 meses. Os candidatos daquele processo seletivo continuam sob a regra de 3 meses (a que valia quando ele foi publicado). Só os processos publicados depois da alteração usarão 6 meses.
@@ -306,12 +306,12 @@ Cada exigência define o que acontece se o candidato não comprovar o que declar
 |---|---|
 | Elimina | O candidato é eliminado do processo. |
 | Reclassifica para ampla concorrência | O candidato perde a vaga na cota, mas segue concorrendo em ampla concorrência. |
-| Remove vantagem | O candidato perde uma vantagem específica (por exemplo, o bônus regional), mas não é eliminado. |
+| Remove vantagem | O candidato perde uma vantagem específica (por exemplo, o Fator de Atenuação das Desigualdades de Acesso), mas não é eliminado. |
 | Pendência para reenvio | Abre-se prazo para o candidato complementar/reenviar o documento numa fase que permita complementação. |
 
 > A qual nó a consequência se prende. A consequência é configurada **por nó** da árvore de exigências, não por documento solto: cada folha (documento único) e cada grupo de alternativas (`OU` / `pelo menos N de`) — a unidade opaca — pode carregar a sua consequência e a sua **própria base legal**; um grupo `E` (todos exigidos) não carrega consequência própria, cada filho carrega a sua. Num grupo de alternativas, portanto, deixar de apresentar uma alternativa **não** aciona a penalidade se outra satisfaz o grupo — a consequência é do grupo, avaliada pelo resultado dele, nunca somada a partir dos filhos.
 
-A consequência precisa ser coerente com a natureza da vaga e com o que o processo oferece — por exemplo, remover o bônus regional só é válido se o processo de fato tiver bônus regional. O sistema verifica essa coerência na publicação.
+A consequência precisa ser coerente com a natureza da vaga e com o que o processo oferece — por exemplo, remover o Fator de Atenuação só é válido se o processo de fato oferecer o Fator de Atenuação. O sistema verifica essa coerência na publicação.
 
 ### 9.4 Base legal
 
@@ -363,7 +363,7 @@ Consolidação das regras institucionais nomeadas. O enunciado público e o mape
 | `RN02` | Prioridade do nome social | Nome social tem prioridade absoluta em listas públicas e documentos de identificação. | Entrega atual |
 | `RN03` | Documentos obrigatórios | Inscrição bloqueada sem os documentos obrigatórios aplicáveis ao caso do candidato. | Entrega atual |
 | `RN04` | Precedência de opções de curso | Vagas de 1ª opção de curso são processadas primeiro; as remanescentes são realocadas para a 2ª opção. A cascata de remanejamento entre modalidades é regra própria (`REQ-56`), não parte da `RN04`. | Etapa futura |
-| `RN05` | Bônus regional | Bônus regional, que cada processo declara se aplica ou não (a declaração é obrigatória para publicar), com percentual configurável por processo seletivo, aplicado sobre a nota final; sem comprovação de elegibilidade, o candidato é reclassificado sem o bônus (não eliminado). | Etapa futura |
+| `RN05` | Fator de Atenuação das Desigualdades de Acesso | Fator de Atenuação das Desigualdades de Acesso, que cada processo declara se aplica ou não (a declaração é obrigatória para publicar), com percentual configurável por processo seletivo, aplicado sobre a nota final; sem comprovação de elegibilidade, o candidato é reclassificado sem o fator (não eliminado). | Etapa futura |
 | `RN06` | Cancelar e refazer | O candidato pode cancelar e refazer a inscrição antes do encerramento, com registro de motivo, data e autor. | Entrega atual |
 | `RN07` | Lista de espera | Inserção na lista de espera conforme a opção indicada no ato da inscrição. | Etapa futura |
 | `RN08` | Congelamento por edital *(nome histórico — tecnicamente, por processo seletivo)* | Todos os parâmetros ficam congelados na publicação do processo seletivo; alterações retroativas são proibidas e atualizações globais valem só para processos futuros. | Entrega atual |
@@ -376,8 +376,8 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 
 | Requisito | Título | Descrição em negócio |
 |---|---|---|
-| `REQ-14` | Configuração do processo | Configurar um processo em rascunho: etapas, vagas, modalidades, critérios, bônus, atendimento, documentos e formulário. |
-| `REQ-15` | Etapas, critérios e bônus | Configurar etapas pontuadas, pesos, critérios de desempate e bônus regional. |
+| `REQ-14` | Configuração do processo | Configurar um processo em rascunho: etapas, vagas, modalidades, critérios, Fator de Atenuação, atendimento, documentos e formulário. |
+| `REQ-15` | Etapas, critérios e Fator de Atenuação | Configurar etapas pontuadas, pesos, critérios de desempate e Fator de Atenuação das Desigualdades de Acesso. |
 | `REQ-16` | Documentos por condição e fase | Configurar documentos exigidos por condição sobre dados do candidato e por fase do processo. |
 | `REQ-17` | Formulário configurável | Formulário configurável por finalidade (inscrição, isenção, habilitação), a partir de modelos por tipo de processo, com campos condicionais. |
 | `REQ-19` | Publicação com cópia congelada | Publicar o processo seletivo, criando a cópia oficial imutável da configuração e emitindo o edital. |
@@ -395,7 +395,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Capacidade | Situação | Observação |
 |---|---|---|
 | Cadastros de base (cursos, unidades, modalidades, tipos de documento, cidades/campus) | Entrega atual | Fundação para configurar o processo. |
-| Configuração do processo (etapas, vagas, cotas, bônus, atendimento) | Entrega atual | Tudo editável enquanto rascunho. |
+| Configuração do processo (etapas, vagas, cotas, Fator de Atenuação, atendimento) | Entrega atual | Tudo editável enquanto rascunho. |
 | Documentos exigidos por condição e fase | Entrega atual | Inclui base legal, consequências e documentos alternativos. |
 | Coleta de dados e cálculo de modalidades | Entrega atual | Formulário condicional e composição da Lei de Cotas por configuração. |
 | Publicação do processo seletivo e congelamento | Entrega atual | Cópia oficial imutável; emissão do edital; retificação como nova publicação. |
@@ -403,7 +403,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Homologação documental (deferir/indeferir) | Etapa futura | Consome a configuração congelada. |
 | Ensalamento e locais exatos de prova | Etapa futura | — |
 | Lançamento de notas por etapa | Etapa futura | As etapas são configuradas agora; as notas são lançadas depois. |
-| Processamento de classificação, remanejamento, desempate, bônus e resultado | Etapa futura | A configuração da cascata já está congelada no snapshot de publicação; esta etapa executará o remanejamento conforme a sequência de destinos e a cota de fallback. |
+| Processamento de classificação, remanejamento, desempate, Fator de Atenuação e resultado | Etapa futura | A configuração da cascata já está congelada no snapshot de publicação; esta etapa executará o remanejamento conforme a sequência de destinos e a cota de fallback. |
 | Recursos administrativos | Etapa futura | Base de suspensividade já configurada (`RN13`). |
 | Habilitação e chamadas de vagas (Ingresso/CRCA) | Etapa futura | Fronteira com o módulo Ingresso. |
 
