@@ -169,7 +169,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0014',
     titulo: 'Configuração do Processo Seletivo',
     enunciado:
-      'O sistema deve permitir configurar um Processo Seletivo em rascunho por meio de requisitos filhos para etapas, vagas, modalidades, critérios, bônus, atendimento, documentos, formulário e validações.',
+      'O sistema deve permitir configurar um Processo Seletivo em rascunho por meio de requisitos filhos para etapas, vagas, modalidades, critérios, Fator de Atenuação das Desigualdades de Acesso, atendimento, documentos, formulário e validações.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -189,9 +189,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0015',
-    titulo: 'Configurar etapas, critérios e bônus',
+    titulo: 'Configurar etapas, critérios e Fator de Atenuação das Desigualdades de Acesso',
     enunciado:
-      'O sistema deve configurar etapas pontuadas, pesos, critérios de desempate e bônus regional como configuração congelável do processo. O processo deve declarar se aplica ou não o bônus regional, como declara a cobrança de taxa de inscrição: a declaração é obrigatória para publicar, "não aplica" é uma resposta válida, e a ausência de configuração não equivale a "sem bônus". Os critérios de desempate são obrigatórios quando a inscrição é feita no sistema; quando o resultado é importado, a lista já vem classificada e o desempate não é obrigatório. Enquanto o processo está em rascunho, a falta de qualquer um dos dois não impede a gravação das demais dimensões; ela bloqueia a publicação e a retificação. Definição repassada pelo líder técnico em 08/10/2026.',
+      'O sistema deve configurar etapas pontuadas, pesos, critérios de desempate e Fator de Atenuação das Desigualdades de Acesso como configuração congelável do processo. O processo deve declarar se aplica ou não o Fator de Atenuação, como declara a cobrança de taxa de inscrição: a declaração é obrigatória para publicar, "não aplica" é uma resposta válida, e a ausência de configuração não equivale a "sem Fator de Atenuação". Os critérios de desempate são obrigatórios quando a inscrição é feita no sistema; quando o resultado é importado, a lista já vem classificada e o desempate não é obrigatório. Enquanto o processo está em rascunho, a falta de qualquer um dos dois não impede a gravação das demais dimensões; ela bloqueia a publicação e a retificação. Definição repassada pelo líder técnico em 08/10/2026.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -203,7 +203,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Etapas, critérios e bônus aparecem na configuração e no snapshot de publicação. Publicar ou retificar sem a declaração do bônus é recusado; publicar ou retificar processo de inscrição própria sem critério de desempate é recusado; processo de resultado importado não exige critério de desempate; em rascunho, a gravação não é recusada por nenhuma das duas faltas.',
+      'Etapas, critérios e Fator de Atenuação aparecem na configuração e no snapshot de publicação. Publicar ou retificar sem a declaração do Fator de Atenuação é recusado; publicar ou retificar processo de inscrição própria sem critério de desempate é recusado; processo de resultado importado não exige critério de desempate; em rascunho, a gravação não é recusada por nenhuma das duas faltas.',
     verificacao:
       'Validação automatizada de configuração e snapshot (planejada).',
     pagina_developers: '/produto/requisitos/',
@@ -432,7 +432,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0145',
     titulo: 'Regras do campo condicionadas às respostas anteriores',
     enunciado:
-      'As regras de um campo pertencem ao formulário, não ao fato: o mesmo fato pode ser obrigatório para um candidato e opcional para outro, conforme as respostas anteriores, e ter regras diferentes em outro modelo de formulário ou em outro processo. Pela mesma regra de dependência, cada campo declara quando aparece (exibição), quando é obrigatório (sempre, nunca ou quando um predicado sobre os fatos de que ele pode depender for verdadeiro), restrições de valor e quais opções oferece — opções filtradas por uma resposta anterior (os municípios da UF escolhida) ou formadas pelas próprias respostas (a opção de lista de espera escolhida entre as opções de curso que o candidato marcou); as opções também podem ser restritas pela configuração do processo, como os municípios configurados no bônus regional (UNI-REQ-0150), e congelam com ela na publicação (UNI-REQ-0078). Uma etapa inteira também pode ter exibição condicionada. Os fatos de que um campo pode depender são: as respostas a campos anteriores na ordem do formulário; para campo de outra finalidade, os fatos já coletados pela inscrição, finalidade que todo candidato preenche (UNI-REQ-0144); os fatos derivados pelo sistema e conhecidos antes da fase do formulário, como o grupo da convocação (UNI-REQ-0147); e os fatos derivados cujas dependências estão todas entre esses (UNI-REQ-0073, UNI-REQ-0077). Esta é a definição a que os demais requisitos do formulário remetem; na habilitação, ela se soma às restrições de UNI-REQ-0147. Campo opcional deixado em branco é tratado como não informado ao concluir a etapa e não impede as regras seguintes (UNI-REQ-0074); se uma resposta anterior muda e a opção escolhida deixa de valer, a resposta do campo é descartada. Definição do PO, 29/09/2026.',
+      'As regras de um campo pertencem ao formulário, não ao fato: o mesmo fato pode ser obrigatório para um candidato e opcional para outro, conforme as respostas anteriores, e ter regras diferentes em outro modelo de formulário ou em outro processo. Pela mesma regra de dependência, cada campo declara quando aparece (exibição), quando é obrigatório (sempre, nunca ou quando um predicado sobre os fatos de que ele pode depender for verdadeiro), restrições de valor e quais opções oferece — opções filtradas por uma resposta anterior (os municípios da UF escolhida) ou formadas pelas próprias respostas (a opção de lista de espera escolhida entre as opções de curso que o candidato marcou); as opções também podem ser restritas pela configuração do processo, como os municípios configurados no Fator de Atenuação das Desigualdades de Acesso (UNI-REQ-0150), e congelam com ela na publicação (UNI-REQ-0078). Uma etapa inteira também pode ter exibição condicionada. Os fatos de que um campo pode depender são: as respostas a campos anteriores na ordem do formulário; para campo de outra finalidade, os fatos já coletados pela inscrição, finalidade que todo candidato preenche (UNI-REQ-0144); os fatos derivados pelo sistema e conhecidos antes da fase do formulário, como o grupo da convocação (UNI-REQ-0147); e os fatos derivados cujas dependências estão todas entre esses (UNI-REQ-0073, UNI-REQ-0077). Esta é a definição a que os demais requisitos do formulário remetem; na habilitação, ela se soma às restrições de UNI-REQ-0147. Campo opcional deixado em branco é tratado como não informado ao concluir a etapa e não impede as regras seguintes (UNI-REQ-0074); se uma resposta anterior muda e a opção escolhida deixa de valer, a resposta do campo é descartada. Definição do PO, 29/09/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -539,7 +539,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0150',
     titulo: 'Pedido do Fator de Atenuação das Desigualdades de Acesso informado no formulário',
     enunciado:
-      'Quando o processo oferece o Fator de Atenuação das Desigualdades de Acesso (até aqui chamado de bônus regional), o formulário pergunta se o candidato o solicita e, a quem solicita, o dado que o critério configurado no processo exige (UNI-REQ-0015). Há dois caminhos, conforme a forma de conclusão do ensino médio (UNI-REQ-0148). Para quem concluiu pelo ensino regular ou pela EJA, o dado é o município da área de influência da Unifesspa em que cursou ao menos um ano do ensino médio, em escola pública ou privada, com as opções de município configuradas no processo. Para quem concluiu por exame de proficiência, pelo ENCCEJA ou pelo ENEM, o dado é o município da área de abrangência da Unifesspa em que residiu, no lugar do município em que cursou, escolhido na mesma lista de municípios do processo, no período de residência que o edital fixa: os anos de referência do ENEM aceitos pelo processo — 2024, 2025 e 2026 no de Medicina deste ano —, com o período exato no texto do edital (item 9.42 do de Medicina), porque depende da data de lançamento. Sem o pedido no formulário, não há acréscimo. A aplicação na classificação segue UNI-REQ-0046, e a comprovação na habilitação é uma exigência documental da habilitação (UNI-REQ-0016): no segundo caminho, a conta de energia, de água ou de telefone, que prova a residência no período fixado no edital. Definição do PO, 29/09/2026 e 06/10/2026.',
+      'Quando o processo oferece o Fator de Atenuação das Desigualdades de Acesso, o formulário pergunta se o candidato o solicita e, a quem solicita, o dado que o critério configurado no processo exige (UNI-REQ-0015). Há dois caminhos, conforme a forma de conclusão do ensino médio (UNI-REQ-0148). Para quem concluiu pelo ensino regular ou pela EJA, o dado é o município da área de influência da Unifesspa em que cursou ao menos um ano do ensino médio, em escola pública ou privada, com as opções de município configuradas no processo. Para quem concluiu por exame de proficiência, pelo ENCCEJA ou pelo ENEM, o dado é o município da área de abrangência da Unifesspa em que residiu, no lugar do município em que cursou, escolhido na mesma lista de municípios do processo, no período de residência que o edital fixa: os anos de referência do ENEM aceitos pelo processo — 2024, 2025 e 2026 no de Medicina deste ano —, com o período exato no texto do edital (item 9.42 do de Medicina), porque depende da data de lançamento. Sem o pedido no formulário, não há acréscimo. A aplicação na classificação segue UNI-REQ-0046, e a comprovação na habilitação é uma exigência documental da habilitação (UNI-REQ-0016): no segundo caminho, a conta de energia, de água ou de telefone, que prova a residência no período fixado no edital. Definição do PO, 29/09/2026 e 06/10/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -624,7 +624,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0022',
     titulo: 'Bloquear mutação direta após publicação',
     enunciado:
-      'O sistema deve bloquear edição direta de configuração já publicada, exigindo retificação para mudança de prazo, vagas, cota, peso, bônus, documentos ou formulário.',
+      'O sistema deve bloquear edição direta de configuração já publicada, exigindo retificação para mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1309,7 +1309,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0044',
     titulo: 'Classificação e resultado',
     enunciado:
-      'Incremento futuro deve processar resultado com motor determinístico, concorrência dupla, remanejamento, desempate, bônus regional e publicação auditável.',
+      'Incremento futuro deve processar resultado com motor determinístico, concorrência dupla, remanejamento, desempate, Fator de Atenuação das Desigualdades de Acesso e publicação auditável.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -1328,9 +1328,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0046',
-    titulo: 'Aplicar bônus regional na classificação',
+    titulo: 'Aplicar o Fator de Atenuação das Desigualdades de Acesso na classificação',
     enunciado:
-      'O incremento de Classificação deve aplicar o bônus regional configurado e reclassificar sem bônus quando a elegibilidade não for comprovada.',
+      'O incremento de Classificação deve aplicar o Fator de Atenuação das Desigualdades de Acesso configurado e reclassificar sem o fator quando a elegibilidade não for comprovada.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1342,7 +1342,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'A configuração do bônus é MVP; o cálculo e a reclassificação são posteriores, vinculados à configuração congelada.',
+      'A configuração do Fator de Atenuação é MVP; o cálculo e a reclassificação são posteriores, vinculados à configuração congelada.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',

@@ -24,7 +24,7 @@ O `regraDistribuicaoCodigo`/`regraDistribuicaoVersao` de uma das
 distribuições de vagas do payload existe no `rol_de_regras`, mas o tipo
 cadastrado da regra não é `regra_distribuicao_vagas`. O catálogo é
 compartilhado por vários tipos de regra do módulo Seleção (distribuição de
-vagas, ajuste de distribuição, bônus regional, cascata de remanejamento,
+vagas, ajuste de distribuição, Fator de Atenuação das Desigualdades de Acesso, cascata de remanejamento,
 entre outros) — o código sozinho não garante o tipo certo; a checagem
 confere os dois.
 
@@ -42,5 +42,5 @@ sem reconsultar o catálogo na restauração.
 
 Confirme, no catálogo de regras, que o código e a versão declarados são de
 fato uma regra do tipo `regra_distribuicao_vagas`. Se a intenção era outra
-regra (ajuste, bônus, cascata), reveja qual referência pertence a qual
+regra (ajuste, Fator de Atenuação, cascata), reveja qual referência pertence a qual
 campo do payload.

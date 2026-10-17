@@ -19,7 +19,7 @@ P.O. e demais interessados:
 Para entender **o que** o sistema faz e **por quê**:
 
 - **Requisitos** funcionais e não funcionais
-- **Regras de negócio** (cotas, bônus regional, concorrência dupla, congelamento de parâmetros)
+- **Regras de negócio** (cotas, Fator de Atenuação das Desigualdades de Acesso, concorrência dupla, congelamento de parâmetros)
 - **Casos de uso** por etapa do ciclo de vida do edital
 - **Glossário** do domínio
 
