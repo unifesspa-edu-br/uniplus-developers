@@ -1,0 +1,32 @@
+---
+title: A alteração deixaria de valer um modelo de formulário
+sidebar_label: Alteração quebra um modelo de formulário
+description: Rascunho — a alteração deixaria de valer um modelo de formulário que usa este fato.
+code: uniplus.configuracao.fato_candidato.alteracao_quebra_modelo_de_formulario
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador enviou a nova definição de um fato do catálogo (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`), mas um modelo de formulário, ativo ou não, usa este fato, e a definição nova o deixaria inválido, por exemplo por mudar o tipo de dado, o formato ou o escopo de um campo que o modelo vincula. A correção da definição de um fato é regra do UNI-REQ-0159, e a API recusa a alteração que deixaria inválido algo que já cita o fato, em vez de alterá-lo em silêncio. Nada é gravado: o fato continua com a definição anterior. A recusa só conta o que a alteração causa: o que o modelo já tinha de inválido antes não entra.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `citacoes.modelos.<código do modelo>`, uma entrada por modelo afetado. A mensagem cita o que deixaria de valer.
+
+## Como resolver
+
+Escolha uma das saídas. Ajuste o item do modelo de formulário citado para que ele valha com a definição nova e reenvie a alteração; ou escolha outra definição, que mantenha o modelo válido. Desativar o modelo não basta, porque os modelos inativos também são conferidos.
+
+A definição corrigida vale para os rascunhos e para os processos novos; a versão já publicada de um processo não muda.

@@ -1,0 +1,32 @@
+---
+title: A fonte nova não comporta os valores do fato
+sidebar_label: Fonte (origem das opções) não comporta os valores
+description: Rascunho — o fato já tem valores cadastrados e a origem das opções nova não os comporta.
+code: uniplus.configuracao.fato_candidato.fonte_nao_comporta_os_valores
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador enviou a nova definição de um fato do catálogo (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) com uma origem das opções (`fonteValores`) que não comporta os valores que o fato já tem cadastrados no catálogo. Os valores cadastrados no próprio catálogo só existem na origem global; outra origem os deixaria sem uso, e a API não os descarta em silêncio. Desativar os valores não resolve: o código de um valor nunca é removido do fato, e os valores desativados contam. A correção da definição de um fato é regra do UNI-REQ-0159.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `fonteValores`. Nada é gravado.
+
+## Como resolver
+
+Mantenha a origem global das opções e envie de novo a definição com as demais alterações que você quer. Se as opções do fato precisam vir de outra origem, não é possível alterar este fato: cadastre um novo fato com a origem desejada e deixe de usar o atual (desative-o, se nada mais o citar).
+
+A definição corrigida vale para os rascunhos e para os processos novos; a versão já publicada de um processo não muda.
