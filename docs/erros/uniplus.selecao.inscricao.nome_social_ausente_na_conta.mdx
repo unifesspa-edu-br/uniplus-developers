@@ -1,0 +1,37 @@
+---
+title: A conta não tem nome social cadastrado
+sidebar_label: Nome social ausente na conta
+description: Quem escolhe usar nome social na inscrição precisa ter o nome social cadastrado na própria conta.
+code: uniplus.selecao.inscricao.nome_social_ausente_na_conta
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+  - Gravação do rascunho da inscrição, quando o corpo traz um nome social
+requisitos:
+  - UNI-REQ-0153
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O candidato marcou que deseja usar nome social, mas a conta dele não tem
+nome social cadastrado. O nome social é dado da conta, e não de cada
+inscrição: a inscrição usa o nome social que está na conta e não o aceita
+digitado. Sem nome social na conta, não há nome social para a inscrição
+usar.
+
+A gravação do rascunho com a escolha de usar e o campo vazio é aceita, para
+que o candidato possa salvar a inscrição antes de cadastrar o nome social.
+A recusa sai no envio, ou na gravação do rascunho quando o corpo traz um
+nome social que a conta não tem.
+
+## Como resolver
+
+Cadastre o nome social em **Meu perfil**, no menu da conta, e volte para
+concluir a inscrição: o campo passa a mostrar o nome social da conta. Quem
+não quer usar nome social nesta inscrição desmarca a opção e envia de novo.

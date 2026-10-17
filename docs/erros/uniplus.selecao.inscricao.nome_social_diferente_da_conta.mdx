@@ -1,0 +1,37 @@
+---
+title: O nome social informado não é o da conta
+sidebar_label: Nome social diferente da conta
+description: O nome social da inscrição tem de ser igual ao nome social cadastrado na conta do candidato.
+code: uniplus.selecao.inscricao.nome_social_diferente_da_conta
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0153
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O candidato escolheu usar nome social, e a resposta do nome social é
+diferente do nome social cadastrado na conta. O nome social é dado da
+conta: a inscrição o recebe da conta e não o aceita alterado. A comparação
+ignora os espaços nas pontas e os repetidos no meio, mas distingue
+maiúsculas e acentos.
+
+No portal o campo vem travado com o nome social da conta, então esta recusa
+indica um corpo montado fora da tela, ou um nome social alterado na conta
+enquanto a inscrição estava aberta, com o valor anterior ainda no
+formulário.
+
+## Como resolver
+
+Envie o nome social exatamente como está na conta, ou recarregue a
+inscrição para que o campo traga o valor atual. Para mudar o nome social,
+altere-o em **Meu perfil**, no menu da conta.
