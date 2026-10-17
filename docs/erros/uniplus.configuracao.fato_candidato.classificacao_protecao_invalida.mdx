@@ -1,0 +1,46 @@
+---
+title: Classificação de proteção de dados do fato fora do vocabulário fechado
+sidebar_label: Classificação de proteção fora do vocabulário
+description: Rascunho — a classificação de proteção de dados informada para o fato não é uma das aceitas.
+code: uniplus.configuracao.fato_candidato.classificacao_protecao_invalida
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato do catálogo (declarado, derivado ou agregado)
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador cadastrou um fato do catálogo (declarado, derivado ou agregado) ou alterou a definição de um fato (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) com uma classificação de proteção de dados (`classificacaoProtecao`) que não pertence ao vocabulário fechado. A classificação define como o dado é tratado e protegido, e só as cinco abaixo existem (a escala está na ADR-0136 da uniplus-api).
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `classificacaoProtecao`. Nada é gravado.
+
+Um campo vazio ou ausente não cai aqui: ele recebe a recusa `uniplus.configuracao.fato_candidato.classificacao_protecao_obrigatoria`. Espaços nas pontas são desconsiderados.
+
+## Como resolver
+
+Envie de novo o cadastro ou a definição com uma destas classificações, escrita exatamente assim, em maiúsculas:
+
+- `PUBLICO`: pode ser divulgado sem restrição;
+- `INTERNO`: restrito ao âmbito institucional;
+- `PESSOAL`: dado pessoal;
+- `IDENTIFICADOR`: número de documento do titular (CPF, RG, passaporte);
+- `SENSIVEL`: dado pessoal sensível, como origem racial ou saúde.
+
+A comparação diferencia maiúsculas de minúsculas e acentos. Se a classificação parece ser uma delas, confira a grafia, o acento e as maiúsculas.
+
+Esta página trata só do vocabulário. Aceita a classificação, ela ainda é conferida contra o tipo do fato: texto, data e endereço nunca ficam abaixo de `PESSOAL`, e `IDENTIFICADOR` só vale para texto. Quem não cumpre essa regra recebe `uniplus.configuracao.fato_candidato.classificacao_abaixo_do_minimo_do_dominio`, e não esta recusa. A classificação também é conferida contra a hipótese legal, com recusa própria (`uniplus.configuracao.fato_candidato.hipotese_legal_incompativel_com_classificacao`).
+
+Os códigos citados nesta página sem link ainda não têm página: estão no catálogo a publicar ([uniplus-developers#329](https://github.com/unifesspa-edu-br/uniplus-developers/issues/329)).
