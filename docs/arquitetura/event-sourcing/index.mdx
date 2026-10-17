@@ -69,7 +69,7 @@ As decisões críticas abaixo pertencem ao ciclo de um **Processo Seletivo**:
 | Julgamento de recurso | RBAC e permissões |
 | Cálculo de pontuação | Configuração (parâmetros, etapas, pesos e cotas do Edital) |
 | Classificação e desempate | Templates e conteúdo administrativo |
-| Publicação de resultado e suas correções (errata ou retificação) | Endpoints técnicos e *smoke tests* |
+| Publicação, retificação e republicação de resultado | Endpoints técnicos e *smoke tests* |
 | Convocação/matrícula com impacto jurídico | Read models e projeções derivadas |
 
 ## Topologia: Marten como store auxiliar, sobre o PostgreSQL existente
@@ -123,12 +123,12 @@ canônicos por tradução explícita, mas o Event Store é a verdade.
 
 - **Eventos são fatos de negócio em linguagem de domínio:**
   `InscricaoHomologada`, `PontuacaoCalculada`, `RecursoDeferido`,
-  `ResultadoCorrigido`. Eventos genéricos (`EntityUpdated`, `StatusChanged`,
+  `ResultadoRepublicado`. Eventos genéricos (`EntityUpdated`, `StatusChanged`,
   `RegistroAlterado`) são **proibidos** em streams críticos.
 - **Streams têm fronteira transacional enxuta** — `inscricao-{id}`,
   `recurso-{id}`, `resultado-{processoSeletivoId}`. Streams gigantes são proibidos.
 - **Correções são novos fatos** (`PontuacaoRetificada`, `HomologacaoReavaliada`,
-  `ResultadoCorrigido`), nunca edição destrutiva de evento passado — o Uni+ não
+  `ResultadoRepublicado`), nunca edição destrutiva de evento passado — o Uni+ não
   muta o passado, registra novos fatos no presente.
 - **Eventos carregam a regra aplicada.** Cálculo, homologação, classificação ou
   resultado registram a **versão/hash da regra** usada na decisão (alinhado ao

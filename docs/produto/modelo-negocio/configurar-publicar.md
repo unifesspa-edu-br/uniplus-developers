@@ -80,7 +80,7 @@ A publicação cria a **cópia oficial imutável** da configuração — o snaps
 
 Publicado o processo, a configuração **não pode mais ser editada diretamente** (`UNI-REQ-0022`). Toda a validação em runtime (a inscrição do candidato, a exigência de documentos, o cálculo da modalidade) passa a ler a **cópia congelada**, não a configuração viva — de modo que mexer na configuração de um processo já publicado não altera o resultado (imunidade pós-publicação, `UNI-REQ-0062`, `UNI-REQ-0063`).
 
-Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que aponta o ato retificado e registra o motivo, com um **novo snapshot congelado**, preservando o histórico: o ato retificado continua publicado (`UNI-REQ-0021`). A capacidade já é suportada; o detalhamento da sua jornada está fora do escopo desta primeira publicação.
+Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que aponta o ato retificado e registra o motivo, com um **novo snapshot congelado**, preservando o histórico: o ato retificado continua publicado (`UNI-REQ-0021`). A capacidade já é suportada. A seção 4.1 trata dos anexos e da cadeia de correção; o restante da jornada da retificação fica para depois.
 
 ### 4.1 Documentos e resultados publicados depois do edital
 
