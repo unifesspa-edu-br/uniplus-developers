@@ -901,7 +901,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0155',
     titulo: 'Documento avulso do processo seletivo',
     enunciado:
-      'O administrador do processo publica atos que não são resultado nem congelam configuração, como aviso, comunicado e errata, com um documento principal em PDF e anexos. A errata sempre aponta o ato corrigido e registra o motivo (UNI-REQ-0156); os demais tipos avulsos também podem apontar um ato corrigido, quando publicados como retificação de ato que não congela configuração. Convocação e chamada não são documento avulso: pertencem ao Ingresso. O ato publicado aparece, com os seus documentos, na linha do tempo do certame. Definição do PO repassada pelo líder técnico em 17/10/2026.',
+      'O administrador do processo publica atos que não são resultado nem congelam configuração, como aviso, comunicado e errata, com um documento principal em PDF e anexos em PDF, DOCX ou ODT, de até 20 MB cada (UNI-REQ-0154). O documento principal e os anexos são publicados idênticos, byte a byte, aos enviados, sem conversão. A errata sempre aponta o ato corrigido e registra o motivo (UNI-REQ-0156); os demais tipos avulsos também podem apontar um ato corrigido, quando publicados como retificação de ato que não congela configuração. Convocação e chamada não são documento avulso: pertencem ao Ingresso. O ato publicado aparece, com os seus documentos, na linha do tempo do certame. Definição do PO repassada pelo líder técnico em 17/10/2026.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -913,9 +913,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O administrador publica aviso, comunicado ou errata com um PDF principal e anexos; a errata sem indicação do ato corrigido e do motivo é recusada; aviso ou comunicado publicado como retificação de ato que não congela aponta o ato corrigido e o motivo; o ato não altera a configuração congelada do processo; convocação e chamada não podem ser publicadas como documento avulso; o ato publicado, com o documento principal e os anexos, aparece na linha do tempo do certame.',
+      'O administrador publica aviso, comunicado ou errata com um PDF principal e anexos em PDF, DOCX ou ODT de até 20 MB; anexo de outro formato ou acima do limite é recusado; o principal e os anexos publicados são idênticos, byte a byte, aos enviados; a errata sem indicação do ato corrigido e do motivo é recusada; aviso ou comunicado publicado como retificação de ato que não congela aponta o ato corrigido e o motivo; o ato não altera a configuração congelada do processo; convocação e chamada não podem ser publicadas como documento avulso; o ato publicado, com o documento principal e os anexos, aparece na linha do tempo do certame.',
     verificacao:
-      'Testes automatizados (publicação de cada tipo de documento avulso; errata exige ato corrigido e motivo; aviso ou comunicado como retificação de ato que não congela aponta o ato corrigido e o motivo; recusa de convocação e chamada; ato sem efeito sobre a configuração congelada; presença na linha do tempo) (planejado).',
+      'Testes automatizados (publicação de cada tipo de documento avulso; formatos e tamanho dos anexos; principal e anexos publicados idênticos aos enviados; errata exige ato corrigido e motivo; aviso ou comunicado como retificação de ato que não congela aponta o ato corrigido e o motivo; recusa de convocação e chamada; ato sem efeito sobre a configuração congelada; presença na linha do tempo) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
