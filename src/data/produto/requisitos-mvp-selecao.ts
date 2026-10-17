@@ -538,7 +538,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0151',
     titulo: 'Conjunto básico de dados do candidato em todo formulário de inscrição',
     enunciado:
-      'Todo formulário de inscrição de todo processo seletivo coleta um conjunto básico de dados do candidato, qualquer que seja o tipo de processo, a modalidade de ingresso e o modelo de formulário (UNI-REQ-0144): nome; se deseja usar nome social e, quando sim, o nome social; CPF; RG, com órgão emissor, UF e data de emissão; nacionalidade e, para o estrangeiro, o passaporte e o registro nacional migratório; data de nascimento; naturalidade, com município e UF de nascimento; nome da mãe e do pai; estado civil; sexo; cor/raça; e-mail; telefone; e endereço. Os dados são obrigatórios para todos os candidatos, com exceções: o nome social é obrigatório só de quem declara desejar usá-lo; o CPF e o RG são obrigatórios do brasileiro, e o estrangeiro apresenta o passaporte e o registro nacional migratório, os dois, no lugar do RG, com o CPF opcional. Na inscrição, o candidato declara esses dados; na habilitação, de todos os candidatos convocados e em todo tipo de processo seletivo, apresenta os comprovantes — RG, CPF (do brasileiro), passaporte e registro nacional migratório (do estrangeiro) e comprovante de residência —, qualquer que seja o grupo da convocação (UNI-REQ-0147). O comprovante de residência tem prazo de emissão de 90 dias, por ser a base do Fator de Atenuação das Desigualdades de Acesso (UNI-REQ-0150). O RG é o documento de identificação do brasileiro, e a CNH, a carteira de trabalho (CTPS) e o passaporte o substituem: na habilitação, o candidato entrega o RG ou um desses documentos, e a exigência é satisfeita por qualquer um deles. O sistema não controla a substituição nem cobra o RG depois: se o RG será exigido mais tarde, e quando, é decisão e ato da equipe do CEPS, fora do sistema. Pendente do PO: como a inscrição trata o candidato que não tem RG, já que os dados do RG são obrigatórios do brasileiro. Definição do PO, 06/10/2026.',
+      'Todo formulário de inscrição de todo processo seletivo coleta um conjunto básico de dados do candidato, qualquer que seja o tipo de processo, a modalidade de ingresso e o modelo de formulário (UNI-REQ-0144): nome; se deseja usar nome social e, quando sim, o nome social, que vem da conta do candidato e não se edita na inscrição (UNI-REQ-0153); CPF; RG, com órgão emissor, UF e data de emissão; nacionalidade e, para o estrangeiro, o passaporte e o registro nacional migratório; data de nascimento; naturalidade, com município e UF de nascimento; nome da mãe e do pai; estado civil; sexo; cor/raça; e-mail; telefone; e endereço. Os dados são obrigatórios para todos os candidatos, com exceções: o nome social é obrigatório só de quem declara desejar usá-lo; o CPF e o RG são obrigatórios do brasileiro, e o estrangeiro apresenta o passaporte e o registro nacional migratório, os dois, no lugar do RG, com o CPF opcional. Na inscrição, o candidato declara esses dados; na habilitação, de todos os candidatos convocados e em todo tipo de processo seletivo, apresenta os comprovantes — RG, CPF (do brasileiro), passaporte e registro nacional migratório (do estrangeiro) e comprovante de residência —, qualquer que seja o grupo da convocação (UNI-REQ-0147). O comprovante de residência tem prazo de emissão de 90 dias, por ser a base do Fator de Atenuação das Desigualdades de Acesso (UNI-REQ-0150). O RG é o documento de identificação do brasileiro, e a CNH, a carteira de trabalho (CTPS) e o passaporte o substituem: na habilitação, o candidato entrega o RG ou um desses documentos, e a exigência é satisfeita por qualquer um deles. O sistema não controla a substituição nem cobra o RG depois: se o RG será exigido mais tarde, e quando, é decisão e ato da equipe do CEPS, fora do sistema. Pendente do PO: como a inscrição trata o candidato que não tem RG, já que os dados do RG são obrigatórios do brasileiro. Definição do PO, 06/10/2026.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -550,7 +550,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O formulário de inscrição de qualquer processo traz os dados do conjunto básico; o nome social só é exigido de quem deseja usá-lo; o brasileiro informa CPF e RG, sem passaporte nem registro nacional migratório; o estrangeiro informa o passaporte e o registro nacional migratório, com o CPF opcional, e não o RG; a habilitação cobra de todo convocado os comprovantes correspondentes, inclusive na ampla concorrência e em qualquer tipo de processo; o comprovante de residência só vale se emitido há até 90 dias; na habilitação, a exigência de identificação do brasileiro é satisfeita pelo RG, pela CNH, pela CTPS ou pelo passaporte, e o sistema não registra compromisso de entrega posterior do RG.',
+      'O formulário de inscrição de qualquer processo traz os dados do conjunto básico; o nome social só é exigido de quem deseja usá-lo, e é o da conta; o brasileiro informa CPF e RG, sem passaporte nem registro nacional migratório; o estrangeiro informa o passaporte e o registro nacional migratório, com o CPF opcional, e não o RG; a habilitação cobra de todo convocado os comprovantes correspondentes, inclusive na ampla concorrência e em qualquer tipo de processo; o comprovante de residência só vale se emitido há até 90 dias; na habilitação, a exigência de identificação do brasileiro é satisfeita pelo RG, pela CNH, pela CTPS ou pelo passaporte, e o sistema não registra compromisso de entrega posterior do RG.',
     verificacao:
       'Teste automatizado (conjunto básico presente em todo formulário de inscrição; obrigatoriedade por nacionalidade; cobrança dos comprovantes na habilitação) (planejado); a regra do RG ausente e a conferência do prazo de emissão dependem da execução da habilitação (UNI-REQ-0049) (planejado).',
     pagina_developers: '/produto/requisitos/',
@@ -830,6 +830,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     verificacao: 'Lacuna conhecida: criar teste de regressão para nome social.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0153',
+    titulo: 'Nome social da conta do candidato',
+    enunciado:
+      'O nome social é dado da conta do candidato, e não de cada inscrição. O titular cadastra, altera ou remove o próprio nome social em Meu perfil, que o leva à atualização de perfil da conta e o traz de volta ao Uni+; o gov.br não fornece nome social. Na conta, o titular edita só o nome social: usuário, nome, sobrenome e e-mail são mantidos pela administração. Na inscrição, o candidato escolhe se usa nome social, mesmo quando a conta tem um. Quando escolhe usar, o nome social da inscrição é o da conta e não se edita na inscrição; quem escolhe usar sem ter nome social na conta tem o envio recusado, com orientação para cadastrá-lo em Meu perfil ou desmarcar a opção. O comprovante de inscrição registra a escolha, sim ou não, e o nome social só aparece nele quando o candidato escolheu usá-lo. O comprovante e todo o processo seletivo seguem com o nome social da inscrição: se o titular alterar o nome social da conta depois do envio, a inscrição só passa a usar o nome novo quando ele refizer a inscrição, o que gera um comprovante novo. O nome social não é cifrado, nem na conta nem na inscrição. A prioridade do nome social na exibição (UNI-REQ-0032) usa o nome social da inscrição: quando o candidato escolhe não usá-lo, nenhuma lista, tela ou documento do processo exibe o nome social da conta. Definição do PO repassada pelo LT, 16/10/2026.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0023',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O titular cadastra, altera e remove o nome social em Meu perfil e volta ao Uni+ já com o nome novo, sem novo login; na conta, não consegue alterar usuário, nome, sobrenome nem e-mail; na inscrição, com a escolha de usar, o nome social é o da conta e não pode ser editado, nem pela tela nem pela API; com a escolha de usar e sem nome social na conta, o envio é recusado com orientação; com a escolha de não usar, a inscrição é aceita sem nome social, mesmo que a conta tenha um; o comprovante registra a escolha; a inscrição enviada mantém o nome social do envio até ser refeita; com a escolha de não usar, nenhuma exibição do processo mostra o nome social da conta.',
+    verificacao:
+      'Teste automatizado (conferência do nome social da inscrição com o da conta; recusa sem nome social na conta; escolha registrada no comprovante); validação da configuração do perfil da conta num Keycloak de teste; validação ponta a ponta do cadastro em Meu perfil com o retorno ao Uni+ já com o token renovado (planejado).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend; Infraestrutura',
   },
   {
     requisito_id: 'UNI-REQ-0033',

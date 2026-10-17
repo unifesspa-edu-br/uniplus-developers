@@ -348,6 +348,7 @@ Por ser sistema de autarquia federal que trata dados pessoais sensíveis de cand
 - Minimização na divulgação. Por padrão, as divulgações públicas expõem o mínimo (o número de inscrição). Ampliar para o nome abreviado (iniciais + último sobrenome) dispensa justificativa, por ser a prática recomendada; ampliar para o nome completo exige justificativa, que fica registrada na versão congelada do processo seletivo.
 - Registros de acesso e ocultação de dados sensíveis. O acesso a dados sensíveis é auditável, e dados pessoais (CPF, nome, documentos) são ocultados nos registros operacionais do sistema.
 - Nome social (`RN02`). Sempre que o nome é exibido, o nome social tem prioridade sobre o civil, em telas, listas e documentos.
+- Nome social da conta (`UNI-REQ-0153`). O nome social é dado da conta: o titular o mantém em Meu perfil, e a inscrição usa o da conta quando o candidato escolhe usar nome social. O comprovante registra a escolha, e a inscrição segue com o nome social do envio até ser refeita. O nome social não é cifrado.
 - Retenção de documentos. O prazo de guarda e expurgo dos documentos segue a Tabela de Temporalidade das instituições federais de ensino e a orientação do encarregado de dados e do jurídico. A confirmar antes da produção.
 
 ---
