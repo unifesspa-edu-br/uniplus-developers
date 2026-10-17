@@ -1,0 +1,46 @@
+---
+title: O ato deste objeto é registrado pelo módulo dono dele
+sidebar_label: Vínculo exige registro pelo domínio
+description: 'Rascunho — o endpoint administrativo de Publicações recebeu um ato vinculado a processo seletivo, diretamente ou por retificar um ato que já tinha esse vínculo; esses atos são registrados pela Seleção.'
+code: uniplus.publicacoes.ato_normativo.vinculo_exige_registro_pelo_dominio
+http_status: 422
+situacao: rascunho
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo vinculado a processo seletivo
+  - Registro de ato normativo que retifica ato vinculado a processo seletivo
+requisitos:
+  - UNI-REQ-0155
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#1960'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1960
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O endpoint administrativo de Publicações recebeu um ato normativo vinculado a
+um **processo seletivo**. O vínculo pode vir declarado na requisição, ou ser
+**herdado**: ao retificar um ato (`atoRetificadoId`), a retificação trata do
+mesmo objeto do ato retificado, e o ato retificado já era de um processo
+seletivo.
+
+Esse endpoint recebe só os metadados e o hash do documento, não o arquivo. Um
+ato de processo seletivo registrado por ali ficaria **sem documento**. Quem
+guarda o arquivo e o leva ao acervo público é o módulo dono do objeto, a
+Seleção.
+
+A mensagem de detalhe nomeia o tipo de entidade vinculada. A recusa vem do
+próprio pedido, que pede o que este endpoint não pode fazer, e não de um estado
+gravado em disputa. Por isso o status é **422**, e não 409.
+
+## Como resolver
+
+Publique o ato pela **Seleção**, na página "Publicações" do processo
+seletivo. Ela guarda o arquivo e o leva ao acervo público, e vale também para
+errata e retificação de um ato que já tem esse vínculo. Não reenvie o mesmo
+pedido ao endpoint de Publicações.
