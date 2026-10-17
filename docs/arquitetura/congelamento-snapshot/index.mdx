@@ -7,7 +7,7 @@ fonte_canonica: "ADRs 0070-0076 do uniplus-api (validação documental sobre sna
 
 # Congelamento na publicação e validação documental
 
-O Uni+ trata os parâmetros de um processo seletivo como **configuração congelável**. Pela regra de negócio **RN08**, ao publicar o edital toda a configuração (etapas, pesos, cotas, documentos exigidos, critérios) é **congelada num snapshot imutável**; alterações retroativas são proibidas, e mudanças válidas só ocorrem por **retificação** (nova publicação, novo snapshot).
+O Uni+ trata os parâmetros de um processo seletivo como **configuração congelável**. Pela regra de negócio **RN08**, ao publicar o edital toda a configuração (etapas, pesos, cotas, documentos exigidos, critérios) é **congelada num snapshot imutável**; alterações retroativas são proibidas, e mudanças válidas só ocorrem por **retificação** (novo ato que aponta o retificado, novo snapshot).
 
 A consequência arquitetural decisiva está na **validação documental** — a verificação de quais documentos uma inscrição ainda deve apresentar. Se essa validação lesse a configuração **viva** (editável), mutar um processo já publicado mudaria **retroativamente** o resultado de inscrições já enviadas, ferindo a RN08 e a defensibilidade jurídica.
 
@@ -33,7 +33,7 @@ A validação documental em runtime resolve as exigências a partir do **snapsho
 
 ## Por que importa
 
-- **Reprodução histórica fiel:** um ato é reavaliável contra o estado vigente na época em que ocorreu; uma retificação cria nova publicação que governa apenas atos novos.
+- **Reprodução histórica fiel:** um ato é reavaliável contra o estado vigente na época em que ocorreu; uma retificação cria nova versão congelada que governa apenas atos novos.
 - **Defensibilidade jurídica e auditabilidade:** o resultado de cada inscrição é reproduzível a partir do snapshot congelado, imune a edições posteriores.
 - **Separação nítida:** tempo de configuração lê o vivo (pré-visualização e coerência); o runtime lê o congelado.
 

@@ -398,7 +398,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Configuração do processo (etapas, vagas, cotas, Fator de Atenuação, atendimento) | Entrega atual | Tudo editável enquanto rascunho. |
 | Documentos exigidos por condição e fase | Entrega atual | Inclui base legal, consequências e documentos alternativos. |
 | Coleta de dados e cálculo de modalidades | Entrega atual | Formulário condicional e composição da Lei de Cotas por configuração. |
-| Publicação do processo seletivo e congelamento | Entrega atual | Cópia oficial imutável; emissão do edital; retificação como nova publicação. |
+| Publicação do processo seletivo e congelamento | Entrega atual | Cópia oficial imutável; emissão do edital; retificação como novo ato que aponta o retificado, com nova versão congelada. |
 | Inscrição do candidato (rascunho a comprovante) | Etapa futura | Requisitos aprovados; ainda não há agregado de inscrição implementado. |
 | Homologação documental (deferir/indeferir) | Etapa futura | Consome a configuração congelada. |
 | Ensalamento e locais exatos de prova | Etapa futura | — |
