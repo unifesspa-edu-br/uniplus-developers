@@ -106,6 +106,8 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.processo_seletivo.janela_de_isencao_sem_prazo',
         'erros/uniplus.selecao.processo_seletivo.janela_de_isencao_nao_abre_com_a_inscricao',
         'erros/uniplus.selecao.processo_seletivo.janela_de_isencao_nao_termina_antes_da_inscricao',
+        'erros/uniplus.selecao.inscricao.nome_social_ausente_na_conta',
+        'erros/uniplus.selecao.inscricao.nome_social_diferente_da_conta',
         'erros/uniplus.selecao.processo_seletivo.janela_de_isencao_menor_que_cinco_dias',
         'erros/uniplus.selecao.processo_seletivo.conformidade_legal_insuficiente',
         'erros/uniplus.selecao.processo_seletivo.regra_legal_inavaliavel',
