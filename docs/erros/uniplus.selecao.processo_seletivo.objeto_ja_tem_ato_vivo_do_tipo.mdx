@@ -29,8 +29,7 @@ por objeto** (`unico_por_objeto`) — só um ato vivo desse tipo pode existir
 para um mesmo processo seletivo. A vaga é monotônica: uma vez ocupada, não se
 libera. Este processo já tem um ato vivo do tipo declarado, criado por uma
 **linhagem diferente** da que está tentando publicar ou retificar agora — por
-exemplo, um ato registrado por fora, pelo endpoint administrativo de
-Publicações.
+exemplo, um ato publicado antes, em outra linhagem do mesmo processo.
 
 Uma retificação da **própria** linhagem nunca dispara este erro: ela não
 disputa a vaga que já ocupa. A conferência é feita sobre o histórico completo
@@ -49,3 +48,8 @@ para este processo, criado por outra linhagem. Se o ato existente estiver
 correto, use-o como base para retificação em vez de tentar criar um novo — ou
 escolha um tipo de ato que não seja único por objeto, se o caso de uso
 realmente permitir múltiplos atos vivos do mesmo tipo.
+
+O ato vivo do outro lado não vem do endpoint administrativo de Publicações, que
+recusa ato de processo seletivo
+([`vinculo_exige_registro_pelo_dominio`](./uniplus.publicacoes.ato_normativo.vinculo_exige_registro_pelo_dominio.mdx)): ele foi publicado pela própria
+Seleção, e é por ela que se retifica a linhagem existente.
