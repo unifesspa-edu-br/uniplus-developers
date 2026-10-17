@@ -385,6 +385,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Equipe frontend',
   },
   {
+    requisito_id: 'UNI-REQ-0159',
+    titulo: 'Correção da definição e dos valores de um fato do catálogo',
+    enunciado:
+      'O administrador corrige um fato que cadastrou sem criar outro: o fato continua o mesmo, com o mesmo código, e o que muda são os dados dele (UNI-REQ-0143). Em cada valor de um fato com lista de opções, ele corrige o texto da opção, a orientação que o candidato lê abaixo dela e a ordem em que as opções aparecem; o código do valor não muda, e mudar o sentido de uma opção não é correção: é acrescentar outro valor e desativar o antigo. Na definição do fato, ele corrige o tipo de dado, se o fato aceita um ou vários valores, de onde vêm as opções, o formato do texto, se quem responde é o candidato ou cada membro de um grupo, a fase em que o valor fica conhecido, a classificação de proteção de dados, a finalidade e a base legal do tratamento. Não mudam o código, a forma como o fato obtém o valor — resposta do candidato, derivação por regra ou resumo das respostas de um grupo — nem, no resumo de grupo, o fato que ele resume. Os fatos de sistema continuam com só o nome e a descrição editáveis. A correção é recusada quando deixaria inválido algo do cadastro que usa o fato: as opções e as regras do próprio fato, a regra de outro fato derivado, o resumo de grupo que o usa, um modelo de formulário (UNI-REQ-0144, UNI-REQ-0145) ou a regra de aplicabilidade de uma modalidade; e o fato resumido por um grupo não muda de tipo de dado, de origem das opções nem de quem responde, porque o resumo deixaria de corresponder a ele. O edital publicado não muda: o candidato responde sempre pela versão publicada, que guarda a cópia do fato, com o tipo de dado e as opções dele, e a do formulário (UNI-REQ-0078, UNI-REQ-0084). O processo ainda em rascunho passa a usar a definição corrigida quando for publicado, e a publicação é recusada, apontando o campo, quando o campo do formulário deixou de combinar com o fato. Na retificação de um processo publicado, o texto, a orientação e a ordem corrigidos das opções entram na versão nova; já a definição de um fato que alguma versão publicada coletou não muda, e a retificação que a mudaria é recusada, porque os candidatos podem ter respondido em qualquer das versões e as respostas precisam ser lidas juntas na classificação e na elegibilidade (UNI-REQ-0144) — a definição corrigida vale para os processos seguintes. A finalidade e a base legal do tratamento ficam fora dessa recusa, porque não mudam a leitura das respostas. Processo encerrado ou cancelado não é afetado pela correção nem a impede. Definição do líder técnico, 17/10/2026, sujeita à validação do PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0143',
+    modulo: 'Configuração; Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O administrador corrige o texto, a orientação e a ordem das opções de um fato que cadastrou, e o código da opção não muda; corrige a definição do fato que cadastrou sem mudar o código, a forma de obter o valor nem o fato resumido por um grupo; a correção de fato de sistema fora do nome e da descrição é recusada; a correção que deixaria inválida a opção ou a regra do próprio fato, a regra de outro derivado, o resumo de grupo, o modelo de formulário ou a regra de aplicabilidade de modalidade é recusada, dizendo o que deixaria de valer; a versão publicada de um processo mantém a definição e as opções que guardou; o rascunho publicado depois da correção usa a definição corrigida, e o campo que deixou de combinar com o fato recusa a publicação; a retificação leva para a versão nova o texto, a orientação e a ordem corrigidos das opções e recusa mudar a definição de fato coletado por versão publicada, salvo a finalidade e a base legal do tratamento; processo encerrado ou cancelado não impede a correção.',
+    verificacao:
+      'Teste automatizado (correção de opções e da definição; recusas por uso no cadastro; versão publicada inalterada; publicação do rascunho com a definição corrigida; retificação com opções corrigidas e recusa de definição de fato coletado) (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
     requisito_id: 'UNI-REQ-0144',
     titulo: 'Formulário por finalidade e modelo de formulário por tipo de processo',
     enunciado:
