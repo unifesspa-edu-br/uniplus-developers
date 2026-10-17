@@ -8,7 +8,7 @@ description: A jornada do administrador para cadastrar, configurar e publicar um
 
 Documento de referência funcional para Análise de Requisitos. Descreve, em linguagem de negócio (sem termos de programação), **a jornada do administrador do CEPS para cadastrar, configurar e publicar um Processo Seletivo** — a experiência administrativa de montar um edital até torná-lo oficial. É um aprofundamento do modelo geral do módulo Seleção, voltado à validação e ao refinamento pela área de negócio.
 
-Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: da criação à primeira publicação, e também as publicações seguintes, de documentos e resultados (as telas operacionais posteriores — inscrição, homologação, notas, classificação e o julgamento dos recursos — são etapas seguintes; a página trata do ciclo recursal só no que toca à publicação dos resultados; a jornada completa da alteração por retificação tem detalhamento próprio, fora deste primeiro recorte; aqui constam apenas os anexos, a cadeia de correção e a classe de congelamento dos atos publicados depois do edital).
+Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: da criação à primeira publicação e às publicações seguintes, de documentos e resultados. As telas operacionais posteriores — inscrição, homologação, notas, classificação e o julgamento dos recursos — são etapas seguintes, e a página trata do ciclo recursal só no que toca à publicação dos resultados. Da alteração por retificação, constam aqui apenas os anexos, a cadeia de correção e a classe de congelamento dos atos publicados depois do edital.
 
 ## Como ler este documento
 

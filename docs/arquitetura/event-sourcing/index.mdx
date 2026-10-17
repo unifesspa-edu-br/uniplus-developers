@@ -123,12 +123,12 @@ canônicos por tradução explícita, mas o Event Store é a verdade.
 
 - **Eventos são fatos de negócio em linguagem de domínio:**
   `InscricaoHomologada`, `PontuacaoCalculada`, `RecursoDeferido`,
-  `ResultadoRepublicado`. Eventos genéricos (`EntityUpdated`, `StatusChanged`,
+  `ResultadoCorrigido`. Eventos genéricos (`EntityUpdated`, `StatusChanged`,
   `RegistroAlterado`) são **proibidos** em streams críticos.
 - **Streams têm fronteira transacional enxuta** — `inscricao-{id}`,
   `recurso-{id}`, `resultado-{processoSeletivoId}`. Streams gigantes são proibidos.
 - **Correções são novos fatos** (`PontuacaoRetificada`, `HomologacaoReavaliada`,
-  `ResultadoRepublicado`), nunca edição destrutiva de evento passado — o Uni+ não
+  `ResultadoCorrigido`), nunca edição destrutiva de evento passado — o Uni+ não
   muta o passado, registra novos fatos no presente.
 - **Eventos carregam a regra aplicada.** Cálculo, homologação, classificação ou
   resultado registram a **versão/hash da regra** usada na decisão (alinhado ao
