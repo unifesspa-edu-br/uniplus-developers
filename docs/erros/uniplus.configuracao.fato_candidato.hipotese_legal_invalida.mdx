@@ -1,0 +1,50 @@
+---
+title: Hipótese legal de tratamento do fato fora do vocabulário fechado
+sidebar_label: Hipótese legal fora do vocabulário
+description: Rascunho — a hipótese legal de tratamento informada para o fato não é uma das aceitas.
+code: uniplus.configuracao.fato_candidato.hipotese_legal_invalida
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato do catálogo (declarado, derivado ou agregado)
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador cadastrou um fato do catálogo (declarado, derivado ou agregado) ou alterou a definição de um fato (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) com uma hipótese legal de tratamento (`hipoteseLegal`) que não pertence ao vocabulário fechado. A hipótese legal é a base da LGPD que autoriza o tratamento do dado (UNI-REQ-0143 e UNI-REQ-0159).
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `hipoteseLegal`. Nada é gravado.
+
+Um campo vazio ou ausente não cai aqui: ele recebe a recusa `uniplus.configuracao.fato_candidato.hipotese_legal_obrigatoria`. Espaços nas pontas são desconsiderados.
+
+## Como resolver
+
+Envie de novo o cadastro ou a definição com uma destas hipóteses, escrita exatamente assim, em maiúsculas e com sublinhado (a comparação diferencia maiúsculas de minúsculas):
+
+- `CONSENTIMENTO`;
+- `CUMPRIMENTO_OBRIGACAO_LEGAL`;
+- `EXECUCAO_POLITICAS_PUBLICAS`;
+- `ESTUDOS_POR_ORGAO_DE_PESQUISA`;
+- `EXECUCAO_CONTRATO`;
+- `EXERCICIO_REGULAR_DE_DIREITOS`;
+- `PROTECAO_DA_VIDA`;
+- `TUTELA_DA_SAUDE`;
+- `INTERESSE_LEGITIMO`;
+- `PROTECAO_DO_CREDITO`;
+- `PREVENCAO_A_FRAUDE`.
+
+Nem toda hipótese serve a toda classificação: para um fato `SENSIVEL` valem as hipóteses do art. 11 da LGPD, e para os demais valem as do art. 7º. Só o art. 7º prevê `EXECUCAO_CONTRATO`, `INTERESSE_LEGITIMO` e `PROTECAO_DO_CREDITO`; só o art. 11 prevê `PREVENCAO_A_FRAUDE`. Uma hipótese do vocabulário que não cabe na classificação recebe outra recusa, `uniplus.configuracao.fato_candidato.hipotese_legal_incompativel_com_classificacao`.
+
+Os códigos citados nesta página sem link ainda não têm página: estão no catálogo a publicar ([uniplus-developers#329](https://github.com/unifesspa-edu-br/uniplus-developers/issues/329)).
