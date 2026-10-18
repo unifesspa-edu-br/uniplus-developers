@@ -1,0 +1,31 @@
+---
+title: O processo ainda não tem página pública para receber o ato
+sidebar_label: Processo ainda sem página pública
+description: 'Rascunho — O documento avulso aparece na linha do tempo do certame, que nasce com a publicação do edital de abertura.'
+code: uniplus.selecao.ato_do_processo.certame_nao_divulgado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento avulso é divulgado na linha do tempo do certame, na página pública do processo.
+Essa página nasce com a publicação do edital de abertura; antes disso não há onde divulgar o
+ato, e a API recusa em vez de registrá-lo sem destino.
+
+## Como resolver
+
+Publique o processo seletivo, com o edital de abertura, e depois publique o documento
+avulso.

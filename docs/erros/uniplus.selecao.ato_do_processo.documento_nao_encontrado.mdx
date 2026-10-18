@@ -1,0 +1,33 @@
+---
+title: Documento do ato não encontrado ou não pertence a este processo
+sidebar_label: Documento do ato não encontrado
+description: 'Rascunho — O documento principal ou um anexo do ato aponta para um documento que não existe ou é de outro processo.'
+code: uniplus.selecao.ato_do_processo.documento_nao_encontrado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento principal ou um dos anexos indica um documento a publicar que não existe ou
+pertence a outro processo seletivo. A mensagem de detalhe traz o identificador. A
+conferência acontece antes de qualquer gravação, porque o ato é registrado depois, por
+mensagem durável.
+
+## Como resolver
+
+Liste os documentos do processo e use o identificador de um documento enviado com a
+finalidade `documentoDeAto` neste processo. Se o arquivo ainda não foi enviado, faça o envio
+e a confirmação antes e repita a publicação.

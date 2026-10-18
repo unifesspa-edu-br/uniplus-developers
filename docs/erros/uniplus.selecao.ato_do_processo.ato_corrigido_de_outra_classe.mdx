@@ -1,0 +1,33 @@
+---
+title: O ato corrigido congela configuração e só se corrige por retificação do edital
+sidebar_label: Ato corrigido congela configuração
+description: 'Rascunho — O ato indicado como corrigido criou versão da configuração; o documento avulso não o corrige.'
+code: uniplus.selecao.ato_do_processo.ato_corrigido_de_outra_classe
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ato indicado como corrigido congelou a configuração do processo, como o edital de abertura
+ou uma retificação do edital. O ato avulso nunca congela, e o corretor tem a mesma classe de
+congelamento do corrigido: o ato que congela só se corrige por retificação do edital, com
+nova versão de configuração (UNI-REQ-0156).
+
+## Como resolver
+
+Para corrigir o edital, faça a retificação do processo seletivo. Para corrigir um ato
+avulso, indique o ato avulso em `atoCorrigidoId`.

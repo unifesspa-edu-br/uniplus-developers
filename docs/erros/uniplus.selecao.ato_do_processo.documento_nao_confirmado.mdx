@@ -1,0 +1,32 @@
+---
+title: Somente um documento confirmado pode ser referenciado no ato
+sidebar_label: Documento do ato não confirmado
+description: 'Rascunho — O documento principal ou um anexo do ato ainda está pendente: o envio dele não foi confirmado.'
+code: uniplus.selecao.ato_do_processo.documento_nao_confirmado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento principal ou um dos anexos existe, mas o envio dele ainda não foi confirmado. Só
+o documento confirmado, já conferido e imutável, pode ser referenciado no ato.
+
+## Como resolver
+
+Confirme o envio do documento e repita a publicação. Se a URL de envio já venceu, a
+confirmação recusa com
+[`documento_a_publicar.objeto_nao_encontrado`](./uniplus.selecao.documento_a_publicar.objeto_nao_encontrado.mdx):
+inicie um novo envio, confirme e use o novo identificador.

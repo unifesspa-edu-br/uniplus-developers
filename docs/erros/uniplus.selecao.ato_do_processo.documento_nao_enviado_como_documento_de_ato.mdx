@@ -1,0 +1,33 @@
+---
+title: Somente um documento enviado para um ato pode ser usado no ato
+sidebar_label: Documento não enviado para um ato
+description: 'Rascunho — O documento principal ou um anexo do ato foi enviado para outra finalidade, como o edital ou o anexo do edital.'
+code: uniplus.selecao.ato_do_processo.documento_nao_enviado_como_documento_de_ato
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento principal ou um dos anexos foi enviado com outra finalidade: como documento do
+edital ou como anexo do edital. A finalidade é declarada no início do envio e não muda. Só o
+documento enviado como `documentoDeAto` serve ao ato avulso, o que mantém o arquivo do
+edital separado do arquivo do ato.
+
+## Como resolver
+
+Use documentos enviados com a finalidade `documentoDeAto`. Se o arquivo certo foi enviado
+com outra finalidade, inicie um novo envio dele como documento de ato, confirme e use o novo
+identificador.
