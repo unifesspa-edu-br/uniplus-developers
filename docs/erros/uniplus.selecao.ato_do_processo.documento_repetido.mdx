@@ -1,0 +1,30 @@
+---
+title: O mesmo documento não pode constar duas vezes no ato
+sidebar_label: Documento repetido no ato
+description: 'Rascunho — O mesmo documento aparece duas vezes entre o principal e os anexos do ato.'
+code: uniplus.selecao.ato_do_processo.documento_repetido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O mesmo documento consta mais de uma vez no ato: em dois anexos, ou como principal e como
+anexo. Cada arquivo publicado do ato tem um lugar só.
+
+## Como resolver
+
+Mantenha cada documento uma única vez. Se são arquivos diferentes, envie cada um e use o
+identificador próprio.

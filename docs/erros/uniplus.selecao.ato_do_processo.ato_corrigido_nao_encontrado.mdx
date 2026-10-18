@@ -1,0 +1,32 @@
+---
+title: O ato corrigido não é um ato publicado por um processo seletivo
+sidebar_label: Ato corrigido não encontrado
+description: 'Rascunho — O ato indicado como corrigido não existe entre os atos publicados pelos processos seletivos.'
+code: uniplus.selecao.ato_do_processo.ato_corrigido_nao_encontrado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador informado como ato corrigido não é de nenhum ato publicado por um processo
+seletivo. Um ato só corrige outro ato publicado do mesmo processo (UNI-REQ-0156). A mensagem
+de detalhe traz o identificador.
+
+## Como resolver
+
+Consulte os atos do processo e use, em `atoCorrigidoId`, o identificador do ato que se quer
+corrigir. Se o ato não precisa corrigir outro, publique sem indicar ato corrigido.

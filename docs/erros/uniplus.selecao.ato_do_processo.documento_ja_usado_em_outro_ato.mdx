@@ -1,0 +1,31 @@
+---
+title: O documento já foi usado em outro ato do processo
+sidebar_label: Documento já usado em outro ato
+description: 'Rascunho — Um documento só sustenta um ato; o documento indicado já foi usado em outro ato do processo.'
+code: uniplus.selecao.ato_do_processo.documento_ja_usado_em_outro_ato
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento indicado já está em outro ato do processo, como principal ou como anexo. O
+arquivo publicado tem um único ato por trás, para que a pessoa que o baixa saiba a que ato
+ele pertence. A mensagem de detalhe traz o identificador do documento.
+
+## Como resolver
+
+Para publicá-lo neste ato, envie o arquivo de novo: inicie um novo envio com a finalidade
+`documentoDeAto`, confirme e use o novo identificador.

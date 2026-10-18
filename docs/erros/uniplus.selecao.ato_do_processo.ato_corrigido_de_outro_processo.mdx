@@ -1,0 +1,32 @@
+---
+title: O ato corrigido é de outro processo seletivo
+sidebar_label: Ato corrigido de outro processo
+description: 'Rascunho — Um ato só corrige ato do próprio processo seletivo.'
+code: uniplus.selecao.ato_do_processo.ato_corrigido_de_outro_processo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ato indicado como corrigido pertence a outro processo seletivo. A correção herda os
+vínculos do ato corrigido; aceitar o ato de outro processo ligaria o novo ato a dois
+processos.
+
+## Como resolver
+
+Use o identificador de um ato deste processo. Se o ato a corrigir é de outro processo,
+publique a correção naquele processo.

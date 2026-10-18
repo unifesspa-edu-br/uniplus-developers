@@ -1,0 +1,31 @@
+---
+title: Nome do anexo do ato inválido
+sidebar_label: Nome do anexo do ato inválido
+description: 'Rascunho — O nome de um dos anexos do ato está vazio, passa de 120 caracteres ou tem caractere proibido.'
+code: uniplus.selecao.ato_do_processo.anexo_nome_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O nome dado a um anexo é o que a pessoa recebe ao baixá-lo. Ele é recusado quando está em
+branco, tem mais de 120 caracteres contando a extensão, ou tem separador de caminho,
+caractere de controle ou um dos caracteres `/ \ < > : " | ? * ;`.
+
+## Como resolver
+
+Informe um nome de até 120 caracteres, sem os caracteres proibidos. A extensão do formato é
+acrescentada quando falta. Repita a publicação.

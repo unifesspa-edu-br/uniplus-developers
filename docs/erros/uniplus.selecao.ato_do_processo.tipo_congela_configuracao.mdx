@@ -1,0 +1,32 @@
+---
+title: O tipo congela configuração e não é documento avulso
+sidebar_label: Tipo de ato que congela configuração
+description: 'Rascunho — O tipo de ato escolhido congela a configuração do processo, e só o edital de abertura ou de retificação o publica.'
+code: uniplus.selecao.ato_do_processo.tipo_congela_configuracao
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de ato escolhido, conforme o catálogo, congela a configuração do processo: publicá-lo
+cria uma nova versão congelada. O documento avulso não altera a configuração, então não
+serve a esse tipo. A mensagem de detalhe nomeia o tipo.
+
+## Como resolver
+
+Escolha um tipo de ato que não congele configuração, como aviso, comunicado ou errata. Se a
+intenção é alterar o edital, faça a retificação do processo seletivo, que cria a nova
+versão.
