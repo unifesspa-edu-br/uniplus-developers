@@ -1,0 +1,44 @@
+---
+title: A etapa declara o mesmo tipo de ato com o mesmo papel mais de uma vez
+sidebar_label: Ato repetido na etapa
+description: 'Cada tipo de ato aparece uma única vez por papel entre os produtos que a etapa publica.'
+code: uniplus.selecao.etapa_processo.ato_duplicado_na_etapa
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1981'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1981
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma etapa declara, entre os produtos que publica, o mesmo tipo de ato com o mesmo papel duas
+ou mais vezes.
+
+O tipo de ato identifica a matéria publicada, e o papel diz se a publicação é preliminar,
+que abre o prazo de recurso, definitiva, que fecha o ciclo recursal, ou sem papel. Declarado
+duas vezes com o mesmo papel, a etapa passa a anunciar duas publicações iguais da mesma
+matéria, e o recurso não teria como saber a qual delas ancorar.
+
+Publicar o preliminar e o definitivo da mesma matéria **não** cai aqui: a etapa declara o
+mesmo tipo de ato duas vezes, uma com o papel preliminar e outra com o papel definitivo. É o
+tipo de ato que liga o definitivo ao preliminar que ele espera. A regra é a mesma da [`fase
+do cronograma`](./uniplus.selecao.fase_cronograma.ato_duplicado_na_fase.mdx).
+
+## Como resolver
+
+Remova a declaração repetida. A mensagem da recusa nomeia o código do ato que aparece mais
+de uma vez com o mesmo papel na etapa.
+
+Se a intenção era anunciar duas publicações diferentes da etapa, declare o tipo de ato de
+cada uma. Se era anunciar o preliminar e o definitivo da mesma matéria, declare o mesmo tipo
+de ato duas vezes, uma com cada papel.
