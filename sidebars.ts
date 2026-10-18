@@ -179,6 +179,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.etapa_processo.peso_invalido',
         'erros/uniplus.selecao.etapa_processo.nota_minima_invalida',
         'erros/uniplus.selecao.etapa_processo.ordem_invalida',
+        'erros/uniplus.selecao.etapa_processo.ato_duplicado_na_etapa',
         'erros/uniplus.selecao.processo_seletivo.nenhuma_etapa_compoe_nota',
         'erros/uniplus.selecao.processo_seletivo.tipo_etapa_nao_encontrado_ou_inativo',
         'erros/uniplus.selecao.processo_seletivo.formulario_titulo_tamanho',
