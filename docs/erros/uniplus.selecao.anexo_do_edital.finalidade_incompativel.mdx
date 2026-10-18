@@ -1,0 +1,34 @@
+---
+title: Somente um documento enviado como anexo do edital pode ser anexado ao edital
+sidebar_label: Documento não enviado como anexo
+description: 'Rascunho — O documento indicado em um anexo foi enviado para outra finalidade, como o PDF principal do edital ou o documento de um ato.'
+code: uniplus.selecao.anexo_do_edital.finalidade_incompativel
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1958'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1958
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento de um dos anexos foi enviado com outra finalidade: como documento do edital ou
+como documento de ato. A finalidade é declarada no início do envio e não muda. Só o
+documento enviado como `anexoDoEdital` pode ser anexo do edital.
+
+## Como resolver
+
+Use, em cada anexo, um documento enviado com a finalidade `anexoDoEdital`. Se o arquivo
+certo foi enviado com outra finalidade, inicie um novo envio dele como anexo do edital,
+confirme e use o novo identificador.

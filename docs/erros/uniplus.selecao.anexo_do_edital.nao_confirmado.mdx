@@ -1,0 +1,35 @@
+---
+title: Somente um documento confirmado pode ser anexado ao edital
+sidebar_label: Anexo ainda não confirmado
+description: 'Rascunho — O documento de um dos anexos ainda está pendente: o envio dele não foi confirmado.'
+code: uniplus.selecao.anexo_do_edital.nao_confirmado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1958'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1958
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento indicado em um dos anexos existe, mas o envio dele ainda não foi confirmado. Só
+o documento confirmado, que já passou pela conferência de formato, tamanho e conteúdo e é
+imutável, pode ser anexado ao edital.
+
+## Como resolver
+
+Confirme o envio do documento e repita o pedido. Se a URL de envio já venceu, a confirmação
+recusa com
+[`documento_a_publicar.objeto_nao_encontrado`](./uniplus.selecao.documento_a_publicar.objeto_nao_encontrado.mdx):
+inicie um novo envio, confirme e use o novo identificador.
