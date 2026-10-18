@@ -1,0 +1,34 @@
+---
+title: A lista de anexos não admite elemento nulo
+sidebar_label: Elemento nulo na lista de anexos
+description: 'A lista de anexos tem um elemento nulo.'
+code: uniplus.publicacoes.anexo_do_ato.nulo
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo
+  - Registro de ato normativo por mensagem durável do módulo dono do objeto
+requisitos:
+  - UNI-REQ-0154
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1962'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1962
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Descartar o elemento nulo mudaria a quantidade e a ordem dos anexos sem que ninguém
+soubesse, então a lista inteira é recusada. Os anexos são conferidos antes de qualquer
+consulta ao banco, tanto no endpoint administrativo de Publicações quanto no registro por
+mensagem durável.
+
+## Como resolver
+
+Remova o elemento nulo da lista ou preencha-o com nome, tipo de mídia e hash, e registre o
+ato de novo.

@@ -1,0 +1,34 @@
+---
+title: O nome do anexo é obrigatório e tem tamanho máximo
+sidebar_label: Nome do anexo inválido
+description: 'O nome de um anexo está vazio ou passa de 255 caracteres.'
+code: uniplus.publicacoes.anexo_do_ato.nome_invalido
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo
+  - Registro de ato normativo por mensagem durável do módulo dono do objeto
+requisitos:
+  - UNI-REQ-0154
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1962'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1962
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O nome identifica o anexo dentro do ato. Ele está vazio (ou só com espaços) ou tem mais de
+255 caracteres. Os anexos são conferidos antes de qualquer consulta ao banco, tanto no
+endpoint administrativo de Publicações quanto no registro por mensagem durável. A recusa
+vem do primeiro anexo com problema, mas o detalhe não diz qual é: confira o nome de cada
+anexo.
+
+## Como resolver
+
+Informe um nome de 1 a 255 caracteres para cada anexo e registre o ato de novo.

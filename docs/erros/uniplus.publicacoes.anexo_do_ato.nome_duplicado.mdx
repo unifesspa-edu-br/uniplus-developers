@@ -1,0 +1,34 @@
+---
+title: Há mais de um anexo com o mesmo nome no ato
+sidebar_label: Nome de anexo duplicado
+description: 'Dois anexos do mesmo ato têm o mesmo nome.'
+code: uniplus.publicacoes.anexo_do_ato.nome_duplicado
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo
+  - Registro de ato normativo por mensagem durável do módulo dono do objeto
+requisitos:
+  - UNI-REQ-0154
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1962'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1962
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O nome é o que distingue um anexo do outro para quem consulta o ato, e dois anexos do mesmo
+ato têm o mesmo nome, ignorando espaços nas pontas. A comparação diferencia maiúsculas de
+minúsculas. A mensagem de detalhe traz o nome repetido. Os anexos são conferidos antes de
+qualquer consulta ao banco, tanto no endpoint administrativo de Publicações quanto no
+registro por mensagem durável, e a recusa nomeia o primeiro anexo com problema.
+
+## Como resolver
+
+Dê um nome diferente a cada anexo do ato e registre de novo.
