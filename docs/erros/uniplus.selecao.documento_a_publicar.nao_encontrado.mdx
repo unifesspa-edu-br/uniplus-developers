@@ -1,0 +1,32 @@
+---
+title: Documento não encontrado
+sidebar_label: Documento não encontrado
+description: 'Rascunho — O documento a publicar informado não existe ou não pertence a este processo seletivo.'
+code: uniplus.selecao.documento_a_publicar.nao_encontrado
+http_status: 404
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento a publicar
+  - Acesso ao documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador do documento não corresponde a nenhum documento deste processo seletivo. A
+API dá a mesma resposta para o documento que não existe e para o documento de outro
+processo: a rota de um processo não confirma a existência de documento alheio.
+
+## Como resolver
+
+Liste os documentos do processo e use o identificador de um deles. Se o documento ainda não
+foi enviado, inicie o envio: a resposta traz o identificador que as demais operações usam.

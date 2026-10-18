@@ -1,0 +1,34 @@
+---
+title: O conteúdo do arquivo não corresponde ao tipo de mídia declarado
+sidebar_label: Conteúdo diverge do formato declarado
+description: 'Rascunho — O arquivo enviado não é, de fato, um documento do tipo de mídia declarado.'
+code: uniplus.selecao.documento_a_publicar.conteudo_diverge_do_formato
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na confirmação, o servidor confere o conteúdo e não se contenta com o que o cliente
+declarou. A recusa vem quando o tipo de mídia com que o arquivo foi enviado à URL difere do
+declarado no início do envio, quando um PDF não começa com a assinatura de PDF ou quando um
+DOCX ou ODT não tem a estrutura de um documento de texto desse formato. Renomear a extensão
+de um arquivo não o converte.
+
+## Como resolver
+
+Gere o arquivo de novo no formato declarado, por exemplo exportando o documento para PDF a
+partir do editor. Inicie um novo envio e, ao enviar o arquivo à URL, use o `Content-Type`
+que o início do envio devolveu.
