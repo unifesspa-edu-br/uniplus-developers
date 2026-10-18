@@ -1,0 +1,30 @@
+---
+title: O documento não pode conter macro
+sidebar_label: Documento com macro
+description: 'Rascunho — O DOCX ou ODT enviado contém macro, que não é aceita em documento publicado pela instituição.'
+code: uniplus.selecao.documento_a_publicar.contem_macro
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento enviado em DOCX ou ODT contém macro. O documento vai a público com a chancela da
+instituição, e conteúdo executável não é aceito nele.
+
+## Como resolver
+
+Salve uma cópia sem macros (em DOCX ou ODT comum) ou exporte o documento para PDF. Inicie um
+novo envio com a cópia e confirme.

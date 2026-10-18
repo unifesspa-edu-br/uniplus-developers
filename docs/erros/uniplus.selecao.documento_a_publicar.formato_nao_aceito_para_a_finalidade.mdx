@@ -1,0 +1,32 @@
+---
+title: O formato do documento não é aceito para a finalidade declarada
+sidebar_label: Formato não aceito para a finalidade
+description: 'Rascunho — O documento do edital é sempre PDF; a finalidade declarada não aceita o formato informado.'
+code: uniplus.selecao.documento_a_publicar.formato_nao_aceito_para_a_finalidade
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Início do envio de documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A finalidade declarada limita o formato. O documento principal do edital é publicado como
+está e só pode ser PDF; anexo do edital e documento de ato aceitam PDF, DOCX ou ODT. A
+recusa vem quando o formato informado não é aceito pela finalidade, hoje o DOCX ou o ODT
+declarados como documento do edital.
+
+## Como resolver
+
+Para o documento principal do edital, exporte o arquivo para PDF. Se o arquivo é um
+complemento do edital, declare a finalidade `anexoDoEdital`. Repita o início do envio.

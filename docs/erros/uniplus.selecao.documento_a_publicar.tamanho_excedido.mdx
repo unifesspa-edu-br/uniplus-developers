@@ -1,0 +1,31 @@
+---
+title: Documento excede o tamanho máximo permitido
+sidebar_label: Documento acima do limite de tamanho
+description: 'Rascunho — O arquivo enviado tem mais de 20 MB, o limite de todo documento a publicar.'
+code: uniplus.selecao.documento_a_publicar.tamanho_excedido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O arquivo enviado ao armazenamento tem mais de 20 MB. O limite vale para todo documento a
+publicar, seja o edital, um anexo ou o documento de um ato, e é conferido na confirmação,
+sobre o arquivo que de fato foi enviado.
+
+## Como resolver
+
+Reduza o arquivo para até 20 MB, por exemplo exportando o PDF com menos resolução nas
+imagens, inicie um novo envio e confirme.

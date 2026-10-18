@@ -1,0 +1,29 @@
+---
+title: O arquivo enviado está vazio
+sidebar_label: Arquivo vazio
+description: 'Rascunho — O arquivo enviado ao armazenamento não tem nenhum byte.'
+code: uniplus.selecao.documento_a_publicar.arquivo_vazio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O objeto no armazenamento existe, mas não tem nenhum byte. Costuma acontecer quando o envio
+foi interrompido ou o arquivo de origem estava vazio.
+
+## Como resolver
+
+Confira que o arquivo de origem abre e tem conteúdo, inicie um novo envio e confirme.

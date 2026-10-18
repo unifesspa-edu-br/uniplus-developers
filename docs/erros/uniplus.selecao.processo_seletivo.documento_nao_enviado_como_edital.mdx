@@ -1,0 +1,40 @@
+---
+title: Somente um documento enviado como edital pode ser o documento do edital
+sidebar_label: Documento não enviado como edital
+description: 'Rascunho — O documento indicado como principal do edital foi enviado para outra finalidade.'
+code: uniplus.selecao.processo_seletivo.documento_nao_enviado_como_edital
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0019
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento indicado como documento do edital existe, é do processo e está confirmado, mas
+foi enviado com outra finalidade: como anexo do edital ou como documento de ato. A
+finalidade é declarada no início do envio e não muda. Só o documento enviado como
+`documentoDoEdital` pode ser o PDF principal do edital de abertura ou de retificação. A
+conferência é a mesma na publicação, na retificação e no fechamento da retificação, e
+acontece antes de qualquer gravação.
+
+## Como resolver
+
+Indique como documento do edital um documento enviado com a finalidade `documentoDoEdital`.
+Se o arquivo certo foi enviado com outra finalidade, inicie um novo envio dele como
+documento do edital, confirme e use o novo identificador. O que foi enviado como anexo
+continua válido como anexo: veja
+[`anexo_do_edital.finalidade_incompativel`](./uniplus.selecao.anexo_do_edital.finalidade_incompativel.mdx).

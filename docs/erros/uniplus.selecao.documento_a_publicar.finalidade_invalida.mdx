@@ -1,0 +1,34 @@
+---
+title: A finalidade do documento é obrigatória
+sidebar_label: Finalidade do documento ausente ou desconhecida
+description: 'Rascunho — O início do envio não declarou para que o documento serve, ou declarou uma finalidade que não existe.'
+code: uniplus.selecao.documento_a_publicar.finalidade_invalida
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Início do envio de documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Todo documento nasce com uma finalidade, que não muda depois: `documentoDoEdital` (o PDF
+principal do edital), `anexoDoEdital` (arquivo que acompanha o edital) ou `documentoDeAto`
+(documento de um ato avulso). É ela que separa o PDF do edital de um anexo que também é PDF,
+e que decide o formato aceito. A recusa vem quando a finalidade falta ou não é uma dessas
+três.
+
+## Como resolver
+
+Declare a finalidade conforme o uso do arquivo e repita o início do envio. Se o arquivo já
+foi enviado com a finalidade errada, inicie um novo envio com a certa: a finalidade do
+documento confirmado não se altera.

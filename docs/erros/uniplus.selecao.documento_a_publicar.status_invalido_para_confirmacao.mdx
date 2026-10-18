@@ -1,0 +1,32 @@
+---
+title: Somente um documento pendente pode ser confirmado
+sidebar_label: Documento já confirmado
+description: 'Rascunho — A confirmação só vale para o documento pendente; o documento já confirmado é imutável.'
+code: uniplus.selecao.documento_a_publicar.status_invalido_para_confirmacao
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A confirmação do envio foi pedida para um documento que não está pendente: ele já foi
+confirmado, inclusive por outra confirmação feita ao mesmo tempo. O documento confirmado é
+imutável, e um novo envio cria outro documento, sem sobrescrever o anterior.
+
+## Como resolver
+
+Não repita a confirmação. Consulte o documento na lista do processo: se a situação é
+confirmado, ele já pode ser usado no edital, nos anexos ou no ato. Para publicar outro
+arquivo, inicie um novo envio.

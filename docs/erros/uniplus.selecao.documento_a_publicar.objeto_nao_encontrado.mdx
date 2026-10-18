@@ -1,0 +1,34 @@
+---
+title: Arquivo ainda não enviado ao armazenamento ou expirado
+sidebar_label: Arquivo não enviado ou expirado
+description: 'Rascunho — A confirmação não encontrou o arquivo no armazenamento: o envio não foi feito ou a URL venceu.'
+code: uniplus.selecao.documento_a_publicar.objeto_nao_encontrado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A confirmação foi pedida, mas não há arquivo no armazenamento para esse documento. Ou o
+envio do arquivo à URL não aconteceu, ou a URL de envio venceu antes e o documento pendente
+expirou. O documento chega ao processo em três passos: o início do envio, que devolve uma
+URL de envio válida por 15 minutos; o envio do arquivo direto ao armazenamento, sem passar
+pela API; e a confirmação, em que o servidor lê o arquivo, confere o conteúdo e guarda o
+documento como imutável.
+
+## Como resolver
+
+Inicie um novo envio do documento, envie o arquivo à nova URL dentro do prazo e só então
+confirme.

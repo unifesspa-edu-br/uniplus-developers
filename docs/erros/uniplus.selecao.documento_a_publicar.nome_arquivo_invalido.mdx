@@ -1,0 +1,32 @@
+---
+title: Nome do arquivo do documento inválido
+sidebar_label: Nome do arquivo inválido
+description: 'Rascunho — O nome do arquivo do documento está vazio, passa de 120 caracteres ou tem caractere proibido.'
+code: uniplus.selecao.documento_a_publicar.nome_arquivo_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Início do envio de documento a publicar
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1957'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1957
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O nome informado (`nomeArquivo`) é o que a pessoa recebe ao baixar o documento. Ele é
+recusado quando está em branco, tem mais de 120 caracteres contando a extensão, ou tem
+separador de caminho, caractere de controle ou um dos caracteres `/ \ < > : " | ? * ;`. A
+recusa vem junto com as demais do mesmo pedido, em `errors[]`.
+
+## Como resolver
+
+Informe um nome de até 120 caracteres, sem os caracteres proibidos. A extensão do formato é
+acrescentada quando falta. Repita o início do envio.
