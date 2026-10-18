@@ -1,0 +1,34 @@
+---
+title: O edital aceita no máximo 20 anexos
+sidebar_label: Mais de 20 anexos
+description: 'Rascunho — O edital leva no máximo 20 anexos, contando os herdados da versão anterior quando a lista é a da retificação.'
+code: uniplus.selecao.anexo_do_edital.quantidade_excedida
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1958'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1958
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O conjunto de anexos da versão do edital passa de 20. Na retificação, a lista enviada é o
+conjunto inteiro da versão nova: o que fica da versão anterior precisa constar nela, somado
+ao que se inclui. Quando o pedido não traz a lista, a versão nova mantém os anexos da
+anterior.
+
+## Como resolver
+
+Reduza a lista para até 20 anexos, retirando os que não precisam acompanhar a nova versão do
+edital, e repita o pedido.

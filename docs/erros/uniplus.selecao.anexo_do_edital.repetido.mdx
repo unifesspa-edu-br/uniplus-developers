@@ -1,0 +1,34 @@
+---
+title: O mesmo documento não pode constar duas vezes no edital
+sidebar_label: Documento repetido no edital
+description: 'Rascunho — O mesmo documento aparece em dois anexos ou como anexo e como documento principal do edital.'
+code: uniplus.selecao.anexo_do_edital.repetido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1958'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1958
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O mesmo documento consta mais de uma vez no edital: em dois anexos, ou como anexo e como
+documento principal. Cada arquivo publicado do edital tem um lugar só, e o edital atesta o
+hash de cada documento.
+
+## Como resolver
+
+Mantenha cada documento uma única vez. Para publicar o mesmo arquivo sob dois nomes, não é
+preciso: um anexo basta. Se são arquivos diferentes, envie cada um e use o identificador
+próprio.

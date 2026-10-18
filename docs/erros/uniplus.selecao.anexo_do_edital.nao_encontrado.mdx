@@ -1,0 +1,35 @@
+---
+title: Documento do anexo não encontrado ou não pertence a este processo
+sidebar_label: Documento do anexo não encontrado
+description: 'Rascunho — Um dos anexos do edital aponta para um documento que não existe ou é de outro processo.'
+code: uniplus.selecao.anexo_do_edital.nao_encontrado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0154
+rastreio:
+  - label: 'uniplus-api#1958'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1958
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos anexos pedidos indica um documento a publicar que não existe ou pertence a outro
+processo seletivo. A conferência dos anexos acontece antes de qualquer gravação: o ato do
+edital é registrado depois, por mensagem durável, e uma recusa tardia não teria a quem
+responder. A mensagem de detalhe traz o identificador do documento.
+
+## Como resolver
+
+Liste os documentos do processo e use, em cada anexo, o identificador de um documento
+enviado com a finalidade `anexoDoEdital` neste processo. Se o arquivo ainda não foi enviado,
+faça o envio e a confirmação antes e repita o pedido.
