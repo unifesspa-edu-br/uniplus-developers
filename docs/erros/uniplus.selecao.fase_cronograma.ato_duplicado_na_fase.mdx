@@ -1,7 +1,7 @@
 ---
-title: A fase declara o mesmo tipo de ato mais de uma vez
+title: A fase declara o mesmo tipo de ato com o mesmo papel mais de uma vez
 sidebar_label: Ato repetido na fase
-description: Cada tipo de ato aparece uma única vez entre os produtos que a fase publica.
+description: Cada tipo de ato aparece uma única vez por papel entre os produtos que a fase publica.
 code: uniplus.selecao.fase_cronograma.ato_duplicado_na_fase
 http_status: 422
 situacao: publicado
@@ -13,6 +13,8 @@ requisitos:
 rastreio:
   - label: 'uniplus-api#1426'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+  - label: 'uniplus-api#1981'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1981
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -22,22 +24,24 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 ## O que aconteceu
 
 Uma fase do cronograma declara, entre os produtos que publica, o mesmo tipo de ato
-duas ou mais vezes.
+com o mesmo papel duas ou mais vezes.
 
-O tipo de ato é o que identifica cada publicação dentro da fase. Declarado duas
-vezes, a fase passa a ter duas intenções sobre a mesma publicação — e podem ser
-intenções divergentes, uma dando papel preliminar e a outra papel definitivo ao
-mesmo ato. Não há como eleger uma das duas sem inventar critério.
+O tipo de ato identifica a matéria publicada, e o papel diz se a publicação é
+preliminar, que abre o prazo de recurso, definitiva, que fecha o ciclo recursal, ou
+sem papel. Declarado duas vezes com o mesmo papel, a fase passa a anunciar duas
+publicações iguais da mesma matéria, e não há como saber qual delas é a que vale.
 
-Publicar o preliminar e o definitivo da mesma matéria **não** cai aqui: são tipos
-de ato distintos no catálogo, com códigos distintos, e a fase pode declarar os dois.
+Publicar o preliminar e o definitivo da mesma matéria **não** cai aqui: a fase
+declara o mesmo tipo de ato duas vezes, uma com o papel preliminar e outra com o
+papel definitivo. É o tipo de ato que liga o definitivo ao preliminar que ele
+espera.
 
 ## Como resolver
 
 Remova a declaração repetida. A mensagem da recusa nomeia o código do ato que
-aparece mais de uma vez na fase.
+aparece mais de uma vez com o mesmo papel na fase.
 
 Se a intenção era anunciar duas publicações diferentes da fase — um gabarito e um
 resultado, por exemplo —, declare o tipo de ato de cada uma. Se era anunciar o
-preliminar e o definitivo da mesma matéria, declare os dois tipos de ato que o
-catálogo tem para isso, cada um com o seu papel.
+preliminar e o definitivo da mesma matéria, declare o mesmo tipo de ato duas vezes,
+uma com cada papel.
