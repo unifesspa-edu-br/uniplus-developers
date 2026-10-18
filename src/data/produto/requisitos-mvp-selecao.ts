@@ -957,7 +957,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O administrador publica somente os itens que a fase ou a etapa declara; item não declarado é recusado com orientação para retificar o edital; quando o cronograma declara preliminar para a matéria, na mesma fase ou na fase que abre o ciclo, o definitivo é recusado enquanto o preliminar do mesmo tipo de ato não foi publicado, e o preliminar publicado de outro tipo de ato não o libera; a publicação do definitivo fecha o ciclo recursal da matéria; a fase ou a etapa que declara o mesmo tipo de ato como preliminar e como definitivo é aceita, e a que declara o mesmo tipo com o mesmo papel duas vezes é recusada; a fase que conclui o ciclo aberto por outra declara o definitivo com o mesmo tipo de ato do preliminar, e a configuração em que ela só declara definitivo de outro tipo é recusada; a matéria sem preliminar declarado tem o definitivo publicado direto; a publicação do preliminar abre o prazo de recurso, contado conforme as regras de prazo do edital, e a publicação do definitivo não o encerra; item já publicado não tem segunda publicação original, e a correção é um novo ato que aponta a publicação corrigida; a correção de resultado publicado passa por errata ou retificação do ato; o PDF publicado é idêntico, byte a byte, ao enviado.',
+      'O administrador publica somente os itens que a fase ou a etapa declara; item não declarado é recusado com orientação para retificar o edital; quando o cronograma declara preliminar para a matéria, na mesma fase ou na fase que abre o ciclo, o definitivo é recusado enquanto o preliminar do mesmo tipo de ato não foi publicado, e o preliminar publicado de outro tipo de ato não o libera; o definitivo também espera o fim do prazo de recurso e o julgamento dos recursos da matéria (UNI-REQ-0161); a publicação do definitivo fecha o ciclo recursal da matéria; a fase ou a etapa que declara o mesmo tipo de ato como preliminar e como definitivo é aceita, e a que declara o mesmo tipo com o mesmo papel duas vezes é recusada; a fase que conclui o ciclo aberto por outra declara o definitivo com o mesmo tipo de ato do preliminar, e a configuração em que ela só declara definitivo de outro tipo é recusada; a matéria sem preliminar declarado tem o definitivo publicado direto; a publicação do preliminar abre o prazo de recurso, contado conforme as regras de prazo do edital, e a publicação do definitivo não o encerra; item já publicado não tem segunda publicação original, e a correção é um novo ato que aponta a publicação corrigida; a correção de resultado publicado passa por errata ou retificação do ato; o PDF publicado é idêntico, byte a byte, ao enviado.',
     verificacao:
       'Testes automatizados (publicação apenas de item declarado, com recusa orientando a retificar o edital quando o item não está declarado; ordem preliminar e definitivo quando o cronograma declara preliminar para a matéria, na mesma fase ou na fase que abre o ciclo; preliminar de outro tipo de ato não libera o definitivo; definitivo direto quando não há preliminar declarado; abertura do prazo de recurso pela publicação do preliminar, sem encerramento pelo definitivo; publicação original única do item, com a correção como novo ato; correção de resultado publicado por errata ou retificação do ato; arquivo publicado idêntico ao enviado) (planejado).',
     pagina_developers: '/produto/requisitos/',
@@ -989,7 +989,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0160',
     titulo: 'Correção do resultado preliminar reabre o prazo de recurso',
     enunciado:
-      'Quando um resultado preliminar é corrigido, por errata ou por retificação do ato, o candidato ganha um novo prazo de recurso, inteiro, contado a partir da publicação da correção e pelas mesmas regras de prazo do edital (UNI-REQ-0113 a UNI-REQ-0116). Assim, quem foi afetado pela correção tem sempre o prazo completo para recorrer do resultado que passou a valer, mesmo quando a correção sai perto do fim do prazo original ou depois dele. O recurso é contra o resultado corrigido, e não contra a errata (UNI-REQ-0157). Se o mesmo resultado for corrigido de novo, o prazo é reaberto de novo, a partir da nova correção. Decisão do líder técnico em 18/10/2026, registrada para conhecimento do PO.',
+      'Quando um resultado preliminar é corrigido, por errata ou por retificação do ato, o candidato ganha um novo prazo de recurso, inteiro, contado a partir da publicação da correção e pelas mesmas regras de prazo do edital (UNI-REQ-0113 a UNI-REQ-0116). Assim, quem foi afetado pela correção tem sempre o prazo completo para recorrer do resultado que passou a valer, mesmo quando a correção sai perto do fim do prazo original ou depois dele. O recurso é contra o resultado corrigido, e não contra a errata (UNI-REQ-0157). Se o mesmo resultado for corrigido de novo, o prazo é reaberto de novo, a partir da nova correção. A reabertura só acontece enquanto o definitivo da matéria não foi publicado: depois dele, o preliminar não se corrige mais (UNI-REQ-0162). Decisão do líder técnico em 18/10/2026, registrada para conhecimento do PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1001,9 +1001,53 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A correção publicada de um resultado preliminar abre um novo prazo de recurso, contado da publicação da correção pelas regras de prazo do edital; o novo prazo vale também quando a correção sai depois do fim do prazo original; o recurso aberto nesse prazo é contra o resultado corrigido; uma nova correção do mesmo resultado reabre o prazo a partir dela.',
+      'A correção publicada de um resultado preliminar abre um novo prazo de recurso, contado da publicação da correção pelas regras de prazo do edital; o novo prazo vale também quando a correção sai depois do fim do prazo original; o recurso aberto nesse prazo é contra o resultado corrigido; uma nova correção do mesmo resultado reabre o prazo a partir dela; depois do definitivo publicado, a correção do preliminar é recusada (UNI-REQ-0162).',
     verificacao:
       'Testes automatizados (correção dentro do prazo original reabre o prazo inteiro; correção depois do fim do prazo original reabre o prazo; recurso contra o resultado corrigido; segunda correção reabre o prazo a partir dela) (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0161',
+    titulo: 'Resultado definitivo só depois do prazo de recurso e dos julgamentos',
+    enunciado:
+      'O resultado definitivo de uma matéria só pode ser publicado depois que termina o prazo de recurso aberto pelo resultado preliminar dela, ou pela última correção desse preliminar (UNI-REQ-0160), e depois que todos os recursos apresentados nesse prazo foram julgados. Assim, nenhum candidato perde a chance de recorrer porque o definitivo saiu antes da hora, e o definitivo já reflete o resultado dos recursos. Enquanto o sistema não conta o prazo de recurso nem recebe os recursos, cabe ao administrador esperar o prazo e os julgamentos antes de publicar o definitivo; a trava automática passa a valer quando o sistema controlar o prazo e os recursos. Decisão do líder técnico em 18/10/2026, registrada para conhecimento do PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0157',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Com o controle de prazo e de recursos no sistema, a publicação do definitivo é recusada enquanto o prazo de recurso do preliminar da matéria, ou da última correção dele, não terminou, e enquanto há recurso dessa matéria sem julgamento; com o prazo encerrado e os recursos julgados, o definitivo é aceito.',
+    verificacao:
+      'Testes automatizados (definitivo recusado dentro do prazo de recurso; definitivo recusado com recurso pendente de julgamento; definitivo aceito com o prazo encerrado e os recursos julgados) (planejado, junto com o controle de prazo e de recursos).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0162',
+    titulo: 'Preliminar não se corrige depois do definitivo publicado',
+    enunciado:
+      'Depois que o resultado definitivo de uma matéria é publicado, o resultado preliminar dela não pode mais ser corrigido: o ciclo de recurso daquela matéria está fechado, e o que vale é o definitivo. Se for preciso ajustar alguma coisa, a correção é feita no próprio definitivo, por errata ou por retificação do ato (UNI-REQ-0156). Por isso a reabertura do prazo de recurso pela correção do preliminar (UNI-REQ-0160) só acontece enquanto o definitivo ainda não foi publicado. Decisão do líder técnico em 18/10/2026, registrada para conhecimento do PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0157',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A correção de um resultado preliminar é recusada quando o definitivo da mesma matéria já foi publicado, com orientação para corrigir o definitivo; antes da publicação do definitivo, a correção do preliminar é aceita; a correção do definitivo por errata ou retificação do ato continua aceita.',
+    verificacao:
+      'Testes automatizados (correção do preliminar recusada depois do definitivo publicado; correção do preliminar aceita antes do definitivo; correção do definitivo aceita) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
