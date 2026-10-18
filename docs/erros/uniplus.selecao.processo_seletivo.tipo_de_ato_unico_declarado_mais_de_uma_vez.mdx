@@ -1,7 +1,7 @@
 ---
 title: O tipo de ato que só pode ser publicado uma vez por processo está declarado em mais de um produto do cronograma
 sidebar_label: Tipo de ato único declarado mais de uma vez
-description: 'Rascunho — um tipo de ato que só pode ser publicado uma vez por processo está declarado mais de uma vez com o mesmo papel: no cronograma, no ato da operação ou em ato já registrado.'
+description: 'Rascunho — um tipo de ato que só pode ser publicado uma vez por processo está declarado mais de uma vez, com qualquer papel: no cronograma, no ato da operação ou em ato já registrado.'
 code: uniplus.selecao.processo_seletivo.tipo_de_ato_unico_declarado_mais_de_uma_vez
 http_status: 422
 situacao: rascunho
@@ -25,54 +25,60 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Um tipo de ato que só pode ser publicado **uma vez por processo** está declarado mais de uma vez
-com o **mesmo papel**. Cada produto declarado no cronograma vira uma publicação esperada, e um
-tipo de publicação única não tem como atender a duas declarações iguais.
+Um tipo de ato que só pode ser publicado **uma vez por processo** está declarado mais de uma
+vez. Cada produto declarado no cronograma vira uma publicação esperada, e um tipo de publicação
+única não tem como atender a duas declarações.
 
-A chave da contagem é o **tipo de ato e o papel** (preliminar, definitivo ou sem papel). O tipo
-único sai no máximo uma vez com cada papel, e por isso declará-lo uma vez como preliminar e outra
-como definitivo é aceito: é assim que o definitivo se liga ao preliminar que ele espera. A recusa
-vem quando o mesmo tipo repete com o mesmo papel.
+A contagem é **por tipo de ato**, com qualquer papel (preliminar, definitivo ou sem papel): o tipo
+único aparece uma só vez no processo. Declará-lo como preliminar e de novo como definitivo também
+é recusado. Quem precisa publicar o preliminar e o definitivo da mesma matéria usa um tipo que
+**não seja único** no catálogo, como o de classificação, que admite mais de uma publicação.
 
 Contam como declaração:
 
 - os **produtos de fase** do cronograma;
 - os **produtos de etapa**, com a etapa identificada por nome e ordem;
-- o **ato da própria operação**, isto é, o ato que está sendo registrado ao publicar, retificar ou
-  fechar a sessão editorial, quando o tipo dele é único;
+- o **ato da própria operação**, isto é, o ato que está sendo registrado ao publicar, retificar
+  ou fechar a sessão editorial, quando o tipo dele é único;
 - o **ato já registrado do processo**, de uma versão anterior, que já ocupa a vaga do tipo. É o
   caso do `EDITAL_ABERTURA` numa retificação: se o cronograma volta a declará-lo, a declaração
-  repete a vaga que o edital de abertura já ocupa. A vaga já ocupada vale para os dois papéis.
+  repete a vaga que o edital de abertura já ocupa.
 
 O ato da operação e o ato já registrado do mesmo tipo ocupam a **mesma vaga** e contam **uma vez
 só**, porque a retificação continua a linhagem do ato registrado. O que repete é a declaração do
-cronograma sobre essa vaga. As correções de um ato são atos próprios e não entram como declaração.
+cronograma sobre essa vaga.
 
 A unicidade vem do catálogo de tipos de ato, mas em datas diferentes. A do ato da operação vem do
 tipo conferido na **data de publicação do ato**. A dos produtos do cronograma e dos atos já
-registrados vem do catálogo na **data de hoje**, no fuso institucional. Tipo que o catálogo não marca
-como único nessas datas não gera esta recusa.
+registrados vem do catálogo na **data de hoje**, no fuso institucional. Tipo que o catálogo não
+marca como único nessas datas não gera esta recusa.
 
-A mensagem de detalhe nomeia o tipo pelo nome do catálogo (por exemplo, "Resultado final"), o papel
-quando há ("como preliminar", "como definitivo") e onde ele repete: em qual fase, em qual etapa (com
-a ordem), no ato em registro ou nos atos já registrados.
+A mensagem de detalhe nomeia o tipo pelo nome do catálogo (por exemplo, "Resultado final") e diz
+onde ele repete: em qual fase, em qual etapa (com a ordem), no ato em registro ou nos atos já
+registrados.
 
-A recusa é do conteúdo do cronograma frente ao catálogo, e não de uma disputa por estado gravado.
-Por isso o status é **422**.
+Não confunda com a repetição **dentro de uma mesma fase ou etapa**, que tem outra regra e outra
+recusa: a mesma fase ou etapa não declara o mesmo tipo com o mesmo papel duas vezes
+([`ato_duplicado_na_fase`](./uniplus.selecao.fase_cronograma.ato_duplicado_na_fase.mdx) e
+[`ato_duplicado_na_etapa`](./uniplus.selecao.etapa_processo.ato_duplicado_na_etapa.mdx)).
+
+A recusa é do conteúdo do cronograma frente ao catálogo, e não de uma disputa por estado
+gravado. Por isso o status é **422**.
 
 ## Como resolver
 
 Escolha a saída que cabe:
 
-- **Declare o tipo uma vez só por papel.** Mantenha-o no produto em que ele de fato sai e retire a
-  declaração repetida.
-- **Se a matéria sai duas vezes com o mesmo papel, use o tipo não único da mesma matéria.** Por
-  exemplo, "Resultado da homologação das inscrições" (`RESULTADO_HOMOLOGACAO`) no lugar de
-  "Homologação das inscrições" (`HOMOLOGACAO_INSCRICOES`): ele admite mais de uma publicação.
-- **Quando o conflito é com o ato já registrado**, retire a declaração do cronograma: aquele tipo já
-  foi publicado e não sai outra vez com o mesmo papel.
+- **Declare o tipo uma vez só no processo.** Mantenha-o no produto em que ele de fato sai e
+  retire as demais declarações, qualquer que seja o papel.
+- **Para publicar preliminar e definitivo da mesma matéria, use um tipo não único.** Por exemplo,
+  "Resultado da homologação das inscrições" (`RESULTADO_HOMOLOGACAO`) no lugar de "Homologação das
+  inscrições" (`HOMOLOGACAO_INSCRICOES`): ele admite mais de uma publicação e serve às duas
+  declarações.
+- **Quando o conflito é com o ato já registrado**, retire a declaração do cronograma: aquele tipo
+  já foi publicado e não sai outra vez.
 
-Depois, publique, retifique ou feche a sessão editorial de novo. O preflight de conformidade mostra só
-as duplicidades **dentro do cronograma**, no item `cronograma_tipo_de_ato_unico_declarado_uma_vez`. O
-conflito com o ato da operação ou com um ato já registrado só aparece ao publicar, retificar ou fechar
-a sessão editorial.
+Depois, publique, retifique ou feche a sessão editorial de novo. O preflight de conformidade
+mostra só as duplicidades **dentro do cronograma**, no item
+`cronograma_tipo_de_ato_unico_declarado_uma_vez`. O conflito com o ato da operação ou com um ato
+já registrado só aparece ao publicar, retificar ou fechar a sessão editorial.
