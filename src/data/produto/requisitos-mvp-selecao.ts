@@ -995,11 +995,11 @@ export const requisitosMvpSelecao: Requisito[] = [
     nivel: 'regra',
     parent_id: 'UNI-REQ-0157',
     modulo: 'Seleção',
-    recorte: 'mvp',
-    status: 'aprovado',
+    recorte: 'incremento_obrigatorio',
+    status: 'incremento_planejado',
     prioridade: 'must',
-    politica_backlog: 'implementavel',
-    tipo_issue_recomendado: 'Story',
+    politica_backlog: 'incremento_futuro',
+    tipo_issue_recomendado: 'None',
     criterios_aceite:
       'A correção publicada de um resultado preliminar abre um novo prazo de recurso, contado da publicação da correção pelas regras de prazo do edital; o novo prazo vale também quando a correção sai depois do fim do prazo original; o recurso aberto nesse prazo é contra o resultado corrigido; uma nova correção do mesmo resultado reabre o prazo a partir dela; depois do definitivo publicado, a correção do preliminar é recusada (UNI-REQ-0162).',
     verificacao:
@@ -1017,11 +1017,11 @@ export const requisitosMvpSelecao: Requisito[] = [
     nivel: 'regra',
     parent_id: 'UNI-REQ-0157',
     modulo: 'Seleção',
-    recorte: 'mvp',
-    status: 'aprovado',
+    recorte: 'incremento_obrigatorio',
+    status: 'incremento_planejado',
     prioridade: 'must',
-    politica_backlog: 'implementavel',
-    tipo_issue_recomendado: 'Story',
+    politica_backlog: 'incremento_futuro',
+    tipo_issue_recomendado: 'None',
     criterios_aceite:
       'Com o controle de prazo e de recursos no sistema, a publicação do definitivo é recusada enquanto o prazo de recurso de qualquer preliminar que ele fecha, ou da última correção dele, não terminou, e enquanto há recurso sem julgamento em qualquer desses ciclos; com o prazo encerrado e os recursos julgados, o definitivo é aceito.',
     verificacao:
