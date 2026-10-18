@@ -945,7 +945,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0157',
     titulo: 'Publicação de resultado declarado no edital',
     enunciado:
-      'Cada fase e etapa do cronograma declara os atos que publica e o papel de cada um: preliminar, que abre o prazo de recurso; definitivo, cuja publicação fecha o ciclo recursal da matéria quando há preliminar; ou nenhum. O prazo de recurso é contado a partir da publicação do preliminar, conforme as regras de prazo do edital (UNI-REQ-0113 a UNI-REQ-0116); a publicação do definitivo não é o que encerra o prazo. O administrador publica cada item declarado com o PDF correspondente. Não se publica resultado que o edital não declara; se for preciso, faz-se por retificação do edital (UNI-REQ-0021). O ciclo recursal pode atravessar fases: uma fase abre com o preliminar e outra, concluinte, fecha com o definitivo. O definitivo de uma matéria só sai depois do preliminar dela quando o cronograma declara preliminar para essa matéria, na mesma fase ou na fase que abre o ciclo; quem não tem preliminar declarado publica o definitivo direto, como a única publicação da matéria. A matéria é o tipo de ato, e o papel diz se a publicação é preliminar ou definitiva: o preliminar e o definitivo de uma matéria são declarados no cronograma com o mesmo tipo de ato, e é esse tipo que liga um ao outro. Por isso a fase e a etapa podem declarar o mesmo tipo de ato uma vez com cada papel, e o catálogo de tipos de ato não repete o papel no código do tipo. Decisão do líder técnico em 18/10/2026. Cada item tem uma única publicação original; as correções são novos atos que apontam a publicação corrigida (UNI-REQ-0156) e não contam como nova publicação do item. A correção de resultado publicado é errata ou retificação do ato, como relação entre atos e sem nova versão de configuração (UNI-REQ-0156), distinta da retificação do edital; o recurso cabe contra o resultado corrigido, e não contra a errata. O sistema não exige, não aplica nem verifica assinatura digital: o PDF assinado fora do sistema é publicado sem alteração de nenhum byte, e a assinatura continua válida. Definição do PO repassada pelo líder técnico em 17/10/2026.',
+      'Cada fase e etapa do cronograma declara os atos que publica e o papel de cada um: preliminar, que abre o prazo de recurso; definitivo, cuja publicação fecha o ciclo recursal da matéria quando há preliminar; ou nenhum. O prazo de recurso é contado a partir da publicação do preliminar, conforme as regras de prazo do edital (UNI-REQ-0113 a UNI-REQ-0116); a publicação do definitivo não é o que encerra o prazo. O administrador publica cada item declarado com o PDF correspondente. Não se publica resultado que o edital não declara; se for preciso, faz-se por retificação do edital (UNI-REQ-0021). O ciclo recursal pode atravessar fases: uma fase abre com o preliminar e outra, concluinte, fecha com o definitivo. O definitivo de uma matéria só sai depois do preliminar dela quando o cronograma declara preliminar para essa matéria, na mesma fase ou na fase que abre o ciclo; quem não tem preliminar declarado publica o definitivo direto, como a única publicação da matéria. Quando duas fases abrem ciclo com o preliminar do mesmo tipo de ato e apontam a mesma fase concluinte, o definitivo desse tipo na concluinte fecha os dois ciclos e só sai depois dos dois preliminares. A matéria é o tipo de ato, e o papel diz se a publicação é preliminar ou definitiva: o preliminar e o definitivo de uma matéria são declarados no cronograma com o mesmo tipo de ato, e é esse tipo que liga um ao outro. Por isso a fase e a etapa podem declarar o mesmo tipo de ato uma vez com cada papel, e o catálogo de tipos de ato não repete o papel no código do tipo. Decisão do líder técnico em 18/10/2026. Cada item tem uma única publicação original; as correções são novos atos que apontam a publicação corrigida (UNI-REQ-0156) e não contam como nova publicação do item. A correção de resultado publicado é errata ou retificação do ato, como relação entre atos e sem nova versão de configuração (UNI-REQ-0156), distinta da retificação do edital; o recurso cabe contra o resultado corrigido, e não contra a errata, e a correção do preliminar reabre o prazo de recurso (UNI-REQ-0160). O sistema não exige, não aplica nem verifica assinatura digital: o PDF assinado fora do sistema é publicado sem alteração de nenhum byte, e a assinatura continua válida. Definição do PO repassada pelo líder técnico em 17/10/2026.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -984,6 +984,28 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Testes automatizados (confirmação obrigatória; registro da confirmação; exibição da política da versão congelada, e não da viva) (planejado); revisão LGPD.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend; DPO',
+  },
+  {
+    requisito_id: 'UNI-REQ-0160',
+    titulo: 'Correção do resultado preliminar reabre o prazo de recurso',
+    enunciado:
+      'Quando um resultado preliminar é corrigido, por errata ou por retificação do ato, o candidato ganha um novo prazo de recurso, inteiro, contado a partir da publicação da correção e pelas mesmas regras de prazo do edital (UNI-REQ-0113 a UNI-REQ-0116). Assim, quem foi afetado pela correção tem sempre o prazo completo para recorrer do resultado que passou a valer, mesmo quando a correção sai perto do fim do prazo original ou depois dele. O recurso é contra o resultado corrigido, e não contra a errata (UNI-REQ-0157). Se o mesmo resultado for corrigido de novo, o prazo é reaberto de novo, a partir da nova correção. Decisão do líder técnico em 18/10/2026, registrada para conhecimento do PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0157',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A correção publicada de um resultado preliminar abre um novo prazo de recurso, contado da publicação da correção pelas regras de prazo do edital; o novo prazo vale também quando a correção sai depois do fim do prazo original; o recurso aberto nesse prazo é contra o resultado corrigido; uma nova correção do mesmo resultado reabre o prazo a partir dela.',
+    verificacao:
+      'Testes automatizados (correção dentro do prazo original reabre o prazo inteiro; correção depois do fim do prazo original reabre o prazo; recurso contra o resultado corrigido; segunda correção reabre o prazo a partir dela) (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
   },
   {
     requisito_id: 'UNI-REQ-0033',
