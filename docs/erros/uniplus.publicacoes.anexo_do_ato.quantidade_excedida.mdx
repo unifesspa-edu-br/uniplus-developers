@@ -1,0 +1,33 @@
+---
+title: O ato excede o número máximo de anexos
+sidebar_label: Mais de 50 anexos no ato
+description: 'Um ato normativo leva no máximo 50 anexos.'
+code: uniplus.publicacoes.anexo_do_ato.quantidade_excedida
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo
+  - Registro de ato normativo por mensagem durável do módulo dono do objeto
+requisitos:
+  - UNI-REQ-0154
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1962'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1962
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista traz mais de 50 anexos. A mensagem de detalhe informa quantos foram enviados. Os
+anexos são conferidos antes de qualquer consulta ao banco, tanto no endpoint administrativo
+de Publicações quanto no registro por mensagem durável.
+
+## Como resolver
+
+Reduza a lista para até 50 anexos, reunindo arquivos quando possível, e registre o ato de
+novo.

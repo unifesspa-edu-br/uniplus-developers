@@ -1,0 +1,36 @@
+---
+title: O hash do anexo deve ser um SHA-256 em hexadecimal minúsculo
+sidebar_label: Hash do anexo inválido
+description: 'O hash de um anexo não é um SHA-256 em hexadecimal minúsculo de 64 caracteres.'
+code: uniplus.publicacoes.anexo_do_ato.hash_invalido
+http_status: 422
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo
+  - Registro de ato normativo por mensagem durável do módulo dono do objeto
+requisitos:
+  - UNI-REQ-0154
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1962'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1962
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada anexo é provado pelo hash do arquivo, e sem ele o hash do documento principal não prova
+que o ato publicado é o que se registrou. O hash informado para um dos anexos não é um
+SHA-256 em hexadecimal minúsculo, com 64 caracteres. A mensagem de detalhe nomeia o anexo.
+Os anexos são conferidos antes de qualquer consulta ao banco, tanto no endpoint
+administrativo de Publicações quanto no registro por mensagem durável, e a recusa nomeia o
+primeiro anexo com problema.
+
+## Como resolver
+
+Calcule o SHA-256 do arquivo do anexo, escreva-o em hexadecimal minúsculo, com 64
+caracteres, e registre o ato de novo.
