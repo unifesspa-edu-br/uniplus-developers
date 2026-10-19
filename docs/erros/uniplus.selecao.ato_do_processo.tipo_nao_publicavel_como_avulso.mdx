@@ -1,0 +1,36 @@
+---
+title: O tipo não é publicável como documento avulso
+sidebar_label: Tipo não publicável como avulso
+description: 'Rascunho — O catálogo não marca o tipo de ato como publicável como documento avulso; só aviso, comunicado e errata são.'
+code: uniplus.selecao.ato_do_processo.tipo_nao_publicavel_como_avulso
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de ato escolhido existe e vigora na data do documento, mas o catálogo de tipos de ato
+não o marca como publicável como documento avulso. Hoje só aviso, comunicado e errata são.
+Resultado, convocação e chamada têm fluxo próprio: o resultado declarado no edital se
+publica pela publicação de resultado (UNI-REQ-0157), e convocação e chamada pertencem ao
+Ingresso. A conferência acontece antes de qualquer gravação, e a mensagem de detalhe nomeia
+o tipo.
+
+## Como resolver
+
+Escolha um tipo publicável como documento avulso, como aviso, comunicado ou errata. Se o
+tipo deveria ser avulso, peça ao administrador do catálogo de tipos de ato que o marque como
+publicável como documento avulso e repita a publicação. Para publicar um resultado, use a
+publicação de resultado do item que a fase ou a etapa declara no edital.
