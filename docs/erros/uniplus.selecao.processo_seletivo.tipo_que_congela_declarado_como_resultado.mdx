@@ -1,0 +1,43 @@
+---
+title: O tipo de ato que congela a configuração não pode ser declarado como item de resultado
+sidebar_label: Tipo que congela declarado como resultado
+description: 'Rascunho — A correção de um resultado não cria versão nova do edital; por isso o tipo que congela a configuração não serve de resultado.'
+code: uniplus.selecao.processo_seletivo.tipo_que_congela_declarado_como_resultado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0156
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1989'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1989
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma fase ou uma etapa declara, com papel preliminar ou definitivo, um tipo de ato que o
+catálogo marca como **congelador de configuração**, como o edital de abertura ou a
+retificação do edital. Esses tipos criam uma versão nova da configuração do processo ao
+serem publicados. A correção de um resultado, ao contrário, é uma errata ou retificação do
+ato e não cria versão nova; um tipo que congela não teria correção possível como resultado.
+A mensagem de detalhe nomeia o tipo de ato e o lugar, a fase ou a etapa, onde ele foi
+declarado.
+
+## Como resolver
+
+Escolha para o produto um tipo de ato de resultado que não congele a configuração. Se o
+produto só precisa constar no cronograma como publicação esperada, declare-o sem papel. Um
+ato que muda a configuração do processo se publica pela publicação ou pela retificação do
+edital, e não como item de resultado. O preflight de conformidade mostra esta pendência no
+item `cronograma_tipo_que_congela_nao_eh_resultado`.

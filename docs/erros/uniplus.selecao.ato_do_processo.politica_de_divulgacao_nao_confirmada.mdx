@@ -1,0 +1,39 @@
+---
+title: A publicação de resultado exige a confirmação da política de divulgação do certame
+sidebar_label: Política de divulgação não confirmada
+description: 'Rascunho — Quem publica um resultado, ou a correção dele, confirma que o PDF segue a política de divulgação congelada na versão vigente do edital.'
+code: uniplus.selecao.ato_do_processo.politica_de_divulgacao_nao_confirmada
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de item do edital
+requisitos:
+  - UNI-REQ-0158
+rastreio:
+  - label: 'uniplus-api#1965'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1965
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de ato do item é um **resultado**, e a publicação chegou sem a confirmação de que o
+PDF segue a política de divulgação do certame. A confirmação é exigida na publicação do
+resultado e também na da correção dele, por errata ou retificação do ato, inclusive quando a
+correção aponta outra correção da cadeia.
+
+A política que vale é a da versão vigente do edital, congelada na publicação, e não a do
+cadastro: mudar o cadastro depois não altera o que se confirma. A mensagem de detalhe lista
+os campos que a política torna públicos. O sistema não confere o conteúdo do PDF; a
+confirmação é o compromisso de quem publica.
+
+## Como resolver
+
+Consulte a política de divulgação mostrada junto aos itens previstos do processo, confira se o
+PDF só traz os campos públicos e repita a publicação com a confirmação marcada
+(`politicaDeDivulgacaoConfirmada`). Se o PDF traz algum dado fora da política, gere uma
+versão sem ele antes de publicar. A confirmação fica registrada com o ato.

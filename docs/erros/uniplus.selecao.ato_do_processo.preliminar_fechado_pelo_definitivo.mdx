@@ -1,0 +1,34 @@
+---
+title: O resultado preliminar não se corrige depois do definitivo
+sidebar_label: Preliminar fechado pelo definitivo
+description: 'Rascunho — O definitivo publicado fecha o ciclo de recurso; o preliminar e as correções dele deixam de ser corrigíveis, e o ajuste é feito no definitivo.'
+code: uniplus.selecao.ato_do_processo.preliminar_fechado_pelo_definitivo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de item do edital
+requisitos:
+  - UNI-REQ-0162
+rastreio:
+  - label: 'uniplus-api#1965'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1965
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A publicação tenta corrigir um resultado **preliminar** cujo definitivo já foi publicado. O
+definitivo fecha o ciclo de recurso da matéria, e o que vale a partir daí é ele. A trava vale
+para toda a cadeia de correções do preliminar: nem o preliminar nem a correção mais recente
+dele podem ser corrigidos. Vale só para os ciclos que esse definitivo fecha; o preliminar do
+mesmo tipo de ato em outro ciclo, ainda aberto, continua corrigível.
+
+## Como resolver
+
+Corrija o resultado **definitivo**, por errata ou retificação do ato, informando a publicação
+do definitivo como ato corrigido. A correção do definitivo ajusta o documento publicado e não
+abre novo prazo de recurso.

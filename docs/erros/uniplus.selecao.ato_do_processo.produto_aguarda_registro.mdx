@@ -1,0 +1,35 @@
+---
+title: O item do edital foi enviado e aguarda a confirmação do registro
+sidebar_label: Item aguarda confirmação do registro
+description: 'Rascunho — A primeira publicação do item já foi enviada ao Publicações e ainda não foi confirmada; nova publicação só depois da confirmação.'
+code: uniplus.selecao.ato_do_processo.produto_aguarda_registro
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de item do edital
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1965'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1965
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A publicação do item foi aceita e enviada ao Publicações, mas o registro dela ainda não foi
+confirmado. O item só conta como publicado quando o Publicações confirma o registro e o
+documento chega ao acervo público. Enquanto isso, o sistema não aceita outra publicação
+original do mesmo item, para não registrar dois documentos para a mesma matéria.
+
+## Como resolver
+
+Aguarde a confirmação e consulte de novo os itens previstos do processo: quando o item
+aparecer como publicado, a publicação está concluída e não há mais nada a enviar. Se for
+preciso ajustar o documento, publique depois uma errata ou uma retificação do ato, que aponta
+a publicação já confirmada. Se o item continuar sem confirmação por um tempo anormal, acione o
+suporte técnico do Uni+ informando o processo e o item.

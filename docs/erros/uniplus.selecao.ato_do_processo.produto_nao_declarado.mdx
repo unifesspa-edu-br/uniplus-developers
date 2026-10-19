@@ -1,0 +1,36 @@
+---
+title: O item não consta na versão vigente do edital
+sidebar_label: Item não consta no edital
+description: 'Rascunho — Só se publica o item que a fase ou a etapa declara na versão vigente do edital; outro item exige retificar o edital.'
+code: uniplus.selecao.ato_do_processo.produto_nao_declarado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de item do edital
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1965'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1965
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A publicação indicou um item que a versão vigente do edital do processo não declara. O edital
+diz, em cada fase e em cada etapa, quais atos serão publicados; o sistema publica somente
+esses itens, cada um com o tipo de ato que o edital lhe deu. O identificador informado pode
+ser de um item que nunca existiu, de outro processo seletivo ou de um item que a versão
+vigente do edital já não declara, por exemplo porque uma retificação o retirou.
+
+## Como resolver
+
+Consulte os itens previstos do processo e escolha, na lista, o item que se quer publicar.
+Se o ato que se quer publicar não está na lista, o edital precisa declará-lo: retifique o
+edital para incluir o item na fase ou na etapa certa e, com a retificação publicada, publique
+o item. Para um aviso, um comunicado ou uma errata que o edital não prevê, use a publicação de
+documento avulso, que não depende de item declarado.
