@@ -1,0 +1,44 @@
+---
+title: A janela que não admite instância superior não declara tempo de bloqueio superior
+sidebar_label: Instância superior na fase sem admissão
+description: 'Rascunho — A janela de recurso da fase declarou tempo de bloqueio da instância superior, mas não admite recurso nela.'
+code: uniplus.selecao.regra_recurso_fase.suspensividade_superior_sem_instancia_superior
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Configuração do cronograma — regra de recurso da fase
+requisitos:
+  - UNI-REQ-0080
+  - UNI-REQ-0081
+rastreio:
+  - label: 'uniplus-api#1991'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1991
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada janela de recurso declara se admite recurso em **instância superior**. Nem todo
+resultado admite: quando a banca recursal encerra o recurso, a decisão da 1ª instância é
+final.
+
+A janela da fase foi declarada como **não admitindo** instância superior e, mesmo assim,
+trouxe o tempo de bloqueio da instância superior (o valor, a unidade ou os dois). Sem
+instância superior não há o que bloquear depois da 1ª instância, e o tempo informado não
+teria efeito.
+
+## Como resolver
+
+Escolha o que o edital prevê para essa janela:
+
+- **a decisão da banca recursal é final.** Mantenha a janela como não admitindo
+  instância superior e deixe em branco o tempo de bloqueio da instância superior;
+- **cabe recurso a outra instância.** Declare que a janela admite instância superior.
+  O tempo de bloqueio dela passa a ser opcional: informe-o se a instância superior
+  bloqueia o processo, ou deixe-o em branco se não bloqueia.
+
+O tempo de bloqueio da 1ª instância não é afetado por essa escolha.
