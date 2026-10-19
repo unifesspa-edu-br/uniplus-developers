@@ -10,11 +10,11 @@ Documento de referência funcional para Análise de Requisitos — como o sistem
 
 Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo da entrega atual: configuração e publicação; a inscrição é capacidade prevista pelos requisitos do MVP.
 
-> Esta página é a **visão geral de negócio** do módulo. Para comportamento já implementado, o código mergeado no `uniplus-api` é a fonte de verdade; para requisitos e regras de negócio, o registro estruturado versionado no portal é a fonte canônica conforme ADR-0002. A documentação narrativa sintetiza essas fontes. Os catálogos rastreáveis vivem em páginas dedicadas: o [domínio e as modalidades](../dominio/index.mdx), as [regras de negócio nomeadas](../regras-negocio/conceitos.mdx) (`RN`) e a [tabela de requisitos](../requisitos/index.mdx) (`UNI-REQ`). Os pontos ainda em aberto estão identificados na seção **Questões em refinamento**.
+> Esta página é a **visão geral de negócio** do módulo. Para comportamento já implementado, o código mergeado no `uniplus-api` é a fonte de verdade; para requisitos e regras de negócio, o registro estruturado versionado no portal é a fonte canônica conforme ADR-0002. A documentação narrativa sintetiza essas fontes. Os catálogos rastreáveis vivem em páginas dedicadas: o [domínio e as modalidades](../dominio/index.mdx), as [regras de negócio institucionais](../regras-negocio/conceitos.mdx) e a [tabela de requisitos](../requisitos/index.mdx) (`UNI-REQ`). Os pontos ainda em aberto estão identificados na seção **Questões em refinamento**.
 
 ## Como ler este documento
 
-Este texto descreve o comportamento de negócio do sistema em linguagem corrente, sem termos de programação. As regras estão organizadas por assunto e, ao final, consolidadas em um catálogo. Cada regra recebe um código estável (por exemplo `RN05` ou `REQ-46`) para facilitar referência futura em reuniões, editais e homologação. As situações são classificadas como Entrega atual (objeto desta primeira entrega), Fundação (base estrutural) ou Etapa futura (planejada para etapas seguintes).
+Este texto descreve o comportamento de negócio do sistema em linguagem corrente, sem termos de programação. As regras estão organizadas por assunto e, ao final, consolidadas em um catálogo. Cada regra aponta o requisito com código estável (`UNI-REQ-NNNN`, por exemplo `UNI-REQ-0046`) para facilitar referência futura em reuniões, editais e homologação. As situações são classificadas como Entrega atual (objeto desta primeira entrega), Fundação (base estrutural) ou Etapa futura (planejada para etapas seguintes).
 
 ## Questões em refinamento
 
@@ -105,7 +105,7 @@ O sistema não permite publicar um processo seletivo com configuração incoeren
 
 A publicação é o ato central do módulo. É quando a configuração deixa de ser rascunho e passa a valer oficialmente, e quando o edital — o documento que a torna pública — é emitido.
 
-> `RN08` — Congelamento de parâmetros por edital *(nome histórico da regra, citado fora deste repositório; tecnicamente o congelamento ocorre por processo seletivo — ver [Edital versus processo seletivo](../dominio/index.mdx#edital-versus-processo-seletivo))*. Ao publicar o processo seletivo, toda a configuração é congelada em uma cópia oficial imutável, e o edital é emitido como o ato que a torna pública. Percentuais, critérios, cotas, vagas, documentos exigidos, a coleta de fatos (perguntas e suas pré-condições), as regras de derivação e as regras de cálculo passam a valer exatamente como estavam no momento da publicação. Alterações posteriores nos cadastros gerais do sistema não afetam processos seletivos já publicados — só valem para processos futuros. Isso garante duas coisas essenciais: os resultados são reproduzíveis (é sempre possível reconstruir fielmente como o processo seletivo funcionava) e ninguém pode alterar as regras de um certame em andamento.
+> Congelamento dos parâmetros na publicação (`UNI-REQ-0019`). O congelamento ocorre por processo seletivo — ver [Edital versus processo seletivo](../dominio/index.mdx#edital-versus-processo-seletivo). Ao publicar o processo seletivo, toda a configuração é congelada em uma cópia oficial imutável, e o edital é emitido como o ato que a torna pública. Percentuais, critérios, cotas, vagas, documentos exigidos, a coleta de fatos (perguntas e suas pré-condições), as regras de derivação e as regras de cálculo passam a valer exatamente como estavam no momento da publicação. Alterações posteriores nos cadastros gerais do sistema não afetam processos seletivos já publicados — só valem para processos futuros. Isso garante duas coisas essenciais: os resultados são reproduzíveis (é sempre possível reconstruir fielmente como o processo seletivo funcionava) e ninguém pode alterar as regras de um certame em andamento.
 
 Consequências práticas do congelamento, em linguagem de negócio:
 
@@ -128,13 +128,13 @@ Quando for implementada, a inscrição será possível quando existir um process
 
 ### Regras observadas na inscrição
 
-| Código | Regra | Descrição em negócio |
+| Requisito | Regra | Descrição em negócio |
 |---|---|---|
-| `RN01` | Uma inscrição por CPF | Um mesmo CPF só pode ter uma inscrição submetida por processo e nível de ensino. Inscrições em níveis de ensino diferentes do mesmo processo são permitidas. O rascunho não conta para essa restrição. |
-| `RN02` | Nome social | Sempre que o nome for exibido — em listas, telas ou documentos —, o nome social tem prioridade absoluta sobre o nome civil. |
-| `RN03` | Documentos obrigatórios | A inscrição não pode ser submetida sem os documentos obrigatórios exigidos para o caso do candidato. |
-| `RN06` | Cancelar e refazer | O candidato pode cancelar e refazer a inscrição enquanto o período estiver aberto. O cancelamento registra motivo, data e autor, e libera nova inscrição respeitando a regra do CPF único. |
-| `RN07` | Lista de espera | O candidato entra em lista de espera conforme a opção indicada no ato da inscrição. Etapa futura — capacidade planejada, ainda sem escopo na entrega atual. |
+| `UNI-REQ-0031` | Uma inscrição por CPF | Um mesmo CPF só pode ter uma inscrição submetida por processo e nível de ensino. Inscrições em níveis de ensino diferentes do mesmo processo são permitidas. O rascunho não conta para essa restrição. |
+| `UNI-REQ-0032` | Nome social | Sempre que o nome for exibido — em listas, telas ou documentos —, o nome social tem prioridade absoluta sobre o nome civil. |
+| `UNI-REQ-0028` | Documentos obrigatórios | A inscrição não pode ser submetida sem os documentos obrigatórios exigidos para o caso do candidato. |
+| `UNI-REQ-0033` | Cancelar e refazer | O candidato pode cancelar e refazer a inscrição enquanto o período estiver aberto. O cancelamento registra motivo, data e autor, e libera nova inscrição respeitando a regra do CPF único. |
+| `UNI-REQ-0047` | Lista de espera | O candidato entra em lista de espera conforme a opção indicada no ato da inscrição. Etapa futura — capacidade planejada, ainda sem escopo na entrega atual. |
 
 > Comprovante e pendências. Mesmo após submeter, um documento ainda em verificação técnica de segurança gera uma pendência que fica registrada e visível no acompanhamento e no comprovante — sem impedir a submissão. A inscrição permanece válida; a pendência apenas sinaliza algo a acompanhar. O comprovante nunca é alterado: uma reemissão gera um novo comprovante, preservando o anterior.
 
@@ -227,7 +227,7 @@ Pontos de atenção que o formulário resolve automaticamente:
 
 Duas regras distintas atuam aqui:
 
-- Precedência de opções de curso (`RN04`). Vagas da 1ª opção de curso são processadas antes de qualquer realocação para a 2ª opção.
+- Precedência de opções de curso (`UNI-REQ-0045`). Vagas da 1ª opção de curso são processadas antes de qualquer realocação para a 2ª opção.
 - Cascata de remanejamento entre modalidades (`REQ-56`). Vagas de uma cota não preenchida migram para outra modalidade conforme uma configuração congelada no snapshot de publicação do processo seletivo. Por modalidade de origem, a configuração define uma **sequência ordenada de destinos** e, além dela, a **cota de fallback** — o destino terminal, usado quando a sequência se esgota. A ordem é semântica: reordená-la muda a modalidade para a qual a vaga migra primeiro e, portanto, quem é convocado.
 
 A configuração da cascata já fica congelada na publicação; o processamento do remanejamento permanece em etapa futura.
@@ -246,7 +246,7 @@ O sistema distingue três tipos de informação sobre o candidato:
 - Dados calculados pelo sistema (derivados) — informações que o sistema deduz automaticamente dos dados informados, por regra configurada ou por mecanismo do próprio sistema (`UNI-REQ-0075`). O exemplo central de regra configurada é a modalidade de concorrência: o candidato responde às perguntas de cota e o sistema calcula o conjunto de modalidades (seção 7.5). São calculados pelo próprio sistema, sem configuração do administrador, a faixa etária (da data de nascimento, usada para decidir exigências de documento), a UF e o município (do endereço) e o egresso de escola pública (da origem escolar, `UNI-REQ-0148`).
 - Dados de integração — informações vindas de outra fonte ou sistema (por exemplo, atributos do candidato importados), com origem própria e resolvidas como os demais fatos. A natureza é suportada no modelo desde já; o que ainda não existe é uma fonte concreta de integração conectada. Não são respostas do formulário nem resultado de derivação; um dado como a nacionalidade só é usado como fato quando tem uma origem definida (informado ou de integração). Ver as três naturezas de fato na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md).
 
-> Por que essa distinção importa. Modelar a modalidade como dado calculado — e não como uma escolha direta do candidato — evita erros e fraudes, garante que a Lei de Cotas seja aplicada de forma uniforme e permite mudar as regras de composição por configuração, sem desenvolvimento. A regra de cálculo é parte da configuração e é congelada na publicação (`RN08`).
+> Por que essa distinção importa. Modelar a modalidade como dado calculado — e não como uma escolha direta do candidato — evita erros e fraudes, garante que a Lei de Cotas seja aplicada de forma uniforme e permite mudar as regras de composição por configuração, sem desenvolvimento. A regra de cálculo é parte da configuração e é congelada na publicação (`UNI-REQ-0019`).
 
 ### 8.2 Campos condicionais (o que aparece depende do que foi respondido)
 
@@ -343,7 +343,7 @@ Detalhes de negócio úteis à análise:
 - Uma retificação publicada no meio do caminho não retroage sobre recurso já em curso: o prazo de interposição e o par de suspensividade que governam o recurso, com suas convenções de contagem, são os vigentes quando o direito de recorrer nasceu — a publicação do ato recorrido ou, na janela ancorada na ciência individual, a ciência do candidato (`UNI-REQ-0115`) —, nunca os vigentes na interposição ou no julgamento. Um recurso contra um ato publicado, ou uma ciência tomada, já sob a regra retificada é regido pela regra nova; não é congelamento perpétuo do processo, é imunidade retroativa por ato (`UNI-REQ-0093`). Sempre que a versão que rege a janela (a que publicou o ato ou, na janela por ciência, a vigente na ciência do candidato) não tem configuração de recurso para ela, da fase ou da etapa — porque nunca houve janela, ou porque uma retificação anterior deixou de configurá-la —, uma interposição nessa janela é recusada com erro nomeado, nunca aceita silenciosamente sem bloqueio (`UNI-REQ-0094`). Irreversibilidade do ato não entra nessa garantia: é classificação do cadastro do tipo de ato (por exemplo, convocação sempre consome vaga escassa), não configuração do processo seletivo que uma retificação possa mudar.
 - O que já precisa ser configurado e congelado na entrega atual. Embora o processamento do recurso seja etapa futura, a informação que o alimenta é configurada e congelada desde a publicação: para cada janela de recurso, de fase ou de etapa, a publicação do processo seletivo congela o prazo de interposição da 1ª instância (a única que o Uni+ recebe) e, por instância, o tempo de bloqueio (um par valor mais unidade, ou sem bloqueio quando não se aplica) — ambos com convenção de contagem explícita — o prazo de interposição em dias úteis ou horas de dia útil, nunca em dias corridos; o tempo de bloqueio nas três convenções — a localidade cujo calendário rege a contagem e o fuso em que o dia civil começa e termina (`UNI-REQ-0111`), a primeira informada no cadastro e obrigatória em todo processo, o segundo aplicado pelo sistema e congelado na publicação. As contagens que distinguem dia útil de não útil — todo prazo de interposição e a suspensividade em dias úteis — dependem de calendário vigente cadastrado e de algoritmo de contagem declarado (faltando qualquer um dos dois, a publicação é recusada). Sem esses campos congelados, o mecanismo futuro não teria como saber o que travar nem reconstruir a garantia de não retroatividade para processo publicado antes de o mecanismo existir — por isso uma janela de recurso publicada sem eles é recusada, assim como o é qualquer processo publicado sem localidade; uma fase ou etapa sem janela de recurso simplesmente não os tem; a instância superior não exige prazo de interposição próprio, por não ter essa etapa dentro do sistema. O fundamento do prazo de interposição está aprovado: é a publicação do processo seletivo que o fixa (`UNI-REQ-0095`). O que ainda bloqueia é mais estreito — publicar processo real **que dependa de efeito suspensivo configurado** aguarda a confirmação jurídica daquela garantia (`UNI-REQ-0117`), independentemente de os campos acima estarem completos. Configuração na entrega atual.
 
-> `RN14` — Matrícula compulsória por decisão judicial final. Quando, no Ingresso, a instância judicial não bloqueia e a vaga é ocupada, mas depois uma decisão judicial final reconhece o direito do candidato — tipicamente com o curso já em andamento —, a universidade o matricula em vaga supranumerária (adicional ao quadro), após cumpridas as fases de habilitação e verificação documental. O quadro de vagas não é alterado, ninguém é desclassificado e a classificação permanece íntegra. É ato excepcional, auditável, com a própria decisão judicial como base legal.
+> Matrícula compulsória por decisão judicial final (`UNI-REQ-0082`). Quando, no Ingresso, a instância judicial não bloqueia e a vaga é ocupada, mas depois uma decisão judicial final reconhece o direito do candidato — tipicamente com o curso já em andamento —, a universidade o matricula em vaga supranumerária (adicional ao quadro), após cumpridas as fases de habilitação e verificação documental. O quadro de vagas não é alterado, ninguém é desclassificado e a classificação permanece íntegra. É ato excepcional, auditável, com a própria decisão judicial como base legal.
 
 ## 11. Proteção de dados e nome social
 
@@ -351,7 +351,7 @@ Por ser sistema de autarquia federal que trata dados pessoais sensíveis de cand
 
 - Minimização na divulgação. Por padrão, as divulgações públicas expõem o mínimo (o número de inscrição). Ampliar para o nome abreviado (iniciais + último sobrenome) dispensa justificativa, por ser a prática recomendada; ampliar para o nome completo exige justificativa, que fica registrada na versão congelada do processo seletivo.
 - Registros de acesso e ocultação de dados sensíveis. O acesso a dados sensíveis é auditável, e dados pessoais (CPF, nome, documentos) são ocultados nos registros operacionais do sistema.
-- Nome social (`RN02`). Sempre que o nome é exibido, o nome social tem prioridade sobre o civil, em telas, listas e documentos.
+- Nome social (`UNI-REQ-0032`). Sempre que o nome é exibido, o nome social tem prioridade sobre o civil, em telas, listas e documentos.
 - Nome social da conta (`UNI-REQ-0153`). O nome social é dado da conta: o titular o mantém em Meu perfil, e a inscrição usa o da conta quando o candidato escolhe usar nome social. O comprovante registra a escolha, e a inscrição segue com o nome social do envio até ser refeita. O nome social não é cifrado.
 - Retenção de documentos. O prazo de guarda e expurgo dos documentos segue a Tabela de Temporalidade das instituições federais de ensino e a orientação do encarregado de dados e do jurídico. A confirmar antes da produção.
 
@@ -359,20 +359,20 @@ Por ser sistema de autarquia federal que trata dados pessoais sensíveis de cand
 
 ## 12. Catálogo de regras de negócio
 
-Consolidação das regras institucionais nomeadas. O enunciado público e o mapeamento para os requisitos de cada uma vivem na página de [regras de negócio](../regras-negocio/conceitos.mdx). As regras marcadas como etapa futura têm sua configuração de base já prevista na entrega atual; apenas o processamento é posterior.
+Consolidação das regras institucionais. O enunciado público e o mapeamento para os requisitos de cada uma vivem na página de [regras de negócio](../regras-negocio/conceitos.mdx). As regras marcadas como etapa futura têm sua configuração de base já prevista na entrega atual; apenas o processamento é posterior.
 
-| Código | Regra | Enunciado | Situação |
+| Requisito | Regra | Enunciado | Situação |
 |---|---|---|---|
-| `RN01` | Inscrição única por CPF | Um CPF só pode ter uma inscrição submetida por processo e nível de ensino; níveis distintos do mesmo processo são permitidos. | Entrega atual |
-| `RN02` | Prioridade do nome social | Nome social tem prioridade absoluta em listas públicas e documentos de identificação. | Entrega atual |
-| `RN03` | Documentos obrigatórios | Inscrição bloqueada sem os documentos obrigatórios aplicáveis ao caso do candidato. | Entrega atual |
-| `RN04` | Precedência de opções de curso | Vagas de 1ª opção de curso são processadas primeiro; as remanescentes são realocadas para a 2ª opção. A cascata de remanejamento entre modalidades é regra própria (`REQ-56`), não parte da `RN04`. | Etapa futura |
-| `RN05` | Fator de Atenuação das Desigualdades de Acesso | Fator de Atenuação das Desigualdades de Acesso, que cada processo declara se aplica ou não (a declaração é obrigatória para publicar), com percentual configurável por processo seletivo, aplicado sobre a nota final; sem comprovação de elegibilidade, o candidato é reclassificado sem o fator (não eliminado). | Etapa futura |
-| `RN06` | Cancelar e refazer | O candidato pode cancelar e refazer a inscrição antes do encerramento, com registro de motivo, data e autor. | Entrega atual |
-| `RN07` | Lista de espera | Inserção na lista de espera conforme a opção indicada no ato da inscrição. | Etapa futura |
-| `RN08` | Congelamento por edital *(nome histórico — tecnicamente, por processo seletivo)* | Todos os parâmetros ficam congelados na publicação do processo seletivo; alterações retroativas são proibidas e atualizações globais valem só para processos futuros. | Entrega atual |
-| `RN13` | Recurso e efeito suspensivo | 1ª instância no sistema; instância superior julgada fora, mas registrada. Efeito suspensivo configurável por instância e por janela de recurso (de fase ou de etapa); cada janela declara se admite instância superior; ausência não bloqueia. | Base configurada |
-| `RN14` | Matrícula compulsória | Decisão judicial final que reconhece direito a vaga ocupada gera matrícula em vaga supranumerária, sem alterar o quadro nem a classificação. | Etapa futura |
+| `UNI-REQ-0031` | Inscrição única por CPF | Um CPF só pode ter uma inscrição submetida por processo e nível de ensino; níveis distintos do mesmo processo são permitidos. | Entrega atual |
+| `UNI-REQ-0032` | Prioridade do nome social | Nome social tem prioridade absoluta em listas públicas e documentos de identificação. | Entrega atual |
+| `UNI-REQ-0028` | Documentos obrigatórios | Inscrição bloqueada sem os documentos obrigatórios aplicáveis ao caso do candidato. | Entrega atual |
+| `UNI-REQ-0024`, `UNI-REQ-0045` | Precedência de opções de curso | Vagas de 1ª opção de curso são processadas primeiro; as remanescentes são realocadas para a 2ª opção. A cascata de remanejamento entre modalidades é regra própria (`REQ-56`), não parte da precedência das opções de curso. | Etapa futura |
+| `UNI-REQ-0015`, `UNI-REQ-0046` | Fator de Atenuação das Desigualdades de Acesso | Fator de Atenuação das Desigualdades de Acesso, que cada processo declara se aplica ou não (a declaração é obrigatória para publicar), com percentual configurável por processo seletivo, aplicado sobre a nota final; sem comprovação de elegibilidade, o candidato é reclassificado sem o fator (não eliminado). | Etapa futura |
+| `UNI-REQ-0033` | Cancelar e refazer | O candidato pode cancelar e refazer a inscrição antes do encerramento, com registro de motivo, data e autor. | Entrega atual |
+| `UNI-REQ-0047` | Lista de espera | Inserção na lista de espera conforme a opção indicada no ato da inscrição. | Etapa futura |
+| `UNI-REQ-0019` | Congelamento por processo seletivo na publicação | Todos os parâmetros ficam congelados na publicação do processo seletivo; alterações retroativas são proibidas e atualizações globais valem só para processos futuros. | Entrega atual |
+| `UNI-REQ-0080` | Recurso e efeito suspensivo | 1ª instância no sistema; instância superior julgada fora, mas registrada. Efeito suspensivo configurável por instância e por janela de recurso (de fase ou de etapa); cada janela declara se admite instância superior; ausência não bloqueia. | Base configurada |
+| `UNI-REQ-0082` | Matrícula compulsória | Decisão judicial final que reconhece direito a vaga ocupada gera matrícula em vaga supranumerária, sem alterar o quadro nem a classificação. | Etapa futura |
 
 ### 12.1 Requisitos e regras derivadas (rastreabilidade)
 
@@ -387,7 +387,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | `REQ-19` | Publicação com cópia congelada | Publicar o processo seletivo, criando a cópia oficial imutável da configuração e emitindo o edital. |
 | `REQ-21 / 22` | Retificação e bloqueio de edição | Alterar processo seletivo publicado só por retificação (novo ato que aponta o retificado, nova versão congelada); edição direta bloqueada. |
 | `REQ-23` a 33 | Ciclo da inscrição previsto | Rascunho, submissão, opções de curso, concorrência dupla, atendimento, documentos, comprovante, unicidade, nome social, cancelamento. |
-| `REQ-56` | Cascata de remanejamento | Congelada no snapshot de publicação: por modalidade de origem, sequência ordenada de destinos mais a cota de fallback. A ordem de migração é semântica e distinta da `RN04`. |
+| `REQ-56` | Cascata de remanejamento | Congelada no snapshot de publicação: por modalidade de origem, sequência ordenada de destinos mais a cota de fallback. A ordem de migração é semântica e distinta da precedência das opções de curso. |
 | `REQ-57` a 71 | Documentos exigidos (detalhe) | Aplicabilidade geral/condicional, condições, base legal, formatos e idade, documentos alternativos, consequências, repetição por entidade e congelamento do conjunto. |
 | `REQ-72` a 78 | Coleta e cálculo de cotas | Autodeclaração mais opção de concorrer, campos condicionais, não se aplica versus pendente, cálculo de modalidade pela Lei de Cotas e ordem de coleta. |
 | `REQ-80`, `81`, `93` a `95` e `82` | Recurso e matrícula | Campos de suspensividade congelados, mecanismo do efeito suspensivo, anti-retroatividade por versão do ato, recusa nominal sem configuração de recurso, dependência de base legal e matrícula compulsória. |
@@ -408,7 +408,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Ensalamento e locais exatos de prova | Etapa futura | — |
 | Lançamento de notas por etapa | Etapa futura | As etapas são configuradas agora; as notas são lançadas depois. |
 | Processamento de classificação, remanejamento, desempate, Fator de Atenuação e resultado | Etapa futura | A configuração da cascata já está congelada no snapshot de publicação; esta etapa executará o remanejamento conforme a sequência de destinos e a cota de fallback. |
-| Recursos administrativos | Etapa futura | Base de suspensividade já configurada (`RN13`). |
+| Recursos administrativos | Etapa futura | Base de suspensividade já configurada (`UNI-REQ-0080`). |
 | Habilitação e chamadas de vagas (Ingresso/CRCA) | Etapa futura | Fronteira com o módulo Ingresso. |
 
 ## 14. Conformidade legal

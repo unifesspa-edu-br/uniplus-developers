@@ -12,7 +12,7 @@ Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: da criação �
 
 ## Como ler este documento
 
-O texto descreve o comportamento de negócio em linguagem corrente. Cada assunto aponta o requisito correspondente com código estável (`UNI-REQ-NNNN`) já registrado na [tabela de requisitos](../requisitos/index.mdx), para facilitar referência em reuniões, editais e homologação. A rastreabilidade completa está no final. A regra de integridade do edital publicado é referida pela marca `RN08`, detalhada nas [regras de negócio](../regras-negocio/conceitos.mdx).
+O texto descreve o comportamento de negócio em linguagem corrente. Cada assunto aponta o requisito correspondente com código estável (`UNI-REQ-NNNN`) já registrado na [tabela de requisitos](../requisitos/index.mdx), para facilitar referência em reuniões, editais e homologação. A rastreabilidade completa está no final. A regra de integridade do edital publicado (congelamento dos parâmetros na publicação) está detalhada nas [regras de negócio institucionais](../regras-negocio/conceitos.mdx).
 
 ## 1. Quem configura e o que é um "rascunho"
 
@@ -52,7 +52,7 @@ Para cada oferta de curso, configura-se a **distribuição de vagas**: o total, 
 Configura-se a **oferta de atendimento especializado** — as condições (por exemplo, pessoa com deficiência), os recursos de acessibilidade (ledor, prova ampliada, intérprete) e os tipos de deficiência, sendo que tipo de deficiência só é aceito sob a condição de pessoa com deficiência.
 
 ### 2.6 Classificação e Fator de Atenuação das Desigualdades de Acesso
-Define-se a **fórmula de classificação** (como a nota final é composta a partir das etapas e seus pesos e o arredondamento) e as **regras de eliminação** (nota mínima por etapa, corte de redação, etc.) (`UNI-REQ-0015`). A ordem de alocação de vagas tem duas partes distintas: a precedência entre 1ª e 2ª opção de curso é **regra fixa** (`RN04`), não configurável; apenas a cascata de remanejamento entre modalidades (`UNI-REQ-0056`) é configurada e congelada por edital. O administrador declara se o processo **aplica o Fator de Atenuação das Desigualdades de Acesso** — um acréscimo percentual à nota final, com seu critério de elegibilidade — e, quando aplica, o configura. A declaração é obrigatória: a ausência bloqueia a publicação e nunca é interpretada como "sem Fator de Atenuação", e "não aplica" é uma resposta válida (`UNI-REQ-0015`).
+Define-se a **fórmula de classificação** (como a nota final é composta a partir das etapas e seus pesos e o arredondamento) e as **regras de eliminação** (nota mínima por etapa, corte de redação, etc.) (`UNI-REQ-0015`). A ordem de alocação de vagas tem duas partes distintas: a precedência entre 1ª e 2ª opção de curso é **regra fixa** (`UNI-REQ-0045`), não configurável; apenas a cascata de remanejamento entre modalidades (`UNI-REQ-0056`) é configurada e congelada por edital. O administrador declara se o processo **aplica o Fator de Atenuação das Desigualdades de Acesso** — um acréscimo percentual à nota final, com seu critério de elegibilidade — e, quando aplica, o configura. A declaração é obrigatória: a ausência bloqueia a publicação e nunca é interpretada como "sem Fator de Atenuação", e "não aplica" é uma resposta válida (`UNI-REQ-0015`).
 
 ### 2.7 Documentos exigidos
 Configuram-se os **documentos comprobatórios** exigidos, por **condição** e por **fase** (`UNI-REQ-0016`). Cada exigência declara de quem é cobrada — de todos, ou de quem satisfaz um **gatilho** sobre os fatos do candidato (por exemplo, na inscrição, "exigido de quem concorre a uma cota de renda"; na habilitação, a cobrança segue o grupo em que a pessoa foi convocada, `UNI-REQ-0147`). Definem-se a base legal de cada exigência (`UNI-REQ-0059`), os formatos e o tamanho aceitos, a idade máxima de emissão, e a estrutura da comprovação (documentos alternativos, grupos "um dos seguintes", repetição por membro do núcleo familiar). Quando um documento depende da idade do candidato, configura-se a **referência temporal** que resolve a idade (a data e a fase de referência).
@@ -78,7 +78,7 @@ Publicar exige ainda que a localidade esteja declarada, e que exista calendário
 
 O **período de inscrição não é informado** quando o cronograma tem fase que coleta inscrição: ele é o prazo declarado na janela dessa fase, e o Edital publica exatamente aquilo. Informá-lo aqui é recusado — aceitar um valor e descartá-lo em silêncio esconderia o desencontro entre o que o ato diz e o que o cronograma marca. Quando o certame **não** coleta inscrição pelo sistema — candidatos vindos de importação externa —, não há janela de onde derivar, e aí o período continua sendo informado no ato.
 
-A publicação cria a **cópia oficial imutável** da configuração — o snapshot congelado (`UNI-REQ-0019`, `UNI-REQ-0020`, `RN08`).
+A publicação cria a **cópia oficial imutável** da configuração — o snapshot congelado (`UNI-REQ-0019`, `UNI-REQ-0020`).
 
 > **Por que congelar.** A cópia congelada é o documento de maior peso jurídico do processo: é ela que sustenta o resultado do certame. Dois candidatos com as mesmas respostas obtêm o mesmo resultado, e qualquer reavaliação reflete exatamente a configuração vigente à época da publicação — mesmo que a configuração viva mude depois.
 
