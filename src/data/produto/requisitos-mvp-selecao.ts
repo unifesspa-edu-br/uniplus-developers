@@ -1118,6 +1118,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Equipe frontend',
   },
   {
+    requisito_id: 'UNI-REQ-0166',
+    titulo: 'Tipo de ato de resultado não tem efeito irreversível',
+    enunciado:
+      'No catálogo de tipos de ato, o efeito irreversível marca o ato que, ao ser publicado, já produz um efeito que não se desfaz em favor de outra pessoa, como a convocação, que ocupa uma vaga. Contra esse ato não cabe recurso, porque não haveria o que reverter: o recurso cabível é contra o resultado que o fundamenta, e a janela de recurso não se ancora em ato de efeito irreversível (UNI-REQ-0080). O resultado é justamente o ato contra o qual se recorre: o resultado preliminar abre o prazo de recurso da sua matéria (UNI-REQ-0157). Por isso o tipo de ato de um resultado nunca é marcado como de efeito irreversível. Se fosse, a fase ou a etapa que publica o preliminar não conseguiria abrir nele a janela de recurso, e o candidato ficaria sem prazo para recorrer. O efeito irreversível fica com o ato que decorre do resultado, como a convocação feita a partir do resultado da classificação. Decisão tomada na consolidação do catálogo de tipos de ato por matéria e registrada a pedido do líder técnico em 19/10/2026.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0157',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O catálogo do sistema não marca como de efeito irreversível nenhum tipo de ato classificado como resultado; a consolidação do catálogo por matéria não altera nada quando encontra, entre os tipos de resultado que vai usar, um marcado como de efeito irreversível, e aponta qual é; a janela de recurso ancorada no preliminar de um tipo de resultado é aceita; a janela de recurso ancorada em ato de efeito irreversível, como a convocação, é recusada (UNI-REQ-0080).',
+    verificacao:
+      'Conferência do catálogo do sistema (nenhum tipo de resultado com efeito irreversível); conferência do roteiro de consolidação, que para antes de escrever diante de tipo de resultado irreversível; testes automatizados da recusa da janela de recurso ancorada em ato de efeito irreversível.',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
     requisito_id: 'UNI-REQ-0033',
     titulo: 'Cancelar e refazer inscrição',
     enunciado:
