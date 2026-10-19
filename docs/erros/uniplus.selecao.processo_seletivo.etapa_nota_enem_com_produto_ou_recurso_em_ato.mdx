@@ -1,0 +1,44 @@
+---
+title: A etapa com nota do ENEM não declara produto nem recurso contra ato publicado
+sidebar_label: Etapa do ENEM com produto ou recurso em ato
+description: Quem publica o resultado e recebe o recurso coletivo é a fase; na etapa cabe só o recurso por ciência individual.
+code: uniplus.selecao.processo_seletivo.etapa_nota_enem_com_produto_ou_recurso_em_ato
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+  - Publicação inicial do processo seletivo
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1615'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1615
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma etapa cuja nota vem do ENEM declarou **produtos** (atos que ela publica) ou uma
+janela de recurso ancorada na **publicação de um ato**.
+
+Nessa etapa ninguém atribui a nota: ela é importada. O resultado é publicado pela
+**fase**, que divulga a lista geral, e o recurso coletivo sobre essa lista é o da
+janela de recurso da fase. Declarar produto ou recurso contra ato na etapa criaria uma
+segunda publicação e uma segunda janela para o mesmo resultado, com prazos que
+poderiam divergir.
+
+O que cabe na etapa é o recurso **por ciência individual**: o candidato que recebe um
+parecer individual sobre a sua situação conta o prazo do momento em que toma ciência.
+
+## Como resolver
+
+A mensagem da recusa nomeia a etapa. Dois caminhos:
+
+- **O resultado e o recurso coletivo.** Remova os produtos e a janela ancorada em ato
+  da etapa, e declare-os na fase que publica a lista geral.
+- **Um parecer individual a cada candidato.** Mantenha na etapa apenas a janela
+  ancorada na ciência individual, com a etapa marcada para emitir parecer individual.
