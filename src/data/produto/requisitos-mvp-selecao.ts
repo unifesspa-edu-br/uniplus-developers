@@ -1033,7 +1033,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0162',
     titulo: 'Preliminar não se corrige depois do definitivo publicado',
     enunciado:
-      'Depois que o resultado definitivo de uma matéria é publicado, os resultados preliminares dos ciclos que esse definitivo fecha não podem mais ser corrigidos: aqueles ciclos de recurso estão fechados, e o que vale é o definitivo. A trava vale só para os ciclos que o definitivo fecha; o preliminar do mesmo tipo de ato em outro ciclo, ainda aberto, continua podendo ser corrigido. Se for preciso ajustar alguma coisa, a correção é feita no próprio definitivo, por errata ou por retificação do ato (UNI-REQ-0156). Por isso a reabertura do prazo de recurso pela correção do preliminar (UNI-REQ-0160) só acontece enquanto o definitivo ainda não foi publicado. Decisão do líder técnico em 18/10/2026, registrada para conhecimento do PO.',
+      'Depois que o resultado definitivo de uma matéria é publicado, os resultados preliminares dos ciclos que esse definitivo fecha não podem mais ser corrigidos: aqueles ciclos de recurso estão fechados, e o que vale é o definitivo. A trava vale só para os ciclos que o definitivo fecha; o preliminar do mesmo tipo de ato em outro ciclo, ainda aberto, continua podendo ser corrigido. Se for preciso ajustar alguma coisa, a correção é feita no próprio definitivo, por errata ou por retificação do ato (UNI-REQ-0156). Por isso a reabertura do prazo de recurso pela correção do preliminar (UNI-REQ-0160) só acontece enquanto o definitivo ainda não foi publicado. A correção do definitivo não abre prazo de recurso: o resultado definitivo não tem recurso, e a correção dele só ajusta o que foi publicado. Decisão do líder técnico em 18/10/2026, registrada para conhecimento do PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1045,7 +1045,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A correção de um resultado preliminar é recusada quando já foi publicado o definitivo que fecha o ciclo dele, com orientação para corrigir o definitivo; o preliminar do mesmo tipo em outro ciclo, cujo definitivo ainda não saiu, continua podendo ser corrigido; antes da publicação do definitivo, a correção do preliminar é aceita; a correção do definitivo por errata ou retificação do ato continua aceita.',
+      'A correção de um resultado preliminar é recusada quando já foi publicado o definitivo que fecha o ciclo dele, com orientação para corrigir o definitivo; o preliminar do mesmo tipo em outro ciclo, cujo definitivo ainda não saiu, continua podendo ser corrigido; antes da publicação do definitivo, a correção do preliminar é aceita; a correção do definitivo por errata ou retificação do ato continua aceita e não abre prazo de recurso.',
     verificacao:
       'Testes automatizados (correção do preliminar recusada depois do definitivo publicado; correção do preliminar aceita antes do definitivo; correção do definitivo aceita) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
