@@ -41,7 +41,7 @@ Cada cota tem **dois fatos independentes** (`UNI-REQ-0072`):
 - **Elegibilidade** — a autodeclaração (ex.: "você é pessoa com deficiência?"); a elegibilidade de escola pública não é perguntada, é calculada de onde e como o candidato cursou o ensino médio (`UNI-REQ-0148`).
 - **Opt-in** — a escolha de concorrer (ex.: "deseja concorrer à cota de pessoa com deficiência?").
 
-A elegibilidade sozinha **não** coloca o candidato na cota — a escolha de concorrer é o que decide. Um candidato pode ser elegível e optar por não concorrer àquela reserva. Só o par elegibilidade **mais** opt-in habilita a contribuição daquela modalidade; a concorrência efetiva ainda depende da derivação e da interseção com a oferta do processo (seção 5).
+A elegibilidade sozinha **não** coloca o candidato na cota — a escolha de concorrer é o que decide. Um candidato pode ser elegível e optar por não concorrer àquela reserva. Só o par elegibilidade **mais** opt-in habilita a contribuição daquela modalidade; a concorrência efetiva ainda depende da derivação e da oferta: do processo, antes da escolha de curso, e do curso de cada opção escolhida (seção 5).
 
 ## 3. O formulário é condicional
 
@@ -79,6 +79,7 @@ A regra de derivação é uma **lista de regrinhas** do tipo "**quando** tais co
 Dois pontos de negócio importantes:
 
 - **Restrição à oferta do processo.** O domínio de contribuição da regra é o próprio **conjunto de modalidades que o processo oferta**. Uma regra que contribua uma modalidade fora da oferta é **recusada na configuração e barrada na publicação** (fail-closed), não filtrada em silêncio em tempo de inscrição. A interseção com a oferta é, assim, garantida por construção — o candidato nunca concorre a uma modalidade que o edital não oferece.
+- **Restrição por curso.** Escolhidas as ofertas (curso em um campus e turno), as modalidades em que o candidato concorre são calculadas por opção: a elegibilidade dele, uma só, limitada ao que a distribuição da oferta daquela opção contempla (`UNI-REQ-0164`). O fato de modalidade usado nas condições do formulário e dos documentos é a união das modalidades das opções escolhidas, sem contar ofertas não escolhidas, e muda quando a escolha muda; antes da escolha, vale o conjunto sobre o processo.
 - **Todo código contribuído é do vocabulário.** Uma regrinha só pode contribuir uma modalidade que exista no domínio congelado; um código desconhecido (por exemplo, um rótulo de exibição usado como se fosse código) é recusado na configuração, nunca traduzido.
 
 Um fato derivado só fica resolvido quando **todas as informações de que depende** já resolveram; se algo de que ele depende está pendente, o derivado também fica pendente.
@@ -112,7 +113,7 @@ Cada comportamento acima corresponde a um requisito com código estável na [tab
 | `UNI-REQ-0073` | Grafo de pré-condições da coleta e gate de escola pública | Formulário condicional e exclusões (seção 3). |
 | `UNI-REQ-0074` | Estado tipado não-aplicável versus indeterminado | "Não se aplica" versus "pendente" (seção 4). |
 | `UNI-REQ-0075` | Fato derivado com regra de derivação congelada | Regra "quando/contribui" (seção 5). |
-| `UNI-REQ-0076` | Derivação de modalidade por configuração (Lei de Cotas) | Cálculo da modalidade e interseção com a oferta (seção 5). |
+| `UNI-REQ-0076` | Derivação de modalidade por configuração (Lei de Cotas) | Cálculo da modalidade, oferta do processo e restrição por curso (seção 5). |
 | `UNI-REQ-0077` | Ordem de coleta, grafo conjunto e máscara de emissão | Ordem lógica, encadeamento sem ciclos e máscara de emissão bloqueada — documento não cobrado antes de o fato poder resolver (seção 6). |
 | `UNI-REQ-0078` | Determinismo e congelamento conjunto do grafo de coleta e derivação | Congelamento e reprodutibilidade na publicação (seção 7). |
 | `UNI-REQ-0143` | Catálogo de fatos do candidato administrável | Quem cadastra os fatos e os seus valores (seção 1). |
