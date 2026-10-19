@@ -1,0 +1,34 @@
+---
+title: 'O tipo corrige sempre outro ato: informe o ato corrigido e o motivo'
+sidebar_label: Tipo exige ato corrigido
+description: 'Rascunho — O tipo de ato, como a errata, corrige sempre outro ato publicado, e o pedido não indicou o ato corrigido.'
+code: uniplus.selecao.ato_do_processo.tipo_exige_ato_corrigido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O catálogo marca o tipo de ato escolhido como um tipo que corrige sempre outro ato, como a
+errata. O pedido não indicou o ato corrigido (`atoCorrigidoId`). A errata não existe
+sozinha: ela aponta o ato que corrige e registra o motivo (UNI-REQ-0156). A mensagem de
+detalhe nomeia o tipo.
+
+## Como resolver
+
+Informe em `atoCorrigidoId` o ato publicado que se quer corrigir, o mais recente da cadeia
+de correção, e o motivo da correção, e repita a publicação. Se o ato não corrige nenhum
+outro, escolha um tipo de ato que não exija correção, como aviso ou comunicado.
