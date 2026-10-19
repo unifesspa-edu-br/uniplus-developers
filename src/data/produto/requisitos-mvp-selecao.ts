@@ -1135,7 +1135,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     criterios_aceite:
       'O cadastro de tipos de ato recusa, ao criar e ao editar, o tipo marcado como resultado e como de efeito irreversível, e aceita o tipo de resultado sem a marca e o tipo de efeito irreversível que não é resultado, como a convocação; o catálogo do sistema não marca como de efeito irreversível nenhum tipo de ato classificado como resultado; a consolidação do catálogo por matéria não altera nada quando encontra, entre os tipos de resultado que vai usar, um marcado como de efeito irreversível, e aponta qual é; a janela de recurso ancorada no preliminar de um tipo de resultado é aceita; a janela de recurso ancorada em ato de efeito irreversível, como a convocação, é recusada (UNI-REQ-0080).',
     verificacao:
-      'Testes automatizados do cadastro de tipos de ato (tipo de resultado com efeito irreversível recusado ao criar e ao editar) (planejado); conferência do catálogo do sistema (nenhum tipo de resultado com efeito irreversível); conferência do roteiro de consolidação, que para antes de escrever diante de tipo de resultado irreversível; testes automatizados da recusa da janela de recurso ancorada em ato de efeito irreversível.',
+      'Testes automatizados do cadastro de tipos de ato (tipo de resultado com efeito irreversível recusado ao criar e ao editar); conferência do catálogo do sistema (nenhum tipo de resultado com efeito irreversível); conferência do roteiro de consolidação, que para antes de escrever diante de tipo de resultado irreversível; testes automatizados da recusa da janela de recurso ancorada em ato de efeito irreversível.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
