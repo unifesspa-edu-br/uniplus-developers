@@ -1,0 +1,36 @@
+---
+title: 'Informe o ato corrigido: o motivo da correção só existe junto dele'
+sidebar_label: Motivo sem ato corrigido
+description: 'Rascunho — O ato informa o motivo da correção, mas não diz qual ato corrige.'
+code: uniplus.selecao.ato_do_processo.ato_corrigido_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ato veio com o **motivo da correção** preenchido, mas sem o **ato corrigido**.
+
+O motivo descreve o que uma correção muda num ato anterior. Sem dizer qual ato é corrigido,
+o motivo não tem a que se referir, e o documento não entra em nenhuma cadeia de correções.
+
+## Como resolver
+
+Escolha o que o documento é:
+
+- **é uma correção.** Escolha o ato corrigido, que é o mais recente da cadeia de correções
+  daquele ato, e mantenha o motivo;
+- **não é uma correção.** Apague o motivo e publique o documento como um aviso ou comunicado
+  novo.
