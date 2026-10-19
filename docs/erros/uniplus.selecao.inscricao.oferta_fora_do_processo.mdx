@@ -1,0 +1,35 @@
+---
+title: A oferta de curso escolhida não é deste processo seletivo
+sidebar_label: Oferta de curso fora do processo
+description: A oferta de curso escolhida na inscrição não pertence ao processo seletivo em que o candidato se inscreve.
+code: uniplus.selecao.inscricao.oferta_fora_do_processo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+  - Gravação do rascunho da inscrição
+requisitos:
+  - UNI-REQ-0024
+  - UNI-REQ-0134
+rastreio:
+  - label: 'uniplus-api#1972'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1972
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A inscrição aponta para uma oferta de curso (curso em um campus e turno) que
+não faz parte do processo seletivo em que ela foi aberta. Só as ofertas do
+próprio processo podem ser escolhidas como opção de curso. Isso acontece, por
+exemplo, quando a tela guarda uma escolha de outro processo ou de uma versão
+anterior das ofertas.
+
+## Como resolver
+
+Recarregue a inscrição e escolha a oferta de curso na lista que o processo
+apresenta; essa lista só traz ofertas válidas. Em seguida, envie de novo.

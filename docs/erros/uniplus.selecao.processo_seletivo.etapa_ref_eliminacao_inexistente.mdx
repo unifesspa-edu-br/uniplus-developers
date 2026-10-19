@@ -34,10 +34,10 @@ Esta checagem roda na raiz do agregado, não dentro de
 `ConfiguracaoClassificacao.Criar` — é a invariante que depende de OUTRA
 dimensão do processo (as etapas), por isso só a raiz, que enxerga as duas
 dimensões, pode validá-la. As invariantes internas da própria configuração
-(coerência entre regra de cálculo e arredondamento, limites de opções de
-alocação, eliminação por ENEM) já foram validadas antes, dentro de
-`ConfiguracaoClassificacao.Criar` — ver, por exemplo,
-[`n_opcoes_invalido`](./uniplus.selecao.configuracao_classificacao.n_opcoes_invalido.mdx)
+(coerência entre regra de cálculo e arredondamento, eliminação por ENEM) já
+foram validadas antes, dentro de `ConfiguracaoClassificacao.Criar` — ver, por
+exemplo,
+[`arredondamento_indevido`](./uniplus.selecao.configuracao_classificacao.arredondamento_indevido.mdx)
 e as demais causas irmãs dela.
 
 Esta é uma das três causas desta série levantadas em **dois pontos**

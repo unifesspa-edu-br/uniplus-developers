@@ -1,0 +1,31 @@
+---
+title: A 2ª opção de curso só existe com a 1ª
+sidebar_label: 2ª opção sem a 1ª
+description: 'Para enviar a inscrição com a 2ª opção de curso, a 1ª opção também precisa estar escolhida.'
+code: uniplus.selecao.inscricao.segunda_opcao_sem_primeira
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0024
+rastreio:
+  - label: 'uniplus-api#2019'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2019
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A inscrição tem a 2ª opção de curso escolhida, mas não tem a 1ª. A 2ª opção é
+uma alternativa à 1ª e não existe sozinha (UNI-REQ-0024). O rascunho pode ser
+salvo nesse estado; a recusa vem no envio.
+
+## Como resolver
+
+Escolha a 1ª opção de curso e envie de novo. Se preferir não ter 2ª opção,
+retire-a e deixe só a 1ª.

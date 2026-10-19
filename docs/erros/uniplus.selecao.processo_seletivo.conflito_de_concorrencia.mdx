@@ -1,0 +1,33 @@
+---
+title: O processo foi alterado por outra pessoa ao mesmo tempo
+sidebar_label: Conflito de concorrência no processo
+description: Duas alterações do processo seletivo chegaram ao mesmo tempo e a sua foi recusada; recarregue o processo e repita a operação.
+code: uniplus.selecao.processo_seletivo.conflito_de_concorrencia
+http_status: 409
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do número de opções de curso do processo seletivo
+requisitos:
+  - UNI-REQ-0024
+rastreio:
+  - label: 'uniplus-api#1972'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1972
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas alterações do mesmo processo seletivo chegaram ao mesmo tempo, por
+pessoas ou abas diferentes. A que confirmou por último encontrou o processo
+já alterado pela outra e foi recusada, para que nenhuma sobrescreva a outra
+sem querer. Nada do que essa requisição enviou foi gravado.
+
+## Como resolver
+
+Recarregue o processo, confira como ele ficou depois da outra alteração e
+repita a operação. A nova tentativa parte do estado atual e é aceita, a
+menos que a outra alteração já tenha feito o que você pretendia.

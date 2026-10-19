@@ -1,0 +1,32 @@
+---
+title: A 2ª opção de curso é a mesma da 1ª
+sidebar_label: 2ª opção igual à 1ª
+description: 'A 2ª opção de curso precisa ser uma oferta diferente da 1ª.'
+code: uniplus.selecao.inscricao.segunda_opcao_igual_a_primeira
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+  - Gravação do rascunho da inscrição
+requisitos:
+  - UNI-REQ-0024
+rastreio:
+  - label: 'uniplus-api#2019'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2019
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A 1ª e a 2ª opção de curso são a mesma oferta (mesmo curso, campus e turno).
+A 2ª opção existe para o candidato indicar outra alternativa, por isso tem de
+ser diferente da 1ª (UNI-REQ-0024).
+
+## Como resolver
+
+Escolha outra oferta como 2ª opção ou retire a 2ª opção, que é opcional, e
+envie de novo.

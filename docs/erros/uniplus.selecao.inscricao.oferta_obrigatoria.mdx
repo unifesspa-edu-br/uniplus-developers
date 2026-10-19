@@ -1,0 +1,28 @@
+---
+title: Escolha a oferta de curso para enviar a inscrição
+sidebar_label: Oferta de curso obrigatória
+description: Para enviar a inscrição, a 1ª opção de curso precisa estar escolhida quando o processo tem ofertas.
+code: uniplus.selecao.inscricao.oferta_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0024
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo seletivo tem ofertas de curso (curso em um campus e turno), mas a
+inscrição foi enviada sem a 1ª opção escolhida. O rascunho pode ser salvo sem
+a oferta; a recusa vem no envio (UNI-REQ-0024).
+
+## Como resolver
+
+Escolha a oferta de curso como 1ª opção e envie de novo. A 2ª opção, quando o
+processo a admite, é opcional.
