@@ -1,0 +1,37 @@
+---
+title: O ato corrigido é um item do edital e só se corrige pela publicação do item
+sidebar_label: Ato corrigido é item do edital
+description: 'Rascunho — O documento avulso não corrige a publicação de um item do edital; a correção passa pelo próprio item, que confirma a política de divulgação e confere as travas do ciclo.'
+code: uniplus.selecao.ato_do_processo.ato_corrigido_eh_item_do_edital
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0156
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1965'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1965
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento avulso indica, como ato corrigido, a publicação de um item que o edital declara,
+como um resultado, ou uma correção dessa publicação na mesma cadeia. A correção de um item do
+edital passa pela publicação do próprio item, porque é ali que o sistema confirma a política
+de divulgação do certame e aplica as travas do ciclo de recurso, como a de não corrigir o
+preliminar depois do definitivo. O documento avulso não passa por essas conferências, e por
+isso não pode corrigir um item.
+
+## Como resolver
+
+Publique a correção pelo item: consulte os itens previstos do processo, escolha o item
+corrigido e envie a errata ou a retificação do ato por ele, informando a publicação corrigida
+e o motivo. Se o documento avulso não era uma correção, retire o ato corrigido e o motivo da
+requisição e publique-o como aviso ou comunicado.

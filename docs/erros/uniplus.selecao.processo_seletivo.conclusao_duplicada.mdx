@@ -1,0 +1,48 @@
+---
+title: A fase que fecha o próprio ciclo aponta uma concluinte que publica o definitivo do mesmo tipo
+sidebar_label: Conclusão duplicada
+description: 'Rascunho — O ciclo de um tipo de ato fecha na própria fase ou na concluinte, nunca nas duas: com dois definitivos, nada diz qual o fecha.'
+code: uniplus.selecao.processo_seletivo.conclusao_duplicada
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1989'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1989
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma fase do cronograma publica o preliminar e o definitivo de um tipo de ato, e portanto já
+fecha sozinha o ciclo de recurso dele. Ainda assim, ela declara uma fase concluinte, e essa
+fase também publica o definitivo do mesmo tipo de ato. O ciclo ficaria com dois definitivos,
+sem regra que diga qual deles o fecha.
+
+A fase concluinte existe para fechar o ciclo que a fase de origem não fecha. Se a própria fase
+já traz o definitivo do tipo, não há o que a concluinte fechar para esse tipo. A mensagem de
+detalhe nomeia as duas fases e o tipo de ato.
+
+## Como resolver
+
+Deixe o ciclo com um só definitivo, de uma das duas formas:
+
+- **Remova a fase concluinte** declarada na fase de origem, se o definitivo dela basta para
+  fechar o ciclo.
+- **Remova o definitivo repetido** de uma das duas fases, se o desenho do edital é que a
+  concluinte feche o ciclo. Nesse caso a fase de origem fica só com o preliminar do tipo e
+  mantém a concluinte declarada.
+
+O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_conclusao_do_ciclo_recursal`. O caso em que nenhuma das duas fases publica o
+definitivo é outro: ver [Conclusão do ciclo não declarada](./uniplus.selecao.processo_seletivo.conclusao_nao_declarada.mdx).
