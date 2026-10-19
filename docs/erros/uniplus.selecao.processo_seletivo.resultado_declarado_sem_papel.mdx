@@ -1,0 +1,44 @@
+---
+title: O tipo de ato classificado como resultado precisa declarar papel preliminar ou definitivo
+sidebar_label: Resultado declarado sem papel
+description: 'Rascunho — O resultado sem preliminar é declarado definitivo; só o ato que não é resultado fica sem papel.'
+code: uniplus.selecao.processo_seletivo.resultado_declarado_sem_papel
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1989'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1989
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma fase ou uma etapa declara, entre os atos que publica, um tipo de ato que o catálogo
+classifica como **resultado**, mas não diz se o produto é preliminar ou definitivo. Para o
+resultado o papel é obrigatório: é ele que diz se a publicação abre um ciclo de recurso ou
+se encerra a matéria. A mensagem de detalhe nomeia o tipo de ato e o lugar, a fase ou a etapa,
+onde ele foi declarado.
+
+A classificação vem do catálogo de tipos de ato, na data da conferência. Um tipo que não é
+resultado, como um aviso ou um parecer, não declara papel.
+
+## Como resolver
+
+Declare o papel do produto. O resultado que não tem preliminar é declarado **definitivo**; o
+resultado que admite recurso é declarado **preliminar**, com o definitivo do mesmo tipo de
+ato na mesma fase ou etapa, ou na fase concluinte. Se o ato não é de fato um resultado, em
+vez de mudar o edital peça ao administrador do catálogo que revise a classificação do tipo,
+e depois repita a operação. O preflight de conformidade mostra esta pendência no item
+`cronograma_resultado_declarado_com_papel`.

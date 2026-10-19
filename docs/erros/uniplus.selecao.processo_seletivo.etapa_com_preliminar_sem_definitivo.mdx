@@ -1,0 +1,42 @@
+---
+title: A etapa publica resultado preliminar sem o definitivo do mesmo tipo de ato
+sidebar_label: Etapa com preliminar sem definitivo
+description: 'Rascunho — A etapa não tem fase concluinte: o ciclo recursal dela fecha dentro dela, com o definitivo do mesmo tipo de ato do preliminar.'
+code: uniplus.selecao.processo_seletivo.etapa_com_preliminar_sem_definitivo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1989'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1989
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma etapa do processo publica o resultado **preliminar** de um tipo de ato e não publica o
+resultado **definitivo** do mesmo tipo. O preliminar abre um ciclo de recurso, e sem o
+definitivo a matéria fica aberta, sem desfecho previsto para o candidato.
+
+Diferente da fase do cronograma, a etapa não aponta uma fase concluinte: o ciclo dela fecha
+dentro dela mesma. Por isso o definitivo precisa estar nos produtos da própria etapa, com o
+mesmo tipo de ato do preliminar. Um definitivo de outro tipo não fecha o ciclo, porque a
+matéria é o tipo de ato. A mensagem de detalhe nomeia a etapa e o tipo de ato.
+
+## Como resolver
+
+Acrescente aos produtos da etapa o resultado definitivo do mesmo tipo de ato do preliminar,
+com papel definitivo. Se o edital quer que o definitivo saia em outra fase, declare o ciclo na
+fase do cronograma, que admite fase concluinte, e deixe a etapa sem o preliminar dessa
+matéria. O preflight de conformidade mostra esta pendência antes da publicação, no item
+`cronograma_conclusao_do_ciclo_recursal`.

@@ -1,0 +1,39 @@
+---
+title: O resultado definitivo só sai depois do preliminar da mesma matéria
+sidebar_label: Preliminar ainda não publicado
+description: 'Rascunho — O edital declara preliminar para a matéria, e o definitivo é recusado enquanto o preliminar do mesmo tipo de ato não foi publicado.'
+code: uniplus.selecao.ato_do_processo.preliminar_nao_publicado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de item do edital
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1965'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1965
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O item é um resultado **definitivo**, e o edital declara, para a mesma matéria, um resultado
+**preliminar** que ainda não foi publicado. O preliminar abre o ciclo de recurso e o
+definitivo o fecha; publicar o definitivo primeiro encerraria um ciclo que o candidato nem
+chegou a ver aberto.
+
+A matéria é o tipo de ato: só o preliminar do mesmo tipo de ato libera o definitivo. O
+preliminar publicado de outro tipo de ato não o libera, e vale o preliminar da mesma fase ou
+da fase que abre o ciclo que este definitivo fecha.
+
+## Como resolver
+
+Publique antes o resultado preliminar da mesma matéria, que a consulta dos itens previstos
+aponta como pendente. Com o preliminar publicado e confirmado, publique o definitivo. O
+sistema não controla ainda o prazo de recurso nem os julgamentos: depois do preliminar, cabe
+a quem publica esperar o encerramento do prazo e o julgamento dos recursos antes de publicar
+o definitivo.

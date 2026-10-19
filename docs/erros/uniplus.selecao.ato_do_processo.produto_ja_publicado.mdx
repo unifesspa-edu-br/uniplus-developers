@@ -1,0 +1,38 @@
+---
+title: O item do edital já foi publicado; a correção é errata ou retificação do ato
+sidebar_label: Item do edital já publicado
+description: 'Rascunho — Cada item do edital tem uma única publicação original; o que muda depois é corrigido por um novo ato que aponta a publicação corrigida.'
+code: uniplus.selecao.ato_do_processo.produto_ja_publicado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de item do edital
+requisitos:
+  - UNI-REQ-0157
+  - UNI-REQ-0163
+rastreio:
+  - label: 'uniplus-api#1965'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1965
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O item indicado já tem a sua publicação original. Cada item que o edital declara é publicado
+uma única vez; publicar de novo, como se fosse a primeira vez, daria ao candidato dois
+documentos originais para a mesma matéria, sem dizer qual vale.
+
+A recusa também ocorre quando duas publicações do mesmo item chegam ao mesmo tempo: só a
+primeira vale, e a outra recebe esta resposta.
+
+## Como resolver
+
+Para consertar o que foi publicado, publique um novo ato que **corrige** a publicação
+existente: uma errata ou uma retificação do ato, informando a publicação corrigida e o motivo.
+A correção é um ato novo ligado ao original e não conta como segunda publicação do item. Se a
+publicação repetida era só um reenvio do mesmo documento, não há o que fazer: a publicação
+original continua válida.

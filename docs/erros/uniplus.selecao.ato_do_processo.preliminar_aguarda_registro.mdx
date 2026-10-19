@@ -1,0 +1,34 @@
+---
+title: O resultado preliminar da mesma matéria aguarda a confirmação do registro
+sidebar_label: Preliminar aguarda confirmação do registro
+description: 'Rascunho — O preliminar da matéria foi enviado ao Publicações e ainda não foi confirmado; o definitivo espera a confirmação.'
+code: uniplus.selecao.ato_do_processo.preliminar_aguarda_registro
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de item do edital
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1965'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1965
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O item é um resultado **definitivo**, e o resultado preliminar da mesma matéria já foi
+enviado, mas o Publicações ainda não confirmou o registro dele. O preliminar só conta como
+publicado depois dessa confirmação; até lá o ciclo de recurso não está aberto, e o definitivo
+não pode fechá-lo.
+
+## Como resolver
+
+Aguarde a confirmação do registro do preliminar e consulte de novo os itens previstos do
+processo. Quando o preliminar constar como publicado, e esgotados o prazo de recurso e os
+julgamentos, publique o definitivo. Se a confirmação demorar mais que o razoável, acione o
+suporte técnico do Uni+ informando o processo e o item.

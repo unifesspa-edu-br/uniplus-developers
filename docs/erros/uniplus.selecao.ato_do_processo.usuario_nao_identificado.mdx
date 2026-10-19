@@ -1,0 +1,34 @@
+---
+title: O token não identifica quem confirma a política de divulgação
+sidebar_label: Usuário não identificado
+description: 'Rascunho — A confirmação da política de divulgação fica registrada com quem a fez; a sessão precisa trazer a identificação do usuário.'
+code: uniplus.selecao.ato_do_processo.usuario_nao_identificado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de item do edital
+requisitos:
+  - UNI-REQ-0158
+rastreio:
+  - label: 'uniplus-api#1965'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1965
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A publicação trouxe a confirmação da política de divulgação, mas a sessão de quem a enviou
+não traz o identificador do usuário (o claim `sub` do token de acesso). A confirmação fica
+registrada com o ato e com quem a fez; sem esse identificador, o registro ficaria sem autor, e
+o sistema recusa a publicação em vez de gravá-la assim.
+
+## Como resolver
+
+Encerre a sessão, entre de novo no Uni+ e repita a publicação: a nova sessão traz a
+identificação do usuário. Se o erro persistir depois de entrar de novo, o problema está na
+conta ou na integração com o provedor de identidade: acione o suporte técnico do Uni+, que
+precisa corrigir a conta antes que alguém consiga publicar resultados.
