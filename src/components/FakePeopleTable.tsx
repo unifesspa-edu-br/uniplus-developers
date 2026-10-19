@@ -3,7 +3,7 @@ import people from '@site/src/data/fake-people.json';
 
 interface Person {
   nome: string;
-  /** Nome social — presente apenas em parte das personas (RN02). */
+  /** Nome social — presente apenas em parte das personas (prioridade do nome social, UNI-REQ-0032). */
   nome_social?: string;
   /** Username da conta real em HML (Keycloak) — não é segredo, só identifica a conta. */
   username: string;

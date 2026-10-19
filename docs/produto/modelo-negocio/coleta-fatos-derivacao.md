@@ -12,7 +12,7 @@ Uni+ · Sistema Unificado Unifesspa · Módulo Seleção.
 
 ## Como ler este documento
 
-O texto descreve o comportamento de negócio em linguagem corrente. Cada assunto aponta o requisito correspondente com código estável (`UNI-REQ-NNNN`) já registrado na [tabela de requisitos](../requisitos/index.mdx), para facilitar referência em reuniões, editais e homologação. A rastreabilidade completa está no final. Onde uma regra de congelamento é citada, usa-se a marca `RN08` (integridade do edital publicado), detalhada nas [regras de negócio](../regras-negocio/conceitos.mdx).
+O texto descreve o comportamento de negócio em linguagem corrente. Cada assunto aponta o requisito correspondente com código estável (`UNI-REQ-NNNN`) já registrado na [tabela de requisitos](../requisitos/index.mdx), para facilitar referência em reuniões, editais e homologação. A rastreabilidade completa está no final. A regra de congelamento (integridade do edital publicado) está detalhada nas [regras de negócio institucionais](../regras-negocio/conceitos.mdx).
 
 ## Questões em refinamento
 
@@ -30,7 +30,7 @@ O sistema trabalha com **fatos** sobre o candidato — informações elementares
 - **Fato derivado** — o sistema **calcula** a partir de outros fatos, seguindo uma regra configurada ou um mecanismo do próprio sistema (`UNI-REQ-0075`). O **egresso de escola pública** é do segundo tipo: o sistema o calcula de onde e como o candidato cursou o ensino médio, e o administrador não o configura (`UNI-REQ-0148`). O exemplo central é a **modalidade de concorrência**: o candidato nunca escolhe "cota de renda com PPI"; ele responde às perguntas e o sistema compõe o conjunto de modalidades (seção 5).
 - **Fato de integração** — vem de outra fonte ou sistema, com origem própria e resolvido como os demais fatos (sem tratamento especial por origem). A natureza é suportada no modelo desde já; o que ainda não existe é uma fonte concreta de integração conectada.
 
-Cada fato escolhido numa lista tem um **vocabulário fechado**: um conjunto definido de valores, com uma descrição do significado de cada valor para orientar a escolha. Cada valor tem código próprio, ordem estável e é congelado no edital na publicação (`RN08`). O administrador cadastra os seus fatos e os valores deles no módulo Configuração, e um valor já usado é desativado, nunca apagado (`UNI-REQ-0143`). Os fatos que a lei ou o motor do sistema definem são fatos de sistema, protegidos: o administrador edita só o nome e a descrição deles, e os vocabulários normativos, como cor/raça, sexo e a autodeclaração de deficiência, têm opções fixas, que ele não acrescenta nem desativa; o tipo de deficiência segue o cadastro institucional do atendimento especializado (`UNI-REQ-0012`). O mesmo vale para as duas perguntas da origem escolar, cuja lista só cresce por nova versão do sistema (`UNI-REQ-0148`).
+Cada fato escolhido numa lista tem um **vocabulário fechado**: um conjunto definido de valores, com uma descrição do significado de cada valor para orientar a escolha. Cada valor tem código próprio, ordem estável e é congelado no edital na publicação (`UNI-REQ-0078`). O administrador cadastra os seus fatos e os valores deles no módulo Configuração, e um valor já usado é desativado, nunca apagado (`UNI-REQ-0143`). Os fatos que a lei ou o motor do sistema definem são fatos de sistema, protegidos: o administrador edita só o nome e a descrição deles, e os vocabulários normativos, como cor/raça, sexo e a autodeclaração de deficiência, têm opções fixas, que ele não acrescenta nem desativa; o tipo de deficiência segue o cadastro institucional do atendimento especializado (`UNI-REQ-0012`). O mesmo vale para as duas perguntas da origem escolar, cuja lista só cresce por nova versão do sistema (`UNI-REQ-0148`).
 
 > **Por que separar declarado de derivado.** Modelar a modalidade como fato calculado — e não como escolha direta — evita erro e fraude, garante que a Lei de Cotas seja aplicada de forma uniforme, e permite mudar as regras de composição por configuração, sem desenvolvimento.
 
@@ -95,7 +95,7 @@ Há ainda uma proteção adicional: enquanto o fato que dispararia um documento 
 
 ## 7. Tudo congela na publicação
 
-Toda essa configuração — o vocabulário de fatos e seus valores, as pré-condições, as regras de derivação, a ordem de coleta e o encadeamento de dependências — é **congelada** no edital no momento da publicação (`UNI-REQ-0078`, `RN08`). A partir daí, o resultado de um candidato é calculado sempre pela versão congelada: mudanças posteriores na configuração viva não alteram um edital já publicado. Isso preserva a integridade e a auditabilidade — dois candidatos com as mesmas respostas obtêm o mesmo resultado, e uma reavaliação reflete a configuração vigente à época. Até a **versão da lógica de cálculo** é congelada, para que a evolução do sistema não mude editais antigos.
+Toda essa configuração — o vocabulário de fatos e seus valores, as pré-condições, as regras de derivação, a ordem de coleta e o encadeamento de dependências — é **congelada** no edital no momento da publicação (`UNI-REQ-0078`). A partir daí, o resultado de um candidato é calculado sempre pela versão congelada: mudanças posteriores na configuração viva não alteram um edital já publicado. Isso preserva a integridade e a auditabilidade — dois candidatos com as mesmas respostas obtêm o mesmo resultado, e uma reavaliação reflete a configuração vigente à época. Até a **versão da lógica de cálculo** é congelada, para que a evolução do sistema não mude editais antigos.
 
 ---
 
@@ -114,7 +114,7 @@ Cada comportamento acima corresponde a um requisito com código estável na [tab
 | `UNI-REQ-0075` | Fato derivado com regra de derivação congelada | Regra "quando/contribui" (seção 5). |
 | `UNI-REQ-0076` | Derivação de modalidade por configuração (Lei de Cotas) | Cálculo da modalidade e interseção com a oferta (seção 5). |
 | `UNI-REQ-0077` | Ordem de coleta, grafo conjunto e máscara de emissão | Ordem lógica, encadeamento sem ciclos e máscara de emissão bloqueada — documento não cobrado antes de o fato poder resolver (seção 6). |
-| `UNI-REQ-0078` | Determinismo e congelamento conjunto do grafo (`RN08`) | Congelamento e reprodutibilidade na publicação (seção 7). |
+| `UNI-REQ-0078` | Determinismo e congelamento conjunto do grafo de coleta e derivação | Congelamento e reprodutibilidade na publicação (seção 7). |
 | `UNI-REQ-0143` | Catálogo de fatos do candidato administrável | Quem cadastra os fatos e os seus valores (seção 1). |
 | `UNI-REQ-0145` | Regras do campo condicionadas às respostas anteriores | Exibição, obrigatoriedade e opções de cada campo; opcional não informado (seções 3 e 4). |
 | `UNI-REQ-0147` | Documentos da habilitação seguem o grupo de vagas da convocação | Cobrança de documento na habilitação (seção 6). |
