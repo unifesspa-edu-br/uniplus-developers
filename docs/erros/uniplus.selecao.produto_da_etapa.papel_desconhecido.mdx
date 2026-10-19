@@ -1,0 +1,41 @@
+---
+title: O papel declarado para o produto da etapa não existe
+sidebar_label: Papel do produto da etapa desconhecido
+description: O papel de um produto é preliminar, definitivo, ou nenhum.
+code: uniplus.selecao.produto_da_etapa.papel_desconhecido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos produtos que a etapa declara publicar veio com um papel que não está entre os
+declaráveis.
+
+O papel diz onde aquela publicação fica no ciclo de recurso da matéria, e só há três
+estados possíveis:
+
+- `PRELIMINAR` — o resultado que abre o ciclo e admite recurso;
+- `DEFINITIVO` — o resultado que encerra a matéria;
+- **nenhum papel** — o produto não é resultado, e portanto não ocupa posição no ciclo.
+  É o caso de avisos e demais publicações que não decidem sobre candidato.
+
+## Como resolver
+
+Use um dos dois valores, exatamente como estão escritos acima, ou não informe papel
+algum. A mensagem da recusa devolve o valor rejeitado e a lista do que é aceito.
+
+Se o produto não é resultado, o caminho é omitir o campo — declarar papel em ato que
+não é resultado tem
+[recusa própria](./uniplus.selecao.produto_da_etapa.papel_em_ato_que_nao_eh_resultado.mdx).

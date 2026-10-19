@@ -1,0 +1,41 @@
+---
+title: A regra declarada não é uma regra de prazo de recurso do catálogo
+sidebar_label: Regra de recurso fora do catálogo
+description: A janela de recurso da etapa só usa a regra de prazo ancorado em ato do catálogo.
+code: uniplus.selecao.recurso_da_etapa.regra_catalogo_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de recurso de uma etapa citou uma regra que **não é uma regra de prazo de
+recurso do catálogo**. Isso acontece quando o código ou a versão informados não
+existem no catálogo, quando existem mas são de outro tipo de regra, ou quando a
+regra de recurso citada não é a de prazo ancorado em ato.
+
+A janela da etapa não descreve o prazo por texto livre: ela referencia a regra do
+catálogo institucional, que fixa como o prazo é entendido. Referenciar uma regra
+que não é de prazo de recurso deixaria a janela sem uma leitura confiável do prazo.
+
+## Como resolver
+
+A mensagem da recusa mostra o código e a versão recebidos. Três desfechos possíveis:
+
+- **Erro de grafia no código ou na versão.** Corrija para o valor exato do catálogo.
+- **A regra existe, mas é de outro tipo.** Escolha, no catálogo, a regra de prazo de
+  recurso ancorado em ato.
+- **A regra de prazo ainda não está no catálogo.** Cadastre-a antes de configurar a
+  etapa, e repita a definição.

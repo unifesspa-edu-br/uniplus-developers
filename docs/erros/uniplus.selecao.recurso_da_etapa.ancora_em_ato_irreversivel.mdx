@@ -1,0 +1,44 @@
+---
+title: Não cabe recurso contra ato de efeito irreversível na etapa
+sidebar_label: Âncora da etapa em ato irreversível
+description: Recurso contra ato que já consumiu vaga não teria o que reverter; recorre-se do resultado que o fundamenta.
+code: uniplus.selecao.recurso_da_etapa.ancora_em_ato_irreversivel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1537'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1537
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de recurso de uma etapa ancora o prazo num tipo de ato que o catálogo
+classifica como de **efeito irreversível**.
+
+Ato de efeito irreversível concede um direito que não se desfaz: a convocação, por
+exemplo, consome vaga escassa, e a vaga passa a ter dono. Um recurso contra ele não
+teria o que reverter. O recurso cabível é contra o **resultado que fundamenta** o
+ato, e é nesse resultado que o prazo ancora.
+
+A classificação é lida do catálogo a cada configuração, e não de uma cópia guardada
+na etapa: se o cadastro do tipo de ato muda, a conferência acompanha.
+
+## Como resolver
+
+A mensagem da recusa nomeia o tipo de ato declarado como âncora. Aponte a janela
+para o resultado preliminar que fundamenta aquele ato e que a **própria etapa**
+publica. Se ele ainda não está entre os produtos da etapa, acrescente-o, com papel
+preliminar, e ancore nele.
+
+Se quem publica esse resultado é outra fase ou etapa, a janela de recurso pertence a
+ela: mova a janela para lá. O mesmo problema na fase tem
+[página própria](./uniplus.selecao.regra_recurso_fase.ancora_em_ato_irreversivel.mdx).

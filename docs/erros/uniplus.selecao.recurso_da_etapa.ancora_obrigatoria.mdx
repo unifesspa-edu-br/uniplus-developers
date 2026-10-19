@@ -1,0 +1,47 @@
+---
+title: A janela de recurso da etapa não diz de que instante o prazo corre
+sidebar_label: Âncora do recurso não declarada
+description: O prazo corre da publicação do ato ou da ciência do candidato; a janela precisa declarar qual.
+code: uniplus.selecao.recurso_da_etapa.ancora_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0115
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma janela de recurso da etapa foi declarada sem dizer **de que instante o prazo
+corre**. Sem essa resposta não há como saber quando a janela do candidato abre,
+e, portanto, quando fecha.
+
+Há dois instantes possíveis:
+
+- **a publicação do ato** — o resultado preliminar da etapa. É um instante só, igual
+  para todos os candidatos;
+- **a ciência individual** — o momento em que cada candidato toma ciência do parecer
+  que o alcança, sem que haja publicação. Só vale em etapa que emite parecer
+  individual.
+
+O sistema não escolhe um dos dois por conta própria: o instante em que o prazo
+começa é decisão do edital.
+
+## Como resolver
+
+Releia o edital e escolha o instante que ele indica para aquela etapa:
+
+- se o prazo corre da divulgação do resultado preliminar, declare a **publicação do
+  ato** e indique qual resultado preliminar da própria etapa abre a janela;
+- se corre da comunicação do parecer a cada candidato, declare a **ciência
+  individual** — e confirme que a etapa está marcada para emitir parecer individual,
+  o que tem [recusa própria](./uniplus.selecao.etapa_processo.ciencia_sem_parecer_individual.mdx).

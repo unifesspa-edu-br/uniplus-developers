@@ -1,0 +1,36 @@
+---
+title: O prazo de interposição da etapa precisa declarar dias úteis ou horas
+sidebar_label: Prazo da etapa sem unidade declarável
+description: Sem unidade de dias úteis ou horas, o prazo não diz como a janela se mede.
+code: uniplus.selecao.recurso_da_etapa.prazo_sem_unidade_declaravel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0113
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **prazo de interposição** da janela de recurso de uma etapa chegou sem uma unidade
+que o sistema aceite. Um valor sozinho não diz como a janela se mede: o mesmo
+número conta prazos diferentes conforme a unidade.
+
+As únicas unidades declaráveis na interposição são **dias úteis**, em valor inteiro,
+e **horas** de dia útil. Dia corrido tem
+[recusa própria](./uniplus.selecao.recurso_da_etapa.prazo_em_dias_corridos.mdx).
+
+## Como resolver
+
+Informe a unidade junto do valor, entre as duas aceitas. Se o edital diz "dois dias
+úteis", declare 2 e a unidade dias úteis; se diz "quarenta e oito horas", declare 48
+e a unidade horas.

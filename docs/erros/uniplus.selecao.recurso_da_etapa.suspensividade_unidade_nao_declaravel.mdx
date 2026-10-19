@@ -1,0 +1,42 @@
+---
+title: A unidade da suspensividade da janela da etapa não é declarável
+sidebar_label: Unidade da suspensividade da etapa inválida
+description: O tempo de bloqueio se declara em dias corridos, horas ou dias úteis.
+code: uniplus.selecao.recurso_da_etapa.suspensividade_unidade_nao_declaravel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A unidade do **efeito suspensivo** de uma instância da janela de recurso não é uma das
+que o sistema aceita.
+
+Diferentemente do prazo de interposição, o tempo de bloqueio admite três unidades:
+
+- **dias corridos**;
+- **horas**;
+- **dias úteis**.
+
+Qualquer outro valor, inclusive uma unidade em branco declarada como se fosse uma
+unidade, é recusado.
+
+## Como resolver
+
+Informe a unidade entre as três acima, junto do valor. Se a instância não bloqueia,
+deixe o valor e a unidade em branco.
+
+Lembre que dia útil só pode ser contado se o processo tiver calendário de dias úteis
+vigente e algoritmo de contagem declarado, o que é conferido na publicação.

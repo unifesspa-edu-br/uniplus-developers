@@ -1,0 +1,39 @@
+---
+title: Cada fato recorrível abre uma única janela de recurso na etapa
+sidebar_label: Recurso duplicado na etapa
+description: Dois prazos para o mesmo resultado, ou dois para a ciência individual, deixariam a janela ambígua.
+code: uniplus.selecao.etapa_processo.recurso_duplicado_na_etapa
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa declara duas janelas de recurso para o **mesmo fato recorrível**: ou duas
+ancoradas no mesmo resultado preliminar, ou duas por ciência individual.
+
+Uma etapa pode ter mais de uma janela — por exemplo, uma para o gabarito preliminar e
+outra para o resultado preliminar da prova —, mas cada fato abre uma só. Com dois
+prazos para o mesmo resultado, ninguém saberia qual deles vale para o candidato.
+
+## Como resolver
+
+Mantenha uma janela por fato:
+
+- **As duas janelas eram para o mesmo resultado.** Mantenha a que o edital descreve e
+  remova a outra;
+- **Eram, na verdade, dois resultados diferentes.** Declare cada resultado como um
+  produto preliminar próprio da etapa e ancore cada janela no seu;
+- **Eram duas ciências individuais.** Mantenha uma: a ciência é uma só por etapa.
