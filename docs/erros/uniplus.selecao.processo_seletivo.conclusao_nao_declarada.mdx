@@ -11,10 +11,13 @@ emitido_em:
   - Publicação inicial do processo seletivo
   - Retificação em ato único
   - Fechamento de sessão editorial
-requisitos: []
+requisitos:
+  - UNI-REQ-0157
 rastreio:
   - label: 'uniplus-api#1426'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1426
+  - label: 'uniplus-api#1989'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1989
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -23,9 +26,14 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Uma fase do cronograma publica um resultado **preliminar**, não publica nenhum
-resultado **definitivo**, e também não declara qual fase do cronograma a conclui.
+Uma fase do cronograma publica um resultado **preliminar**, não publica o resultado
+**definitivo** da mesma matéria, e também não declara qual fase do cronograma a conclui.
 O cronograma abre um ciclo recursal sem dizer onde ele fecha.
+
+A matéria é o tipo de ato: o definitivo que fecha o ciclo tem o mesmo tipo de ato do
+preliminar. Se a fase publica o preliminar de um tipo e o definitivo de outro, os dois
+não se fecham — o definitivo sai sozinho, e o ciclo aberto pelo preliminar continua sem
+desfecho.
 
 Resultado preliminar é, por definição, o que ainda admite contestação; quem encerra
 a matéria é o resultado definitivo. Enquanto o cronograma não disser em que fase a
@@ -37,12 +45,12 @@ e o edital publicaria uma etapa sem desfecho previsto.
 Dois caminhos, e o desenho do certame decide qual:
 
 - **A própria fase conclui.** Acrescente aos produtos dela o resultado definitivo
-  da matéria, com papel definitivo. Nesse caso não há fase concluinte a declarar —
+  da matéria, com o mesmo tipo de ato do preliminar e papel definitivo. Nesse caso não há fase concluinte a declarar —
   a conclusão já está nos produtos da fase.
 - **Outra fase conclui**, que é o arranjo usual quando existe uma fase de recursos
   entre as duas publicações. Declare, na fase que publica o preliminar, o código da
-  fase que a conclui. Essa fase precisa estar no cronograma, publicar resultado
-  definitivo e não anteceder a fase que ela encerra.
+  fase que a conclui. Essa fase precisa estar no cronograma, publicar o resultado
+  definitivo com o mesmo tipo de ato do preliminar e não anteceder a fase que ela encerra.
 
 O preflight de conformidade mostra esta pendência antes da publicação, no item
 `cronograma_conclusao_do_ciclo_recursal`.
