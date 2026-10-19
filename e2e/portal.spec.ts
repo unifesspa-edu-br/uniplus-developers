@@ -38,7 +38,7 @@ test.describe('Portal — navegação e conteúdo', () => {
     {url: 'produto/dominio/', heading: 'Domínio do processo seletivo'},
     {
       url: 'produto/regras-negocio/conceitos',
-      heading: 'Regras de negócio nomeadas',
+      heading: 'Regras de negócio institucionais',
     },
     {url: 'produto/conformidade-legal/', heading: 'Conformidade legal'},
     {
@@ -198,7 +198,7 @@ test.describe('Personas (cadastros fictícios)', () => {
     await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.goto('personas/');
 
-    // A primeira persona tem nome social (RN02).
+    // A primeira persona tem nome social.
     await page
       .locator('tbody tr')
       .first()

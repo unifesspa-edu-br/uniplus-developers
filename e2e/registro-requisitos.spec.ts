@@ -9,34 +9,11 @@ import {requisitosMvpSelecao} from '../src/data/produto/requisitos-mvp-selecao';
  * rastreabilidade e regras de negócio), e o `typecheck` só garante a forma de
  * cada item — não que os identificadores sejam únicos, que a árvore feche numa
  * única raiz sem componente solta, nem que a prosa curada em `conceitos.mdx`
- * acompanhe o que o registro declara. Essas coisas já falharam na prática: a
- * célula da RN13 ficou sem o `UNI-REQ-0111` por uma edição que criou o
- * requisito e não voltou à página.
+ * só cite requisitos que existem.
  */
 
 /** Identificadores declarados, na ordem do registro. */
 const identificadores = requisitosMvpSelecao.map((r) => r.requisito_id);
-
-/**
- * Regras institucionais que cada requisito declara implementar, lidas do
- * título — a convenção do registro é sufixá-lo com `(RNxx)`.
- *
- * O alcance disto é o que a convenção alcança, e ela não é universal: só as
- * regras cujos requisitos sufixam o título entram aqui (hoje RN08, RN13 e
- * RN14). As demais têm requisitos vinculados apenas pela prosa curada da
- * página — `UNI-REQ-0031` implementa a RN01 sem dizê-lo no título —, e para
- * elas não existe segunda fonte contra a qual conferir: retirar um requisito
- * daquelas células não é detectável aqui. Fechar isso exige declarar o vínculo
- * como dado do registro, e não como sufixo de texto.
- */
-const requisitosPorRegra = new Map<string, string[]>();
-for (const requisito of requisitosMvpSelecao) {
-  for (const regra of requisito.titulo.match(/\bRN\d{2}\b/g) ?? []) {
-    const lista = requisitosPorRegra.get(regra) ?? [];
-    lista.push(requisito.requisito_id);
-    requisitosPorRegra.set(regra, lista);
-  }
-}
 
 test.describe('Registro de requisitos — integridade referencial', () => {
   test('nenhum identificador é usado por dois requisitos', () => {
@@ -106,8 +83,8 @@ test.describe('Regras institucionais e os requisitos que as implementam', () => 
     // sem ser confrontado com o registro.
     const citadosPorTexto = texto.match(/UNI-REQ-\d{4}/g) ?? [];
 
-    // Os rótulos dos links complementam o texto corrido: a célula da RN08
-    // abrevia a faixa como `UNI-REQ-0057…0063`, e o segundo extremo é um link
+    // Os rótulos dos links complementam o texto corrido: uma célula
+    // pode abreviar a faixa como `UNI-REQ-0057…0063`, e o segundo extremo é um link
     // rotulado só `0063` — invisível para quem procurasse apenas a forma
     // completa no texto.
     const citadosPorLink = (await tabela.getByRole('link').allTextContents())
@@ -146,36 +123,9 @@ test.describe('Regras institucionais e os requisitos que as implementam', () => 
 
     const inexistentes = citados.filter((id) => !identificadores.includes(id));
     // Este sentido pega o que o outro não pega: citação a requisito que foi
-    // renumerado ou nunca existiu, em qualquer RN — inclusive nas que não usam
-    // o sufixo no título.
+    // renumerado ou nunca existiu, em qualquer regra da tabela.
     expect(inexistentes, 'requisitos citados que não estão no registro').toEqual(
       [],
     );
   });
-
-  for (const [regra, requisitos] of requisitosPorRegra) {
-    test(`a célula da ${regra} lista todo requisito que a declara no título`, async ({
-      page,
-    }) => {
-      await page.goto('produto/regras-negocio/conceitos');
-
-      const linha = page
-        .getByRole('row')
-        .filter({has: page.getByRole('cell', {name: regra, exact: true})});
-      await expect(
-        linha,
-        `${regra} aparece em título de requisito e precisa de linha própria na tabela`,
-      ).toHaveCount(1);
-
-      for (const requisito of requisitos) {
-        // A célula é a única navegação da regra institucional para os
-        // requisitos verificáveis: um requisito ausente dela fica invisível
-        // para quem chega pela regra.
-        await expect(
-          linha,
-          `${regra} não cita ${requisito}, que declara implementá-la`,
-        ).toContainText(requisito);
-      }
-    });
-  }
 });
