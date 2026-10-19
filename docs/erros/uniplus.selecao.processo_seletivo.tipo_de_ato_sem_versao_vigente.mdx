@@ -12,7 +12,10 @@ emitido_em:
   - Fechamento de retificação
 requisitos:
   - UNI-REQ-0019
+  - UNI-REQ-0163
 rastreio:
+  - label: 'uniplus-api#1995'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1995
   - label: 'uniplus-api#827'
     href: https://github.com/unifesspa-edu-br/uniplus-api/pull/827
 ---
@@ -35,12 +38,23 @@ mensagem morta (dead letter) — um estado inconsistente que só apareceria como
 incidente operacional depois. O que dá para recusar com 422, na hora, não
 pode virar esse tipo de incidente.
 
+A recusa vale também para os **tipos de ato que o cronograma declara**. Ao
+publicar, e ao retificar com um tipo declarado pela primeira vez, a
+classificação de cada tipo (se congela a configuração, se é único, se é
+resultado) é lida do catálogo na data de hoje e congelada na versão
+publicada. Tipo declarado sem versão vigente hoje não tem classificação a
+congelar. O tipo que a versão vigente já congelou não é relido na
+retificação (UNI-REQ-0163).
+
 ## Como resolver
 
-Confirme, no catálogo de tipos de ato de Publicações, que o código declarado
-tem uma versão vigente na data de publicação enviada — tipos de ato têm
-vigência própria, e um código válido hoje pode não ter versão vigente na data
-retroativa ou futura que o comando declarou.
+Confirme, no catálogo de tipos de ato de Publicações, que o código tem uma
+versão vigente na data que vale para ele — tipos de ato têm vigência própria:
+
+- **tipo do ato da operação** (o edital de abertura ou a retificação): vigente
+  na data de publicação enviada, que pode ser retroativa ou futura;
+- **tipo declarado no cronograma pela primeira vez:** vigente hoje. Cadastre
+  uma versão vigente ou declare outro tipo no cronograma.
 
 Se o tipo de ato não existe no catálogo, é preciso cadastrá-lo antes — ver
 [`tipo_ato.nao_encontrado`](./uniplus.publicacoes.tipo_ato.nao_encontrado.mdx)

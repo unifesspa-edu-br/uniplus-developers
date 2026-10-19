@@ -10,7 +10,10 @@ emitido_em:
   - Registro de ato normativo, quando o ato declara atoRetificadoId
 requisitos:
   - UNI-REQ-0156
+  - UNI-REQ-0157
 rastreio:
+  - label: 'uniplus-api#1995'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1995
   - label: 'uniplus-api#796'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
 ---
@@ -34,11 +37,17 @@ classe de congelamento no meio de uma cadeia deixaria ambíguo se a versão
 vigente da configuração é a que o ato original congelou ou a que a
 retificação teria congelado.
 
-A comparação é entre a classe do **retificador** — resolvida agora, do
-tipo vigente na data deste registro — e a classe que o **retificado**
+A comparação é entre a classe do **retificador** e a classe que o **retificado**
 congelou no seu próprio registro, não o que o tipo dele diz hoje: o
 catálogo é editável, e a classe do ato já publicado não muda
 retroativamente se o cadastro do tipo mudar depois.
+
+A classe do retificador depende de quem registra. No registro feito direto no
+Publicações, ela é resolvida agora, do tipo vigente na data deste registro.
+No ato que a Seleção origina a partir de um item do edital, ela vem da
+classificação que a versão publicada do edital congelou para o tipo, e chega na
+própria requisição: mudar o tipo no catálogo depois da publicação não muda a
+classe com que o processo corrige os seus atos (UNI-REQ-0157).
 
 ## Como resolver
 
