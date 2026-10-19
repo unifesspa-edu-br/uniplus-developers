@@ -120,7 +120,7 @@ Consequências práticas do congelamento, em linguagem de negócio:
 Quando for implementada, a inscrição será possível quando existir um processo seletivo publicado e vigente e o período de inscrição estiver aberto. O fluxo esperado do candidato:
 
 - Abre a inscrição e preenche o formulário. A inscrição começa como rascunho. O candidato responde às perguntas do formulário do processo, incluindo as autodeclarações de cota (ver seção 8).
-- Escolhe opções de curso e responde às perguntas de cota. Indica até duas opções de curso. O candidato não escolhe a modalidade diretamente: ele concorre sempre em ampla concorrência e, para cada reserva, somente quando é elegível e opta por concorrer; então, o sistema calcula o conjunto de modalidades — que pode conter mais de uma reserva ao mesmo tempo. Ver concorrência dupla e cálculo de modalidades na seção 7. A futura inscrição terá, no máximo, um papel reservado de registro; essa cardinalidade não limita o conjunto derivado. A relação entre esse papel e o conjunto será definida pela decisão proposta na seção Questões em refinamento.
+- Escolhe opções de curso e responde às perguntas de cota. Indica até duas opções de curso, sendo a segunda opcional (ver seção 6.1). O candidato não escolhe a modalidade diretamente: ele concorre sempre em ampla concorrência e, para cada reserva, somente quando é elegível e opta por concorrer; então, o sistema calcula o conjunto de modalidades — que pode conter mais de uma reserva ao mesmo tempo. Ver concorrência dupla e cálculo de modalidades na seção 7. A futura inscrição terá, no máximo, um papel reservado de registro; essa cardinalidade não limita o conjunto derivado. A relação entre esse papel e o conjunto será definida pela decisão proposta na seção Questões em refinamento.
 - Solicita atendimento especializado, se necessário. Entre as opções que o processo oferece, o candidato pode solicitar condições, recursos ou informar tipo de deficiência.
 - Envia os documentos exigidos. Anexa os documentos que se aplicam ao seu caso. Cada arquivo passa por uma verificação técnica de segurança antes de ser considerado válido.
 - Submete a inscrição. O sistema confere se todos os documentos obrigatórios aplicáveis ao caso do candidato estão presentes. Faltando algum, a submissão é bloqueada com a indicação do que falta.
@@ -134,9 +134,43 @@ Quando for implementada, a inscrição será possível quando existir um process
 | `UNI-REQ-0032` | Nome social | Sempre que o nome for exibido — em listas, telas ou documentos —, o nome social tem prioridade absoluta sobre o nome civil. |
 | `UNI-REQ-0028` | Documentos obrigatórios | A inscrição não pode ser submetida sem os documentos obrigatórios exigidos para o caso do candidato. |
 | `UNI-REQ-0033` | Cancelar e refazer | O candidato pode cancelar e refazer a inscrição enquanto o período estiver aberto. O cancelamento registra motivo, data e autor, e libera nova inscrição respeitando a regra do CPF único. |
+| `UNI-REQ-0164` | Modalidades por opção de curso | As modalidades em que o candidato concorre são calculadas e registradas por opção de curso (seção 6.1); a segunda opção é opcional (`UNI-REQ-0024`). |
+| `UNI-REQ-0165` | Correção da inscrição submetida | Com as inscrições abertas, o candidato corrige a mesma inscrição, que gera novo comprovante a cada correção (seção 6.1). |
 | `UNI-REQ-0047` | Lista de espera | O candidato entra em lista de espera conforme a opção indicada no ato da inscrição. Etapa futura — capacidade planejada, ainda sem escopo na entrega atual. |
 
 > Comprovante e pendências. Mesmo após submeter, um documento ainda em verificação técnica de segurança gera uma pendência que fica registrada e visível no acompanhamento e no comprovante — sem impedir a submissão. A inscrição permanece válida; a pendência apenas sinaliza algo a acompanhar. O comprovante nunca é alterado: uma reemissão gera um novo comprovante, preservando o anterior.
+
+### 6.1 Duas opções de curso na inscrição
+
+Quando o processo seletivo permite duas opções de curso, valem as regras abaixo (decisão do PO repassada pelo líder técnico em 19/10/2026; requisitos [`UNI-REQ-0024`](../requisitos/index.mdx) e [`UNI-REQ-0164`](../requisitos/index.mdx)).
+
+1. **A segunda opção é opcional.** O candidato pode se inscrever só com a primeira.
+2. **A segunda opção precisa ser válida.** Tem de ser uma oferta diferente da primeira (um curso em um campus e turno) do mesmo processo seletivo ([`UNI-REQ-0134`](../requisitos/index.mdx)); nos exemplos, "curso" quer dizer essa oferta. O envio exige a primeira opção quando o processo tem ofertas; o rascunho pode ficar sem. Só existe segunda opção se a primeira foi escolhida. Se o processo permite uma só opção, não há segunda.
+3. **O candidato informa tudo uma única vez.** Renda, escola pública, cor/raça, deficiência e as demais informações, bem como os documentos, valem para as duas opções. O formulário e os documentos exigidos consideram os dois cursos escolhidos.
+4. **As modalidades são calculadas por opção.** A elegibilidade do candidato é uma só e considera todas as modalidades que as regras de distribuição das ofertas do processo admitem, inclusive as institucionais (no PSIQ, a ação afirmativa indígena ou quilombola; [`UNI-REQ-0096`](../requisitos/index.mdx)), mas cada oferta tem a sua própria distribuição de vagas (modalidades oferecidas e quadro de vagas). Por isso o sistema calcula e registra separadamente, para cada opção, em quais modalidades o candidato concorre: as que o direito dele permite e que a distribuição da oferta daquela opção contempla. Para decidir o que o formulário e os documentos pedem, vale a união das modalidades das opções escolhidas; ofertas que o candidato não escolheu não contam. Assim, só se pede documento de cota que vale em ao menos uma das opções escolhidas. Antes de escolher o curso, vale o conjunto do processo.
+5. **O comprovante mostra as duas opções.** Traz a primeira e a segunda opção (ou "não declarada") e as modalidades em que o candidato concorre em cada uma.
+6. **A segunda opção pode ser trocada ou retirada** enquanto as inscrições estiverem abertas, corrigindo a inscrição já submetida ([`UNI-REQ-0165`](../requisitos/index.mdx)). É a mesma inscrição, com o mesmo número, que continua submetida: não há cancelamento nem nova inscrição. A correção pode alterar as respostas como num novo envio e passa pelas mesmas conferências do envio (campos, termos e documentos obrigatórios, regras da segunda opção); se não passar, é recusada por inteiro e a inscrição e o comprovante anteriores continuam valendo. O que uma regra fixa depois do envio, como o nome social ([`UNI-REQ-0153`](../requisitos/index.mdx)), continua fixo. Cada correção emite um novo comprovante, os anteriores são preservados e vale o último. Encerradas as inscrições, não há mais correção.
+7. **A inscrição segue as regras do edital vigentes quando foi iniciada** ([`UNI-REQ-0084`](../requisitos/index.mdx)). Uma retificação posterior que mude o número de opções de curso não altera inscrições já iniciadas.
+
+**O que estas regras ainda não cobrem.** Elas tratam da escolha das opções na inscrição e do que fica registrado. O uso dessa escolha acontece depois, na classificação, e será definido em etapas futuras:
+
+- **Aproveitamento das vagas pela segunda opção** ([`UNI-REQ-0045`](../requisitos/index.mdx)). A classificação preenche primeiro as vagas de cada curso com quem o escolheu como primeira opção. Se sobrarem vagas, elas são oferecidas, pela ordem de classificação, a quem escolheu aquele curso como segunda opção. Exemplo: Direito tem 30 vagas e só 25 candidatos aprovados em primeira opção; as 5 vagas restantes vão para os mais bem classificados que indicaram Direito como segunda opção.
+- **Lista de espera** ([`UNI-REQ-0047`](../requisitos/index.mdx)). É a fila de quem não entrou nas vagas iniciais e aguarda ser chamado se alguém desistir ou não fizer a matrícula. O edital define se há lista de espera e como o candidato a indica na inscrição.
+
+Até essas etapas existirem, a segunda opção fica registrada na inscrição e no comprovante, mas ainda não muda o resultado da classificação.
+
+**Exemplo 1 — a escolha.** Um processo oferece Medicina, Direito, Engenharia da Computação e Engenharia Elétrica e permite duas opções. Marlene escolhe Direito como primeira opção e Engenharia da Computação como segunda. Ela responde ao formulário e envia os documentos uma só vez; o formulário e a lista de documentos já levam em conta os dois cursos. Se preferisse, Marlene poderia ter escolhido apenas Direito.
+
+**Exemplo 2 — a modalidade muda de um curso para o outro.** Leandro declara ter deficiência, cursou o ensino médio em escola particular e, por isso, não concorre pelas cotas da lei: concorre em ampla concorrência e na ação afirmativa para pessoa com deficiência, que é institucional. Escolhe Direito como primeira opção e Engenharia Elétrica como segunda. Os dois cursos oferecem as cotas da lei, mas só Direito oferece a ação afirmativa para pessoa com deficiência. O comprovante mostra:
+
+| Opção | Curso | Modalidades em que Leandro concorre |
+|---|---|---|
+| 1ª | Direito | Ampla concorrência; ação afirmativa para pessoa com deficiência |
+| 2ª | Engenharia Elétrica | Ampla concorrência |
+
+A elegibilidade de Leandro é a mesma nos dois cursos; o que muda é o que cada curso oferece.
+
+**O que é recusado.** Helena tenta escolher Direito como primeira e como segunda opção: a segunda opção é recusada, pois tem de ser outro curso. Erick tenta indicar uma segunda opção em um processo que permite uma só: a segunda opção é recusada, pois nesse processo ela não existe.
 
 ---
 
@@ -221,7 +255,7 @@ Pontos de atenção que o formulário resolve automaticamente:
 - Renda amplia, não substitui. Quem concorre por renda (grupo LB) concorre também à versão sem renda (grupo LI). Quem não opta por concorrer por renda mantém apenas as modalidades independentes de renda.
 - Cota da lei e ação afirmativa não se somam. A pessoa com deficiência que não opta pelas cotas da lei — por não ser egresso de escola pública ou por recusá-las — concorre a `AC_PCD` (a modalidade rotulada V no edital); a que opta concorre a `LI_PCD` (e `LB_PCD`, se concorre por renda) e nunca a `AC_PCD` ([UNI-REQ-0142](../requisitos/index.mdx)).
 - Indígena nunca gera cota quilombola (exclusão prevista em lei).
-- Restrição pela oferta. As modalidades a que o candidato pode concorrer são exatamente as que o processo oferece — a união de todas as configurações de distribuição de vagas do processo (todas as ofertas de curso), não apenas as dos cursos que o candidato escolheu (a restrição por curso específico ocorre mais tarde, na classificação). Essa restrição é garantida na origem: uma regra de derivação que contribua uma modalidade fora da oferta é recusada na configuração e barrada na publicação (fail-closed), não filtrada em silêncio — de modo que o candidato nunca concorre a uma modalidade não ofertada. (O registro `UNI-REQ-0076` ainda descreve essa restrição como interseção "no último passo"; o comportamento implementado é a recusa antecipada na configuração — divergência de redação a reconciliar no registro.)
+- Restrição pela oferta. As modalidades a que o candidato pode concorrer são exatamente as que o processo oferece. Com cursos escolhidos, o conjunto assim obtido é ainda restringido, opção por opção, às modalidades que o curso daquela opção oferece (seção 6.1, `UNI-REQ-0164`); essa restrição por curso é outra, feita sobre a elegibilidade do candidato, e não substitui a garantia na origem descrita a seguir. A restrição à oferta do processo é garantida na origem: uma regra de derivação que contribua uma modalidade fora da oferta é recusada na configuração e barrada na publicação (fail-closed), não filtrada em silêncio — de modo que o candidato nunca concorre a uma modalidade não ofertada.
 
 ### 7.6 Remanejamento de vagas não preenchidas
 
