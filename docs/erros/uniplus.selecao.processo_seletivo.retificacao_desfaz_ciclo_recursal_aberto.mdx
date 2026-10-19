@@ -1,0 +1,41 @@
+---
+title: A retificação desfaz o ciclo de recurso de uma matéria
+sidebar_label: Retificação desfaz ciclo aberto
+description: 'Rascunho — A retificação retira ou muda de ciclo o resultado de uma matéria cujo preliminar já foi publicado.'
+code: uniplus.selecao.processo_seletivo.retificacao_desfaz_ciclo_recursal_aberto
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Retificação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0157
+rastreio:
+  - label: 'uniplus-api#1996'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1996
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O resultado preliminar de uma matéria já foi publicado, o definitivo dela ainda não, e a
+configuração nova que a retificação traz retira o preliminar ou o definitivo do cronograma,
+ou leva o definitivo para outro ciclo de recurso.
+
+A publicação do preliminar abre o ciclo de recurso da matéria, e só o definitivo do mesmo
+tipo de ato, no mesmo ciclo, o fecha. Se a retificação desfizesse esse par, o ciclo já aberto
+ficaria sem um definitivo que pudesse ser publicado, e o candidato ficaria sem o resultado
+final daquela matéria.
+
+## Como resolver
+
+Escolha um dos caminhos:
+
+- **o definitivo pode sair antes.** Publique o resultado definitivo da matéria e, depois,
+  retifique o edital. Com o ciclo fechado, a retificação pode mudar a matéria;
+- **a matéria continua no edital.** Mantenha na configuração nova o preliminar e o definitivo
+  da matéria, no mesmo ciclo, e retifique só o restante.

@@ -104,6 +104,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.banca_requerida.categoria_duplicada_no_recorte',
         'erros/uniplus.selecao.processo_seletivo.conclusao_nao_declarada',
         'erros/uniplus.selecao.processo_seletivo.conclusao_duplicada',
+        'erros/uniplus.selecao.processo_seletivo.retificacao_desfaz_ciclo_recursal_aberto',
         'erros/uniplus.selecao.processo_seletivo.conclusao_declarada_sem_preliminar',
         'erros/uniplus.selecao.processo_seletivo.conclusao_declarada_em_fase_que_se_conclui',
         'erros/uniplus.selecao.processo_seletivo.fase_concluinte_fora_do_cronograma',
