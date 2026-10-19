@@ -1,0 +1,34 @@
+---
+title: Dois anexos do ato têm o mesmo nome
+sidebar_label: Nome de anexo repetido
+description: 'Rascunho — Dois anexos do ato ficariam com o mesmo nome no download.'
+code: uniplus.selecao.ato_do_processo.anexo_nome_repetido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0155
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O nome dado a um anexo é o nome do arquivo que a pessoa recebe ao baixá-lo, e cada anexo do
+ato precisa de um nome próprio. Dois anexos ficaram com o mesmo nome.
+
+A extensão do formato é acrescentada ao nome quando falta. Por isso `quadro` e `quadro.pdf`,
+num anexo em PDF, contam como o mesmo nome. Espaços no começo e no fim também não distinguem
+um nome do outro.
+
+## Como resolver
+
+Dê a cada anexo um nome que o distinga dos demais, por exemplo `quadro de vagas` e
+`quadro de vagas retificado`, e repita a publicação.
