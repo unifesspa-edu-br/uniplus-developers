@@ -171,6 +171,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.ato_do_processo.documento_repetido',
         'erros/uniplus.selecao.ato_do_processo.documento_ja_usado_em_outro_ato',
         'erros/uniplus.selecao.ato_do_processo.anexo_nome_invalido',
+        'erros/uniplus.selecao.ato_do_processo.anexo_nome_repetido',
         'erros/uniplus.selecao.ato_do_processo.quantidade_de_anexos_excedida',
         'erros/uniplus.selecao.ato_do_processo.ato_corrigido_nao_encontrado',
         'erros/uniplus.selecao.ato_do_processo.ato_corrigido_obrigatorio',
