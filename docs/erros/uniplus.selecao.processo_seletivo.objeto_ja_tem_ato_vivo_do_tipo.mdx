@@ -12,6 +12,7 @@ emitido_em:
   - Fechamento de retificação
 requisitos:
   - UNI-REQ-0019
+  - UNI-REQ-0163
 rastreio:
   - label: 'uniplus-api#827'
     href: https://github.com/unifesspa-edu-br/uniplus-api/pull/827
@@ -36,7 +37,10 @@ disputa a vaga que já ocupa. A conferência é feita sobre o histórico complet
 de atos da linhagem, não só sobre a tabela de vagas — porque `unico_por_objeto`
 é um atributo editável do tipo de ato: um ato registrado quando o tipo ainda
 não era único não reservou vaga, e ainda assim conflitaria se o tipo passasse
-a ser único depois.
+a ser único depois. Para o processo já publicado, porém, vale a marcação de
+único da versão publicada da configuração: marcar o tipo como único no catálogo
+depois disso não faz a publicação de um item que o edital declara colidir com
+um ato anterior do mesmo processo (UNI-REQ-0163).
 
 ## Como resolver
 
