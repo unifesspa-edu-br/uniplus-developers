@@ -380,6 +380,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.publicacoes.tipo_ato.base_legal_tamanho',
         'erros/uniplus.publicacoes.tipo_ato.vigencia_fim_anterior_ao_inicio',
         'erros/uniplus.publicacoes.tipo_ato.vigencia_sobreposta',
+        'erros/uniplus.publicacoes.tipo_ato.resultado_com_efeito_irreversivel',
         'erros/uniplus.publicacoes.tipo_ato.nao_encontrado',
         'erros/uniplus.publicacoes.tipo_ato.id_divergente',
         'erros/uniplus.publicacoes.ato_normativo.tipo_sem_versao_vigente',

@@ -1,0 +1,48 @@
+---
+title: Tipo de resultado não pode ter efeito irreversível
+sidebar_label: Resultado com efeito irreversível
+description: Rascunho — o tipo de ato de resultado abre o prazo de recurso no preliminar e por isso não pode ter efeito irreversível.
+code: uniplus.publicacoes.tipo_ato.resultado_com_efeito_irreversivel
+http_status: 422
+situacao: rascunho
+modulo: Publicações
+emitido_em:
+  - Criação de tipo de ato
+  - Atualização de tipo de ato
+requisitos:
+  - UNI-REQ-0166
+rastreio:
+  - label: 'uniplus-api#2020'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2020
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de ato foi marcado ao mesmo tempo como **resultado** e como de **efeito
+irreversível**, e o cadastro não aceita essa combinação.
+
+O resultado é o ato contra o qual o candidato recorre: o edital publica o resultado
+preliminar, e é nele que se abre o prazo de recurso. Já o efeito irreversível marca o
+ato que, ao ser publicado, produz um efeito que não se desfaz em favor de outra pessoa,
+como a convocação, que ocupa uma vaga. Contra esse ato não cabe recurso. Um tipo de
+resultado marcado como irreversível deixaria o candidato sem prazo para recorrer do
+preliminar.
+
+O resultado final não precisa da marca para ficar protegido. Ele é publicado no papel
+definitivo, e a janela de recurso só se ancora no preliminar. Depois dele, o preliminar
+não se corrige mais. O que se corrige é o próprio definitivo, por errata ou retificação do
+ato, e essa correção ajusta o documento sem mudar a decisão que um requisito declara
+imutável, como a homologação das inscrições.
+
+## Como resolver
+
+Desmarque uma das duas opções, conforme o que o tipo é:
+
+- **É um resultado** (classificação, homologação, gabarito, parecer): desmarque o efeito
+  irreversível.
+- **É um ato que decorre do resultado e já produz efeito em terceiro**, como a
+  convocação: desmarque a opção de resultado.
