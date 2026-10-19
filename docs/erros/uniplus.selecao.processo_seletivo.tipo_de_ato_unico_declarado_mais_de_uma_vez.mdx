@@ -14,6 +14,8 @@ requisitos:
   - UNI-REQ-0157
   - UNI-REQ-0163
 rastreio:
+  - label: 'uniplus-api#1995'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1995
   - label: 'uniplus-api#1959'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1959
   - label: 'uniplus-api#1981'
@@ -49,10 +51,13 @@ O ato da operação e o ato já registrado do mesmo tipo ocupam a **mesma vaga**
 só**, porque a retificação continua a linhagem do ato registrado. O que repete é a declaração do
 cronograma sobre essa vaga.
 
-A unicidade vem do catálogo de tipos de ato, mas em datas diferentes. A do ato da operação vem do
-tipo conferido na **data de publicação do ato**. A dos produtos do cronograma e dos atos já
-registrados vem do catálogo na **data de hoje**, no fuso institucional. Tipo que o catálogo não
-marca como único nessas datas não gera esta recusa.
+A unicidade vem do catálogo de tipos de ato, mas em momentos diferentes. A do ato da operação vem
+do tipo conferido na **data de publicação do ato**. A dos produtos do cronograma vem do catálogo na
+publicação; a partir daí, a marcação fica **congelada na versão publicada**, e a retificação usa a
+marcação congelada para os tipos que já estavam declarados, lendo o catálogo só para os tipos
+declarados pela primeira vez. Marcar ou desmarcar um tipo como único no catálogo depois da
+publicação não alcança o processo já publicado (UNI-REQ-0163). Tipo que não é único no momento que
+vale para ele não gera esta recusa.
 
 A mensagem de detalhe nomeia o tipo pelo nome do catálogo (por exemplo, "Resultado final") e diz
 onde ele repete: em qual fase, em qual etapa (com a ordem), no ato em registro ou nos atos já
