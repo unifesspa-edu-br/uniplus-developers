@@ -979,9 +979,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A publicação de resultado, e a da correção de um resultado, exibe a política de divulgação da versão vigente congelada do certame e só prossegue após a confirmação do administrador; mudar a política no cadastro não altera a exibida; a confirmação fica registrada com o ato; o sistema não analisa o conteúdo do PDF.',
+      'A publicação de resultado, e a da correção de um resultado, inclusive a que aponta outra correção da cadeia do resultado, exibe a política de divulgação da versão vigente congelada do certame e só prossegue após a confirmação do administrador; mudar a política no cadastro não altera a exibida; a confirmação fica registrada com o ato; o sistema não analisa o conteúdo do PDF.',
     verificacao:
-      'Testes automatizados (confirmação obrigatória; registro da confirmação; exibição da política da versão congelada, e não da viva) (planejado); revisão LGPD.',
+      'Testes automatizados (confirmação obrigatória, também na segunda correção da cadeia; registro da confirmação; exibição da política da versão congelada, e não da viva) (planejado); revisão LGPD.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend; DPO',
   },
@@ -1045,7 +1045,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A correção de um resultado preliminar é recusada quando já foi publicado o definitivo que fecha o ciclo dele, com orientação para corrigir o definitivo; a recusa vale também para a correção que aponta a errata ou a retificação mais recente do preliminar; o preliminar do mesmo tipo em outro ciclo, cujo definitivo ainda não saiu, continua podendo ser corrigido; antes da publicação do definitivo, a correção do preliminar é aceita; a correção do definitivo por errata ou retificação do ato continua aceita e não abre prazo de recurso.',
+      'A correção de um resultado preliminar é recusada quando já foi publicado o definitivo que fecha o ciclo dele, com orientação para corrigir o definitivo; a recusa vale também para a correção que aponta a errata ou a retificação mais recente do preliminar; o preliminar do mesmo tipo em outro ciclo, cujo definitivo ainda não saiu, continua podendo ser corrigido; antes da publicação do definitivo, a correção do preliminar é aceita; a correção do definitivo por errata ou retificação do ato continua aceita e não abre prazo de recurso; quando um requisito declara imutável a decisão que o definitivo publica, como a homologação das inscrições (UNI-REQ-0127), a correção do definitivo corrige o documento e não altera a decisão de nenhum candidato.',
     verificacao:
       'Testes automatizados (correção do preliminar recusada depois do definitivo publicado; correção do preliminar aceita antes do definitivo; correção do definitivo aceita) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
