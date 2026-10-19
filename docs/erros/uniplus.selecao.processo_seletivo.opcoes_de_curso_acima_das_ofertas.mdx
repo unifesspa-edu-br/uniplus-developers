@@ -1,0 +1,40 @@
+---
+title: O processo tem menos ofertas do que opções de curso
+sidebar_label: Opções de curso acima das ofertas
+description: Com 2 opções de curso, a distribuição de vagas do processo precisa ter pelo menos duas ofertas.
+code: uniplus.selecao.processo_seletivo.opcoes_de_curso_acima_das_ofertas
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do número de opções de curso do processo seletivo
+  - Alteração da distribuição de vagas que deixa o processo com menos ofertas do que opções
+requisitos:
+  - UNI-REQ-0024
+rastreio:
+  - label: 'uniplus-api#1972'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1972
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo declara mais opções de curso do que ofertas na distribuição de
+vagas. Cada opção é uma oferta do processo, isto é, um curso em um campus e
+turno (UNI-REQ-0024). Com 2 opções de curso, o candidato escolhe duas ofertas
+diferentes; para isso a distribuição precisa ter pelo menos duas ofertas. Elas
+podem ser de cursos diferentes ou do mesmo curso em campus ou turno
+diferentes. A mensagem é: "Com 2 opções de curso, cadastre pelo menos dois
+cursos."
+
+## Como resolver
+
+Escolha um dos caminhos, ambos terminam em um processo válido:
+
+- inclua outra oferta na distribuição de vagas, de modo que ela tenha ao menos
+  duas (outro curso ou o mesmo curso em outro campus ou turno), e declare as 2
+  opções de curso; ou
+- volte o número de opções de curso para `1`, que não exige mais de uma oferta.

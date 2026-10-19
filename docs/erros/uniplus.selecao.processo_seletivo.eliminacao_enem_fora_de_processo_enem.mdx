@@ -58,7 +58,7 @@ No descarte de retificação, essa acumulação não é observável — o codec 
 propaga ao chamador a primeira violação que a reconstrução acumular
 internamente, e esta checagem é sempre a **última** conferida dentro de
 `Criar`. Por isso, no descarte, esta causa só aparece sozinha: se o mesmo
-envelope corrompido também violasse `n_opcoes_invalido` ou qualquer causa do
+envelope corrompido também violasse qualquer causa do
 bloco de arredondamento/eliminação, é sempre a outra causa que o descarte
 devolve — nunca esta.
 

@@ -1,0 +1,35 @@
+---
+title: O número de opções de curso deve ser 1 ou 2
+sidebar_label: Número de opções de curso inválido
+description: O processo seletivo admite uma ou duas opções de curso por inscrição, nunca zero e nunca mais de duas.
+code: uniplus.selecao.processo_seletivo.opcoes_de_curso_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do número de opções de curso do processo seletivo
+requisitos:
+  - UNI-REQ-0024
+rastreio:
+  - label: 'uniplus-api#1972'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1972
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O número de opções de curso informado para o processo seletivo não é 1 nem 2.
+Uma inscrição pode registrar uma só opção de curso ou, quando o processo
+permite, uma segunda; não há processo com zero opções nem com mais de duas
+(UNI-REQ-0024).
+
+## Como resolver
+
+Informe `1` ou `2` como número de opções de curso e envie de novo. Com `2`,
+a distribuição de vagas do processo precisa ter ao menos duas ofertas
+(cursos diferentes ou o mesmo curso em outro campus ou turno); do contrário a resposta será
+[`opcoes_de_curso_acima_das_ofertas`](./uniplus.selecao.processo_seletivo.opcoes_de_curso_acima_das_ofertas.mdx).
+Com `1`, este pedido não exige mais nada.
