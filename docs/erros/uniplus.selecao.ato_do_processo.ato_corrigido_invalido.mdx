@@ -1,0 +1,35 @@
+---
+title: 'O ato corrigido informado é inválido'
+sidebar_label: Ato corrigido inválido
+description: 'Rascunho — O identificador do ato corrigido veio vazio.'
+code: uniplus.selecao.ato_do_processo.ato_corrigido_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo do **ato corrigido** veio preenchido com um identificador vazio, que não aponta para
+nenhum ato.
+
+Isso costuma acontecer quando a tela ou a integração envia o campo sem um ato escolhido, em vez
+de omiti-lo.
+
+## Como resolver
+
+- **é uma correção.** Escolha na lista de atos publicados do processo o ato que será
+  corrigido e envie de novo;
+- **não é uma correção.** Omita o ato corrigido e o motivo, e publique o documento como um
+  aviso ou comunicado novo.

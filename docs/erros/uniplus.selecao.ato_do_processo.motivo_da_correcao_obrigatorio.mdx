@@ -1,0 +1,38 @@
+---
+title: 'O motivo da correção é obrigatório quando o ato corrige outro'
+sidebar_label: Correção sem motivo
+description: 'Rascunho — O ato aponta um ato corrigido, mas não informa o motivo da correção.'
+code: uniplus.selecao.ato_do_processo.motivo_da_correcao_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação de documento avulso do processo
+requisitos:
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#1963'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1963
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ato foi enviado como correção, porque informa o **ato corrigido**, mas veio sem o **motivo
+da correção**, ou com o motivo em branco.
+
+A correção é uma relação entre atos: quem corrige diz o que corrige e por quê. O motivo fica
+registrado com o ato e aparece para quem consulta a cadeia de correções do certame. Sem ele,
+o leitor vê que um ato foi corrigido e não sabe o que mudou.
+
+## Como resolver
+
+Escolha o que o documento é:
+
+- **é uma correção.** Informe o motivo, em poucas palavras, junto do ato corrigido. Por
+  exemplo: "corrige a data da prova divulgada no aviso anterior";
+- **não é uma correção.** Retire o ato corrigido e publique o documento como um aviso ou
+  comunicado novo, sem motivo.
