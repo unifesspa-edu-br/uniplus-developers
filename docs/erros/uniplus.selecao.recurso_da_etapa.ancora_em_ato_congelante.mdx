@@ -1,0 +1,40 @@
+---
+title: A âncora do recurso da etapa não pode ser o ato que congela a configuração
+sidebar_label: Âncora da etapa em ato congelante
+description: O ato que congela a configuração não abre janela de recurso; recorre-se do resultado que o fundamenta.
+code: uniplus.selecao.recurso_da_etapa.ancora_em_ato_congelante
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1537'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1537
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de recurso de uma etapa ancora o prazo num tipo de ato que **congela a
+configuração** do processo seletivo, como a publicação do próprio edital.
+
+O ato que congela a configuração fixa as regras do certame e não é uma decisão sobre
+candidato. Ancorar o prazo nele faria a janela de recurso depender de um ato que
+nunca é resultado, e a configuração de que ela própria faz parte deixaria de ser
+reproduzível. O recurso cabível é contra o **resultado preliminar** da etapa, e é
+nele que o prazo ancora.
+
+## Como resolver
+
+A mensagem da recusa nomeia o tipo de ato declarado como âncora. Aponte a janela
+para o resultado preliminar que a própria etapa publica.
+
+Se esse resultado ainda não está entre os produtos da etapa, acrescente-o, com papel
+preliminar, e ancore nele. Se o prazo na verdade corre da comunicação do parecer ao
+candidato, declare a ciência individual como âncora, em vez de um ato publicado.

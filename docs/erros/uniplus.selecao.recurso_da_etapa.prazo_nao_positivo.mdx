@@ -1,0 +1,39 @@
+---
+title: O prazo de interposição da etapa deve ser maior que zero
+sidebar_label: Prazo do recurso da etapa não positivo
+description: Prazo zero ou negativo fecharia a janela no instante em que ela abre.
+code: uniplus.selecao.recurso_da_etapa.prazo_nao_positivo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **prazo de interposição** da janela de recurso de uma etapa foi declarado com valor
+zero ou negativo.
+
+Um prazo zero fecharia a janela no mesmo instante em que ela abre, e um prazo
+negativo a fecharia antes do ato que a abre: nos dois casos o candidato não teria
+tempo algum para recorrer. O prazo nasceria inutilizável, e, depois da publicação,
+não há como corrigi-lo.
+
+## Como resolver
+
+Declare o prazo que o edital concede, em valor maior que zero. Se o edital diz
+"dois dias úteis", declare 2 em dias úteis. Se a janela é menor que um dia, declare em
+horas.
+
+Esta é a primeira conferência do prazo: depois de corrigido o valor, a unidade ainda
+é conferida, e dia corrido tem [recusa própria](./uniplus.selecao.recurso_da_etapa.prazo_em_dias_corridos.mdx).

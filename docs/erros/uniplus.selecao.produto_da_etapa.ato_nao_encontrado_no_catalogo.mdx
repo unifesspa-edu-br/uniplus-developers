@@ -1,0 +1,40 @@
+---
+title: O tipo de ato declarado pela etapa não tem versão vigente no catálogo
+sidebar_label: Ato do produto da etapa sem versão vigente
+description: A etapa só publica tipo de ato que o catálogo de Publicações tem vigente hoje.
+code: uniplus.selecao.produto_da_etapa.ato_nao_encontrado_no_catalogo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1527'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1527
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos produtos que a etapa declara publicar cita um tipo de ato que não tem versão
+vigente no catálogo de tipos de ato publicados na data de hoje. Ou o código não existe
+no catálogo, ou existe e nenhuma versão dele está vigente agora.
+
+A etapa não descreve o documento que vai publicar por texto livre: ela referencia um
+tipo de ato do catálogo, que é o que fixa o modelo, os campos e a classificação
+daquela publicação. Referenciar um tipo sem versão vigente deixaria a etapa apontando
+para um modelo que ninguém consegue emitir.
+
+## Como resolver
+
+A mensagem da recusa nomeia o código declarado, e o campo indica qual produto de qual
+etapa o trouxe. Três desfechos possíveis:
+
+- **Erro de grafia no código.** Corrija para o código exato do catálogo.
+- **O tipo existe e está sem versão vigente.** Publique a versão dele no catálogo de
+  tipos de ato, no módulo Publicações, e repita a definição das etapas.
+- **O tipo não é o certo.** Declare o tipo de ato que a etapa de fato publica.

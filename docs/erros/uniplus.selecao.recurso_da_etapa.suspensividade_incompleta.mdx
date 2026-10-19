@@ -1,0 +1,39 @@
+---
+title: A suspensividade da janela da etapa exige valor e unidade juntos
+sidebar_label: Suspensividade da etapa incompleta
+description: O tempo de bloqueio é um par valor-unidade; informa-se os dois ou nenhum.
+code: uniplus.selecao.recurso_da_etapa.suspensividade_incompleta
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **efeito suspensivo** de uma instância da janela de recurso foi declarado só pela
+metade: veio o valor sem a unidade, ou a unidade sem o valor.
+
+O tempo de bloqueio é sempre um par: um valor sozinho não diz em que unidade corre, e
+uma unidade sozinha não diz por quanto tempo. Já a **ausência dos dois** é legítima e
+significa que aquela instância não bloqueia.
+
+## Como resolver
+
+Escolha o que o edital prevê para aquela instância:
+
+- **a instância bloqueia por um tempo.** Informe o valor e a unidade juntos;
+- **a instância não bloqueia.** Deixe os dois em branco.
+
+Se a janela não admite recurso em instância superior, não declare tempo de bloqueio
+da instância superior; o da 1ª instância continua possível.

@@ -1,0 +1,43 @@
+---
+title: O prazo contado da ciência exige que a etapa emita parecer individual
+sidebar_label: Ciência sem parecer individual
+description: A ciência individual é do parecer que o candidato recebe; sem parecer individual, não há do que tomar ciência.
+code: uniplus.selecao.etapa_processo.ciencia_sem_parecer_individual
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0115
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de recurso da etapa conta o prazo da **ciência individual** do candidato,
+mas a etapa não está marcada para emitir parecer individual.
+
+A ciência individual é o momento em que cada candidato toma conhecimento da decisão
+que o alcança — por exemplo, o parecer que indefere um documento enviado —, sem que
+haja publicação para todos. Se a etapa não promete esse parecer, não existe o que o
+candidato receba, e o prazo não teria de onde correr.
+
+## Como resolver
+
+Conforme o que a etapa de fato faz:
+
+- **A etapa comunica um parecer a cada candidato.** Marque a etapa para emitir parecer
+  individual e mantenha a âncora na ciência individual.
+- **A etapa só divulga um resultado para todos.** Troque a âncora para a publicação do
+  ato e indique o resultado preliminar da etapa que abre a janela. **Exceção: a etapa
+  cuja nota vem do ENEM** não aceita recurso contra ato publicado (veja
+  [a página desse erro](./uniplus.selecao.processo_seletivo.etapa_nota_enem_com_produto_ou_recurso_em_ato.mdx)).
+  Nela, ou a etapa passa a emitir parecer individual, ou a janela da etapa é retirada,
+  e o recurso coletivo sobre a lista geral fica na janela de recurso da fase.

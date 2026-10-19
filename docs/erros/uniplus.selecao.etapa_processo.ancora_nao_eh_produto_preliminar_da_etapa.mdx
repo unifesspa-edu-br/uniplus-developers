@@ -1,0 +1,47 @@
+---
+title: A âncora do recurso não é um produto preliminar da própria etapa
+sidebar_label: Âncora fora dos preliminares da etapa
+description: O prazo conta da publicação preliminar que a própria etapa faz, não de outra.
+code: uniplus.selecao.etapa_processo.ancora_nao_eh_produto_preliminar_da_etapa
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0115
+rastreio:
+  - label: 'uniplus-api#1988'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1988
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de recurso da etapa, ancorada em ato publicado, aponta como âncora um ato
+que não está entre os produtos **preliminares** que a própria etapa publica.
+
+Duas exigências se somam aqui:
+
+- **A âncora é da própria etapa.** O prazo corre do instante em que aquela publicação
+  sai. Etapas diferentes podem publicar o mesmo tipo de ato, e o tipo sozinho não diz
+  de qual publicação o prazo conta. Numa habilitação com três etapas, por exemplo, cada
+  uma publica o seu resultado preliminar, e cada janela ancora no da sua etapa.
+- **A âncora é preliminar.** O resultado definitivo encerra a matéria; ancorar nele
+  daria prazo para recorrer daquilo que já não admite recurso.
+
+## Como resolver
+
+Três caminhos, conforme onde está o resultado certo:
+
+- **O resultado preliminar certo já é produto da etapa.** Aponte a janela para ele.
+- **O resultado é publicado por outra fase ou etapa.** Mova a janela de recurso para
+  quem o publica: é ela que abre a janela, e o prazo corre da sua publicação.
+- **O resultado preliminar ainda não está declarado.** Acrescente-o aos produtos da
+  etapa, com papel preliminar, e ancore nele.
+
+O mesmo problema na fase tem
+[página própria](./uniplus.selecao.regra_recurso_fase.ancora_nao_eh_produto_preliminar_da_fase.mdx).
