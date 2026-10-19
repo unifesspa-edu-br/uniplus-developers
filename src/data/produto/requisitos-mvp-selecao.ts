@@ -1001,7 +1001,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'A correção publicada de um resultado preliminar abre um novo prazo de recurso, contado da publicação da correção pelas regras de prazo do edital; o novo prazo vale também quando a correção sai depois do fim do prazo original; o recurso aberto nesse prazo é contra o resultado corrigido; uma nova correção do mesmo resultado reabre o prazo a partir dela; depois do definitivo publicado, a correção do preliminar é recusada (UNI-REQ-0162).',
+      'A correção publicada do resultado preliminar em que se ancora uma janela de recurso abre um novo prazo de recurso nessa janela, contado da publicação da correção pelas regras de prazo do edital; o novo prazo vale também quando a correção sai depois do fim do prazo original; o recurso aberto nesse prazo é contra o resultado corrigido; uma nova correção do mesmo resultado reabre o prazo a partir dela; a correção de preliminar sem janela de recurso ancorada não abre prazo; depois do definitivo publicado, a correção do preliminar é recusada (UNI-REQ-0162).',
     verificacao:
       'Testes automatizados (correção dentro do prazo original reabre o prazo inteiro; correção depois do fim do prazo original reabre o prazo; recurso contra o resultado corrigido; segunda correção reabre o prazo a partir dela) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -1011,7 +1011,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0161',
     titulo: 'Resultado definitivo só depois do prazo de recurso e dos julgamentos',
     enunciado:
-      'O resultado definitivo de uma matéria só pode ser publicado depois que termina o prazo de recurso aberto pelo resultado preliminar dela, ou pela última correção desse preliminar (UNI-REQ-0160), e depois que todos os recursos apresentados nesse prazo foram julgados. Quando o mesmo definitivo fecha mais de um ciclo (UNI-REQ-0157), ele espera o prazo e os julgamentos de todos os ciclos que fecha, inclusive o do preliminar que tiver sido corrigido por último. Assim, nenhum candidato perde a chance de recorrer porque o definitivo saiu antes da hora, e o definitivo já reflete o resultado dos recursos. Enquanto o sistema não conta o prazo de recurso nem recebe os recursos, cabe ao administrador esperar o prazo e os julgamentos antes de publicar o definitivo; a trava automática passa a valer quando o sistema controlar o prazo e os recursos. Decisão do líder técnico em 18/10/2026, registrada para conhecimento do PO.',
+      'O resultado definitivo de uma matéria só pode ser publicado depois que termina o prazo de recurso aberto pelo resultado preliminar dela, quando há janela de recurso ancorada nesse preliminar, ou pela última correção desse preliminar (UNI-REQ-0160), e depois que todos os recursos apresentados nesse prazo foram julgados. Quando o mesmo definitivo fecha mais de um ciclo (UNI-REQ-0157), ele espera o prazo e os julgamentos de todos os ciclos que fecha, inclusive o do preliminar que tiver sido corrigido por último. Assim, nenhum candidato perde a chance de recorrer porque o definitivo saiu antes da hora, e o definitivo já reflete o resultado dos recursos. Enquanto o sistema não conta o prazo de recurso nem recebe os recursos, cabe ao administrador esperar o prazo e os julgamentos antes de publicar o definitivo; a trava automática passa a valer quando o sistema controlar o prazo e os recursos. Decisão do líder técnico em 18/10/2026, registrada para conhecimento do PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1023,7 +1023,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Com o controle de prazo e de recursos no sistema, a publicação do definitivo é recusada enquanto o prazo de recurso de qualquer preliminar que ele fecha, ou da última correção dele, não terminou, e enquanto há recurso sem julgamento em qualquer desses ciclos; com o prazo encerrado e os recursos julgados, o definitivo é aceito.',
+      'Com o controle de prazo e de recursos no sistema, a publicação do definitivo é recusada enquanto o prazo de recurso de qualquer preliminar com janela ancorada que ele fecha, ou da última correção dele, não terminou, e enquanto há recurso sem julgamento em qualquer desses ciclos; com o prazo encerrado e os recursos julgados, o definitivo é aceito; o preliminar sem janela de recurso ancorada não tem prazo a esperar e não segura o definitivo.',
     verificacao:
       'Testes automatizados (definitivo recusado dentro do prazo de recurso; definitivo recusado com recurso pendente de julgamento; definitivo aceito com o prazo encerrado e os recursos julgados) (planejado, junto com o controle de prazo e de recursos).',
     pagina_developers: '/produto/regras-negocio/',
