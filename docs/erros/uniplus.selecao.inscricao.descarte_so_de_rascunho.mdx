@@ -1,0 +1,33 @@
+---
+title: Só o rascunho da inscrição pode ser descartado
+sidebar_label: Descarte só de rascunho
+description: 'A inscrição já enviada não é descartada; para desistir dela, cancele a inscrição.'
+code: uniplus.selecao.inscricao.descarte_so_de_rascunho
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Descarte do rascunho da inscrição do candidato
+requisitos:
+  - UNI-REQ-0023
+  - UNI-REQ-0033
+rastreio:
+  - label: 'uniplus-api#2026'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2026
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido tenta descartar uma inscrição que já foi enviada. Só o rascunho se
+descarta (UNI-REQ-0023): a inscrição enviada tem número e comprovante e não é
+removida.
+
+## Como resolver
+
+Para desistir da inscrição enviada, cancele-a enquanto as inscrições estiverem
+abertas (UNI-REQ-0033). Depois do cancelamento, é possível iniciar uma
+inscrição nova, do zero, no mesmo processo seletivo.

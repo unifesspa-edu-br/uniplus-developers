@@ -1,0 +1,33 @@
+---
+title: Só a inscrição enviada pode ser cancelada
+sidebar_label: Cancelamento só de enviada
+description: 'O rascunho não se cancela; para desistir dele, descarte-o.'
+code: uniplus.selecao.inscricao.cancelamento_so_de_enviada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cancelamento da inscrição do candidato
+requisitos:
+  - UNI-REQ-0033
+  - UNI-REQ-0023
+rastreio:
+  - label: 'uniplus-api#2027'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2027
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido tenta cancelar uma inscrição que ainda é rascunho. O cancelamento vale
+só para a inscrição já enviada (UNI-REQ-0033); o rascunho não tem número nem
+comprovante e sai por outro caminho.
+
+## Como resolver
+
+Para desistir do rascunho, descarte-o (UNI-REQ-0023). Depois do descarte, é
+possível iniciar uma inscrição nova. Se preferir continuar, termine o rascunho
+e envie a inscrição.

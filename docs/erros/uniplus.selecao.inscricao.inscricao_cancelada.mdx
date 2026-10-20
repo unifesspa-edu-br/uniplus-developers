@@ -1,0 +1,35 @@
+---
+title: A inscrição cancelada não pode mais ser alterada
+sidebar_label: Inscrição cancelada
+description: 'A inscrição cancelada é definitiva e não volta a ser alterada; para participar, inicie uma nova inscrição.'
+code: uniplus.selecao.inscricao.inscricao_cancelada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Operação do candidato sobre a inscrição já cancelada
+requisitos:
+  - UNI-REQ-0033
+  - UNI-REQ-0165
+rastreio:
+  - label: 'uniplus-api#2027'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2027
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A inscrição já foi cancelada e a operação tenta alterá-la. A inscrição cancelada
+é definitiva: não é salva, enviada, corrigida, descartada nem cancelada de novo
+(UNI-REQ-0033, UNI-REQ-0165). Como ela deixa de ser a inscrição ativa do
+candidato no processo, a operação também pode responder que ainda não há
+inscrição neste processo seletivo; a orientação é a mesma.
+
+## Como resolver
+
+Inicie uma nova inscrição no processo seletivo, enquanto as inscrições estiverem
+abertas. Ela nasce do zero, com o formulário vigente, e o primeiro envio gera
+outro número: o número da inscrição cancelada não é reaproveitado.
