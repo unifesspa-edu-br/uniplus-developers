@@ -1,0 +1,31 @@
+---
+title: O motivo do cancelamento excede o tamanho máximo
+sidebar_label: Motivo do cancelamento longo
+description: 'O motivo do cancelamento aceita até 500 caracteres; encurte-o ou deixe-o em branco.'
+code: uniplus.selecao.inscricao.motivo_do_cancelamento_longo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cancelamento da inscrição do candidato
+requisitos:
+  - UNI-REQ-0033
+rastreio:
+  - label: 'uniplus-api#2027'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2027
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O motivo informado no cancelamento tem mais de 500 caracteres, contados sem
+os espaços das pontas. A inscrição
+não foi cancelada e continua enviada.
+
+## Como resolver
+
+Encurte o motivo para até 500 caracteres e cancele de novo. O motivo é
+opcional: sem ele, fica registrado "a pedido do candidato" (UNI-REQ-0033).
