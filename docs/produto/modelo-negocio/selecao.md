@@ -119,7 +119,7 @@ Consequências práticas do congelamento, em linguagem de negócio:
 
 Quando for implementada, a inscrição será possível quando existir um processo seletivo publicado e vigente e o período de inscrição estiver aberto. O fluxo esperado do candidato:
 
-- Abre a inscrição e preenche o formulário. A inscrição começa como rascunho. O candidato responde às perguntas do formulário do processo, incluindo as autodeclarações de cota (ver seção 8).
+- Abre a inscrição e preenche o formulário. A inscrição começa como rascunho, que usa sempre a versão vigente do formulário e pode ser descartado pelo candidato (seção 6.2). O candidato responde às perguntas do formulário do processo, incluindo as autodeclarações de cota (ver seção 8).
 - Escolhe opções de curso e responde às perguntas de cota. Indica até duas opções de curso, sendo a segunda opcional (ver seção 6.1). O candidato não escolhe a modalidade diretamente: ele concorre sempre em ampla concorrência e, para cada reserva, somente quando é elegível e opta por concorrer; então, o sistema calcula o conjunto de modalidades — que pode conter mais de uma reserva ao mesmo tempo. Ver concorrência dupla e cálculo de modalidades na seção 7. A futura inscrição terá, no máximo, um papel reservado de registro; essa cardinalidade não limita o conjunto derivado. A relação entre esse papel e o conjunto será definida pela decisão proposta na seção Questões em refinamento.
 - Solicita atendimento especializado, se necessário. Entre as opções que o processo oferece, o candidato pode solicitar condições, recursos ou informar tipo de deficiência.
 - Envia os documentos exigidos. Anexa os documentos que se aplicam ao seu caso. Cada arquivo passa por uma verificação técnica de segurança antes de ser considerado válido.
@@ -130,10 +130,10 @@ Quando for implementada, a inscrição será possível quando existir um process
 
 | Requisito | Regra | Descrição em negócio |
 |---|---|---|
-| `UNI-REQ-0031` | Uma inscrição por CPF | Um mesmo CPF só pode ter uma inscrição submetida por processo e nível de ensino. Inscrições em níveis de ensino diferentes do mesmo processo são permitidas. O rascunho não conta para essa restrição. |
+| `UNI-REQ-0031` | Uma inscrição por CPF | Um mesmo CPF só pode ter uma inscrição ativa — rascunho ou enviada — por processo e nível de ensino. Inscrições em níveis de ensino diferentes do mesmo processo são permitidas. A inscrição cancelada não conta e não impede uma nova inscrição. |
 | `UNI-REQ-0032` | Nome social | Sempre que o nome for exibido — em listas, telas ou documentos —, o nome social tem prioridade absoluta sobre o nome civil. |
 | `UNI-REQ-0028` | Documentos obrigatórios | A inscrição não pode ser submetida sem os documentos obrigatórios exigidos para o caso do candidato. |
-| `UNI-REQ-0033` | Cancelar e refazer | O candidato pode cancelar e refazer a inscrição enquanto o período estiver aberto. O cancelamento registra motivo, data e autor, e libera nova inscrição respeitando a regra do CPF único. |
+| `UNI-REQ-0033` | Cancelar e refazer | O candidato pode cancelar a inscrição enviada enquanto as inscrições estiverem abertas, sabendo que, para voltar a participar, terá de fazer uma inscrição nova, do zero (seção 6.2). O cancelamento registra quem cancelou, a data e o motivo, que é opcional para o candidato. |
 | `UNI-REQ-0164` | Modalidades por opção de curso | As modalidades em que o candidato concorre são calculadas e registradas por opção de curso (seção 6.1); a segunda opção é opcional (`UNI-REQ-0024`). |
 | `UNI-REQ-0165` | Correção da inscrição submetida | Com as inscrições abertas, o candidato corrige a mesma inscrição, que gera novo comprovante a cada correção (seção 6.1). |
 | `UNI-REQ-0047` | Lista de espera | O candidato entra em lista de espera conforme a opção indicada no ato da inscrição. Etapa futura — capacidade planejada, ainda sem escopo na entrega atual. |
@@ -150,7 +150,7 @@ Quando o processo seletivo permite duas opções de curso, valem as regras abaix
 4. **As modalidades são calculadas por opção.** A elegibilidade do candidato é uma só e considera todas as modalidades que as regras de distribuição das ofertas do processo admitem, inclusive as institucionais (no PSIQ, a ação afirmativa indígena ou quilombola; [`UNI-REQ-0096`](../requisitos/index.mdx)), mas cada oferta tem a sua própria distribuição de vagas (modalidades oferecidas e quadro de vagas). Por isso o sistema calcula e registra separadamente, para cada opção, em quais modalidades o candidato concorre: as que o direito dele permite e que a distribuição da oferta daquela opção contempla. Para decidir o que o formulário e os documentos pedem, vale a união das modalidades das opções escolhidas; ofertas que o candidato não escolheu não contam. Assim, só se pede documento de cota que vale em ao menos uma das opções escolhidas. Antes de escolher o curso, vale o conjunto do processo.
 5. **O comprovante mostra as duas opções.** Traz a primeira e a segunda opção (ou "não declarada") e as modalidades em que o candidato concorre em cada uma.
 6. **A segunda opção pode ser trocada ou retirada** enquanto as inscrições estiverem abertas, corrigindo a inscrição já submetida ([`UNI-REQ-0165`](../requisitos/index.mdx)). É a mesma inscrição, com o mesmo número, que continua submetida: não há cancelamento nem nova inscrição. A correção pode alterar as respostas como num novo envio e passa pelas mesmas conferências do envio (campos, termos e documentos obrigatórios, regras da segunda opção); se não passar, é recusada por inteiro e a inscrição e o comprovante anteriores continuam valendo. O que uma regra fixa depois do envio, como o nome social ([`UNI-REQ-0153`](../requisitos/index.mdx)), continua fixo. Cada correção emite um novo comprovante, os anteriores são preservados e vale o último. Encerradas as inscrições, não há mais correção.
-7. **A inscrição segue as regras do edital vigentes quando foi iniciada** ([`UNI-REQ-0084`](../requisitos/index.mdx)). Uma retificação posterior que mude o número de opções de curso não altera inscrições já iniciadas.
+7. **A inscrição segue as regras do edital vigentes quando foi enviada pela primeira vez** ([`UNI-REQ-0084`](../requisitos/index.mdx)). Uma retificação posterior que mude o número de opções de curso não altera inscrições já enviadas. O rascunho, que ainda não foi enviado, acompanha a retificação (seção 6.2).
 
 **O que estas regras ainda não cobrem.** Elas tratam da escolha das opções na inscrição e do que fica registrado. O uso dessa escolha acontece depois, na classificação, e será definido em etapas futuras:
 
@@ -173,6 +173,22 @@ A elegibilidade de Leandro é a mesma nos dois cursos; o que muda é o que cada 
 **O que é recusado.** Helena tenta escolher Direito como primeira e como segunda opção: a segunda opção é recusada, pois tem de ser outro curso. Erick tenta indicar uma segunda opção em um processo que permite uma só: a segunda opção é recusada, pois nesse processo ela não existe.
 
 ---
+
+### 6.2 Rascunho, descarte, cancelamento e retificação
+
+Regras definidas na reunião de alinhamento de 20/10/2026 (CEPS, PO e líder técnico); requisitos [`UNI-REQ-0023`](../requisitos/index.mdx), [`UNI-REQ-0033`](../requisitos/index.mdx), [`UNI-REQ-0084`](../requisitos/index.mdx), [`UNI-REQ-0165`](../requisitos/index.mdx) e [`UNI-REQ-0167`](../requisitos/index.mdx).
+
+1. **O rascunho segue a versão vigente do formulário.** Ao continuar depois de uma retificação, o candidato vê o formulário novo: as respostas a perguntas que saíram deixam de valer, as perguntas novas obrigatórias ficam pendentes, e a oferta ou a 2ª opção que a versão nova não admite são retiradas. A versão do formulário fica fixa a partir do primeiro envio.
+2. **O candidato pode descartar o rascunho.** Ele some de "Minhas inscrições" e o candidato pode iniciar outro. Rascunho não se cancela.
+3. **O candidato cancela só a inscrição enviada e só com as inscrições abertas.** Antes de confirmar, o sistema avisa que, para voltar a participar, o candidato terá de fazer uma inscrição nova, do zero, com o formulário vigente. O número da inscrição cancelada não é reaproveitado e não há limite de cancelamentos. O motivo é opcional para o candidato: sem ele, fica registrado "a pedido do candidato". Quem cancelou e a data são sempre registrados.
+4. **Ações do candidato em cada situação**, conforme a tabela abaixo.
+5. **Retificação que altera o formulário.** O sistema não avisa os inscritos: o CEPS orienta por comunicado e e-mail. Quem não cancelar e refizer fica com a inscrição como a enviou. Como requisito futuro da administração, fica registrado o relatório de inscritos por data de envio e versão do formulário.
+
+| Situação | Ações |
+|---|---|
+| Rascunho | Continuar e descartar. |
+| Enviada, com as inscrições abertas | Corrigir os dados, cancelar e ver o comprovante. |
+| Enviada, com as inscrições encerradas | Só ver o comprovante. |
 
 ## 7. Cotas e modalidades de concorrência
 
@@ -397,12 +413,12 @@ Consolidação das regras institucionais. O enunciado público e o mapeamento pa
 
 | Requisito | Regra | Enunciado | Situação |
 |---|---|---|---|
-| `UNI-REQ-0031` | Inscrição única por CPF | Um CPF só pode ter uma inscrição submetida por processo e nível de ensino; níveis distintos do mesmo processo são permitidos. | Entrega atual |
+| `UNI-REQ-0031` | Inscrição única por CPF | Um CPF só pode ter uma inscrição ativa (rascunho ou enviada) por processo e nível de ensino, e a cancelada não conta; níveis distintos do mesmo processo são permitidos. | Entrega atual |
 | `UNI-REQ-0032` | Prioridade do nome social | Nome social tem prioridade absoluta em listas públicas e documentos de identificação. | Entrega atual |
 | `UNI-REQ-0028` | Documentos obrigatórios | Inscrição bloqueada sem os documentos obrigatórios aplicáveis ao caso do candidato. | Entrega atual |
 | `UNI-REQ-0024`, `UNI-REQ-0045` | Precedência de opções de curso | Vagas de 1ª opção de curso são processadas primeiro; as remanescentes são realocadas para a 2ª opção. A cascata de remanejamento entre modalidades é regra própria (`REQ-56`), não parte da precedência das opções de curso. | Etapa futura |
 | `UNI-REQ-0015`, `UNI-REQ-0046` | Fator de Atenuação das Desigualdades de Acesso | Fator de Atenuação das Desigualdades de Acesso, que cada processo declara se aplica ou não (a declaração é obrigatória para publicar), com percentual configurável por processo seletivo, aplicado sobre a nota final; sem comprovação de elegibilidade, o candidato é reclassificado sem o fator (não eliminado). | Etapa futura |
-| `UNI-REQ-0033` | Cancelar e refazer | O candidato pode cancelar e refazer a inscrição antes do encerramento, com registro de motivo, data e autor. | Entrega atual |
+| `UNI-REQ-0033` | Cancelar e refazer | O candidato pode cancelar a inscrição enviada antes do encerramento, com registro de quem cancelou, da data e do motivo (opcional para o candidato). | Entrega atual |
 | `UNI-REQ-0047` | Lista de espera | Inserção na lista de espera conforme a opção indicada no ato da inscrição. | Etapa futura |
 | `UNI-REQ-0019` | Congelamento por processo seletivo na publicação | Todos os parâmetros ficam congelados na publicação do processo seletivo; alterações retroativas são proibidas e atualizações globais valem só para processos futuros. | Entrega atual |
 | `UNI-REQ-0080` | Recurso e efeito suspensivo | 1ª instância no sistema; instância superior julgada fora, mas registrada. Efeito suspensivo configurável por instância e por janela de recurso (de fase ou de etapa); cada janela declara se admite instância superior; ausência não bloqueia. | Base configurada |

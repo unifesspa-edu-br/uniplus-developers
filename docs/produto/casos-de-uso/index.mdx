@@ -111,10 +111,12 @@ está aberto.
 6. Com tudo presente, a inscrição passa a submetida e o sistema emite um
    comprovante imutável com o relatório de documentos e pendências.
 
-**Regras observadas:** uma inscrição submetida é única por CPF, processo e nível
-de ensino; o nome social tem prioridade em exibições; quando o candidato escolhe
-usar nome social, a inscrição usa o nome social da conta; o candidato pode cancelar
-e refazer a inscrição enquanto o período permitir.
+**Regras observadas:** uma inscrição ativa (rascunho ou enviada) é única por CPF, processo e
+nível de ensino, e a cancelada não conta; o nome social tem prioridade em exibições; quando o candidato escolhe
+usar nome social, a inscrição usa o nome social da conta; o rascunho usa sempre a
+versão vigente do formulário e pode ser descartado; o candidato pode cancelar a
+inscrição enviada enquanto as inscrições estiverem abertas e, para voltar a
+participar, faz uma inscrição nova, do zero.
 
 **Pós-condição:** a inscrição está submetida, com comprovante emitido; pendências
 técnicas de documento (quando houver) ficam registradas para acompanhamento.
@@ -123,8 +125,9 @@ técnicas de documento (quando houver) ficam registradas para acompanhamento.
 UNI-REQ-0024 (opções de curso), UNI-REQ-0025 (concorrência dupla),
 UNI-REQ-0026 (atendimento especializado), UNI-REQ-0027 (upload de documentos),
 UNI-REQ-0028 (validação documental no submit), UNI-REQ-0029 (comprovante
-imutável), UNI-REQ-0031 (unicidade por CPF e nível), UNI-REQ-0032 (nome social),
-UNI-REQ-0033 (cancelar e refazer), UNI-REQ-0153 (nome social da conta).
+imutável), UNI-REQ-0031 (uma inscrição ativa por CPF e nível), UNI-REQ-0032 (nome social),
+UNI-REQ-0033 (cancelar e refazer), UNI-REQ-0153 (nome social da conta),
+UNI-REQ-0165 (correção da inscrição enviada), UNI-REQ-0167 (relatório de inscritos por versão do formulário).
 
 ## Incrementos planejados
 
