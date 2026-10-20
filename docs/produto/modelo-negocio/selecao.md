@@ -75,7 +75,7 @@ Enquanto o processo está em rascunho, o administrador monta livremente toda a c
 
 Ao publicar o processo seletivo, o sistema valida a configuração e, estando tudo conforme, oficializa e congela os parâmetros, emitindo o edital que torna a publicação pública. Desse instante em diante, a configuração viva não muda mais o que já foi publicado; qualquer alteração exige retificação (novo ato que aponta o retificado, com nova versão congelada).
 
-Durante a inscrição, o candidato responde ao formulário do processo, indica opções de curso e responde às perguntas de cota, envia documentos e submete a inscrição. O sistema decide o que se aplica a ele sempre com base na cópia oficial congelada do processo seletivo, garantindo que todos os candidatos de um mesmo processo seletivo sejam tratados exatamente pelas mesmas regras, mesmo que a configuração seja alterada depois para processos futuros.
+Durante a inscrição, o candidato responde ao formulário do processo, indica opções de curso e responde às perguntas de cota, envia documentos e submete a inscrição. O sistema decide o que se aplica a ele sempre com base na cópia oficial congelada do processo seletivo, garantindo que a inscrição seja tratada pelas regras da versão em que foi enviada pela primeira vez, mesmo que a configuração seja alterada depois. Enquanto é rascunho, a inscrição acompanha a versão vigente; depois de uma retificação, quem já enviou continua na versão do seu envio, salvo se cancelar e se inscrever de novo (seção 6.2).
 
 ### Papéis (quem faz o quê)
 
