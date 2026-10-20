@@ -1,7 +1,7 @@
 ---
 title: A retificação não troca o eixo de fato já coletado por versão publicada
 sidebar_label: Eixo de fato já coletado alterado
-description: Rascunho — a retificação é recusada quando a versão nova congelaria, num fato que alguma versão publicada já coletou, uma definição diferente da publicada.
+description: Rascunho — recusa que deixa de existir com o UNI-REQ-0159 de 19/10/2026; até a API aplicar a regra nova, a retificação é recusada quando a versão nova congelaria, num fato que alguma versão publicada já coletou, uma definição diferente da publicada.
 code: uniplus.selecao.retificacao.eixo_do_fato_ja_coletado_alterado
 http_status: 422
 situacao: rascunho
@@ -16,11 +16,26 @@ requisitos:
 rastreio:
   - label: 'uniplus-api#1967'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1967
+  - label: 'uniplus-api#1978'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1978
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa que vai deixar de existir
+
+Em 19/10/2026 o UNI-REQ-0159 mudou: na retificação, o fato já coletado passa a
+manter a definição publicada, mesmo que tenha sido corrigido no catálogo, e a
+retificação deixa de ser recusada por isso. A classificação de proteção corrigida
+para mais forte e a finalidade e a base legal corrigidas chegam à versão nova.
+A API ainda não aplica a regra nova (uniplus-api#1978). Quando aplicar, este
+código deixa de ser emitido e esta página continua no ar, registrando isso, para
+que respostas antigas que o citam ainda encontrem a explicação. O texto abaixo
+descreve a recusa como era antes da mudança.
+
+:::
 
 ## O que aconteceu
 
@@ -54,8 +69,9 @@ A recusa da operação vale para qualquer resumo de grupo cuja operação alguma
 versão publicada tenha congelado; a API não exige que o campo de membro tenha
 sido coletado.
 
-A lista protegida é a do que a versão publicada congela do fato. O UNI-REQ-0159
-fala em definição do fato; a finalidade e a base legal ficam fora da recusa. Quem
+A lista protegida é a do que a versão publicada congela do fato. Pela versão do
+UNI-REQ-0159 anterior a 19/10/2026, a finalidade e a base legal ficavam fora da
+recusa. Quem
 responde o fato (candidato ou membro de grupo) já é recusado por outra regra de
 coletabilidade, e não por este código.
 
