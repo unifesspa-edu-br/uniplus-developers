@@ -122,7 +122,7 @@ Quando for implementada, a inscrição será possível quando existir um process
 - Abre a inscrição e preenche o formulário. A inscrição começa como rascunho, que usa sempre a versão vigente do formulário e pode ser descartado pelo candidato (seção 6.2). O candidato responde às perguntas do formulário do processo, incluindo as autodeclarações de cota (ver seção 8).
 - Escolhe opções de curso e responde às perguntas de cota. Indica até duas opções de curso, sendo a segunda opcional (ver seção 6.1). O candidato não escolhe a modalidade diretamente: ele concorre sempre em ampla concorrência e, para cada reserva, somente quando é elegível e opta por concorrer; então, o sistema calcula o conjunto de modalidades — que pode conter mais de uma reserva ao mesmo tempo. Ver concorrência dupla e cálculo de modalidades na seção 7. A futura inscrição terá, no máximo, um papel reservado de registro; essa cardinalidade não limita o conjunto derivado. A relação entre esse papel e o conjunto será definida pela decisão proposta na seção Questões em refinamento.
 - Solicita atendimento especializado, se necessário. Entre as opções que o processo oferece, o candidato pode solicitar condições, recursos ou informar tipo de deficiência.
-- Envia os documentos exigidos. Anexa os documentos que se aplicam ao seu caso. Cada arquivo passa por uma verificação técnica de segurança antes de ser considerado válido.
+- Envia os documentos exigidos. Anexa os documentos que se aplicam ao seu caso. Cada arquivo passa por uma verificação de segurança (antivírus) e só é aceito se passar; o arquivo recusado não é guardado e conta como não enviado (seção 6.3).
 - Submete a inscrição. O sistema confere se todos os documentos obrigatórios aplicáveis ao caso do candidato estão presentes. Faltando algum, a submissão é bloqueada com a indicação do que falta.
 - Recebe o comprovante. Com tudo presente, a inscrição passa a submetida e o sistema emite um comprovante imutável, com o relatório dos documentos, pendências e implicações por escrito.
 
@@ -138,7 +138,7 @@ Quando for implementada, a inscrição será possível quando existir um process
 | `UNI-REQ-0165` | Correção da inscrição submetida | Com as inscrições abertas, o candidato corrige a mesma inscrição, que gera novo comprovante a cada correção (seção 6.1). |
 | `UNI-REQ-0047` | Lista de espera | O candidato entra em lista de espera conforme a opção indicada no ato da inscrição. Etapa futura — capacidade planejada, ainda sem escopo na entrega atual. |
 
-> Comprovante e pendências. Mesmo após submeter, um documento ainda em verificação técnica de segurança gera uma pendência que fica registrada e visível no acompanhamento e no comprovante — sem impedir a submissão. A inscrição permanece válida; a pendência apenas sinaliza algo a acompanhar. O comprovante nunca é alterado: uma reemissão gera um novo comprovante, preservando o anterior.
+> Comprovante e pendências. Mesmo após submeter, um documento não obrigatório que não foi enviado gera uma pendência que fica registrada e visível na consulta da inscrição e no comprovante — sem impedir a submissão. A inscrição permanece válida; a pendência apenas sinaliza algo a acompanhar. O comprovante nunca é alterado: uma reemissão gera um novo comprovante, preservando o anterior.
 
 ### 6.1 Duas opções de curso na inscrição
 
@@ -189,6 +189,42 @@ Regras definidas na reunião de alinhamento de 20/10/2026 (CEPS, PO e líder té
 | Rascunho | Continuar e descartar. |
 | Enviada, com as inscrições abertas | Corrigir os dados, cancelar e ver o comprovante. |
 | Enviada, com as inscrições encerradas | Só ver o comprovante. |
+
+### 6.3 Envio de documentos e atendimento especializado
+
+Regras definidas pelo líder técnico em 20/10/2026, **a confirmar pelo PO**; requisitos [`UNI-REQ-0026`](../requisitos/index.mdx), [`UNI-REQ-0027`](../requisitos/index.mdx), [`UNI-REQ-0028`](../requisitos/index.mdx), [`UNI-REQ-0029`](../requisitos/index.mdx), [`UNI-REQ-0030`](../requisitos/index.mdx), [`UNI-REQ-0130`](../requisitos/index.mdx), [`UNI-REQ-0168`](../requisitos/index.mdx), [`UNI-REQ-0169`](../requisitos/index.mdx) e [`UNI-REQ-0170`](../requisitos/index.mdx). Cada item abaixo é uma decisão do líder técnico em 20/10/2026, a confirmar pelo PO.
+
+1. **O envio é feito no próprio formulário.** O candidato anexa cada documento exigido no passo "Documentos", com a inscrição em rascunho ou já enviada (correção), enquanto as inscrições estão abertas. A página "Documentos" do portal, para acompanhar pendências depois do envio, fica para depois; nesta primeira entrega a situação aparece na consulta da inscrição e no comprovante.
+2. **O arquivo só vale depois de verificado.** O sistema aceita só PDF, JPEG e PNG, dentro dos formatos que a exigência permite, com o tamanho máximo da exigência ou, se ela não define, 10 MB. Arquivo com vírus é recusado e não é guardado; se a verificação estiver fora do ar, o envio é recusado e o candidato tenta de novo. Por isso o comprovante nunca mostra arquivo "em verificação".
+3. **Proteção do arquivo.** Cada arquivo é guardado cifrado, protegido separadamente, conforme o parecer das encarregadas de dados de 13/10/2026. O nome original não é guardado (a tela mostra "Arquivo 1 — PDF, 2 MB") e o local de guarda não contém dado pessoal.
+4. **Conferência no envio.** Falta de documento **obrigatório** recusa o envio, junto das demais recusas. Quando a exigência aceita alternativas ("laudo **ou** atestado"), o documento alternativo atende. Documento **não obrigatório** que falta não impede o envio; o comprovante registra a consequência. A correção da inscrição enviada passa pela mesma conferência.
+5. **Nada se apaga no rascunho.** Se o candidato muda uma resposta, ou o edital é retificado e a exigência some, o arquivo apenas deixa de contar e volta a contar se a exigência voltar. No envio (inclusive na correção), saem os arquivos de exigência que não se aplica. Depois do envio, nada é apagado por substituição: o arquivo antigo fica guardado e vale o da correção mais recente.
+6. **Descarte e cancelamento.** Descartar o rascunho apaga os arquivos; cancelar a inscrição enviada não apaga, e os arquivos seguem a retenção da tabela de temporalidade (`UNI-REQ-0131`).
+7. **Comprovante.** Para cada documento exigido, traz se é obrigatório, se foi atendido ou está pendente e, por escrito, a consequência de não atender. Para cada arquivo, traz o código de verificação (SHA-256), o tamanho e o formato — nunca o nome original nem onde está guardado.
+8. **Quem acessa.** Nesta primeira entrega, só o próprio candidato é dono dos seus arquivos. O CEPS ainda não os consulta pelo sistema (risco registrado): o acesso por operação administrativa auditada, com registro do acesso sem o conteúdo, entra antes da análise do atendimento (uniplus-api#2040), e o da banca fica para a homologação.
+9. **Documentos do atendimento especializado não são obrigatórios.** Quem não envia o documento mantém a inscrição, mas o atendimento especializado não é concedido na análise do atendimento (homologação, `UNI-REQ-0041`).
+10. **O modelo de formulário traz os documentos padrão.** Ao aplicar o modelo a um processo, o conjunto abaixo é copiado para a configuração do processo, na fase de inscrição; o administrador pode ajustá-lo, e o ajuste vale só para aquele processo. A tabela está sujeita à validação do CEPS.
+
+| Condição de atendimento | Documento exigido |
+|---|---|
+| Pessoa com deficiência | Laudo médico |
+| Dislexia, discalculia, déficit de atenção | Laudo médico de profissional habilitado |
+| Lactante | Certidão de nascimento da criança ou documento equivalente (não depende do sexo declarado) |
+| Gestante | Laudo médico |
+| Outra condição | Laudo médico ou documento equivalente |
+| Pessoa idosa | Nenhum (a idade vem do cadastro) |
+
+O documento comprova a condição, não o recurso solicitado.
+
+**Exemplo 1 — pessoa com deficiência.** Leandro declara pessoa com deficiência e solicita atendimento. O passo "Documentos" pede o laudo médico. Ele anexa um PDF de 2 MB, que passa pela verificação, e envia a inscrição. O comprovante traz o laudo como atendido, com o código de verificação, o tamanho e o formato, sem o nome do arquivo.
+
+**Exemplo 2 — sem o documento.** Camila declara a condição lactante e não anexa a certidão. A inscrição é enviada normalmente (o documento não é obrigatório), o comprovante registra que, sem a certidão da criança ou documento equivalente, o atendimento especializado não será concedido, e, na análise do atendimento, ele não é concedido. A inscrição continua válida.
+
+**Exemplo 3 — nada se apaga no rascunho.** Helena anexa o laudo, desmarca por engano a condição e marca de novo: o laudo continua anexado. Se enviasse a inscrição sem a condição marcada, o laudo sairia no envio.
+
+**Exemplo 4 — documento alternativo.** A exigência aceita "laudo médico ou atestado de profissional habilitado". Lúcia anexa só o atestado: a exigência está atendida e o envio não é recusado.
+
+**Exemplo 5 — descarte e cancelamento.** Kevin descarta o rascunho e os arquivos que anexou são apagados. Marlene cancela a inscrição enviada e os arquivos dela continuam guardados pelo prazo de retenção.
 
 ## 7. Cotas e modalidades de concorrência
 
