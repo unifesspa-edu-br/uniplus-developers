@@ -176,7 +176,7 @@ A elegibilidade de Leandro é a mesma nos dois cursos; o que muda é o que cada 
 
 ### 6.2 Rascunho, descarte, cancelamento e retificação
 
-Regras definidas na reunião de alinhamento de 20/10/2026 (CEPS, PO e líder técnico); requisitos [`UNI-REQ-0023`](../requisitos/index.mdx), [`UNI-REQ-0033`](../requisitos/index.mdx), [`UNI-REQ-0084`](../requisitos/index.mdx), [`UNI-REQ-0165`](../requisitos/index.mdx) e [`UNI-REQ-0167`](../requisitos/index.mdx).
+Regras definidas na reunião de alinhamento de 20/10/2026 (CEPS, PO e líder técnico); requisitos [`UNI-REQ-0023`](../requisitos/index.mdx), [`UNI-REQ-0033`](../requisitos/index.mdx), [`UNI-REQ-0084`](../requisitos/index.mdx), [`UNI-REQ-0165`](../requisitos/index.mdx) e [`UNI-REQ-0167`](../requisitos/index.mdx); a decisão do líder técnico de 21/10/2026 sobre avanço e envio ([`UNI-REQ-0028`](../requisitos/index.mdx)) está ao fim da seção.
 
 1. **O rascunho segue a versão vigente do formulário.** Ao continuar depois de uma retificação, o candidato vê o formulário novo: as respostas a perguntas que saíram deixam de valer, as perguntas novas obrigatórias ficam pendentes, e a oferta ou a 2ª opção que a versão nova não admite são retiradas. A versão do formulário fica fixa a partir do primeiro envio.
 2. **O candidato pode descartar o rascunho.** Ele some de "Minhas inscrições" e o candidato pode iniciar outro. Rascunho não se cancela.
@@ -190,7 +190,7 @@ Regras definidas na reunião de alinhamento de 20/10/2026 (CEPS, PO e líder té
 | Enviada, com as inscrições abertas | Corrigir os dados, cancelar e ver o comprovante. |
 | Enviada, com as inscrições encerradas | Só ver o comprovante. |
 
-**Avanço e envio no formulário** (decisão do líder técnico em 21/10/2026, a confirmar pelo PO). O candidato só avança de um passo para o seguinte quando o passo atual não tem pergunta obrigatória sem resposta nem resposta inválida; voltar a um passo anterior é sempre livre. "Enviar inscrição" só envia quando todos os passos estão válidos — perguntas, aceites e documentos obrigatórios — e, enquanto isso não ocorre, informa o motivo. O rascunho pode ser salvo com pendências. A regra vale também na correção da inscrição enviada. O formulário válido controla o avanço e o envio, e o servidor continua conferindo tudo no envio ([`UNI-REQ-0023`](../requisitos/index.mdx) e [`UNI-REQ-0028`](../requisitos/index.mdx)).
+**Avanço e envio no formulário** (decisão do líder técnico em 21/10/2026, a confirmar pelo PO). O candidato só avança de um passo para o seguinte quando o passo atual não tem pendência obrigatória (pergunta sem resposta, resposta inválida, termo obrigatório não marcado ou documento obrigatório não atendido); voltar a um passo anterior é sempre livre. "Enviar inscrição" só envia quando todos os passos estão válidos — perguntas, aceites e documentos obrigatórios — e, enquanto isso não ocorre, informa o motivo. O rascunho pode ser salvo com pendências. A regra vale também na correção da inscrição enviada. O formulário válido controla o avanço e o envio, e o servidor continua conferindo tudo no envio ([`UNI-REQ-0023`](../requisitos/index.mdx) e [`UNI-REQ-0028`](../requisitos/index.mdx)).
 
 ### 6.3 Envio de documentos e atendimento especializado
 
