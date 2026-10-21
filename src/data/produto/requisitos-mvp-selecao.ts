@@ -1936,7 +1936,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0026',
     titulo: 'Solicitar atendimento especializado',
     enunciado:
-      'O candidato deve poder solicitar condições, recursos e tipos de deficiência ofertados para o processo seletivo da inscrição. Os documentos que comprovam a condição solicitada não são obrigatórios para enviar a inscrição: quem não os envia mantém a inscrição, mas o atendimento especializado não é concedido na análise do atendimento, que ainda não existe nesta primeira entrega e se dará na homologação documental (UNI-REQ-0041). O documento comprova a condição, não o recurso, e quais documentos cada condição exige está em UNI-REQ-0170. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+      'O candidato deve poder solicitar condições, recursos e tipos de deficiência ofertados para o processo seletivo da inscrição. Os documentos que comprovam a condição solicitada não são obrigatórios para enviar a inscrição, e isso é permanente, não provisório: quem não os envia mantém a inscrição, mas o atendimento especializado não é concedido na análise do atendimento, que ainda não existe nesta primeira entrega e se dará na homologação documental (UNI-REQ-0041). O documento comprova a condição, não o recurso, e quais documentos cada condição exige está em UNI-REQ-0170. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1948,7 +1948,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Solicitação só aceita itens do mesmo processo e tipo de deficiência sob a condição selecionada.',
+      'Solicitação só aceita itens do mesmo processo e tipo de deficiência sob a condição selecionada; a falta do documento da condição não impede o envio da inscrição e o atendimento não é concedido.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -3497,7 +3497,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0168',
     titulo: 'Arquivo de documento que deixou de valer',
     enunciado:
-      'Enquanto a inscrição é rascunho, nenhum arquivo enviado é apagado por mudança de resposta ou por retificação do edital: o arquivo de uma exigência que deixou de se aplicar (o candidato mudou uma resposta, ou a versão nova do formulário não tem mais a exigência ou não aceita mais aquele formato) apenas deixa de contar, e volta a contar se a exigência voltar a se aplicar. A limpeza acontece num único momento, no envio da inscrição, inclusive na correção (UNI-REQ-0165), e só apaga arquivo que nunca constou de um envio: o anexado depois do último envio para uma exigência que não se aplica à versão da inscrição. O arquivo que já constou de um envio (e, portanto, de um comprovante imutável, UNI-REQ-0029) nunca é apagado por substituição nem por deixar de valer: fica guardado, conforme a retenção (UNI-REQ-0131), deixa de contar, e vale o que a correção mais recente apresenta. Exemplo: Helena anexa o laudo médico, desmarca por engano a condição de pessoa com deficiência e a marca de novo; o laudo continua lá. Se ela enviasse a inscrição sem a condição marcada, o laudo seria removido, pois nunca constou de um envio. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+      'Enquanto a inscrição é rascunho, nenhum arquivo enviado é apagado por mudança de resposta ou por retificação do edital: o arquivo de uma exigência que deixou de se aplicar (o candidato mudou uma resposta, ou a versão nova do formulário não tem mais a exigência ou não aceita mais aquele formato) apenas deixa de contar, e volta a contar se a exigência voltar a se aplicar. A limpeza acontece num único momento, no envio da inscrição, inclusive na correção (UNI-REQ-0165), e só apaga arquivo que nunca constou de um envio: o anexado depois do último envio para uma exigência que não se aplica à versão da inscrição ou em formato que a exigência não aceita mais. O arquivo que já constou de um envio (e, portanto, de um comprovante imutável, UNI-REQ-0029) nunca é apagado por substituição nem por deixar de valer: fica guardado, conforme a retenção (UNI-REQ-0131), deixa de contar, e vale o que a correção mais recente apresenta. Exemplo: Helena anexa o laudo médico, desmarca por engano a condição de pessoa com deficiência e a marca de novo; o laudo continua lá. Se ela enviasse a inscrição sem a condição marcada, o laudo seria removido, pois nunca constou de um envio. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3518,7 +3518,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0169',
     titulo: 'Descarte do rascunho e cancelamento da inscrição quanto aos arquivos enviados',
     enunciado:
-      'Descartar uma inscrição em rascunho apaga os arquivos enviados nela. Cancelar uma inscrição já enviada não apaga nenhum arquivo, que segue a retenção da tabela de temporalidade (UNI-REQ-0131). Exemplo: Kevin descarta o rascunho e todos os arquivos que anexou somem; Marlene cancela a inscrição enviada e os arquivos dela continuam guardados pelo prazo de retenção. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+      'Descartar uma inscrição em rascunho apaga os arquivos enviados nela. Cancelar uma inscrição já enviada não apaga nenhum arquivo, que segue a retenção da tabela de temporalidade (UNI-REQ-0131). Exemplo: Valentina descarta o rascunho e todos os arquivos que anexou somem; Marlene cancela a inscrição enviada e os arquivos dela continuam guardados pelo prazo de retenção. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3539,7 +3539,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0170',
     titulo: 'Documentos padrão do atendimento especializado no modelo de formulário',
     enunciado:
-      'O modelo de formulário traz um conjunto padrão de documentos exigidos do atendimento especializado, com uma regra por condição, na fase de inscrição, e esse conjunto é copiado para a configuração do processo quando o modelo é aplicado. Depois de aplicado, o administrador pode ajustar o conjunto, e o ajuste vale só para aquele processo. Quem declara que não precisa de atendimento não recebe exigência de documento do atendimento. Tabela padrão, a ser validada pelo CEPS: pessoa com deficiência, laudo médico; dislexia, discalculia e déficit de atenção, laudo médico de profissional habilitado; lactante, certidão de nascimento da criança ou documento equivalente (a exigência não depende do sexo declarado); gestante, laudo médico; outra condição, laudo médico ou documento equivalente; pessoa idosa, nenhum documento (a idade vem do cadastro). O documento comprova a condição, não o recurso solicitado. Sem o documento, o candidato mantém a inscrição e perde o atendimento (consequência de retirar a vantagem), conforme UNI-REQ-0026. Exemplo: Camila declara a condição lactante e o passo "Documentos" pede a certidão de nascimento da criança ou documento equivalente; Leandro declara pessoa com deficiência e o passo pede o laudo médico. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+      'O modelo de formulário traz um conjunto padrão de documentos exigidos do atendimento especializado, com uma regra por condição, na fase de inscrição, e esse conjunto é copiado para a configuração do processo quando o modelo é aplicado. Há uma exigência por condição, só para quem solicita atendimento especializado; quem declara duas condições comprova as duas; quem declara que não precisa de atendimento não recebe exigência de documento do atendimento; condição que o processo não oferta não gera exigência. Depois de aplicado, o administrador pode ajustar o conjunto, e o ajuste vale só para aquele processo; reaplicar o modelo substitui os documentos de inscrição do processo, inclusive os ajustados. Aplicar o modelo exige a fase de inscrição no cronograma do processo. A base legal da exigência fica pendente até o CEPS indicá-la, e o processo só é publicado com ela resolvida (decisão do líder técnico em 20/10/2026, a confirmar pelo CEPS e pelo PO). Tabela padrão, a ser validada pelo CEPS: pessoa com deficiência, laudo médico; dislexia, discalculia e déficit de atenção, laudo médico de profissional habilitado; lactante, certidão de nascimento da criança ou documento equivalente (a exigência não depende do sexo declarado); gestante, laudo médico; outra condição, laudo médico ou documento equivalente; pessoa idosa, nenhum documento (a idade vem do cadastro). O documento comprova a condição, não o recurso solicitado (como ledor, sala ou tempo adicional). Sem o documento, o candidato mantém a inscrição e perde o atendimento (consequência de retirar a vantagem), conforme UNI-REQ-0026. Exemplo: Camila declara a condição lactante e o passo "Documentos" pede a certidão de nascimento da criança ou documento equivalente; Leandro declara pessoa com deficiência e o passo pede o laudo médico. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3551,9 +3551,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Aplicar o modelo copia para o processo uma regra por condição de atendimento, na fase de inscrição; cada condição pede o documento da tabela e quem não precisa de atendimento não recebe exigência; a alteração feita pelo administrador vale só para o processo; sem o documento, a inscrição segue válida e o atendimento não é concedido.',
+      'Aplicar o modelo copia para o processo uma regra por condição de atendimento, na fase de inscrição; cada condição pede o documento da tabela e quem não precisa de atendimento não recebe exigência; a alteração feita pelo administrador vale só para o processo; reaplicar o modelo substitui os documentos de inscrição, inclusive os ajustados; condição não ofertada não gera exigência; quem declara duas condições comprova as duas; o processo sem a base legal resolvida não é publicado; sem o documento, a inscrição segue válida e o atendimento não é concedido.',
     verificacao: 'Validação automatizada da aplicação do modelo e do passo de documentos por condição (planejada). Tabela sujeita à validação do CEPS.',
-    pagina_developers: '/produto/requisitos/',
+    pagina_developers: '/produto/regras-negocio/',
     owner: 'PO; Equipe backend',
   },
 ];
