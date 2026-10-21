@@ -838,7 +838,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0029',
     titulo: 'Comprovante de inscrição imutável',
     enunciado:
-      'O sistema deve emitir comprovante imutável no submit, contendo relatório de documentos, pendências e implicações por escrito. O relatório lista, para cada documento exigido na inscrição, se é obrigatório, se foi atendido ou está pendente e, por escrito, a consequência de não atender (por exemplo, "sem o comprovante, o atendimento especializado não será concedido"). Para cada arquivo traz o código de verificação (SHA-256), o tamanho e o formato; nunca o nome original do arquivo nem onde ele está guardado. A lista de documentos entra no código de integridade do comprovante. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO. O texto da consequência depende do que o edital declara para o documento: eliminação, "Sem o documento X, você será eliminado do processo seletivo."; perda da vaga reservada, "Sem o documento X, você perderá a vaga reservada e passará a concorrer na ampla concorrência."; perda da vantagem pleiteada, "Sem o documento X, a vantagem que você pleiteia não será concedida."; e pendência de reenvio, "Sem o documento X, você será notificado para reenviá-lo no prazo da fase." Documento sem consequência declarada não recebe texto de consequência: o comprovante não inventa uma. Quando a consequência é declarada num grupo "um ou outro" e não em cada documento, ela vale para as alternativas que não declaram a própria e é escrita sobre os documentos do grupo ("Sem os documentos exigidos (A, B), ..."). A alternativa de um grupo "um ou outro" que o candidato não precisou enviar, porque o grupo já está atendido, aparece como dispensada e sem consequência, para que o comprovante não contradiga a inscrição aceita: quem enviou a CNH não aparece como eliminado por não ter enviado o RG. Entram só as exigências da inscrição que se aplicam ao candidato; as de outra fase, como a habilitação, ficam de fora. Arquivo confirmado depois que o comprovante foi composto não passa a constar dele: fica para o comprovante do envio seguinte. O comprovante de uma inscrição sem documentos exigidos não traz a seção de documentos. Decisão do LT em 21/10/2026, a confirmar pelo PO (proposto).',
+      'O sistema deve emitir comprovante imutável no submit, contendo relatório de documentos, pendências e implicações por escrito. O relatório lista, para cada documento exigido na inscrição, se é obrigatório, se foi atendido ou está pendente e, por escrito, a consequência de não atender (por exemplo, "sem o comprovante, o atendimento especializado não será concedido"). Para cada arquivo traz o código de verificação (SHA-256), o tamanho e o formato; nunca o nome original do arquivo nem onde ele está guardado. A lista de documentos entra no código de integridade do comprovante. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO. Os textos de cada consequência e as regras do que entra no comprovante estão no UNI-REQ-0171.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -850,10 +850,31 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O comprovante é append-only; a reemissão cria novo registro sem alterar o anterior; cada exigência traz obrigatoriedade, situação e consequência por escrito; cada arquivo traz código de verificação, tamanho e formato, e nunca o nome nem o caminho; o texto da consequência segue a declarada (eliminação, perda da vaga reservada, perda da vantagem ou reenvio) e não existe quando nenhuma é declarada; a alternativa dispensada por grupo já atendido aparece como dispensada, sem consequência; a lista de documentos faz parte da integridade do comprovante.',
-    verificacao:
-      'Teste automatizado (texto por consequência, ausência de texto sem consequência declarada, grupo atendido, arquivos sem nome nem caminho, integridade cobrindo a lista de documentos); demais regras do comprovante (planejado).',
+      'O comprovante é append-only; a reemissão cria novo registro sem alterar o anterior; cada exigência traz obrigatoriedade, situação e consequência por escrito; cada arquivo traz código de verificação, tamanho e formato, e nunca o nome nem o caminho.',
+    verificacao: 'Validação automatizada do comprovante (planejada).',
     pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0171',
+    titulo: 'Texto das consequências e conteúdo dos documentos no comprovante',
+    enunciado:
+      'O texto da consequência de não atender um documento, no comprovante da inscrição (UNI-REQ-0029), depende do que o edital declara para ele: eliminação, "Sem o documento X, você será eliminado do processo seletivo."; perda da vaga reservada, "Sem o documento X, você perderá a vaga reservada e passará a concorrer na ampla concorrência."; perda da vantagem pleiteada, "Sem o documento X, a vantagem que você pleiteia não será concedida."; e pendência de reenvio, "Sem o documento X, você será notificado para reenviá-lo no prazo da fase." Documento sem consequência declarada não recebe texto de consequência: o comprovante não inventa uma. Quando a consequência é declarada num grupo "um ou outro" e não em cada documento, ela vale para as alternativas que não declaram a própria e é escrita sobre os documentos do grupo ("Sem os documentos exigidos (A, B), ..."). A alternativa de um grupo "um ou outro" que o candidato não precisou enviar, porque o grupo já está atendido, aparece como dispensada e sem consequência, para que o comprovante não contradiga a inscrição aceita: quem enviou a CNH não aparece como eliminado por não ter enviado o RG. Entram só as exigências da inscrição que se aplicam ao candidato; as de outra fase, como a habilitação, ficam de fora. Arquivo confirmado depois que o comprovante foi composto não passa a constar dele: fica para o comprovante do envio seguinte. A lista de documentos faz parte do que o código de integridade do comprovante protege, e o comprovante de uma inscrição sem documentos exigidos não traz a seção de documentos. Decisão do LT em 21/10/2026, a confirmar pelo PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0029',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Cada exigência da inscrição aparece com a consequência por escrito quando o edital a declara, no texto próprio de eliminação, perda da vaga reservada, perda da vantagem ou reenvio, e sem texto de consequência quando não declara; a consequência declarada no grupo vale para as alternativas que não declaram a própria; a alternativa dispensada por grupo já atendido aparece como dispensada, sem consequência; exigências de outra fase não aparecem; arquivo confirmado após a composição fica para o envio seguinte; alterar a lista de documentos altera o código de integridade; sem documentos exigidos, o comprovante não traz a seção.',
+    verificacao:
+      'Teste automatizado (texto por consequência, ausência de texto sem consequência declarada, grupo atendido, integridade cobrindo a lista de documentos) (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
   {
