@@ -796,7 +796,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0027',
     titulo: 'Upload de documentos da inscrição',
     enunciado:
-      'O candidato deve poder anexar documentos exigidos na fase de inscrição por fluxo de URL pré-assinada para storage em quarentena.',
+      'O candidato deve poder enviar cada documento exigido na fase de inscrição pelo próprio formulário de inscrição, no passo "Documentos", enquanto as inscrições estão abertas, com a inscrição em rascunho ou já enviada (correção, UNI-REQ-0165). O arquivo só passa a valer depois de verificado por antivírus: o arquivo recusado pela verificação não é guardado e não conta como enviado, e se a verificação estiver fora do ar o envio é recusado e o candidato tenta de novo. O sistema aceita só PDF, JPEG e PNG, dentro dos formatos que a exigência permite; o tamanho máximo é o da exigência e, quando ela não define, 10 MB. O arquivo é guardado cifrado, cada arquivo protegido separadamente, conforme o parecer das encarregadas de dados de 13/10/2026, e o local onde fica guardado não contém dado pessoal (nem o nome do arquivo enviado é guardado: a tela mostra, por exemplo, "Arquivo 1 — PDF, 2 MB"). Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -808,8 +808,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O documento é salvo sem dados pessoais no caminho, em quarentena, com hash e estado técnico controlado.',
-    verificacao: 'Validação automatizada de upload (planejada).',
+      'O documento é guardado cifrado, sem dados pessoais no caminho nem o nome original, com o código de verificação do arquivo (SHA-256), tamanho e formato; formato fora do que a exigência permite, PDF que não começa como PDF e arquivo infectado são recusados e nada é guardado; verificação fora do ar recusa o envio sem perder a exigência pendente; outro candidato não acessa o arquivo; inscrição cancelada ou período encerrado recusa o envio.',
+    verificacao: 'Validação automatizada do envio de documentos, com arquivo de teste de vírus padrão (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend; Infraestrutura',
   },
@@ -817,7 +817,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0028',
     titulo: 'Validação documental no submit',
     enunciado:
-      'O sistema deve bloquear a submissão quando faltar documento obrigatório da fase de inscrição cujo gatilho se aplica à inscrição.',
+      'O sistema deve bloquear a submissão quando faltar documento obrigatório da fase de inscrição cujo gatilho se aplica à inscrição. Quando a exigência admite alternativas ("um ou outro"), o documento alternativo atende: só falta documento se nenhuma alternativa foi apresentada. Documento obrigatório ausente é recusado junto das demais recusas do envio. Documento não obrigatório que falta não impede o envio; o comprovante registra a consequência (UNI-REQ-0029). A mesma conferência vale para a correção da inscrição enviada (UNI-REQ-0165). Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -829,7 +829,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A ausência bloqueia o submit; documento presente, ainda em quarentena, permite o submit e gera pendência viva.',
+      'A ausência de documento obrigatório bloqueia o submit; grupo "um ou outro" atendido por uma alternativa não bloqueia; documento não obrigatório ausente não bloqueia; a correção passa pela mesma conferência.',
     verificacao: 'Validação automatizada da validação documental (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -838,7 +838,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0029',
     titulo: 'Comprovante de inscrição imutável',
     enunciado:
-      'O sistema deve emitir comprovante imutável no submit, contendo relatório de documentos, pendências e implicações por escrito.',
+      'O sistema deve emitir comprovante imutável no submit, contendo relatório de documentos, pendências e implicações por escrito. O relatório lista, para cada documento exigido na inscrição, se é obrigatório, se foi atendido ou está pendente e, por escrito, a consequência de não atender (por exemplo, "sem o comprovante, o atendimento especializado não será concedido"). Para cada arquivo traz o código de verificação (SHA-256), o tamanho e o formato; nunca o nome original do arquivo nem onde ele está guardado. A lista de documentos entra no código de integridade do comprovante. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -850,7 +850,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O comprovante é append-only; a reemissão cria novo registro sem alterar o anterior.',
+      'O comprovante é append-only; a reemissão cria novo registro sem alterar o anterior; cada exigência traz obrigatoriedade, situação e consequência por escrito; cada arquivo traz código de verificação, tamanho e formato, e nunca o nome nem o caminho.',
     verificacao: 'Validação automatizada do comprovante (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -1936,7 +1936,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0026',
     titulo: 'Solicitar atendimento especializado',
     enunciado:
-      'O candidato deve poder solicitar condições, recursos e tipos de deficiência ofertados para o processo seletivo da inscrição.',
+      'O candidato deve poder solicitar condições, recursos e tipos de deficiência ofertados para o processo seletivo da inscrição. Os documentos que comprovam a condição solicitada não são obrigatórios para enviar a inscrição: quem não os envia mantém a inscrição, mas o atendimento especializado não é concedido na análise do atendimento (homologação, UNI-REQ-0041). O documento comprova a condição, não o recurso, e quais documentos cada condição exige está em UNI-REQ-0170. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1957,7 +1957,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0030',
     titulo: 'Pendência derivada pós-submit',
     enunciado:
-      'O sistema deve calcular pendência viva após submissão sem mudar InscricaoStatus. As causas são exemplificativas e não exaustivas: ausência de documento, documento em estado técnico diferente de limpo e, com a árvore de satisfação, exigência pendente, indeterminada, impossível ou com slot de cardinalidade pendente. A consulta e o comprovante distinguem esses estados.',
+      'O sistema deve calcular pendência viva após submissão sem mudar InscricaoStatus. As causas são exemplificativas e não exaustivas: ausência de documento (obrigatório ou não) e, com a árvore de satisfação, exigência pendente, indeterminada, impossível ou com slot de cardinalidade pendente. A consulta e o comprovante distinguem esses estados. Como o arquivo só é aceito depois da verificação de segurança (UNI-REQ-0027), não existe pendência por arquivo em verificação. Nesta primeira entrega a pendência aparece na consulta da inscrição e no comprovante; a página "Documentos" do portal para acompanhá-la depois do envio fica para depois. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2957,7 +2957,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A publicação recusa mais de um campo produtor do mesmo fato no processo, em qualquer dos formulários por finalidade (UNI-REQ-0144), fato de pré-condição fora dos admitidos por UNI-REQ-0145 (como fato de integração — ver UNI-REQ-0089), campo fora do universo do processo, ou campo dependente ordenado antes do seu produtor; o snapshot publicado carrega o formulário congelado (campo, fato produzido, ordem, pré-condição); alterar o cadastro vivo do formulário depois de publicado não muda o snapshot de uma versão já publicada; o rascunho do formulário de cada finalidade — isenção, inscrição ou habilitação — usa sempre a versão de configuração vigente e divulgada, e quem continua depois de uma retificação vê o formulário novo (respostas a perguntas removidas deixam de valer, perguntas novas obrigatórias ficam pendentes, oferta ou 2ª opção não admitida pela versão nova são retiradas, e arquivo enviado para documento que a versão nova deixou de exigir é descartado); a partir do primeiro envio a versão fica imutável na própria inscrição, inclusive na correção, independentemente de retificações publicadas depois.',
+      'A publicação recusa mais de um campo produtor do mesmo fato no processo, em qualquer dos formulários por finalidade (UNI-REQ-0144), fato de pré-condição fora dos admitidos por UNI-REQ-0145 (como fato de integração — ver UNI-REQ-0089), campo fora do universo do processo, ou campo dependente ordenado antes do seu produtor; o snapshot publicado carrega o formulário congelado (campo, fato produzido, ordem, pré-condição); alterar o cadastro vivo do formulário depois de publicado não muda o snapshot de uma versão já publicada; o rascunho do formulário de cada finalidade — isenção, inscrição ou habilitação — usa sempre a versão de configuração vigente e divulgada, e quem continua depois de uma retificação vê o formulário novo (respostas a perguntas removidas deixam de valer, perguntas novas obrigatórias ficam pendentes, oferta ou 2ª opção não admitida pela versão nova são retiradas, e arquivo enviado para documento que a versão nova deixou de exigir deixa de contar, sem ser apagado — UNI-REQ-0168); a partir do primeiro envio a versão fica imutável na própria inscrição, inclusive na correção, independentemente de retificações publicadas depois.',
     verificacao:
       'Teste automatizado (as quatro recusas de publicação; shape do envelope congelado contra processo real publicado; nenhum caminho de runtime lê a configuração viva do formulário; rascunho que passa à versão nova após retificação, com respostas removidas, pendências novas e opções retiradas; versão da inscrição enviada imutável mesmo após retificação publicada depois do envio) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -3392,7 +3392,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0130',
     titulo: 'Acesso restrito ao documento apresentado pelo candidato',
     enunciado:
-      'O documento de comprovação e o anexo de recurso são acessíveis somente ao próprio candidato, quanto aos seus, ao integrante autorizado da banca no escopo em que atua e por operação administrativa auditada. Conteúdo e localização técnica não aparecem em log, evento ou resposta destinada a terceiro.',
+      'O documento de comprovação e o anexo de recurso são acessíveis somente ao próprio candidato, quanto aos seus, ao integrante autorizado da banca no escopo em que atua e por operação administrativa auditada. Nesta primeira entrega o candidato não baixa de volta o arquivo que enviou; o acesso do CEPS aos comprovantes do atendimento especializado, por operação administrativa auditada, entra antes da análise do atendimento (uniplus-api#2040), e o da banca fica para a homologação. Até lá, o CEPS ainda não consulta esses comprovantes pelo sistema (risco registrado). Conteúdo e localização técnica não aparecem em log, evento ou resposta destinada a terceiro. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -3492,5 +3492,68 @@ export const requisitosMvpSelecao: Requisito[] = [
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0168',
+    titulo: 'Arquivo de documento que deixou de valer',
+    enunciado:
+      'Enquanto a inscrição é rascunho, nenhum arquivo enviado é apagado por mudança de resposta ou por retificação do edital: o arquivo de uma exigência que deixou de se aplicar (o candidato mudou uma resposta, ou a versão nova do formulário não tem mais a exigência ou não aceita mais aquele formato) apenas deixa de contar, e volta a contar se a exigência voltar a se aplicar. A limpeza acontece num único momento, no envio da inscrição, inclusive na correção (UNI-REQ-0165): saem os arquivos das exigências que não se aplicam à versão da inscrição. Depois do envio, o arquivo substituído ou que deixou de valer fica guardado, conforme a retenção (UNI-REQ-0131), deixa de contar, e vale o que a correção mais recente apresenta. Exemplo: Helena anexa o laudo médico, desmarca por engano a condição de pessoa com deficiência e a marca de novo; o laudo continua lá. Se ela enviasse a inscrição sem a condição marcada, o laudo seria removido. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0027',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'criterio_verificacao',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'No rascunho, mudar a resposta ou adotar versão nova do formulário não apaga arquivo; o arquivo de exigência que não se aplica não conta; no envio e na correção, o arquivo de exigência que não se aplica à versão da inscrição é removido; depois do envio, nada é apagado por substituição.',
+    verificacao: 'Validação automatizada do envio e da correção com exigência que deixa de se aplicar (planejada).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0169',
+    titulo: 'Descarte do rascunho e cancelamento da inscrição quanto aos arquivos enviados',
+    enunciado:
+      'Descartar uma inscrição em rascunho apaga os arquivos enviados nela. Cancelar uma inscrição já enviada não apaga nenhum arquivo, que segue a retenção da tabela de temporalidade (UNI-REQ-0131). Exemplo: Kevin descarta o rascunho e todos os arquivos que anexou somem; Lúcia cancela a inscrição enviada e os arquivos dela continuam guardados pelo prazo de retenção. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0027',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'criterio_verificacao',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'O descarte do rascunho remove os arquivos da inscrição; o cancelamento da inscrição enviada preserva os arquivos.',
+    verificacao: 'Validação automatizada do descarte e do cancelamento (planejada).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0170',
+    titulo: 'Documentos padrão do atendimento especializado no modelo de formulário',
+    enunciado:
+      'O modelo de formulário traz um conjunto padrão de documentos exigidos do atendimento especializado, com uma regra por condição, na fase de inscrição, e esse conjunto é copiado para a configuração do processo quando o modelo é aplicado. Depois de aplicado, o administrador pode ajustar o conjunto, e o ajuste vale só para aquele processo. Quem declara que não precisa de atendimento não recebe exigência de documento do atendimento. Tabela padrão, a ser validada pelo CEPS: pessoa com deficiência, laudo médico; dislexia, discalculia e déficit de atenção, laudo médico de profissional habilitado; lactante, certidão de nascimento da criança ou documento equivalente (a exigência não depende do sexo declarado); gestante, laudo médico; outra condição, laudo médico ou documento equivalente; pessoa idosa, nenhum documento (a idade vem do cadastro). O documento comprova a condição, não o recurso solicitado. Sem o documento, o candidato mantém a inscrição e perde o atendimento (consequência de retirar a vantagem), conforme UNI-REQ-0026. Exemplo: Camila declara a condição lactante e o passo \"Documentos\" pede a certidão de nascimento da criança ou documento equivalente; Leandro declara pessoa com deficiência e o passo pede o laudo médico. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0026',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Aplicar o modelo copia para o processo uma regra por condição de atendimento, na fase de inscrição; cada condição pede o documento da tabela e quem não precisa de atendimento não recebe exigência; a alteração feita pelo administrador vale só para o processo; sem o documento, a inscrição segue válida e o atendimento não é concedido.',
+    verificacao: 'Validação automatizada da aplicação do modelo e do passo de documentos por condição (planejada). Tabela sujeita à validação do CEPS.',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'PO; Equipe backend',
   },
 ];
