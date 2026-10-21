@@ -3095,9 +3095,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0091',
-    titulo: 'Fluxo de aceite de termo de consentimento em runtime fora do escopo do cadastro de termos de consentimento',
+    titulo: 'Aceite de termo de consentimento na inscrição: o que já existe e a evidência de log de IP que falta',
     enunciado:
-      'O cadastro de termos de consentimento (UNI-REQ-0086) cobre cadastro, versionamento e congelamento de termo de consentimento/declaração — a configuração que existe antes de qualquer candidato interagir, incluindo a fase em que cada termo é exigido e se é obrigatório, já congelados no snapshot. Apresentar o termo congelado ao candidato na fase congelada, bloquear essa fase até o aceite quando o termo é obrigatório (só apresentar, sem bloquear, quando não é), e persistir o ator, a data/hora, a versão/snapshot aceito e a evidência de log de IP quando a forma de aceite exigir (REGISTRO_DIGITAL_COM_LOG_IP) é fluxo de runtime que ainda não existe neste harness — consistente com o restante do harness, que modela configuração e congelamento, não motor de candidato.',
+      'O cadastro de termos de consentimento (UNI-REQ-0086) cobre cadastro, versionamento e congelamento do termo — a configuração que existe antes de qualquer candidato interagir. O aceite do termo na inscrição já está entregue: o formulário exige os termos congelados do processo, o candidato aceita cada um na versão e no hash apresentados, o aceite fica gravado com a inscrição, o sistema recusa aceite repetido, de termo que não pertence ao formulário ou de outra versão, e o envio é recusado quando falta o aceite de termo obrigatório (UNI-REQ-0023); o rascunho pode ficar com a lista incompleta. Continua como incremento futuro apenas a evidência de log de IP, exigida quando a forma de aceite for REGISTRO_DIGITAL_COM_LOG_IP, que ainda não é registrada. Confirmado no código em 21/10/2026.',
     grupo: 'negocio',
     tipo: 'incremento',
     nivel: 'capacidade',
@@ -3109,8 +3109,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Enquanto este incremento não é entregue, um termo exigido publicado não bloqueia nenhuma fase do candidato nem persiste evidência de aceite; entregar este incremento exige apresentar o termo congelado, bloquear a fase até o aceite só quando a flag obrigatorio congelada for verdadeira (termo opcional é apresentado, mas não bloqueia), e persistir o aceite correlacionado ao identificador próprio da exigência (UNI-REQ-0086) — nunca por nome ou código do termo, que dois itens do catálogo podem compartilhar —, junto com ator, data/hora, versão aceita e log de IP quando a forma de aceite exigir.',
-    verificacao: 'Revisão futura.',
+      'Entregue: o aceite é gravado por termo com a versão e o hash fixados; aceite repetido, de termo fora do formulário ou de outra versão é recusado; termo obrigatório sem aceite impede o envio, e o opcional não bloqueia. Pendente: persistir a evidência de log de IP quando a forma de aceite exigir.',
+    verificacao: 'Aceite e conferência no envio verificados no código da API; evidência de log de IP: revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
   },
