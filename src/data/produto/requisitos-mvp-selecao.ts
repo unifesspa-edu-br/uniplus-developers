@@ -667,7 +667,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0023',
     titulo: 'Ciclo-base da inscrição',
     enunciado:
-      'O sistema deve criar inscrição em rascunho e permitir sua submissão, sem incluir aqui as regras de documentos, atendimento, comprovante, cancelamento e unicidade, que possuem requisitos próprios. O rascunho é a inscrição ainda não enviada: o candidato pode continuar de onde parou ou descartá-lo. Descartado, o rascunho some de "Minhas inscrições" e o candidato pode iniciar outro; rascunho não se cancela, só se descarta. Ações do candidato por situação: com o rascunho, continuar e descartar; com a inscrição enviada e as inscrições abertas, corrigir os dados (UNI-REQ-0165), cancelar (UNI-REQ-0033) e ver o comprovante; com a inscrição enviada e as inscrições encerradas, só ver o comprovante. Decisão da reunião de alinhamento de 20/10/2026 (LT, CEPS e PO).',
+      'O sistema deve criar inscrição em rascunho e permitir sua submissão, sem incluir aqui as regras de documentos, atendimento, comprovante, cancelamento e unicidade, que possuem requisitos próprios. O rascunho é a inscrição ainda não enviada: o candidato pode continuar de onde parou ou descartá-lo. Descartado, o rascunho some de "Minhas inscrições" e o candidato pode iniciar outro; rascunho não se cancela, só se descarta. Ações do candidato por situação: com o rascunho, continuar e descartar; com a inscrição enviada e as inscrições abertas, corrigir os dados (UNI-REQ-0165), cancelar (UNI-REQ-0033) e ver o comprovante; com a inscrição enviada e as inscrições encerradas, só ver o comprovante. Decisão da reunião de alinhamento de 20/10/2026 (LT, CEPS e PO). Avanço e envio no formulário: o candidato só avança de um passo para o seguinte quando o passo atual não tem pergunta obrigatória sem resposta nem resposta inválida; voltar a um passo anterior é sempre livre, mesmo com pendência. "Enviar inscrição" só envia quando todos os passos estão válidos — perguntas, aceites e documentos obrigatórios — e, enquanto isso não ocorre, informa o motivo (por exemplo, quantas respostas faltam e em qual passo). O rascunho pode ser salvo com pendências. A regra vale para a inscrição e para a correção da inscrição enviada (UNI-REQ-0165). O formulário válido controla o avanço e o envio, e o servidor continua conferindo tudo no envio. Decisão do líder técnico em 21/10/2026, a confirmar pelo PO.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -679,7 +679,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'O rascunho conta como inscrição ativa para a unicidade (UNI-REQ-0031); a submissão muda o status de rascunho para submetida sem criar nova inscrição; o candidato descarta o próprio rascunho, que some de "Minhas inscrições", e pode iniciar outro; o rascunho oferece continuar e descartar, e não tem cancelamento; a inscrição enviada oferece corrigir, cancelar e ver o comprovante com as inscrições abertas, e só ver o comprovante depois que elas encerram.',
+      'O rascunho conta como inscrição ativa para a unicidade (UNI-REQ-0031); a submissão muda o status de rascunho para submetida sem criar nova inscrição; o candidato descarta o próprio rascunho, que some de "Minhas inscrições", e pode iniciar outro; o rascunho oferece continuar e descartar, e não tem cancelamento; a inscrição enviada oferece corrigir, cancelar e ver o comprovante com as inscrições abertas, e só ver o comprovante depois que elas encerram; o candidato não avança de passo com pergunta obrigatória pendente ou resposta inválida no passo atual, mas volta a qualquer passo anterior; "Enviar inscrição" só envia com todos os passos válidos (perguntas, aceites e documentos obrigatórios) e informa o motivo; o rascunho é salvo com pendências; a regra vale também na correção da inscrição enviada.',
     verificacao:
       'Validação automatizada do ciclo da inscrição (planejada); E2E planejado.',
     pagina_developers: '/produto/requisitos/',
@@ -829,7 +829,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A ausência de documento obrigatório bloqueia o submit; grupo "um ou outro" atendido por uma alternativa não bloqueia; documento não obrigatório ausente não bloqueia; a correção passa pela mesma conferência.',
+      'A ausência de documento obrigatório bloqueia o submit; grupo "um ou outro" atendido por uma alternativa não bloqueia; documento não obrigatório ausente não bloqueia; a correção passa pela mesma conferência. No formulário, "Enviar inscrição" não envia enquanto houver documento obrigatório pendente e informa o motivo.',
     verificacao: 'Validação automatizada da validação documental (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',

@@ -190,6 +190,8 @@ Regras definidas na reunião de alinhamento de 20/10/2026 (CEPS, PO e líder té
 | Enviada, com as inscrições abertas | Corrigir os dados, cancelar e ver o comprovante. |
 | Enviada, com as inscrições encerradas | Só ver o comprovante. |
 
+**Avanço e envio no formulário** (decisão do líder técnico em 21/10/2026, a confirmar pelo PO). O candidato só avança de um passo para o seguinte quando o passo atual não tem pergunta obrigatória sem resposta nem resposta inválida; voltar a um passo anterior é sempre livre. "Enviar inscrição" só envia quando todos os passos estão válidos — perguntas, aceites e documentos obrigatórios — e, enquanto isso não ocorre, informa o motivo. O rascunho pode ser salvo com pendências. A regra vale também na correção da inscrição enviada. O formulário válido controla o avanço e o envio, e o servidor continua conferindo tudo no envio ([`UNI-REQ-0023`](../requisitos/index.mdx) e [`UNI-REQ-0028`](../requisitos/index.mdx)).
+
 ### 6.3 Envio de documentos e atendimento especializado
 
 Regras definidas pelo líder técnico em 20/10/2026, **a confirmar pelo PO**; requisitos [`UNI-REQ-0026`](../requisitos/index.mdx), [`UNI-REQ-0027`](../requisitos/index.mdx), [`UNI-REQ-0028`](../requisitos/index.mdx), [`UNI-REQ-0029`](../requisitos/index.mdx), [`UNI-REQ-0030`](../requisitos/index.mdx), [`UNI-REQ-0130`](../requisitos/index.mdx), [`UNI-REQ-0168`](../requisitos/index.mdx), [`UNI-REQ-0169`](../requisitos/index.mdx) e [`UNI-REQ-0170`](../requisitos/index.mdx). Cada item abaixo é uma decisão do líder técnico em 20/10/2026, a confirmar pelo PO.
