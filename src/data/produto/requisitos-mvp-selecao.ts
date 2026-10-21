@@ -817,7 +817,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0028',
     titulo: 'Validação documental no submit',
     enunciado:
-      'O sistema deve bloquear a submissão quando faltar documento obrigatório da fase de inscrição cujo gatilho se aplica à inscrição. Quando a exigência admite alternativas ("um ou outro"), o documento alternativo atende: só falta documento se nenhuma alternativa foi apresentada. Documento obrigatório ausente é recusado junto das demais recusas do envio. Documento não obrigatório que falta não impede o envio; o comprovante registra a consequência (UNI-REQ-0029). A mesma conferência vale para a correção da inscrição enviada (UNI-REQ-0165). Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+      'O sistema deve bloquear a submissão quando faltar documento obrigatório da fase de inscrição cujo gatilho se aplica à inscrição. Quando a exigência admite alternativas ("um ou outro"), o documento alternativo atende: só falta documento se nenhuma alternativa foi apresentada. Documento obrigatório ausente é recusado junto das demais recusas do envio. Documento não obrigatório que falta não impede o envio; o comprovante registra a consequência (UNI-REQ-0029). A mesma conferência vale para a correção da inscrição enviada (UNI-REQ-0165). No formulário, documento obrigatório não atendido impede avançar do passo de documentos e enviar a inscrição, com o motivo informado (UNI-REQ-0023); o servidor continua conferindo no envio. Decisão do líder técnico em 20/10/2026 e, quanto à tela, em 21/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -829,7 +829,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A ausência de documento obrigatório bloqueia o submit; grupo "um ou outro" atendido por uma alternativa não bloqueia; documento não obrigatório ausente não bloqueia; a correção passa pela mesma conferência.',
+      'A ausência de documento obrigatório bloqueia o submit; grupo "um ou outro" atendido por uma alternativa não bloqueia; documento não obrigatório ausente não bloqueia; a correção passa pela mesma conferência; na tela, documento obrigatório pendente impede avançar do passo de documentos e enviar, e o motivo é informado.',
     verificacao: 'Validação automatizada da validação documental (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
