@@ -1508,6 +1508,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Infraestrutura',
   },
   {
+    requisito_id: 'UNI-REQ-0172',
+    titulo: 'Envio de documentos acessível pela internet e protegido em trânsito',
+    enunciado:
+        'O envio de documentos da inscrição (UNI-REQ-0027) deve funcionar a partir de redes externas à Unifesspa, sem depender de acesso à rede interna institucional. Todo arquivo enviado pelo candidato deve trafegar cifrado, por HTTPS, entre o navegador e o serviço de armazenamento. O endereço de envio fornecido pela API deve ser individual, ter validade curta e autorizar somente o envio do arquivo correspondente. Decisão técnica do líder técnico em 21/10/2026, com dispensa de validação pelo PO conforme alinhamento de 22/10/2026.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0035',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+        'O envio de documentos funciona a partir de uma rede externa à Unifesspa; o endereço de envio é acessível pela internet; os arquivos são transmitidos por HTTPS, sem envio em HTTP não cifrado; o endereço de envio é individual, tem validade curta e não autoriza o envio de outro arquivo ou para outro objeto de armazenamento.',
+    verificacao:
+        'Testes em ambiente de homologação a partir de rede externa à Unifesspa; verificação da transmissão por HTTPS; testes de expiração e restrição dos endereços de envio (planejados).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Infraestrutura',
+  },
+  {
     requisito_id: 'UNI-REQ-0036',
     titulo: 'Auditoria e masking operacional',
     enunciado:
