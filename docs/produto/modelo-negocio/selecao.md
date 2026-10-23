@@ -204,23 +204,22 @@ Regras definidas pelo líder técnico em 20/10/2026, **a confirmar pelo PO**; re
 6. **Descarte e cancelamento.** Descartar o rascunho apaga os arquivos; cancelar a inscrição enviada não apaga, e os arquivos seguem a retenção da tabela de temporalidade (`UNI-REQ-0131`).
 7. **Comprovante.** Para cada documento exigido, traz se é obrigatório, se foi atendido ou está pendente e, por escrito, a consequência de não atender. Para cada arquivo, traz o código de verificação (SHA-256), o tamanho e o formato — nunca o nome original nem onde está guardado. O comprovante nunca traz arquivo em verificação: documento não obrigatório ainda em verificação no envio consta como pendente, salvo a alternativa de um grupo "um ou outro" já atendido, que consta como dispensada.
 8. **Quem acessa.** Nesta primeira entrega, só o próprio candidato é dono dos seus arquivos. O CEPS ainda não os consulta pelo sistema (risco registrado): o acesso por operação administrativa auditada, com registro do acesso sem o conteúdo, entra antes da análise do atendimento (uniplus-api#2040), e o da banca fica para a homologação.
-9. **Documentos do atendimento especializado não são obrigatórios.** Quem não envia o documento mantém a inscrição, mas o atendimento especializado não é concedido na análise do atendimento, que ainda não existe nesta primeira entrega e se dará na homologação documental (`UNI-REQ-0041`). Essa regra é permanente, não provisória.
-10. **O modelo de formulário traz os documentos padrão.** Ao aplicar o modelo a um processo, o conjunto abaixo é copiado para a configuração do processo, na fase de inscrição; o administrador pode ajustá-lo, e o ajuste vale só para aquele processo. Há uma exigência por condição, só para quem solicita atendimento; quem declara duas condições comprova as duas; condição que o processo não oferta, ou que não tem documento na tabela (pessoa idosa), não gera exigência; reaplicar o modelo substitui os documentos de inscrição do processo, inclusive os ajustados; aplicar o modelo exige a fase de inscrição no cronograma. A tabela e a base legal da exigência dependem do CEPS (decisão do líder técnico em 20/10/2026, a confirmar pelo CEPS e pelo PO): o processo só é publicado com a base legal resolvida.
+9. **Documentos do atendimento especializado são obrigatórios para quem solicita atendimento.** Sem o documento de cada condição declarada, a inscrição não é enviada: o documento é o que dá direito ao atendimento e permite ao CEPS organizá-lo. Quem não solicita atendimento não recebe a exigência. A análise do documento se dará na homologação documental (`UNI-REQ-0041`). Definição do PO em 22/10/2026.
+10. **O modelo de formulário traz os documentos padrão.** Ao aplicar o modelo a um processo, o conjunto abaixo é copiado para a configuração do processo, na fase de inscrição; o administrador pode ajustá-lo, e o ajuste vale só para aquele processo. Há uma exigência por condição, só para quem solicita atendimento; quem declara duas condições comprova as duas; condição que o processo não oferta, ou que não tem documento na tabela (pessoa idosa), não gera exigência; reaplicar o modelo substitui os documentos de inscrição do processo, inclusive os ajustados; aplicar o modelo exige a fase de inscrição no cronograma. A tabela e a base legal abaixo foram definidas pelo PO em 22/10/2026; o processo só é publicado com a base legal resolvida.
 
 | Condição de atendimento | Documento exigido |
 |---|---|
-| Pessoa com deficiência | Laudo médico |
-| Dislexia, discalculia, déficit de atenção | Laudo médico de profissional habilitado |
-| Lactante | Certidão de nascimento da criança ou documento equivalente (não depende do sexo declarado) |
-| Gestante | Laudo médico |
-| Outra condição | Laudo médico ou documento equivalente |
+| Toda condição do catálogo, inclusive outra condição específica | Laudo médico |
+| Lactante | Certidão de nascimento da criança (não depende do sexo declarado); permite ao CEPS preparar a sala em que o acompanhante fica com o bebê |
 | Pessoa idosa | Nenhum (a idade vem do cadastro) |
 
 O documento comprova a condição, não o recurso solicitado.
 
+**Base legal.** Para lactante, a Lei nº 13.872/2019, art. 2º, § 2º, que prevê a prova da idade da criança pela certidão de nascimento. Para as demais condições, a Lei nº 13.146/2015 (Lei Brasileira de Inclusão), o Decreto nº 9.508/2018, na redação do Decreto nº 9.546/2018, e o Decreto nº 3.298/1999, que pedem a comprovação da condição no ato da inscrição.
+
 **Exemplo 1 — pessoa com deficiência.** Leandro declara pessoa com deficiência e solicita atendimento. O passo "Documentos" pede o laudo médico. Ele anexa um PDF de 2 MB, que passa pela verificação, e envia a inscrição. O comprovante traz o laudo como atendido, com o código de verificação, o tamanho e o formato, sem o nome do arquivo.
 
-**Exemplo 2 — sem o documento.** Camila declara a condição lactante e não anexa a certidão. A inscrição é enviada normalmente (o documento não é obrigatório), o comprovante registra que, sem a certidão da criança ou documento equivalente, o atendimento especializado não será concedido, e, na análise do atendimento (ainda não entregue), ele não é concedido. A inscrição continua válida.
+**Exemplo 2 — sem o documento.** Camila declara a condição lactante, solicita atendimento e não anexa a certidão de nascimento da criança. O envio da inscrição é recusado, informando que falta a certidão. Ela anexa a certidão e envia; ou, se desistir do atendimento, retira a solicitação e envia sem a exigência.
 
 **Exemplo 3 — nada se apaga no rascunho.** Helena anexa o laudo, desmarca por engano a condição e marca de novo: o laudo continua anexado. Se enviasse a inscrição sem a condição marcada, o laudo sairia, pois nunca constou de um envio.
 
@@ -508,6 +507,8 @@ O detalhamento por norma vive na página de [conformidade legal](../conformidade
 | LGPD (Lei 13.709/2018) | Proteção e minimização de dados pessoais e sensíveis; auditoria de acesso; ocultação de dados nos registros; divulgação minimizada por padrão. |
 | Lei de Cotas (12.711/2012, atualizada pela 14.723/2023) | Reserva de vagas por modalidade, concorrência dupla e remanejamento por configuração congelável; o motor genérico avalia a matriz normativa R0–R9 da Lei de Cotas, sem ramificação por tipo de processo. |
 | LBI (Lei 13.146/2015) | Inclusão da pessoa com deficiência e atendimento especializado configurável e solicitável na inscrição. |
+| Decretos nº 9.508/2018 e nº 3.298/1999 | Comprovação da condição no ato da inscrição: quem solicita atendimento especializado envia o laudo médico de cada condição declarada. |
+| Lei nº 13.872/2019 | Direito da lactante de amamentar durante a prova: a certidão de nascimento da criança é exigida na inscrição. |
 | Lei 14.129/2021 (Governo Digital) | Serviço digital, transparência e reprodução fiel do resultado, garantida pelo congelamento na publicação. |
 | Gov.br / Acessibilidade (Portaria SEI-MCOM 540/2020; IN SGD/ME 94/2022) | Uso do Design System do Gov.br e acessibilidade WCAG 2.1 AA / e-MAG (obrigação de autarquia federal). |
 | Resoluções Unifesspa (414/2020, 326/2019, 184/2017, 183/2017) | Normas internas que embasam exigências e procedimentos, registradas como base legal das exigências documentais. |
