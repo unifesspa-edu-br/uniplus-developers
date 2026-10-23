@@ -209,13 +209,13 @@ Regras definidas pelo líder técnico em 20/10/2026, **a confirmar pelo PO**; re
 
 | Condição de atendimento | Documento exigido |
 |---|---|
-| Toda condição do catálogo, inclusive outra condição específica | Laudo médico |
+| Toda condição do catálogo, exceto lactante e pessoa idosa, inclusive outra condição específica | Laudo médico |
 | Lactante | Certidão de nascimento da criança (não depende do sexo declarado); permite ao CEPS preparar a sala em que o acompanhante fica com o bebê |
 | Pessoa idosa | Nenhum (a idade vem do cadastro) |
 
 O documento comprova a condição, não o recurso solicitado.
 
-**Base legal.** Para lactante, a Lei nº 13.872/2019, art. 2º, § 2º, que prevê a prova da idade da criança pela certidão de nascimento. Para as demais condições, a Lei nº 13.146/2015 (Lei Brasileira de Inclusão), o Decreto nº 9.508/2018, na redação do Decreto nº 9.546/2018, e o Decreto nº 3.298/1999, que pedem a comprovação da condição no ato da inscrição.
+**Base legal.** Indicada pelo PO. Para lactante, a Lei nº 13.872/2019, art. 2º, § 2º, que prevê a prova da idade da criança pela certidão de nascimento. Para as demais condições, a Lei nº 13.146/2015 (Lei Brasileira de Inclusão), o Decreto nº 9.508/2018, na redação do Decreto nº 9.546/2018, que prevê a comprovação da deficiência na inscrição, e o Decreto nº 3.298/1999. A Lei nº 13.872/2019 e os decretos tratam de concurso público: o processo seletivo os adota como referência, e exigir o documento já na inscrição é regra do edital.
 
 **Exemplo 1 — pessoa com deficiência.** Leandro declara pessoa com deficiência e solicita atendimento. O passo "Documentos" pede o laudo médico. Ele anexa um PDF de 2 MB, que passa pela verificação, e envia a inscrição. O comprovante traz o laudo como atendido, com o código de verificação, o tamanho e o formato, sem o nome do arquivo.
 
@@ -507,8 +507,8 @@ O detalhamento por norma vive na página de [conformidade legal](../conformidade
 | LGPD (Lei 13.709/2018) | Proteção e minimização de dados pessoais e sensíveis; auditoria de acesso; ocultação de dados nos registros; divulgação minimizada por padrão. |
 | Lei de Cotas (12.711/2012, atualizada pela 14.723/2023) | Reserva de vagas por modalidade, concorrência dupla e remanejamento por configuração congelável; o motor genérico avalia a matriz normativa R0–R9 da Lei de Cotas, sem ramificação por tipo de processo. |
 | LBI (Lei 13.146/2015) | Inclusão da pessoa com deficiência e atendimento especializado configurável e solicitável na inscrição. |
-| Decretos nº 9.508/2018 e nº 3.298/1999 | Comprovação da condição no ato da inscrição: quem solicita atendimento especializado envia o laudo médico de cada condição declarada. |
-| Lei nº 13.872/2019 | Direito da lactante de amamentar durante a prova: a certidão de nascimento da criança é exigida na inscrição. |
+| Decretos nº 9.508/2018 e nº 3.298/1999 | Referência, tomada dos concursos públicos, para a comprovação da condição: o edital exige, na inscrição, o laudo médico de cada condição declarada por quem solicita atendimento especializado. |
+| Lei nº 13.872/2019 | Referência, tomada dos concursos públicos, para o direito da lactante de amamentar durante a prova: o edital exige a certidão de nascimento da criança na inscrição, para o CEPS preparar a sala. |
 | Lei 14.129/2021 (Governo Digital) | Serviço digital, transparência e reprodução fiel do resultado, garantida pelo congelamento na publicação. |
 | Gov.br / Acessibilidade (Portaria SEI-MCOM 540/2020; IN SGD/ME 94/2022) | Uso do Design System do Gov.br e acessibilidade WCAG 2.1 AA / e-MAG (obrigação de autarquia federal). |
 | Resoluções Unifesspa (414/2020, 326/2019, 184/2017, 183/2017) | Normas internas que embasam exigências e procedimentos, registradas como base legal das exigências documentais. |
