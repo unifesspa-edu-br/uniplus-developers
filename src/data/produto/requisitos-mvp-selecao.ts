@@ -1895,7 +1895,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0012',
     titulo: 'Atendimento especializado configurável',
     enunciado:
-      'O sistema deve separar oferta de atendimento especializado no Processo da solicitação feita na Inscrição.',
+      'O sistema deve separar oferta de atendimento especializado no Processo da solicitação feita na Inscrição. Só o processo com aplicação de prova oferece atendimento especializado, porque o atendimento serve à realização da prova: o processo sem prova, como o que seleciona pela nota do ENEM, não oferece condições, recursos nem tipos de deficiência, e o formulário de inscrição dele não pergunta por atendimento especializado nem por recursos de acessibilidade. Exemplo: o processo seletivo de Medicina 2027 classifica pela nota do ENEM e não pergunta por atendimento na inscrição. Definição do PO em 23/10/2026.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1907,7 +1907,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Condição, recurso e tipo de deficiência são configurados no processo e solicitados na inscrição.',
+      'Condição, recurso e tipo de deficiência são configurados no processo e solicitados na inscrição; o processo sem prova não oferece atendimento especializado e o formulário de inscrição dele não pergunta por atendimento nem por recursos de acessibilidade.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
