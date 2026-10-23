@@ -2001,7 +2001,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0030',
     titulo: 'Pendência derivada pós-submit',
     enunciado:
-      'O sistema deve calcular pendência viva após submissão sem mudar a situação da inscrição. As causas são exemplificativas e não exaustivas: ausência de documento não obrigatório (a de documento obrigatório já impede o envio, UNI-REQ-0028) e, conforme a composição da exigência, exigência ainda pendente, que não pôde ser conferida, que não pode mais ser cumprida ou que pede mais de um documento e ainda não os tem todos. A consulta e o comprovante distinguem esses estados. Documento não obrigatório cujo arquivo ainda está em verificação no envio conta como não apresentado: aparece como pendente (UNI-REQ-0029) e deixa de ser pendência quando o arquivo é verificado. Nesta primeira entrega a pendência aparece na consulta da inscrição e no comprovante; a página "Documentos" do portal para acompanhá-la depois do envio fica para depois. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO; arquivo em verificação: proposta do líder técnico em 23/10/2026, a confirmar pelo PO.',
+      'O sistema deve calcular pendência viva após submissão sem mudar a situação da inscrição. As causas são exemplificativas e não exaustivas: ausência de documento não obrigatório (a de documento obrigatório já impede o envio, UNI-REQ-0028) e, conforme a composição da exigência, exigência ainda pendente, que não pôde ser conferida, que não pode mais ser cumprida ou que pede mais de um documento e ainda não os tem todos. A consulta e o comprovante distinguem esses estados. Documento não obrigatório cujo arquivo ainda está em verificação no envio conta como não apresentado e aparece como pendente (UNI-REQ-0029). O arquivo verificado depois só passa a contar quando um novo envio da inscrição o inclui, isto é, a correção enquanto as inscrições estão abertas (UNI-REQ-0165), e então consta do comprovante desse envio (UNI-REQ-0171). Encerradas as inscrições, a pendência permanece: o prazo vale para o envio (UNI-REQ-0028). Nesta primeira entrega a pendência aparece na consulta da inscrição e no comprovante; a página "Documentos" do portal para acompanhá-la depois do envio fica para depois. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO; arquivo em verificação: proposta do líder técnico em 23/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2013,7 +2013,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Inscrição permanece Submetida; pendência aparece em consulta e comprovante conforme documentos vigentes; documento não obrigatório em verificação no envio aparece como pendente e deixa de ser pendência quando o arquivo é verificado.',
+      'Inscrição permanece Submetida; pendência aparece em consulta e comprovante conforme documentos vigentes; documento não obrigatório em verificação no envio aparece como pendente e só deixa de sê-lo num novo envio que inclua o arquivo verificado, dentro do período de inscrições; encerradas as inscrições, a pendência permanece.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
