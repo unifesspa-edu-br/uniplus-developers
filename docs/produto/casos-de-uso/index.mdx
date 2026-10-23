@@ -113,6 +113,25 @@ está aberto.
 6. Com tudo presente, a inscrição passa a submetida e o sistema emite um
    comprovante imutável com o relatório de documentos e pendências.
 
+**Fluxo alternativo — correção da inscrição enviada (UNI-REQ-0165):**
+
+1. Enquanto as inscrições estiverem abertas, o candidato acessa uma inscrição já enviada e escolhe a ação "Corrigir os dados".
+2. O sistema disponibiliza uma correção pendente, separada da inscrição anteriormente enviada. O candidato pode alterar respostas, opções de curso e documentos, respeitando as regras aplicáveis à inscrição.
+3. Durante a correção, o candidato pode retirar ou substituir arquivos que constaram de envios anteriores. O sistema distingue os arquivos que já integram a inscrição válida daqueles que dependem de novo envio.
+4. Enquanto houver alterações não enviadas, o formulário apresenta aviso visível informando que elas ainda não são válidas. Ao tentar sair da página com alterações pendentes, o sistema solicita confirmação. Em "Minhas inscrições", a pendência é identificada como "Correção não enviada", sem alterar a situação válida da inscrição.
+5. O candidato conclui a correção por meio de um novo envio. O sistema executa as mesmas validações da submissão inicial, incluindo campos, termos e documentos obrigatórios (UNI-REQ-0028). Se houver impedimento, o novo envio é recusado, e a inscrição e o comprovante anteriores permanecem válidos.
+6. Com o novo envio válido, a correção passa a constituir a versão vigente da mesma inscrição, preservando seu número. O sistema emite um novo comprovante imutável, sem modificar os anteriores (UNI-REQ-0029). Os arquivos retirados deixam de integrar o novo comprovante, enquanto os registros documentais históricos permanecem sujeitos à retenção aplicável (UNI-REQ-0131).
+
+**Fluxo alternativo — descarte da correção pendente (UNI-REQ-0165 e UNI-REQ-0169):**
+
+1. O candidato pode descartar voluntariamente uma correção ainda não enviada.
+2. Caso a correção permaneça pendente até o encerramento das inscrições, o sistema a descarta automaticamente.
+3. Em ambos os casos, as alterações pendentes deixam de produzir efeitos. Os arquivos exclusivos da correção descartada, que nunca integraram um envio válido, seguem as regras de exclusão lógica do UNI-REQ-0169.
+4. A última versão enviada da inscrição e seu comprovante permanecem válidos e inalterados. O descarte da correção não equivale ao cancelamento da inscrição.
+5. Enquanto existir correção não enviada, o sistema informa a pendência no portal e envia um e-mail ao candidato com dois dias de antecedência do encerramento das inscrições, caso a correção continue pendente.
+
+**Pós-condições dos fluxos alternativos:** se a correção for enviada validamente, a inscrição mantém o mesmo número e passa a valer sua última versão submetida, registrada em novo comprovante. Se a correção for recusada, descartada ou não for enviada até o encerramento das inscrições, a versão anteriormente submetida e seu comprovante continuam válidos. A homologação e a análise documental consideram exclusivamente o último envio válido, desconsiderando alterações pendentes.
+
 **Regras observadas:** uma inscrição ativa (rascunho ou enviada) é única por CPF, processo e
 nível de ensino, e a cancelada não conta; o nome social tem prioridade em exibições; quando o candidato escolhe
 usar nome social, a inscrição usa o nome social da conta; o rascunho usa sempre a
@@ -128,7 +147,7 @@ UNI-REQ-0024 (opções de curso), UNI-REQ-0025 (concorrência dupla),
 UNI-REQ-0026 (atendimento especializado), UNI-REQ-0027 (upload de documentos),
 UNI-REQ-0028 (validação documental no submit), UNI-REQ-0029 (comprovante
 imutável), UNI-REQ-0031 (uma inscrição ativa por CPF e nível), UNI-REQ-0032 (nome social),
-UNI-REQ-0033 (cancelar e refazer), UNI-REQ-0153 (nome social da conta),
+UNI-REQ-0033 (cancelar e refazer), UNI-REQ-0131 (retenção e destinação documental), UNI-REQ-0153 (nome social da conta),
 UNI-REQ-0165 (correção da inscrição enviada), UNI-REQ-0168 (arquivo que deixou de
 valer), UNI-REQ-0169 (exclusão lógica, descarte e cancelamento) e UNI-REQ-0170 (documentos padrão do
 atendimento).
