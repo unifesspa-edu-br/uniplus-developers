@@ -796,7 +796,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0027',
     titulo: 'Upload de documentos da inscrição',
     enunciado:
-      'O candidato deve poder enviar cada documento exigido na fase de inscrição pelo próprio formulário de inscrição, no passo "Documentos", enquanto as inscrições estão abertas, com a inscrição em rascunho ou já enviada (correção, UNI-REQ-0165). O arquivo só passa a valer depois de verificado por antivírus: o arquivo recusado pela verificação não é guardado e não conta como enviado, e se a verificação estiver fora do ar o envio do arquivo é recusado (e não a inscrição) e o candidato tenta de novo. O sistema aceita só PDF, JPEG e PNG, dentro dos formatos que a exigência declara entre esses três ("qualquer formato" significa PDF, JPEG e PNG; outros formatos, como DOCX, não são configuráveis), e confere que o conteúdo corresponde ao formato (o PDF tem de começar como PDF); o tamanho máximo é o da exigência e, quando ela não define, 10 MB; nenhum arquivo passa de 20 MB, qualquer que seja a exigência. O arquivo é guardado cifrado, cada arquivo protegido separadamente, conforme o parecer das encarregadas de dados de 13/10/2026, e o local onde fica guardado não contém dado pessoal (nem o nome do arquivo enviado é guardado: a tela mostra, por exemplo, "Arquivo 1 — PDF, 2 MB"). Decisão do líder técnico em 20/10/2026; a confirmar pelo PO; teto de 20 MB confirmado pelo PO em 23/10/2026.',
+      'O candidato deve poder enviar cada documento exigido na fase de inscrição pelo próprio formulário de inscrição, no passo "Documentos", enquanto as inscrições estão abertas, com a inscrição em rascunho ou já enviada (correção, UNI-REQ-0165). O arquivo só passa a valer depois de verificado por antivírus. Até o resultado, que em condição normal sai em poucos segundos, o arquivo aparece como "em verificação" e ainda não atende a exigência. O arquivo recusado pela verificação não é guardado e não conta como enviado. Se a verificação estiver fora do ar, o arquivo não é recusado: fica em verificação até ela voltar. Se o arquivo anexado não chegou ao sistema, ou foi trocado depois de anexado, o candidato é avisado para enviá-lo de novo. O sistema aceita só PDF, JPEG e PNG, dentro dos formatos que a exigência declara entre esses três ("qualquer formato" significa PDF, JPEG e PNG; outros formatos, como DOCX, não são configuráveis), e confere que o conteúdo corresponde ao formato (o PDF tem de começar como PDF); o tamanho máximo é o da exigência e, quando ela não define, 10 MB; nenhum arquivo passa de 20 MB, qualquer que seja a exigência. O arquivo é guardado cifrado, cada arquivo protegido separadamente, conforme o parecer das encarregadas de dados de 13/10/2026, e o local onde fica guardado não contém dado pessoal (nem o nome do arquivo enviado é guardado: a tela mostra, por exemplo, "Arquivo 1 — PDF, 2 MB"). Decisão do líder técnico em 20/10/2026; a confirmar pelo PO; teto de 20 MB confirmado pelo PO em 23/10/2026; arquivo em verificação: proposta do líder técnico em 23/10/2026, a confirmar pelo PO.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -808,7 +808,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O documento é guardado cifrado, sem dados pessoais no caminho nem o nome original, com o código de verificação do arquivo (SHA-256), tamanho e formato; formato fora do que a exigência permite, PDF que não começa como PDF, arquivo acima do limite da exigência ou de 20 MB e arquivo infectado são recusados e nada é guardado; verificação fora do ar recusa o envio do arquivo e a exigência segue pendente; outro candidato não acessa o arquivo; inscrição cancelada ou período encerrado recusa o envio.',
+      'O documento é guardado cifrado, sem dados pessoais no caminho nem o nome original, com o código de verificação do arquivo (SHA-256), tamanho e formato; formato fora do que a exigência permite, PDF que não começa como PDF, arquivo acima do limite da exigência ou de 20 MB e arquivo infectado são recusados e nada é guardado; arquivo em verificação não atende a exigência; verificação fora do ar não recusa o arquivo, que segue em verificação, e a exigência segue pendente; arquivo que não chegou ou foi trocado depois de anexado pede novo envio; outro candidato não acessa o arquivo; inscrição cancelada ou período encerrado recusa o envio.',
     verificacao: 'Validação automatizada do envio de documentos, com arquivo de teste de vírus padrão (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend; Infraestrutura',
@@ -817,7 +817,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0028',
     titulo: 'Validação documental no submit',
     enunciado:
-      'O sistema deve bloquear a submissão quando faltar documento obrigatório da fase de inscrição cujo gatilho se aplica à inscrição. Quando a exigência admite alternativas ("um ou outro"), o documento alternativo atende: só falta documento se nenhuma alternativa foi apresentada. Documento obrigatório ausente é recusado junto das demais recusas do envio. Documento não obrigatório que falta não impede o envio; o comprovante registra a consequência (UNI-REQ-0029). A mesma conferência vale para a correção da inscrição enviada (UNI-REQ-0165). No formulário, documento obrigatório não atendido impede avançar do passo de documentos e enviar a inscrição, com o motivo informado (UNI-REQ-0023); o servidor continua conferindo no envio. Decisão do líder técnico em 20/10/2026 e, quanto à tela, em 21/10/2026, a confirmar pelo PO.',
+      'O sistema deve bloquear a submissão quando faltar documento obrigatório da fase de inscrição cujo gatilho se aplica à inscrição. Quando a exigência admite alternativas ("um ou outro"), o documento alternativo atende: só falta documento se nenhuma alternativa foi apresentada. Documento obrigatório ausente é recusado junto das demais recusas do envio. Documento obrigatório cujo arquivo ainda está em verificação também não atende: o envio espera o resultado. O prazo vale para o envio da inscrição: se as inscrições se encerram com documento obrigatório ainda em verificação, a inscrição não é enviada. Exemplo: Valentina anexa o laudo às 23h58, a verificação está fora do ar e as inscrições fecham às 23h59; sem o laudo verificado, ela não consegue enviar. Se a verificação ficar fora do ar perto do encerramento, cabe à comissão prorrogar o prazo por retificação do edital. Documento não obrigatório que falta não impede o envio; o comprovante registra a consequência (UNI-REQ-0029). A mesma conferência vale para a correção da inscrição enviada (UNI-REQ-0165). No formulário, documento obrigatório não atendido impede avançar do passo de documentos e enviar a inscrição, com o motivo informado (UNI-REQ-0023); o servidor continua conferindo no envio. Decisão do líder técnico em 20/10/2026 e, quanto à tela, em 21/10/2026, a confirmar pelo PO. Arquivo em verificação e prazo: proposta do líder técnico em 23/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -829,7 +829,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A ausência de documento obrigatório bloqueia o submit; grupo "um ou outro" atendido por uma alternativa não bloqueia; documento não obrigatório ausente não bloqueia; a correção passa pela mesma conferência; na tela, documento obrigatório pendente impede avançar do passo de documentos e enviar, e o motivo é informado.',
+      'A ausência de documento obrigatório bloqueia o submit; grupo "um ou outro" atendido por uma alternativa não bloqueia; documento não obrigatório ausente não bloqueia; a correção passa pela mesma conferência; na tela, documento obrigatório pendente impede avançar do passo de documentos e enviar, e o motivo é informado; documento obrigatório com arquivo em verificação bloqueia o envio até o resultado; encerradas as inscrições com documento obrigatório em verificação, a inscrição não é enviada.',
     verificacao: 'Validação automatizada da validação documental (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -838,7 +838,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0029',
     titulo: 'Comprovante de inscrição imutável',
     enunciado:
-      'O sistema deve emitir comprovante imutável no submit, contendo relatório de documentos, pendências e implicações por escrito. O relatório lista, para cada documento exigido na inscrição, se é obrigatório, se foi atendido ou está pendente e, por escrito, a consequência de não atender (por exemplo, "sem o comprovante, o atendimento especializado não será concedido"). Para cada arquivo traz o código de verificação (SHA-256), o tamanho e o formato; nunca o nome original do arquivo nem onde ele está guardado. A lista de documentos entra no código de integridade do comprovante. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO. Os textos de cada consequência e as regras do que entra no comprovante estão no UNI-REQ-0171.',
+      'O sistema deve emitir comprovante imutável no submit, contendo relatório de documentos, pendências e implicações por escrito. O relatório lista, para cada documento exigido na inscrição, se é obrigatório, se foi atendido ou está pendente e, por escrito, a consequência de não atender (por exemplo, "sem o comprovante, o atendimento especializado não será concedido"). Para cada arquivo traz o código de verificação (SHA-256), o tamanho e o formato; nunca o nome original do arquivo nem onde ele está guardado. O comprovante nunca traz arquivo em verificação: o documento não obrigatório cujo arquivo ainda está em verificação no envio consta como pendente. A lista de documentos entra no código de integridade do comprovante. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO; arquivo em verificação: proposta do líder técnico em 23/10/2026, a confirmar pelo PO. Os textos de cada consequência e as regras do que entra no comprovante estão no UNI-REQ-0171.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -850,7 +850,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O comprovante é append-only; a reemissão cria novo registro sem alterar o anterior; cada exigência traz obrigatoriedade, situação e consequência por escrito; cada arquivo traz código de verificação, tamanho e formato, e nunca o nome nem o caminho.',
+      'O comprovante é append-only; a reemissão cria novo registro sem alterar o anterior; cada exigência traz obrigatoriedade, situação e consequência por escrito; cada arquivo traz código de verificação, tamanho e formato, e nunca o nome nem o caminho; documento não obrigatório com arquivo em verificação no envio consta como pendente.',
     verificacao: 'Validação automatizada do comprovante (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
@@ -2001,7 +2001,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0030',
     titulo: 'Pendência derivada pós-submit',
     enunciado:
-      'O sistema deve calcular pendência viva após submissão sem mudar a situação da inscrição. As causas são exemplificativas e não exaustivas: ausência de documento não obrigatório (a de documento obrigatório já impede o envio, UNI-REQ-0028) e, conforme a composição da exigência, exigência ainda pendente, que não pôde ser conferida, que não pode mais ser cumprida ou que pede mais de um documento e ainda não os tem todos. A consulta e o comprovante distinguem esses estados. Como o arquivo só é aceito depois da verificação de segurança (UNI-REQ-0027), não existe pendência por arquivo em verificação. Nesta primeira entrega a pendência aparece na consulta da inscrição e no comprovante; a página "Documentos" do portal para acompanhá-la depois do envio fica para depois. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+      'O sistema deve calcular pendência viva após submissão sem mudar a situação da inscrição. As causas são exemplificativas e não exaustivas: ausência de documento não obrigatório (a de documento obrigatório já impede o envio, UNI-REQ-0028) e, conforme a composição da exigência, exigência ainda pendente, que não pôde ser conferida, que não pode mais ser cumprida ou que pede mais de um documento e ainda não os tem todos. A consulta e o comprovante distinguem esses estados. Documento não obrigatório cujo arquivo ainda está em verificação no envio conta como não apresentado: aparece como pendente (UNI-REQ-0029) e deixa de ser pendência quando o arquivo é verificado. Nesta primeira entrega a pendência aparece na consulta da inscrição e no comprovante; a página "Documentos" do portal para acompanhá-la depois do envio fica para depois. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO; arquivo em verificação: proposta do líder técnico em 23/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2013,7 +2013,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Inscrição permanece Submetida; pendência aparece em consulta e comprovante conforme documentos vigentes.',
+      'Inscrição permanece Submetida; pendência aparece em consulta e comprovante conforme documentos vigentes; documento não obrigatório em verificação no envio aparece como pendente e deixa de ser pendência quando o arquivo é verificado.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
