@@ -1980,7 +1980,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0026',
     titulo: 'Solicitar atendimento especializado',
     enunciado:
-      'O candidato deve poder solicitar condições, recursos e tipos de deficiência ofertados para o processo seletivo da inscrição. Quem solicita atendimento especializado precisa enviar o documento que comprova cada condição declarada: o documento é obrigatório para enviar a inscrição (UNI-REQ-0028), porque é ele que dá direito ao atendimento e permite ao CEPS organizá-lo. Quem não solicita atendimento não recebe essa exigência. A análise do documento se dará na homologação documental (UNI-REQ-0041). O documento comprova a condição, não o recurso, e quais documentos cada condição exige está em UNI-REQ-0170. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO; obrigatoriedade do documento definida pelo PO em 22/10/2026.',
+      'O candidato deve poder solicitar condições, recursos e tipos de deficiência ofertados para o processo seletivo da inscrição. Quem solicita atendimento especializado precisa enviar o documento que comprova cada condição declarada: o documento é obrigatório para enviar a inscrição (UNI-REQ-0028), porque é ele que dá direito ao atendimento e permite ao CEPS organizá-lo. Quem não solicita atendimento não recebe essa exigência. A análise do documento se dará na homologação documental (UNI-REQ-0041). O documento comprova a condição, não o recurso, e quais documentos cada condição exige está em UNI-REQ-0170. Quem declara "outra condição específica" informa qual é a condição em texto livre, obrigatório, de até 120 caracteres, o suficiente para o nome dela (definição do PO, repassada pelo líder técnico em 23/10/2026). Decisão do líder técnico em 20/10/2026, a confirmar pelo PO; obrigatoriedade do documento definida pelo PO em 22/10/2026.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -1992,7 +1992,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Solicitação só aceita itens do mesmo processo e tipo de deficiência sob a condição selecionada; a falta do documento de condição declarada impede o envio da inscrição de quem solicita atendimento; quem não solicita atendimento não recebe a exigência.',
+      'Solicitação só aceita itens do mesmo processo e tipo de deficiência sob a condição selecionada; a falta do documento de condição declarada impede o envio da inscrição de quem solicita atendimento; quem não solicita atendimento não recebe a exigência; quem declara "outra condição específica" precisa informar a condição, em até 120 caracteres.',
     verificacao: 'Validação automatizada (planejada).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
