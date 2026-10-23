@@ -3436,7 +3436,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0130',
     titulo: 'Acesso restrito ao documento apresentado pelo candidato',
     enunciado:
-      'O documento de comprovação e o anexo de recurso são acessíveis somente ao próprio candidato, quanto aos seus, ao integrante autorizado da banca no escopo em que atua e por operação administrativa auditada. Nesta primeira entrega o candidato não baixa de volta o arquivo que enviou; o acesso do CEPS aos comprovantes do atendimento especializado, por operação administrativa auditada, entra antes da análise do atendimento (uniplus-api#2040), e o da banca fica para a homologação. Até lá, o CEPS ainda não consulta esses comprovantes pelo sistema (risco registrado). Conteúdo e localização técnica não aparecem em log, evento ou resposta destinada a terceiro. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+      'O documento de comprovação e o anexo de recurso são acessíveis somente ao próprio candidato, quanto aos seus, ao integrante autorizado da banca no escopo em que atua e por operação administrativa auditada. O candidato visualiza e baixa o arquivo que ele mesmo enviou, depois de verificado, para ter certeza de que mandou o arquivo correto, inclusive depois do envio da inscrição; o arquivo em verificação, recusado ou excluído não fica disponível. Exemplo: Leandro anexa por engano o PDF de outro exame no lugar do laudo médico, abre o arquivo pela tela, percebe o erro e o troca antes de enviar a inscrição. Visualização pelo candidato: definição repassada pelo líder técnico em 23/10/2026. o acesso do CEPS aos comprovantes do atendimento especializado, por operação administrativa auditada, entra antes da análise do atendimento (uniplus-api#2040), e o da banca fica para a homologação. Até lá, o CEPS ainda não consulta esses comprovantes pelo sistema (risco registrado). Conteúdo e localização técnica não aparecem em log, evento ou resposta destinada a terceiro. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -3448,7 +3448,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Acesso sem autorização é recusado sem revelar dados do candidato; logs e eventos não contêm conteúdo nem caminho técnico do documento.',
+      'O candidato visualiza e baixa o próprio arquivo verificado, e não o arquivo em verificação, recusado ou excluído; acesso sem autorização é recusado sem revelar dados do candidato; logs e eventos não contêm conteúdo nem caminho técnico do documento.',
     verificacao: 'Testes de autorização e inspeção de logs e eventos.',
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
