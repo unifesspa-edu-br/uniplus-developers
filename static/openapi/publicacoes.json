@@ -1052,6 +1052,44 @@
   },
   "components": {
     "schemas": {
+      "AnexoDoAtoDto": {
+        "required": [
+          "nome",
+          "tipoMidia",
+          "hash"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "tipoMidia": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
+      "AnexoDoAtoInput": {
+        "required": [
+          "nome",
+          "tipoMidia",
+          "hash"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "tipoMidia": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
       "AtoNormativoDto": {
         "required": [
           "id",
@@ -1060,6 +1098,7 @@
           "ano",
           "numero",
           "tipoCodigo",
+          "tipoNome",
           "congelaConfiguracao",
           "efeitoIrreversivel",
           "unicoPorObjeto",
@@ -1070,7 +1109,8 @@
           "versaoInvocadaId",
           "versaoInvocadaHash",
           "atoRetificadoId",
-          "motivoRetificacao"
+          "motivoRetificacao",
+          "anexos"
         ],
         "type": "object",
         "properties": {
@@ -1100,6 +1140,12 @@
           },
           "tipoCodigo": {
             "type": "string"
+          },
+          "tipoNome": {
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "congelaConfiguracao": {
             "type": "boolean"
@@ -1150,6 +1196,12 @@
               "string"
             ]
           },
+          "anexos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnexoDoAtoDto"
+            }
+          },
           "avisos": {
             "type": [
               "null",
@@ -1178,6 +1230,9 @@
           "congelaConfiguracao",
           "unicoPorObjeto",
           "efeitoIrreversivel",
+          "ehResultado",
+          "publicavelComoAvulso",
+          "exigeAtoCorrigido",
           "vigenciaInicio"
         ],
         "type": "object",
@@ -1205,6 +1260,15 @@
             "type": "boolean"
           },
           "efeitoIrreversivel": {
+            "type": "boolean"
+          },
+          "ehResultado": {
+            "type": "boolean"
+          },
+          "publicavelComoAvulso": {
+            "type": "boolean"
+          },
+          "exigeAtoCorrigido": {
             "type": "boolean"
           },
           "vigenciaInicio": {
@@ -1296,6 +1360,9 @@
           "congelaConfiguracao",
           "unicoPorObjeto",
           "efeitoIrreversivel",
+          "ehResultado",
+          "publicavelComoAvulso",
+          "exigeAtoCorrigido",
           "vigenciaInicio"
         ],
         "type": "object",
@@ -1319,6 +1386,15 @@
             "type": "boolean"
           },
           "efeitoIrreversivel": {
+            "type": "boolean"
+          },
+          "ehResultado": {
+            "type": "boolean"
+          },
+          "publicavelComoAvulso": {
+            "type": "boolean"
+          },
+          "exigeAtoCorrigido": {
             "type": "boolean"
           },
           "vigenciaInicio": {
@@ -1375,6 +1451,10 @@
               "null",
               "string"
             ]
+          },
+          "retryable": {
+            "type": "boolean",
+            "description": "Presente e \u0060true\u0060 quando o conflito descreve uma corrida que j\u00E1 passou: a mesma requisi\u00E7\u00E3o, repetida sem altera\u00E7\u00E3o, pode agora ser aceita. A aus\u00EAncia \u00E9 o default conservador do servidor \u2014 diz que o conflito n\u00E3o foi declarado retent\u00E1vel, n\u00E3o que repetir esteja descartado; nesse caso vale a descri\u00E7\u00E3o da pr\u00F3pria resposta."
           }
         }
       },
@@ -1458,6 +1538,15 @@
             "items": {
               "$ref": "#/components/schemas/VinculoEntidadeInput"
             }
+          },
+          "anexos": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/AnexoDoAtoInput"
+            }
           }
         }
       },
@@ -1493,6 +1582,7 @@
           "congelaConfiguracao",
           "unicoPorObjeto",
           "efeitoIrreversivel",
+          "ehResultado",
           "vigenciaInicio",
           "vigenciaFim",
           "baseLegal",
@@ -1519,6 +1609,9 @@
           "efeitoIrreversivel": {
             "type": "boolean"
           },
+          "ehResultado": {
+            "type": "boolean"
+          },
           "vigenciaInicio": {
             "type": "string",
             "format": "date"
@@ -1539,6 +1632,14 @@
           "criadoEm": {
             "type": "string",
             "format": "date-time"
+          },
+          "publicavelComoAvulso": {
+            "type": "boolean",
+            "default": false
+          },
+          "exigeAtoCorrigido": {
+            "type": "boolean",
+            "default": false
           },
           "_links": {
             "type": [
