@@ -1,0 +1,28 @@
+---
+title: Há inscrição que concorre a um curso que não está no edital divulgado
+sidebar_label: Inscrição em curso fora do edital
+description: 'Alguma inscrição da edição concorre a um curso que o edital divulgado não oferta mais; nada foi gravado.'
+code: uniplus.selecao.notas_do_enem.oferta_de_inscricao_fora_do_edital
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Importação do arquivo de retorno do INEP
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#2091'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2091
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A nota da etapa do ENEM é calculada para cada curso que a inscrição concorre, com os pesos do grupo de área desse curso no edital divulgado (UNI-REQ-0174). Alguma inscrição enviada da edição concorre, em primeira ou segunda opção, a um curso que não está no edital divulgado, em geral porque uma retificação o retirou. Sem o curso no edital não há peso para calcular a nota, então a importação foi recusada inteira e nenhum lote foi gravado. A mensagem diz quantas inscrições estão nessa situação, sem identificá-las.
+
+## Como resolver
+
+Confira a retificação que retirou o curso. Recoloque o mesmo curso no edital por uma nova retificação, divulgue-a e importe o arquivo de novo: as inscrições voltam a ter o curso com peso e a importação é aceita.

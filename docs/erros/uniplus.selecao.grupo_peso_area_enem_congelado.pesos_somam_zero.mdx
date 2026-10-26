@@ -1,0 +1,28 @@
+---
+title: Os pesos das áreas do grupo do quadro de pesos por área não podem somar zero
+sidebar_label: Grupo do quadro de pesos soma zero
+description: 'O grupo de pesos por área que a classificação congelaria tem todos os pesos zerados.'
+code: uniplus.selecao.grupo_peso_area_enem_congelado.pesos_somam_zero
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição da classificação do processo seletivo
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#2091'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2091
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao definir a classificação, o processo seletivo copia do cadastro de Pesos por Área o quadro de pesos de cada grupo de área do ENEM. Um dos grupos chegou com todos os pesos zerados, e a nota da etapa do ENEM, que é a média ponderada por esses pesos (UNI-REQ-0174), não teria resultado. Hoje o cadastro já recusa esse caso; o erro aparece com um quadro gravado antes dessa regra. Nada foi gravado.
+
+## Como resolver
+
+Corrija o grupo no cadastro de Pesos por Área, com ao menos um peso maior que zero, e defina a classificação do processo de novo.

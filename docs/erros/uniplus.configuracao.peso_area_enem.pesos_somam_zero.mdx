@@ -1,0 +1,29 @@
+---
+title: Os pesos das áreas não podem somar zero
+sidebar_label: Pesos por área somam zero
+description: 'Ao menos uma das cinco áreas precisa ter peso maior que zero.'
+code: uniplus.configuracao.peso_area_enem.pesos_somam_zero
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro dos pesos por área do ENEM
+  - Atualização dos pesos por área do ENEM
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#2091'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2091
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Os cinco pesos informados somam zero, inclusive quando só zeram depois do arredondamento a duas casas decimais. A nota da etapa do ENEM é a média das áreas ponderada por esses pesos (UNI-REQ-0174), e com soma zero ela não tem resultado. O erro aponta o campo `areas`. Nada foi gravado.
+
+## Como resolver
+
+Informe peso maior que zero em ao menos uma área e salve de novo.
