@@ -1,0 +1,29 @@
+---
+title: A etapa não tem a nota vinda do ENEM
+sidebar_label: Etapa sem nota do ENEM
+description: 'As notas do arquivo do INEP só entram numa etapa de nota do ENEM.'
+code: uniplus.selecao.notas_do_enem.etapa_sem_nota_do_enem
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Geração do arquivo de envio ao INEP
+  - Importação do arquivo de retorno do INEP
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa existe, mas o tipo dela não declara que a nota vem do ENEM. O arquivo do INEP só alimenta a etapa de nota do ENEM; as outras etapas recebem nota da banca ou da leitura da prova (UNI-REQ-0043).
+
+## Como resolver
+
+Escolha a etapa de nota do ENEM do processo. Se o processo não tem uma, a configuração das etapas precisa ser revista numa retificação antes de usar o arquivo do INEP.

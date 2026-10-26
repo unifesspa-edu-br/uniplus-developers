@@ -1,0 +1,28 @@
+---
+title: O tipo do arquivo não é aceito
+sidebar_label: Tipo de arquivo não aceito
+description: 'O arquivo não é texto, ou a requisição não é um envio de formulário com arquivo.'
+code: uniplus.selecao.notas_do_enem.tipo_de_arquivo_nao_aceito
+http_status: 415
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Importação do arquivo de retorno do INEP
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O arquivo foi enviado com um tipo que não é texto, como PDF ou planilha, ou a requisição não é um envio de formulário com arquivo (`multipart/form-data`). O retorno do INEP é um arquivo de texto com campos separados por ponto e vírgula. Nada foi gravado.
+
+## Como resolver
+
+Envie o arquivo de texto como o INEP o devolveu, sem abri-lo e salvá-lo de novo numa planilha.

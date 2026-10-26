@@ -1,0 +1,29 @@
+---
+title: O leiaute escolhido não está disponível
+sidebar_label: Leiaute indisponível
+description: 'O leiaute não existe, foi desativado ou é de outro tipo de arquivo.'
+code: uniplus.selecao.notas_do_enem.leiaute_indisponivel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Geração do arquivo de envio ao INEP
+  - Importação do arquivo de retorno do INEP
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O leiaute (código e versão) não existe no catálogo, foi desativado ou é de outro tipo: o leiaute de envio não serve para importar o retorno, e o de retorno não serve para gerar o envio.
+
+## Como resolver
+
+Consulte o catálogo de leiautes ativos e escolha um do tipo certo para a operação: envio para gerar o arquivo ao INEP, retorno para importar as notas.

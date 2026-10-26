@@ -1,0 +1,28 @@
+---
+title: O arquivo não confere com o leiaute escolhido
+sidebar_label: Arquivo fora do leiaute
+description: 'A estrutura do arquivo não corresponde ao leiaute escolhido; nada foi gravado.'
+code: uniplus.selecao.notas_do_enem.arquivo_fora_do_leiaute
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Importação do arquivo de retorno do INEP
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A estrutura do arquivo não corresponde ao leiaute escolhido: número de campos diferente, CPF, número de inscrição ou nota fora do formato, codificação que não é UTF-8, linha em branco no meio do arquivo ou arquivo sem linhas. O arquivo é recusado inteiro, sem gravar nenhuma nota, para que a nota de uma área nunca seja gravada como se fosse de outra (UNI-REQ-0174). A mensagem de detalhe aponta a linha e a coluna, nunca o conteúdo, porque o arquivo traz dados pessoais.
+
+## Como resolver
+
+Confira se o leiaute escolhido é o do arquivo: o retorno de 20 campos vale para as edições a partir de 2024. Não edite o arquivo para fazê-lo passar. Se o INEP mudou o formato e o leiaute certo não está no catálogo, acione a equipe técnica.

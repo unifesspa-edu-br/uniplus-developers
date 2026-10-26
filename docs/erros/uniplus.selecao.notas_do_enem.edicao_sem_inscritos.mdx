@@ -1,0 +1,28 @@
+---
+title: Nenhuma inscrição enviada escolheu esta edição
+sidebar_label: Edição sem inscritos
+description: 'Não há CPF a enviar ao INEP para a edição informada.'
+code: uniplus.selecao.notas_do_enem.edicao_sem_inscritos
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Geração do arquivo de envio ao INEP
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Nenhuma inscrição enviada do processo escolheu esta edição do ENEM. Rascunho e inscrição cancelada não contam, então não há CPF a enviar ao INEP (UNI-REQ-0174).
+
+## Como resolver
+
+Confira a edição escolhida. Se as inscrições ainda estão em andamento, gere o envio depois que os candidatos enviarem as inscrições.

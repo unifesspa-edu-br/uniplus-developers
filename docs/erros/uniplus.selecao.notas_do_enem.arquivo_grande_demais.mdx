@@ -1,0 +1,28 @@
+---
+title: O arquivo passa do tamanho aceito
+sidebar_label: Arquivo grande demais
+description: 'O arquivo passa de 10 MiB, muito além do retorno de um processo.'
+code: uniplus.selecao.notas_do_enem.arquivo_grande_demais
+http_status: 413
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Importação do arquivo de retorno do INEP
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O arquivo, ou o corpo da requisição, passa de 10 MiB. O retorno do INEP de um processo seletivo fica muito abaixo disso, então provavelmente foi escolhido outro arquivo. Nada foi gravado.
+
+## Como resolver
+
+Confira se o arquivo é o retorno do INEP deste processo. Se for, acione a equipe técnica: o limite foi calculado para o maior processo previsto.
