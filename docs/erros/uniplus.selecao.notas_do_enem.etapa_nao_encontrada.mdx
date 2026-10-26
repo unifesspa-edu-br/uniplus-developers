@@ -1,0 +1,30 @@
+---
+title: A etapa não pertence ao processo seletivo
+sidebar_label: Etapa não encontrada no processo
+description: 'O identificador da etapa não corresponde a nenhuma etapa do processo divulgado.'
+code: uniplus.selecao.notas_do_enem.etapa_nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Geração do arquivo de envio ao INEP
+  - Importação do arquivo de retorno do INEP
+  - Consulta dos envios e dos lotes de notas
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador da etapa não corresponde a nenhuma etapa deste processo seletivo na versão divulgada do edital. As notas do ENEM são lançadas sempre pela configuração que o edital publicou, nunca pelo cadastro em edição.
+
+## Como resolver
+
+Use o identificador de uma etapa do próprio processo, como aparece na configuração das etapas do edital divulgado.

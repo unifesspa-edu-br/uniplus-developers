@@ -1,0 +1,28 @@
+---
+title: O arquivo traz um código de situação que o leiaute não conhece
+sidebar_label: Código de situação desconhecido
+description: 'Uma prova tem situação diferente de presente e ausente; nada foi gravado.'
+code: uniplus.selecao.notas_do_enem.codigo_de_situacao_desconhecido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Importação do arquivo de retorno do INEP
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das colunas de situação da prova traz um código diferente de presente (7) e ausente (6). Aceitá-lo poderia lançar como presente quem não fez a prova, ou o contrário, e a eliminação por falta depende dessa indicação. O arquivo é recusado inteiro, sem gravar nenhuma nota.
+
+## Como resolver
+
+Informe à equipe técnica a linha e a coluna da mensagem de detalhe, para que o significado do código seja confirmado com o CEPS e o leiaute seja atualizado. Não altere o arquivo.

@@ -1,0 +1,30 @@
+---
+title: A edição do ENEM não é uma das aceitas pelo processo
+sidebar_label: Edição do ENEM não admitida
+description: 'A edição informada não está entre as que o edital divulgado aceita.'
+code: uniplus.selecao.notas_do_enem.edicao_nao_admitida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Geração do arquivo de envio ao INEP
+  - Importação do arquivo de retorno do INEP
+  - Consulta dos envios e dos lotes de notas
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A edição do ENEM informada não está entre as edições que o edital divulgado do processo admite. O envio e a importação são feitos por edição, e só as edições aceitas pelo edital têm inscritos que possam tê-la escolhido.
+
+## Como resolver
+
+Informe uma das edições declaradas pelo processo, as mesmas que o candidato escolhe na inscrição.

@@ -1,0 +1,28 @@
+---
+title: O arquivo não foi enviado ou está vazio
+sidebar_label: Arquivo vazio
+description: 'A importação não trouxe o arquivo ou ele não tem conteúdo.'
+code: uniplus.selecao.notas_do_enem.arquivo_vazio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Importação do arquivo de retorno do INEP
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A requisição de importação não trouxe o arquivo de retorno, ou o arquivo enviado não tem conteúdo. Nada foi gravado.
+
+## Como resolver
+
+Envie o arquivo de retorno do INEP como ele foi recebido, sem alterações.

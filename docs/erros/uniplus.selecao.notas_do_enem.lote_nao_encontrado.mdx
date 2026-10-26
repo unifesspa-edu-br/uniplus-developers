@@ -1,0 +1,28 @@
+---
+title: O lote de notas não foi encontrado
+sidebar_label: Lote de notas não encontrado
+description: 'O lote não existe no processo, na etapa e na edição informados.'
+code: uniplus.selecao.notas_do_enem.lote_nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Consulta de um lote de notas
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#1602'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1602
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador não corresponde a nenhum lote de notas importado no processo, na etapa e na edição informados. Um lote só é encontrado dentro do escopo em que foi importado.
+
+## Como resolver
+
+Liste os lotes da edição e use um dos identificadores devolvidos.
