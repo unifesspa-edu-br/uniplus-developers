@@ -1,0 +1,41 @@
+---
+title: A nota máxima, quando informada, deve ser maior que zero
+sidebar_label: Nota máxima da etapa inválida
+description: A nota máxima da etapa pode ficar em branco em rascunho, mas, quando informada, tem de ser maior que zero.
+code: uniplus.selecao.etapa_processo.nota_maxima_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2092'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2092
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do payload informou `notaMaxima` igual a zero ou negativa. Uma
+escala que vai de zero a zero, ou abaixo dela, não comporta nota alguma, e nenhuma
+nota mínima caberia nela.
+
+O campo é opcional na gravação: o processo em rascunho pode não ter decidido ainda a
+escala da etapa. Esta recusa vale só para o valor declarado e contraditório, e ela
+chega no array `errors[]`, no campo `notaMaxima` da etapa, junto das demais violações
+da mesma definição de etapas.
+
+## Como resolver
+
+Informe uma `notaMaxima` maior que zero (por exemplo, 10 ou 1000), ou omita o campo
+enquanto o processo estiver em rascunho.
+
+A nota máxima só é obrigatória na publicação, e só na etapa com nota que não é do
+ENEM. Se a etapa tiver nota mínima, ela não pode passar da máxima; e a máxima deve
+ser múltipla do passo do lançamento, quando houver passo. Se a resposta trouxer mais
+de uma violação em `errors[]`, corrija todas antes de reenviar.
