@@ -1,0 +1,39 @@
+---
+title: O passo do lançamento, quando informado, deve ser maior que zero
+sidebar_label: Passo do lançamento inválido
+description: O passo do lançamento é opcional, mas, quando informado, tem de ser maior que zero.
+code: uniplus.selecao.etapa_processo.passo_do_lancamento_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2092'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2092
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do payload informou `passoDoLancamento` igual a zero ou negativo.
+O passo é o intervalo entre duas notas que o avaliador pode digitar; com passo zero
+não existe a nota seguinte, e com passo negativo a escala andaria para trás.
+
+O campo é opcional e nunca é obrigatório. A recusa vale só para o valor declarado e
+contraditório, e chega no array `errors[]`, no campo `passoDoLancamento` da etapa,
+junto das demais violações da mesma definição de etapas.
+
+## Como resolver
+
+Informe um decimal positivo de até 4 casas (0,01; 0,25; 0,5; 1) que divida a nota
+máxima da etapa. Se a nota máxima ainda não foi decidida, omita os dois campos: a
+etapa em rascunho fica sem escala, e a escala só é cobrada na publicação.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

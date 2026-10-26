@@ -1,0 +1,38 @@
+---
+title: A nota mínima não pode passar da nota máxima da etapa
+sidebar_label: Nota mínima acima da nota máxima
+description: A nota mínima da etapa maior que a nota máxima eliminaria todos os candidatos.
+code: uniplus.selecao.etapa_processo.nota_minima_acima_da_nota_maxima
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2092'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2092
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa declarou `notaMinima` maior que `notaMaxima`. Nenhuma nota lançada chegaria
+ao corte, então ninguém passaria pela etapa.
+
+A recusa vale só quando os dois valores estão declarados, e chega no array `errors[]`,
+no campo `notaMinima` da etapa, junto das demais violações da mesma definição de
+etapas.
+
+## Como resolver
+
+Baixe a nota mínima até a nota máxima ou menos, ou suba a nota máxima, mantendo-a
+múltipla do passo do lançamento. Nota mínima igual à nota máxima é aceita, e a nota
+mínima não precisa ser múltipla do passo, porque é um corte, não uma nota lançada.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

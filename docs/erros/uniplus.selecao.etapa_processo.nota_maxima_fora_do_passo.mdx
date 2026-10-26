@@ -1,0 +1,38 @@
+---
+title: A nota máxima deve ser múltipla do passo do lançamento
+sidebar_label: Nota máxima fora do passo
+description: Quando a etapa declara passo, a nota máxima tem de ser alcançável de passo em passo.
+code: uniplus.selecao.etapa_processo.nota_maxima_fora_do_passo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2092'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2092
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A `notaMaxima` da etapa não é múltipla do `passoDoLancamento`. Com nota máxima 10 e
+passo 0,3, por exemplo, as notas lançáveis são 9,9 e 10,2, e o 10 nunca poderia ser
+digitado: a escala não seria lançável até o fim.
+
+A recusa vale só quando os dois valores estão declarados, e chega no array `errors[]`,
+no campo `notaMaxima` da etapa, junto das demais violações da mesma definição de
+etapas.
+
+## Como resolver
+
+Escolha um passo que divida a nota máxima (0,5 ou 1 para 10), ou ajuste a nota máxima a
+um múltiplo do passo atual (9,9 ou 10,2 para o passo 0,3).
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

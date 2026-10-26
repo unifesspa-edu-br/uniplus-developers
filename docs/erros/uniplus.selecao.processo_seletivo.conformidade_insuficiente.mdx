@@ -12,6 +12,7 @@ emitido_em:
   - Fechamento de retificação
 requisitos:
   - UNI-REQ-0019
+  - UNI-REQ-0175
 rastreio:
   - label: 'uniplus-api#857'
     href: https://github.com/unifesspa-edu-br/uniplus-api/pull/857
@@ -31,11 +32,66 @@ que a resposta sozinha já diga o que falta, sem obrigar o cliente a
 inspecionar a configuração inteira em busca do problema. O mesmo checklist
 vale para as três transições, não só para a publicação.
 
-O checklist estrutural tem seis itens fixos — **Atendimento especializado**,
-**Distribuição de vagas**, **Classificação**, **Cronograma de fases**, **Taxa
-de inscrição e isenção** e **Base legal das exigências documentais** — mais
-um condicional, **Divisor da média**, que só entra quando a classificação usa
-fórmula de média ponderada local.
+O checklist estrutural reúne os itens abaixo. Cada um tem um **código** estável,
+que identifica o que reprovou, e uma **dimensão**, que diz em qual seção da
+configuração corrigir. A mensagem lista, por nome, os itens reprovados, e os
+itens acumulam: uma tentativa devolve de uma vez tudo o que falta.
+
+| Código | Dimensão | O que confere |
+|---|---|---|
+| `atendimento_especializado_ausente` | `atendimento_especializado` | Atendimento especializado |
+| `distribuicao_vagas_ausente` | `distribuicao_vagas` | Distribuição de vagas |
+| `distribuicao_vagas_oferta_sem_nome` | `distribuicao_vagas` | Nome de cada oferta congelado na distribuição de vagas |
+| `opcoes_de_curso_nao_declaradas` | `distribuicao_vagas` | Número de opções de curso |
+| `opcoes_de_curso_acima_das_ofertas` | `distribuicao_vagas` | A distribuição de vagas tem ao menos tantos cursos quanto o número de opções |
+| `classificacao_ausente` | `classificacao` | Classificação |
+| `cronograma_fases_ausente` | `cronograma` | Cronograma de fases |
+| `taxa_inscricao_nao_declarada` | `taxa_inscricao` | Taxa de inscrição e isenção |
+| `taxa_inscricao_sem_fundamento_de_isencao` | `taxa_inscricao` | Fundamentos de isenção do processo que cobra taxa |
+| `exigencias_base_legal_nao_resolvida` | `exigencias_documentais` | Base legal das exigências documentais |
+| `bonus_regional_nao_declarado` | `bonus_regional` | Bônus regional: aplica ou não aplica |
+| `bonus_regional_fato_de_elegibilidade` | `bonus_regional` | Com inscrição própria, o fato booleano que decide quem recebe o acréscimo |
+| `criterios_desempate_ausentes` | `desempate` | Critérios de desempate (inscrição própria) |
+| `etapa_com_nota_sem_nota_maxima` | `etapas` | Nota máxima de cada etapa com nota que não é do ENEM |
+| `etapa_sem_nota_com_escala` | `etapas` | Nota máxima e passo só em etapa com nota |
+| `etapa_do_enem_com_escala` | `etapas` | Etapa de nota do ENEM sem nota máxima nem passo |
+| `nota_minima_da_regra_acima_da_nota_maxima` | `etapas` | Nota mínima da regra de eliminação até a nota máxima da etapa |
+
+Alguns itens só entram quando a exigência existe:
+
+| Código | Dimensão | Quando entra |
+|---|---|---|
+| `classificacao_divisor_media_invalido` | `classificacao` | A classificação usa fórmula de média ponderada local (o divisor da média tem de ser maior que zero) |
+| `classificacao_resolucao_peso_area_enem_ausente` | `classificacao` | A média usa os pesos por área do ENEM: resolução com o quadro de pesos congelado |
+| `distribuicao_vagas_oferta_sem_grupo_area_enem` | `distribuicao_vagas` | A média usa os pesos por área do ENEM: grupo de área congelado em toda oferta |
+| `classificacao_grupo_area_enem_da_oferta_fora_do_quadro` | `classificacao` | A média usa os pesos por área do ENEM: o grupo de cada oferta consta no quadro |
+| `classificacao_edicao_enem_nao_declarada` | `classificacao` | Inscrição própria com classificação baseada em ENEM: edições do ENEM admitidas |
+
+### Itens da escala das etapas
+
+A dimensão `etapas` é a seção estrutural sobre o que a etapa declara de si mesma,
+como a escala em que a nota dela é lançada. Ela é distinta do `cronograma`, que
+diz quando a etapa acontece. Cada item lista as etapas que reprovam na forma
+`(etapas: "A"; "B")`, e os itens acumulam entre si e com os demais.
+
+A etapa **tem nota** quando entra na média (caráter classificatório ou ambos, com
+peso), tem nota mínima, ou é citada pela eliminação por nota mínima da etapa ou
+pelo desempate pela maior nota da etapa.
+
+| Código | Como resolver |
+|---|---|
+| `etapa_com_nota_sem_nota_maxima` | Declare a nota máxima da etapa listada, maior que zero, múltipla do passo e não menor que a nota mínima. |
+| `etapa_sem_nota_com_escala` | Remova a nota máxima e o passo da etapa listada, ou faça a etapa ter nota (peso, nota mínima ou regra); nesse caso a nota máxima volta a ser obrigatória. |
+| `etapa_do_enem_com_escala` | Remova a nota máxima e o passo da etapa listada: a escala do ENEM vem do INEP. |
+| `nota_minima_da_regra_acima_da_nota_maxima` | Reduza a nota mínima da regra de eliminação por nota da etapa listada, ou suba a nota máxima da etapa. Sem nota máxima declarada, quem reprova é o primeiro item. |
+
+Os valores contraditórios dentro de uma só etapa (nota máxima ou passo menores ou
+iguais a zero, nota mínima acima da máxima, nota máxima fora do passo) não chegam
+aqui: são recusados já na gravação, também em rascunho, por
+[`nota_maxima_invalida`](./uniplus.selecao.etapa_processo.nota_maxima_invalida.mdx),
+[`passo_do_lancamento_invalido`](./uniplus.selecao.etapa_processo.passo_do_lancamento_invalido.mdx),
+[`nota_minima_acima_da_nota_maxima`](./uniplus.selecao.etapa_processo.nota_minima_acima_da_nota_maxima.mdx) e
+[`nota_maxima_fora_do_passo`](./uniplus.selecao.etapa_processo.nota_maxima_fora_do_passo.mdx).
 
 A **cascata de remanejamento** e a coerência fina da árvore de exigências
 documentais (condicional vazia que determina resultado, consequência de
@@ -52,7 +108,7 @@ então itens já corrigidos deixam de aparecer na próxima resposta.
 
 Para um diagnóstico mais amplo, consulte
 `GET /api/selecao/processos-seletivos/{id}/conformidade` — além dos mesmos
-seis itens (mais o condicional) desta causa, ela também mostra os itens dos
+itens desta causa, ela também mostra os itens dos
 outros gates estruturais (cascata de remanejamento, cronograma, coerência da
 árvore de exigências documentais, referência temporal de fatos e regras de
 derivação), que têm causas nomeadas próprias e não aparecem na mensagem desta
