@@ -508,7 +508,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Inscrição do candidato (rascunho a comprovante) | Etapa futura | Requisitos aprovados; ainda não há agregado de inscrição implementado. |
 | Homologação documental (deferir/indeferir) | Etapa futura | Consome a configuração congelada. |
 | Ensalamento e locais exatos de prova | Etapa futura | — |
-| Lançamento de notas por etapa | Etapa futura | As etapas são configuradas agora; as notas são lançadas depois. |
+| Lançamento de notas por etapa | Entrega atual, em desenvolvimento | Começa pelas notas do ENEM, pelo arquivo do INEP (UNI-REQ-0174); as demais origens entram pela mesma avaliação (UNI-REQ-0043). |
 | Processamento de classificação, remanejamento, desempate, Fator de Atenuação e resultado | Etapa futura | A configuração da cascata já está congelada no snapshot de publicação; esta etapa executará o remanejamento conforme a sequência de destinos e a cota de fallback. |
 | Recursos administrativos | Etapa futura | Base de suspensividade já configurada (`UNI-REQ-0080`). |
 | Habilitação e chamadas de vagas (Ingresso/CRCA) | Etapa futura | Fronteira com o módulo Ingresso. |
