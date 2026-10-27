@@ -1,0 +1,41 @@
+---
+title: O passo do lançamento só se aplica à etapa de avaliação humana
+sidebar_label: Passo do lançamento na forma objetiva
+description: Na avaliação objetiva ninguém lança a nota, então o passo do lançamento não faz sentido.
+code: uniplus.selecao.etapa_processo.passo_na_forma_objetiva
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2093'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2093
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa declarou a forma `OBJETIVA` e também um `passoDoLancamento`. O passo é o intervalo
+entre duas notas que um avaliador pode digitar (por exemplo, de 0,5 em 0,5); na
+avaliação objetiva a nota sai do gabarito ou da leitora óptica e ninguém a digita, então
+o passo não teria a quem se aplicar.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`passoDoLancamento` da etapa.
+
+## Como resolver
+
+Escolha um dos dois caminhos:
+
+- se a nota é obtida por gabarito ou leitora, remova o `passoDoLancamento`;
+- se a nota é lançada pela banca, declare a forma como `HUMANA` e mantenha o passo, que
+  deve dividir a nota máxima da etapa.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

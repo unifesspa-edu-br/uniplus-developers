@@ -1,0 +1,40 @@
+---
+title: A etapa de nota do ENEM não declara forma de avaliação nem regra de consolidação
+sidebar_label: Avaliação na etapa do ENEM
+description: A nota da etapa do ENEM vem do INEP; ela não tem forma de avaliação nem regra de consolidação.
+code: uniplus.selecao.etapa_processo.avaliacao_na_etapa_do_enem
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2093'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2093
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma etapa de nota do ENEM informou `formaDeAvaliacao`, `regraConsolidacao` ou ambas. Nessa
+etapa a nota vem do INEP: não há gabarito do processo, avaliador nem banca lançando
+notas, então nenhuma das duas declarações tem o que descrever.
+
+A recusa vale já na gravação, também em rascunho. Ela chega no array `errors[]`, em um
+item para cada campo declarado, e não repete as outras recusas de forma e de regra que
+seriam consequência da mesma causa.
+
+## Como resolver
+
+Remova a forma de avaliação e a regra de consolidação da etapa de nota do ENEM. Se a
+intenção era uma etapa avaliada pelo próprio processo (prova, redação, entrevista),
+troque o tipo da etapa para o de uma etapa que não seja de nota do ENEM e então declare
+a forma nela.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

@@ -1,0 +1,43 @@
+---
+title: A regra de consolidação só se aplica à etapa de avaliação humana
+sidebar_label: Regra de consolidação fora da forma humana
+description: A regra de consolidação existe para combinar as notas de avaliadores; sem forma humana declarada, ela é recusada.
+code: uniplus.selecao.etapa_processo.regra_de_consolidacao_fora_da_forma_humana
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2093'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2093
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa informou uma regra de consolidação, mas a forma de avaliação dela não é
+`HUMANA`: é `OBJETIVA` ou está em branco. A regra de consolidação diz como as notas
+lançadas pelos avaliadores viram a nota da etapa. Na avaliação objetiva ninguém lança
+nota, e sem forma declarada o sistema não sabe se há avaliadores.
+
+Por isso a forma ausente também é recusada aqui: a regra só é aceita quando a etapa diz,
+na mesma gravação, que é de avaliação humana. A recusa vale já na gravação, também em
+rascunho, e chega no array `errors[]`, no campo `regraConsolidacao` da etapa.
+
+## Como resolver
+
+Escolha um dos dois caminhos:
+
+- se a etapa é avaliada pela banca, declare `formaDeAvaliacao` como `HUMANA` e mantenha a
+  regra (avaliação única, ou correção independente com terceiro corretor por
+  discrepância);
+- se a etapa é objetiva, mantenha `OBJETIVA` e remova a regra de consolidação.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

@@ -1,0 +1,47 @@
+---
+title: A regra declarada não é uma regra de consolidação do catálogo
+sidebar_label: Regra de consolidação inválida
+description: A etapa só aceita, como regra de consolidação, uma das regras desse tipo no catálogo de regras.
+code: uniplus.selecao.etapa_processo.regra_de_consolidacao_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2093'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2093
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de consolidação informada pela etapa (código e versão) não é uma regra de
+consolidação do catálogo: ou não existe no catálogo, ou existe mas é de outro tipo (por
+exemplo, uma regra de cálculo da classificação ou de desempate). Só as regras do tipo
+consolidação dizem como as notas dos avaliadores viram a nota da etapa.
+
+O catálogo oferece duas, ambas na versão `v1`:
+
+- `CONSOLIDACAO-AVALIACAO-UNICA`: um só avaliador lança a nota de cada candidato, e essa
+  é a nota da etapa;
+- `CONSOLIDACAO-CORRECAO-INDEPENDENTE`: mais de um avaliador corrige cada candidato sem
+  conhecer a nota do outro, com terceiro corretor quando há discrepância
+  (UNI-REQ-0097).
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`regraConsolidacao` da etapa.
+
+## Como resolver
+
+Informe o código e a versão de uma das duas regras acima, ou omita a regra enquanto o
+processo estiver em rascunho e a escolha ainda não tiver sido feita. A regra só é aceita
+junto da forma `HUMANA`, e é obrigatória na publicação para a etapa humana.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.
