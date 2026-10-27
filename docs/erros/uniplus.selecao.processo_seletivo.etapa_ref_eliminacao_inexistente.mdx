@@ -1,7 +1,7 @@
 ---
 title: A regra de eliminação referencia uma etapa que não existe neste processo
 sidebar_label: Etapa da eliminação inexistente
-description: Uma regra de eliminação ELIM-NOTA-MINIMA-ETAPA referencia uma etapa por identificador — se ela não estiver entre as etapas do processo, não há nota para comparar contra o mínimo.
+description: Uma regra de eliminação ELIM-NOTA-MINIMA-ETAPA ou ELIM-AUSENCIA-NA-ETAPA referencia uma etapa por identificador — se ela não estiver entre as etapas do processo, não há nota para comparar contra o mínimo.
 code: uniplus.selecao.processo_seletivo.etapa_ref_eliminacao_inexistente
 http_status: 422
 situacao: publicado
@@ -23,7 +23,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Uma regra de eliminação com código `ELIM-NOTA-MINIMA-ETAPA` referencia, em
+Uma regra de eliminação com código `ELIM-NOTA-MINIMA-ETAPA` ou `ELIM-AUSENCIA-NA-ETAPA` referencia, em
 `etapaRef`, um identificador de etapa que não existe entre as etapas já
 definidas do processo (INV-B4). É a mesma classe de checagem de
 [`etapa_ref_desempate_inexistente`](./uniplus.selecao.processo_seletivo.etapa_ref_desempate_inexistente.mdx),

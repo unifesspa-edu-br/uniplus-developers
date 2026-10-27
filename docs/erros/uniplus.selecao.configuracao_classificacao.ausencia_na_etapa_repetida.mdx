@@ -1,0 +1,39 @@
+---
+title: A eliminação por ausência só pode ser declarada uma vez para cada etapa
+sidebar_label: Ausência repetida para a mesma etapa
+description: Repetir a eliminação por ausência para a mesma etapa não elimina ninguém a mais; cada repetição é recusada no próprio item.
+code: uniplus.selecao.configuracao_classificacao.ausencia_na_etapa_repetida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2094'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2094
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `regrasEliminacao` da classificação traz a `ELIM-AUSENCIA-NA-ETAPA` mais de uma
+vez com o mesmo `etapaRef`. A primeira declaração vale; cada repetição é recusada no
+próprio item, no campo `regrasEliminacao[i]`, e acumula no array `errors[]` com as demais
+violações da requisição.
+
+Etapas diferentes podem, cada uma, ter a sua eliminação por ausência: o que não se repete é
+a regra para a mesma etapa.
+
+Na classificação importada, que não admite regra de eliminação nenhuma, a repetição não gera
+um segundo erro: a recusa é a da lista inteira, em
+[`eliminacao_indevida`](./uniplus.selecao.configuracao_classificacao.eliminacao_indevida.mdx).
+
+## Como resolver
+
+Remova as declarações repetidas e mantenha uma para cada etapa.
