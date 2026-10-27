@@ -1,0 +1,38 @@
+---
+title: A fração do nível de atendimento deve estar entre 0 e 1
+sidebar_label: Fração do nível de atendimento inválida
+description: A fração é a parte da pontuação do item que o nível vale, de 0% a 100%.
+code: uniplus.selecao.nivel_de_atendimento.fracao_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nível da escala de atendimento declarou `fracao` menor que 0 ou maior que 1. A fração
+é a parte da pontuação do item que o nível vale: 1 é a pontuação inteira (100%), 0,5 é a
+metade e 0 é nada. Valores fora desse intervalo dariam ao candidato mais que o item vale
+ou menos que zero. A fração tem no máximo quatro casas decimais.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`escalaDeAtendimento[i].fracao` da etapa.
+
+## Como resolver
+
+Informe uma fração entre 0 e 1. No exemplo do PSR 2027, "Atendeu" vale 1, "Atendeu
+parcialmente" vale 0,5 e "Não atendeu" vale 0.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

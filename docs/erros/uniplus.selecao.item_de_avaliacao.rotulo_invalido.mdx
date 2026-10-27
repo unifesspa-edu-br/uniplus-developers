@@ -1,0 +1,36 @@
+---
+title: O rótulo do item de avaliação é obrigatório
+sidebar_label: Rótulo do item de avaliação inválido
+description: Todo item de avaliação tem um rótulo, de até 300 caracteres, que a banca reconhece.
+code: uniplus.selecao.item_de_avaliacao.rotulo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um item de avaliação da etapa veio sem rótulo (vazio ou só espaços) ou com mais de 300
+caracteres. O rótulo é o nome do critério ou do bloco, como a banca o vê ao avaliar e o
+candidato ao conhecer o resultado.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`itensDeAvaliacao[i].rotulo` da etapa, com o índice do item.
+
+## Como resolver
+
+Informe um rótulo com até 300 caracteres para o item, ou remova o item da lista.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

@@ -58,8 +58,10 @@ itens acumulam: uma tentativa devolve de uma vez tudo o que falta.
 | `nota_minima_da_regra_acima_da_nota_maxima` | `etapas` | Nota mínima da regra de eliminação até a nota máxima da etapa |
 | `etapa_com_nota_sem_forma_de_avaliacao` | `etapas` | Forma de avaliação de cada etapa com nota que não é do ENEM |
 | `etapa_sem_nota_com_forma_de_avaliacao` | `etapas` | Forma de avaliação e regra de consolidação só em etapa com nota |
+| `etapa_sem_nota_com_itens_de_avaliacao` | `etapas` | Itens de avaliação e escala de atendimento só em etapa com nota |
+| `etapa_com_itens_fora_da_nota_maxima` | `etapas` | Soma das pontuações dos itens igual à nota máxima de cada etapa com itens |
 | `etapa_humana_sem_regra_de_consolidacao` | `etapas` | Regra de consolidação de cada etapa de avaliação humana |
-| `etapa_humana_sem_passo_do_lancamento` | `etapas` | Passo do lançamento de cada etapa de avaliação humana |
+| `etapa_humana_sem_passo_do_lancamento` | `etapas` | Passo do lançamento de cada etapa de avaliação humana sem escala de atendimento |
 | `etapa_humana_sem_banca` | `etapas` | Ao menos uma banca em cada etapa de avaliação humana |
 
 Alguns itens só entram quando a exigência existe:
@@ -113,7 +115,7 @@ com os demais.
 | `etapa_com_nota_sem_forma_de_avaliacao` | Declare a forma de avaliação (`OBJETIVA` ou `HUMANA`) da etapa listada. A etapa de nota do ENEM não entra aqui: a nota dela vem do INEP. |
 | `etapa_sem_nota_com_forma_de_avaliacao` | Remova a forma de avaliação e a regra de consolidação da etapa listada, ou faça a etapa ter nota (peso, nota mínima ou regra); nesse caso a forma volta a ser obrigatória. |
 | `etapa_humana_sem_regra_de_consolidacao` | Escolha, no catálogo, a regra de consolidação da etapa listada: avaliação única ou correção independente. |
-| `etapa_humana_sem_passo_do_lancamento` | Declare o passo do lançamento da etapa listada (por exemplo, 0,5), que divide a nota máxima. |
+| `etapa_humana_sem_passo_do_lancamento` | Declare o passo do lançamento da etapa listada (por exemplo, 0,5), que divide a nota máxima, ou declare uma escala de atendimento: com ela a banca escolhe o nível e não digita a nota, e o passo deixa de ser exigido. |
 | `etapa_humana_sem_banca` | Cadastre ao menos uma banca na etapa listada, que é quem lança as notas. |
 
 A contradição entre o que a etapa declara sobre a avaliação não chega aqui: é recusada
@@ -125,6 +127,36 @@ já na gravação, também em rascunho, por
 [`passo_na_forma_objetiva`](./uniplus.selecao.etapa_processo.passo_na_forma_objetiva.mdx).
 A falta, ao contrário, não impede a gravação em rascunho; só a publicação e a
 retificação a cobram.
+
+### Itens de avaliação das etapas
+
+Uma etapa com nota pode se dividir em itens de avaliação (critérios ou blocos), cada um
+com a sua pontuação máxima, e pode declarar uma escala de atendimento: os níveis (por
+exemplo, "Atendeu", "Atendeu parcialmente" e "Não atendeu") com a fração da pontuação
+do item que cada um vale. Os dois itens abaixo listam as etapas que reprovam, no mesmo
+formato dos demais.
+
+| Código | Como resolver |
+|---|---|
+| `etapa_sem_nota_com_itens_de_avaliacao` | Remova os itens de avaliação e a escala de atendimento da etapa listada, ou faça a etapa ter nota (peso, nota mínima ou regra). |
+| `etapa_com_itens_fora_da_nota_maxima` | Ajuste as pontuações dos itens da etapa listada para que a soma seja igual à nota máxima da etapa, ou ajuste a nota máxima. Só é conferido quando a etapa declara a nota máxima: a falta dela tem item próprio. |
+
+A contradição entre o que a etapa declara sobre os itens e a escala não chega aqui: é
+recusada já na gravação, também em rascunho, por
+[`itens_na_etapa_do_enem`](./uniplus.selecao.etapa_processo.itens_na_etapa_do_enem.mdx),
+[`escala_sem_itens`](./uniplus.selecao.etapa_processo.escala_sem_itens.mdx),
+[`escala_na_forma_objetiva`](./uniplus.selecao.etapa_processo.escala_na_forma_objetiva.mdx),
+[`passo_com_escala_de_atendimento`](./uniplus.selecao.etapa_processo.passo_com_escala_de_atendimento.mdx),
+[`rotulo_invalido`](./uniplus.selecao.item_de_avaliacao.rotulo_invalido.mdx),
+[`rotulo_duplicado`](./uniplus.selecao.item_de_avaliacao.rotulo_duplicado.mdx),
+[`id_duplicado`](./uniplus.selecao.item_de_avaliacao.id_duplicado.mdx),
+[`pontuacao_maxima_invalida`](./uniplus.selecao.item_de_avaliacao.pontuacao_maxima_invalida.mdx),
+[`pontuacao_fora_do_passo`](./uniplus.selecao.item_de_avaliacao.pontuacao_fora_do_passo.mdx), e,
+na escala, por
+[`rotulo_invalido`](./uniplus.selecao.nivel_de_atendimento.rotulo_invalido.mdx),
+[`fracao_invalida`](./uniplus.selecao.nivel_de_atendimento.fracao_invalida.mdx),
+[`duplicado`](./uniplus.selecao.nivel_de_atendimento.duplicado.mdx) e
+[`sem_nivel_completo`](./uniplus.selecao.nivel_de_atendimento.sem_nivel_completo.mdx).
 
 A **cascata de remanejamento** e a coerência fina da árvore de exigências
 documentais (condicional vazia que determina resultado, consequência de

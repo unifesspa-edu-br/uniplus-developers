@@ -1,0 +1,37 @@
+---
+title: A escala de atendimento precisa de um nível que valha a pontuação inteira
+sidebar_label: Escala sem nível de 100%
+description: Sem um nível de fração 1, nenhum candidato poderia tirar a pontuação máxima do item.
+code: uniplus.selecao.nivel_de_atendimento.sem_nivel_completo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A escala de atendimento da etapa tem níveis, mas nenhum com `fracao` igual a 1 (100% da
+pontuação do item). Sem esse nível, a banca nunca poderia dar a pontuação máxima de um
+item, e a nota máxima da etapa seria inalcançável.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`escalaDeAtendimento` da etapa.
+
+## Como resolver
+
+Acrescente à escala um nível de fração 1 (por exemplo, "Atendeu"). A escala do PSR 2027 é
+um exemplo completo: 100%, 50% e 0%.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

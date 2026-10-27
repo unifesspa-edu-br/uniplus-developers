@@ -1,0 +1,41 @@
+---
+title: A escala de atendimento só se aplica à etapa de avaliação humana
+sidebar_label: Escala de atendimento na forma objetiva
+description: Na avaliação objetiva ninguém escolhe o nível de atendimento, então a escala não faz sentido.
+code: uniplus.selecao.etapa_processo.escala_na_forma_objetiva
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa declarou a forma `OBJETIVA` e também uma `escalaDeAtendimento`. A escala existe
+para a banca escolher, em cada item, o nível que o candidato atendeu; na avaliação
+objetiva a nota sai do gabarito ou da leitora óptica e não há quem escolha.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`escalaDeAtendimento` da etapa. Enquanto a forma não estiver declarada, a escala é
+aceita em rascunho; a falta da forma é cobrada na publicação.
+
+## Como resolver
+
+Escolha um dos dois caminhos:
+
+- se a nota é obtida por gabarito ou leitora, remova a escala de atendimento (os itens
+  de avaliação continuam permitidos: são os blocos da prova);
+- se a nota é dada pela banca, declare a forma como `HUMANA` e mantenha a escala.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

@@ -1,0 +1,45 @@
+---
+title: A etapa de nota do ENEM não declara itens de avaliação nem escala de atendimento
+sidebar_label: Itens e escala na etapa do ENEM
+description: A nota da etapa do ENEM vem do INEP; ela não se divide em itens nem tem escala de atendimento.
+code: uniplus.selecao.etapa_processo.itens_na_etapa_do_enem
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma etapa de nota do ENEM informou `itensDeAvaliacao`, `escalaDeAtendimento` ou ambos.
+Nessa etapa a nota vem do INEP, por área do conhecimento: não há critério nem bloco que a
+banca avalie, e nenhum nível de atendimento a escolher.
+
+A recusa vale já na gravação, também em rascunho. Ela chega no array `errors[]`, em um
+item para cada campo declarado.
+
+## Como resolver
+
+Remova os itens de avaliação e a escala de atendimento da etapa de nota do ENEM. Se a
+intenção era dividir em critérios uma etapa avaliada pelo próprio processo (redação,
+entrevista, prova), troque o tipo da etapa para o de uma etapa que não seja de nota do
+ENEM e então declare os itens nela.
+
+Uma etapa **sem nota** (que não entra na média, não tem nota mínima e não é citada pela
+eliminação nem pelo desempate) também não declara itens nem escala, mas essa recusa não é
+feita na gravação: aparece na publicação e na retificação, como o item
+`etapa_sem_nota_com_itens_de_avaliacao` de
+[`conformidade_insuficiente`](./uniplus.selecao.processo_seletivo.conformidade_insuficiente.mdx).
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

@@ -1,0 +1,37 @@
+---
+title: O nível de atendimento não pode se repetir na escala
+sidebar_label: Nível de atendimento repetido
+description: Dois níveis com o mesmo rótulo seriam ambíguos para a banca.
+code: uniplus.selecao.nivel_de_atendimento.duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A escala de atendimento da etapa declarou dois níveis com o mesmo rótulo. A comparação
+ignora espaços nas pontas e trata como iguais as grafias do mesmo texto com acento
+composto e decomposto. A banca escolhe o nível pelo rótulo, e dois níveis iguais com
+frações diferentes não dizem quanto vale a escolha.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`escalaDeAtendimento[i].rotulo` do segundo nível repetido.
+
+## Como resolver
+
+Dê um rótulo distinto a cada nível, ou remova o repetido.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

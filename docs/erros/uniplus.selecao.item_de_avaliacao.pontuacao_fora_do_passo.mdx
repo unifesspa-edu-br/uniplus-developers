@@ -1,0 +1,39 @@
+---
+title: A pontuação máxima do item deve ser múltipla do passo do lançamento
+sidebar_label: Pontuação do item fora do passo
+description: Com passo, as notas são lançadas de passo em passo, então a pontuação do item cai nesse intervalo.
+code: uniplus.selecao.item_de_avaliacao.pontuacao_fora_do_passo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa declara um `passoDoLancamento` (por exemplo, 0,5) e a pontuação máxima de um
+item não é múltipla dele (por exemplo, 2,3). O avaliador só pode lançar notas em
+múltiplos do passo, e um item cuja pontuação máxima não é múltipla dele nunca poderia
+receber a nota inteira.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`itensDeAvaliacao[i].pontuacaoMaxima` da etapa.
+
+## Como resolver
+
+Ajuste a pontuação do item para um múltiplo do passo, ou altere o passo da etapa. Se a
+banca escolhe o nível de atendimento em vez de digitar a nota, remova o passo: com
+escala de atendimento a etapa não declara passo.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

@@ -1,0 +1,39 @@
+---
+title: Dois itens da mesma etapa não podem ter o mesmo rótulo
+sidebar_label: Rótulo de item de avaliação repetido
+description: O rótulo identifica o critério para a banca; dois itens iguais seriam ambíguos.
+code: uniplus.selecao.item_de_avaliacao.rotulo_duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa declarou dois itens de avaliação com o mesmo rótulo. A comparação ignora espaços
+nas pontas e trata como iguais as grafias do mesmo texto com acento composto e
+decomposto. Com dois critérios de nome igual, a banca não saberia a qual deles lançar a
+avaliação.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`itensDeAvaliacao[i].rotulo` do segundo item repetido.
+
+## Como resolver
+
+Dê um rótulo distinto a cada item. Para trocar o rótulo de um item que já existe sem
+perder o vínculo com o que já aponta para ele, envie o item com o mesmo `id` e o novo
+rótulo.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

@@ -1,0 +1,36 @@
+---
+title: O rótulo do nível de atendimento é obrigatório
+sidebar_label: Rótulo do nível de atendimento inválido
+description: Todo nível da escala tem um rótulo, de até 100 caracteres, que a banca escolhe.
+code: uniplus.selecao.nivel_de_atendimento.rotulo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um nível da escala de atendimento veio sem rótulo (vazio ou só espaços) ou com mais de
+100 caracteres. O rótulo é o que a banca lê e escolhe em cada item, como "Atendeu" ou
+"Atendeu parcialmente".
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`escalaDeAtendimento[i].rotulo` da etapa.
+
+## Como resolver
+
+Informe um rótulo com até 100 caracteres para o nível, ou remova o nível da escala.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.
