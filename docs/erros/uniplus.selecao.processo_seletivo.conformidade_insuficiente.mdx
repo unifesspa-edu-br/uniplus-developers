@@ -56,6 +56,11 @@ itens acumulam: uma tentativa devolve de uma vez tudo o que falta.
 | `etapa_sem_nota_com_escala` | `etapas` | Nota máxima e passo só em etapa com nota |
 | `etapa_do_enem_com_escala` | `etapas` | Etapa de nota do ENEM sem nota máxima nem passo |
 | `nota_minima_da_regra_acima_da_nota_maxima` | `etapas` | Nota mínima da regra de eliminação até a nota máxima da etapa |
+| `etapa_com_nota_sem_forma_de_avaliacao` | `etapas` | Forma de avaliação de cada etapa com nota que não é do ENEM |
+| `etapa_sem_nota_com_forma_de_avaliacao` | `etapas` | Forma de avaliação e regra de consolidação só em etapa com nota |
+| `etapa_humana_sem_regra_de_consolidacao` | `etapas` | Regra de consolidação de cada etapa de avaliação humana |
+| `etapa_humana_sem_passo_do_lancamento` | `etapas` | Passo do lançamento de cada etapa de avaliação humana |
+| `etapa_humana_sem_banca` | `etapas` | Ao menos uma banca em cada etapa de avaliação humana |
 
 Alguns itens só entram quando a exigência existe:
 
@@ -92,6 +97,34 @@ aqui: são recusados já na gravação, também em rascunho, por
 [`passo_do_lancamento_invalido`](./uniplus.selecao.etapa_processo.passo_do_lancamento_invalido.mdx),
 [`nota_minima_acima_da_nota_maxima`](./uniplus.selecao.etapa_processo.nota_minima_acima_da_nota_maxima.mdx) e
 [`nota_maxima_fora_do_passo`](./uniplus.selecao.etapa_processo.nota_maxima_fora_do_passo.mdx).
+
+### Itens da forma de avaliação das etapas
+
+Ainda na dimensão `etapas`, estes itens conferem como a nota de cada etapa é obtida.
+A forma de avaliação é **objetiva** (gabarito ou leitora óptica, sem avaliador) ou
+**humana** (a banca da etapa lança as notas); na forma humana, a etapa declara também a
+regra que consolida as notas dos avaliadores (avaliação única, ou correção independente
+com terceiro corretor por discrepância), o passo do lançamento e ao menos uma banca. Os
+itens listam as etapas que reprovam na forma `(etapas: "A"; "B")` e acumulam entre si e
+com os demais.
+
+| Código | Como resolver |
+|---|---|
+| `etapa_com_nota_sem_forma_de_avaliacao` | Declare a forma de avaliação (`OBJETIVA` ou `HUMANA`) da etapa listada. A etapa de nota do ENEM não entra aqui: a nota dela vem do INEP. |
+| `etapa_sem_nota_com_forma_de_avaliacao` | Remova a forma de avaliação e a regra de consolidação da etapa listada, ou faça a etapa ter nota (peso, nota mínima ou regra); nesse caso a forma volta a ser obrigatória. |
+| `etapa_humana_sem_regra_de_consolidacao` | Escolha, no catálogo, a regra de consolidação da etapa listada: avaliação única ou correção independente. |
+| `etapa_humana_sem_passo_do_lancamento` | Declare o passo do lançamento da etapa listada (por exemplo, 0,5), que divide a nota máxima. |
+| `etapa_humana_sem_banca` | Cadastre ao menos uma banca na etapa listada, que é quem lança as notas. |
+
+A contradição entre o que a etapa declara sobre a avaliação não chega aqui: é recusada
+já na gravação, também em rascunho, por
+[`forma_de_avaliacao_desconhecida`](./uniplus.selecao.etapa_processo.forma_de_avaliacao_desconhecida.mdx),
+[`avaliacao_na_etapa_do_enem`](./uniplus.selecao.etapa_processo.avaliacao_na_etapa_do_enem.mdx),
+[`regra_de_consolidacao_fora_da_forma_humana`](./uniplus.selecao.etapa_processo.regra_de_consolidacao_fora_da_forma_humana.mdx),
+[`regra_de_consolidacao_invalida`](./uniplus.selecao.etapa_processo.regra_de_consolidacao_invalida.mdx) e
+[`passo_na_forma_objetiva`](./uniplus.selecao.etapa_processo.passo_na_forma_objetiva.mdx).
+A falta, ao contrário, não impede a gravação em rascunho; só a publicação e a
+retificação a cobram.
 
 A **cascata de remanejamento** e a coerência fina da árvore de exigências
 documentais (condicional vazia que determina resultado, consequência de

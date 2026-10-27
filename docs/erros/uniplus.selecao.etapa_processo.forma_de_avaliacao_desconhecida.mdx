@@ -1,0 +1,41 @@
+---
+title: "A forma de avaliação declarada não existe: use OBJETIVA ou HUMANA"
+sidebar_label: Forma de avaliação desconhecida
+description: A forma de avaliação da etapa é OBJETIVA ou HUMANA; qualquer outro texto é recusado.
+code: uniplus.selecao.etapa_processo.forma_de_avaliacao_desconhecida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2093'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2093
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do payload informou `formaDeAvaliacao` com um texto que não é uma das
+duas formas existentes. A forma diz como a nota da etapa é obtida: **OBJETIVA** (corrigida
+por gabarito ou leitora óptica, sem avaliador) ou **HUMANA** (as pessoas da banca da etapa
+lançam as notas). A dupla correção não é uma terceira forma: ela qualifica a avaliação
+humana e é declarada pela regra de consolidação.
+
+O sistema recusa o texto desconhecido em vez de tratá-lo como campo em branco, porque um
+erro de digitação passaria por etapa sem forma declarada e só seria apontado na
+publicação, longe de quem o cometeu. A recusa chega no array `errors[]`, no campo
+`formaDeAvaliacao` da etapa, junto das demais violações da mesma definição de etapas.
+
+## Como resolver
+
+Informe exatamente `OBJETIVA` ou `HUMANA`, em maiúsculas, ou omita o campo enquanto o
+processo estiver em rascunho e a forma ainda não tiver sido decidida.
+
+A forma é obrigatória só na publicação, e só na etapa com nota que não é do ENEM. Se a
+resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de reenviar.
