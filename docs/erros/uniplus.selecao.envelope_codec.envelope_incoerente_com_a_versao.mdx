@@ -1,0 +1,36 @@
+---
+title: O envelope contradiz a versão que o guarda
+sidebar_label: Envelope incoerente com a versão
+description: 'O conteúdo do envelope congelado não confere com o registro da versão a que pertence.'
+code: uniplus.selecao.envelope_codec.envelope_incoerente_com_a_versao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Leitura da configuração congelada de um processo seletivo
+requisitos:
+  - UNI-REQ-0019
+  - UNI-REQ-0021
+rastreio:
+  - label: 'uniplus-developers#402'
+    href: https://github.com/unifesspa-edu-br/uniplus-developers/issues/402
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O envelope congelado deve ser coerente com o registro da versão que o guarda. A leitura é recusada quando encontra, por exemplo:
+
+- o hash do documento congelado no envelope diferente do hash do ato que criou a versão;
+- um bloco de retificação presente na primeira versão, que abre a cadeia e não retifica ato algum;
+- um bloco de retificação ausente numa versão que sucede outra;
+- uma retificação que aponta para um ato diferente do registrado na versão.
+
+Em todos os casos o envelope e o registro da versão contam histórias diferentes, e o sistema não escolhe uma delas por conta própria.
+
+## Como resolver
+
+Acione o suporte, informando o `instance` e o `traceId` do ProblemDetails recebido. Não há o que corrigir em formulário, cadastro ou documento: a recusa é sobre a integridade do processo já congelado, e a análise e a correção dependem da equipe responsável pelo sistema. Com o suporte acionado, o processo permanece como estava, sem alteração, até a análise.

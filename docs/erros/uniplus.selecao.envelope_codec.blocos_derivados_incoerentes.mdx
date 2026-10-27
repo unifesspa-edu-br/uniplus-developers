@@ -1,0 +1,30 @@
+---
+title: Os blocos derivados do envelope não fecham entre si
+sidebar_label: Blocos derivados incoerentes
+description: 'Distribuição de vagas, modalidades e ofertas do envelope não declaram o mesmo conjunto de ofertas de curso.'
+code: uniplus.selecao.envelope_codec.blocos_derivados_incoerentes
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Leitura da configuração congelada de um processo seletivo
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-developers#402'
+    href: https://github.com/unifesspa-edu-br/uniplus-developers/issues/402
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+No envelope congelado, a distribuição de vagas, as modalidades e as ofertas são derivadas da mesma coleção de ofertas de curso e precisam declarar o mesmo conjunto. A leitura é recusada quando esses blocos não fecham entre si.
+
+Recombiná-los em silêncio reconstruiria uma configuração que nunca existiu, por isso o sistema recusa.
+
+## Como resolver
+
+Acione o suporte, informando o `instance` e o `traceId` do ProblemDetails recebido. Não há o que corrigir em formulário, cadastro ou documento: a recusa é sobre a integridade do processo já congelado, e a análise e a correção dependem da equipe responsável pelo sistema. Com o suporte acionado, o processo permanece como estava, sem alteração, até a análise.

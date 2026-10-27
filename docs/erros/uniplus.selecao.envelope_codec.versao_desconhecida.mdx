@@ -1,0 +1,30 @@
+---
+title: A versão do envelope congelado não é reconhecida
+sidebar_label: Versão do envelope desconhecida
+description: 'O processo foi congelado por uma versão do envelope que o sistema atual não reconhece.'
+code: uniplus.selecao.envelope_codec.versao_desconhecida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Leitura da configuração congelada de um processo seletivo, antes de a operação em curso (por exemplo, retificar, descartar uma retificação ou conferir os fatos coletados) prosseguir
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-developers#402'
+    href: https://github.com/unifesspa-edu-br/uniplus-developers/issues/402
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Quando um processo seletivo é publicado, sua configuração é congelada num envelope que carrega a versão do formato em que foi gravado. Esta recusa indica que a versão registrada no envelope não consta entre as que o sistema atual sabe ler, de modo que não há como reconstruir a configuração daquele processo.
+
+O caso típico é o de um processo publicado antes de uma atualização que alterou a versão do formato do envelope: a mensagem informa a versão encontrada (por exemplo, `0.0.33`) e a consequência para a operação pedida. A recusa é intencional — reconstruir a configuração por aproximação faria o processo divergir do que foi publicado.
+
+## Como resolver
+
+Acione o suporte, informando o `instance` e o `traceId` do ProblemDetails recebido. O processo foi congelado por uma versão do formato que o sistema não lê mais, e nada que se edite na tela muda isso: a leitura desse processo depende da equipe responsável pelo sistema. Com o suporte acionado, o processo permanece como estava, sem alteração, até a análise.

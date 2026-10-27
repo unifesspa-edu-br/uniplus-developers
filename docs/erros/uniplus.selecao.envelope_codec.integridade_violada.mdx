@@ -1,0 +1,30 @@
+---
+title: A integridade do envelope congelado foi violada
+sidebar_label: Integridade do envelope violada
+description: 'Os bytes do envelope congelado não correspondem ao hash registrado na versão, ou não estão na forma canônica.'
+code: uniplus.selecao.envelope_codec.integridade_violada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Leitura da configuração congelada de um processo seletivo
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-developers#402'
+    href: https://github.com/unifesspa-edu-br/uniplus-developers/issues/402
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O hash registrado na versão é a prova de que o envelope é exatamente o que foi publicado. A leitura é recusada quando os bytes congelados não produzem esse hash ou não estão na forma canônica, isto é, quando reserializá-los resulta em bytes distintos.
+
+Nesse caso o envelope deixa de provar o que diz provar, e o sistema não reconstrói a configuração a partir dele.
+
+## Como resolver
+
+Acione o suporte, informando o `instance` e o `traceId` do ProblemDetails recebido. Não há o que corrigir em formulário, cadastro ou documento: a recusa é sobre a integridade do processo já congelado, e a análise e a correção dependem da equipe responsável pelo sistema. Com o suporte acionado, o processo permanece como estava, sem alteração, até a análise.

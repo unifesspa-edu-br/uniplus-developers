@@ -1,0 +1,30 @@
+---
+title: O envelope referencia uma regra desconhecida
+sidebar_label: Regra desconhecida no envelope
+description: 'O envelope congelado cita um código de regra fora do rol que o sistema conhece.'
+code: uniplus.selecao.envelope_codec.regra_desconhecida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Leitura da configuração congelada de um processo seletivo, ao reconstruir qualquer regra referenciada por código, como regras de classificação, de eliminação, de distribuição de vagas e de prazo, critérios de desempate e condições de obrigatoriedade de documentos
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-developers#402'
+    href: https://github.com/unifesspa-edu-br/uniplus-developers/issues/402
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O envelope congelado referencia regras (como critérios de desempate, regras de eliminação e condições de obrigatoriedade de documentos) por código. A leitura é recusada quando um desses códigos não consta no rol que o sistema conhece, ou quando o código consta, mas os parâmetros gravados com ele não correspondem a nenhuma variante conhecida daquela regra; a mensagem informa o código e o trecho do envelope.
+
+Interpretar um código desconhecido como uma regra padrão reconstruiria uma configuração diferente da congelada.
+
+## Como resolver
+
+Acione o suporte, informando o `instance` e o `traceId` do ProblemDetails recebido. Não há o que corrigir em formulário, cadastro ou documento: a recusa é sobre a integridade do processo já congelado, e a análise e a correção dependem da equipe responsável pelo sistema. Com o suporte acionado, o processo permanece como estava, sem alteração, até a análise.

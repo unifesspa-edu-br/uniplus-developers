@@ -1,0 +1,30 @@
+---
+title: A versão do envelope é conhecida, mas não pode ser reconstruída
+sidebar_label: Versão do envelope não reconstruível
+description: 'O sistema conhece a versão do envelope, mas não tem como reconstruir a configuração a partir dela.'
+code: uniplus.selecao.envelope_codec.versao_nao_reidratavel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Leitura da configuração congelada de um processo seletivo, antes de a operação em curso prosseguir
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-developers#402'
+    href: https://github.com/unifesspa-edu-br/uniplus-developers/issues/402
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A versão do envelope registrada no processo é conhecida pelo sistema, mas não possui leitura completa: a mensagem traz o motivo da recusa. Como uma reconstrução parcial entregaria uma configuração diferente da publicada, o sistema recusa a leitura por inteiro.
+
+Diferentemente de [`versao_desconhecida`](./uniplus.selecao.envelope_codec.versao_desconhecida.mdx), aqui a versão existe no registro do sistema; o que falta é a capacidade de reconstruí-la.
+
+## Como resolver
+
+Acione o suporte, informando o `instance` e o `traceId` do ProblemDetails recebido e o motivo que a mensagem traz. O sistema conhece a versão do formato em que o processo foi congelado, mas não sabe reconstruí-la por inteiro, e nada que se edite na tela muda isso: a leitura desse processo depende da equipe responsável pelo sistema. Com o suporte acionado, o processo permanece como estava, sem alteração, até a análise.
