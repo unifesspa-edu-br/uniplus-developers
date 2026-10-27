@@ -513,6 +513,31 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Recursos administrativos | Etapa futura | Base de suspensividade já configurada (`UNI-REQ-0080`). |
 | Habilitação e chamadas de vagas (Ingresso/CRCA) | Etapa futura | Fronteira com o módulo Ingresso. |
 
+### 13.1 Acompanhamento administrativo dos processos
+
+O PO aprovou o percurso painel de processos → página do processo, com somente
+a aba Acompanhamento na primeira entrega, sem abas futuras em construção. O
+público autorizado é formado pelos servidores do CEPS (UNI-REQ-0176/0177).
+O primeiro incremento prepara navegação e estrutura; os indicadores são
+entregues em seguida. Validação inicial com dados fictícios e usuários de
+teste não altera o público aprovado para liberação com dados reais.
+
+As situações em inscrição, em homologação, em avaliação e em período de recurso
+podem ocorrer simultaneamente, com consulta por qualquer filtro aplicável.
+Antes da primeira fase, mostrar Aguardando início; nos intervalos, Entre etapas;
+o término da última fase do cronograma determina Encerrado. Cancelados continuam
+consultáveis e identificados (UNI-REQ-0178).
+
+Os indicadores distinguem registros de inscrição de pessoas: reenvios não criam
+nova inscrição, opções e modalidades não multiplicam o total de submetidas, e
+o total de inscritos é por pessoas distintas. As definições dos universos dos
+totais e outros detalhes permanecem explícitos como pendentes (UNI-REQ-0179).
+
+As regras confirmadas, necessidades de relatórios e notas ainda a refinar,
+dependências de implementação e roteiro de validação estão em
+[Acompanhamento administrativo](../acompanhamento-administrativo.mdx).
+A aprovação dessas necessidades não comprova disponibilidade no ambiente.
+
 ## 14. Conformidade legal
 
 O detalhamento por norma vive na página de [conformidade legal](../conformidade-legal/index.mdx); o quadro abaixo resume como o módulo Seleção atende cada uma.

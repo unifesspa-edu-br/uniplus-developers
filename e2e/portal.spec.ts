@@ -32,6 +32,10 @@ test.describe('Portal — navegação e conteúdo', () => {
     {url: 'produto/rastreabilidade/', heading: 'Rastreabilidade'},
     {url: 'produto/mvp-selecao/', heading: 'MVP Seleção'},
     {
+      url: 'produto/acompanhamento-administrativo/',
+      heading: 'Acompanhamento administrativo dos processos seletivos',
+    },
+    {
       url: 'produto/checklist-publicacao/',
       heading: 'Checklist de publicação de requisitos',
     },
