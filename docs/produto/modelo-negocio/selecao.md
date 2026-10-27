@@ -524,9 +524,18 @@ teste não altera o público aprovado para liberação com dados reais.
 
 As situações em inscrição, em homologação, em avaliação e em período de recurso
 podem ocorrer simultaneamente, com consulta por qualquer filtro aplicável.
-Antes da primeira fase, mostrar Aguardando início; nos intervalos, Entre etapas;
-o término da última fase do cronograma determina Encerrado. Cancelados continuam
-consultáveis e identificados (UNI-REQ-0178).
+Antes da primeira fase, mostrar Aguardando início; nos intervalos, Entre etapas.
+Cancelados continuam consultáveis e identificados (UNI-REQ-0178).
+
+A situação temporal do painel é distinta do encerramento formal. O PO indicou
+inicialmente o término da última fase do cronograma, mas o LT informou depois
+que a conclusão depende do CRCA e orientou obter a definição com a Rebeca, no
+setor. O critério de Encerrado permanece pendente dessa validação. Os formatos
+automático e administrativo, com justificativa obrigatória no administrativo,
+são proposta do LT a validar com o CRCA. Também dependem dessa definição o
+gatilho de conclusão, os usuários autorizados e a apresentação entre o fim do
+cronograma e a conclusão pelo CRCA, sem presumir situação intermediária. A
+consulta não efetiva encerramento.
 
 Os indicadores distinguem registros de inscrição de pessoas: reenvios não criam
 nova inscrição, opções e modalidades não multiplicam o total de submetidas, e
