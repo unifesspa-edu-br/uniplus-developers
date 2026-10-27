@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
         'produto/rastreabilidade/index',
         'produto/mvp-selecao/index',
         'produto/casos-de-uso/index',
+        'produto/acompanhamento-administrativo',
         'produto/conformidade-legal/index',
         'produto/checklist-publicacao/index',
         'produto/codigo-de-cadastro-institucional',
