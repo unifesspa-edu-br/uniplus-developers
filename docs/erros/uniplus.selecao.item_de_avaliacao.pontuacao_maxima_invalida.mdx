@@ -1,0 +1,39 @@
+---
+title: A pontuação máxima do item de avaliação deve ser maior que zero
+sidebar_label: Pontuação máxima do item inválida
+description: Um item que não vale pontos não compõe a nota da etapa.
+code: uniplus.selecao.item_de_avaliacao.pontuacao_maxima_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um item de avaliação declarou `pontuacaoMaxima` igual ou menor que zero. A pontuação
+máxima é o quanto o item vale da nota máxima da etapa e precisa ser positiva, com no
+máximo quatro casas decimais.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`itensDeAvaliacao[i].pontuacaoMaxima` da etapa.
+
+## Como resolver
+
+Informe uma pontuação máxima maior que zero, ou remova o item. A soma das pontuações dos
+itens deve igualar a nota máxima da etapa; a divergência não impede a gravação em
+rascunho, mas barra a publicação e a retificação (item `etapa_com_itens_fora_da_nota_maxima`
+de [`conformidade_insuficiente`](./uniplus.selecao.processo_seletivo.conformidade_insuficiente.mdx)).
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

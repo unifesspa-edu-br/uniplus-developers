@@ -1,0 +1,40 @@
+---
+title: A escala de atendimento só vale em etapa com itens de avaliação
+sidebar_label: Escala de atendimento sem itens
+description: Os níveis de atendimento são aplicados a cada item; sem itens, não há a que aplicá-los.
+code: uniplus.selecao.etapa_processo.escala_sem_itens
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa declarou `escalaDeAtendimento` sem declarar nenhum item de avaliação. A escala diz
+quanto cada nível (por exemplo, "Atendeu", "Atendeu parcialmente" e "Não atendeu") vale da
+pontuação de um item; sem itens, a banca não teria sobre o que escolher o nível.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`escalaDeAtendimento` da etapa.
+
+## Como resolver
+
+Escolha um dos dois caminhos:
+
+- se a nota da etapa é lançada em um só valor, remova a escala de atendimento;
+- se a banca deve escolher o nível de cada critério, declare em `itensDeAvaliacao` os
+  critérios ou blocos da etapa, com a pontuação máxima de cada um.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

@@ -1,0 +1,42 @@
+---
+title: A etapa com escala de atendimento não declara passo do lançamento
+sidebar_label: Passo do lançamento com escala de atendimento
+description: Com escala, a banca escolhe o nível e não digita a nota, então não há passo do lançamento.
+code: uniplus.selecao.etapa_processo.passo_com_escala_de_atendimento
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa declarou `escalaDeAtendimento` e também um `passoDoLancamento`. O passo é o
+intervalo entre duas notas que um avaliador pode digitar (por exemplo, de 0,5 em 0,5).
+Com a escala, o avaliador não digita a nota: escolhe o nível de cada item, e o sistema
+calcula a pontuação a partir da fração do nível. O passo não teria a quem se aplicar.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`passoDoLancamento` da etapa.
+
+## Como resolver
+
+Escolha um dos dois caminhos:
+
+- se a banca escolhe o nível de atendimento, remova o `passoDoLancamento`. Na forma
+  `HUMANA`, o passo deixa de ser obrigatório na publicação quando a etapa tem escala;
+- se a banca digita a nota de cada item, remova a escala de atendimento e mantenha o
+  passo.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.

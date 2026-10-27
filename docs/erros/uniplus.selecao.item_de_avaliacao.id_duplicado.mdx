@@ -1,0 +1,36 @@
+---
+title: O mesmo id de item de avaliação não pode ser informado duas vezes
+sidebar_label: Id de item de avaliação repetido
+description: Cada id de item existente pode aparecer uma só vez na lista da etapa.
+code: uniplus.selecao.item_de_avaliacao.id_duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#1622'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1622
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `itensDeAvaliacao` da etapa trouxe o mesmo `id` em dois itens. O id identifica um
+item que já existe, e é por ele que a gravação preserva o vínculo de quem aponta para o
+critério; dois itens com o mesmo id disputariam a mesma linha.
+
+A recusa vale já na gravação, também em rascunho, e chega no array `errors[]`, no campo
+`itensDeAvaliacao[i].id` do segundo item.
+
+## Como resolver
+
+Mantenha o `id` em um só item. O item novo é enviado sem `id`.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.
