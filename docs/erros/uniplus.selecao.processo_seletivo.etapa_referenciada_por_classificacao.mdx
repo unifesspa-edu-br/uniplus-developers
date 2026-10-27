@@ -1,7 +1,7 @@
 ---
 title: Etapa referenciada por regra de eliminação da classificação
 sidebar_label: Etapa referenciada por classificação
-description: Redefinir as etapas do processo não pode deixar uma regra de eliminação ELIM-NOTA-MINIMA-ETAPA da classificação apontando para uma etapa que deixou de existir.
+description: Redefinir as etapas do processo não pode deixar uma regra de eliminação ELIM-NOTA-MINIMA-ETAPA ou ELIM-AUSENCIA-NA-ETAPA da classificação apontando para uma etapa que deixou de existir.
 code: uniplus.selecao.processo_seletivo.etapa_referenciada_por_classificacao
 http_status: 422
 situacao: publicado
@@ -21,7 +21,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 ## O que aconteceu
 
 O processo já tem uma configuração de classificação definida, com uma
-regra de eliminação de código `ELIM-NOTA-MINIMA-ETAPA`, e o novo payload de
+regra de eliminação de código `ELIM-NOTA-MINIMA-ETAPA` ou `ELIM-AUSENCIA-NA-ETAPA`, e o novo payload de
 definição de etapas omite a etapa que essa regra referencia (`etapaRef`).
 É a mesma proteção de
 [`etapa_referenciada_por_desempate`](./uniplus.selecao.processo_seletivo.etapa_referenciada_por_desempate.mdx)

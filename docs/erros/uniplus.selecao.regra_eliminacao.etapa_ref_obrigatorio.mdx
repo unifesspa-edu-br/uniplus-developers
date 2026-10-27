@@ -1,0 +1,39 @@
+---
+title: EtapaRef é obrigatório para a regra ELIM-AUSENCIA-NA-ETAPA
+sidebar_label: EtapaRef ausente na eliminação por ausência
+description: A regra que elimina quem falta a uma etapa precisa da etapa citada e não aceita os campos das outras regras de eliminação.
+code: uniplus.selecao.regra_eliminacao.etapa_ref_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2094'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2094
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma regra de eliminação com o código `ELIM-AUSENCIA-NA-ETAPA` não informou `etapaRef`, ou
+informou `notaMinima`, `minimo` ou `areaCodigo`, campos que pertencem a outras regras de
+eliminação. A regra tem um único parâmetro: a etapa à qual a ausência elimina.
+
+Esta checagem verifica só que os campos foram informados nos lugares certos. Que a etapa
+exista no processo e não seja a de nota do ENEM é conferido separadamente, ver
+[`etapa_ref_eliminacao_inexistente`](./uniplus.selecao.processo_seletivo.etapa_ref_eliminacao_inexistente.mdx)
+e
+[`ausencia_na_etapa_do_enem`](./uniplus.selecao.processo_seletivo.ausencia_na_etapa_do_enem.mdx).
+Roda na montagem dos argumentos da regra e não acumula com outra violação: a primeira que
+falhar interrompe o processamento.
+
+## Como resolver
+
+Informe `etapaRef` com o identificador da etapa e deixe `notaMinima`, `minimo` e
+`areaCodigo` sem valor.

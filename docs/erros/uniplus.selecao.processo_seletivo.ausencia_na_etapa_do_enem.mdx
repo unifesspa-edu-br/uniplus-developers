@@ -1,0 +1,43 @@
+---
+title: A eliminação por ausência não se aplica à etapa de nota do ENEM
+sidebar_label: Ausência na etapa do ENEM
+description: Quem falta ao ENEM é tratado pela eliminação por falta em dia de prova do ENEM; a eliminação por ausência na etapa vale para as demais etapas.
+code: uniplus.selecao.processo_seletivo.ausencia_na_etapa_do_enem
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Definição de etapas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos:
+  - UNI-REQ-0175
+rastreio:
+  - label: 'uniplus-api#2094'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2094
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma regra de eliminação `ELIM-AUSENCIA-NA-ETAPA` cita, em `etapaRef`, a etapa cuja nota
+vem do ENEM. Nessa etapa o candidato não comparece a uma prova do processo: a ausência é a
+falta em um dia de prova do ENEM, que tem regra própria, a `ELIM-FALTA-EM-DIA-DE-PROVA-ENEM`.
+
+A recusa aparece em três momentos:
+
+- Na **definição da classificação**, ela chega no array `errors[]`, no campo
+  `regrasEliminacao[i].etapaRef` da regra afetada, junto das outras violações da mesma
+  requisição.
+- Na **definição das etapas**, quando a classificação já tem a eliminação por ausência e a
+  etapa citada passa a ser a de nota do ENEM. Chega como recusa do processo, sem campo.
+- No **descarte de retificação**, quando a configuração congelada traz a combinação.
+
+## Como resolver
+
+Troque a regra pela eliminação por falta em dia de prova do ENEM, que não tem parâmetro,
+ou aponte `etapaRef` para outra etapa do processo. A eliminação por ausência vale para
+qualquer etapa que não seja a de nota do ENEM, com ou sem nota.
