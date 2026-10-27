@@ -1,0 +1,30 @@
+---
+title: O envelope congelado está malformado
+sidebar_label: Envelope malformado
+description: 'O envelope congelado não tem a forma que a versão dele declara.'
+code: uniplus.selecao.envelope_codec.envelope_malformado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Leitura da configuração congelada de um processo seletivo
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-developers#402'
+    href: https://github.com/unifesspa-edu-br/uniplus-developers/issues/402
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O envelope congelado é um documento estruturado com forma fixa por versão. A leitura é recusada quando o documento não segue essa forma: JSON inválido, chave obrigatória ausente, chave desconhecida ou duplicada, valor fora do formato esperado, vocabulário não reconhecido, itens repetidos ou fora da ordem canônica. A mensagem aponta o trecho do envelope em que a divergência foi encontrada.
+
+Não se trata de dado preenchido incorretamente por quem opera o sistema, e sim da integridade do registro já congelado.
+
+## Como resolver
+
+Acione o suporte, informando o `instance` e o `traceId` do ProblemDetails recebido. Não há o que corrigir em formulário, cadastro ou documento: a recusa é sobre a integridade do processo já congelado, e a análise e a correção dependem da equipe responsável pelo sistema. Com o suporte acionado, o processo permanece como estava, sem alteração, até a análise.

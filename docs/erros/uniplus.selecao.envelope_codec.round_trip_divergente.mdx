@@ -1,0 +1,30 @@
+---
+title: A configuração reconstruída não reproduz o envelope congelado
+sidebar_label: Reconstrução divergente do envelope
+description: 'A configuração reconstruída a partir do envelope não gera de volta os mesmos bytes congelados.'
+code: uniplus.selecao.envelope_codec.round_trip_divergente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Descarte de uma retificação do processo seletivo, na verificação final da reconstrução da configuração congelada da versão anterior
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-developers#402'
+    href: https://github.com/unifesspa-edu-br/uniplus-developers/issues/402
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao restaurar uma versão, o sistema reconstrói a configuração e a confere: gera os bytes a partir do resultado e os compara com o envelope congelado. Esta recusa indica que a comparação falhou, isto é, algum dado se perdeu na reconstrução.
+
+A restauração é recusada porque repor uma configuração empobrecida faria o certame publicado divergir do documento que o publicou, sem que nada acusasse.
+
+## Como resolver
+
+Acione o suporte, informando o `instance` e o `traceId` do ProblemDetails recebido. Não há o que corrigir em formulário, cadastro ou documento: a recusa é sobre a integridade do processo já congelado, e a análise e a correção dependem da equipe responsável pelo sistema. Com o suporte acionado, o processo permanece como estava, sem alteração, até a análise.

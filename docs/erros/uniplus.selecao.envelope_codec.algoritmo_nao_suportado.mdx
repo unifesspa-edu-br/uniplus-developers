@@ -1,0 +1,30 @@
+---
+title: O algoritmo de hash da versão não é suportado
+sidebar_label: Algoritmo de hash não suportado
+description: 'O algoritmo de hash registrado na versão não é o que o formato daquela versão emite.'
+code: uniplus.selecao.envelope_codec.algoritmo_nao_suportado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Leitura da configuração congelada de um processo seletivo, ao conferir o hash da versão
+requisitos:
+  - UNI-REQ-0019
+rastreio:
+  - label: 'uniplus-developers#402'
+    href: https://github.com/unifesspa-edu-br/uniplus-developers/issues/402
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada versão do formato do envelope emite o hash com um algoritmo próprio. A leitura é recusada quando o algoritmo registrado na versão de configuração é diferente do que o formato correspondente emite; a mensagem informa os dois.
+
+Sem o algoritmo correto, o hash não pode ser conferido e a integridade do envelope não pode ser demonstrada.
+
+## Como resolver
+
+Acione o suporte, informando o `instance` e o `traceId` do ProblemDetails recebido. Não há o que corrigir em formulário, cadastro ou documento: a recusa é sobre a integridade do processo já congelado, e a análise e a correção dependem da equipe responsável pelo sistema. Com o suporte acionado, o processo permanece como estava, sem alteração, até a análise.
