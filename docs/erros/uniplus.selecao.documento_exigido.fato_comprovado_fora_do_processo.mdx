@@ -1,0 +1,29 @@
+---
+title: A exigência comprova um fato que o processo não coleta
+sidebar_label: Fato comprovado fora do processo
+description: Um fato declarado como comprovado pela exigência não é coletado pelo processo seletivo.
+code: uniplus.selecao.documento_exigido.fato_comprovado_fora_do_processo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação de processo seletivo
+  - Retificação de processo seletivo
+requisitos:
+  - UNI-REQ-0130
+rastreio:
+  - label: 'uniplus-api#2124'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2124
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A proteção da exigência é conferida contra a classificação de cada fato comprovado, congelada no processo. Um fato que o processo não coleta não tem essa classificação, e a conferência não pode ser feita.
+
+## Como resolver
+
+Inclua o fato no formulário do processo ou retire-o da lista de fatos comprovados pela exigência.
