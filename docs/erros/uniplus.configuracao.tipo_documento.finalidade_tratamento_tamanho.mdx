@@ -1,0 +1,29 @@
+---
+title: Finalidade do tratamento do tipo de documento longa demais
+sidebar_label: Finalidade longa demais
+description: A finalidade do tratamento ultrapassa o tamanho máximo.
+code: uniplus.configuracao.tipo_documento.finalidade_tratamento_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos:
+  - UNI-REQ-0130
+rastreio:
+  - label: 'uniplus-api#2124'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2124
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A finalidade explica, em poucas linhas, para que o documento é tratado. O texto informado passa do limite, o mesmo dos fatos do candidato.
+
+## Como resolver
+
+Resuma a finalidade do tratamento.

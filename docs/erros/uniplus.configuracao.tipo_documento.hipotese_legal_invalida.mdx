@@ -1,0 +1,29 @@
+---
+title: Hipótese legal do tipo de documento inválida
+sidebar_label: Hipótese legal inválida
+description: A hipótese legal informada não pertence ao vocabulário aceito.
+code: uniplus.configuracao.tipo_documento.hipotese_legal_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de documento
+  - Atualização de um tipo de documento
+requisitos:
+  - UNI-REQ-0130
+rastreio:
+  - label: 'uniplus-api#2124'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2124
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A hipótese legal de tratamento usa o mesmo vocabulário dos fatos do candidato. O valor informado não é nenhum deles.
+
+## Como resolver
+
+Escolha uma das hipóteses legais aceitas.
