@@ -1,7 +1,7 @@
 ---
-title: Concessão igual já ativa
+title: Concessão igual não revogada
 sidebar_label: Concessão duplicada
-description: A pessoa já tem uma concessão ativa do mesmo perfil no mesmo escopo.
+description: A pessoa já tem uma concessão não revogada, vigente ou vencida, do mesmo perfil no mesmo escopo.
 code: uniplus.autorizacao.concessao.duplicada
 http_status: 409
 situacao: publicado
@@ -21,8 +21,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A pessoa já tem uma concessão ativa igual: mesmo perfil, mesmo escopo. Duas concessões iguais fariam a revogação de uma não retirar o acesso.
+A pessoa já tem uma concessão igual, com o mesmo perfil e o mesmo escopo, que não foi revogada. Ela pode estar vigente ou já vencida pelo prazo. Duas concessões iguais fariam a revogação de uma não retirar o acesso.
 
 ## Como resolver
 
-Nenhuma ação é necessária: o acesso já existe. Consulte as concessões ativas da pessoa.
+Consulte as concessões da pessoa. Se a igual estiver vigente, o acesso já existe. Se estiver vencida, revogue-a e conceda de novo.
