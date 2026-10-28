@@ -1,0 +1,28 @@
+---
+title: O alcance de um perfil com concessões não pode mudar
+sidebar_label: Alcance alterado
+description: Um perfil já concedido não troca permissões de unidade por institucionais, nem o contrário.
+code: uniplus.autorizacao.perfil.alcance_alterado
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de perfis de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#612'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/612
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil tem concessões em vigor. Mudar o alcance dele mudaria o sentido dessas concessões sem um novo pedido e uma nova aprovação.
+
+## Como resolver
+
+Crie um perfil novo com o alcance desejado e peça a concessão dele.
