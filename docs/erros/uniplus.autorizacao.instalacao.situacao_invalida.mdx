@@ -1,0 +1,28 @@
+---
+title: Passo da instalação fora de ordem
+sidebar_label: Situação inválida
+description: A instalação não está na situação que este passo exige.
+code: uniplus.autorizacao.instalacao.situacao_invalida
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Instalação dos primeiros gestores de acessos
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O passo pedido não vale para a situação atual da instalação: por exemplo, pedir o código antes de o documento ser verificado, ou confirmar o documento de uma instalação já cancelada.
+
+## Como resolver
+
+Consulte a situação da instalação e siga os passos na ordem. Se ela foi cancelada, recusada ou expirou, inicie uma nova.

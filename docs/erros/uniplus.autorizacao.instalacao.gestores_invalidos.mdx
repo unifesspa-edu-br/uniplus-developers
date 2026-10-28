@@ -1,0 +1,28 @@
+---
+title: Gestores informados inválidos
+sidebar_label: Gestores inválidos
+description: A instalação precisa de exatamente dois gestores distintos, identificados pela conta institucional.
+code: uniplus.autorizacao.instalacao.gestores_invalidos
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Instalação dos primeiros gestores de acessos
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Os gestores informados não são exatamente dois, repetem a mesma pessoa ou têm identificação em formato inválido para a conta institucional.
+
+## Como resolver
+
+Informe duas pessoas distintas, com a identificação da conta institucional de cada uma.
