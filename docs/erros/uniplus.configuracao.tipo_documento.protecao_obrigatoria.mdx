@@ -1,0 +1,53 @@
+---
+title: O tipo de documento precisa declarar a proteção do que o candidato envia
+sidebar_label: Proteção do tipo de documento obrigatória
+description: Rascunho — o cadastro ou a alteração do tipo de documento não informou a classificação de proteção, a finalidade do tratamento ou a hipótese legal.
+code: uniplus.configuracao.tipo_documento.protecao_obrigatoria
+http_status: 422
+situacao: rascunho
+modulo: Configuração
+emitido_em:
+  - Cadastro de um tipo de documento
+  - Alteração de um tipo de documento
+requisitos:
+  - UNI-REQ-0183
+rastreio:
+  - label: 'uniplus-api#2124'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2124
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2124. A regra está em
+UNI-REQ-0183, ainda a confirmar pelo PO.
+
+:::
+
+## O que aconteceu
+
+O cadastro ou a alteração de um tipo de documento chegou sem pelo menos um destes
+dados: a classificação de proteção, a finalidade do tratamento ou a hipótese
+legal. A recusa vem na lista `errors` da resposta, com um item para cada dado que
+faltou. Nada é gravado.
+
+Os três dados são obrigatórios porque definem quem pode abrir os arquivos que os
+candidatos enviam desse tipo. O documento costuma trazer mais do que o dado que
+comprova: o laudo traz o histórico clínico, e o comprovante de renda familiar
+traz dados de outras pessoas. Sem a classificação, o sistema não tem como decidir
+quem pode abri-lo.
+
+## Como resolver
+
+Envie de novo o cadastro com os três dados preenchidos:
+
+- **classificação de proteção**, na mesma escala dos dados do candidato: público,
+  interno, pessoal, identificador ou sensível;
+- **finalidade do tratamento**, que explica para que o documento é pedido;
+- **hipótese legal**, que fundamenta o tratamento.
+
+Na dúvida sobre a classificação de um tipo de documento, consulte a encarregada
+de proteção de dados da Unifesspa antes de cadastrá-lo.
