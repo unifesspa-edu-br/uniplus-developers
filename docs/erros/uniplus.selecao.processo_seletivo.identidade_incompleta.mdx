@@ -1,0 +1,29 @@
+---
+title: Identidade da sessão incompleta
+sidebar_label: Identidade incompleta
+description: A sessão não traz os dados de identidade necessários para decidir o acesso.
+code: uniplus.selecao.processo_seletivo.identidade_incompleta
+http_status: 401
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação de processo seletivo
+  - Acesso a documento da inscrição
+requisitos:
+  - UNI-REQ-0130
+rastreio:
+  - label: 'uniplus-api#2104'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2104
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A sessão autenticada não traz todos os dados de identidade de que a decisão de acesso precisa.
+
+## Como resolver
+
+Saia e entre de novo no sistema. Se o erro continuar, procure o suporte do CTIC.

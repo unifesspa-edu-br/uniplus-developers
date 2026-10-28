@@ -389,6 +389,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.processo_seletivo.no_exigencia_folha_sem_documento_exigido',
         'erros/uniplus.selecao.processo_seletivo.no_exigencia_documento_exigido_duplicado',
         'erros/uniplus.selecao.processo_seletivo.exigencia_menos_protegida_que_fato_comprovado',
+        'erros/uniplus.selecao.processo_seletivo.identidade_incompleta',
         'erros/uniplus.selecao.documento_exigido.fato_comprovado_fora_do_processo',
         'erros/uniplus.selecao.documento_exigido.fatos_comprovados_invalidos',
         'erros/uniplus.selecao.obrigatoriedade_legal.predicado_com_codigo_em_branco',
