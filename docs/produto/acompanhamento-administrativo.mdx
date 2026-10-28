@@ -1,7 +1,7 @@
 ---
 title: Acompanhamento administrativo dos processos seletivos
 description: Decisões confirmadas, incrementos e pendências do acompanhamento administrativo do módulo Seleção.
-fonte_canonica: "src/data/produto/requisitos-mvp-selecao.ts; Developers #397; Web #1248"
+fonte_canonica: "src/data/produto/requisitos-mvp-selecao.ts; Developers #397 e PR #407; API #2140; Web #1248"
 estado_publicacao: "requisitos confirmados e necessidades em refinamento; implementação em tarefas próprias"
 ---
 
@@ -35,13 +35,13 @@ fluxo e não tornam todas as funções do COC requisitos do Uni+.
 | --- | --- |
 | Fluxo | Painel de processos e abertura do acompanhamento do processo selecionado. |
 | Página inicial | Somente a aba Acompanhamento; sem abas futuras “em construção”. |
-| Público | Somente servidores do CEPS. |
+| Público | Indicadores e operações protegidas do acompanhamento são destinados aos servidores autorizados do CEPS. A leitura do processo publicado é aberta na API; o backoffice exige autenticação. |
 | Situações | Em inscrição, em homologação, em avaliação e em período de recurso confirmadas pelo PO. O rótulo Encerrado permanece previsto, com critério pendente de validação do CRCA. |
 | Simultaneidade | Exibir todas as situações em andamento; o processo é encontrado pelo filtro de qualquer uma delas. |
 | Antes e entre fases | “Aguardando início” antes da primeira fase e “Entre etapas” nos intervalos sem fase em andamento. |
 | Encerramento | O PO inicialmente indicou o término da última fase do cronograma. Após o LT informar que a conclusão depende do CRCA, a definição ficou pendente de validação com o setor. |
 | Cancelamento | Processos cancelados continuam consultáveis e identificados como “Cancelado”. |
-| Indicadores iniciais | Quantidades de inscrições, distribuição por curso/modalidade e próximos prazos. Homologações pendentes ficam para o refinamento da homologação. |
+| Indicadores iniciais | Inscrições, Inscritos e Rascunhos, confirmados pelo PO em 28/10/2026; distribuições por curso/oferta e modalidade e próximos prazos. Homologações pendentes ficam para o refinamento da homologação. |
 
 ### Encerramento formal e situação temporal
 
@@ -66,31 +66,85 @@ Esta atualização é documental. Ações que efetivem os formatos propostos nã
 integram a consulta e dependem de validação e detalhamento próprios. O
 encerramento das inscrições e os prazos de recurso mantêm suas regras próprias.
 
+## Leitura do processo e acesso protegido
+
+O [primeiro comentário do LT no PR #407](https://github.com/unifesspa-edu-br/uniplus-developers/pull/407#issuecomment-6455822103)
+separa a leitura da identificação e configuração do processo publicado dos dados
+operacionais protegidos. O UNI-REQ-0177 registra leitura aberta na API, inclusive
+sem token, pelo recurso existente. Ações de criar, configurar, publicar e
+retificar, dados de inscrições, documentos, análises, notas, indicadores e
+relatórios continuam exigindo autorização própria no servidor.
+
+O shell do backoffice mantém autenticação: entrar no painel não libera suas
+áreas protegidas. O público CEPS continua valendo para o acompanhamento
+protegido, sem concessão automática por papel genérico de administração.
+
+O **rascunho de processo** segue o UNI-REQ-0184 e a
+[API #2140](https://github.com/unifesspa-edu-br/uniplus-api/issues/2140): somente
+quem tem permissão de configurar processos na **unidade dona** pode lê-lo.
+A unidade é dona do processo; autoria, papel genérico, concessão em outra unidade
+ou permissão apenas de acompanhar não bastam. Sem a concessão aplicável, o
+rascunho não aparece na lista e o acesso direto responde como processo
+inexistente, inclusive para seu autor após a revogação da concessão.
+
 ## Quantitativos confirmados e limites da definição
 
 **Inscrição** é o registro de participação. **Inscrito** designa a pessoa.
-Os dois totais foram solicitados pelo PO e devem ter rótulos distintos.
+O [segundo comentário do LT no PR #407](https://github.com/unifesspa-edu-br/uniplus-developers/pull/407#issuecomment-6456245881)
+propôs reduzir os contadores. O PO aprovou os três indicadores em **28/10/2026**,
+substituindo a definição anterior e resolvendo as pendências de universo dos
+totais no UNI-REQ-0179. Não há contador adicional de Canceladas ou Submetidas.
 
-| Quantitativo | Regra confirmada | Detalhamento pendente |
+| Indicador | Universo confirmado | Leitura |
 | --- | --- | --- |
-| Em preenchimento | Inscrições ainda não enviadas. | Reconciliação da consulta com descarte e retenção existentes, sem contar correção de enviada como novo rascunho. |
-| Submetidas | Inscrições enviadas e não canceladas. Cada inscrição conta uma vez, inclusive após alteração ou reenvio. | Especificação da consulta sobre a última versão válida, conforme o ciclo existente. |
-| Canceladas | Inscrições canceladas, mesmo quando a pessoa fez outra inscrição depois. | Aplicação técnica da retenção já definida no domínio. |
-| Total de inscrições | Deve ser apresentado; alterações, reenvios, opções e modalidades não criam novas inscrições. | Quais estados entram no total e como tratar descartes. Não presumir que ele seja a soma dos três contadores. |
-| Total de inscritos | Pessoas distintas, sem multiplicação por curso ou modalidade. | Universo das pessoas: submetidas, também em preenchimento, e pessoas com somente inscrição cancelada. |
-| Por curso/oferta | Separar primeira e segunda opção; uma inscrição com duas opções aparece em cada grupo correspondente, mas uma única vez no total de submetidas. | Contrato e identificação dos grupos por oferta de curso. |
-| Por modalidade | A mesma inscrição pode pertencer a vários grupos; a soma pode superar o total de inscrições. O total de pessoas continua separado. | Apresentação das modalidades por opção e conjunto de inscrições utilizado em cada agrupamento. |
-| Próximos prazos | Integram a etapa de indicadores. | Eventos considerados, ordenação, fases em andamento, datas ausentes e quantidade exibida. |
+| Inscrições | Inscrições submetidas e não canceladas. | Cada inscrição conta uma vez, sem multiplicação por reenvio, opções ou modalidades. |
+| Inscritos | Pessoas distintas no mesmo conjunto de inscrições submetidas e não canceladas. | Uma pessoa com inscrições em níveis diferentes conta uma vez, respeitado UNI-REQ-0031. |
+| Rascunhos | Inscrições não enviadas e não descartadas. | Em preenchimento durante as inscrições; não enviadas após o encerramento. Correção pendente de enviada não é novo rascunho. |
 
-Exemplo de distinção, sem fixar o universo dos totais: uma pessoa cancela uma
-inscrição e envia outra. Existem dois registros de inscrição e uma pessoa; há
-uma inscrição cancelada e uma submetida. A regra de quais desses registros
-participam de cada total global ainda precisa ser fechada.
+Canceladas e descartadas ficam fora dos três indicadores. Por exemplo, uma pessoa
+cancela uma inscrição e envia outra: o resultado é **uma Inscrição e um Inscrito**.
+Se tiver duas inscrições válidas em níveis diferentes, são **duas Inscrições e um
+Inscrito**.
 
-A classificação administrativa das inscrições continua subordinada aos
-UNI-REQ-0023, UNI-REQ-0031, UNI-REQ-0033, UNI-REQ-0165 e UNI-REQ-0169. A definição
-do painel não cria um novo estado de inscrição nem altera as regras de envio,
+As distribuições usam **somente inscrições submetidas e não canceladas**, pela
+**última versão enviada válida**, sem incorporar correções pendentes. Por
+curso/oferta, primeira e segunda opção ficam separadas; as modalidades são
+apuradas por oferta e opção. Uma inscrição pode aparecer nos grupos das duas
+opções e em várias modalidades, cuja soma pode superar o total de Inscrições,
+sem multiplicar os totais globais. Contrato e apresentação dos grupos ainda
+precisam ser detalhados, mas seu universo está definido.
+
+Próximos prazos integram a etapa de indicadores; eventos considerados, ordenação,
+fases em andamento, datas ausentes e quantidade exibida ainda serão definidos.
+
+A classificação administrativa continua subordinada aos UNI-REQ-0023,
+UNI-REQ-0031, UNI-REQ-0033, UNI-REQ-0165 e UNI-REQ-0169. O rascunho de inscrição
+descartado fica fora das consultas e contagens mesmo quando ainda existe por
+**exclusão lógica**. Não se exige exclusão física imediata nem se alteram as
+regras de retenção. O painel não cria estado de inscrição nem altera envio,
 correção, cancelamento ou descarte.
+
+## Relação nominal de inscrições — proposta a validar
+
+O UNI-REQ-0185 registra a proposta do LT como requisito próprio, filho do
+UNI-REQ-0176 e separado dos relatórios do UNI-REQ-0180. A aprovação dos três
+indicadores não aprova automaticamente esta consulta nominal.
+
+A proposta permite ao administrador autorizado consultar inscrições com filtros
+por **situação (Submetida, Rascunho e Cancelada), curso e oferta de curso**.
+O filtro de curso/oferta alcança primeira e segunda opção, e a relação identifica
+a opção correspondente. O CPF aparece sempre mascarado como `***.999.999-**`.
+A consulta exige **permissão própria, avaliada no servidor**; entrar no painel ou
+consultar indicadores não concede acesso nominal, a documentos ou a notas.
+
+Canceladas podem aparecer na relação sem entrar nos indicadores. Rascunhos de
+inscrição não enviados permitem acompanhar quem ainda não enviou; descartados
+ficam fora da consulta, mesmo antes da remoção física, conforme UNI-REQ-0169.
+Este rascunho de inscrição não se confunde com o rascunho de processo protegido
+pelo UNI-REQ-0184.
+
+A validação do recorte nominal com o PO, campos finais, ordenação e detalhamento
+da autorização permanecem pendentes; o requisito mantém o estado **proposto**.
 
 ## Primeiro incremento de implementação
 
@@ -99,24 +153,25 @@ somente Acompanhamento. Os cartões básicos mostram o nome do processo e o aces
 à página. A ausência temporária de indicadores não deve ser apresentada como
 zero inscrições ou como erro de consulta.
 
+As referências abaixo descrevem **trabalho planejado**, sem atestar implementação.
+A API #2111 deixa de ser dependência: lista e detalhe usam o recurso existente de
+processos seletivos, com a adequação da leitura prevista na API #2140.
+
 | Issue | Responsabilidade | Dependências de integração |
 | --- | --- | --- |
-| [API #2111](https://github.com/unifesspa-edu-br/uniplus-api/issues/2111) | Consultas básicas de lista e identificação do processo. | Independente da implementação Web. |
-| [Web #1292](https://github.com/unifesspa-edu-br/uniplus-web/issues/1292) | Menu e entrada para validação. | Independente das novas consultas. |
-| [Web #1284](https://github.com/unifesspa-edu-br/uniplus-web/issues/1284) | Lista paginada e cliente compartilhado. | API #2111 e Web #1292. |
-| [Web #1286](https://github.com/unifesspa-edu-br/uniplus-web/issues/1286) | Página do processo, aba única e atalhos existentes. | Consultas da API, entrada de validação e cliente da Web #1284. |
-| [API #2104](https://github.com/unifesspa-edu-br/uniplus-api/issues/2104) | Autorização definitiva para o público CEPS e integração Web correspondente. | Obrigatória antes da liberação com dados reais. |
+| [API #2140](https://github.com/unifesspa-edu-br/uniplus-api/issues/2140) | Leitura aberta do publicado e restrição do rascunho à unidade dona no recurso existente. | Permissões e contexto de decisão da API; não cria coleção paralela. |
+| [Web #1307](https://github.com/unifesspa-edu-br/uniplus-web/issues/1307) | Apresentação do painel com fixtures. | Independente de novas entregas de API e autorização; integração em #1284. |
+| [Web #1308](https://github.com/unifesspa-edu-br/uniplus-web/issues/1308) | Apresentação da página do processo e aba única com fixtures. | Independente de novas entregas de API e autorização; integração em #1286. |
+| [Web #1284](https://github.com/unifesspa-edu-br/uniplus-web/issues/1284) | Integração da lista e do painel com o recurso existente. | API #2140, apresentação #1307, permissões #1305 e navegação #1309. |
+| [Web #1286](https://github.com/unifesspa-edu-br/uniplus-web/issues/1286) | Integração da página identificada, consulta e navegação contextual. | Recurso existente com API #2140, apresentação #1308, integração #1284 e permissões/navegação #1305/#1309. |
+| [Web #1305](https://github.com/unifesspa-edu-br/uniplus-web/issues/1305) | Fonte compartilhada de permissões efetivas para a interface. | Contrato da API #2104; a API decide autorização por unidade e recurso. |
+| [Web #1309](https://github.com/unifesspa-edu-br/uniplus-web/issues/1309) | Retirada do modo temporário e ajuste de menu, guards e redirecionamentos. | Web #1305 e permissões da API #2104; preserva autenticação do backoffice e proteções das áreas. |
+| [API #2104](https://github.com/unifesspa-edu-br/uniplus-api/issues/2104) | Permissões definitivas de indicadores e operações protegidas, refletidas na Web. | Exigidas desde o acesso aos dados protegidos, sem etapa provisória. |
 
-As duas tarefas independentes foram encaminhadas às equipes para implementação.
-O primeiro incremento pode ser validado com usuários autenticados de teste em
-ambiente controlado com dados fictícios. A autorização definitiva foi
-postergada na sequência de desenvolvimento; o público de negócio continua
-sendo o CEPS. Esse modo não amplia as permissões de cadastro ou de outras
-operações e não autoriza liberação com dados reais.
-
-Os caminhos de API, DTOs, paginação, opções de configuração e regras técnicas de
-ativação são especificados nas issues dos repositórios responsáveis. Este texto
-não publica as consultas planejadas como contrato OpenAPI já disponível.
+A apresentação pode avançar com dados fictícios e testes de interface, sem que
+isso constitua liberação temporária de acesso. Indicadores nascem sob a permissão
+definitiva do CEPS. Caminhos, DTOs, paginação e contratos técnicos são definidos
+nos repositórios responsáveis; este planejamento não os declara entregues.
 
 ## Próxima etapa de indicadores e situações
 
@@ -133,8 +188,7 @@ Ainda precisam ser especificados:
 - Com o CRCA, a definição a obter com a Rebeca: condição e gatilho de conclusão do processo; formatos permitidos (automático e/ou administrativo); usuários autorizados; e validação da justificativa obrigatória proposta pelo LT para o administrativo.
 - A apresentação entre o fim do cronograma e a conclusão pelo CRCA, a fonte do rótulo Encerrado e sua relação com o estado cadastral, sem presumir situação intermediária.
 - A precedência da identificação Cancelado diante de situações simultâneas, intervalos ou encerramento conforme o critério a validar com o CRCA.
-- Os universos dos totais de inscrições e de pessoas, sem misturar registros com pessoas distintas.
-- Os detalhes dos agrupamentos por modalidade/opção e dos próximos prazos.
+- O contrato e a apresentação dos agrupamentos por oferta/modalidade/opção, com universo já definido, e os detalhes dos próximos prazos.
 - A data da submissão mais recente, proposta inicial ainda sem regra final sobre reenvios e inscrições canceladas.
 
 “Aguardando início”, “Entre etapas” e “Cancelado” foram confirmados como
@@ -166,8 +220,9 @@ tratar valores não informados. “Inscritas/homologadas” pode significar rela
 separados ou filtro; o nome de homologação também precisa ser compatibilizado
 com a inclusão de indeferimentos.
 
-Relatórios configuráveis pelo usuário são uma possibilidade a confirmar. O
-relatório por endereço citado na proposta inicial do LT e ausente da lista do
+A orientação recebida é de **relatórios fixos nesta etapa**; a configuração pelo
+usuário fica adiada para evolução posterior. A relação nominal do UNI-REQ-0185
+é uma consulta separada, ainda proposta. O relatório por endereço citado na proposta inicial do LT e ausente da lista do
 e-mail precisa ser esclarecido; não foi automaticamente descartado.
 
 A necessidade equivalente a **Visualizar Notas dos Candidatos** foi adicionada
@@ -182,9 +237,11 @@ executados ou de implementação entregue.
 
 | Cenário | Resultado esperado |
 | --- | --- |
-| Opção de validação desligada | Preservar a navegação vigente; não consultar os novos endpoints. |
-| Usuário sem autenticação | Seguir o fluxo de autenticação existente. |
-| Usuário autenticado de teste sem perfil de cadastro | Consultar o acompanhamento no ambiente controlado, sem ganhar acesso ao cadastro. |
+| Leitura direta do processo publicado na API sem token | Retornar identificação e configuração, sem liberar dados ou operações protegidas. |
+| Usuário sem autenticação no backoffice | Seguir o fluxo de autenticação existente. |
+| Usuário autenticado sem concessões administrativas | Acessar o painel, sem acesso a indicadores, cadastro ou dados de inscrições. |
+| Rascunho de processo com permissão de configurar na unidade dona | Permitir leitura na lista e no acesso direto. |
+| Rascunho sem concessão aplicável, inclusive autor, papel genérico ou concessão em outra unidade | Omitir da lista e responder como inexistente no acesso direto. |
 | Lista vazia | Informar ausência de processos após uma consulta bem-sucedida. |
 | Mais processos que uma página | Navegar por Anterior/Próximo conforme a API, sem calcular total por varredura. |
 | Falha de consulta ou acesso negado | Mostrar o erro/acesso negado; não apresentar como lista vazia nem como zero inscrições. |
@@ -192,7 +249,7 @@ executados ou de implementação entregue.
 | Troca de processo durante carregamento | Não manter nome, dados ou ações do processo anterior. |
 | Acesso direto e recarregamento | Consultar o processo identificado na URL e manter a aba única. |
 | Atalhos de edição/publicações | Preservar processo e permissões do destino. |
-| Liberação com dados reais | Exigir a autorização definitiva do CEPS, inclusive na API. |
+| Consulta de indicadores | Exigir a permissão definitiva para servidor autorizado do CEPS, inclusive na API. |
 
 ## Registro estruturado
 
@@ -201,7 +258,7 @@ de aprovação do requisito, não de disponibilidade da implementação.
 
 <RequisitosTable
   requisitos={requisitosMvpSelecao.filter((r) =>
-    ['UNI-REQ-0176', 'UNI-REQ-0177', 'UNI-REQ-0178', 'UNI-REQ-0179', 'UNI-REQ-0180', 'UNI-REQ-0181'].includes(r.requisito_id)
+    ['UNI-REQ-0176', 'UNI-REQ-0177', 'UNI-REQ-0178', 'UNI-REQ-0179', 'UNI-REQ-0180', 'UNI-REQ-0181', 'UNI-REQ-0184', 'UNI-REQ-0185'].includes(r.requisito_id)
   )}
   filtros={['status']}
 />
