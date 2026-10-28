@@ -1,0 +1,28 @@
+---
+title: O perfil mistura permissões de unidade e institucionais
+sidebar_label: Alcance misto
+description: Um perfil reúne só permissões de unidade ou só permissões institucionais.
+code: uniplus.autorizacao.perfil.alcance_misto
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de perfis de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#612'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/612
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada concessão vale numa unidade ou na instituição inteira. Algumas permissões valem para os recursos de uma unidade e outras para os cadastros da instituição; um perfil com as duas não teria escopo que o concedesse por inteiro.
+
+## Como resolver
+
+Separe as permissões em dois perfis, um de unidade e outro institucional.
