@@ -1,0 +1,28 @@
+---
+title: Etapa do pedido não é sua
+sidebar_label: Etapa inválida
+description: O pedido aguarda a decisão de outra etapa.
+code: uniplus.autorizacao.pedido.etapa_invalida
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Quem tentou decidir aprova em outra etapa. A primeira decisão é sempre do gestor de acessos; a encarregada de dados decide depois, quando o perfil tem permissão sobre dado pessoal ou sensível.
+
+## Como resolver
+
+Aguarde o pedido chegar à sua fila.

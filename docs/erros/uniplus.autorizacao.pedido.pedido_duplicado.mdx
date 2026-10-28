@@ -1,0 +1,28 @@
+---
+title: Pedido igual em andamento
+sidebar_label: Pedido duplicado
+description: Já existe pedido em andamento para a mesma pessoa, perfil e escopo.
+code: uniplus.autorizacao.pedido.pedido_duplicado
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Há um pedido igual (mesmo beneficiário, perfil e escopo) que ainda aguarda decisão.
+
+## Como resolver
+
+Acompanhe o pedido que já existe, ou cancele-o antes de pedir de novo.

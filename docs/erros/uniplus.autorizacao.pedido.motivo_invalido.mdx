@@ -1,0 +1,28 @@
+---
+title: Motivo da recusa inválido
+sidebar_label: Motivo inválido
+description: A recusa do pedido exige motivo.
+code: uniplus.autorizacao.pedido.motivo_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A recusa foi enviada sem motivo ou com motivo acima de 500 caracteres. O motivo fica na trilha e explica ao solicitante por que o acesso não foi concedido.
+
+## Como resolver
+
+Informe o motivo da recusa, em até 500 caracteres.
