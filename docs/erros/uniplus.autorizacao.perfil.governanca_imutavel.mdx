@@ -1,0 +1,28 @@
+---
+title: Perfil de governança não se altera
+sidebar_label: Perfil de governança imutável
+description: Os perfis de gestor de acessos e de encarregada de dados são do sistema e não se editam nem se desativam.
+code: uniplus.autorizacao.perfil.governanca_imutavel
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de perfis de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2133'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2133
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Houve tentativa de editar, ativar ou desativar um perfil de governança. Esses perfis definem quem administra e fiscaliza as concessões, e o conjunto de permissões deles é mantido pelo próprio sistema.
+
+## Como resolver
+
+Nenhuma ação é necessária no perfil. Para tirar o acesso de uma pessoa, revogue a concessão dela.

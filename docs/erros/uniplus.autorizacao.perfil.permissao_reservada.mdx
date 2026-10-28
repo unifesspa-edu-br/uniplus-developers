@@ -1,0 +1,28 @@
+---
+title: A permissão é reservada aos perfis de governança
+sidebar_label: Permissão reservada à governança
+description: Permissões de administrar perfis e concessões só existem nos perfis de gestor de acessos e de encarregada de dados.
+code: uniplus.autorizacao.perfil.permissao_reservada
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de perfis de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2133'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2133
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `permissoes` de um perfil comum trouxe permissão reservada à governança das concessões, como a de manter perfis. Um perfil comum com essas permissões criaria um gestor de acessos sem a designação formal e fora da conta do mínimo de dois gestores. A recusa lista, em `errors[]`, cada código reservado.
+
+## Como resolver
+
+Retire do perfil os códigos listados. Quem precisa administrar acessos recebe o perfil de gestor de acessos, por pedido com o documento de designação.

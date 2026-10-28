@@ -1,0 +1,28 @@
+---
+title: Nome do perfil ausente ou longo demais
+sidebar_label: Nome de perfil inválido
+description: O nome do perfil é obrigatório e tem até 120 caracteres.
+code: uniplus.autorizacao.perfil.nome_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de perfis de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2133'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2133
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `nome` chegou vazio ou com mais de 120 caracteres.
+
+## Como resolver
+
+Informe um nome de até 120 caracteres que descreva a função do perfil, como "Operação de inscrições".
