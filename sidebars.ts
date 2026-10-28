@@ -492,6 +492,7 @@ const sidebars: SidebarsConfig = {
 'erros/uniplus.autorizacao.pedido.unidade_inexistente',
 'erros/uniplus.autorizacao.pedido.justificativa_invalida',
 'erros/uniplus.autorizacao.pedido.beneficiario_invalido',
+'erros/uniplus.autorizacao.pedido.beneficiario_sem_nome',
 'erros/uniplus.autorizacao.pedido.pedido_duplicado',
 'erros/uniplus.autorizacao.pedido.etapa_invalida',
 'erros/uniplus.autorizacao.pedido.situacao_invalida',
