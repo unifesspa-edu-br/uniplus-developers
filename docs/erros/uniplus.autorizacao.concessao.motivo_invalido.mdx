@@ -1,0 +1,28 @@
+---
+title: Motivo da revogação inválido
+sidebar_label: Motivo inválido
+description: O motivo da revogação é obrigatório e tem limite de tamanho.
+code: uniplus.autorizacao.concessao.motivo_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Revogação de concessões
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2134'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2134
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A revogação foi enviada sem motivo ou com motivo acima de 500 caracteres. O motivo fica na trilha de auditoria da concessão.
+
+## Como resolver
+
+Informe por que o acesso está sendo retirado, em até 500 caracteres.

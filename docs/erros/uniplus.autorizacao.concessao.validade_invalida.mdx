@@ -1,0 +1,28 @@
+---
+title: Validade da concessão inválida
+sidebar_label: Validade inválida
+description: A data de fim da concessão é inválida ou não se aplica ao perfil.
+code: uniplus.autorizacao.concessao.validade_invalida
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Concessão de acesso por pedido aprovado
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2134'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2134
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A data de fim da concessão não é posterior ao início, ou foi informada para perfil de gestor de acessos ou de encarregada de dados, que não têm concessão com prazo.
+
+## Como resolver
+
+Informe uma data de fim posterior ao início, ou não informe data para os perfis de governança.

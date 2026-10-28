@@ -1,0 +1,28 @@
+---
+title: Concessão igual já ativa
+sidebar_label: Concessão duplicada
+description: A pessoa já tem uma concessão ativa do mesmo perfil no mesmo escopo.
+code: uniplus.autorizacao.concessao.duplicada
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Concessão de acesso por pedido aprovado ou instalação
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2134'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2134
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A pessoa já tem uma concessão ativa igual: mesmo perfil, mesmo escopo. Duas concessões iguais fariam a revogação de uma não retirar o acesso.
+
+## Como resolver
+
+Nenhuma ação é necessária: o acesso já existe. Consulte as concessões ativas da pessoa.

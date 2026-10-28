@@ -1,0 +1,28 @@
+---
+title: Mínimo de dois gestores de acessos
+sidebar_label: Mínimo de gestores
+description: A revogação deixaria a instituição com menos de dois gestores de acessos ativos.
+code: uniplus.autorizacao.concessao.minimo_de_gestores
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Revogação de concessões
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2134'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2134
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A concessão revogada é de gestor de acessos, e sem ela restaria menos de dois gestores ativos. A instituição precisa sempre de ao menos dois, para que nenhuma concessão dependa de uma só pessoa.
+
+## Como resolver
+
+Designe e conceda o perfil de gestor de acessos a outra pessoa antes de revogar esta concessão.

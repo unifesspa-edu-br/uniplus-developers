@@ -1,0 +1,28 @@
+---
+title: Escopo da concessão inválido
+sidebar_label: Escopo inválido
+description: O escopo da concessão não combina com o perfil ou está incompleto.
+code: uniplus.autorizacao.concessao.escopo_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Concessão de acesso por pedido aprovado ou instalação
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2134'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2134
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O escopo informado não é aceito. Escopo de unidade exige a unidade; perfis de gestor de acessos e de encarregada de dados valem só para a instituição; os demais perfis valem só para uma unidade.
+
+## Como resolver
+
+Corrija o escopo do pedido: indique a unidade, ou a instituição no caso dos perfis de governança.
