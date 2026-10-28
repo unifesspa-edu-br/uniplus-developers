@@ -1,0 +1,28 @@
+---
+title: Descrição do perfil ausente ou longa demais
+sidebar_label: Descrição de perfil inválida
+description: A descrição do perfil é obrigatória e tem até 500 caracteres.
+code: uniplus.autorizacao.perfil.descricao_invalida
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de perfis de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2133'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2133
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `descricao` chegou vazio ou com mais de 500 caracteres.
+
+## Como resolver
+
+Descreva em até 500 caracteres para que serve o perfil e quem deve recebê-lo.
