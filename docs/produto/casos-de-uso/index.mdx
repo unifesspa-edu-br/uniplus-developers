@@ -159,9 +159,13 @@ atendimento) e UNI-REQ-0173 (verificação de segurança do arquivo enviado).
 
 **Ator:** servidor do CEPS autorizado ao acompanhamento.
 
-**Pré-condição de liberação:** autorização na Web e na API. A validação inicial
-com usuários autenticados de teste em ambiente de dados fictícios é uma etapa
-de implementação e não amplia o público de negócio.
+**Pré-condições:** autenticação no shell do backoffice e autorização própria na
+API para indicadores e operações protegidas. A leitura da identificação e
+configuração do processo publicado é aberta na API, inclusive sem token, e não
+concede acesso aos dados protegidos. Processo em rascunho só é visível a quem
+tem permissão de configurar na unidade dona: autoria, papel genérico, concessão
+em outra unidade ou acesso apenas ao acompanhamento não bastam. Sem essa
+concessão, não aparece na lista e o acesso direto responde como inexistente.
 
 1. O usuário acessa o painel de processos seletivos.
 2. O sistema consulta e apresenta a lista de processos disponíveis.
@@ -177,8 +181,23 @@ negado têm tratamentos distintos. Acesso direto e recarregamento preservam a
 identificação; a troca de processo não mantém dados ou ações do anterior.
 
 Na etapa de indicadores, o acompanhamento apresenta situações simultâneas e
-intervalos conforme o cronograma, além de quantidades de inscrições e pessoas
-separadas. O encerramento formal é distinto da situação temporal: o critério de
+intervalos conforme o cronograma e os três indicadores aprovados pelo PO em
+28/10/2026: **Inscrições** (submetidas e não canceladas), **Inscritos** (pessoas
+distintas nesse conjunto) e **Rascunhos** (não enviados e não descartados).
+Correções pendentes não são novos rascunhos. Distribuições usam a última versão
+enviada válida das inscrições submetidas e não canceladas, preservando primeira
+e segunda opção e modalidades por oferta, sem multiplicar os totais globais.
+Descartados ficam fora de consultas e contagens mesmo quando ainda existem por
+exclusão lógica, sem exigir remoção física imediata (UNI-REQ-0169).
+
+A relação nominal é proposta separada dos relatórios: filtros por situação
+(Submetida, Rascunho e Cancelada), curso/oferta nas duas opções, identificação da
+opção, CPF mascarado como `***.999.999-**` e permissão própria no servidor.
+Canceladas podem constar dessa relação sem entrar nos indicadores. A validação
+do recorte nominal, campos, ordenação e autorização ainda está pendente. Os
+relatórios são fixos nesta etapa, com configuração pelo usuário adiada.
+
+O encerramento formal é distinto da situação temporal: o critério de
 Encerrado e a apresentação entre o fim do cronograma e a conclusão pelo CRCA
 dependem de validação com o setor, a obter com a Rebeca conforme orientação do
 LT. Não se presume conclusão pelo fim do cronograma nem se cria situação
@@ -188,7 +207,9 @@ o caso de uso de consulta não executa essas ações. Fórmulas, mapeamentos e
 definições pendentes são detalhados antes da implementação correspondente.
 
 **Requisitos relacionados:** UNI-REQ-0176 (fluxo e aba única), UNI-REQ-0177
-(acesso CEPS), UNI-REQ-0178 (situações) e UNI-REQ-0179 (quantitativos).
+(leitura aberta e acesso CEPS), UNI-REQ-0178 (situações), UNI-REQ-0179
+(quantitativos), UNI-REQ-0180 (relatórios fixos a refinar), UNI-REQ-0184
+(rascunho de processo) e UNI-REQ-0185 (proposta de relação nominal).
 Ver [decisões, pendências e incrementos](../acompanhamento-administrativo.mdx).
 
 ## Incrementos planejados
