@@ -3689,4 +3689,29 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0183',
+    titulo: 'Tipo de documento declara a proteção do que o candidato envia',
+    enunciado:
+      'Cada tipo de documento declara, no cadastro, a classificação de proteção (público, interno, pessoal, identificador ou sensível), a finalidade do tratamento e a hipótese legal, na mesma escala dos fatos do candidato. A declaração é obrigatória, porque o documento costuma trazer mais do que o fato que comprova: o laudo traz o histórico clínico, e o comprovante de renda familiar traz dados de outras pessoas. ' +
+      'Cada exigência de documento informa quais fatos o documento comprova, quando comprova algum. A exigência não é publicada nem retificada quando o tipo de documento é menos protegido que o mais protegido dos fatos que ela comprova. O fato que só aciona a exigência, como a modalidade, não conta como fato comprovado. ' +
+      'A publicação congela na exigência a classificação, a finalidade e a hipótese legal do tipo, junto com o que já congela dele (UNI-REQ-0071). Mudar o cadastro depois não altera processo publicado. O acesso ao arquivo enviado segue a classificação congelada na exigência: o acesso a documento sensível exige autorização específica para dado sensível (UNI-REQ-0130). ' +
+      'Exemplo: o laudo médico é cadastrado como sensível. A exigência que pede o laudo para comprovar a deficiência é publicada normalmente. Se o laudo estivesse cadastrado como pessoal, a publicação seria recusada, porque o fato da deficiência é sensível. ' +
+      'Decisão do líder técnico em 27/10/2026, a confirmar pelo PO. A classificação de cada tipo de documento e o tratamento de documento com dado de terceiro aguardam orientação da encarregada de dados.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0130',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Tipo de documento sem classificação, finalidade ou hipótese legal é recusado no cadastro; exigência cujo tipo é menos protegido que o fato mais protegido que ela comprova é recusada na publicação e na retificação; o fato que só aciona a exigência não entra na comparação; a classificação do tipo fica congelada na exigência publicada e não muda com o cadastro; o acesso ao arquivo segue a classificação congelada.',
+    verificacao: 'Testes do cadastro, da recusa na publicação e na retificação, do congelamento e da decisão de acesso ao arquivo por classificação (planejado, uniplus-api#2124).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Tech Lead',
+  },
 ];
