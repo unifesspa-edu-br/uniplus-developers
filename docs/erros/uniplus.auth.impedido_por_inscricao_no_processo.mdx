@@ -1,0 +1,54 @@
+---
+title: Quem tem inscrição no processo seletivo não atua na operação dele
+sidebar_label: Impedido por inscrição no processo
+description: Rascunho — a operação é recusada porque a pessoa tem inscrição enviada e não cancelada no mesmo processo seletivo e, por isso, está impedida de atuar nele.
+code: uniplus.auth.impedido_por_inscricao_no_processo
+http_status: 403
+situacao: rascunho
+modulo: Transversal
+emitido_em:
+  - Qualquer operação com escopo de processo seletivo, quando quem a pede tem inscrição enviada e não cancelada nesse processo
+requisitos:
+  - UNI-REQ-0182
+rastreio:
+  - label: 'uniplus-api#2123'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2123
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2123. A regra está em
+UNI-REQ-0182, ainda a confirmar pelo PO.
+
+:::
+
+## O que aconteceu
+
+Você tem uma inscrição enviada, e não cancelada, neste processo seletivo. Quem
+concorre em um processo tem interesse direto no resultado e fica impedido de
+atuar na operação dele (Lei nº 9.784/1999, art. 18, I). Por isso a operação foi
+recusada com **403**, mesmo que você tenha autorização para ela.
+
+O impedimento vale para todo o processo, e não só para o curso em que você
+concorre: configurar, retificar, analisar pedidos, compor banca, avaliar, julgar
+recurso, classificar, homologar e consultar dados de outros candidatos. Ele vale
+a partir do envio da inscrição, inclusive para autorizações recebidas antes, e
+não há liberação. O que você fez antes do envio continua registrado.
+
+Neste processo, você continua com os mesmos direitos de qualquer candidato:
+acompanha a própria inscrição e consulta o processo publicado. Nos outros
+processos seletivos, em que não está inscrito, você atua normalmente.
+
+## Como resolver
+
+A operação precisa ser feita por outra pessoa da equipe que opera o processo.
+Avise quem coordena a equipe para redistribuir o trabalho. Pedir nova
+autorização não resolve, porque o impedimento prevalece sobre qualquer
+concessão.
+
+Se a inscrição for cancelada, o impedimento acaba e você volta a atuar no
+processo.

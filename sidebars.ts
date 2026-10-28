@@ -459,6 +459,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.requisicao.valor_invalido',
         'erros/uniplus.auth.unauthorized',
         'erros/uniplus.auth.forbidden',
+        'erros/uniplus.auth.impedido_por_inscricao_no_processo',
         'erros/uniplus.organizacao.unidade.nome_obrigatorio',
         'erros/uniplus.organizacao.unidade.nome_tamanho',
         'erros/uniplus.organizacao.unidade.sigla_obrigatoria',
