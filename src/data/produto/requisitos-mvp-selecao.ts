@@ -3714,4 +3714,31 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/requisitos/',
     owner: 'Tech Lead',
   },
+  {
+    requisito_id: 'UNI-REQ-0182',
+    titulo: 'Servidor inscrito em processo seletivo fica impedido de atuar nele',
+    enunciado:
+      'O servidor que tem inscrição enviada e não cancelada em um processo seletivo participa desse processo apenas como candidato, com os mesmos direitos de qualquer outro candidato, e fica impedido de atuar na operação dele, em razão do interesse direto no resultado (Lei nº 9.784/1999, art. 18, I). ' +
+      'O impedimento alcança o processo inteiro, e não só a oferta em que ele concorre: configurar, retificar, publicar, analisar pedido de isenção ou de atendimento, compor banca, avaliar, julgar recurso, classificar, homologar e consultar dados de outros candidatos. Continuam disponíveis para ele a consulta pública do processo publicado e o acesso aos próprios dados de candidato. ' +
+      'O impedimento vale em cada acesso, e não só quando a autorização é concedida: a autorização que o servidor já tinha deixa de valer naquele processo a partir do envio da inscrição. O que ele fez antes do envio permanece registrado. Não há liberação do impedimento: se a unidade ficar sem quem opere o processo, a operação é atribuída a outra pessoa. ' +
+      'A inscrição cancelada encerra o impedimento, porque o interesse no resultado deixa de existir. O rascunho de inscrição não gera impedimento. ' +
+      'Nos demais processos, a própria inscrição não impede o servidor. O impedimento por parente, cônjuge ou companheiro inscrito e a suspeição (Lei nº 9.784/1999, arts. 18 e 20) seguem por declaração do próprio servidor no ato de designação, porque o sistema não conhece esses vínculos. ' +
+      'Exemplo: Betina integra a equipe que opera o processo seletivo e se inscreve nele. Depois do envio, ela acompanha a própria inscrição como qualquer candidata, mas não consegue mais abrir a lista de inscritos nem analisar pedidos de isenção daquele processo. Nos outros processos, continua atuando normalmente. ' +
+      'Decisão do líder técnico em 27/10/2026, a confirmar pelo PO, inclusive quanto ao fim do impedimento com o cancelamento e à ausência de impedimento no rascunho.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0035',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Servidor com inscrição enviada e não cancelada em um processo tem recusada toda operação daquele processo, ainda que tenha autorização para ela; a recusa vale a partir do envio, inclusive para autorização concedida antes; a consulta pública do processo e o acesso aos próprios dados continuam disponíveis; o cancelamento da inscrição encerra o impedimento; o rascunho não gera impedimento; nos demais processos, o servidor atua normalmente; toda recusa por impedimento é registrada.',
+    verificacao: 'Testes de autorização com o mesmo usuário como candidato e como operador, antes e depois do envio e do cancelamento da inscrição (planejado, uniplus-api#2123).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Tech Lead',
+  },
 ];
