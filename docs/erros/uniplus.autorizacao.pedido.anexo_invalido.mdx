@@ -1,0 +1,28 @@
+---
+title: Anexo inválido
+sidebar_label: Anexo inválido
+description: O PDF anexo está vazio, acima de 10 MB ou sem confirmação de envio válida.
+code: uniplus.autorizacao.pedido.anexo_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tamanho declarado do PDF está fora do limite (de 1 byte a 10 MB) ou a confirmação do envio não trouxe a identificação do arquivo enviado.
+
+## Como resolver
+
+Envie o PDF com até 10 MB e confirme o envio de novo.
