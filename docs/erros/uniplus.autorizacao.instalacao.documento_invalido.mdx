@@ -1,0 +1,28 @@
+---
+title: Documento de designação inválido
+sidebar_label: Documento inválido
+description: O número ou o arquivo do documento de designação está ausente ou fora do limite.
+code: uniplus.autorizacao.instalacao.documento_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Instalação dos primeiros gestores de acessos
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O número do documento de designação no sistema de protocolo não foi informado ou é longo demais, ou o tamanho declarado do PDF está fora do limite de 10 MB.
+
+## Como resolver
+
+Informe o número do documento de designação e envie o PDF com até 10 MB.

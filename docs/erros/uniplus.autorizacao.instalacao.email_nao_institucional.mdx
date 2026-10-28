@@ -1,0 +1,28 @@
+---
+title: E-mail não institucional ou não verificado
+sidebar_label: E-mail não institucional
+description: O código só é enviado ao e-mail institucional verificado de quem executa.
+code: uniplus.autorizacao.instalacao.email_nao_institucional
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Instalação dos primeiros gestores de acessos
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O e-mail da sua sessão não está verificado ou não pertence a um domínio institucional. O código de confirmação vai sempre ao e-mail institucional verificado de quem executa, nunca a um e-mail pessoal.
+
+## Como resolver
+
+Entre com a conta institucional, que tem o e-mail institucional verificado, e peça o código de novo.
