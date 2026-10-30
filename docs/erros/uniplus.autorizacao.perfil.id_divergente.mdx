@@ -1,0 +1,27 @@
+---
+title: O perfil do endereço não é o mesmo do corpo da requisição
+sidebar_label: Identificador do perfil divergente
+description: O identificador do perfil no endereço difere do identificador enviado no corpo da alteração.
+code: uniplus.autorizacao.perfil.id_divergente
+http_status: 400
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Alteração de perfil de acesso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2142'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2142
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A alteração de um perfil foi enviada para o endereço de um perfil, mas o corpo da requisição traz o identificador de outro. Para não alterar o perfil errado, o sistema recusa. Nada foi alterado.
+
+## Como resolver
+
+Abra o perfil que você quer alterar a partir da lista e salve a partir dessa tela, que envia sempre o mesmo identificador nos dois lugares. Quem integra por programa deve enviar o identificador do perfil no endereço e no corpo, iguais.

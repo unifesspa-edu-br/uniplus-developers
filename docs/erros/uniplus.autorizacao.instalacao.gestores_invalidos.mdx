@@ -1,7 +1,7 @@
 ---
 title: Gestores informados inválidos
 sidebar_label: Gestores inválidos
-description: A instalação precisa de exatamente dois gestores distintos, identificados pela conta institucional.
+description: A instalação precisa de exatamente dois gestores distintos, cada um com e-mail institucional.
 code: uniplus.autorizacao.instalacao.gestores_invalidos
 http_status: 422
 situacao: publicado
@@ -10,6 +10,7 @@ emitido_em:
   - Instalação dos primeiros gestores de acessos
 requisitos:
   - UNI-REQ-0184
+  - UNI-REQ-0188
 rastreio:
   - label: 'uniplus-api#2137'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
@@ -21,8 +22,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Os gestores informados não são exatamente dois, repetem a mesma pessoa ou têm identificação em formato inválido para a conta institucional.
+Os gestores informados não são exatamente dois, repetem a mesma pessoa ou têm identificação em formato inválido, ou algum deles tem e-mail que não é do domínio institucional.
 
 ## Como resolver
 
-Informe duas pessoas distintas, com a identificação da conta institucional de cada uma.
+Informe duas pessoas distintas, com a identificação e o e-mail institucional de cada uma. O e-mail precisa ser do domínio da Unifesspa, porque é ele que a revogação da concessão pede de volta como conferência.

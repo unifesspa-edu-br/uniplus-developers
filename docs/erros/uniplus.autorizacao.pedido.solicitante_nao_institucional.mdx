@@ -1,0 +1,33 @@
+---
+title: Esta operação exige e-mail institucional verificado
+sidebar_label: Solicitante não institucional
+description: Pedir acesso para outra pessoa, ou ver os perfis que se podem pedir, exige e-mail institucional verificado ou a permissão de manter perfis.
+code: uniplus.autorizacao.pedido.solicitante_nao_institucional
+http_status: 403
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso para outra pessoa
+  - Consulta dos perfis de acesso que se podem pedir
+requisitos:
+  - UNI-REQ-0185
+rastreio:
+  - label: 'uniplus-api#2142'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2142
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Pedir acesso para outra pessoa, e ver a lista dos perfis disponíveis para pedir, são operações de quem atua pela instituição. A sessão atual não tem e-mail institucional verificado, por exemplo porque você entrou com uma conta de e-mail pessoal, e, no caso da lista, também não tem a permissão de manter perfis, que dispensa essa exigência só para a leitura da lista. Nenhum pedido foi criado e nenhuma lista foi mostrada.
+
+Quem usa o Uni+ como usuário externo não vê a lista de perfis.
+
+## Como resolver
+
+Entre de novo com a conta de e-mail institucional da Unifesspa e confirme que o e-mail está verificado na conta. Com a sessão institucional, a lista aparece e o pedido para outra pessoa é aceito.
+
+Se você não tem conta institucional, peça à pessoa responsável pela sua unidade que faça o pedido com a conta institucional dela.

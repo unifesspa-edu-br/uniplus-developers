@@ -1,0 +1,27 @@
+---
+title: A situação escolhida para filtrar as concessões não existe
+sidebar_label: Situação do filtro de concessões inválida
+description: O filtro de situação das concessões só aceita ativa, revogada, vencida ou todas.
+code: uniplus.autorizacao.concessao.filtro_de_situacao_invalido
+http_status: 400
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Listagem de concessões de acesso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2142'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2142
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O filtro por situação da lista de concessões recebeu um valor desconhecido. As situações possíveis são: ativa, revogada, vencida e todas. Nenhuma concessão foi listada.
+
+## Como resolver
+
+Escolha uma das quatro situações. Sem informar a situação, a lista mostra só as concessões ativas.
