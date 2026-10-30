@@ -1,7 +1,7 @@
 ---
 title: A fila de pedidos informada não existe
 sidebar_label: Fila de pedidos inválida
-description: A lista de pedidos só aceita as filas meus, gestor, encarregada ou todos.
+description: A lista de pedidos só aceita as filas meus, gestor, protecao_de_dados ou todos.
 code: uniplus.autorizacao.pedido.fila_invalida
 http_status: 400
 situacao: publicado
@@ -20,8 +20,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A lista de pedidos foi aberta com uma fila que o sistema não conhece. As filas existentes são: **meus** (os pedidos que você fez ou que são para você), **gestor** (os que esperam a aprovação do gestor de acessos), **encarregada** (os que esperam a aprovação da encarregada de dados) e **todos**. Nenhum pedido foi listado.
+A lista de pedidos foi aberta com uma fila que o sistema não conhece. As filas existentes são: **meus** (os pedidos que você fez ou que são para você), **gestor** (os que esperam a aprovação do gestor de acessos), **protecao_de_dados** (os que esperam a aprovação da proteção de dados) e **todos**. Nenhum pedido foi listado.
 
 ## Como resolver
 
-Escolha uma das quatro filas: meus, gestor, encarregada ou todos. Se a tela foi aberta por um endereço salvo ou digitado à mão, volte ao menu de pedidos e use o seletor de fila. Sem informar a fila, a lista abre em meus.
+Escolha uma das quatro filas: meus, gestor, protecao_de_dados ou todos. Se a tela foi aberta por um endereço salvo ou digitado à mão, volte ao menu de pedidos e use o seletor de fila. Sem informar a fila, a lista abre em meus.

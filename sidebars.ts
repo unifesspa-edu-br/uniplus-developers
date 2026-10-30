@@ -477,7 +477,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.autorizacao.perfil.id_divergente',
         'erros/uniplus.autorizacao.perfil.alcance_misto',
         'erros/uniplus.autorizacao.perfil.alcance_alterado',
-        'erros/uniplus.autorizacao.perfil.ampliacao_exige_encarregada',
+        'erros/uniplus.autorizacao.perfil.ampliacao_exige_protecao_de_dados',
         'erros/uniplus.autorizacao.concessao.nao_encontrada',
         'erros/uniplus.autorizacao.concessao.ja_revogada',
         'erros/uniplus.autorizacao.concessao.minimo_de_gestores',
