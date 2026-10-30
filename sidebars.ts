@@ -511,7 +511,6 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.autorizacao.pedido.situacao_invalida',
         'erros/uniplus.autorizacao.pedido.decisor_e_parte',
         'erros/uniplus.autorizacao.pedido.mesmo_decisor_nas_duas_etapas',
-        'erros/uniplus.autorizacao.pedido.documento_obrigatorio',
         'erros/uniplus.autorizacao.pedido.motivo_invalido',
         'erros/uniplus.autorizacao.pedido.ja_tem_concessao',
         'erros/uniplus.autorizacao.pedido.autor_nao_identificado',
