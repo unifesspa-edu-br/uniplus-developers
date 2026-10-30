@@ -1,0 +1,30 @@
+---
+title: O e-mail digitado não é o do beneficiário da concessão
+sidebar_label: Confirmação divergente
+description: Para revogar uma concessão, é preciso digitar o e-mail do beneficiário, e o digitado não confere.
+code: uniplus.autorizacao.concessao.confirmacao_divergente
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Revogação de concessão de acesso
+requisitos:
+  - UNI-REQ-0186
+rastreio:
+  - label: 'uniplus-api#2142'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2142
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Revogar uma concessão encerra o acesso de uma pessoa de imediato. Para evitar que se revogue a concessão errada, o sistema pede que você digite o e-mail do beneficiário como conferência, e o e-mail digitado não é o dessa concessão. Nada foi revogado.
+
+A comparação ignora maiúsculas e minúsculas e espaços nas pontas, mas o endereço precisa ser o mesmo que consta na concessão.
+
+## Como resolver
+
+Abra a concessão, confira nome e e-mail do beneficiário e digite o e-mail exatamente como aparece nela. Se a pessoa que você pretendia atingir é outra, volte à lista e escolha a concessão certa antes de revogar. Com o e-mail correto, a revogação é concluída.

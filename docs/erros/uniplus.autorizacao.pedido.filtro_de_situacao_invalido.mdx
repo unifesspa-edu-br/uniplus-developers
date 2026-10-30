@@ -1,0 +1,27 @@
+---
+title: A situação escolhida para filtrar os pedidos não existe
+sidebar_label: Situação do filtro de pedidos inválida
+description: O filtro de situação dos pedidos só aceita as situações que um pedido pode ter.
+code: uniplus.autorizacao.pedido.filtro_de_situacao_invalido
+http_status: 400
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Listagem de pedidos de concessão de acesso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2142'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2142
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O filtro por situação da lista de pedidos recebeu um valor que nenhum pedido pode ter. As situações possíveis são: aguardando_beneficiario, aguardando_gestor, aguardando_encarregada, aprovado, recusado e cancelado. Nenhum pedido foi listado.
+
+## Como resolver
+
+Escolha uma das situações acima ou retire o filtro para ver os pedidos de todas as situações. Para consultar o histórico dos pedidos já decididos, filtre por aprovado, recusado ou cancelado: eles aparecem do mais recente ao mais antigo.
