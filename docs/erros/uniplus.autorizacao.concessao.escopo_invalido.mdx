@@ -21,8 +21,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O escopo informado não é aceito. Escopo de unidade exige a unidade; perfis de gestor de acessos e de encarregada de dados valem só para a instituição; os demais perfis valem só para uma unidade.
+O escopo informado não é aceito. Escopo de unidade exige a unidade, e escopo da instituição não admite unidade. O escopo admitido segue o alcance das permissões do perfil: perfil de permissões por unidade se concede numa unidade, e perfil de permissões da instituição inteira, como os de gestor de acessos e de encarregada de dados, se concede na instituição.
 
 ## Como resolver
 
-Corrija o escopo do pedido: indique a unidade, ou a instituição no caso dos perfis de governança.
+Corrija o escopo conforme o alcance do perfil: indique a unidade quando o perfil for de unidade, ou a instituição quando for da instituição.
