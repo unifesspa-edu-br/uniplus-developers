@@ -3778,7 +3778,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A lista de perfis disponíveis é recusada para a sessão sem e-mail institucional verificado e sem a permissão de manter perfis; o pedido para outra pessoa é recusado para a sessão sem e-mail institucional verificado; o pedido para si mesmo não depende desse e-mail; a recusa indica ao usuário como seguir.',
+      'A lista de perfis disponíveis é recusada para a sessão sem e-mail institucional verificado e sem a permissão de manter perfis; o pedido, para si ou para outra pessoa, é recusado para a sessão sem e-mail institucional verificado; a recusa indica ao usuário como seguir.',
     verificacao: 'Testes automatizados de API da lista de perfis e do pedido, com sessão institucional, sessão de e-mail pessoal e sessão com a permissão de manter perfis (uniplus-api#2142).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
