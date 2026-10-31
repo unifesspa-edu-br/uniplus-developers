@@ -1,0 +1,28 @@
+---
+title: Revisão de acessos não encontrada
+sidebar_label: Revisão não encontrada
+description: A revisão de acessos indicada não existe.
+code: uniplus.autorizacao.revisao.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Revisão periódica dos acessos
+requisitos:
+  - UNI-REQ-0202
+rastreio:
+  - label: 'uniplus-api#2139'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2139
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Não há revisão de acessos com o identificador informado.
+
+## Como resolver
+
+Abra a lista de revisões e escolha uma das que aparecem nela.

@@ -3909,4 +3909,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0202',
+    titulo: 'A proteção de dados revisa periodicamente os acessos a dado pessoal ou sensível',
+    enunciado:
+      'Quem tem o perfil de proteção de dados abre uma revisão dos acessos, que reúne um item para cada concessão ativa de perfil pessoal ou sensível. Cada item é confirmado, e a concessão continua, ou revogado com motivo, e a concessão termina na hora. Os itens das concessões de quem tem o perfil de proteção de dados, em qualquer perfil, são decididos pelos gestores de acessos; os demais, pela proteção de dados; ninguém decide o item da própria concessão. A revogação na revisão respeita o mínimo de dois gestores de acessos. Cada decisão aparece na trilha da concessão. A revisão fica em andamento enquanto algum item sem decisão trata de concessão ainda ativa; a concessão que termina fora da revisão deixa de pedir decisão. Só uma revisão fica em andamento por vez. A revisão é aberta manualmente; a periodicidade automática fica para quando a proteção de dados definir o intervalo. Rastreia a governança das concessões (UNI-REQ-0184). Proposta do líder técnico em 31/10/2026.',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'should',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A revisão traz só concessões ativas de perfil pessoal ou sensível; confirmar mantém a concessão e revogar a encerra com efeito imediato; cada decisão aparece na trilha da concessão; os itens das concessões de quem tem o perfil de proteção de dados só são decididos por gestores de acessos, e os demais só pela proteção de dados; ninguém decide o item da própria concessão; não se abre uma segunda revisão com outra em andamento.',
+    verificacao: 'Testes automatizados de domínio e de API da revisão dos acessos (uniplus-api#2139).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];
