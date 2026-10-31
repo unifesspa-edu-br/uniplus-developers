@@ -3867,4 +3867,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0200',
+    titulo: 'O gestor define o prazo da concessão ao aprovar o pedido',
+    enunciado:
+      'A concessão de perfil comum pode ter prazo: o gestor de acessos informa, ao aprovar o pedido, até quando o acesso vale, ou aprova sem prazo. Quem pede pode sugerir o prazo no pedido, e a sugestão chega preenchida ao gestor, que a mantém, altera ou retira. Quando o pedido passa também pela proteção de dados, vale o prazo que o gestor definiu; a proteção de dados aprova ou recusa, sem alterar o prazo. Se o prazo vencer antes da aprovação da proteção de dados, o pedido volta ao gestor, sem prazo, para que ele aprove de novo. O prazo tem de ser posterior ao momento em que é informado. O perfil de gestor de acessos e o de proteção de dados não admitem prazo, nem sugerido nem na aprovação, porque a concessão que vencesse sozinha poderia deixar a instituição com menos de dois gestores. O acesso começa na aprovação; começar numa data futura não está previsto. A concessão vencida deixa de valer sem revogação. Rastreia a governança das concessões (UNI-REQ-0184; ADR-0152 da uniplus-api). Proposta do líder técnico em 31/10/2026.',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'should',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A aprovação do gestor com prazo gera concessão que vale até esse prazo, e a sem prazo gera concessão sem prazo; a sugestão de quem pede aparece ao gestor e pode ser alterada; o prazo no passado é recusado, no pedido e na aprovação; o perfil de gestor de acessos ou de proteção de dados com prazo é recusado; a proteção de dados não altera o prazo definido pelo gestor; o prazo vencido antes da aprovação da proteção de dados devolve o pedido ao gestor, sem prazo.',
+    verificacao: 'Testes automatizados de API do pedido e da aprovação com prazo (uniplus-api#2157) e testes de interface do pedido e da aprovação (uniplus-web#1324).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
 ];

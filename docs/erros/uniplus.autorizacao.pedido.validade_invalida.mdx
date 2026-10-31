@@ -1,0 +1,29 @@
+---
+title: Prazo do pedido inválido
+sidebar_label: Prazo inválido
+description: O prazo informado no pedido ou na aprovação é inválido ou não se aplica ao perfil.
+code: uniplus.autorizacao.pedido.validade_invalida
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Criação do pedido de concessão
+  - Aprovação do pedido de concessão
+requisitos:
+  - UNI-REQ-0200
+rastreio:
+  - label: 'uniplus-api#2157'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2157
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O prazo informado não é posterior ao momento do pedido ou da aprovação, ou foi informado para o perfil de gestor de acessos ou de proteção de dados, que não admitem prazo. Na etapa da proteção de dados, o prazo também é recusado: ele é definido pelo gestor.
+
+## Como resolver
+
+Informe um prazo futuro, ou deixe o prazo em branco. Para os perfis de gestor de acessos e de proteção de dados, não informe prazo. Na etapa da proteção de dados, aprove sem informar prazo; se o prazo definido pelo gestor não for adequado, recuse o pedido.
