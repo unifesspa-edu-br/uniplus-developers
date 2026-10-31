@@ -1,0 +1,28 @@
+---
+title: O prazo venceu antes da aprovação
+sidebar_label: Prazo vencido
+description: O prazo definido pelo gestor de acessos venceu antes da aprovação da proteção de dados; o pedido voltou ao gestor.
+code: uniplus.autorizacao.pedido.prazo_vencido
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Aprovação do pedido de concessão
+requisitos:
+  - UNI-REQ-0200
+rastreio:
+  - label: 'uniplus-api#2157'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2157
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O gestor de acessos aprovou o pedido com um prazo, e esse prazo venceu antes da aprovação da proteção de dados. Uma concessão já vencida não pode nascer; por isso o pedido voltou ao gestor, sem prazo definido.
+
+## Como resolver
+
+Aguarde o gestor de acessos aprovar de novo, com outro prazo ou sem prazo. Depois disso, o pedido volta à proteção de dados.
