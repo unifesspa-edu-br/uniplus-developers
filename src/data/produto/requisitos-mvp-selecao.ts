@@ -3846,4 +3846,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0189',
+    titulo: 'A pessoa vê os perfis de acesso que tem, e não o papel do login',
+    enunciado:
+      'A pessoa vê os perfis de acesso vigentes que tem, no menu do usuário, na barra lateral e em Meu perfil. Cada perfil aparece com o escopo, que é a sigla da unidade ou "Instituição", e com o prazo, quando a concessão tem prazo. A concessão revogada ou vencida não aparece; a concessão vigente de um perfil desativado continua aparecendo, porque continua concedendo acesso. O papel dado pelo provedor de login não aparece como perfil, porque o login só identifica a pessoa e não concede acesso. A lista vem pelo nome do perfil; quando o mesmo perfil vale em mais de um escopo, o institucional vem primeiro, as unidades seguem pela sigla e a unidade não identificada vem por último. Se a unidade da concessão saiu da Organização Institucional, o perfil continua aparecendo, com a unidade como "Unidade não identificada". Quem não tem perfil não vê perfil algum. Rastreia a governança das concessões (UNI-REQ-0184; ADR-0152 da uniplus-api). Decisão do líder técnico em 30/10/2026.',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A pessoa com vários perfis vê todos, com escopo e prazo, na ordem do nome do perfil e, no mesmo perfil, a instituição antes das unidades em ordem de sigla e a unidade não identificada por último; a concessão revogada ou vencida não aparece e a vigente de perfil desativado aparece; nenhuma pessoa, com ou sem perfil, vê o papel do login entre os perfis, mesmo quando o login o informa; quem não tem perfil não vê perfil algum; o perfil em unidade que não existe mais aparece como "Unidade não identificada".',
+    verificacao: 'Testes automatizados de API dos perfis no perfil do usuário e testes de interface do menu, da barra lateral e de Meu perfil, com sessão cujo login informa papéis (uniplus-api#2161, uniplus-web#1332); conferência do papel padrão retirado do login em HML (uniplus-infra#745).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
 ];
