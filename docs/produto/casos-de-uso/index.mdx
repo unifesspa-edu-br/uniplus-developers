@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-description: Casos de uso públicos do MVP do módulo Seleção — configurar processo, publicar edital e inscrever candidato — vinculados aos requisitos.
+description: Casos de uso públicos do MVP do módulo Seleção — configurar processo, publicar edital, inscrever candidato e acompanhar administrativamente — vinculados aos requisitos.
 fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
 estado_publicacao: "primeira fonte pública curada dos casos de uso do MVP Seleção"
 ---
@@ -17,7 +17,9 @@ Primeira fonte pública curada dos casos de uso. Os fluxos derivam do mesmo
 recorte do [MVP Seleção](../mvp-selecao/index.mdx) e dos
 [requisitos](../requisitos/index.mdx); os exemplos usam dados fictícios. As fases
 posteriores (homologação, avaliação, classificação, recursos) ficam registradas
-como incrementos planejados, fora deste recorte primário.
+como incrementos planejados, fora deste recorte primário. O UC-04 documenta o
+primeiro incremento de acompanhamento administrativo, com implementação em
+tarefas próprias.
 :::
 
 ## Fonte canônica
@@ -33,6 +35,7 @@ para a página de [regras de negócio](../regras-negocio/index.mdx).
 - **Administrador da Unidade** — configura e publica o processo seletivo dentro da
   Unidade que administra.
 - **Candidato** — preenche e submete a inscrição no portal público.
+- **Servidor do CEPS** — consulta o acompanhamento administrativo quando autorizado.
 
 ## UC-01 — Configurar o processo seletivo
 
@@ -151,6 +154,63 @@ UNI-REQ-0033 (cancelar e refazer), UNI-REQ-0131 (retenção e destinação docum
 UNI-REQ-0165 (correção da inscrição enviada), UNI-REQ-0168 (arquivo que deixou de
 valer), UNI-REQ-0169 (exclusão lógica, descarte e cancelamento), UNI-REQ-0170 (documentos padrão do
 atendimento) e UNI-REQ-0173 (verificação de segurança do arquivo enviado).
+
+## UC-04 — Acompanhar administrativamente um processo
+
+**Ator:** servidor do CEPS autorizado ao acompanhamento.
+
+**Pré-condições:** autenticação no shell do backoffice e autorização própria na
+API para indicadores e operações protegidas. A leitura da identificação e
+configuração do processo publicado é aberta na API, inclusive sem token, e não
+concede acesso aos dados protegidos. Processo em rascunho só é visível a quem
+tem permissão de configurar na unidade dona: autoria, papel genérico, concessão
+em outra unidade ou acesso apenas ao acompanhamento não bastam. Sem essa
+concessão, não aparece na lista e o acesso direto responde como inexistente.
+
+1. O usuário acessa o painel de processos seletivos.
+2. O sistema consulta e apresenta a lista de processos disponíveis.
+3. O usuário escolhe um processo.
+4. O sistema abre a página identificada pelo processo e a aba Acompanhamento.
+5. O usuário consulta as informações disponíveis e pode retornar ao painel ou
+   acessar edição/publicações, se autorizado às funções existentes.
+
+Na primeira entrega, só a aba Acompanhamento é exibida. Indicadores ainda não
+implementados não aparecem como zero, e abas futuras não aparecem em construção.
+Carregamento, lista vazia, processo não encontrado, erro de consulta e acesso
+negado têm tratamentos distintos. Acesso direto e recarregamento preservam a
+identificação; a troca de processo não mantém dados ou ações do anterior.
+
+Na etapa de indicadores, o acompanhamento apresenta situações simultâneas e
+intervalos conforme o cronograma e os três indicadores aprovados pelo PO em
+28/10/2026: **Inscrições** (submetidas e não canceladas), **Inscritos** (pessoas
+distintas nesse conjunto) e **Rascunhos** (não enviados e não descartados).
+Correções pendentes não são novos rascunhos. Distribuições usam a última versão
+enviada válida das inscrições submetidas e não canceladas, preservando primeira
+e segunda opção e modalidades por oferta, sem multiplicar os totais globais.
+Descartados ficam fora de consultas e contagens mesmo quando ainda existem por
+exclusão lógica, sem exigir remoção física imediata (UNI-REQ-0169).
+
+A relação nominal é proposta separada dos relatórios: filtros por situação
+(Submetida, Rascunho e Cancelada), curso/oferta nas duas opções, identificação da
+opção, CPF mascarado como `***.999.999-**` e permissão própria no servidor.
+Canceladas podem constar dessa relação sem entrar nos indicadores. A validação
+do recorte nominal, campos, ordenação e autorização ainda está pendente. Os
+relatórios são fixos nesta etapa, com configuração pelo usuário adiada.
+
+O encerramento formal é distinto da situação temporal: o critério de
+Encerrado e a apresentação entre o fim do cronograma e a conclusão pelo CRCA
+dependem de validação com o setor, a obter com a Rebeca conforme orientação do
+LT. Não se presume conclusão pelo fim do cronograma nem se cria situação
+intermediária. Os formatos automático e administrativo, com justificativa
+obrigatória no administrativo, são proposta do LT ainda a validar com o CRCA;
+o caso de uso de consulta não executa essas ações. Fórmulas, mapeamentos e
+definições pendentes são detalhados antes da implementação correspondente.
+
+**Requisitos relacionados:** UNI-REQ-0176 (fluxo e aba única), UNI-REQ-0177
+(leitura aberta e acesso CEPS), UNI-REQ-0178 (situações), UNI-REQ-0179
+(quantitativos), UNI-REQ-0180 (relatórios fixos a refinar), UNI-REQ-0184
+(rascunho de processo) e UNI-REQ-0185 (proposta de relação nominal).
+Ver [decisões, pendências e incrementos](../acompanhamento-administrativo.mdx).
 
 ## Incrementos planejados
 

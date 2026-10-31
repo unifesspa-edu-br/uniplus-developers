@@ -513,6 +513,62 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Recursos administrativos | Etapa futura | Base de suspensividade já configurada (`UNI-REQ-0080`). |
 | Habilitação e chamadas de vagas (Ingresso/CRCA) | Etapa futura | Fronteira com o módulo Ingresso. |
 
+### 13.1 Acompanhamento administrativo dos processos
+
+O PO aprovou o percurso painel de processos → página do processo, com somente
+a aba Acompanhamento na primeira entrega, sem abas futuras em construção. O
+público autorizado aos indicadores e operações protegidas é formado pelos
+servidores autorizados do CEPS (UNI-REQ-0176/0177). A leitura da identificação e
+configuração do processo publicado é aberta na API, inclusive sem token, pelo
+recurso existente; ações, inscrições, documentos, análises e notas mantêm
+autorização própria. O backoffice exige autenticação, e entrar no painel não
+concede essas operações. O rascunho de processo só pode ser lido por quem tem
+permissão de configurar na unidade dona, sem autorização automática por autoria,
+papel genérico, concessão em outra unidade ou acesso apenas ao acompanhamento
+(UNI-REQ-0184). Sem a concessão aplicável, não aparece na lista e o acesso direto
+responde como inexistente. O primeiro incremento prevê navegação e estrutura;
+indicadores exigem a permissão definitiva desde seu acesso. Essa sequência é
+planejamento, não comprovação de entrega.
+
+As situações em inscrição, em homologação, em avaliação e em período de recurso
+podem ocorrer simultaneamente, com consulta por qualquer filtro aplicável.
+Antes da primeira fase, mostrar Aguardando início; nos intervalos, Entre etapas.
+Cancelados continuam consultáveis e identificados (UNI-REQ-0178).
+
+A situação temporal do painel é distinta do encerramento formal. O PO indicou
+inicialmente o término da última fase do cronograma, mas o LT informou depois
+que a conclusão depende do CRCA e orientou obter a definição com a Rebeca, no
+setor. O critério de Encerrado permanece pendente dessa validação. Os formatos
+automático e administrativo, com justificativa obrigatória no administrativo,
+são proposta do LT a validar com o CRCA. Também dependem dessa definição o
+gatilho de conclusão, os usuários autorizados e a apresentação entre o fim do
+cronograma e a conclusão pelo CRCA, sem presumir situação intermediária. A
+consulta não efetiva encerramento.
+
+O PO aprovou em 28/10/2026 três indicadores (UNI-REQ-0179): **Inscrições**
+(submetidas e não canceladas), **Inscritos** (pessoas distintas nesse conjunto) e
+**Rascunhos** (não enviados e não descartados). Não há contador adicional de
+canceladas ou submetidas. Reenvios, opções e modalidades não multiplicam os
+totais globais; correção pendente não conta como novo rascunho. As distribuições
+usam a última versão enviada válida das inscrições submetidas e não canceladas,
+separando primeira e segunda opção e modalidades por oferta. Descartados ficam
+fora de consultas e contagens mesmo quando ainda existem por exclusão lógica,
+sem exigir exclusão física imediata (UNI-REQ-0169).
+
+A relação nominal (UNI-REQ-0185), filha do UNI-REQ-0176, permanece proposta a
+validar, separada dos relatórios: filtros por situação (Submetida, Rascunho e
+Cancelada), curso/oferta em ambas as opções, identificação da opção, CPF
+mascarado como `***.999.999-**` e permissão própria no servidor. Canceladas podem
+aparecer nessa relação sem entrar nos indicadores. O recorte nominal, campos,
+ordenação e detalhamento da autorização ainda dependem de validação. Para os
+relatórios do UNI-REQ-0180, a orientação é de formatos fixos nesta etapa, com
+configuração pelo usuário adiada.
+
+As regras confirmadas, necessidades de relatórios e notas ainda a refinar,
+dependências de implementação e roteiro de validação estão em
+[Acompanhamento administrativo](../acompanhamento-administrativo.mdx).
+A aprovação dessas necessidades não comprova disponibilidade no ambiente.
+
 ## 14. Conformidade legal
 
 O detalhamento por norma vive na página de [conformidade legal](../conformidade-legal/index.mdx); o quadro abaixo resume como o módulo Seleção atende cada uma.
