@@ -3888,4 +3888,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0201',
+    titulo: 'O pedido de acesso avisa por e-mail quem precisa agir ou saber',
+    enunciado:
+      'Cada mudança de situação do pedido de acesso avisa por e-mail quem precisa agir ou saber, com o link do pedido no Uni+: a pessoa indicada como beneficiária, quando o pedido aguarda o aceite dela; os gestores de acessos, quando o pedido chega à fila deles, inclusive quando volta porque o perfil mudou ou o prazo venceu; quem tem o perfil de proteção de dados, quando o pedido chega à etapa dela, sem quem já aprovou como gestor no mesmo pedido; quem pediu e a pessoa beneficiária, quando o pedido é aprovado ou recusado; e a pessoa beneficiária, quando quem pediu cancela um pedido de que ela já sabia. Quem é parte do pedido não recebe o aviso de fila, porque não pode decidi-lo. O e-mail traz o perfil, o escopo, a situação e o link; nome de pessoa, justificativa e motivo da recusa ficam no pedido, que só quem tem acesso abre. Os endereços vêm do cadastro e das concessões, nunca de texto digitado no pedido. O aviso é gravado junto da mudança de situação, e a mudança sem aviso, ou o aviso sem mudança, não acontece. Rastreia a governança das concessões (UNI-REQ-0184). Proposta do líder técnico em 31/10/2026.',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'should',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A pessoa beneficiária recebe o aviso do aceite pendente; os gestores de acessos recebem o aviso do pedido na fila, e quem é parte do pedido não; quem tem o perfil de proteção de dados recebe o aviso da etapa dela, e quem aprovou como gestor no mesmo pedido não; quem pediu e a pessoa beneficiária recebem o aviso da aprovação e da recusa; o cancelamento avisa só a pessoa beneficiária que já sabia do pedido; nenhum e-mail traz nome de pessoa, justificativa ou motivo da recusa; todo aviso traz o link do pedido.',
+    verificacao: 'Testes automatizados de API dos avisos por transição, com entrega conferida no servidor de e-mail de teste (uniplus-api#2156).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];
