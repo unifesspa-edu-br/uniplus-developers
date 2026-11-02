@@ -1,0 +1,30 @@
+---
+title: O tipo de documento foi alterado concorrentemente
+sidebar_label: Tipo de documento alterado concorrentemente
+description: Duas alterações simultâneas sobre o mesmo tipo de documento foram detectadas — a que confirmou por último é recusada em vez de sobrescrever a outra em silêncio.
+code: uniplus.configuracao.tipo_documento.conflito_de_concorrencia
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Alteração de um tipo de documento
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de documento foi alterado por outra operação enquanto a sua edição era gravada. Pode ter sido outra edição ou uma decisão da proteção de dados sobre o mesmo item.
+
+A recusa é deliberada. Sem ela, a sua edição poderia apagar a outra sem aviso, ou uma decisão de proteção de dados passaria a valer para uma classificação que ninguém analisou.
+
+## Como resolver
+
+Abra o tipo de documento de novo, confira o estado atual e repita a alteração, se ela ainda fizer sentido. Nada foi gravado pela tentativa recusada.

@@ -1,0 +1,28 @@
+---
+title: A classificação recomendada é a mesma que o item já tem
+sidebar_label: Recomendação igual à atual
+description: O ajuste recomendado indicou como classificação correta a mesma classificação que o item já declara.
+code: uniplus.configuracao.protecao_do_catalogo.recomendacao_igual_a_atual
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Recomendação de ajuste da proteção de dados de um item
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ajuste recomendado indica a classificação correta do item. A classificação indicada é igual à que o item já tem, então aceitar a recomendação não mudaria nada.
+
+## Como resolver
+
+Se a classificação atual está correta, aprove o item. Se só a base legal ou a finalidade precisam de ajuste, combine a correção com quem mantém o cadastro: a edição devolve o item a pendente, para uma nova solicitação.

@@ -1,0 +1,28 @@
+---
+title: Cadastro do item fora do vocabulário da aprovação da proteção de dados
+sidebar_label: Cadastro inválido
+description: A decisão indica um cadastro que não é tipo de documento nem fato.
+code: uniplus.configuracao.protecao_do_catalogo.cadastro_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (aprovação, ajuste recomendado ou reprovação)
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A aprovação da proteção de dados vale para dois cadastros: tipo de documento e fato do candidato. O cadastro informado não é nenhum deles.
+
+## Como resolver
+
+Informe `TIPO_DOCUMENTO` ou `FATO`.

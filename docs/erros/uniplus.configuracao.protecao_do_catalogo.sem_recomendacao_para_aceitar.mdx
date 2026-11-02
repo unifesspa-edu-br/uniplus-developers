@@ -1,0 +1,28 @@
+---
+title: 'O item não tem ajuste recomendado pela proteção de dados: não há recomendação a aceitar'
+sidebar_label: Sem recomendação a aceitar
+description: O aceite da recomendação foi pedido para um item sem ajuste recomendado.
+code: uniplus.configuracao.protecao_do_catalogo.sem_recomendacao_para_aceitar
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Aceite da recomendação da proteção de dados
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Só o item com ajuste recomendado pela proteção de dados tem uma classificação recomendada. Este item está pendente, aguardando decisão, já aprovado ou reprovado.
+
+## Como resolver
+
+Confira a situação do item. O aceite só cabe depois de um ajuste recomendado.

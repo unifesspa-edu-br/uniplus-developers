@@ -1,0 +1,28 @@
+---
+title: O item da solicitação não existe ou não está pendente
+sidebar_label: Item não pendente
+description: Um item da solicitação não existe ou não está pendente de solicitação.
+code: uniplus.configuracao.protecao_do_catalogo.item_nao_pendente
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Envio da solicitação de aprovação da proteção de dados
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Só o item pendente pode ser enviado à proteção de dados. Um dos itens escolhidos não existe, ou já foi enviado, decidido ou alterado desde que a lista foi aberta.
+
+## Como resolver
+
+Abra de novo a lista de itens pendentes, marque os que continuam pendentes e envie a solicitação.

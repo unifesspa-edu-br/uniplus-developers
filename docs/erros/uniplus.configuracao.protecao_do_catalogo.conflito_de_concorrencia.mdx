@@ -1,0 +1,32 @@
+---
+title: O item do catálogo foi alterado ao mesmo tempo que a decisão
+sidebar_label: Item alterado durante a decisão
+description: A decisão ou o aceite da recomendação encontrou o tipo de documento ou o fato já alterado por outra operação e foi recusado, sem sobrescrevê-la.
+code: uniplus.configuracao.protecao_do_catalogo.conflito_de_concorrencia
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Envio da solicitação de aprovação da proteção de dados
+  - Decisão da proteção de dados (aprovação, ajuste recomendado ou reprovação) de um item
+  - Aceite da classificação recomendada
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Enquanto a solicitação era enviada, a proteção de dados era decidida ou a recomendação era aceita, outra pessoa alterou o mesmo tipo de documento. A operação que confirmou por último encontrou o item já modificado.
+
+A recusa é deliberada. Sem ela, a decisão poderia valer para uma classificação diferente da que foi analisada, ou apagar a alteração da outra pessoa sem aviso.
+
+## Como resolver
+
+Abra o item de novo e confira a classificação, a base legal e a finalidade atuais. Se a decisão ainda fizer sentido, repita a operação. Nada foi gravado pela tentativa recusada.
