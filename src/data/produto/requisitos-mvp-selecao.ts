@@ -910,7 +910,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0032',
     titulo: 'Prioridade do nome social',
     enunciado:
-      'Quando o nome for exibido em lista, documento ou tela pública ou administrativa, o nome social deve ter prioridade sobre o nome civil, conforme a regra aplicável.',
+      'Quando o nome for exibido em lista, documento ou tela pública ou administrativa, o nome social deve ter prioridade sobre o nome civil, conforme a regra aplicável. Nas publicações, o nome aparece conforme a preferência do candidato: as listas de classificação e de resultado trazem o número de inscrição com o nome abreviado, e a convocação nominal e o atendimento trazem o nome social quando o candidato o prefere; o nome civil nunca aparece contra essa preferência. Na consulta administrativa das inscrições, a classificação do nome é a da UNI-REQ-0208.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -922,7 +922,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Campos e listas respeitam o nome social sempre que exibem nome.',
+      'Campos e listas respeitam o nome social sempre que exibem nome; as listas, a convocação nominal e o atendimento seguem a preferência do candidato.',
     verificacao: 'Lacuna conhecida: criar teste de regressão para nome social.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4034,5 +4034,26 @@ export const requisitosMvpSelecao: Requisito[] = [
     verificacao: 'Testes automatizados de API do acesso ao arquivo da inscrição por classificação (uniplus-api#2151).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0208',
+    titulo: 'A equipe vê de cada inscrição só os dados que a classificação de cada um permite',
+    enunciado:
+      'Na consulta administrativa das inscrições, na lista e no detalhe, cada dado do candidato aparece segundo a classificação de proteção que o processo congelou para ele: público, interno, pessoal, sensível ou identificador. Cada classificação de dado tem a sua própria permissão de consulta, sem hierarquia, e o dado sensível exige também a base legal e a finalidade aprovadas. O dado que a pessoa não pode ver não aparece, sem aviso de que existe; quando a classificação não pode ser determinada, vale a regra do sensível. O nome social é dado pessoal, como o nome civil, e segue a classificação do dado, que é no mínimo pessoal (podendo ser sensível, com base legal aprovada); a banca que avalia sem identificar o candidato não recebe nenhum dos dois nomes. Nas publicações vale a preferência do candidato (UNI-REQ-0032). O número de documento de identificação, como o CPF ou o passaporte, tem duas permissões separadas: ver o número mascarado e revelá-lo por inteiro; ver dados pessoais não dá nenhuma das duas. A revelação vale para um candidato por vez, a pedido, com registro do acesso, e exige também a permissão de ver o número mascarado, mas não a de consultar inscrições. Quem tem as duas vê o número mascarado com a opção de revelar; quem só pode revelar não vê o documento nem a opção, como qualquer dado sem permissão. O pedido de revelação sem alguma das duas permissões responde "não encontrado", igual para o documento existente e para o ausente. A linha de cada inscrição na lista sempre leva ao detalhe para quem pode consultar inscrições, mesmo que a pessoa não tenha permissão para nenhum dado da inscrição; o detalhe mostra então só o que as permissões dela alcançam. Cada dado aparece com o nome e a descrição congelados no processo, e não com a ajuda dada ao candidato. Cada inscrição exibida e cada revelação ficam registradas antes de o dado ser entregue (UNI-REQ-0203). Exemplo: Leandro, que confere as inscrições sem identificar o candidato, vê o número, o curso e a situação de cada inscrição, mas não o nome nem o CPF; Isabella, que pode ver o número mascarado, vê o CPF de Fernanda mascarado, sem opção de revelar; Diogo, que pode ver o número mascarado e revelá-lo, vê o CPF de Fernanda mascarado e o revela quando precisa conferi-lo. Detalha os controles de proteção de dados pessoais (UNI-REQ-0035). Proposta do líder técnico em 01/11/2026; em 02/11/2026, o líder técnico passou a exigir a permissão de ver o número mascarado para revelar.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0035',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Cada dado da inscrição sai só com a permissão da sua classificação, sem hierarquia entre elas; dado sensível sem base legal aprovada não sai; dado omitido não deixa indício; classificação não determinada vale como sensível; o identificador sai mascarado só com a permissão de vê-lo mascarado, e dados pessoais não a substituem; sai por inteiro só a pedido, um por vez, com a permissão de revelar e a de ver o mascarado, sem depender da de consultar inscrições; quem só pode revelar não vê o documento nem a opção de revelar; a revelação sem alguma das duas permissões responde não encontrado, igual para o documento existente e para o ausente; a linha da lista sempre leva ao detalhe para quem pode consultar inscrições; o nome social segue a classificação do dado, no mínimo pessoal, e a banca que avalia sem identificar o candidato não recebe nenhum dos nomes; a ajuda ao candidato não sai; a lista e a revelação registram o acesso antes da entrega.',
+    verificacao: 'Testes automatizados de aplicação e de integração da lista, do detalhe e da revelação da inscrição (uniplus-api, issue do projetor da consulta administrativa).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
   },
 ];
