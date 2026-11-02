@@ -4014,4 +4014,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0206',
+    titulo: 'Cada classificação de arquivo do candidato tem a sua permissão de consulta',
+    enunciado:
+      'O acesso administrativo ao arquivo enviado pelo candidato depende da classificação de proteção do tipo de documento exigido, congelada no processo. Cada classificação (público, interno, pessoal, identificador e sensível) tem a sua própria permissão de consulta, concedida em separado e sem hierarquia entre elas: quem precisa abrir mais de uma classe recebe todas as que precisa. Ter acesso à inscrição não abre arquivo algum. Quando a classificação do arquivo não pode ser determinada, vale a regra do sensível. Quem não tem a permissão exigida recebe "não encontrado", sem saber se o arquivo existe. Exemplo: Leandro, que confere o comprovante de residência de Fernanda, não abre o RG dela sem a permissão de documentos de identificação. A concessão das permissões segue a governança dos acessos, com a proteção de dados. Detalha o acesso restrito ao documento do candidato (UNI-REQ-0130). Decisão do líder técnico em 31/10/2026.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0130',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Cada classificação de arquivo exige a sua própria permissão, sem hierarquia; documento de identificação não abre com a permissão de pessoais nem de sensíveis; o acesso à inscrição sozinho não abre arquivo; classificação não determinada exige a permissão de sensíveis; a recusa responde "não encontrado".',
+    verificacao: 'Testes automatizados de API do acesso ao arquivo da inscrição por classificação (uniplus-api#2151).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend',
+  },
 ];
