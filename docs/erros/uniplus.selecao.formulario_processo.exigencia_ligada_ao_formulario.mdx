@@ -1,0 +1,42 @@
+---
+title: O formulário tem exigência de documento ligada a ele
+sidebar_label: Exigência ligada ao formulário
+description: Rascunho — recusa prevista pelo UNI-REQ-0144 e pelo UNI-REQ-0212, ainda não emitida pela API; o formulário que se retira ainda recebe documentos exigidos.
+code: uniplus.selecao.formulario_processo.exigencia_ligada_ao_formulario
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Remoção do formulário do processo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0212
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+O formulário que se tentou retirar ainda tem exigência de documento ligada a ele:
+o documento é entregue por esse formulário (UNI-REQ-0144). O sistema não retira
+as exigências por conta própria, porque isso mudaria em silêncio o que o
+candidato precisa entregar. A recusa sai com **422**, e o `detail` lista as
+exigências.
+
+## Como resolver
+
+Antes de retirar o formulário, retire cada exigência listada ou religue-a a outro
+formulário da mesma fase, e então retire o formulário. Se a fase ficaria com
+exigência de documento e sem formulário, mantenha o formulário. Depois disso,
+grave de novo.

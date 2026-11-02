@@ -1,0 +1,45 @@
+---
+title: Um fundamento de isenção do processo não é oferecido por nenhum formulário
+sidebar_label: Fundamento sem formulário
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; o processo referencia um fundamento de isenção que nenhum formulário do pedido de isenção oferece.
+code: uniplus.selecao.formulario_processo.fundamento_sem_formulario
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0099
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+O processo que cobra taxa referencia fundamentos de isenção (UNI-REQ-0101), e
+cada fundamento referenciado precisa ser oferecido por exatamente um formulário
+do pedido de isenção, isto é, um formulário que tem o bloco de escolha de
+fundamentos (UNI-REQ-0144). Pelo menos um fundamento referenciado não consta da
+lista de nenhum formulário do pedido, e o candidato não teria como pedi-lo. A
+recusa sai na publicação e no fechamento da retificação, com **422**, e o
+`detail` lista os fundamentos.
+
+## Como resolver
+
+Acrescente cada fundamento listado à lista de fundamentos de um formulário do
+pedido de isenção (e os dados que ele exige a esse mesmo formulário), ou retire o
+fundamento dos referenciados pelo processo, se o processo não vai aceitá-lo. Se o
+processo não tem formulário do pedido, acrescente um, com o bloco de escolha de
+fundamentos. Depois disso, publique de novo.

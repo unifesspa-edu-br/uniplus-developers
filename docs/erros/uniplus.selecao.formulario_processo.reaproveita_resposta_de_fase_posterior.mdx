@@ -1,0 +1,64 @@
+---
+title: O formulário usa resposta de formulário de fase posterior
+sidebar_label: Resposta de fase posterior
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; uma regra, um campo ou uma exigência de documento cita fato coletado por formulário de fase posterior à do formulário que o usa.
+code: uniplus.selecao.formulario_processo.reaproveita_resposta_de_fase_posterior
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Gravação dos itens do formulário
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0145
+  - UNI-REQ-0077
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+Um formulário (ou a exigência de documento dele) cita o fato que outro formulário
+coleta, mas esse outro formulário está numa fase **posterior** à do formulário
+que o usa. Um formulário só reaproveita respostas de formulário obrigatório que o
+candidato já enviou, da mesma fase ou de fase anterior na ordem do cronograma
+(UNI-REQ-0144): quando o candidato abre o formulário, a resposta de uma fase
+posterior ainda não existe. A recusa sai com **422**, e o `detail` diz o fato, o
+formulário que o coleta e a fase de cada um.
+
+A janela de isenção conta como contemporânea da fase de inscrição com que abre
+(UNI-REQ-0106): o pedido de isenção, mesmo ligado a uma fase própria ordenada
+antes da inscrição, reaproveita sem recusa a resposta do formulário obrigatório
+da inscrição que o candidato já enviou.
+
+## Como resolver
+
+Escolha uma das saídas, na mesma gravação:
+
+- **transfira o campo que produz o fato** para um formulário obrigatório de fase
+  anterior (ou da mesma fase), e retire-o do formulário de fase posterior, que
+  passa a reaproveitá-lo. Se quem cita é formulário **obrigatório da fase de
+  inscrição**, não transfira o campo para outro obrigatório da mesma fase, porque
+  eles são enviados juntos e a citação cairia em
+  `uniplus.selecao.formulario_processo.reaproveita_resposta_de_formulario_do_mesmo_envio`:
+  coloque o campo no próprio formulário que cita. O fato tem um único campo
+  produtor no processo, então não crie um segundo campo para o mesmo fato.
+  Confira em seguida as demais regras e exigências de documento que citam esse
+  fato, porque o produtor mudou de formulário;
+- **mude a fase** do formulário que usa o fato para uma fase igual ou posterior à
+  do formulário que o produz;
+- **retire a citação** do fato do formulário que o usa.
+
+Depois disso, grave de novo.

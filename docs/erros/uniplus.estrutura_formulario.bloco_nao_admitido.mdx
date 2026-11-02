@@ -1,0 +1,48 @@
+---
+title: O bloco de sistema não é admitido neste formulário
+sidebar_label: Bloco não admitido
+description: Rascunho — o bloco de sistema do formulário não é admitido neste formulário, por ser obrigatório ou estar fora da janela de isenção, no caso do bloco de escolha de fundamentos; a recusa passa a valer também na mudança de obrigatoriedade ou de fase, na publicação e no fechamento da retificação.
+code: uniplus.estrutura_formulario.bloco_nao_admitido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Gravação das etapas do formulário
+  - Mudança de obrigatoriedade ou de fase do formulário
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa em revisão
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, amplia esta recusa: a mensagem passa a dizer que o bloco não é
+admitido neste formulário (obrigatório ou fora da janela de isenção), em vez de
+falar da finalidade do formulário, e ela também sai na mudança de obrigatoriedade
+ou de fase, na publicação e no fechamento da retificação.
+
+:::
+
+## O que aconteceu
+
+Uma etapa do formulário usa um bloco de sistema que o formulário não admite. O
+bloco de escolha de fundamentos de isenção, por exemplo, só é admitido em formulário
+**facultativo** da janela de isenção: o formulário de inscrição, o obrigatório e o
+que está fora da janela não o admitem. A conferência vale quando as etapas são
+gravadas, quando a obrigatoriedade ou a fase do formulário muda, na publicação e no
+fechamento da retificação, de modo que um facultativo com o bloco que passa a
+obrigatório na fase combinada também é recusado. A recusa sai com **422**, e o
+`detail` aponta a etapa.
+
+## Como resolver
+
+Retire o bloco da etapa, ou mantenha o formulário facultativo e na janela de
+isenção, se ele é o formulário do pedido. Se o formulário precisa ser obrigatório,
+tire o bloco de escolha de fundamentos dele e use um formulário facultativo do
+pedido de isenção para a escolha. Depois disso, grave de novo.

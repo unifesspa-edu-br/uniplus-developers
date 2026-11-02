@@ -1,0 +1,98 @@
+---
+title: Dado básico do candidato sem origem no processo de resultado importado
+sidebar_label: Dado básico sem origem na importação
+description: Rascunho — recusa prevista pelo UNI-REQ-0144 e pelo UNI-REQ-0151, ainda não emitida pela API; o processo de resultado importado tem dado básico que o arquivo não traz e nenhum formulário obrigatório da primeira fase seguinte coleta, ou que o formulário coleta em campo opcional ou com condição de exibição própria.
+code: uniplus.selecao.formulario_processo.dados_basicos_sem_origem_no_resultado_importado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0151
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+O processo declara resultado importado, como o do SISU, e **algum relatório
+considerado** (declarado ou pelo qual algum candidato já foi importado) não traz um dado básico do candidato (UNI-REQ-0151) de forma completa,
+ou o traz só em coluna opcional (que não conta como trazido), e nenhum formulário
+**obrigatório** da primeira fase seguinte o coleta. Também é recusado o processo em
+que o campo do dado básico está **presente, mas opcional ou com condição de
+exibição própria**: todo campo de dado básico complementar desse formulário é
+sempre obrigatório, e o configurador não define condição de exibição, porque o
+campo aparece quando o dado não veio na importação e segue as exceções do conjunto
+básico, como as que dependem da nacionalidade. Sem isso, o candidato concluiria a
+fase sem informar o dado (por exemplo, sem endereço, quando a lista por perfil
+não o traz).
+
+A conferência é **por relatório**, porque o candidato pode estar só no relatório
+mais pobre: o RG, por exemplo, só vem completo com número, órgão emissor, UF e data
+de emissão. A escolha do uso do nome social faz parte do conjunto básico e nunca
+vem no arquivo de nenhum relatório: ela é um desses dados, e o processo cujo
+formulário obrigatório da primeira fase seguinte não a coleta, ou a deixa opcional
+ou condicionada, também é recusado por este código, na publicação e no fechamento
+da retificação. A recusa sai com **422**, e o `detail` lista o relatório e os dados
+sem origem, ou o campo opcional ou condicionado.
+
+A conferência considera os relatórios declarados e também aqueles pelos quais algum
+candidato já foi importado, mesmo que uma retificação deixe de declará-los: por
+exemplo, Helena veio só pelo relatório por perfil, que não traz endereço, e a
+retificação que tira esse relatório e o campo de endereço é recusada, porque ela
+concluiria a habilitação sem endereço.
+
+## Como resolver
+
+Para cada relatório e dado listados, escolha uma das saídas:
+
+- **acrescente o campo** ao formulário obrigatório da primeira fase seguinte à
+  importação, usando o modelo que traz o conjunto básico, ou torne obrigatório o
+  formulário que já o coleta. O formulário pede o dado, por inteiro, só de quem
+  não o recebeu por inteiro: o dado que vem incompleto (o RG só com número, por
+  exemplo) não conta como trazido e é pedido inteiro, sem pré-preenchimento
+  parcial, e não é gravado como resposta importada: o formulário grava a resposta
+  inteira, com origem informada. Esse é o único caso em que o dado tem campo no
+  formulário e vem do relatório ao mesmo tempo, e a exceção ao produtor único vale
+  também para o relatório pelo qual algum candidato já foi importado, mesmo que a
+  retificação não o declare mais;
+- **torne o campo obrigatório e sem condição própria**, se ele já existe mas está
+  opcional ou com condição de exibição que o configurador definiu; o campo continua
+  aparecendo só para quem não recebeu o dado, e segue as exceções do conjunto
+  básico;
+- **deixe de importar todo relatório que não traz o dado**, **só se nenhum candidato
+  foi importado por ele** e só para um dado que algum relatório considerado traz, e
+  **só então retire do formulário o campo que coleta esse dado, se houver**: o campo
+  só deixa de ser necessário quando todos os relatórios considerados (declarados ou
+  já importados) o trazem de forma completa. Enquanto algum relatório considerado
+  não trouxer o dado, o campo complementar fica, obrigatório e sem condição própria.
+  Quando todos os relatórios considerados o trazem, o campo que ficasse deixaria de
+  ser exceção ao produtor único e seria recusado por produtor duplicado, por isso é
+  retirado. A exceção ao produtor único vale para todo relatório considerado: se a
+  retificação deixa de declarar o relatório por perfil, mas Helena já foi importada
+  por ele, o campo de endereço fica, e o fechamento é aceito sem recusa de produtor
+  duplicado, enquanto esse relatório for considerado;
+- **mantenha o campo, obrigatório e sem condição própria**, se algum candidato já foi
+  importado pelo relatório que não traz o dado, mesmo que a retificação deixe de
+  declará-lo: a conferência considera também os relatórios já importados, e é a
+  única saída para eles.
+
+Para a **escolha do uso do nome social**, nenhum relatório a traz, e a única saída é
+acrescentá-la ao formulário obrigatório da primeira fase seguinte, **obrigatória e
+sem condição de exibição**: a escolha opcional ou condicionada também é recusada
+por este código, porque o candidato concluiria a fase sem escolher.
+
+Depois disso, publique ou feche a retificação de novo.

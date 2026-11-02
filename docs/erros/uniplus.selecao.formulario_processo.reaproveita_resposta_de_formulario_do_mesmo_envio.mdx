@@ -1,0 +1,50 @@
+---
+title: O formulário usa resposta de outro formulário enviado no mesmo envio
+sidebar_label: Resposta do mesmo envio
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; dois formulários obrigatórios da fase de inscrição reaproveitam respostas um do outro, mas são enviados juntos.
+code: uniplus.selecao.formulario_processo.reaproveita_resposta_de_formulario_do_mesmo_envio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Gravação dos itens do formulário
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0145
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+Os formulários obrigatórios da fase de inscrição são enviados num único envio
+(UNI-REQ-0144): o candidato só envia a inscrição quando todos estão completos.
+Por isso nenhum deles tem, ao ser preenchido, uma resposta **já enviada** do
+outro, e um não pode reaproveitar as respostas do outro. A recusa sai com
+**422**, e o `detail` diz o fato e os dois formulários.
+
+## Como resolver
+
+Escolha uma das saídas, na mesma gravação:
+
+- **junte os campos** dos dois formulários em um só, se um precisa do dado do
+  outro;
+- **transfira o campo que produz o fato** para o formulário que o usa, retirando-o
+  do outro, porque o fato tem um único campo produtor no processo, e confira as
+  demais regras que o citam;
+- **retire a citação** do fato do formulário que o usa.
+
+Os formulários de outras fases, enviados em momentos diferentes, podem
+reaproveitar resposta de um obrigatório já enviado. Depois disso, grave de novo.

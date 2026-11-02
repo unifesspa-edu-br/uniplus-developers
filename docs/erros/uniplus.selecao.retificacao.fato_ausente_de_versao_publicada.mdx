@@ -1,7 +1,7 @@
 ---
-title: Fato de outra finalidade não coletado em todas as versões publicadas
+title: Fato de formulário obrigatório não coletado em todas as versões publicadas
 sidebar_label: Fato ausente de versão publicada
-description: Na retificação, um formulário, termo ou exigência de documento cita fato que o formulário de outra finalidade não coletou em alguma versão publicada do edital.
+description: Na retificação, um formulário, termo ou exigência de documento cita fato que o formulário obrigatório de origem não coletou em alguma versão publicada do edital.
 code: uniplus.selecao.retificacao.fato_ausente_de_versao_publicada
 http_status: 422
 situacao: publicado
@@ -21,30 +21,56 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
 
+:::warning Recusa em revisão
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, muda de quem é o fato: passa a valer o formulário
+**obrigatório já enviado**, da mesma fase ou de fase anterior. O texto abaixo já
+descreve a regra nova. Até a API aplicá-la, a recusa segue a regra anterior, por
+finalidade, e a primeira e a última saídas (transferir o campo e manter a coleta
+na versão nova) só valem depois dela; até lá valem retirar a citação e citar fato
+coletado em todas as versões.
+
+:::
+
 ## O que aconteceu
 
 Na retificação, a versão nova cita, num formulário, num termo ou numa condição
-de documento exigido, um fato que vem do formulário de **outra finalidade**, e
-esse formulário não coletou o fato em alguma das versões já publicadas do
-edital. A recusa sai com **422**, e o `detail` diz o fato, quem o cita e a
-finalidade que deveria tê-lo coletado. Quando a citação é a um fato derivado,
-o `detail` diz também de qual fato coletado ele depende.
+de documento exigido, um fato que vem de **outro formulário obrigatório** (da
+mesma fase ou de fase anterior), e esse formulário não coletou o fato em alguma
+das versões já publicadas do edital **ou** na própria versão nova da
+retificação: basta faltar em uma delas. A recusa sai com **422**, e o `detail`
+diz o fato, quem o cita e o formulário que deveria tê-lo coletado. Quando a
+citação é a um fato derivado, o `detail` diz também de qual fato coletado ele
+depende.
 
-O motivo é de negócio: o candidato pode ter preenchido a finalidade anterior em
-qualquer versão publicada (UNI-REQ-0144). Exemplo: o formulário de isenção passa
-a perguntar algo só depois da retificação, e o formulário de habilitação passa
-a citar essa resposta. Quem pediu isenção antes da retificação nunca a
-informou, e a habilitação dele não teria o dado.
+O motivo é de negócio: o candidato pode ter preenchido o formulário de origem em
+qualquer versão publicada, ou na versão nova (UNI-REQ-0144). Exemplos: o
+formulário de inscrição passa a perguntar a "Escola de conclusão do ensino médio"
+só depois da retificação, e o formulário de habilitação passa a citar essa
+resposta; quem se inscreveu antes da retificação nunca a informou, e a habilitação
+dele não teria o dado. Ou: a retificação retira da inscrição um fato que a
+habilitação ainda cita, e a gravação dos itens da inscrição é recusada (e, se
+passar por outra via, o fechamento da retificação), porque a versão nova da
+inscrição deixaria de coletá-lo.
 
 ## Como resolver
 
 Escolha uma saída, conforme o que a versão nova precisa:
 
-- **pergunte no próprio formulário que cita o fato.** Acrescente a pergunta ao
-  formulário da finalidade que usa o dado, que então não depende da outra;
+- **pergunte no formulário que cita o fato** (só depois que a API aplicar a regra
+  nova). No exemplo, transfira o campo da escola para o formulário de habilitação,
+  retirando-o da inscrição na mesma retificação, e confira as demais regras que o
+  citam. O fato tem um só campo produtor no processo, então não deixe o campo nos
+  dois formulários;
 - **retire a citação.** Tire o fato da condição, da seção ou do termo que o
   cita;
-- **cite um fato que todas as versões coletaram.** Use, de outra finalidade, só
-  fatos que o formulário dela coleta desde a primeira publicação.
+- **cite um fato que todas as versões, e a nova, coletam.** Use, de outro
+  formulário obrigatório, só fatos que ele coleta desde a primeira publicação;
+- **volte a incluir o fato no formulário de origem** (só depois que a API aplicar a
+  regra nova), no mesmo lugar em que a versão publicada o coleta (como pergunta
+  avulsa ou no mesmo grupo). Se a recusa veio de a retificação retirar da
+  inscrição um fato que a habilitação ainda cita, isso mantém a coleta na versão
+  nova.
 
-Depois de qualquer das três, regrave o que foi recusado e feche a retificação.
+Depois de qualquer das saídas, regrave o que foi recusado e feche a retificação.
