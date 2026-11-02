@@ -1,0 +1,28 @@
+---
+title: A data inicial do período é posterior à final
+sidebar_label: Período inválido
+description: O período da consulta das decisões começa depois de terminar.
+code: uniplus.configuracao.protecao_do_catalogo.periodo_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Consulta das decisões da proteção de dados
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A consulta das decisões da proteção de dados informou uma data inicial posterior à data final, e por isso nenhum período satisfaz o filtro.
+
+## Como resolver
+
+Informe a data inicial igual ou anterior à final. Os dois extremos do período entram na consulta.

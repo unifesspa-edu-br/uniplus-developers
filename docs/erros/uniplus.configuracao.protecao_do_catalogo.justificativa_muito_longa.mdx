@@ -1,0 +1,28 @@
+---
+title: A justificativa passa do limite de 2.000 caracteres
+sidebar_label: Justificativa muito longa
+description: A justificativa do ajuste recomendado ou da reprovação passou de 2.000 caracteres.
+code: uniplus.configuracao.protecao_do_catalogo.justificativa_muito_longa
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (aprovação, ajuste recomendado ou reprovação)
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A justificativa de uma decisão da proteção de dados aceita no máximo 2.000 caracteres, sem contar os espaços nas pontas.
+
+## Como resolver
+
+Resuma a justificativa até o limite de 2.000 caracteres e envie a decisão de novo.

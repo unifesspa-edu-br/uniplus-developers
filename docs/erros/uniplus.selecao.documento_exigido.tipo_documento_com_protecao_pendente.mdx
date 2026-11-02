@@ -1,0 +1,28 @@
+---
+title: O tipo de documento aguarda a aprovação da proteção de dados e não aceita vínculo novo
+sidebar_label: Tipo de documento com proteção pendente
+description: O tipo de documento escolhido para a exigência ainda não teve a proteção de dados aprovada.
+code: uniplus.selecao.documento_exigido.tipo_documento_com_protecao_pendente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro ou alteração de exigência documental do processo seletivo
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um tipo de documento só pode ser exigido depois de a proteção de dados aprovar a classificação, a finalidade e a base legal dele. O tipo é novo ou teve a proteção alterada e está pendente.
+
+## Como resolver
+
+Peça ao administrador do catálogo que envie a solicitação de aprovação, ou escolha um tipo já aprovado.

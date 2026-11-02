@@ -1,0 +1,28 @@
+---
+title: A proteção conferida pelo aprovador está ausente ou inválida
+sidebar_label: Proteção conferida inválida
+description: A decisão foi enviada sem a classificação, a base legal ou a finalidade que o aprovador conferiu no item, ou com um valor que não existe.
+code: uniplus.configuracao.protecao_do_catalogo.protecao_conferida_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (aprovação, ajuste recomendado ou reprovação) de um item
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A decisão da proteção de dados vale para a proteção que o aprovador viu: a classificação, a base legal e a finalidade do item. A decisão chegou sem um desses três dados, ou com uma classificação ou base legal que não existe. Assim não há como saber se o item ainda está como foi analisado.
+
+## Como resolver
+
+Envie a decisão com a classificação, a base legal e a finalidade do item como aparecem na lista de itens solicitados. Se o item tiver mudado desde então, a decisão é recusada porque a proteção mudou: abra a lista de novo e analise o item atual.

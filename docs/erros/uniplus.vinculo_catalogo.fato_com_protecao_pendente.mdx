@@ -1,0 +1,28 @@
+---
+title: O fato aguarda a aprovação da proteção de dados e não aceita vínculo novo
+sidebar_label: Fato com proteção pendente
+description: O fato escolhido ainda não teve a proteção de dados aprovada.
+code: uniplus.vinculo_catalogo.fato_com_protecao_pendente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Configuração do formulário, das regras e das exigências do processo seletivo
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um fato só pode ser usado na configuração de processo seletivo depois de a proteção de dados aprovar a classificação, a finalidade e a base legal dele. O fato é novo ou teve a proteção alterada e está pendente.
+
+## Como resolver
+
+Peça ao administrador do catálogo que envie a solicitação de aprovação, ou use um fato já aprovado.
