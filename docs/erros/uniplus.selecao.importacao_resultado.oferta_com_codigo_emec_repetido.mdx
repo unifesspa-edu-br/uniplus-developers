@@ -1,0 +1,44 @@
+---
+title: Duas ofertas do processo têm o mesmo código do e-MEC
+sidebar_label: Código e-MEC repetido
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; duas ou mais ofertas do processo de resultado importado têm o mesmo código do curso no e-MEC.
+code: uniplus.selecao.importacao_resultado.oferta_com_codigo_emec_repetido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0213
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+O processo declara resultado importado, e duas ou mais ofertas dele têm o mesmo
+código do curso no e-MEC, como acontece com um convênio que herda o código do curso
+(ADR-0066). Cada linha do relatório do SISU identifica o curso pelo código, e com o
+código repetido a linha não teria uma oferta única. A recusa sai na publicação e no
+fechamento da retificação, com **422**, e o `detail` lista as ofertas.
+
+## Como resolver
+
+Se o código de uma das ofertas está errado no cadastro, corrija-o na Configuração
+e **salve de novo a distribuição de vagas dessa oferta** no processo, o que copia
+o código outra vez. Se a repetição é legítima, como o convênio que herda o código
+do curso (ADR-0066), deixe cada código em uma única oferta do processo: retire a
+oferta duplicada ou leve o convênio a um processo próprio. Depois, publique o
+processo ou, se a recusa veio do fechamento de uma retificação, conclua a
+retificação de novo.

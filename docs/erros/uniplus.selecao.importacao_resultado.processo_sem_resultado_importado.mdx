@@ -1,0 +1,41 @@
+---
+title: O processo não recebe resultado importado
+sidebar_label: Processo sem resultado importado
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; a importação foi pedida em processo cujos candidatos se inscrevem pelo sistema.
+code: uniplus.selecao.importacao_resultado.processo_sem_resultado_importado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Prévia da importação do resultado
+  - Importação do resultado
+requisitos:
+  - UNI-REQ-0213
+  - UNI-REQ-0174
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+O processo declara que a inscrição é feita pelo sistema, e só o processo de
+resultado importado recebe a importação do resultado do SISU (UNI-REQ-0144,
+UNI-REQ-0213). A recusa sai com **422**.
+
+## Como resolver
+
+Importe o resultado no processo de resultado importado correspondente. Se este
+processo deve receber o resultado do SISU, mude a origem dos candidatos para
+resultado importado enquanto ele é rascunho (antes, retire o formulário de
+inscrição), publique e então importe: a importação só ocorre com o processo
+publicado.

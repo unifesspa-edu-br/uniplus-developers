@@ -1,0 +1,41 @@
+---
+title: A oferta do processo não tem código do e-MEC
+sidebar_label: Oferta sem código e-MEC
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; uma oferta de curso do processo de resultado importado não tem o código do curso no e-MEC.
+code: uniplus.selecao.importacao_resultado.oferta_sem_codigo_emec
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0213
+  - UNI-REQ-0144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+O processo declara resultado importado, e uma das ofertas de curso dele não tem o
+código do curso no e-MEC (UNI-REQ-0213). Sem o código, nenhuma linha do relatório
+poderia ser ligada a essa oferta. A recusa sai com **422**, e o `detail` lista as
+ofertas.
+
+## Como resolver
+
+Preencha o código do e-MEC no cadastro do curso ou da oferta, na Configuração, e
+**salve de novo a distribuição de vagas da oferta** no processo, o que copia o
+código outra vez. Depois, publique o processo ou, se a recusa veio do fechamento
+de uma retificação, conclua a retificação de novo.

@@ -1,0 +1,63 @@
+---
+title: O CPF e a inscrição no ENEM da linha não se confirmam
+sidebar_label: Identidade divergente
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; o CPF da linha já está no processo com outro número de inscrição no ENEM, ou o número de inscrição no ENEM da linha já está no processo com outro CPF.
+code: uniplus.selecao.importacao_resultado.identidade_divergente
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Prévia da importação do resultado
+  - Importação do resultado
+requisitos:
+  - UNI-REQ-0213
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+No processo de resultado importado, o CPF é a chave do candidato e o número de
+inscrição no ENEM confirma a identidade (UNI-REQ-0213). A linha foi recusada
+porque o CPF dela já está no processo com outro número de inscrição no ENEM, ou
+porque o número de inscrição no ENEM dela já está no processo com outro CPF. O
+outro registro pode estar no mesmo arquivo, em outro relatório ou em uma
+importação anterior.
+
+A linha recusada não cria candidato nem resultado, não grava nenhum dado dela e
+não muda o que já estava gravado. Quando a divergência está entre linhas do mesmo
+arquivo ou do mesmo lote e nenhum dos dois lados está gravado, **todas as linhas do
+par são recusadas**, nenhuma prevalece, para não gravar identidade errada, e a
+prévia as conta como recusadas. Quando um dos lados já está gravado, só a linha
+nova é recusada; a linha que já diverge de um lado gravado é recusada por isso e
+não entra na conferência do par, e as demais linhas seguem conferidas entre si. A recusa diz o número da linha e as colunas que não se
+confirmam e **não reproduz o conteúdo das células**, que são dado pessoal. As
+demais linhas seguem.
+
+## Como resolver
+
+Confira no SisuGestão qual é o dado correto: o CPF e o número de inscrição no
+ENEM daquele candidato.
+
+- **O relatório estava errado:** obtenha o relatório corrigido do MEC e importe-o
+  de novo, em vez de editar o arquivo. A importação aplica só o que falta e não
+  repete as linhas já aplicadas; no caso de linhas divergentes do mesmo arquivo,
+  o relatório corrigido traz a linha certa, que entra.
+- **A identidade já gravada no processo é a errada:** a unidade pede a correção à
+  equipe de sustentação do Uni+ (CTIC), que corrige o CPF ou o número de inscrição
+  no ENEM gravado, com registro de quem corrigiu e por quê. Depois disso, importe de
+  novo o relatório corrigido e a linha é aplicada.
+
+Até a correção, o candidato continua com a identidade gravada e com os resultados
+já aplicados, e a linha segue recusada, sem deixar nada gravado. As demais linhas
+já importadas não são afetadas.

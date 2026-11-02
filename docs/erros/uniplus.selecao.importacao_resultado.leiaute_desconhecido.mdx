@@ -1,0 +1,47 @@
+---
+title: O arquivo não é de um formato que o sistema lê
+sidebar_label: Formato do arquivo desconhecido
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; o arquivo de resultado do SISU é de outro ano ou de outro relatório, ou o cabeçalho não confere com o formato escolhido.
+code: uniplus.selecao.importacao_resultado.leiaute_desconhecido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Prévia da importação do resultado
+  - Importação do resultado
+requisitos:
+  - UNI-REQ-0213
+  - UNI-REQ-0174
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+O arquivo não corresponde ao formato escolhido: o conjunto dos nomes das colunas
+difere do relatório de 2026 que o sistema conhece, mesmo que o número de colunas
+seja o mesmo. Só o formato da edição de 2026
+é lido, e arquivo de 2024, de 2025 ou de outro relatório é recusado inteiro, sem
+gravar nada (UNI-REQ-0213). A recusa sai com **422**. O `detail` lista pelo nome só
+as colunas **ausentes**, porque esses nomes vêm do formato conhecido; as colunas a
+mais são identificadas só pela posição e pela quantidade, sem repetir o texto do
+arquivo. Um arquivo sem cabeçalho, em que a primeira linha de dados seria lida como
+cabeçalho, também não tem essa linha reproduzida.
+
+## Como resolver
+
+Escolha o relatório certo na importação (chamada regular, lista de espera dos
+que manifestaram interesse ou lista de espera por perfil socioeconômico) e envie
+o arquivo da edição de 2026 do SISU, sem abri-lo e salvá-lo em outro programa, que
+altera o cabeçalho. Se o arquivo é de outro ano, obtenha o relatório de 2026. Depois
+disso, envie de novo.
