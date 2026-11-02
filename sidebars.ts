@@ -36,6 +36,7 @@ const sidebars: SidebarsConfig = {
             'produto/modelo-negocio/selecao',
             'produto/modelo-negocio/configurar-publicar',
             'produto/modelo-negocio/coleta-fatos-derivacao',
+            'produto/modelo-negocio/importacao-resultado-sisu',
           ],
         },
       ],
