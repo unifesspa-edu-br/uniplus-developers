@@ -1,0 +1,39 @@
+---
+title: O município informado não existe no Geo
+sidebar_label: Município não encontrado
+description: O código do município informado na inscrição não consta no Geo, o cadastro de localidades do Uni+.
+code: uniplus.selecao.conferencia_endereco_geo.municipio_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0214
+rastreio:
+  - label: 'uniplus-api#2186'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2186
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+No envio da inscrição, o sistema confere no Geo, o cadastro de localidades
+do Uni+, cada município que o candidato informou, como o município de
+nascimento. O código do município deste campo não consta no Geo. A recusa
+vem no campo do município e, quando ele está dentro de um grupo repetível,
+no item daquela ocorrência.
+
+A conferência vale só para o campo que a inscrição pede. O município de um
+campo que ficou oculto, por exemplo a naturalidade de quem declarou
+nacionalidade estrangeira, não é conferido nem recusado.
+
+## Como resolver
+
+Escolha o município de novo na lista do formulário, que vem do Geo e é
+filtrada pela UF informada, e envie a inscrição outra vez. Nada desta tentativa foi gravado, e o
+município escolhido na lista é aceito. O nome do
+município é sempre o que o Geo devolve no envio: não é preciso digitá-lo.

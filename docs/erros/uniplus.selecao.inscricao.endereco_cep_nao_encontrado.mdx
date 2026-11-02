@@ -1,0 +1,47 @@
+---
+title: O CEP informado não foi encontrado
+sidebar_label: CEP não encontrado
+description: O Geo, o cadastro de localidades do Uni+, não encontrou o CEP informado no endereço da inscrição.
+code: uniplus.selecao.inscricao.endereco_cep_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0214
+rastreio:
+  - label: 'uniplus-api#2186'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2186
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O endereço da inscrição é conferido pelo CEP no Geo, o cadastro de
+localidades do Uni+, ao salvar o rascunho e ao enviar a inscrição. O Geo
+não encontrou o CEP informado.
+
+Esta causa é diferente de o Geo estar fora do ar. Com o Geo fora do ar, o
+rascunho é salvo e, se não houver outra recusa, o envio recebe o aviso de
+indisponibilidade; havendo outras recusas, como uma resposta obrigatória
+em branco, o envio responde 422 com elas. Em nenhum caso a resposta é
+"CEP não encontrado".
+
+## Como resolver
+
+Confira o CEP na busca dos Correios e corrija-o no endereço.
+
+Se o seu bairro não tem CEP próprio, use o CEP geral da sua cidade e
+descreva o endereço real no complemento, que aceita até 300 caracteres.
+Com o CEP geral, preencha também o logradouro e o bairro, que passam a ser
+obrigatórios. Se o formulário pedir que você confirme o endereço, faça a
+confirmação antes de enviar. Sem essas informações, o envio é recusado de
+novo, por outro motivo.
+
+Depois de corrigir, envie a inscrição outra vez; se ela ainda é rascunho,
+você também pode salvar antes. Nada desta tentativa foi gravado.
