@@ -1,0 +1,47 @@
+---
+title: O curso da linha não tem oferta no processo
+sidebar_label: Curso sem oferta correspondente
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; a linha traz um código de curso do e-MEC que nenhuma oferta do processo tem.
+code: uniplus.selecao.importacao_resultado.curso_sem_oferta_correspondente
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Prévia da importação do resultado
+  - Importação do resultado
+requisitos:
+  - UNI-REQ-0213
+  - UNI-REQ-0174
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+O código do curso no e-MEC da linha não corresponde a nenhuma oferta de curso do
+processo. A conferência é feita sobre o código **congelado na oferta** quando a
+distribuição de vagas dela foi salva no processo, e não sobre o cadastro vivo do
+curso. A linha é recusada, sem criar candidato nem resposta, e as demais seguem
+(UNI-REQ-0213). A recusa diz a linha e a coluna e não reproduz o conteúdo da
+célula.
+
+## Como resolver
+
+Corrija o código no cadastro do curso ou da oferta na Configuração e **salve de
+novo a distribuição de vagas da oferta** no processo, o que copia o código outra
+vez, **por retificação**, porque a importação só ocorre com o processo
+publicado. A correção só vale depois que a retificação é **concluída**: a
+importação lê sempre a versão publicada vigente, mesmo com a retificação aberta. Mudar só o cadastro vivo não basta, porque a oferta do processo guarda
+o código congelado. **Conclua a retificação e então reenvie o relatório:** a importação aplica só o que
+falta, sem repetir as linhas já aplicadas. Se o curso não faz parte do processo,
+a linha é de outro processo e não deve ser importada aqui.

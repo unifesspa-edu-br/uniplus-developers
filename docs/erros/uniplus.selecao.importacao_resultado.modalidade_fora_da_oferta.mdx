@@ -1,0 +1,42 @@
+---
+title: A modalidade da linha não é ofertada naquela oferta
+sidebar_label: Modalidade fora da oferta
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; a modalidade do MEC tem correspondência, mas o processo não a oferta no curso da linha.
+code: uniplus.selecao.importacao_resultado.modalidade_fora_da_oferta
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Prévia da importação do resultado
+  - Importação do resultado
+requisitos:
+  - UNI-REQ-0213
+  - UNI-REQ-0174
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+A modalidade da linha tem correspondência no Uni+, mas a oferta de curso do
+processo não a oferta (UNI-REQ-0213). A linha é recusada, e o sistema não recalcula o
+enquadramento do candidato: a modalidade é a do arquivo.
+
+## Como resolver
+
+Confira a distribuição de vagas da oferta do processo: se a modalidade deve ser
+ofertada no curso, acrescente-a ao processo por retificação, **conclua a
+retificação e então reenvie o relatório**, que importa as linhas pendentes sem
+repetir as já aplicadas (a importação lê sempre a versão publicada vigente, e a
+correção só vale depois que a retificação é concluída); se não deve, a linha não
+pertence a este processo.
