@@ -1,0 +1,42 @@
+---
+title: A inscrição não foi encontrada
+sidebar_label: Inscrição não encontrada
+description: Não há inscrição a mostrar no processo seletivo, ou ela não está ao alcance de quem pediu.
+code: uniplus.selecao.inscricao.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Consulta da própria inscrição pelo candidato
+  - Consulta administrativa de uma inscrição do processo seletivo
+requisitos:
+  - UNI-REQ-0208
+rastreio:
+  - label: 'uniplus-api#2168'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2168
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Para o candidato, ele ainda não tem inscrição no processo seletivo
+consultado.
+
+Na consulta administrativa, a inscrição pedida não pôde ser mostrada. A
+resposta é a mesma em todos os casos, para não revelar o que existe: a
+inscrição não existe, pertence a outro processo seletivo, ainda está em
+rascunho, ou a pessoa não tem acesso às inscrições do processo na unidade que
+o administra.
+
+## Como resolver
+
+O candidato abre a inscrição pela página do processo seletivo, enquanto o
+período de inscrição estiver aberto.
+
+Na consulta administrativa, abra a inscrição a partir da lista de inscrições
+do processo, que só mostra as enviadas. Se a lista também não aparece e a
+consulta faz parte do seu trabalho, peça o acesso às inscrições do processo
+pelo pedido de acesso.

@@ -145,6 +145,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.inscricao.inscricao_cancelada',
         'erros/uniplus.selecao.inscricao.motivo_do_cancelamento_longo',
         'erros/uniplus.selecao.inscricao.campo_nao_encontrado',
+        'erros/uniplus.selecao.inscricao.nao_encontrada',
         'erros/uniplus.selecao.notas_do_enem.etapa_nao_encontrada',
         'erros/uniplus.selecao.notas_do_enem.etapa_sem_nota_do_enem',
         'erros/uniplus.selecao.notas_do_enem.edicao_nao_admitida',
