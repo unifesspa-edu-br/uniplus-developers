@@ -1,0 +1,51 @@
+---
+title: Há uma retificação em curso, e a alteração exige o If-Match com o ETag da sessão
+sidebar_label: Precondição requerida
+description: Com retificação em curso, toda alteração da configuração do processo, e a alteração do motivo, o descarte e o fechamento, exigem o cabeçalho If-Match com o ETag da retificação.
+code: uniplus.selecao.precondicao_requerida
+http_status: 428
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Qualquer alteração da configuração de processo com retificação em curso
+  - Alteração do motivo da retificação
+  - Descarte de retificação
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0021
+  - UNI-REQ-0022
+rastreio:
+  - label: 'uniplus-api#860'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/860
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo tem uma retificação em curso, e o pedido chegou **sem** o cabeçalho
+`If-Match`. A recusa sai com **428**, antes de qualquer regra de negócio: a
+alteração não chegou a ser tentada.
+
+Com a retificação aberta, as alterações da configuração gravam sobre a mesma
+retificação, e duas pessoas, ou duas janelas, podem estar editando ao mesmo
+tempo. Só o `If-Match` com o `ETag` exato garante que o pedido parte do estado
+mais recente da retificação, para que uma gravação não apague outra sem que
+ninguém perceba. A API também aceita `If-Match: *`, que só exige que a
+retificação exista e não dá essa garantia.
+O descarte e o fechamento sempre exigem o cabeçalho, porque existem só para a
+retificação em curso.
+
+Em processo em rascunho não há retificação, e o cabeçalho não é exigido. A
+inscrição do candidato tem a própria precondição, com outro código
+(`uniplus.selecao.inscricao.precondicao_requerida`).
+
+## Como resolver
+
+Leia a retificação em curso (`GET .../retificacao-em-curso`), guarde o `ETag`
+da resposta e repita o pedido com `If-Match: <ETag>`. Cada alteração aceita da
+configuração devolve um `ETag` novo, e a retificação continua em curso: use-o no
+pedido seguinte. O fechamento e o descarte encerram a retificação e não devolvem
+`ETag`.

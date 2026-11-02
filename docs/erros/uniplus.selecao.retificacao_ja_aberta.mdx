@@ -1,0 +1,52 @@
+---
+title: Já existe uma retificação em curso neste processo
+sidebar_label: Retificação já aberta
+description: O processo já tem uma retificação em curso; feche-a ou descarte-a antes de abrir outra ou de usar a retificação em ato único.
+code: uniplus.selecao.retificacao_ja_aberta
+http_status: 409
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Abertura de retificação
+  - Retificação em ato único
+requisitos:
+  - UNI-REQ-0021
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#860'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/860
+  - label: 'uniplus-api#862'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/862
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo seletivo já tem uma retificação em curso, aberta por alguém da
+unidade responsável, e um processo tem no máximo uma por vez. A recusa sai com
+**409** em dois casos:
+
+- ao abrir uma retificação (`POST .../retificacao-em-curso`) com outra ainda
+  aberta, inclusive quando duas aberturas chegam ao mesmo tempo e só uma vence;
+- ao usar a retificação em ato único (`POST .../retificacoes`) com uma
+  retificação em curso, porque ela congelaria a configuração que a outra está
+  editando.
+
+A regra existe porque a cadeia de atos é linear (UNI-REQ-0156): cada
+retificação emenda o ato mais recente, e duas retificações paralelas
+emendariam o mesmo ato.
+
+## Como resolver
+
+Consulte a retificação em curso (`GET .../retificacao-em-curso`) para saber o
+motivo e quando ela foi aberta. Depois, escolha um caminho:
+
+- se as mudanças que você quer cabem nela, faça-as nessa mesma retificação e
+  feche-a com o edital de retificação;
+- se ela não deve valer, descarte-a (`DELETE .../retificacao-em-curso`), e a
+  configuração volta a ser a publicada; então abra a sua.
+
+Ao final, o processo fica com uma única retificação aberta ou com nenhuma.

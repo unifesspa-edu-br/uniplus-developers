@@ -1,0 +1,52 @@
+---
+title: A retificação não retira da inscrição fato que ela já coleta
+sidebar_label: Fato já coletado removido
+description: Na retificação, a gravação dos itens do formulário de inscrição deixaria de coletar um fato que o edital publicado já coleta, ou o moveria entre pergunta avulsa e grupo, ou entre grupos.
+code: uniplus.selecao.retificacao.fato_ja_coletado_removido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição dos itens do formulário de inscrição
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0212
+rastreio:
+  - label: 'uniplus-api#1725'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1725
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa em revisão
+
+A proposta do líder técnico de 02/11/2026, registrada no UNI-REQ-0212 e ainda
+a confirmar pelo PO, permite que a retificação retire perguntas do formulário.
+Quando a API aplicar a regra nova, este código deixa de sair para a **retirada**
+do fato e continua saindo para a **mudança de lugar** do fato já coletado,
+de pergunta avulsa para grupo ou de um grupo para outro. O texto abaixo
+descreve a recusa como a API a aplica hoje.
+
+:::
+
+## O que aconteceu
+
+Na retificação, o formulário de inscrição foi regravado
+(`PUT .../formularios/inscricao/itens`) sem um fato que o formulário de
+inscrição da versão publicada já coleta, ou com esse fato movido de item para
+campo de grupo, ou de um grupo para outro. A recusa sai com **422**, e o
+`detail` cita o fato.
+
+Hoje a API protege o fato porque quem se inscreveu numa versão anterior o
+informou, e as outras finalidades e as versões seguintes contam com ele.
+
+## Como resolver
+
+Volte a incluir o fato no formulário de inscrição, no mesmo lugar em que a
+versão publicada o coleta (como pergunta avulsa ou no mesmo grupo), e regrave
+os itens. Se a pergunta não deve mais aparecer, mantenha-a nesta retificação e
+registre a necessidade de retirá-la: a retirada passa a ser aceita quando a API
+aplicar o UNI-REQ-0212. A mudança de lugar continua recusada também depois
+disso.

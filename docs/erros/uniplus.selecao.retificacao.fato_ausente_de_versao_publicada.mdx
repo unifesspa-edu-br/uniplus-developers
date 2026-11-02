@@ -1,0 +1,50 @@
+---
+title: Fato de outra finalidade não coletado em todas as versões publicadas
+sidebar_label: Fato ausente de versão publicada
+description: Na retificação, um formulário, termo ou exigência de documento cita fato que o formulário de outra finalidade não coletou em alguma versão publicada do edital.
+code: uniplus.selecao.retificacao.fato_ausente_de_versao_publicada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição dos itens, das seções ou dos termos de um formulário do processo
+  - Definição dos documentos exigidos
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+rastreio:
+  - label: 'uniplus-api#1725'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1725
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na retificação, a versão nova cita, num formulário, num termo ou numa condição
+de documento exigido, um fato que vem do formulário de **outra finalidade**, e
+esse formulário não coletou o fato em alguma das versões já publicadas do
+edital. A recusa sai com **422**, e o `detail` diz o fato, quem o cita e a
+finalidade que deveria tê-lo coletado. Quando a citação é a um fato derivado,
+o `detail` diz também de qual fato coletado ele depende.
+
+O motivo é de negócio: o candidato pode ter preenchido a finalidade anterior em
+qualquer versão publicada (UNI-REQ-0144). Exemplo: o formulário de isenção passa
+a perguntar algo só depois da retificação, e o formulário de habilitação passa
+a citar essa resposta. Quem pediu isenção antes da retificação nunca a
+informou, e a habilitação dele não teria o dado.
+
+## Como resolver
+
+Escolha uma saída, conforme o que a versão nova precisa:
+
+- **pergunte no próprio formulário que cita o fato.** Acrescente a pergunta ao
+  formulário da finalidade que usa o dado, que então não depende da outra;
+- **retire a citação.** Tire o fato da condição, da seção ou do termo que o
+  cita;
+- **cite um fato que todas as versões coletaram.** Use, de outra finalidade, só
+  fatos que o formulário dela coleta desde a primeira publicação.
+
+Depois de qualquer das três, regrave o que foi recusado e feche a retificação.

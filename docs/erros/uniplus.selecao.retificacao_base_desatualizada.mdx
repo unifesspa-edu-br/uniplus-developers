@@ -1,0 +1,45 @@
+---
+title: A versão sobre a qual a retificação foi aberta não é mais o topo da cadeia
+sidebar_label: Base da retificação desatualizada
+description: A versão publicada que a retificação tomou como base deixou de ser a mais recente, e a retificação não pode ser fechada nem descartada com segurança.
+code: uniplus.selecao.retificacao_base_desatualizada
+http_status: 409
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Descarte de retificação
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0021
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#861'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/861
+  - label: 'uniplus-api#862'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/862
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A retificação foi aberta sobre uma versão publicada da configuração, que era a
+mais recente. No fechamento ou no descarte, essa versão já não é a mais
+recente. A recusa sai com **409**.
+
+Pelas regras atuais, isso não deveria acontecer: com a retificação em curso, a
+retificação em ato único é recusada, e o fechamento encerra a retificação no
+mesmo passo em que publica a versão nova. A conferência existe para que um
+caminho novo que quebre essa garantia não feche a retificação sobre o ato
+errado (UNI-REQ-0156) nem reponha, no descarte, a configuração de uma versão
+que não é a publicada.
+
+## Como resolver
+
+Não repita o pedido: o resultado será o mesmo. Recarregue o processo e confira
+a versão publicada mais recente e a retificação em curso. Registre o caso ao
+suporte do Uni+ com o `instance` e o `traceId` da resposta, porque ele indica
+defeito no sistema, e não na operação. Até a correção, a versão publicada
+continua valendo para os candidatos.

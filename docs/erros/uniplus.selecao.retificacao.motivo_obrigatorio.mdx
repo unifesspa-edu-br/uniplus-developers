@@ -1,0 +1,45 @@
+---
+title: O motivo da retificação é obrigatório
+sidebar_label: Motivo da retificação ausente na abertura
+description: Guarda interna do domínio — a abertura da retificação e a alteração do motivo sem motivo são recusadas antes, pela validação do pedido, com uniplus.validacao e erro no campo motivo.
+code: uniplus.selecao.retificacao.motivo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Abertura de retificação
+  - Alteração do motivo da retificação
+requisitos:
+  - UNI-REQ-0021
+rastreio:
+  - label: 'uniplus-api#860'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/860
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Este código é a guarda do próprio domínio contra motivo em branco na abertura
+da retificação (`POST .../retificacao-em-curso`) e na alteração do motivo
+(`PUT .../retificacao-em-curso`). Toda retificação registra o motivo
+(UNI-REQ-0021): ele vai para o ato de retificação e aparece na página pública
+do certame.
+
+Pelas rotas da API, o pedido sem motivo, ou com motivo só de espaços, não
+chega ao domínio: a validação do pedido o recusa antes, com **422**, o código
+`uniplus.validacao` e o erro no campo `motivo` da
+lista `errors`. Este código só aparece se um caminho novo chamar o domínio sem
+passar por essa validação.
+
+Na retificação em ato único, a falta do motivo tem outra página:
+[`processo_seletivo.motivo_retificacao_obrigatorio`](./uniplus.selecao.processo_seletivo.motivo_retificacao_obrigatorio.mdx).
+
+## Como resolver
+
+Trate a recusa pelo campo `motivo` da resposta de validação: informe o motivo
+em texto, por exemplo "Prorrogação do período de inscrição", e repita o
+pedido. O motivo pode ser alterado depois, enquanto a retificação estiver em
+curso.

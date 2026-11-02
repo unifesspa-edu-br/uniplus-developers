@@ -1,0 +1,47 @@
+---
+title: O If-Match não corresponde ao estado atual da retificação
+sidebar_label: Precondição falhou
+description: O ETag enviado no If-Match é de um estado anterior da retificação em curso, ou de uma retificação que já não existe.
+code: uniplus.selecao.precondicao_falhou
+http_status: 412
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Qualquer alteração da configuração de processo com retificação em curso
+  - Alteração do motivo da retificação
+  - Descarte de retificação
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0021
+rastreio:
+  - label: 'uniplus-api#860'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/860
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido trouxe `If-Match`, mas o `ETag` não é o da retificação como ela está
+agora. A recusa sai com **412**, antes de qualquer regra de negócio: a
+alteração não foi gravada. Há três causas comuns:
+
+- outra gravação, sua em outra janela ou de outra pessoa da unidade, chegou
+  antes e mudou a retificação;
+- o pedido reaproveitou o `ETag` de uma resposta anterior, e não o da última
+  alteração aceita;
+- a retificação em que o `ETag` foi lido foi descartada e outra foi aberta. O
+  `ETag` de uma retificação não vale para a seguinte.
+
+O `ETag` em forma fraca (`W/"..."`) nunca corresponde, porque a comparação é
+forte.
+
+## Como resolver
+
+Leia de novo a retificação em curso (`GET .../retificacao-em-curso`) e a parte
+da configuração que você ia alterar, para ver o que mudou. Refaça a alteração
+sobre esse estado, com `If-Match` igual ao `ETag` que acabou de ler. Repetir o
+pedido igual, sem reler, é recusado de novo. Esta recusa não fica guardada na
+`Idempotency-Key`: a repetição com o `ETag` certo é decidida de novo.
