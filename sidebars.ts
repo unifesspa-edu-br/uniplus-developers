@@ -788,6 +788,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.configuracao.protecao_do_catalogo.recomendacao_incompativel_com_a_hipotese_legal',
         'erros/uniplus.configuracao.protecao_do_catalogo.sem_quem_aprove',
         'erros/uniplus.configuracao.protecao_do_catalogo.sem_permissao',
+        'erros/uniplus.configuracao.protecao_do_catalogo.identidade_incompleta',
         'erros/uniplus.configuracao.protecao_do_catalogo.situacao_invalida',
         'erros/uniplus.configuracao.protecao_do_catalogo.cadastro_invalido',
         'erros/uniplus.configuracao.protecao_do_catalogo.decisao_invalida',
