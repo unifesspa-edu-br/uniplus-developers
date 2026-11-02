@@ -110,7 +110,7 @@ A publicação é o ato central do módulo. É quando a configuração deixa de 
 Consequências práticas do congelamento, em linguagem de negócio:
 
 - Imunidade após a publicação. Se, depois de publicar, alguém alterar um cadastro geral (por exemplo, a descrição de um tipo de documento ou a lista de valores de uma pergunta), o processo seletivo publicado continua funcionando como antes. A mudança só alcança processos seletivos novos.
-- Alteração só por retificação. Para mudar prazo, vagas, cotas, pesos, Fator de Atenuação, documentos ou formulário de um processo seletivo já publicado, emite-se uma retificação, que registra um novo ato apontando o ato retificado, com o motivo e uma nova versão congelada; o ato retificado continua publicado. A edição direta da configuração já publicada é bloqueada (`REQ-21`, `REQ-22`).
+- Alteração só por retificação. Para mudar prazo, vagas, cotas, pesos, Fator de Atenuação, documentos ou formulário de um processo seletivo já publicado, emite-se uma retificação, que registra um novo ato apontando o ato retificado, com o motivo e uma nova versão congelada; o ato retificado continua publicado. A edição direta da configuração já publicada é bloqueada (`UNI-REQ-0021`, `UNI-REQ-0022`).
 - Qual versão vale em cada momento. Quando há mais de uma versão (por retificações), o sistema sabe identificar qual versão do processo seletivo — e qual edital — estava vigente em cada data, para avaliar cada ato pela regra correta da época.
 
 > Exemplo. Um processo seletivo exige comprovante de renda com no máximo 3 meses. Após a publicação, a área administrativa altera o cadastro geral para 6 meses. Os candidatos daquele processo seletivo continuam sob a regra de 3 meses (a que valia quando ele foi publicado). Só os processos publicados depois da alteração usarão 6 meses.
@@ -183,7 +183,7 @@ Regras definidas na reunião de alinhamento de 20/10/2026 (CEPS, PO e líder té
 2. **O candidato pode descartar o rascunho.** Ele some de "Minhas inscrições" e o candidato pode iniciar outro. Rascunho não se cancela.
 3. **O candidato cancela só a inscrição enviada e só com as inscrições abertas.** Antes de confirmar, o sistema avisa que, para voltar a participar, o candidato terá de fazer uma inscrição nova, do zero, com o formulário vigente. O número da inscrição cancelada não é reaproveitado e não há limite de cancelamentos. O motivo é opcional para o candidato: sem ele, fica registrado "a pedido do candidato". Quem cancelou e a data são sempre registrados.
 4. **Ações do candidato em cada situação**, conforme a tabela abaixo.
-5. **Retificação que altera o formulário.** O sistema não avisa os inscritos: o CEPS orienta por comunicado e e-mail. Quem não cancelar e refizer fica com a inscrição como a enviou. Como requisito futuro da administração, fica registrado o relatório de inscritos por data de envio e versão do formulário.
+5. **Retificação que altera o formulário.** O sistema não avisa os inscritos: a unidade responsável pelo processo seletivo os orienta por comunicado e e-mail. Quem não cancelar e refizer fica com a inscrição como a enviou. Quem está com a inscrição em rascunho é avisado, ao validá-la, de que houve mudança no formulário ou nas regras (proposta do líder técnico em 02/11/2026, [`UNI-REQ-0212`](../requisitos/index.mdx)). Como requisito futuro da administração, fica registrado o relatório de inscritos por data de envio e versão do formulário.
 
 | Situação | Ações |
 |---|---|

@@ -6,9 +6,9 @@ description: A jornada do administrador para cadastrar, configurar e publicar um
 
 # Configuração e publicação de um Processo Seletivo pelo administrador — modelo de negócio
 
-Documento de referência funcional para Análise de Requisitos. Descreve, em linguagem de negócio (sem termos de programação), **a jornada do administrador do CEPS para cadastrar, configurar e publicar um Processo Seletivo** — a experiência administrativa de montar um edital até torná-lo oficial. É um aprofundamento do modelo geral do módulo Seleção, voltado à validação e ao refinamento pela área de negócio.
+Documento de referência funcional para Análise de Requisitos. Descreve, em linguagem de negócio (sem termos de programação), **a jornada do administrador da unidade responsável pelo processo seletivo para cadastrar, configurar e publicar um Processo Seletivo** — a experiência administrativa de montar um edital até torná-lo oficial. É um aprofundamento do modelo geral do módulo Seleção, voltado à validação e ao refinamento pela área de negócio.
 
-Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: da criação à primeira publicação e às publicações seguintes, de documentos e resultados. As telas operacionais posteriores — inscrição, homologação, notas, classificação e o julgamento dos recursos — são etapas seguintes, e a página trata do ciclo recursal só no que toca à publicação dos resultados. Da alteração por retificação, constam aqui apenas os anexos, a cadeia de correção e a classe de congelamento dos atos publicados depois do edital.
+Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: da criação à primeira publicação e às publicações seguintes, de documentos e resultados. As telas operacionais posteriores — inscrição, homologação, notas, classificação e o julgamento dos recursos — são etapas seguintes, e a página trata do ciclo recursal só no que toca à publicação dos resultados. Da alteração por retificação, constam aqui apenas os anexos, a cadeia de correção e a classe de congelamento dos atos publicados depois do edital, e as regras propostas da retificação (seção 4.2).
 
 ## Como ler este documento
 
@@ -16,7 +16,7 @@ O texto descreve o comportamento de negócio em linguagem corrente. Cada assunto
 
 ## 1. Quem configura e o que é um "rascunho"
 
-A configuração de um Processo Seletivo é feita pelo **administrador do CEPS** — o papel institucional responsável por montar o edital. Enquanto o processo não é publicado, ele está em **rascunho**: uma configuração editável, ainda não oficial, que pode ser montada aos poucos e revisada quantas vezes for preciso (`UNI-REQ-0014`).
+A configuração de um Processo Seletivo é feita pelo **administrador da unidade responsável pelo processo seletivo** — o papel institucional responsável por montar o edital. Enquanto o processo não é publicado, ele está em **rascunho**: uma configuração editável, ainda não oficial, que pode ser montada aos poucos e revisada quantas vezes for preciso (`UNI-REQ-0014`).
 
 A configuração é organizada em **dimensões independentes** (etapas, vagas, documentos, formulário, etc.). O administrador preenche cada uma quando quiser; o sistema mostra o que já está completo e o que falta. A publicação é um passo final, só liberado quando tudo está conforme (seção 3).
 
@@ -86,7 +86,7 @@ A publicação cria a **cópia oficial imutável** da configuração — o snaps
 
 Publicado o processo, a configuração **não pode mais ser editada diretamente** (`UNI-REQ-0022`). Toda a validação em runtime (a inscrição do candidato, a exigência de documentos, o cálculo da modalidade) passa a ler a **cópia congelada**, não a configuração viva — de modo que mexer na configuração de um processo já publicado não altera o resultado (imunidade pós-publicação, `UNI-REQ-0062`, `UNI-REQ-0063`).
 
-Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que aponta o ato retificado e registra o motivo, com um **novo snapshot congelado**, preservando o histórico: o ato retificado continua publicado (`UNI-REQ-0021`). A capacidade já é suportada. A seção 4.1 trata dos anexos e da cadeia de correção; o restante da jornada da retificação fica para depois.
+Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que aponta o ato retificado e registra o motivo, com um **novo snapshot congelado**, preservando o histórico: o ato retificado continua publicado (`UNI-REQ-0021`). A API já faz a retificação; a tela do administrador ainda não existe. A seção 4.1 trata dos anexos e da cadeia de correção, e a seção 4.2, de quem retifica, até quando e o que a retificação muda.
 
 ### 4.1 Documentos e resultados publicados depois do edital
 
@@ -101,6 +101,37 @@ Um ato publicado não é apagado nem alterado. A correção é um novo ato, erra
 > **Fora do escopo: assinatura digital.** O sistema não exige, não aplica e não verifica assinatura digital nos documentos publicados. O PDF assinado fora do sistema é publicado sem alteração de nenhum byte, e a assinatura continua válida.
 
 ---
+
+### 4.2 Regras da retificação
+
+Decisão do líder técnico em 02/11/2026, a confirmar pelo PO; requisitos `UNI-REQ-0210`, `UNI-REQ-0211` e `UNI-REQ-0212`. Só uma regra aguarda o PO: adiar o início das inscrições antes de abrirem (ver Prazos).
+
+**Quem retifica e até quando** (`UNI-REQ-0210`).
+
+- Retifica quem cadastra e configura o processo na unidade responsável pelo processo seletivo. Não há aprovação de uma segunda pessoa nem permissão própria para retificar. Na prática, são as permissões de configurar e de publicar nessa unidade.
+- O processo pode ser retificado enquanto não está concluído. Concluído é o processo encerrado ou cancelado.
+- A unidade responsável pelo processo seletivo define a janela de prazo de todas as fases, inclusive das conduzidas por outra unidade, como as chamadas e a habilitação. A unidade que conduz a fase faz o trabalho dela dentro dessa janela.
+- O ato de retificação descreve o que mudou. Mostrar na página pública a diferença entre as versões é desejável, mas não obrigatório.
+
+**Prazos** (`UNI-REQ-0211`).
+
+- A fase concluída não muda.
+- A fase cujo prazo terminou sem que ela tenha sido concluída pode ter o término prorrogado.
+- O início de uma fase que já começou não muda.
+- O prazo de inscrição pode ser prorrogado, mas não reduzido.
+- A janela de solicitação de isenção é a exceção explícita à prorrogação da fase vencida: segue o `UNI-REQ-0106`, só se prorroga antes do término e não se reabre depois de encerrada.
+- Não há prazo mínimo entre a publicação da retificação e o fim das inscrições.
+- Considera-se concluída a fase cujo resultado definitivo já foi publicado; a fase que não publica resultado definitivo considera-se concluída quando a fase seguinte do cronograma começa.
+- **Aguarda o PO:** adiar o início das inscrições antes de abrirem encurta o período de inscrição; se conta como redução do prazo, que é proibida, o PO decide. Recomendação: não contar como redução, porque nenhum candidato perdeu prazo, e, em contrapartida, não permitir que a retificação antecipe o término de fase já em andamento.
+
+**Efeito sobre as inscrições** (`UNI-REQ-0212`).
+
+- A mudança de vagas, cotas, ofertas ou formulário não alcança a inscrição já enviada. Para que a mudança valha para ela, o candidato cancela a inscrição e faz uma nova (`UNI-REQ-0033`).
+- A inscrição em rascunho segue a versão mais recente publicada. Ao validar a inscrição, o sistema avisa o candidato de que houve mudança no formulário ou nas regras. O aviso continua depois de salvar o rascunho, até o candidato confirmar a leitura ou enviar a inscrição, e cita todas as retificações do intervalo.
+- A retificação pode acrescentar e retirar perguntas. A pergunta só não sai enquanto outra finalidade ou uma exigência de documento da versão nova usa o fato que ela coleta (`UNI-REQ-0144`). O fato já coletado pela inscrição não muda de pergunta avulsa para grupo, nem de um grupo para outro.
+- A retificação pode acrescentar um formulário e retirar um formulário inteiro enquanto nenhum envio tiver sido feito por ele (pedido de isenção enviado, no de isenção; o envio equivalente nos demais), observada a obrigatoriedade dos formulários (`UNI-REQ-0144`): a retificação só fecha se a configuração continuar publicável, e por isso o formulário de inscrição não é retirado em processo com inscrição pelo sistema, mesmo sem inscrição enviada. Com envio feito, a retirada é recusada; não há retirada com aviso para refazer.
+- Depois que há inscrição enviada, a retificação não altera as condições em que o candidato se inscreveu: a oferta de curso e as modalidades de concorrência em que alguma inscrição enviada concorre não saem, oferta por oferta; o valor da taxa não muda, nem para mais nem para menos, e o processo não passa de gratuito a cobrado nem de cobrado a gratuito; e os critérios de isenção não mudam se já houver pedido de isenção feito. O rascunho não conta, porque segue a versão mais recente.
+- Na correção da inscrição enviada (`UNI-REQ-0165`), a oferta só pode ser escolhida se existir na versão vigente. O enquadramento em modalidades segue as regras da versão do primeiro envio, mas em cada oferta só entra a modalidade que existe naquela oferta na versão vigente; a correção do dado verdadeiro não é recusada por isso.
 
 ## 5. Rastreabilidade
 
@@ -144,5 +175,8 @@ Cada comportamento acima corresponde a um requisito com código estável no acer
 | `UNI-REQ-0156` | Correção de ato publicado por novo ato | Ato publicado não se altera; a correção é um novo ato, uma vez por ato (seção 4.1). |
 | `UNI-REQ-0157` | Publicação de resultado declarado no edital | Preliminar e definitivo declarados pela fase e pela etapa (seção 4.1). |
 | `UNI-REQ-0158` | Política de divulgação confirmada na publicação de resultado | Confirmação da política de divulgação antes de publicar (seção 4.1). |
+| `UNI-REQ-0210` | Quem retifica o processo seletivo, até quando e o que o ato de retificação informa | Quem retifica, até quando e a janela das fases de outras unidades (seção 4.2, proposta). |
+| `UNI-REQ-0211` | Prazos das fases na retificação | Fase concluída, prorrogação e prazo de inscrição (seção 4.2, proposta). |
+| `UNI-REQ-0212` | Efeito da retificação sobre as inscrições, a taxa e a isenção | Inscrição enviada, rascunho, perguntas retiradas e isenção aprovada (seção 4.2, proposta). |
 
 > A coleta de fatos e a derivação de modalidade (2.8) têm modelo de negócio próprio na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md) (`UNI-REQ-0065`, `UNI-REQ-0070` a `UNI-REQ-0078`).
