@@ -1,0 +1,44 @@
+---
+title: Não há retificação em curso neste processo
+sidebar_label: Retificação não aberta
+description: A operação alterar o motivo, descartar ou fechar existe só para a retificação em curso, e o processo não tem nenhuma.
+code: uniplus.selecao.retificacao_nao_aberta
+http_status: 409
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Alteração do motivo da retificação
+  - Descarte de retificação
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0021
+rastreio:
+  - label: 'uniplus-api#860'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/860
+  - label: 'uniplus-api#861'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/861
+  - label: 'uniplus-api#862'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/862
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido alterou o motivo (`PUT .../retificacao-em-curso`), descartou
+(`DELETE .../retificacao-em-curso`) ou fechou
+(`POST .../retificacao-em-curso/fechamento`) uma retificação, mas o processo
+não tem retificação em curso. A recusa sai com **409**.
+
+O caso mais comum é a retificação já ter sido fechada ou descartada, por você
+em outra janela ou por outra pessoa da unidade, entre a última leitura e este
+pedido.
+
+## Como resolver
+
+Recarregue o processo. Se a retificação foi fechada, a versão nova já está
+publicada e não há nada a fechar. Se foi descartada, a configuração é a
+publicada. Para mudar o processo, abra uma retificação nova
+(`POST .../retificacao-em-curso`) com o motivo.

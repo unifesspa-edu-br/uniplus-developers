@@ -1,0 +1,51 @@
+---
+title: A retificação acrescenta formulário, mas não remove
+sidebar_label: Remoção de formulário só em rascunho
+description: Com retificação em curso, o formulário de uma finalidade que o edital publicou não pode ser removido; a remoção só vale para processo em rascunho.
+code: uniplus.selecao.formulario_processo.remocao_so_em_rascunho
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Remoção do formulário de uma finalidade
+requisitos:
+  - UNI-REQ-0144
+rastreio:
+  - label: 'uniplus-api#1696'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1696
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa em revisão
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0212 e a
+confirmar pelo PO, permite retirar na retificação o formulário que nenhum envio
+usou. Quando a API aplicar a regra, a retirada com envio feito passa a sair com
+`uniplus.selecao.retificacao.formulario_com_envio_feito`. O texto abaixo
+descreve a recusa como a API a aplica hoje.
+
+:::
+
+## O que aconteceu
+
+O pedido removeu o formulário de uma finalidade
+(`DELETE .../formularios/{finalidade}`), inteiro, com os itens e os termos,
+num processo com retificação em curso. A recusa sai com **422**, antes da
+conferência do `If-Match`, porque nenhuma remoção de formulário é aceita na
+retificação.
+
+A retificação pode acrescentar o formulário de uma finalidade que o processo
+ainda não tinha (UNI-REQ-0144), mas não retira o que o edital publicou:
+candidatos podem ter preenchido esse formulário numa versão publicada.
+Retirar **perguntas** de um formulário é outra operação, feita ao regravar os
+itens.
+
+## Como resolver
+
+Mantenha o formulário. Se o que precisa mudar são perguntas ou termos, regrave
+os itens (`PUT .../formularios/{finalidade}/itens`) ou os termos
+(`PUT .../formularios/{finalidade}/termos`) dentro da retificação. Se o
+processo ainda não foi publicado, a remoção é aceita fora de retificação.
