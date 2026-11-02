@@ -3930,4 +3930,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0203',
+    titulo: 'Todo acesso a dado pessoal ou sensível fica registrado antes de o dado ser entregue',
+    enunciado:
+      'Quando alguém da equipe acessa dado pessoal ou sensível de um candidato, como o CPF revelado a pedido ou um documento da inscrição, o Uni+ registra quem acessou, com qual permissão, de qual inscrição e qual dado foi revelado, sem guardar o conteúdo do dado. O dado só é entregue depois de o registro estar gravado; se o registro não puder ser gravado, nada é registrado e a ação falha com aviso de indisponibilidade, sem que a falha vire recusa de acesso nem omissão do dado; a pessoa pode repetir a ação, que é registrada como um novo acesso. O acesso a várias inscrições de uma vez, como numa lista, é registrado por inteiro ou não é registrado. O registro fica separado dos dados da aplicação, de modo que quem opera o sistema não altera nem apaga a trilha. A consulta dos registros pela proteção de dados vem numa entrega posterior. O candidato, ao acessar os próprios dados, não gera registro de acesso de terceiro. Rastreia a governança das concessões (UNI-REQ-0184) e o registro das operações de tratamento exigido pela LGPD (art. 37). Proposta do líder técnico em 31/10/2026.',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Revelar o CPF e abrir documento da inscrição geram registro com quem acessou, a permissão, a inscrição e o dado revelado, sem o conteúdo; sem o registro gravado o dado não é entregue e a resposta é de indisponibilidade, não de recusa; uma falha no meio do registro de várias inscrições não deixa registro parcial; o acesso do candidato aos próprios dados não gera registro de acesso de terceiro.',
+    verificacao: 'Testes automatizados de API da revelação e do documento com o registro publicado e com a falha de gravação (uniplus-api#2162).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];
