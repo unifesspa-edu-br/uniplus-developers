@@ -4056,4 +4056,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0209',
+    titulo: 'Toda recusa de acesso por falta de permissão fica registrada',
+    enunciado:
+      'Quando o Uni+ recusa um pedido por falta de permissão, em qualquer módulo e para qualquer tipo de dado, a recusa fica registrada na trilha de acessos, com quem pediu, a permissão que faltou e o motivo, sem guardar o conteúdo do dado. O mesmo vale quando a pessoa é impedida de atuar porque está inscrita no processo seletivo (conflito de interesse), e a trilha distingue esse impedimento da falta de permissão. Se o pedido pode ser atendido por mais de uma permissão alternativa e nenhuma é concedida, a recusa de cada uma é registrada; se uma delas permite, nenhuma recusa é registrada. Quando a pessoa tem a permissão só como concessão geral e a regra exige concessão numa unidade, a recusa é registrada com esse motivo próprio. Não são recusas, e não são registradas, as verificações que só decidem o que mostrar a quem já está usando o sistema, como se um botão aparece ou qual visão do processo exibir, nem o pedido sem identificação da pessoa, que fica no registro comum de requisições. O pedido para abrir o detalhe de uma inscrição ou para revelar um documento de identificação, quando a inscrição não existe, é de outro processo ou ainda é rascunho, feito por quem não tem, na unidade dona do processo, a permissão de consultar inscrições (no detalhe) ou alguma das duas exigidas para revelar (ver o número mascarado e revelar), também é registrado, sem indicar a inscrição, e a resposta é a mesma de uma inscrição existente: não encontrado; para quem tem a permissão, o endereço errado não gera registro. O pedido de documento da inscrição e o de processo inexistente seguem sem esse registro. Se o registro da recusa não puder ser gravado, a resposta é de serviço indisponível, como no acesso permitido a dado pessoal (UNI-REQ-0203), e a pessoa recusada passa a ver indisponibilidade no lugar de acesso negado. O acesso permitido continua registrado quando envolve dado pessoal, sensível ou de identificação; por isso, com a trilha fora do ar, quem tem permissão em uma tela de dado menos protegido segue trabalhando. Exemplo: Erick, sem permissão para consultar inscrições, tenta abrir a inscrição de Fernanda e recebe a recusa, que fica registrada em seu nome; com a trilha indisponível, ele recebe o aviso de indisponibilidade. Detalha os controles de proteção de dados pessoais (UNI-REQ-0035) e o registro das operações de tratamento exigido pela LGPD (art. 37). Proposta do líder técnico em 01/11/2026.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0035',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A recusa por falta de permissão é registrada em qualquer módulo e com qualquer classificação de dado; o impedimento por inscrição no processo é registrado e distinguível; com permissões alternativas, a recusa de cada uma é registrada quando nenhuma permite e nenhuma é registrada quando uma permite; a concessão geral onde se exige concessão em unidade é registrada com motivo próprio; a verificação que só escolhe o que mostrar, o pedido sem identificação e o acesso permitido a dado abaixo do pessoal não geram registro de recusa; o pedido de abrir o detalhe ou de revelar documento de identificação sobre inscrição inexistente, de outro processo ou em rascunho, feito sem a permissão, é registrado sem a inscrição e responde não encontrado, e feito com a permissão não é registrado; sem o registro gravado, a resposta é de indisponibilidade, e o acesso permitido a dado abaixo do pessoal segue sem depender da trilha.',
+    verificacao: 'Testes automatizados de API da recusa por falta de permissão, do impedimento, das permissões alternativas, da inscrição inexistente e da falha de gravação (uniplus-api#2162).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend',
+  },
 ];
