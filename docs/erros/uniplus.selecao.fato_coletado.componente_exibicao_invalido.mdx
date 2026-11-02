@@ -1,0 +1,28 @@
+---
+title: A forma de exibição copiada do catálogo não existe
+sidebar_label: Forma de exibição copiada inválida
+description: A cópia do fato do catálogo trouxe uma forma de exibição fora das opções aceitas; é uma falha interna, não do que foi enviado.
+code: uniplus.selecao.fato_coletado.componente_exibicao_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Configuração dos fatos coletados de um processo seletivo
+requisitos:
+  - UNI-REQ-0207
+rastreio:
+  - label: 'uniplus-api#2183'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2183
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao copiar o fato do catálogo para o processo, a forma de exibição veio com um valor que o Uni+ não reconhece. Isso indica cópia corrompida do catálogo, não um erro no que foi enviado.
+
+## Como resolver
+
+Tente de novo. Se a recusa persistir, informe a equipe do Uni+ com o código deste erro e o fato envolvido.

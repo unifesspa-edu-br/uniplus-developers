@@ -1,0 +1,29 @@
+---
+title: A forma de exibição do fato não existe
+sidebar_label: Forma de exibição inválida
+description: O fato foi cadastrado ou alterado com uma forma de exibição fora das opções aceitas.
+code: uniplus.configuracao.fato_candidato.componente_exibicao_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato do catálogo
+  - Alteração de um fato do catálogo
+requisitos:
+  - UNI-REQ-0207
+rastreio:
+  - label: 'uniplus-api#2183'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2183
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A forma de exibição diz como o valor do fato aparece para quem analisa a inscrição, quando isso não se deduz do tipo do dado. O valor enviado não é uma das opções aceitas.
+
+## Como resolver
+
+Escolha uma das opções que a tela de cadastro oferece, como moeda ou situação, ou deixe sem declaração para exibir o valor pelo tipo do dado.
