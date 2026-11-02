@@ -1,0 +1,54 @@
+---
+title: O formulário do pedido de isenção está declarado obrigatório
+sidebar_label: Pedido de isenção obrigatório
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; um formulário obrigatório foi ligado à fase da janela de isenção sem que a fase também colete a inscrição.
+code: uniplus.selecao.formulario_processo.formulario_da_isencao_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Gravação do formulário do processo
+  - Aplicação de modelo de formulário
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0106
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+A fase da janela de isenção da taxa (UNI-REQ-0106) recebe os formulários do pedido
+de isenção, e só pede isenção quem quer: eles são sempre facultativos
+(UNI-REQ-0144). O formulário indicado está obrigatório e a fase **não** coleta
+a inscrição, de modo que ele seria um pedido de isenção imposto a todos os
+candidatos, até a quem vai pagar a taxa. A recusa sai com **422**, e o `detail`
+diz o formulário.
+
+Quando a mesma fase coleta a inscrição e a janela de isenção, esta recusa não se
+aplica: os formulários obrigatórios dela são os da inscrição, e os facultativos,
+os do pedido de isenção. O formulário obrigatório com o bloco de escolha de
+fundamentos é recusado com `uniplus.estrutura_formulario.bloco_nao_admitido` em
+qualquer fase.
+
+## Como resolver
+
+Declare o formulário facultativo. Se ele deve ser respondido por todos os
+candidatos, **retire o bloco de escolha de fundamentos dele** (um formulário com o
+bloco é o do pedido de isenção e é recusado como obrigatório em qualquer fase) e
+só então mantenha-o obrigatório, em uma fase que não seja a da janela de isenção
+ou na fase que também coleta a inscrição. **Ao retirar o bloco, deixe na janela de isenção formulários facultativos com o
+bloco que ofereçam, juntos, cada fundamento referenciado pelo processo, cada um em
+um único formulário. Acrescente o fundamento à lista de um formulário do pedido que
+já existe ou crie um. Fundamento sem formulário, ou em dois, é recusado.** Depois
+disso, grave de novo.

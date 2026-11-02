@@ -1,0 +1,33 @@
+---
+title: O formulário de inscrição não coleta o conjunto básico de dados do candidato
+sidebar_label: Inscrição sem conjunto básico
+description: A publicação recusa o processo com inscrição pelo sistema em que o formulário de inscrição não coleta todos os dados do conjunto básico do candidato na seção reservada.
+code: uniplus.selecao.processo_seletivo.inscricao_sem_conjunto_basico
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+requisitos:
+  - UNI-REQ-0151
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo declara que a inscrição é feita pelo sistema, e o formulário de
+inscrição não coleta todos os dados do conjunto básico do candidato (UNI-REQ-0151:
+nome, CPF, RG, nacionalidade, data de nascimento, endereço e os demais dados
+básicos) na seção reservada a eles. A API confere os dados do conjunto nessa
+seção do formulário de inscrição, e falta pelo menos um. A recusa sai com
+**422**, e o `detail` diz quantos dados faltam.
+
+## Como resolver
+
+Restaure a seção reservada dos dados básicos do formulário de inscrição: grave de
+novo o formulário e, depois, os itens dele, o que repõe a seção com todos os dados
+do conjunto. Ou parta do modelo de inscrição do tipo do processo, que já traz o
+conjunto básico completo. Depois disso, publique de novo.

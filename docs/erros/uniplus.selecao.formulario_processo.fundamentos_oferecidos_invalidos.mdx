@@ -1,0 +1,46 @@
+---
+title: A lista de fundamentos do formulário do pedido de isenção é inválida
+sidebar_label: Lista de fundamentos inválida
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; a lista de fundamentos que o formulário do pedido de isenção oferece está vazia ou cita um fundamento que o processo não referencia.
+code: uniplus.selecao.formulario_processo.fundamentos_oferecidos_invalidos
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0101
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+O formulário do pedido de isenção, o que tem o bloco de escolha de fundamentos,
+oferece uma lista de fundamentos que precisa ter ao menos um fundamento, e todos
+eles referenciados pelo processo (UNI-REQ-0144). A lista do formulário está vazia,
+ou cita um fundamento que o processo não referencia: por exemplo, a doação de
+medula óssea saiu dos fundamentos do processo e continua na lista do formulário.
+A recusa sai na publicação e no fechamento da retificação, com **422**. O
+`detail` identifica sempre o formulário e cita o fundamento só quando há um que o
+processo não referencia; com a lista vazia, não cita fundamento.
+
+## Como resolver
+
+Ajuste a lista do formulário: retire dela o fundamento que o processo não
+referencia, ou acrescente ao menos um fundamento referenciado se a lista ficou
+vazia. Se o fundamento deve continuar valendo, volte a referenciá-lo no processo.
+Se o formulário deixou de ter fundamento algum, retire-o, enquanto nenhum pedido
+tiver sido enviado por ele. Depois disso, publique de novo.

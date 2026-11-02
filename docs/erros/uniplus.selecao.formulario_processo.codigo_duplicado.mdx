@@ -1,0 +1,40 @@
+---
+title: Dois formulários do processo têm o mesmo código
+sidebar_label: Código de formulário duplicado
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; o código do formulário já identifica outro formulário do mesmo processo.
+code: uniplus.selecao.formulario_processo.codigo_duplicado
+http_status: 409
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Gravação do formulário do processo
+  - Aplicação de modelo de formulário
+requisitos:
+  - UNI-REQ-0144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+O processo tem quantos formulários forem necessários (UNI-REQ-0144), e cada um é
+identificado por um código que não se repete dentro do processo. O código
+informado já pertence a outro formulário dele, de modo que a gravação (ou a
+aplicação de um modelo) substituiria o formulário errado. A recusa sai com
+**409**, e o `detail` diz o código repetido.
+
+## Como resolver
+
+Escolha outro código para o formulário novo, como `HABILITACAO_COMPLEMENTAR` no
+lugar de `HABILITACAO`. Se a intenção era mudar o formulário que já existe,
+grave-o pelo código dele, em vez de criar um novo. Depois disso, grave de novo.
