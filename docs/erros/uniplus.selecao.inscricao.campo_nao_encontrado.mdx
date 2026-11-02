@@ -1,0 +1,41 @@
+---
+title: O dado pedido não foi encontrado na inscrição
+sidebar_label: Dado da inscrição não encontrado
+description: O dado que se pediu para revelar não existe na inscrição ou não está ao alcance de quem pediu.
+code: uniplus.selecao.inscricao.campo_nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Revelação de um número de documento de identificação da inscrição
+requisitos:
+  - UNI-REQ-0208
+rastreio:
+  - label: 'uniplus-api#2184'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2184
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido para mostrar por inteiro um número de documento de identificação da
+inscrição, como o CPF ou o passaporte, não foi atendido. A resposta é a mesma
+em todos os casos, para não revelar o que existe na inscrição: o dado não é um
+identificador, não foi preenchido, a ocorrência indicada não existe, a
+inscrição não está ao alcance de quem pediu ou a pessoa não tem a permissão de
+ver o número mascarado ou a de revelar identificadores. A recusa por falta de
+permissão fica registrada; o endereço errado pedido por quem tem as permissões, não.
+
+## Como resolver
+
+Confira se o documento de identificação foi informado pelo candidato: só o
+documento informado pode ser revelado. Quem pode consultar a inscrição confere ali
+se o documento aparece mascarado, com a opção de revelar. Quem não pode consultar
+inscrições confere a inscrição e o documento pedidos com quem conduz a
+conferência. Revelar exige duas permissões: ver o número mascarado e revelar
+identificadores; nenhuma depende da de consultar inscrições. Se a opção não aparece e a conferência do documento faz
+parte do seu trabalho, peça a que falta pelo pedido de acesso, que passa pela
+aprovação da proteção de dados.
