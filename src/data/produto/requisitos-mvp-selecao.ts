@@ -4077,4 +4077,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0214',
+    titulo: 'O nome do município da inscrição vem do Geo, conferido no envio',
+    enunciado:
+      'No envio da inscrição, o sistema confere no Geo, o cadastro de localidades do Uni+, cada município que o candidato informou e o endereço pelo CEP, e grava o nome conferido junto com o código do município. O nome que o navegador mandou nunca vale: nem o de município, nem o da cidade de um endereço, mesmo quando diverge. A consulta administrativa, o comprovante e o acompanhamento do candidato mostram o nome gravado, sem consultar o Geo de novo, e por isso continuam corretos com o Geo fora do ar. As regras do processo, como o requisito regional e a reserva de vagas, continuam lendo só o código do município. O rascunho guarda só o código do município, e o Geo não é consultado para o município ao salvá-lo; o endereço é conferido pelo CEP já no rascunho, e o Geo fora do ar adia essa conferência para o envio. Município de campo que a inscrição não pede, por exemplo a naturalidade de quem declarou nacionalidade estrangeira, não é conferido nem recusado. Município que o Geo não conhece, ou que não pertence à UF informada, é recusado no próprio campo, e o endereço cujo CEP o Geo não resolve, ou resolve para outra cidade, é recusado no endereço. O envio acumula todas as recusas, as de endereço, de município e de campo obrigatório, e as devolve juntas, para o candidato corrigir tudo de uma vez. O aviso de que o Geo não respondeu só vale quando não há nenhuma outra recusa que o candidato possa corrigir; nesse caso nada é gravado e o rascunho continua salvo para tentar de novo. No segundo envio de uma inscrição, o município já gravado é conferido de novo e o nome é regravado. Exemplo: Erick Isaac Ramos informa Salvador como município de nascimento (código 2927408) e envia a inscrição; Isabella Priscila Figueiredo abre a inscrição dele e lê "Salvador", e continua lendo "Salvador" mesmo com o Geo fora do ar. Proposta do líder técnico em 02/11/2026.',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0151',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O município respondido, o município de residência e o de cada ocorrência de grupo ficam gravados com código e nome, e o nome é o que o Geo devolveu no envio; o nome de cidade que o navegador mandou num endereço é ignorado, mesmo quando diverge; o rascunho guarda só o código do município e não consulta o Geo para município, mas confere o endereço pelo CEP, adiando a conferência para o envio se o Geo estiver fora do ar; município que o Geo não conhece é recusado no campo, assim como o de outra UF, com uma recusa só por campo; município de campo que a inscrição não pede não é conferido nem recusado; as recusas de endereço, de município e de campo obrigatório saem numa resposta só; com o Geo fora do ar, o envio devolve o aviso de indisponibilidade só quando não há outra recusa a corrigir, não grava nada e mantém o rascunho; a consulta, o comprovante e o acompanhamento mostram o nome gravado sem consultar o Geo, e o requisito regional dá o mesmo resultado no envio e depois dele, também com o Geo fora do ar; o segundo envio regrava o nome.',
+    verificacao: 'Testes automatizados de domínio, de aplicação e de API do envio, da consulta e do comprovante, com o Geo no ar e fora do ar (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
 ];
