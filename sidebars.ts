@@ -65,6 +65,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'erros/uniplus.selecao.processo_seletivo.localidade_ausente',
         'erros/uniplus.selecao.processo_seletivo.fuso_institucional_nao_reconhecido',
+        'erros/uniplus.selecao.fato_coletado.componente_exibicao_invalido',
         'erros/uniplus.selecao.processo_seletivo.algoritmo_contagem_prazo_nao_declarado',
         'erros/uniplus.selecao.processo_seletivo.calendario_vigente_ausente',
         'erros/uniplus.selecao.calendario_vigente.forma_territorial_invalida',
@@ -779,6 +780,8 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.configuracao.fato_candidato.eixo_nao_editavel_no_tipo_do_fato',
         'erros/uniplus.configuracao.fato_candidato.fonte_nao_comporta_os_valores',
         'erros/uniplus.configuracao.fato_candidato.hipotese_legal_invalida',
+        'erros/uniplus.configuracao.fato_candidato.descricao_obrigatoria',
+        'erros/uniplus.configuracao.fato_candidato.componente_exibicao_invalido',
         'erros/uniplus.configuracao.fato_candidato.definicao_do_fato_de_sistema_travada',
         'erros/uniplus.configuracao.protecao_do_catalogo.solicitacao_sem_item',
         'erros/uniplus.configuracao.protecao_do_catalogo.item_nao_pendente',
