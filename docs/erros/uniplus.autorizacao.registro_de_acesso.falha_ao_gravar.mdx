@@ -1,0 +1,29 @@
+---
+title: O acesso não pôde ser registrado e por isso não foi concluído
+sidebar_label: Falha ao registrar o acesso
+description: O dado pessoal ou sensível só é entregue depois de o acesso estar registrado; sem o registro, a ação não é concluída.
+code: uniplus.autorizacao.registro_de_acesso.falha_ao_gravar
+http_status: 503
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Revelação do CPF da inscrição
+  - Abertura de documento da inscrição
+requisitos:
+  - UNI-REQ-0203
+rastreio:
+  - label: 'uniplus-api#2162'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2162
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Todo acesso a dado pessoal ou sensível de um candidato fica registrado antes de o dado ser entregue. O registro desta ação não pôde ser gravado, e por isso nada foi registrado e o dado não foi mostrado. Não é uma recusa: a permissão de quem pediu não foi avaliada como insuficiente.
+
+## Como resolver
+
+Repita a ação em instantes. Se a falha continuar, avise a equipe de suporte do Uni+, porque nenhum acesso a dado protegido é concluído enquanto o registro estiver indisponível.

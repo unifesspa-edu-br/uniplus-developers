@@ -534,6 +534,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.autorizacao.revisao.autor_nao_identificado',
         'erros/uniplus.autorizacao.pedido.filtro_de_situacao_invalido',
         'erros/uniplus.autorizacao.pedido.cursor_invalido',
+        'erros/uniplus.autorizacao.registro_de_acesso.falha_ao_gravar',
         'erros/uniplus.organizacao.unidade.nome_obrigatorio',
         'erros/uniplus.organizacao.unidade.nome_tamanho',
         'erros/uniplus.organizacao.unidade.sigla_obrigatoria',
