@@ -3951,4 +3951,25 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0204',
+    titulo: 'A modalidade e as opções de concorrer são dados internos, e o processo congela a proteção de todo fato',
+    enunciado:
+      'A modalidade de concorrência do candidato, a modalidade em que ele é convocado, a segunda opção de modalidade e as opções de concorrer (como concorrer pela reserva de vagas) são dados internos: aparecem nas listas de resultado que a lei manda publicar e não revelam, sozinhas, a condição que dá direito à reserva. A condição que dá o direito, como a deficiência, a cor ou raça e a renda, continua com a proteção que já tem, pessoal ou sensível. A segunda opção de modalidade passa a constar do catálogo de fatos como fato de sistema derivado. Na publicação, o processo seletivo congela, de cada fato que coleta e de cada fato derivado do catálogo, a classificação de proteção de dados, a base legal e a finalidade do tratamento; do fato derivado congela também o nome, o tipo de dado e se aceita um ou vários valores. Mudar o catálogo depois não muda o processo publicado, e a retificação mantém o que o processo já congelou; só o fato derivado novo vem do catálogo. A conferência da proteção do documento exigido usa a classificação congelada no processo, e a exigência só comprova fato que o processo coleta ou que é derivado do catálogo. A classificação semeada é o valor inicial e passa pela aprovação da proteção de dados. Detalha o catálogo de fatos (UNI-REQ-0143). Proposta do líder técnico em 31/10/2026.',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0143',
+    modulo: 'Configuração; Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O catálogo semeado classifica como internas as modalidades e as opções de concorrer, e a segunda opção de modalidade está no catálogo como fato de sistema derivado; a publicação congela classificação, base legal e finalidade de todo fato coletado e derivado, e nome, tipo e cardinalidade do derivado; alterar o catálogo depois não muda o processo publicado nem a retificação; a conferência da exigência usa a classificação congelada; exigência que comprova fato que o processo não coleta e que não é derivado é recusada.',
+    verificacao: 'Testes automatizados de domínio e de integração da publicação, da retificação e da conferência das exigências (uniplus-api, issue da classificação da modalidade).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];
