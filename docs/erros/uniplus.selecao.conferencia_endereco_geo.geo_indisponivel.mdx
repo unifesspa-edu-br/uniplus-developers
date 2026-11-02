@@ -1,0 +1,50 @@
+---
+title: O Geo não respondeu
+sidebar_label: Geo indisponível
+description: O envio foi recusado porque o Geo, o cadastro de localidades do Uni+, não respondeu à conferência; nada desta tentativa foi gravado.
+code: uniplus.selecao.conferencia_endereco_geo.geo_indisponivel
+http_status: 503
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0214
+rastreio:
+  - label: 'uniplus-api#2186'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2186
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+No envio da inscrição, o sistema confere no Geo, o cadastro de localidades
+do Uni+, o endereço pelo CEP e os municípios informados. O Geo não
+respondeu, e o sistema não aceita um município ou um endereço sem essa
+conferência. Por isso o envio foi recusado por inteiro.
+
+Este aviso é temporário e não aponta erro nos dados do candidato. Ele só
+é dado quando não há nenhuma outra recusa que o candidato possa corrigir:
+se houvesse, o envio seria recusado com 422 e a lista dessas recusas.
+
+Nada desta tentativa foi gravado. O que vale depende do caso:
+
+- **Primeiro envio:** a inscrição não foi enviada, e o que fica é a última
+  versão salva do rascunho. Se você alterou respostas depois do último
+  salvamento e as mandou junto com o pedido de envio, essas alterações não
+  foram gravadas.
+- **Correção de inscrição já enviada:** a correção não foi gravada, e a
+  inscrição e o comprovante do envio anterior continuam valendo.
+
+## Como resolver
+
+Aguarde alguns minutos. Se for o primeiro envio, abra o rascunho e confira
+as respostas que você alterou desde o último salvamento, refazendo as que
+faltarem. Se for a correção de uma inscrição já enviada, refaça a correção
+a partir da inscrição como ela está. Em seguida, envie outra vez. Se o
+prazo de inscrição estiver perto do fim, tente de novo o quanto antes. Se o
+aviso persistir por muito tempo, procure o canal de suporte do processo
+seletivo.

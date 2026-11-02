@@ -1,0 +1,48 @@
+---
+title: O CEP pertence a outra cidade que a declarada
+sidebar_label: CEP de outra cidade
+description: O CEP informado no endereço da inscrição pertence a uma cidade diferente da que o candidato declarou.
+code: uniplus.selecao.inscricao.endereco_cep_de_outra_cidade
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0214
+rastreio:
+  - label: 'uniplus-api#2186'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2186
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O endereço da inscrição é conferido pelo CEP no Geo, o cadastro de
+localidades do Uni+, ao salvar o rascunho e ao enviar a inscrição. O Geo
+resolveu o CEP para uma cidade ou uma UF diferente da que o candidato
+declarou no endereço.
+
+A comparação é pelo código da cidade e pela UF. No rascunho, é só essa
+conferência de CEP, código e UF, e o endereço é gravado como veio. No
+envio, o nome da cidade que o navegador mandou também deixa de valer: o
+nome gravado é o que o Geo resolve pelo CEP.
+
+## Como resolver
+
+Confira se o CEP e a cidade combinam. Se o CEP está certo, escolha no
+endereço a cidade e a UF a que ele pertence. Se a cidade está certa,
+corrija o CEP para um da mesma cidade.
+
+Se usar o CEP geral da cidade, descreva o endereço real no complemento e
+preencha também o logradouro e o bairro, que passam a ser obrigatórios. Se
+o formulário pedir que você confirme o endereço, faça a confirmação antes
+de enviar. Sem essas informações, o envio é recusado de novo, por outro
+motivo.
+
+Depois de corrigir, envie a inscrição outra vez; se ela ainda é rascunho,
+você também pode salvar antes. Nada desta tentativa foi gravado.
