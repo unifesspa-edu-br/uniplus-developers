@@ -4187,7 +4187,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0218',
     titulo: 'Cada chamada tem publicação e janela próprias',
     enunciado:
-      'Cada chamada é publicada com a lista dos convocados, a janela de envio dos documentos e, quando houver, a agenda das bancas. A janela é definida em cada chamada, durante o processo, pela unidade responsável pela fase, como o Centro de Gestão Acadêmica no Edital de Medicina 2027.',
+      'Cada chamada é publicada com a lista dos convocados, a janela de envio dos documentos e, quando houver, a agenda das bancas. A janela é definida em cada chamada, durante o processo, pela unidade responsável pela fase, como o Centro de Gestão Acadêmica no Edital de Medicina 2027. ' +
+      'Exemplo: a 1ª chamada de um processo é publicada com os seus convocados e a janela de 01/02 a 05/02. A 2ª é publicada com outros convocados e a janela de 20/02 a 24/02. Se a modalidade de um convocado tiver banca, a agenda sai na publicação; se a chamada não tiver banca, ela é publicada sem agenda.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4208,7 +4209,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0219',
     titulo: 'Regras da habilitação vêm do edital e valem para todas as chamadas',
     enunciado:
-      'As regras que decidem a habilitação, como os documentos exigidos, o formato aceito e o prazo de recurso, vêm do edital e são as mesmas em todas as chamadas do processo. A chamada define a janela e a agenda, mas não altera essas regras.',
+      'As regras que decidem a habilitação, como os documentos exigidos, o formato aceito e o prazo de recurso, vêm do edital e são as mesmas em todas as chamadas do processo. A chamada define a janela e a agenda, mas não altera essas regras. ' +
+      'Exemplo: Fernanda, da 1ª chamada, e Leandro, da 2ª, foram convocados no mesmo grupo de vagas. As janelas são diferentes, mas os documentos, os formatos aceitos e o prazo de recurso são os mesmos. Se o edital der dois dias úteis para recorrer, a 2ª chamada não pode dar três.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4229,7 +4231,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0220',
     titulo: 'Edital fixa o período da habilitação',
     enunciado:
-      'O edital fixa o período da habilitação. Ponto em confirmação com o PO: se a janela de cada chamada (UNI-REQ-0218) precisa ficar dentro desse período e o que acontece se a habilitação atrasar ou se houver chamada depois do fim do período.',
+      'O edital fixa o período da habilitação. Ponto em confirmação com o PO: se a janela de cada chamada (UNI-REQ-0218) precisa ficar dentro desse período e o que acontece se a habilitação atrasar ou se houver chamada depois do fim do período. ' +
+      'Exemplo da dúvida: o edital fixa a habilitação de 01/02 a 31/03. Uma chamada com janela de 10/02 a 14/02 fica dentro do período, mas ainda não está definido o que acontece com uma chamada necessária em abril.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4250,7 +4253,10 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0221',
     titulo: 'Vaga liberada segue para a chamada seguinte',
     enunciado:
-      'A vaga liberada por recusa, não comparecimento ou indeferimento vai para a chamada seguinte. A vaga não ocupada em uma chamada só pode ser ocupada na chamada seguinte, nunca dentro da mesma chamada.',
+      'A vaga liberada por recusa, não comparecimento ou indeferimento, quando não é assumida pela reserva da própria chamada (UNI-REQ-0228), vai para a chamada seguinte. A vaga que termina uma chamada sem ocupante só pode ser ocupada na chamada seguinte, e, dentro da chamada, só quem foi convocado nela para a reserva pode assumi-la. ' +
+      'Exemplo 1, sem cadastro de reserva: Fernanda é convocada na 1ª chamada e recusa a vaga. Ninguém assume na 1ª chamada, e a vaga vai para a 2ª. ' +
+      'Exemplo 2, com cadastro de reserva: na 2ª chamada, Fernanda é convocada para a vaga, e Leandro e Marlene para a reserva. Fernanda é indeferida, sem recurso pendente. Leandro assume ainda na 2ª chamada, porque foi convocado nela, e não é preciso outra chamada. ' +
+      'Exemplo 3: no mesmo caso, Fernanda, Leandro e Marlene não ocupam a vaga. Ela termina a 2ª chamada sem ocupante e só pode ser ocupada na 3ª.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4262,8 +4268,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Recusa, não comparecimento e indeferimento já sem recurso administrativo pendente liberam a vaga, que fica disponível para a chamada seguinte e nunca é ocupada por duas pessoas; ninguém assume a vaga liberada dentro da mesma chamada.',
-    verificacao: 'Testes automatizados de cada motivo de liberação (planejado).',
+      'Sem cadastro de reserva, recusa, não comparecimento e indeferimento sem recurso administrativo pendente deixam a vaga para a chamada seguinte; com cadastro de reserva, a vaga é assumida na própria chamada por quem foi convocado para a reserva e só vai à chamada seguinte se ninguém a ocupar; quem não foi convocado na chamada não assume a vaga nela; a vaga nunca é ocupada por duas pessoas.',
+    verificacao: 'Testes automatizados de cada motivo de liberação, com e sem cadastro de reserva, e da vaga que termina a chamada sem ocupante (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -4271,7 +4277,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0222',
     titulo: 'Recurso administrativo pendente guarda só a vaga em disputa',
     enunciado:
-      'Enquanto houver recurso administrativo pendente, a vaga em disputa fica guardada e não entra na chamada seguinte. As demais vagas do curso seguem para a chamada normalmente, e a chamada seguinte pode ser publicada antes do julgamento do recurso.',
+      'Enquanto houver recurso administrativo pendente, a vaga em disputa fica guardada e não entra na chamada seguinte. As demais vagas do curso seguem para a chamada normalmente, e a chamada seguinte pode ser publicada antes do julgamento do recurso. ' +
+      'Exemplo: duas vagas de um curso ficaram disponíveis, e Marlene recorreu do indeferimento referente a uma delas. A chamada seguinte é publicada só com a outra vaga. Se o recurso for deferido, a vaga guardada fica com Marlene; se for indeferido, sem outra pendência administrativa, a vaga entra na chamada seguinte.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4292,7 +4299,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0223',
     titulo: 'Recurso judicial não guarda vaga',
     enunciado:
-      'O recurso judicial não guarda vaga: a vaga em disputa segue para a chamada seguinte normalmente. Se a Justiça reconhecer depois o direito do candidato, ele é matriculado em vaga adicional ao quadro, sem desclassificar ninguém (UNI-REQ-0082).',
+      'O recurso judicial não guarda vaga: a vaga em disputa segue o caminho normal, assumida pela reserva da própria chamada, quando houver, ou na chamada seguinte. Se a Justiça reconhecer depois o direito do candidato, ele é matriculado em vaga adicional ao quadro, sem desclassificar ninguém (UNI-REQ-0082). ' +
+      'Exemplo: Leandro entra com ação na Justiça contra o indeferimento. A vaga segue para a chamada seguinte, e Fernanda a ocupa. Se a decisão judicial final for favorável, Leandro é matriculado em vaga adicional: o quadro continua com 40 vagas, com 41 matriculados, e Fernanda permanece.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4304,7 +4312,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Registrar recurso judicial não retém vaga nem impede a publicação da chamada seguinte; o quadro de vagas e a classificação não mudam.',
+      'Registrar recurso judicial não retém vaga, não impede a reserva de assumi-la nem a publicação da chamada seguinte; o quadro de vagas e a classificação não mudam.',
     verificacao: 'Teste automatizado da chamada seguinte com recurso judicial registrado (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -4313,7 +4321,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0224',
     titulo: 'Recurso cabe contra o resultado da habilitação, não contra a convocação',
     enunciado:
-      'Não cabe recurso contra a convocação em si, porque o resultado que a fundamenta já teve a sua fase de recurso (UNI-REQ-0166). Cabe recurso contra o resultado da habilitação, no prazo declarado no edital.',
+      'Não cabe recurso contra a convocação em si, porque o resultado que a fundamenta já teve a sua fase de recurso (UNI-REQ-0166). Cabe recurso contra o resultado da habilitação, no prazo declarado no edital. ' +
+      'Exemplo: Leandro discorda de não ter sido convocado na 1ª chamada, mas o resultado já teve a sua fase de recurso, e não há recurso contra a convocação. Quando convocado e indeferido na habilitação, ele pode recorrer desse resultado no prazo do edital, mesmo se tiver sido convocado para o cadastro de reserva.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4334,7 +4343,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0225',
     titulo: 'Uni+ envia os novos alunos ao SIGAA',
     enunciado:
-      'O Uni+ envia os novos alunos ao SIGAA, e o SIGAA gera o número de matrícula. O envio é feito pela unidade responsável, como o Centro de Gestão Acadêmica no Edital de Medicina 2027, na conclusão do processo, ou a cada chamada quando as chamadas ocorrem depois do início das aulas. Matrícula em disciplinas é procedimento distinto e não faz parte desse envio.',
+      'O Uni+ envia os novos alunos ao SIGAA, e o SIGAA gera o número de matrícula. O envio é feito pela unidade responsável, como o Centro de Gestão Acadêmica no Edital de Medicina 2027, na conclusão do processo, ou a cada chamada quando as chamadas ocorrem depois do início das aulas. Matrícula em disciplinas é procedimento distinto e não faz parte desse envio. ' +
+      'Exemplo 1: processo com chamadas antes do início das aulas: o envio ocorre uma vez, na conclusão do processo. Exemplo 2: chamada depois do início das aulas: os habilitados dela que ocupam vaga são enviados ao fim da chamada, sem esperar a conclusão. ' +
+      'Exemplo 3: na mesma chamada, Fernanda ocupou a vaga, e Leandro, da reserva, foi habilitado, mas não assumiu vaga. Só Fernanda é enviada ao SIGAA, que devolve o número de matrícula dela.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4346,7 +4357,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Somente quem está habilitado é enviado; a pessoa autorizada faz o envio na conclusão do processo ou por chamada, conforme o caso; o número de matrícula vem do SIGAA, nunca do Uni+; enviar de novo não duplica o aluno, e a falha fica visível para nova tentativa.',
+      'Somente quem está habilitado e ocupa a vaga é enviado, e a pessoa da reserva que não assumiu vaga não é; a pessoa autorizada faz o envio na conclusão do processo ou por chamada, conforme o caso; o número de matrícula vem do SIGAA, nunca do Uni+; enviar de novo não duplica o aluno, e a falha fica visível para nova tentativa.',
     verificacao: 'Testes automatizados de envio, falha, repetição e retorno do número de matrícula (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4355,7 +4366,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0226',
     titulo: 'Avaliação biopsicossocial ocorre na habilitação',
     enunciado:
-      'A avaliação biopsicossocial acontece na habilitação, com todos os convocados cuja modalidade exige a avaliação.',
+      'A avaliação biopsicossocial acontece na habilitação, com todos os convocados cuja modalidade exige a avaliação. ' +
+      'Exemplo: em uma chamada, Leandro foi convocado em modalidade que exige a avaliação, e Fernanda, em modalidade que não exige. Só Leandro é encaminhado. A avaliação não é feita na inscrição nem em outra fase anterior à habilitação.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4367,7 +4379,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Todo convocado cuja modalidade exige a avaliação é encaminhado a ela, e quem está em modalidade que não a exige não é; a avaliação não é exigida antes da habilitação.',
+      'Todo convocado cuja modalidade exige a avaliação é encaminhado a ela, inclusive o convocado para o cadastro de reserva, e quem está em modalidade que não a exige não é; a avaliação não é exigida antes da habilitação.',
     verificacao: 'Testes automatizados com convocados de modalidades com e sem a exigência (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -4376,7 +4388,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0227',
     titulo: 'Documento já enviado é reaproveitado nas etapas seguintes',
     enunciado:
-      'O documento que o candidato já enviou numa etapa anterior é reaproveitado em qualquer etapa seguinte que o exija, inclusive na habilitação, e o sistema não cobra o reenvio. O candidato pode enviá-lo de novo se quiser, por exemplo por ter uma nova via. Se o documento tem prazo de validade e está vencido, o sistema exige obrigatoriamente o envio de um documento novo.',
+      'O documento que o candidato já enviou numa etapa anterior é reaproveitado em qualquer etapa seguinte que o exija, inclusive na habilitação, e o sistema não cobra o reenvio. O candidato pode enviá-lo de novo se quiser, por exemplo por ter uma nova via. Se o documento tem prazo de validade e está vencido, o sistema exige obrigatoriamente o envio de um documento novo. ' +
+      'Exemplo 1: Fernanda enviou o histórico escolar na inscrição, e a habilitação exige esse documento: ela não precisa reenviar, e o documento segue para a análise da habilitação. Exemplo 2: ela prefere enviar uma nova via: a nova via passa a ser a considerada. ' +
+      'Exemplo 3: o comprovante de residência dela tem validade de 90 dias e venceu entre a inscrição e a habilitação: o sistema exige um novo comprovante, e ela não conclui a entrega sem ele.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4390,6 +4404,31 @@ export const requisitosMvpSelecao: Requisito[] = [
     criterios_aceite:
       'Na etapa seguinte, o documento já enviado aparece como já enviado, sem cobrança de reenvio, e segue para a análise que a etapa prevê; o candidato pode enviar nova via; documento com prazo de validade vencido não é reaproveitado e o envio de um novo é obrigatório; arquivo recusado pela verificação de antivírus não é reaproveitado.',
     verificacao: 'Testes automatizados de reaproveitamento, de nova via e de documento vencido (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0228',
+    titulo: 'Cadastro de reserva dentro da chamada',
+    enunciado:
+      'Quando o edital prevê, a chamada convoca, além de quem ocupa a vaga, pessoas para o cadastro de reserva dessa mesma chamada. Elas também entregam os documentos na janela da chamada e, na ordem definida pelo edital, assumem a vaga em caso de falta, desistência ou indeferimento de quem a ocupava, sem nova chamada. A quantidade de pessoas por vaga vem do edital e nunca é fixada no sistema. ' +
+      'Enquanto houver recurso administrativo pendente de quem foi indeferido, a vaga fica guardada e a reserva não a assume (UNI-REQ-0222); se o recurso for indeferido, sem outra pendência administrativa, a próxima pessoa da reserva assume. Pontos em confirmação: se a reserva já assume durante o prazo de recurso, antes de ele ser interposto, e o que acontece, depois da chamada, com a pessoa da reserva que não assumiu vaga. ' +
+      'Exemplo 1: no Edital de Medicina 2027, a 2ª convocação chama três pessoas por vaga não preenchida. Com duas vagas, são seis convocados: dois para as vagas e quatro para a reserva. ' +
+      'Exemplo 2: Fernanda é convocada para a vaga, e Leandro e Marlene, para a reserva, todos na 2ª chamada. Fernanda desiste, e Leandro assume. Se Leandro for indeferido, Marlene assume. ' +
+      'Exemplo 3: com menos pessoas elegíveis do que o previsto, são convocadas só as que existem, e a vaga que terminar a chamada sem ocupante segue para a chamada seguinte (UNI-REQ-0221).',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0049',
+    modulo: 'Ingresso',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A chamada de edital com reserva identifica quem foi convocado para a vaga e quem foi para a reserva, na ordem definida; a chamada de edital sem reserva não convoca reserva; a pessoa da reserva entrega documentos na mesma janela; ao faltar, desistir ou ser indeferido sem recurso administrativo pendente quem ocupa a vaga, a próxima pessoa elegível assume, com registro; com recurso administrativo pendente, a vaga fica guardada; duas pessoas nunca ocupam a mesma vaga; a lista insuficiente não impede a publicação.',
+    verificacao: 'Testes automatizados com editais com e sem reserva, sucessão de duas pessoas na mesma vaga, recurso administrativo pendente, lista insuficiente e operações simultâneas (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
