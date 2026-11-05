@@ -4250,7 +4250,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0221',
     titulo: 'Vaga liberada segue para a chamada seguinte',
     enunciado:
-      'A vaga liberada por recusa, não comparecimento ou indeferimento vai para a chamada seguinte. Ponto em confirmação: como essa regra convive com o cadastro de reserva, informado para a segunda convocação de Medicina, em que uma pessoa da reserva pode assumir a vaga liberada.',
+      'A vaga liberada por recusa, não comparecimento ou indeferimento vai para a chamada seguinte. A vaga não ocupada em uma chamada só pode ser ocupada na chamada seguinte, nunca dentro da mesma chamada.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4262,7 +4262,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Recusa, não comparecimento e indeferimento já sem recurso administrativo pendente liberam a vaga, que fica disponível para a chamada seguinte e nunca é ocupada por duas pessoas.',
+      'Recusa, não comparecimento e indeferimento já sem recurso administrativo pendente liberam a vaga, que fica disponível para a chamada seguinte e nunca é ocupada por duas pessoas; ninguém assume a vaga liberada dentro da mesma chamada.',
     verificacao: 'Testes automatizados de cada motivo de liberação (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -4376,7 +4376,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0227',
     titulo: 'Documento já enviado é reaproveitado nas etapas seguintes',
     enunciado:
-      'O documento que o candidato já enviou numa etapa anterior é reaproveitado em qualquer etapa seguinte que o exija, inclusive na habilitação, e o sistema não cobra o reenvio. O candidato pode enviá-lo de novo se quiser, por exemplo por ter uma nova via. Ponto em confirmação: o que ocorre quando o documento enviado antes perdeu a validade exigida na etapa seguinte.',
+      'O documento que o candidato já enviou numa etapa anterior é reaproveitado em qualquer etapa seguinte que o exija, inclusive na habilitação, e o sistema não cobra o reenvio. O candidato pode enviá-lo de novo se quiser, por exemplo por ter uma nova via. Se o documento tem prazo de validade e está vencido, o sistema exige obrigatoriamente o envio de um documento novo.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4388,8 +4388,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Na etapa seguinte, o documento já enviado aparece como já enviado, sem cobrança de reenvio, e segue para a análise que a etapa prevê; o candidato pode enviar nova via; arquivo recusado pela verificação de antivírus não é reaproveitado.',
-    verificacao: 'Testes automatizados de reaproveitamento e de nova via (planejado).',
+      'Na etapa seguinte, o documento já enviado aparece como já enviado, sem cobrança de reenvio, e segue para a análise que a etapa prevê; o candidato pode enviar nova via; documento com prazo de validade vencido não é reaproveitado e o envio de um novo é obrigatório; arquivo recusado pela verificação de antivírus não é reaproveitado.',
+    verificacao: 'Testes automatizados de reaproveitamento, de nova via e de documento vencido (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
