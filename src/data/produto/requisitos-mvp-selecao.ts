@@ -6880,8 +6880,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     enunciado:
       'A vaga liberada por recusa, não comparecimento ou indeferimento, quando não é assumida pela reserva da própria chamada (UNI-REQ-0354), vai para a chamada seguinte. A vaga que termina uma chamada sem ocupante só pode ser ocupada na chamada seguinte, e, dentro da chamada, só quem foi convocado nela para a reserva pode assumi-la. ' +
       'Exemplo 1, sem cadastro de reserva: Fernanda é convocada na 1ª chamada e recusa a vaga. Ninguém assume na 1ª chamada, e a vaga vai para a 2ª. ' +
-      'Exemplo 2, com cadastro de reserva: na 2ª chamada, Fernanda é convocada para a vaga, e Leandro e Marlene para a reserva. Fernanda é indeferida, sem recurso pendente. Leandro assume ainda na 2ª chamada, porque foi convocado nela, e não é preciso outra chamada. ' +
-      'Exemplo 3: no mesmo caso, Fernanda, Leandro e Marlene não ocupam a vaga. Ela termina a 2ª chamada sem ocupante e só pode ser ocupada na 3ª.',
+      'Exemplo 2, com cadastro de reserva: na 2ª chamada, Fernanda é convocada para a vaga, e Leandro e Marlene para a reserva. Os três passam pela habilitação. Fernanda é indeferida, sem recurso pendente, e Leandro é homologado como habilitado. Leandro ocupa a vaga ainda na 2ª chamada, porque foi convocado nela, e não é preciso outra chamada. ' +
+      'Exemplo 3: no mesmo caso, nenhum dos três é homologado como habilitado. A vaga termina a 2ª chamada sem ocupante e só pode ser ocupada na 3ª.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6893,7 +6893,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Sem cadastro de reserva, recusa, não comparecimento e indeferimento sem recurso administrativo pendente deixam a vaga para a chamada seguinte; com cadastro de reserva, a vaga é assumida na própria chamada por quem foi convocado para a reserva e só vai à chamada seguinte se ninguém a ocupar; quem não foi convocado na chamada não assume a vaga nela; a vaga nunca é ocupada por duas pessoas.',
+      'Sem cadastro de reserva, recusa, não comparecimento e indeferimento sem recurso administrativo pendente deixam a vaga para a chamada seguinte; com cadastro de reserva, a vaga é ocupada na própria chamada por quem foi convocado para a reserva e homologado como habilitado, e só vai à chamada seguinte se ninguém a ocupar; quem não foi convocado na chamada não assume a vaga nela; a vaga nunca é ocupada por duas pessoas.',
     verificacao: 'Testes automatizados de cada motivo de liberação, com e sem cadastro de reserva, e da vaga que termina a chamada sem ocupante (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -6903,7 +6903,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     titulo: 'Recurso administrativo pendente guarda só a vaga em disputa',
     enunciado:
       'Enquanto houver recurso administrativo pendente, a vaga em disputa fica guardada e não entra na chamada seguinte. As demais vagas do curso seguem para a chamada normalmente, e a chamada seguinte pode ser publicada antes do julgamento do recurso. ' +
-      'Exemplo: duas vagas de um curso ficaram disponíveis, e Marlene recorreu do indeferimento referente a uma delas. A chamada seguinte é publicada só com a outra vaga. Se o recurso for deferido, a vaga guardada fica com Marlene; se for indeferido, sem outra pendência administrativa, a vaga entra na chamada seguinte.',
+      'Exemplo: duas vagas de um curso ficaram disponíveis, e Marlene recorreu do indeferimento referente a uma delas. A chamada seguinte é publicada só com a outra vaga. Se o recurso for deferido, a vaga guardada fica com Marlene; se for indeferido, sem outra pendência administrativa, a vaga segue para a reserva da própria chamada, quando houver, ou para a chamada seguinte.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6915,7 +6915,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Com recurso administrativo pendente, a chamada seguinte pode ser publicada sem a vaga em disputa e com as demais; ao ser deferido o recurso, a vaga fica com quem recorreu; ao ser indeferido, sem outra pendência administrativa, a vaga vai para a chamada seguinte.',
+      'Com recurso administrativo pendente, a chamada seguinte pode ser publicada sem a vaga em disputa e com as demais; ao ser deferido o recurso, a vaga fica com quem recorreu; ao ser indeferido, sem outra pendência administrativa, a vaga segue o caminho normal: a reserva da própria chamada, quando houver, ou a chamada seguinte.',
     verificacao: 'Testes automatizados da guarda e da liberação da vaga, incluindo os dois desfechos do recurso (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -6925,7 +6925,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     titulo: 'Recurso judicial não guarda vaga',
     enunciado:
       'O recurso judicial não guarda vaga: a vaga em disputa segue o caminho normal, assumida pela reserva da própria chamada, quando houver, ou na chamada seguinte. Se a Justiça reconhecer depois o direito do candidato, ele é matriculado em vaga adicional ao quadro, sem desclassificar ninguém (UNI-REQ-0082). ' +
-      'Exemplo: Leandro entra com ação na Justiça contra o indeferimento. A vaga segue para a chamada seguinte, e Fernanda a ocupa. Se a decisão judicial final for favorável, Leandro é matriculado em vaga adicional: o quadro continua com 40 vagas, com 41 matriculados, e Fernanda permanece.',
+      'Exemplo: Leandro entra com ação na Justiça contra o indeferimento. A vaga segue para a chamada seguinte, e Fernanda, convocada e homologada como habilitada, a ocupa. Se a decisão judicial final for favorável, Leandro é matriculado em vaga adicional: o quadro continua com 40 vagas, com 41 matriculados, e Fernanda permanece.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6969,8 +6969,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     titulo: 'Uni+ envia os novos alunos ao SIGAA',
     enunciado:
       'O Uni+ envia os novos alunos ao SIGAA, e o SIGAA gera o número de matrícula. O envio é feito pela unidade responsável, como o Centro de Gestão Acadêmica no Edital de Medicina 2027, na conclusão do processo, ou a cada chamada quando as chamadas ocorrem depois do início das aulas. Matrícula em disciplinas é procedimento distinto e não faz parte desse envio. ' +
-      'Exemplo 1: processo com chamadas antes do início das aulas: o envio ocorre uma vez, na conclusão do processo. Exemplo 2: chamada depois do início das aulas: os habilitados dela que ocupam vaga são enviados ao fim da chamada, sem esperar a conclusão. ' +
-      'Exemplo 3: na mesma chamada, Fernanda ocupou a vaga, e Leandro, da reserva, foi habilitado, mas não assumiu vaga. Só Fernanda é enviada ao SIGAA, que devolve o número de matrícula dela.',
+      'Exemplo 1: processo com chamadas antes do início das aulas: o envio ocorre uma vez, na conclusão do processo. Exemplo 2: chamada depois do início das aulas: os homologados como habilitados que ocupam vaga são enviados ao fim da chamada, sem esperar a conclusão. ' +
+      'Exemplo 3: na mesma chamada, Fernanda e Leandro, da reserva, foram homologados como habilitados. Fernanda ocupou a vaga, e Leandro não. Só Fernanda é enviada ao SIGAA, que devolve o número de matrícula dela.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6982,7 +6982,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Somente quem está habilitado e ocupa a vaga é enviado, e a pessoa da reserva que não assumiu vaga não é; a pessoa autorizada faz o envio na conclusão do processo ou por chamada, conforme o caso; o número de matrícula vem do SIGAA, nunca do Uni+; enviar de novo não duplica o aluno, e a falha fica visível para nova tentativa.',
+      'Somente quem foi homologado como habilitado e ocupa a vaga é enviado; o convocado ainda sem homologação e a pessoa da reserva homologada que não ocupou vaga não são; a pessoa autorizada faz o envio na conclusão do processo ou por chamada, conforme o caso; o número de matrícula vem do SIGAA, nunca do Uni+; enviar de novo não duplica o aluno, e a falha fica visível para nova tentativa.',
     verificacao: 'Testes automatizados de envio, falha, repetição e retorno do número de matrícula (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -7036,10 +7036,10 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0354',
     titulo: 'Cadastro de reserva dentro da chamada',
     enunciado:
-      'Quando o edital prevê, a chamada convoca, além de quem ocupa a vaga, pessoas para o cadastro de reserva dessa mesma chamada. Elas também entregam os documentos na janela da chamada e, na ordem definida pelo edital, assumem a vaga em caso de falta, desistência ou indeferimento de quem a ocupava, sem nova chamada. A quantidade de pessoas por vaga vem do edital e nunca é fixada no sistema. ' +
-      'Enquanto houver recurso administrativo pendente de quem foi indeferido, a vaga fica guardada e a reserva não a assume (UNI-REQ-0348); se o recurso for indeferido, sem outra pendência administrativa, a próxima pessoa da reserva assume. Pontos em confirmação: se a reserva já assume durante o prazo de recurso, antes de ele ser interposto, e o que acontece, depois da chamada, com a pessoa da reserva que não assumiu vaga. ' +
-      'Exemplo 1: no Edital de Medicina 2027, a 2ª convocação chama três pessoas por vaga não preenchida. Com duas vagas, são seis convocados: dois para as vagas e quatro para a reserva. ' +
-      'Exemplo 2: Fernanda é convocada para a vaga, e Leandro e Marlene, para a reserva, todos na 2ª chamada. Fernanda desiste, e Leandro assume. Se Leandro for indeferido, Marlene assume. ' +
+      'Quando o edital prevê, a chamada convoca, além de quem ocupa a vaga, pessoas para o cadastro de reserva dessa mesma chamada. Elas também entregam os documentos na janela da chamada e, na ordem definida pelo edital, ocupam a vaga, desde que homologadas como habilitadas (UNI-REQ-0356), em caso de falta, desistência ou indeferimento de quem estava à frente, sem nova chamada. A quantidade de pessoas da reserva por vaga vem da configuração do processo (UNI-REQ-0355) e nunca é fixada no sistema. ' +
+      'Enquanto houver recurso administrativo pendente de quem foi indeferido, a vaga fica guardada e a reserva não a assume (UNI-REQ-0348); se o recurso for indeferido, sem outra pendência administrativa, a próxima pessoa da reserva homologada como habilitada ocupa a vaga. Pontos em confirmação: se a reserva já assume durante o prazo de recurso, antes de ele ser interposto, e o que acontece, depois da chamada, com a pessoa da reserva que não assumiu vaga. ' +
+      'Exemplo 1: no Edital de Medicina 2027, a 2ª convocação chama, por vaga não preenchida, uma pessoa para a vaga e duas para a reserva. Com duas vagas, são seis convocados: dois para as vagas e quatro para a reserva. ' +
+      'Exemplo 2: Fernanda é convocada para a vaga, e Leandro e Marlene, para a reserva, todos na 2ª chamada. Todos passam pela habilitação. Se os três forem homologados como habilitados, Fernanda ocupa a vaga, e Leandro e Marlene ficam na reserva. Se Fernanda desistir, Leandro ocupa a vaga. Se, além disso, Leandro for indeferido, Marlene ocupa a vaga, desde que homologada. ' +
       'Exemplo 3: com menos pessoas elegíveis do que o previsto, são convocadas só as que existem, e a vaga que terminar a chamada sem ocupante segue para a chamada seguinte (UNI-REQ-0347).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
@@ -7052,8 +7052,57 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A chamada de edital com reserva identifica quem foi convocado para a vaga e quem foi para a reserva, na ordem definida; a chamada de edital sem reserva não convoca reserva; a pessoa da reserva entrega documentos na mesma janela; ao faltar, desistir ou ser indeferido sem recurso administrativo pendente quem ocupa a vaga, a próxima pessoa elegível assume, com registro; com recurso administrativo pendente, a vaga fica guardada; duas pessoas nunca ocupam a mesma vaga; a lista insuficiente não impede a publicação.',
+      'A chamada para a qual o processo configura reserva identifica quem foi convocado para a vaga e quem foi para a reserva, na ordem definida; a chamada sem reserva configurada não convoca reserva; a pessoa da reserva entrega documentos na mesma janela; ao faltar, desistir ou ser indeferido sem recurso administrativo pendente quem está à frente, a próxima pessoa homologada como habilitada ocupa a vaga, com registro; com recurso administrativo pendente, a vaga fica guardada; duas pessoas nunca ocupam a mesma vaga; a lista insuficiente não impede a publicação.',
     verificacao: 'Testes automatizados com editais com e sem reserva, sucessão de duas pessoas na mesma vaga, recurso administrativo pendente, lista insuficiente e operações simultâneas (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0355',
+    titulo: 'Configuração do cadastro de reserva por chamada',
+    enunciado:
+      'Quem configura o processo declara, para cada chamada que tem cadastro de reserva, quantas pessoas da reserva são convocadas por vaga, conforme o edital. A chamada sem essa declaração não tem reserva. A declaração é facultativa, porque nem todo edital tem reserva, e fica congelada na publicação do processo, como as demais regras do edital; só muda por retificação. Sem ela, o sistema não teria como saber quantas pessoas convocar (UNI-REQ-0354). ' +
+      'O número conta só as pessoas da reserva, sem incluir quem é convocado para a vaga. ' +
+      'Exemplo 1: o edital diz que a 2ª chamada convoca três pessoas por vaga, uma para a vaga e duas para a reserva. Quem configura declara 2ª chamada, duas pessoas da reserva por vaga. Com duas vagas, são seis convocados. ' +
+      'Exemplo 2: o edital não prevê reserva na 1ª chamada. Nada é declarado para ela, e cada vaga convoca uma pessoa. ' +
+      'Exemplo 3: o processo não declara reserva em nenhuma chamada. A vaga liberada vai sempre para a chamada seguinte (UNI-REQ-0347).',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0049',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A configuração aceita, por número de chamada, uma quantidade inteira de pelo menos uma pessoa da reserva por vaga; a quantidade zero ou negativa, o número de chamada inválido e a mesma chamada declarada duas vezes são recusados; o processo pode ser publicado sem nenhuma declaração; a configuração fica congelada na publicação e aparece na leitura do processo; mudar depois da publicação exige retificação; a revisão da configuração mostra por chamada a quantidade declarada ou a ausência de reserva; a chamada convoca até a quantidade declarada para o número dela, conforme as pessoas elegíveis existentes.',
+    verificacao: 'Testes automatizados da configuração, das recusas, do congelamento na publicação e da retificação, e teste de interface do preenchimento e da revisão (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0356',
+    titulo: 'Convocação não é habilitação nem ocupação da vaga',
+    enunciado:
+      'Ser convocado é ser chamado para passar pela habilitação. Ser homologado como habilitado é o resultado da análise dessa habilitação. Só quem é homologado como habilitado pode ocupar a vaga. A convocação não garante a homologação, e a homologação de quem está na reserva não garante a vaga. ' +
+      'Exemplo 1: Fernanda foi convocada e entregou os documentos. Enquanto a análise não termina, ela não está habilitada nem ocupa a vaga. ' +
+      'Exemplo 2: Fernanda é convocada e indeferida. Ela não ocupa a vaga, mesmo tendo sido a primeira na ordem. ' +
+      'Exemplo 3: Fernanda e Leandro, da reserva, são homologados como habilitados. Fernanda, à frente na ordem, ocupa a vaga, e Leandro continua sem vaga.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0049',
+    modulo: 'Ingresso',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Convocado, homologado como habilitado e ocupante da vaga são situações distintas e consultáveis de cada pessoa; publicar a chamada não marca ninguém como habilitado nem como ocupante da vaga; só a homologação marca a pessoa como habilitada; somente pessoa homologada como habilitada pode ocupar a vaga ou ser enviada ao SIGAA.',
+    verificacao: 'Testes automatizados das passagens entre as situações e das recusas (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
