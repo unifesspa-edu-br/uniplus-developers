@@ -3247,7 +3247,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Existe catálogo por fundamento; criar, editar, ativar e desativar motivo exige autorização institucional própria, sem depender de nome de perfil no código; a decisão preserva o código e a descrição vigentes no momento em que foi proferida.',
+      'Existe catálogo por fundamento; criar, editar, desativar e reativar motivo exige autorização institucional própria, sem depender de nome de perfil no código; a decisão preserva o código e a descrição vigentes no momento em que foi proferida.',
     verificacao: 'Testes de manutenção do catálogo e de preservação histórica da decisão.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO',
@@ -3340,7 +3340,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0125',
     titulo: 'Consulta auditável da trilha de manutenção sem conceder escrita',
     enunciado:
-      'A consulta da justificativa de manutenção e da trilha protegida do catálogo é uma operação própria, concedível a qualquer perfil autorizado, que não habilita criar, alterar, ativar ou desativar motivo nem julgar recurso.',
+      'A consulta da justificativa de manutenção e da trilha protegida do catálogo é uma operação própria, concedível a qualquer perfil autorizado, que não habilita criar, alterar, desativar ou reativar motivo nem julgar recurso.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
