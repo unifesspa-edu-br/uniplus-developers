@@ -3359,9 +3359,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0126',
-    titulo: 'Resultado preliminar de homologação por regularização financeira',
+    titulo: 'Resultado de homologação por regularização financeira',
     enunciado:
-      'Ao término do limite de regularização, composto pelo fim das inscrições, pelo prazo de pagamento e por janela de reconciliação com o provedor de arrecadação, a fase de inscrição publica resultado preliminar de homologação. Inscrição sem pagamento confirmado nem isenção deferida consta como não homologada pelo motivo de falta de pagamento da taxa; a publicação não cria novo status de inscrição.',
+      'No processo com taxa de inscrição, ao término do limite de regularização, composto pelo fim das inscrições, pelo prazo de pagamento e por janela de reconciliação com o provedor de arrecadação, a homologação é apurada e publicada nos resultados que a fase declara no edital. Inscrição sem pagamento confirmado nem isenção deferida consta como não homologada pelo motivo de falta de pagamento da taxa; a publicação não cria novo status de inscrição. Ajuste proposto pelo líder técnico em 05/11/2026, a confirmar pelo PO.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -3373,16 +3373,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O resultado preliminar distingue homologada de não homologada com motivo; a situação da inscrição permanece a existente; a janela de reconciliação nunca é inferior ao mínimo aprovado.',
-    verificacao: 'Testes de publicação do resultado preliminar e de preservação do status.',
+      'O resultado distingue homologada de não homologada com motivo; a situação da inscrição permanece a existente; a janela de reconciliação nunca é inferior ao mínimo aprovado.',
+    verificacao: 'Testes de publicação dos resultados que a fase declara e de preservação do status.',
     pagina_developers: '/produto/requisitos/',
     owner: 'PO',
   },
   {
     requisito_id: 'UNI-REQ-0127',
-    titulo: 'Recurso contra a não homologação e resultado definitivo imutável',
+    titulo: 'Recurso contra a não homologação e resultado final imutável',
     enunciado:
-      'Candidato não homologado pode interpor um único recurso tempestivo. Julgados os recursos, publica-se o resultado definitivo de homologação, que é imutável, não admite revogação administrativa nem novo recurso sobre a homologação, e é pré-requisito para iniciar a fase seguinte.',
+      'Quando a fase declara resultado preliminar com janela de recurso, o candidato não homologado pode interpor um único recurso tempestivo, e o acolhimento o homologa no resultado final. O resultado final é imutável, não admite revogação administrativa nem novo recurso sobre a homologação, e é pré-requisito para iniciar a fase seguinte. Ajuste proposto pelo líder técnico em 05/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3394,10 +3394,120 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Segundo recurso é recusado; a fase seguinte não inicia antes da publicação definitiva; após a publicação definitiva, alteração é recusada.',
+      'Segundo recurso é recusado; a fase que declara só o resultado final não oferece recurso; a fase seguinte não inicia antes da publicação do resultado final; após essa publicação, alteração é recusada.',
     verificacao: 'Testes de unicidade do recurso, de bloqueio da fase seguinte e de imutabilidade.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
+  },
+  {
+    requisito_id: 'UNI-REQ-0231',
+    titulo: 'Inscrição homologada pela confirmação do INEP',
+    enunciado:
+      'No processo que usa a nota do ENEM, a inscrição é homologada quando o retorno do INEP traz resultado da pessoa na edição que ela indicou, consultada somente pelo CPF. Quem tem resultado é homologado mesmo que falte nota; a falta de nota é tratada depois, nas regras de eliminação da classificação. Exemplo 1: Fernanda tem resultado e notas válidas: é homologada e segue para a classificação. Exemplo 2: Leandro tem resultado, mas faltou a um dia de prova: é homologado e depois eliminado por falta de nota. Exemplo 3: Marlene indicou o ano errado e não aparece no retorno: não é homologada. No processo com taxa que usa a nota do ENEM, valem as duas condições: a confirmação do INEP e o pagamento ou a isenção (UNI-REQ-0126). Regra repassada pelo líder técnico em 05/11/2026 como definição do PO, com confirmação pedida por escrito.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0023',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A apuração distingue homologada de não homologada, com motivo, a partir do retorno vigente do INEP, e o motivo de pagamento só existe em processo com taxa.',
+    verificacao:
+      'Teste automatizado com as personas fictícias: pessoa com notas válidas, pessoa ausente em um dia de prova e pessoa fora do retorno (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0232',
+    titulo: 'Quem não é homologado é eliminado no resultado final da homologação',
+    enunciado:
+      'A inscrição não homologada é eliminada quando se publica o resultado final da homologação, e a pessoa não é classificada. Os resultados que a fase publica são os que o administrador declara no edital: só o resultado final ou também um resultado preliminar. Antes da publicação do resultado final, ninguém está eliminado por não homologação. Exemplo 1: a fase declara só o resultado final. Marlene consta nele como não homologada e é eliminada nessa publicação. Exemplo 2: a fase declara resultado preliminar e final. Marlene consta como não homologada no preliminar e ainda não está eliminada; o que vale é a situação dela no final. Regra repassada pelo líder técnico em 05/11/2026 como definição do PO, com confirmação pedida por escrito.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0023',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'No processo com fase de homologação, a classificação não inicia sem o resultado final da homologação e não inclui eliminados.',
+    verificacao:
+      'Teste automatizado da publicação nas duas configurações da fase e da recusa de iniciar a classificação sem o resultado final (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0233',
+    titulo: 'Linhas em conflito impedem a publicação do resultado',
+    enunciado:
+      'Enquanto houver inscrito com linhas em conflito no retorno do INEP, sem decisão do CEPS, o resultado da homologação e o da classificação não são publicados. O sistema não escolhe uma das linhas. Exemplo: o arquivo traz duas linhas de Helena com notas de redação diferentes: a publicação é recusada até o CEPS decidir qual vale. Proposta do líder técnico em 05/11/2026, a confirmar pelo PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0043',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A publicação é recusada e informa quantos conflitos estão pendentes em cada edição, sem identificar as pessoas, e a página de erro correspondente é publicada no portal.',
+    verificacao:
+      'Teste automatizado da recusa com conflito pendente e da publicação depois da decisão (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0234',
+    titulo: 'Decisão do CEPS sobre linhas em conflito, na tela da importação',
+    enunciado:
+      'O CEPS resolve o conflito na tela da importação, sem editar o arquivo. A tela mostra lado a lado, para cada pessoa, o número da linha, o número de inscrição no ENEM, as notas por área e as presenças de cada linha. O CEPS confere, escolhe a linha que vale e registra a justificativa; o ato fica registrado com autor, data e linha escolhida, e a nota da pessoa passa a ser calculada por essa linha, como se fosse a única do arquivo. Enquanto o resultado que usa a nota não for publicado, a decisão pode ser trocada, e a anterior permanece registrada. O sistema não aceita nota digitada. A alternativa à escolha é repetir a consulta: gerar de novo o arquivo com os CPFs, enviá-lo à plataforma do INEP e importar o retorno, que substitui o anterior (UNI-REQ-0174). Não há solicitação formal ao INEP. O critério da conferência e o que fazer se o novo retorno mantiver o conflito aguardam a definição do PO. A decisão vale para o arquivo em que foi tomada: importar de novo o mesmo arquivo a mantém, e um arquivo diferente não a herda. Para a comparação, a importação guarda das linhas em conflito somente o número da linha, o número de inscrição no ENEM, as notas e as presenças; nome, CPF e dados cadastrais dessas linhas não são guardados. Exemplo: Helena aparece nas linhas 12 e 13 com notas de redação 720 e 680. O CEPS escolhe a linha 12 e justifica: a nota de Helena é calculada com 720, e o conflito deixa de estar pendente. Proposta do líder técnico em 05/11/2026, a confirmar pelo PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0043',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A decisão exige linha do conflito e justificativa e é registrada com autor e data sem alterar o lote; a nota passa a ser calculada pela linha escolhida; a troca é aceita até a publicação do resultado que usa a nota e recusada depois; não há operação que aceite nota digitada; reimportar o mesmo arquivo mantém a decisão e um arquivo diferente não a herda; nenhum nome ou CPF das linhas em conflito é guardado.',
+    verificacao:
+      'Testes automatizados com arquivos sintéticos gerados com as personas fictícias: decisão, recusa sem justificativa, troca antes e depois da publicação, reimportação e arquivo diferente; teste da tela de comparação (planejados).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0235',
+    titulo: 'Inscrito sem consulta ao INEP impede a publicação do resultado',
+    enunciado:
+      'O resultado da homologação e, no processo sem essa fase, o da classificação não são publicados enquanto houver inscrito cuja edição do ENEM não tenha consulta feita depois do fim das inscrições: o último arquivo de envio da edição precisa ter sido gerado depois desse fim, e o arquivo que vale precisa ter sido importado depois desse envio, ainda que o retorno venha idêntico a um anterior. Assim, ninguém é eliminado por não ter sido consultado na plataforma do INEP. Exemplo 1: o processo admite as edições de 2024, 2025 e 2026, e Betina indicou 2024. Enquanto o retorno dessa edição não for importado, a publicação é recusada. Exemplo 2: o envio foi gerado antes de Breno se inscrever. Mesmo com o retorno importado depois do fim das inscrições, a publicação é recusada até um novo envio e a importação do retorno dele. Exemplo 3: depois do fim das inscrições, o CEPS gera o envio de novo e o retorno vem idêntico ao anterior. Ao ser importado, ele conta como consulta, e a publicação segue. Proposta do líder técnico em 05/11/2026, a confirmar pelo PO.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0043',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A publicação é recusada e informa as edições sem consulta válida, sem identificar as pessoas, inclusive quando o envio é anterior ao fim das inscrições ou a importação é anterior ao último envio; o retorno idêntico importado depois do envio é aceito; edição sem inscrito não é exigida; a página de erro correspondente é publicada no portal.',
+    verificacao:
+      'Teste automatizado da recusa com edição sem retorno, com envio anterior ao fim das inscrições e com importação anterior ao último envio, e da publicação com todas as edições consultadas, inclusive com retorno idêntico ao anterior e com edição admitida sem inscrito (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
   },
   {
     requisito_id: 'UNI-REQ-0128',
@@ -3649,7 +3759,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0174',
     titulo: 'Entrada das notas do ENEM pelo arquivo do INEP',
     enunciado:
-      'As notas do ENEM entram no processo seletivo pela troca de arquivos com o INEP, por processo, pela etapa de nota do ENEM e por edição do ENEM. Para uma edição, o sistema gera o arquivo de envio com o CPF das inscrições submetidas do processo que escolheram essa edição; sem nenhuma inscrição submetida na edição, o envio é recusado. O envio e a importação seguem a etapa e as edições do edital divulgado, e o processo ainda sem edital divulgado não tem envio nem importação. O arquivo de retorno do INEP é importado com o formato (leiaute) escolhido por quem importa, entre os formatos que o sistema conhece. O arquivo cuja estrutura não corresponde ao formato escolhido é recusado inteiro, sem gravar nenhuma nota, para que a nota de uma área nunca seja gravada como se fosse de outra. Também é recusado inteiro o arquivo que traz, na situação de uma prova, código diferente de presente e ausente, até o CEPS confirmar o significado dos códigos do INEP. Cada candidato encontrado recebe as notas das cinco áreas (Ciências da Natureza, Ciências Humanas, Linguagens, Matemática e Redação), com a indicação de presença em cada prova e o número de inscrição no ENEM. Do arquivo, só entram as notas, as presenças e o número de inscrição; nome, data de nascimento, município, documento e língua estrangeira não são guardados, nem o próprio arquivo; da linha cujo CPF não é de inscrito da edição, guardam-se só o CPF mascarado (***.999.999-**), o nome e o sexo que o arquivo informa, para o CEPS reconhecer a pessoa, e o sexo diferente de feminino e masculino recusa o arquivo inteiro. Importar de novo o arquivo que já vale não duplica nada, e importar de novo um arquivo anterior da edição faz ele voltar a valer. Um arquivo diferente da mesma edição substitui o anterior por inteiro, porque o retorno do INEP é o retrato completo da edição: quem não aparece no arquivo novo fica sem nota. O que não virou nota é listado no resultado da importação, sem interromper a importação: o inscrito que não aparece no arquivo, a linha cujo CPF não é de inscrito da edição (identificada pelo número da linha, pelo CPF mascarado e pelo nome e sexo do arquivo) e o mesmo CPF de inscrito em duas linhas diferentes, que o CEPS confere e decide, sem que o sistema escolha uma das linhas. O resultado lista também quem faltou a uma ou mais provas, com as provas. Para o CEPS localizar cada pessoa, o inscrito sem linha, o ausente e o inscrito em conflito aparecem com o número de inscrição, o nome, o CPF mascarado e os cursos que escolheu, em ordem de preferência. Duas linhas que só diferem nos dados que não são guardados (nome, dados cadastrais) contam como uma; o CPF que não é de inscrito, repetido em várias linhas, aparece uma vez por linha. A nota da etapa é a média das cinco áreas ponderada pelos pesos do grupo de área do curso que o candidato concorre, tirados do edital divulgado no momento da importação, sem arredondamento, que é regra da classificação; com a segunda opção de curso, cada curso tem a sua nota. Os pesos de um grupo de área somam mais que zero: o cadastro de Pesos por Área e a classificação do processo recusam o quadro com todos os pesos zerados. Depois de uma retificação do edital, a nota só muda com nova importação, e importar de novo o mesmo arquivo sob o edital retificado recalcula as notas. A importação é recusada inteira, sem gravar nada, quando alguma inscrição da edição concorre a um curso que não está no edital divulgado. Quem faltou a uma prova tem zero naquela área, com a indicação de ausente, que a regra de eliminação por falta usa, e a nota da etapa é calculada com esse zero; o arquivo que traz prova ausente com nota diferente de zero é recusado inteiro. O inscrito que não aparece no arquivo ou tem linhas em conflito fica sem nota da etapa, com o motivo (sem linha no arquivo ou linhas em conflito), nunca com nota zero. O candidato que troca de edição do ENEM depois da importação fica sem nota até a importação do arquivo da edição nova. Gerar o envio e importar o retorno são atos restritos, registrados com autor, data, edição e formato; o nome do autor é gravado no momento do ato. As edições do ENEM aceitas são as que o processo declara: na Medicina e no processo seletivo regular, as de 2024, 2025 e 2026; no processo de vagas remanescentes, ao menos as dos últimos 13 anos (definição do PO de 26/10/2026). Por isso o sistema precisa conhecer também os formatos de retorno do INEP anteriores a 2024. O inscrito que não aparece no arquivo da edição que escolheu é eliminado, como o edital de abertura prevê (definição do PO de 26/10/2026); a eliminação considera o arquivo que vale quando a classificação é processada, e o inscrito com linhas em conflito aguarda a decisão do CEPS. A identificação das pessoas no resultado da importação e o nome do autor são decisão técnica do líder técnico em 26/10/2026, com o CPF mascarado pelo Parecer DPO 002/2026. Proposta do líder técnico em 26/10/2026, confirmada pelo PO em 26/10/2026, inclusive o tratamento do mesmo CPF em duas linhas, que o CEPS confere e decide.',
+      'As notas do ENEM entram no processo seletivo pela troca de arquivos com o INEP, por processo, pela etapa de nota do ENEM e por edição do ENEM. Para uma edição, o sistema gera o arquivo de envio com o CPF das inscrições submetidas do processo que escolheram essa edição; sem nenhuma inscrição submetida na edição, o envio é recusado. O envio e a importação seguem a etapa e as edições do edital divulgado, e o processo ainda sem edital divulgado não tem envio nem importação. O arquivo de retorno do INEP é importado com o formato (leiaute) escolhido por quem importa, entre os formatos que o sistema conhece. O arquivo cuja estrutura não corresponde ao formato escolhido é recusado inteiro, sem gravar nenhuma nota, para que a nota de uma área nunca seja gravada como se fosse de outra. Também é recusado inteiro o arquivo que traz, na situação de uma prova, código diferente de presente e ausente, até o CEPS confirmar o significado dos códigos do INEP. Cada candidato encontrado recebe as notas das cinco áreas (Ciências da Natureza, Ciências Humanas, Linguagens, Matemática e Redação), com a indicação de presença em cada prova e o número de inscrição no ENEM. Do arquivo, só entram as notas, as presenças, o número de inscrição e, das linhas em conflito, o número da linha; nome, data de nascimento, município, documento e língua estrangeira não são guardados, nem o próprio arquivo; da linha cujo CPF não é de inscrito da edição, guardam-se só o número da linha, o CPF mascarado (***.999.999-**), o nome e o sexo que o arquivo informa, para o CEPS reconhecer a pessoa, e o sexo diferente de feminino e masculino recusa o arquivo inteiro. Importar de novo o arquivo que já vale não duplica nada, e importar de novo um arquivo anterior da edição faz ele voltar a valer. Um arquivo diferente da mesma edição substitui o anterior por inteiro, porque o retorno do INEP é o retrato completo da edição: quem não aparece no arquivo novo fica sem nota. O que não virou nota é listado no resultado da importação, sem interromper a importação: o inscrito que não aparece no arquivo, a linha cujo CPF não é de inscrito da edição (identificada pelo número da linha, pelo CPF mascarado e pelo nome e sexo do arquivo) e o mesmo CPF de inscrito em duas linhas diferentes, que o CEPS confere e decide na tela da importação (UNI-REQ-0234), sem que o sistema escolha uma das linhas. O resultado lista também quem faltou a uma ou mais provas, com as provas. Para o CEPS localizar cada pessoa, o inscrito sem linha, o ausente e o inscrito em conflito aparecem com o número de inscrição, o nome, o CPF mascarado e os cursos que escolheu, em ordem de preferência. Duas linhas que só diferem nos dados que não são guardados (nome, dados cadastrais) contam como uma; o CPF que não é de inscrito, repetido em várias linhas, aparece uma vez por linha. A nota da etapa é a média das cinco áreas ponderada pelos pesos do grupo de área do curso que o candidato concorre, tirados do edital divulgado no momento da importação, sem arredondamento, que é regra da classificação; com a segunda opção de curso, cada curso tem a sua nota. Os pesos de um grupo de área somam mais que zero: o cadastro de Pesos por Área e a classificação do processo recusam o quadro com todos os pesos zerados. Depois de uma retificação do edital, a nota só muda com nova importação, e importar de novo o mesmo arquivo sob o edital retificado recalcula as notas. A importação é recusada inteira, sem gravar nada, quando alguma inscrição da edição concorre a um curso que não está no edital divulgado. Quem faltou a uma prova tem zero naquela área, com a indicação de ausente, que a regra de eliminação por falta usa, e a nota da etapa é calculada com esse zero; o arquivo que traz prova ausente com nota diferente de zero é recusado inteiro. O inscrito que não aparece no arquivo ou tem linhas em conflito fica sem nota da etapa, com o motivo (sem linha no arquivo ou linhas em conflito), nunca com nota zero. O candidato que troca de edição do ENEM depois da importação fica sem nota até a importação do arquivo da edição nova. Gerar o envio e importar o retorno são atos restritos, registrados com autor, data, edição e formato; o nome do autor é gravado no momento do ato. As edições do ENEM aceitas são as que o processo declara: na Medicina e no processo seletivo regular, as de 2024, 2025 e 2026; no processo de vagas remanescentes, ao menos as dos últimos 13 anos (definição do PO de 26/10/2026). Por isso o sistema precisa conhecer também os formatos de retorno do INEP anteriores a 2024. O inscrito que não aparece no arquivo da edição que escolheu não é homologado e é eliminado no resultado final da homologação (UNI-REQ-0231 e UNI-REQ-0232), como o edital de abertura prevê (definição do PO de 26/10/2026). No processo sem fase de homologação, a eliminação considera o arquivo que vale quando a classificação é processada. O inscrito com linhas em conflito aguarda a decisão do CEPS. A identificação das pessoas no resultado da importação e o nome do autor são decisão técnica do líder técnico em 26/10/2026, com o CPF mascarado pelo Parecer DPO 002/2026. Proposta do líder técnico em 26/10/2026, confirmada pelo PO em 26/10/2026, inclusive o tratamento do mesmo CPF em duas linhas, que o CEPS confere e decide. O momento da eliminação e o meio da decisão são ajuste proposto pelo líder técnico em 05/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3661,7 +3771,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O envio de uma edição lista o CPF de cada inscrição submetida do processo que a escolheu; o retorno no formato escolhido grava as cinco notas e as presenças de cada candidato encontrado; sem inscrição submetida na edição, o envio é recusado; o processo sem edital divulgado não tem envio nem importação; o arquivo de outra estrutura, ou com código de situação além de presente e ausente, é recusado sem gravar nada; reimportar o arquivo que já vale não duplica, e reimportar um arquivo anterior da edição faz ele voltar a valer; o inscrito ausente do arquivo, a linha de CPF que não é inscrito e o CPF de inscrito em duas linhas diferentes aparecem no resultado sem interromper a importação; o resultado lista quem faltou a alguma prova, com as provas; o inscrito afetado aparece com número de inscrição, nome, CPF mascarado e cursos, e a linha sem inscrito com o número da linha, o CPF mascarado e o nome e o sexo do arquivo; o sexo diferente de feminino e masculino recusa o arquivo; o envio e a importação mostram o nome de quem agiu; a nota da etapa é a média ponderada pelos pesos do grupo do curso no edital divulgado, sem arredondamento, uma por curso concorrido; o quadro de pesos que soma zero é recusado; a prova ausente com nota diferente de zero recusa o arquivo; depois de uma retificação, reimportar o mesmo arquivo recalcula as notas; a inscrição em curso que não está no edital divulgado recusa a importação; o inscrito sem linha no arquivo fica sem nota e é eliminado, e o ausente numa prova tem zero na área com a indicação de ausente; um arquivo novo da edição substitui o anterior por inteiro; o candidato que troca de edição fica sem nota até nova importação; nenhum dado do arquivo além de notas, presenças, número de inscrição e, da linha sem inscrito, CPF mascarado, nome e sexo é guardado.',
+      'O envio de uma edição lista o CPF de cada inscrição submetida do processo que a escolheu; o retorno no formato escolhido grava as cinco notas e as presenças de cada candidato encontrado; sem inscrição submetida na edição, o envio é recusado; o processo sem edital divulgado não tem envio nem importação; o arquivo de outra estrutura, ou com código de situação além de presente e ausente, é recusado sem gravar nada; reimportar o arquivo que já vale não duplica, e reimportar um arquivo anterior da edição faz ele voltar a valer; o inscrito ausente do arquivo, a linha de CPF que não é inscrito e o CPF de inscrito em duas linhas diferentes aparecem no resultado sem interromper a importação; o resultado lista quem faltou a alguma prova, com as provas; o inscrito afetado aparece com número de inscrição, nome, CPF mascarado e cursos, e a linha sem inscrito com o número da linha, o CPF mascarado e o nome e o sexo do arquivo; o sexo diferente de feminino e masculino recusa o arquivo; o envio e a importação mostram o nome de quem agiu; a nota da etapa é a média ponderada pelos pesos do grupo do curso no edital divulgado, sem arredondamento, uma por curso concorrido; o quadro de pesos que soma zero é recusado; a prova ausente com nota diferente de zero recusa o arquivo; depois de uma retificação, reimportar o mesmo arquivo recalcula as notas; a inscrição em curso que não está no edital divulgado recusa a importação; o inscrito sem linha no arquivo fica sem nota e é eliminado no resultado final da homologação ou, no processo sem essa fase, quando a classificação é processada, e o ausente numa prova tem zero na área com a indicação de ausente; um arquivo novo da edição substitui o anterior por inteiro; o candidato que troca de edição fica sem nota até nova importação; nenhum dado do arquivo além de notas, presenças, número de inscrição, número da linha das linhas em conflito e, da linha sem inscrito, número da linha, CPF mascarado, nome e sexo é guardado.',
     verificacao:
       'Teste automatizado com arquivos sintéticos no formato do INEP, gerados com as personas fictícias (formato certo, formato errado, inscrito ausente, CPF sem inscrito, CPF em duas linhas, reimportação, segunda opção de curso em outro grupo) (planejado). Teste da eliminação do inscrito sem linha no arquivo e da importação nos formatos de retorno anteriores a 2024 (planejado).',
     pagina_developers: '/produto/regras-negocio/',
