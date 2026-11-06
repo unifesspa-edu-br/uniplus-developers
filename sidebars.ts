@@ -170,6 +170,8 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.notas_do_enem.arquivo_fora_do_leiaute',
         'erros/uniplus.selecao.notas_do_enem.codigo_de_situacao_desconhecido',
         'erros/uniplus.selecao.notas_do_enem.lote_nao_encontrado',
+        'erros/uniplus.selecao.notas_do_enem.conflitos_pendentes',
+        'erros/uniplus.selecao.notas_do_enem.edicao_sem_retorno_valido',
         'erros/uniplus.selecao.processo_seletivo.janela_de_isencao_menor_que_cinco_dias',
         'erros/uniplus.selecao.processo_seletivo.conformidade_legal_insuficiente',
         'erros/uniplus.selecao.processo_seletivo.regra_legal_inavaliavel',
