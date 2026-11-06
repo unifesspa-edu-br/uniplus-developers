@@ -4184,6 +4184,116 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Equipe frontend',
   },
   {
+    requisito_id: 'UNI-REQ-0243',
+    titulo: 'A unidade guarda o histórico dos seus identificadores, com o motivo de cada mudança',
+    enunciado:
+      'Quando a sigla, o código, o slug ou o alias de uma unidade organizacional muda, o sistema encerra a vigência do valor anterior e abre a do novo, de modo que se saiba qual identificador a unidade tinha em cada data. Quem altera a unidade pode informar o motivo da mudança; o motivo é opcional e tem no máximo 500 caracteres, descontados os espaços nas bordas. O histórico só cresce: a entrada encerrada não é apagada. O motivo acima do limite é recusado junto com as demais faltas do mesmo pedido, e nenhuma alteração da unidade é gravada.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0008',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'should',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Mudar a sigla, o código, o slug ou o alias da unidade encerra a vigência do valor anterior e abre a do novo, com o motivo quando informado; a atualização sem motivo é aceita; o motivo de 500 caracteres é aceito e o de 501 é recusado com o erro uniplus.organizacao.unidade.motivo_mudanca_tamanho (422), sem gravar alteração nenhuma da unidade.',
+    verificacao:
+      'Testes automatizados de domínio e de API do limite do motivo, da atualização sem motivo e do encerramento da vigência anterior (planejados).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0244',
+    titulo: 'O tipo de etapa com nota de origem no ENEM não se remove',
+    enunciado:
+      'O tipo de etapa cuja nota vem do ENEM, e não de banca, não pode ser removido do cadastro de tipos de etapa. Remover um tipo o tira da leitura dos demais módulos, e sem esse tipo nenhum processo seletivo poderia configurar a etapa de nota do ENEM (UNI-REQ-0174). A recusa vale para qualquer pessoa com permissão de manter tipos de etapa e não altera o tipo. Os demais tipos de etapa continuam podendo ser removidos; o tipo removido não volta, e o código dele não é reaproveitado.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0015',
+    modulo: 'Configuração',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Remover o tipo de etapa com nota de origem no ENEM é recusado com o erro uniplus.configuracao.tipo_etapa.nota_de_origem_no_enem_nao_desativa (422) e o tipo segue em circulação; remover outro tipo de etapa ativo é aceito; remover de novo um tipo já removido é recusado com uniplus.configuracao.tipo_etapa.ja_desativado (422).',
+    verificacao:
+      'Testes automatizados de domínio da recusa de remover o tipo com nota de origem no ENEM e da remoção de um tipo comum; teste da segunda remoção do mesmo tipo (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0245',
+    titulo: 'O tipo de etapa declara se compõe a nota final e se elimina candidato',
+    enunciado:
+      'Todo tipo de etapa declara, no cadastro, se as etapas desse tipo podem compor a nota final e se podem eliminar candidato. As duas declarações são obrigatórias, na criação e na atualização, e a ausência de uma delas não vale como resposta negativa: o pedido é recusado, junto com as demais faltas, para que nenhum tipo nasça declarando sem que ninguém tenha dito.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0015',
+    modulo: 'Configuração',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Criar ou atualizar tipo de etapa sem declarar se compõe a nota final é recusado com uniplus.configuracao.tipo_etapa.admite_pontuacao_obrigatorio (422); sem declarar se elimina candidato, com uniplus.configuracao.tipo_etapa.admite_eliminacao_obrigatorio (422); faltando as duas, a resposta traz as duas recusas; declarar falso é uma resposta válida.',
+    verificacao:
+      'Testes automatizados de domínio da falta de cada declaração, da falta das duas e do falso declarado (planejados).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0246',
+    titulo: 'O tipo de etapa admite ao menos um caráter',
+    enunciado:
+      'O tipo de etapa deve admitir compor a nota final, eliminar candidato, ou os dois. O tipo que declara não admitir nenhum dos dois é recusado, porque toda etapa de um processo seletivo tem um caráter e nenhum sobraria para escolher.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0015',
+    modulo: 'Configuração',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Declarar que o tipo não compõe a nota final e não elimina candidato é recusado com uniplus.configuracao.tipo_etapa.sem_carater_admitido (422), na criação e na atualização; declarar só um dos dois, ou os dois, é aceito.',
+    verificacao:
+      'Testes automatizados de domínio dos quatro pares de declarações (planejados).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0247',
+    titulo: 'O tipo de etapa com nota do ENEM sempre compõe a nota final',
+    enunciado:
+      'O tipo de etapa cuja nota vem do ENEM, e não de banca, deve admitir compor a nota final, e a atualização que o declara de outro modo é recusada por inteiro, sem alterar o tipo. A etapa de nota do ENEM compõe a média do candidato (UNI-REQ-0174); sem pontuação, nenhuma etapa desse tipo poderia ser configurada.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0015',
+    modulo: 'Configuração',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Atualizar o tipo com nota de origem no ENEM declarando que não compõe a nota final é recusado com uniplus.configuracao.tipo_etapa.nota_de_origem_no_enem_exige_pontuacao (422) e nada é alterado; atualizar o nome ou a descrição do mesmo tipo, mantendo a pontuação, é aceito.',
+    verificacao:
+      'Testes automatizados de domínio da recusa e da atualização que mantém a pontuação (planejados).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
     requisito_id: 'UNI-REQ-0215',
     titulo: 'Texto do comprovante é o da versão do formulário em que a inscrição foi enviada',
     enunciado:

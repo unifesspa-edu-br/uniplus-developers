@@ -1,0 +1,33 @@
+---
+title: O tipo de etapa com nota de origem no ENEM não pode ser removido
+sidebar_label: Tipo de etapa com nota do ENEM não se remove
+description: O tipo de etapa cuja nota vem do ENEM não pode ser removido, porque nenhuma etapa de nota do ENEM poderia mais ser configurada.
+code: uniplus.configuracao.tipo_etapa.nota_de_origem_no_enem_nao_desativa
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Remoção de um tipo de etapa
+requisitos:
+  - UNI-REQ-0244
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação tentou remover um tipo de etapa cuja **nota vem do ENEM**, e não de
+uma banca.
+
+O tipo de etapa removido sai da lista que os demais módulos consultam. Se o
+tipo que representa a nota do ENEM saísse, nenhum processo seletivo poderia
+configurar etapa de nota do ENEM, e as notas entregues pelo INEP ficariam sem
+etapa para recebê-las. Por isso esse tipo é permanente no cadastro.
+
+## Como resolver
+
+Nenhuma ação é necessária: o tipo de etapa com nota do ENEM não se remove.
+Para deixar de usar o ENEM em um processo, retire a etapa dele na
+configuração do processo seletivo.

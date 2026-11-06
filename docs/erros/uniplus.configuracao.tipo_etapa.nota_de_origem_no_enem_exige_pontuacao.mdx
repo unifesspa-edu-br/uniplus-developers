@@ -1,0 +1,31 @@
+---
+title: O tipo de etapa com nota do ENEM deve compor a nota final
+sidebar_label: Tipo de etapa com nota do ENEM exige pontuação
+description: O tipo de etapa cuja nota vem do ENEM não pode ser alterado para deixar de compor a nota final.
+code: uniplus.configuracao.tipo_etapa.nota_de_origem_no_enem_exige_pontuacao
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um tipo de etapa
+requisitos:
+  - UNI-REQ-0247
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A atualização declarou `admitePontuacao` falso para um tipo de etapa cuja
+**nota vem do ENEM**.
+
+A etapa de nota do ENEM compõe a média do candidato. Se o tipo deixasse de
+admitir compor a nota final, nenhuma etapa desse tipo poderia ser configurada.
+A atualização inteira é recusada, e o tipo não é alterado.
+
+## Como resolver
+
+Mantenha `admitePontuacao` verdadeiro ao atualizar esse tipo. Os outros campos
+editáveis, como nome e descrição, podem ser atualizados normalmente.
