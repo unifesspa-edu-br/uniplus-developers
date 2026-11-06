@@ -1,0 +1,32 @@
+---
+title: O tipo de etapa não admite nenhum caráter
+sidebar_label: Tipo de etapa sem caráter admitido
+description: O tipo de etapa deve admitir compor a nota final, eliminar candidato, ou os dois; declarar que não admite nenhum dos dois é recusado.
+code: uniplus.configuracao.tipo_etapa.sem_carater_admitido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de etapa
+  - Atualização de um tipo de etapa
+requisitos:
+  - UNI-REQ-0246
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido declarou que o tipo de etapa **não** compõe a nota final
+(`admitePontuacao` falso) **e não** elimina candidato (`admiteEliminacao`
+falso).
+
+Toda etapa de um processo seletivo tem um caráter: classificatório,
+eliminatório ou os dois. Um tipo que não admite nenhum deles não permitiria
+configurar etapa alguma.
+
+## Como resolver
+
+Declare verdadeiro em `admitePontuacao`, em `admiteEliminacao` ou nos dois.

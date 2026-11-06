@@ -22,10 +22,9 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 O código informado já foi reservado por outro tipo de etapa.
 
-Diferente de cadastros com soft-delete (modalidade, fase canônica), o tipo
-de etapa nunca é removido, só desativado — e a checagem de unicidade
-considera **todos** os registros, ativos ou não. Um código já usado por um
-tipo desativado continua indisponível para reuso.
+A checagem de unicidade considera **todos** os registros, inclusive os tipos
+de etapa já removidos. Um código já usado por um tipo removido continua
+indisponível para reuso.
 
 ## Como resolver
 

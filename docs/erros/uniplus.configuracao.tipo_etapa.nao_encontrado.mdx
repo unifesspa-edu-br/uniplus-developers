@@ -24,10 +24,12 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 O identificador informado não corresponde a nenhum tipo de etapa
 existente.
 
-Diferente de outros cadastros do módulo, o tipo de etapa nunca é removido —
-só desativado. Um tipo desativado ainda é encontrado por este
-identificador; esta causa é exclusivamente de identificador inexistente.
+Um tipo de etapa removido também não é encontrado pela consulta por este
+identificador: a API só traz os tipos que estão em circulação. Tentar remover
+de novo um tipo já removido não cai aqui, mas na recusa
+[`ja_desativado`](./uniplus.configuracao.tipo_etapa.ja_desativado.mdx).
 
 ## Como resolver
 
-Confira o identificador do tipo de etapa.
+Confira o identificador do tipo de etapa e, se ele já existiu, se o tipo não
+foi removido.
