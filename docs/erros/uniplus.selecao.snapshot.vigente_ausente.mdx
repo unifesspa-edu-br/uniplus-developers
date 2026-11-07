@@ -1,0 +1,41 @@
+---
+title: Não há versão publicada do processo para o instante pedido
+sidebar_label: Versão publicada ausente
+description: O processo seletivo não tem publicação vigente para o instante consultado, então não há versão congelada para ler.
+code: uniplus.selecao.snapshot.vigente_ausente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Consulta do comprovante de uma inscrição cuja versão publicada do processo não pode ser lida
+  - Consulta da versão vigente de um processo seletivo
+requisitos:
+  - UNI-REQ-0165
+  - UNI-REQ-0215
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O sistema lê o processo seletivo sempre na versão que foi publicada. Para o
+instante pedido não existe nenhuma publicação vigente: o processo ainda não foi
+publicado, ou a versão a que a inscrição está presa não pode ser lida. Sem uma
+versão publicada não há texto congelado para montar a resposta, e o sistema não
+usa o cadastro atual no lugar dela, porque o texto exibido poderia diferir do
+que o candidato viu ao se inscrever.
+
+No comprovante da inscrição, a recusa significa que a versão do processo a que a
+inscrição está presa não está disponível. Nenhum dado do comprovante é devolvido.
+
+## Como resolver
+
+Quem consulta uma versão do processo deve pedir um instante posterior à primeira
+publicação, ou aguardar a publicação do processo.
+
+Para o comprovante, tentar de novo mais tarde. Se a recusa persistir, o candidato
+informa o número da inscrição à equipe do processo seletivo, que verifica a
+publicação do processo e a regulariza. Nenhuma inscrição ou comprovante é
+perdido: ambos continuam guardados.

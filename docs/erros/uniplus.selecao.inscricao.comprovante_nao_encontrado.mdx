@@ -1,0 +1,33 @@
+---
+title: A inscrição não tem o comprovante com este número
+sidebar_label: Comprovante não encontrado
+description: O número pedido não corresponde a nenhum comprovante emitido para a inscrição.
+code: uniplus.selecao.inscricao.comprovante_nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Consulta de um comprovante da inscrição por um número que a inscrição não emitiu
+requisitos:
+  - UNI-REQ-0029
+  - UNI-REQ-0165
+  - UNI-REQ-0216
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido trouxe um número de comprovante que a inscrição não tem. Os comprovantes
+são numerados na ordem em que foram emitidos, a partir de 1: o primeiro envio é o
+comprovante 1 e cada correção emite o seguinte. Zero, número negativo e número
+maior que a quantidade emitida não correspondem a nenhum comprovante.
+
+## Como resolver
+
+Abra o comprovante pela lista de comprovantes da inscrição em "Minhas
+inscrições", que traz o número de cada um. O comprovante que vale é o de maior
+número; ele indica o anterior, e os anteriores indicam o seguinte, para navegar
+entre eles.
