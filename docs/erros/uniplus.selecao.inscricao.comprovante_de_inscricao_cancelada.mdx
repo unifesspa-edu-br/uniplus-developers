@@ -1,0 +1,40 @@
+---
+title: A inscrição cancelada não tem comprovante para exibir
+sidebar_label: Comprovante de inscrição cancelada
+description: O comprovante de uma inscrição cancelada não é exibido nem impresso, para não servir de prova de uma inscrição desfeita.
+code: uniplus.selecao.inscricao.comprovante_de_inscricao_cancelada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Consulta de um comprovante de inscrição que o candidato cancelou
+requisitos:
+  - UNI-REQ-0033
+  - UNI-REQ-0165
+  - UNI-REQ-0217
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O candidato pediu o comprovante de uma inscrição que está cancelada. O
+cancelamento desfaz a inscrição, e um comprovante de inscrição desfeita induziria
+a erro quem o apresentasse como prova de que está inscrito. Por isso a consulta
+é recusada, sem devolver nenhum dado do comprovante.
+
+Os comprovantes que a inscrição já tinha emitido continuam guardados, sem
+alteração. Eles só não se exibem enquanto a inscrição estiver cancelada.
+
+A recusa vale só para o dono da inscrição. Quem pede o comprovante de uma
+inscrição que não é sua recebe a resposta de inscrição inexistente, e não esta,
+para que a consulta não revele que a inscrição existe.
+
+## Como resolver
+
+Em "Minhas inscrições", a inscrição cancelada mostra a data e o motivo do
+cancelamento e não oferece comprovante para abrir. Quem ainda deseja participar
+do processo faz uma nova inscrição, se as inscrições estiverem abertas, e abre o
+comprovante dela.
