@@ -14,8 +14,8 @@ O acompanhamento começa pelo painel de processos. Ao escolher um processo, o
 usuário abre sua página identificada e consulta a aba **Acompanhamento**.
 
 :::info[Requisito aprovado não significa funcionalidade entregue]
-O PO confirmou o fluxo, a aba única, o público CEPS e as regras descritas como
-confirmadas abaixo. A primeira implementação prepara navegação e estrutura;
+O PO confirmou o fluxo, a aba única, o público registrado originalmente como
+CEPS e as regras descritas como confirmadas abaixo. A primeira implementação prepara navegação e estrutura;
 indicadores, situações e relatórios avançam em incrementos próprios. A
 implementação e sua disponibilidade devem ser verificadas nas issues e nos
 repositórios responsáveis.
@@ -35,7 +35,7 @@ fluxo e não tornam todas as funções do COC requisitos do Uni+.
 | --- | --- |
 | Fluxo | Painel de processos e abertura do acompanhamento do processo selecionado. |
 | Página inicial | Somente a aba Acompanhamento; sem abas futuras “em construção”. |
-| Público | Indicadores e operações protegidas do acompanhamento são destinados aos servidores autorizados do CEPS. A leitura do processo publicado é aberta na API; o backoffice exige autenticação. |
+| Público | A decisão inicial registra servidores do CEPS. A referência institucional atual é CGA; o vínculo institucional não concede acesso sem a permissão efetiva na unidade dona. A leitura do processo publicado é aberta na API; o backoffice exige autenticação. |
 | Situações | Em inscrição, em homologação, em avaliação e em período de recurso confirmadas pelo PO. O rótulo Encerrado permanece previsto, com critério pendente de validação do CRCA. |
 | Simultaneidade | Exibir todas as situações em andamento; o processo é encontrado pelo filtro de qualquer uma delas. |
 | Antes e entre fases | “Aguardando início” antes da primeira fase e “Entre etapas” nos intervalos sem fase em andamento. |
@@ -76,16 +76,25 @@ retificar, dados de inscrições, documentos, análises, notas, indicadores e
 relatórios continuam exigindo autorização própria no servidor.
 
 O shell do backoffice mantém autenticação: entrar no painel não libera suas
-áreas protegidas. O público CEPS continua valendo para o acompanhamento
-protegido, sem concessão automática por papel genérico de administração.
+áreas protegidas. As referências atuais usam **CGA**, preservando CEPS nos
+registros históricos. Isso não cria concessão por nome da unidade, lotação ou
+papel genérico. Fora de rascunho, consultar indicadores exige permissão de
+acompanhar na unidade dona, respeitados os impedimentos de atuação aplicáveis.
 
-O **rascunho de processo** segue o UNI-REQ-0184 e a
+O **rascunho de processo** segue o UNI-REQ-0258 e a
 [API #2140](https://github.com/unifesspa-edu-br/uniplus-api/issues/2140): somente
 quem tem permissão de configurar processos na **unidade dona** pode lê-lo.
 A unidade é dona do processo; autoria, papel genérico, concessão em outra unidade
 ou permissão apenas de acompanhar não bastam. Sem a concessão aplicável, o
 rascunho não aparece na lista e o acesso direto responde como processo
 inexistente, inclusive para seu autor após a revogação da concessão.
+
+Para os indicadores de um **processo em rascunho**, quem pode configurar na
+unidade dona consulta os três valores **zero**, pois o processo ainda não recebe
+inscrições. Quem só acompanha recebe resposta equivalente a processo inexistente.
+A permissão de acompanhar fora de rascunho não substitui a de configurar neste
+caso. Essa distinção segue o refinamento do LT de **06/11/2026** na
+[API #2105](https://github.com/unifesspa-edu-br/uniplus-api/issues/2105#issuecomment-6694516562).
 
 ## Quantitativos confirmados e limites da definição
 
@@ -98,13 +107,33 @@ totais no UNI-REQ-0179. Não há contador adicional de Canceladas ou Submetidas.
 | Indicador | Universo confirmado | Leitura |
 | --- | --- | --- |
 | Inscrições | Inscrições submetidas e não canceladas. | Cada inscrição conta uma vez, sem multiplicação por reenvio, opções ou modalidades. |
-| Inscritos | Pessoas distintas no mesmo conjunto de inscrições submetidas e não canceladas. | Uma pessoa com inscrições em níveis diferentes conta uma vez, respeitado UNI-REQ-0031. |
-| Rascunhos | Inscrições não enviadas e não descartadas. | Em preenchimento durante as inscrições; não enviadas após o encerramento. Correção pendente de enviada não é novo rascunho. |
+| Inscritos | Pessoas distintas por CPF no mesmo conjunto de inscrições submetidas e não canceladas. | A identidade é o CPF, não a conta de acesso; o indicador não revela o CPF dos candidatos. |
+| Rascunhos | Inscrições não enviadas e não descartadas. | Descrição contextual conforme a janela de inscrição. Correção pendente de enviada não é novo rascunho. |
 
 Canceladas e descartadas ficam fora dos três indicadores. Por exemplo, uma pessoa
 cancela uma inscrição e envia outra: o resultado é **uma Inscrição e um Inscrito**.
-Se tiver duas inscrições válidas em níveis diferentes, são **duas Inscrições e um
-Inscrito**.
+O PO confirmou que **um processo seletivo nunca mistura níveis de ensino**.
+O exemplo anterior de duas inscrições da mesma pessoa no mesmo processo por
+níveis diferentes deixa de ser cenário de aceite. Inscrições e Inscritos
+continuam conceitos distintos, embora tenham o mesmo valor sob a unicidade
+vigente por CPF e processo; a contagem de pessoas permanece distinta por CPF.
+
+O rótulo **Rascunhos** permanece; sua descrição acompanha a janela de inscrição
+da versão divulgada, inclusive prorrogações por retificação:
+
+| Contexto | Descrição |
+| --- | --- |
+| Inscrições abertas | Em preenchimento |
+| Inscrições encerradas | Não enviados |
+| Antes da abertura, sem formulário de inscrição ou sem versão divulgada | Inscrições ainda não enviadas |
+
+A ausência de versão divulgada não torna o processo inexistente. Outra falha
+na leitura da janela ou no cálculo deve aparecer como erro, sem zeros ou
+descrição de sucesso inventados. A descrição contextual trata do período de
+inscrição e não determina o encerramento formal do processo seletivo.
+Uma consulta válida sem inscrições apresenta os três valores zero.
+
+### Distribuições e próximos prazos em entregas próprias
 
 As distribuições usam **somente inscrições submetidas e não canceladas**, pela
 **última versão enviada válida**, sem incorporar correções pendentes. Por
@@ -114,34 +143,57 @@ opções e em várias modalidades, cuja soma pode superar o total de Inscriçõe
 sem multiplicar os totais globais. Contrato e apresentação dos grupos ainda
 precisam ser detalhados, mas seu universo está definido.
 
-Próximos prazos integram a etapa de indicadores; eventos considerados, ordenação,
-fases em andamento, datas ausentes e quantidade exibida ainda serão definidos.
+Distribuições e próximos prazos permanecem previstos no UNI-REQ-0176, em
+entregas próprias. Eventos considerados nos prazos, ordenação, fases em
+andamento, datas ausentes e quantidade exibida ainda serão definidos. Eles não
+condicionam a entrega dos três quantitativos.
 
 A classificação administrativa continua subordinada aos UNI-REQ-0023,
 UNI-REQ-0031, UNI-REQ-0033, UNI-REQ-0165 e UNI-REQ-0169. O rascunho de inscrição
 descartado fica fora das consultas e contagens mesmo quando ainda existe por
-**exclusão lógica**. Não se exige exclusão física imediata nem se alteram as
-regras de retenção. O painel não cria estado de inscrição nem altera envio,
+**exclusão lógica**. O refinamento da API #2105 distingue o descarte atualmente
+disponível da evolução de exclusão lógica prevista na API #2062: contar descartes
+corretamente não depende dessa evolução. O UNI-REQ-0169 permanece como requisito
+de produto, sem exigir remoção física imediata nem alterar retenção. O painel não cria estado de inscrição nem altera envio,
 correção, cancelamento ou descarte.
 
 ## Relação nominal de inscrições — proposta a validar
 
-O UNI-REQ-0185 registra a proposta do LT como requisito próprio, filho do
+O UNI-REQ-0259 registra a proposta do LT como requisito próprio, filho do
 UNI-REQ-0176 e separado dos relatórios do UNI-REQ-0180. A aprovação dos três
 indicadores não aprova automaticamente esta consulta nominal.
 
 A proposta permite ao administrador autorizado consultar inscrições com filtros
 por **situação (Submetida, Rascunho e Cancelada), curso e oferta de curso**.
 O filtro de curso/oferta alcança primeira e segunda opção, e a relação identifica
-a opção correspondente. O CPF aparece sempre mascarado como `***.999.999-**`.
-A consulta exige **permissão própria, avaliada no servidor**; entrar no painel ou
-consultar indicadores não concede acesso nominal, a documentos ou a notas.
+a opção correspondente. A consulta exige **permissão própria no servidor** e
+respeita o [UNI-REQ-0208 da main](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/src/data/produto/requisitos-mvp-selecao.ts):
+autorização para consultar inscrições não concede acesso a todos os dados.
+
+Dados sensíveis dependem também de base legal e finalidade aprovadas. Quem pode
+consultar inscrições mantém o acesso ao detalhe mesmo quando dados identificadores
+precisem ser omitidos; o detalhe mostra somente os dados autorizados. Todas as
+restrições do UNI-REQ-0208 permanecem aplicáveis.
+
+Cada dado segue a classificação de proteção congelada no processo e a permissão
+correspondente, sem hierarquia automática. Nome civil e social exigem a permissão
+aplicável, no mínimo de dado pessoal. CPF só aparece, mascarado como
+`***.999.999-**`, para quem tem a permissão específica de ver identificador
+mascarado; a de dados pessoais não a substitui. Dados sem permissão são omitidos
+sem indicar sua existência, e classificação desconhecida segue a proteção do
+sensível. Esta proposta não acrescenta revelação de CPF; essa operação segue
+as regras próprias do UNI-REQ-0208.
+
+Cada inscrição exibida segue o registro de acesso antes da entrega do
+UNI-REQ-0203, também registrado na main. Entrar no painel ou consultar indicadores
+não concede acesso nominal, a documentos ou a notas.
 
 Canceladas podem aparecer na relação sem entrar nos indicadores. Rascunhos de
-inscrição não enviados permitem acompanhar quem ainda não enviou; descartados
+inscrição não enviados permitem à equipe autorizada da CGA acompanhar quem ainda
+não enviou; descartados
 ficam fora da consulta, mesmo antes da remoção física, conforme UNI-REQ-0169.
 Este rascunho de inscrição não se confunde com o rascunho de processo protegido
-pelo UNI-REQ-0184.
+pelo UNI-REQ-0258.
 
 A validação do recorte nominal com o PO, campos finais, ordenação e detalhamento
 da autorização permanecem pendentes; o requisito mantém o estado **proposto**.
@@ -152,6 +204,16 @@ O primeiro incremento entrega seleção do processo e estrutura da página, com
 somente Acompanhamento. Os cartões básicos mostram o nome do processo e o acesso
 à página. A ausência temporária de indicadores não deve ser apresentada como
 zero inscrições ou como erro de consulta.
+
+O UNI-REQ-0176 preserva a necessidade de apresentar quantitativos nos cartões do
+painel. O histórico do UNI-REQ-0179 registra **Inscrições, Inscritos e Rascunhos**
+para o painel e a aba Acompanhamento, com universos confirmados pelo PO em
+28/10/2026. A composição final dos quantitativos de cada cartão e sua apresentação
+permanecem em refinamento; a necessidade registrada não foi cancelada.
+
+Os três quantitativos do **processo selecionado** têm contrato na API #2105.
+Indicadores ou agregados dos **cartões do painel** pertencem a outro recorte,
+sem ampliar esse contrato nem presumir que ele já atenda à consulta do painel.
 
 As referências abaixo descrevem **trabalho planejado**, sem atestar implementação.
 A API #2111 deixa de ser dependência: lista e detalhe usam o recurso existente de
@@ -170,16 +232,32 @@ processos seletivos, com a adequação da leitura prevista na API #2140.
 
 A apresentação pode avançar com dados fictícios e testes de interface, sem que
 isso constitua liberação temporária de acesso. Indicadores nascem sob a permissão
-definitiva do CEPS. Caminhos, DTOs, paginação e contratos técnicos são definidos
+definitiva na unidade dona, sem concessão automática por vínculo com a CGA.
+Caminhos, DTOs, paginação e contratos técnicos são definidos
 nos repositórios responsáveis; este planejamento não os declara entregues.
 
-## Próxima etapa de indicadores e situações
+## Entregas independentes do acompanhamento
 
-A [API #2105](https://github.com/unifesspa-edu-br/uniplus-api/issues/2105) e a
-[Web #1285](https://github.com/unifesspa-edu-br/uniplus-web/issues/1285) recebem o
-refinamento das situações, filtros, contadores, distribuições e próximos prazos.
-As respostas do PO confirmam as regras listadas acima, sem fechar todas as
-fórmulas e o mapeamento temporal.
+O refinamento do LT de 06/11/2026 delimita a
+[API #2105](https://github.com/unifesspa-edu-br/uniplus-api/issues/2105) e a
+[Web #1285](https://github.com/unifesspa-edu-br/uniplus-web/issues/1285) aos **três
+quantitativos do processo na aba Acompanhamento**, organizados pela
+[Web #1384](https://github.com/unifesspa-edu-br/uniplus-web/issues/1384).
+
+As **distribuições** por curso/oferta, opção e modalidade estão na
+[API #2261](https://github.com/unifesspa-edu-br/uniplus-api/issues/2261),
+[Web #1393](https://github.com/unifesspa-edu-br/uniplus-web/issues/1393) e
+[Web #1394](https://github.com/unifesspa-edu-br/uniplus-web/issues/1394), com as
+regras de produto preservadas acima e no UNI-REQ-0176.
+
+Situações e seus filtros, próximos prazos, agregados dos cartões do painel,
+encerramento, homologações pendentes, relação nominal, relatórios e notas
+permanecem na iniciativa
+[Web #1248](https://github.com/unifesspa-edu-br/uniplus-web/issues/1248), com
+refinamentos e entregas próprios. A separação permite implementação e validação
+independentes; não define ordem de entrega nem cancela funcionalidades. A
+consulta dos três quantitativos não depende de distribuições, situações, prazos
+ou definição de encerramento.
 
 Ainda precisam ser especificados:
 
@@ -221,7 +299,7 @@ separados ou filtro; o nome de homologação também precisa ser compatibilizado
 com a inclusão de indeferimentos.
 
 A orientação recebida é de **relatórios fixos nesta etapa**; a configuração pelo
-usuário fica adiada para evolução posterior. A relação nominal do UNI-REQ-0185
+usuário fica adiada para evolução posterior. A relação nominal do UNI-REQ-0259
 é uma consulta separada, ainda proposta. O relatório por endereço citado na proposta inicial do LT e ausente da lista do
 e-mail precisa ser esclarecido; não foi automaticamente descartado.
 
@@ -240,7 +318,7 @@ executados ou de implementação entregue.
 | Leitura direta do processo publicado na API sem token | Retornar identificação e configuração, sem liberar dados ou operações protegidas. |
 | Usuário sem autenticação no backoffice | Seguir o fluxo de autenticação existente. |
 | Usuário autenticado sem concessões administrativas | Acessar o painel, sem acesso a indicadores, cadastro ou dados de inscrições. |
-| Rascunho de processo com permissão de configurar na unidade dona | Permitir leitura na lista e no acesso direto. |
+| Rascunho de processo com permissão de configurar na unidade dona | Permitir leitura na lista e no acesso direto; a consulta de indicadores apresenta três valores zero. |
 | Rascunho sem concessão aplicável, inclusive autor, papel genérico ou concessão em outra unidade | Omitir da lista e responder como inexistente no acesso direto. |
 | Lista vazia | Informar ausência de processos após uma consulta bem-sucedida. |
 | Mais processos que uma página | Navegar por Anterior/Próximo conforme a API, sem calcular total por varredura. |
@@ -249,7 +327,9 @@ executados ou de implementação entregue.
 | Troca de processo durante carregamento | Não manter nome, dados ou ações do processo anterior. |
 | Acesso direto e recarregamento | Consultar o processo identificado na URL e manter a aba única. |
 | Atalhos de edição/publicações | Preservar processo e permissões do destino. |
-| Consulta de indicadores | Exigir a permissão definitiva para servidor autorizado do CEPS, inclusive na API. |
+| Indicadores fora de rascunho | Exigir permissão de acompanhar na unidade dona, inclusive na API; respeitar impedimentos de atuação, sem concessão automática por papel ou vínculo com a CGA. |
+| Ausência legítima de inscrições | Apresentar os três quantitativos zerados; falhas de cálculo continuam sendo erro. |
+| Descrição de Rascunhos | Usar a janela de inscrição e as três descrições previstas, incluindo retificações, ausência de formulário e de versão divulgada, sem inferir encerramento do processo. |
 
 ## Registro estruturado
 
@@ -258,7 +338,7 @@ de aprovação do requisito, não de disponibilidade da implementação.
 
 <RequisitosTable
   requisitos={requisitosMvpSelecao.filter((r) =>
-    ['UNI-REQ-0176', 'UNI-REQ-0177', 'UNI-REQ-0178', 'UNI-REQ-0179', 'UNI-REQ-0180', 'UNI-REQ-0181', 'UNI-REQ-0184', 'UNI-REQ-0185'].includes(r.requisito_id)
+    ['UNI-REQ-0176', 'UNI-REQ-0177', 'UNI-REQ-0178', 'UNI-REQ-0179', 'UNI-REQ-0180', 'UNI-REQ-0181', 'UNI-REQ-0258', 'UNI-REQ-0259'].includes(r.requisito_id)
   )}
   filtros={['status']}
 />
