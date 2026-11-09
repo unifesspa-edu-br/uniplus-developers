@@ -1,0 +1,29 @@
+---
+title: A etapa pedida não é a que a versão aguarda
+sidebar_label: Etapa inválida
+description: A decisão foi pedida para uma etapa que a versão não aguarda agora.
+code: uniplus.autorizacao.perfil.etapa_invalida
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Aprovação da versão do perfil de acesso
+requisitos:
+  - UNI-REQ-0261
+  - UNI-REQ-0262
+rastreio:
+  - label: 'uniplus-api#2278'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2278
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A versão passa primeiro pela gestão de acessos e, quando acrescenta permissão pessoal, identificadora ou sensível, depois pela proteção de dados. A decisão foi pedida para outra etapa, ou por quem só tem a permissão da outra etapa.
+
+## Como resolver
+
+Consulte a versão para ver qual etapa ela aguarda. Se a etapa não for a sua, aguarde a versão chegar à sua fila.
