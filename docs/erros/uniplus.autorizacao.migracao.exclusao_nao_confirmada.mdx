@@ -1,0 +1,32 @@
+---
+title: A exclusão da lista exige confirmação
+sidebar_label: Exclusão não confirmada
+description: Recusar concessões revoga o acesso; a confirmação é obrigatória.
+code: uniplus.autorizacao.migracao.exclusao_nao_confirmada
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Envio do lote da janela de migração do perfil de acesso
+  - Decisão da concessão retida na janela de migração
+  - Decisão da proteção de dados na janela de migração
+  - Encerramento da janela de migração do perfil de acesso
+requisitos:
+  - UNI-REQ-0295
+  - UNI-REQ-0299
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A decisão recusa ao menos uma concessão, ou encerra a versão anterior, e a pessoa não confirmou que entende que o acesso será revogado. Sem a confirmação nada foi gravado.
+
+## Como resolver
+
+Repita a decisão confirmando que entende que as concessões recusadas, ou as que não foram migradas, serão revogadas.

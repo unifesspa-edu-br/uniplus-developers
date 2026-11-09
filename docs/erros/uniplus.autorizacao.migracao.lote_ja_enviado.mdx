@@ -1,0 +1,28 @@
+---
+title: O lote da gestão de acessos já foi enviado
+sidebar_label: Lote já enviado
+description: A janela aceita um único lote da gestão de acessos, e ele já foi enviado.
+code: uniplus.autorizacao.migracao.lote_ja_enviado
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Envio do lote da janela de migração do perfil de acesso
+requisitos:
+  - UNI-REQ-0294
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada janela de migração aceita um só lote da gestão de acessos, e ele fica congelado no envio. Outro envio, de qualquer pessoa, é recusado.
+
+## Como resolver
+
+Recarregue a janela para ver as decisões do lote enviado. O que ficou retido para outra pessoa da gestão de acessos se decide pela concessão retida, e o que aguarda a proteção de dados, pela etapa dela.

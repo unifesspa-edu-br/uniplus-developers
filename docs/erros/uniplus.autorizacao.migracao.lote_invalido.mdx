@@ -1,0 +1,31 @@
+---
+title: Lote de migração inválido
+sidebar_label: Lote inválido
+description: A lista traz decisão inválida, concessão repetida ou concessão que não é do perfil nem aguarda a etapa.
+code: uniplus.autorizacao.migracao.lote_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Envio do lote da janela de migração do perfil de acesso
+  - Decisão da concessão retida na janela de migração
+  - Decisão da proteção de dados na janela de migração
+requisitos:
+  - UNI-REQ-0294
+  - UNI-REQ-0297
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista enviada tem uma decisão que não é migrar nem recusar, repete uma concessão ou traz uma concessão que não pertence ao perfil nem aguarda a etapa que está sendo decidida. Como o envio é tudo ou nada, nada foi gravado.
+
+## Como resolver
+
+Recarregue a janela e monte a lista de novo, com uma decisão por concessão, só de concessões do perfil que aguardam a etapa.

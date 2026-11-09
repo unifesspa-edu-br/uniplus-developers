@@ -1,0 +1,28 @@
+---
+title: O lote da gestão de acessos ainda não foi enviado
+sidebar_label: Lote não enviado
+description: A concessão retida só pode ser decidida depois do envio do lote, e ela precisa constar dele.
+code: uniplus.autorizacao.migracao.lote_nao_enviado
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Decisão da concessão retida na janela de migração
+requisitos:
+  - UNI-REQ-0296
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A concessão retida nasce no envio do lote da gestão de acessos. Antes disso nenhuma decisão sobre ela é aceita, e depois dele a concessão precisa constar do lote.
+
+## Como resolver
+
+Aguarde o envio do lote por outra pessoa da gestão de acessos e recarregue a janela. Se a concessão não constar da lista, ela não depende de decisão.

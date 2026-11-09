@@ -1,0 +1,28 @@
+---
+title: O perfil tem janela de migração aberta
+sidebar_label: Janela de migração aberta
+description: Enquanto a janela está aberta, o perfil não aceita nova versão pendente.
+code: uniplus.autorizacao.perfil.janela_de_migracao_aberta
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de versões do perfil de acesso
+requisitos:
+  - UNI-REQ-0292
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil tem janela de migração aberta, e nesse período ele não aceita outra versão pendente. A proposta de versão nova fica recusada até o fim da janela.
+
+## Como resolver
+
+Proponha a versão depois que a janela terminar. A remoção de permissão continua possível durante a janela e vale na hora, sem reiniciar o prazo.

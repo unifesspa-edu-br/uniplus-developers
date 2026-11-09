@@ -1,0 +1,28 @@
+---
+title: A mesma pessoa não decide as duas etapas
+sidebar_label: Mesma pessoa nas duas etapas
+description: Quem decidiu a concessão pela gestão de acessos não a decide também pela proteção de dados.
+code: uniplus.autorizacao.migracao.mesma_pessoa_nas_duas_etapas
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Decisão da proteção de dados na janela de migração
+requisitos:
+  - UNI-REQ-0297
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+No acréscimo protegido, a concessão passa pela gestão de acessos e depois pela proteção de dados, e as duas decisões são de pessoas diferentes. A pessoa que já decidiu a concessão numa etapa não decide a outra.
+
+## Como resolver
+
+Peça a outra pessoa com a permissão da etapa que decida a concessão.
