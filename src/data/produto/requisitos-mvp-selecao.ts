@@ -5707,4 +5707,92 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0288',
+    titulo: 'Motivo e justificativa de resultado individual nunca são publicados',
+    enunciado:
+      'O motivo e a justificativa de qualquer resultado individual nunca são publicados. A lista pública e o documento publicado mostram a situação de cada inscrição, sem motivo nem justificativa. A forma de identificar as pessoas nas listas está em análise com a proteção de dados e não muda esta regra. Entendimento da reunião do líder técnico com o PO em 09/11/2026, a confirmar pelo PO por escrito.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0035',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Nenhuma lista ou documento publicado traz motivo ou justificativa de resultado individual.',
+    verificacao:
+      'Teste automatizado do conteúdo da publicação (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0289',
+    titulo: 'Candidato vê o motivo do próprio resultado depois da publicação',
+    enunciado:
+      'Somente depois da publicação do resultado, o candidato vê, na área do candidato, o próprio resultado. Na decisão automática: a situação, o motivo de cada condição não cumprida, o que a apuração encontrou e a unidade responsável. Na decisão tomada por pessoas: a situação, o motivo, a justificativa, o nome da banca e a unidade responsável. Assim o candidato conhece o motivo para poder recorrer, sem que o motivo vá para a publicação. Entendimento da reunião do líder técnico com o PO em 09/11/2026, a confirmar pelo PO por escrito.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0035',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Antes da publicação, o candidato não vê situação nem motivo; depois, vê os itens de cada tipo de decisão, só do próprio resultado.',
+    verificacao:
+      'Teste automatizado da consulta antes e depois da publicação, nos dois tipos de decisão (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0290',
+    titulo: 'Candidato não vê quem decidiu nem os votos',
+    enunciado:
+      'O candidato nunca vê os nomes das pessoas que decidiram nem os votos. O e-mail ao candidato apenas avisa que há resultado, sem motivo nem justificativa. Entendimento da reunião do líder técnico com o PO em 09/11/2026, a confirmar pelo PO por escrito.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0035',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A consulta do candidato não traz nome de integrante nem voto; o e-mail de aviso não traz motivo nem justificativa.',
+    verificacao:
+      'Teste automatizado da consulta e do conteúdo do e-mail (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0291',
+    titulo: 'Servidor vê o motivo conforme a sua permissão',
+    enunciado:
+      'Os servidores veem o motivo, a justificativa e os votos de um resultado individual de acordo com a permissão de acesso de cada um. Entendimento da reunião do líder técnico com o PO em 09/11/2026, a confirmar pelo PO por escrito.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0035',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Sem a permissão, a consulta do servidor é recusada; com ela, traz motivo, justificativa e votos.',
+    verificacao:
+      'Teste automatizado da consulta com e sem permissão (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
 ];
