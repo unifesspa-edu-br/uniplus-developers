@@ -1,0 +1,28 @@
+---
+title: O documento da versão não aguarda envio
+sidebar_label: Documento não aguarda envio
+description: A URL de envio só é reemitida enquanto o documento aguarda envio.
+code: uniplus.autorizacao.perfil.documento_nao_aguarda_envio
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Documento de fundamentação da versão do perfil
+requisitos:
+  - UNI-REQ-0248
+rastreio:
+  - label: 'uniplus-api#2276'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2276
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento da versão já foi enviado e não aguarda mais o arquivo. Por isso não há URL de envio a reemitir, e o envio não pode ser confirmado de novo.
+
+## Como resolver
+
+Consulte a situação do documento. Se está em verificação, aguarde o resultado. Se já foi verificado, use o documento existente. Se foi recusado, envie outro documento.

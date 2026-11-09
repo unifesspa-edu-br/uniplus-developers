@@ -1,0 +1,28 @@
+---
+title: A versão do perfil não está pendente
+sidebar_label: Versão não pendente
+description: A operação só vale para uma versão pendente.
+code: uniplus.autorizacao.perfil.versao_nao_pendente
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de versões do perfil de acesso
+requisitos:
+  - UNI-REQ-0248
+rastreio:
+  - label: 'uniplus-api#2276'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2276
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A versão informada já foi decidida, cancelada ou substituída, e a operação pedida só se aplica a uma versão pendente.
+
+## Como resolver
+
+Consulte a situação da versão. Se a mudança ainda for necessária, proponha uma versão nova.

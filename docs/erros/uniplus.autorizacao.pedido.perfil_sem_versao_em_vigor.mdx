@@ -1,0 +1,28 @@
+---
+title: Perfil de acesso sem versão em vigor
+sidebar_label: Perfil sem versão em vigor
+description: Um perfil sem versão em vigor não pode ser pedido.
+code: uniplus.autorizacao.pedido.perfil_sem_versao_em_vigor
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2276'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2276
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil ainda não tem versão em vigor, então não há permissões definidas a conceder e o pedido não é aceito.
+
+## Como resolver
+
+Escolha um perfil que já tenha versão em vigor ou peça à gestão de acessos que aprove a versão pendente do perfil.
