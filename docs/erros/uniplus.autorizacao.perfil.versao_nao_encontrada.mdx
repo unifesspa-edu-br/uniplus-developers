@@ -1,0 +1,28 @@
+---
+title: Versão do perfil não encontrada
+sidebar_label: Versão não encontrada
+description: O identificador informado não corresponde a nenhuma versão do perfil.
+code: uniplus.autorizacao.perfil.versao_nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de versões do perfil de acesso
+requisitos:
+  - UNI-REQ-0248
+rastreio:
+  - label: 'uniplus-api#2276'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2276
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Não há versão com o identificador informado para esse perfil.
+
+## Como resolver
+
+Confira o identificador na lista de versões do perfil e repita a operação com uma versão que exista.
