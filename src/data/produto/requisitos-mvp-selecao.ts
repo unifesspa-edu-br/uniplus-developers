@@ -5531,4 +5531,70 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0280',
+    titulo: 'Resultado definitivo é o preliminar com as decisões dos recursos',
+    enunciado:
+      'O resultado definitivo de uma matéria com recurso é o resultado preliminar com as decisões dos recursos aplicadas. No recurso contra o próprio resultado, quem teve recurso deferido passa à situação pedida, e quem teve recurso indeferido ou não recorreu mantém a situação do preliminar. No recurso contra ato que alcança todos os participantes, como o gabarito preliminar, o deferimento altera o resultado de todos os que o ato alcança, tenham ou não recorrido. O recurso não altera a inscrição (UNI-REQ-0132); a decisão entra no resultado definitivo. Exemplo, na homologação das inscrições: Marlene, não homologada no preliminar, tem o recurso deferido e consta como homologada no definitivo; quem não é homologado no definitivo é eliminado (UNI-REQ-0232). Entendimento da reunião do líder técnico com o PO em 09/11/2026, a confirmar pelo PO por escrito.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0157',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O definitivo reproduz o preliminar e muda só as situações alcançadas por recurso deferido, inclusive as de quem não recorreu quando o deferimento altera ato comum a todos; nenhuma inscrição é alterada pelo julgamento do recurso.',
+    verificacao:
+      'Teste automatizado da composição do definitivo com recurso deferido, indeferido e sem recurso (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0281',
+    titulo: 'Preliminar publicado não aceita retorno do INEP diferente do importado',
+    enunciado:
+      'Enquanto o resultado preliminar da homologação das inscrições publicado estiver valendo, o sistema não aceita novo arquivo de retorno do INEP diferente do já importado; o mesmo arquivo continua aceito. A correção de um caso individual se faz pelo recurso. O erro que atinge várias pessoas, ou o erro material, que não se resolve por recurso individual se corrige por retificação do edital (UNI-REQ-0282). Depois da publicação do preliminar, esta regra restringe a substituição do arquivo de retorno prevista no UNI-REQ-0174, que continua valendo antes dela. Como corrigir um arquivo de retorno errado quando a retificação não muda a regra de homologação nem as inscrições da fase está pendente de definição do PO. Entendimento da reunião do líder técnico com o PO em 09/11/2026, a confirmar pelo PO por escrito.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0174',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Com preliminar publicado e valendo, a importação de arquivo diferente é recusada com erro nomeado e a do mesmo arquivo é aceita sem mudar o resultado.',
+    verificacao:
+      'Teste automatizado das duas importações depois da publicação do preliminar (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0282',
+    titulo: 'Retificação depois do preliminar gera novo preliminar e novo prazo de recurso',
+    enunciado:
+      'Se uma retificação do edital, depois da publicação do resultado preliminar da homologação das inscrições, mudar a regra de homologação ou as inscrições da fase (por exemplo, prorrogação das inscrições ou mudança das edições do ENEM aceitas), é publicado um novo preliminar, com novo prazo de recurso. A importação do retorno do INEP é reaberta, os recursos já apresentados ficam registrados, mas sem efeito, e o candidato pode recorrer contra o novo preliminar. Assim, ninguém chega ao resultado definitivo sem a oportunidade de recorrer. Se a retificação retirar uma edição do ENEM em que haja pessoa inscrita, o novo preliminar fica bloqueado até uma nova retificação voltar a aceitar essa edição. O novo preliminar abre um novo ciclo do mesmo item do edital: é a publicação original desse ciclo, identificada pelo número do ciclo e ligada ao preliminar que substitui, e não uma correção do preliminar anterior; a publicação única por item do UNI-REQ-0157 passa a valer por ciclo. Os recursos do preliminar substituído não precisam ser julgados para o definitivo, que espera só os do novo ciclo; é a diferença em relação à correção do mesmo preliminar, sem retificação, em que a exigência de julgar os recursos anteriores do UNI-REQ-0161 continua e o prazo é reaberto pelo UNI-REQ-0160. Entendimento da reunião do líder técnico com o PO em 09/11/2026, a confirmar pelo PO por escrito.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0265',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A retificação que muda a regra ou as inscrições da fase exige novo preliminar antes do definitivo; os recursos anteriores ficam registrados e sem efeito; o novo preliminar abre novo prazo; a retirada de edição com inscrito bloqueia o novo preliminar.',
+    verificacao:
+      'Teste automatizado da retificação depois do preliminar, com e sem edição retirada (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
 ];
