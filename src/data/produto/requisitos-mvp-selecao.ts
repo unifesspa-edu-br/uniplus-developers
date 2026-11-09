@@ -3403,7 +3403,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0231',
     titulo: 'Inscrição homologada pela confirmação do INEP',
     enunciado:
-      'No processo que usa a nota do ENEM, a inscrição é homologada quando o retorno do INEP traz resultado da pessoa na edição que ela indicou, consultada somente pelo CPF. Quem tem resultado é homologado mesmo que falte nota; a falta de nota é tratada depois, nas regras de eliminação da classificação. Exemplo 1: Fernanda tem resultado e notas válidas: é homologada e segue para a classificação. Exemplo 2: Leandro tem resultado, mas faltou a um dia de prova: é homologado e depois eliminado por falta de nota. Exemplo 3: Marlene indicou o ano errado e não aparece no retorno: não é homologada. No processo com taxa que usa a nota do ENEM, valem as duas condições: a confirmação do INEP e o pagamento ou a isenção (UNI-REQ-0126). Regra repassada pelo líder técnico em 05/11/2026 como definição do PO, com confirmação pedida por escrito.',
+      'Quando a regra de homologação das inscrições do processo inclui a confirmação do INEP (UNI-REQ-0265), essa condição é cumprida quando o retorno do INEP traz resultado da pessoa na edição que ela indicou, consultada somente pelo CPF. Quem tem resultado é homologado mesmo que falte nota; a falta de nota é tratada depois, nas regras de eliminação da classificação. Exemplo 1: Fernanda tem resultado e notas válidas: é homologada e segue para a classificação. Exemplo 2: Leandro tem resultado, mas faltou a um dia de prova: é homologado e depois eliminado por falta de nota. Exemplo 3: Marlene indicou o ano errado e não aparece no retorno: não é homologada. A combinação com outras condições, como o pagamento ou a isenção, segue a regra que o edital declara (UNI-REQ-0265). Regra repassada pelo líder técnico em 05/11/2026 como definição do PO, com confirmação pedida por escrito.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3689,7 +3689,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0264',
     titulo: 'Processo com inscrição no sistema tem fase de homologação das inscrições',
     enunciado:
-      'Todo processo seletivo com inscrição no sistema tem a fase de homologação das inscrições no cronograma, qualquer que seja o tipo de processo, e essa fase declara um único tipo de resultado. O processo de resultado importado, como o do SISU, não tem inscrição no sistema e não precisa dessa fase. A publicação do edital e a retificação que deixem o processo sem a fase, ou com a fase sem resultado ou com mais de um tipo de resultado, são recusadas. Resultado preliminar e resultado final da homologação das inscrições contam como um único tipo de resultado (UNI-REQ-0232). Exemplo: um processo com inscrição pelo sistema e cronograma com inscrição, classificação e resultado final não é publicado até incluir a homologação das inscrições. Fase obrigatória repassada pelo líder técnico em 06/11/2026; a exigência do resultado é proposta do líder técnico, a confirmar pelo PO. Pendente do PO: qual é o critério de homologação das inscrições no processo que não usa a nota do ENEM e não cobra taxa.',
+      'Todo processo seletivo com inscrição no sistema tem a fase de homologação das inscrições no cronograma, qualquer que seja o tipo de processo, e essa fase declara um único tipo de resultado. O processo de resultado importado, como o do SISU, não tem inscrição no sistema e não precisa dessa fase. A publicação do edital e a retificação que deixem o processo sem a fase, ou com a fase sem resultado ou com mais de um tipo de resultado, são recusadas. Resultado preliminar e resultado final da homologação das inscrições contam como um único tipo de resultado (UNI-REQ-0232). Exemplo: um processo com inscrição pelo sistema e cronograma com inscrição, classificação e resultado final não é publicado até incluir a homologação das inscrições. Fase obrigatória repassada pelo líder técnico em 06/11/2026; a exigência do resultado é proposta do líder técnico, a confirmar pelo PO. Quem é homologado segue a regra configurada da fase (UNI-REQ-0265).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3704,6 +3704,28 @@ export const requisitosMvpSelecao: Requisito[] = [
       'A publicação e a retificação de processo com inscrição no sistema sem a fase de homologação das inscrições são recusadas, e o painel de conformidade aponta a pendência; a recusa da fase ausente aparece antes da recusa do resultado; a fase sem resultado ou com dois tipos de resultado é recusada; o processo de resultado importado é publicado sem essa fase; a regra não depende do tipo de processo.',
     verificacao:
       'Testes automatizados da publicação, da retificação e do painel de conformidade, com inscrição no sistema e com resultado importado (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0265',
+    titulo: 'A homologação das inscrições segue a regra que o edital declara',
+    enunciado:
+      'O que homologa uma inscrição é declarado pelo administrador da unidade ao configurar o processo seletivo, na fase de homologação das inscrições. A regra combina condições que o sistema sabe apurar, como o resultado no retorno do INEP na edição indicada, a taxa paga ou a isenção deferida e um documento exigido deferido, e o administrador define como elas se combinam: grupos de condições que precisam ser todas cumpridas, e grupos alternativos, dos quais basta um. Cada condição pode valer só para quem se enquadra nela. O critério nunca é deduzido do tipo de processo, do uso do ENEM, da cobrança de taxa nem da existência de uma etapa. A inscrição é homologada quando cumpre um dos grupos; não é homologada quando nenhum grupo pode mais ser cumprido, e o motivo são as condições não cumpridas; enquanto alguma condição estiver em apuração, a lista não é fechada. A fase sem nenhuma condição homologa toda inscrição enviada. A regra faz parte do edital e só muda por retificação, e o edital não pode declarar condição que o sistema ainda não apura. Exemplo 1: na Medicina 2027, a regra tem só a confirmação do INEP. Exemplo 2: num processo com taxa, a regra exige a confirmação do INEP e, em alternativa, o pagamento ou a isenção. Exemplo 3: num processo para indígenas, a regra exige a declaração de pertencimento deferida, com ou sem a taxa. Decisão do líder técnico em 08/11/2026.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0023',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O administrador monta a regra com grupos de condições e alternativas; a inscrição que cumpre um grupo é homologada, e a que não pode mais cumprir nenhum é não homologada, com as condições não cumpridas como motivo; a lista não fecha com condição em apuração; a fase sem condição homologa toda inscrição enviada, e o painel de conformidade avisa; a publicação e a retificação com condição que o sistema ainda não apura são recusadas; mudar a regra depois da publicação exige retificação; nenhuma regra depende do tipo de processo.',
+    verificacao:
+      'Testes automatizados da avaliação da regra com uma condição, com grupos e com alternativas, da regra vazia, da recusa de condição não disponível e do congelamento na versão (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
