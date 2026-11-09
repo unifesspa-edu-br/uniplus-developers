@@ -1,0 +1,40 @@
+---
+title: O motivo da retificação excede o limite de caracteres
+sidebar_label: Motivo da retificação longo demais
+description: Guarda interna do domínio — o motivo com mais de 1.000 caracteres é recusado antes, pela validação do pedido, com uniplus.validacao e erro no campo motivo.
+code: uniplus.selecao.retificacao.motivo_muito_longo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Abertura de retificação
+  - Alteração do motivo da retificação
+requisitos:
+  - UNI-REQ-0021
+rastreio:
+  - label: 'uniplus-api#860'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/860
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Este código é a guarda do próprio domínio contra motivo com mais de
+**1.000 caracteres**, contados depois de retirar os espaços das pontas, na
+abertura da retificação e na alteração do motivo.
+
+Pelas rotas da API, o motivo longo demais não chega ao domínio: a validação do
+pedido o recusa antes, com **422**, o código
+`uniplus.validacao` e o erro no campo `motivo` da
+lista `errors`. Este código só aparece se um caminho novo chamar o domínio sem
+passar por essa validação.
+
+## Como resolver
+
+Trate a recusa pelo campo `motivo` da resposta de validação: resuma o motivo em
+até 1.000 caracteres e repita o pedido. O motivo identifica a retificação; a
+descrição completa das mudanças fica no edital de retificação, publicado no
+fechamento.

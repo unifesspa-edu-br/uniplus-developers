@@ -1,0 +1,27 @@
+---
+title: O ponto de continuação da lista de pedidos não é válido
+sidebar_label: Cursor de paginação dos pedidos inválido
+description: O cursor que continua a lista de pedidos de onde parou foi alterado ou não pertence a esta lista.
+code: uniplus.autorizacao.pedido.cursor_invalido
+http_status: 400
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Listagem de pedidos de concessão de acesso
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2142'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2142
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista de pedidos é entregue em páginas, e cada página traz um cursor que marca onde a seguinte começa. O cursor recebido foi alterado ou não foi gerado por esta lista, e por isso não dá para saber de onde continuar. Nenhum pedido foi listado.
+
+## Como resolver
+
+Volte à primeira página da lista, sem cursor, e navegue pelos botões de página, que usam sempre o cursor devolvido pelo próprio sistema. Não monte nem edite o cursor à mão, e não o reaproveite em outra fila ou outro filtro.

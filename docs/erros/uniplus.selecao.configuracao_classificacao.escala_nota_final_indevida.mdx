@@ -1,0 +1,27 @@
+---
+title: A escala da nota final não vale para classificação importada
+sidebar_label: Escala da nota final indevida
+description: A classificação importada chega com a nota final pronta, por isso não declara escala.
+code: uniplus.selecao.configuracao_classificacao.escala_nota_final_indevida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição da classificação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2144'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A escala da nota final serve para converter a média ponderada calculada pelo Uni+ no teto publicado. Quando a classificação é importada, a nota final já chega pronta de outra origem, e não há média a converter. A configuração declarou a classificação como importada e, ao mesmo tempo, informou uma escala. A recusa aponta o campo `escalaNotaFinal`. Nada foi gravado.
+
+## Como resolver
+
+Escolha uma das duas formas e repita a definição. Se a nota final vem pronta, retire a escala. Se a nota final deve ser calculada pelo Uni+, mude a regra de cálculo para a fórmula local e informe a escala, maior que zero.

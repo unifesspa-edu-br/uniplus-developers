@@ -1,0 +1,31 @@
+---
+title: Sem permissão sobre a proteção de dados do catálogo
+sidebar_label: Sem permissão
+description: A pessoa não tem a permissão exigida para esta ação da aprovação da proteção de dados.
+code: uniplus.configuracao.protecao_do_catalogo.sem_permissao
+http_status: 403
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Consulta dos itens da aprovação da proteção de dados
+  - Envio da solicitação de aprovação
+  - Aprovação ou negativa de um item
+  - Aceite da recomendação
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Enviar a solicitação e aceitar a recomendação exigem a permissão de manter o cadastro do item (tipos de documento ou fatos do candidato). Aprovar e negar exigem a permissão de aprovar a proteção de dados do catálogo.
+
+## Como resolver
+
+Peça a concessão do perfil adequado pelo fluxo de pedido de acesso.

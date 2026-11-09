@@ -1,0 +1,31 @@
+---
+title: 'A definição do fato de sistema é travada: só o nome, a descrição, a forma de exibição e a proteção de dados se editam'
+sidebar_label: Fato de sistema travado
+description: O fato de sistema aceita mudança só no nome, na descrição, na forma de exibição e na proteção de dados.
+code: uniplus.configuracao.fato_candidato.definicao_do_fato_de_sistema_travada
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Alteração da definição de um fato do catálogo
+  - Alteração das regras ou dos valores de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0205
+  - UNI-REQ-0207
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Os fatos de sistema são definidos pela lei ou calculados pelo próprio Uni+. O código, o tipo de dado, se aceita um ou vários valores, a origem, a fonte e o formato dos valores, os valores do domínio, as regras padrão, o ponto em que o valor fica conhecido, o escopo e a ativação continuam travados. A alteração pedida mexe em algum deles.
+
+## Como resolver
+
+Altere só o nome, a descrição, a forma de exibição ou a proteção de dados (classificação, finalidade e base legal). A mudança da proteção deixa o fato pendente até a aprovação da proteção de dados.

@@ -1,0 +1,64 @@
+---
+title: O formulário usa resposta de um formulário facultativo
+sidebar_label: Resposta de formulário facultativo
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; uma regra, um campo ou uma exigência de documento cita fato que só um formulário facultativo coleta.
+code: uniplus.selecao.formulario_processo.reaproveita_resposta_de_formulario_facultativo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Gravação dos itens do formulário
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0145
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+Um formulário (ou a exigência de documento dele) cita, em uma regra, o fato que
+um formulário **facultativo** coleta, como o pedido de isenção da taxa. A
+resposta de formulário facultativo vale só dentro dele (UNI-REQ-0144): nem todo
+candidato o responde, e a regra deixaria sem resposta quem não o preencheu. A
+recusa sai com **422**, e o `detail` diz o fato e o formulário facultativo que o
+coleta.
+
+## Como resolver
+
+Escolha uma das saídas, na mesma gravação:
+
+- **torne obrigatório o formulário de origem**, se todo candidato que chega à
+  fase deve respondê-lo; o formulário que usa o fato passa a abrir depois do
+  envio dele. Isso **não vale para o formulário da janela de isenção**, que é
+  sempre facultativo (na fase que também coleta a inscrição, o obrigatório é o
+  da inscrição, que não tem o bloco de escolha de fundamentos; o formulário com o
+  bloco declarado obrigatório é recusado em qualquer fase), **nem quando quem cita é obrigatório da fase de
+  inscrição e a origem está na mesma fase**: os dois seriam enviados juntos, e a
+  citação cairia em
+  `uniplus.selecao.formulario_processo.reaproveita_resposta_de_formulario_do_mesmo_envio`.
+  Nesses casos, use a saída seguinte;
+- **transfira o campo que produz o fato** para um formulário **obrigatório** de
+  fase anterior ou da mesma fase, e retire-o do formulário facultativo, que passa
+  a reaproveitá-lo. Se quem cita é formulário **obrigatório da fase de
+  inscrição**, coloque o campo no próprio formulário que cita, e não em outro
+  obrigatório da mesma fase, porque eles são enviados juntos e a citação cairia em
+  `uniplus.selecao.formulario_processo.reaproveita_resposta_de_formulario_do_mesmo_envio`.
+  O fato tem um único campo produtor no processo, então não crie um segundo
+  campo para o mesmo fato; confira as demais regras e exigências que o citam;
+- **retire a citação** do fato do formulário que o usa. Se o campo é do pedido de
+  isenção, a regra que o cita pode ficar dentro desse mesmo formulário.
+
+Depois disso, grave de novo.

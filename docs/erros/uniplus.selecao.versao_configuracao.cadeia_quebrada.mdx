@@ -1,0 +1,44 @@
+---
+title: O ato criador da versão não retifica o ato criador da versão anterior
+sidebar_label: Cadeia de versões quebrada
+description: A versão nova da configuração seria criada por um ato que não retifica o ato da versão anterior; a cadeia de versões de um processo é única.
+code: uniplus.selecao.versao_configuracao.cadeia_quebrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Retificação em ato único
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0021
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#802'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/802
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada versão da configuração, depois da primeira, é criada por um ato que
+retifica o ato criador da versão anterior (UNI-REQ-0021), e a cadeia de atos é
+linear (UNI-REQ-0156). Ao gravar a versão nova, o banco de dados recusou a
+ligação: o ato que a cria não retifica o ato da versão anterior. A recusa sai
+com **422**.
+
+Pelas regras atuais, isso não deveria acontecer: o sistema escolhe sozinho o
+ato a retificar, que é sempre o da versão vigente. A conferência no banco
+existe para o caso de duas gravações concorrentes ou de um caminho novo que
+quebre essa garantia. Nada é gravado.
+
+## Como resolver
+
+Recarregue o processo e confira a versão publicada mais recente. Se outra
+retificação foi fechada nesse intervalo, as suas mudanças precisam partir dela:
+abra uma retificação nova sobre a versão atual e refaça as mudanças. Se a
+versão é a mesma que você retificava, registre o caso ao suporte do Uni+ com o
+`instance` e o `traceId` da resposta. Em qualquer caso, a versão publicada
+continua valendo.

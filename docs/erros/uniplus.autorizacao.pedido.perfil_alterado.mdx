@@ -1,0 +1,28 @@
+---
+title: O perfil mudou durante a análise
+sidebar_label: Perfil alterado
+description: As permissões do perfil mudaram depois da aprovação anterior; o pedido voltou ao gestor de acessos.
+code: uniplus.autorizacao.pedido.perfil_alterado
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Entre uma etapa e outra, o perfil do pedido mudou. Para que nenhuma etapa conceda o que a anterior não avaliou, o pedido volta à análise do gestor de acessos.
+
+## Como resolver
+
+Aguarde nova decisão do gestor de acessos sobre o perfil atualizado.

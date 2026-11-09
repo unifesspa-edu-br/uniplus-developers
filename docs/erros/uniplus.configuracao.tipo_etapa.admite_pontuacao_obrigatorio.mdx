@@ -1,0 +1,32 @@
+---
+title: Falta declarar se o tipo de etapa compõe a nota final
+sidebar_label: Tipo de etapa sem declarar se compõe a nota
+description: O tipo de etapa precisa declarar se admite compor a nota final; a declaração ausente é recusada, e não vale como "não compõe".
+code: uniplus.configuracao.tipo_etapa.admite_pontuacao_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de etapa
+  - Atualização de um tipo de etapa
+requisitos:
+  - UNI-REQ-0245
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido não trouxe o campo `admitePontuacao`, que declara se as etapas desse
+tipo podem compor a nota final.
+
+A ausência não é tratada como "não compõe": o sistema recusa o pedido para que
+nenhum tipo nasça declarando, sem que ninguém tenha dito isso, que suas etapas
+não entram na nota.
+
+## Como resolver
+
+Informe `admitePontuacao` como verdadeiro ou falso e envie o pedido de novo.
+Se o campo `admiteEliminacao` também faltar, a resposta traz as duas faltas.

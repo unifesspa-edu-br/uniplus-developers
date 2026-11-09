@@ -1,0 +1,28 @@
+---
+title: Ninguém decide o item da própria concessão
+sidebar_label: Decisor é o beneficiário
+description: Quem decide um item da revisão não pode ser o titular da concessão.
+code: uniplus.autorizacao.revisao.decisor_e_beneficiario
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Revisão periódica dos acessos
+requisitos:
+  - UNI-REQ-0202
+rastreio:
+  - label: 'uniplus-api#2139'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2139
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O item trata de uma concessão da própria pessoa que tentou decidir. Ninguém confirma nem revoga o próprio acesso.
+
+## Como resolver
+
+O item precisa ser decidido por outra pessoa da mesma governança.

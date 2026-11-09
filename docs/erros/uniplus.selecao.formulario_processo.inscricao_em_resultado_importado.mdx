@@ -1,0 +1,45 @@
+---
+title: O processo de resultado importado tem formulário de inscrição
+sidebar_label: Inscrição em resultado importado
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; o processo declara resultado importado e tem formulário na fase que coletaria a inscrição.
+code: uniplus.selecao.formulario_processo.inscricao_em_resultado_importado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Gravação do formulário do processo
+  - Publicação do processo seletivo
+  - Mudança da origem dos candidatos
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0151
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+O processo declara que o resultado é importado, como o do SISU, em que o
+candidato se inscreve fora do sistema, e mesmo assim tem formulário na fase que
+coleta inscrição (UNI-REQ-0144). Processo de resultado importado não tem
+formulário de inscrição: os candidatos chegam pela importação, e os formulários
+das fases seguintes, como o de habilitação, valem para eles. A recusa sai com
+**422**, e o `detail` diz o formulário.
+
+## Como resolver
+
+Retire o formulário da fase de inscrição, enquanto o processo é rascunho, e
+publique. Os formulários das fases seguintes ficam como estão e podem usar como
+resposta os dados que vieram na importação. Se o processo deve, na verdade,
+receber inscrição pelo sistema, mude a origem dos candidatos para inscrição pelo
+sistema e mantenha o formulário.

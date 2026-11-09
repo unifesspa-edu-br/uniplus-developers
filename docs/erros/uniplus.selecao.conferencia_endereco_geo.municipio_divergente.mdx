@@ -1,0 +1,40 @@
+---
+title: O município informado não pertence à UF declarada
+sidebar_label: Município de outra UF
+description: O município informado na inscrição pertence a uma UF diferente da que o candidato declarou.
+code: uniplus.selecao.conferencia_endereco_geo.municipio_divergente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0214
+rastreio:
+  - label: 'uniplus-api#2186'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2186
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+No envio da inscrição, o sistema confere no Geo, o cadastro de localidades
+do Uni+, que o município informado existe e pertence à UF que o candidato
+declarou no campo de UF correspondente. Por exemplo, Erick Isaac Ramos
+nasceu em Salvador, que é da Bahia; se o formulário traz "PA" como UF de
+nascimento e o código de Salvador como município, o município não pertence
+à UF declarada.
+
+A recusa vem uma só vez no campo do município, e não se repete com a
+mensagem genérica de município fora da UF. Quando o município está dentro
+de um grupo repetível, ela vem no item daquela ocorrência.
+
+## Como resolver
+
+Confira os dois campos juntos: a UF e o município. Escolha primeiro a UF
+correta e, em seguida, o município na lista, que vem do Geo e mostra só os
+municípios daquela UF. Se o erro estava na UF, corrija a UF e escolha o
+município de novo. Depois envie a inscrição outra vez. Nada desta tentativa foi gravado.

@@ -1,0 +1,28 @@
+---
+title: A decisão traz classificação recomendada ou justificativa que ela não admite
+sidebar_label: Dado que a decisão não admite
+description: A decisão enviada traz um dado que não faz parte dela.
+code: uniplus.configuracao.protecao_do_catalogo.dado_da_decisao_nao_cabe
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (aprovação, ajuste recomendado ou reprovação)
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada decisão admite só alguns dados: a aprovação não aceita classificação recomendada nem justificativa; o ajuste recomendado exige a classificação recomendada e aceita justificativa opcional; a reprovação exige justificativa e não aceita classificação recomendada. A decisão enviada traz um dado que a decisão escolhida não admite.
+
+## Como resolver
+
+Retire da decisão a classificação recomendada ou a justificativa que não cabe nela. Para indicar a classificação correta, escolha o ajuste recomendado.

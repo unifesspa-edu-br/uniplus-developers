@@ -1,0 +1,59 @@
+---
+title: O documento exigido não pode ser menos protegido que o dado que comprova
+sidebar_label: Exigência menos protegida que o fato comprovado
+description: Rascunho — a publicação ou a retificação foi recusada porque uma exigência de documento usa um tipo de documento menos protegido que um dos fatos que o documento comprova.
+code: uniplus.selecao.processo_seletivo.exigencia_menos_protegida_que_fato_comprovado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Retificação do processo seletivo
+requisitos:
+  - UNI-REQ-0183
+  - UNI-REQ-0071
+rastreio:
+  - label: 'uniplus-api#2124'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2124
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2124. A regra está em
+UNI-REQ-0183, ainda a confirmar pelo PO.
+
+:::
+
+## O que aconteceu
+
+Uma exigência de documento do processo declara que o documento comprova um fato
+do candidato, mas o tipo de documento escolhido é menos protegido que esse fato.
+A publicação, ou a retificação, foi recusada. A mensagem cita a exigência, o tipo
+de documento e o fato.
+
+Por exemplo: o fato "tipo de deficiência" é sensível. Se a exigência pede um
+documento cadastrado como pessoal para comprová-lo, o arquivo que o candidato
+enviar ficaria menos protegido que a própria informação sobre a deficiência.
+
+Quando a exigência comprova vários fatos, a comparação é feita com o mais
+protegido deles. O fato que só aciona a exigência, como a modalidade de
+concorrência, não entra na comparação: ele decide se o documento é pedido, mas o
+documento não o comprova.
+
+## Como resolver
+
+Escolha uma destas saídas:
+
+- troque, na exigência, o tipo de documento por um tipo tão protegido quanto o
+  fato que ele comprova (por exemplo, um laudo cadastrado como sensível);
+- se o documento não comprova de fato aquele dado, retire o fato da lista de fatos
+  comprovados pela exigência.
+
+Se o tipo de documento está classificado abaixo do que deveria, corrija a
+classificação no cadastro de tipos de documento do módulo Configuração. A
+correção vale para os processos publicados a partir daí; os processos já
+publicados mantêm a classificação congelada na publicação.

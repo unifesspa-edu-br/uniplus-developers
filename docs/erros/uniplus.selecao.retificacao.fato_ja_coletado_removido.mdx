@@ -1,0 +1,62 @@
+---
+title: A retificação não retira da inscrição fato que ela já coleta
+sidebar_label: Fato já coletado removido
+description: Na retificação, a gravação dos itens do formulário de inscrição deixaria de coletar um fato que o edital publicado já coleta, ou o moveria entre pergunta avulsa e grupo, ou entre grupos.
+code: uniplus.selecao.retificacao.fato_ja_coletado_removido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição dos itens do formulário de inscrição
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0212
+rastreio:
+  - label: 'uniplus-api#1725'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1725
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa em revisão
+
+A proposta do líder técnico de 02/11/2026, registrada no UNI-REQ-0212 e ainda a
+confirmar pelo PO, permite que a retificação retire perguntas do formulário, e a
+regra de não mudar de lugar uma pergunta já respondida vale para **qualquer
+formulário com envio**, e não só para o de inscrição. Quando a API aplicar a regra
+nova, a **retirada** passa a ser aceita e este código fica só para a **mudança de
+lugar** do fato já coletado, de pergunta avulsa para grupo ou de um grupo para
+outro, em qualquer formulário com envio. O texto abaixo descreve a recusa como a
+API a aplica hoje, para o formulário de inscrição.
+
+:::
+
+## O que aconteceu
+
+**Hoje**, na retificação, a API recusa só no formulário de inscrição: a inscrição
+foi regravada (`PUT .../formularios/inscricao/itens`) sem um fato que a versão
+publicada dela já coleta (retirada), ou com esse fato movido de item para campo de
+grupo, ou de um grupo para outro (mudança de lugar). A recusa sai com **422**, e o
+`detail` cita o fato. A API protege o fato porque quem se inscreveu numa versão
+anterior o informou, e os outros formulários e as versões seguintes contam com ele.
+
+**Previsto** com o UNI-REQ-0212: a **retirada** de pergunta passa a ser aceita em
+qualquer formulário; se a versão nova ainda usar o fato retirado, a recusa é
+`uniplus.selecao.retificacao.fato_ausente_de_versao_publicada`. A recusa por este
+código fica só para a **mudança de lugar**, que passa a valer para qualquer
+formulário com envio, como a habilitação, com a gravação dos itens dele (`PUT
+.../formularios/{codigo}/itens`). A extensão a outros formulários é regra prevista,
+ainda não emitida pela API.
+
+## Como resolver
+
+Se a recusa foi pela retirada (hoje, na inscrição), volte a incluir o fato no
+formulário, no mesmo lugar em que a versão publicada o coleta (como pergunta avulsa
+ou no mesmo grupo), e regrave os itens; se a pergunta não deve mais aparecer,
+mantenha-a nesta retificação e registre a necessidade de retirá-la, porque a retirada
+passa a ser aceita quando a API aplicar o UNI-REQ-0212. Se a recusa foi pela mudança
+de lugar, mantenha o fato no lugar em que a versão publicada o coleta (pergunta
+avulsa ou o mesmo grupo): a mudança de lugar continua recusada também depois disso,
+em qualquer formulário com envio.

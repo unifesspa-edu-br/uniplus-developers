@@ -1,0 +1,28 @@
+---
+title: Concessão já revogada
+sidebar_label: Concessão já revogada
+description: A concessão de acesso já foi revogada e não pode ser revogada de novo.
+code: uniplus.autorizacao.concessao.ja_revogada
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Revogação de concessões
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2134'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2134
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A concessão já tinha sido revogada antes. Uma concessão revogada não volta a valer e não se revoga duas vezes.
+
+## Como resolver
+
+Nenhuma ação é necessária: o acesso já foi retirado. Se a pessoa precisar do acesso de novo, faça um novo pedido.

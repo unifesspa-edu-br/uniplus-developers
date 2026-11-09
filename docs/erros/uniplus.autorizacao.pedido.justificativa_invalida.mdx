@@ -1,0 +1,28 @@
+---
+title: Justificativa do pedido inválida
+sidebar_label: Justificativa inválida
+description: A justificativa é obrigatória e tem limite de tamanho.
+code: uniplus.autorizacao.pedido.justificativa_invalida
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido foi enviado sem justificativa, ou com justificativa curta ou longa demais. A justificativa explica por que a função exige o acesso e fica na trilha.
+
+## Como resolver
+
+Explique a necessidade funcional do acesso, entre 10 e 2000 caracteres.

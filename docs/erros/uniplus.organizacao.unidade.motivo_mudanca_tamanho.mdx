@@ -1,0 +1,35 @@
+---
+title: O motivo da mudança de identificador tem tamanho inválido
+sidebar_label: Motivo da mudança de identificador fora do tamanho
+description: O motivo informado ao mudar a sigla, o código, o slug ou o alias de uma unidade organizacional é opcional e limitado a 500 caracteres.
+code: uniplus.organizacao.unidade.motivo_mudanca_tamanho
+http_status: 422
+situacao: publicado
+modulo: Organização Institucional
+emitido_em:
+  - Atualização de unidade
+requisitos:
+  - UNI-REQ-0243
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **motivo da mudança de identificador** (campo `motivoMudancaIdentificador`)
+tem mais de 500 caracteres, aparado de espaço nas bordas.
+
+Quando a sigla, o código, o slug ou o alias de uma unidade muda, o sistema
+guarda o valor anterior no histórico da unidade, para que se saiba qual
+identificador ela tinha em cada data. O motivo explica a mudança nesse
+histórico; é opcional, mas, quando informado, cabe em até 500 caracteres.
+
+A recusa vale para a atualização inteira: nenhuma alteração da unidade é
+gravada. Se o mesmo pedido tem outras faltas, elas vêm juntas na resposta.
+
+## Como resolver
+
+Resuma o motivo em até 500 caracteres ou deixe o campo em branco, e envie a
+atualização de novo.

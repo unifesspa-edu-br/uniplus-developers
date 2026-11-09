@@ -1,0 +1,40 @@
+---
+title: O If-Match está sintaticamente inválido
+sidebar_label: Precondição malformada
+description: O cabeçalho If-Match veio vazio, misturou o curinga com entity-tags ou trouxe entity-tag sem aspas.
+code: uniplus.selecao.precondicao_malformada
+http_status: 400
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Alterações do processo seletivo que aceitam If-Match
+requisitos:
+  - UNI-REQ-0021
+rastreio:
+  - label: 'uniplus-api#860'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/860
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cabeçalho `If-Match` veio, mas fora da forma que a
+[RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html#section-13.1.1) define.
+A recusa sai com **400** em três casos:
+
+- o cabeçalho veio vazio ou só com vírgulas, sem nenhuma entity-tag;
+- o curinga `*` veio junto com entity-tags;
+- uma entity-tag veio sem as aspas duplas, como `If-Match: 0193...:3` em vez de
+  `If-Match: "0193...:3"`.
+
+Cabeçalho ausente não é este caso: com retificação em curso, ele é recusado com
+[`precondicao_requerida`](./uniplus.selecao.precondicao_requerida.mdx).
+
+## Como resolver
+
+Envie o `ETag` exatamente como a resposta o devolveu, com as aspas, por
+exemplo `If-Match: "0193...:3"`, e repita o pedido. Para ler o `ETag` atual,
+consulte a retificação em curso (`GET .../retificacao-em-curso`).

@@ -1,0 +1,28 @@
+---
+title: Pedido de concessão não encontrado
+sidebar_label: Pedido inexistente
+description: Não existe pedido de concessão com esse identificador visível para quem consulta.
+code: uniplus.autorizacao.pedido.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido não existe ou quem consulta não é parte dele nem aprovador. Pedidos só são visíveis para o solicitante, o beneficiário e quem decide.
+
+## Como resolver
+
+Confira o identificador na sua lista de pedidos.

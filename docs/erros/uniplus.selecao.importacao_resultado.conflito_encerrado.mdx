@@ -1,0 +1,57 @@
+---
+title: O conflito da importação já foi encerrado
+sidebar_label: Conflito encerrado
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; a confirmação ou o descarte de um dado pessoal importado chegou depois de o conflito ser encerrado pelo envio de formulário posterior, pela conclusão da fase, pelo encerramento ou pelo cancelamento do processo, ou pelo reenvio do relatório com o valor já gravado.
+code: uniplus.selecao.importacao_resultado.conflito_encerrado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Decisão do conflito da importação
+requisitos:
+  - UNI-REQ-0213
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+Um relatório novo trouxe outro valor para um dado pessoal do candidato, e o valor
+ficou guardado até a decisão (UNI-REQ-0213). Antes da decisão, o conflito foi
+encerrado por um de cinco motivos, que têm o mesmo efeito: o **envio de um
+formulário de fase posterior** pelo candidato; a **conclusão da fase** do processo em
+que o resultado importado entra (resultado definitivo publicado, ou início da fase
+seguinte do cronograma, quando a fase não publica resultado); o **encerramento** do
+processo; o **cancelamento** do processo; ou o **reenvio do relatório com o valor já
+gravado**, que mostra que o relatório foi corrigido. O conflito sai da lista, fica
+encerrado e sem valor, e o valor guardado, pendente ou descartado, é apagado. A
+confirmação que chega depois (por corrida, ou de uma tela que estava aberta) é
+recusada com **422**. Nos motivos de prazo, a conclusão da fase vale pela data em
+toda leitura: o conflito deixa de aparecer na lista e na decisão, e o valor guardado
+fica inacessível desde o instante em que a fase termina; a rotina agendada apaga o
+valor logo em seguida, com nova tentativa se falhar; o apagamento não é instantâneo.
+A mensagem diz o motivo do encerramento e não reproduz nenhum dos valores. Depois
+dos quatro eventos de prazo (envio posterior, conclusão da fase, encerramento e
+cancelamento), a divergência que chegar numa reimportação nem chega a guardar o
+valor: fica só um aviso informativo. Depois do encerramento por reenvio corrigido,
+um reenvio com outro valor abre conflito novo.
+
+## Como resolver
+
+Não há mais nada a fazer no sistema para este conflito: o dado gravado continua
+valendo, e o valor guardado é apagado (na fase concluída, fica inacessível desde o
+fim da fase e a rotina o apaga em seguida, tentando de novo se falhar). Se o dado gravado está errado, o caso é
+tratado fora do sistema pela unidade responsável; quando o motivo foi o envio do
+formulário posterior, o próprio candidato corrige o dado no formulário. Quando o
+motivo foi o reenvio do relatório com o valor já gravado, o dado gravado já é o que o
+relatório corrigido traz, e não resta nada a fazer.

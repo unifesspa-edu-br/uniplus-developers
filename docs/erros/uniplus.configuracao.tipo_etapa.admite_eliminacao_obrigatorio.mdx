@@ -1,0 +1,32 @@
+---
+title: Falta declarar se o tipo de etapa elimina candidato
+sidebar_label: Tipo de etapa sem declarar se elimina
+description: O tipo de etapa precisa declarar se admite eliminar candidato; a declaração ausente é recusada, e não vale como "não elimina".
+code: uniplus.configuracao.tipo_etapa.admite_eliminacao_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de etapa
+  - Atualização de um tipo de etapa
+requisitos:
+  - UNI-REQ-0245
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido não trouxe o campo `admiteEliminacao`, que declara se as etapas desse
+tipo podem eliminar candidato.
+
+A ausência não é tratada como "não elimina": o sistema recusa o pedido para
+que nenhum tipo nasça declarando, sem que ninguém tenha dito isso, que suas
+etapas não eliminam.
+
+## Como resolver
+
+Informe `admiteEliminacao` como verdadeiro ou falso e envie o pedido de novo.
+Se o campo `admitePontuacao` também faltar, a resposta traz as duas faltas.

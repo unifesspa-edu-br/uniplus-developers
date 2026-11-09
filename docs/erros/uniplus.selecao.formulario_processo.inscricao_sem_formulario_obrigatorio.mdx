@@ -1,0 +1,47 @@
+---
+title: O processo com inscrição pelo sistema não tem formulário obrigatório na fase de inscrição
+sidebar_label: Inscrição sem formulário obrigatório
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; o processo declara inscrição pelo sistema e nenhum formulário obrigatório está ligado à fase que coleta inscrição.
+code: uniplus.selecao.formulario_processo.inscricao_sem_formulario_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+  - Remoção do formulário do processo
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0151
+  - UNI-REQ-0212
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+O processo declara que a inscrição é feita pelo sistema, e nenhum formulário
+**obrigatório** está ligado à fase que coleta inscrição: o candidato não teria
+onde se inscrever. Isso acontece por falta do formulário, por ele estar
+facultativo, ou por ter sido retirado pela retificação. Se a fase também abre a
+janela de isenção, os formulários facultativos do pedido de isenção dela não
+substituem o obrigatório da inscrição. A recusa sai com **422**.
+
+## Como resolver
+
+Ligue à fase que coleta inscrição um formulário obrigatório, a partir do modelo de
+inscrição do tipo do processo, que já traz o conjunto básico de dados do
+candidato (UNI-REQ-0151). Se o formulário existe e está facultativo, declare-o
+obrigatório. Se o processo recebe o resultado já pronto, como o do SISU, mude a
+origem dos candidatos para resultado importado, e então não há formulário de
+inscrição.

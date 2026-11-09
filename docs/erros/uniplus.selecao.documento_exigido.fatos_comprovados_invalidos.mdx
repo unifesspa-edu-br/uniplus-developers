@@ -1,0 +1,28 @@
+---
+title: Lista de fatos comprovados inválida
+sidebar_label: Fatos comprovados inválidos
+description: Os fatos comprovados pela exigência devem ser códigos de fato, sem repetição.
+code: uniplus.selecao.documento_exigido.fatos_comprovados_invalidos
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Configuração dos documentos exigidos
+requisitos:
+  - UNI-REQ-0130
+rastreio:
+  - label: 'uniplus-api#2124'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2124
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista de fatos comprovados tem um código vazio, mal formado ou repetido.
+
+## Como resolver
+
+Informe cada fato comprovado uma única vez, pelo código do fato.

@@ -1,0 +1,28 @@
+---
+title: A pessoa já tem esse acesso
+sidebar_label: Já tem concessão
+description: O beneficiário já tem concessão ativa igual.
+code: uniplus.autorizacao.pedido.ja_tem_concessao
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O beneficiário já tem concessão ativa do mesmo perfil no mesmo escopo, então o pedido não tem o que conceder.
+
+## Como resolver
+
+Nenhuma ação é necessária: o acesso já existe. Recuse ou cancele o pedido.

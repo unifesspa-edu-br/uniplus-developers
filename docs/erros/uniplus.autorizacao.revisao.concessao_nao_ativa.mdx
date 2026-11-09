@@ -1,0 +1,28 @@
+---
+title: A concessão do item já não está ativa
+sidebar_label: Concessão encerrada
+description: A concessão do item foi revogada ou venceu fora da revisão.
+code: uniplus.autorizacao.revisao.concessao_nao_ativa
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Revisão periódica dos acessos
+requisitos:
+  - UNI-REQ-0202
+rastreio:
+  - label: 'uniplus-api#2139'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2139
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A concessão deixou de valer depois que a revisão foi aberta, por revogação ou fim de vigência. Ela não pede mais decisão.
+
+## Como resolver
+
+Nada a fazer neste item: ele não conta mais como pendente na revisão.

@@ -1,0 +1,42 @@
+---
+title: A retificação mexe em formulário de fase concluída
+sidebar_label: Formulário em fase concluída
+description: Rascunho — recusa prevista pelo UNI-REQ-0211 e pelo UNI-REQ-0144, ainda não emitida pela API; a retificação acrescenta, retira ou religa formulário de uma fase já concluída.
+code: uniplus.selecao.retificacao.formulario_em_fase_concluida
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0211
+  - UNI-REQ-0144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+A retificação acrescentou, retirou ou religou um formulário cuja fase já está
+concluída (UNI-REQ-0211): a fase terminou e o que foi decidido nela não se
+reabre. A recusa sai com **422**, e o `detail` diz o formulário e a fase.
+
+## Como resolver
+
+Desfaça a alteração do formulário na retificação e feche-a. O formulário que já
+está em fase concluída fica como está, porque religá-lo a outra fase a partir de uma
+fase concluída também é recusado. Se o formulário ainda não está em fase
+concluída e precisa de outra fase, ligue-o a uma fase que também não esteja
+concluída. Se é preciso coletar algo na fase que está aberta, acrescente um
+formulário novo nessa fase. Uma fase concluída só muda por decisão fora da
+retificação, como a publicação de um novo ato.

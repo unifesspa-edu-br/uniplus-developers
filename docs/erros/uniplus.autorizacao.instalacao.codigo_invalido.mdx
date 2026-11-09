@@ -1,0 +1,28 @@
+---
+title: Código de confirmação não aceito
+sidebar_label: Código inválido
+description: O código de confirmação não foi aceito.
+code: uniplus.autorizacao.instalacao.codigo_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Instalação dos primeiros gestores de acessos
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código não foi aceito. A resposta é a mesma em todos os casos, para não revelar se há instalação pendente: código errado, código vencido, instalação cancelada ou nenhuma instalação aguardando código de quem pede. Depois de cinco tentativas erradas ou passadas duas horas do envio, a instalação deixa de valer.
+
+## Como resolver
+
+Confira o código recebido no e-mail institucional. Se passou o prazo ou as tentativas se esgotaram, inicie a instalação de novo.

@@ -1,0 +1,40 @@
+---
+title: A importação foi pedida em processo ainda não publicado
+sidebar_label: Processo não publicado
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; a importação do resultado só ocorre com o processo publicado.
+code: uniplus.selecao.importacao_resultado.processo_nao_publicado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Prévia da importação do resultado
+  - Importação do resultado
+requisitos:
+  - UNI-REQ-0213
+  - UNI-REQ-0144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+O processo ainda está em rascunho, e a importação do resultado do SISU só ocorre
+com o processo publicado (UNI-REQ-0213): as ofertas, as modalidades e o código
+e-MEC de cada oferta só valem depois de congelados na publicação. A recusa sai
+com **422**.
+
+## Como resolver
+
+Conclua a configuração e publique o processo; depois, peça a prévia e importe. A
+recusa vale só para processo em rascunho: o processo publicado com retificação
+aberta aceita a importação, que lê a versão publicada vigente.

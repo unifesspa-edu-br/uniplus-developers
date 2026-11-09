@@ -1,0 +1,28 @@
+---
+title: A base legal do item não cabe na classificação recomendada
+sidebar_label: Base legal incompatível com a recomendação
+description: Aceitar a recomendação deixaria o item com uma base legal que não vale para a classificação indicada.
+code: uniplus.configuracao.protecao_do_catalogo.recomendacao_incompativel_com_a_hipotese_legal
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Aceite da recomendação da proteção de dados
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A recomendação da proteção de dados muda só a classificação. A base legal atual do item não é aceita para a classificação recomendada; por exemplo, o legítimo interesse não ampara o tratamento de dado sensível.
+
+## Como resolver
+
+Edite o item, ajustando a classificação e a base legal, e envie de novo à proteção de dados.

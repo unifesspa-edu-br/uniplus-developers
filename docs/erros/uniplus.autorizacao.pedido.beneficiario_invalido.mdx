@@ -1,0 +1,28 @@
+---
+title: Beneficiário do pedido inválido
+sidebar_label: Beneficiário inválido
+description: O e-mail do beneficiário precisa ser institucional.
+code: uniplus.autorizacao.pedido.beneficiario_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O beneficiário é identificado pelo e-mail institucional. O e-mail informado está mal formado ou não pertence a um domínio institucional.
+
+## Como resolver
+
+Informe o e-mail institucional da pessoa que vai receber o acesso.

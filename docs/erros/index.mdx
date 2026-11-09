@@ -48,10 +48,12 @@ redigidos em português e podem ser reescritos sem que a causa mude.
 
 ## Quando vale repetir
 
-Um conflito que traz `retryable: true` pode ser repetido **preservando a
-`Idempotency-Key`**: a reserva daquela chave é liberada em vez de guardada,
-justamente para que a repetição alcance o servidor. Sem o campo, repetir com a
-mesma chave devolve a mesma recusa enquanto a entrada estiver em cache.
+Nenhuma recusa (`4xx`) fica guardada na `Idempotency-Key`: depois de corrigir a
+causa — a permissão concedida, a precondição atendida —, a repetição com a
+mesma chave alcança o servidor e é decidida de novo. Só a resposta de sucesso
+fica guardada e é devolvida em replay. O campo `retryable: true` indica que a
+mesma requisição, sem mudança nenhuma, pode dar certo se repetida (um conflito
+de concorrência, por exemplo).
 
 O campo é declarado no schema `ProblemDetails` dos contratos da API, como
 booleano **opcional** — opcional porque só viaja quando é `true`, e um cliente
@@ -65,7 +67,7 @@ O critério que separa os dois casos é o que evita generalizar errado:
 > Não é seguro repetir aquela cujo alvo sai do **estado corrente** — porque é
 > justamente esse estado que a corrida mudou.
 
-Marcar vigente um dataset, ativar um motivo, gravar um rascunho: todos nomeiam o
+Marcar vigente um dataset, reativar um motivo, gravar um rascunho: todos nomeiam o
 que tocam, e repetir faz a mesma coisa. Já "aprovo o texto que está lá" e
 "retifico a versão que está valendo" não nomeiam nada — o que elas tocam pode ter
 mudado por causa da mesma corrida que as recusou, e repetir aplicaria o efeito a

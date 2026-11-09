@@ -1,0 +1,41 @@
+---
+title: O fundamento escolhido não é oferecido por este formulário
+sidebar_label: Fundamento não oferecido pelo formulário
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; o pedido de isenção escolheu um fundamento que o formulário não oferece, mesmo que o processo o referencie.
+code: uniplus.selecao.formulario_processo.fundamento_nao_oferecido_pelo_formulario
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Envio do pedido de isenção
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0107
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. O pedido de isenção ainda não existe na
+API.
+
+:::
+
+## O que aconteceu
+
+Cada formulário do pedido de isenção oferece só alguns dos fundamentos que o
+processo referencia, e cada fundamento é oferecido por exatamente um formulário
+(UNI-REQ-0144). A escolha enviada inclui um fundamento que este formulário não
+oferece, ainda que o processo o referencie. A recusa sai com **422**, e o
+`detail` diz apenas que o formulário não oferece o fundamento escolhido, sem
+repetir o valor enviado.
+
+## Como resolver
+
+Escolha, neste formulário, apenas os fundamentos que ele oferece; o portal mostra
+quais fundamentos cada formulário do pedido oferece. Para pedir o outro
+fundamento, use o formulário que o oferece. Depois disso, envie de novo.

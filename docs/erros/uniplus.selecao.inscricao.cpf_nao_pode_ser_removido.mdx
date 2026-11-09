@@ -1,0 +1,28 @@
+---
+title: O CPF da inscrição não pode ser removido
+sidebar_label: CPF não pode ser removido
+description: A inscrição sempre guarda o CPF da conta do candidato, e a resposta não pode ser apagada.
+code: uniplus.selecao.inscricao.cpf_nao_pode_ser_removido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Salvamento do rascunho da inscrição
+requisitos:
+  - UNI-REQ-0151
+rastreio:
+  - label: 'uniplus-api#2182'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2182
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O CPF é obrigatório de todo candidato, inclusive do estrangeiro, e a inscrição o guarda desde o início, com o CPF da conta com que o candidato entrou no Uni+. O salvamento pediu para apagar essa resposta.
+
+## Como resolver
+
+Mantenha o CPF preenchido com o CPF da sua conta. Ele não pode ser apagado nem trocado por outro.

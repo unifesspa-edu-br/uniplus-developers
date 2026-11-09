@@ -9,13 +9,25 @@ modulo: Seleção
 emitido_em:
   - Envio da inscrição do candidato
   - Gravação do rascunho da inscrição, quando o corpo traz um nome social
+  - Envio do formulário que coleta a escolha do uso do nome social, em processo de resultado importado (regra prevista, UNI-REQ-0144)
 requisitos:
   - UNI-REQ-0153
+  - UNI-REQ-0144
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
+
+:::note Também no processo de resultado importado
+
+Como a regra é do nome social (UNI-REQ-0153), e não do formulário, esta recusa
+também vale, com o mesmo código, no envio do formulário que coleta a escolha do
+uso do nome social em processo de resultado importado, que não tem inscrição.
+Nesse caso, onde o texto diz "inscrição", leia "o formulário da fase". Isso é regra
+prevista, ainda não emitida pela API fora da inscrição.
+
+:::
 
 ## O que aconteceu
 

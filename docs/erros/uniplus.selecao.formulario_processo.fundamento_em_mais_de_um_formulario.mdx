@@ -1,0 +1,45 @@
+---
+title: O mesmo fundamento de isenção está em mais de um formulário do pedido
+sidebar_label: Fundamento em mais de um formulário
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; o mesmo fundamento de isenção é oferecido por mais de um formulário do pedido de isenção.
+code: uniplus.selecao.formulario_processo.fundamento_em_mais_de_um_formulario
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0145
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+Cada fundamento de isenção que o processo referencia é oferecido por exatamente
+um formulário do pedido de isenção, isto é, um formulário que tem o bloco de
+escolha de fundamentos, e os dados que o fundamento exige (a renda da carência
+socioeconômica, o comprovante de doação de medula óssea) ficam nesse formulário
+(UNI-REQ-0144). O mesmo fundamento está na lista de mais de um formulário do
+pedido, o que daria à renda dois campos produtores. A recusa sai na publicação e
+no fechamento da retificação, com **422**, e o `detail` diz o fundamento e os
+formulários.
+
+## Como resolver
+
+Retire o fundamento da lista de fundamentos do outro formulário do pedido, e
+mantenha com o formulário que fica os dados que o fundamento exige. Se o outro
+formulário só existia para esse fundamento, retire-o, enquanto nenhum pedido tiver
+sido enviado por ele. Depois disso, publique de novo.

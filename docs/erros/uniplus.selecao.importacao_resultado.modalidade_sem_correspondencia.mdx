@@ -1,0 +1,43 @@
+---
+title: A modalidade do MEC não tem correspondência no Uni+
+sidebar_label: Modalidade sem correspondência
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; o texto de modalidade da linha não consta da tabela de correspondência do formato de 2026.
+code: uniplus.selecao.importacao_resultado.modalidade_sem_correspondencia
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Prévia da importação do resultado
+  - Importação do resultado
+requisitos:
+  - UNI-REQ-0213
+  - UNI-REQ-0174
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+O texto de modalidade de concorrência da linha não consta da tabela de
+correspondência que acompanha o formato de 2026. A linha é recusada. A recusa diz
+o número da linha e a coluna, e **não reproduz o texto da célula**, porque ele
+não foi validado (UNI-REQ-0213).
+
+## Como resolver
+
+Confira se o relatório é o da edição de 2026, e leia o texto na linha e coluna
+indicadas. Se o texto é legítimo e novo, a correspondência é uma mudança do
+formato e depende de uma versão nova dele; informe a equipe de desenvolvimento.
+Enquanto isso, as demais linhas podem ser importadas, e a linha recusada é
+aplicada ao reenviar o relatório depois da versão nova do formato, sem repetir
+as já aplicadas.

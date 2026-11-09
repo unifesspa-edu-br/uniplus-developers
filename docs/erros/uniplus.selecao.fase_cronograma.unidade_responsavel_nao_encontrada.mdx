@@ -1,0 +1,29 @@
+---
+title: A unidade responsável da fase não foi encontrada
+sidebar_label: Unidade responsável da fase não encontrada
+description: A unidade escolhida para responder por uma fase do cronograma não existe no cadastro ou já não está viva.
+code: uniplus.selecao.fase_cronograma.unidade_responsavel_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação do edital
+  - Divulgação de retificação do edital
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2142'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2142
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada fase do cronograma pode indicar a unidade da Unifesspa que responde por ela. A unidade indicada para uma das fases não existe no cadastro de unidades ou foi desativada. A confirmação é feita no cadastro vivo, a cada definição do cronograma e de novo ao publicar o edital ou divulgar uma retificação, porque a unidade pode ter deixado de existir depois que foi escolhida. A mensagem diz qual fase e qual unidade. Nada foi gravado ou publicado.
+
+## Como resolver
+
+Escolha, na fase indicada, outra unidade que esteja viva no cadastro e repita a operação. Se a unidade certa foi desativada por engano, peça a quem mantém o cadastro de unidades que a reative. Com todas as fases apontando para unidades vivas, a definição e a publicação seguem normalmente.

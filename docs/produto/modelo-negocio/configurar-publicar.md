@@ -6,9 +6,9 @@ description: A jornada do administrador para cadastrar, configurar e publicar um
 
 # Configuração e publicação de um Processo Seletivo pelo administrador — modelo de negócio
 
-Documento de referência funcional para Análise de Requisitos. Descreve, em linguagem de negócio (sem termos de programação), **a jornada do administrador do CEPS para cadastrar, configurar e publicar um Processo Seletivo** — a experiência administrativa de montar um edital até torná-lo oficial. É um aprofundamento do modelo geral do módulo Seleção, voltado à validação e ao refinamento pela área de negócio.
+Documento de referência funcional para Análise de Requisitos. Descreve, em linguagem de negócio (sem termos de programação), **a jornada do administrador da unidade responsável pelo processo seletivo para cadastrar, configurar e publicar um Processo Seletivo** — a experiência administrativa de montar um edital até torná-lo oficial. É um aprofundamento do modelo geral do módulo Seleção, voltado à validação e ao refinamento pela área de negócio.
 
-Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: da criação à primeira publicação e às publicações seguintes, de documentos e resultados. As telas operacionais posteriores — inscrição, homologação, notas, classificação e o julgamento dos recursos — são etapas seguintes, e a página trata do ciclo recursal só no que toca à publicação dos resultados. Da alteração por retificação, constam aqui apenas os anexos, a cadeia de correção e a classe de congelamento dos atos publicados depois do edital.
+Uni+ · Sistema Unificado Unifesspa · Módulo Seleção. Escopo: da criação à primeira publicação e às publicações seguintes, de documentos e resultados. As telas operacionais posteriores — inscrição, homologação, notas, classificação e o julgamento dos recursos — são etapas seguintes, e a página trata do ciclo recursal só no que toca à publicação dos resultados. Da alteração por retificação, constam aqui apenas os anexos, a cadeia de correção e a classe de congelamento dos atos publicados depois do edital, e as regras propostas da retificação (seção 4.2).
 
 ## Como ler este documento
 
@@ -16,7 +16,7 @@ O texto descreve o comportamento de negócio em linguagem corrente. Cada assunto
 
 ## 1. Quem configura e o que é um "rascunho"
 
-A configuração de um Processo Seletivo é feita pelo **administrador do CEPS** — o papel institucional responsável por montar o edital. Enquanto o processo não é publicado, ele está em **rascunho**: uma configuração editável, ainda não oficial, que pode ser montada aos poucos e revisada quantas vezes for preciso (`UNI-REQ-0014`).
+A configuração de um Processo Seletivo é feita pelo **administrador da unidade responsável pelo processo seletivo** — o papel institucional responsável por montar o edital. Enquanto o processo não é publicado, ele está em **rascunho**: uma configuração editável, ainda não oficial, que pode ser montada aos poucos e revisada quantas vezes for preciso (`UNI-REQ-0014`).
 
 A configuração é organizada em **dimensões independentes** (etapas, vagas, documentos, formulário, etc.). O administrador preenche cada uma quando quiser; o sistema mostra o que já está completo e o que falta. A publicação é um passo final, só liberado quando tudo está conforme (seção 3).
 
@@ -58,14 +58,14 @@ Define-se a **fórmula de classificação** (como a nota final é composta a par
 Configuram-se os **documentos comprobatórios** exigidos, por **condição** e por **fase** (`UNI-REQ-0016`). Cada exigência declara de quem é cobrada — de todos, ou de quem satisfaz um **gatilho** sobre os fatos do candidato (por exemplo, na inscrição, "exigido de quem concorre a uma cota de renda"; na habilitação, a cobrança segue o grupo em que a pessoa foi convocada, `UNI-REQ-0147`). Definem-se a base legal de cada exigência (`UNI-REQ-0059`), os formatos e o tamanho aceitos, a idade máxima de emissão, e a estrutura da comprovação (documentos alternativos, grupos "um dos seguintes", repetição por membro do núcleo familiar). Quando um documento depende da idade do candidato, configura-se a **referência temporal** que resolve a idade (a data e a fase de referência).
 
 ### 2.8 Formulários e coleta de fatos
-Configura-se **um formulário por finalidade** — inscrição, isenção da taxa e habilitação —, cada um com as próprias etapas, perguntas e termos (`UNI-REQ-0017`). O processo parte de um **modelo de formulário** do seu tipo — o de isenção da taxa não tem tipo próprio e serve a qualquer processo que cobre taxa —, montado no módulo Configuração, e recebe uma cópia que pode ajustar; alterar o modelo depois não altera o processo (`UNI-REQ-0144`). As perguntas são fatos do catálogo que o administrador cadastra (`UNI-REQ-0143`), e cada campo declara, conforme as respostas anteriores, quando aparece, quando é obrigatório e quais opções oferece (`UNI-REQ-0145`). É aqui que se define a **coleta de fatos** (o que o candidato declara e em que ordem, com as pré-condições que decidem quando cada campo aparece) e as **regras de derivação da modalidade** (como o sistema calcula a modalidade a partir das respostas). O detalhamento de negócio da coleta e da derivação está na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md) (`UNI-REQ-0072` a `UNI-REQ-0078`).
+O processo é **composto de formulários**: tem quantos forem necessários, cada um ligado a uma fase do cronograma, aberto e fechado pelo prazo dela, e uma fase pode ter mais de um (`UNI-REQ-0017`, `UNI-REQ-0144`). Cada formulário tem as próprias etapas, perguntas e termos de aceite — o termo é um campo do formulário — e é obrigatório ou facultativo. A inscrição não é obrigatória: o processo declara se a inscrição é feita pelo sistema, caso em que a fase de inscrição tem ao menos um formulário obrigatório com o conjunto básico de dados e o envio exige todos os obrigatórios, ou se o resultado é importado (como o do SISU), caso em que não há formulário de inscrição, os dados pessoais e socioeconômicos do arquivo valem como respostas do candidato (curso, modalidade e classificação são o contexto da convocação, e não respostas) e os dados básicos que faltam, ou que vêm incompletos, são pedidos por inteiro no formulário obrigatório da primeira fase seguinte, em campos sempre obrigatórios e sem condição de exibição própria (o campo aparece quando o dado não veio na importação e segue as exceções do conjunto básico, como as da nacionalidade). O pedido de isenção da taxa é feito em formulários facultativos na fase da janela de isenção, que pode ser a mesma da inscrição. A fase de habilitação sem exigência de documento nem termo não precisa de formulário, exceto quando é a primeira fase depois de uma importação, caso em que o formulário obrigatório que coleta os dados básicos que faltam e a escolha do uso do nome social é sempre exigido, porque essa escolha nunca vem no arquivo (`UNI-REQ-0144`, `UNI-REQ-0151`). Um formulário reaproveita respostas só de formulário obrigatório que o candidato já enviou, da mesma fase ou de fase anterior, e só abre depois desse envio (a janela de isenção ordenada antes da inscrição conta como contemporânea dela para esse reaproveitamento, `UNI-REQ-0106`); a resposta de formulário facultativo vale só dentro dele. O processo parte de **modelos de formulário** montados no módulo Configuração — o de inscrição por tipo de processo, e os de outras fases, como o pedido de isenção, para qualquer processo que os comporte — e recebe uma cópia que pode ajustar; alterar o modelo depois não altera o processo (`UNI-REQ-0144`). As perguntas são fatos do catálogo que o administrador cadastra (`UNI-REQ-0143`), e cada campo declara, conforme as respostas anteriores, quando aparece, quando é obrigatório e quais opções oferece (`UNI-REQ-0145`). É aqui que se define a **coleta de fatos** (o que o candidato declara e em que ordem, com as pré-condições que decidem quando cada campo aparece) e as **regras de derivação da modalidade** (como o sistema calcula a modalidade a partir das respostas). O detalhamento de negócio da coleta e da derivação está na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md) (`UNI-REQ-0072` a `UNI-REQ-0078`).
 
 ### 2.9 Taxa de inscrição e isenção
 O administrador declara se o processo **cobra taxa de inscrição** e, quando cobrar, o **valor**. A ausência de declaração bloqueia a publicação — nunca é interpretada como "não cobra" (`UNI-REQ-0099`). "Não cobrar" e "isentar" são decisões distintas e mutuamente exclusivas: um processo que não cobra não aceita nenhum critério de isenção configurado (`UNI-REQ-0100`). Um processo que cobra **reconhece ao menos um fundamento de isenção**: a possibilidade de o candidato pedir isenção se materializa nos fundamentos que o processo declara, e quem cobra sem declarar nenhum não a oferece a ninguém. Declarar o fundamento nesta camada não decide ainda a forma de comprovação nem quem analisa o pedido (`UNI-REQ-0101`).
 
 Quem cobra também declara **quando** o candidato pode pedir a isenção: a janela de solicitação é fase do cronograma, com as regras de contorno descritas em 2.3 (`UNI-REQ-0106`).
 
-> **O que ainda não existe.** Solicitar, comprovar, analisar, deferir e recorrer da isenção — e, após indeferimento, gerar e pagar a taxa normalmente — pertencem à frente de inscrição, que depende do agregado de Inscrição, ainda inexistente, e não fazem parte desta primeira publicação. A verificação por fundamento (SISTAC para Cadastro Único, documento com análise humana para doação de medula óssea), o recurso em instância única contra indeferimento e a continuidade da inscrição após indeferimento já têm decisão de negócio registrada, aguardando essa capacidade (`UNI-REQ-0102` a `UNI-REQ-0105`). O mecanismo de arrecadação (PagTesouro via Sistema Próprio) foi escolhido, mas depende de cadastro SISGRU ainda pendente na PROAD (`UNI-REQ-0109`); a base legal do fundamento Cadastro Único está definida (`UNI-REQ-0110`).
+> **O que está planejado.** O pedido de isenção é uma capacidade **planejada**: o candidato **pedirá a isenção** enviando o formulário facultativo da janela de isenção, que só abre depois do envio da inscrição, por um ou mais dos fundamentos que o processo referencia, cada fundamento oferecido por exatamente um formulário do pedido de isenção (o que tem o bloco de escolha de fundamentos) (`UNI-REQ-0107`, `UNI-REQ-0144`, `UNI-REQ-0149`). Comprovar, analisar, deferir e recorrer da isenção — e, após indeferimento, gerar e pagar a taxa normalmente — são a frente seguinte, que depende da verificação por fundamento e da análise humana, e não são necessários para haver pedido enviado, que também é planejado. A verificação por fundamento (SISTAC para Cadastro Único, documento com análise humana para doação de medula óssea), o recurso em instância única contra indeferimento e a continuidade da inscrição após indeferimento já têm decisão de negócio registrada, aguardando a frente seguinte (`UNI-REQ-0102` a `UNI-REQ-0105`). O mecanismo de arrecadação (PagTesouro via Sistema Próprio) foi escolhido, mas depende de cadastro SISGRU ainda pendente na PROAD (`UNI-REQ-0109`); a base legal do fundamento Cadastro Único está definida (`UNI-REQ-0110`).
 
 ## 3. Revisão de conformidade e publicação
 
@@ -86,7 +86,7 @@ A publicação cria a **cópia oficial imutável** da configuração — o snaps
 
 Publicado o processo, a configuração **não pode mais ser editada diretamente** (`UNI-REQ-0022`). Toda a validação em runtime (a inscrição do candidato, a exigência de documentos, o cálculo da modalidade) passa a ler a **cópia congelada**, não a configuração viva — de modo que mexer na configuração de um processo já publicado não altera o resultado (imunidade pós-publicação, `UNI-REQ-0062`, `UNI-REQ-0063`).
 
-Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que aponta o ato retificado e registra o motivo, com um **novo snapshot congelado**, preservando o histórico: o ato retificado continua publicado (`UNI-REQ-0021`). A capacidade já é suportada. A seção 4.1 trata dos anexos e da cadeia de correção; o restante da jornada da retificação fica para depois.
+Uma alteração legítima de um edital publicado (mudança de prazo, vagas, cota, peso, Fator de Atenuação, documentos ou formulário) só acontece por **retificação** — um novo ato que aponta o ato retificado e registra o motivo, com um **novo snapshot congelado**, preservando o histórico: o ato retificado continua publicado (`UNI-REQ-0021`). A API já faz a retificação; a tela do administrador ainda não existe. A seção 4.1 trata dos anexos e da cadeia de correção, e a seção 4.2, de quem retifica, até quando e o que a retificação muda.
 
 ### 4.1 Documentos e resultados publicados depois do edital
 
@@ -102,6 +102,37 @@ Um ato publicado não é apagado nem alterado. A correção é um novo ato, erra
 
 ---
 
+### 4.2 Regras da retificação
+
+Decisão do líder técnico em 02/11/2026, a confirmar pelo PO; requisitos `UNI-REQ-0210`, `UNI-REQ-0211` e `UNI-REQ-0212`. Só uma regra aguarda o PO: adiar o início das inscrições antes de abrirem (ver Prazos).
+
+**Quem retifica e até quando** (`UNI-REQ-0210`).
+
+- Retifica quem cadastra e configura o processo na unidade responsável pelo processo seletivo. Não há aprovação de uma segunda pessoa nem permissão própria para retificar. Na prática, são as permissões de configurar e de publicar nessa unidade.
+- O processo pode ser retificado enquanto não está concluído. Concluído é o processo encerrado ou cancelado.
+- A unidade responsável pelo processo seletivo define a janela de prazo de todas as fases, inclusive das conduzidas por outra unidade, como as chamadas e a habilitação. A unidade que conduz a fase faz o trabalho dela dentro dessa janela.
+- O ato de retificação descreve o que mudou. Mostrar na página pública a diferença entre as versões é desejável, mas não obrigatório.
+
+**Prazos** (`UNI-REQ-0211`).
+
+- A fase concluída não muda.
+- A fase cujo prazo terminou sem que ela tenha sido concluída pode ter o término prorrogado.
+- O início de uma fase que já começou não muda.
+- O prazo de inscrição pode ser prorrogado, mas não reduzido.
+- A janela de solicitação de isenção é a exceção explícita à prorrogação da fase vencida: segue o `UNI-REQ-0106`, só se prorroga antes do término e não se reabre depois de encerrada.
+- Não há prazo mínimo entre a publicação da retificação e o fim das inscrições.
+- Considera-se concluída a fase cujo resultado definitivo já foi publicado; a fase que não publica resultado definitivo considera-se concluída quando a fase seguinte do cronograma começa.
+- **Aguarda o PO:** adiar o início das inscrições antes de abrirem encurta o período de inscrição; se conta como redução do prazo, que é proibida, o PO decide. Recomendação: não contar como redução, porque nenhum candidato perdeu prazo, e, em contrapartida, não permitir que a retificação antecipe o término de fase já em andamento.
+
+**Efeito sobre as inscrições** (`UNI-REQ-0212`).
+
+- A mudança de vagas, cotas, ofertas ou formulário não alcança o formulário **já enviado**: ele fica na versão do envio, e, para que a mudança valha para ele, o candidato cancela a inscrição e faz uma nova (`UNI-REQ-0033`). O formulário de fase posterior **ainda não enviado** segue a versão vigente, sem cancelar a inscrição, e a versão dele fica fixa a partir do primeiro envio dele (`UNI-REQ-0084`, `UNI-REQ-0144`).
+- A inscrição em rascunho segue a versão mais recente publicada. Ao validar a inscrição, o sistema avisa o candidato de que houve mudança no formulário ou nas regras. O aviso continua depois de salvar o rascunho, até o candidato confirmar a leitura ou enviar a inscrição, e cita todas as retificações do intervalo.
+- A retificação pode acrescentar e retirar perguntas. Ela não alcança formulário já enviado (a inscrição enviada fica como está, e só cancelar e refazer leva à versão nova), mas o formulário de fase posterior ainda não enviado segue a versão vigente: quem já enviou a inscrição e ainda não enviou a habilitação vê a pergunta acrescentada na habilitação, sem cancelar a inscrição. A pergunta só não sai enquanto outro formulário ou uma exigência de documento da versão nova usa o fato que ela coleta (`UNI-REQ-0144`). O fato já coletado por um formulário não muda de pergunta avulsa para grupo, nem de um grupo para outro.
+- A retificação pode acrescentar um formulário e retirar um formulário inteiro enquanto nenhum envio tiver sido feito por ele (pedido de isenção enviado, no de pedido de isenção; o envio equivalente nos demais): a retificação só fecha se a configuração continuar publicável (`UNI-REQ-0144`), e por isso o único formulário obrigatório da fase de inscrição não é retirado em processo com inscrição pelo sistema, mesmo sem inscrição enviada. Com envio feito, a retirada é recusada; não há retirada com aviso para refazer.
+- Depois que há inscrição enviada, a retificação não altera as condições em que o candidato se inscreveu: a oferta de curso e as modalidades de concorrência em que alguma inscrição enviada concorre não saem, oferta por oferta; o valor da taxa não muda, nem para mais nem para menos, e o processo não passa de gratuito a cobrado nem de cobrado a gratuito; e os critérios de isenção não mudam se já houver pedido de isenção feito. O rascunho não conta, porque segue a versão mais recente.
+- Na correção da inscrição enviada (`UNI-REQ-0165`), a oferta só pode ser escolhida se existir na versão vigente. O enquadramento em modalidades segue as regras da versão do primeiro envio, mas em cada oferta só entra a modalidade que existe naquela oferta na versão vigente; a correção do dado verdadeiro não é recusada por isso.
+
 ## 5. Rastreabilidade
 
 Cada comportamento acima corresponde a um requisito com código estável no acervo (UNI-REQ-NNNN):
@@ -115,9 +146,9 @@ Cada comportamento acima corresponde a um requisito com código estável no acer
 | `UNI-REQ-0015` | Configurar etapas, critérios e Fator de Atenuação das Desigualdades de Acesso | Etapas, pesos, desempate, classificação e Fator de Atenuação (2.2, 2.6). |
 | `UNI-REQ-0016` | Configurar documentos exigidos por gatilho e fase | Documentos por condição e fase (2.7). |
 | `UNI-REQ-0147` | Documentos da habilitação seguem o grupo de vagas da convocação | Cobrança na habilitação pelo grupo da convocação (2.7). |
-| `UNI-REQ-0017` | Formulário configurável por finalidade | Formulário por finalidade e campos condicionais (2.8). |
+| `UNI-REQ-0017` | Formulários configuráveis do processo, ligados às fases do cronograma | Formulários por fase e campos condicionais (2.8). |
 | `UNI-REQ-0143` | Catálogo de fatos do candidato administrável | Fatos que os formulários coletam (2.8). |
-| `UNI-REQ-0144` | Formulário por finalidade e modelo de formulário por tipo de processo | Modelos e cópia editável no processo (2.1, 2.8). |
+| `UNI-REQ-0144` | Formulários do processo ligados às fases do cronograma e modelos de formulário | Formulários por fase, reaproveitamento de respostas, modelos e cópia editável no processo (2.1, 2.8). |
 | `UNI-REQ-0145` | Regras do campo condicionadas às respostas anteriores | Exibição, obrigatoriedade e opções de cada campo (2.8). |
 | `UNI-REQ-0099` | Taxa de inscrição e isenção | Declaração de cobrança e valor da taxa (2.9). |
 | `UNI-REQ-0100` | Não cobrar e isentar são mutuamente exclusivas | Processo sem cobrança não aceita isenção (2.9). |
@@ -144,5 +175,8 @@ Cada comportamento acima corresponde a um requisito com código estável no acer
 | `UNI-REQ-0156` | Correção de ato publicado por novo ato | Ato publicado não se altera; a correção é um novo ato, uma vez por ato (seção 4.1). |
 | `UNI-REQ-0157` | Publicação de resultado declarado no edital | Preliminar e definitivo declarados pela fase e pela etapa (seção 4.1). |
 | `UNI-REQ-0158` | Política de divulgação confirmada na publicação de resultado | Confirmação da política de divulgação antes de publicar (seção 4.1). |
+| `UNI-REQ-0210` | Quem retifica o processo seletivo, até quando e o que o ato de retificação informa | Quem retifica, até quando e a janela das fases de outras unidades (seção 4.2, proposta). |
+| `UNI-REQ-0211` | Prazos das fases na retificação | Fase concluída, prorrogação e prazo de inscrição (seção 4.2, proposta). |
+| `UNI-REQ-0212` | Efeito da retificação sobre as inscrições, a taxa e a isenção | Inscrição enviada, rascunho, perguntas retiradas e isenção aprovada (seção 4.2, proposta). |
 
 > A coleta de fatos e a derivação de modalidade (2.8) têm modelo de negócio próprio na página [Coleta de fatos e derivação de modalidade](./coleta-fatos-derivacao.md) (`UNI-REQ-0065`, `UNI-REQ-0070` a `UNI-REQ-0078`).

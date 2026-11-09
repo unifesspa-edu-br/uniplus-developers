@@ -1,0 +1,84 @@
+---
+title: O dado pessoal do candidato mudou entre duas importações
+sidebar_label: Dado pessoal em conflito
+description: Rascunho — recusa prevista pelo UNI-REQ-0213, ainda não emitida pela API; a importação traz, para um candidato já importado, um dado pessoal diferente do que está gravado.
+code: uniplus.selecao.importacao_resultado.valor_em_conflito
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Prévia da importação do resultado
+  - Importação do resultado
+requisitos:
+  - UNI-REQ-0213
+  - UNI-REQ-0174
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0213 e a
+confirmar pelo PO, prevê esta recusa. A importação do resultado do SISU ainda não
+existe na API.
+
+:::
+
+## O que aconteceu
+
+O candidato já foi importado, e um relatório novo traz outro valor para um **dado
+pessoal** dele, como o nome, a data de nascimento ou um contato (UNI-REQ-0213).
+O conflito é apresentado, mas **não bloqueia o resultado da linha**: o resultado
+por contexto é aplicado e o dado gravado é mantido. O valor novo fica guardado na
+linha pendente da importação, com a mesma proteção da resposta (cifrado, se o
+dado for sensível), até a decisão. Quem tem a permissão de decidir o conflito vê, lado a lado, o valor
+gravado e o novo, com a proteção da resposta (CPF mascarado; dado sensível só para
+quem pode ver aquela resposta). A mensagem lista o candidato (com o CPF mascarado)
+e o dado, e o valor nunca vai para registro nem para a mensagem.
+
+Quando o conflito é encerrado (envio posterior, conclusão da fase, encerramento ou
+cancelamento do processo, ou reenvio com o valor já gravado), a confirmação que
+chegar depois é recusada com `uniplus.selecao.importacao_resultado.conflito_encerrado`.
+Na fase concluída, o valor guardado fica inacessível desde o fim da fase e a rotina
+agendada o apaga em seguida, tentando de novo se falhar; o apagamento não é
+instantâneo. Se um terceiro valor substituiu o pendente depois que a tela foi aberta, a decisão
+é recusada com 409 `uniplus.concorrencia.conflito` e a tela recarrega o conflito.
+
+Ressalva: depois do envio de formulário de fase posterior, da conclusão da fase, do
+encerramento ou do cancelamento do processo, a divergência de uma reimportação não é
+conflito de decisão e **não guarda valor**. Fica só um aviso informativo, sem ações e
+fora da lista de decisão e da contagem de conflitos, dizendo que um dado diferente
+foi ignorado porque o conflito desse dado já foi encerrado.
+
+A linha já aplicada, reimportada no mesmo contexto, não é reaplicada nem duplicada,
+mas os dados pessoais dela são comparados com os gravados, e dados iguais não geram
+nada. Se o relatório exportado de novo traz o valor já gravado enquanto há conflito
+pendente, o conflito se encerra e o valor guardado é apagado, porque o relatório foi
+corrigido; se traz de novo o mesmo valor pendente, nada muda e o conflito continua
+pendente; se traz um terceiro valor, ele substitui o pendente. Com valor descartado,
+o mesmo valor descartado não gera nada, outro valor abre conflito novo, e o valor
+igual ao gravado apaga o descartado.
+
+Diferença de nota, de nota de corte ou de classificação **não é conflito**: o
+resultado é guardado por candidato, relatório, oferta e modalidade, e várias
+linhas do mesmo CPF são normais.
+
+## Como resolver
+
+Confira com a fonte (o relatório do SISU) qual valor vale e decida na própria
+importação: **confirmar** aplica o valor guardado; **descartar** mantém o dado como
+está e deixa o valor descartado guardado, com a mesma proteção, fora da lista de
+conflitos, de modo que reenviar o mesmo arquivo não reabre o conflito (um valor
+diferente abre um conflito novo). Se o relatório estava errado, corrija-o na origem
+e reenvie: o reenvio com o valor já gravado encerra o conflito. O valor guardado,
+pendente ou descartado, é apagado no primeiro destes eventos: o envio de um
+formulário de fase posterior pelo candidato (a sobrescrita passa a ser recusada); a
+conclusão da fase em que o resultado importado entra; o encerramento do processo; o
+cancelamento do processo. Se isso ocorrer com o conflito ainda não decidido, o dado
+gravado continua valendo e não há mais nada a fazer no sistema; o valor guardado é
+apagado (no caso da fase concluída, fica inacessível desde o fim da fase e a rotina
+o apaga em seguida, tentando de novo se falhar); se o dado gravado está errado, o caso é tratado fora do sistema, pela
+unidade responsável. Reenviar o relatório com o mesmo valor pendente não decide o
+conflito.

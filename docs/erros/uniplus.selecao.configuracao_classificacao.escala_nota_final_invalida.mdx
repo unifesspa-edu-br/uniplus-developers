@@ -1,0 +1,32 @@
+---
+title: A escala da nota final não é um valor aceito
+sidebar_label: Escala da nota final inválida
+description: A escala da nota final, quando informada, deve ser maior que zero e caber na nota final, com até 5 dígitos inteiros e 4 casas decimais.
+code: uniplus.selecao.configuracao_classificacao.escala_nota_final_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição da classificação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2144'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A escala da nota final é o teto em que a nota do processo é publicada, como 10, 100 ou 1.000. A escala informada foi recusada por um destes motivos:
+
+- é zero ou negativa;
+- tem mais de 5 dígitos inteiros ou mais de 4 casas decimais, o que a nota final não comporta.
+
+A recusa aponta o campo `escalaNotaFinal`. A classificação não foi gravada. Deixar a escala em branco não gera esta recusa, mas o edital só pode ser publicado com a escala declarada quando a nota final é calculada pelo Uni+.
+
+## Como resolver
+
+Informe um número maior que zero, com até 5 dígitos inteiros e até 4 casas decimais, que seja o teto da nota do edital: 10, 100 e 1.000 são os usuais. Se o processo recebe a classificação pronta de outra origem, não informe escala: veja [escala da nota final indevida](./uniplus.selecao.configuracao_classificacao.escala_nota_final_indevida.mdx).

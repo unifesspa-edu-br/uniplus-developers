@@ -1,0 +1,28 @@
+---
+title: O perfil cita permissão que não existe no catálogo
+sidebar_label: Permissão fora do catálogo
+description: Todo código de permissão do perfil precisa existir no catálogo de permissões.
+code: uniplus.autorizacao.perfil.permissao_inexistente
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de perfis de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2133'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2133
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um ou mais códigos da lista `permissoes` não existem no catálogo de permissões da plataforma. A recusa lista, em `errors[]`, cada código que não foi encontrado.
+
+## Como resolver
+
+Troque cada código listado por um código do catálogo, consultado em `GET /api/autorizacao/permissoes`. Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de reenviar.

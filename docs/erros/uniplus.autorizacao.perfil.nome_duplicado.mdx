@@ -1,0 +1,28 @@
+---
+title: Já existe perfil com esse nome
+sidebar_label: Nome de perfil repetido
+description: O nome do perfil é único, sem distinção entre maiúsculas e minúsculas.
+code: uniplus.autorizacao.perfil.nome_duplicado
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de perfis de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2133'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2133
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Outro perfil já usa o nome informado. Dois perfis com o mesmo nome confundiriam quem pede e quem aprova a concessão.
+
+## Como resolver
+
+Escolha outro nome, ou edite o perfil existente.

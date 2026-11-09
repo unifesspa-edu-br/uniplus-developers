@@ -1,0 +1,28 @@
+---
+title: Já há gestor de acessos ativo
+sidebar_label: Já há gestor
+description: A instalação só é aceita quando não há nenhum gestor de acessos ativo.
+code: uniplus.autorizacao.instalacao.ja_ha_gestor
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Instalação dos primeiros gestores de acessos
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A instituição já tem gestor de acessos ativo. A instalação existe só para o ambiente novo ou para recuperar um ambiente que ficou sem gestor; com gestor ativo, o acesso de gestor é concedido por pedido aprovado.
+
+## Como resolver
+
+Peça a um gestor de acessos ativo que conceda o perfil pelo fluxo de pedido.

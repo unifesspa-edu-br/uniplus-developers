@@ -1,0 +1,28 @@
+---
+title: Identidade do solicitante incompleta
+sidebar_label: Identidade incompleta
+description: A sessão não identifica por completo quem fez a requisição.
+code: uniplus.autorizacao.revisao.identidade_incompleta
+http_status: 401
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Revisão periódica dos acessos
+requisitos:
+  - UNI-REQ-0202
+rastreio:
+  - label: 'uniplus-api#2139'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2139
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O token da sessão não traz a identificação completa da pessoa, e sem ela não se sabe o que ela pode na revisão.
+
+## Como resolver
+
+Saia e entre de novo no Uni+. Se persistir, procure o suporte.

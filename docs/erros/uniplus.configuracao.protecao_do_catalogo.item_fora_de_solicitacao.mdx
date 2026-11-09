@@ -1,0 +1,28 @@
+---
+title: O item não está numa solicitação da proteção de dados
+sidebar_label: Item fora de solicitação
+description: A proteção de dados tentou decidir um item que não foi enviado para aprovação.
+code: uniplus.configuracao.protecao_do_catalogo.item_fora_de_solicitacao
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (aprovação, ajuste recomendado ou reprovação) de um item do catálogo
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A proteção de dados decide só o item que o administrador enviou na solicitação. Este item ainda está pendente de envio, já foi decidido, ou foi alterado depois do envio e voltou a pendente.
+
+## Como resolver
+
+Atualize a lista de itens aguardando decisão. Se o item voltou a pendente, espere o administrador enviar a nova solicitação.

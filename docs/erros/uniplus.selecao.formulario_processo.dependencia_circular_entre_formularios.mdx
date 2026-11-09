@@ -1,0 +1,43 @@
+---
+title: Dois formulários dependem um do outro
+sidebar_label: Dependência circular entre formulários
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; formulários da mesma fase reaproveitam respostas uns dos outros em círculo, e nenhum poderia abrir primeiro.
+code: uniplus.selecao.formulario_processo.dependencia_circular_entre_formularios
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Gravação dos itens do formulário
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0145
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+Um formulário só abre depois do envio do formulário obrigatório de que reaproveita
+respostas (UNI-REQ-0144). Os formulários indicados dependem uns dos outros em
+círculo, na mesma fase: o primeiro espera o segundo, e o segundo espera o
+primeiro, de modo que nenhum abriria. A recusa sai com **422**, e o `detail`
+lista os formulários do círculo.
+
+## Como resolver
+
+Rompa o círculo em um ponto. Deixe só um dos formulários reaproveitar a resposta
+do outro, tirando a citação do fato do formulário que passa a abrir primeiro, ou
+junte os campos dos dois em um só formulário, caso precisem do mesmo dado. Depois
+disso, grave de novo.

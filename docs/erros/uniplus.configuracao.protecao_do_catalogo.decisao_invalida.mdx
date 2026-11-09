@@ -1,0 +1,28 @@
+---
+title: Decisão fora do vocabulário da aprovação da proteção de dados
+sidebar_label: Decisão inválida
+description: A decisão enviada não é aprovação, ajuste recomendado nem reprovação.
+code: uniplus.configuracao.protecao_do_catalogo.decisao_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (aprovação, ajuste recomendado ou reprovação)
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A proteção de dados aprova, recomenda ajuste ou reprova cada item. O valor enviado não é nenhum dos três.
+
+## Como resolver
+
+Informe `APROVAR`, `RECOMENDAR_AJUSTE` ou `REPROVAR`. No ajuste, informe também a classificação recomendada; na reprovação, a justificativa.

@@ -1,0 +1,28 @@
+---
+title: A proteção do item mudou depois que o aprovador a conferiu
+sidebar_label: Proteção mudou desde a conferência
+description: A decisão foi enviada para uma classificação, base legal ou finalidade que o item já não tem.
+code: uniplus.configuracao.protecao_do_catalogo.protecao_mudou
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (aprovação, ajuste recomendado ou reprovação) de um item
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A decisão da proteção de dados vale para a proteção que o aprovador conferiu. Depois da conferência, o administrador mudou a classificação, a base legal ou a finalidade do item e enviou a solicitação de novo. A decisão foi recusada para não aprovar uma proteção que ninguém analisou.
+
+## Como resolver
+
+Repetir a mesma decisão não resolve. Abra de novo a lista de itens solicitados, analise a proteção atual do item e decida sobre ela.

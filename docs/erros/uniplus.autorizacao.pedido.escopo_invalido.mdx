@@ -1,0 +1,28 @@
+---
+title: Escopo do pedido inválido
+sidebar_label: Escopo inválido
+description: O escopo do pedido não combina com o perfil.
+code: uniplus.autorizacao.pedido.escopo_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O escopo do pedido segue o alcance das permissões do perfil. Perfil cujas permissões valem por unidade se pede para uma unidade, que precisa ser informada. Perfil cujas permissões valem para a instituição inteira, como os de gestor de acessos e de encarregado(a) pelo tratamento de dados, se pede sem unidade.
+
+## Como resolver
+
+Confira na lista de perfis o escopo do perfil escolhido: informe a unidade quando o escopo for de unidade, e nenhuma unidade quando for da instituição.

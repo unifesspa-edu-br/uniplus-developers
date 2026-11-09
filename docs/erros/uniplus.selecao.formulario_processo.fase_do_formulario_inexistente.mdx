@@ -1,0 +1,44 @@
+---
+title: O formulário está ligado a uma fase que não existe no cronograma
+sidebar_label: Fase do formulário inexistente
+description: Rascunho — recusa prevista pelo UNI-REQ-0144, ainda não emitida pela API; o formulário foi ligado a uma fase que o cronograma do processo não tem, ou que saiu dele.
+code: uniplus.selecao.formulario_processo.fase_do_formulario_inexistente
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Gravação do formulário do processo
+  - Publicação do processo seletivo
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0144
+  - UNI-REQ-0212
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+O formulário foi ligado a uma fase que não faz parte do cronograma do processo:
+a fase indicada nunca existiu nele, ou foi retirada do cronograma depois de o
+formulário ser ligado a ela. Cada formulário abre e fecha com o prazo da fase a
+que está ligado (UNI-REQ-0144), e sem fase ele não tem prazo. A recusa sai com
+**422**, e o `detail` diz o formulário e a fase.
+
+## Como resolver
+
+Escolha, para o formulário, uma fase que existe no cronograma do processo. Se a
+fase certa ainda não foi cadastrada, acrescente-a ao cronograma e ligue o
+formulário a ela. Se a fase foi retirada de propósito, ligue o formulário à fase
+que passa a recebê-lo, ou retire o formulário, enquanto nenhum envio tiver sido
+feito por ele. Depois disso, grave o formulário de novo e publique.

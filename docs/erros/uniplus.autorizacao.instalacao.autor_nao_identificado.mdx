@@ -1,0 +1,28 @@
+---
+title: Quem executa não foi identificado
+sidebar_label: Autor não identificado
+description: A sessão não identifica quem executa a instalação.
+code: uniplus.autorizacao.instalacao.autor_nao_identificado
+http_status: 403
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Instalação dos primeiros gestores de acessos
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A sessão autenticada não trouxe a identificação de quem executa. A instalação registra o executor na trilha, e sem ele a operação não é aceita.
+
+## Como resolver
+
+Saia e entre de novo no sistema. Se o erro continuar, procure o suporte do CTIC.

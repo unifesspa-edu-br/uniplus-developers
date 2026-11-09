@@ -1,0 +1,28 @@
+---
+title: Instalação não encontrada
+sidebar_label: Instalação inexistente
+description: Não existe instalação com esse identificador iniciada por quem pede.
+code: uniplus.autorizacao.instalacao.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Instalação dos primeiros gestores de acessos
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A instalação pedida não existe, ou foi iniciada por outra pessoa. Cada instalação só é visível para quem a iniciou.
+
+## Como resolver
+
+Confira o identificador ou inicie uma nova instalação.

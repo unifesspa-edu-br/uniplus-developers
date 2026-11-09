@@ -1,0 +1,28 @@
+---
+title: Perfil de acesso desativado
+sidebar_label: Perfil inativo
+description: Perfil desativado não aceita concessão nova.
+code: uniplus.autorizacao.concessao.perfil_inativo
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Concessão de acesso por pedido aprovado
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2134'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2134
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil pedido está desativado. Desativar um perfil não retira as concessões que já existem, mas impede concessões novas.
+
+## Como resolver
+
+Escolha um perfil ativo ou peça ao gestor de acessos que reative o perfil.

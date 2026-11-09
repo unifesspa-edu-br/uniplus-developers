@@ -1,0 +1,28 @@
+---
+title: Situação fora do vocabulário da aprovação da proteção de dados
+sidebar_label: Situação inválida
+description: O filtro de situação da lista não é um dos aceitos.
+code: uniplus.configuracao.protecao_do_catalogo.situacao_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Consulta dos itens da aprovação da proteção de dados
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista filtra os itens pela situação na aprovação da proteção de dados, e o valor enviado não está entre os aceitos.
+
+## Como resolver
+
+Use uma das situações publicadas no contrato da API, ou consulte sem o filtro.

@@ -1,0 +1,29 @@
+---
+title: Ninguém tem a permissão de aprovar a proteção de dados do catálogo
+sidebar_label: Ninguém para aprovar
+description: A solicitação não foi enviada porque nenhuma pessoa pode aprová-la.
+code: uniplus.configuracao.protecao_do_catalogo.sem_quem_aprove
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Envio da solicitação de aprovação da proteção de dados
+requisitos:
+  - UNI-REQ-0205
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A solicitação vai a quem tem a permissão de aprovar a proteção de dados do catálogo. Nenhuma concessão vigente inclui essa permissão, e a solicitação ficaria sem quem a decida.
+
+## Como resolver
+
+Peça ao gestor de acessos que inclua a permissão no perfil de quem responde pela proteção de dados e que a concessão seja aprovada. Depois, envie a solicitação de novo.

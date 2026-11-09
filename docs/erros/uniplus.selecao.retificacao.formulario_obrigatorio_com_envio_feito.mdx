@@ -1,0 +1,39 @@
+---
+title: A retificação torna facultativo um formulário que já recebeu envio
+sidebar_label: Obrigatório a facultativo com envio feito
+description: Rascunho — recusa prevista pelo UNI-REQ-0212 e pelo UNI-REQ-0144, ainda não emitida pela API; a retificação passa a facultativo um formulário obrigatório que alguém já enviou.
+code: uniplus.selecao.retificacao.formulario_obrigatorio_com_envio_feito
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Fechamento de retificação
+requisitos:
+  - UNI-REQ-0212
+  - UNI-REQ-0144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Recusa ainda não emitida
+
+A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0144 e a
+confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, o formulário do
+processo segue a regra anterior, de um formulário por finalidade.
+
+:::
+
+## O que aconteceu
+
+A retificação passou um formulário de obrigatório a facultativo, e há candidato que
+já o enviou como obrigatório. Mudar a obrigatoriedade depois do envio altera as
+condições em que o candidato se inscreveu (UNI-REQ-0212). A recusa sai com
+**422**, e o `detail` diz o formulário e o envio.
+
+## Como resolver
+
+Mantenha o formulário obrigatório na versão nova e feche a retificação. Se ele
+nunca deve ser respondido por todos, retire-o e crie outro, facultativo, quando
+nenhum envio tiver sido feito pelo original.

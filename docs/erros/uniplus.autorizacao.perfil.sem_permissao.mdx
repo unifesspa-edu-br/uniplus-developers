@@ -1,0 +1,28 @@
+---
+title: O perfil precisa reunir ao menos uma permissão
+sidebar_label: Perfil sem permissão
+description: Um perfil de acesso é um conjunto de permissões do catálogo e não existe vazio.
+code: uniplus.autorizacao.perfil.sem_permissao
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de perfis de acesso
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2133'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2133
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `permissoes` do perfil chegou vazia. O perfil é o que se concede a uma pessoa, e um perfil sem permissão não daria acesso a nada.
+
+## Como resolver
+
+Informe ao menos um código de permissão do catálogo, consultado em `GET /api/autorizacao/permissoes`.

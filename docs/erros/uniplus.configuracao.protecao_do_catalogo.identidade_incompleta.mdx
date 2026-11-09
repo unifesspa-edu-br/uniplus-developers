@@ -1,0 +1,29 @@
+---
+title: Identidade da sessão incompleta na proteção de dados do catálogo
+sidebar_label: Identidade incompleta
+description: A sessão não traz os dados de identidade necessários para decidir o acesso à aprovação da proteção de dados.
+code: uniplus.configuracao.protecao_do_catalogo.identidade_incompleta
+http_status: 401
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Consulta dos itens da aprovação da proteção de dados
+  - Envio da solicitação de aprovação
+requisitos:
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A sessão autenticada não traz todos os dados de identidade de que a decisão de acesso precisa, e por isso o sistema não consegue verificar se a pessoa pode manter o cadastro do item ou aprovar a proteção de dados.
+
+## Como resolver
+
+Saia e entre de novo no sistema. Se o erro continuar, procure o suporte do CTIC.

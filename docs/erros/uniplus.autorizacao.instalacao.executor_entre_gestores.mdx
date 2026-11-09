@@ -1,0 +1,28 @@
+---
+title: Quem executa não pode se instalar
+sidebar_label: Executor entre os gestores
+description: Quem executa a instalação não pode estar entre os gestores instalados.
+code: uniplus.autorizacao.instalacao.executor_entre_gestores
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Instalação dos primeiros gestores de acessos
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2137'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2137
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A pessoa que executa a instalação aparece entre os dois gestores informados. A instalação separa quem a executa de quem passa a conceder acesso, para que ninguém se dê acesso sozinho.
+
+## Como resolver
+
+Informe dois gestores diferentes de quem executa, conforme o documento de designação.

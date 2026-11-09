@@ -1,0 +1,29 @@
+---
+title: Beneficiário sem nome na sessão
+sidebar_label: Beneficiário sem nome
+description: A sessão do beneficiário não traz o nome completo, que o aprovador precisa para julgar o pedido.
+code: uniplus.autorizacao.pedido.beneficiario_sem_nome
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+  - Aceite do pedido pelo beneficiário
+requisitos:
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2135'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Quem aprova um pedido de acesso precisa saber quem vai recebê-lo. O nome do beneficiário vem da conta dele, e a sessão atual não traz o nome completo.
+
+## Como resolver
+
+O beneficiário deve completar o nome na conta institucional, entrar de novo no Uni+ e repetir o pedido ou o aceite.
