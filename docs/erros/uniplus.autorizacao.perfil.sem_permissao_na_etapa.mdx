@@ -1,0 +1,28 @@
+---
+title: Acesso negado, pois a operação exige a permissão da etapa
+sidebar_label: Sem permissão na etapa
+description: Falta a permissão de aprovação da etapa, ou a permissão exigida para consultar ou cancelar a versão.
+code: uniplus.autorizacao.perfil.sem_permissao_na_etapa
+http_status: 403
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Aprovação da versão do perfil de acesso
+requisitos:
+  - UNI-REQ-0262
+rastreio:
+  - label: 'uniplus-api#2278'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2278
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A pessoa não tem a permissão de aprovação pela gestão de acessos nem a de aprovação pela proteção de dados, necessárias para decidir a versão, ver a fila de uma etapa ou ler o documento da versão. O cancelamento de versão criada por outra pessoa também exige a permissão da gestão de acessos.
+
+## Como resolver
+
+Peça à gestão de acessos que confira os perfis da sua conta. Se a operação não for da sua função, encaminhe a versão a quem tenha a permissão.
