@@ -3689,7 +3689,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0264',
     titulo: 'Processo com inscrição no sistema tem fase de homologação das inscrições',
     enunciado:
-      'Todo processo seletivo com inscrição no sistema tem a fase de homologação das inscrições no cronograma, qualquer que seja o tipo de processo, e essa fase declara um único tipo de resultado. O processo de resultado importado, como o do SISU, não tem inscrição no sistema e não precisa dessa fase. A publicação do edital e a retificação que deixem o processo sem a fase, ou com a fase sem resultado ou com mais de um tipo de resultado, são recusadas. Resultado preliminar e resultado final da homologação das inscrições contam como um único tipo de resultado (UNI-REQ-0232). Exemplo: um processo com inscrição pelo sistema e cronograma com inscrição, classificação e resultado final não é publicado até incluir a homologação das inscrições. Fase obrigatória repassada pelo líder técnico em 06/11/2026; a exigência do resultado é proposta do líder técnico, a confirmar pelo PO. Quem é homologado segue a regra configurada da fase (UNI-REQ-0265).',
+      'Todo processo seletivo com inscrição no sistema tem a fase de homologação das inscrições no cronograma, qualquer que seja o tipo de processo, e essa fase declara ao menos um resultado. O processo de resultado importado, como o do SISU, não tem inscrição no sistema e não precisa dessa fase. A publicação do edital e a retificação que deixem o processo sem a fase, ou com a fase sem resultado, são recusadas. Exemplo: um processo com inscrição pelo sistema e cronograma com inscrição, classificação e resultado final não é publicado até incluir a homologação das inscrições. Fase obrigatória repassada pelo líder técnico em 06/11/2026; a exigência do resultado é proposta do líder técnico, a confirmar pelo PO. Quem é homologado segue a regra configurada da fase (UNI-REQ-0265).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3701,7 +3701,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A publicação e a retificação de processo com inscrição no sistema sem a fase de homologação das inscrições são recusadas, e o painel de conformidade aponta a pendência; a recusa da fase ausente aparece antes da recusa do resultado; a fase sem resultado ou com dois tipos de resultado é recusada; o processo de resultado importado é publicado sem essa fase; a regra não depende do tipo de processo.',
+      'A publicação e a retificação de processo com inscrição no sistema sem a fase de homologação das inscrições são recusadas, e o painel de conformidade aponta a pendência; a recusa da fase ausente aparece antes da recusa do resultado; a fase sem resultado é recusada; o processo de resultado importado é publicado sem essa fase; a regra não depende do tipo de processo.',
     verificacao:
       'Testes automatizados da publicação, da retificação e do painel de conformidade, com inscrição no sistema e com resultado importado (planejado).',
     pagina_developers: '/produto/regras-negocio/',
