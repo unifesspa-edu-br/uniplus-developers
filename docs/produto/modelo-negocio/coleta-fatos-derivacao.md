@@ -74,7 +74,7 @@ Uma consequência importante da transição para **não se aplica**: quando uma 
 
 A **modalidade é um fato derivado**: o sistema a calcula a partir das autodeclarações e opt-ins, aplicando a composição da Lei de Cotas expressa como **configuração** (`UNI-REQ-0075`, `UNI-REQ-0076`).
 
-A regra de derivação é uma **lista de regrinhas** do tipo "**quando** tais condições valem, **contribui** com tal modalidade". A avaliação **soma** (une) as modalidades de todas as regrinhas cujas condições são verdadeiras; regra falsa ou não-aplicável não contribui. A composição da Lei de Cotas — o par autodeclaração+concorrer, a concorrência dupla (Lei 14.723/2023), a relação entre cotas de renda e independentes de renda, as exclusões mútuas, o gate de escola pública, a exclusividade entre cota da lei e ação afirmativa (`UNI-REQ-0142`) — é toda expressa nessas regrinhas, não em código que ramifica por tipo de processo.
+A regra de derivação é uma **lista de regrinhas** do tipo "**quando** tais condições valem, **contribui** com tal modalidade". A avaliação **soma** (une) as modalidades de todas as regrinhas cujas condições são verdadeiras; regra falsa ou não-aplicável não contribui. A composição da Lei de Cotas — o par autodeclaração+concorrer, a concorrência dupla (Lei 14.723/2023), a relação entre cotas de renda e independentes de renda, as exclusões mútuas, o gate de escola pública, a exclusividade entre cota da lei e ação afirmativa, que tem a `AC_PCD` como exceção (`UNI-REQ-0142`) — é toda expressa nessas regrinhas, não em código que ramifica por tipo de processo.
 
 Dois pontos de negócio importantes:
 
