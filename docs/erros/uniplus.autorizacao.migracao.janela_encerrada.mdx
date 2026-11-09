@@ -1,0 +1,31 @@
+---
+title: A janela de migração já terminou
+sidebar_label: Janela encerrada
+description: A janela terminou porque não restava concessão pendente, e a operação não é mais aceita.
+code: uniplus.autorizacao.migracao.janela_encerrada
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Envio do lote da janela de migração do perfil de acesso
+  - Decisão da concessão retida na janela de migração
+  - Decisão da proteção de dados na janela de migração
+  - Encerramento da janela de migração do perfil de acesso
+requisitos:
+  - UNI-REQ-0293
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de migração do perfil terminou ao ser consultada, porque todas as concessões já tinham sido decididas e nenhuma estava pendente. A operação pedida não foi aplicada.
+
+## Como resolver
+
+Recarregue a tela: as concessões já têm a situação final. Se alguém precisar do perfil, o caminho é o pedido de acesso, que volta a ser aceito com a janela terminada.

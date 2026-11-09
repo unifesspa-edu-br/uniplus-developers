@@ -1,0 +1,29 @@
+---
+title: O lote não decide todas as concessões da versão anterior
+sidebar_label: Lote incompleto
+description: O lote precisa decidir todas as concessões da versão anterior, menos as de quem envia o lote.
+code: uniplus.autorizacao.migracao.lote_incompleto
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Envio do lote da janela de migração do perfil de acesso
+requisitos:
+  - UNI-REQ-0294
+  - UNI-REQ-0296
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O lote enviado deixou sem decisão alguma concessão da versão anterior. O lote vale por inteiro: ele decide todas as concessões ativas, menos as retidas, que são as de quem o envia. Nada foi gravado.
+
+## Como resolver
+
+Recarregue a janela, decida cada concessão da lista, migrando ou recusando, e envie de novo o lote completo. As concessões da própria pessoa que envia ficam fora da lista e são decididas por outra pessoa da gestão de acessos.

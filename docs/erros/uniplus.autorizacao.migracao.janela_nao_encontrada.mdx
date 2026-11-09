@@ -1,0 +1,32 @@
+---
+title: Janela de migração não encontrada
+sidebar_label: Janela não encontrada
+description: O perfil não tem janela de migração aberta.
+code: uniplus.autorizacao.migracao.janela_nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Consulta da janela de migração do perfil de acesso
+  - Envio do lote da janela de migração do perfil de acesso
+  - Decisão da concessão retida na janela de migração
+  - Decisão da proteção de dados na janela de migração
+  - Encerramento da janela de migração do perfil de acesso
+requisitos:
+  - UNI-REQ-0292
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação pede a janela de migração do perfil, mas o perfil não tem janela aberta: ela nunca foi aberta, porque a versão em vigor não acrescentou permissão, ou já terminou.
+
+## Como resolver
+
+Confira se o perfil informado é o que está em migração. Se a janela já terminou, não há mais o que decidir: quem não foi migrado perdeu o acesso e volta por pedido novo.

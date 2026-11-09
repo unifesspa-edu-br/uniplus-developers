@@ -1,0 +1,32 @@
+---
+title: O prazo da janela de migração terminou
+sidebar_label: Prazo encerrado
+description: Passadas as 72 horas, as concessões não decididas foram encerradas e a decisão não é mais aceita.
+code: uniplus.autorizacao.migracao.prazo_encerrado
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Envio do lote da janela de migração do perfil de acesso
+  - Decisão da concessão retida na janela de migração
+  - Decisão da proteção de dados na janela de migração
+  - Encerramento da janela de migração do perfil de acesso
+requisitos:
+  - UNI-REQ-0300
+  - UNI-REQ-0301
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A janela de migração durou as 72 horas corridas e não se prorroga. A concessão que não concluiu todas as etapas até o fim do prazo foi revogada por não ter sido migrada para a versão nova, e a decisão recebida depois do prazo é recusada, inclusive o envio do lote.
+
+## Como resolver
+
+Recarregue a tela para ver a situação final de cada concessão. Quem perdeu o acesso volta a tê-lo por pedido novo, feito depois do fim da janela.
