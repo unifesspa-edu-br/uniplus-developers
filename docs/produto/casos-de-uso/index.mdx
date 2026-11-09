@@ -35,7 +35,8 @@ para a página de [regras de negócio](../regras-negocio/index.mdx).
 - **Administrador da Unidade** — configura e publica o processo seletivo dentro da
   Unidade que administra.
 - **Candidato** — preenche e submete a inscrição no portal público.
-- **Servidor do CEPS** — consulta o acompanhamento administrativo quando autorizado.
+- **Servidor da CGA** — consulta o acompanhamento administrativo com a concessão
+  aplicável na unidade dona; CEPS é a referência dos registros históricos.
 
 ## UC-01 — Configurar o processo seletivo
 
@@ -157,7 +158,8 @@ atendimento) e UNI-REQ-0173 (verificação de segurança do arquivo enviado).
 
 ## UC-04 — Acompanhar administrativamente um processo
 
-**Ator:** servidor do CEPS autorizado ao acompanhamento.
+**Ator:** servidor da CGA com a concessão aplicável na unidade dona (CEPS nos
+registros históricos).
 
 **Pré-condições:** autenticação no shell do backoffice e autorização própria na
 API para indicadores e operações protegidas. A leitura da identificação e
@@ -166,6 +168,10 @@ concede acesso aos dados protegidos. Processo em rascunho só é visível a quem
 tem permissão de configurar na unidade dona: autoria, papel genérico, concessão
 em outra unidade ou acesso apenas ao acompanhamento não bastam. Sem essa
 concessão, não aparece na lista e o acesso direto responde como inexistente.
+Fora de rascunho, indicadores exigem permissão de acompanhar na unidade dona;
+em rascunho, quem configura nessa unidade consulta três valores zero e quem
+só acompanha não vê o processo. Vínculo institucional e papel genérico não
+substituem concessões; impedimentos de atuação continuam aplicáveis.
 
 1. O usuário acessa o painel de processos seletivos.
 2. O sistema consulta e apresenta a lista de processos disponíveis.
@@ -180,11 +186,24 @@ Carregamento, lista vazia, processo não encontrado, erro de consulta e acesso
 negado têm tratamentos distintos. Acesso direto e recarregamento preservam a
 identificação; a troca de processo não mantém dados ou ações do anterior.
 
-Na etapa de indicadores, o acompanhamento apresenta situações simultâneas e
-intervalos conforme o cronograma e os três indicadores aprovados pelo PO em
+O acompanhamento prevê situações simultâneas e intervalos conforme o cronograma.
+Em entrega independente, apresenta os três indicadores aprovados pelo PO em
 28/10/2026: **Inscrições** (submetidas e não canceladas), **Inscritos** (pessoas
-distintas nesse conjunto) e **Rascunhos** (não enviados e não descartados).
-Correções pendentes não são novos rascunhos. Distribuições usam a última versão
+distintas por CPF nesse conjunto) e **Rascunhos** (não enviados e não descartados).
+O PO confirmou que cada processo reúne um único nível de ensino; não se usa
+inscrição em níveis diferentes no mesmo processo como cenário de aceite.
+Inscrições e Inscritos mantêm seus significados, embora tenham o mesmo valor
+sob a unicidade vigente por CPF e processo. O CPF não é exposto nos agregados.
+Correções pendentes não são novos rascunhos. Rascunhos tem a descrição
+“Em preenchimento” com inscrições abertas, “Não enviados” após o encerramento
+das inscrições e “Inscrições ainda não enviadas” antes da abertura, sem formulário
+ou sem versão divulgada. A janela considera prorrogações por retificação; falhas
+não geram descrição de sucesso ou zeros, e ausência de versão divulgada não
+significa processo inexistente. Uma consulta válida sem inscrições retorna zeros.
+
+Distribuições, situações, prazos, agregados dos cartões e encerramento são
+entregas próprias, sem condicionar os três quantitativos. Distribuições usam a
+última versão
 enviada válida das inscrições submetidas e não canceladas, preservando primeira
 e segunda opção e modalidades por oferta, sem multiplicar os totais globais.
 Descartados ficam fora de consultas e contagens mesmo quando ainda existem por
@@ -192,7 +211,13 @@ exclusão lógica, sem exigir remoção física imediata (UNI-REQ-0169).
 
 A relação nominal é proposta separada dos relatórios: filtros por situação
 (Submetida, Rascunho e Cancelada), curso/oferta nas duas opções, identificação da
-opção, CPF mascarado como `***.999.999-**` e permissão própria no servidor.
+opção e permissão própria no servidor. Conforme o [UNI-REQ-0208 da main](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/src/data/produto/requisitos-mvp-selecao.ts), cada dado
+respeita a classificação congelada e sua permissão; nomes exigem a permissão
+aplicável, e CPF mascarado como `***.999.999-**` exige a específica de identificador
+mascarado, sem revelação adicional nesta proposta. Dados sem permissão são
+omitidos sem indicar sua existência; classificação desconhecida segue a proteção
+do sensível. Cada inscrição exibida segue o registro de acesso antes da entrega
+previsto no UNI-REQ-0203. Consultar inscrições não concede acesso a todos os dados.
 Canceladas podem constar dessa relação sem entrar nos indicadores. A validação
 do recorte nominal, campos, ordenação e autorização ainda está pendente. Os
 relatórios são fixos nesta etapa, com configuração pelo usuário adiada.
@@ -207,9 +232,9 @@ o caso de uso de consulta não executa essas ações. Fórmulas, mapeamentos e
 definições pendentes são detalhados antes da implementação correspondente.
 
 **Requisitos relacionados:** UNI-REQ-0176 (fluxo e aba única), UNI-REQ-0177
-(leitura aberta e acesso CEPS), UNI-REQ-0178 (situações), UNI-REQ-0179
-(quantitativos), UNI-REQ-0180 (relatórios fixos a refinar), UNI-REQ-0184
-(rascunho de processo) e UNI-REQ-0185 (proposta de relação nominal).
+(leitura aberta e acesso protegido), UNI-REQ-0178 (situações), UNI-REQ-0179
+(quantitativos), UNI-REQ-0180 (relatórios fixos a refinar), UNI-REQ-0258
+(rascunho de processo) e UNI-REQ-0259 (proposta de relação nominal).
 Ver [decisões, pendências e incrementos](../acompanhamento-administrativo.mdx).
 
 ## Incrementos planejados

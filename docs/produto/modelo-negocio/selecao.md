@@ -64,7 +64,7 @@ Termos usados ao longo do documento, com o sentido que têm no Uni+.
 | Fase | Momento do cronograma do processo (inscrição, homologação, habilitação etc.). Cada exigência de documento é vinculada à fase em que se aplica. |
 | Versão congelada (cópia oficial) | Quando o processo seletivo é publicado, o sistema tira uma fotografia imutável de toda a configuração. A partir daí, é essa cópia — e não a configuração viva — que governa inscrições, análises e resultados. Ver seção 5. |
 | Retificação | A forma oficial de alterar a configuração de um processo seletivo já publicado: emite-se um novo ato que aponta o ato retificado e registra o motivo, com nova versão congelada; o ato retificado continua publicado. A configuração publicada não é editada diretamente. |
-| Administrador da Unidade | Servidor que configura e publica processos dentro da unidade que administra (por exemplo, o CEPS). |
+| Administrador da Unidade | Servidor que configura e publica processos dentro da unidade que administra (por exemplo, a CGA). |
 | Candidato | Pessoa que preenche e submete a inscrição no portal público. |
 
 ## 3. Como o sistema funciona (visão geral)
@@ -130,13 +130,21 @@ Quando for implementada, a inscrição será possível quando existir um process
 
 | Requisito | Regra | Descrição em negócio |
 |---|---|---|
-| `UNI-REQ-0031` | Uma inscrição por CPF | Um mesmo CPF só pode ter uma inscrição ativa — rascunho ou enviada — por processo e nível de ensino. Inscrições em níveis de ensino diferentes do mesmo processo são permitidas. A inscrição cancelada não conta e não impede uma nova inscrição. |
+| `UNI-REQ-0031` | Uma inscrição por CPF | Um mesmo CPF só pode ter uma inscrição ativa — rascunho ou enviada — por processo e nível de ensino. O registro canônico ainda contém a redação anterior que permite inscrições em níveis distintos; a confirmação posterior do PO e a reconciliação pendente estão descritas abaixo. A inscrição cancelada não conta e não impede uma nova inscrição. |
 | `UNI-REQ-0032` | Nome social | Sempre que o nome for exibido — em listas, telas ou documentos —, o nome social tem prioridade absoluta sobre o nome civil. |
 | `UNI-REQ-0028` | Documentos obrigatórios | A inscrição não pode ser submetida sem os documentos obrigatórios exigidos para o caso do candidato. |
 | `UNI-REQ-0033` | Cancelar e refazer | O candidato pode cancelar a inscrição enviada enquanto as inscrições estiverem abertas, sabendo que, para voltar a participar, terá de fazer uma inscrição nova, do zero (seção 6.2). O cancelamento registra quem cancelou, a data e o motivo, que é opcional para o candidato. |
 | `UNI-REQ-0164` | Modalidades por opção de curso | As modalidades em que o candidato concorre são calculadas e registradas por opção de curso (seção 6.1); a segunda opção é opcional (`UNI-REQ-0024`). |
 | `UNI-REQ-0165` | Correção da inscrição submetida | Com as inscrições abertas, o candidato corrige a mesma inscrição, que gera novo comprovante a cada correção (seção 6.1). |
 | `UNI-REQ-0047` | Lista de espera | O candidato entra em lista de espera conforme a opção indicada no ato da inscrição. Etapa futura — capacidade planejada, ainda sem escopo na entrega atual. |
+
+**Definição posterior sobre nível de ensino.** O UNI-REQ-0031 ainda conserva a
+redação anterior que permite inscrições em níveis distintos. Posteriormente, o
+PO Jairo confirmou: “Sempre do mesmo nível. Nunca misturados”. Essa é uma
+definição funcional mais recente: cada processo seletivo reúne um único nível
+de ensino. A confirmação está preservada no UNI-REQ-0179 e precisa ser
+reconciliada com o UNI-REQ-0031 em refinamento separado. Este ajuste documental
+não altera o registro canônico do UNI-REQ-0031.
 
 > Comprovante e pendências. Mesmo após submeter, um documento não obrigatório que não foi enviado, por exemplo, gera uma pendência que fica registrada e visível na consulta da inscrição e no comprovante — sem impedir a submissão. A inscrição permanece válida; a pendência apenas sinaliza algo a acompanhar. O comprovante nunca é alterado: uma reemissão gera um novo comprovante, preservando o anterior.
 
@@ -465,7 +473,7 @@ Consolidação das regras institucionais. O enunciado público e o mapeamento pa
 
 | Requisito | Regra | Enunciado | Situação |
 |---|---|---|---|
-| `UNI-REQ-0031` | Inscrição única por CPF | Um CPF só pode ter uma inscrição ativa (rascunho ou enviada) por processo e nível de ensino, e a cancelada não conta; níveis distintos do mesmo processo são permitidos. | Entrega atual |
+| `UNI-REQ-0031` | Inscrição única por CPF | Um CPF só pode ter uma inscrição ativa (rascunho ou enviada) por processo e nível de ensino, e a cancelada não conta; o registro canônico ainda permite nível distinto, enquanto a confirmação posterior de Jairo (“Sempre do mesmo nível. Nunca misturados”), preservada no UNI-REQ-0179, aguarda reconciliação em refinamento separado. | Entrega atual; reconciliação pendente |
 | `UNI-REQ-0032` | Prioridade do nome social | Nome social tem prioridade absoluta em listas públicas e documentos de identificação. | Entrega atual |
 | `UNI-REQ-0028` | Documentos obrigatórios | Inscrição bloqueada sem os documentos obrigatórios aplicáveis ao caso do candidato. | Entrega atual |
 | `UNI-REQ-0024`, `UNI-REQ-0045` | Precedência de opções de curso | Vagas de 1ª opção de curso são processadas primeiro; as remanescentes são realocadas para a 2ª opção. A cascata de remanejamento entre modalidades é regra própria (`REQ-56`), não parte da precedência das opções de curso. | Etapa futura |
@@ -518,17 +526,21 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 O PO aprovou o percurso painel de processos → página do processo, com somente
 a aba Acompanhamento na primeira entrega, sem abas futuras em construção. O
 público autorizado aos indicadores e operações protegidas é formado pelos
-servidores autorizados do CEPS (UNI-REQ-0176/0177). A leitura da identificação e
+servidores da CGA com concessão na unidade dona (UNI-REQ-0176/0177); CEPS é a
+referência dos registros históricos, sem concessão automática pelo nome da
+unidade. A leitura da identificação e
 configuração do processo publicado é aberta na API, inclusive sem token, pelo
 recurso existente; ações, inscrições, documentos, análises e notas mantêm
 autorização própria. O backoffice exige autenticação, e entrar no painel não
 concede essas operações. O rascunho de processo só pode ser lido por quem tem
 permissão de configurar na unidade dona, sem autorização automática por autoria,
 papel genérico, concessão em outra unidade ou acesso apenas ao acompanhamento
-(UNI-REQ-0184). Sem a concessão aplicável, não aparece na lista e o acesso direto
+(UNI-REQ-0258). Sem a concessão aplicável, não aparece na lista e o acesso direto
 responde como inexistente. O primeiro incremento prevê navegação e estrutura;
-indicadores exigem a permissão definitiva desde seu acesso. Essa sequência é
-planejamento, não comprovação de entrega.
+fora de rascunho, indicadores exigem a permissão de acompanhar na unidade dona.
+Em rascunho, quem configura nessa unidade consulta os três valores zero, e quem
+só acompanha não vê o processo. Impedimentos de atuação continuam aplicáveis.
+Essa sequência é planejamento, não comprovação de entrega.
 
 As situações em inscrição, em homologação, em avaliação e em período de recurso
 podem ocorrer simultaneamente, com consulta por qualquer filtro aplicável.
@@ -546,19 +558,43 @@ cronograma e a conclusão pelo CRCA, sem presumir situação intermediária. A
 consulta não efetiva encerramento.
 
 O PO aprovou em 28/10/2026 três indicadores (UNI-REQ-0179): **Inscrições**
-(submetidas e não canceladas), **Inscritos** (pessoas distintas nesse conjunto) e
+(submetidas e não canceladas), **Inscritos** (pessoas distintas por CPF nesse conjunto) e
 **Rascunhos** (não enviados e não descartados). Não há contador adicional de
 canceladas ou submetidas. Reenvios, opções e modalidades não multiplicam os
-totais globais; correção pendente não conta como novo rascunho. As distribuições
+totais globais; correção pendente não conta como novo rascunho. O PO confirmou
+que processos nunca misturam níveis de ensino; o exemplo de inscrições em níveis
+diferentes no mesmo processo não integra o aceite. Sob a unicidade vigente por
+CPF e processo, Inscrições e Inscritos têm o mesmo valor, mantendo conceitos
+próprios e sem expor o CPF dos candidatos nos agregados.
+
+Rascunhos apresenta “Em preenchimento” com inscrições abertas, “Não enviados”
+após o encerramento das inscrições e “Inscrições ainda não enviadas” antes da
+abertura, sem formulário ou sem versão divulgada. A janela da versão divulgada
+considera prorrogações por retificação. Ausência de versão divulgada não torna
+o processo inexistente; falhas são apresentadas como erro, sem zeros ou descrição
+de sucesso inventados. A descrição trata do período de inscrição, sem deduzir
+encerramento formal do processo.
+
+Distribuições, situações, próximos prazos, agregados dos cartões e encerramento
+permanecem em entregas próprias, independentes dos três quantitativos. As
+distribuições
 usam a última versão enviada válida das inscrições submetidas e não canceladas,
 separando primeira e segunda opção e modalidades por oferta. Descartados ficam
 fora de consultas e contagens mesmo quando ainda existem por exclusão lógica,
 sem exigir exclusão física imediata (UNI-REQ-0169).
 
-A relação nominal (UNI-REQ-0185), filha do UNI-REQ-0176, permanece proposta a
+A relação nominal (UNI-REQ-0259), filha do UNI-REQ-0176, permanece proposta a
 validar, separada dos relatórios: filtros por situação (Submetida, Rascunho e
 Cancelada), curso/oferta em ambas as opções, identificação da opção, CPF
-mascarado como `***.999.999-**` e permissão própria no servidor. Canceladas podem
+mascarado como `***.999.999-**` apenas com a permissão específica, e autorização
+própria no servidor. Aplica-se o
+[UNI-REQ-0208 da main](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/src/data/produto/requisitos-mvp-selecao.ts):
+consultar inscrições não libera todos os dados; cada dado segue sua classificação
+congelada e a permissão correspondente. Nomes exigem a permissão aplicável,
+dados sem permissão são omitidos sem indício e classificação desconhecida segue
+a proteção do sensível. A proposta não acrescenta revelação de CPF; cada inscrição
+exibida segue o registro de acesso antes da entrega previsto no UNI-REQ-0203.
+Canceladas podem
 aparecer nessa relação sem entrar nos indicadores. O recorte nominal, campos,
 ordenação e detalhamento da autorização ainda dependem de validação. Para os
 relatórios do UNI-REQ-0180, a orientação é de formatos fixos nesta etapa, com
