@@ -4039,7 +4039,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0256',
     titulo: 'Os perfis de governança não têm versão, lote nem janela e não se suspendem pela API',
     enunciado:
-      'Os perfis da gestão de acessos e da proteção de dados ficam fora da versão, do lote e da janela de migração, e a composição deles só muda por alteração do próprio sistema. Também não se suspendem nem se desativam pela API, porque suspender a gestão de acessos travaria a própria retomada. A reclassificação de permissão não os suspende e só gera aviso. A contenção nesses perfis é a revogação individual, com o mínimo de duas pessoas ativas na gestão de acessos (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
+      'Os perfis da gestão de acessos e da proteção de dados ficam fora da versão, do lote e da janela de migração, e a composição deles só muda por alteração do próprio sistema. Também não se suspendem nem se desativam pela API, porque suspender a gestão de acessos travaria a própria retomada. A reclassificação de permissão não os suspende e só gera aviso. A contenção nesses perfis é a revogação individual, com o mínimo de duas pessoas ativas na gestão de acessos. Como escapam da aprovação, só reúnem permissões do módulo de autorização, e toda permissão reservada à governança é desse módulo: uma permissão de outro módulo chegaria a todos os gestores e à proteção de dados sem aprovação (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4051,7 +4051,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A criação de versão, o lote e a janela para os perfis de governança são recusados; a suspensão e a desativação desses perfis pela API são recusadas; a reclassificação de permissão que os usa gera aviso e não os suspende; a revogação individual continua possível e respeita o mínimo de duas pessoas ativas na gestão de acessos.',
+      'A criação de versão, o lote e a janela para os perfis de governança são recusados; a suspensão e a desativação desses perfis pela API são recusadas; a reclassificação de permissão que os usa gera aviso e não os suspende; a revogação individual continua possível e respeita o mínimo de duas pessoas ativas na gestão de acessos; os perfis de governança só contêm permissões do módulo de autorização, e nenhuma permissão de outro módulo é reservada à governança.',
     verificacao: 'Testes automatizados de API das recusas para os perfis de governança (planejado, uniplus-api#2274).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
