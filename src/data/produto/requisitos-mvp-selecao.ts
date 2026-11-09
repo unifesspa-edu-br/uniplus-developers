@@ -3425,7 +3425,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0232',
     titulo: 'Quem não é homologado é eliminado no resultado final da homologação das inscrições',
     enunciado:
-      'A inscrição não homologada é eliminada quando se publica o resultado final da homologação das inscrições, e a pessoa não é classificada. Os resultados que a fase publica são os que o administrador declara no edital: só o resultado final ou também um resultado preliminar. Antes da publicação do resultado final, ninguém está eliminado por não homologação da inscrição. Exemplo 1: a fase declara só o resultado final. Marlene consta nele como não homologada e é eliminada nessa publicação. Exemplo 2: a fase declara resultado preliminar e final. Marlene consta como não homologada no preliminar e ainda não está eliminada; o que vale é a situação dela no final. Regra repassada pelo líder técnico em 05/11/2026 como definição do PO, com confirmação pedida por escrito.',
+      'A inscrição não homologada é eliminada automaticamente quando se publica o resultado final da homologação das inscrições, sem outro ato, e a pessoa não entra na classificação. O resultado que publica a lista é o que a regra de homologação das inscrições aponta (UNI-REQ-0265), e o administrador declara no edital se ele tem só o resultado final ou também um resultado preliminar. Antes da publicação do resultado final, ninguém está eliminado por não homologação da inscrição. Exemplo 1: a fase declara só o resultado final. Marlene consta nele como não homologada e é eliminada nessa publicação. Exemplo 2: a fase declara resultado preliminar e final. Marlene consta como não homologada no preliminar e ainda não está eliminada; o que vale é a situação dela no final. Regra repassada pelo líder técnico em 05/11/2026 como definição do PO, com confirmação pedida por escrito.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3437,7 +3437,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'No processo com fase de homologação das inscrições, a classificação não inicia sem o resultado final da homologação das inscrições e não inclui eliminados.',
+      'A classificação não inicia sem o resultado final da homologação das inscrições e só inclui inscrições homologadas; a não homologada no resultado final é eliminada sem outro ato.',
     verificacao:
       'Teste automatizado da publicação nas duas configurações da fase e da recusa de iniciar a classificação sem o resultado final (planejado).',
     pagina_developers: '/produto/regras-negocio/',
