@@ -1,0 +1,28 @@
+---
+title: Motivo ausente ou longo demais
+sidebar_label: Motivo inválido
+description: O motivo do encerramento da janela é obrigatório e tem limite de tamanho.
+code: uniplus.autorizacao.migracao.motivo_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Encerramento da janela de migração do perfil de acesso
+requisitos:
+  - UNI-REQ-0299
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O encerramento antecipado da janela de migração exige um motivo, e o informado está ausente ou passa do limite de caracteres. O limite vem na mensagem da resposta.
+
+## Como resolver
+
+Informe um motivo que explique o encerramento, dentro do limite de caracteres, e repita o pedido.

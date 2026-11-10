@@ -1,0 +1,30 @@
+---
+title: Ninguém decide a própria concessão
+sidebar_label: Decisão da própria concessão
+description: A pessoa não pode migrar nem recusar a concessão em que ela mesma é a beneficiária.
+code: uniplus.autorizacao.migracao.decisao_da_propria_concessao
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Envio do lote da janela de migração do perfil de acesso
+  - Decisão da concessão retida na janela de migração
+  - Decisão da proteção de dados na janela de migração
+requisitos:
+  - UNI-REQ-0296
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A decisão pedida inclui uma concessão do perfil em que quem decide é a pessoa beneficiária. A concessão de quem envia o lote fica retida justamente para ser decidida por outra pessoa. Nada foi gravado.
+
+## Como resolver
+
+Retire a própria concessão da decisão e peça a outra pessoa da gestão de acessos que decida a concessão retida.

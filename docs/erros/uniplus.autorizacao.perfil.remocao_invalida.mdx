@@ -1,0 +1,28 @@
+---
+title: Permissões a remover inválidas
+sidebar_label: Remoção inválida
+description: A remoção precisa de ao menos uma permissão da versão em vigor e, se houver categoria, de uma das previstas.
+code: uniplus.autorizacao.perfil.remocao_invalida
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Remoção de permissão do perfil de acesso
+requisitos:
+  - UNI-REQ-0259
+rastreio:
+  - label: 'uniplus-api#2278'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2278
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista de permissões a remover está vazia, traz permissão que o perfil não tem na versão em vigor ou traz uma categoria que não é uma das previstas: incidente, erro de composição ou mudança de função.
+
+## Como resolver
+
+Consulte a versão em vigor do perfil, informe ao menos uma permissão que ela tenha e, se for indicar a categoria, escolha uma das três previstas.

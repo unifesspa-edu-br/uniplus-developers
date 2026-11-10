@@ -1,0 +1,28 @@
+---
+title: O perfil de acesso não está suspenso
+sidebar_label: Não suspenso
+description: Rascunho — a decisão de retomada foi enviada para um perfil sem suspensão em andamento.
+code: uniplus.autorizacao.perfil.nao_suspenso
+http_status: 422
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Decisão da retomada do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao/retomada`)
+requisitos:
+  - UNI-REQ-0309
+rastreio:
+  - label: 'uniplus-api#2280'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2280
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil não tem suspensão em andamento: ele nunca foi suspenso, ou a suspensão já terminou, inclusive por uma decisão enviada um instante antes por outra pessoa. A decisão enviada não foi gravada.
+
+## Como resolver
+
+Recarregue o perfil para ver a situação atual. Se ele já voltou a valer, nada mais é preciso; se for preciso conter o acesso de novo, suspenda o perfil.

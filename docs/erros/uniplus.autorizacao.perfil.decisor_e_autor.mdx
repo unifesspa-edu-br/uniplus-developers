@@ -1,0 +1,28 @@
+---
+title: Quem criou a versão não a decide
+sidebar_label: Decisor é o autor
+description: Quem criou a versão do perfil não pode aprová-la nem recusá-la.
+code: uniplus.autorizacao.perfil.decisor_e_autor
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Aprovação da versão do perfil de acesso
+requisitos:
+  - UNI-REQ-0249
+rastreio:
+  - label: 'uniplus-api#2278'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2278
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A pessoa que tentou decidir é a mesma que criou a versão. A criação, a aprovação pela gestão de acessos e a aprovação pela proteção de dados são feitas por três pessoas diferentes. Ter concessão do perfil não impede ninguém de criar nem de decidir.
+
+## Como resolver
+
+Peça a outra pessoa com a permissão da etapa que decida a versão.

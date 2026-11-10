@@ -1,0 +1,28 @@
+---
+title: Já existe uma versão pendente para o perfil
+sidebar_label: Versão pendente já existe
+description: Um perfil só pode ter uma versão pendente por vez.
+code: uniplus.autorizacao.perfil.versao_pendente_existente
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Cadastro de versões do perfil de acesso
+requisitos:
+  - UNI-REQ-0248
+rastreio:
+  - label: 'uniplus-api#2276'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2276
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil já tem uma versão aguardando aprovação. Enquanto ela não for decidida ou cancelada, não é possível propor outra.
+
+## Como resolver
+
+Decida ou cancele a versão pendente e, depois, proponha a versão nova.

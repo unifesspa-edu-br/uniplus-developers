@@ -1,0 +1,44 @@
+---
+title: Há linhas em conflito sem decisão no retorno do INEP
+sidebar_label: Conflitos pendentes no retorno do INEP
+description: Rascunho — o resultado não foi publicado porque há inscrito com linhas em conflito no retorno do INEP, sem decisão do CEPS.
+code: uniplus.selecao.notas_do_enem.conflitos_pendentes
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do resultado da homologação das inscrições
+  - Publicação do resultado da classificação
+requisitos:
+  - UNI-REQ-0233
+  - UNI-REQ-0234
+rastreio:
+  - label: 'uniplus-api#2256'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2256
+  - label: 'uniplus-api#1222'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1222
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O arquivo do INEP que vale para uma edição do ENEM traz linhas diferentes para o
+mesmo inscrito, e o CEPS ainda não decidiu qual delas vale. Por exemplo, duas
+linhas com notas de redação diferentes. A mensagem informa quantos conflitos
+estão pendentes em cada edição, sem identificar as pessoas.
+
+## Por que recusar
+
+O sistema não escolhe uma das linhas. Publicar agora poderia homologar,
+classificar ou eliminar alguém por erro de arquivo.
+
+## Como resolver
+
+Em cada edição indicada na mensagem, abra o lote de notas que vale, vá à aba de
+conflitos e, para cada pessoa, compare as linhas, escolha a que vale e registre a justificativa.
+Não é preciso editar o arquivo. Como alternativa à escolha, gere de novo o arquivo
+com os CPFs, envie-o à plataforma do INEP e importe o retorno. Quando não houver
+mais pendência, publique o resultado de novo.

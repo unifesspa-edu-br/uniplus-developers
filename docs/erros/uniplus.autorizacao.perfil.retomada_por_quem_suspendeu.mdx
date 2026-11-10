@@ -1,0 +1,28 @@
+---
+title: Quem suspendeu o perfil de acesso não decide a retomada
+sidebar_label: Retomada por quem suspendeu
+description: Rascunho — a pessoa que fez a suspensão tentou decidir uma etapa da retomada.
+code: uniplus.autorizacao.perfil.retomada_por_quem_suspendeu
+http_status: 422
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Decisão da retomada do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao/retomada`)
+requisitos:
+  - UNI-REQ-0309
+rastreio:
+  - label: 'uniplus-api#2280'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2280
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A retomada exige outra pessoa: quem suspendeu o perfil não decide nenhuma das etapas da retomada, mesmo que tenha a permissão da etapa. A decisão não foi gravada.
+
+## Como resolver
+
+Peça a outra pessoa com a permissão da etapa que decida a retomada.

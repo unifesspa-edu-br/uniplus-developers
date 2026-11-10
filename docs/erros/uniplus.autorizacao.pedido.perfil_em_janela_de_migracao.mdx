@@ -1,0 +1,29 @@
+---
+title: O perfil está em janela de migração
+sidebar_label: Perfil em janela de migração
+description: O perfil não recebe pessoa nova até o fim da janela de migração.
+code: uniplus.autorizacao.pedido.perfil_em_janela_de_migracao
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0302
+  - UNI-REQ-0292
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil pedido está em janela de migração: nesse período ele não recebe pessoa nova, nem na versão anterior nem na nova, para que as concessões que já existem sejam decididas antes. O pedido é recusado até o fim da janela.
+
+## Como resolver
+
+Faça o pedido depois que a janela terminar, o que acontece em até 72 horas corridas da abertura, ou antes, se todas as concessões forem decididas ou a gestão de acessos encerrar a janela.

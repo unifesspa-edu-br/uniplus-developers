@@ -1,0 +1,28 @@
+---
+title: A mudança de classe descartou as aprovações
+sidebar_label: Aprovações descartadas
+description: As permissões acrescentadas mudaram de classe e as aprovações já dadas deixaram de valer.
+code: uniplus.autorizacao.perfil.aprovacoes_descartadas
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Aprovação da versão do perfil de acesso
+requisitos:
+  - UNI-REQ-0261
+rastreio:
+  - label: 'uniplus-api#2278'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2278
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Entre a criação e a decisão, a classificação de uma das permissões acrescentadas mudou, e a versão passou a exigir outras aprovações. As aprovações já dadas foram descartadas, e quem as deu foi avisado. A decisão pedida não foi registrada.
+
+## Como resolver
+
+Consulte a versão, veja as etapas que ela exige agora e decida de novo, na ordem. A resposta repetida com a mesma chave de idempotência devolve o mesmo resultado.

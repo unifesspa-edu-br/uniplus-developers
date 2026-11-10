@@ -1,0 +1,29 @@
+---
+title: A concessão já foi decidida na janela de migração
+sidebar_label: Concessão já decidida
+description: A concessão já tem decisão final na janela e não é decidida de novo.
+code: uniplus.autorizacao.migracao.concessao_ja_decidida
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Decisão da concessão retida na janela de migração
+  - Decisão da proteção de dados na janela de migração
+requisitos:
+  - UNI-REQ-0297
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A concessão já foi migrada, recusada ou encerrada na janela, e a decisão final não se altera. Uma decisão diferente da já gravada, ou uma operação concorrente sobre a mesma concessão, devolve conflito; o mesmo pedido repetido com a mesma chave de idempotência devolve o resultado gravado.
+
+## Como resolver
+
+Recarregue a janela para ver a decisão gravada. Quem foi recusado volta a ter o perfil por pedido novo, feito depois do fim da janela.

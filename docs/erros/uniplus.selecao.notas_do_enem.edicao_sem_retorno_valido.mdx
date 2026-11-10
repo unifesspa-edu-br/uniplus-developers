@@ -1,0 +1,39 @@
+---
+title: Há inscritos sem consulta válida na plataforma do INEP
+sidebar_label: Edição sem consulta válida
+description: Rascunho — o resultado não foi publicado porque uma edição do ENEM com inscritos não tem consulta feita depois do fim das inscrições.
+code: uniplus.selecao.notas_do_enem.edicao_sem_retorno_valido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do resultado da homologação das inscrições
+requisitos:
+  - UNI-REQ-0235
+rastreio:
+  - label: 'uniplus-api#1222'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1222
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao menos uma edição do ENEM indicada por inscritos não tem consulta feita depois
+do fim das inscrições: ainda não há envio ou retorno importado, o último arquivo de
+envio foi gerado antes desse fim, ou o arquivo que vale foi importado antes desse
+envio. A mensagem informa quais são as
+edições, sem identificar as pessoas.
+
+## Por que recusar
+
+Quem não aparece no retorno não é homologado e é eliminado. Publicar agora
+eliminaria pessoas que não foram consultadas na plataforma do INEP.
+
+## Como resolver
+
+Para cada edição indicada na mensagem, gere o arquivo com os CPFs, envie-o à
+plataforma do INEP e importe o retorno, mesmo que ele venha idêntico ao anterior.
+Depois, publique o resultado de novo.

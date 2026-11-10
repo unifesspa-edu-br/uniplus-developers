@@ -1,0 +1,28 @@
+---
+title: O perfil de acesso já está suspenso
+sidebar_label: Já suspenso
+description: Rascunho — o perfil já tem uma suspensão em andamento, e o motivo enviado não foi gravado.
+code: uniplus.autorizacao.perfil.ja_suspenso
+http_status: 422
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Suspensão do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao`)
+requisitos:
+  - UNI-REQ-0305
+rastreio:
+  - label: 'uniplus-api#2280'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2280
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil já está suspenso e só pode ter uma suspensão em andamento. A suspensão e o motivo enviados agora não foram gravados.
+
+## Como resolver
+
+Consulte o perfil para ver desde quando está suspenso. Não há o que repetir: a suspensão que já existe continua valendo até a retomada.

@@ -1,0 +1,32 @@
+---
+title: 'Acesso negado: a operação exige a permissão da etapa'
+sidebar_label: Sem permissão na etapa
+description: 'Quem decide a migração precisa da permissão da etapa: gestão de acessos ou proteção de dados.'
+code: uniplus.autorizacao.migracao.sem_permissao_na_etapa
+http_status: 403
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Envio do lote da janela de migração do perfil de acesso
+  - Decisão da concessão retida na janela de migração
+  - Decisão da proteção de dados na janela de migração
+  - Encerramento da janela de migração do perfil de acesso
+requisitos:
+  - UNI-REQ-0294
+  - UNI-REQ-0297
+rastreio:
+  - label: 'uniplus-api#2279'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2279
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A operação da janela de migração exige a permissão da etapa: a da gestão de acessos para o lote, a concessão retida e o encerramento, e a da proteção de dados para a etapa dela. Quem tem só a permissão da outra etapa não a decide.
+
+## Como resolver
+
+Peça a uma pessoa com a permissão da etapa que faça a decisão.
