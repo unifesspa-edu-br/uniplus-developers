@@ -8,8 +8,10 @@ situacao: publicado
 modulo: Autorização
 emitido_em:
   - Aprovação da versão do perfil de acesso
+  - Decisão da retomada do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao/retomada`)
 requisitos:
   - UNI-REQ-0249
+  - UNI-REQ-0309
 rastreio:
   - label: 'uniplus-api#2278'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2278
@@ -21,7 +23,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A pessoa que tentou decidir já decidiu a outra etapa da versão. As duas etapas são decididas por pessoas diferentes, mesmo que uma delas tenha as duas permissões.
+A pessoa que tentou decidir já decidiu a outra etapa da versão ou da retomada do perfil. As duas etapas são decididas por pessoas diferentes, mesmo que uma delas tenha as duas permissões.
 
 ## Como resolver
 

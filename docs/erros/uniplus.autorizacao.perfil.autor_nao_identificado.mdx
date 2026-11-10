@@ -9,8 +9,14 @@ modulo: Autorização
 emitido_em:
   - Cadastro de versões do perfil de acesso
   - Documento de fundamentação da versão do perfil
+  - Suspensão do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao`)
+  - Decisão da retomada do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao/retomada`)
+  - Desativação do perfil de acesso (`POST /api/autorizacao/perfis/{id}/desativacao`)
+  - Reativação do perfil de acesso (`POST /api/autorizacao/perfis/{id}/reativacao`)
 requisitos:
   - UNI-REQ-0248
+  - UNI-REQ-0303
+  - UNI-REQ-0305
 rastreio:
   - label: 'uniplus-api#2276'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2276
@@ -22,7 +28,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A sessão autenticada não trouxe a identificação de quem age. Proposta, decisão, cancelamento e documento da versão do perfil registram o autor na trilha, e nada foi registrado.
+A sessão autenticada não trouxe a identificação de quem age. Proposta, decisão, cancelamento e documento da versão do perfil, e também a suspensão, a retomada, a desativação e a reativação do perfil, registram o autor na trilha, e nada foi registrado.
 
 ## Como resolver
 

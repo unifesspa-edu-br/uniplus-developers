@@ -1,0 +1,28 @@
+---
+title: A etapa da retomada já foi decidida
+sidebar_label: Etapa da retomada já decidida
+description: Rascunho — a etapa da retomada já tem decisão nesta suspensão.
+code: uniplus.autorizacao.perfil.etapa_da_retomada_ja_decidida
+http_status: 409
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Decisão da retomada do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao/retomada`)
+requisitos:
+  - UNI-REQ-0309
+rastreio:
+  - label: 'uniplus-api#2280'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2280
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa já recebeu decisão nesta suspensão, dada por outra pessoa ou por uma requisição anterior. Cada etapa da retomada recebe uma única decisão, e a decisão não se repete nem se altera.
+
+## Como resolver
+
+Consulte o perfil para ver quais etapas já foram decididas e quais faltam. Se ainda falta a outra etapa, ela é decidida por outra pessoa com a permissão dela.
