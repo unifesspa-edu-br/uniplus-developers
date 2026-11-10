@@ -14,7 +14,7 @@ O acompanhamento começa pelo painel de processos. Ao escolher um processo, o
 usuário abre sua página identificada e consulta a aba **Acompanhamento**.
 
 :::info[Requisito aprovado não significa funcionalidade entregue]
-O PO confirmou o fluxo, a aba única, o público registrado originalmente como
+O PO confirmou o fluxo, a aba única, o público de servidores do
 CEPS e as regras descritas como confirmadas abaixo. A primeira implementação prepara navegação e estrutura;
 indicadores, situações e relatórios avançam em incrementos próprios. A
 implementação e sua disponibilidade devem ser verificadas nas issues e nos
@@ -35,11 +35,11 @@ fluxo e não tornam todas as funções do COC requisitos do Uni+.
 | --- | --- |
 | Fluxo | Painel de processos e abertura do acompanhamento do processo selecionado. |
 | Página inicial | Somente a aba Acompanhamento; sem abas futuras “em construção”. |
-| Público | A decisão inicial registra servidores do CEPS. A referência institucional atual é CGA; o vínculo institucional não concede acesso sem a permissão efetiva na unidade dona. A leitura do processo publicado é aberta na API; o backoffice exige autenticação. |
-| Situações | Em inscrição, em homologação, em avaliação e em período de recurso confirmadas pelo PO. O rótulo Encerrado permanece previsto, com critério pendente de validação do CRCA. |
+| Público | O público aprovado é de servidores do CEPS, responsável pela condução dos processos seletivos; o vínculo institucional não concede acesso sem a permissão efetiva na unidade dona. A leitura do processo publicado é aberta na API; o backoffice exige autenticação. |
+| Situações | Em inscrição, em homologação das inscrições, em avaliação e em período de recurso confirmadas pelo PO. O rótulo Encerrado permanece previsto, com critério pendente de validação da CGA. |
 | Simultaneidade | Exibir todas as situações em andamento; o processo é encontrado pelo filtro de qualquer uma delas. |
 | Antes e entre fases | “Aguardando início” antes da primeira fase e “Entre etapas” nos intervalos sem fase em andamento. |
-| Encerramento | O PO inicialmente indicou o término da última fase do cronograma. Após o LT informar que a conclusão depende do CRCA, a definição ficou pendente de validação com o setor. |
+| Encerramento | O PO inicialmente indicou o término da última fase do cronograma. Após o LT informar que a conclusão depende do CRCA (atual CGA), a definição ficou pendente de validação com o setor. |
 | Cancelamento | Processos cancelados continuam consultáveis e identificados como “Cancelado”. |
 | Indicadores iniciais | Inscrições, Inscritos e Rascunhos, confirmados pelo PO em 28/10/2026; distribuições por curso/oferta e modalidade e próximos prazos. Homologações pendentes ficam para o refinamento da homologação. |
 
@@ -47,17 +47,17 @@ fluxo e não tornam todas as funções do COC requisitos do Uni+.
 
 O PO perguntou se “encerramento administrativo” significava encerramento manual
 e inicialmente indicou o término da última fase do cronograma como critério.
-Posteriormente, o LT informou que a conclusão do processo depende do CRCA e
+Posteriormente, o LT informou que a conclusão do processo depende do CRCA (atual CGA) e
 orientou obter a definição com a Rebeca, no setor. A resposta inicial do PO é
 preservada como origem do refinamento, sem constituir critério definitivo.
 
 O LT propôs dois formatos de encerramento, **automático** e **administrativo**,
 com **justificativa obrigatória no administrativo**. Os formatos e a exigência
-de justificativa são propostas do LT, ainda sujeitas à validação do CRCA.
+de justificativa são propostas do LT, ainda sujeitas à validação da CGA.
 
 A situação temporal apresentada no painel e o encerramento formal do processo
 são conceitos distintos. O término do cronograma não permite presumir a
-conclusão pelo CRCA nem atribuir automaticamente Encerrado. A apresentação entre
+conclusão pela CGA nem atribuir automaticamente Encerrado. A apresentação entre
 esses momentos e a relação com o estado cadastral dependem da definição do
 setor; não se cria uma situação intermediária neste registro. A consulta de
 acompanhamento não altera o estado do processo nem executa encerramento.
@@ -76,12 +76,14 @@ retificar, dados de inscrições, documentos, análises, notas, indicadores e
 relatórios continuam exigindo autorização própria no servidor.
 
 O shell do backoffice mantém autenticação: entrar no painel não libera suas
-áreas protegidas. As referências atuais usam **CGA**, preservando CEPS nos
-registros históricos. Isso não cria concessão por nome da unidade, lotação ou
+áreas protegidas. O **CEPS** conduz os processos seletivos. A **CGA (antigo CRCA)**
+é uma unidade distinta, responsável por habilitação, matrícula, envio ao SIGAA
+e atividades acadêmicas correspondentes; não é um novo nome do CEPS.
+Essas atribuições não criam concessão por nome da unidade, lotação ou
 papel genérico. Fora de rascunho, consultar indicadores exige permissão de
 acompanhar na unidade dona, respeitados os impedimentos de atuação aplicáveis.
 
-O **rascunho de processo** segue o UNI-REQ-0258 e a
+O **rascunho de processo** segue o UNI-REQ-0327 e a
 [API #2140](https://github.com/unifesspa-edu-br/uniplus-api/issues/2140): somente
 quem tem permissão de configurar processos na **unidade dona** pode lê-lo.
 A unidade é dona do processo; autoria, papel genérico, concessão em outra unidade
@@ -159,7 +161,7 @@ correção, cancelamento ou descarte.
 
 ## Relação nominal de inscrições — proposta a validar
 
-O UNI-REQ-0259 registra a proposta do LT como requisito próprio, filho do
+O UNI-REQ-0328 registra a proposta do LT como requisito próprio, filho do
 UNI-REQ-0176 e separado dos relatórios do UNI-REQ-0180. A aprovação dos três
 indicadores não aprova automaticamente esta consulta nominal.
 
@@ -189,11 +191,11 @@ UNI-REQ-0203, também registrado na main. Entrar no painel ou consultar indicado
 não concede acesso nominal, a documentos ou a notas.
 
 Canceladas podem aparecer na relação sem entrar nos indicadores. Rascunhos de
-inscrição não enviados permitem à equipe autorizada da CGA acompanhar quem ainda
+inscrição não enviados permitem à equipe autorizada do CEPS acompanhar quem ainda
 não enviou; descartados
 ficam fora da consulta, mesmo antes da remoção física, conforme UNI-REQ-0169.
 Este rascunho de inscrição não se confunde com o rascunho de processo protegido
-pelo UNI-REQ-0258.
+pelo UNI-REQ-0327.
 
 A validação do recorte nominal com o PO, campos finais, ordenação e detalhamento
 da autorização permanecem pendentes; o requisito mantém o estado **proposto**.
@@ -232,7 +234,7 @@ processos seletivos, com a adequação da leitura prevista na API #2140.
 
 A apresentação pode avançar com dados fictícios e testes de interface, sem que
 isso constitua liberação temporária de acesso. Indicadores nascem sob a permissão
-definitiva na unidade dona, sem concessão automática por vínculo com a CGA.
+definitiva na unidade dona, sem concessão automática por vínculo com o CEPS ou a CGA.
 Caminhos, DTOs, paginação e contratos técnicos são definidos
 nos repositórios responsáveis; este planejamento não os declara entregues.
 
@@ -263,9 +265,9 @@ Ainda precisam ser especificados:
 
 - As fases que produzem cada situação, inclusive fases de recursos de assuntos distintos.
 - Os limites de início e término, cronograma incompleto e retificação do cronograma.
-- Com o CRCA, a definição a obter com a Rebeca: condição e gatilho de conclusão do processo; formatos permitidos (automático e/ou administrativo); usuários autorizados; e validação da justificativa obrigatória proposta pelo LT para o administrativo.
-- A apresentação entre o fim do cronograma e a conclusão pelo CRCA, a fonte do rótulo Encerrado e sua relação com o estado cadastral, sem presumir situação intermediária.
-- A precedência da identificação Cancelado diante de situações simultâneas, intervalos ou encerramento conforme o critério a validar com o CRCA.
+- Com a CGA, a definição a obter com a Rebeca: condição e gatilho de conclusão do processo; formatos permitidos (automático e/ou administrativo); usuários autorizados; e validação da justificativa obrigatória proposta pelo LT para o administrativo.
+- A apresentação entre o fim do cronograma e a conclusão pela CGA, a fonte do rótulo Encerrado e sua relação com o estado cadastral, sem presumir situação intermediária.
+- A precedência da identificação Cancelado diante de situações simultâneas, intervalos ou encerramento conforme o critério a validar com a CGA.
 - O contrato e a apresentação dos agrupamentos por oferta/modalidade/opção, com universo já definido, e os detalhes dos próximos prazos.
 - A data da submissão mais recente, proposta inicial ainda sem regra final sobre reenvios e inscrições canceladas.
 
@@ -283,7 +285,7 @@ filtros e acesso por operação.
 | Relatório solicitado | Campos e abrangência informados |
 | --- | --- |
 | Pessoas candidatas inscritas por curso | Ordenação, número de inscrição, CPF mascarado, nome e modalidade. |
-| Homologação | Ordenação, número de inscrição, CPF mascarado, nome, modalidade, deferido/indeferido e justificativa, inclusive após recurso quando houver. |
+| Homologação das inscrições | Ordenação, número de inscrição, CPF mascarado, nome, modalidade, situação homologada/não homologada e justificativa, inclusive após recurso quando houver. |
 | Aprovadas — preliminar | Classificadas e lista de espera; ordem de classificação, número de inscrição, CPF mascarado, nome, modalidade e situação. |
 | Aprovadas — definitivo | Mesmos campos do preliminar e resultado de recurso quando houver. |
 | Atendimento especializado | Solicitações de atendimento; campos ainda a definir. |
@@ -295,11 +297,12 @@ filtros e acesso por operação.
 O PO mencionou filtros por sexo, sexualidade e estado civil. Falta relacionar
 cada termo aos campos do Uni+, definir a quais relatórios se aplica e como
 tratar valores não informados. “Inscritas/homologadas” pode significar relatórios
-separados ou filtro; o nome de homologação também precisa ser compatibilizado
-com a inclusão de indeferimentos.
+separados ou filtro. O relatório de homologação das inscrições usa as situações
+“homologada” e “não homologada”, conforme UNI-REQ-0231 e UNI-REQ-0232;
+não se trata de deferimento ou indeferimento de análise documental ou recurso.
 
 A orientação recebida é de **relatórios fixos nesta etapa**; a configuração pelo
-usuário fica adiada para evolução posterior. A relação nominal do UNI-REQ-0259
+usuário fica adiada para evolução posterior. A relação nominal do UNI-REQ-0328
 é uma consulta separada, ainda proposta. O relatório por endereço citado na proposta inicial do LT e ausente da lista do
 e-mail precisa ser esclarecido; não foi automaticamente descartado.
 
@@ -327,7 +330,7 @@ executados ou de implementação entregue.
 | Troca de processo durante carregamento | Não manter nome, dados ou ações do processo anterior. |
 | Acesso direto e recarregamento | Consultar o processo identificado na URL e manter a aba única. |
 | Atalhos de edição/publicações | Preservar processo e permissões do destino. |
-| Indicadores fora de rascunho | Exigir permissão de acompanhar na unidade dona, inclusive na API; respeitar impedimentos de atuação, sem concessão automática por papel ou vínculo com a CGA. |
+| Indicadores fora de rascunho | Exigir permissão de acompanhar na unidade dona, inclusive na API; respeitar impedimentos de atuação, sem concessão automática por papel ou vínculo com o CEPS ou a CGA. |
 | Ausência legítima de inscrições | Apresentar os três quantitativos zerados; falhas de cálculo continuam sendo erro. |
 | Descrição de Rascunhos | Usar a janela de inscrição e as três descrições previstas, incluindo retificações, ausência de formulário e de versão divulgada, sem inferir encerramento do processo. |
 
@@ -338,7 +341,7 @@ de aprovação do requisito, não de disponibilidade da implementação.
 
 <RequisitosTable
   requisitos={requisitosMvpSelecao.filter((r) =>
-    ['UNI-REQ-0176', 'UNI-REQ-0177', 'UNI-REQ-0178', 'UNI-REQ-0179', 'UNI-REQ-0180', 'UNI-REQ-0181', 'UNI-REQ-0258', 'UNI-REQ-0259'].includes(r.requisito_id)
+    ['UNI-REQ-0176', 'UNI-REQ-0177', 'UNI-REQ-0178', 'UNI-REQ-0179', 'UNI-REQ-0180', 'UNI-REQ-0181', 'UNI-REQ-0327', 'UNI-REQ-0328'].includes(r.requisito_id)
   )}
   filtros={['status']}
 />
