@@ -1,0 +1,28 @@
+---
+title: O documento instituidor ainda não foi lido
+sidebar_label: Documento não lido
+description: Rascunho — a pessoa ainda não leu o documento instituidor de alguma versão em uso das concessões decididas.
+code: uniplus.autorizacao.reclassificacao.documento_nao_lido
+http_status: 422
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Decisão da liberação da permissão reclassificada (`POST /api/autorizacao/reclassificacoes/{id}/decisoes`)
+requisitos:
+  - UNI-REQ-0318
+rastreio:
+  - label: 'uniplus-api#2281'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2281
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A decisão exige que a pessoa tenha lido o documento instituidor de cada versão em uso das concessões que decide, e a leitura ainda não está registrada para alguma delas. Nada do envio foi gravado.
+
+## Como resolver
+
+Abra a reclassificação, leia o documento de cada versão em uso e envie a decisão de novo.

@@ -1,0 +1,28 @@
+---
+title: Uma reclassificação mais recente substituiu esta
+sidebar_label: Reclassificação superada
+description: Rascunho — a mesma permissão foi reclassificada de novo no perfil, e só a mais recente pode ser decidida.
+code: uniplus.autorizacao.reclassificacao.superada
+http_status: 409
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Decisão da liberação da permissão reclassificada (`POST /api/autorizacao/reclassificacoes/{id}/decisoes`)
+requisitos:
+  - UNI-REQ-0321
+rastreio:
+  - label: 'uniplus-api#2281'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2281
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A mesma permissão do mesmo perfil foi reclassificada outra vez depois desta. Só a reclassificação mais recente pode ser decidida, e nada da decisão enviada foi gravado.
+
+## Como resolver
+
+Recarregue a fila, abra a reclassificação mais recente e decida por ela.

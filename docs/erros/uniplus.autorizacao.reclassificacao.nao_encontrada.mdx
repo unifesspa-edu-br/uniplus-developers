@@ -1,0 +1,29 @@
+---
+title: Reclassificação não encontrada
+sidebar_label: Não encontrada
+description: Rascunho — a reclassificação consultada ou decidida não existe.
+code: uniplus.autorizacao.reclassificacao.nao_encontrada
+http_status: 404
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Detalhe da reclassificação (`GET /api/autorizacao/reclassificacoes/{id}`)
+  - Decisão da liberação da permissão reclassificada (`POST /api/autorizacao/reclassificacoes/{id}/decisoes`)
+requisitos:
+  - UNI-REQ-0321
+rastreio:
+  - label: 'uniplus-api#2281'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2281
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Não existe reclassificação com o identificador informado, para consulta ou para decisão.
+
+## Como resolver
+
+Recarregue a fila de reclassificações e abra a que está listada. O identificador pode ter vindo de um endereço antigo ou digitado errado.
