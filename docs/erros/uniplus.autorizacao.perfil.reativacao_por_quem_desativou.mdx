@@ -1,0 +1,28 @@
+---
+title: Quem desativou o perfil de acesso não o reativa
+sidebar_label: Reativação por quem desativou
+description: Rascunho — a pessoa que fez a desativação tentou reativar o perfil.
+code: uniplus.autorizacao.perfil.reativacao_por_quem_desativou
+http_status: 422
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Reativação do perfil de acesso (`POST /api/autorizacao/perfis/{id}/reativacao`)
+requisitos:
+  - UNI-REQ-0304
+rastreio:
+  - label: 'uniplus-api#2280'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2280
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A reativação exige outra pessoa da gestão de acessos: quem desativou o perfil não o reativa. O perfil continua desativado.
+
+## Como resolver
+
+Peça a outra pessoa da gestão de acessos que reative o perfil, informando o motivo.

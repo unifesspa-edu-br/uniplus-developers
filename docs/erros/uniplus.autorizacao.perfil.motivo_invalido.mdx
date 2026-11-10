@@ -1,7 +1,7 @@
 ---
 title: Motivo ausente ou longo demais
 sidebar_label: Motivo inválido
-description: O motivo da remoção, da recusa ou do cancelamento é obrigatório e tem até 500 caracteres.
+description: O motivo da remoção, da recusa, do cancelamento, da suspensão, da retomada, da desativação ou da reativação é obrigatório e tem até 500 caracteres.
 code: uniplus.autorizacao.perfil.motivo_invalido
 http_status: 422
 situacao: publicado
@@ -9,9 +9,17 @@ modulo: Autorização
 emitido_em:
   - Remoção de permissão do perfil de acesso
   - Aprovação da versão do perfil de acesso
+  - Suspensão do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao`)
+  - Decisão da retomada do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao/retomada`)
+  - Desativação do perfil de acesso (`POST /api/autorizacao/perfis/{id}/desativacao`)
+  - Reativação do perfil de acesso (`POST /api/autorizacao/perfis/{id}/reativacao`)
 requisitos:
   - UNI-REQ-0259
   - UNI-REQ-0261
+  - UNI-REQ-0303
+  - UNI-REQ-0304
+  - UNI-REQ-0305
+  - UNI-REQ-0309
 rastreio:
   - label: 'uniplus-api#2278'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2278
@@ -23,7 +31,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A remoção de permissão, a recusa de uma etapa da aprovação ou o cancelamento de uma versão foi enviado sem motivo, só com espaços ou com mais de 500 caracteres. O motivo fica na trilha e explica a decisão a quem consultar a versão depois.
+A remoção de permissão, a recusa de uma etapa da aprovação, o cancelamento de uma versão, a suspensão, a decisão da retomada, a desativação ou a reativação do perfil foi enviado sem motivo, só com espaços ou com mais de 500 caracteres. O motivo fica na trilha e explica a decisão a quem consultar a versão depois.
 
 ## Como resolver
 

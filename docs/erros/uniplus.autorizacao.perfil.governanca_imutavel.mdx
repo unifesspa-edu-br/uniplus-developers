@@ -8,8 +8,15 @@ situacao: publicado
 modulo: Autorização
 emitido_em:
   - Cadastro de perfis de acesso
+  - Suspensão do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao`)
+  - Decisão da retomada do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao/retomada`)
+  - Desativação do perfil de acesso (`POST /api/autorizacao/perfis/{id}/desativacao`)
+  - Reativação do perfil de acesso (`POST /api/autorizacao/perfis/{id}/reativacao`)
 requisitos:
   - UNI-REQ-0184
+  - UNI-REQ-0303
+  - UNI-REQ-0304
+  - UNI-REQ-0305
 rastreio:
   - label: 'uniplus-api#2133'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2133
@@ -21,7 +28,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Houve tentativa de editar, desativar ou reativar um perfil de governança. Esses perfis definem quem administra e fiscaliza as concessões, e o conjunto de permissões deles é mantido pelo próprio sistema.
+Houve tentativa de editar, desativar, reativar, suspender ou retomar um perfil de governança. Esses perfis definem quem administra e fiscaliza as concessões, e o conjunto de permissões deles é mantido pelo próprio sistema.
 
 ## Como resolver
 

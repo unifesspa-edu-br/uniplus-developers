@@ -9,8 +9,12 @@ modulo: Autorização
 emitido_em:
   - Aprovação da versão do perfil de acesso
   - Consulta da janela de migração do perfil de acesso
+  - Suspensão do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao`)
+  - Decisão da retomada do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao/retomada`)
 requisitos:
   - UNI-REQ-0262
+  - UNI-REQ-0305
+  - UNI-REQ-0309
 rastreio:
   - label: 'uniplus-api#2278'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2278
@@ -22,7 +26,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A pessoa não tem a permissão de aprovação pela gestão de acessos nem a de aprovação pela proteção de dados, necessárias para decidir a versão, ver a fila de uma etapa ou ler o documento da versão. O cancelamento de versão criada por outra pessoa também exige a permissão da gestão de acessos.
+A pessoa não tem a permissão de aprovação pela gestão de acessos nem a de aprovação pela proteção de dados, necessárias para decidir a versão, ver a fila de uma etapa ou ler o documento da versão. A suspensão e a retomada de perfil exigem a permissão de manter perfis ou a de aprovação pela proteção de dados, conforme a etapa. O cancelamento de versão criada por outra pessoa também exige a permissão da gestão de acessos.
 
 ## Como resolver
 
