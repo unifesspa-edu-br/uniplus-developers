@@ -526,35 +526,36 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 O PO aprovou o percurso painel de processos → página do processo, com somente
 a aba Acompanhamento na primeira entrega, sem abas futuras em construção. O
 público autorizado aos indicadores e operações protegidas é formado pelos
-servidores da CGA com concessão na unidade dona (UNI-REQ-0176/0177); CEPS é a
-referência dos registros históricos, sem concessão automática pelo nome da
-unidade. A leitura da identificação e
+servidores do CEPS com permissão correspondente na unidade dona (UNI-REQ-0176/0177).
+O CEPS conduz os processos seletivos; a CGA (antigo CRCA) é unidade distinta,
+responsável por habilitação, matrícula, envio ao SIGAA e atividades acadêmicas
+correspondentes. O vínculo com qualquer setor não concede permissão. A leitura da identificação e
 configuração do processo publicado é aberta na API, inclusive sem token, pelo
 recurso existente; ações, inscrições, documentos, análises e notas mantêm
 autorização própria. O backoffice exige autenticação, e entrar no painel não
 concede essas operações. O rascunho de processo só pode ser lido por quem tem
 permissão de configurar na unidade dona, sem autorização automática por autoria,
 papel genérico, concessão em outra unidade ou acesso apenas ao acompanhamento
-(UNI-REQ-0258). Sem a concessão aplicável, não aparece na lista e o acesso direto
+(UNI-REQ-0327). Sem a concessão aplicável, não aparece na lista e o acesso direto
 responde como inexistente. O primeiro incremento prevê navegação e estrutura;
 fora de rascunho, indicadores exigem a permissão de acompanhar na unidade dona.
 Em rascunho, quem configura nessa unidade consulta os três valores zero, e quem
 só acompanha não vê o processo. Impedimentos de atuação continuam aplicáveis.
 Essa sequência é planejamento, não comprovação de entrega.
 
-As situações em inscrição, em homologação, em avaliação e em período de recurso
+As situações em inscrição, em homologação das inscrições, em avaliação e em período de recurso
 podem ocorrer simultaneamente, com consulta por qualquer filtro aplicável.
 Antes da primeira fase, mostrar Aguardando início; nos intervalos, Entre etapas.
 Cancelados continuam consultáveis e identificados (UNI-REQ-0178).
 
 A situação temporal do painel é distinta do encerramento formal. O PO indicou
 inicialmente o término da última fase do cronograma, mas o LT informou depois
-que a conclusão depende do CRCA e orientou obter a definição com a Rebeca, no
+que a conclusão depende do CRCA (atual CGA) e orientou obter a definição com a Rebeca, no
 setor. O critério de Encerrado permanece pendente dessa validação. Os formatos
 automático e administrativo, com justificativa obrigatória no administrativo,
-são proposta do LT a validar com o CRCA. Também dependem dessa definição o
+são proposta do LT a validar com a CGA. Também dependem dessa definição o
 gatilho de conclusão, os usuários autorizados e a apresentação entre o fim do
-cronograma e a conclusão pelo CRCA, sem presumir situação intermediária. A
+cronograma e a conclusão pela CGA, sem presumir situação intermediária. A
 consulta não efetiva encerramento.
 
 O PO aprovou em 28/10/2026 três indicadores (UNI-REQ-0179): **Inscrições**
@@ -583,7 +584,7 @@ separando primeira e segunda opção e modalidades por oferta. Descartados ficam
 fora de consultas e contagens mesmo quando ainda existem por exclusão lógica,
 sem exigir exclusão física imediata (UNI-REQ-0169).
 
-A relação nominal (UNI-REQ-0259), filha do UNI-REQ-0176, permanece proposta a
+A relação nominal (UNI-REQ-0328), filha do UNI-REQ-0176, permanece proposta a
 validar, separada dos relatórios: filtros por situação (Submetida, Rascunho e
 Cancelada), curso/oferta em ambas as opções, identificação da opção, CPF
 mascarado como `***.999.999-**` apenas com a permissão específica, e autorização
