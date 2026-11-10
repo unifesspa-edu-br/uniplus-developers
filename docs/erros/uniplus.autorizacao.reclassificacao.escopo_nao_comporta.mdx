@@ -1,0 +1,28 @@
+---
+title: O escopo da concessão não comporta o novo alcance
+sidebar_label: Escopo não comporta
+description: Rascunho — a permissão passou a ter outro escopo e a concessão não pode ser liberada.
+code: uniplus.autorizacao.reclassificacao.escopo_nao_comporta
+http_status: 422
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Decisão da liberação da permissão reclassificada (`POST /api/autorizacao/reclassificacoes/{id}/decisoes`)
+requisitos:
+  - UNI-REQ-0320
+rastreio:
+  - label: 'uniplus-api#2281'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2281
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A permissão passou a ser de unidade e a concessão é da instituição inteira, ou o inverso, e a gestão de acessos não libera esse caso. Nada do envio foi gravado.
+
+## Como resolver
+
+Mantenha a suspensão dessa concessão, informando o motivo; a pessoa volta a ter a permissão por um pedido novo, com o escopo certo. No envio para todas as concessões, a que não comporta é pulada.

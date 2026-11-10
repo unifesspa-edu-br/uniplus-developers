@@ -1,0 +1,28 @@
+---
+title: Resultado inválido
+sidebar_label: Resultado inválido
+description: Rascunho — o resultado informado não é liberada nem mantida.
+code: uniplus.autorizacao.reclassificacao.resultado_invalido
+http_status: 422
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Decisão da liberação da permissão reclassificada (`POST /api/autorizacao/reclassificacoes/{id}/decisoes`)
+requisitos:
+  - UNI-REQ-0319
+rastreio:
+  - label: 'uniplus-api#2281'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2281
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O resultado da decisão não é um dos dois existentes: `liberada` ou `mantida`.
+
+## Como resolver
+
+Informe `liberada` para devolver a permissão ou `mantida` para manter a suspensão, e envie a decisão de novo.

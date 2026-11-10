@@ -1,0 +1,29 @@
+---
+title: Sistema em atualização
+sidebar_label: Catálogo desatualizado
+description: Rascunho — a instância não decide acesso porque o catálogo de permissões dela difere do aplicado ao banco.
+code: uniplus.autorizacao.catalogo.desatualizado
+http_status: 503
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Qualquer operação autenticada que decide acesso, como a consulta da fila de reclassificações (`GET /api/autorizacao/reclassificacoes`)
+  - Aprovação da versão do perfil de acesso
+requisitos:
+  - UNI-REQ-0324
+rastreio:
+  - label: 'uniplus-api#2281'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2281
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O sistema está sendo atualizado: a instância que atendeu a requisição carrega um catálogo de permissões diferente do que a implantação mais recente aplicou ao banco, ou o banco ainda não tem catálogo. Por segurança, o acesso não é decidido, e nada foi feito nem recusado por falta de permissão. A resposta não é guardada pela chave de idempotência, de modo que repetir a requisição não devolve este erro.
+
+## Como resolver
+
+Aguarde alguns instantes e repita a operação, com a mesma chave de idempotência se houver. Se o erro durar mais que alguns minutos, avise a equipe de suporte do Uni+.

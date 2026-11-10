@@ -13,10 +13,14 @@ emitido_em:
   - Decisão da retomada do perfil de acesso (`POST /api/autorizacao/perfis/{id}/suspensao/retomada`)
   - Desativação do perfil de acesso (`POST /api/autorizacao/perfis/{id}/desativacao`)
   - Reativação do perfil de acesso (`POST /api/autorizacao/perfis/{id}/reativacao`)
+  - Fila de reclassificações do catálogo (`GET /api/autorizacao/reclassificacoes`)
+  - Decisão da liberação da permissão reclassificada (`POST /api/autorizacao/reclassificacoes/{id}/decisoes`)
+  - Divergências da governança (`GET /api/autorizacao/governanca/divergencias`)
 requisitos:
   - UNI-REQ-0248
   - UNI-REQ-0303
   - UNI-REQ-0305
+  - UNI-REQ-0319
 rastreio:
   - label: 'uniplus-api#2276'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2276
@@ -28,7 +32,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A sessão autenticada não trouxe a identificação de quem age. Proposta, decisão, cancelamento e documento da versão do perfil, e também a suspensão, a retomada, a desativação e a reativação do perfil, registram o autor na trilha, e nada foi registrado.
+A sessão autenticada não trouxe a identificação de quem age. Proposta, decisão, cancelamento e documento da versão do perfil, e também a suspensão, a retomada, a desativação e a reativação do perfil, e a consulta e a decisão da liberação das permissões reclassificadas, registram o autor na trilha, e nada foi registrado.
 
 ## Como resolver
 
