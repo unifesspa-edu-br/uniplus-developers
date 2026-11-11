@@ -6028,7 +6028,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0269',
     titulo: 'Recurso se abre pela publicação de um ato ou resultado',
     enunciado:
-      'O recurso pode ser previsto no edital para uma fase ou para uma etapa do processo seletivo, e a sua janela se abre sempre pela publicação de um ato ou resultado da fase ou da etapa, como o resultado preliminar da homologação das inscrições, o gabarito preliminar, as notas ou a análise de uma banca. Todos os casos levantados com o PO têm publicação; a contagem pela ciência individual do candidato (UNI-REQ-0115) fica sem uso até o PO indicar decisão comunicada só ao candidato contra a qual caiba recurso. Confirmado pelo PO em 10/11/2026.',
+      'O recurso pode ser previsto no edital para uma fase ou para uma etapa do processo seletivo, e a sua janela se abre sempre pela publicação de um ato ou resultado da fase ou da etapa, como o resultado preliminar da homologação das inscrições, o gabarito preliminar, as notas ou a análise de uma banca. Todos os casos levantados com o PO têm publicação; nenhuma decisão é comunicada só ao candidato, então a contagem pela ciência individual (UNI-REQ-0115) fica sem uso no recurso. Confirmado pelo PO em 10/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6226,7 +6226,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0278',
     titulo: 'Decisões dos recursos saem em documento único assinado',
     enunciado:
-      'As decisões dos recursos de uma janela saem num documento único, com o número de inscrição e o resultado de cada recurso, sem motivo, assinado por todos os que votaram. Até o Uni+ ter integração com a assinatura gov.br, a assinatura é feita no gov.br, fora do sistema, como a Unifesspa já faz com os seus documentos, e o documento assinado é anexado e conferido no sistema. Havendo recursos, o resultado definitivo só é publicado depois do documento assinado e conferido (UNI-REQ-0161); sem recursos, não há documento das decisões. Se o documento é publicado como ato ou apenas arquivado está pendente de definição do PO; enquanto isso, o Uni+ não o mostra ao candidato (UNI-REQ-0290). Confirmado pelo PO em 10/11/2026.',
+      'As decisões dos recursos de uma janela saem num documento único, com o número de inscrição e o resultado de cada recurso, sem motivo, assinado por todos os que votaram. Até o Uni+ ter integração com a assinatura gov.br, a assinatura é feita no gov.br, fora do sistema, como a Unifesspa já faz com os seus documentos, e o documento assinado é anexado e conferido no sistema. Havendo recursos, o resultado definitivo só é publicado depois do documento assinado e conferido (UNI-REQ-0161); sem recursos, não há documento das decisões. O documento é arquivado, não publicado: o Uni+ não o mostra ao candidato (UNI-REQ-0290). Confirmado pelo PO em 10/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6238,7 +6238,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O documento lista número de inscrição e resultado de cada recurso, sem motivo nem nome de candidato; o definitivo com recursos é recusado sem documento conferido; sem recursos, o definitivo não exige documento.',
+      'O documento lista número de inscrição e resultado de cada recurso, sem motivo nem nome de candidato, e é arquivado, não publicado; o definitivo com recursos é recusado sem documento conferido; sem recursos, o definitivo não exige documento.',
     verificacao:
       'Teste automatizado da geração do documento e da recusa do definitivo (planejado).',
     pagina_developers: '/produto/regras-negocio/',
