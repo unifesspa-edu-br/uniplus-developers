@@ -3569,9 +3569,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A tela de configuração oferece, para cada fase, somente pessoas ativas, que aceitaram o papel (UNI-REQ-0263) e podem assinar pela unidade dela e permite definir a ordem, inclusive pelo teclado; a mesma pessoa não aparece duas vezes na lista; a emissão é recusada quando a fase não tem assinantes. Quando o sistema gerar documento de etapa, ele usa os assinantes e a unidade da fase declarada pela etapa.',
+      'A tela de configuração oferece, para cada fase, somente pessoas ativas, que aceitaram o papel (UNI-REQ-0263) e podem assinar pela unidade dela e permite definir a ordem, inclusive pelo teclado; a mesma pessoa não aparece duas vezes na lista; a emissão é recusada quando a fase não tem assinantes; a publicação do documento da fase é aceita com a permissão de publicar documento da fase na unidade da fase e recusada para quem tem só a permissão de publicar o processo. Quando o sistema gerar documento de etapa, ele usa os assinantes e a unidade da fase declarada pela etapa.',
     verificacao:
-      'Testes automatizados da lista por fase, da ordem, da repetição e da recusa de emissão sem assinantes; E2E da configuração (planejado).',
+      'Testes automatizados da lista por fase, da ordem, da repetição e da recusa de emissão sem assinantes; da publicação com a permissão de publicar documento da fase e só com a de publicar o processo; E2E da configuração (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -3711,7 +3711,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0265',
     titulo: 'A homologação das inscrições segue a regra que o edital declara',
     enunciado:
-      'O que homologa uma inscrição é declarado por quem configura o processo na unidade dona, na fase de homologação das inscrições. A regra aponta qual resultado da fase publica a lista e combina condições que o sistema sabe apurar, como o resultado no retorno do INEP na edição indicada, a taxa paga ou a isenção deferida e um documento exigido deferido, e o administrador define como elas se combinam: grupos de condições que precisam ser todas cumpridas, e grupos alternativos, dos quais basta um. Cada condição pode valer só para quem se enquadra nela; para quem não se enquadra, ela conta como cumprida, e, quando não se sabe se a pessoa se enquadra, a condição fica em apuração. O critério nunca é deduzido do tipo de processo, do uso do ENEM, da cobrança de taxa nem da existência de uma etapa. A inscrição é homologada quando cumpre um dos grupos; não é homologada quando nenhum grupo pode mais ser cumprido, e o motivo são as condições não cumpridas; enquanto alguma condição estiver em apuração em qualquer inscrição, a lista não é fechada, mesmo que a inscrição já cumpra outro grupo, para que ninguém perca a homologação por uma condição ainda não apurada. A fase sem nenhuma condição homologa toda inscrição enviada. A fase pode ter mais de um resultado, e só o apontado publica a lista. A regra faz parte do edital: muda por retificação até a publicação do resultado definitivo apontado, quando a fase se considera concluída (UNI-REQ-0211), e, depois dela, só em cumprimento de ordem judicial, pela reabertura da fase. A lista já fechada antes da mudança precisa ser fechada de novo. O edital não pode declarar condição que o sistema ainda não apura. Exemplo 1: na Medicina 2027, a regra tem só a confirmação do INEP. Exemplo 2: num processo com taxa, a regra exige a confirmação do INEP e, em alternativa, o pagamento ou a isenção. Exemplo 3: num processo para indígenas, a regra exige a declaração de pertencimento deferida, com ou sem a taxa. Decisão do líder técnico em 08/11/2026.',
+      'O que homologa uma inscrição é declarado por quem configura o processo na unidade dona, na fase de homologação das inscrições. A regra aponta qual resultado da fase publica a lista e combina condições que o sistema sabe apurar, como o resultado no retorno do INEP na edição indicada, a taxa paga ou a isenção deferida e um documento exigido deferido, e quem configura o processo define como elas se combinam: grupos de condições que precisam ser todas cumpridas, e grupos alternativos, dos quais basta um. Cada condição pode valer só para quem se enquadra nela; para quem não se enquadra, ela conta como cumprida, e, quando não se sabe se a pessoa se enquadra, a condição fica em apuração. O critério nunca é deduzido do tipo de processo, do uso do ENEM, da cobrança de taxa nem da existência de uma etapa. A inscrição é homologada quando cumpre um dos grupos; não é homologada quando nenhum grupo pode mais ser cumprido, e o motivo são as condições não cumpridas; enquanto alguma condição estiver em apuração em qualquer inscrição, a lista não é fechada, mesmo que a inscrição já cumpra outro grupo, para que ninguém perca a homologação da inscrição por uma condição ainda não apurada. A fase sem nenhuma condição homologa toda inscrição enviada. A fase pode ter mais de um resultado, e só o apontado publica a lista. A regra faz parte do edital: muda por retificação até a publicação do resultado definitivo apontado, quando a fase se considera concluída (UNI-REQ-0211), e, depois dela, só em cumprimento de ordem judicial, pela reabertura da fase. A lista já fechada antes da mudança precisa ser fechada de novo. O edital não pode declarar condição que o sistema ainda não apura. Exemplo 1: na Medicina 2027, a regra tem só a confirmação do INEP. Exemplo 2: num processo com taxa, a regra exige a confirmação do INEP e, em alternativa, o pagamento ou a isenção. Exemplo 3: num processo para indígenas, a regra exige a declaração de pertencimento deferida, com ou sem a taxa. Decisão do líder técnico em 08/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3775,7 +3775,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0130',
     titulo: 'Acesso restrito ao documento apresentado pelo candidato',
     enunciado:
-      'O documento de comprovação e o anexo de recurso são acessíveis ao próprio candidato, quanto aos seus, e por três caminhos, cada um com o seu limite: a consulta administrativa auditada, na unidade responsável pelo processo e com a permissão de consultar inscrições (UNI-REQ-0336; a barreira de acesso é da uniplus-api#2192); a banca designada pela unidade responsável pela fase ou pela etapa, no que a etapa analisa; e a unidade responsável pela fase, só para quem ela convocou (UNI-REQ-0336). A consulta administrativa não é trocada pela unidade da fase. O candidato visualiza e baixa o arquivo que ele mesmo enviou, depois de verificado, para ter certeza de que mandou o arquivo correto, inclusive depois do envio da inscrição; o arquivo em verificação, recusado ou excluído não fica disponível. Exemplo: Leandro anexa por engano o PDF de outro exame no lugar do laudo médico, abre o arquivo pela tela, percebe o erro e o troca antes de enviar a inscrição. Visualização pelo candidato: definição repassada pelo líder técnico em 23/10/2026. o acesso da unidade responsável pelo processo aos comprovantes do atendimento especializado, por consulta administrativa auditada, entra antes da análise do atendimento (uniplus-api#2040), e o da banca fica para a homologação documental. Até lá, a unidade ainda não consulta esses comprovantes pelo sistema (risco registrado). Conteúdo e localização técnica não aparecem em log, evento ou resposta destinada a terceiro. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
+      'O documento de comprovação e o anexo de recurso são acessíveis ao próprio candidato, quanto aos seus, e por três caminhos, cada um com o seu limite: a consulta administrativa auditada, na unidade responsável pelo processo e com a permissão de consultar inscrições (a barreira de acesso é da uniplus-api#2192); a banca designada pela unidade responsável pela fase ou pela etapa, no que a etapa analisa (UNI-REQ-0330); e a unidade responsável pela fase, só para quem ela convocou (UNI-REQ-0336). A consulta administrativa não é trocada pela unidade da fase. O candidato visualiza e baixa o arquivo que ele mesmo enviou, depois de verificado, para ter certeza de que mandou o arquivo correto, inclusive depois do envio da inscrição; o arquivo em verificação, recusado ou excluído não fica disponível. Exemplo: Leandro anexa por engano o PDF de outro exame no lugar do laudo médico, abre o arquivo pela tela, percebe o erro e o troca antes de enviar a inscrição. Visualização pelo candidato: definição repassada pelo líder técnico em 23/10/2026. o acesso da unidade responsável pelo processo aos comprovantes do atendimento especializado, por consulta administrativa auditada, entra antes da análise do atendimento (uniplus-api#2040), e o da banca fica para a homologação documental. Até lá, a unidade ainda não consulta esses comprovantes pelo sistema (risco registrado). Conteúdo e localização técnica não aparecem em log, evento ou resposta destinada a terceiro. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -6912,7 +6912,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A retificação que troca a unidade de fase com janela já iniciada, com ato ou registro, ou encerrada é recusada; a de fase que ainda não começou é aceita.',
+      'A retificação que troca a unidade de fase com janela já iniciada, de fase sem janela com ato ou registro, ou de fase encerrada é recusada; a de fase que ainda não começou é aceita, inclusive a de fase com janela futura e a de fase sem janela, ato ou registro.',
     verificacao:
       'Testes automatizados da troca de unidade com a fase por começar, em andamento, sem janela e com ato registrado, e encerrada (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -6934,7 +6934,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Depois do fim da fase, as ações listadas são aceitas na unidade da fase de origem e recusadas na unidade responsável pelo processo; a reabertura por ordem judicial é aceita na unidade responsável pelo processo e recusada na unidade da fase.',
+      'Depois do fim da fase, as ações listadas são aceitas na unidade da fase de origem e, quando a unidade responsável pelo processo é outra, recusadas nela; a reabertura por ordem judicial é aceita na unidade responsável pelo processo e, quando a unidade da fase é outra, recusada nela.',
     verificacao:
       'Testes automatizados das ações posteriores ao fim da fase e da reabertura por ordem judicial, nas duas unidades (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -6958,7 +6958,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     criterios_aceite:
       'O órgão e a unidade gravados no ato são os da unidade do ato, e o pedido que traz outra unidade não os altera; a publicação por quem não tem a permissão na unidade do ato é recusada; o ato avulso que declara a fase sai com a unidade da fase, e o que não declara sai com a do processo.',
     verificacao:
-      'Testes automatizados da unidade gravada em cada tipo de ato e da recusa de pedido com unidade diferente (planejado).',
+      'Testes automatizados da unidade gravada em cada tipo de ato, com pedido que traz outra unidade, e da recusa por falta da permissão na unidade do ato (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -7010,7 +7010,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0338',
     titulo: 'A banca de homologação das inscrições age por ato individual',
     enunciado:
-      'A banca de homologação das inscrições não tem quórum nem votação: qualquer titular designado pratica o ato sozinho, e o ato é registrado com autor, data e, quando houver, justificativa. Exemplo: Betina, titular designada da banca de homologação das inscrições do "SISU 2027", resolve uma crítica da importação, e o registro traz Betina como autora, a data e a justificativa. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
+      'A banca de homologação das inscrições não tem quórum nem votação: qualquer pessoa titular designada pratica o ato individualmente, e o ato é registrado com autoria, data e, quando houver, justificativa. Exemplo: Betina, titular designada da banca de homologação das inscrições do "SISU 2027", resolve uma crítica da importação, e o registro traz Betina como autora, a data e a justificativa. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7022,7 +7022,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O ato de qualquer titular designado é aceito sem quórum e sem votação, e fica registrado com autor, data e justificativa quando houver; quem não é titular designado é recusado.',
+      'O ato de qualquer pessoa titular designada é aceito sem quórum e sem votação, e fica registrado com autoria, data e justificativa quando houver; quem não é titular designada é recusada.',
     verificacao:
       'Testes automatizados do ato por titular e por quem não é titular, e do registro de autoria (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7044,7 +7044,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cada ato listado é aceito para o titular designado da banca de homologação das inscrições, com a permissão na unidade da fase de homologação das inscrições, e recusado para quem não é titular ou tem a permissão só na unidade responsável pelo processo; a publicação do resultado segue o documento da fase.',
+      'Cada ato listado é aceito para a pessoa titular designada da banca de homologação das inscrições, com a permissão na unidade da fase de homologação das inscrições, e recusado para quem não é titular designada ou tem a permissão só na unidade responsável pelo processo; a publicação do resultado segue o documento da fase.',
     verificacao:
       'Testes automatizados de cada ato da banca, com titular e sem ser titular (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7076,7 +7076,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0341',
     titulo: 'A importação externa acontece no período da inscrição',
     enunciado:
-      'Na importação externa, o arquivo de candidatos é importado no período da fase de inscrição, fixado pela unidade responsável pelo processo, e não no período da fase de homologação das inscrições, que é a fase a que o trabalho pertence (UNI-REQ-0330). Exemplo: Betina importa o arquivo de candidatos do "SISU 2027" dentro do período da fase de inscrição, a importação é aceita e o ato fica registrado com Betina como autora; fora desse período, é recusada. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
+      'Na importação externa, o arquivo de candidatos é importado no período da fase de inscrição, fixado pela unidade responsável pelo processo, e não no período da fase de homologação das inscrições, que é a fase a que o trabalho pertence (UNI-REQ-0330). Exemplo: Betina importa o arquivo de candidatos do "SISU 2027" dentro do período da fase de inscrição, a importação é aceita, com o registro do ato conforme o UNI-REQ-0338; fora desse período, é recusada. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7088,7 +7088,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A importação do arquivo de candidatos é aceita dentro do período da fase de inscrição e recusada fora dele, e o ato fica registrado com a autora ou o autor.',
+      'A importação do arquivo de candidatos é aceita dentro do período da fase de inscrição e recusada fora dele; o registro do ato segue o UNI-REQ-0338.',
     verificacao:
       'Testes automatizados da importação dentro e fora do período da fase de inscrição (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7132,7 +7132,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Até a existência do recurso no sistema, a correção feita pela banca de homologação das inscrições a pedido de quem não tem inscrição fica registrada com autor, data e justificativa.',
+      'Até a existência do recurso no sistema, a correção feita pela banca de homologação das inscrições a pedido de quem não tem inscrição é um ato da banca, registrado conforme o UNI-REQ-0338; quando o recurso existir no sistema, a pessoa sem inscrição no processo o interpõe dentro dele e a banca o analisa.',
     verificacao:
       'Revisão futura; o registro da correção é conferido nos testes do requisito UNI-REQ-0338 (planejado).',
     pagina_developers: '/produto/regras-negocio/',
