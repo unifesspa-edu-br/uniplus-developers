@@ -6286,7 +6286,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0275',
     titulo: 'Regra de deliberação da banca é a do edital',
     enunciado:
-      'O edital define, para cada banca: o número de integrantes; o número de suplentes; o quórum; o critério de decisão (maioria simples, maioria absoluta ou unanimidade); a forma de desempate (voto da presidência da banca ou nova votação); como a votação termina (quando todos os integrantes votam, ou quando a presidência encerra ao atingir o quórum); e o que vale quando a unanimidade não é alcançada. O sistema não impõe nenhuma dessas regras; segue a do edital. Quando a votação termina ao atingir o quórum, a unanimidade é a dos votos registrados. Confirmado pelo PO em 10/11/2026.',
+      'O edital define, para cada banca: o número de integrantes; o número de suplentes; o quórum; o critério de decisão (maioria simples, maioria absoluta ou unanimidade); a forma de desempate (voto da presidência da banca ou nova votação); como a votação termina (quando todos os integrantes votam, ou quando a presidência encerra ao atingir o quórum); e o que vale quando a unanimidade não é alcançada. O sistema não impõe nenhuma dessas regras; segue a do edital. A banca de homologação das inscrições é a exceção: age por ato individual, sem quórum nem votação (UNI-REQ-0338). Quando a votação termina ao atingir o quórum, a unanimidade é a dos votos registrados. Confirmado pelo PO em 10/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6298,7 +6298,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A publicação exige a regra completa de cada banca; a decisão sai pela regra configurada em cada combinação de critério, desempate e encerramento; sem quórum, não há decisão.',
+      'A publicação exige a regra completa de cada banca; a decisão sai pela regra configurada em cada combinação de critério, desempate e encerramento; sem quórum, não há decisão, salvo na banca de homologação das inscrições, que não tem quórum (UNI-REQ-0338).',
     verificacao:
       'Teste automatizado das combinações da regra de deliberação (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7010,7 +7010,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0338',
     titulo: 'A banca de homologação das inscrições age por ato individual',
     enunciado:
-      'A banca de homologação das inscrições não tem quórum nem votação: qualquer pessoa titular designada pratica o ato individualmente, e o ato é registrado com autoria, data e, quando houver, justificativa. Exemplo: Betina, titular designada da banca de homologação das inscrições do "SISU 2027", resolve uma crítica da importação, e o registro traz Betina como autora, a data e a justificativa. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
+      'Em exceção ao UNI-REQ-0275, a banca de homologação das inscrições não tem quórum nem votação: qualquer pessoa titular designada pratica o ato individualmente, e o ato é registrado com autoria, data e, quando houver, justificativa. Exemplo: Betina, titular designada da banca de homologação das inscrições do "SISU 2027", resolve uma crítica da importação, e o registro traz Betina como autora, a data e a justificativa. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
