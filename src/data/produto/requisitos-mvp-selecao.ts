@@ -5374,6 +5374,27 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend',
   },
   {
+    requisito_id: 'UNI-REQ-0363',
+    titulo: 'Quem aprova a versão do perfil lê o perfil que decide',
+    enunciado:
+      'Quem aprova uma etapa da versão do perfil, pela gestão de acessos ou pela proteção de dados, lê a lista de perfis e o detalhe de cada um: nome, composição, versão pendente, suspensão e janela de migração, sem concessões nem dado pessoal. Assim chega ao perfil que precisa decidir, inclusive pelo link do aviso por e-mail e na retomada do perfil suspenso. Ler o perfil não dá o direito de mantê-lo: criar e alterar versão, remover permissão, desativar e reativar continuam só para quem mantém perfis. Quem não mantém nem aprova perfis não lê. Rastreia a governança das concessões (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Quem só aprova uma etapa lê a lista e o detalhe do perfil; quem só aprova é recusado nas ações de manutenção; quem não mantém nem aprova perfis é recusado na leitura.',
+    verificacao: 'Testes automatizados de API da leitura do perfil por quem aprova (uniplus-api#2332) e da rota do detalhe na interface (uniplus-web#1406).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
     requisito_id: 'UNI-REQ-0200',
     titulo: 'O gestor define o prazo da concessão ao aprovar o pedido',
     enunciado:
