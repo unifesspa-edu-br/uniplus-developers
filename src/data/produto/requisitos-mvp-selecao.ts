@@ -3319,7 +3319,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0124',
     titulo: 'Evolução aditiva do catálogo em processo publicado',
     enunciado:
-      'Em processo publicado, o conjunto de motivos evolui apenas por inclusão, válida para julgamentos posteriores, sem criar critério material novo e sem alterar decisões já proferidas. A inclusão exige justificativa textual de manutenção, restrita a perfis administrativos e não apresentada ao candidato.',
+      'Em processo publicado, o conjunto de motivos evolui apenas por inclusão, válida para julgamentos posteriores, sem criar critério material novo e sem alterar decisões já proferidas. A inclusão exige justificativa textual de manutenção, restrita a perfis administrativos e não apresentada ao candidato. Depois da publicação do edital, a inclusão de motivo exige retificação do edital e acontece antes do início da avaliação correspondente (UNI-REQ-0285).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3331,7 +3331,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Inclusão sem justificativa é recusada; decisões anteriores permanecem inalteradas; a justificativa não integra o que o candidato consulta.',
+      'Inclusão sem justificativa é recusada; inclusão depois da publicação sem retificação do edital, ou depois do início da avaliação correspondente, é recusada; decisões anteriores permanecem inalteradas; a justificativa não integra o que o candidato consulta.',
     verificacao: 'Testes de inclusão, de imutabilidade das decisões anteriores e de escopo de acesso.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -6380,7 +6380,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0285',
     titulo: 'Edital escolhe os motivos que usará',
     enunciado:
-      'O edital escolhe, entre os motivos cadastrados, os que usará em cada tipo de decisão. Depois da publicação, só se inclui motivo por retificação do edital e antes do início da avaliação correspondente. Generaliza UNI-REQ-0123 e, quando confirmado, substitui para todos os tipos a inclusão sem retificação prevista em UNI-REQ-0124. Confirmado pelo PO em 10/11/2026.',
+      'O edital escolhe, entre os motivos cadastrados, os que usará em cada tipo de decisão. Depois da publicação, só se inclui motivo por retificação do edital e antes do início da avaliação correspondente. Generaliza UNI-REQ-0123 e substitui para todos os tipos a inclusão sem retificação prevista em UNI-REQ-0124. Confirmado pelo PO em 10/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
