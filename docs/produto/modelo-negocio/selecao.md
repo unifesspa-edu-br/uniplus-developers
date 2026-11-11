@@ -528,9 +528,9 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 O PO aprovou o percurso painel de processos → página do processo, com somente
 a aba Acompanhamento na primeira entrega, sem abas futuras em construção. O
 público autorizado aos indicadores e operações protegidas é formado pelos
-servidores do CEPS com permissão correspondente na unidade dona (UNI-REQ-0176/0177).
-O CEPS conduz os processos seletivos; a CGA (antigo CRCA) é unidade distinta,
-responsável por habilitação, matrícula, envio ao SIGAA e atividades acadêmicas
+servidores da unidade responsável pelo processo com permissão correspondente na unidade dona (UNI-REQ-0176/0177).
+A unidade responsável pelo processo seletivo (qualquer unidade, como o CEPS) o conduz, e cada fase fica com a unidade responsável por ela; a CGA (antigo CRCA) é unidade distinta,
+responsável, por exemplo, por habilitação, matrícula, envio ao SIGAA e atividades acadêmicas
 correspondentes. O vínculo com qualquer setor não concede permissão. A leitura da identificação e
 configuração do processo publicado é aberta na API, inclusive sem token, pelo
 recurso existente; ações, inscrições, documentos, análises e notas mantêm
