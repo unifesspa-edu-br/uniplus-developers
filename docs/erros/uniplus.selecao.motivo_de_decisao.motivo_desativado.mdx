@@ -1,10 +1,10 @@
 ---
 title: Motivo escolhido foi desativado no cadastro
 sidebar_label: Motivo escolhido desativado antes de publicar
-description: Rascunho — a configuração escolheu um motivo que foi desativado no cadastro antes de ser publicado.
+description: A configuração escolheu um motivo que foi desativado no cadastro antes de ser publicado.
 code: uniplus.selecao.motivo_de_decisao.motivo_desativado
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Publicação do edital
@@ -20,13 +20,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::warning Código ainda não emitido
-
-Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
-decisão por tipo. Até lá, a API não o emite.
-
-:::
 
 ## O que aconteceu
 
