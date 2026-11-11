@@ -2496,7 +2496,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0115',
     titulo: 'Âncora do prazo de interposição conforme a convenção de contagem',
     enunciado:
-      'A âncora do prazo de interposição é a publicação confirmada do ato contra o qual se recorre, igual para todos os candidatos (UNI-REQ-0269), e a forma dela segue a convenção de contagem que o processo declara (UNI-REQ-0112). Nas convenções que contam por dia, excluindo o dia inicial ou avançando para a data útil, a âncora é a **data de publicação** declarada pelo ato, lida no fuso congelado na versão publicada: hora e deslocamento não mudam o resultado. Na convenção que conta horas úteis desde a âncora, a âncora é o **instante da publicação**, com data, hora e deslocamento em relação a UTC, informado por quem publica o ato. A âncora nunca é o instante em que o registro foi gravado ou processado no sistema, que é dado de auditoria e deslocaria a janela sempre que o registro atrasasse. A janela calculada é guardada como instante absoluto, como as demais janelas do cronograma, e fecha às 23:59:59 do último dia útil no fuso congelado. O instante em que a publicação foi confirmada no sistema serve só para a regra de republicação: confirmada no início da contagem ou depois, não se aceitam recursos nessa publicação, e ela é refeita com o prazo inteiro (UNI-REQ-0157). A âncora por ciência individual não existe no recurso: o PO confirmou em 10/11/2026 que nenhuma decisão é comunicada só ao candidato. Decisão do líder técnico em 11/11/2026 (uniplus-developers#440).',
+      'A âncora do prazo de interposição é a publicação do ato contra o qual se recorre, igual para todos os candidatos (UNI-REQ-0269), e a forma dela segue a convenção de contagem que o processo declara (UNI-REQ-0112). Na convenção **por exclusão do dia de início**, a contagem começa às 00:00 do primeiro dia útil posterior ao dia da âncora e descarta a hora dela, então a âncora é a **data de publicação** declarada pelo ato, lida no fuso congelado na versão publicada. Nas convenções **por horas úteis desde a âncora** e **por avanço de data útil**, que preservam a hora da âncora, ela é o **instante da publicação**: data, hora e o deslocamento em relação a UTC efetivamente aplicado, informados por quem publica o ato, nunca uma hora local acompanhada apenas do nome do fuso. Uma hora local declarada que caia em salto ou em repetição de horário de verão é recusada com erro nomeado. A âncora nunca é o instante em que o registro foi gravado ou processado no sistema, que é dado de auditoria e deslocaria a janela sempre que o registro atrasasse. O fechamento é o que a convenção declarada produz (UNI-REQ-0112) e é guardado como instante absoluto, como as demais janelas do cronograma, de modo que duas leituras do mesmo snapshot cheguem ao mesmo resultado. A publicação confirmada no sistema depois de a contagem começar segue o UNI-REQ-0368. A âncora por ciência individual não existe no recurso: o PO confirmou em 10/11/2026 que nenhuma decisão é comunicada só ao candidato. Decisão do líder técnico em 11/11/2026 (uniplus-developers#440).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2508,9 +2508,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Na convenção por dia, dois atos com a mesma data de publicação produzem a mesma janela, qualquer que seja a hora do registro; na convenção por horas úteis, a âncora é o instante de publicação informado por quem publica, e a falta dele recusa a abertura da janela com erro nomeado; a janela fecha às 23:59:59 do último dia útil no fuso congelado e é guardada como instante absoluto; o instante de gravação ou de processamento nunca substitui a âncora; publicação confirmada no início da contagem ou depois não recebe recurso e exige republicação; a configuração do recurso não aceita âncora por ciência individual.',
+      'Na convenção por exclusão do dia de início, dois atos com a mesma data de publicação produzem a mesma janela, qualquer que seja a hora do registro; nas convenções por horas úteis e por avanço de data útil, a âncora é o instante de publicação com deslocamento explícito, a âncora sem deslocamento é recusada, e a hora local inexistente ou repetida é recusada com erro nomeado; o instante de gravação ou de processamento nunca substitui a âncora; o fechamento é guardado como instante absoluto; a configuração do recurso não aceita âncora por ciência individual.',
     verificacao:
-      'Testes automatizados do cálculo da janela nas três convenções, do fechamento no fim do último dia útil e da confirmação atrasada (planejado, uniplus-api#2326).',
+      'Testes automatizados da âncora e do fechamento nas três convenções, em dias úteis e em horas (planejado, uniplus-api#2326).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
   },
@@ -7767,7 +7767,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0365',
     titulo: 'A retificação retira do processo o motivo que nenhuma decisão usou',
     enunciado:
-      'Depois da publicação, a retificação do edital pode retirar do processo um motivo de decisão já congelado, desde que nenhuma decisão o tenha usado. O motivo usado em alguma decisão não sai, porque a decisão continua mostrando o motivo que a fundamentou. A retirada vale da versão retificada em diante; as versões anteriores continuam mostrando o motivo (UNI-REQ-0366). A cobertura de motivos exigida para publicar e retificar continua valendo depois da retirada (UNI-REQ-0123). Decisão do líder técnico em 11/11/2026.',
+      'Depois da publicação, a retificação do edital pode retirar do processo um motivo de decisão já congelado, desde que nenhuma decisão o tenha usado. O motivo usado em alguma decisão não sai, porque a decisão continua mostrando o motivo que a fundamentou. A retirada vale da versão retificada em diante; as versões anteriores continuam mostrando o motivo (UNI-REQ-0366). Depois da retirada, a cobertura de motivos exigida para publicar e retificar continua valendo (UNI-REQ-0123), e cada condição que decide automaticamente continua apontando para um motivo disponível na nova versão (UNI-REQ-0287). Decisão do líder técnico em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7779,7 +7779,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A retificação retira o motivo congelado que nenhuma decisão usou; a retirada do motivo usado é recusada com erro nomeado; fora de retificação, a retirada depois da publicação é recusada; a retificação que deixa algum tipo de decisão sem a cobertura exigida é recusada.',
+      'A retificação retira o motivo congelado que nenhuma decisão usou; a retirada do motivo usado é recusada com erro nomeado; fora de retificação, a retirada depois da publicação é recusada; a retificação que deixa algum tipo de decisão sem a cobertura exigida, ou alguma condição automática sem motivo disponível, é recusada.',
     verificacao: 'Testes automatizados de API da retirada na retificação, com e sem decisão que use o motivo (planejado, uniplus-api#2338).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -7788,7 +7788,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0366',
     titulo: 'Cada versão publicada mostra os motivos de decisão que tinha',
     enunciado:
-      'Cada motivo de decisão do processo registra a versão publicada em que passou a valer e, se for retirado, a versão em que saiu. Assim, a leitura de qualquer versão mostra exatamente os motivos que ela tinha. Exemplo: na versão 1, a homologação das inscrições tem o motivo "Sem resultado no ENEM informado"; a retificação da versão 2 acrescenta outro motivo; a versão 1 continua mostrando só o primeiro. Decisão do líder técnico em 11/11/2026.',
+      'Cada inclusão e cada retirada de motivo de decisão do processo registra a versão publicada em que passou a valer. Um motivo retirado pode voltar por nova retificação, e cada volta abre um novo período. Assim, a leitura de qualquer versão mostra exatamente os motivos que ela tinha. Exemplo: na versão 1, a homologação das inscrições tem o motivo "Sem resultado no ENEM informado"; a retificação da versão 2 acrescenta outro motivo; a versão 1 continua mostrando só o primeiro. Decisão do líder técnico em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7800,7 +7800,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A leitura do processo informa, para cada motivo, a versão de entrada e, quando houver, a de saída; a leitura de uma versão anterior não mostra motivo incluído depois nem esconde motivo retirado depois.',
+      'A leitura do processo informa, para cada motivo, os períodos de versões em que valeu; a leitura de uma versão anterior não mostra motivo incluído depois nem esconde motivo retirado depois; o motivo retirado e incluído de novo aparece nas versões dos dois períodos e não aparece nas versões entre eles.',
     verificacao: 'Testes automatizados de API da leitura dos motivos por versão (planejado, uniplus-api#2338).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -7809,7 +7809,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0367',
     titulo: 'Onde começa a avaliação de cada tipo de decisão',
     enunciado:
-      'A avaliação de um tipo de decisão começa na abertura da janela em que ela acontece ou na primeira decisão desse tipo, o que vier primeiro, e a partir daí não se inclui motivo desse tipo (UNI-REQ-0285). A janela de cada tipo é: isenção, a coleta das solicitações de isenção; homologação das inscrições, a fase de homologação das inscrições; análise documental, a etapa de análise documental da habilitação, e não a fase de habilitação inteira, porque as outras etapas da habilitação, como heteroidentificação e entrevista, não iniciam a análise documental; recurso e demais tipos, a fase de mesmo nome. Sem janela da etapa de análise documental no cronograma, conta só a primeira decisão. Decisão do líder técnico em 11/11/2026.',
+      'A avaliação de um tipo de decisão começa na abertura da janela em que ela acontece ou na primeira decisão desse tipo, o que vier primeiro, e a partir daí não se inclui motivo desse tipo (UNI-REQ-0285). A janela de cada um dos seis tipos (UNI-REQ-0283) é: isenção da taxa, a coleta das solicitações de isenção; homologação das inscrições, a fase de homologação das inscrições; análise documental, heteroidentificação e avaliação biopsicossocial, a etapa correspondente da habilitação, e não a fase de habilitação inteira, porque a abertura de uma etapa não inicia a avaliação das outras; classificação, a fase de classificação. Sem a janela correspondente no cronograma, conta só a primeira decisão do tipo. O recurso não tem janela própria para esse fim: usa os motivos do tipo da decisão recorrida (UNI-REQ-0283). Decisão do líder técnico em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7821,8 +7821,29 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A inclusão de motivo é recusada depois da abertura da janela do tipo ou da primeira decisão do tipo; a abertura de outra etapa da habilitação não impede incluir motivo de análise documental; sem janela da etapa, a primeira decisão de análise documental passa a impedir a inclusão.',
+      'A inclusão de motivo é recusada depois da abertura da janela do tipo ou da primeira decisão do tipo; a abertura de uma etapa da habilitação não impede incluir motivo das outras etapas; sem janela correspondente, a primeira decisão do tipo passa a impedir a inclusão.',
     verificacao: 'Testes automatizados de API do início da avaliação por tipo (planejado, uniplus-api#2338 e uniplus-api#2322).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0368',
+    titulo: 'Publicação confirmada depois de a contagem começar é refeita com o prazo inteiro',
+    enunciado:
+      'Se a publicação de um ato contra o qual cabe recurso só for confirmada no sistema quando a contagem do prazo já começou, não se aceitam recursos nessa publicação, e ela é refeita com nova data e o prazo inteiro. A contagem começa onde a convenção declarada a faz começar (UNI-REQ-0112): na convenção por exclusão do dia de início, às 00:00 do primeiro dia útil posterior à data de publicação; nas convenções por horas úteis e por avanço de data útil, no instante de publicação declarado, que por isso precisa ser posterior à confirmação. Exemplo: o resultado preliminar declara publicação em 10/11 e a confirmação chega em 11/11 às 09h, já dentro do primeiro dia útil da contagem; o resultado é publicado de novo, com nova data. Confirmado pelo PO em 10/11/2026; ADR-0158 da uniplus-api.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0080',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A confirmação antes do início da contagem abre a janela de recurso; a confirmação no início da contagem ou depois não abre a janela e exige nova publicação; a nova publicação abre a janela com o prazo inteiro.',
+    verificacao: 'Testes automatizados da confirmação antes, no início e depois do início da contagem, nas três convenções (planejado, uniplus-api#2326).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
