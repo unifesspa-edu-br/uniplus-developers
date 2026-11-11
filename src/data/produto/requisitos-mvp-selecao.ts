@@ -6922,7 +6922,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0364',
     titulo: 'A fase iniciada não sai do cronograma',
     enunciado:
-      'A retificação que remove do cronograma uma fase iniciada é recusada, pela mesma razão que impede trocar a unidade dela (UNI-REQ-0333): remover a fase numa retificação e recolocá-la com outra unidade na seguinte produziria a troca recusada. A fase iniciada é a definida no UNI-REQ-0333, inclusive a encerrada. A fase que ainda não começou continua podendo sair do cronograma. Exemplo: a janela da habilitação do "PSR 2027", conduzida pela CGA, já começou, e a retificação que retira a habilitação do cronograma é recusada; a fase de classificação, sem janela aberta e sem ato ou registro, pode ser retirada. Decisão do PO em 11/11/2026.',
+      'A retificação que remove do cronograma uma fase iniciada é recusada, pela mesma razão que impede trocar a unidade dela (UNI-REQ-0333): remover a fase numa retificação e recolocá-la com outra unidade na seguinte produziria a troca recusada. A fase iniciada é a definida no UNI-REQ-0333, inclusive a encerrada. A fase que ainda não começou não é impedida por esta regra de sair do cronograma, e a remoção dela continua sujeita às demais regras de publicação e retificação, como a fase obrigatória de homologação das inscrições (UNI-REQ-0264). Exemplo: a janela da habilitação do "PSR 2027", conduzida pela CGA, já começou, e a retificação que retira a habilitação do cronograma é recusada; a fase de classificação, sem janela aberta e sem ato ou registro, pode ser retirada. Decisão do PO em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6934,7 +6934,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A retificação que remove fase com janela já iniciada, fase com ato ou registro ou fase encerrada é recusada; a que remove fase ainda não começada é aceita.',
+      'A retificação que remove fase com janela já iniciada, fase com ato ou registro ou fase encerrada é recusada; a que remove fase ainda não começada não é recusada por esta regra, valendo as demais regras de publicação e retificação.',
     verificacao:
       'Testes automatizados da remoção de fase por começar, em andamento, com ato registrado e encerrada (planejado; uniplus-api#2337).',
     pagina_developers: '/produto/regras-negocio/',
