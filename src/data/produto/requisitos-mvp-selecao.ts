@@ -6238,7 +6238,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O documento lista número de inscrição e resultado de cada recurso, sem motivo nem nome de candidato, e é arquivado, não publicado; o definitivo com recursos é recusado sem documento conferido; sem recursos, o definitivo não exige documento.',
+      'O documento lista número de inscrição e resultado de cada recurso, sem motivo nem nome de candidato, e é arquivado, não publicado; o definitivo com recursos é recusado sem o documento das decisões assinado por todos os que votaram e conferido; sem recursos, o definitivo não exige documento.',
     verificacao:
       'Teste automatizado da geração do documento e da recusa do definitivo (planejado).',
     pagina_developers: '/produto/regras-negocio/',
