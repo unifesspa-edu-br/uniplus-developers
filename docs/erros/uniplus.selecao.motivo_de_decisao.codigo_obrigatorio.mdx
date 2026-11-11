@@ -1,10 +1,10 @@
 ---
 title: O código do motivo é obrigatório
 sidebar_label: Código do motivo ausente
-description: Rascunho — o cadastro do motivo veio sem código.
+description: O cadastro do motivo veio sem código.
 code: uniplus.selecao.motivo_de_decisao.codigo_obrigatorio
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Cadastro de motivo de decisão
@@ -19,13 +19,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::warning Código ainda não emitido
-
-Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
-decisão por tipo. Até lá, a API não o emite.
-
-:::
 
 ## O que aconteceu
 

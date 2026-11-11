@@ -1,10 +1,10 @@
 ---
 title: Motivo publicado não é retirado do processo
 sidebar_label: Retirada de motivo publicado
-description: Rascunho — a sessão de retificação tentou retirar um motivo que já consta do edital publicado.
+description: A sessão de retificação tentou retirar um motivo que já consta do edital publicado.
 code: uniplus.selecao.motivo_de_decisao.retirada_apos_publicacao
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Retirada de motivo do processo
@@ -18,13 +18,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::warning Código ainda não emitido
-
-Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
-decisão por tipo. Até lá, a API não o emite.
-
-:::
 
 ## O que aconteceu
 

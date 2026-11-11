@@ -1,10 +1,10 @@
 ---
 title: Inclusão depois da publicação exige justificativa
 sidebar_label: Justificativa ausente na inclusão
-description: Rascunho — a inclusão de motivo no processo publicado, na sessão de retificação, veio sem justificativa.
+description: A inclusão de motivo no processo publicado, na sessão de retificação, veio sem justificativa.
 code: uniplus.selecao.motivo_de_decisao.justificativa_obrigatoria
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Inclusão de motivo no processo
@@ -19,13 +19,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::warning Código ainda não emitido
-
-Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
-decisão por tipo. Até lá, a API não o emite.
-
-:::
 
 ## O que aconteceu
 

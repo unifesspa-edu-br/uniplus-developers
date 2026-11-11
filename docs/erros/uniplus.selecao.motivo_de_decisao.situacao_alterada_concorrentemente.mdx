@@ -1,10 +1,10 @@
 ---
 title: O motivo foi alterado por outra operação
 sidebar_label: Alteração concorrente do motivo
-description: Rascunho — outra operação alterou o motivo ou a escolha do processo ao mesmo tempo; o pedido pode ser repetido.
+description: Outra operação alterou o motivo ou a escolha do processo ao mesmo tempo; o pedido pode ser repetido.
 code: uniplus.selecao.motivo_de_decisao.situacao_alterada_concorrentemente
 http_status: 409
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Edição da descrição do motivo
@@ -22,13 +22,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::warning Código ainda não emitido
-
-Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
-decisão por tipo. Até lá, a API não o emite.
-
-:::
 
 ## O que aconteceu
 

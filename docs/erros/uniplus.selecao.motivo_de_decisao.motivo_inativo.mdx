@@ -1,10 +1,10 @@
 ---
 title: Motivo desativado não entra em nova escolha
 sidebar_label: Inclusão de motivo desativado
-description: Rascunho — o processo tentou escolher um motivo que está desativado no cadastro.
+description: O processo tentou escolher um motivo que está desativado no cadastro.
 code: uniplus.selecao.motivo_de_decisao.motivo_inativo
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Inclusão de motivo no processo
@@ -19,13 +19,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::warning Código ainda não emitido
-
-Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
-decisão por tipo. Até lá, a API não o emite.
-
-:::
 
 ## O que aconteceu
 

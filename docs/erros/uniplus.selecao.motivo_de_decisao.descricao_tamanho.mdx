@@ -1,10 +1,10 @@
 ---
 title: A descrição do motivo está fora do tamanho permitido
 sidebar_label: Descrição do motivo fora do tamanho
-description: Rascunho — a descrição do motivo tem menos de 3 ou mais de 500 caracteres.
+description: A descrição do motivo tem menos de 3 ou mais de 500 caracteres.
 code: uniplus.selecao.motivo_de_decisao.descricao_tamanho
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Cadastro de motivo de decisão
@@ -19,13 +19,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::warning Código ainda não emitido
-
-Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
-decisão por tipo. Até lá, a API não o emite.
-
-:::
 
 ## O que aconteceu
 
