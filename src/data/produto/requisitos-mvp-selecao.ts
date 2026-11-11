@@ -6774,10 +6774,11 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0348',
-    titulo: 'Recurso administrativo pendente guarda só a vaga em disputa',
+    titulo: 'Recurso administrativo guarda a vaga em disputa conforme o efeito suspensivo',
     enunciado:
-      'Enquanto houver recurso administrativo pendente, a vaga em disputa fica guardada e não entra na chamada seguinte. As demais vagas do curso seguem para a chamada normalmente, e a chamada seguinte pode ser publicada antes do julgamento do recurso. ' +
-      'Exemplo: duas vagas de um curso ficaram disponíveis, e Marlene recorreu do indeferimento referente a uma delas. A chamada seguinte é publicada só com a outra vaga. Se o recurso for deferido, a vaga guardada fica com Marlene; se for indeferido, sem outra pendência administrativa, a vaga segue para a reserva da própria chamada, quando houver, ou para a chamada seguinte.',
+      'A guarda da vaga pelo recurso administrativo pendente segue o efeito suspensivo configurado na janela de recurso (UNI-REQ-0080 e UNI-REQ-0081). Com efeito suspensivo, a vaga em disputa fica guardada e não entra na chamada seguinte até o julgamento. Sem efeito suspensivo, ou depois de ele se encerrar, a vaga não fica guardada e segue o caminho normal. As demais vagas do curso seguem para a chamada normalmente, e a chamada seguinte pode ser publicada antes do julgamento do recurso. ' +
+      'Exemplo 1, com efeito suspensivo: duas vagas de um curso ficaram disponíveis, e Marlene recorreu do indeferimento referente a uma delas. A chamada seguinte é publicada só com a outra vaga. Se o recurso for deferido, a vaga guardada fica com Marlene; se for indeferido, sem outra pendência com efeito suspensivo, a vaga segue para a reserva da própria chamada, quando houver, ou para a chamada seguinte. ' +
+      'Exemplo 2, sem efeito suspensivo: na janela configurada sem efeito suspensivo, Marlene recorre do indeferimento, mas a vaga não fica guardada e segue o caminho normal enquanto o recurso é julgado.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6789,8 +6790,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Com recurso administrativo pendente, a chamada seguinte pode ser publicada sem a vaga em disputa e com as demais; ao ser deferido o recurso, a vaga fica com quem recorreu; ao ser indeferido, sem outra pendência administrativa, a vaga segue o caminho normal: a reserva da própria chamada, quando houver, ou a chamada seguinte.',
-    verificacao: 'Testes automatizados da guarda e da liberação da vaga, incluindo os dois desfechos do recurso (planejado).',
+      'Com recurso administrativo pendente em janela com efeito suspensivo, a chamada seguinte pode ser publicada sem a vaga em disputa e com as demais; ao ser deferido o recurso, a vaga fica com quem recorreu; ao ser indeferido, sem outra pendência com efeito suspensivo, a vaga segue o caminho normal: a reserva da própria chamada, quando houver, ou a chamada seguinte. Em janela sem efeito suspensivo, ou depois de o efeito se encerrar, o recurso pendente não guarda a vaga.',
+    verificacao: 'Testes automatizados da guarda e da liberação da vaga, com e sem efeito suspensivo configurado na janela, incluindo os dois desfechos do recurso (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
