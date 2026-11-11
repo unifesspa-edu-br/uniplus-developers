@@ -6846,7 +6846,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A ação da fase é aceita para quem tem a permissão na unidade responsável pela fase e recusada para quem a tem só na unidade responsável pelo processo ou em outra unidade; a ação cujo período vem de outra fase pertence à fase do trabalho; a ação sem fase fica com a unidade responsável pelo processo.',
+      'A ação da fase é aceita para quem tem a permissão na unidade responsável pela fase e recusada para quem não a tem na unidade responsável pela fase, ainda que a tenha na unidade responsável pelo processo quando esta é outra; a ação cujo período vem de outra fase pertence à fase do trabalho; a ação sem fase fica com a unidade responsável pelo processo.',
     verificacao:
       'Testes automatizados de API de cada ação da fase com a permissão na unidade da fase, na unidade responsável pelo processo e em outra unidade (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7000,7 +7000,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A unidade responsável pelo processo consulta os atos publicados e a situação das decisões da fase; votos, voto vencido e evidências individuais de banca não aparecem para ela e aparecem para a unidade da fase e para a auditoria.',
+      'A unidade responsável pelo processo consulta os atos publicados e a situação das decisões da fase; votos, voto vencido e evidências individuais de banca não aparecem para ela, quando a unidade da fase é outra, e aparecem para a unidade da fase e para a auditoria.',
     verificacao:
       'Testes automatizados da consulta pela unidade responsável pelo processo, pela unidade da fase e pela auditoria (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7044,7 +7044,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cada ato listado é aceito para a pessoa titular designada da banca de homologação das inscrições, com a permissão na unidade da fase de homologação das inscrições, e recusado para quem não é titular designada ou tem a permissão só na unidade responsável pelo processo; a publicação do resultado segue o documento da fase.',
+      'Cada ato listado é aceito para a pessoa titular designada da banca de homologação das inscrições, com a permissão na unidade da fase de homologação das inscrições, e recusado para quem não é titular designada ou, quando a unidade responsável pelo processo é outra, não tem a permissão na unidade da fase de homologação das inscrições; a publicação do resultado segue o documento da fase.',
     verificacao:
       'Testes automatizados de cada ato da banca, com titular e sem ser titular (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7076,7 +7076,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0341',
     titulo: 'A importação externa acontece no período da inscrição',
     enunciado:
-      'Na importação externa, o arquivo de candidatos é importado no período da fase de inscrição, fixado pela unidade responsável pelo processo, e não no período da fase de homologação das inscrições, que é a fase a que o trabalho pertence (UNI-REQ-0330). Exemplo: Betina importa o arquivo de candidatos do "SISU 2027" dentro do período da fase de inscrição, a importação é aceita, com o registro do ato conforme o UNI-REQ-0338; fora desse período, é recusada. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
+      'Na importação externa, o arquivo de candidatos é importado no período da fase de inscrição, fixado pela unidade responsável pelo processo, qualquer que seja o período da fase de homologação das inscrições, que é a fase a que o trabalho pertence (UNI-REQ-0330). Exemplo: Betina importa o arquivo de candidatos do "SISU 2027" dentro do período da fase de inscrição, a importação é aceita, com o registro do ato conforme o UNI-REQ-0338; fora desse período, é recusada. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7110,7 +7110,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A configuração com importação externa declara na homologação das inscrições o resultado preliminar, a janela de recurso e o resultado definitivo; o definitivo só sai depois do preliminar.',
+      'A configuração com importação externa declara na homologação das inscrições o resultado preliminar, a janela de recurso entre os dois e o resultado definitivo; o definitivo só sai depois do preliminar.',
     verificacao:
       'Testes automatizados da declaração e da ordem das publicações na importação externa (planejado).',
     pagina_developers: '/produto/regras-negocio/',
