@@ -7098,7 +7098,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0342',
     titulo: 'Resultado preliminar e definitivo da importação externa',
     enunciado:
-      'Na importação externa, a homologação das inscrições publica resultado preliminar e definitivo, com janela de recurso entre os dois, para que o candidato veja como foi importado e recorra de erro de importação. Exemplo: Breno aparece no resultado preliminar do "SISU 2027" com a modalidade errada, recorre dentro da janela, e a decisão do recurso entra no resultado definitivo, como a de um recurso deferido, sem alterar a inscrição nem o arquivo importado (UNI-REQ-0132 e UNI-REQ-0280). Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
+      'Na importação externa, a homologação das inscrições publica resultado preliminar e definitivo, com janela de recurso entre os dois, e o definitivo só sai depois do fim dessa janela, como nos demais recursos (UNI-REQ-0161), para que o candidato veja como foi importado e recorra de erro de importação. Exemplo: Breno aparece no resultado preliminar do "SISU 2027" com a modalidade errada, recorre dentro da janela, e a decisão do recurso entra no resultado definitivo, como a de um recurso deferido, sem alterar a inscrição nem o arquivo importado (UNI-REQ-0132 e UNI-REQ-0280). Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7110,9 +7110,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A configuração com importação externa declara na homologação das inscrições o resultado preliminar, a janela de recurso entre os dois e o resultado definitivo; o definitivo só sai depois do preliminar; a decisão do recurso entra no definitivo como a de um recurso deferido, sem alterar a inscrição nem o arquivo importado.',
+      'A configuração com importação externa declara na homologação das inscrições o resultado preliminar, a janela de recurso entre os dois e o resultado definitivo; o definitivo só sai depois do preliminar e do fim da janela de recurso, nos termos do UNI-REQ-0161; a decisão do recurso entra no definitivo como a de um recurso deferido, sem alterar a inscrição nem o arquivo importado.',
     verificacao:
-      'Testes automatizados da declaração e da ordem das publicações na importação externa (planejado).',
+      'Testes automatizados da declaração, da ordem das publicações e da espera do fim da janela de recurso na importação externa (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
