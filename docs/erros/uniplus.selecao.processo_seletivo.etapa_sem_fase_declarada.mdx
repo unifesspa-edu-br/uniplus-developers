@@ -1,0 +1,33 @@
+---
+title: A etapa não declara a fase em que acontece
+sidebar_label: Etapa sem fase declarada
+description: Rascunho — o processo não é publicado nem retificado enquanto alguma etapa não declara a fase.
+code: uniplus.selecao.processo_seletivo.etapa_sem_fase_declarada
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do processo seletivo
+  - Fechamento da retificação do processo seletivo
+requisitos:
+  - UNI-REQ-0331
+rastreio:
+  - label: 'uniplus-api#2318'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2318
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Alguma etapa do processo não declara a fase em que acontece. A etapa segue a
+unidade da fase que a contém, e sem a fase não há unidade que decida as ações
+dela. O rascunho aceita etapa sem fase; a publicação e a retificação, não. A
+lista de conformidade do processo mostra o mesmo item como pendente.
+
+## Como resolver
+
+Declare, em cada etapa, a fase do cronograma em que ela acontece, e publique
+ou retifique de novo.
