@@ -1,0 +1,35 @@
+---
+title: O fundamento de isenção informado é desconhecido
+sidebar_label: Fundamento de isenção desconhecido
+description: Rascunho — a subclassificação do motivo da isenção não é um fundamento de isenção conhecido.
+code: uniplus.selecao.motivo_de_decisao.subclassificacao_invalida
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+requisitos:
+  - UNI-REQ-0120
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+O pedido de `POST /api/selecao/admin/motivos-de-decisao` com tipo `ISENCAO_DA_TAXA` trouxe em `subclassificacao` um valor que não é código de fundamento de isenção. A recusa sai com **422**, e o `detail` lista os códigos aceitos.
+
+## Como resolver
+
+Use um dos códigos de fundamento listados no `detail`, com a grafia exata.

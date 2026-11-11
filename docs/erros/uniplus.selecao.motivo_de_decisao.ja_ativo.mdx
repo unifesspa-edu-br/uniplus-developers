@@ -1,0 +1,35 @@
+---
+title: O motivo já está ativo
+sidebar_label: Motivo já ativo
+description: Rascunho — o pedido de ativação chegou para um motivo que já está ativo.
+code: uniplus.selecao.motivo_de_decisao.ja_ativo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Ativação do motivo
+requisitos:
+  - UNI-REQ-0122
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+O pedido de `POST /api/selecao/admin/motivos-de-decisao/{id}/ativacao` chegou para um motivo que já está ativo, e nada foi alterado. A recusa sai com **422**.
+
+## Como resolver
+
+Nenhuma ação é necessária: o motivo já entra em novas escolhas dos processos. Releia o motivo para conferir a situação.

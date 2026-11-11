@@ -1,0 +1,37 @@
+---
+title: O motivo já está inativo
+sidebar_label: Motivo já inativo
+description: Rascunho — o pedido de desativação chegou para um motivo que já está desativado.
+code: uniplus.selecao.motivo_de_decisao.ja_inativo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Desativação do motivo
+requisitos:
+  - UNI-REQ-0122
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+O pedido de `DELETE /api/selecao/admin/motivos-de-decisao/{id}/ativacao` chegou para um motivo que já está desativado, e nada foi alterado. A recusa sai com **422**.
+
+Desativar não apaga: o motivo deixa de entrar em novas escolhas e continua valendo nos processos publicados que já o escolheram (UNI-REQ-0122).
+
+## Como resolver
+
+Nenhuma ação é necessária. Releia o motivo para conferir a situação.

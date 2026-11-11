@@ -1,0 +1,36 @@
+---
+title: Motivo desativado não entra em nova escolha
+sidebar_label: Inclusão de motivo desativado
+description: Rascunho — o processo tentou escolher um motivo que está desativado no cadastro.
+code: uniplus.selecao.motivo_de_decisao.motivo_inativo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Inclusão de motivo no processo
+requisitos:
+  - UNI-REQ-0122
+  - UNI-REQ-0285
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+O pedido de `PUT /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}` indicou um motivo desativado no cadastro. Motivo desativado não entra em nova escolha, mas continua valendo nos processos que já o escolheram e publicaram (UNI-REQ-0122). A recusa sai com **422**.
+
+## Como resolver
+
+Escolha um motivo ativo do mesmo tipo. Se o motivo desativado ainda descreve uma regra do edital, peça a quem mantém o cadastro que o reative.

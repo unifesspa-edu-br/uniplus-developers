@@ -1,0 +1,35 @@
+---
+title: A justificativa está fora do tamanho permitido
+sidebar_label: Justificativa da inclusão longa demais
+description: Rascunho — a justificativa da inclusão de motivo no processo publicado passa de 1000 caracteres.
+code: uniplus.selecao.motivo_de_decisao.justificativa_tamanho
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Inclusão de motivo no processo
+requisitos:
+  - UNI-REQ-0124
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+A justificativa da inclusão de motivo depois da publicação tem até 1000 caracteres, contados depois de retirar os espaços das pontas. A enviada em `PUT /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}` passou desse limite. A recusa sai com **422**.
+
+## Como resolver
+
+Resuma a justificativa para até 1000 caracteres.

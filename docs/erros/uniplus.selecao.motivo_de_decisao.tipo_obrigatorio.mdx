@@ -1,0 +1,37 @@
+---
+title: O tipo do motivo é obrigatório
+sidebar_label: Tipo do motivo ausente ou desconhecido
+description: Rascunho — o cadastro do motivo veio sem tipo ou com um tipo fora dos seis aceitos.
+code: uniplus.selecao.motivo_de_decisao.tipo_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+requisitos:
+  - UNI-REQ-0283
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+O cadastro de motivos de decisão é organizado por tipo, e os tipos formam um domínio fechado (UNI-REQ-0283). O pedido de `POST /api/selecao/admin/motivos-de-decisao` veio sem o campo `tipo` ou com um valor que não é um dos seis aceitos: `ISENCAO_DA_TAXA`, `HOMOLOGACAO_DAS_INSCRICOES`, `ANALISE_DOCUMENTAL`, `HETEROIDENTIFICACAO`, `AVALIACAO_BIOPSICOSSOCIAL` ou `CLASSIFICACAO`. A recusa sai com **422**, e o erro aparece no campo `tipo`.
+
+O recurso não é um tipo: ele usa os motivos do tipo da decisão recorrida.
+
+## Como resolver
+
+Informe no campo `tipo` um dos seis códigos: `ISENCAO_DA_TAXA`, `HOMOLOGACAO_DAS_INSCRICOES`, `ANALISE_DOCUMENTAL`, `HETEROIDENTIFICACAO`, `AVALIACAO_BIOPSICOSSOCIAL` ou `CLASSIFICACAO`. O tipo não muda depois de criado; para usar o mesmo texto em outro tipo, cadastre outro motivo.

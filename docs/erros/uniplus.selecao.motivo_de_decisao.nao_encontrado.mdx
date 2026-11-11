@@ -1,0 +1,39 @@
+---
+title: Motivo de decisão não encontrado
+sidebar_label: Motivo de decisão não encontrado
+description: Rascunho — não existe motivo de decisão com o identificador informado.
+code: uniplus.selecao.motivo_de_decisao.nao_encontrado
+http_status: 404
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Consulta do motivo
+  - Edição da descrição do motivo
+  - Ativação do motivo
+  - Desativação do motivo
+  - Inclusão de motivo no processo
+requisitos:
+  - UNI-REQ-0283
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Não existe motivo de decisão com o identificador da rota, seja na consulta e na manutenção em `/api/selecao/motivos-de-decisao` e `/api/selecao/admin/motivos-de-decisao`, seja na inclusão do motivo no processo. A recusa sai com **404**.
+
+## Como resolver
+
+Confira o identificador. A lista em `GET /api/selecao/motivos-de-decisao`, com filtro por tipo e subclassificação, mostra os motivos existentes.

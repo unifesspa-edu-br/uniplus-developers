@@ -1,0 +1,38 @@
+---
+title: Inclusão depois da publicação exige justificativa
+sidebar_label: Justificativa ausente na inclusão
+description: Rascunho — a inclusão de motivo no processo publicado, na sessão de retificação, veio sem justificativa.
+code: uniplus.selecao.motivo_de_decisao.justificativa_obrigatoria
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Inclusão de motivo no processo
+requisitos:
+  - UNI-REQ-0124
+  - UNI-REQ-0285
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Depois da publicação do edital, o processo só inclui motivo pela retificação, e cada inclusão exige uma justificativa em texto (UNI-REQ-0124 e UNI-REQ-0285). O pedido de `PUT /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}`, na sessão de retificação, veio com o campo `justificativa` vazio ou só com espaços. A recusa sai com **422**.
+
+A justificativa é de uso interno da administração: não aparece para o candidato.
+
+## Como resolver
+
+Informe a justificativa, com até 1000 caracteres, dizendo por que o motivo entra depois da publicação. Antes da publicação, a escolha não pede justificativa.

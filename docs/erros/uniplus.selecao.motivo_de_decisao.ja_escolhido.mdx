@@ -1,0 +1,35 @@
+---
+title: O processo já escolheu este motivo
+sidebar_label: Motivo já escolhido pelo processo
+description: Rascunho — o processo já tem este motivo entre os escolhidos.
+code: uniplus.selecao.motivo_de_decisao.ja_escolhido
+http_status: 409
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Inclusão de motivo no processo
+requisitos:
+  - UNI-REQ-0285
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+O pedido de `PUT /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}` indicou um motivo que o processo já escolheu. A recusa sai com **409**, e nada é alterado.
+
+## Como resolver
+
+Nenhuma ação é necessária. A lista em `GET /api/selecao/processos-seletivos/{id}/motivos-de-decisao` mostra os motivos já escolhidos.

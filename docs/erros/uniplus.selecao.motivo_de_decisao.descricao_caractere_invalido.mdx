@@ -1,0 +1,36 @@
+---
+title: A descrição do motivo contém caractere não permitido
+sidebar_label: Caractere nulo na descrição do motivo
+description: Rascunho — a descrição do motivo contém o caractere nulo (U+0000).
+code: uniplus.selecao.motivo_de_decisao.descricao_caractere_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+  - Edição da descrição do motivo
+requisitos:
+  - UNI-REQ-0120
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+A descrição enviada em `POST /api/selecao/admin/motivos-de-decisao` ou `PUT /api/selecao/admin/motivos-de-decisao/{id}` contém o caractere nulo (U+0000), que não é gravado. Isso costuma acontecer quando o texto é colado de outro sistema ou gerado por código. A recusa sai com **422**, e o erro aparece no campo `descricao`.
+
+## Como resolver
+
+Retire o caractere nulo do texto e envie de novo.
