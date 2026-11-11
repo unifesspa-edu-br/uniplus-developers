@@ -6800,8 +6800,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0349',
     titulo: 'Recurso judicial não guarda vaga',
     enunciado:
-      'O recurso judicial não guarda vaga: a vaga em disputa segue o caminho normal, assumida pela reserva da própria chamada, quando houver, ou na chamada seguinte. Se a Justiça reconhecer depois o direito do candidato, ele é matriculado em vaga adicional ao quadro, sem desclassificar ninguém (UNI-REQ-0082). ' +
-      'Exemplo: Leandro entra com ação na Justiça contra o indeferimento. A vaga segue para a chamada seguinte, e Fernanda, convocada e homologada como habilitada, a ocupa. Se a decisão judicial final for favorável, Leandro é matriculado em vaga adicional: o quadro continua com 40 vagas, com 41 matriculados, e Fernanda permanece.',
+      'O recurso judicial não guarda vaga: a vaga em disputa segue o caminho normal, assumida pela reserva da própria chamada, quando houver, ou na chamada seguinte. Se uma decisão judicial final reconhecer depois o direito do candidato a vaga já ocupada, ele é matriculado em vaga supranumerária, adicional ao quadro, sem desclassificar ninguém, depois da habilitação e da verificação documental, nos mesmos limites do UNI-REQ-0082. A decisão provisória (liminar) é outra situação, fora deste requisito e pendente, como no UNI-REQ-0082. ' +
+      'Exemplo: Leandro entra com ação na Justiça contra o indeferimento. A vaga segue para a chamada seguinte, e Fernanda, convocada e homologada como habilitada, a ocupa. Se a decisão judicial final for favorável e ele cumprir a habilitação e a verificação documental, Leandro é matriculado em vaga supranumerária: o quadro continua com 40 vagas, com 41 matriculados, e Fernanda permanece.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6813,8 +6813,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Registrar recurso judicial não retém vaga, não impede a reserva de assumi-la nem a publicação da chamada seguinte; o quadro de vagas e a classificação não mudam.',
-    verificacao: 'Teste automatizado da chamada seguinte com recurso judicial registrado (planejado).',
+      'Registrar recurso judicial não retém vaga, não impede a reserva de assumi-la nem a publicação da chamada seguinte; o quadro de vagas e a classificação não mudam. A matrícula supranumerária só ocorre por decisão judicial final sobre vaga já ocupada, depois da habilitação e da verificação documental; a decisão provisória não gera matrícula supranumerária por este requisito.',
+    verificacao: 'Teste automatizado da chamada seguinte com recurso judicial registrado, e da matrícula supranumerária somente com decisão judicial final e habilitação e verificação documental cumpridas (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
