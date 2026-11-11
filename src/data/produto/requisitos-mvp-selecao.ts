@@ -6678,7 +6678,7 @@ export const requisitosMvpSelecao: Requisito[] = [
   {
     requisito_id: 'UNI-REQ-0177',
     titulo: 'Leitura aberta do processo publicado e proteção do acompanhamento',
-    enunciado: 'A leitura da identificação e configuração do processo publicado deve ser aberta na API, inclusive sem autenticação, pelo recurso existente. Essa leitura não concede acesso aos indicadores, quantitativos, relatórios ou consulta de notas do acompanhamento. O público aprovado pelo PO é de servidores do CEPS, responsável pela condução dos processos seletivos. A CGA (antigo CRCA) é unidade distinta, responsável por habilitação, matrícula, envio ao SIGAA e atividades acadêmicas correspondentes. Não há concessão automática por nome de unidade, lotação ou papel. Fora de rascunho, os indicadores exigem permissão de acompanhar na unidade dona; em rascunho, quem tem permissão de configurar nessa unidade consulta indicadores zerados, e quem só acompanha não vê o processo (UNI-REQ-0179 e UNI-REQ-0327). Ações de criar, configurar, publicar e retificar, assim como dados de inscrições, documentos, análises e notas, exigem autorização própria no servidor, refletida na Web. Autoria e papel genérico de administração não substituem a permissão da operação. O shell do backoffice continua exigindo autenticação; entrar no painel não concede acesso às áreas protegidas. Separação orientada pelo LT no Developers PR #407 e detalhada na API #2140; autorização em API #2104 e refinamento da API #2105 em 06/11/2026.',
+    enunciado: 'A leitura da identificação e configuração do processo publicado deve ser aberta na API, inclusive sem autenticação, pelo recurso existente. Essa leitura não concede acesso aos indicadores, quantitativos, relatórios ou consulta de notas do acompanhamento. O público aprovado pelo PO é de servidores da unidade responsável pelo processo seletivo, que conduz o processo. Os relatórios de cada fase ficam com a unidade responsável pela fase (UNI-REQ-0337). A CGA (antigo CRCA) é unidade distinta, responsável por habilitação, matrícula, envio ao SIGAA e atividades acadêmicas correspondentes. Não há concessão automática por nome de unidade, lotação ou papel. Fora de rascunho, os indicadores exigem permissão de acompanhar na unidade dona; em rascunho, quem tem permissão de configurar nessa unidade consulta indicadores zerados, e quem só acompanha não vê o processo (UNI-REQ-0179 e UNI-REQ-0327). Ações de criar, configurar, publicar e retificar, assim como dados de inscrições, documentos, análises e notas, exigem autorização própria no servidor, refletida na Web. Autoria e papel genérico de administração não substituem a permissão da operação. O shell do backoffice continua exigindo autenticação; entrar no painel não concede acesso às áreas protegidas. Separação orientada pelo LT no Developers PR #407 e detalhada na API #2140; autorização em API #2104 e refinamento da API #2105 em 06/11/2026.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -6689,7 +6689,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     prioridade: 'must',
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
-    criterios_aceite: 'Processo publicado pode ser consultado diretamente na API sem token; usuário autenticado sem concessões administrativas entra no painel do backoffice, mas não consulta indicadores ou dados protegidos; fora de rascunho, indicadores exigem permissão de acompanhar na unidade dona, inclusive por chamada direta; em rascunho, a consulta segue a permissão de configurar nessa unidade, conforme UNI-REQ-0179; operações de cadastro, relatórios, inscrições, documentos e notas mantêm suas autorizações próprias; autoria, papel genérico ou vínculo com o CEPS ou a CGA não concedem essas operações; ausência de sessão no backoffice segue o fluxo de autenticação.',
+    criterios_aceite: 'Processo publicado pode ser consultado diretamente na API sem token; usuário autenticado sem concessões administrativas entra no painel do backoffice, mas não consulta indicadores ou dados protegidos; fora de rascunho, indicadores exigem permissão de acompanhar na unidade dona, inclusive por chamada direta; em rascunho, a consulta segue a permissão de configurar nessa unidade, conforme UNI-REQ-0179; operações de cadastro, relatórios, inscrições, documentos e notas mantêm suas autorizações próprias; autoria, papel genérico ou vínculo com uma unidade não concedem essas operações; os relatórios de cada fase são consultados na unidade responsável por ela; ausência de sessão no backoffice segue o fluxo de autenticação.',
     verificacao: 'Testes de leitura pública, autenticação do backoffice e autorização por operação na API e na Web, incluindo chamadas diretas, concessões em unidades distintas, papel sem concessão e acesso por estado do processo (planejados).',
     pagina_developers: '/produto/acompanhamento-administrativo/',
     owner: 'PO; Equipe backend; Equipe frontend',
@@ -6988,7 +6988,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0337',
     titulo: 'O que a unidade responsável pelo processo vê do trabalho da fase',
     enunciado:
-      'A unidade responsável pelo processo vê os atos publicados e a situação das decisões da fase conduzida por outra unidade. Os votos, o voto vencido e as evidências individuais de banca ficam com a unidade da fase e com a auditoria. Exemplo: a PROEG vê que a CGA publicou o resultado preliminar da habilitação do "PSR 2027" e quantas decisões estão pendentes, mas não vê como cada integrante da banca votou. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
+      'A unidade responsável pelo processo vê os atos publicados e a situação das decisões da fase conduzida por outra unidade. Os votos, o voto vencido e as evidências individuais de banca ficam com a unidade da fase e com a auditoria. A unidade responsável pela fase tem os relatórios da fase, como os de convocados e de habilitados (UNI-REQ-0177). Exemplo: a PROEG vê que a CGA publicou o resultado preliminar da habilitação do "PSR 2027" e quantas decisões estão pendentes, mas não vê como cada integrante da banca votou. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'regra',
@@ -7000,9 +7000,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A unidade responsável pelo processo consulta os atos publicados e a situação das decisões da fase; votos, voto vencido e evidências individuais de banca não aparecem para ela, quando a unidade da fase é outra, e aparecem para a unidade da fase e para a auditoria.',
+      'A unidade responsável pelo processo consulta os atos publicados e a situação das decisões da fase; votos, voto vencido e evidências individuais de banca não aparecem para ela, quando a unidade da fase é outra, e aparecem para a unidade da fase e para a auditoria; os relatórios da fase, como os de convocados e de habilitados, são consultados na unidade da fase.',
     verificacao:
-      'Testes automatizados da consulta pela unidade responsável pelo processo, pela unidade da fase e pela auditoria (planejado).',
+      'Testes automatizados da consulta pela unidade responsável pelo processo, pela unidade da fase e pela auditoria, e dos relatórios da fase (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
