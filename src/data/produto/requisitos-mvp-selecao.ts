@@ -6706,10 +6706,11 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0345',
-    titulo: 'Regras da habilitação vêm do edital e valem para todas as chamadas',
+    titulo: 'Regras da habilitação vêm da versão vigente do edital em cada chamada',
     enunciado:
-      'As regras que decidem a habilitação, como os documentos exigidos, o formato aceito e o prazo de recurso, vêm do edital e são as mesmas em todas as chamadas do processo. A chamada define a janela e a agenda, mas não altera essas regras. ' +
-      'Exemplo: Fernanda, da 1ª chamada, e Leandro, da 2ª, foram convocados no mesmo grupo de vagas. As janelas são diferentes, mas os documentos, os formatos aceitos e o prazo de recurso são os mesmos. Se o edital der dois dias úteis para recorrer, a 2ª chamada não pode dar três.',
+      'As regras que decidem a habilitação, como os documentos exigidos, o formato aceito e o prazo de recurso, vêm do edital. Cada chamada segue a versão do edital vigente quando ela é publicada, e as regras são as mesmas em todas as chamadas da mesma versão. A chamada define a janela e a agenda, mas não altera essas regras. Uma retificação entre chamadas vale para as chamadas seguintes e preserva o que já foi publicado (UNI-REQ-0019 e UNI-REQ-0093). ' +
+      'Exemplo: Fernanda, da 1ª chamada, e Leandro, da 2ª, foram convocados no mesmo grupo de vagas. As janelas são diferentes, mas os documentos, os formatos aceitos e o prazo de recurso são os mesmos. Se o edital der dois dias úteis para recorrer, a 2ª chamada não pode dar três. ' +
+      'Exemplo com retificação: a 1ª chamada é publicada com o edital na versão 1, que dá dois dias úteis para recorrer. Uma retificação publica a versão 2, com três dias úteis. A 2ª chamada, publicada depois, segue a versão 2, e o prazo de Fernanda, da 1ª chamada, continua em dois dias úteis.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6721,8 +6722,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Candidatos de chamadas diferentes do mesmo processo seguem as mesmas regras de exigência do edital, aplicadas ao grupo de vagas da convocação e às respostas de cada pessoa (UNI-REQ-0147), e o mesmo prazo de recurso; a publicação da chamada não oferece meio de mudar documento, formato ou prazo de recurso.',
-    verificacao: 'Teste automatizado com duas chamadas do mesmo processo (planejado).',
+      'Candidatos de chamadas diferentes do mesmo processo, sob a mesma versão do edital, seguem as mesmas regras de exigência, aplicadas ao grupo de vagas da convocação e às respostas de cada pessoa (UNI-REQ-0147), e o mesmo prazo de recurso; cada chamada segue a versão do edital vigente na sua publicação; a retificação entre chamadas vale para as seguintes e não altera chamada já publicada; a publicação da chamada não oferece meio de mudar documento, formato ou prazo de recurso.',
+    verificacao: 'Testes automatizados com duas chamadas do mesmo processo na mesma versão do edital e com uma retificação entre as chamadas, conferindo que a chamada já publicada preserva as regras da versão anterior (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
