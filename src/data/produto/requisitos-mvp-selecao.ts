@@ -6264,7 +6264,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0274',
     titulo: 'Todo recurso exige banca de análise de recursos designada',
     enunciado:
-      'Todo recurso previsto no edital exige uma banca de análise de recursos, prevista na fase ou na etapa do recurso e designada formalmente pela unidade responsável pela fase do recurso ou, na etapa, pela unidade da fase da etapa (UNI-REQ-0330 e UNI-REQ-0331), porque os integrantes têm acesso a dados pessoais, inclusive sensíveis, dos candidatos. O edital sem essa banca para um recurso previsto não é publicado, e a análise só é feita por quem integra a banca designada; a consulta dos recursos por outros servidores segue a permissão de cada um (UNI-REQ-0291). Confirmado pelo PO em 10/11/2026.',
+      'Todo recurso previsto no edital exige uma banca de análise de recursos, prevista na fase ou na etapa do recurso e designada formalmente pela unidade responsável pela fase do recurso ou, na etapa, pela unidade da fase da etapa (UNI-REQ-0330 e UNI-REQ-0331), porque os integrantes têm acesso a dados pessoais, inclusive sensíveis, dos candidatos. O edital sem essa banca para um recurso previsto não é publicado, e a análise só é feita por quem integra a banca designada; a consulta dos recursos por outros servidores segue a permissão de cada um (UNI-REQ-0291). O pedido de quem não foi importado, por protocolo ou e-mail, não é recurso no sistema e fica fora desta regra (UNI-REQ-0343). Confirmado pelo PO em 10/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6900,7 +6900,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0333',
     titulo: 'A unidade de fase iniciada não muda',
     enunciado:
-      'A retificação que troca a unidade de uma fase iniciada é recusada. A fase está iniciada desde o início da janela publicada ou, quando não tem janela, desde o primeiro ato ou registro dela; a fase encerrada conta como iniciada. Exemplo: a janela da habilitação do "PSR 2027" já começou, e a retificação que passa a habilitação da CGA para a PROEG é recusada; a fase de classificação, ainda sem janela aberta e sem ato ou registro, aceita a troca. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
+      'A retificação que troca a unidade de uma fase iniciada é recusada. A fase está iniciada desde o início da janela publicada ou desde o primeiro ato ou registro dela, o que vier primeiro, mesmo quando tem janela; a fase encerrada conta como iniciada. Exemplo: a janela da habilitação do "PSR 2027" já começou, e a retificação que passa a habilitação da CGA para a PROEG é recusada; a fase de classificação, ainda sem janela aberta e sem ato ou registro, aceita a troca. Outro exemplo: a importação externa feita pela banca de homologação das inscrições do "SISU 2027" no período da inscrição (UNI-REQ-0341) inicia a fase de homologação das inscrições, ainda que a janela dela comece depois, e a retificação que troca a unidade dessa fase passa a ser recusada. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6912,9 +6912,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A retificação que troca a unidade de fase com janela já iniciada, de fase sem janela com ato ou registro, ou de fase encerrada é recusada; a de fase que ainda não começou é aceita, inclusive a de fase com janela futura e a de fase sem janela, ato ou registro.',
+      'A retificação que troca a unidade de fase com janela já iniciada, de fase com ato ou registro, mesmo com a janela ainda por começar, ou de fase encerrada é recusada; a de fase que ainda não começou, sem ato nem registro, é aceita, inclusive a de fase com janela futura.',
     verificacao:
-      'Testes automatizados da troca de unidade com a fase por começar, em andamento, sem janela e com ato registrado, e encerrada (planejado).',
+      'Testes automatizados da troca de unidade com a fase por começar, em andamento, sem janela e com ato registrado, com janela futura e com ato registrado, como a importação externa no período da inscrição, e encerrada (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -7098,7 +7098,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0342',
     titulo: 'Resultado preliminar e definitivo da importação externa',
     enunciado:
-      'Na importação externa, a homologação das inscrições publica resultado preliminar e definitivo, com janela de recurso entre os dois, para que o candidato veja como foi importado e recorra de erro de importação. Exemplo: Breno aparece no resultado preliminar do "SISU 2027" com a modalidade errada, recorre dentro da janela, e a banca de homologação das inscrições corrige a importação antes do definitivo. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
+      'Na importação externa, a homologação das inscrições publica resultado preliminar e definitivo, com janela de recurso entre os dois, para que o candidato veja como foi importado e recorra de erro de importação. Exemplo: Breno aparece no resultado preliminar do "SISU 2027" com a modalidade errada, recorre dentro da janela, e a decisão do recurso entra no resultado definitivo, como a de um recurso deferido, sem alterar a inscrição nem o arquivo importado (UNI-REQ-0132 e UNI-REQ-0280). Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7110,7 +7110,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A configuração com importação externa declara na homologação das inscrições o resultado preliminar, a janela de recurso entre os dois e o resultado definitivo; o definitivo só sai depois do preliminar.',
+      'A configuração com importação externa declara na homologação das inscrições o resultado preliminar, a janela de recurso entre os dois e o resultado definitivo; o definitivo só sai depois do preliminar; a decisão do recurso entra no definitivo como a de um recurso deferido, sem alterar a inscrição nem o arquivo importado.',
     verificacao:
       'Testes automatizados da declaração e da ordem das publicações na importação externa (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7120,7 +7120,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0343',
     titulo: 'Recurso de quem não tem inscrição no processo (desejável)',
     enunciado:
-      'Requisito desejável, fora do MVP: permitir, dentro do sistema, o recurso de quem não tem inscrição no processo, como a pessoa aprovada no SISU que não foi importada. Até lá, a pessoa recorre por protocolo ou por e-mail, e a banca de homologação das inscrições analisa, corrige a importação e registra o que fez. Exemplo: Lúcia foi aprovada no SISU e não consta da importação do "SISU 2027"; ela escreve à Unifesspa, e a banca de homologação das inscrições confere, corrige a importação e registra o que fez. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
+      'Requisito desejável, fora do MVP: permitir, dentro do sistema, o recurso de quem não tem inscrição no processo, como a pessoa aprovada no SISU que não foi importada. Até lá, o pedido da pessoa, feito por protocolo ou por e-mail, não é recurso no sistema e fica fora do UNI-REQ-0274; a banca de homologação das inscrições o analisa como crítica da importação (UNI-REQ-0339), e a decisão entra no resultado definitivo como a de um recurso deferido. Exemplo: Lúcia foi aprovada no SISU e não consta da importação do "SISU 2027"; ela escreve à Unifesspa, e a banca de homologação das inscrições analisa o pedido como crítica da importação, registra a decisão e a inclui no resultado definitivo, como a de um recurso deferido. Proposta do líder técnico em 10/11/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7132,7 +7132,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Até a existência do recurso no sistema, a correção feita pela banca de homologação das inscrições a pedido de quem não tem inscrição é um ato da banca, registrado conforme o UNI-REQ-0338; quando o recurso existir no sistema, a pessoa sem inscrição no processo o interpõe dentro dele e a banca o analisa.',
+      'Até a existência do recurso no sistema, o pedido de quem não tem inscrição, feito por protocolo ou por e-mail, não é recurso no sistema nem passa pela banca de análise de recursos (UNI-REQ-0274); a banca de homologação das inscrições o analisa como crítica da importação (UNI-REQ-0339), em ato registrado conforme o UNI-REQ-0338, e a decisão entra no resultado definitivo como a de um recurso deferido; quando o recurso existir no sistema, a pessoa sem inscrição no processo o interpõe dentro dele e a banca o analisa.',
     verificacao:
       'Revisão futura; o registro da correção é conferido nos testes do requisito UNI-REQ-0338 (planejado).',
     pagina_developers: '/produto/regras-negocio/',
