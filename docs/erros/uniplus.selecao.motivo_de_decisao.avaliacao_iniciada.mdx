@@ -1,0 +1,36 @@
+---
+title: A avaliação desta decisão já começou
+sidebar_label: Inclusão depois do início da avaliação
+description: Rascunho — a retificação tentou incluir motivo de uma decisão cuja avaliação já começou.
+code: uniplus.selecao.motivo_de_decisao.avaliacao_iniciada
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Inclusão de motivo no processo
+requisitos:
+  - UNI-REQ-0124
+  - UNI-REQ-0285
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Depois da publicação, o motivo novo só entra antes do início da avaliação daquela decisão (UNI-REQ-0124 e UNI-REQ-0285). A avaliação começa no que vier primeiro: o início da janela da fase em que a decisão é avaliada, ou de uma etapa dela, no cronograma, ou o primeiro registro de decisão daquele tipo. É a mesma regra de fase iniciada do UNI-REQ-0333. O pedido de `PUT /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}` chegou depois desse instante, que conta como já começado. A recusa sai com **422**, e o `detail` diz o tipo da decisão.
+
+## Como resolver
+
+A avaliação já em curso usa só os motivos publicados. Se falta motivo para um caso, a decisão usa o motivo mais próximo da lista, com a justificativa explicando o caso (UNI-REQ-0286).

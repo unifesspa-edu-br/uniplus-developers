@@ -1,0 +1,36 @@
+---
+title: O código do motivo é obrigatório
+sidebar_label: Código do motivo ausente
+description: Rascunho — o cadastro do motivo veio sem código.
+code: uniplus.selecao.motivo_de_decisao.codigo_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+requisitos:
+  - UNI-REQ-0120
+  - UNI-REQ-0283
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Todo motivo tem um código estável, que a decisão guarda junto com a descrição vigente quando é proferida (UNI-REQ-0120). O pedido de `POST /api/selecao/admin/motivos-de-decisao` veio com o campo `codigo` vazio ou só com espaços. A recusa sai com **422**, e o erro aparece no campo `codigo`.
+
+## Como resolver
+
+Informe o código, por exemplo `SEM_RESULTADO_INEP`. Ele não muda depois de criado, então escolha um nome que descreva a regra, e não o edital.

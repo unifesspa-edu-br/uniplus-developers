@@ -1,0 +1,35 @@
+---
+title: O código do motivo está fora do formato aceito
+sidebar_label: Código do motivo fora do formato
+description: Rascunho — o código do motivo não segue o formato de letras maiúsculas, dígitos e sublinhado, com 2 a 50 caracteres.
+code: uniplus.selecao.motivo_de_decisao.codigo_formato_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+requisitos:
+  - UNI-REQ-0120
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+O código do motivo segue o formato `^[A-Z][A-Z0-9_]{1,49}$`: começa com letra maiúscula, continua com letras maiúsculas, dígitos ou sublinhado e tem de 2 a 50 caracteres. O código enviado em `POST /api/selecao/admin/motivos-de-decisao` não segue esse formato, por exemplo por ter letra minúscula, acento, espaço ou hífen. A recusa sai com **422**, e o erro aparece no campo `codigo`.
+
+## Como resolver
+
+Reescreva o código no formato aceito: `DOCUMENTO_ILEGIVEL` é aceito; `documento-ilegível` não é.

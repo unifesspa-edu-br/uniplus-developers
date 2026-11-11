@@ -1,0 +1,39 @@
+---
+title: Motivo escolhido foi desativado no cadastro
+sidebar_label: Motivo escolhido desativado antes de publicar
+description: Rascunho — a configuração escolheu um motivo que foi desativado no cadastro antes de ser publicado.
+code: uniplus.selecao.motivo_de_decisao.motivo_desativado
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do edital
+  - Retificação em ato único
+  - Fechamento da sessão de retificação
+requisitos:
+  - UNI-REQ-0122
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+O processo escolheu um motivo que, ainda não publicado, foi desativado no cadastro depois da escolha. Motivo desativado não entra em nova publicação (UNI-REQ-0122), então a publicação, a retificação em ato único e o fechamento da sessão de retificação são recusados com **422**. O erro aparece no campo `motivosDeDecisao`, uma entrada por motivo, com o código no `detail`.
+
+Os motivos já publicados não passam por esta verificação: eles continuam valendo mesmo desativados.
+
+## Como resolver
+
+Retire o motivo desativado com `DELETE /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}` e escolha um motivo ativo do mesmo tipo e sentido. Depois, publique ou feche a sessão de novo.

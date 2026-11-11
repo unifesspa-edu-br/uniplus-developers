@@ -1,0 +1,37 @@
+---
+title: O tipo não admite motivo neste sentido
+sidebar_label: Sentido não admitido pelo tipo
+description: Rascunho — a regra do tipo do motivo não admite o sentido informado.
+code: uniplus.selecao.motivo_de_decisao.sentido_nao_admitido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+requisitos:
+  - UNI-REQ-0283
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Cada tipo de motivo tem a sua regra, que diz quais sentidos ele admite. O sentido enviado em `POST /api/selecao/admin/motivos-de-decisao` não é admitido pelo tipo informado. A recusa sai com **422**, e o erro aparece no campo `sentido`, com o tipo e o sentido no `detail`.
+
+Hoje os seis tipos admitem os dois sentidos; esta recusa protege a regra de um tipo que venha a restringi-los.
+
+## Como resolver
+
+Confira o tipo e o sentido do motivo. Se o tipo não admite o sentido, a decisão daquele tipo não usa motivo nesse sentido, e o motivo não deve ser cadastrado.

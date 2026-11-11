@@ -1,0 +1,40 @@
+---
+title: Motivos insuficientes para as decisões do processo
+sidebar_label: Cobertura de motivos insuficiente
+description: Rascunho — falta motivo favorável ou desfavorável para algum fundamento de isenção habilitado no processo.
+code: uniplus.selecao.motivo_de_decisao.cobertura_insuficiente
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação do edital
+  - Retificação em ato único
+  - Fechamento da sessão de retificação
+requisitos:
+  - UNI-REQ-0123
+  - UNI-REQ-0285
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Para cada fundamento de isenção habilitado no processo, o edital escolhe ao menos um motivo favorável e um desfavorável (UNI-REQ-0123). Falta pelo menos um deles, e a publicação, a retificação em ato único e o fechamento da sessão de retificação são recusados com **422**. O erro aparece no campo `motivosDeDecisao`, uma entrada para cada fundamento e sentido que faltam.
+
+Esta verificação é a última antes do congelamento: as demais pendências da configuração aparecem antes dela. Hoje ela cobre a isenção da taxa; as outras decisões passam a ser exigidas quando o edital puder declará-las.
+
+## Como resolver
+
+Para cada entrada, escolha com `PUT /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}` um motivo do tipo `ISENCAO_DA_TAXA` com o fundamento e o sentido indicados. Se o cadastro não tem esse motivo, peça a quem o mantém que o crie. Depois, publique ou feche a sessão de novo.

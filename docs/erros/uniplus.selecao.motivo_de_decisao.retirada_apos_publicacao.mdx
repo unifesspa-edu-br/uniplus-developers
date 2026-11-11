@@ -1,0 +1,37 @@
+---
+title: Motivo publicado não é retirado do processo
+sidebar_label: Retirada de motivo publicado
+description: Rascunho — a sessão de retificação tentou retirar um motivo que já consta do edital publicado.
+code: uniplus.selecao.motivo_de_decisao.retirada_apos_publicacao
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Retirada de motivo do processo
+requisitos:
+  - UNI-REQ-0124
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Em processo publicado, o conjunto de motivos só cresce (UNI-REQ-0124). O pedido de `DELETE /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}`, na sessão de retificação, indicou um motivo que já consta do edital publicado. A recusa sai com **422**, e o `detail` diz o código do motivo.
+
+Motivo incluído na sessão em curso, e ainda não publicado, pode ser retirado.
+
+## Como resolver
+
+Mantenha o motivo. Se ele não deve mais ser usado em processos novos, peça a desativação no cadastro: o processo publicado continua com ele (UNI-REQ-0122).

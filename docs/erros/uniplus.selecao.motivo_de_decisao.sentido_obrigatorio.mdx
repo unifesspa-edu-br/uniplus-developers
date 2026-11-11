@@ -1,0 +1,38 @@
+---
+title: O motivo deve declarar exatamente um sentido
+sidebar_label: Sentido do motivo ausente
+description: Rascunho — o motivo veio sem sentido ou com um valor diferente de favorável e desfavorável.
+code: uniplus.selecao.motivo_de_decisao.sentido_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+requisitos:
+  - UNI-REQ-0121
+  - UNI-REQ-0283
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Cada motivo é favorável ou desfavorável à pessoa, e só um dos dois (UNI-REQ-0121 e UNI-REQ-0283). O pedido de `POST /api/selecao/admin/motivos-de-decisao` veio sem o campo `sentido` ou com valor diferente de `FAVORAVEL` e `DESFAVORAVEL`. A recusa sai com **422**, e o erro aparece no campo `sentido`.
+
+Cada decisão traduz o sentido para o seu rótulo: homologada ou não homologada, deferido ou indeferido.
+
+## Como resolver
+
+Informe `FAVORAVEL` ou `DESFAVORAVEL`. O sentido não muda depois de criado; se a mesma regra serve aos dois resultados, cadastre dois motivos.

@@ -1,0 +1,36 @@
+---
+title: A descrição do motivo está fora do tamanho permitido
+sidebar_label: Descrição do motivo fora do tamanho
+description: Rascunho — a descrição do motivo tem menos de 3 ou mais de 500 caracteres.
+code: uniplus.selecao.motivo_de_decisao.descricao_tamanho
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+  - Edição da descrição do motivo
+requisitos:
+  - UNI-REQ-0120
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+A descrição do motivo tem de 3 a 500 caracteres, contados depois de retirar os espaços das pontas. A descrição enviada em `POST /api/selecao/admin/motivos-de-decisao` ou `PUT /api/selecao/admin/motivos-de-decisao/{id}` ficou fora desse intervalo. A recusa sai com **422**, e o erro aparece no campo `descricao`.
+
+## Como resolver
+
+Ajuste o texto para ficar entre 3 e 500 caracteres. A descrição diz a regra não cumprida em uma frase; a explicação do caso de cada candidato vai na justificativa da decisão (UNI-REQ-0286).

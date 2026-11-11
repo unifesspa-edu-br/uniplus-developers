@@ -1,0 +1,35 @@
+---
+title: O tipo do motivo não tem subclassificação
+sidebar_label: Subclassificação fora da isenção
+description: Rascunho — o motivo de um tipo que não é a isenção da taxa veio com subclassificação.
+code: uniplus.selecao.motivo_de_decisao.subclassificacao_nao_admitida
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+requisitos:
+  - UNI-REQ-0283
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Só o motivo da isenção da taxa tem subclassificação, que é o fundamento de isenção. O pedido de `POST /api/selecao/admin/motivos-de-decisao` de outro tipo, como heteroidentificação, trouxe o campo `subclassificacao` preenchido. A recusa sai com **422**.
+
+## Como resolver
+
+Envie o motivo sem `subclassificacao`. Se a intenção era um motivo de isenção, troque o tipo para `ISENCAO_DA_TAXA`.

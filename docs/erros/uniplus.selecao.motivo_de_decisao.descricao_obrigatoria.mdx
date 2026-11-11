@@ -1,0 +1,36 @@
+---
+title: A descrição do motivo é obrigatória
+sidebar_label: Descrição do motivo ausente
+description: Rascunho — o motivo veio sem descrição.
+code: uniplus.selecao.motivo_de_decisao.descricao_obrigatoria
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Cadastro de motivo de decisão
+  - Edição da descrição do motivo
+requisitos:
+  - UNI-REQ-0120
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+A descrição é o texto que o candidato lê junto com a decisão. O pedido de `POST /api/selecao/admin/motivos-de-decisao` ou de `PUT /api/selecao/admin/motivos-de-decisao/{id}` veio com o campo `descricao` vazio ou só com espaços. A recusa sai com **422**, e o erro aparece no campo `descricao`.
+
+## Como resolver
+
+Informe a descrição, com 3 a 500 caracteres, por exemplo "Sem resultado no retorno do INEP para a edição indicada".
