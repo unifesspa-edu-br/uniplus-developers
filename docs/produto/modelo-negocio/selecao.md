@@ -54,6 +54,8 @@ Termos usados ao longo do documento, com o sentido que têm no Uni+.
 | Termo | Significado |
 |---|---|
 | Processo seletivo | O certame em si (por exemplo, o SiSU 2026 ou o Vestibular Indígena/Quilombola). Reúne toda a configuração: etapas, cotas, vagas, documentos e formulário. É ele que se configura, publica e retifica — os dois termos não são sinônimos. |
+| Unidade responsável pelo processo | A unidade que cadastra, publica e retifica o processo seletivo, com os dados gerais, o cronograma, as datas e a unidade de cada fase (UNI-REQ-0329). |
+| Unidade responsável pela fase | A unidade que conduz o trabalho interno de uma fase do cronograma, mesmo quando não é a responsável pelo processo: publica os documentos da fase, designa as bancas, julga os recursos e conduz chamada, habilitação e matrícula (UNI-REQ-0330). |
 | Edital | O documento oficial emitido quando um processo seletivo é publicado — o ato que fecha e oficializa a configuração. Não é editado diretamente: uma mudança pós-publicação sai como retificação, um novo ato que aponta o edital retificado. |
 | Modalidade de concorrência | A fila em que o candidato disputa a vaga: ampla concorrência, uma cota da Lei 12.711/2012 ou uma ação afirmativa institucional. Ver seção 7. |
 | Ampla concorrência | A modalidade `AC`, aberta a todos os candidatos. Todo candidato concorre nela, inclusive o cotista. |
@@ -84,7 +86,7 @@ Durante a inscrição, o candidato responde ao formulário do processo, indica o
 | Administrador da Unidade | Configura o processo, define cotas, vagas, documentos e formulário, e publica o processo seletivo. Só atua dentro da unidade que administra. |
 | Candidato | Preenche o formulário, escolhe opções de curso e responde às perguntas de cota, envia documentos e submete a inscrição no portal público. Não escolhe a modalidade diretamente — o sistema a deriva das respostas (seção 7). |
 
-O acesso administrativo é restrito por unidade: um administrador só enxerga e opera os processos da sua unidade. A identificação de usuários (login) é feita por um provedor de identidade institucional, com integração ao Gov.br prevista para o ambiente de produção.
+O acesso administrativo é restrito por unidade, e a unidade que vale depende da operação: quem configura, publica e retifica o processo age na unidade responsável pelo processo, e quem conduz o trabalho de uma fase (publicar os documentos dela, designar as bancas, julgar os recursos, conduzir chamada, habilitação e matrícula) age na unidade responsável por ela, sem herança entre as duas (UNI-REQ-0329 e UNI-REQ-0330). A identificação de usuários (login) é feita por um provedor de identidade institucional, com integração ao Gov.br prevista para o ambiente de produção.
 
 ## 4. Como se configura um processo seletivo
 
@@ -519,7 +521,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | Lançamento de notas por etapa | Entrega atual, em desenvolvimento | Começa pelas notas do ENEM, pelo arquivo do INEP (UNI-REQ-0174); as demais origens entram pela mesma avaliação (UNI-REQ-0043). |
 | Processamento de classificação, remanejamento, desempate, Fator de Atenuação e resultado | Etapa futura | A configuração da cascata já está congelada no snapshot de publicação; esta etapa executará o remanejamento conforme a sequência de destinos e a cota de fallback. |
 | Recursos administrativos | Etapa futura | Base de suspensividade já configurada (`UNI-REQ-0080`). |
-| Habilitação e chamadas de vagas (Ingresso/CRCA) | Etapa futura | Fronteira com o módulo Ingresso. |
+| Habilitação e chamadas de vagas (Ingresso/CGA) | Etapa futura | Fronteira com o módulo Ingresso. |
 
 ### 13.1 Acompanhamento administrativo dos processos
 
