@@ -1,0 +1,35 @@
+---
+title: A justificativa contém caractere não permitido
+sidebar_label: Caractere nulo na justificativa da inclusão
+description: Rascunho — a justificativa da inclusão de motivo no processo publicado contém o caractere nulo (U+0000).
+code: uniplus.selecao.motivo_de_decisao.justificativa_caractere_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Inclusão de motivo no processo
+requisitos:
+  - UNI-REQ-0124
+rastreio:
+  - label: 'uniplus-api#2324'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2324
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::warning Código ainda não emitido
+
+Este código entra com a uniplus-api#2324, que generaliza o cadastro de motivos de
+decisão por tipo. Até lá, a API não o emite.
+
+:::
+
+## O que aconteceu
+
+Depois da publicação do edital, o processo só inclui motivo pela retificação, e cada inclusão exige uma justificativa em texto (UNI-REQ-0124). A justificativa enviada em `PUT /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}`, na sessão de retificação, contém o caractere nulo (U+0000), que não é gravado. Isso costuma acontecer quando o texto é colado de outro sistema ou gerado por código. A recusa sai com **422**.
+
+## Como resolver
+
+Retire o caractere nulo da justificativa e envie de novo. A justificativa tem até 1000 caracteres e é de uso interno da administração.

@@ -952,6 +952,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.motivo_de_decisao.nao_escolhido',
         'erros/uniplus.selecao.motivo_de_decisao.justificativa_obrigatoria',
         'erros/uniplus.selecao.motivo_de_decisao.justificativa_tamanho',
+        'erros/uniplus.selecao.motivo_de_decisao.justificativa_caractere_invalido',
         'erros/uniplus.selecao.motivo_de_decisao.avaliacao_iniciada',
         'erros/uniplus.selecao.motivo_de_decisao.retirada_apos_publicacao',
         'erros/uniplus.selecao.motivo_de_decisao.motivo_desativado',
