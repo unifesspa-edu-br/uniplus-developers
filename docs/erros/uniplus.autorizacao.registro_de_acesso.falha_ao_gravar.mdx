@@ -9,11 +9,15 @@ modulo: Autorização
 emitido_em:
   - Revelação do CPF da inscrição
   - Abertura de documento da inscrição
+  - Consultas do Encarregado de dados (pedidos, concessões, revisões, versões dos perfis, janela de migração, proteção do catálogo e anexos)
 requisitos:
   - UNI-REQ-0203
+  - UNI-REQ-0372
 rastreio:
   - label: 'uniplus-api#2162'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2162
+  - label: 'uniplus-api#2364'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2364
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -23,6 +27,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 ## O que aconteceu
 
 Todo acesso a dado pessoal ou sensível de um candidato fica registrado antes de o dado ser entregue. O registro desta ação não pôde ser gravado, e por isso nada foi registrado e o dado não foi mostrado. Não é uma recusa: a permissão de quem pediu não foi avaliada como insuficiente.
+
+O mesmo vale para as leituras do Encarregado de dados: pedidos, concessões, revisões, versões dos perfis, janela de migração, proteção do catálogo e anexos. Cada leitura é registrada antes da entrega, e, sem o registro, a tela mostra este erro sem exibir o dado.
 
 ## Como resolver
 

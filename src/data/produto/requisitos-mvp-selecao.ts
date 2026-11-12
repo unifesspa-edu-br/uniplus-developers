@@ -5148,7 +5148,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0322',
     titulo: 'Os perfis de governança nunca são suspensos pela reclassificação: a divergência é registrada e avisada',
     enunciado:
-      'A reclassificação não suspende os perfis de governança (gestor de acessos, Representante do controlador e Encarregado de dados), para que a própria retomada nunca fique sem quem decida. Quando uma permissão que esses perfis têm é reclassificada, ou quando a composição deles não bate com a esperada, a divergência fica registrada e os gestores de acessos e os Representantes do controlador são avisados. Quem tem a permissão de manter perfis ou a de aprovação na etapa da proteção de dados consulta a lista de divergências, da mais recente para a mais antiga (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A reclassificação não suspende os perfis de governança (gestor de acessos, Representante do controlador e Encarregado de dados), para que a própria retomada nunca fique sem quem decida. Quando uma permissão que esses perfis têm é reclassificada, ou quando a composição deles não bate com a esperada, a divergência fica registrada e os gestores de acessos e os Representantes do controlador são avisados. Quem tem a permissão de manter perfis, a de aprovação na etapa da proteção de dados ou a de consultar versões de perfis consulta a lista de divergências, da mais recente para a mais antiga (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5160,8 +5160,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A reclassificação de permissão dos perfis de governança não suspende nenhuma concessão e gera divergência e aviso; a composição divergente gera divergência e aviso; a lista de divergências é consultada pelos titulares das duas permissões e recusada para quem não tem nenhuma delas.',
-    verificacao: 'Testes automatizados de integração da conferência da governança e de API da consulta de divergências (planejado, uniplus-api#2281).',
+      'A reclassificação de permissão dos perfis de governança não suspende nenhuma concessão e gera divergência e aviso; a composição divergente gera divergência e aviso; a lista de divergências é consultada pelos titulares da permissão de manter perfis, da de aprovação na etapa da proteção de dados e da de consultar versões de perfis, e recusada para quem não tem nenhuma delas.',
+    verificacao: 'Testes automatizados de integração da conferência da governança e de API da consulta de divergências (planejado, uniplus-api#2281); consulta pela permissão de consultar versões (planejado, uniplus-api#2364).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -5417,12 +5417,12 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
-  // Pendente de definição na uniplus-api: código de erro da incompatibilidade de papéis (sem página no catálogo até o contrato existir; uniplus-api#2364).
+  // Pendente de confirmação na uniplus-api: o código de erro da recusa por papéis incompatíveis na instalação (uniplus-api#2364).
   {
     requisito_id: 'UNI-REQ-0370',
     titulo: 'Ninguém é ao mesmo tempo Representante do controlador e Encarregado de dados',
     enunciado:
-      'Uma mesma pessoa não pode ter concessões vigentes simultâneas de Representante do controlador e de Encarregado de dados, porque quem decide não fiscaliza a própria decisão. A acumulação de gestor de acessos e Representante do controlador é permitida. A incompatibilidade é conferida na criação do pedido e em todos os caminhos que criam concessão, inclusive a instalação, de modo que dois pedidos aprovados ao mesmo tempo não produzem a acumulação. Concessão vencida ou revogada não conta e não impede nova designação. Exemplo: Helena é Representante do controlador; o pedido que a indica como Encarregado de dados é recusado na criação, e o mesmo vale na ordem inversa para Kevin, que é Encarregado de dados. Se a concessão de Representante de Helena vencer, Helena pode receber a designação de Encarregado de dados. (UNI-REQ-0184; ADR-0162 da uniplus-api, que separa as atribuições de governança).',
+      'Uma mesma pessoa não pode ter concessões vigentes simultâneas de Representante do controlador e de Encarregado de dados, porque quem decide não fiscaliza a própria decisão. A acumulação de gestor de acessos e Representante do controlador é permitida. A incompatibilidade é conferida na criação do pedido próprio, no aceite da pessoa beneficiária do pedido feito para ela por outra pessoa e na aprovação, e também nos demais caminhos que criam concessão, inclusive a instalação, de modo que dois pedidos aprovados ao mesmo tempo não produzem a acumulação. Concessão vencida ou revogada não conta e não impede nova designação. Exemplo 1: Helena é Representante do controlador e faz para si o pedido do perfil de Encarregado de dados; o pedido é recusado na criação. Exemplo 2: Diogo pede para Kevin, que é Encarregado de dados, o perfil de Representante do controlador; o pedido é criado, mas é recusado quando Kevin, a pessoa beneficiária, vai aceitá-lo, e seria recusado também na aprovação se a concessão de Kevin passasse a valer depois do aceite. Se a concessão de Representante de Helena vencer, Helena pode receber a designação de Encarregado de dados. (UNI-REQ-0184; ADR-0162 da uniplus-api, que separa as atribuições de governança).',
     grupo: 'governanca',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5434,7 +5434,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O pedido de Encarregado de dados para quem tem concessão vigente de Representante do controlador é recusado, e o inverso também; a recusa vale na criação do pedido, na aprovação e na instalação; duas aprovações concorrentes que produziriam a acumulação resultam em uma aceita e outra recusada; a concessão vencida ou revogada não impede a designação; gestor de acessos e Representante do controlador na mesma pessoa são aceitos.',
+      'O pedido de Encarregado de dados para quem tem concessão vigente de Representante do controlador é recusado, e o inverso também; a recusa acontece na criação do pedido próprio, no aceite da pessoa beneficiária do pedido para terceiro e na aprovação, com o erro de papéis incompatíveis, e também na instalação; duas aprovações concorrentes que produziriam a acumulação resultam em uma aceita e outra recusada; a concessão vencida ou revogada não impede a designação; gestor de acessos e Representante do controlador na mesma pessoa são aceitos.',
     verificacao: 'Testes automatizados de API e de integração com transações concorrentes reais, com ausência de concessão e com concessão vencida, e da instalação na ordem gestores, Representante e Encarregado (planejado, uniplus-api#2364).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -5443,7 +5443,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0371',
     titulo: 'O perfil de Encarregado de dados é de sistema, tem composição fixa e não se altera',
     enunciado:
-      'O perfil de Encarregado de dados é um perfil de sistema, com composição fixa: consultar o catálogo de permissões, os pedidos, as concessões, as revisões, as versões dos perfis e a proteção do catálogo, manifestar-se sobre a proteção do catálogo e solicitar providências. As permissões novas de consulta, manifestação e providência são reservadas à governança e não entram em perfil comum. Como os demais perfis de governança, o de Encarregado de dados não é editado, desativado, reativado, suspenso, versionado, migrado pela janela nem reclassificado (UNI-REQ-0256). A pessoa que tem o perfil pode receber, por outros pedidos, permissões compatíveis de perfis comuns, que continuam funcionando. (UNI-REQ-0184; ADR-0162 da uniplus-api, que separa as atribuições de governança).',
+      'O perfil de Encarregado de dados é um perfil de sistema, com composição fixa: consultar o catálogo de permissões, os pedidos, as concessões, as revisões, as versões dos perfis e a proteção do catálogo, manifestar-se sobre a proteção do catálogo e solicitar providências. As permissões novas de consulta, manifestação e providência são reservadas à governança e não entram em perfil comum. Como os demais perfis de governança, o de Encarregado de dados não é editado, desativado, reativado, suspenso, versionado, migrado pela janela nem reclassificado (UNI-REQ-0256). O pedido do perfil de Encarregado de dados, como o de Representante do controlador, exige o documento de designação, passa pela etapa da proteção de dados decidida por um Representante e admite prazo. A pessoa que tem o perfil pode receber, por outros pedidos, permissões compatíveis de perfis comuns, que continuam funcionando. (UNI-REQ-0184; ADR-0162 da uniplus-api, que separa as atribuições de governança).',
     grupo: 'governanca',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5455,17 +5455,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O perfil de Encarregado de dados existe com a composição fixa; a edição, a desativação, a reativação, a suspensão, a criação de versão, a migração e a reclassificação desse perfil são recusadas; o perfil comum que inclui permissão reservada à governança é recusado; a pessoa com o perfil isolado consulta e tem recusadas a decisão, a revogação e a aprovação; permissões compatíveis concedidas por outro perfil continuam valendo.',
+      'O perfil de Encarregado de dados existe com a composição fixa; a edição, a desativação, a reativação, a suspensão, a criação de versão, a migração e a reclassificação desse perfil são recusadas; o perfil comum que inclui permissão reservada à governança é recusado; a pessoa com o perfil isolado consulta e tem recusadas a decisão, a revogação e a aprovação; o pedido do perfil exige o documento de designação, passa pela etapa da proteção de dados e aceita prazo; permissões compatíveis concedidas por outro perfil continuam valendo.',
     verificacao: 'Testes automatizados de API da composição, das recusas sobre o perfil de sistema e da consulta do catálogo pelos três perfis de governança (planejado, uniplus-api#2364).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
-  // Pendente de definição na uniplus-api: matriz por consulta (campos devolvidos, classe efetiva, permissão, base legal e política de registro) a ser entregue em uniplus-api#2364.
   {
     requisito_id: 'UNI-REQ-0372',
     titulo: 'O Encarregado de dados consulta o que quem administra vê, com cada leitura registrada',
     enunciado:
-      'O Encarregado de dados consulta pedidos, concessões, revisões, versões dos perfis, janela de migração e decisões da proteção do catálogo, inclusive listagens e anexos, pelas mesmas projeções disponíveis a quem administra, sem ver mais do que o gestor de acessos vê. Cada leitura é registrada, inclusive a de texto livre e de anexo, e se o registro não puder ser gravado a leitura é recusada com aviso de indisponibilidade (UNI-REQ-0203). A classificação de cada consulta segue os campos que ela efetivamente devolve: a ausência de dado de inscrição não torna a consulta livre de dado pessoal, e a consulta que devolve nome de pessoa, texto livre ou anexo é no mínimo pessoal, ou identificadora ou sensível quando o conteúdo chegar a essas classes; a classificação não resolvida segue o tratamento mais protetivo. A consulta dos registros de acesso ainda não está disponível (UNI-REQ-0379). (UNI-REQ-0184; ADR-0162 da uniplus-api, que separa as atribuições de governança).',
+      'O Encarregado de dados consulta pedidos, concessões, revisões, versões dos perfis, janela de migração e decisões da proteção do catálogo, inclusive listagens e anexos, pelas mesmas projeções disponíveis a quem administra, sem ver mais do que o gestor de acessos vê. Cada consulta tem a sua permissão, exclusiva do perfil de Encarregado de dados: a de pedidos alcança as filas de todos os pedidos e dos próprios, o detalhe, a trilha e o anexo; a de concessões, a lista, o detalhe, a trilha, a trilha da instalação e as tentativas de instalação sem pendência; a de revisões, a lista e o detalhe; a de versões dos perfis, os perfis, a versão, a janela, a contenção, a reclassificação e as divergências da governança, mas não as filas de decisão das versões, das janelas e das reclassificações; e a da proteção do catálogo, as decisões e o histórico dos itens. Quem só consulta tem recusadas, por falta de permissão, as ações de decidir, aprovar, revogar e manter. Cada leitura é registrada, inclusive a de texto livre e de anexo, e se o registro não puder ser gravado a leitura é recusada com aviso de indisponibilidade (UNI-REQ-0203). A classificação de cada consulta segue os campos que ela efetivamente devolve: a ausência de dado de inscrição não torna a consulta livre de dado pessoal, e a consulta que devolve nome de pessoa, texto livre ou anexo é no mínimo pessoal, ou identificadora ou sensível quando o conteúdo chegar a essas classes; a classificação não resolvida segue o tratamento mais protetivo. A consulta dos registros de acesso ainda não está disponível (UNI-REQ-0379). (UNI-REQ-0184; ADR-0162 da uniplus-api, que separa as atribuições de governança).',
     grupo: 'seguranca',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5477,7 +5476,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O Encarregado de dados lê pedidos, concessões, revisões, versões, janela e catálogo, inclusive listagens e anexos, sem ver campo que o gestor não vê; cada leitura gera registro antes da entrega; sem o registro gravado, a leitura é recusada com indisponibilidade; a consulta que devolve nome, texto livre ou anexo é classificada no mínimo como pessoal; a concessão vencida deixa de dar a consulta.',
+      'O Encarregado de dados lê pedidos, concessões, revisões, versões, janela e catálogo, inclusive listagens e anexos, sem ver campo que o gestor não vê; as filas de decisão das versões, das janelas e das reclassificações e as ações de decidir, aprovar, revogar e manter respondem 403 a quem só consulta; cada leitura gera registro antes da entrega; sem o registro gravado, a leitura responde 503 com o erro uniplus.autorizacao.registro_de_acesso.falha_ao_gravar e não entrega o dado; a consulta que devolve nome, texto livre ou anexo é classificada no mínimo como pessoal; a concessão vencida deixa de dar a consulta.',
     verificacao: 'Testes automatizados de API das consultas, do registro das leituras, da recusa por falha do registro e do vencimento da concessão (planejado, uniplus-api#2364).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',

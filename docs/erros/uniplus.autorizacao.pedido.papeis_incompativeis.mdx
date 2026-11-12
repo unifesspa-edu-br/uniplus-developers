@@ -1,0 +1,36 @@
+---
+title: O beneficiário já exerce papel incompatível
+sidebar_label: Papéis incompatíveis
+description: Uma mesma pessoa não pode ter, ao mesmo tempo, concessões vigentes de Representante do controlador e de Encarregado de dados.
+code: uniplus.autorizacao.pedido.papeis_incompativeis
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Criação do pedido próprio de concessão de acesso
+  - Aceite do beneficiário no pedido feito para outra pessoa
+  - Aprovação do pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0370
+  - UNI-REQ-0184
+rastreio:
+  - label: 'uniplus-api#2364'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2364
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma mesma pessoa não pode ter, ao mesmo tempo, concessões vigentes de Representante do controlador e de Encarregado de dados. O beneficiário tem concessão vigente do outro papel; ela precisa ser revogada ou vencer antes desta designação.
+
+Quem decide a etapa da proteção de dados não fiscaliza a própria decisão. Gestor de acessos e Representante do controlador podem ser a mesma pessoa. Concessão vencida ou revogada não conta.
+
+## Como resolver
+
+Depende do momento em que a recusa aconteceu:
+
+- **Na criação do pedido próprio:** o pedido não foi criado. Revogue a concessão do outro papel, ou aguarde que ela vença, e só então faça o pedido de novo.
+- **No aceite da pessoa beneficiária ou na aprovação de um pedido já existente:** o aceite ou a aprovação foi recusado, e o pedido não avança enquanto a concessão do outro papel estiver vigente. Revogue essa concessão, ou aguarde que ela vença, e depois faça o pedido de novo.
