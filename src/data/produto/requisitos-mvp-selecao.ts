@@ -3688,9 +3688,10 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0264',
-    titulo: 'Processo com inscrição no sistema tem fase de homologação das inscrições',
+    titulo:
+      'Todo processo tem fase de homologação das inscrições',
     enunciado:
-      'Todo processo seletivo com inscrição no sistema tem a fase de homologação das inscrições no cronograma, qualquer que seja o tipo de processo, e essa fase declara ao menos um resultado. O processo de resultado importado, como o do SISU, não tem inscrição no sistema e não precisa dessa fase. A publicação do edital e a retificação que deixem o processo sem a fase, ou com a fase sem resultado, são recusadas. Exemplo: um processo com inscrição pelo sistema e cronograma com inscrição, classificação e resultado final não é publicado até incluir a homologação das inscrições. Fase obrigatória repassada pelo líder técnico em 06/11/2026; a exigência do resultado é proposta do líder técnico, a confirmar pelo PO. Quem é homologado segue a regra configurada da fase (UNI-REQ-0265).',
+      'Todo processo seletivo tem a fase de homologação das inscrições no cronograma, qualquer que seja o tipo de processo e a origem das inscrições: inscrição no sistema, nota do ENEM por inscrição própria ou importação externa, como a do SISU. Essa fase declara ao menos um resultado e tem banca de homologação das inscrições. Na importação externa, a banca importa no período da fase de inscrição (UNI-REQ-0341), e a homologação das inscrições publica preliminar e definitivo, com janela de recurso contra erro de importação. A publicação do edital e a retificação que deixem o processo sem a fase, ou com a fase sem resultado, são recusadas. Exemplo: um processo com inscrição pelo sistema e cronograma com inscrição, classificação e resultado final não é publicado até incluir a homologação das inscrições. Fase obrigatória repassada pelo líder técnico em 06/11/2026 e estendida à importação externa em 12/11/2026; a exigência do resultado é proposta do líder técnico, a confirmar pelo PO. Quem é homologado segue a regra configurada da fase (UNI-REQ-0265).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3702,9 +3703,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A publicação e a retificação de processo com inscrição no sistema sem a fase de homologação das inscrições são recusadas, e o painel de conformidade aponta a pendência; a recusa da fase ausente aparece antes da recusa do resultado; a fase sem resultado é recusada; o processo de resultado importado é publicado sem essa fase; a regra não depende do tipo de processo.',
+      'A publicação e a retificação de processo sem a fase ou sem a banca de homologação das inscrições são recusadas, inclusive na importação externa, e o painel de conformidade aponta a pendência; a recusa da fase ausente aparece antes da recusa do resultado; a fase sem resultado é recusada; o processo de importação externa não é dispensado da fase nem da banca; a regra não depende do tipo de processo.',
     verificacao:
-      'Testes automatizados da publicação, da retificação e do painel de conformidade, com inscrição no sistema e com resultado importado (planejado).',
+      'Testes automatizados da publicação, da retificação e do painel de conformidade, com inscrição no sistema, com importação de exame e com importação externa (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -7872,6 +7873,50 @@ export const requisitosMvpSelecao: Requisito[] = [
       'A decisão com tipo que a fase ou a etapa não declara é recusada; o tipo duplicado na mesma fase ou etapa é recusado; o mesmo tipo em fase e etapa diferentes é aceito; o motivo fora da escolha da fase ou etapa é recusado; a declaração integra o hash da versão.',
     verificacao:
       'Testes automatizados da declaração, da duplicidade e da conferência por decisão (planejado, uniplus-api#2338).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0388',
+    titulo: 'A fase de homologação das inscrições é identificada pela capacidade configurada',
+    enunciado:
+      'O sistema reconhece a fase de homologação das inscrições pela capacidade que o edital configura nela, e não por um código de fase fixo: o código qualificado é `HOMOLOGACAO_INSCRICOES`, e a decisão correspondente é do tipo `HOMOLOGACAO_DAS_INSCRICOES`, distintos. Nenhuma regra depende do tipo de processo. Decisão do líder técnico em 11/11/2026.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0023',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A regra de homologação das inscrições se aplica à fase que tem a capacidade configurada, qualquer que seja o código dela; nenhuma regra exige código de fase fixo ou tipo de processo; o código da fase e o tipo de decisão são distintos.',
+    verificacao:
+      'Testes automatizados com fase de outro código que configura a capacidade e com fase de código igual que não a configura (planejado, uniplus-api#2322).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0389',
+    titulo: 'Inscrição no sistema, importação de exame e importação externa são distintas',
+    enunciado:
+      'A homologação das inscrições distingue três origens: a inscrição no sistema, a importação de resultado de exame, como o do ENEM, e a importação externa de seleção, como a do SISU. Cada origem tem o seu caminho e as suas recusas nomeadas, e nenhuma é tratada como outra. Decisão do líder técnico em 11/11/2026.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0023',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Cada origem é tratada pelo seu caminho; a recusa por falta de homologação das inscrições é nomeada por origem; a importação externa tem janela de recurso contra erro de importação (UNI-REQ-0264).',
+    verificacao:
+      'Testes automatizados da publicação e da homologação nas três origens (planejado, uniplus-api#2322).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
