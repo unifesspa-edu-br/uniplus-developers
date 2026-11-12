@@ -1097,7 +1097,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Com o controle de prazo e de recursos no sistema, a publicação do definitivo é recusada enquanto o prazo de recurso de qualquer preliminar com janela ancorada que ele fecha, ou da última correção dele, não terminou, e enquanto há recurso do preliminar vigente sem julgamento em qualquer desses ciclos; o recurso do preliminar substituído por retificação não segura o definitivo; com o prazo encerrado e os recursos julgados, o definitivo é aceito; o preliminar sem janela de recurso ancorada não tem prazo a esperar e não segura o definitivo.',
+      'Com o controle de prazo e de recursos no sistema, a publicação do definitivo é recusada enquanto o prazo de recurso de qualquer preliminar com janela ancorada que ele fecha, ou da última correção dele, não terminou, e enquanto há recurso do preliminar vigente sem julgamento em qualquer desses ciclos; o recurso do preliminar substituído por retificação não é descartado e segura o definitivo até ser julgado junto com o do ciclo novo; com o prazo encerrado e os recursos julgados, o definitivo é aceito; o preliminar sem janela de recurso ancorada não tem prazo a esperar e não segura o definitivo.',
     verificacao:
       'Testes automatizados (definitivo recusado dentro do prazo de recurso; definitivo recusado com recurso pendente de julgamento; definitivo aceito com o prazo encerrado e os recursos julgados) (planejado, junto com o controle de prazo e de recursos).',
     pagina_developers: '/produto/regras-negocio/',
