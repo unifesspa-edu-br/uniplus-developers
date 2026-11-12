@@ -1,0 +1,29 @@
+---
+title: A situação informada para filtrar as revisões não existe
+sidebar_label: Filtro de situação inválido
+description: A lista de revisões só aceita filtrar pelas situações em_andamento ou concluida.
+code: uniplus.autorizacao.revisao.filtro_de_situacao_invalido
+http_status: 400
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Listagem das revisões periódicas dos acessos (`GET /api/revisoes`)
+requisitos:
+  - UNI-REQ-0202
+  - UNI-REQ-0372
+rastreio:
+  - label: 'uniplus-api#2364'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2364
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista de revisões foi pedida com o parâmetro `situacao` num valor que o sistema não conhece. Os valores aceitos são `em_andamento` e `concluida`. O filtro é aplicado no servidor, antes da paginação, e por isso o valor inválido é recusado em vez de devolver uma página vazia. Nenhuma revisão foi listada.
+
+## Como resolver
+
+Envie `situacao=em_andamento` ou `situacao=concluida`, ou omita o parâmetro para listar todas as revisões.
