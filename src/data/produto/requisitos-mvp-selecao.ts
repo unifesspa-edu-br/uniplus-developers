@@ -3278,7 +3278,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0122',
     titulo: 'Desativação de motivo alcança apenas novas publicações',
     enunciado:
-      'Motivo desativado deixa de compor novas publicações, mas permanece elegível nos julgamentos dos processos publicados em que já havia sido disponibilizado.',
+      'Motivo desativado deixa de compor novas publicações e não volta a ser incluído em processo publicado, mas permanece elegível para quem já o escolheu: segue selecionável nos julgamentos dos processos publicados em que já havia sido disponibilizado, enquanto a escolha não for retirada (UNI-REQ-0365).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3290,7 +3290,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'criterio_verificacao',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Após a desativação, o motivo não aparece para novas publicações e continua selecionável no julgamento do processo publicado anterior.',
+      'Após a desativação, o motivo não aparece para novas publicações nem volta por inclusão em processo publicado, e continua selecionável no julgamento do processo publicado que já o escolheu, até a escolha ser retirada.',
     verificacao: 'Testes sobre processo publicado e sobre processo em elaboração.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
@@ -3320,7 +3320,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0124',
     titulo: 'Evolução aditiva do catálogo em processo publicado',
     enunciado:
-      'Em processo publicado, o conjunto de motivos evolui por inclusão, válida para julgamentos posteriores, e só perde motivo que nenhuma decisão usou (UNI-REQ-0365), sem criar critério material novo e sem alterar decisões já proferidas. A inclusão exige justificativa textual de manutenção, restrita a perfis administrativos e não apresentada ao candidato. Depois da publicação do edital, a inclusão de motivo exige retificação do edital e acontece antes do início da avaliação correspondente (UNI-REQ-0285).',
+      'Em processo publicado, o conjunto de motivos evolui por inclusão, válida para julgamentos posteriores, e só perde, na retificação, motivo que nenhuma decisão usou e cuja avaliação ainda não começou (UNI-REQ-0365), sem criar critério material novo e sem alterar decisões já proferidas. A inclusão exige justificativa textual de manutenção, restrita a perfis administrativos e não apresentada ao candidato. Depois da publicação do edital, a inclusão de motivo exige retificação do edital e acontece antes do início da avaliação correspondente (UNI-REQ-0285).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6744,7 +6744,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0283',
     titulo: 'Cadastro único de motivos de decisão, organizado por tipo',
     enunciado:
-      'Há um cadastro único de motivos de decisão, organizado por tipo. Os tipos acompanham as fases e os tipos de banca que o sistema reconhece (UNI-REQ-0139), inclusive a banca de homologação das inscrições, como a isenção da taxa, a homologação das inscrições, a análise documental, a heteroidentificação, a avaliação biopsicossocial, a classificação e a entrevista. Cada motivo indica se é favorável ou desfavorável ao candidato, e esse vínculo não muda depois que o motivo é usado em processo publicado. A lista de tipos não é fechada em seis: um processo com entrevista passa a ter motivos do tipo "entrevista", como "não compareceu no horário agendado", sem mudança no sistema. O recurso não é tipo próprio: usa os motivos do tipo da decisão recorrida (UNI-REQ-0120). Generaliza para todos os tipos o catálogo de motivos da isenção (UNI-REQ-0120 e UNI-REQ-0121). Confirmado pelo PO em 10/11/2026; a regra dos tipos que acompanham as fases e as bancas foi aprovada em 11/11/2026.',
+      'Há um cadastro único de motivos de decisão, organizado por tipo. Os tipos de decisão formam um vocabulário próprio, separado do vocabulário de fases e de bancas (UNI-REQ-0139), e cada tipo tem código explícito e qualificado: `ISENCAO_DA_TAXA`, `HOMOLOGACAO_DAS_INSCRICOES` (distinto do código da fase, `HOMOLOGACAO_INSCRICOES`), `ANALISE_DOCUMENTAL`, `HETEROIDENTIFICACAO`, `AVALIACAO_BIOPSICOSSOCIAL` e `CLASSIFICACAO`, além dos códigos de gabarito, de nota e das demais decisões necessárias, que completam o vocabulário e têm os nomes finais conferidos no código antes de fechar o contrato. Cada fase ou etapa declara os tipos que produz (UNI-REQ-0390). Cada motivo indica se é favorável ou desfavorável ao candidato, e esse vínculo não muda depois que o motivo é usado em processo publicado. O vocabulário cresce por tipo novo, que nasce com a sua política em código, sem mudar o cadastro nem os motivos dos demais tipos: um processo com entrevista passa a ter motivos do tipo próprio da entrevista, como "não compareceu no horário agendado". O recurso não é tipo próprio: usa os motivos do tipo da decisão recorrida (UNI-REQ-0120). Generaliza para todos os tipos o catálogo de motivos da isenção (UNI-REQ-0120 e UNI-REQ-0121). Confirmado pelo PO em 10/11/2026; a regra dos tipos que acompanham as fases e as bancas foi aprovada em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6756,7 +6756,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Todo motivo tem tipo e indica se é favorável ou desfavorável; a decisão de um tipo só usa motivo do mesmo tipo; o resultado do motivo usado em processo publicado não pode ser alterado.',
+      'O tipo pertence ao vocabulário próprio de decisões, com código explícito e distinto do código da fase; todo motivo tem tipo e indica se é favorável ou desfavorável; a decisão de um tipo só usa motivo do mesmo tipo; o resultado do motivo usado em processo publicado não pode ser alterado.',
     verificacao:
       'Teste automatizado do cadastro e do uso por tipo (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -6788,7 +6788,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0285',
     titulo: 'Edital escolhe os motivos que usará',
     enunciado:
-      'O edital escolhe, entre os motivos cadastrados, os que usará em cada tipo de decisão. Depois da publicação, só se inclui motivo por retificação do edital e antes do início da avaliação correspondente. Generaliza UNI-REQ-0123 e substitui para todos os tipos a inclusão sem retificação prevista em UNI-REQ-0124. Confirmado pelo PO em 10/11/2026.',
+      'O edital escolhe, entre os motivos cadastrados, os que usará em cada tipo de decisão, e a escolha é por fase ou etapa: a identidade dela é (processo, fase ou etapa, motivo do cadastro), com cópia do texto do motivo, e cada inclusão e cada retirada registra a versão publicada em que passou a valer, formando períodos de versão sem sobreposição (UNI-REQ-0366). Depois da publicação, só se inclui motivo por retificação do edital e antes do início da avaliação da fase ou etapa produtora (UNI-REQ-0367); a retirada do motivo que nenhuma decisão usou segue o UNI-REQ-0365. Generaliza UNI-REQ-0123 e, com o UNI-REQ-0124, substitui para todos os tipos a inclusão sem retificação. Confirmado pelo PO em 10/11/2026; escolha por fase ou etapa decidida pelo líder técnico em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6800,7 +6800,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A publicação exige os motivos dos tipos de decisão que o edital prevê; inclusão de motivo depois da publicação fora de retificação, ou depois do início da avaliação, é recusada com erro nomeado.',
+      'A escolha é por fase ou etapa, com períodos de versão; a publicação exige os motivos dos tipos de decisão que o edital prevê; inclusão de motivo depois da publicação fora de retificação, ou depois do início da avaliação, é recusada com erro nomeado.',
     verificacao:
       'Teste automatizado da inclusão por retificação antes e depois do início da avaliação (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7770,7 +7770,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0365',
     titulo: 'A retificação retira do processo o motivo que nenhuma decisão usou',
     enunciado:
-      'Depois da publicação, a retificação do edital pode retirar do processo um motivo de decisão já congelado, desde que nenhuma decisão o tenha usado. O motivo usado em alguma decisão não sai, porque a decisão continua mostrando o motivo que a fundamentou. A retirada vale da versão retificada em diante; as versões anteriores continuam mostrando o motivo (UNI-REQ-0366). Depois da retirada, a cobertura de motivos exigida para publicar e retificar continua valendo (UNI-REQ-0123), e cada condição que decide automaticamente continua apontando para um motivo disponível na nova versão (UNI-REQ-0287). Decisão do líder técnico em 11/11/2026.',
+      'Depois da publicação, a retificação do edital pode retirar do processo um motivo de decisão já congelado, desde que nenhuma decisão o tenha usado e que a avaliação da fase ou da etapa produtora ainda não tenha começado (UNI-REQ-0367). O motivo usado em alguma decisão não sai, porque a decisão continua mostrando o motivo que a fundamentou. A retirada vale da versão retificada em diante; as versões anteriores continuam mostrando o motivo (UNI-REQ-0366). Depois da retirada, a cobertura de motivos exigida para publicar e retificar continua valendo (UNI-REQ-0123), e cada condição que decide automaticamente continua apontando para um motivo disponível na nova versão (UNI-REQ-0287). Decisão do líder técnico em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7782,7 +7782,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A retificação retira o motivo congelado que nenhuma decisão usou; a retirada do motivo usado é recusada com erro nomeado; fora de retificação, a retirada depois da publicação é recusada; a retificação que deixa algum tipo de decisão sem a cobertura exigida, ou alguma condição automática sem motivo disponível, é recusada.',
+      'A retificação retira o motivo congelado que nenhuma decisão usou; a retirada do motivo usado, ou depois do início da avaliação da fase ou da etapa produtora, é recusada com erro nomeado; fora de retificação, a retirada depois da publicação é recusada; a retificação que deixa algum tipo de decisão sem a cobertura exigida, ou alguma condição automática sem motivo disponível, é recusada.',
     verificacao: 'Testes automatizados de API da retirada na retificação, com e sem decisão que use o motivo (planejado, uniplus-api#2338).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -7810,9 +7810,10 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0367',
-    titulo: 'Onde começa a avaliação de cada tipo de decisão',
+    titulo:
+      'Onde começa a avaliação de cada fase ou etapa produtora de decisão',
     enunciado:
-      'A avaliação de um tipo de decisão começa na abertura da janela em que ela acontece ou na primeira decisão desse tipo, o que vier primeiro, e a partir daí não se inclui motivo desse tipo (UNI-REQ-0285). A janela de cada um dos seis tipos (UNI-REQ-0283) é: isenção da taxa, a coleta das solicitações de isenção; homologação das inscrições, a fase de homologação das inscrições; análise documental, heteroidentificação e avaliação biopsicossocial, a etapa correspondente da habilitação, e não a fase de habilitação inteira, porque a abertura de uma etapa não inicia a avaliação das outras; classificação, a fase de classificação. Sem a janela correspondente no cronograma, conta só a primeira decisão do tipo. O recurso não tem janela própria para esse fim: usa os motivos do tipo da decisão recorrida (UNI-REQ-0283). Decisão do líder técnico em 11/11/2026.',
+      'A avaliação de uma fase ou etapa produtora de decisão começa no que vier primeiro entre a abertura da janela, o primeiro ato, a primeira avaliação lançada e a primeira decisão, pelo histórico publicado. Uma vez iniciada, não se desfaz, e a partir daí não se inclui nem se retira motivo daquela fase ou etapa (UNI-REQ-0285 e UNI-REQ-0365). A abertura de uma etapa não inicia a avaliação das outras: numa habilitação com três etapas, o início da análise documental não impede incluir motivo da heteroidentificação. O recurso não tem janela própria para esse fim: usa os motivos do tipo da decisão recorrida (UNI-REQ-0283). O início é conferido de novo no fechamento da retificação e na retificação direta. Decisão do líder técnico em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7824,7 +7825,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A inclusão de motivo é recusada depois da abertura da janela do tipo ou da primeira decisão do tipo; a abertura de uma etapa da habilitação não impede incluir motivo das outras etapas; sem janela correspondente, a primeira decisão do tipo passa a impedir a inclusão.',
+      'A inclusão e a retirada de motivo são recusadas depois do início da avaliação da fase ou da etapa produtora, contado pelo que vier primeiro entre janela, primeiro ato, primeira avaliação lançada e primeira decisão; a abertura de uma etapa não impede incluir motivo das outras; o início é conferido de novo no fechamento da retificação e na retificação direta.',
     verificacao: 'Testes automatizados de API do início da avaliação por tipo (planejado, uniplus-api#2338 e uniplus-api#2322).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -7848,6 +7849,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     criterios_aceite:
       'Sem critério próprio: a âncora do prazo e a admissão do recurso estão no UNI-REQ-0115.',
     verificacao: 'Testes automatizados da confirmação antes, no início e depois do início da contagem, nas três convenções (planejado, uniplus-api#2326).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0390',
+    titulo: 'Cada fase ou etapa declara os tipos de decisão que produz',
+    enunciado:
+      'Cada fase ou etapa declara o conjunto de tipos de decisão que produz: zero, um ou vários (UNI-REQ-0283). Fase e etapa podem declarar o mesmo tipo, cada uma com o que é seu e sem herança entre elas; só a duplicidade na mesma fase ou etapa é recusada. A declaração entra na versão congelada e no seu hash, e nada é deduzido pelo nome da fase. Toda decisão informa a fase ou a etapa e o tipo, e o sistema confere se a fase ou a etapa declara o tipo e se o motivo é escolha dela. Decisão do líder técnico em 11/11/2026.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0120',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A decisão com tipo que a fase ou a etapa não declara é recusada; o tipo duplicado na mesma fase ou etapa é recusado; o mesmo tipo em fase e etapa diferentes é aceito; o motivo fora da escolha da fase ou etapa é recusado; a declaração integra o hash da versão.',
+    verificacao:
+      'Testes automatizados da declaração, da duplicidade e da conferência por decisão (planejado, uniplus-api#2338).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
