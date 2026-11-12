@@ -7247,7 +7247,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0335',
     titulo: 'O ato sai pela unidade do ato',
     enunciado:
-      'O órgão e a unidade do ato publicado saem da unidade do ato, nunca do pedido de quem publica, e só publica quem tem a permissão nessa unidade. A unidade do ato é a do processo no edital, na retificação e no ato sem fase, e a da fase no documento da fase e no ato que declara a fase. O ato avulso, como o aviso e o comunicado, pode declarar a fase a que se refere (UNI-REQ-0155). Exemplo: a CGA publica o resultado preliminar da habilitação do "PSR 2027" e o documento sai com a CGA como unidade do ato; o edital do mesmo processo sai com a PROEG. Aprovado pelo PO em 11/11/2026.',
+      'O órgão e a unidade do ato publicado saem da unidade do ato, nunca do pedido de quem publica. A unidade do ato é a do processo no edital, na retificação e no ato sem fase, e a da fase no documento da fase e no ato que declara a fase. O ato avulso, como o aviso e o comunicado, pode declarar a fase a que se refere (UNI-REQ-0155). Exemplo: a CGA publica o resultado preliminar da habilitação do "PSR 2027" e o documento sai com a CGA como unidade do ato; o edital do mesmo processo sai com a PROEG. A permissão para publicar em cada unidade é a do UNI-REQ-0381. Aprovado pelo PO em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7259,17 +7259,17 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O órgão e a unidade gravados no ato são os da unidade do ato, e o pedido que traz outra unidade não os altera; a publicação por quem não tem a permissão na unidade do ato é recusada; o ato avulso que declara a fase sai com a unidade da fase, e o que não declara sai com a do processo.',
+      'O órgão e a unidade gravados no ato são os da unidade do ato, e o pedido que traz outra unidade não os altera; o ato avulso que declara a fase sai com a unidade da fase, e o que não declara sai com a do processo.',
     verificacao:
-      'Testes automatizados da unidade gravada em cada tipo de ato, com pedido que traz outra unidade, e da recusa por falta da permissão na unidade do ato (planejado).',
+      'Testes automatizados da unidade gravada em cada tipo de ato, com pedido que traz outra unidade (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
   {
     requisito_id: 'UNI-REQ-0381',
-    titulo: 'Publicar documento de uma fase exige permissão própria',
+    titulo: 'Publicar exige permissão na unidade do ato, e a do documento de fase é própria',
     enunciado:
-      'Publicar o documento de uma fase exige uma permissão própria, separada da de publicar o edital e a retificação, concedida na unidade responsável pela fase (UNI-REQ-0330). A permissão de publicar o processo não basta para publicar o documento de uma fase conduzida por outra unidade, e a permissão de publicar o documento da fase não permite publicar o edital nem a retificação. Exemplo: Betina publica os resultados da habilitação do "PSR 2027" porque tem a permissão de publicar documento da fase na CGA, que conduz a habilitação; ela não publica o edital nem uma retificação do "PSR 2027", e Diogo, que tem só a permissão de publicar o processo, não publica o resultado da habilitação. Aprovado pelo PO em 11/11/2026.',
+      'Ninguém publica em nome de uma unidade em que não tem permissão (a unidade do ato é a do UNI-REQ-0335): no edital, na retificação e no ato sem fase, vale a permissão de publicar o processo na unidade responsável pelo processo. Publicar o documento de uma fase exige uma permissão própria, separada da de publicar o edital e a retificação, concedida na unidade responsável pela fase (UNI-REQ-0330). A permissão de publicar o processo não basta para publicar o documento de uma fase conduzida por outra unidade, e a permissão de publicar o documento da fase não permite publicar o edital nem a retificação. Exemplo: Betina publica os resultados da habilitação do "PSR 2027" porque tem a permissão de publicar documento da fase na CGA, que conduz a habilitação; ela não publica o edital nem uma retificação do "PSR 2027", e Diogo, que tem só a permissão de publicar o processo, não publica o resultado da habilitação. Betina, que tem permissão só na CGA, também não publica um aviso geral do processo, que sairia em nome da unidade responsável pelo processo. Aprovado pelo PO em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7281,9 +7281,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A publicação do documento da fase é aceita com a permissão de publicar documento da fase na unidade da fase e recusada para quem tem só a permissão de publicar o processo; a publicação do edital e da retificação é recusada para quem tem só a permissão de publicar documento da fase.',
+      'A publicação por quem não tem a permissão na unidade do ato é recusada, inclusive o aviso geral por quem tem permissão só na unidade de uma fase; a publicação do documento da fase é aceita com a permissão de publicar documento da fase na unidade da fase e recusada para quem tem só a permissão de publicar o processo; a publicação do edital e da retificação é recusada para quem tem só a permissão de publicar documento da fase.',
     verificacao:
-      'Testes automatizados da publicação do documento da fase e do edital com cada uma das duas permissões (planejado).',
+      'Testes automatizados da publicação do documento da fase, do edital e do aviso geral com cada uma das duas permissões e com permissão só em outra unidade (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
