@@ -1,0 +1,38 @@
+---
+title: Uma etapa iniciada não sai do cronograma
+sidebar_label: Etapa iniciada não sai
+description: Rascunho — a retificação tenta remover do cronograma uma etapa que já começou.
+code: uniplus.selecao.fase_cronograma.etapa_iniciada_nao_sai_do_cronograma
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição das etapas durante a retificação do processo seletivo
+  - Fechamento da retificação do processo seletivo
+requisitos:
+  - UNI-REQ-0364
+  - UNI-REQ-0333
+rastreio:
+  - label: 'uniplus-api#2337'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2337
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A retificação remove uma etapa que já está iniciada, mesmo que a fase dela
+continue no cronograma. A etapa está iniciada quando a janela dela já abriu,
+quando tem ato ou registro próprio, como a avaliação lançada, ou quando já
+terminou. A abertura de uma etapa não inicia as outras etapas da mesma fase. A
+remoção é conferida ao editar as etapas e de novo ao fechar a retificação, porque
+a etapa pode ter começado entre uma e outra, e a comparação é feita com a versão
+publicada vigente, não com o que a retificação aberta já gravou.
+
+## Como resolver
+
+Mantenha a etapa na retificação. A etapa que ainda não começou, sem janela aberta
+e sem ato ou registro, continua podendo sair, sujeita às demais regras de
+publicação e retificação.
