@@ -804,7 +804,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0027',
     titulo: 'Upload de documentos da inscrição',
     enunciado:
-      'O candidato deve poder enviar cada documento exigido na fase de inscrição pelo próprio formulário de inscrição, no passo "Documentos", enquanto as inscrições estão abertas, com a inscrição em rascunho ou já enviada (correção, UNI-REQ-0165). O arquivo só passa a valer depois de verificado por antivírus. Até o resultado, que em condição normal sai em poucos segundos, o arquivo aparece como "em verificação" e ainda não atende a exigência. O arquivo recusado pela verificação não é guardado e não conta como enviado. Se a verificação estiver fora do ar, o arquivo não é recusado: fica em verificação até ela voltar. Se o arquivo anexado não chegou ao sistema, ou foi trocado depois de anexado, o candidato é avisado para enviá-lo de novo. O sistema aceita só PDF, JPEG e PNG, dentro dos formatos que a exigência declara entre esses três ("qualquer formato" significa PDF, JPEG e PNG; outros formatos, como DOCX, não são configuráveis), e confere que o conteúdo corresponde ao formato (o PDF tem de começar como PDF); o tamanho máximo é o da exigência e, quando ela não define, 10 MB; nenhum arquivo passa de 20 MB, qualquer que seja a exigência. O arquivo é guardado cifrado, cada arquivo protegido separadamente, conforme o parecer das encarregadas de dados de 13/10/2026, e o local onde fica guardado não contém dado pessoal (nem o nome do arquivo enviado é guardado: a tela mostra, por exemplo, "Arquivo 1 — PDF, 2 MB"). A recusa diz ao candidato o motivo, para que ele saiba o que corrigir, sem nunca nomear a ameaça encontrada: "O formato deste arquivo não é aceito para este documento. Envie um arquivo em {formatos aceitos}."; "Este arquivo passa do tamanho máximo de {limite} para este documento. Envie um arquivo menor."; "O conteúdo deste arquivo não corresponde ao formato {formato}. Envie o arquivo original."; "Este arquivo não passou na verificação de segurança (antivírus) e não foi aceito. Envie outro arquivo."; "Este PDF está protegido por senha. Envie o arquivo sem senha.". O que a verificação de segurança recusa e o que ela aceita está na UNI-REQ-0173. Enquanto verifica, a tela mostra "Arquivo em verificação. Isso costuma levar poucos segundos." e, quando o arquivo não chegou ou foi trocado, "Não recebemos este arquivo. Envie-o novamente.". Decisão do líder técnico em 20/10/2026; a confirmar pelo PO; teto de 20 MB confirmado pelo PO em 23/10/2026; arquivo em verificação: proposta do líder técnico confirmada pelo PO em 23/10/2026.',
+      'O candidato deve poder enviar cada documento exigido na fase de inscrição pelo próprio formulário de inscrição, no passo "Documentos", enquanto as inscrições estão abertas, com a inscrição em rascunho ou já enviada (correção, UNI-REQ-0165). O arquivo só passa a valer depois de verificado por antivírus. Até o resultado, que em condição normal sai em poucos segundos, o arquivo aparece como "em verificação" e ainda não atende a exigência. O arquivo recusado pela verificação não é guardado e não conta como enviado. Se a verificação estiver fora do ar, o arquivo não é recusado: fica em verificação até ela voltar. Se o arquivo anexado não chegou ao sistema, ou foi trocado depois de anexado, o candidato é avisado para enviá-lo de novo. O sistema aceita só PDF, JPEG e PNG, dentro dos formatos que a exigência declara entre esses três ("qualquer formato" significa PDF, JPEG e PNG; outros formatos, como DOCX, não são configuráveis), e confere que o conteúdo corresponde ao formato (o PDF tem de começar como PDF); o tamanho máximo é o da exigência e, quando ela não define, 10 MB; nenhum arquivo passa de 20 MB, qualquer que seja a exigência. O arquivo é guardado cifrado, cada arquivo protegido separadamente, conforme o parecer dos Encarregados de dados de 13/10/2026, e o local onde fica guardado não contém dado pessoal (nem o nome do arquivo enviado é guardado: a tela mostra, por exemplo, "Arquivo 1 — PDF, 2 MB"). A recusa diz ao candidato o motivo, para que ele saiba o que corrigir, sem nunca nomear a ameaça encontrada: "O formato deste arquivo não é aceito para este documento. Envie um arquivo em {formatos aceitos}."; "Este arquivo passa do tamanho máximo de {limite} para este documento. Envie um arquivo menor."; "O conteúdo deste arquivo não corresponde ao formato {formato}. Envie o arquivo original."; "Este arquivo não passou na verificação de segurança (antivírus) e não foi aceito. Envie outro arquivo."; "Este PDF está protegido por senha. Envie o arquivo sem senha.". O que a verificação de segurança recusa e o que ela aceita está na UNI-REQ-0173. Enquanto verifica, a tela mostra "Arquivo em verificação. Isso costuma levar poucos segundos." e, quando o arquivo não chegou ou foi trocado, "Não recebemos este arquivo. Envie-o novamente.". Decisão do líder técnico em 20/10/2026; a confirmar pelo PO; teto de 20 MB confirmado pelo PO em 23/10/2026; arquivo em verificação: proposta do líder técnico confirmada pelo PO em 23/10/2026.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -4027,7 +4027,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Cada exigência de documento informa quais fatos o documento comprova, quando comprova algum. A exigência não é publicada nem retificada quando o tipo de documento é menos protegido que o mais protegido dos fatos que ela comprova. O fato que só aciona a exigência, como a modalidade, não conta como fato comprovado. ' +
       'A publicação congela na exigência a classificação, a finalidade e a hipótese legal do tipo, junto com o que já congela dele (UNI-REQ-0071). Mudar o cadastro depois não altera processo publicado. O acesso ao arquivo enviado segue a classificação congelada na exigência: o acesso a documento sensível exige autorização específica para dado sensível (UNI-REQ-0130). ' +
       'Exemplo: o laudo médico é cadastrado como sensível. A exigência que pede o laudo para comprovar a deficiência é publicada normalmente. Se o laudo estivesse cadastrado como pessoal, a publicação seria recusada, porque o fato da deficiência é sensível. ' +
-      'Decisão do líder técnico em 27/10/2026, a confirmar pelo PO. A classificação de cada tipo de documento e o tratamento de documento com dado de terceiro aguardam orientação do(a) encarregado(a) de dados.',
+      'Decisão do líder técnico em 27/10/2026, a confirmar pelo PO. A classificação de cada tipo de documento é aprovada pelo Representante do controlador, com manifestação facultativa do Encarregado de dados (UNI-REQ-0205 e UNI-REQ-0373); o tratamento de documento com dado de terceiro aguarda orientação do Encarregado de dados.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -4075,7 +4075,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0184',
     titulo: 'Governança das concessões de acesso',
     enunciado:
-      'Ninguém ganha acesso administrativo ao Uni+ por ter conta institucional ou por um papel atribuído no login: o login identifica a pessoa, e todo acesso é uma concessão registrada no Uni+, que nasce de um pedido aprovado. O pedido é feito para si ou para outra pessoa, como a coordenação que pede acesso para uma pessoa servidora da equipe, e indica o perfil (um conjunto nomeado de permissões, mantido pela gestão de acessos) e o escopo: uma unidade ou, para o cadastro que vale para a instituição inteira (campi, motivos, catálogos), a própria instituição. A concessão numa unidade não alcança as unidades abaixo dela. A gestão de acessos aprova a adequação funcional; quando o perfil inclui permissão sobre dado pessoal ou sensível, a proteção de dados aprova em seguida a adequação à proteção de dados, e a concessão só vale depois da última aprovação exigida. O perfil tem versões aprovadas, e a concessão fica presa à versão que foi aprovada para ela. A mudança no perfil não amplia o acesso de ninguém por si só: a remoção de permissão vale para todas as concessões na hora, e o acréscimo só chega a quem já tem o perfil por migração de versão, decidida concessão a concessão (UNI-REQ-0248 a UNI-REQ-0253). A migração dispensa pedido novo e aceite da pessoa beneficiária, mas continuam valendo os impedimentos contra o autobenefício: ninguém decide a própria concessão, as duas etapas de uma mesma concessão são de pessoas diferentes e quem criou a versão não a aprova; o impedimento de quem solicitou a concessão original não se aplica à migração, porque não há pedido novo. Ninguém aprova pedido em que é pessoa solicitante ou beneficiária, e quem aprova pela gestão de acessos não aprova na etapa da proteção de dados. O pedido em que quem exerce a proteção de dados é a pessoa beneficiária passa só pela gestão de acessos; o pedido que essa pessoa faz para outra, com permissão sobre dado pessoal ou sensível, espera a aprovação de quem a substitui formalmente. Revogar não exige aprovação e vale de imediato; a concessão não se edita: para mudar, revoga-se e pede-se de novo, e a única exceção é a migração de versão do perfil, que troca só a versão e mantém a pessoa, o escopo e a validade. A instituição mantém no mínimo duas pessoas ativas na gestão de acessos, e a revogação da penúltima é recusada. O recurso institucional, como o processo seletivo, pertence a uma unidade, nunca a quem o criou; os dados da inscrição pertencem à pessoa candidata, que os acessa sem concessão, e ser pessoa servidora não dá acesso a dados de pessoas candidatas. As duas primeiras pessoas da gestão de acessos são instaladas por quem tem o papel de instalação, só quando não há ninguém ativo nessa gestão, com o número do documento de designação no protocolo, o PDF do documento e a confirmação por um código enviado ao e-mail institucional de quem executa, válido por duas horas e só para essa pessoa; quem executa não pode estar entre as pessoas instaladas. A pessoa beneficiária é indicada pelo e-mail institucional e, quando não é a própria pessoa solicitante, confirma o pedido entrando no Uni+, para que quem aprova saiba quem receberá o acesso. O pedido do perfil da gestão de acessos ou do perfil Encarregado(a) pelo tratamento de dados exige o documento de designação: fica aguardando o documento, fora da fila da gestão de acessos, até o PDF anexado ser verificado, e só então segue para o aceite da pessoa beneficiária ou para a gestão de acessos; o do perfil Encarregado(a) pelo tratamento de dados passa só pela gestão de acessos, porque ainda não há quem aprove a própria designação. Se entrar em vigor uma nova versão do perfil antes da última aprovação exigida, inclusive antes da primeira decisão da gestão de acessos e entre as duas etapas, o pedido volta à gestão de acessos quando a versão não acrescenta permissão e é devolvido a quem pediu quando acrescenta. Todo pedido, aprovação, recusa, revogação e instalação fica na trilha de auditoria. Proposta do líder técnico em 28/10/2026, com a confirmação da proteção de dados sobre o papel de segunda aprovação e sobre a substituição nas ausências ainda pendente. Atualizada por decisão do líder técnico em 08 e 09/11/2026 e pela ADR-0157 da uniplus-api, que emenda a ADR-0152.',
+      'Ninguém ganha acesso administrativo ao Uni+ por ter conta institucional ou por um papel atribuído no login: o login identifica a pessoa, e todo acesso é uma concessão registrada no Uni+, que nasce de um pedido aprovado. O pedido é feito para si ou para outra pessoa, como a coordenação que pede acesso para uma pessoa servidora da equipe, e indica o perfil (um conjunto nomeado de permissões, mantido pela gestão de acessos) e o escopo: uma unidade ou, para o cadastro que vale para a instituição inteira (campi, motivos, catálogos), a própria instituição. A concessão numa unidade não alcança as unidades abaixo dela. A governança das concessões tem três papéis, nomeados pela função (UNI-REQ-0369): o gestor de acessos mantém os perfis e aprova a adequação funcional; o Representante do controlador decide a etapa da proteção de dados; o Encarregado de dados consulta, se manifesta e solicita providências, sem decidir. Quando o perfil inclui permissão sobre dado pessoal ou sensível, o Representante do controlador aprova, depois do gestor, a adequação à proteção de dados, e a concessão só vale depois da última aprovação exigida. O perfil tem versões aprovadas, e a concessão fica presa à versão que foi aprovada para ela. A mudança no perfil não amplia o acesso de ninguém por si só: a remoção de permissão vale para todas as concessões na hora, e o acréscimo só chega a quem já tem o perfil por migração de versão, decidida concessão a concessão (UNI-REQ-0248 a UNI-REQ-0253). A migração dispensa pedido novo e aceite da pessoa beneficiária, mas continuam valendo os impedimentos contra o autobenefício: ninguém decide a própria concessão, as duas etapas de uma mesma concessão são de pessoas diferentes e quem criou a versão não a aprova; o impedimento de quem solicitou a concessão original não se aplica à migração, porque não há pedido novo. Ninguém aprova pedido em que é pessoa solicitante ou beneficiária, e quem aprova pela gestão de acessos não aprova na etapa da proteção de dados. O pedido com a etapa da proteção de dados em que a pessoa beneficiária ou a solicitante é Representante do controlador é decidido nessa etapa por outro Representante. Uma mesma pessoa não tem, ao mesmo tempo, concessões vigentes de Representante do controlador e de Encarregado de dados; a de gestor de acessos e a de Representante podem coexistir (UNI-REQ-0370). Revogar não exige aprovação e vale de imediato; a concessão não se edita: para mudar, revoga-se e pede-se de novo, e a única exceção é a migração de versão do perfil, que troca só a versão e mantém a pessoa, o escopo e a validade. A instituição mantém no mínimo duas pessoas ativas na gestão de acessos, e a revogação da penúltima é recusada. O recurso institucional, como o processo seletivo, pertence a uma unidade, nunca a quem o criou; os dados da inscrição pertencem à pessoa candidata, que os acessa sem concessão, e ser pessoa servidora não dá acesso a dados de pessoas candidatas. As duas primeiras pessoas da gestão de acessos são instaladas por quem tem o papel de instalação, só quando não há ninguém ativo nessa gestão, com o número do documento de designação no protocolo, o PDF do documento e a confirmação por um código enviado ao e-mail institucional de quem executa, válido por duas horas e só para essa pessoa; quem executa não pode estar entre as pessoas instaladas. A pessoa beneficiária é indicada pelo e-mail institucional e, quando não é a própria pessoa solicitante, confirma o pedido entrando no Uni+, para que quem aprova saiba quem receberá o acesso. O pedido de perfil de governança (gestor de acessos, Representante do controlador ou Encarregado de dados) exige o documento de designação: fica aguardando o documento, fora da fila da gestão de acessos, até o PDF anexado ser verificado, e só então segue para o aceite da pessoa beneficiária e para a gestão de acessos. O pedido que exige a etapa da proteção de dados, inclusive o dos perfis de governança, exige também o aceite do termo de responsabilidade pela pessoa beneficiária antes da decisão do gestor (UNI-REQ-0377 e UNI-REQ-0378). Só a designação do primeiro Representante do controlador, quando nenhuma pessoa tem concessão vigente desse perfil, passa só pela gestão de acessos, pela dispensa da designação; havendo Representante vigente, a designação de outro passa pela etapa da proteção de dados, decidida por um Representante diferente de quem pediu, e duas designações simultâneas sem Representante vigente não usam ambas a dispensa. O sistema não tem ato de substituição: é pré-requisito operacional manter no mínimo dois Representantes com concessão vigente, titular e substituto, para que cada um decida o pedido protegido do outro. Revogam o gestor de acessos e o Representante do controlador; o Encarregado de dados não revoga. As permissões pessoais dos perfis de governança têm como base legal o art. 7º, II, combinado com o art. 23 da LGPD. Se entrar em vigor uma nova versão do perfil antes da última aprovação exigida, inclusive antes da primeira decisão da gestão de acessos e entre as duas etapas, o pedido volta à gestão de acessos quando a versão não acrescenta permissão e é devolvido a quem pediu quando acrescenta. Todo pedido, aprovação, recusa, revogação e instalação fica na trilha de auditoria. Proposta do líder técnico em 28/10/2026. Atualizada por decisão do líder técnico em 08 e 09/11/2026 e pela ADR-0157 da uniplus-api, que emenda a ADR-0152, e pela ADR-0161 da uniplus-api, que separa as atribuições de governança e emenda as ADR-0152, ADR-0153 e ADR-0157.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4087,8 +4087,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Permissão cuja única origem é um papel no login é negada; o pedido aprovado pela pessoa solicitante ou pela pessoa beneficiária, ou pela mesma pessoa nas duas aprovações, é recusado; quando não há dispensa aplicável, a concessão com permissão sobre dado pessoal ou sensível não vale com uma só aprovação; o pedido da proteção de dados para outra pessoa com dado pessoal ou sensível não vale só com a aprovação da gestão de acessos; o pedido do perfil Encarregado(a) pelo tratamento de dados (designação da proteção de dados) passa só pela gestão de acessos e vale com ela; o pedido em que a pessoa beneficiária é quem exerce a proteção de dados passa só pela gestão de acessos e vale com ela; a concessão revogada deixa de valer na próxima operação; a revogação da penúltima pessoa ativa na gestão de acessos é recusada; a permissão removida do perfil deixa de valer para todas as concessões na hora, e a acrescentada não vale para a concessão presa à versão anterior até a migração dela; a migração de versão é concluída sem pedido novo e sem aceite da pessoa beneficiária, mas é recusada quando quem decide é a pessoa beneficiária e quando as duas etapas são da mesma pessoa; a aprovação da versão por quem a criou é recusada, e quem a criou pode decidir a migração da concessão de outras pessoas, mas não a própria, que fica retida; a migração não é recusada por quem decide ter solicitado a concessão original; a edição da concessão é recusada, e a migração de versão troca só a versão, sem mudar pessoa, escopo nem validade; a versão sem acréscimo que entra em vigor antes da primeira decisão da gestão de acessos faz o pedido voltar à gestão de acessos, e a que entra entre as duas etapas também; a versão com acréscimo que entra em vigor antes da primeira decisão da gestão de acessos faz o pedido ser devolvido a quem pediu, e a que entra entre as duas etapas também; a concessão numa unidade não vale nas unidades abaixo dela; a instalação é recusada com pessoa ativa na gestão de acessos, sem o documento ou quando quem executa está entre as pessoas instaladas, e só vale com o código certo, informado pela mesma pessoa em até duas horas.',
-    verificacao: 'Testes automatizados de API das recusas, da migração de versão e da decisão de acesso (planejado, uniplus-api#2274).',
+      'Permissão cuja única origem é um papel no login é negada; o pedido aprovado pela pessoa solicitante ou pela pessoa beneficiária, ou pela mesma pessoa nas duas aprovações, é recusado; quando não há dispensa aplicável, a concessão com permissão sobre dado pessoal ou sensível não vale com uma só aprovação; o pedido com a etapa da proteção de dados em que a pessoa beneficiária ou a solicitante é Representante do controlador só vale com a decisão de outro Representante nessa etapa; o pedido de designação do primeiro Representante do controlador, sem Representante vigente, passa só pela gestão de acessos e vale com ela, e o de outro Representante, com Representante vigente, só vale com a decisão de um Representante diferente de quem pediu; de duas designações simultâneas sem Representante vigente, só uma usa a dispensa; a revogação pelo Encarregado de dados é recusada; a concessão vigente simultânea de Representante do controlador e de Encarregado de dados para a mesma pessoa é recusada, nas duas ordens, e a de gestor de acessos com a de Representante é aceita; a concessão revogada deixa de valer na próxima operação; a revogação da penúltima pessoa ativa na gestão de acessos é recusada; a permissão removida do perfil deixa de valer para todas as concessões na hora, e a acrescentada não vale para a concessão presa à versão anterior até a migração dela; a migração de versão é concluída sem pedido novo e sem aceite da pessoa beneficiária, mas é recusada quando quem decide é a pessoa beneficiária e quando as duas etapas são da mesma pessoa; a aprovação da versão por quem a criou é recusada, e quem a criou pode decidir a migração da concessão de outras pessoas, mas não a própria, que fica retida; a migração não é recusada por quem decide ter solicitado a concessão original; a edição da concessão é recusada, e a migração de versão troca só a versão, sem mudar pessoa, escopo nem validade; a versão sem acréscimo que entra em vigor antes da primeira decisão da gestão de acessos faz o pedido voltar à gestão de acessos, e a que entra entre as duas etapas também; a versão com acréscimo que entra em vigor antes da primeira decisão da gestão de acessos faz o pedido ser devolvido a quem pediu, e a que entra entre as duas etapas também; a concessão numa unidade não vale nas unidades abaixo dela; a instalação é recusada com pessoa ativa na gestão de acessos, sem o documento ou quando quem executa está entre as pessoas instaladas, e só vale com o código certo, informado pela mesma pessoa em até duas horas.',
+    verificacao: 'Testes automatizados de API das recusas, da migração de versão e da decisão de acesso (planejado, uniplus-api#2274); papéis de governança, fim da dispensa de quem é Representante e incompatibilidade de designações (planejado, uniplus-api#2363 e uniplus-api#2364).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -4138,7 +4138,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0187',
     titulo: 'O nome de quem age aparece na trilha, nas listas de pedidos e de concessões',
     enunciado:
-      'A trilha de auditoria e as listas de pedidos e de concessões mostram o nome de cada pessoa envolvida, e não só o identificador dela: quem pediu, o beneficiário, quem aprovou ou recusou, quem concedeu e quem revogou. O nome é o social, quando a pessoa tem, e o civil nos demais casos, e fica gravado no momento da ação; registros anteriores a essa regra podem não ter o nome. A lista de pedidos já decididos (aprovados, recusados e cancelados) mostra o histórico do mais recente ao mais antigo, para que o aprovador e a proteção de dados consultem o que foi decidido. Rastreia a governança das concessões (UNI-REQ-0184; ADR-0152 da uniplus-api). Decisão do líder técnico em 29/10/2026.',
+      'A trilha de auditoria e as listas de pedidos e de concessões mostram o nome de cada pessoa envolvida, e não só o identificador dela: quem pediu, o beneficiário, quem aprovou ou recusou, quem concedeu e quem revogou. O nome é o social, quando a pessoa tem, e o civil nos demais casos, e fica gravado no momento da ação; registros anteriores a essa regra podem não ter o nome. A lista de pedidos já decididos (aprovados, recusados e cancelados) mostra o histórico do mais recente ao mais antigo, para que o gestor de acessos, o Representante do controlador e o Encarregado de dados consultem o que foi decidido. Rastreia a governança das concessões (UNI-REQ-0184; ADR-0152 da uniplus-api). Decisão do líder técnico em 29/10/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4222,7 +4222,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0249',
     titulo: 'A aprovação da versão do perfil segue a classificação do acréscimo e a segregação entre três pessoas',
     enunciado:
-      'A aprovação da versão depende do que ela acrescenta, e não da classificação do perfil inteiro. Perfil novo só com permissões públicas ou internas, ou acréscimo só dessas permissões, passa por outra pessoa da gestão de acessos. Perfil novo com permissão pessoal, identificadora ou sensível, ou acréscimo de ao menos uma permissão dessas classes, passa por outra pessoa da gestão de acessos e, depois, pela proteção de dados. Mudança só de nome, descrição ou documento passa por outra pessoa da gestão de acessos. Versão que só remove permissão não exige aprovação, mas exige motivo e gera aviso. Na versão que remove e acrescenta, a remoção vale na hora para todos e o acréscimo segue a tabela. A remoção cancela a versão que aguardava aprovação. Quem cria a versão, quem a aprova pela gestão de acessos e quem a aprova pela proteção de dados são três pessoas diferentes; ter concessão do perfil não impede ninguém de criar nem de aprovar versões dele. Um acréscimo só de permissão interna num perfil que já é protegido passa só pela gestão de acessos, porque a proteção de dados já aprovou aquela concessão (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
+      'A aprovação da versão depende do que ela acrescenta, e não da classificação do perfil inteiro. Perfil novo só com permissões públicas ou internas, ou acréscimo só dessas permissões, passa por outra pessoa da gestão de acessos. Perfil novo com permissão pessoal, identificadora ou sensível, ou acréscimo de ao menos uma permissão dessas classes, passa por outra pessoa da gestão de acessos e, depois, pelo Representante do controlador, na etapa da proteção de dados. Mudança só de nome, descrição ou documento passa por outra pessoa da gestão de acessos. Versão que só remove permissão não exige aprovação, mas exige motivo e gera aviso. Na versão que remove e acrescenta, a remoção vale na hora para todos e o acréscimo segue a tabela. A remoção cancela a versão que aguardava aprovação. Quem cria a versão, quem a aprova pela gestão de acessos e quem a aprova como Representante do controlador são três pessoas diferentes; ter concessão do perfil não impede ninguém de criar nem de aprovar versões dele. Um acréscimo só de permissão interna num perfil que já é protegido passa só pela gestão de acessos, porque o Representante do controlador já aprovou aquela concessão (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4234,7 +4234,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O acréscimo só de permissão pública ou interna é aprovado só pela gestão de acessos; o acréscimo de permissão pessoal, identificadora ou sensível só vale depois da gestão de acessos e da proteção de dados; a versão só de nome, descrição ou documento passa só pela gestão de acessos; a versão que só remove permissão vale sem aprovação, com motivo e aviso; na versão que remove e acrescenta, a remoção vale na hora e o acréscimo espera a aprovação; a remoção cancela a versão aguardando aprovação; quem criou a versão não a aprova, e as duas aprovações são de pessoas diferentes entre si e de quem criou; quem tem concessão do perfil pode criar e aprovar versões dele.',
+      'O acréscimo só de permissão pública ou interna é aprovado só pela gestão de acessos; o acréscimo de permissão pessoal, identificadora ou sensível só vale depois da gestão de acessos e do Representante do controlador; a versão só de nome, descrição ou documento passa só pela gestão de acessos; a versão que só remove permissão vale sem aprovação, com motivo e aviso; na versão que remove e acrescenta, a remoção vale na hora e o acréscimo espera a aprovação; a remoção cancela a versão aguardando aprovação; quem criou a versão não a aprova, e as duas aprovações são de pessoas diferentes entre si e de quem criou; quem tem concessão do perfil pode criar e aprovar versões dele.',
     verificacao: 'Testes automatizados de API de cada linha da tabela de aprovação e das recusas de segregação (planejado, uniplus-api#2274).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4243,7 +4243,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0250',
     titulo: 'A migração de versão tem janela de 72 horas corridas, sem prorrogação, com lote completo e atômico',
     enunciado:
-      'Quando a versão acrescenta permissão, abre-se a janela de migração, de 72 horas corridas, sem prorrogação. Nela, a versão anterior não recebe atribuição nenhuma, nem para a pessoa que já tem o perfil em outro escopo, a versão nova também não recebe pessoa nova, e os pedidos em andamento são devolvidos. A gestão de acessos decide cada concessão da versão anterior, migrando ou recusando, num lote completo e atômico: o lote decide todas as concessões da versão anterior, menos as retidas, que são decididas por outra pessoa da gestão de acessos (UNI-REQ-0251), e todas as decisões do lote valem juntas ou nenhuma vale. A janela termina antes quando não resta concessão pendente, ou quando a gestão de acessos encerra a versão anterior, com motivo e confirmação, depois de concluída a aprovação da versão nova; no encerramento antecipado, quem não migrou perde o acesso nesse momento, inclusive quem aguarda a decisão da proteção de dados. Dentro da janela, a remoção de permissão cria na hora uma versão reduzida: as concessões já migradas passam para ela, as migrações seguintes também apontam para ela e as demais continuam sujeitas à decisão do lote, no mesmo prazo. Fora da janela, a versão sem acréscimo migra todas as concessões automaticamente. O prazo é conferido a cada decisão de acesso, sem depender de tarefa agendada (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
+      'Quando a versão acrescenta permissão, abre-se a janela de migração, de 72 horas corridas, sem prorrogação. Nela, a versão anterior não recebe atribuição nenhuma, nem para a pessoa que já tem o perfil em outro escopo, a versão nova também não recebe pessoa nova, e os pedidos em andamento são devolvidos. A gestão de acessos decide cada concessão da versão anterior, migrando ou recusando, num lote completo e atômico: o lote decide todas as concessões da versão anterior, menos as retidas, que são decididas por outra pessoa da gestão de acessos (UNI-REQ-0251), e todas as decisões do lote valem juntas ou nenhuma vale. A janela termina antes quando não resta concessão pendente, ou quando a gestão de acessos encerra a versão anterior, com motivo e confirmação, depois de concluída a aprovação da versão nova; no encerramento antecipado, quem não migrou perde o acesso nesse momento, inclusive quem aguarda a decisão do Representante do controlador. Dentro da janela, a remoção de permissão cria na hora uma versão reduzida: as concessões já migradas passam para ela, as migrações seguintes também apontam para ela e as demais continuam sujeitas à decisão do lote, no mesmo prazo. Fora da janela, a versão sem acréscimo migra todas as concessões automaticamente. O prazo é conferido a cada decisão de acesso, sem depender de tarefa agendada (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4283,9 +4283,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0252',
-    titulo: 'Na migração com acréscimo protegido, a proteção de dados decide depois da gestão de acessos, individualmente ou em lote',
+    titulo: 'Na migração com acréscimo protegido, o Representante do controlador decide depois da gestão de acessos, individualmente ou em lote',
     enunciado:
-      'Quando o acréscimo é de permissão pessoal, identificadora ou sensível, a proteção de dados decide cada concessão depois da gestão de acessos, individualmente ou em lote, e não migra quem a gestão de acessos recusou. As duas etapas de uma mesma concessão são de pessoas diferentes. Quando não há dispensa aplicável, as duas decisões são exigidas, a da gestão de acessos e, depois, a da proteção de dados. Na migração resta uma só dispensa, a da pessoa beneficiária que já tem o perfil da proteção de dados, que fica apenas com a decisão da gestão de acessos porque a proteção de dados já aprovou aquela pessoa. A dispensa da designação da proteção de dados vale na governança dos pedidos (UNI-REQ-0184), não na migração, porque os perfis de governança não têm versão nem migração (UNI-REQ-0256) (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
+      'Quando o acréscimo é de permissão pessoal, identificadora ou sensível, o Representante do controlador decide cada concessão depois da gestão de acessos, individualmente ou em lote, e não migra quem a gestão de acessos recusou. As duas etapas de uma mesma concessão são de pessoas diferentes. As duas decisões são exigidas em toda concessão, a da gestão de acessos e, depois, a do Representante do controlador. Na migração não há dispensa: a concessão de quem é Representante do controlador também passa pela etapa da proteção de dados, decidida por outro Representante, porque ninguém decide a própria concessão. A dispensa da designação do primeiro Representante do controlador vale na governança dos pedidos (UNI-REQ-0184), não na migração, porque os perfis de governança não têm versão nem migração (UNI-REQ-0256) (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4297,8 +4297,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Quando não há dispensa aplicável, a concessão com acréscimo protegido só migra depois das duas decisões; a proteção de dados não migra a concessão recusada pela gestão de acessos; a decisão individual e a decisão em lote da proteção de dados são aceitas; as duas etapas feitas pela mesma pessoa são recusadas; a concessão da pessoa beneficiária que já tem o perfil da proteção de dados migra só com a decisão da gestão de acessos; qualquer outra concessão com acréscimo protegido sem a decisão da proteção de dados não migra, e nenhuma outra dispensa é aceita.',
-    verificacao: 'Testes automatizados de API da etapa da proteção de dados, individual e em lote, e das dispensas (planejado, uniplus-api#2274).',
+      'A concessão com acréscimo protegido só migra depois das duas decisões; o Representante do controlador não migra a concessão recusada pela gestão de acessos; a decisão individual e a decisão em lote da proteção de dados são aceitas; as duas etapas feitas pela mesma pessoa são recusadas; a concessão de quem é Representante do controlador só migra com a decisão de outro Representante na etapa da proteção de dados, e a decisão dele sobre a própria concessão é recusada; nenhuma dispensa é aceita na migração.',
+    verificacao: 'Testes automatizados de API da etapa da proteção de dados, individual e em lote, e das dispensas (planejado, uniplus-api#2274); fim da dispensa de quem é Representante do controlador (planejado, uniplus-api#2363).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -4306,7 +4306,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0253',
     titulo: 'Quem não migra perde o acesso, por recusa ou por fim do prazo, e volta por pedido novo',
     enunciado:
-      'A recusa da migração revoga a concessão na hora, e o encerramento antecipado da versão anterior pela gestão de acessos faz o mesmo com toda concessão ainda pendente. A concessão que não concluir todas as etapas exigidas até o fim do prazo também cai, inclusive a que a gestão de acessos já aprovou e que ainda aguarda a proteção de dados, e a pessoa só volta por pedido novo. Os avisos de 48 e de 24 horas antes do fim do prazo reduzem o risco de perder o acesso por falta de decisão (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
+      'A recusa da migração revoga a concessão na hora, e o encerramento antecipado da versão anterior pela gestão de acessos faz o mesmo com toda concessão ainda pendente. A concessão que não concluir todas as etapas exigidas até o fim do prazo também cai, inclusive a que a gestão de acessos já aprovou e que ainda aguarda o Representante do controlador, e a pessoa só volta por pedido novo. Os avisos de 48 e de 24 horas antes do fim do prazo reduzem o risco de perder o acesso por falta de decisão (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4318,7 +4318,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A concessão recusada na migração deixa de valer na próxima operação; a concessão sem todas as etapas concluídas ao fim das 72 horas deixa de valer, inclusive a aprovada pela gestão de acessos que aguarda a proteção de dados; o encerramento antecipado da versão anterior pela gestão de acessos faz deixar de valer, nesse momento, toda concessão ainda pendente, inclusive a aprovada pela gestão de acessos que aguarda a proteção de dados; a pessoa só volta ao perfil por pedido novo; os avisos de 48 e de 24 horas são enviados enquanto houver concessão pendente.',
+      'A concessão recusada na migração deixa de valer na próxima operação; a concessão sem todas as etapas concluídas ao fim das 72 horas deixa de valer, inclusive a aprovada pela gestão de acessos que aguarda o Representante do controlador; o encerramento antecipado da versão anterior pela gestão de acessos faz deixar de valer, nesse momento, toda concessão ainda pendente, inclusive a aprovada pela gestão de acessos que aguarda o Representante do controlador; a pessoa só volta ao perfil por pedido novo; os avisos de 48 e de 24 horas são enviados enquanto houver concessão pendente.',
     verificacao: 'Testes automatizados de API da revogação por recusa, da queda por prazo e dos avisos (planejado, uniplus-api#2274).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4327,7 +4327,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0254',
     titulo: 'O perfil pode ser suspenso, desativado e reativado, com pessoas diferentes para retomar',
     enunciado:
-      'Suspender o perfil bloqueia todas as concessões dele na hora, e retomar exige outra pessoa, que não seja quem suspendeu, e também a proteção de dados quando o perfil é protegido. Desativar o perfil só impede pedidos e versões novas, e as concessões vigentes continuam valendo; reativar exige outra pessoa da gestão de acessos. A suspensão é a contenção de um incidente e a desativação é a saída de uso do perfil (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
+      'Suspender o perfil bloqueia todas as concessões dele na hora, e retomar exige outra pessoa, que não seja quem suspendeu, e também o Representante do controlador quando o perfil é protegido. Desativar o perfil só impede pedidos e versões novas, e as concessões vigentes continuam valendo; reativar exige outra pessoa da gestão de acessos. A suspensão é a contenção de um incidente e a desativação é a saída de uso do perfil (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4339,7 +4339,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A suspensão bloqueia na hora todas as concessões do perfil; a retomada pela mesma pessoa que suspendeu é recusada; a retomada de perfil protegido sem a proteção de dados é recusada; o perfil desativado recusa pedido e versão nova e mantém as concessões vigentes; a reativação por outra pessoa da gestão de acessos é aceita e pela mesma pessoa que desativou é recusada.',
+      'A suspensão bloqueia na hora todas as concessões do perfil; a retomada pela mesma pessoa que suspendeu é recusada; a retomada de perfil protegido sem o Representante do controlador é recusada; o perfil desativado recusa pedido e versão nova e mantém as concessões vigentes; a reativação por outra pessoa da gestão de acessos é aceita e pela mesma pessoa que desativou é recusada.',
     verificacao: 'Testes automatizados de API da suspensão, da desativação e da reativação (planejado, uniplus-api#2274).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4348,7 +4348,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0255',
     titulo: 'A reclassificação de permissão suspende a permissão reclassificada até a liberação',
     enunciado:
-      'Quando uma versão nova do sistema reclassifica uma permissão para cima, ou muda o escopo dela, a permissão reclassificada fica suspensa nas versões em uso dos perfis que a têm, antes de o sistema voltar a atender, de modo que o acesso nunca se amplia sem aprovação. A suspensão é só da permissão reclassificada: o perfil não é suspenso e as demais permissões dele continuam valendo. Os perfis de governança ficam fora da suspensão e só recebem aviso (UNI-REQ-0256). A liberação é perfil por perfil, lendo todas as permissões do perfil e o documento instituidor: a proteção de dados libera quando a classificação sobe, e a gestão de acessos libera quando o escopo muda; se os dois mudam, são duas decisões, de pessoas diferentes. Dentro do perfil, a proteção de dados revisa as concessões individualmente ou em lote, a seu critério. Quem não for liberado continua sem a permissão reclassificada, e a concessão cujo escopo não comporta o novo alcance só volta por pedido novo (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
+      'Quando uma versão nova do sistema reclassifica uma permissão para cima, ou muda o escopo dela, a permissão reclassificada fica suspensa nas versões em uso dos perfis que a têm, antes de o sistema voltar a atender, de modo que o acesso nunca se amplia sem aprovação. A suspensão é só da permissão reclassificada: o perfil não é suspenso e as demais permissões dele continuam valendo. Os perfis de governança ficam fora da suspensão e só recebem aviso (UNI-REQ-0256). A liberação é perfil por perfil, lendo todas as permissões do perfil e o documento instituidor: o Representante do controlador libera quando a classificação sobe, e a gestão de acessos libera quando o escopo muda; se os dois mudam, são duas decisões, de pessoas diferentes. Dentro do perfil, o Representante do controlador revisa as concessões individualmente ou em lote, a seu critério. Quem não for liberado continua sem a permissão reclassificada, e a concessão cujo escopo não comporta o novo alcance só volta por pedido novo (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4360,7 +4360,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A reclassificação para cima ou a mudança de escopo suspende, desde o início do atendimento, a permissão reclassificada nas versões em uso dos perfis que a têm; o perfil não é suspenso e as demais permissões dele continuam valendo; o perfil de governança que a usa só gera aviso e nenhuma permissão dele é suspensa; a liberação por classificação exige a proteção de dados e a por escopo exige a gestão de acessos; quando os dois mudam, as duas liberações são de pessoas diferentes; a proteção de dados libera concessões individualmente ou em lote; a concessão não liberada continua sem a permissão reclassificada; a concessão cujo escopo não comporta o novo alcance não volta sem pedido novo.',
+      'A reclassificação para cima ou a mudança de escopo suspende, desde o início do atendimento, a permissão reclassificada nas versões em uso dos perfis que a têm; o perfil não é suspenso e as demais permissões dele continuam valendo; o perfil de governança que a usa só gera aviso e nenhuma permissão dele é suspensa; a liberação por classificação exige o Representante do controlador e a por escopo exige a gestão de acessos; quando os dois mudam, as duas liberações são de pessoas diferentes; o Representante do controlador libera concessões individualmente ou em lote; a concessão não liberada continua sem a permissão reclassificada; a concessão cujo escopo não comporta o novo alcance não volta sem pedido novo.',
     verificacao: 'Testes automatizados de API da suspensão por reclassificação e das liberações (planejado, uniplus-api#2274).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4369,7 +4369,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0256',
     titulo: 'Os perfis de governança não têm versão, lote nem janela e não se suspendem pela API',
     enunciado:
-      'Os perfis da gestão de acessos e da proteção de dados ficam fora da versão, do lote e da janela de migração, e a composição deles só muda por alteração do próprio sistema. Também não se suspendem nem se desativam pela API, porque suspender a gestão de acessos travaria a própria retomada. A reclassificação de permissão não os suspende e só gera aviso. A contenção nesses perfis é a revogação individual, com o mínimo de duas pessoas ativas na gestão de acessos. Como escapam da aprovação, só reúnem permissões do módulo de autorização, e toda permissão reservada à governança é desse módulo: uma permissão de outro módulo chegaria a todos os gestores e à proteção de dados sem aprovação (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
+      'Os perfis de governança (gestor de acessos, Representante do controlador e Encarregado de dados) ficam fora da versão, do lote e da janela de migração, e a composição deles só muda por alteração do próprio sistema. Também não se suspendem nem se desativam pela API, porque suspender a gestão de acessos travaria a própria retomada. A reclassificação de permissão não os suspende e só gera aviso. A contenção nesses perfis é a revogação individual, com o mínimo de duas pessoas ativas na gestão de acessos. Como escapam da aprovação, só reúnem permissões do módulo de autorização e permissões de outros módulos reservadas à governança, como a de aprovar a proteção do catálogo; a permissão de outro módulo que não é reservada chegaria a todos os titulares desses perfis sem aprovação e é recusada neles, e o perfil comum não recebe permissão reservada (UNI-REQ-0184; ADR-0157 da uniplus-api). Decisão do líder técnico em 08 e 09/11/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4381,8 +4381,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A criação de versão, o lote e a janela para os perfis de governança são recusados; a suspensão e a desativação desses perfis pela API são recusadas; a reclassificação de permissão que os usa gera aviso e não os suspende; a revogação individual continua possível e respeita o mínimo de duas pessoas ativas na gestão de acessos; os perfis de governança só contêm permissões do módulo de autorização, e nenhuma permissão de outro módulo é reservada à governança.',
-    verificacao: 'Testes automatizados de API das recusas para os perfis de governança (planejado, uniplus-api#2274).',
+      'A criação de versão, o lote e a janela para os perfis de governança são recusados; a suspensão e a desativação desses perfis pela API são recusadas; a reclassificação de permissão que os usa gera aviso e não os suspende; a revogação individual continua possível e respeita o mínimo de duas pessoas ativas na gestão de acessos; os perfis de governança aceitam permissões do módulo de autorização e permissões reservadas de outros módulos, e recusam permissão não reservada de outro módulo; o perfil comum recusa permissão reservada.',
+    verificacao: 'Testes automatizados de API das recusas para os perfis de governança (planejado, uniplus-api#2274); composição com permissões reservadas de outros módulos (planejado, uniplus-api#2363 e uniplus-api#2364).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -4423,7 +4423,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A versão aguardando aprovação expira 15 dias corridos depois de criada, e a passagem da gestão de acessos para a proteção de dados não reinicia o prazo; a tentativa de aprovar ou recusar a versão vencida é recusada e a versão fica expirada, mesmo que a rotina periódica ainda não tenha rodado; a versão expirada não aparece nas filas; depois da expiração o perfil aceita uma versão nova; a expiração não envia aviso; a versão que remove permissão não tem prazo.',
+      'A versão aguardando aprovação expira 15 dias corridos depois de criada, e a passagem da gestão de acessos para o Representante do controlador não reinicia o prazo; a tentativa de aprovar ou recusar a versão vencida é recusada e a versão fica expirada, mesmo que a rotina periódica ainda não tenha rodado; a versão expirada não aparece nas filas; depois da expiração o perfil aceita uma versão nova; a expiração não envia aviso; a versão que remove permissão não tem prazo.',
     verificacao: 'Testes automatizados de API do prazo exato, da expiração conferida na operação, da fila e da rotina periódica (planejado, uniplus-api#2278).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4453,7 +4453,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0260',
     titulo: 'A versão que acrescenta permissão a perfil com concessão só chega a quem já tem o perfil por migração, numa janela de 72 horas',
     enunciado:
-      'A versão do perfil que acrescenta permissão não amplia o acesso de ninguém por si: a concessão continua presa à versão anterior até ser migrada, uma a uma, para a versão nova (UNI-REQ-0292). Vale para o acréscimo de permissão pública ou interna e também para o de permissão pessoal, identificadora ou sensível, que depois da gestão de acessos passa também pela proteção de dados (UNI-REQ-0249 e UNI-REQ-0297). A versão que acrescenta permissão a perfil que tem concessão não revogada é criada e aprovada normalmente, e a aprovação final abre a janela de migração; a concessão revogada não conta. Perfil novo, perfil sem concessão e versão só de nome, descrição ou documento seguem a aprovação normal, sem janela (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A versão do perfil que acrescenta permissão não amplia o acesso de ninguém por si: a concessão continua presa à versão anterior até ser migrada, uma a uma, para a versão nova (UNI-REQ-0292). Vale para o acréscimo de permissão pública ou interna e também para o de permissão pessoal, identificadora ou sensível, que depois da gestão de acessos passa também pelo Representante do controlador (UNI-REQ-0249 e UNI-REQ-0297). A versão que acrescenta permissão a perfil que tem concessão não revogada é criada e aprovada normalmente, e a aprovação final abre a janela de migração; a concessão revogada não conta. Perfil novo, perfil sem concessão e versão só de nome, descrição ou documento seguem a aprovação normal, sem janela (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4474,7 +4474,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0261',
     titulo: 'Cada etapa da aprovação da versão é decidida uma vez, na ordem, e a mudança de classe descarta as decisões dadas',
     enunciado:
-      'A versão do perfil passa pelas etapas na ordem: primeiro a gestão de acessos e, quando a versão acrescenta permissão pessoal, identificadora ou sensível, depois a proteção de dados. Só se decide a etapa que a versão aguarda no momento, e cada etapa recebe uma única decisão, de aprovação ou de recusa; a segunda tentativa na mesma etapa é recusada. A recusa exige motivo de até 500 caracteres, e a recusa de qualquer etapa encerra a versão. Se o catálogo de permissões mudar e a classe do acréscimo com ele, as decisões já dadas são descartadas, quem as deu é avisado e a decisão é refeita na rodada nova (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A versão do perfil passa pelas etapas na ordem: primeiro a gestão de acessos e, quando a versão acrescenta permissão pessoal, identificadora ou sensível, depois o Representante do controlador. Só se decide a etapa que a versão aguarda no momento, e cada etapa recebe uma única decisão, de aprovação ou de recusa; a segunda tentativa na mesma etapa é recusada. A recusa exige motivo de até 500 caracteres, e a recusa de qualquer etapa encerra a versão. Se o catálogo de permissões mudar e a classe do acréscimo com ele, as decisões já dadas são descartadas, quem as deu é avisado e a decisão é refeita na rodada nova (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4495,7 +4495,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0262',
     titulo: 'Cada etapa da aprovação da versão exige a permissão própria dela',
     enunciado:
-      'Aprovar ou recusar a versão do perfil exige a permissão da etapa: a de aprovação pela gestão de acessos ou a de aprovação pela proteção de dados, ambas reservadas aos perfis de governança. Quem tem só a permissão da outra etapa é informado de que a etapa não é a sua. As mesmas permissões dão acesso à fila de versões da etapa e ao documento da versão; o cancelamento de uma versão é de quem a criou ou da gestão de acessos, e a terceira pessoa sem nenhuma dessas condições é recusada (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'Aprovar ou recusar a versão do perfil exige a permissão da etapa: a de aprovação pela gestão de acessos ou a de aprovação na etapa da proteção de dados, ambas reservadas aos perfis de governança. Quem tem só a permissão da outra etapa é informado de que a etapa não é a sua. As mesmas permissões dão acesso à fila de versões da etapa e ao documento da versão; o cancelamento de uma versão é de quem a criou ou da gestão de acessos, e a terceira pessoa sem nenhuma dessas condições é recusada (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4600,7 +4600,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0296',
     titulo: 'Ninguém decide a própria concessão na migração: a concessão de quem envia o lote fica retida para outra pessoa da gestão de acessos',
     enunciado:
-      'Quem da gestão de acessos envia o lote decide todas as concessões da versão anterior, inclusive as de outras pessoas da gestão de acessos que têm o perfil, menos as próprias. Ficam retidas todas as concessões em que quem envia é o beneficiário, em qualquer unidade. A concessão retida nasce no envio do lote e só então pode ser decidida; antes do envio nenhuma decisão sobre ela é aceita. Quem decide a concessão retida é outra pessoa da gestão de acessos, tenha ela o perfil ou não, inclusive uma recém-concedida; essa pessoa decide só a retida e não altera o que já foi decidido. Nunca se decide a própria concessão. A condição de pertencer à gestão de acessos e a de não ser o beneficiário são conferidas no momento de cada decisão. No acréscimo protegido, a concessão retida passa depois pela proteção de dados. Sem decisão de outra pessoa até o fim do prazo, a retida é revogada (UNI-REQ-0300). Duas pessoas da gestão de acessos com o mesmo perfil podem migrar uma a concessão da outra, e a trilha registra quando quem decide tem concessão do perfil (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'Quem da gestão de acessos envia o lote decide todas as concessões da versão anterior, inclusive as de outras pessoas da gestão de acessos que têm o perfil, menos as próprias. Ficam retidas todas as concessões em que quem envia é o beneficiário, em qualquer unidade. A concessão retida nasce no envio do lote e só então pode ser decidida; antes do envio nenhuma decisão sobre ela é aceita. Quem decide a concessão retida é outra pessoa da gestão de acessos, tenha ela o perfil ou não, inclusive uma recém-concedida; essa pessoa decide só a retida e não altera o que já foi decidido. Nunca se decide a própria concessão. A condição de pertencer à gestão de acessos e a de não ser o beneficiário são conferidas no momento de cada decisão. No acréscimo protegido, a concessão retida passa depois pelo Representante do controlador. Sem decisão de outra pessoa até o fim do prazo, a retida é revogada (UNI-REQ-0300). Duas pessoas da gestão de acessos com o mesmo perfil podem migrar uma a concessão da outra, e a trilha registra quando quem decide tem concessão do perfil (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4612,16 +4612,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'As concessões em que quem envia é o beneficiário ficam retidas em todas as unidades; a decisão da retida antes do envio do lote é recusada; a tentativa de decidir a própria concessão é recusada; outra pessoa da gestão de acessos, com ou sem o perfil, decide a retida sem alterar as demais decisões; a retida de acréscimo protegido segue para a proteção de dados; a condição de quem decide é conferida em cada decisão; cada decisão registra se quem decide tem concessão do perfil.',
+      'As concessões em que quem envia é o beneficiário ficam retidas em todas as unidades; a decisão da retida antes do envio do lote é recusada; a tentativa de decidir a própria concessão é recusada; outra pessoa da gestão de acessos, com ou sem o perfil, decide a retida sem alterar as demais decisões; a retida de acréscimo protegido segue para o Representante do controlador; a condição de quem decide é conferida em cada decisão; cada decisão registra se quem decide tem concessão do perfil.',
     verificacao: 'Testes automatizados de API da retenção, da decisão da retida, da recusa da própria concessão e da conferência no momento da decisão (planejado, uniplus-api#2279).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
   {
     requisito_id: 'UNI-REQ-0297',
-    titulo: 'No acréscimo protegido, a migração aguarda a proteção de dados, que decide por concessão ou em lote e não altera a decisão da gestão de acessos',
+    titulo: 'No acréscimo protegido, a migração aguarda o Representante do controlador, que decide por concessão ou em lote e não altera a decisão da gestão de acessos',
     enunciado:
-      'Quando a versão acrescenta permissão pessoal, identificadora ou sensível, as concessões que a gestão de acessos migrou ficam aguardando a proteção de dados, que decide cada uma, individualmente ou em lote, aprovando ou recusando, inclusive parte delas. A proteção de dados não migra quem a gestão de acessos recusou nem altera as decisões dela. A recusa da proteção de dados revoga na hora, com confirmação (UNI-REQ-0295). As duas etapas de uma mesma concessão são decididas por pessoas diferentes: a segunda decisão da mesma pessoa é recusada. A pessoa que tem o perfil de proteção de dados migra só pela gestão de acessos, e a concessão de governança é conferida no instante da decisão. Cada decisão de cada etapa leva chave de idempotência, e a mesma chave devolve o resultado gravado, enquanto decisão diferente ou operação concorrente devolve conflito (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'Quando a versão acrescenta permissão pessoal, identificadora ou sensível, as concessões que a gestão de acessos migrou ficam aguardando o Representante do controlador, que decide cada uma, individualmente ou em lote, aprovando ou recusando, inclusive parte delas. O Representante do controlador não migra quem a gestão de acessos recusou nem altera as decisões dela. A recusa da proteção de dados revoga na hora, com confirmação (UNI-REQ-0295). As duas etapas de uma mesma concessão são decididas por pessoas diferentes: a segunda decisão da mesma pessoa é recusada. A concessão de quem é Representante do controlador também aguarda a etapa da proteção de dados, decidida por outro Representante, e a condição de Representante de quem decide e da pessoa beneficiária é conferida no instante da decisão. Cada decisão de cada etapa leva chave de idempotência, e a mesma chave devolve o resultado gravado, enquanto decisão diferente ou operação concorrente devolve conflito (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4633,8 +4633,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'No acréscimo protegido a migração aprovada pela gestão de acessos aguarda a proteção de dados e só vale depois da aprovação; a proteção de dados decide em lote ou uma a uma e pode recusar parte; a concessão recusada pela gestão de acessos não é migrada pela proteção de dados; a mesma pessoa não decide as duas etapas; a pessoa com o perfil de proteção de dados migra só pela gestão de acessos; a mesma chave devolve o resultado gravado e decisão diferente ou concorrente devolve conflito.',
-    verificacao: 'Testes automatizados de API da etapa da proteção de dados, da segregação entre as etapas, da dispensa e da idempotência (planejado, uniplus-api#2279).',
+      'No acréscimo protegido a migração aprovada pela gestão de acessos aguarda o Representante do controlador e só vale depois da aprovação; o Representante do controlador decide em lote ou uma a uma e pode recusar parte; a concessão recusada pela gestão de acessos não é migrada pelo Representante do controlador; a mesma pessoa não decide as duas etapas; a concessão de quem é Representante do controlador só migra com a decisão de outro Representante; a mesma chave devolve o resultado gravado e decisão diferente ou concorrente devolve conflito.',
+    verificacao: 'Testes automatizados de API da etapa da proteção de dados, da segregação entre as etapas, da concessão de Representante e da idempotência (planejado, uniplus-api#2279 e uniplus-api#2363).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -4684,7 +4684,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0300',
     titulo: 'Ao fim do prazo, quem não foi migrado perde o acesso, e a revogação não depende de tarefa agendada para valer',
     enunciado:
-      'Terminadas as 72 horas, toda concessão que não concluiu as etapas exigidas é revogada com o motivo de não ter sido migrada para a versão nova. Cai também a concessão que a gestão de acessos aprovou e ainda aguarda a proteção de dados, e a retida que ninguém decidiu. A pessoa volta a ter o perfil só por pedido novo. A tarefa agendada apenas materializa essas revogações e registra os eventos, de modo único e repetível sem efeito duplicado; o acesso, porém, deixa de valer no instante do fim do prazo (UNI-REQ-0301). Decisão recebida depois do prazo, inclusive o envio do lote, é recusada. Os avisos de 48 e 24 horas antes do fim reduzem o risco de perda de acesso (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'Terminadas as 72 horas, toda concessão que não concluiu as etapas exigidas é revogada com o motivo de não ter sido migrada para a versão nova. Cai também a concessão que a gestão de acessos aprovou e ainda aguarda o Representante do controlador, e a retida que ninguém decidiu. A pessoa volta a ter o perfil só por pedido novo. A tarefa agendada apenas materializa essas revogações e registra os eventos, de modo único e repetível sem efeito duplicado; o acesso, porém, deixa de valer no instante do fim do prazo (UNI-REQ-0301). Decisão recebida depois do prazo, inclusive o envio do lote, é recusada. Os avisos de 48 e 24 horas antes do fim reduzem o risco de perda de acesso (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4696,7 +4696,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Ao fim do prazo, a concessão não decidida, a retida sem decisão e a aprovada que aguarda a proteção de dados são revogadas com o motivo de não ter sido migrada para a versão nova; a tarefa agendada roda em instância única e repetida não duplica efeito nem evento; a decisão e o envio do lote depois do prazo são recusados; a pessoa volta pelo pedido de acesso.',
+      'Ao fim do prazo, a concessão não decidida, a retida sem decisão e a aprovada que aguarda o Representante do controlador são revogadas com o motivo de não ter sido migrada para a versão nova; a tarefa agendada roda em instância única e repetida não duplica efeito nem evento; a decisão e o envio do lote depois do prazo são recusados; a pessoa volta pelo pedido de acesso.',
     verificacao: 'Testes automatizados de API do fim do prazo, da revogação pela tarefa agendada, da instância única e da idempotência (planejado, uniplus-api#2279).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4747,7 +4747,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0303',
     titulo: 'Desativar o perfil só impede pedidos e versões novas, e as concessões continuam valendo',
     enunciado:
-      'A gestão de acessos desativa um perfil comum informando o motivo. O perfil desativado não recebe pedido de acesso novo nem proposta de versão nova, mas as concessões que ele já tem continuam valendo e não são revogadas: desativar não é conter o acesso (UNI-REQ-0305). Desativar perfil que já está desativado é aceito sem efeito. Os perfis de gestão de acessos e de proteção de dados são do sistema e não se desativam (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A gestão de acessos desativa um perfil comum informando o motivo. O perfil desativado não recebe pedido de acesso novo nem proposta de versão nova, mas as concessões que ele já tem continuam valendo e não são revogadas: desativar não é conter o acesso (UNI-REQ-0305). Desativar perfil que já está desativado é aceito sem efeito. Os perfis de governança são do sistema e não se desativam (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4759,7 +4759,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A desativação sem motivo, ou com mais de 500 caracteres, é recusada; o perfil desativado recusa pedido de acesso e proposta de versão; as concessões do perfil desativado continuam valendo na decisão de acesso; desativar perfil já desativado é aceito sem efeito; a desativação do perfil de gestão de acessos ou de proteção de dados é recusada; a requisição repetida com a mesma chave devolve o resultado gravado; quem não tem a permissão de manter perfis é recusado.',
+      'A desativação sem motivo, ou com mais de 500 caracteres, é recusada; o perfil desativado recusa pedido de acesso e proposta de versão; as concessões do perfil desativado continuam valendo na decisão de acesso; desativar perfil já desativado é aceito sem efeito; a desativação do perfil de governança é recusada; a requisição repetida com a mesma chave devolve o resultado gravado; quem não tem a permissão de manter perfis é recusado.',
     verificacao: 'Testes automatizados de domínio e de API da desativação, da recusa de pedido e de versão, da permanência do acesso e da idempotência (planejado, uniplus-api#2280).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4780,7 +4780,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A reativação por quem desativou é recusada; a reativação por outra pessoa da gestão de acessos, com motivo, é aceita; a reativação sem motivo, ou com mais de 500 caracteres, é recusada; reativar perfil que já está ativo é aceito sem efeito; a reativação do perfil de gestão de acessos ou de proteção de dados é recusada; reativar não reabre janela de migração.',
+      'A reativação por quem desativou é recusada; a reativação por outra pessoa da gestão de acessos, com motivo, é aceita; a reativação sem motivo, ou com mais de 500 caracteres, é recusada; reativar perfil que já está ativo é aceito sem efeito; a reativação do perfil de governança é recusada; reativar não reabre janela de migração.',
     verificacao: 'Testes automatizados de domínio e de API da reativação, da regra de outra pessoa, da recusa nos perfis de governança e da idempotência (planejado, uniplus-api#2280).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4789,7 +4789,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0305',
     titulo: 'Suspender o perfil bloqueia, na requisição seguinte, o acesso de todas as concessões dele, sem revogá-las',
     enunciado:
-      'A gestão de acessos ou a proteção de dados suspendem um perfil comum, informando o motivo. Enquanto durar a suspensão, nenhuma concessão do perfil vale na decisão de acesso: o bloqueio começa na requisição seguinte à suspensão e alcança as concessões de qualquer versão, inclusive as já migradas e as que aguardam migração, e também a concessão criada durante a suspensão. Nenhuma concessão é revogada: o acesso volta com a retomada (UNI-REQ-0309). O perfil suspenso não pode ser suspenso de novo, para que a segunda pessoa saiba que o motivo dela não foi gravado. Os perfis de gestão de acessos e de proteção de dados não se suspendem (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A gestão de acessos ou o Representante do controlador suspendem um perfil comum, informando o motivo. Enquanto durar a suspensão, nenhuma concessão do perfil vale na decisão de acesso: o bloqueio começa na requisição seguinte à suspensão e alcança as concessões de qualquer versão, inclusive as já migradas e as que aguardam migração, e também a concessão criada durante a suspensão. Nenhuma concessão é revogada: o acesso volta com a retomada (UNI-REQ-0309). O perfil suspenso não pode ser suspenso de novo, para que a segunda pessoa saiba que o motivo dela não foi gravado. Os perfis de governança não se suspendem (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4801,7 +4801,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A suspensão sem motivo, ou com mais de 500 caracteres, é recusada; quem não tem a permissão de manter perfis nem a de aprovação pela proteção de dados é recusado; na requisição seguinte à suspensão, nenhuma concessão do perfil dá acesso, de qualquer versão, inclusive as migradas e as que aguardam migração; a concessão criada durante a suspensão nasce bloqueada; nenhuma concessão fica revogada por causa da suspensão; suspender perfil já suspenso é recusado; a suspensão do perfil de gestão de acessos ou de proteção de dados é recusada; a requisição repetida com a mesma chave devolve o resultado gravado.',
+      'A suspensão sem motivo, ou com mais de 500 caracteres, é recusada; quem não tem a permissão de manter perfis nem a de aprovação na etapa da proteção de dados é recusado; na requisição seguinte à suspensão, nenhuma concessão do perfil dá acesso, de qualquer versão, inclusive as migradas e as que aguardam migração; a concessão criada durante a suspensão nasce bloqueada; nenhuma concessão fica revogada por causa da suspensão; suspender perfil já suspenso é recusado; a suspensão do perfil de governança é recusada; a requisição repetida com a mesma chave devolve o resultado gravado.',
     verificacao: 'Testes automatizados de domínio, de API e de concorrência da suspensão, do bloqueio na decisão de acesso e da concessão criada durante a suspensão (planejado, uniplus-api#2280).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4850,9 +4850,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0308',
-    titulo: 'A suspensão do perfil avisa por e-mail os outros gestores e a proteção de dados, sem dado pessoal',
+    titulo: 'A suspensão do perfil avisa por e-mail os outros gestores e os Representantes do controlador, sem dado pessoal',
     enunciado:
-      'A suspensão avisa por e-mail quem tem a permissão de manter perfis e quem tem a de aprovação pela proteção de dados, menos a pessoa que suspendeu. O e-mail traz o perfil, o tipo do evento e o link, sem o motivo, sem nome de pessoa e sem texto livre. O aviso é gravado junto da suspensão, de modo que suspensão sem aviso, ou aviso sem suspensão, não acontece, e cada destinatário recebe um único aviso por suspensão (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A suspensão avisa por e-mail quem tem a permissão de manter perfis e quem tem a de aprovação na etapa da proteção de dados, menos a pessoa que suspendeu. O e-mail traz o perfil, o tipo do evento e o link, sem o motivo, sem nome de pessoa e sem texto livre. O aviso é gravado junto da suspensão, de modo que suspensão sem aviso, ou aviso sem suspensão, não acontece, e cada destinatário recebe um único aviso por suspensão (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4885,14 +4885,14 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A decisão de quem suspendeu é recusada; a decisão sem motivo, ou com mais de 500 caracteres, é recusada; a decisão de etapa por quem não tem a permissão dela é recusada; perfil não suspenso recusa a decisão de retomada; a etapa já decidida recusa nova decisão; a mesma pessoa não decide as duas etapas; perfil não protegido volta com a decisão da gestão de acessos; a retomada concluída devolve o acesso das concessões; duas decisões simultâneas da mesma etapa resultam em uma aceita e outra recusada; a retomada dos perfis de gestão de acessos e de proteção de dados é recusada.',
+      'A decisão de quem suspendeu é recusada; a decisão sem motivo, ou com mais de 500 caracteres, é recusada; a decisão de etapa por quem não tem a permissão dela é recusada; perfil não suspenso recusa a decisão de retomada; a etapa já decidida recusa nova decisão; a mesma pessoa não decide as duas etapas; perfil não protegido volta com a decisão da gestão de acessos; a retomada concluída devolve o acesso das concessões; duas decisões simultâneas da mesma etapa resultam em uma aceita e outra recusada; a retomada dos perfis de governança é recusada.',
     verificacao: 'Testes automatizados de domínio, de API e de concorrência da retomada por etapa, das recusas e da devolução do acesso (planejado, uniplus-api#2280).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
   {
     requisito_id: 'UNI-REQ-0310',
-    titulo: 'Se o perfil é protegido ao concluir a retomada, a proteção de dados também decide',
+    titulo: 'Se o perfil é protegido ao concluir a retomada, o Representante do controlador também decide',
     enunciado:
       'Perfil protegido é o que tem, na composição em vigor, alguma permissão pessoal, identificadora ou sensível pelo catálogo atual. A etapa da proteção de dados é exigida quando o perfil é protegido no instante em que a retomada se conclui, e esse instante é reavaliado a cada decisão de etapa, a cada troca da versão em vigor durante a suspensão e a cada reclassificação de permissão do catálogo. Assim a retomada nunca fica sem caminho: se a gestão de acessos já decidiu e a permissão protegida sai do perfil, a suspensão termina. A decisão da etapa da proteção de dados em perfil não protegido é recusada (UNI-REQ-0309; UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
@@ -4906,7 +4906,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Em perfil não protegido, a decisão da gestão de acessos encerra a suspensão; em perfil protegido, a suspensão só termina depois das duas etapas, em qualquer ordem; a decisão da proteção de dados em perfil não protegido é recusada; se a gestão de acessos decidiu e a versão em vigor deixa de ter permissão protegida, a suspensão termina; se o perfil se torna protegido antes de qualquer decisão, a suspensão continua aberta até a decisão da proteção de dados; a reclassificação que tira a proteção, com a gestão de acessos já decidida, encerra a suspensão.',
+      'Em perfil não protegido, a decisão da gestão de acessos encerra a suspensão; em perfil protegido, a suspensão só termina depois das duas etapas, em qualquer ordem; a decisão do Representante do controlador em perfil não protegido é recusada; se a gestão de acessos decidiu e a versão em vigor deixa de ter permissão protegida, a suspensão termina; se o perfil se torna protegido antes de qualquer decisão, a suspensão continua aberta até a decisão do Representante do controlador; a reclassificação que tira a proteção, com a gestão de acessos já decidida, encerra a suspensão.',
     verificacao: 'Testes automatizados de domínio e de API das etapas exigidas, da troca de versão e da reclassificação durante a suspensão, e de concorrência entre a troca de versão e a decisão (planejado, uniplus-api#2280).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -4915,7 +4915,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0311',
     titulo: 'Suspensão, decisões de retomada, desativação e reativação ficam numa trilha que não se altera',
     enunciado:
-      'Cada suspensão, cada decisão de etapa da retomada, cada retomada concluída, cada desativação e cada reativação grava um registro que não se altera nem se apaga, na mesma gravação da mudança, com o instante, a pessoa e o motivo quando houver decisão humana. O registro da decisão de etapa informa quem decidiu, a etapa, o motivo, se o perfil era protegido e se quem decidiu tinha concessão do perfil. O registro da retomada concluída informa se veio de uma decisão, da troca de versão ou da reclassificação. A trilha tem ordem própria e estável, também quando os registros têm o mesmo instante, e continua visível depois que a suspensão e a desativação terminam. Quem tem a permissão de manter perfis ou a de aprovação pela proteção de dados consulta a trilha (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'Cada suspensão, cada decisão de etapa da retomada, cada retomada concluída, cada desativação e cada reativação grava um registro que não se altera nem se apaga, na mesma gravação da mudança, com o instante, a pessoa e o motivo quando houver decisão humana. O registro da decisão de etapa informa quem decidiu, a etapa, o motivo, se o perfil era protegido e se quem decidiu tinha concessão do perfil. O registro da retomada concluída informa se veio de uma decisão, da troca de versão ou da reclassificação. A trilha tem ordem própria e estável, também quando os registros têm o mesmo instante, e continua visível depois que a suspensão e a desativação terminam. Quem tem a permissão de manter perfis ou a de aprovação na etapa da proteção de dados consulta a trilha (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -4936,7 +4936,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0312',
     titulo: 'A leitura do perfil mostra que ele está suspenso ou desativado, sem motivo nem pessoa',
     enunciado:
-      'O detalhe e a listagem do perfil informam desde quando ele está suspenso, quem suspendeu em termos de papel (gestão de acessos ou proteção de dados), quais etapas da retomada são exigidas agora e quais já foram decididas, e desde quando está desativado. A leitura comum do perfil não traz o motivo nem a identificação de pessoa, que ficam na trilha (UNI-REQ-0311). As etapas exigidas são calculadas pelo catálogo atual no momento da leitura (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'O detalhe e a listagem do perfil informam desde quando ele está suspenso, quem suspendeu em termos de papel (gestor de acessos ou Representante do controlador), quais etapas da retomada são exigidas agora e quais já foram decididas, e desde quando está desativado. A leitura comum do perfil não traz o motivo nem a identificação de pessoa, que ficam na trilha (UNI-REQ-0311). As etapas exigidas são calculadas pelo catálogo atual no momento da leitura (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5039,9 +5039,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0317',
-    titulo: 'A liberação exige a proteção de dados quando a classe sobe e a gestão de acessos quando o escopo muda, por pessoas diferentes',
+    titulo: 'A liberação exige o Representante do controlador quando a classe sobe e a gestão de acessos quando o escopo muda, por pessoas diferentes',
     enunciado:
-      'A etapa exigida depende do que mudou para cada concessão: a subida de classe exige a decisão da proteção de dados, a mudança de escopo exige a decisão da gestão de acessos, e as duas mudanças exigem as duas decisões, em qualquer ordem. Quem decide não é a pessoa beneficiária da concessão, e a mesma pessoa não decide as duas etapas da mesma concessão. A permissão só volta quando todas as etapas exigidas estão liberadas; com uma etapa só liberada, continua suspensa. Cada etapa recebe uma única decisão por concessão (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A etapa exigida depende do que mudou para cada concessão: a subida de classe exige a decisão do Representante do controlador, a mudança de escopo exige a decisão da gestão de acessos, e as duas mudanças exigem as duas decisões, em qualquer ordem. Quem decide não é a pessoa beneficiária da concessão, e a mesma pessoa não decide as duas etapas da mesma concessão. A permissão só volta quando todas as etapas exigidas estão liberadas; com uma etapa só liberada, continua suspensa. Cada etapa recebe uma única decisão por concessão (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5053,7 +5053,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A subida de classe exige só a proteção de dados; a mudança de escopo exige só a gestão de acessos; subida e escopo juntos exigem as duas, em qualquer ordem, e com uma só liberada a permissão continua suspensa; a decisão de etapa não exigida é recusada; a decisão sobre concessão que não está suspensa por essa reclassificação é recusada; a decisão da própria concessão é recusada; a mesma pessoa decidindo a segunda etapa da mesma concessão é recusada; a etapa já decidida recusa nova decisão; quem não tem a permissão da etapa é recusado.',
+      'A subida de classe exige só o Representante do controlador; a mudança de escopo exige só a gestão de acessos; subida e escopo juntos exigem as duas, em qualquer ordem, e com uma só liberada a permissão continua suspensa; a decisão de etapa não exigida é recusada; a decisão sobre concessão que não está suspensa por essa reclassificação é recusada; a decisão da própria concessão é recusada; a mesma pessoa decidindo a segunda etapa da mesma concessão é recusada; a etapa já decidida recusa nova decisão; quem não tem a permissão da etapa é recusado.',
     verificacao: 'Testes automatizados de domínio, de API e de concorrência das etapas e da separação de pessoas (planejado, uniplus-api#2281).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -5146,7 +5146,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0322',
     titulo: 'Os perfis de governança nunca são suspensos pela reclassificação: a divergência é registrada e avisada',
     enunciado:
-      'A reclassificação não suspende os perfis de gestão de acessos e de proteção de dados, para que a própria retomada nunca fique sem quem decida. Quando uma permissão que esses perfis têm é reclassificada, ou quando a composição deles não bate com a esperada, a divergência fica registrada e as pessoas da gestão de acessos e da proteção de dados são avisadas. Quem tem a permissão de manter perfis ou a de aprovação pela proteção de dados consulta a lista de divergências, da mais recente para a mais antiga (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A reclassificação não suspende os perfis de governança (gestor de acessos, Representante do controlador e Encarregado de dados), para que a própria retomada nunca fique sem quem decida. Quando uma permissão que esses perfis têm é reclassificada, ou quando a composição deles não bate com a esperada, a divergência fica registrada e os gestores de acessos e os Representantes do controlador são avisados. Quem tem a permissão de manter perfis ou a de aprovação na etapa da proteção de dados consulta a lista de divergências, da mais recente para a mais antiga (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5167,7 +5167,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0323',
     titulo: 'O aviso da reclassificação vai por e-mail a quem decide a etapa, sem dado pessoal e sem texto livre',
     enunciado:
-      'A subida de classe avisa quem tem a permissão de aprovação pela proteção de dados; a mudança de escopo, e a divergência da governança, avisam essa pessoa e quem tem a permissão de manter perfis; a descida não avisa. O e-mail traz o perfil, o nome da permissão, o que mudou e o link, sem nome de pessoa e sem texto livre, e cada reclassificação ou divergência gera um único aviso. Sem destinatário, o fato fica só no registro do sistema (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A subida de classe avisa quem tem a permissão de aprovação na etapa da proteção de dados; a mudança de escopo, e a divergência da governança, avisam essa pessoa e quem tem a permissão de manter perfis; a descida não avisa. O e-mail traz o perfil, o nome da permissão, o que mudou e o link, sem nome de pessoa e sem texto livre, e cada reclassificação ou divergência gera um único aviso. Sem destinatário, o fato fica só no registro do sistema (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5179,7 +5179,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A subida avisa a proteção de dados; o escopo avisa as duas permissões; a divergência avisa as duas; a descida não avisa; o e-mail não traz dado pessoal nem texto livre; repetir a rotina de envio não duplica o aviso.',
+      'A subida avisa o Representante do controlador; o escopo avisa as duas permissões; a divergência avisa as duas; a descida não avisa; o e-mail não traz dado pessoal nem texto livre; repetir a rotina de envio não duplica o aviso.',
     verificacao: 'Testes automatizados de integração dos destinatários, da deduplicação e do conteúdo dos avisos (planejado, uniplus-api#2281).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -5272,7 +5272,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0358',
     titulo: 'Quem decide a migração é avisado quando precisa agir e a tempo',
     enunciado:
-      'Quem pode decidir uma etapa da versão do perfil é avisado quando precisa agir. A pessoa que aprova a etapa é avisada quando a versão pendente fica apta a ela, depois de conferidos o estado, o prazo, o documento e o ciclo. A gestão de acessos e a proteção de dados são avisadas quando a versão é aprovada com a janela aberta, com o número de concessões e o prazo, quando as migrações passam a aguardar a proteção de dados, quando um lote é enviado com recusas e quando a versão é encerrada. Faltando 48 e 24 horas para o fim da janela, todos os gestores são avisados, e a proteção de dados também quando a versão tem essa etapa: quem tem o perfil recebe a advertência de que perderá o acesso em tantas horas, e quem pode decidir recebe o aviso de que precisa agir. A concessão retida à espera de outro gestor avisa todos os gestores; a pessoa dona recebe a advertência de que perderá o acesso ao perfil, e os demais, que precisam agir (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'Quem pode decidir uma etapa da versão do perfil é avisado quando precisa agir. A pessoa que aprova a etapa é avisada quando a versão pendente fica apta a ela, depois de conferidos o estado, o prazo, o documento e o ciclo. Os gestores de acessos e os Representantes do controlador são avisados quando a versão é aprovada com a janela aberta, com o número de concessões e o prazo, quando as migrações passam a aguardar o Representante do controlador, quando um lote é enviado com recusas e quando a versão é encerrada. Faltando 48 e 24 horas para o fim da janela, todos os gestores são avisados, e os Representantes do controlador também quando a versão tem essa etapa: quem tem o perfil recebe a advertência de que perderá o acesso em tantas horas, e quem pode decidir recebe o aviso de que precisa agir. A concessão retida à espera de outro gestor avisa todos os gestores; a pessoa dona recebe a advertência de que perderá o acesso ao perfil, e os demais, que precisam agir (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5284,16 +5284,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A versão pendente que fica apta avisa quem aprova a etapa; a versão aprovada com a janela aberta avisa gestores e proteção de dados com o número de concessões e o prazo; o aviso de 48 e de 24 horas vai a todos os gestores, com a advertência para quem tem o perfil e o aviso de ação para quem decide; a concessão retida avisa o dono e os outros gestores com mensagens diferentes.',
+      'A versão pendente que fica apta avisa quem aprova a etapa; a versão aprovada com a janela aberta avisa gestores e Representantes do controlador com o número de concessões e o prazo; o aviso de 48 e de 24 horas vai a todos os gestores, com a advertência para quem tem o perfil e o aviso de ação para quem decide; a concessão retida avisa o dono e os outros gestores com mensagens diferentes.',
     verificacao: 'Testes automatizados de integração e do Host, com o relógio controlado e a entrega conferida no servidor de e-mail de teste (planejado, uniplus-api#2282).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
   {
     requisito_id: 'UNI-REQ-0359',
-    titulo: 'Remoção, suspensão e contenção avisam os outros gestores e a proteção de dados',
+    titulo: 'Remoção, suspensão e contenção avisam os outros gestores e os Representantes do controlador',
     enunciado:
-      'A remoção de permissão do perfil, a suspensão do perfil e o cancelamento por contenção avisam por e-mail os outros gestores de acessos e a proteção de dados. Quem praticou o ato não recebe o aviso do que fez. O aviso diz o que aconteceu e o perfil afetado, sem o motivo informado pela pessoa. A reclassificação de permissão segue a regra própria de aviso, que depende do tipo de mudança (UNI-REQ-0323) (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'A remoção de permissão do perfil, a suspensão do perfil e o cancelamento por contenção avisam por e-mail os outros gestores de acessos e os Representantes do controlador. Quem praticou o ato não recebe o aviso do que fez. O aviso diz o que aconteceu e o perfil afetado, sem o motivo informado pela pessoa. A reclassificação de permissão segue a regra própria de aviso, que depende do tipo de mudança (UNI-REQ-0323) (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5305,7 +5305,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Cada um dos três atos avisa os outros gestores e a proteção de dados, e não avisa quem o praticou; o aviso não traz o motivo.',
+      'Cada um dos três atos avisa os outros gestores e os Representantes do controlador, e não avisa quem o praticou; o aviso não traz o motivo.',
     verificacao: 'Testes automatizados de integração dos avisos de cada ato (planejado, uniplus-api#2282).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -5314,7 +5314,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0360',
     titulo: 'O aviso da governança não leva dado pessoal nem texto livre',
     enunciado:
-      'O e-mail da governança de perfis traz o identificador do perfil, o tipo do evento, os nomes das permissões, o prazo e o link autenticado. Não traz texto livre, como descrição ou motivo, nem lista de beneficiários nem CPF; quem aprova vê a lista na tela, depois de entrar no Uni+. O texto é em português do Brasil e nomeia os papéis pela função, como gestão de acessos e proteção de dados, nunca pelo gênero de quem os ocupa (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'O e-mail da governança de perfis traz o identificador do perfil, o tipo do evento, os nomes das permissões, o prazo e o link autenticado. Não traz texto livre, como descrição ou motivo, nem lista de beneficiários nem CPF; quem aprova vê a lista na tela, depois de entrar no Uni+. O texto é em português do Brasil e nomeia os papéis pela função, no masculino genérico, como gestor de acessos, Representante do controlador e Encarregado de dados, nunca pelo gênero de quem os ocupa (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5326,7 +5326,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'O aviso de lote com recusas não traz nome de beneficiário, CPF nem motivo; os textos dos avisos nomeiam gestão de acessos e proteção de dados.',
+      'O aviso de lote com recusas não traz nome de beneficiário, CPF nem motivo; os textos dos avisos nomeiam os papéis pela função, no masculino genérico, sem forma dupla nem feminino.',
     verificacao: 'Testes automatizados do conteúdo de cada aviso (planejado, uniplus-api#2282).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -5375,9 +5375,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0363',
-    titulo: 'Quem aprova a versão do perfil lê o perfil que decide',
+    titulo: 'Quem aprova a versão do perfil lê o perfil que decide, e a leitura traz nomes de pessoas',
     enunciado:
-      'Quem aprova uma etapa da versão do perfil, pela gestão de acessos ou pela proteção de dados, lê a lista de perfis e o detalhe de cada um: nome, composição, versão pendente, suspensão e janela de migração, sem concessões nem dado pessoal. Assim chega ao perfil que precisa decidir, inclusive pelo link do aviso por e-mail e na retomada do perfil suspenso. Ler o perfil não dá o direito de mantê-lo: criar e alterar versão, remover permissão, desativar e reativar continuam só para quem mantém perfis. Quem não mantém nem aprova perfis não lê. Rastreia a governança das concessões (UNI-REQ-0184; ADR-0157 da uniplus-api).',
+      'Quem aprova uma etapa da versão do perfil, pela gestão de acessos ou como Representante do controlador, lê a lista de perfis e o detalhe de cada um: nome, composição, versão pendente, suspensão e janela de migração, sem concessões. A leitura não é livre de dado pessoal: o detalhe da versão traz o nome de quem decidiu cada etapa, e por isso é tratada como leitura de dado pessoal. O Encarregado de dados lê as versões pela permissão de consultá-las, sem decidir, com a leitura registrada (UNI-REQ-0372). Assim chega ao perfil que precisa decidir, inclusive pelo link do aviso por e-mail e na retomada do perfil suspenso. Ler o perfil não dá o direito de mantê-lo: criar e alterar versão, remover permissão, desativar e reativar continuam só para quem mantém perfis. Quem não mantém, não aprova nem tem a permissão de consultar versões de perfis não lê. Rastreia a governança das concessões (UNI-REQ-0184; ADR-0157 da uniplus-api).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5389,16 +5389,276 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Quem só aprova uma etapa lê a lista e o detalhe do perfil; quem só aprova é recusado nas ações de manutenção; quem não mantém nem aprova perfis é recusado na leitura.',
-    verificacao: 'Testes automatizados de API da leitura do perfil por quem aprova (uniplus-api#2332) e da rota do detalhe na interface (uniplus-web#1406).',
+      'Quem só aprova uma etapa lê a lista e o detalhe do perfil; quem só aprova é recusado nas ações de manutenção; quem não mantém, não aprova nem consulta versões de perfis é recusado na leitura; o detalhe da versão traz o nome de quem decidiu, e a leitura por quem só consulta é registrada.',
+    verificacao: 'Testes automatizados de API da leitura do perfil por quem aprova (uniplus-api#2332) e da rota do detalhe na interface (uniplus-web#1406); classificação da leitura e registro da consulta (planejado, uniplus-api#2364).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
   {
-    requisito_id: 'UNI-REQ-0200',
-    titulo: 'O gestor define o prazo da concessão ao aprovar o pedido',
+    requisito_id: 'UNI-REQ-0369',
+    titulo: 'A governança das concessões tem três papéis: o gestor mantém, o Representante do controlador decide e o Encarregado de dados consulta',
     enunciado:
-      'A concessão de perfil comum pode ter prazo: o gestor de acessos informa, ao aprovar o pedido, até quando o acesso vale, ou aprova sem prazo. Quem pede pode sugerir o prazo no pedido, e a sugestão chega preenchida ao gestor, que a mantém, altera ou retira. Quando o pedido passa também pela proteção de dados, vale o prazo que o gestor definiu; a proteção de dados aprova ou recusa, sem alterar o prazo. Se o prazo vencer antes da aprovação da proteção de dados, o pedido volta ao gestor, sem prazo, para que ele aprove de novo. O prazo tem de ser posterior ao momento em que é informado. O perfil de gestor de acessos e o de proteção de dados não admitem prazo, nem sugerido nem na aprovação, porque a concessão que vencesse sozinha poderia deixar a instituição com menos de dois gestores. O acesso começa na aprovação; começar numa data futura não está previsto. A concessão vencida deixa de valer sem revogação. Rastreia a governança das concessões (UNI-REQ-0184; ADR-0152 da uniplus-api). Proposta do líder técnico em 31/10/2026.',
+      'A governança das concessões tem três papéis, nomeados pela função e no masculino genérico, nunca pelo gênero de quem os ocupa. O gestor de acessos mantém os perfis, aprova a adequação funcional dos pedidos e publica o termo de responsabilidade. O Representante do controlador decide a etapa da proteção de dados dos pedidos, as versões dos perfis, a janela de migração e a proteção do catálogo, conduz a revisão periódica dos acessos e administra as concessões. O Encarregado de dados consulta pedidos, concessões, revisões, versões, janela e catálogo, se manifesta sobre a proteção do catálogo e solicita providências sobre concessões, sem decidir, aprovar nem revogar. O perfil de Representante do controlador é o perfil de sistema que antes se chamava proteção de dados, com o mesmo identificador; o de Encarregado de dados é um perfil de sistema novo. Os nomes técnicos da etapa e das permissões de aprovação da proteção de dados continuam os mesmos. Exemplo: Diogo é gestor de acessos e aprova o pedido de Leandro; Helena, Representante do controlador, decide a etapa da proteção de dados desse pedido; Kevin, Encarregado de dados, consulta o pedido e não tem opção de decidi-lo. (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'governanca',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O gestor de acessos aprova a etapa funcional e publica o termo; o Representante do controlador decide a etapa da proteção de dados, as versões, a janela e a proteção do catálogo e conduz a revisão; o Encarregado de dados consulta, se manifesta e solicita providências, e tem recusadas a decisão, a aprovação e a revogação; o perfil de Representante mantém o identificador do antigo perfil de proteção de dados; os textos do sistema nomeiam os papéis pela função, no masculino genérico.',
+    verificacao: 'Testes automatizados de API da composição e das recusas de cada papel (planejado, uniplus-api#2363 e uniplus-api#2364).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  // Pendente de definição na uniplus-api: código de erro da incompatibilidade de papéis (sem página no catálogo até o contrato existir; uniplus-api#2364).
+  {
+    requisito_id: 'UNI-REQ-0370',
+    titulo: 'Ninguém é ao mesmo tempo Representante do controlador e Encarregado de dados',
+    enunciado:
+      'Uma mesma pessoa não pode ter concessões vigentes simultâneas de Representante do controlador e de Encarregado de dados, porque quem decide não fiscaliza a própria decisão. A acumulação de gestor de acessos e Representante do controlador é permitida. A incompatibilidade é conferida na criação do pedido e em todos os caminhos que criam concessão, inclusive a instalação, de modo que dois pedidos aprovados ao mesmo tempo não produzem a acumulação. Concessão vencida ou revogada não conta e não impede nova designação. Exemplo: Helena é Representante do controlador; o pedido que a indica como Encarregado de dados é recusado na criação, e o mesmo vale na ordem inversa para Kevin, que é Encarregado de dados. Se a concessão de Representante de Helena vencer, Helena pode receber a designação de Encarregado de dados. (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'governanca',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O pedido de Encarregado de dados para quem tem concessão vigente de Representante do controlador é recusado, e o inverso também; a recusa vale na criação do pedido, na aprovação e na instalação; duas aprovações concorrentes que produziriam a acumulação resultam em uma aceita e outra recusada; a concessão vencida ou revogada não impede a designação; gestor de acessos e Representante do controlador na mesma pessoa são aceitos.',
+    verificacao: 'Testes automatizados de API e de integração com transações concorrentes reais, com ausência de concessão e com concessão vencida, e da instalação na ordem gestores, Representante e Encarregado (planejado, uniplus-api#2364).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0371',
+    titulo: 'O perfil de Encarregado de dados é de sistema, tem composição fixa e não se altera',
+    enunciado:
+      'O perfil de Encarregado de dados é um perfil de sistema, com composição fixa: consultar o catálogo de permissões, os pedidos, as concessões, as revisões, as versões dos perfis e a proteção do catálogo, manifestar-se sobre a proteção do catálogo e solicitar providências. As permissões novas de consulta, manifestação e providência são reservadas à governança e não entram em perfil comum. Como os demais perfis de governança, o de Encarregado de dados não é editado, desativado, reativado, suspenso, versionado, migrado pela janela nem reclassificado (UNI-REQ-0256). A pessoa que tem o perfil pode receber, por outros pedidos, permissões compatíveis de perfis comuns, que continuam funcionando. (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'governanca',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O perfil de Encarregado de dados existe com a composição fixa; a edição, a desativação, a reativação, a suspensão, a criação de versão, a migração e a reclassificação desse perfil são recusadas; o perfil comum que inclui permissão reservada à governança é recusado; a pessoa com o perfil isolado consulta e tem recusadas a decisão, a revogação e a aprovação; permissões compatíveis concedidas por outro perfil continuam valendo.',
+    verificacao: 'Testes automatizados de API da composição, das recusas sobre o perfil de sistema e da consulta do catálogo pelos três perfis de governança (planejado, uniplus-api#2364).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  // Pendente de definição na uniplus-api: matriz por consulta (campos devolvidos, classe efetiva, permissão, base legal e política de registro) a ser entregue em uniplus-api#2364.
+  {
+    requisito_id: 'UNI-REQ-0372',
+    titulo: 'O Encarregado de dados consulta o que quem administra vê, com cada leitura registrada',
+    enunciado:
+      'O Encarregado de dados consulta pedidos, concessões, revisões, versões dos perfis, janela de migração e decisões da proteção do catálogo, inclusive listagens e anexos, pelas mesmas projeções disponíveis a quem administra, sem ver mais do que o gestor de acessos vê. Cada leitura é registrada, inclusive a de texto livre e de anexo, e se o registro não puder ser gravado a leitura é recusada com aviso de indisponibilidade (UNI-REQ-0203). A classificação de cada consulta segue os campos que ela efetivamente devolve: a ausência de dado de inscrição não torna a consulta livre de dado pessoal, e a consulta que devolve nome de pessoa, texto livre ou anexo é no mínimo pessoal, ou identificadora ou sensível quando o conteúdo chegar a essas classes; a classificação não resolvida segue o tratamento mais protetivo. A consulta dos registros de acesso ainda não está disponível (UNI-REQ-0379). (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'seguranca',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O Encarregado de dados lê pedidos, concessões, revisões, versões, janela e catálogo, inclusive listagens e anexos, sem ver campo que o gestor não vê; cada leitura gera registro antes da entrega; sem o registro gravado, a leitura é recusada com indisponibilidade; a consulta que devolve nome, texto livre ou anexo é classificada no mínimo como pessoal; a concessão vencida deixa de dar a consulta.',
+    verificacao: 'Testes automatizados de API das consultas, do registro das leituras, da recusa por falha do registro e do vencimento da concessão (planejado, uniplus-api#2364).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  // Pendente de definição na uniplus-api: códigos de erro da manifestação e tamanho máximo do texto (sem página no catálogo até o contrato existir; uniplus-api#2366).
+  {
+    requisito_id: 'UNI-REQ-0373',
+    titulo: 'O Encarregado de dados se manifesta sobre a proteção de cada item do catálogo, sem decidir',
+    enunciado:
+      'Quem tem a permissão de se manifestar sobre a proteção do catálogo registra manifestação no tipo de documento ou no fato cuja aprovação foi solicitada (UNI-REQ-0205), com um de três pareceres: adequada, recomenda ajuste ou inadequada. O texto é obrigatório nos pareceres recomenda ajuste e inadequada. A manifestação vale para o ciclo de aprovação em que foi feita: uma nova manifestação da mesma pessoa no mesmo ciclo substitui a vigente sem apagar a anterior, e registro e substituição ficam como eventos que não se alteram. Manifestações de pessoas diferentes coexistem. Cada reinício da aprovação, inclusive pela edição de item reprovado ou com ajuste recomendado, encerra o ciclo e as manifestações dele; a edição que não reinicia a aprovação não encerra o ciclo. A falta de manifestação não impede a decisão. Os titulares da permissão de se manifestar recebem um aviso por solicitação, sem nome de pessoa. Exemplo: Kevin, Encarregado de dados, registra parecer inadequada sobre o tipo de documento Laudo médico, com o texto que explica por que a classificação pessoal é insuficiente; depois substitui o parecer por recomenda ajuste, e os dois ficam no histórico. Detalha a aprovação da proteção do catálogo (UNI-REQ-0205; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'seguranca',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0205',
+    modulo: 'Configuração; Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Quem não tem a permissão de se manifestar é recusado; o parecer recomenda ajuste ou inadequada sem texto é recusado; a manifestação em item sem aprovação solicitada é recusada; a nova manifestação da mesma pessoa substitui a vigente e a anterior continua no histórico; manifestações de pessoas diferentes coexistem; o reinício da aprovação encerra o ciclo e a edição sem reinício não o encerra; a decisão sem manifestação é aceita; cada solicitação gera um único aviso por titular; vale para tipos de documento e para fatos.',
+    verificacao: 'Testes automatizados de domínio, de API e de integração com transações reais da manifestação, da substituição, do ciclo e da consulta histórica após gravação e recarga (planejado, uniplus-api#2366).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  // Pendente de definição na uniplus-api: código de erro da justificativa ausente diante de manifestação desfavorável (uniplus-api#2366).
+  {
+    requisito_id: 'UNI-REQ-0374',
+    titulo: 'Aprovar ou recomendar ajuste contra manifestação desfavorável exige justificativa, que fica registrada no ato',
+    enunciado:
+      'Quando há manifestação desfavorável vigente (recomenda ajuste ou inadequada) no ciclo, o Representante do controlador só aprova ou recomenda ajuste informando justificativa, que fica registrada no próprio ato da decisão, também na aprovação, e aparece no histórico do item. O administrador do cadastro aceita a recomendação de ajuste sem nova justificativa. A manifestação e a decisão disputam a mesma versão do item: se uma for gravada entre a leitura e o envio da outra, a segunda é recusada por conflito e precisa ser refeita depois de reler o item. O histórico do item mostra as manifestações, inclusive as substituídas, e as justificativas das decisões (UNI-REQ-0205 e UNI-REQ-0373; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'seguranca',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0205',
+    modulo: 'Configuração; Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A aprovação ou a recomendação de ajuste sem justificativa diante de manifestação desfavorável vigente é recusada, e com justificativa é aceita e a justificativa fica no ato; diante só de manifestação adequada, ou sem manifestação, a justificativa não é exigida na aprovação; o aceite da recomendação pelo administrador não exige nova justificativa; a manifestação e a decisão concorrentes resultam em uma gravada e outra recusada por conflito; o histórico mostra manifestações substituídas e a justificativa da aprovação.',
+    verificacao: 'Testes automatizados de API e de integração com transações reais entre manifestação e recomendação de ajuste, para tipo de documento e para fato, e da consulta histórica após recarga (planejado, uniplus-api#2366).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  // Pendente de definição na uniplus-api: códigos de erro da providência, rótulos dos estados e tamanho máximo do fundamento e da resposta (sem página no catálogo até o contrato existir; uniplus-api#2367).
+  {
+    requisito_id: 'UNI-REQ-0375',
+    titulo: 'O Encarregado de dados solicita providência sobre uma concessão, com fundamento',
+    enunciado:
+      'Quem tem a permissão de solicitar providências pede a retirada ou a revisão de uma concessão, com fundamento obrigatório. A solicitação entra numa fila prioritária dos gestores de acessos e dos Representantes do controlador, que são avisados por e-mail, sem o fundamento nem nome de pessoa no corpo da mensagem; quem solicitou é avisado da resposta e do atendimento. A solicitação e cada ato sobre ela aparecem na trilha da concessão. Exemplo: Kevin, Encarregado de dados, nota que Leandro mantém acesso a documentos sensíveis depois de deixar a banca e solicita a retirada, com o fundamento; Diogo, gestor de acessos, vê a solicitação no topo da fila. (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'seguranca',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A solicitação sem a permissão é recusada; sem fundamento é recusada; o tipo aceita só retirada ou revisão; a solicitação aparece na fila dos gestores de acessos e dos Representantes do controlador e na trilha da concessão; os destinatários recebem o aviso sem fundamento nem nome de pessoa.',
+    verificacao: 'Testes automatizados de API da autorização, da criação, da fila e das notificações (planejado, uniplus-api#2367).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  // Pendente de definição na uniplus-api: códigos de erro e rótulos em pt-BR dos estados da providência (uniplus-api#2367).
+  {
+    requisito_id: 'UNI-REQ-0376',
+    titulo: 'A providência é respondida com motivo ou atendida pela revogação vinculada, e fica prejudicada quando a concessão deixa de valer',
+    enunciado:
+      'A providência tem três situações gravadas: aberta, respondida e atendida. Só a revogação feita a partir da providência a atende; a revogação por outro caminho não conta como atendimento. A resposta é motivada e exige providência aberta e concessão ativa. A providência aberta cuja concessão deixou de valer, por revogação por outro caminho ou por vencimento, aparece como prejudicada, situação calculada na leitura e nunca gravada; a trilha mostra o que encerrou a concessão. Vence quem grava primeiro: a segunda resposta é recusada, e a gravação concorrente recebe conflito. A revogação vinculada segue a revogação comum, com o mínimo de dois gestores de acessos, e grava o aviso na mesma operação; repetida com a mesma chave, devolve o mesmo resultado. Quem solicitou e a pessoa beneficiária da concessão não respondem. (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'seguranca',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A resposta motivada leva a providência a respondida; a revogação vinculada leva a atendida e respeita o mínimo de dois gestores; a revogação por outro caminho antes da resposta faz a resposta ser recusada e a providência aparecer como prejudicada; o vencimento durante a tramitação deixa a providência prejudicada sem gravação; duas respostas simultâneas resultam em uma gravada e outra recusada por conflito; a repetição da revogação vinculada com a mesma chave devolve o mesmo resultado; a resposta de quem solicitou ou da pessoa beneficiária é recusada.',
+    verificacao: 'Testes automatizados de API e de integração com transações reais das transições, dos impedimentos, da precedência e da idempotência (planejado, uniplus-api#2367).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  // Pendente de definição na uniplus-api: códigos de erro do termo (ausência de versão publicada e divergência de versão) e a normalização exata do texto e a codificação usadas no código de verificação (uniplus-api#2365).
+  {
+    requisito_id: 'UNI-REQ-0377',
+    titulo: 'O gestor publica o termo de responsabilidade em versões que não se alteram',
+    enunciado:
+      'O termo de responsabilidade é publicado pelo gestor de acessos, com a permissão de publicar termos, em versões que não se alteram: cada versão guarda o texto, o código de verificação SHA-256 do texto, o ato que a aprovou e quem a publicou. A versão publicada mais recente é a vigente. O pedido que exige a etapa da proteção de dados, isto é, de perfil com permissão pessoal, identificadora ou sensível, inclusive os três perfis de governança, fixa a versão vigente na criação, e a criação é recusada enquanto não houver termo publicado. O pedido criado durante uma publicação fixa a versão anterior, se terminar antes dela, ou é recusado por divergência, se terminar depois, e precisa ser refeito com a versão nova. A nova publicação não muda a versão fixada nos pedidos em andamento nem derruba concessões existentes. (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'conformidade',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A publicação sem a permissão é recusada; a versão publicada não se altera e o código de verificação corresponde ao texto apresentado; o pedido protegido fixa a versão vigente na criação; a criação de pedido protegido sem termo publicado é recusada; a nova publicação não muda a versão fixada nem afeta as concessões existentes.',
+    verificacao: 'Testes automatizados de domínio e de API da publicação, do código de verificação e da fixação da versão (planejado, uniplus-api#2365).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  // Pendente fora da API: eventual exigência de assinatura avançada pela Procuradoria, que exige desenho próprio antes da produção (uniplus-api#2365; ADR-0161).
+  {
+    requisito_id: 'UNI-REQ-0378',
+    titulo: 'A pessoa beneficiária aceita o termo depois da verificação do documento e antes da decisão do gestor',
+    enunciado:
+      'No pedido protegido, só a pessoa beneficiária, autenticada, aceita o termo de responsabilidade, e o aceite precede a decisão do gestor de acessos. Quando o pedido exige documento, o documento verificado precede o aceite. No pedido para si sem documento, o aceite é feito no envio; no pedido para si com documento, depois da verificação dele, e o pedido aguarda a pessoa beneficiária antes de ir ao gestor; no pedido para outra pessoa, a pessoa beneficiária aceita o termo ao confirmar o pedido, depois da verificação do documento quando exigido. A intenção de anexar documento é declarada na criação do pedido. O sistema apresenta a versão vigente ou fixada e confere, na mesma operação do aceite ou da criação, que a versão aceita é a mesma; se divergir, a operação é recusada e o termo é reapresentado. O aceite registra a pessoa, o instante, o pedido, a versão e o código de verificação, e equivale à assinatura eletrônica simples (Lei nº 14.063/2020, art. 4º): prova qual texto foi apresentado, não que foi lido; e o texto e essa evidência ficam disponíveis no pedido e na trilha da concessão. Exemplo: Leandro pede para si um perfil com documentos sensíveis e anexa a portaria; depois da verificação do arquivo, aceita o termo, e só então o pedido chega a Diogo, gestor de acessos. (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'conformidade',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O aceite por quem não é a pessoa beneficiária é recusado; a aprovação do gestor antes do aceite é recusada; o aceite antes da verificação do documento exigido ou declarado é recusado; os três casos (para si sem documento, para si com documento e para outra pessoa) seguem a ordem documento, aceite e gestor; a versão divergente da vigente ou fixada é recusada e exige reapresentação; a publicação concorrente entre a exibição e o envio é recusada por divergência; a evidência do aceite aparece no pedido e na trilha da concessão.',
+    verificacao: 'Testes automatizados de API dos três casos, da publicação concorrente, do documento opcional, da verificação recusada e da tentativa de aprovação com documento pendente (planejado, uniplus-api#2365).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0379',
+    titulo: 'A consulta aos registros de acesso fica para um incremento posterior',
+    enunciado:
+      'Os registros de acesso a dado pessoal e das recusas (UNI-REQ-0203 e UNI-REQ-0209) já são enviados e guardados fora dos dados da aplicação, mas a consulta deles ainda não está disponível no Uni+. A retenção, o controle de acesso e a consulta desses registros, inclusive pelo Encarregado de dados, ficam como incremento planejado, de prioridade baixa. Até lá, ninguém consulta os registros pelo Uni+. (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'seguranca',
+    tipo: 'incremento',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'incremento_obrigatorio',
+    status: 'incremento_planejado',
+    prioridade: 'could',
+    politica_backlog: 'incremento_futuro',
+    tipo_issue_recomendado: 'None',
+    criterios_aceite:
+      'Enquanto o incremento não for entregue, o Uni+ não oferece consulta aos registros de acesso; quando entregue, este requisito é atualizado com a retenção, o controle de acesso e a consulta.',
+    verificacao: 'Revisão documental (incremento planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0380',
+    titulo: 'A manifestação do Encarregado de dados sobre versões de perfil protegido fica para um incremento posterior',
+    enunciado:
+      'A manifestação técnica do Encarregado de dados vale hoje só para a proteção do catálogo (UNI-REQ-0373). A manifestação sobre versões de perfil protegido, antes da decisão do Representante do controlador, fica como incremento planejado; até lá, o Encarregado de dados consulta as versões sem se manifestar sobre elas (UNI-REQ-0372). (UNI-REQ-0184; ADR-0161 da uniplus-api, que separa as atribuições de governança).',
+    grupo: 'seguranca',
+    tipo: 'incremento',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'incremento_obrigatorio',
+    status: 'incremento_planejado',
+    prioridade: 'could',
+    politica_backlog: 'incremento_futuro',
+    tipo_issue_recomendado: 'None',
+    criterios_aceite:
+      'Enquanto o incremento não for entregue, não há manifestação sobre versões de perfil; quando entregue, este requisito é atualizado com as regras próprias.',
+    verificacao: 'Revisão documental (incremento planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0200',
+    titulo: 'O gestor define o prazo da concessão ao aprovar o pedido, e o perfil de gestor de acessos não tem prazo',
+    enunciado:
+      'A concessão de perfil comum, de Representante do controlador ou de Encarregado de dados pode ter prazo: o gestor de acessos informa, ao aprovar o pedido, até quando o acesso vale, ou aprova sem prazo. Quem pede pode sugerir o prazo no pedido, e a sugestão chega preenchida ao gestor, que a mantém, altera ou retira. Quando o pedido passa também pela etapa da proteção de dados, vale o prazo que o gestor definiu; o Representante do controlador aprova ou recusa, sem alterar o prazo. Se o prazo vencer antes da aprovação da proteção de dados, o pedido volta ao gestor, sem prazo, para que ele aprove de novo. O prazo tem de ser posterior ao momento em que é informado. O perfil de gestor de acessos não admite prazo, nem sugerido nem na aprovação, porque a concessão que vencesse sozinha poderia deixar a instituição com menos de dois gestores; nos perfis de Representante do controlador e de Encarregado de dados o prazo é opcional, e a concessão vencida não impede nova designação. O acesso começa na aprovação; começar numa data futura não está previsto. A concessão vencida deixa de valer sem revogação. Rastreia a governança das concessões (UNI-REQ-0184; ADR-0152 da uniplus-api). Proposta do líder técnico em 31/10/2026; prazo opcional dos perfis de Representante do controlador e de Encarregado de dados pela separação das atribuições de governança (uniplus-api#2364).',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5410,8 +5670,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A aprovação do gestor com prazo gera concessão que vale até esse prazo, e a sem prazo gera concessão sem prazo; a sugestão de quem pede aparece ao gestor e pode ser alterada; o prazo no passado é recusado, no pedido e na aprovação; o perfil de gestor de acessos ou de proteção de dados com prazo é recusado; a proteção de dados não altera o prazo definido pelo gestor; o prazo vencido antes da aprovação da proteção de dados devolve o pedido ao gestor, sem prazo.',
-    verificacao: 'Testes automatizados de API do pedido e da aprovação com prazo (uniplus-api#2157) e testes de interface do pedido e da aprovação (uniplus-web#1324).',
+      'A aprovação do gestor com prazo gera concessão que vale até esse prazo, e a sem prazo gera concessão sem prazo; a sugestão de quem pede aparece ao gestor e pode ser alterada; o prazo no passado é recusado, no pedido e na aprovação; o perfil de gestor de acessos com prazo é recusado, e os de Representante do controlador e de Encarregado de dados aceitam prazo ou ficam sem prazo; o Representante do controlador não altera o prazo definido pelo gestor; o prazo vencido antes da aprovação da proteção de dados devolve o pedido ao gestor, sem prazo.',
+    verificacao: 'Testes automatizados de API do pedido e da aprovação com prazo (uniplus-api#2157) e testes de interface do pedido e da aprovação (uniplus-web#1324); prazo opcional nos perfis de Representante do controlador e de Encarregado de dados (planejado, uniplus-api#2364).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -5419,7 +5679,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0201',
     titulo: 'O pedido de acesso avisa por e-mail quem precisa agir ou saber',
     enunciado:
-      'Cada mudança de situação do pedido de acesso avisa por e-mail quem precisa agir ou saber, com o link do pedido no Uni+: a pessoa indicada como beneficiária, quando o pedido aguarda o aceite dela; os gestores de acessos, quando o pedido chega à fila deles, inclusive quando volta porque o perfil mudou ou o prazo venceu; quem tem o perfil de proteção de dados, quando o pedido chega à etapa dela, sem quem já aprovou como gestor no mesmo pedido; quem pediu e a pessoa beneficiária, quando o pedido é aprovado ou recusado; e a pessoa beneficiária, quando quem pediu cancela um pedido de que ela já sabia. Quem é parte do pedido não recebe o aviso de fila, porque não pode decidi-lo. O e-mail traz o perfil, o escopo, a situação e o link; nome de pessoa, justificativa e motivo da recusa ficam no pedido, que só quem tem acesso abre. Os endereços vêm do cadastro e das concessões, nunca de texto digitado no pedido. O aviso é gravado junto da mudança de situação, e a mudança sem aviso, ou o aviso sem mudança, não acontece. Rastreia a governança das concessões (UNI-REQ-0184). Proposta do líder técnico em 31/10/2026.',
+      'Cada mudança de situação do pedido de acesso avisa por e-mail quem precisa agir ou saber, com o link do pedido no Uni+: a pessoa indicada como beneficiária, quando o pedido aguarda o aceite dela, inclusive o do termo de responsabilidade (UNI-REQ-0378); os gestores de acessos, quando o pedido chega à fila deles, inclusive quando volta porque o perfil mudou ou o prazo venceu; os Representantes do controlador, quando o pedido chega à etapa da proteção de dados, sem quem já aprovou como gestor no mesmo pedido; quem pediu e a pessoa beneficiária, quando o pedido é aprovado ou recusado; e a pessoa beneficiária, quando quem pediu cancela um pedido de que ela já sabia. Quem é parte do pedido não recebe o aviso de fila, porque não pode decidi-lo. O e-mail traz o perfil, o escopo, a situação e o link; nome de pessoa, justificativa e motivo da recusa ficam no pedido, que só quem tem acesso abre. Os endereços vêm do cadastro e das concessões, nunca de texto digitado no pedido. O aviso é gravado junto da mudança de situação, e a mudança sem aviso, ou o aviso sem mudança, não acontece. Rastreia a governança das concessões (UNI-REQ-0184). Proposta do líder técnico em 31/10/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5431,16 +5691,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A pessoa beneficiária recebe o aviso do aceite pendente; os gestores de acessos recebem o aviso do pedido na fila, e quem é parte do pedido não; quem tem o perfil de proteção de dados recebe o aviso da etapa dela, e quem aprovou como gestor no mesmo pedido não; quem pediu e a pessoa beneficiária recebem o aviso da aprovação e da recusa; o cancelamento avisa só a pessoa beneficiária que já sabia do pedido; nenhum e-mail traz nome de pessoa, justificativa ou motivo da recusa; todo aviso traz o link do pedido.',
+      'A pessoa beneficiária recebe o aviso do aceite pendente; os gestores de acessos recebem o aviso do pedido na fila, e quem é parte do pedido não; os Representantes do controlador recebem o aviso da etapa da proteção de dados, e quem aprovou como gestor no mesmo pedido não; quem pediu e a pessoa beneficiária recebem o aviso da aprovação e da recusa; o cancelamento avisa só a pessoa beneficiária que já sabia do pedido; nenhum e-mail traz nome de pessoa, justificativa ou motivo da recusa; todo aviso traz o link do pedido.',
     verificacao: 'Testes automatizados de API dos avisos por transição, com entrega conferida no servidor de e-mail de teste (uniplus-api#2156).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
   {
     requisito_id: 'UNI-REQ-0202',
-    titulo: 'A proteção de dados revisa periodicamente os acessos a dado pessoal ou sensível',
+    titulo: 'O Representante do controlador conduz a revisão periódica dos acessos a dado pessoal ou sensível',
     enunciado:
-      'Quem tem o perfil de proteção de dados abre uma revisão dos acessos, que reúne um item para cada concessão ativa de perfil pessoal ou sensível. Cada item é confirmado, e a concessão continua, ou revogado com motivo, e a concessão termina na hora. Os itens das concessões de quem tem o perfil de proteção de dados, em qualquer perfil, são decididos pelos gestores de acessos; os demais, pela proteção de dados; ninguém decide o item da própria concessão. A revogação na revisão respeita o mínimo de dois gestores de acessos. Cada decisão aparece na trilha da concessão. A revisão fica em andamento enquanto algum item sem decisão trata de concessão ainda ativa; a concessão que termina fora da revisão deixa de pedir decisão. Só uma revisão fica em andamento por vez. A revisão é aberta manualmente; a periodicidade automática fica para quando a proteção de dados definir o intervalo. Rastreia a governança das concessões (UNI-REQ-0184). Proposta do líder técnico em 31/10/2026.',
+      'Quem tem a permissão de conduzir revisões, reservada ao Representante do controlador, abre uma revisão dos acessos, que reúne um item para cada concessão ativa de perfil pessoal ou sensível. Cada item é confirmado, e a concessão continua, ou revogado com motivo, e a concessão termina na hora. Quem decide o item é definido pela pessoa beneficiária da concessão: os itens das concessões de quem é Representante do controlador, em qualquer perfil, são decididos pelos gestores de acessos; os demais, pelo Representante do controlador. Ninguém decide o item da própria concessão, e quem está impedido no item, por ser a pessoa beneficiária, não o decide nem pelo outro papel que tenha. A revogação na revisão respeita o mínimo de dois gestores de acessos. Cada decisão aparece na trilha da concessão. A revisão fica em andamento enquanto algum item sem decisão trata de concessão ainda ativa; a concessão que termina fora da revisão deixa de pedir decisão. Só uma revisão fica em andamento por vez. A condição de Representante da pessoa beneficiária é conferida no instante da decisão do item, e não na abertura da revisão: a designação concedida, revogada ou vencida durante a revisão aberta muda quem decide a partir dali, e a decisão grava o papel com que foi tomada; duas decisões do mesmo item resultam em uma gravada e outra recusada por conflito. O Encarregado de dados consulta as revisões e os itens, sem decidir (UNI-REQ-0372). A revisão periódica é distinta da etapa da proteção de dados do pedido: revê concessões já em vigor. A revisão é aberta manualmente; a periodicidade automática fica para quando o intervalo for definido. Rastreia a governança das concessões (UNI-REQ-0184). Proposta do líder técnico em 31/10/2026; condução pelo Representante do controlador pela ADR-0161 da uniplus-api.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5452,8 +5712,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A revisão traz só concessões ativas de perfil pessoal ou sensível; confirmar mantém a concessão e revogar a encerra com efeito imediato; cada decisão aparece na trilha da concessão; os itens das concessões de quem tem o perfil de proteção de dados só são decididos por gestores de acessos, e os demais só pela proteção de dados; ninguém decide o item da própria concessão; não se abre uma segunda revisão com outra em andamento.',
-    verificacao: 'Testes automatizados de domínio e de API da revisão dos acessos (uniplus-api#2139).',
+      'A revisão traz só concessões ativas de perfil pessoal ou sensível; confirmar mantém a concessão e revogar a encerra com efeito imediato; cada decisão aparece na trilha da concessão; os itens das concessões de quem é Representante do controlador só são decididos por gestores de acessos, e os demais só pelo Representante do controlador; abrir a revisão exige a permissão de conduzir revisões; o Encarregado de dados consulta a revisão e tem a decisão de item recusada; ninguém decide o item da própria concessão; não se abre uma segunda revisão com outra em andamento; a condição de Representante da pessoa beneficiária é a do instante da decisão do item, inclusive quando a designação é concedida, revogada ou vence com a revisão aberta.',
+    verificacao: 'Testes automatizados de domínio e de API da revisão dos acessos (uniplus-api#2139); condução pelo Representante do controlador e decisão conforme a condição da pessoa beneficiária, inclusive concessão, revogação e vencimento da designação durante a revisão aberta (planejado, uniplus-api#2363).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -5461,7 +5721,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0203',
     titulo: 'Todo acesso a dado pessoal ou sensível fica registrado antes de o dado ser entregue',
     enunciado:
-      'Quando alguém da equipe acessa dado pessoal ou sensível de um candidato, como o CPF revelado a pedido ou um documento da inscrição, o Uni+ registra quem acessou, com qual permissão, de qual inscrição e qual dado foi revelado, sem guardar o conteúdo do dado; no processo de resultado importado, em que o candidato não tem inscrição pelo sistema (UNI-REQ-0144), o registro identifica o candidato importado no processo no lugar da inscrição, inclusive quando a equipe vê o valor em conflito de uma importação (UNI-REQ-0213). O dado só é entregue depois de o registro estar gravado; se o registro não puder ser gravado, nada é registrado e a ação falha com aviso de indisponibilidade, sem que a falha vire recusa de acesso nem omissão do dado; a pessoa pode repetir a ação, que é registrada como um novo acesso. O acesso a várias inscrições de uma vez, como numa lista, é registrado por inteiro ou não é registrado. O registro fica separado dos dados da aplicação, de modo que quem opera o sistema não altera nem apaga a trilha. A consulta dos registros pela proteção de dados vem numa entrega posterior. O candidato, ao acessar os próprios dados, não gera registro de acesso de terceiro. Rastreia a governança das concessões (UNI-REQ-0184) e o registro das operações de tratamento exigido pela LGPD (art. 37). Proposta do líder técnico em 31/10/2026.',
+      'Quando alguém da equipe acessa dado pessoal ou sensível de um candidato, como o CPF revelado a pedido ou um documento da inscrição, o Uni+ registra quem acessou, com qual permissão, de qual inscrição e qual dado foi revelado, sem guardar o conteúdo do dado; no processo de resultado importado, em que o candidato não tem inscrição pelo sistema (UNI-REQ-0144), o registro identifica o candidato importado no processo no lugar da inscrição, inclusive quando a equipe vê o valor em conflito de uma importação (UNI-REQ-0213). O dado só é entregue depois de o registro estar gravado; se o registro não puder ser gravado, nada é registrado e a ação falha com aviso de indisponibilidade, sem que a falha vire recusa de acesso nem omissão do dado; a pessoa pode repetir a ação, que é registrada como um novo acesso. O acesso a várias inscrições de uma vez, como numa lista, é registrado por inteiro ou não é registrado. O registro fica separado dos dados da aplicação, de modo que quem opera o sistema não altera nem apaga a trilha. A consulta desses registros ainda não está disponível: fica como incremento planejado (UNI-REQ-0379), e até lá os registros são só enviados e guardados. O candidato, ao acessar os próprios dados, não gera registro de acesso de terceiro. Rastreia a governança das concessões (UNI-REQ-0184) e o registro das operações de tratamento exigido pela LGPD (art. 37). Proposta do líder técnico em 31/10/2026.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5501,9 +5761,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0205',
-    titulo: 'A proteção de dados aprova a classificação de cada tipo de documento e de cada fato do catálogo',
+    titulo: 'O Representante do controlador aprova a classificação de cada tipo de documento e de cada fato do catálogo',
     enunciado:
-      'Todo tipo de documento e todo fato do catálogo declaram a própria proteção de dados: a classificação (não pessoal, pessoal ou sensível), a finalidade e a base legal do tratamento. Criar um item, em qualquer classificação, ou mudar a classificação, a finalidade ou a base legal de um item deixa o item pendente; mudar o nome, a descrição e os demais campos não muda a proteção e não exige nova aprovação. O administrador do cadastro envia a solicitação dos itens pendentes que escolher, todos ou alguns, e o item que não escolher continua pendente; só então quem responde pela proteção de dados recebe o aviso por e-mail, sem nome de pessoa. A proteção de dados aprova, recomenda ajuste ou reprova cada item. No ajuste, ela indica a classificação correta e pode explicar o motivo; na reprovação, não há recomendação e a justificativa é obrigatória. A justificativa tem no máximo 2.000 caracteres e aparece para o administrador. No item com ajuste recomendado, o administrador aceita a recomendação, e o item fica aprovado com a classificação indicada sem nova solicitação, com aviso à proteção de dados, ou edita o item, que volta a pendente; no item reprovado, só edita. Item pendente não é usado na configuração de processo seletivo, e a publicação e a retificação de processo que usa item pendente, inclusive o que voltou a pendente depois de vinculado, são recusadas apontando o item. O processo já publicado mantém o que congelou. No fato de sistema, a proteção de dados também é editável, com a mesma aprovação; o restante da definição continua travado. O catálogo inicial nasce pendente e passa pela mesma aprovação. Fica registrado quem enviou a solicitação, quem aprovou, recomendou ajuste ou reprovou cada item, com a classificação recomendada e a justificativa, e quem aceitou a recomendação, com o instante de cada ato. Cada ato fica registrado de forma permanente — solicitação, aprovação, ajuste recomendado, reprovação e aceite — com quem agiu, quando, a proteção conferida, a recomendação e a justificativa; a edição do item reinicia a aprovação, mas não apaga o registro. A proteção de dados consulta as decisões, com filtros por decisão, cadastro, período e busca, e pode restringir às próprias; o administrador vê o histórico de cada item, com o nome de quem agiu. Detalha o catálogo de fatos (UNI-REQ-0143) e a governança dos acessos (UNI-REQ-0184). Proposta do líder técnico em 31/10/2026. Ajuste do líder técnico em 01/11/2026: três decisões com justificativa e envio por seleção. Histórico das decisões pedido pelo líder técnico em 01/11/2026.',
+      'Todo tipo de documento e todo fato do catálogo declaram a própria proteção de dados: a classificação (não pessoal, pessoal ou sensível), a finalidade e a base legal do tratamento. Criar um item, em qualquer classificação, ou mudar a classificação, a finalidade ou a base legal de um item deixa o item pendente; mudar o nome, a descrição e os demais campos não muda a proteção e não exige nova aprovação. O administrador do cadastro envia a solicitação dos itens pendentes que escolher, todos ou alguns, e o item que não escolher continua pendente; só então os Representantes do controlador e os Encarregados de dados recebem o aviso por e-mail, sem nome de pessoa. O Encarregado de dados pode se manifestar sobre o item, sem decidir (UNI-REQ-0373). O Representante do controlador aprova, recomenda ajuste ou reprova cada item. No ajuste, ele indica a classificação correta e pode explicar o motivo, salvo diante de manifestação desfavorável vigente do Encarregado de dados, quando a justificativa é obrigatória no ajuste e na aprovação (UNI-REQ-0374); na reprovação, não há recomendação e a justificativa é obrigatória. A justificativa tem no máximo 2.000 caracteres e aparece para o administrador. No item com ajuste recomendado, o administrador aceita a recomendação, e o item fica aprovado com a classificação indicada sem nova solicitação, com aviso ao Representante do controlador, ou edita o item, que volta a pendente; no item reprovado, só edita. Item pendente não é usado na configuração de processo seletivo, e a publicação e a retificação de processo que usa item pendente, inclusive o que voltou a pendente depois de vinculado, são recusadas apontando o item. O processo já publicado mantém o que congelou. No fato de sistema, a proteção de dados também é editável, com a mesma aprovação; o restante da definição continua travado. O catálogo inicial nasce pendente e passa pela mesma aprovação. Fica registrado quem enviou a solicitação, quem aprovou, recomendou ajuste ou reprovou cada item, com a classificação recomendada e a justificativa, e quem aceitou a recomendação, com o instante de cada ato. Cada ato fica registrado de forma permanente — solicitação, aprovação, ajuste recomendado, reprovação e aceite — com quem agiu, quando, a proteção conferida, a recomendação e a justificativa; a edição do item reinicia a aprovação, mas não apaga o registro. O Representante do controlador consulta as decisões, com filtros por decisão, cadastro, período e busca, e pode restringir às próprias; o Encarregado de dados consulta as mesmas decisões, sem poder de decisão; o administrador vê o histórico de cada item, com o nome de quem agiu. Detalha o catálogo de fatos (UNI-REQ-0143) e a governança dos acessos (UNI-REQ-0184). Proposta do líder técnico em 31/10/2026. Ajuste do líder técnico em 01/11/2026: três decisões com justificativa e envio por seleção. Histórico das decisões pedido pelo líder técnico em 01/11/2026. Decisão atribuída ao Representante do controlador pela separação das atribuições de governança (uniplus-api#2363 e uniplus-api#2366).',
     grupo: 'seguranca',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5515,7 +5775,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Criar item ou mudar classificação, finalidade ou base legal deixa o item pendente, e mudar nome ou descrição não; a solicitação envia só os itens pendentes escolhidos, o item não escolhido continua pendente, e a solicitação sem item ou com item que não está pendente é recusada; a proteção de dados só é avisada depois do envio da solicitação; aprovar, recomendar ajuste e reprovar exigem a permissão da proteção de dados; o ajuste exige a classificação recomendada e aceita justificativa opcional; a reprovação exige a justificativa e não aceita classificação recomendada; a justificativa acima de 2.000 caracteres é recusada e aparece para o administrador; aceitar a recomendação de item com ajuste recomendado aprova o item sem nova solicitação, e o aceite de item reprovado é recusado, restando editá-lo; editar o item com ajuste recomendado ou reprovado o devolve a pendente; a decisão registra quem e quando, com a justificativa; item pendente é recusado no vínculo, na publicação e na retificação; processo publicado não muda quando um item congelado volta a pendente; o catálogo inicial nasce pendente; cada solicitação, aprovação, ajuste recomendado, reprovação e aceite fica registrado de forma permanente, com quem agiu, quando, a proteção conferida, a recomendação e a justificativa, e a edição do item o devolve a pendente sem apagar o registro; a proteção de dados consulta as decisões filtrando por decisão, cadastro, período e busca, restringe às próprias e vê a mais recente primeiro; o filtro de decisão fora de aprovação, ajuste recomendado e reprovação e o período com data inicial posterior à final são recusados; o administrador vê o histórico do item, com o nome de quem agiu, e quem não tem a permissão de aprovar não consulta as decisões.',
+      'Criar item ou mudar classificação, finalidade ou base legal deixa o item pendente, e mudar nome ou descrição não; a solicitação envia só os itens pendentes escolhidos, o item não escolhido continua pendente, e a solicitação sem item ou com item que não está pendente é recusada; o Representante do controlador só é avisado depois do envio da solicitação; aprovar, recomendar ajuste e reprovar exigem a permissão de aprovar a proteção do catálogo, reservada ao Representante do controlador; o ajuste exige a classificação recomendada e aceita justificativa opcional, que passa a obrigatória, também na aprovação, diante de manifestação desfavorável vigente; a reprovação exige a justificativa e não aceita classificação recomendada; a justificativa acima de 2.000 caracteres é recusada e aparece para o administrador; aceitar a recomendação de item com ajuste recomendado aprova o item sem nova solicitação, e o aceite de item reprovado é recusado, restando editá-lo; editar o item com ajuste recomendado ou reprovado o devolve a pendente; a decisão registra quem e quando, com a justificativa; item pendente é recusado no vínculo, na publicação e na retificação; processo publicado não muda quando um item congelado volta a pendente; o catálogo inicial nasce pendente; cada solicitação, aprovação, ajuste recomendado, reprovação e aceite fica registrado de forma permanente, com quem agiu, quando, a proteção conferida, a recomendação e a justificativa, e a edição do item o devolve a pendente sem apagar o registro; o Representante do controlador consulta as decisões filtrando por decisão, cadastro, período e busca, restringe às próprias e vê a mais recente primeiro; o filtro de decisão fora de aprovação, ajuste recomendado e reprovação e o período com data inicial posterior à final são recusados; o administrador vê o histórico do item, com o nome de quem agiu, e quem não tem a permissão de aprovar nem a de consultar a proteção do catálogo não consulta as decisões.',
     verificacao: 'Testes automatizados de domínio, de API e de integração do circuito de aprovação e das recusas na Seleção (uniplus-api, issue da aprovação da proteção de dados).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -5545,7 +5805,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0206',
     titulo: 'Cada classificação de arquivo do candidato tem a sua permissão de consulta',
     enunciado:
-      'O acesso administrativo ao arquivo enviado pelo candidato depende da classificação de proteção do tipo de documento exigido, congelada no processo. Cada classificação (público, interno, pessoal, identificador e sensível) tem a sua própria permissão de consulta, concedida em separado e sem hierarquia entre elas: quem precisa abrir mais de uma classe recebe todas as que precisa. Ter acesso à inscrição não abre arquivo algum. Quando a classificação do arquivo não pode ser determinada, vale a regra do sensível. Quem não tem a permissão exigida recebe "não encontrado", sem saber se o arquivo existe. Exemplo: Leandro, que confere o comprovante de residência de Fernanda, não abre o RG dela sem a permissão de documentos de identificação. A concessão das permissões segue a governança dos acessos, com a proteção de dados. Detalha o acesso restrito ao documento do candidato (UNI-REQ-0130). Decisão do líder técnico em 31/10/2026.',
+      'O acesso administrativo ao arquivo enviado pelo candidato depende da classificação de proteção do tipo de documento exigido, congelada no processo. Cada classificação (público, interno, pessoal, identificador e sensível) tem a sua própria permissão de consulta, concedida em separado e sem hierarquia entre elas: quem precisa abrir mais de uma classe recebe todas as que precisa. Ter acesso à inscrição não abre arquivo algum. Quando a classificação do arquivo não pode ser determinada, vale a regra do sensível. Quem não tem a permissão exigida recebe "não encontrado", sem saber se o arquivo existe. Exemplo: Leandro, que confere o comprovante de residência de Fernanda, não abre o RG dela sem a permissão de documentos de identificação. A concessão das permissões segue a governança dos acessos, com a etapa da proteção de dados decidida pelo Representante do controlador. Detalha o acesso restrito ao documento do candidato (UNI-REQ-0130). Decisão do líder técnico em 31/10/2026.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'requisito',
@@ -7065,7 +7325,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O ato de qualquer pessoa titular designada é aceito sem quórum e sem votação, e fica registrado com autoria, data e justificativa quando houver; quem não é titular designada é recusada.',
+      'O ato de qualquer pessoa titular designada é aceito sem quórum e sem votação, e fica registrado com autoria, data e justificativa quando houver; quem não é titular designado é recusado.',
     verificacao:
       'Testes automatizados do ato por titular e por quem não é titular, e do registro de autoria (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7087,7 +7347,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cada ato listado é aceito para a pessoa titular designada da banca de homologação das inscrições, com a permissão na unidade da fase de homologação das inscrições, e recusado para quem não é titular designada ou, quando a unidade responsável pelo processo é outra, não tem a permissão na unidade da fase de homologação das inscrições; a publicação do resultado segue o documento da fase.',
+      'Cada ato listado é aceito para a pessoa titular designada da banca de homologação das inscrições, com a permissão na unidade da fase de homologação das inscrições, e recusado para quem não é titular designado ou, quando a unidade responsável pelo processo é outra, não tem a permissão na unidade da fase de homologação das inscrições; a publicação do resultado segue o documento da fase.',
     verificacao:
       'Testes automatizados de cada ato da banca, com titular e sem ser titular (planejado).',
     pagina_developers: '/produto/regras-negocio/',
