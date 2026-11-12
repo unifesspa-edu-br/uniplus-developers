@@ -1063,7 +1063,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0160',
     titulo: 'Correção que muda o resultado preliminar reabre o prazo de recurso',
     enunciado:
-      'Quando o resultado preliminar em que se ancora a janela de recurso é corrigido e a correção muda o resultado de alguém, o candidato ganha um novo prazo de recurso, inteiro, contado a partir da publicação da correção e pelas mesmas regras de prazo do edital (UNI-REQ-0113 a UNI-REQ-0116). Assim, quem foi afetado pela correção tem sempre o prazo completo para recorrer do resultado que passou a valer, mesmo quando a correção sai perto do fim do prazo original ou depois dele. A correção de erro no documento que não muda o resultado de ninguém não reinicia o prazo (PO, 10/11/2026). Se a correção muda algum resultado, o caminho é a retificação, com novo resultado preliminar e novo prazo (PO, 10/11/2026); para a homologação das inscrições, é o caso do UNI-REQ-0282, que a issue #445 vai generalizar. O recurso é contra o resultado corrigido, e não contra a errata (UNI-REQ-0157). Se o mesmo resultado for corrigido de novo e a nova correção mudar o resultado de alguém, o prazo é reaberto de novo, a partir dela. Pendente de definição do PO: quando o edital é retificado entre a publicação do preliminar e a da correção, qual versão do edital rege o prazo reaberto (a vigente na publicação do preliminar ou a vigente na publicação da correção); e o que acontece com o recurso apresentado antes da correção (continua valendo contra o resultado corrigido, perde o objeto ou pode ser complementado). Enquanto isso não é definido, o recurso apresentado antes da correção não é descartado pelo sistema. A reabertura só acontece enquanto o definitivo da matéria não foi publicado: depois dele, o preliminar não se corrige mais (UNI-REQ-0162). Decisão do líder técnico em 18/10/2026; a limitação à correção que muda resultado foi definida pelo PO em 10/11/2026.',
+      'Quando o resultado preliminar em que se ancora a janela de recurso é corrigido e a correção muda o resultado de alguém, o candidato ganha um novo prazo de recurso, inteiro, contado a partir da publicação da correção e pelas mesmas regras de prazo do edital (UNI-REQ-0113 a UNI-REQ-0116). Assim, quem foi afetado pela correção tem sempre o prazo completo para recorrer do resultado que passou a valer, mesmo quando a correção sai perto do fim do prazo original ou depois dele. A correção de erro no documento que não muda o resultado de ninguém não reinicia o prazo (PO, 10/11/2026). Se a correção muda algum resultado, o caminho é a retificação, com novo resultado preliminar e novo prazo (PO, 10/11/2026); isso vale para qualquer resultado preliminar (UNI-REQ-0282). O recurso é contra o resultado corrigido, e não contra a errata (UNI-REQ-0157). Se o mesmo resultado for corrigido de novo e a nova correção mudar o resultado de alguém, o prazo é reaberto de novo, a partir dela. Pendente de definição do PO: quando o edital é retificado entre a publicação do preliminar e a da correção, qual versão do edital rege o prazo reaberto (a vigente na publicação do preliminar ou a vigente na publicação da correção); e o que acontece com o recurso apresentado antes da correção (continua valendo contra o resultado corrigido, perde o objeto ou pode ser complementado). Enquanto isso não é definido, o recurso apresentado antes da correção não é descartado pelo sistema. A reabertura só acontece enquanto o definitivo da matéria não foi publicado: depois dele, o preliminar não se corrige mais (UNI-REQ-0162). Decisão do líder técnico em 18/10/2026; a limitação à correção que muda resultado foi definida pelo PO em 10/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1075,7 +1075,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'A correção publicada do resultado preliminar em que se ancora uma janela de recurso, quando muda o resultado de alguém, abre um novo prazo de recurso nessa janela, contado da publicação da correção pelas regras de prazo do edital; o novo prazo vale também quando a correção sai depois do fim do prazo original; o recurso aberto nesse prazo é contra o resultado corrigido; uma nova correção do mesmo resultado só reabre o prazo, a partir dela, quando muda o resultado de alguém; a correção de erro no documento que não muda o resultado de ninguém não reinicia o prazo; a correção que muda resultado segue pela retificação, com novo preliminar e novo prazo (na homologação das inscrições, UNI-REQ-0282, que a issue #445 vai generalizar); a correção de preliminar sem janela de recurso ancorada não abre prazo; depois do definitivo publicado, a correção do preliminar é recusada (UNI-REQ-0162).',
+      'A correção publicada do resultado preliminar em que se ancora uma janela de recurso, quando muda o resultado de alguém, abre um novo prazo de recurso nessa janela, contado da publicação da correção pelas regras de prazo do edital; o novo prazo vale também quando a correção sai depois do fim do prazo original; o recurso aberto nesse prazo é contra o resultado corrigido; uma nova correção do mesmo resultado só reabre o prazo, a partir dela, quando muda o resultado de alguém; a correção de erro no documento que não muda o resultado de ninguém não reinicia o prazo; a correção que muda resultado segue pela retificação, com novo preliminar e novo prazo (UNI-REQ-0282); a correção de preliminar sem janela de recurso ancorada não abre prazo; depois do definitivo publicado, a correção do preliminar é recusada (UNI-REQ-0162).',
     verificacao:
       'Testes automatizados (correção dentro do prazo original reabre o prazo inteiro; correção depois do fim do prazo original reabre o prazo; recurso contra o resultado corrigido; segunda correção reabre o prazo a partir dela; correção que não muda resultado não reabre o prazo) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -6697,23 +6697,23 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0281',
-    titulo: 'Preliminar publicado não aceita retorno do INEP diferente do importado',
+    titulo: 'Preliminar publicado trava os dados que o alimentaram',
     enunciado:
-      'Enquanto o resultado preliminar da homologação das inscrições publicado estiver valendo, o sistema não aceita novo arquivo de retorno do INEP diferente do já importado; o mesmo arquivo continua aceito. A correção de um caso individual se faz pelo recurso. O erro que atinge várias pessoas, ou o erro material, que não se resolve por recurso individual se corrige por retificação do edital (UNI-REQ-0282). Depois da publicação do preliminar, esta regra restringe a substituição do arquivo de retorno prevista no UNI-REQ-0174, que continua valendo antes dela. Como corrigir um arquivo de retorno errado quando a retificação não muda a regra de homologação nem as inscrições da fase está pendente de definição do PO. Entendimento da reunião do líder técnico com o PO em 09/11/2026, a confirmar pelo PO por escrito.',
+      'Enquanto o resultado preliminar publicado estiver valendo, os dados que o produziram não são substituídos: o arquivo ou a planilha que o alimentou não é trocado por outro diferente, e o mesmo arquivo já importado pode ser importado de novo, sem efeito. A correção de um caso individual se faz pelo recurso; o erro que atinge várias pessoas, ou o erro material que não se resolve por recurso individual, se corrige por retificação do edital (UNI-REQ-0282). Na homologação das inscrições, a regra restringe, depois da publicação do preliminar, a substituição do arquivo de retorno do INEP prevista no UNI-REQ-0174, que continua valendo antes dela. Exemplo: depois do preliminar das notas de uma prova, a planilha de notas não é trocada, e Kevin, que discorda da nota dele, recorre; depois do preliminar da homologação das inscrições, um retorno do INEP diferente do já importado é recusado, e importar de novo o mesmo arquivo é aceito, sem efeito. Aprovado pelo PO em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
     parent_id: 'UNI-REQ-0174',
     modulo: 'Seleção',
     recorte: 'mvp',
-    status: 'proposto',
+    status: 'aprovado',
     prioridade: 'must',
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Com preliminar publicado e valendo, a importação de arquivo diferente é recusada com erro nomeado e a do mesmo arquivo é aceita sem mudar o resultado.',
+      'Com preliminar publicado e valendo, a substituição dos dados que o produziram por outros diferentes é recusada com erro nomeado, e a repetição dos mesmos dados é aceita sem mudar o resultado.',
     verificacao:
-      'Teste automatizado das duas importações depois da publicação do preliminar (planejado).',
+      'Teste automatizado das duas operações depois da publicação do preliminar, na homologação das inscrições e num resultado com planilha de notas (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -6721,21 +6721,21 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0282',
     titulo: 'Retificação depois do preliminar gera novo preliminar e novo prazo de recurso',
     enunciado:
-      'Se uma retificação do edital, depois da publicação do resultado preliminar da homologação das inscrições, mudar a regra de homologação ou as inscrições da fase (por exemplo, prorrogação das inscrições ou mudança das edições do ENEM aceitas), é publicado um novo preliminar, com novo prazo de recurso. A importação do retorno do INEP é reaberta, os recursos já apresentados ficam registrados, mas sem efeito, e o candidato pode recorrer contra o novo preliminar. Assim, ninguém chega ao resultado definitivo sem a oportunidade de recorrer. Se a retificação retirar uma edição do ENEM em que haja pessoa inscrita, o novo preliminar fica bloqueado até uma nova retificação voltar a aceitar essa edição. O novo preliminar abre um novo ciclo do mesmo item do edital: é a publicação original desse ciclo, identificada pelo número do ciclo e ligada ao preliminar que substitui, e não uma correção do preliminar anterior; a publicação única por item do UNI-REQ-0157 passa a valer por ciclo. Os recursos do preliminar substituído não precisam ser julgados para o definitivo, que espera só os do novo ciclo; o tratamento dos recursos anteriores está pendente de confirmação do PO. A correção do mesmo preliminar segue o UNI-REQ-0160: só a que muda resultado reabre o prazo, e então pela retificação, com novo preliminar e novo prazo. Este requisito trata da homologação das inscrições, e a issue #445 vai generalizá-lo. Entendimento da reunião do líder técnico com o PO em 09/11/2026, a confirmar pelo PO por escrito.',
+      'Se uma retificação do edital, depois da publicação de um resultado preliminar, mudar a regra ou os dados de entrada desse preliminar (por exemplo, a prorrogação das inscrições, a mudança das edições do ENEM aceitas ou o peso de uma questão), é publicado um novo preliminar, com novo prazo de recurso. Quando os dados vêm de importação, como o retorno do INEP, a importação é reaberta. Os recursos já apresentados ficam registrados, mas sem efeito, e o candidato pode recorrer contra o novo preliminar. Assim, ninguém chega ao resultado definitivo sem a oportunidade de recorrer. Se a retificação retirar uma edição do ENEM em que haja pessoa inscrita, o novo preliminar fica bloqueado até uma nova retificação voltar a aceitar essa edição, para que ninguém fique sem resultado. O novo preliminar abre um novo ciclo do mesmo item do edital: é a publicação original desse ciclo, identificada pelo número do ciclo e ligada ao preliminar que substitui, e não uma correção do preliminar anterior; a publicação única por item do UNI-REQ-0157 passa a valer por ciclo. Os recursos do preliminar substituído não precisam ser julgados para o definitivo, que espera só os do novo ciclo. A correção do mesmo preliminar segue o UNI-REQ-0160: só a que muda resultado reabre o prazo, e então pela retificação, com novo preliminar e novo prazo. Exemplo: depois do preliminar das notas de uma prova, uma retificação muda o peso de uma questão; sai novo preliminar das notas, com novo prazo, e Helena pode recorrer de novo. Aprovado pelo PO em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
     parent_id: 'UNI-REQ-0265',
     modulo: 'Seleção',
     recorte: 'mvp',
-    status: 'proposto',
+    status: 'aprovado',
     prioridade: 'must',
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A retificação que muda a regra ou as inscrições da fase exige novo preliminar antes do definitivo; os recursos anteriores ficam registrados e sem efeito; o novo preliminar abre novo prazo; a retirada de edição com inscrito bloqueia o novo preliminar.',
+      'A retificação que muda a regra ou os dados de entrada de um preliminar publicado exige novo preliminar antes do definitivo; os recursos anteriores ficam registrados e sem efeito; o novo preliminar abre novo prazo; na homologação das inscrições, a retirada de edição com inscrito bloqueia o novo preliminar.',
     verificacao:
-      'Teste automatizado da retificação depois do preliminar, com e sem edição retirada (planejado).',
+      'Teste automatizado da retificação depois do preliminar, na homologação das inscrições, com e sem edição retirada, e num resultado de prova (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
