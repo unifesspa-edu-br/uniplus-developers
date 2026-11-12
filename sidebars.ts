@@ -667,6 +667,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.autorizacao.revisao.decisor_nao_decide_o_item',
         'erros/uniplus.autorizacao.revisao.identidade_incompleta',
         'erros/uniplus.autorizacao.revisao.autor_nao_identificado',
+        'erros/uniplus.autorizacao.revisao.filtro_de_situacao_invalido',
         'erros/uniplus.autorizacao.pedido.filtro_de_situacao_invalido',
         'erros/uniplus.autorizacao.pedido.cursor_invalido',
         'erros/uniplus.autorizacao.registro_de_acesso.falha_ao_gravar',
