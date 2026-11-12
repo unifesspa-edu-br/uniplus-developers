@@ -114,6 +114,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.fase_cronograma.categoria_documento_nao_encontrada',
         'erros/uniplus.selecao.fase_cronograma.unidade_responsavel_nao_encontrada',
         'erros/uniplus.selecao.fase_cronograma.unidade_de_fase_iniciada_nao_muda',
+        'erros/uniplus.selecao.fase_cronograma.fase_iniciada_nao_sai_do_cronograma',
         'erros/uniplus.selecao.processo_seletivo.etapa_sem_fase_declarada',
         'erros/uniplus.selecao.banca_requerida.recorte_de_competencia_obrigatorio',
         'erros/uniplus.selecao.banca_requerida.recorte_de_competencia_duplicado',
