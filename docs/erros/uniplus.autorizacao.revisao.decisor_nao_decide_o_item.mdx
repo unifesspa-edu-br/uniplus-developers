@@ -1,7 +1,7 @@
 ---
 title: O item cabe à outra governança
 sidebar_label: Item de outra governança
-description: Os acessos de quem é Representante do controlador são revistos pelos gestores de acessos; os demais, pelo Representante do controlador.
+description: O Representante do controlador decide os acessos de quem não é Representante, e os gestores de acessos, os de quem é Representante no instante da decisão.
 code: uniplus.autorizacao.revisao.decisor_nao_decide_o_item
 http_status: 422
 situacao: publicado
@@ -13,6 +13,8 @@ requisitos:
 rastreio:
   - label: 'uniplus-api#2139'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2139
+  - label: 'uniplus-api#2363'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2363
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -21,8 +23,10 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Quem tentou decidir não é da governança a que o item cabe.
+O item cabe à outra governança: o Representante do controlador decide os acessos de quem não é Representante, e os gestores de acessos, os de quem é Representante no instante da decisão.
+
+Quem tentou decidir não tem o papel a que o item cabe. A condição de Representante da pessoa beneficiária é conferida na hora da decisão, e não na abertura da revisão: se a designação dela foi concedida, revogada ou venceu com a revisão aberta, o papel que decide o item mudou. O campo `decide` do item informa o papel atual (`representante-do-controlador` ou `gestor-de-acessos`).
 
 ## Como resolver
 
-Peça a decisão a quem tem o papel indicado no item: gestor de acessos, para as concessões de quem é Representante do controlador, ou Representante do controlador, para as demais.
+Recarregue a revisão e confira o campo `decide` do item. Peça a decisão a quem tem esse papel: um gestor de acessos, quando a pessoa beneficiária é Representante do controlador, ou um Representante do controlador, nos demais casos. Ninguém decide o item da própria concessão.
