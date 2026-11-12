@@ -32,6 +32,16 @@ const sidebars: SidebarsConfig = {
         'produto/codigo-de-cadastro-institucional',
         {
           type: 'category',
+          label: 'Atos de governança de acessos',
+          link: {type: 'doc', id: 'produto/governanca-de-acessos/index'},
+          items: [
+            'produto/governanca-de-acessos/portaria-e-designacao',
+            'produto/governanca-de-acessos/termos',
+            'produto/governanca-de-acessos/validacoes-institucionais',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Modelo de negócio',
           items: [
             'produto/modelo-negocio/selecao',
