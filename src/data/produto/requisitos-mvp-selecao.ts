@@ -6567,7 +6567,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0275',
     titulo: 'Regra de deliberação da banca é a do edital',
     enunciado:
-      'O edital define, para cada banca: o número de integrantes; o número de suplentes; o quórum; o critério de decisão (maioria simples, maioria absoluta ou unanimidade); a forma de desempate (voto da presidência da banca ou nova votação); como a votação termina (quando todos os integrantes votam, ou quando a presidência encerra ao atingir o quórum); e o que vale quando a unanimidade não é alcançada. O sistema não impõe nenhuma dessas regras; segue a do edital. A banca de homologação das inscrições é a exceção: age por ato individual, sem quórum nem votação (UNI-REQ-0338). Quando a votação termina ao atingir o quórum, a unanimidade é a dos votos registrados. Confirmado pelo PO em 10/11/2026.',
+      'O edital define, para cada banca: o número de integrantes; o número de suplentes; o quórum; o critério de decisão (maioria simples, maioria absoluta ou unanimidade); a forma de desempate (voto da presidência da banca ou nova votação); como a votação termina (quando todos os integrantes votam, ou quando a presidência encerra ao atingir o quórum); e o que vale quando a unanimidade não é alcançada. O sistema não impõe nenhuma dessas regras; segue a do edital. A banca de homologação das inscrições é a exceção: age por ato individual, sem quórum nem votação (UNI-REQ-0338). Quando a votação termina ao atingir o quórum, a unanimidade é a dos votos registrados. Confirmado pelo PO em 10/11/2026 e em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6589,7 +6589,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0276',
     titulo: 'Designação da banca tem exatamente o número previsto no edital',
     enunciado:
-      'A designação da banca contém exatamente o número de integrantes e de suplentes previsto no edital. O suplente só vota quando substitui um integrante, e o voto pertence à vaga de integrante, não à pessoa. A banca é designada pela unidade responsável pela fase ou pela etapa dela (UNI-REQ-0330 e UNI-REQ-0331). A banca pode ter uma única pessoa. O número de integrantes, de suplentes, o quórum e as demais regras de deliberação são configuração de cada edital (UNI-REQ-0275), e não regra fixa do sistema. Quem tem inscrição enviada e não cancelada no processo não integra a banca (UNI-REQ-0182). Confirmado pelo PO em 10/11/2026.',
+      'A designação da banca contém exatamente o número de integrantes e de suplentes previsto no edital. O suplente só vota quando substitui um integrante, e o voto pertence à vaga de integrante, não à pessoa. A banca é designada pela unidade responsável pela fase ou pela etapa dela (UNI-REQ-0330 e UNI-REQ-0331). A banca pode ter uma única pessoa. O número de integrantes, de suplentes, o quórum e as demais regras de deliberação são configuração de cada edital (UNI-REQ-0275), e não regra fixa do sistema. Quem tem inscrição enviada e não cancelada no processo não integra a banca (UNI-REQ-0182). Confirmado pelo PO em 10/11/2026 e em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6633,7 +6633,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0278',
     titulo: 'Decisões dos recursos saem em documento único assinado',
     enunciado:
-      'As decisões dos recursos de uma janela saem num documento único, com o número de inscrição e o resultado de cada recurso, sem motivo, assinado por todos os que votaram. Até o Uni+ ter integração com a assinatura gov.br, a assinatura é feita no gov.br, fora do sistema, como a Unifesspa já faz com os seus documentos, e o documento assinado é anexado e conferido no sistema. Havendo recursos, o resultado definitivo só é publicado depois do documento assinado e conferido (UNI-REQ-0161); sem recursos, não há documento das decisões. O documento é arquivado, não publicado: o Uni+ não o mostra ao candidato (UNI-REQ-0290). Confirmado pelo PO em 10/11/2026.',
+      'As decisões dos recursos de uma janela saem num documento único, com o número de inscrição e o resultado de cada recurso, sem motivo, assinado por todos os que votaram. Até o Uni+ ter integração com a assinatura gov.br, a assinatura é feita no gov.br, fora do sistema, como a Unifesspa já faz com os seus documentos, e o documento assinado é anexado e conferido no sistema. Havendo recursos, o resultado definitivo só é publicado depois do documento assinado e conferido (UNI-REQ-0161); sem recurso apresentado, não há documento das decisões, e o resultado definitivo é publicado depois do fim do prazo. O documento é arquivado, não publicado: o Uni+ não o mostra ao candidato (UNI-REQ-0290). Confirmado pelo PO em 10/11/2026 e em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6875,7 +6875,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0289',
     titulo: 'Candidato vê o motivo do próprio resultado depois da publicação',
     enunciado:
-      'Somente depois da publicação do resultado, o candidato vê, na área do candidato, o próprio resultado. Na decisão automática: a situação, o motivo de cada condição não cumprida, o que a apuração encontrou e a unidade responsável pela fase em que a decisão foi tomada. Na decisão tomada por pessoas: a situação, o motivo, a justificativa, o nome da banca e a unidade responsável pela fase em que a decisão foi tomada. Assim o candidato conhece o motivo para poder recorrer, sem que o motivo vá para a publicação. Confirmado pelo PO em 10/11/2026.',
+      'Somente depois da publicação do resultado, o candidato vê, na área do candidato, o próprio resultado. Na decisão automática: a situação, o motivo de cada condição não cumprida, o que a apuração encontrou e a unidade responsável pela fase em que a decisão foi tomada. Na decisão tomada por pessoas: a situação, o motivo, a justificativa, o nome da banca e a unidade responsável pela fase em que a decisão foi tomada. Assim o candidato conhece o motivo para poder recorrer, sem que o motivo vá para a publicação. Exemplo: Marlene, eliminada pela decisão automática da homologação das inscrições, vê "Não foram localizadas as informações necessárias na base de dados do INEP para o CPF e ano de referência do Enem cadastrados no ato da inscrição" e que a edição de 2025 não trouxe resultado para o CPF dela. Confirmado pelo PO em 10/11/2026 e em 11/11/2026.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'regra',
