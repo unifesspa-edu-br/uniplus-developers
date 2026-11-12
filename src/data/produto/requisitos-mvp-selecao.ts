@@ -2494,9 +2494,10 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0115',
-    titulo: 'Âncora do prazo de interposição conforme a convenção de contagem',
+    titulo:
+      'Âncora do prazo de interposição é a divulgação, conforme a convenção de contagem',
     enunciado:
-      'A âncora do prazo de interposição é a publicação do ato contra o qual se recorre, igual para todos os candidatos (UNI-REQ-0269), e a forma dela segue a convenção de contagem que o processo declara (UNI-REQ-0112). Na convenção **por exclusão do dia de início**, a contagem começa às 00:00 do primeiro dia útil posterior ao dia da âncora e descarta a hora dela, então a âncora é a **data de publicação** declarada pelo ato, lida no fuso congelado na versão publicada. Nas convenções **por horas úteis desde a âncora** e **por avanço de data útil**, que preservam a hora da âncora, ela é o **instante da publicação**: data, hora e o deslocamento em relação a UTC efetivamente aplicado, informados por quem publica o ato, nunca uma hora local acompanhada apenas do nome do fuso. Uma hora local declarada que caia em salto ou em repetição de horário de verão é recusada com erro nomeado. A âncora nunca é o instante em que o registro foi gravado ou processado no sistema, que é dado de auditoria e deslocaria a janela sempre que o registro atrasasse. O fechamento é o que a convenção declarada produz (UNI-REQ-0112) e é guardado como instante absoluto, como as demais janelas do cronograma, de modo que duas leituras do mesmo snapshot cheguem ao mesmo resultado. A publicação confirmada no sistema depois de a contagem começar segue o UNI-REQ-0368. A âncora por ciência individual não existe no recurso: o PO confirmou em 10/11/2026 que nenhuma decisão é comunicada só ao candidato. Decisão do líder técnico em 11/11/2026 (uniplus-developers#440).',
+      'A âncora do prazo de interposição é a divulgação do ato contra o qual se recorre, igual para todos os candidatos (UNI-REQ-0269): a publicação vale na divulgação, e o instante dela é gravado pelo sistema, uma só vez por ato, sem data informada por quem publica. A forma da âncora segue a convenção de contagem que o processo declara (UNI-REQ-0112). Na convenção **por exclusão do dia de início**, a contagem começa às 00:00 do primeiro dia útil posterior ao dia da divulgação e descarta a hora dela. Nas convenções **por horas úteis desde a âncora** e **por avanço de data útil**, que preservam a hora da âncora, ela é o instante da divulgação, com o deslocamento em relação a UTC efetivamente aplicado. O dia civil é lido no fuso congelado na versão publicada, e a reprodução da contagem é garantida pela mesma versão das regras de fuso (UNI-REQ-0111). A data impressa no documento é a de emissão e não entra na contagem. A contagem sempre começa depois da divulgação, e por isso o recurso é admitido desde a divulgação, com limite exclusivo no fim do prazo: o candidato nunca perde prazo por atraso de registro. O instante em que o registro foi gravado ou processado por outro caminho nunca substitui a âncora. O fechamento é o que a convenção declarada produz (UNI-REQ-0112) e é guardado como instante absoluto, como as demais janelas do cronograma, de modo que duas leituras do mesmo snapshot cheguem ao mesmo resultado. A âncora por ciência individual não existe no recurso: o PO confirmou em 10/11/2026 que nenhuma decisão é comunicada só ao candidato. Decisão do líder técnico em 11/11/2026 (uniplus-developers#440).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2508,7 +2509,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Na convenção por exclusão do dia de início, dois atos com a mesma data de publicação produzem a mesma janela, qualquer que seja a hora do registro; nas convenções por horas úteis e por avanço de data útil, a âncora é o instante de publicação com deslocamento explícito, a âncora sem deslocamento é recusada, e a hora local inexistente ou repetida é recusada com erro nomeado; o instante de gravação ou de processamento nunca substitui a âncora; o fechamento é guardado como instante absoluto; a configuração do recurso não aceita âncora por ciência individual.',
+      'Na convenção por exclusão do dia de início, dois atos divulgados no mesmo dia produzem a mesma janela, qualquer que seja a hora da divulgação; nas convenções por horas úteis e por avanço de data útil, a âncora é o instante da divulgação gravado pelo sistema, com deslocamento explícito; nenhuma data de publicação é informada por quem publica o ato, e a data impressa no documento não altera a janela; o recurso é admitido desde a divulgação, e o limite do prazo é exclusivo; o fechamento é guardado como instante absoluto; a configuração do recurso não aceita âncora por ciência individual.',
     verificacao:
       'Testes automatizados da âncora e do fechamento nas três convenções, em dias úteis e em horas (planejado, uniplus-api#2326).',
     pagina_developers: '/produto/regras-negocio/',
@@ -7830,21 +7831,22 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0368',
-    titulo: 'Publicação confirmada depois de a contagem começar é refeita com o prazo inteiro',
+    titulo:
+      'Substituído: a publicação vale na divulgação e não há atraso a refazer',
     enunciado:
-      'Se a publicação de um ato contra o qual cabe recurso só for confirmada no sistema quando a contagem do prazo já começou, não se aceitam recursos nessa publicação, e ela é refeita com nova data e o prazo inteiro. A contagem começa onde a convenção declarada a faz começar (UNI-REQ-0112): na convenção por exclusão do dia de início, às 00:00 do primeiro dia útil posterior à data de publicação; nas convenções por horas úteis e por avanço de data útil, no instante de publicação declarado, que por isso precisa ser posterior à confirmação. Exemplo: o resultado preliminar declara publicação em 10/11 e a confirmação chega em 11/11 às 09h, já dentro do primeiro dia útil da contagem; o resultado é publicado de novo, com nova data. Confirmado pelo PO em 10/11/2026; ADR-0158 da uniplus-api.',
+      'Requisito substituído pelo UNI-REQ-0115. Previa-se que a publicação confirmada no sistema depois de a contagem começar fosse refeita com nova data e o prazo inteiro. A decisão do líder técnico de 11/11/2026 é outra: a data da publicação é a da divulgação, gravada pelo sistema, e a contagem sempre começa depois dela. Por isso o atraso deixou de existir, e não há publicação refeita nem tentativa sem eficácia. A decisão não contraria o que o PO confirmou em 10/11/2026, que é o candidato não perder prazo por atraso na publicação: a regra nova garante isso por construção.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
     parent_id: 'UNI-REQ-0080',
     modulo: 'Seleção',
-    recorte: 'mvp',
-    status: 'aprovado',
+    recorte: 'fora_escopo',
+    status: 'historico',
     prioridade: 'must',
-    politica_backlog: 'implementavel',
-    tipo_issue_recomendado: 'Task',
+    politica_backlog: 'governanca',
+    tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'A confirmação antes do início da contagem abre a janela de recurso; a confirmação no início da contagem ou depois não abre a janela e exige nova publicação; a nova publicação abre a janela com o prazo inteiro.',
+      'Sem critério próprio: a âncora do prazo e a admissão do recurso estão no UNI-REQ-0115.',
     verificacao: 'Testes automatizados da confirmação antes, no início e depois do início da contagem, nas três convenções (planejado, uniplus-api#2326).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
