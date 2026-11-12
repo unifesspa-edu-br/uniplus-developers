@@ -13,6 +13,8 @@ requisitos:
 rastreio:
   - label: 'uniplus-api#2134'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2134
+  - label: 'uniplus-api#2388'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2388
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -21,8 +23,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A data de fim da concessão não é posterior ao início, ou foi informada para perfil de governança que não tem concessão com prazo, como o de gestor de acessos.
+A data de fim da concessão não é posterior ao início, ou foi informada para o perfil de gestor de acessos, que não admite prazo: a concessão do gestor só termina pela revogação, que confere o mínimo de dois gestores. Os perfis de Representante do controlador e de Encarregado de dados admitem prazo, como os perfis comuns.
 
 ## Como resolver
 
-Informe uma data de fim posterior ao início, ou não informe data para os perfis de governança.
+Informe uma data de fim posterior ao início. Para o perfil de gestor de acessos, não informe data de fim.
