@@ -1,0 +1,39 @@
+---
+title: Uma fase iniciada não sai do cronograma
+sidebar_label: Fase iniciada não sai
+description: Rascunho — a retificação tenta remover do cronograma uma fase que já começou.
+code: uniplus.selecao.fase_cronograma.fase_iniciada_nao_sai_do_cronograma
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases durante a retificação do processo seletivo
+  - Fechamento da retificação do processo seletivo
+requisitos:
+  - UNI-REQ-0364
+  - UNI-REQ-0333
+rastreio:
+  - label: 'uniplus-api#2337'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2337
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A retificação remove do cronograma uma fase que já está iniciada. A fase está
+iniciada desde o início da janela publicada ou desde o primeiro ato ou registro
+dela, o que vier primeiro, mesmo quando tem janela. A fase encerrada também conta
+como iniciada. A remoção é conferida ao editar o cronograma e de novo ao fechar a
+retificação, porque a fase pode ter começado entre uma e outra, e a comparação é
+feita com a versão publicada vigente, não com o que a retificação aberta já
+gravou.
+
+## Como resolver
+
+Mantenha a fase no cronograma da retificação, com a unidade que ela tem na versão
+publicada. A fase que ainda não começou, sem janela aberta e sem ato ou registro,
+continua podendo sair do cronograma, sujeita às demais regras de publicação e
+retificação.
