@@ -1,0 +1,33 @@
+---
+title: Não há termo de responsabilidade publicado
+sidebar_label: Termo ausente
+description: Pedido de perfil protegido não é criado enquanto não houver termo de responsabilidade publicado.
+code: uniplus.autorizacao.pedido.sem_termo_vigente
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Criação do pedido de concessão de acesso (`POST /api/autorizacao/pedidos-de-concessao`)
+requisitos:
+  - UNI-REQ-0377
+  - UNI-REQ-0378
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil pedido dá acesso a dado pessoal ou sensível e exige o aceite do termo de responsabilidade, mas nenhuma versão foi publicada. Peça ao gestor de acessos que publique o termo.
+
+O pedido fixa a versão vigente do termo na criação, e sem versão publicada não há o que fixar. Nenhum pedido foi criado.
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Peça ao gestor de acessos que publique o termo de responsabilidade. Depois da publicação, faça o pedido de novo.

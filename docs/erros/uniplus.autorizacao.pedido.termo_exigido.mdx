@@ -1,0 +1,30 @@
+---
+title: O perfil passou a exigir o termo de responsabilidade
+sidebar_label: Termo passou a ser exigido
+description: O perfil passou a dar acesso a dado pessoal ou sensível depois da criação do pedido, que foi devolvido ao solicitante.
+code: uniplus.autorizacao.pedido.termo_exigido
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Aprovação do pedido de concessão de acesso pelo gestor de acessos
+requisitos:
+  - UNI-REQ-0378
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O perfil passou a dar acesso a dado pessoal ou sensível depois da criação do pedido, que não tem termo de responsabilidade fixado. O pedido foi devolvido; refaça-o para aceitar o termo.
+
+Quando o pedido foi criado, o perfil não exigia o termo, e por isso nenhuma versão foi fixada nem aceita. Na aprovação pelo gestor de acessos, o perfil já é protegido, e nenhuma concessão protegida nasce sem o aceite do termo (ADR-0162 da uniplus-api). A aprovação não foi registrada e não houve concessão: o pedido foi encerrado como devolvido, e a trilha do pedido registra a devolução por termo exigido. Diferentemente das demais recusas, essa devolução fica gravada.
+
+## Como resolver
+
+O pedido devolvido não volta à fila. Quem pediu faz um pedido novo do mesmo perfil, que agora fixa a versão vigente do termo; a pessoa beneficiária aceita o termo, depois da verificação do documento quando houver, e o novo pedido segue para o gestor de acessos.

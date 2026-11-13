@@ -1,0 +1,32 @@
+---
+title: O pedido não declarou documento
+sidebar_label: Anexo não declarado
+description: No pedido de perfil protegido, o documento só se anexa se o pedido declarou, na criação, que o anexaria.
+code: uniplus.autorizacao.pedido.anexo_nao_declarado
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Envio do anexo do pedido de concessão de acesso
+requisitos:
+  - UNI-REQ-0378
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento só se anexa ao pedido que declarou, na criação, que o anexaria. Cancele e refaça o pedido declarando o documento.
+
+A regra vale para o pedido de perfil protegido; o pedido de perfil comum continua aceitando anexo até a primeira decisão. A intenção de anexar documento (`anexaraDocumento`) é declarada na criação do pedido de perfil protegido, porque ela define a ordem entre a verificação do documento, o aceite do termo e a decisão do gestor. Nada foi anexado.
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Cancele o pedido e faça um novo declarando que vai anexar o documento. Enquanto o pedido atual estiver em andamento, o novo é recusado como pedido duplicado; por isso o cancelamento vem antes.

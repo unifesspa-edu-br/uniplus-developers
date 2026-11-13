@@ -1,0 +1,32 @@
+---
+title: Outra versão foi publicada antes
+sidebar_label: Vigente alterado
+description: A versão vigente mudou desde que a tela foi aberta.
+code: uniplus.autorizacao.termo.vigente_alterado
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Publicação de versão do termo de responsabilidade (`POST /api/autorizacao/termos-de-responsabilidade/versoes`)
+requisitos:
+  - UNI-REQ-0377
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Outra versão do termo foi publicada depois que a tela foi aberta. Confira a versão vigente antes de publicar outra.
+
+A publicação informa a versão vigente que a tela carregou (`versaoVigenteEsperadaId`), e ela não é mais a vigente. Nada foi publicado.
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Recarregue a tela, leia a versão nova e confira se ainda é preciso publicar outra. Se for, publique a partir da versão nova.
