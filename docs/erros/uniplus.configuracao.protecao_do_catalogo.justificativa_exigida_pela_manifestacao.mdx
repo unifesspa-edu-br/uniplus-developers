@@ -1,0 +1,31 @@
+---
+title: Aprovar ou recomendar ajuste diante de manifestação desfavorável vigente exige a justificativa
+sidebar_label: Justificativa exigida pela manifestação
+description: Diante de manifestação desfavorável vigente, a aprovação e o ajuste recomendado exigem justificativa.
+code: uniplus.configuracao.protecao_do_catalogo.justificativa_exigida_pela_manifestacao
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (`POST /api/configuracao/admin/protecao-do-catalogo`)
+requisitos:
+  - UNI-REQ-0374
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#2366'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O item tem, no ciclo de aprovação atual, manifestação desfavorável vigente do Encarregado de dados (parecer recomenda ajuste ou inadequada). Nesse caso, o Representante do controlador só aprova ou recomenda ajuste informando a justificativa, que fica registrada no ato da decisão. A justificativa chegou ausente ou em branco, no campo `justificativa`. Nada foi decidido.
+
+Regra da manifestação técnica na proteção do catálogo, definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Informe a justificativa da decisão, explicando por que aprova ou recomenda o ajuste apesar da manifestação desfavorável, e envie de novo. Sem manifestação desfavorável vigente, a justificativa é opcional na aprovação e no ajuste.
