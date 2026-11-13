@@ -7,7 +7,7 @@ http_status: 422
 situacao: publicado
 modulo: Configuração
 emitido_em:
-  - Registro de manifestação na proteção do catálogo (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
+  - Registro de manifestação na proteção do catálogo de tipos de documento e de fatos do candidato (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
 requisitos:
   - UNI-REQ-0373
 rastreio:
@@ -23,7 +23,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 O campo `parecer` da manifestação trouxe um valor que não está entre os aceitos: `ADEQUADA`, `RECOMENDA_AJUSTE` e `INADEQUADA`. A recusa vem no mesmo lote das demais violações do corpo, em `errors[]`. Nada foi registrado.
 
-Regra da manifestação técnica na proteção do catálogo, definida na ADR-0162 da uniplus-api.
+Regra da manifestação técnica na proteção do catálogo de tipos de documento e de fatos do candidato, definida na ADR-0162 da uniplus-api.
 
 ## Como resolver
 

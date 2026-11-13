@@ -7,7 +7,7 @@ http_status: 422
 situacao: publicado
 modulo: Configuração
 emitido_em:
-  - Registro de manifestação na proteção do catálogo (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
+  - Registro de manifestação na proteção do catálogo de tipos de documento e de fatos do candidato (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
 requisitos:
   - UNI-REQ-0373
 rastreio:
@@ -23,7 +23,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 A manifestação com parecer `RECOMENDA_AJUSTE` ou `INADEQUADA` explica o que está inadequado na proteção do item, para que o Representante do controlador saiba o que considerar ao decidir. O texto chegou ausente ou em branco. No parecer `ADEQUADA`, o texto é opcional. Nada foi registrado.
 
-Regra da manifestação técnica na proteção do catálogo, definida na ADR-0162 da uniplus-api.
+Regra da manifestação técnica na proteção do catálogo de tipos de documento e de fatos do candidato, definida na ADR-0162 da uniplus-api.
 
 ## Como resolver
 
