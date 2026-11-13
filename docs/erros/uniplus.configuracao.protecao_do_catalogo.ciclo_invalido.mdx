@@ -1,15 +1,17 @@
 ---
 title: Ciclo de aprovação ausente ou inválido
 sidebar_label: Ciclo inválido
-description: A manifestação precisa informar o ciclo de aprovação lido no item.
+description: A manifestação e a decisão precisam informar o ciclo de aprovação lido no item.
 code: uniplus.configuracao.protecao_do_catalogo.ciclo_invalido
 http_status: 422
 situacao: publicado
 modulo: Configuração
 emitido_em:
   - Registro de manifestação na proteção do catálogo de tipos de documento e de fatos do candidato (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
+  - Decisão da proteção de dados (`POST /api/configuracao/admin/protecao-do-catalogo`)
 requisitos:
   - UNI-REQ-0373
+  - UNI-REQ-0374
 rastreio:
   - label: 'uniplus-api#2366'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
@@ -21,10 +23,11 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A manifestação vale para o ciclo de aprovação em que foi feita, e por isso informa, no campo `ciclo`, o valor de `aprovacao.ciclo` lido no detalhe do item. O ciclo chegou ausente ou com um valor inválido. Nada foi registrado.
+A manifestação e a decisão informam, no campo `ciclo`, o valor de `aprovacao.ciclo` lido no detalhe do item: a manifestação vale para o ciclo de aprovação em que foi feita, e a decisão confere que decide o ciclo que foi lido. O ciclo chegou ausente ou com um valor inválido. Nada foi registrado nem decidido.
 
 Regra da manifestação técnica na proteção do catálogo de tipos de documento e de fatos do candidato, definida na ADR-0162 da uniplus-api.
 
 ## Como resolver
 
-Leia o detalhe do item e envie a manifestação com o valor de `aprovacao.ciclo` que ele traz.
+- **Na manifestação:** leia o detalhe do item e envie a manifestação com o valor de `aprovacao.ciclo` que ele traz.
+- **Na decisão:** releia o item e decida de novo, informando o ciclo e a contagem de manifestações que ele traz.
