@@ -5497,7 +5497,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
       'Quem não tem a permissão de se manifestar é recusado; o Representante do controlador, cujo perfil não inclui a permissão de se manifestar, é recusado; o parecer fora de adequada, recomenda ajuste e inadequada é recusado; o parecer recomenda ajuste ou inadequada sem texto, o texto acima de 2.000 caracteres e o ciclo ausente ou inválido são recusados; o ciclo que mudou depois da leitura responde 409 e exige reler o item; a manifestação em item sem aprovação solicitada é recusada; a nova manifestação da mesma pessoa substitui a vigente, mesmo idêntica, e a anterior continua no histórico como substituída; o reinício deixa as do ciclo anterior como encerradas; a leitura do histórico é registrada e, sem registro, responde 503; manifestações de pessoas diferentes coexistem; o reinício da aprovação encerra o ciclo e a edição sem reinício não o encerra; a decisão sem manifestação é aceita; cada solicitação gera um único aviso por titular; vale para tipos de documento e para fatos.',
-    verificacao: 'Testes automatizados de domínio, de API e de integração com transações reais da manifestação, da substituição, do ciclo e da consulta histórica após gravação e recarga (planejado, uniplus-api#2366).',
+    verificacao: 'Testes automatizados de domínio, de API e de integração com transações reais da manifestação, da substituição, do ciclo e da consulta histórica após gravação e recarga (planejado, uniplus-api#2366); leitura das manifestações pelo administrador do cadastro acompanhada pela uniplus-api#2400.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -5518,7 +5518,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
       'A aprovação ou a recomendação de ajuste sem justificativa diante de manifestação desfavorável vigente é recusada, e com justificativa é aceita e a justificativa fica no ato; diante só de manifestação adequada, ou sem manifestação, a justificativa não é exigida na aprovação nem no ajuste, e quando informada na aprovação fica no ato; o aceite da recomendação pelo administrador não exige nova justificativa; a manifestação e a decisão concorrentes resultam em uma gravada e outra recusada por conflito; o histórico mostra manifestações substituídas e a justificativa da aprovação.',
-    verificacao: 'Testes automatizados de API e de integração com transações reais entre manifestação e recomendação de ajuste, para tipo de documento e para fato, e da consulta histórica após recarga (planejado, uniplus-api#2366).',
+    verificacao: 'Testes automatizados de API e de integração com transações reais entre manifestação e recomendação de ajuste, para tipo de documento e para fato, e da consulta histórica após recarga (planejado, uniplus-api#2366); leitura das manifestações pelo administrador do cadastro acompanhada pela uniplus-api#2400.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
