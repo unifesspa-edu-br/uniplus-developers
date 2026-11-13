@@ -27,8 +27,10 @@ O campo `termoVersaoApresentadaId` não combina com o pedido. Há dois casos:
 - o pedido exige o termo e a versão apresentada não foi informada: "Este pedido exige informar a versão do termo de responsabilidade apresentada.";
 - o perfil não dá acesso a dado pessoal ou sensível, o pedido não exige o termo e a versão foi informada: "Este pedido não exige o termo de responsabilidade, e a versão não deve ser informada."
 
+Todo pedido de perfil protegido informa a versão apresentada na criação, inclusive o feito para outra pessoa e o com documento; no aceite, informa a versão fixada no pedido.
+
 Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
 
 ## Como resolver
 
-Informe em `termoVersaoApresentadaId` a versão do termo que foi mostrada, quando o pedido exige o termo, ou envie o campo vazio quando o perfil não exige termo.
+Informe em `termoVersaoApresentadaId` a versão do termo que foi mostrada em todo pedido de perfil protegido, qualquer que seja o caso, ou envie o campo vazio quando o perfil não exige termo.
