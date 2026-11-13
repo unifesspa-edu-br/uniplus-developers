@@ -1,18 +1,22 @@
 ---
-title: Anexo ainda não verificado
+title: O anexo ainda não foi verificado
 sidebar_label: Anexo não verificado
-description: Só se lê anexo que já passou pela verificação de formato e antivírus.
+description: O anexo do pedido ainda não passou pela verificação; ele não se lê, e o aceite e a decisão esperam por ela.
 code: uniplus.autorizacao.pedido.anexo_nao_verificado
 http_status: 422
 situacao: publicado
 modulo: Autorização
 emitido_em:
-  - Pedido de concessão de acesso
+  - Leitura do anexo do pedido de concessão de acesso
+  - Aceite do pedido pela pessoa beneficiária e decisão do pedido
 requisitos:
   - UNI-REQ-0184
+  - UNI-REQ-0378
 rastreio:
   - label: 'uniplus-api#2135'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2135
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -21,8 +25,14 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O anexo ainda está em verificação ou foi recusado pela verificação, e por isso não pode ser aberto.
+O anexo ainda está em verificação de formato e antivírus, ou foi recusado por ela. A mensagem depende de onde a recusa aconteceu:
+
+- **Na leitura do anexo:** "O anexo só se lê depois de verificado." O arquivo não é entregue enquanto não for verificado.
+- **No aceite do termo ou na decisão do pedido:** "O documento declarado ainda não foi verificado; o aceite e a decisão esperam a verificação." No pedido que declarou documento, a verificação vem antes do aceite do termo pela pessoa beneficiária, e o aceite vem antes da decisão do gestor (ADR-0162 da uniplus-api). Nada foi registrado.
 
 ## Como resolver
 
-Aguarde a verificação. Se o anexo foi recusado, o solicitante deve enviar outro arquivo.
+- **Na leitura do anexo:** aguarde a verificação e abra o anexo de novo.
+- **No aceite ou na decisão:** aguarde a verificação do documento declarado e repita o aceite ou a decisão.
+
+Nos dois casos, se a verificação recusou o arquivo, o solicitante envia outro.

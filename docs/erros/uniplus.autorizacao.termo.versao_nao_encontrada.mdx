@@ -1,0 +1,30 @@
+---
+title: Versão do termo não encontrada
+sidebar_label: Versão não encontrada
+description: A versão do termo de responsabilidade informada não existe.
+code: uniplus.autorizacao.termo.versao_nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Leitura de versão do termo (`GET /api/autorizacao/termos-de-responsabilidade/versoes/{id}`)
+requisitos:
+  - UNI-REQ-0377
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A versão do termo de responsabilidade informada não existe.
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Confira o identificador da versão. O pedido informa a versão fixada (`termo.versaoId`); use esse valor para ler o texto aceito.

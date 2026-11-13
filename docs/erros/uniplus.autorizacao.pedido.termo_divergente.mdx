@@ -1,0 +1,34 @@
+---
+title: O termo apresentado não é o vigente
+sidebar_label: Termo divergente
+description: A versão do termo apresentada não é a vigente, na criação, nem a fixada no pedido, no aceite.
+code: uniplus.autorizacao.pedido.termo_divergente
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Criação do pedido de concessão de acesso (`POST /api/autorizacao/pedidos-de-concessao`)
+  - Aceite do pedido pela pessoa beneficiária (`POST /api/autorizacao/pedidos-de-concessao/{id}/aceite`)
+requisitos:
+  - UNI-REQ-0378
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A versão do termo apresentada não é a vigente (na criação) ou a fixada no pedido (no aceite). Leia o termo novamente e repita a operação.
+
+Na criação, outra versão foi publicada entre a exibição do termo e o envio. No aceite, a versão informada não é a que o pedido fixou na criação. Nada foi gravado.
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+- **Na criação do pedido:** leia de novo a versão vigente do termo, apresente-a e repita o envio informando essa versão, como uma nova requisição, com nova chave de idempotência.
+- **No aceite:** leia a versão fixada no pedido, que não é necessariamente a vigente, apresente-a e repita o aceite informando essa versão.

@@ -1,0 +1,30 @@
+---
+title: Ato de aprovação inválido
+sidebar_label: Ato inválido
+description: O ato que aprova a versão é obrigatório e tem até 500 caracteres.
+code: uniplus.autorizacao.termo.ato_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Publicação de versão do termo de responsabilidade (`POST /api/autorizacao/termos-de-responsabilidade/versoes`)
+requisitos:
+  - UNI-REQ-0377
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ato que aprova a versão é obrigatório e tem até 500 caracteres, sem caractere de controle. Nenhuma versão foi publicada.
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Informe a identificação do ato que aprova a versão, como o número e o órgão da portaria. O ato é obrigatório, tem até 500 caracteres e não pode conter caractere de controle; remova-os, se houver, e publique de novo.

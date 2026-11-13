@@ -1,0 +1,32 @@
+---
+title: Autor da operação não identificado
+sidebar_label: Autor não identificado
+description: A versão do termo não é publicada sem saber quem a publicou.
+code: uniplus.autorizacao.termo.autor_nao_identificado
+http_status: 403
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Publicação de versão do termo de responsabilidade (`POST /api/autorizacao/termos-de-responsabilidade/versoes`)
+requisitos:
+  - UNI-REQ-0377
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Não foi possível identificar quem publica o termo; nada foi registrado.
+
+Toda versão do termo registra quem a publicou, e a sessão não identifica a pessoa.
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Saia e entre de novo no Uni+. Se persistir, procure o suporte.

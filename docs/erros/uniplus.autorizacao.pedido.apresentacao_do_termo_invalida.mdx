@@ -1,0 +1,34 @@
+---
+title: Versão do termo ausente ou indevida
+sidebar_label: Versão do termo inválida
+description: O pedido exige informar a versão do termo apresentada, ou não admite termo e a versão não deve ser informada.
+code: uniplus.autorizacao.pedido.apresentacao_do_termo_invalida
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Criação do pedido de concessão de acesso (`POST /api/autorizacao/pedidos-de-concessao`)
+  - Aceite do pedido pela pessoa beneficiária (`POST /api/autorizacao/pedidos-de-concessao/{id}/aceite`)
+requisitos:
+  - UNI-REQ-0378
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `termoVersaoApresentadaId` não combina com o pedido. Há dois casos:
+
+- o pedido exige o termo e a versão apresentada não foi informada: "Este pedido exige informar a versão do termo de responsabilidade apresentada.";
+- o perfil não dá acesso a dado pessoal ou sensível, o pedido não exige o termo e a versão foi informada: "Este pedido não exige o termo de responsabilidade, e a versão não deve ser informada."
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Informe em `termoVersaoApresentadaId` a versão do termo que foi mostrada, quando o pedido exige o termo, ou envie o campo vazio quando o perfil não exige termo.

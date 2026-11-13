@@ -1,0 +1,32 @@
+---
+title: Texto do termo inválido
+sidebar_label: Texto do termo inválido
+description: O texto do termo é obrigatório e tem entre 200 e 20 000 caracteres depois de normalizado.
+code: uniplus.autorizacao.termo.texto_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Publicação de versão do termo de responsabilidade (`POST /api/autorizacao/termos-de-responsabilidade/versoes`)
+requisitos:
+  - UNI-REQ-0377
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O texto do termo é obrigatório, tem entre 200 e 20 000 caracteres depois de normalizado e não contém caractere de controle além da quebra de linha e da tabulação.
+
+A normalização junta as formas compostas dos caracteres, troca as quebras de linha por uma só forma, tira os espaços do fim das linhas e das pontas do texto. O texto gravado é o normalizado, e é sobre ele que se calcula o código de verificação (SHA-256). Nenhuma versão foi publicada.
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Corrija o texto e publique de novo. O limite de 200 a 20 000 caracteres é conferido depois da normalização, e por isso espaços nas pontas e no fim das linhas não contam. Quebra de linha e tabulação são permitidas; os demais caracteres de controle não.

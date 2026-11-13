@@ -1,0 +1,32 @@
+---
+title: O texto é igual ao da versão vigente
+sidebar_label: Texto igual ao vigente
+description: O texto enviado é igual ao da versão vigente; não há o que publicar.
+code: uniplus.autorizacao.termo.texto_igual_ao_vigente
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Publicação de versão do termo de responsabilidade (`POST /api/autorizacao/termos-de-responsabilidade/versoes`)
+requisitos:
+  - UNI-REQ-0377
+rastreio:
+  - label: 'uniplus-api#2365'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2365
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O texto é igual ao da versão vigente; não há o que publicar.
+
+A comparação é feita depois da normalização, pelo código de verificação: textos que só diferem em espaços nas pontas das linhas ou na forma da quebra de linha são iguais. Nenhuma versão foi publicada.
+
+Regra do termo de responsabilidade definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Publique só quando o texto mudar. Se a intenção era registrar outro ato para o mesmo texto, a versão vigente continua valendo.
