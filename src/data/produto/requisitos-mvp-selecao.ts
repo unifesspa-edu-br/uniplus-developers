@@ -1303,7 +1303,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0104',
     titulo: 'Recurso contra indeferimento de isenção em instância única',
     enunciado:
-      'Quando a frente de inscrição existir, o candidato deve poder recorrer contra o indeferimento do pedido de isenção, em instância única — não há segunda instância de recurso para isenção. Não há suspensividade nem trava de pagamento no recurso da isenção. O boleto nunca vence depois do fim das inscrições; o recurso contra a isenção negada é julgado antes do fim das inscrições, conforme o cronograma do edital; o boleto emitido depois do recurso negado vence no fim das inscrições; só o recurso deferido muda o resultado, e então a isenção é concedida. Regra adotada pelo líder técnico em 12/11/2026.',
+      'Quando a frente de inscrição existir, o candidato deve poder recorrer contra o indeferimento do pedido de isenção, em instância única — não há segunda instância de recurso para isenção. Há um recurso por manifestação indeferida em cada janela, que o candidato pode alterar enquanto o prazo está aberto, com as versões registradas (UNI-REQ-0272). Não há suspensividade nem trava de pagamento no recurso da isenção. O boleto nunca vence depois do fim das inscrições; o recurso contra a isenção negada é julgado antes do fim das inscrições, conforme o cronograma do edital; o boleto emitido depois do recurso negado vence no fim das inscrições; só o recurso deferido muda o resultado, e então a isenção é concedida. Regra adotada pelo líder técnico em 12/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -1315,7 +1315,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'O candidato pode registrar um único recurso contra o indeferimento de cada manifestação de isenção; nova tentativa de recurso sobre a mesma manifestação já recorrida é bloqueada. O recurso da isenção não suspende nada nem trava o pagamento; o boleto não vence depois do fim das inscrições, e o emitido depois do recurso negado vence no fim das inscrições; só o recurso deferido concede a isenção.',
+      'O candidato pode registrar um recurso contra o indeferimento de cada manifestação de isenção em cada janela e alterá-lo enquanto o prazo está aberto, e cada versão fica registrada; o envio ou a alteração depois do prazo é recusado; não há segunda instância de recurso. O recurso da isenção não suspende nada nem trava o pagamento; o boleto não vence depois do fim das inscrições, e o emitido depois do recurso negado vence no fim das inscrições; só o recurso deferido concede a isenção.',
     verificacao:
       'Não verificável hoje — depende do agregado de Inscrição, ainda inexistente; planejado como incremento.',
     pagina_developers: '/produto/regras-negocio/',
@@ -3236,7 +3236,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0120',
     titulo: 'Catálogo institucional de motivos de decisão de isenção',
     enunciado:
-      'O sistema deve manter, por fundamento de isenção, um catálogo institucional de motivos de decisão, com código e descrição estáveis, disponível para seleção pelo processo seletivo e utilizável tanto na análise inicial quanto no julgamento de recurso do mesmo fundamento.',
+      'O sistema deve manter, por fundamento de isenção, um catálogo institucional de motivos de decisão, com código e descrição estáveis, disponível para seleção pelo processo seletivo e utilizável tanto na análise inicial quanto no julgamento de recurso do mesmo fundamento. Generalizado para todos os tipos de decisão pelo UNI-REQ-0283.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -3257,7 +3257,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0121',
     titulo: 'Motivo de decisão declara um único resultado permitido',
     enunciado:
-      'Cada motivo pertence a exatamente um resultado permitido, deferimento ou indeferimento, e esse vínculo torna-se imutável depois que o motivo é disponibilizado a processo publicado.',
+      'Cada motivo pertence a exatamente um resultado permitido, deferimento ou indeferimento, e esse vínculo torna-se imutável depois que o motivo é disponibilizado a processo publicado. Generalizado para todos os tipos de decisão pelo UNI-REQ-0283, que mantém o vínculo favorável ou desfavorável ao candidato.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3299,7 +3299,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0123',
     titulo: 'Seleção explícita de motivos e cobertura mínima na publicação',
     enunciado:
-      'O administrador seleciona explicitamente, entre os motivos institucionais, os aplicáveis a cada fundamento habilitado no processo seletivo; nenhum motivo é associado automaticamente, e a publicação exige ao menos um motivo de deferimento e um de indeferimento por fundamento habilitado.',
+      'O administrador seleciona explicitamente, entre os motivos institucionais, os aplicáveis a cada fundamento habilitado no processo seletivo; nenhum motivo é associado automaticamente, e a publicação exige ao menos um motivo de deferimento e um de indeferimento por fundamento habilitado. Generalizado para todos os tipos de decisão pelo UNI-REQ-0285.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3320,7 +3320,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0124',
     titulo: 'Evolução aditiva do catálogo em processo publicado',
     enunciado:
-      'Em processo publicado, o conjunto de motivos evolui por inclusão, válida para julgamentos posteriores, e só perde, na retificação, motivo que nenhuma decisão usou e cuja avaliação ainda não começou (UNI-REQ-0365), sem criar critério material novo e sem alterar decisões já proferidas. A inclusão exige justificativa textual de manutenção, restrita a perfis administrativos e não apresentada ao candidato. Depois da publicação do edital, a inclusão de motivo exige retificação do edital e acontece antes do início da avaliação correspondente (UNI-REQ-0285).',
+      'Em processo publicado, o conjunto de motivos evolui por inclusão, válida para julgamentos posteriores, e só perde, na retificação, motivo que nenhuma decisão usou e cuja avaliação ainda não começou (UNI-REQ-0365), sem criar critério material novo e sem alterar decisões já proferidas. A inclusão exige justificativa textual de manutenção, restrita a perfis administrativos e não apresentada ao candidato. Depois da publicação do edital, a inclusão de motivo exige retificação do edital e acontece antes do início da avaliação correspondente (UNI-REQ-0285), que generaliza esta regra para todos os tipos de decisão.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3381,9 +3381,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0127',
-    titulo: 'Recurso contra a não homologação e resultado final imutável',
+    titulo: 'Recurso na janela do preliminar e resultado final imutável da homologação',
     enunciado:
-      'Quando a fase declara resultado preliminar com janela de recurso, o candidato não homologado pode interpor um único recurso tempestivo, e o acolhimento o homologa no resultado final. O resultado final é imutável, não admite revogação administrativa nem novo recurso sobre a homologação, e é pré-requisito para iniciar a fase seguinte. Ajuste proposto pelo líder técnico em 05/11/2026, a confirmar pelo PO.',
+      'Quando a fase declara resultado preliminar com janela de recurso, quem pode recorrer é o que a janela define (UNI-REQ-0270), e o sistema não fixa essa legitimidade. Cada candidato tem um recurso por manifestação em cada janela (a isenção tem um por manifestação indeferida, UNI-REQ-0104) e pode alterá-lo enquanto o prazo está aberto, com as versões registradas (UNI-REQ-0272). O novo preliminar gerado por retificação abre nova janela, com novo prazo (UNI-REQ-0282). O deferimento entra no resultado definitivo (UNI-REQ-0280); na homologação das inscrições, por exemplo, o acolhimento do recurso do candidato não homologado o homologa no resultado final. Na homologação das inscrições, o resultado final é imutável, não admite revogação administrativa nem novo recurso sobre a homologação, e é pré-requisito para iniciar a fase seguinte; a correção do documento do definitivo não altera a decisão de nenhum candidato (UNI-REQ-0162). Ajuste proposto pelo líder técnico em 05/11/2026, a confirmar pelo PO. Conciliado com os UNI-REQ-0270, UNI-REQ-0272 e UNI-REQ-0282 em 13/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -3395,8 +3395,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Segundo recurso é recusado; a fase que declara só o resultado final não oferece recurso; a fase seguinte não inicia antes da publicação do resultado final; após essa publicação, alteração é recusada.',
-    verificacao: 'Testes de unicidade do recurso, de bloqueio da fase seguinte e de imutabilidade.',
+      'O recurso de quem a janela não alcança é recusado; cada candidato tem um recurso por manifestação em cada janela, e o envio dentro do prazo altera o recurso existente e grava nova versão, sem criar segundo recurso; o novo preliminar gerado por retificação abre nova janela, com novo prazo; o recurso deferido entra no resultado definitivo; a fase que declara só o resultado final não oferece recurso; na homologação das inscrições, a fase seguinte não inicia antes da publicação do resultado final e, após essa publicação, a alteração da decisão é recusada, sem impedir a correção do documento do definitivo.',
+    verificacao:
+      'Testes de um recurso por manifestação em cada janela com alteração dentro do prazo, de nova janela depois da retificação, de bloqueio da fase seguinte e de imutabilidade na homologação das inscrições.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'PO',
   },
@@ -6697,11 +6698,11 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0281',
     titulo: 'Preliminar publicado trava os dados que o alimentaram',
     enunciado:
-      'Enquanto o resultado preliminar publicado estiver valendo, os dados que o produziram não são substituídos: o arquivo ou a planilha que o alimentou não é trocado por outro diferente, e o mesmo arquivo já importado pode ser importado de novo, sem efeito. O erro no arquivo do INEP, ou na fonte da nota, detectado antes da divulgação do preliminar é corrigido na fonte e o arquivo é reimportado. Depois da divulgação do preliminar, o caso vai a recurso, sem gatilho de defasagem. A retificação do edital continua sendo o caminho quando muda a regra ou os dados de entrada do preliminar (UNI-REQ-0282). Na homologação das inscrições, a regra restringe, depois da publicação do preliminar, a substituição do arquivo de retorno do INEP prevista no UNI-REQ-0174, que continua valendo antes dela. Exemplo: depois do preliminar das notas de uma prova, a planilha de notas não é trocada, e Kevin, que discorda da nota dele, recorre; depois do preliminar da homologação das inscrições, um retorno do INEP diferente do já importado é recusado, e importar de novo o mesmo arquivo é aceito, sem efeito. Aprovado pelo PO em 11/11/2026; a correção da fonte antes da divulgação do preliminar foi decidida pelo líder técnico em 11/11/2026.',
+      'Enquanto o resultado preliminar publicado estiver valendo, os dados que o produziram não são substituídos: o arquivo ou a planilha que o alimentou não é trocado por outro diferente, e o mesmo arquivo já importado pode ser importado de novo, sem efeito. O erro na fonte dos dados (por exemplo, o arquivo do INEP ou a planilha de notas), detectado antes da divulgação do preliminar, é corrigido na fonte e o arquivo é reimportado. Depois da divulgação do preliminar, o caso vai a recurso, quando o preliminar tem janela de recurso (UNI-REQ-0157), sem gatilho de defasagem. A retificação do edital continua sendo o caminho quando muda a regra ou os dados de entrada do preliminar (UNI-REQ-0282). Na homologação das inscrições, a regra restringe, depois da publicação do preliminar, a substituição do arquivo de retorno do INEP prevista no UNI-REQ-0174, que continua valendo antes dela. Exemplo: depois do preliminar das notas de uma prova, a planilha de notas não é trocada, e Kevin, que discorda da nota dele, recorre; depois do preliminar da homologação das inscrições, um retorno do INEP diferente do já importado é recusado, e importar de novo o mesmo arquivo é aceito, sem efeito. Aprovado pelo PO em 11/11/2026; a correção da fonte antes da divulgação do preliminar foi decidida pelo líder técnico em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
-    parent_id: 'UNI-REQ-0174',
+    parent_id: 'UNI-REQ-0157',
     modulo: 'Seleção',
     recorte: 'mvp',
     status: 'aprovado',
@@ -6709,7 +6710,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Com preliminar publicado e valendo, a substituição dos dados que o produziram por outros diferentes é recusada com erro nomeado, e a repetição dos mesmos dados é aceita sem mudar o resultado; o erro na fonte detectado antes da divulgação do preliminar é corrigido e reimportado, e depois dela vai a recurso.',
+      'Com preliminar publicado e valendo, a substituição dos dados que o produziram por outros diferentes é recusada com erro nomeado, e a repetição dos mesmos dados é aceita sem mudar o resultado; o erro na fonte detectado antes da divulgação do preliminar é corrigido e reimportado, e depois dela vai a recurso, quando o preliminar tem janela.',
     verificacao:
       'Teste automatizado das duas operações depois da publicação do preliminar, na homologação das inscrições e num resultado com planilha de notas (planejado).',
     pagina_developers: '/produto/regras-negocio/',
@@ -6717,13 +6718,13 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0282',
-    titulo: 'Retificação depois do preliminar gera novo preliminar e novo prazo de recurso',
+    titulo: 'Retificação depois do preliminar gera novo preliminar e, havendo janela, novo prazo de recurso',
     enunciado:
-      'Se uma retificação do edital, depois da publicação de um resultado preliminar, mudar a regra ou os dados de entrada desse preliminar (por exemplo, a prorrogação das inscrições, a mudança das edições do ENEM aceitas ou o peso de uma questão), é publicado um novo preliminar, com novo prazo de recurso. Quando os dados vêm de importação, como o retorno do INEP, a importação é reaberta. Os recursos já apresentados nunca são descartados: ficam registrados e são julgados junto com o recurso do novo ciclo, em decisão única por candidato e item, e no definitivo prevalece o resultado mais favorável ao candidato. O candidato pode recorrer contra o novo preliminar. Assim, ninguém chega ao resultado definitivo sem a oportunidade de recorrer. Se a retificação retirar uma edição do ENEM em que haja pessoa inscrita, o novo preliminar fica bloqueado até uma nova retificação voltar a aceitar essa edição, para que ninguém fique sem resultado. O novo preliminar abre um novo ciclo do mesmo item do edital: é a publicação original desse ciclo, identificada pelo número do ciclo e ligada ao preliminar que substitui, e não uma correção do preliminar anterior; a publicação única por item do UNI-REQ-0157 passa a valer por ciclo. O definitivo espera o julgamento de cada unidade, que reúne os recursos de todos os ciclos; o julgamento concluído antes da retificação é preservado. A correção do mesmo preliminar segue o UNI-REQ-0160: só a que muda resultado reabre o prazo, e então pela retificação, com novo preliminar e novo prazo. Exemplo: depois do preliminar das notas de uma prova, uma retificação muda o peso de uma questão; sai novo preliminar das notas, com novo prazo, e Helena pode recorrer de novo. Aprovado pelo PO em 11/11/2026.',
+      'Em qualquer matéria com resultado preliminar publicado, se uma retificação do edital mudar a regra ou os dados de entrada desse preliminar, é publicado um novo preliminar, com novo prazo de recurso quando o preliminar tem janela de recurso (UNI-REQ-0157). Exemplos de matérias diversas: o peso de uma questão, a regra de avaliação de uma etapa e, na homologação das inscrições, a prorrogação das inscrições ou a mudança das edições do ENEM aceitas. Quando os dados vêm de importação, como o retorno do INEP, a importação é reaberta. Os recursos já apresentados nunca são descartados: ficam registrados e são julgados junto com o recurso do novo ciclo, em decisão única por candidato e item, e no definitivo prevalece o resultado mais favorável ao candidato. Quando o preliminar tem janela, o candidato pode recorrer contra o novo preliminar, e assim ninguém chega ao resultado definitivo sem a oportunidade de recorrer. Na homologação das inscrições, se a retificação retirar uma edição do ENEM em que haja pessoa inscrita, o novo preliminar fica bloqueado até uma nova retificação voltar a aceitar essa edição, para que ninguém fique sem resultado. O novo preliminar abre um novo ciclo do mesmo item do edital: é a publicação original desse ciclo, identificada pelo número do ciclo e ligada ao preliminar que substitui, e não uma correção do preliminar anterior; a publicação única por item do UNI-REQ-0157 passa a valer por ciclo. O definitivo espera o julgamento de cada unidade, que reúne os recursos de todos os ciclos; o julgamento concluído antes da retificação é preservado. A correção do mesmo preliminar segue o UNI-REQ-0160: só a que muda resultado de preliminar com janela reabre o prazo, e então pela retificação, com novo preliminar e novo prazo. Exemplo: depois do preliminar das notas de uma prova, uma retificação muda o peso de uma questão; sai novo preliminar das notas, com novo prazo, e Helena pode recorrer de novo. Aprovado pelo PO em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
-    parent_id: 'UNI-REQ-0265',
+    parent_id: 'UNI-REQ-0157',
     modulo: 'Seleção',
     recorte: 'mvp',
     status: 'aprovado',
@@ -6731,9 +6732,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A retificação que muda a regra ou os dados de entrada de um preliminar publicado exige novo preliminar antes do definitivo; os recursos anteriores ficam registrados e são julgados junto com o do novo ciclo, sem prejuízo ao candidato; o novo preliminar abre novo prazo; na homologação das inscrições, a retirada de edição com inscrito bloqueia o novo preliminar.',
+      'Vale para qualquer matéria com preliminar publicado: a retificação que muda a regra ou os dados de entrada de um preliminar publicado exige novo preliminar antes do definitivo; os recursos anteriores ficam registrados e são julgados junto com o do novo ciclo, sem prejuízo ao candidato; o novo preliminar abre novo prazo quando o preliminar tem janela de recurso; na homologação das inscrições, a retirada de edição com inscrito bloqueia o novo preliminar.',
     verificacao:
-      'Teste automatizado da retificação depois do preliminar, na homologação das inscrições, com e sem edição retirada, e num resultado de prova (planejado).',
+      'Teste automatizado da retificação depois do preliminar, na homologação das inscrições, com e sem edição retirada, num resultado de prova e com preliminar sem janela de recurso, que não abre prazo (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
