@@ -1,0 +1,32 @@
+---
+title: A revogação deixaria a instituição sem Representante do controlador
+sidebar_label: Último Representante
+description: Rascunho — a revogação deixaria a instituição sem Representante do controlador vigente.
+code: uniplus.autorizacao.concessao.ultimo_representante
+http_status: 422
+situacao: rascunho
+modulo: Autorização
+emitido_em:
+  - Revogação de concessões (`POST /api/autorizacao/concessoes/{id}/revogacao`)
+  - Atendimento da providência, com a revogação da concessão de acesso (`POST /api/autorizacao/providencias/{id}/atendimento`)
+  - Revogação do item da revisão de acessos
+requisitos:
+  - UNI-REQ-0184
+  - UNI-REQ-0394
+  - UNI-REQ-0376
+rastreio:
+  - label: 'uniplus-api#2412'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2412
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A revogação deixaria a instituição sem Representante do controlador vigente. A concessão revogada é a única designação vigente desse perfil, e sem ela ficariam sem quem decida a etapa da proteção de dados dos pedidos, as versões protegidas de perfil, a janela de migração e a proteção do catálogo de tipos de documento e de fatos do candidato. Depois da primeira designação, a instituição não fica mais sem Representante vigente, qualquer que seja o caminho da revogação: a revogação direta, o atendimento de uma providência ou a revogação do item da revisão de acessos. A recusa não grava nada: a concessão continua vigente, e a providência ou o item da revisão continuam sem desfecho.
+
+## Como resolver
+
+Designe primeiro quem vai substituí-lo e revogue esta designação depois que a nova estiver vigente. O pedido da pessoa nova passa pela etapa da proteção de dados, decidida pelo Representante atual; com a concessão dela vigente, a revogação desta é aceita.
