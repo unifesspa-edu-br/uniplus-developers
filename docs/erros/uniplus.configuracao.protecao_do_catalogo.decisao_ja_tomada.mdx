@@ -1,0 +1,31 @@
+---
+title: O item foi decidido depois da leitura; releia o item
+sidebar_label: Decisão já tomada
+description: O item foi decidido depois que quem se manifesta o leu.
+code: uniplus.configuracao.protecao_do_catalogo.decisao_ja_tomada
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Registro de manifestação na proteção do catálogo de tipos de documento e de fatos do candidato (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
+requisitos:
+  - UNI-REQ-0373
+  - UNI-REQ-0374
+rastreio:
+  - label: 'uniplus-api#2366'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Depois que o item foi lido, o Representante do controlador decidiu a aprovação dele, e a manifestação não se aplica a um item já decidido sem que o Encarregado de dados veja a decisão. Nada foi registrado. Repetir a mesma requisição não resolve.
+
+Regra da manifestação técnica na proteção do catálogo de tipos de documento e de fatos do candidato, definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Releia o item para ver a decisão tomada. Se a aprovação for reiniciada, manifeste-se no ciclo novo.

@@ -1,0 +1,31 @@
+---
+title: Há manifestação técnica registrada depois da leitura; releia o item
+sidebar_label: Manifestação não lida
+description: Uma manifestação técnica foi registrada no item depois que quem decide o leu.
+code: uniplus.configuracao.protecao_do_catalogo.manifestacao_nao_lida
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (`POST /api/configuracao/admin/protecao-do-catalogo`)
+requisitos:
+  - UNI-REQ-0374
+  - UNI-REQ-0373
+rastreio:
+  - label: 'uniplus-api#2366'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A decisão informa o ciclo de aprovação e as manifestações do ciclo que quem decide leu (`ciclo` e `manifestacoesNoCiclo`). Depois dessa leitura, o Encarregado de dados registrou ou substituiu uma manifestação técnica no item, e a decisão não pode ser tomada sem considerá-la, porque uma manifestação desfavorável exige justificativa. Nada foi decidido. Repetir a mesma requisição não resolve.
+
+Regra da manifestação técnica na proteção do catálogo de tipos de documento e de fatos do candidato, definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Releia o item e as manifestações do ciclo e decida de novo, informando o que foi lido. Se houver manifestação desfavorável vigente, informe a justificativa.
