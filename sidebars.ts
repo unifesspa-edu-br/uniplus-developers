@@ -963,6 +963,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.configuracao.protecao_do_catalogo.ciclo_invalido',
         'erros/uniplus.configuracao.protecao_do_catalogo.ciclo_mudou',
         'erros/uniplus.configuracao.protecao_do_catalogo.manifestacao_nao_lida',
+        'erros/uniplus.configuracao.protecao_do_catalogo.manifestacoes_no_ciclo_invalida',
         'erros/uniplus.configuracao.protecao_do_catalogo.decisao_ja_tomada',
         'erros/uniplus.configuracao.fato_valor_dominio.ordem_com_codigo_desconhecido',
         'erros/uniplus.configuracao.fato_valor_dominio.ordem_com_codigo_repetido',
