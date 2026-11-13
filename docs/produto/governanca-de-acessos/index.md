@@ -16,7 +16,7 @@ A [ADR-0162](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs
 | Papel | Atribuição resumida |
 |---|---|
 | **Gestor de acessos** | Mantém os perfis, aprova a adequação funcional, revoga concessões e publica o termo de responsabilidade. |
-| **Representante do controlador** | Decide, em nome da Unifesspa, a etapa de proteção de dados dos pedidos com dado pessoal, as versões protegidas de perfil e a proteção do catálogo; conduz a revisão periódica. |
+| **Representante do controlador** | Decide, em nome da Unifesspa, a etapa de proteção de dados dos pedidos com dado pessoal, as versões protegidas de perfil, a janela de migração e a proteção do catálogo de tipos de documento e de fatos do candidato; conduz a revisão periódica. |
 | **Encarregado de dados** | Consulta, se manifesta e solicita providências, sem aprovar, recusar ou revogar (LGPD, art. 41). |
 
 O sistema impõe a separação, mas a entrada em produção depende de atos institucionais: quem designa o Representante, com que texto, e qual termo assina quem recebe acesso a dado protegido. Esta seção reúne as minutas desses atos:
@@ -27,8 +27,8 @@ O sistema impõe a separação, mas a entrada em produção depende de atos inst
 
 ## Requisitos relacionados
 
-- [UNI-REQ-0184](../requisitos/index.mdx): todo acesso administrativo nasce de pedido aprovado, sem autoaprovação, ressalvada a instalação inicial dos dois primeiros gestores de acessos, por procedimento próprio.
-- UNI-REQ-0369 a UNI-REQ-0380: requisitos da separação das atribuições de governança, em especial UNI-REQ-0377 e UNI-REQ-0378, sobre o termo de responsabilidade e o aceite pelo beneficiário. Estão em revisão e passam a constar do [registro de requisitos](../requisitos/index.mdx) quando integrados.
+- [UNI-REQ-0184](../requisitos/index.mdx): todo acesso administrativo nasce de pedido aprovado, sem autoaprovação, ressalvada a instalação inicial dos dois primeiros gestores de acessos, por procedimento próprio, que concede só o perfil de gestor de acessos.
+- UNI-REQ-0369 a UNI-REQ-0380, no [registro de requisitos](../requisitos/index.mdx): requisitos da separação das atribuições de governança, em especial UNI-REQ-0370, sobre a incompatibilidade entre Representante do controlador e Encarregado de dados, e UNI-REQ-0377 e UNI-REQ-0378, sobre o termo de responsabilidade e o aceite pelo beneficiário.
 
 ## Uso dos placeholders
 
