@@ -1,0 +1,35 @@
+---
+title: A concessão da providência já não está ativa
+sidebar_label: Concessão não ativa
+description: A concessão de acesso foi revogada ou venceu, e a providência não se abre nem se responde.
+code: uniplus.autorizacao.providencia.concessao_nao_ativa
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Solicitação de providência sobre concessão de acesso (`POST /api/autorizacao/providencias`)
+  - Resposta à providência (`POST /api/autorizacao/providencias/{id}/resposta`)
+  - Atendimento da providência, com a revogação da concessão de acesso (`POST /api/autorizacao/providencias/{id}/atendimento`)
+requisitos:
+  - UNI-REQ-0375
+  - UNI-REQ-0376
+rastreio:
+  - label: 'uniplus-api#2367'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2367
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A concessão da providência já não está ativa: foi revogada ou venceu.
+
+A providência só se abre, se responde e se atende sobre concessão de acesso ativa. Quando a concessão deixa de valer por outro caminho, a providência aberta aparece como prejudicada, e a leitura informa o que encerrou a concessão. Nada foi registrado.
+
+Regra da tramitação da providência sobre concessão de acesso, definida na ADR-0164 da uniplus-api.
+
+## Como resolver
+
+Não há o que pedir nem responder: a concessão já não dá acesso. Consulte a trilha da concessão de acesso para ver se ela foi revogada ou venceu.

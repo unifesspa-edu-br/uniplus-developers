@@ -1,0 +1,34 @@
+---
+title: Providência não encontrada
+sidebar_label: Não encontrada
+description: A providência informada não existe.
+code: uniplus.autorizacao.providencia.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Leitura da providência (`GET /api/autorizacao/providencias/{id}`)
+  - Resposta à providência (`POST /api/autorizacao/providencias/{id}/resposta`)
+  - Atendimento da providência, com a revogação da concessão de acesso (`POST /api/autorizacao/providencias/{id}/atendimento`)
+requisitos:
+  - UNI-REQ-0376
+rastreio:
+  - label: 'uniplus-api#2367'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2367
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Providência não encontrada.
+
+Não há providência com o identificador informado. Nada foi registrado.
+
+Regra da tramitação da providência sobre concessão de acesso, definida na ADR-0164 da uniplus-api.
+
+## Como resolver
+
+Confira o identificador da providência. Para encontrá-la, use a lista de providências ou a trilha da concessão de acesso.

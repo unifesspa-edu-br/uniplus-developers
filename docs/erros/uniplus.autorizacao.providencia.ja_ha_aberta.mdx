@@ -1,0 +1,32 @@
+---
+title: Já existe providência aberta para a concessão
+sidebar_label: Já há providência aberta
+description: Só uma providência fica aberta por concessão de acesso.
+code: uniplus.autorizacao.providencia.ja_ha_aberta
+http_status: 409
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Solicitação de providência sobre concessão de acesso (`POST /api/autorizacao/providencias`)
+requisitos:
+  - UNI-REQ-0375
+rastreio:
+  - label: 'uniplus-api#2367'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2367
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe providência aberta para esta concessão; aguarde o desfecho dela antes de solicitar outra.
+
+Cada concessão de acesso tem no máximo uma providência aberta por vez. Nenhuma providência nova foi aberta.
+
+Regra da tramitação da providência sobre concessão de acesso, definida na ADR-0164 da uniplus-api.
+
+## Como resolver
+
+Acompanhe a providência que já está aberta. Depois da resposta, solicite outra só se a concessão de acesso continuar ativa e a necessidade persistir. O atendimento revoga a concessão, e uma nova providência sobre ela é recusada como concessão não ativa.
