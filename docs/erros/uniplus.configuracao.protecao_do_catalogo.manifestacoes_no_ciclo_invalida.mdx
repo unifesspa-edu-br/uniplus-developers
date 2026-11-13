@@ -1,0 +1,30 @@
+---
+title: Contagem de manifestações lida no item ausente ou inválida
+sidebar_label: Contagem de manifestações inválida
+description: A decisão precisa informar a contagem de manifestações do ciclo lida no item.
+code: uniplus.configuracao.protecao_do_catalogo.manifestacoes_no_ciclo_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Decisão da proteção de dados (`POST /api/configuracao/admin/protecao-do-catalogo`)
+requisitos:
+  - UNI-REQ-0374
+rastreio:
+  - label: 'uniplus-api#2366'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A decisão informa, junto com o ciclo de aprovação, a contagem de manifestações do ciclo que quem decide leu no item (`manifestacoesNoCiclo`). Com ela, o sistema confere que nenhuma manifestação técnica foi registrada depois da leitura. A contagem chegou ausente ou com um valor inválido. Nada foi decidido.
+
+Regra da manifestação técnica na proteção do catálogo de tipos de documento e de fatos do candidato, definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Releia o item e decida de novo, informando o ciclo e a contagem de manifestações que o item traz.
