@@ -27,8 +27,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O prazo informado não é posterior ao momento do pedido ou da aprovação, ou foi informado para um perfil que não admite prazo. Os perfis de gestor de acessos e de Representante do controlador não admitem prazo: a concessão deles só termina pela revogação, que confere o mínimo de dois gestores e a regra do último Representante vigente. O perfil de Encarregado de dados admite prazo, como os perfis comuns. Na etapa da proteção de dados, o prazo também é recusado: ele é definido pelo gestor.
+O prazo informado não é posterior ao momento do pedido ou da aprovação, ou foi informado para um perfil que não admite prazo. Os perfis de gestor de acessos e de Representante do controlador não admitem prazo: a concessão deles só termina pela revogação, que confere o mínimo de dois gestores e a regra do último Representante vigente. O perfil de Encarregado de dados admite prazo, como os perfis comuns. Na etapa da proteção de dados, o prazo também é recusado: ele é definido pelo gestor. Isso alcança o pedido de Representante que chegou à etapa da proteção de dados com prazo definido pelo gestor antes de o perfil deixar de admitir prazo: a aprovação é recusada antes de virar concessão, e nada é gravado.
 
 ## Como resolver
 
-Informe um prazo futuro, ou deixe o prazo em branco. Para os perfis de gestor de acessos e de Representante do controlador, não informe prazo, nem como sugestão no pedido nem na aprovação. Na etapa da proteção de dados, aprove sem informar prazo; se o prazo definido pelo gestor não for adequado, recuse o pedido.
+Informe um prazo futuro, ou deixe o prazo em branco. Para os perfis de gestor de acessos e de Representante do controlador, não informe prazo, nem como sugestão no pedido nem na aprovação. Na etapa da proteção de dados, aprove sem informar prazo; se o prazo definido pelo gestor não for adequado, recuse o pedido. O pedido de Representante que já tinha prazo não pode ser aprovado: o Representante o recusa ou quem pediu o cancela, e a pessoa faz outro pedido, sem prazo.
