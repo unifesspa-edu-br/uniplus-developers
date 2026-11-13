@@ -28,7 +28,7 @@ declara o que vale quando a unanimidade não é alcançada. Com mais de um
 integrante, os votos podem divergir, e o edital precisa dizer a decisão nesse
 caso (UNI-REQ-0275). Sem o campo, a votação dividida ficaria sem desfecho.
 
-A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.semUnanimidade` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.semUnanimidade` na banca da etapa.
+A recusa vem na lista `errors[]` da resposta, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.semUnanimidade` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.semUnanimidade` na banca da etapa.
 
 ## Como resolver
 

@@ -26,7 +26,7 @@ A banca declara o campo `semUnanimidade` onde ele não existe: em critério que 
 de unanimidade, ou em banca de 1 integrante, cujo voto é sempre unânime. Guardar
 um campo que nunca é usado deixaria a regra do edital ambígua.
 
-A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.semUnanimidade` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.semUnanimidade` na banca da etapa.
+A recusa vem na lista `errors[]` da resposta, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.semUnanimidade` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.semUnanimidade` na banca da etapa.
 
 ## Como resolver
 
