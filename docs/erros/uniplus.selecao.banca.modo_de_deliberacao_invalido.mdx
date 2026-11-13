@@ -1,0 +1,52 @@
+---
+title: Modo de deliberação inválido
+sidebar_label: Modo de deliberação inválido
+description: Rascunho — o modo de deliberação informado não é um dos dois do vocabulário fechado, colegiadaComVotacao ou atoIndividual.
+code: uniplus.selecao.banca.modo_de_deliberacao_invalido
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0275
+  - UNI-REQ-0338
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0275 e UNI-REQ-0338.
+
+:::
+
+## O que aconteceu
+
+A regra de deliberação da banca informou um `modo` que não pertence ao vocabulário
+de deliberação. O vocabulário é fechado e tem dois modos:
+
+- `colegiadaComVotacao`: a banca decide por votação, com quórum, critério de
+  decisão e forma de encerramento (UNI-REQ-0275);
+- `atoIndividual`: sem quórum nem votação, qualquer pessoa titular designada
+  pratica o ato (UNI-REQ-0338).
+
+O modo escolhido define quais campos da regra existem. Um valor fora do
+vocabulário não permite saber como a banca decide nem o que conferir na
+declaração.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.modo` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.modo` na banca da etapa.
+
+## Como resolver
+
+Informe um dos dois modos. Use `colegiadaComVotacao` quando o edital manda a banca
+votar e `atoIndividual` quando o edital dá a decisão a quem pratica o ato
+sozinho, como na banca de homologação das inscrições. Depois de corrigido o modo,
+os campos dele são conferidos; no ato individual, a presença de campo de votação
+tem [recusa própria](./uniplus.selecao.banca.ato_individual_sem_votacao.mdx).

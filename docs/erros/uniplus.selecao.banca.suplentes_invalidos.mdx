@@ -1,0 +1,39 @@
+---
+title: Número de suplentes inválido
+sidebar_label: Número de suplentes inválido
+description: Rascunho — a banca declara número negativo de suplentes.
+code: uniplus.selecao.banca.suplentes_invalidos
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0275
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0275.
+
+:::
+
+## O que aconteceu
+
+A regra de deliberação da banca declara um número negativo de suplentes. A banca
+pode ter nenhum suplente, mas não menos que nenhum.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.suplentes` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.suplentes` na banca da etapa.
+
+## Como resolver
+
+Informe no campo `suplentes` um número inteiro a partir de 0. Use 0 quando o edital
+não prevê suplentes: a banca fica só com os titulares.

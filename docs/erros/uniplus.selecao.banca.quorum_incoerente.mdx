@@ -1,0 +1,51 @@
+---
+title: Quórum incoerente com o encerramento
+sidebar_label: Quórum incoerente com o encerramento
+description: Rascunho — o quórum difere do número de integrantes, e a votação só termina com todos os titulares votando.
+code: uniplus.selecao.banca.quorum_incoerente
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0275
+  - UNI-REQ-0399
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0275 e UNI-REQ-0399.
+
+:::
+
+## O que aconteceu
+
+A banca declara que a votação termina quando todos os titulares votam
+(`todosOsTitulares`), mas o quórum é diferente do número de integrantes. As duas
+declarações se contradizem: se todos precisam votar, o quórum é o número de
+integrantes. Com 3 integrantes, encerramento por todos os titulares e quórum 2,
+a regra diz duas coisas diferentes sobre quando a votação acaba.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.quorum` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.quorum` na banca da etapa.
+
+## Como resolver
+
+Escolha o que o edital quer dizer:
+
+- **A votação termina com todos os titulares.** Use o próprio número de
+  integrantes como quórum.
+- **A votação termina quando o quórum é atingido.** Declare o encerramento
+  `presidenciaNoQuorum`: a presidência encerra ao atingir o quórum, e o quórum
+  pode ser menor que o número de integrantes.
+
+Um quórum de zero ou acima do número de integrantes tem
+[recusa própria](./uniplus.selecao.banca.quorum_fora_do_intervalo.mdx).

@@ -1,0 +1,55 @@
+---
+title: Regra de deliberação obrigatória
+sidebar_label: Regra de deliberação obrigatória
+description: Rascunho — a banca declarada no processo seletivo não traz a regra de deliberação do edital, que a publicação exige.
+code: uniplus.selecao.banca.regra_de_deliberacao_obrigatoria
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0275
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0275.
+
+:::
+
+## O que aconteceu
+
+A banca foi declarada na fase ou na etapa sem a regra de deliberação, e o edital
+não pode ser publicado assim. No rascunho a regra é opcional, para que a banca
+possa ser declarada aos poucos; a publicação a exige, porque o sistema não impõe
+nenhuma regra de decisão à banca: quem a define é o edital (UNI-REQ-0275). Sem
+ela, no julgamento não haveria como saber quantos votos decidem, como se
+desempata nem quando a votação termina.
+
+A mesma conferência roda na publicação, na retificação em ato único e no
+fechamento da sessão de edição. A recusa vem na lista `errors[]` da resposta,
+junto das demais violações do mesmo corpo.
+
+## Como resolver
+
+Informe a regra de deliberação da banca, do modo que o edital declara:
+
+- **`colegiadaComVotacao`:** número de integrantes e de suplentes, quórum,
+  critério de decisão e forma de encerramento, além do desempate e do valor para
+  a unanimidade não alcançada, nos casos em que se aplicam.
+- **`atoIndividual`:** sem quórum nem votação, como na banca de homologação das
+  inscrições (UNI-REQ-0338).
+
+Os campos da regra são conferidos já na gravação do cronograma e das etapas,
+cada um com a sua recusa, antes da publicação. O painel de conformidade aponta a
+banca sem regra, no item `cronograma_banca_com_regra_de_deliberacao`.

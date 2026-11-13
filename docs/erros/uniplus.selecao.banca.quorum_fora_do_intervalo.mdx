@@ -1,0 +1,47 @@
+---
+title: Quórum fora do intervalo
+sidebar_label: Quórum fora do intervalo
+description: Rascunho — o quórum da deliberação colegiada não foi informado, é zero ou excede o número de integrantes.
+code: uniplus.selecao.banca.quorum_fora_do_intervalo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0399
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0399.
+
+:::
+
+## O que aconteceu
+
+O quórum declarado para a banca colegiada não está entre 1 e o número de
+integrantes: ou não foi informado, ou é zero, ou excede o número de integrantes.
+O quórum é obrigatório na deliberação por votação, e a ausência dele é recusada
+com este mesmo código. Sem quórum não há decisão, e um quórum maior que a banca
+nunca seria alcançado. Com 3 integrantes, um quórum ausente, um quórum 0 ou um
+quórum 4 são recusados; 1, 2 e 3 são aceitos.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.quorum` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.quorum` na banca da etapa.
+
+## Como resolver
+
+Informe, no campo `quorum`, que é obrigatório, um número de 1 até o número de integrantes que o edital
+declara. O quórum só existe na deliberação por votação: no ato individual, ele
+não é informado (ver [ato individual sem votação](./uniplus.selecao.banca.ato_individual_sem_votacao.mdx)).
+
+Quando o encerramento da votação é por todos os titulares, o quórum precisa ser
+igual ao número de integrantes, o que tem [recusa própria](./uniplus.selecao.banca.quorum_incoerente.mdx).

@@ -1,0 +1,44 @@
+---
+title: Número de integrantes inválido
+sidebar_label: Número de integrantes inválido
+description: Rascunho — a banca declara menos de 1 integrante.
+code: uniplus.selecao.banca.integrantes_invalidos
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0275
+  - UNI-REQ-0276
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0275 e UNI-REQ-0276.
+
+:::
+
+## O que aconteceu
+
+A regra de deliberação da banca declara menos de 1 integrante. A banca tem ao
+menos uma pessoa titular: ela pode ter uma só (UNI-REQ-0276), mas não pode ter
+nenhuma, porque ninguém poderia deliberar ou praticar o ato.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.integrantes` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.integrantes` na banca da etapa.
+
+## Como resolver
+
+Informe no campo `integrantes` um número inteiro a partir de 1, o que o edital
+declara para a banca. Depois de corrigido o número, o quórum e o mínimo de
+integrantes são conferidos em função dele, e têm recusa própria:
+[quórum fora do intervalo](./uniplus.selecao.banca.quorum_fora_do_intervalo.mdx) e
+[integrantes abaixo do mínimo](./uniplus.selecao.banca.integrantes_abaixo_do_minimo.mdx).
