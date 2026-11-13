@@ -1,0 +1,44 @@
+---
+title: Desempate obrigatório na maioria
+sidebar_label: Desempate obrigatório na maioria
+description: Rascunho — a banca decide por maioria, tem 2 ou mais integrantes e não declara o desempate.
+code: uniplus.selecao.banca.desempate_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0275
+  - UNI-REQ-0400
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0275 e UNI-REQ-0400.
+
+:::
+
+## O que aconteceu
+
+A banca decide por maioria (`maioriaSimples` ou `maioriaAbsoluta`), tem 2 ou mais
+integrantes e não declara a forma de desempate. Com mais de um integrante a
+votação pode empatar, e o edital precisa dizer o que acontece então
+(UNI-REQ-0275). Uma banca de 4 integrantes com maioria simples e sem desempate
+fica sem resposta para o empate de 2 a 2.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.desempate` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.desempate` na banca da etapa.
+
+## Como resolver
+
+Informe no campo `desempate` a forma do edital: `votoDaPresidencia` ou
+`novaVotacao`. Se o critério não é de maioria, o campo não se aplica; ver
+[desempate não se aplica](./uniplus.selecao.banca.desempate_nao_se_aplica.mdx).

@@ -1,0 +1,43 @@
+---
+title: Encerramento da votação obrigatório
+sidebar_label: Encerramento da votação obrigatório
+description: Rascunho — a banca que delibera por votação não declara como a votação termina.
+code: uniplus.selecao.banca.encerramento_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0275
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0275.
+
+:::
+
+## O que aconteceu
+
+A banca declarada com deliberação por votação (`colegiadaComVotacao`) não diz como
+a votação termina. O edital define se ela acaba quando todos os titulares votam
+ou quando a presidência a encerra ao atingir o quórum (UNI-REQ-0275), e a
+diferença muda quando a decisão sai e como se conta a unanimidade.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.encerramento` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.encerramento` na banca da etapa.
+
+## Como resolver
+
+Informe no campo `encerramento` uma das duas formas: `todosOsTitulares` ou
+`presidenciaNoQuorum`. Com `todosOsTitulares`, o quórum precisa ser igual ao
+número de integrantes
+([quórum incoerente](./uniplus.selecao.banca.quorum_incoerente.mdx)).

@@ -1,0 +1,44 @@
+---
+title: Critério de decisão obrigatório
+sidebar_label: Critério de decisão obrigatório
+description: Rascunho — a banca que delibera por votação não declara o critério de decisão.
+code: uniplus.selecao.banca.criterio_obrigatorio
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0275
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0275.
+
+:::
+
+## O que aconteceu
+
+A banca declarada com deliberação por votação (`colegiadaComVotacao`) não traz o
+critério de decisão. O edital define, para cada banca, o critério pelo qual a
+votação decide (UNI-REQ-0275), e o sistema não escolhe um no lugar dele.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.criterio` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.criterio` na banca da etapa.
+
+## Como resolver
+
+Informe no campo `criterio` o critério do edital: `maioriaSimples`,
+`maioriaAbsoluta` ou `unanimidade`. Conforme o critério, outros campos passam a
+ser exigidos ou recusados: o
+[desempate](./uniplus.selecao.banca.desempate_obrigatorio.mdx) na maioria e o
+[valor para a unanimidade não alcançada](./uniplus.selecao.banca.sem_unanimidade_obrigatoria.mdx)
+na unanimidade.

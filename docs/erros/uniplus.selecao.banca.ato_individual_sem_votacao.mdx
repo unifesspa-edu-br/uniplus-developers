@@ -1,0 +1,45 @@
+---
+title: Ato individual não tem campo de votação
+sidebar_label: Ato individual não tem campo de votação
+description: Rascunho — a banca por ato individual declara quórum, critério, desempate, encerramento ou valor sem unanimidade.
+code: uniplus.selecao.banca.ato_individual_sem_votacao
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0338
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0338.
+
+:::
+
+## O que aconteceu
+
+A banca declarada por ato individual (`atoIndividual`) traz ao menos um campo de
+votação: quórum, critério, desempate, encerramento ou o valor para a unanimidade
+não alcançada. No ato individual não há quórum nem votação: qualquer pessoa
+titular designada pratica o ato, e o registro traz a autoria, a data e, quando
+houver, a justificativa (UNI-REQ-0338). É o modo da banca de homologação das
+inscrições.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.quorum` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.quorum` na banca da etapa.
+
+## Como resolver
+
+Retire os campos de votação e deixe só o modo, o número de integrantes e o de
+suplentes. Se o edital manda a banca votar, mude o modo para `colegiadaComVotacao`
+e declare os campos dela; ver
+[modo de deliberação inválido](./uniplus.selecao.banca.modo_de_deliberacao_invalido.mdx).

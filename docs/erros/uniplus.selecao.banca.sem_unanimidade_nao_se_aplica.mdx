@@ -1,0 +1,41 @@
+---
+title: Valor para a unanimidade não se aplica
+sidebar_label: Valor para a unanimidade não se aplica
+description: Rascunho — a banca declara o que vale sem unanimidade fora do critério de unanimidade ou com 1 integrante.
+code: uniplus.selecao.banca.sem_unanimidade_nao_se_aplica
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0401
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0401.
+
+:::
+
+## O que aconteceu
+
+A banca declara o campo `semUnanimidade` onde ele não existe: em critério que não é
+de unanimidade, ou em banca de 1 integrante, cujo voto é sempre unânime. Guardar
+um campo que nunca é usado deixaria a regra do edital ambígua.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.semUnanimidade` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.semUnanimidade` na banca da etapa.
+
+## Como resolver
+
+Retire o campo `semUnanimidade`. Ele só é declarado na banca de unanimidade com 2
+ou mais integrantes; nesse caso, ele é
+[obrigatório](./uniplus.selecao.banca.sem_unanimidade_obrigatoria.mdx).

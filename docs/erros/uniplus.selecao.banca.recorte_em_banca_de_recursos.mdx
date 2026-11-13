@@ -1,0 +1,58 @@
+---
+title: Recorte não se aplica à banca de recursos
+sidebar_label: Recorte não se aplica à banca de recursos
+description: Rascunho — a banca de análise de recursos julga o recurso inteiro e não tem recorte de competência.
+code: uniplus.selecao.banca.recorte_em_banca_de_recursos
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0398
+  - UNI-REQ-0274
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0398 e UNI-REQ-0274.
+
+:::
+
+## O que aconteceu
+
+A banca de análise de recursos foi declarada com recorte de competência, isto é,
+com a lista de categorias de documento que ela julga. A banca de análise de
+recursos não tem recorte: ela analisa o recurso da fase ou da etapa inteiro
+(UNI-REQ-0274), e não uma parte dele.
+
+O recorte existe para distinguir duas bancas do mesmo tipo na mesma fase, cada
+uma com a sua parte da análise documental, como descrito em
+[Recorte de competência obrigatório](./uniplus.selecao.banca_requerida.recorte_de_competencia_obrigatorio.mdx).
+Na banca de recursos, um recorte deixaria parte do recurso sem quem o analise.
+
+Só a banca da fase tem recorte de competência: a recusa sai na gravação do
+cronograma, no campo `fases[0].bancasRequeridas[0].categoriasDocumentoIds`, e
+vem na lista `errors[]` da resposta, junto das demais violações do mesmo corpo.
+A publicação, a retificação em ato único e o fechamento da sessão conferem de
+novo.
+
+## Como resolver
+
+Retire o recorte de competência da banca de análise de recursos. Se parte da
+análise documental precisa de bancas distintas, declare essas bancas com o tipo
+próprio de cada uma, e mantenha uma única banca de análise de recursos sem
+recorte.
+
+O painel de conformidade aponta a pendência antes da publicação, no item
+`cronograma_banca_de_recursos_sem_recorte`.

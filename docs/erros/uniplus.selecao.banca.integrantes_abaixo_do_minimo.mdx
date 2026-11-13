@@ -1,0 +1,81 @@
+---
+title: Integrantes abaixo do mínimo
+sidebar_label: Integrantes abaixo do mínimo
+description: Rascunho — a banca declara menos integrantes do que o maior entre o quórum e o número de corretores que a regra de consolidação das etapas julgadas exige.
+code: uniplus.selecao.banca.integrantes_abaixo_do_minimo
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0387
+  - UNI-REQ-0276
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+  - label: 'uniplus-api#2383'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2383
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0387 e UNI-REQ-0276.
+
+:::
+
+## O que aconteceu
+
+A banca declara menos integrantes do que a publicação exige. O mínimo é o maior
+valor entre o quórum da banca e o número de corretores distintos que a regra de
+consolidação congelada de cada etapa julgada pela banca exige (UNI-REQ-0387). A
+mensagem da recusa cita a banca, o local onde ela foi declarada (a fase ou a
+etapa), o número de integrantes declarado e o mínimo exigido: por exemplo, a
+banca declara 2 integrantes, e o mínimo exigido é 3.
+
+O número de corretores é parâmetro da regra de consolidação da etapa: a
+correção independente declara 3, a avaliação única declara 1, e a etapa sem
+consolidação humana declara 0. Enquanto a regra de consolidação não declara esse
+número, ele conta 0, e o mínimo é o próprio quórum da banca. A conferência lê só esse número, nunca o tipo da
+etapa nem o tipo do processo. Quem corrige e quem vota são a mesma banca
+designada, então uma banca curta demais nunca conseguiria corrigir o recurso
+com o terceiro corretor, e o problema só apareceria no julgamento, com o prazo
+correndo. Por isso a recusa vem na publicação.
+
+Quais etapas a banca julga:
+
+- a banca da etapa julga a própria etapa;
+- a banca de análise de recursos da fase julga a própria fase e as etapas dela
+  que têm recurso e não têm banca de recurso própria;
+- a banca que julga mais de uma etapa usa o maior número de corretores entre
+  elas.
+
+Exemplo: a banca de análise de recursos de uma redação com correção
+independente declara 2 titulares e quórum 2. O mínimo é 3, o maior entre o
+quórum 2 e os 3 corretores, e a banca é recusada. Com 3 titulares e quórum 2, é
+aceita. Um quórum maior que o número de corretores é válido: 5 integrantes e
+quórum 4, com 3 corretores, passa, porque o mínimo é 4.
+
+A conferência roda na publicação, na retificação em ato único e no fechamento da
+sessão de edição. A recusa vem na lista `errors[]` da resposta, junto das demais
+violações do mesmo corpo.
+
+## Como resolver
+
+Aumente o número de integrantes da banca até o mínimo informado, ou, se o
+edital permite, reduza o quórum. Quando o mínimo vem do número de corretores,
+reduzir o quórum não basta: o número de integrantes precisa alcançar o número
+de corretores da etapa julgada.
+
+A designação de quem integra a banca confere depois o número exato declarado
+(UNI-REQ-0276), de modo que, garantido o mínimo na publicação, a operação não
+fica sem corretores.
+
+O painel de conformidade aponta a banca abaixo do mínimo antes da publicação, no
+item `cronograma_banca_com_o_minimo_de_integrantes`.

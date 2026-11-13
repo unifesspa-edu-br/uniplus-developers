@@ -1,0 +1,67 @@
+---
+title: Ciclo recursal sem banca de análise
+sidebar_label: Ciclo recursal sem banca de análise
+description: Rascunho — o cronograma tem prazo de recurso em uma fase ou etapa e não declara a banca de análise de recursos que o julga.
+code: uniplus.selecao.cronograma.recurso_sem_banca
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0274
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0274.
+
+:::
+
+## O que aconteceu
+
+O cronograma tem prazo de recurso em uma fase ou em uma etapa, e nenhuma banca
+de análise de recursos o julga. Todo recurso previsto no edital exige essa banca
+(UNI-REQ-0274), porque quem integra a banca é quem tem acesso aos dados dos
+candidatos para analisá-lo. Sem ela, o recurso de quem recorre ficaria sem quem
+o analise, e o edital não é publicado.
+
+A banca que atende o recurso é declarada assim:
+
+- **recurso da fase:** a banca de análise de recursos declarada na própria
+  fase;
+- **recurso da etapa:** a banca de análise de recursos declarada na própria
+  etapa ou, na falta dela, na fase da etapa. Quando existe nas duas, o recurso
+  da etapa é julgado pela banca da etapa. Banca declarada só em outra etapa não
+  atende.
+
+A conferência roda na publicação, na retificação em ato único e no fechamento
+da sessão de edição; a restauração por descarte da retificação não a repete, e
+devolve a versão divulgada. A recusa vem na lista `errors[]` da resposta e
+cita a fase ou a etapa que está sem banca.
+
+## Como resolver
+
+Declare a banca de análise de recursos onde o recurso é julgado:
+
+- na fase, quando todos os recursos dela, e das etapas que não têm banca
+  própria, são analisados pela mesma banca;
+- na etapa, quando ela tem banca de recurso própria.
+
+Declare a banca com a regra de deliberação do edital, que também é conferida:
+[regra obrigatória](./uniplus.selecao.banca.regra_de_deliberacao_obrigatoria.mdx)
+e [mínimo de integrantes](./uniplus.selecao.banca.integrantes_abaixo_do_minimo.mdx).
+Se o certame não admite recurso naquela fase ou etapa, retire o prazo de
+recurso em vez de declarar a banca.
+
+O painel de conformidade aponta o recurso sem banca antes da publicação, no item
+`cronograma_recurso_com_banca_de_analise`.

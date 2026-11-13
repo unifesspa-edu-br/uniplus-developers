@@ -1,0 +1,44 @@
+---
+title: Valor para a unanimidade não alcançada obrigatório
+sidebar_label: Valor para a unanimidade não alcançada obrigatório
+description: Rascunho — a banca decide por unanimidade com 2 ou mais integrantes e não declara o que vale sem unanimidade.
+code: uniplus.selecao.banca.sem_unanimidade_obrigatoria
+http_status: 422
+situacao: rascunho
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Definição de etapas do processo seletivo
+requisitos:
+  - UNI-REQ-0275
+  - UNI-REQ-0401
+rastreio:
+  - label: 'uniplus-api#2323'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2323
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+:::info Recusa ainda não emitida
+
+A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0275 e UNI-REQ-0401.
+
+:::
+
+## O que aconteceu
+
+A banca decide por unanimidade (`unanimidade`), tem 2 ou mais integrantes e não
+declara o que vale quando a unanimidade não é alcançada. Com mais de um
+integrante, os votos podem divergir, e o edital precisa dizer a decisão nesse
+caso (UNI-REQ-0275). Sem o campo, a votação dividida ficaria sem desfecho.
+
+A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.semUnanimidade` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.semUnanimidade` na banca da etapa.
+
+## Como resolver
+
+Informe no campo `semUnanimidade` o que o edital declara: `favoravel`,
+`desfavoravel` ou `novaVotacao`. Fora da unanimidade, ou com 1 integrante, o campo
+não se aplica; ver
+[valor para a unanimidade não se aplica](./uniplus.selecao.banca.sem_unanimidade_nao_se_aplica.mdx).
