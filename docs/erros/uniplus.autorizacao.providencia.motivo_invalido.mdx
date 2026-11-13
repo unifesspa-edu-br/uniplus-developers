@@ -1,0 +1,33 @@
+---
+title: Motivo da resposta inválido
+sidebar_label: Motivo inválido
+description: A resposta e o atendimento da providência exigem motivo de até 500 caracteres.
+code: uniplus.autorizacao.providencia.motivo_invalido
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Resposta à providência (`POST /api/autorizacao/providencias/{id}/resposta`)
+  - Atendimento da providência, com a revogação da concessão de acesso (`POST /api/autorizacao/providencias/{id}/atendimento`)
+requisitos:
+  - UNI-REQ-0376
+rastreio:
+  - label: 'uniplus-api#2367'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2367
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O motivo é obrigatório e deve ter até 500 caracteres.
+
+A resposta e o atendimento são motivados: na resposta, o motivo explica por que a providência não leva à revogação; no atendimento, vira o motivo da revogação na trilha da concessão de acesso. Nada foi registrado.
+
+Regra da tramitação da providência sobre concessão de acesso, definida na ADR-0164 da uniplus-api.
+
+## Como resolver
+
+Informe o motivo, com até 500 caracteres, e repita a resposta ou o atendimento.

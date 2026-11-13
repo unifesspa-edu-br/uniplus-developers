@@ -1,0 +1,33 @@
+---
+title: Quem solicitou a providência não a responde
+sidebar_label: Solicitante não responde
+description: Quem solicitou a providência não a responde nem a atende.
+code: uniplus.autorizacao.providencia.solicitante_nao_responde
+http_status: 422
+situacao: publicado
+modulo: Autorização
+emitido_em:
+  - Resposta à providência (`POST /api/autorizacao/providencias/{id}/resposta`)
+  - Atendimento da providência, com a revogação da concessão de acesso (`POST /api/autorizacao/providencias/{id}/atendimento`)
+requisitos:
+  - UNI-REQ-0376
+rastreio:
+  - label: 'uniplus-api#2367'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2367
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Quem solicitou a providência não a responde nem a atende.
+
+Quem pede a providência não decide o próprio pedido. A leitura da providência traz `impedidoDeResponder` para quem está nessa situação. Nada foi registrado.
+
+Regra da tramitação da providência sobre concessão de acesso, definida na ADR-0164 da uniplus-api; os papéis de quem solicita e de quem responde vêm da ADR-0162, que separa as atribuições de governança.
+
+## Como resolver
+
+Peça a resposta ou o atendimento a outro gestor de acessos ou Representante do controlador que tenha a permissão de administrar concessões de acesso e que não seja quem solicitou a providência nem o beneficiário da concessão.

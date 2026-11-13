@@ -8,11 +8,15 @@ situacao: publicado
 modulo: Autorização
 emitido_em:
   - Revogação de concessões
+  - Atendimento da providência, com a revogação da concessão de acesso (`POST /api/autorizacao/providencias/{id}/atendimento`)
 requisitos:
   - UNI-REQ-0184
+  - UNI-REQ-0376
 rastreio:
   - label: 'uniplus-api#2134'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2134
+  - label: 'uniplus-api#2367'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2367
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -21,7 +25,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A concessão revogada é de gestor de acessos, e sem ela restaria menos de dois gestores ativos. A instituição precisa sempre de ao menos dois, para que nenhuma concessão dependa de uma só pessoa.
+A concessão revogada é de gestor de acessos, e sem ela restaria menos de dois gestores ativos. A instituição precisa sempre de ao menos dois, para que nenhuma concessão dependa de uma só pessoa. A regra vale também quando a revogação vem do atendimento de uma providência.
 
 ## Como resolver
 

@@ -8,11 +8,15 @@ situacao: publicado
 modulo: Autorização
 emitido_em:
   - Revogação de concessão de acesso
+  - Atendimento da providência, com a revogação da concessão de acesso (`POST /api/autorizacao/providencias/{id}/atendimento`)
 requisitos:
   - UNI-REQ-0186
+  - UNI-REQ-0376
 rastreio:
   - label: 'uniplus-api#2142'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2142
+  - label: 'uniplus-api#2367'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2367
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -21,7 +25,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Revogar uma concessão encerra o acesso de uma pessoa de imediato. Para evitar que se revogue a concessão errada, o sistema pede que você digite o e-mail do beneficiário como conferência, e o e-mail digitado não é o dessa concessão. Nada foi revogado.
+Revogar uma concessão encerra o acesso de uma pessoa de imediato. Para evitar que se revogue a concessão errada, o sistema pede que você digite o e-mail do beneficiário como conferência, e o e-mail digitado não é o dessa concessão. A mesma conferência vale no atendimento de uma providência, que revoga a concessão de acesso. Nada foi revogado.
 
 A comparação ignora maiúsculas e minúsculas e espaços nas pontas, mas o endereço precisa ser o mesmo que consta na concessão.
 
