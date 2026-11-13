@@ -599,6 +599,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.autorizacao.concessao.nao_encontrada',
         'erros/uniplus.autorizacao.concessao.ja_revogada',
         'erros/uniplus.autorizacao.concessao.minimo_de_gestores',
+        'erros/uniplus.autorizacao.concessao.ultimo_representante',
         'erros/uniplus.autorizacao.concessao.motivo_invalido',
         'erros/uniplus.autorizacao.concessao.confirmacao_divergente',
         'erros/uniplus.autorizacao.concessao.filtro_de_pessoa_invalido',

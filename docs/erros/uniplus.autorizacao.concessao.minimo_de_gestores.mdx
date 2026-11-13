@@ -9,6 +9,7 @@ modulo: Autorização
 emitido_em:
   - Revogação de concessões
   - Atendimento da providência, com a revogação da concessão de acesso (`POST /api/autorizacao/providencias/{id}/atendimento`)
+  - Revogação do item da revisão de acessos
 requisitos:
   - UNI-REQ-0184
   - UNI-REQ-0376
@@ -25,7 +26,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A concessão revogada é de gestor de acessos, e sem ela restaria menos de dois gestores ativos. A instituição precisa sempre de ao menos dois, para que nenhuma concessão dependa de uma só pessoa. A regra vale também quando a revogação vem do atendimento de uma providência.
+A concessão revogada é de gestor de acessos, e sem ela restaria menos de dois gestores ativos. A instituição precisa sempre de ao menos dois, para que nenhuma concessão dependa de uma só pessoa. A regra vale também quando a revogação vem do atendimento de uma providência ou da revogação do item da revisão de acessos.
 
 ## Como resolver
 
