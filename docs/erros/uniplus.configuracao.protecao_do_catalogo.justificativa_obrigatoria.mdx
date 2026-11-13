@@ -10,9 +10,12 @@ emitido_em:
   - Decisão da proteção de dados (aprovação, ajuste recomendado ou reprovação)
 requisitos:
   - UNI-REQ-0205
+  - UNI-REQ-0374
 rastreio:
   - label: 'uniplus-api#2181'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+  - label: 'uniplus-api#2366'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -25,6 +28,6 @@ Ao reprovar um item, o Representante do controlador explica o motivo, porque a r
 
 ## Como resolver
 
-Informe a justificativa da reprovação. Se a ideia é indicar a classificação correta, use o ajuste recomendado, em que a justificativa é opcional, salvo quando houver manifestação desfavorável vigente do Encarregado de dados no ciclo: nesse caso, a justificativa é obrigatória também no ajuste recomendado e na aprovação (UNI-REQ-0374).
+Informe a justificativa da reprovação. Se a ideia é indicar a classificação correta, use o ajuste recomendado, que exige a classificação recomendada e, diante de manifestação desfavorável vigente, também a justificativa.
 
-{/* Pendente da uniplus-api#2366: o código de erro da justificativa ausente diante de manifestação desfavorável ainda não foi definido; esta página não o cobre. */}
+Na aprovação e no ajuste recomendado, a justificativa é opcional. Diante de manifestação desfavorável vigente do Encarregado de dados no ciclo, ela passa a ser obrigatória nessas duas decisões, e a falta dela é recusada com o código próprio [`uniplus.configuracao.protecao_do_catalogo.justificativa_exigida_pela_manifestacao`](./uniplus.configuracao.protecao_do_catalogo.justificativa_exigida_pela_manifestacao.mdx) (UNI-REQ-0374).

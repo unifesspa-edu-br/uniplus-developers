@@ -1,0 +1,30 @@
+---
+title: Os pareceres recomenda ajuste e inadequada exigem o texto
+sidebar_label: Texto da manifestação obrigatório
+description: Os pareceres recomenda ajuste e inadequada exigem o texto da manifestação.
+code: uniplus.configuracao.protecao_do_catalogo.texto_da_manifestacao_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Registro de manifestação na proteção do catálogo (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
+requisitos:
+  - UNI-REQ-0373
+rastreio:
+  - label: 'uniplus-api#2366'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A manifestação com parecer `RECOMENDA_AJUSTE` ou `INADEQUADA` explica o que está inadequado na proteção do item, para que o Representante do controlador saiba o que considerar ao decidir. O texto chegou ausente ou em branco. No parecer `ADEQUADA`, o texto é opcional. Nada foi registrado.
+
+Regra da manifestação técnica na proteção do catálogo, definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Informe o texto da manifestação, com até 2.000 caracteres, e envie de novo.

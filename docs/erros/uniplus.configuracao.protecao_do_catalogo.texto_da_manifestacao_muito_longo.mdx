@@ -1,0 +1,30 @@
+---
+title: O texto da manifestação passa do limite de 2.000 caracteres
+sidebar_label: Texto da manifestação muito longo
+description: O texto da manifestação aceita no máximo 2.000 caracteres.
+code: uniplus.configuracao.protecao_do_catalogo.texto_da_manifestacao_muito_longo
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Registro de manifestação na proteção do catálogo (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
+requisitos:
+  - UNI-REQ-0373
+rastreio:
+  - label: 'uniplus-api#2366'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O texto da manifestação passa do limite de 2.000 caracteres. Nada foi registrado.
+
+Regra da manifestação técnica na proteção do catálogo, definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Resuma o texto em até 2.000 caracteres e envie de novo.

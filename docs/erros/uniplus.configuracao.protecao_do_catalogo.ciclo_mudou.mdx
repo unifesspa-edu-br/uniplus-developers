@@ -1,0 +1,30 @@
+---
+title: O ciclo de aprovação do item mudou depois de lido; releia o item
+sidebar_label: Ciclo mudou
+description: A aprovação do item foi reiniciada depois que ele foi lido, e a manifestação não vale para o ciclo novo.
+code: uniplus.configuracao.protecao_do_catalogo.ciclo_mudou
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Registro de manifestação na proteção do catálogo (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
+requisitos:
+  - UNI-REQ-0373
+rastreio:
+  - label: 'uniplus-api#2366'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ciclo informado na manifestação não é mais o ciclo de aprovação do item: depois da leitura, a aprovação foi reiniciada, por exemplo porque o item foi editado e enviado de novo. A manifestação vale só para o ciclo em que foi feita, e as do ciclo anterior ficam encerradas. Nada foi registrado. Diferentemente do conflito de concorrência, repetir a mesma requisição não resolve.
+
+Regra da manifestação técnica na proteção do catálogo, definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Releia o item, confira a proteção que está agora em aprovação e, se ainda for o caso, manifeste-se de novo informando o ciclo atual.

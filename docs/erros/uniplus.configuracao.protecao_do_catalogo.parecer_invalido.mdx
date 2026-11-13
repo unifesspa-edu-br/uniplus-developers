@@ -1,0 +1,30 @@
+---
+title: Parecer fora do vocabulário da manifestação
+sidebar_label: Parecer inválido
+description: A manifestação só aceita os pareceres ADEQUADA, RECOMENDA_AJUSTE ou INADEQUADA.
+code: uniplus.configuracao.protecao_do_catalogo.parecer_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Registro de manifestação na proteção do catálogo (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`)
+requisitos:
+  - UNI-REQ-0373
+rastreio:
+  - label: 'uniplus-api#2366'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2366
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `parecer` da manifestação trouxe um valor que não está entre os aceitos: `ADEQUADA`, `RECOMENDA_AJUSTE` e `INADEQUADA`. A recusa vem no mesmo lote das demais violações do corpo, em `errors[]`. Nada foi registrado.
+
+Regra da manifestação técnica na proteção do catálogo, definida na ADR-0162 da uniplus-api.
+
+## Como resolver
+
+Envie um dos três pareceres. Nos pareceres `RECOMENDA_AJUSTE` e `INADEQUADA`, informe também o texto.
