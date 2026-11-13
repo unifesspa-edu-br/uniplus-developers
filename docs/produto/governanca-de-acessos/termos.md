@@ -31,15 +31,21 @@ Assinado por quem é designado gestor de acessos, Representante do controlador (
 
 ## Modelo do termo de responsabilidade
 
-Aceito no Uni+ pelo beneficiário de pedido que concede permissão pessoal, identificadora ou sensível, antes da decisão do gestor de acessos (UNI-REQ-0377 e UNI-REQ-0378, em revisão).
+Aceito no Uni+ pelo beneficiário de pedido de perfil protegido, isto é, que concede permissão pessoal, identificadora ou sensível, antes da decisão do gestor de acessos (UNI-REQ-0377 e UNI-REQ-0378).
 
 ### Como o termo é versionado
 
-Conforme a [ADR-0162](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0162-separacao-das-atribuicoes-de-governanca.md):
+Conforme a [ADR-0162](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0162-separacao-das-atribuicoes-de-governanca.md) e os requisitos UNI-REQ-0377 e UNI-REQ-0378:
 
-- cada versão é imutável e é publicada pelo gestor de acessos com o texto, o resumo SHA-256 do texto normalizado, o ato que a aprova e o autor;
-- o pedido fixa a versão vigente na criação; publicar versão nova não afeta pedidos já criados nem concessões existentes;
-- o aceite registra instante, pedido, versão e resumo, e é feito só pelo beneficiário, autenticado pelo login institucional.
+- cada versão é numerada e imutável, e é publicada pelo gestor de acessos com o texto, de 200 a 20 000 caracteres, o resumo do texto, o ato que a aprova, com até 500 caracteres, e o autor;
+- o texto é gravado já normalizado (forma composta NFC, uma só forma de quebra de linha, sem espaço em branco no fim das linhas nem nas pontas), e o resumo é o SHA-256 dos bytes UTF-8 desse texto; o ato não entra no resumo;
+- a publicação é recusada se outra versão foi publicada depois que a tela foi aberta, e o texto igual ao da versão vigente não é publicado de novo;
+- todo pedido de perfil protegido informa, na criação, a versão do termo apresentada, inclusive o feito para outra pessoa e o com documento; o pedido fixa a versão vigente, e a criação é recusada se não houver termo publicado ou se a versão apresentada não for mais a vigente;
+- no pedido para si sem documento, o aceite é registrado no próprio envio; nos demais casos, é feito depois, sobre a versão fixada, e, quando há documento, depois da verificação dele;
+- no pedido de perfil protegido, a intenção de anexar documento é declarada na criação, e o documento só se anexa se foi declarado;
+- se o perfil passa a exigir o termo depois da criação do pedido, o pedido é devolvido a quem pediu e precisa ser refeito para fixar e aceitar o termo;
+- publicar versão nova não muda a versão fixada nos pedidos em andamento nem afeta concessões existentes;
+- o aceite registra pessoa, instante, pedido, versão e resumo, e é feito só pelo beneficiário, autenticado pelo login institucional.
 
 | Campo da versão | Valor nesta minuta |
 |---|---|
