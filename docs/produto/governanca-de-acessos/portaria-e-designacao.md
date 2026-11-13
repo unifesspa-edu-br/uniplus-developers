@@ -33,7 +33,7 @@ III - **Encarregado de dados**, que consulta pedidos, concessões, revisões, ve
 
 § 1º O substituto formal recebe o mesmo perfil de acesso do titular, de modo que cada um possa decidir os pedidos de proteção de dados do outro.
 
-§ 2º A designação é ato institucional, alterado ou encerrado pela autoridade competente, e pode fixar prazo. A concessão do perfil no Uni+ é revogada pelo gestor de acessos quando a designação mudar ou acabar e, se não houver prazo, enquanto isso não ocorrer, continua vigente.
+§ 2º A designação é ato institucional, alterado ou encerrado pela autoridade competente, e pode fixar prazo. A concessão do perfil no Uni+ não tem data de fim, ainda que a designação tenha prazo: continua vigente até ser revogada pelo gestor de acessos quando a designação mudar ou acabar. A revogação que deixaria a instituição sem Representante do controlador vigente é recusada pelo sistema; por isso, quem assume a função recebe o perfil antes de ser revogada a concessão de quem a deixa.
 
 § 3º A unidade de lotação do designado comunica ao gestor de acessos, em até [PRAZO] dias, a mudança de lotação, o afastamento ou qualquer fato que encerre ou altere a designação, e a mudança ou o fim da própria designação, para que a concessão no Uni+ seja revogada pelo gestor de acessos.
 
@@ -67,7 +67,7 @@ O [CARGO DA AUTORIDADE SIGNATÁRIA] da Universidade Federal do Sul e Sudeste do 
 
 **Art. 2º** Titular e substituto recebem o mesmo perfil de acesso de Representante do controlador e assinam o [termo de compromisso do designado](./termos.md#termo-de-compromisso-do-designado).
 
-**Art. 3º** A designação vigora [até DATA FINAL | por prazo indeterminado, até ser alterada ou encerrada pela autoridade competente]. Encerrada ou alterada a designação, o gestor de acessos revoga a concessão correspondente no Uni+.
+**Art. 3º** A designação vigora [até DATA FINAL | por prazo indeterminado, até ser alterada ou encerrada pela autoridade competente]. Encerrada ou alterada a designação, o gestor de acessos revoga a concessão correspondente no Uni+, que não tem data de fim; se a revogação deixar a instituição sem Representante do controlador vigente, ela só é feita depois que a concessão de quem assume estiver vigente.
 
 **Art. 4º** A unidade de lotação dos designados comunica ao gestor de acessos a mudança ou o fim da designação, para que a concessão no Uni+ seja revogada, nos termos do art. 3º, § 3º, da Portaria Normativa nº [Nº DA PORTARIA NORMATIVA].
 
@@ -85,8 +85,8 @@ O [CARGO DA AUTORIDADE SIGNATÁRIA] da Universidade Federal do Sul e Sudeste do 
 | Acesso só por pedido aprovado e sem autoaprovação, ressalvada a instalação dos dois primeiros gestores | [UNI-REQ-0184](../requisitos/index.mdx) |
 | A instalação concede só o perfil de gestor de acessos e não confere a incompatibilidade entre Representante e Encarregado | UNI-REQ-0370 |
 | Três funções e incompatibilidade entre Representante e Encarregado | UNI-REQ-0369, UNI-REQ-0370 e [ADR-0162](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0162-separacao-das-atribuicoes-de-governanca.md) |
-| Titular e substituto com o mesmo perfil | ADR-0162: o sistema não tem ato de substituição e exige dois Representantes vigentes para que um decida o pedido do outro |
-| Prazo opcional e revogação | ADR-0162: concessão de Representante admite prazo; sem prazo, termina pela revogação do gestor, feita quando a designação muda ou acaba |
+| Titular e substituto com o mesmo perfil | ADR-0162: o sistema não tem ato de substituição; dois Representantes vigentes permitem que um decida o pedido do outro |
+| Prazo da designação e revogação | UNI-REQ-0200 e UNI-REQ-0394: a concessão de Representante não admite prazo, mesmo quando a designação tem; termina pela revogação do gestor, feita quando a designação muda ou acaba, e a revogação que deixaria a instituição sem Representante vigente é recusada, de modo que quem assume recebe o perfil antes |
 | Comunicação pela unidade | Regra institucional, fora do sistema: a revogação decorrente é feita pelo gestor de acessos |
 | Termo antes da decisão do gestor, na versão fixada no pedido | UNI-REQ-0377 e UNI-REQ-0378 |
 | Itens da revisão periódica de quem é Representante decididos pelos gestores | UNI-REQ-0202 e ADR-0162 |
