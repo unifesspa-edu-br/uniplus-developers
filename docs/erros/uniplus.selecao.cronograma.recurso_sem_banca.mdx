@@ -38,12 +38,12 @@ A banca que atende o recurso é declarada assim:
   da etapa é julgado pela banca da etapa. Banca declarada só em outra etapa não
   atende.
 
-A conferência roda na publicação, na retificação em ato único e no fechamento
-da sessão de edição; a restauração por descarte da retificação não a repete, e
-devolve a versão divulgada. Na gravação do cronograma, a recusa vem na lista `errors[]` da resposta e
-cita a fase ou a etapa que está sem banca; na publicação, na retificação e no
-fechamento, vem como o código desta página no corpo da resposta, uma pendência
-por vez.
+A conferência roda no congelamento do processo: na publicação, na retificação
+em ato único e no fechamento da sessão de edição; a restauração por descarte da
+retificação não a repete, e devolve a versão divulgada. A gravação do
+cronograma não a faz. A recusa vem como o código desta página no corpo da
+resposta, e não na lista `errors[]`; ela aponta uma pendência por vez, a
+primeira que encontra, e cita a fase ou a etapa que está sem banca.
 
 ## Como resolver
 

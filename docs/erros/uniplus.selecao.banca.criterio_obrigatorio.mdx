@@ -26,7 +26,7 @@ A banca declarada com deliberação por votação (`colegiadaComVotacao`) não t
 critério de decisão. O edital define, para cada banca, o critério pelo qual a
 votação decide (UNI-REQ-0275), e o sistema não escolhe um no lugar dele.
 
-A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.criterio` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.criterio` na banca da etapa.
+A recusa vem na lista `errors[]` da resposta, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.criterio` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.criterio` na banca da etapa.
 
 ## Como resolver
 
