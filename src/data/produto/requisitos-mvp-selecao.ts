@@ -8222,4 +8222,92 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0402',
+    titulo: 'O instante que decide prazo ou ordem é guardado em microssegundos, por truncamento',
+    enunciado:
+      'Todo instante que o sistema grava, compara ou publica tem precisão de microssegundo, obtida por truncamento, nunca por arredondamento. Vale para o instante que o próprio sistema gera (divulgação do ato, abertura e fechamento de janela, decisão, publicação de versão) e para o que chega de fora: o instante de uma requisição, o de uma mensagem entre sistemas e o limite de janela que o edital configura no cronograma são truncados na entrada, antes de qualquer uso. O valor comparado é o mesmo que foi gravado: o instante lido de volta é igual ao usado na comparação, e o limite exclusivo de um prazo cai do mesmo lado antes e depois de gravar. Esta regra não muda o fuso, a convenção de contagem nem a âncora do prazo (UNI-REQ-0112 a UNI-REQ-0115).',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0080',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'O instante gerado com mais de seis casas fracionárias é gravado e lido com seis, truncado; o instante lido de volta é igual ao usado na comparação do prazo; o recurso que chega no último microssegundo anterior ao limite exclusivo é aceito e o que chega no próprio limite é recusado, antes e depois de gravar; o instante recebido por requisição ou por mensagem e o limite de janela do cronograma com mais de seis casas são truncados na entrada; o limite de janela do cronograma é comparado com os instantes gravados já nessa precisão.',
+    verificacao:
+      'Testes automatizados do relógio do sistema, da ida e volta no banco de dados, da entrada por requisição e por mensagem, do limite de janela do cronograma e do limite exclusivo do prazo (planejado, uniplus-api#2380 e uniplus-api#2338).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0403',
+    titulo: 'Instante obrigatório que não chega é recusado, e nunca preenchido com o momento do recebimento',
+    enunciado:
+      'Onde o instante é obrigatório, a requisição ou a mensagem que não o traz é recusada: o sistema nunca o preenche com o instante em que a recebe, porque esse não é o instante do fato (UNI-REQ-0115). A mensagem antiga, anterior à exigência do instante, também é recusada, e a recusa fica registrada sem interromper o processamento das demais mensagens.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0080',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A requisição sem o instante obrigatório é recusada com erro de validação; a mensagem sem o instante obrigatório é recusada e registrada; a mensagem seguinte é processada normalmente; nenhum instante é preenchido com o momento do recebimento.',
+    verificacao:
+      'Testes automatizados da requisição e da mensagem sem o instante, com a mensagem seguinte processada (planejado, uniplus-api#2380).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0404',
+    titulo: 'Fatos de mesmo instante são ordenados pela ordem de registro',
+    enunciado:
+      'Quando dois fatos do mesmo escopo têm o mesmo instante em microssegundos (UNI-REQ-0402), vale a ordem em que foram registrados, e nunca o identificador do registro, que não acompanha a ordem real. Os fatos que decidem prazo ou ordem carregam um número de ordem de registro, gravado junto com o fato e nunca informado nem exibido a quem usa o sistema. Têm esse número: os atos do processo (a divulgação, a primeira publicação do item e a cadeia de correção), a abertura da janela de migração, as decisões da migração, as decisões do pedido de concessão, os atos e as manifestações da proteção de dados do catálogo, os lotes de notas do ENEM (cuja vigência é a do lote mais recente), o voto da banca e a decisão do recurso. Quem já tem numeração própria a mantém: a versão da configuração, a versão do perfil, a etapa da decisão da versão e as trilhas da governança de perfis (UNI-REQ-0311 e UNI-REQ-0326). Dentro de cada escopo as gravações já são serializadas, e por isso o número reflete a ordem real: quem perde um conflito refaz a gravação e recebe número maior. Onde só se quer uma ordem estável de leitura, sem decidir prazo nem ordem, o desempate pelo identificador basta, e ele não representa ordem real.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0080',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Dois atos do mesmo processo gravados no mesmo microssegundo são listados na ordem do registro, também quando o de identificador maior foi gravado primeiro; o mesmo vale para a abertura da janela de migração, as decisões da migração, as decisões do pedido, os atos e as manifestações da proteção de dados do catálogo, os votos e a decisão do recurso; dois lotes de notas do ENEM da mesma etapa e edição importados no mesmo microssegundo têm a vigência decidida pelo registrado por último; dois atos concorrentes no mesmo processo recebem números distintos, e o que perdeu o conflito e refez a gravação recebe o maior; o número de ordem não aparece em resposta, tela nem mensagem; fato com numeração própria usa a dele.',
+    verificacao:
+      'Testes automatizados de persistência por contexto, com o fato de maior identificador gravado primeiro e instantes iguais, e teste de concorrência com transação real entre dois atos do mesmo processo (planejado, uniplus-api#2380 e uniplus-api#2329).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0405',
+    titulo: 'A última aprovação do gestor de acessos no pedido é a mais recente, mesmo em instantes iguais',
+    enunciado:
+      'Quando o pedido de acesso tem mais de uma aprovação do gestor de acessos, a última é a de maior instante e, em instantes iguais, a registrada depois (UNI-REQ-0404). É contra essa aprovação que se confere se o perfil mudou desde que o gestor o avaliou: se mudou, o pedido volta ao gestor de acessos.',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0184',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Com duas aprovações do gestor no mesmo instante, a conferência do perfil usa a registrada depois; com instantes diferentes, a de maior instante; a decisão ainda não gravada conta como a mais recente do seu instante; o relógio que regride não muda a regra: vale o instante.',
+    verificacao:
+      'Testes automatizados de domínio da última aprovação com instante igual, com decisão nova ainda não gravada e com relógio que regride (planejado, uniplus-api#2380).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];
