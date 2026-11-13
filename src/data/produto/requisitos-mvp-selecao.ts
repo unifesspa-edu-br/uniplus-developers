@@ -8134,4 +8134,92 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0398',
+    titulo: 'A banca de análise de recursos não tem recorte de competência',
+    enunciado:
+      'A banca de análise de recursos analisa o recurso da fase ou da etapa inteiro e, por isso, não admite recorte de competência, isto é, a lista de categorias de documento que a banca julga. O recorte serve só para distinguir duas bancas do mesmo tipo na mesma fase. Regra proposta na uniplus-api#2323, a confirmar.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0139',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A declaração da banca de análise de recursos com recorte de competência é recusada com erro nomeado; a mesma banca sem recorte é aceita; a recusa vale na definição do cronograma, na publicação, na retificação e no fechamento da sessão.',
+    verificacao:
+      'Testes automatizados da declaração com e sem recorte (planejado, uniplus-api#2323).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0399',
+    titulo: 'O quórum da banca colegiada é coerente com o número de integrantes e com o encerramento',
+    enunciado:
+      'Na deliberação colegiada com votação, o quórum é obrigatório e vai de 1 ao número de integrantes, e o quórum ausente é recusado como o que está fora do intervalo; quando a votação só termina com todos os titulares votando, o quórum é igual ao número de integrantes. Regra proposta na uniplus-api#2323, a confirmar.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0139',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A declaração é recusada, com erro nomeado, com quórum ausente, zero ou acima do número de integrantes e com quórum diferente do número de integrantes no encerramento por todos os titulares; a banca de 5 integrantes com quórum 4 e encerramento pela presidência no quórum é aceita.',
+    verificacao:
+      'Testes automatizados de cada combinação de quórum, número de integrantes e encerramento (planejado, uniplus-api#2323).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0400',
+    titulo: 'O desempate da banca existe só onde a votação pode empatar',
+    enunciado:
+      'A banca que decide por maioria e tem 2 ou mais integrantes declara a forma de desempate (voto da presidência ou nova votação). Nos demais casos, em banca de 1 integrante ou no critério de unanimidade, não há desempate a declarar. Regra proposta na uniplus-api#2323, a confirmar.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0139',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A declaração de maioria com 2 ou mais integrantes sem desempate é recusada com erro nomeado; o desempate declarado em banca de 1 integrante ou em unanimidade é recusado com erro nomeado; a maioria com desempate e a de 1 integrante sem desempate são aceitas.',
+    verificacao:
+      'Testes automatizados da declaração em cada critério e número de integrantes (planejado, uniplus-api#2323).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0401',
+    titulo: 'O valor para a unanimidade não alcançada existe só na unanimidade com mais de um integrante',
+    enunciado:
+      'A banca que decide por unanimidade e tem 2 ou mais integrantes declara o que vale quando a unanimidade não é alcançada (favorável, desfavorável ou nova votação). Nos demais casos, fora da unanimidade ou em banca de 1 integrante, não há valor a declarar. Regra proposta na uniplus-api#2323, a confirmar.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0139',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'A declaração de unanimidade com 2 ou mais integrantes sem esse valor é recusada com erro nomeado; o valor declarado fora da unanimidade ou em banca de 1 integrante é recusado com erro nomeado; a unanimidade com o valor e a de 1 integrante sem ele são aceitas.',
+    verificacao:
+      'Testes automatizados da declaração em cada critério e número de integrantes (planejado, uniplus-api#2323).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];
