@@ -1,10 +1,10 @@
 ---
 title: Integrantes abaixo do mínimo
 sidebar_label: Integrantes abaixo do mínimo
-description: Rascunho — a banca declara menos integrantes do que o maior entre o quórum e o número de corretores que a regra de consolidação das etapas julgadas exige.
+description: A banca declara menos integrantes do que o maior entre o quórum e o número de corretores que a regra de consolidação das etapas julgadas exige.
 code: uniplus.selecao.banca.integrantes_abaixo_do_minimo
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Publicação inicial do processo seletivo
@@ -23,12 +23,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0387 e UNI-REQ-0276.
-
-:::
 
 ## O que aconteceu
 
@@ -50,7 +44,7 @@ correndo. Por isso a recusa vem na publicação.
 
 Quais etapas a banca julga:
 
-- a banca da etapa julga a própria etapa;
+- a banca de análise de recursos da etapa julga a própria etapa;
 - a banca de análise de recursos da fase julga a própria fase e as etapas dela
   que têm recurso e não têm banca de recurso própria;
 - a banca que julga mais de uma etapa usa o maior número de corretores entre
@@ -63,8 +57,9 @@ aceita. Um quórum maior que o número de corretores é válido: 5 integrantes e
 quórum 4, com 3 corretores, passa, porque o mínimo é 4.
 
 A conferência roda na publicação, na retificação em ato único e no fechamento da
-sessão de edição. A recusa vem na lista `errors[]` da resposta, junto das demais
-violações do mesmo corpo.
+sessão de edição. A recusa vem como o código desta página no corpo da resposta, e não
+na lista `errors[]`: a publicação aponta uma pendência por vez, a primeira que
+encontra.
 
 ## Como resolver
 

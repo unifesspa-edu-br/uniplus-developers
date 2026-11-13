@@ -1,10 +1,10 @@
 ---
 title: Modo de deliberação inválido
 sidebar_label: Modo de deliberação inválido
-description: Rascunho — o modo de deliberação informado não é um dos dois do vocabulário fechado, colegiadaComVotacao ou atoIndividual.
+description: O modo de deliberação informado não é um dos dois do vocabulário fechado, colegiadaComVotacao ou atoIndividual.
 code: uniplus.selecao.banca.modo_de_deliberacao_invalido
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
@@ -20,12 +20,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0275 e UNI-REQ-0338.
-
-:::
 
 ## O que aconteceu
 

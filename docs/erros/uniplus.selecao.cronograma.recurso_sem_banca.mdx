@@ -1,10 +1,10 @@
 ---
 title: Ciclo recursal sem banca de análise
 sidebar_label: Ciclo recursal sem banca de análise
-description: Rascunho — o cronograma tem prazo de recurso em uma fase ou etapa e não declara a banca de análise de recursos que o julga.
+description: O cronograma tem prazo de recurso em uma fase ou etapa e não declara a banca de análise de recursos que o julga.
 code: uniplus.selecao.cronograma.recurso_sem_banca
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Publicação inicial do processo seletivo
@@ -20,12 +20,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0274.
-
-:::
 
 ## O que aconteceu
 
@@ -46,8 +40,10 @@ A banca que atende o recurso é declarada assim:
 
 A conferência roda na publicação, na retificação em ato único e no fechamento
 da sessão de edição; a restauração por descarte da retificação não a repete, e
-devolve a versão divulgada. A recusa vem na lista `errors[]` da resposta e
-cita a fase ou a etapa que está sem banca.
+devolve a versão divulgada. Na gravação do cronograma, a recusa vem na lista `errors[]` da resposta e
+cita a fase ou a etapa que está sem banca; na publicação, na retificação e no
+fechamento, vem como o código desta página no corpo da resposta, uma pendência
+por vez.
 
 ## Como resolver
 

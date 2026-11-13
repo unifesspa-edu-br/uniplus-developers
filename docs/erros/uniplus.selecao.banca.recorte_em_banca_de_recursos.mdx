@@ -1,10 +1,10 @@
 ---
 title: Recorte não se aplica à banca de recursos
 sidebar_label: Recorte não se aplica à banca de recursos
-description: Rascunho — a banca de análise de recursos julga o recurso inteiro e não tem recorte de competência.
+description: A banca de análise de recursos julga o recurso inteiro e não tem recorte de competência.
 code: uniplus.selecao.banca.recorte_em_banca_de_recursos
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
@@ -22,12 +22,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0398 e UNI-REQ-0274.
-
-:::
 
 ## O que aconteceu
 

@@ -1,10 +1,10 @@
 ---
 title: Valor para a unanimidade não se aplica
 sidebar_label: Valor para a unanimidade não se aplica
-description: Rascunho — a banca declara o que vale sem unanimidade fora do critério de unanimidade ou com 1 integrante.
+description: A banca declara o que vale sem unanimidade fora do critério de unanimidade ou com 1 integrante.
 code: uniplus.selecao.banca.sem_unanimidade_nao_se_aplica
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
@@ -19,12 +19,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0401.
-
-:::
 
 ## O que aconteceu
 

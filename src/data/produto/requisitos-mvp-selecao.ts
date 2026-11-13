@@ -8172,7 +8172,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A declaração é recusada, com erro nomeado, com quórum ausente, zero ou acima do número de integrantes e com quórum diferente do número de integrantes no encerramento por todos os titulares; a banca de 5 integrantes com quórum 4 e encerramento pela presidência no quórum é aceita.',
+      'A declaração é recusada, com erro nomeado, com quórum ausente, zero, negativo ou acima do número de integrantes e com quórum diferente do número de integrantes no encerramento por todos os titulares; a banca de 5 integrantes com quórum 4 e encerramento pela presidência no quórum é aceita.',
     verificacao:
       'Testes automatizados de cada combinação de quórum, número de integrantes e encerramento (planejado, uniplus-api#2323).',
     pagina_developers: '/produto/regras-negocio/',

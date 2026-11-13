@@ -1,10 +1,10 @@
 ---
 title: Valor para a unanimidade não alcançada obrigatório
 sidebar_label: Valor para a unanimidade não alcançada obrigatório
-description: Rascunho — a banca decide por unanimidade com 2 ou mais integrantes e não declara o que vale sem unanimidade.
+description: A banca decide por unanimidade com 2 ou mais integrantes e não declara o que vale sem unanimidade.
 code: uniplus.selecao.banca.sem_unanimidade_obrigatoria
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
@@ -20,12 +20,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0275 e UNI-REQ-0401.
-
-:::
 
 ## O que aconteceu
 
