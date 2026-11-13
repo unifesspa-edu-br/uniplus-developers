@@ -1,10 +1,10 @@
 ---
 title: Número de suplentes inválido
 sidebar_label: Número de suplentes inválido
-description: Rascunho — a banca declara número negativo de suplentes.
+description: A banca declara número negativo de suplentes.
 code: uniplus.selecao.banca.suplentes_invalidos
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
@@ -19,12 +19,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0275.
-
-:::
 
 ## O que aconteceu
 

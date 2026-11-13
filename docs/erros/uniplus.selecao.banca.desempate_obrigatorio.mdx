@@ -1,10 +1,10 @@
 ---
 title: Desempate obrigatório na maioria
 sidebar_label: Desempate obrigatório na maioria
-description: Rascunho — a banca decide por maioria, tem 2 ou mais integrantes e não declara o desempate.
+description: A banca decide por maioria, tem 2 ou mais integrantes e não declara o desempate.
 code: uniplus.selecao.banca.desempate_obrigatorio
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
@@ -20,12 +20,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. As regras estão em UNI-REQ-0275 e UNI-REQ-0400.
-
-:::
 
 ## O que aconteceu
 

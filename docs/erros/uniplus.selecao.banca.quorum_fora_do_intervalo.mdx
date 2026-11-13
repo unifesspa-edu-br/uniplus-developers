@@ -1,10 +1,10 @@
 ---
 title: Quórum fora do intervalo
 sidebar_label: Quórum fora do intervalo
-description: Rascunho — o quórum da deliberação colegiada não foi informado, é zero ou excede o número de integrantes.
+description: O quórum da deliberação colegiada não foi informado, é zero ou negativo, ou excede o número de integrantes.
 code: uniplus.selecao.banca.quorum_fora_do_intervalo
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
@@ -20,20 +20,16 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
 
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0399.
-
-:::
-
 ## O que aconteceu
 
 O quórum declarado para a banca colegiada não está entre 1 e o número de
-integrantes: ou não foi informado, ou é zero, ou excede o número de integrantes.
+integrantes: ou não foi informado, ou é zero ou negativo, ou excede o número de integrantes.
 O quórum é obrigatório na deliberação por votação, e a ausência dele é recusada
 com este mesmo código. Sem quórum não há decisão, e um quórum maior que a banca
-nunca seria alcançado. Com 3 integrantes, um quórum ausente, um quórum 0 ou um
-quórum 4 são recusados; 1, 2 e 3 são aceitos.
+nunca seria alcançado. Com 3 integrantes, um quórum ausente, um quórum 0, um
+quórum negativo ou um quórum 4 são recusados. Quando a votação se encerra pela
+presidência no quórum, 1, 2 e 3 são aceitos; quando se encerra por todos os
+titulares, só o 3 é coerente.
 
 A recusa vem na lista `errors[]` da resposta, acumulada com as demais violações do mesmo corpo, no caminho do campo recusado, por exemplo `fases[0].bancasRequeridas[0].regraDeDeliberacao.quorum` na banca da fase e `etapas[0].bancas[0].regraDeDeliberacao.quorum` na banca da etapa.
 

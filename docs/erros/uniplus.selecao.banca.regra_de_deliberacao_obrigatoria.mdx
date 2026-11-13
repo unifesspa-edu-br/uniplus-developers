@@ -1,10 +1,10 @@
 ---
 title: Regra de deliberação obrigatória
 sidebar_label: Regra de deliberação obrigatória
-description: Rascunho — a banca declarada no processo seletivo não traz a regra de deliberação do edital, que a publicação exige.
+description: A banca declarada no processo seletivo não traz a regra de deliberação do edital, que a publicação exige.
 code: uniplus.selecao.banca.regra_de_deliberacao_obrigatoria
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Publicação inicial do processo seletivo
@@ -21,12 +21,6 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
 
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0275.
-
-:::
-
 ## O que aconteceu
 
 A banca foi declarada na fase ou na etapa sem a regra de deliberação, e o edital
@@ -37,8 +31,9 @@ ela, no julgamento não haveria como saber quantos votos decidem, como se
 desempata nem quando a votação termina.
 
 A mesma conferência roda na publicação, na retificação em ato único e no
-fechamento da sessão de edição. A recusa vem na lista `errors[]` da resposta,
-junto das demais violações do mesmo corpo.
+fechamento da sessão de edição. A recusa vem como o código desta página no corpo da resposta, e não
+na lista `errors[]`: a publicação aponta uma pendência por vez, a primeira que
+encontra.
 
 ## Como resolver
 

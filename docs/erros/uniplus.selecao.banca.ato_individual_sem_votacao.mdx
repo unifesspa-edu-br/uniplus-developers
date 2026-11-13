@@ -1,10 +1,10 @@
 ---
 title: Ato individual não tem campo de votação
 sidebar_label: Ato individual não tem campo de votação
-description: Rascunho — a banca por ato individual declara quórum, critério, desempate, encerramento ou valor sem unanimidade.
+description: A banca por ato individual declara quórum, critério, desempate, encerramento ou valor sem unanimidade.
 code: uniplus.selecao.banca.ato_individual_sem_votacao
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
@@ -19,12 +19,6 @@ rastreio:
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
-
-:::info Recusa ainda não emitida
-
-A API passa a emitir este código com a uniplus-api#2323. A regra está em UNI-REQ-0338.
-
-:::
 
 ## O que aconteceu
 
