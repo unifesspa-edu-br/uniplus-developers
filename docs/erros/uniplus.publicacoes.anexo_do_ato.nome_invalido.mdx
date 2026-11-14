@@ -8,7 +8,7 @@ situacao: publicado
 modulo: Publicações
 emitido_em:
   - Registro de ato normativo
-  - Registro de ato normativo por mensagem durável do módulo dono do objeto
+  - Registro de ato normativo pelo módulo dono do objeto, na mesma operação da publicação
 requisitos:
   - UNI-REQ-0154
   - UNI-REQ-0155
@@ -25,7 +25,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 O nome identifica o anexo dentro do ato. Ele está vazio (ou só com espaços) ou tem mais de
 255 caracteres. Os anexos são conferidos antes de qualquer consulta ao banco, tanto no
-endpoint administrativo de Publicações quanto no registro por mensagem durável. A recusa
+endpoint administrativo de Publicações quanto no registro feito pelo módulo dono do objeto, na mesma operação da publicação. A recusa
 vem do primeiro anexo com problema, mas o detalhe não diz qual é: confira o nome de cada
 anexo.
 

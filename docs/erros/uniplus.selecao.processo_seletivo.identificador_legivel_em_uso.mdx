@@ -9,10 +9,13 @@ modulo: Seleção
 emitido_em:
   - Criação do processo seletivo
   - Alteração do identificador legível do processo seletivo
+  - Publicação, retificação e fechamento da retificação do processo seletivo
 requisitos: []
 rastreio:
   - label: 'uniplus-api#1479'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1479
+  - label: 'uniplus-api#2435'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2435
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -21,8 +24,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Outro processo seletivo já usa o identificador informado. A unicidade é global, e não por unidade administradora ou ano, porque o identificador forma o endereço público do certame e a chave do documento no acervo.
+Outro processo seletivo já usa o identificador informado. A unicidade é global, e não por unidade administradora ou ano, porque o identificador forma o endereço público do certame e a chave do documento no acervo. A conferência é refeita na hora de publicar o processo, de retificá-lo e de fechar a retificação: se outro processo passou a usar o identificador depois que o rascunho foi salvo, a publicação é recusada com este código, **nada fica gravado** (nenhuma versão, ato ou divulgação) e o rascunho é preservado.
 
 ## Como resolver
 
-Escolha outro identificador, por exemplo acrescentando o ano ou a modalidade (`medicina-2027-ampla`). Se o processo que já o usa é o mesmo certame, abra-o em vez de criar outro.
+Escolha outro identificador, por exemplo acrescentando o ano ou a modalidade (`medicina-2027-ampla`). Se o processo que já o usa é o mesmo certame, abra-o em vez de criar outro. Na publicação, altere o identificador no rascunho e publique de novo.

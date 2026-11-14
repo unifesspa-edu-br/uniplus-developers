@@ -8,10 +8,14 @@ situacao: publicado
 modulo: Publicações
 emitido_em:
   - Registro de ato normativo, para tipo marcado como único por objeto
+  - Publicação, retificação e fechamento da retificação do processo seletivo
+  - Publicação de documento avulso e de item do edital do processo seletivo
 requisitos: []
 rastreio:
   - label: 'uniplus-api#796'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
+  - label: 'uniplus-api#2435'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2435
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -42,6 +46,14 @@ linhagem que já ocupa a vaga. Esta recusa também aparece quando duas
 requisições concorrentes disputam a mesma vaga ao mesmo tempo: o índice
 único que fecha a corrida produz a mesma causa para quem perde, em vez de
 um erro genérico.
+
+Quando o ato é de um **processo seletivo**, o registro acontece na mesma
+operação da Seleção que grava a divulgação do certame (e a versão da
+configuração, nos atos que criam uma). A recusa chega, portanto, **na hora**, na resposta da própria
+publicação, retificação ou fechamento da retificação, com este mesmo código
+e status **409**. **Nada fica gravado**: nenhum ato, nenhuma divulgação e nenhuma
+versão. O rascunho é preservado. A Seleção não tem código próprio para
+esta recusa: ela repassa o de Publicações.
 
 ## Como resolver
 

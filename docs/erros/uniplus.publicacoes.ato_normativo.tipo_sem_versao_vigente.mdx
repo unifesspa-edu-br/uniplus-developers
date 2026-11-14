@@ -1,7 +1,7 @@
 ---
-title: Não há versão vigente do tipo de ato na data de publicação
+title: Não há versão vigente do tipo de ato na data da publicação
 sidebar_label: Tipo de ato sem versão vigente
-description: O tipo de ato informado não tem versão vigente na data de publicação declarada — não há de onde copiar os atributos de consequência.
+description: O tipo de ato informado não tem versão vigente no dia da divulgação; não há de onde copiar os atributos de consequência.
 code: uniplus.publicacoes.ato_normativo.tipo_sem_versao_vigente
 http_status: 422
 situacao: publicado
@@ -11,11 +11,14 @@ emitido_em:
 requisitos:
   - UNI-REQ-0157
   - UNI-REQ-0163
+  - UNI-REQ-0406
 rastreio:
   - label: 'uniplus-api#1995'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1995
   - label: 'uniplus-api#796'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
+  - label: 'uniplus-api#2435'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2435
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -24,44 +27,47 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O tipo de ato informado **não tem versão vigente** na data de publicação
-do ato.
+O tipo de ato informado **não tem versão vigente** no dia da divulgação do
+ato.
 
 Ao registrar um ato, o servidor precisa saber se aquele tipo congela a
 configuração, se admite um único ato vivo por objeto e se o efeito é
-irreversível — três dos quatro atributos de consequência do tipo, e os que
+irreversível: três dos quatro atributos de consequência do tipo, e os que
 o ato copia **por valor** no instante do registro. Sem uma versão vigente
-do tipo na data de publicação, não há de onde copiar esses atributos, e o
-registro é recusado.
+do tipo nesse dia, não há de onde copiar esses atributos, e o registro é
+recusado.
 
-Para o ato que a **Seleção** origina a partir de um item do edital, os atributos
-de congelamento e de ato único não vêm do catálogo vivo: vêm da classificação
-que a versão publicada do edital congelou para aquele tipo de ato, e chegam ao
-registro na própria requisição. Mudar o tipo no catálogo depois da publicação
-não alcança esse processo (UNI-REQ-0157 e UNI-REQ-0163).
+O dia que vale é o dia civil do instante da divulgação, gravado pelo
+sistema, no fuso institucional (UNI-REQ-0111). A **data do ato**, a que o
+documento declara, não participa da escolha da versão do tipo
+(UNI-REQ-0406).
 
-O quarto atributo — **se o ato é resultado**, isto é, se ele determina a
-situação do candidato — não é copiado para o ato registrado. É esse
+Para o ato que a **Seleção** origina, os atributos de congelamento e de ato
+único não vêm do catálogo vivo: vêm da classificação que a versão
+publicada do edital congelou para aquele tipo de ato, e chegam ao registro
+junto com a publicação. Mudar o tipo no catálogo depois da publicação não
+alcança esse processo (UNI-REQ-0157 e UNI-REQ-0163).
+
+O quarto atributo, **se o ato é resultado**, isto é, se ele determina a
+situação do candidato, não é copiado para o ato registrado. É esse
 atributo que decide se um tipo pode receber papel preliminar ou definitivo
 entre os produtos de uma fase do cronograma: enquanto a configuração é
-editada, ele é lido do catálogo; depois que a configuração é publicada, vale
-como estava na versão publicada, e mudá-lo no catálogo não alcança o
-processo já publicado (UNI-REQ-0157). Um tipo marcado como não
-sendo resultado nunca integra ciclo recursal, em edital nenhum — a recusa
+editada, ele é lido do catálogo; depois que a configuração é publicada,
+vale como estava na versão publicada, e mudá-lo no catálogo não alcança o
+processo já publicado (UNI-REQ-0157). Um tipo que não é
+resultado nunca integra ciclo recursal, em edital nenhum; a recusa
 correspondente é
 [papel em ato que não é resultado](./uniplus.selecao.produto_da_fase.papel_em_ato_que_nao_eh_resultado.mdx).
 
-Este caminho de validação só roda quando quem registra **não** já
-confere os atributos do tipo junto com a requisição (o caminho em que
-outro domínio publica via mensageria durável e já resolveu os atributos
-no próprio instante da publicação, sob as regras vigentes então, passa por
-uma checagem equivalente — mas de existência do tipo no catálogo, não de
-vigência na data — e uma falha ali não produz esta resposta HTTP: vira
-falha de processamento assíncrono, tratada operacionalmente).
+Esta resposta só aparece quando o catálogo é consultado no registro. O
+ato que a Seleção registra já traz os atributos do tipo conferidos, e a
+recusa equivalente nesse caminho é a da própria Seleção,
+[`tipo_de_ato_sem_versao_vigente`](./uniplus.selecao.processo_seletivo.tipo_de_ato_sem_versao_vigente.mdx),
+devolvida na hora, sem nada gravado.
 
 ## Como resolver
 
-Cadastre uma versão do tipo de ato cuja janela de vigência cubra a data de
-publicação informada, ou corrija a data de publicação para uma que caia
-dentro de uma janela já cadastrada. Se o tipo nunca foi cadastrado, é
-preciso criá-lo primeiro no catálogo de tipos de ato.
+Cadastre uma versão do tipo de ato cuja janela de vigência cubra o dia da
+divulgação, que é hoje, e repita o pedido. Não adianta ajustar a data que o
+documento declara: ela não escolhe a versão do tipo. Se o tipo nunca foi
+cadastrado, é preciso criá-lo primeiro no catálogo de tipos de ato.
