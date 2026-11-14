@@ -104,7 +104,7 @@ Um ato publicado não é apagado nem alterado. A correção é um novo ato, erra
 
 ### 4.2 Regras da retificação
 
-Decisão do líder técnico em 02/11/2026, a confirmar pelo PO; requisitos `UNI-REQ-0210`, `UNI-REQ-0211` e `UNI-REQ-0212`. Só uma regra aguarda o PO: adiar o início das inscrições antes de abrirem (ver Prazos).
+Decisão do líder técnico em 02/11/2026, a confirmar pelo PO; requisitos `UNI-REQ-0210`, `UNI-REQ-0211` e `UNI-REQ-0212`. O adiamento do início das inscrições antes de abrirem foi decidido pelo líder técnico em 13/11/2026 (ver Prazos).
 
 **Quem retifica e até quando** (`UNI-REQ-0210`).
 
@@ -119,10 +119,11 @@ Decisão do líder técnico em 02/11/2026, a confirmar pelo PO; requisitos `UNI-
 - A fase cujo prazo terminou sem que ela tenha sido concluída pode ter o término prorrogado.
 - O início de uma fase que já começou não muda.
 - O prazo de inscrição pode ser prorrogado, mas não reduzido.
+- A retificação não antecipa o término de uma fase que já está em andamento.
 - A janela de solicitação de isenção é a exceção explícita à prorrogação da fase vencida: segue o `UNI-REQ-0106`, só se prorroga antes do término e não se reabre depois de encerrada.
 - Não há prazo mínimo entre a publicação da retificação e o fim das inscrições.
 - Considera-se concluída a fase cujo resultado definitivo já foi publicado; a fase que não publica resultado definitivo considera-se concluída quando a fase seguinte do cronograma começa.
-- **Aguarda o PO:** adiar o início das inscrições antes de abrirem encurta o período de inscrição; se conta como redução do prazo, que é proibida, o PO decide. Recomendação: não contar como redução, porque nenhum candidato perdeu prazo, e, em contrapartida, não permitir que a retificação antecipe o término de fase já em andamento.
+- Adiar o início das inscrições antes de abrirem não conta como redução do prazo de inscrição, porque nenhum candidato perde prazo (decisão do líder técnico em 13/11/2026).
 
 **Efeito sobre as inscrições** (`UNI-REQ-0212`).
 
