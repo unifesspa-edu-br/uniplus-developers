@@ -104,7 +104,7 @@ Um ato publicado não é apagado nem alterado. A correção é um novo ato, erra
 
 ### 4.2 Regras da retificação
 
-Decisão do líder técnico em 02/11/2026, a confirmar pelo PO; requisitos `UNI-REQ-0210`, `UNI-REQ-0211` e `UNI-REQ-0212`. O adiamento do início das inscrições antes de abrirem foi decidido pelo líder técnico em 13/11/2026 (ver Prazos).
+Requisitos `UNI-REQ-0210`, `UNI-REQ-0211` e `UNI-REQ-0212`, decisão do líder técnico em 02/11/2026. Em 13/11/2026 o líder técnico decidiu que adiar o início das inscrições antes de abrirem não conta como redução do prazo e que a retificação não antecipa o término de fase em andamento (ver Prazos). Seguem a confirmar pelo PO apenas os pontos do `UNI-REQ-0212`: a regra do que não muda depois que há inscritos e a retirada de formulário inteiro.
 
 **Quem retifica e até quando** (`UNI-REQ-0210`).
 
@@ -123,7 +123,7 @@ Decisão do líder técnico em 02/11/2026, a confirmar pelo PO; requisitos `UNI-
 - A janela de solicitação de isenção é a exceção explícita à prorrogação da fase vencida: segue o `UNI-REQ-0106`, só se prorroga antes do término e não se reabre depois de encerrada.
 - Não há prazo mínimo entre a publicação da retificação e o fim das inscrições.
 - Considera-se concluída a fase cujo resultado definitivo já foi publicado; a fase que não publica resultado definitivo considera-se concluída quando a fase seguinte do cronograma começa.
-- Adiar o início das inscrições antes de abrirem não conta como redução do prazo de inscrição, porque nenhum candidato perde prazo (decisão do líder técnico em 13/11/2026).
+- Adiar o início das inscrições antes de abrirem não conta como redução do prazo de inscrição, porque nenhum candidato perde prazo, desde que a janela de solicitação de isenção continue cumprindo o `UNI-REQ-0106`: começa junto com as inscrições, não é reduzida, respeita a duração mínima e termina antes do fim das inscrições. Se deixar de cumprir, a retificação é recusada pela regra do `UNI-REQ-0106` (decisão do líder técnico em 13/11/2026).
 
 **Efeito sobre as inscrições** (`UNI-REQ-0212`).
 
