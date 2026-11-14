@@ -25,50 +25,13 @@
     }
   ],
   "paths": {
-    "/api/auth/me": {
-      "get": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Retorna o usu\u00E1rio autenticado",
-        "description": "Retorna informa\u00E7\u00F5es do usu\u00E1rio extra\u00EDdas do access token. Requer autentica\u00E7\u00E3o.",
-        "operationId": "GetAuthenticatedUser",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AuthenticatedUserResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/problem\u002Bjson": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
     "/api/profile/me": {
       "get": {
         "tags": [
           "Profile"
         ],
         "summary": "Retorna o perfil do usu\u00E1rio autenticado",
-        "description": "Retorna atributos de identidade e institucionais (CPF, NomeSocial) extra\u00EDdos do access token. Requer autentica\u00E7\u00E3o.",
+        "description": "Retorna a identidade do access token (nome, e-mail, CPF, NomeSocial) e os perfis de acesso que a pessoa tem por concess\u00E3o vigente, cada um com o escopo (unidade ou institui\u00E7\u00E3o) e o prazo. O token identifica a pessoa e n\u00E3o concede acesso. Requer autentica\u00E7\u00E3o.",
         "operationId": "GetAuthenticatedUserProfile",
         "responses": {
           "200": {
@@ -1052,6 +1015,44 @@
   },
   "components": {
     "schemas": {
+      "AnexoDoAtoDto": {
+        "required": [
+          "nome",
+          "tipoMidia",
+          "hash"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "tipoMidia": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
+      "AnexoDoAtoInput": {
+        "required": [
+          "nome",
+          "tipoMidia",
+          "hash"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "tipoMidia": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
       "AtoNormativoDto": {
         "required": [
           "id",
@@ -1060,6 +1061,7 @@
           "ano",
           "numero",
           "tipoCodigo",
+          "tipoNome",
           "congelaConfiguracao",
           "efeitoIrreversivel",
           "unicoPorObjeto",
@@ -1070,7 +1072,8 @@
           "versaoInvocadaId",
           "versaoInvocadaHash",
           "atoRetificadoId",
-          "motivoRetificacao"
+          "motivoRetificacao",
+          "anexos"
         ],
         "type": "object",
         "properties": {
@@ -1085,11 +1088,7 @@
             "type": "string"
           },
           "ano": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
+            "type": "integer",
             "format": "int32"
           },
           "numero": {
@@ -1100,6 +1099,12 @@
           },
           "tipoCodigo": {
             "type": "string"
+          },
+          "tipoNome": {
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "congelaConfiguracao": {
             "type": "boolean"
@@ -1150,6 +1155,12 @@
               "string"
             ]
           },
+          "anexos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnexoDoAtoDto"
+            }
+          },
           "avisos": {
             "type": [
               "null",
@@ -1178,6 +1189,9 @@
           "congelaConfiguracao",
           "unicoPorObjeto",
           "efeitoIrreversivel",
+          "ehResultado",
+          "publicavelComoAvulso",
+          "exigeAtoCorrigido",
           "vigenciaInicio"
         ],
         "type": "object",
@@ -1207,6 +1221,15 @@
           "efeitoIrreversivel": {
             "type": "boolean"
           },
+          "ehResultado": {
+            "type": "boolean"
+          },
+          "publicavelComoAvulso": {
+            "type": "boolean"
+          },
+          "exigeAtoCorrigido": {
+            "type": "boolean"
+          },
           "vigenciaInicio": {
             "type": "string",
             "format": "date"
@@ -1223,46 +1246,6 @@
               "null",
               "string"
             ]
-          }
-        }
-      },
-      "AuthenticatedUserResponse": {
-        "required": [
-          "userId",
-          "name",
-          "email",
-          "roles",
-          "timestamp"
-        ],
-        "type": "object",
-        "properties": {
-          "userId": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "name": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "email": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "roles": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
@@ -1296,6 +1279,9 @@
           "congelaConfiguracao",
           "unicoPorObjeto",
           "efeitoIrreversivel",
+          "ehResultado",
+          "publicavelComoAvulso",
+          "exigeAtoCorrigido",
           "vigenciaInicio"
         ],
         "type": "object",
@@ -1321,6 +1307,15 @@
           "efeitoIrreversivel": {
             "type": "boolean"
           },
+          "ehResultado": {
+            "type": "boolean"
+          },
+          "publicavelComoAvulso": {
+            "type": "boolean"
+          },
+          "exigeAtoCorrigido": {
+            "type": "boolean"
+          },
           "vigenciaInicio": {
             "type": "string",
             "format": "date"
@@ -1340,6 +1335,61 @@
           }
         }
       },
+      "PerfilConcedidoResponse": {
+        "required": [
+          "concessaoId",
+          "perfilId",
+          "nome",
+          "escopoTipo",
+          "unidadeId",
+          "unidadeSigla",
+          "unidadeNome",
+          "validaAte"
+        ],
+        "type": "object",
+        "properties": {
+          "concessaoId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "perfilId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "escopoTipo": {
+            "type": "string"
+          },
+          "unidadeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "unidadeSigla": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "unidadeNome": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "validaAte": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -1356,11 +1406,9 @@
             ]
           },
           "status": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
             "type": [
               "null",
-              "integer",
-              "string"
+              "integer"
             ],
             "format": "int32"
           },
@@ -1375,6 +1423,10 @@
               "null",
               "string"
             ]
+          },
+          "retryable": {
+            "type": "boolean",
+            "description": "Presente e \u0060true\u0060 quando o conflito descreve uma corrida que j\u00E1 passou: a mesma requisi\u00E7\u00E3o, repetida sem altera\u00E7\u00E3o, pode agora ser aceita. A aus\u00EAncia \u00E9 o default conservador do servidor \u2014 diz que o conflito n\u00E3o foi declarado retent\u00E1vel, n\u00E3o que repetir esteja descartado; nesse caso vale a descri\u00E7\u00E3o da pr\u00F3pria resposta."
           }
         }
       },
@@ -1398,11 +1450,7 @@
             "type": "string"
           },
           "ano": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
+            "type": "integer",
             "format": "int32"
           },
           "numero": {
@@ -1458,6 +1506,15 @@
             "items": {
               "$ref": "#/components/schemas/VinculoEntidadeInput"
             }
+          },
+          "anexos": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/AnexoDoAtoInput"
+            }
           }
         }
       },
@@ -1493,6 +1550,7 @@
           "congelaConfiguracao",
           "unicoPorObjeto",
           "efeitoIrreversivel",
+          "ehResultado",
           "vigenciaInicio",
           "vigenciaFim",
           "baseLegal",
@@ -1519,6 +1577,9 @@
           "efeitoIrreversivel": {
             "type": "boolean"
           },
+          "ehResultado": {
+            "type": "boolean"
+          },
           "vigenciaInicio": {
             "type": "string",
             "format": "date"
@@ -1540,6 +1601,14 @@
             "type": "string",
             "format": "date-time"
           },
+          "publicavelComoAvulso": {
+            "type": "boolean",
+            "default": false
+          },
+          "exigeAtoCorrigido": {
+            "type": "boolean",
+            "default": false
+          },
           "_links": {
             "type": [
               "null",
@@ -1558,7 +1627,7 @@
           "email",
           "cpf",
           "nomeSocial",
-          "roles",
+          "perfis",
           "timestamp"
         ],
         "type": "object",
@@ -1595,10 +1664,10 @@
               "string"
             ]
           },
-          "roles": {
+          "perfis": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/PerfilConcedidoResponse"
             }
           },
           "timestamp": {
@@ -1634,9 +1703,6 @@
     }
   },
   "tags": [
-    {
-      "name": "Auth"
-    },
     {
       "name": "Profile"
     },
