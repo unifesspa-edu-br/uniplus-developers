@@ -1,7 +1,7 @@
 ---
-title: Não há versão vigente do tipo de ato declarado na data de publicação
+title: Não há versão vigente do tipo de ato na data da publicação
 sidebar_label: Tipo de ato sem versão vigente
-description: O catálogo de tipos de ato (módulo Publicações) é consultado antes de publicar ou retificar — sem versão vigente na data declarada, a transição é recusada.
+description: O catálogo de tipos de ato (módulo Publicações) é consultado na hora de publicar ou retificar; sem versão vigente do tipo no dia da divulgação, a operação é recusada e nada fica gravado.
 code: uniplus.selecao.processo_seletivo.tipo_de_ato_sem_versao_vigente
 http_status: 422
 situacao: publicado
@@ -10,14 +10,18 @@ emitido_em:
   - Publicação do processo seletivo
   - Retificação do processo seletivo
   - Fechamento de retificação
+  - Publicação de documento avulso e de item do edital
 requisitos:
   - UNI-REQ-0019
   - UNI-REQ-0163
+  - UNI-REQ-0406
 rastreio:
   - label: 'uniplus-api#1995'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1995
   - label: 'uniplus-api#827'
     href: https://github.com/unifesspa-edu-br/uniplus-api/pull/827
+  - label: 'uniplus-api#2435'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2435
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -26,17 +30,21 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Publicar ou retificar um processo seletivo registra um ato normativo no
-módulo Publicações (por mensagem durável). Antes disso, o tipo de ato
-declarado é conferido no catálogo — a mesma leitura cross-módulo que valida
-se o tipo existe e está vigente na data de publicação informada.
+Publicar ou retificar um processo seletivo registra um ato normativo em
+Publicações, na mesma operação que grava a versão da configuração e a
+divulgação do certame. Nessa operação, o tipo de ato declarado é conferido
+no catálogo: ele precisa ter versão vigente **no dia da divulgação**.
 
-Esta conferência acontece **antes** de tentar registrar o ato. Sem ela, um
-tipo inválido só seria recusado no consumo assíncrono da fila: o processo já
-publicado, o cliente já com a resposta de sucesso na mão, e a recusa virando
-mensagem morta (dead letter) — um estado inconsistente que só apareceria como
-incidente operacional depois. O que dá para recusar com 422, na hora, não
-pode virar esse tipo de incidente.
+O dia que vale é o dia civil do instante em que o sistema divulga o ato,
+no fuso institucional (UNI-REQ-0111). A data que o documento declara, a
+impressa nele, **não escolhe** a versão do tipo (UNI-REQ-0406): um
+documento datado de uma semana atrás não busca a versão que vigorava
+então.
+
+A recusa é **síncrona**: chega na própria resposta da publicação, antes de
+qualquer gravação. **Nada fica gravado**: nenhuma versão, nenhum ato,
+nenhuma divulgação. O rascunho é preservado, e a operação pode ser
+repetida assim que o tipo tiver versão vigente.
 
 A recusa vale também para os **tipos de ato que o cronograma declara**. Ao
 publicar, e ao retificar com um tipo declarado pela primeira vez, a
@@ -49,13 +57,11 @@ retificação (UNI-REQ-0163).
 ## Como resolver
 
 Confirme, no catálogo de tipos de ato de Publicações, que o código tem uma
-versão vigente na data que vale para ele — tipos de ato têm vigência própria:
+versão vigente no dia da divulgação, que é hoje: tipos de ato têm vigência
+própria. Cadastre uma versão vigente ou escolha outro tipo de ato. Para o
+tipo declarado no cronograma pela primeira vez vale a mesma regra: vigente
+hoje, ou declare outro tipo no cronograma.
 
-- **tipo do ato da operação** (o edital de abertura ou a retificação): vigente
-  na data de publicação enviada, que pode ser retroativa ou futura;
-- **tipo declarado no cronograma pela primeira vez:** vigente hoje. Cadastre
-  uma versão vigente ou declare outro tipo no cronograma.
-
-Se o tipo de ato não existe no catálogo, é preciso cadastrá-lo antes — ver
+Se o tipo de ato não existe no catálogo, é preciso cadastrá-lo antes; ver
 [`tipo_ato.nao_encontrado`](./uniplus.publicacoes.tipo_ato.nao_encontrado.mdx)
 para o comportamento equivalente no cadastro direto de Publicações.

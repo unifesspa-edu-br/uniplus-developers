@@ -8,7 +8,7 @@ situacao: publicado
 modulo: Publicações
 emitido_em:
   - Registro de ato normativo
-  - Registro de ato normativo por mensagem durável do módulo dono do objeto
+  - Registro de ato normativo pelo módulo dono do objeto, na mesma operação da publicação
 requisitos:
   - UNI-REQ-0154
   - UNI-REQ-0155
@@ -27,7 +27,7 @@ O nome é o que distingue um anexo do outro para quem consulta o ato, e dois ane
 ato têm o mesmo nome, ignorando espaços nas pontas. A comparação diferencia maiúsculas de
 minúsculas. A mensagem de detalhe traz o nome repetido. Os anexos são conferidos antes de
 qualquer consulta ao banco, tanto no endpoint administrativo de Publicações quanto no
-registro por mensagem durável, e a recusa nomeia o primeiro anexo com problema.
+registro feito pelo módulo dono do objeto, na mesma operação da publicação, e a recusa nomeia o primeiro anexo com problema.
 
 ## Como resolver
 

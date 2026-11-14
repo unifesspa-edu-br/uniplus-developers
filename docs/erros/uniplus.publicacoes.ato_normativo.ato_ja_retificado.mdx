@@ -1,0 +1,66 @@
+---
+title: O ato que se tentou retificar já foi retificado por outro (a cadeia é linear)
+sidebar_label: Ato já retificado
+description: A cadeia de retificação é linear; uma nova retificação precisa emendar o ato mais recente da cadeia, e não um ato que já foi retificado, seja a raiz ou um elo intermediário.
+code: uniplus.publicacoes.ato_normativo.ato_ja_retificado
+http_status: 409
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Registro de ato normativo, quando o ato declara atoRetificadoId
+  - Publicação, retificação e fechamento da retificação do processo seletivo
+  - Publicação de documento avulso e de item do edital do processo seletivo
+requisitos:
+  - UNI-REQ-0021
+  - UNI-REQ-0156
+rastreio:
+  - label: 'uniplus-api#796'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/796
+  - label: 'uniplus-api#2435'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2435
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ato que se tentou retificar **já foi retificado por outro ato**.
+
+A cadeia de retificação é linear: um ato é retificado no máximo uma vez, e
+um ato já corrigido, por errata ou por retificação, não recebe outra
+correção (UNI-REQ-0156); a correção recai sobre o ato mais recente. Isso
+vale para **qualquer ato da cadeia**: a raiz, que é o ato original, e
+também um elo intermediário que já tem sucessor. Retificar um ato que já
+foi retificado criaria uma bifurcação, com duas retificações concorrentes
+do mesmo ato, e não haveria como dizer qual delas é a versão vigente. Por
+isso é conflito (**409**), e não invariante de formato: o pedido em si está
+coerente, o que não cabe é junto do que já foi gravado. Na conferência
+prévia, a mensagem de detalhe nomeia o ato que já retificou o alvo.
+
+A recusa também aparece quando duas requisições concorrentes tentam
+retificar o mesmo ato ao mesmo tempo: a garantia definitiva da linearidade
+é um índice único no banco, e a que perde a corrida recebe esta mesma
+causa em vez de um erro genérico, e o detalhe apenas informa o registro
+concorrente, sem nomear o ato sucessor; a orientação é a mesma: consultar a
+cadeia do ato.
+
+Na **Seleção**, o registro do ato acontece no mesmo momento em que a
+divulgação é gravada (e a versão da configuração, nos atos que criam uma).
+Por isso a recusa chega na hora, na resposta da própria publicação ou
+retificação, e **nada fica gravado**: nenhum ato, nenhuma divulgação e
+nenhuma versão. O rascunho é preservado.
+
+## Como resolver
+
+Retifique o ato **mais recente** da cadeia, aquele que ainda não foi
+retificado, em vez de um ato que já tem sucessor. Consulte a cadeia de
+retificações para identificar qual é o ato mais recente.
+
+Para ato de **processo seletivo**, o caminho é a **Seleção**: o endpoint
+administrativo de Publicações recusa esse vínculo, inclusive na retificação, com
+[`vinculo_exige_registro_pelo_dominio`](./uniplus.publicacoes.ato_normativo.vinculo_exige_registro_pelo_dominio.mdx). Publique e retifique pela
+Seleção, na página "Publicações" do processo. Se a retificação que já existe
+não é a que você esperava, outra pessoa pode ter retificado o mesmo ato entre
+a leitura da tela e o envio: releia o processo antes de repetir.

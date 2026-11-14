@@ -8,7 +8,7 @@ situacao: publicado
 modulo: Publicações
 emitido_em:
   - Registro de ato normativo
-  - Registro de ato normativo por mensagem durável do módulo dono do objeto
+  - Registro de ato normativo pelo módulo dono do objeto, na mesma operação da publicação
 requisitos:
   - UNI-REQ-0154
   - UNI-REQ-0155
@@ -25,8 +25,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 Descartar o elemento nulo mudaria a quantidade e a ordem dos anexos sem que ninguém
 soubesse, então a lista inteira é recusada. Os anexos são conferidos antes de qualquer
-consulta ao banco, tanto no endpoint administrativo de Publicações quanto no registro por
-mensagem durável.
+consulta ao banco, tanto no endpoint administrativo de Publicações quanto no registro feito pelo módulo dono do objeto, na mesma operação da publicação.
 
 ## Como resolver
 

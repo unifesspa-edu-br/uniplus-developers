@@ -8310,4 +8310,26 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0406',
+    titulo: 'O ato publicado vale pelo instante da divulgação, e a data do ato é só a que o documento declara',
+    enunciado:
+      'O ato publicado vale pelo instante da divulgação. O sistema o grava uma só vez, na mesma transação que grava o ato e a divulgação do certame (e a versão da configuração, nos atos que criam uma, como a publicação do processo e a retificação do edital; a correção de resultado não cria versão, conforme o UNI-REQ-0157), e quem publica nunca o informa. O ato não tem estado pendente: a recusa que a publicação pode trazer, como o tipo de ato sem versão vigente, a vaga do tipo único já ocupada, o ato que já foi retificado ou o identificador legível já em uso, chega na hora, nada fica gravado e o rascunho é preservado. A data do ato é outra coisa: é a data que o documento declara, a impressa nele, como o "de 10 de novembro" do título de um edital. Ela é informada por quem publica e fica como fato do ato, mas não produz efeito em prazo, em vigência nem na escolha do tipo de ato que vale. A versão do tipo de ato que vale é a do dia civil do instante da divulgação, no fuso institucional (UNI-REQ-0111), e, quando o ato cria versão da configuração, a vigência dela começa nesse mesmo instante. A lista de atos do certame segue a ordem da divulgação. O prazo de recurso conta a partir da divulgação, como já decide o UNI-REQ-0115. Decisão do líder técnico em 13 e 14/11/2026 (uniplus-api#2435).',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0019',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'O instante da divulgação é gravado pelo sistema, o mesmo no ato, na divulgação do certame e na versão da configuração quando o ato cria uma, e a publicação não tem campo para quem publica informá-lo; a data do ato é a que o documento declara, e um ato cujo documento declara data anterior ou posterior à da divulgação é divulgado no instante do sistema; a data do ato não altera prazo, vigência nem a escolha da versão do tipo de ato: o tipo cuja versão passou a vigorar hoje é aceito para um documento datado de uma semana atrás, e o tipo sem versão vigente hoje é recusado ainda que houvesse versão vigente na data que o documento declara; a versão do tipo é escolhida pelo dia civil do instante da divulgação no fuso institucional, de modo que a divulgação logo antes da meia-noite desse fuso usa o dia que termina, ainda que em UTC já seja o dia seguinte; a recusa por tipo de ato sem versão vigente, por vaga do tipo único ocupada, por ato já retificado ou por identificador legível em uso deixa sem gravar a versão, o ato e a divulgação e preserva o rascunho; a lista de atos do certame vem na ordem do instante da divulgação, e não na da data do ato.',
+    verificacao:
+      'Testes automatizados (instante único no ato, na divulgação e na versão quando há; ausência de campo para o instante na publicação; data do ato anterior e posterior à divulgação sem efeito sobre prazo, vigência e escolha do tipo; escolha da versão do tipo pelo dia civil no fuso institucional, inclusive na virada do dia em relação a UTC; recusa síncrona sem resíduo nos quatro casos; ordem da lista pelo instante da divulgação) (planejado, uniplus-api#2435).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];

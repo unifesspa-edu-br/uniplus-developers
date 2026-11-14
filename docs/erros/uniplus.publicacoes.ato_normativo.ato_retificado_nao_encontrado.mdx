@@ -29,19 +29,16 @@ e emenda a cabeça, nunca uma raiz arbitrária. Sem o ato retificado, não há
 linhagem para emendar: não existe base contra a qual conferir a classe de
 congelamento, nem cabeça de cadeia contra a qual verificar a linearidade.
 
-Quando o registro chega por mensageria durável — um domínio publicando um
-ato que retifica outro do mesmo domínio, na mesma transação — esta causa
-específica não vai para a fila de erro imediatamente: o predecessor pode
-só ainda não ter chegado, já que publicar e retificar em sequência rápida
-colocam duas mensagens na fila sem garantia de ordem. Nesse caminho, o
-sistema tenta de novo por alguns segundos antes de desistir.
+Quando o registro é feito pela Seleção, que publica um ato retificando outro
+do mesmo processo, a conferência acontece na mesma operação da publicação e
+a recusa chega na hora, sem nada gravado.
 
 ## Como resolver
 
 Confira o `atoRetificadoId` informado. Se o ato que você pretende
-retificar acabou de ser registrado, é possível que a leitura tenha
-ocorrido antes da gravação terminar — tente novamente. Se o ato nunca
-existiu, corrija o identificador.
+retificar acabou de ser registrado, confira se o identificador é o do ato
+publicado e tente novamente. Se o ato nunca existiu, corrija o
+identificador.
 
 Para ato de **processo seletivo**, o caminho é a **Seleção**: o endpoint
 administrativo de Publicações recusa esse vínculo, inclusive na retificação, com
