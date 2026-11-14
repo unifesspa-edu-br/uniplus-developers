@@ -25,8 +25,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 O ato normativo pode invocar a versão do objeto que ele governou no
 instante da publicação, por um par **`{versaoDoObjetoId,
 versaoDoObjetoHash}`**, sem chave estrangeira entre módulos: o
-identificador aponta a versão no módulo de origem, e o hash prova que a
-definição aplicada não mudou depois. Um ato pode não invocar versão
+identificador aponta a versão no módulo de origem, e o hash serve para
+conferir, nesse módulo, que a definição aplicada não mudou depois. Um ato pode não invocar versão
 nenhuma (ato autônomo, sem vínculo com um objeto versionado), e nesse caso a
 referência simplesmente não existe.
 
@@ -36,16 +36,18 @@ dois cenários distintos:
 
 1. **O par veio pela metade**: um identificador sem hash, ou um hash sem
    identificador. Metade da referência não prova nada: só o par completo
-   liga o ato a uma versão específica e comprova que ela não mudou.
+   liga o ato a uma versão específica e permite conferir que ela não mudou.
 2. **O par veio completo, mas malformado**: o identificador é um GUID
    vazio, ou o hash não tem o formato de um SHA-256 em hexadecimal
    minúsculo (64 caracteres).
 
 No registro administrativo de ato, a validação do pedido recusa esses casos
-antes do domínio, com **422** de validação e os problemas em `errors`, um por
-campo. O código desta página chega no campo `code` quando o registro vem
+antes do domínio, com **422** de validação e os problemas em `errors`, uma
+entrada por violação (um mesmo campo pode ter mais de uma). O código desta página chega no campo `code` quando o registro vem
 por um caminho que não passa por essa validação, como o registro feito pelo
-domínio dono do objeto; nesse caso o `detail` descreve qual dos dois falhou.
+domínio dono do objeto; nesse caso o `detail` traz a mensagem do par completo ou ausente, quando ele
+veio pela metade, e a do identificador ou do hash, quando veio malformado (se
+os dois estão malformados, é relatado primeiro o identificador).
 
 ## Como resolver
 
