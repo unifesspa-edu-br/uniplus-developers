@@ -30,15 +30,22 @@ definição aplicada não mudou depois. Um ato pode não invocar versão
 nenhuma (ato autônomo, sem vínculo com um objeto versionado), e nesse caso a
 referência simplesmente não existe.
 
-Esta causa cobre dois cenários distintos, ambos com este mesmo código:
+Publicações confere só a **forma** do par: não verifica, no módulo de
+origem, se a versão existe nem se o hash corresponde a ela. Esta causa cobre
+dois cenários distintos:
 
 1. **O par veio pela metade**: um identificador sem hash, ou um hash sem
    identificador. Metade da referência não prova nada: só o par completo
    liga o ato a uma versão específica e comprova que ela não mudou.
 2. **O par veio completo, mas malformado**: o identificador é um GUID
    vazio, ou o hash não tem o formato de um SHA-256 em hexadecimal
-   minúsculo (64 caracteres). Neste caso, o `detail` da resposta descreve
-   qual dos dois falhou, em vez de repetir a mensagem sobre par incompleto.
+   minúsculo (64 caracteres).
+
+No registro administrativo de ato, a validação do pedido recusa esses casos
+antes do domínio, com **422** de validação e os problemas em `errors`, um por
+campo. O código desta página chega no campo `code` quando o registro vem
+por um caminho que não passa por essa validação, como o registro feito pelo
+domínio dono do objeto; nesse caso o `detail` descreve qual dos dois falhou.
 
 ## Como resolver
 
