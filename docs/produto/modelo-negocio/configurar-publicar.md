@@ -123,7 +123,7 @@ Requisitos `UNI-REQ-0210`, `UNI-REQ-0211` e `UNI-REQ-0212`, decisão do líder t
 - A janela de solicitação de isenção é a exceção explícita à prorrogação da fase vencida: segue o `UNI-REQ-0106`, só se prorroga antes do término e não se reabre depois de encerrada.
 - Não há prazo mínimo entre a publicação da retificação e o fim das inscrições.
 - Considera-se concluída a fase cujo resultado definitivo já foi publicado; a fase que não publica resultado definitivo considera-se concluída quando a fase seguinte do cronograma começa.
-- Adiar o início das inscrições antes de abrirem não conta como redução do prazo de inscrição, porque nenhum candidato perde prazo, desde que a janela de solicitação de isenção continue cumprindo o `UNI-REQ-0106`: começa junto com as inscrições, não é reduzida, respeita a duração mínima e termina antes do fim das inscrições. Se deixar de cumprir, a retificação é recusada pela regra do `UNI-REQ-0106` (decisão do líder técnico em 13/11/2026).
+- Adiar o início das inscrições antes de abrirem não conta como redução do prazo de inscrição, porque nenhum candidato perde prazo, desde que, havendo janela de solicitação de isenção, ela continue cumprindo o `UNI-REQ-0106`: começa junto com as inscrições, não é reduzida, respeita a duração mínima e termina antes do fim das inscrições. Se deixar de cumprir, a retificação é recusada pela regra do `UNI-REQ-0106`. Em processo gratuito não há janela de isenção (`UNI-REQ-0144`), e a condição não se aplica (decisão do líder técnico em 13/11/2026).
 
 **Efeito sobre as inscrições** (`UNI-REQ-0212`).
 
