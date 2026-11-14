@@ -1,0 +1,38 @@
+---
+title: Ato do processo não encontrado
+sidebar_label: Ato do processo não encontrado
+description: 'A consulta de um ato do processo não achou o ato no processo da rota.'
+code: uniplus.selecao.ato_do_processo.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Consulta de um ato do processo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2441'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2441
+  - label: 'uniplus-api#2442'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2442
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A consulta de um ato (`GET /api/selecao/processos-seletivos/{processoSeletivoId}/atos/{atoId}`)
+não encontrou o ato no processo da rota. O ato pode não existir, ou existir em outro
+processo seletivo: os dois casos respondem igual, para que a consulta não revele que o
+identificador existe fora do processo. A mensagem não repete o identificador informado.
+
+Quando é o processo que não existe, a resposta é a do processo não encontrado
+(`uniplus.selecao.processo_seletivo.nao_encontrado`), não esta.
+
+## Como resolver
+
+Confira o identificador do ato e o do processo. A lista de atos do processo
+(`GET /api/selecao/processos-seletivos/{processoSeletivoId}/atos`) traz os atos que ele tem,
+cada um com o seu identificador; o `atoId` devolvido por uma publicação, com 201, aponta o ato
+criado no `Location`.

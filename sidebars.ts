@@ -249,6 +249,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.ato_do_processo.ato_corrigido_obrigatorio',
         'erros/uniplus.selecao.ato_do_processo.ato_corrigido_invalido',
         'erros/uniplus.selecao.ato_do_processo.motivo_da_correcao_obrigatorio',
+        'erros/uniplus.selecao.ato_do_processo.nao_encontrado',
         'erros/uniplus.selecao.ato_do_processo.ato_corrigido_de_outro_processo',
         'erros/uniplus.selecao.ato_do_processo.ato_corrigido_de_outra_classe',
         'erros/uniplus.selecao.ato_do_processo.ato_corrigido_ja_corrigido',
