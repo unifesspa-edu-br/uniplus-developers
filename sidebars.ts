@@ -533,7 +533,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.publicacoes.tipo_ato.nao_encontrado',
         'erros/uniplus.publicacoes.tipo_ato.id_divergente',
         'erros/uniplus.publicacoes.ato_normativo.tipo_sem_versao_vigente',
-        'erros/uniplus.publicacoes.ato_normativo.versao_de_configuracao_incompleta',
+        'erros/uniplus.publicacoes.ato_normativo.versao_do_objeto_incompleta',
         'erros/uniplus.publicacoes.ato_normativo.ato_retificado_nao_encontrado',
         'erros/uniplus.publicacoes.ato_normativo.classe_congelamento_divergente',
         'erros/uniplus.publicacoes.ato_normativo.ato_ja_retificado',

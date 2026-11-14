@@ -1,13 +1,13 @@
 ---
-title: A versão de configuração deve trazer o par (id, hash) completo ou nenhum dos dois
-sidebar_label: Versão de configuração incompleta
-description: A referência à versão de configuração que o ato invoca é o par (id, hash) completo, ou nenhum dos dois.
-code: uniplus.publicacoes.ato_normativo.versao_de_configuracao_incompleta
+title: A versão do objeto deve trazer o par (id, hash) completo ou nenhum dos dois
+sidebar_label: Versão do objeto incompleta
+description: A referência à versão do objeto que o ato invoca é o par (id, hash) completo, ou nenhum dos dois.
+code: uniplus.publicacoes.ato_normativo.versao_do_objeto_incompleta
 http_status: 422
 situacao: publicado
 modulo: Publicações
 emitido_em:
-  - Registro de ato normativo, quando o ato declara vínculo com uma versão de configuração
+  - Registro de ato normativo, quando o ato declara vínculo com uma versão do objeto
 requisitos: []
 rastreio:
   - label: 'uniplus-api#796'
@@ -22,12 +22,12 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O ato normativo pode invocar a versão de configuração que ele governou no
-instante da publicação, por um par **`{versaoDeConfiguracaoId,
-versaoDeConfiguracaoHash}`**, sem chave estrangeira entre módulos: o
+O ato normativo pode invocar a versão do objeto que ele governou no
+instante da publicação, por um par **`{versaoDoObjetoId,
+versaoDoObjetoHash}`**, sem chave estrangeira entre módulos: o
 identificador aponta a versão no módulo de origem, e o hash prova que a
 definição aplicada não mudou depois. Um ato pode não invocar versão
-nenhuma (ato autônomo, sem vínculo com configuração), e nesse caso a
+nenhuma (ato autônomo, sem vínculo com um objeto versionado), e nesse caso a
 referência simplesmente não existe.
 
 Esta causa cobre dois cenários distintos, ambos com este mesmo código:
@@ -42,8 +42,8 @@ Esta causa cobre dois cenários distintos, ambos com este mesmo código:
 
 ## Como resolver
 
-Envie o par `{versaoDeConfiguracaoId, versaoDeConfiguracaoHash}` completo
-e bem formado, com o identificador de uma versão de configuração real e o
+Envie o par `{versaoDoObjetoId, versaoDoObjetoHash}` completo
+e bem formado, com o identificador de uma versão do objeto real e o
 hash SHA-256 correspondente, em hexadecimal minúsculo, ou omita os dois
-campos por completo quando o ato não invocar nenhuma versão de
-configuração.
+campos por completo quando o ato não invocar nenhuma versão do
+objeto.
