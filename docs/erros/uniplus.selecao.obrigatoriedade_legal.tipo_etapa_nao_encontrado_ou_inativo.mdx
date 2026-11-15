@@ -1,0 +1,47 @@
+---
+title: O tipo de etapa citado pela regra legal não existe ou não está ativo
+sidebar_label: Tipo de etapa da regra legal inexistente ou inativo
+description: O predicado de etapa obrigatória da regra legal cita um tipo de etapa que não está entre os ativos do cadastro.
+code: uniplus.selecao.obrigatoriedade_legal.tipo_etapa_nao_encontrado_ou_inativo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1071'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1071
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O predicado de **etapa obrigatória** da regra legal cita um tipo de etapa por código, e esse código
+não corresponde a nenhum tipo de etapa ativo no cadastro do módulo Configuração. A mensagem da
+resposta traz o código informado. Nada é gravado.
+
+O código é aparado e normalizado antes da busca, do mesmo modo que o cadastro o guarda; espaço nas
+pontas não é a causa deste erro. A comparação é exata depois disso, com diferença entre maiúsculas e
+minúsculas. Tipo desativado também é recusado, inclusive na atualização de uma regra que já o citava
+e que não mudou o código.
+
+A regra é a mesma na criação e na atualização, para que uma referência recusada num caminho não
+entre pelo outro.
+
+Código ausente ou em branco não chega aqui: a forma do predicado é conferida antes e a recusa é
+[`predicado_com_codigo_em_branco`](./uniplus.selecao.obrigatoriedade_legal.predicado_com_codigo_em_branco.mdx).
+Existe outro código com o mesmo título,
+[`processo_seletivo.tipo_etapa_nao_encontrado_ou_inativo`](./uniplus.selecao.processo_seletivo.tipo_etapa_nao_encontrado_ou_inativo.mdx),
+emitido na definição das etapas de um processo seletivo, e não no cadastro de regra legal; o campo
+`code` do corpo de erro diz qual dos dois foi emitido.
+
+## Como resolver
+
+Confira o código do tipo de etapa no cadastro de tipos de etapa e corrija o predicado. O cadastro
+não oferece reativar um tipo que foi removido: se o tipo citado foi removido, use o código de outro
+tipo de etapa ativo ou revise a regra legal.

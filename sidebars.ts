@@ -1308,6 +1308,12 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.idade_maxima_emissao.fase_incoerente_com_tipo',
         'erros/uniplus.selecao.idade_maxima_emissao.fase_nao_pertence_ao_processo',
         'erros/uniplus.selecao.idade_maxima_emissao.valor_invalido',
+        'erros/uniplus.selecao.obrigatoriedade_legal.tipo_processo_nao_encontrado_ou_inativo',
+        'erros/uniplus.selecao.obrigatoriedade_legal.tipo_etapa_nao_encontrado_ou_inativo',
+        'erros/uniplus.selecao.obrigatoriedade_legal.regra_codigo_duplicada',
+        'erros/uniplus.selecao.obrigatoriedade_legal.hash_colisao',
+        'erros/uniplus.selecao.obrigatoriedade_legal.nao_encontrada',
+        'erros/uniplus.selecao.regra_catalogo.nao_encontrada',
       ],
     },
     {
