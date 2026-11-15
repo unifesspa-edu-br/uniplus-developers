@@ -1,0 +1,41 @@
+---
+title: Uma condição do processo cita um município que deixaria a área do bônus regional
+sidebar_label: Município do bônus citado por condição em uso
+description: A nova área do bônus regional não pode retirar um município que ainda é citado por condição do processo.
+code: uniplus.selecao.processo_seletivo.municipio_do_bonus_referenciado_por_condicao_viva
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração do Fator de Atenuação das Desigualdades de Acesso do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Alguma condição do processo — regra de item de formulário, grupo, derivação de
+fato, critério de desempate por fato ou exibição condicional — cita um município
+que não pertence à área do bônus regional. A área é formada pelos municípios da
+base legal do processo; processo sem bônus regional tem área vazia, e qualquer
+município citado fica fora dela.
+
+A recusa aparece em dois momentos: ao declarar o Fator de Atenuação, quando a
+nova área retiraria um município que a condição ainda cita, e ao congelar uma
+versão (publicação, retificação em ato único ou fechamento da sessão
+editorial), quando a conferência final encontra a condição fora da área. Em
+ambos os casos nada é gravado ou congelado. A mensagem indica o município.
+
+## Como resolver
+
+Ajuste a condição que cita o município — removendo-a ou trocando o município
+por um da área — ou mantenha o município na área do bônus regional do processo.
+
+Em processo já publicado, as alterações são feitas numa retificação. Depois,
+repita a operação recusada.

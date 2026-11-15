@@ -1,0 +1,34 @@
+---
+title: Uma ocorrência simulada não tem identidade própria dentro do grupo
+sidebar_label: Ocorrência simulada sem identidade
+description: Na pré-visualização, cada ocorrência de um grupo repetível precisa de identificador próprio e sem repetição dentro do grupo.
+code: uniplus.selecao.processo_seletivo.ocorrencia_simulada_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Pré-visualização do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na pré-visualização do processo seletivo, a simulação de respostas inclui um
+grupo repetível — por exemplo, vários itens do mesmo grupo — em que uma
+ocorrência não traz identificador ou traz um identificador já usado por outra
+ocorrência do mesmo grupo. Cada ocorrência precisa de uma identidade própria
+para que as regras e os cálculos a distingam das demais.
+
+A recusa indica, no campo de erro, o grupo e a posição da ocorrência, e só
+aparece depois que a definição de avaliação do processo é montada: se a
+configuração tem outra pendência que impeça a montagem, é essa pendência que
+responde primeiro. A pré-visualização não grava nada.
+
+## Como resolver
+
+Informe um identificador distinto para cada ocorrência de cada grupo repetível
+da simulação e repita a pré-visualização.

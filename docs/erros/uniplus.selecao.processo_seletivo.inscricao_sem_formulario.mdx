@@ -1,0 +1,39 @@
+---
+title: O processo recebe inscrições pelo sistema, mas não tem formulário de inscrição
+sidebar_label: Inscrição sem formulário
+description: Processo cujos candidatos se inscrevem pelo sistema precisa de um formulário de inscrição para ser publicado.
+code: uniplus.selecao.processo_seletivo.inscricao_sem_formulario
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A origem dos candidatos do processo é a inscrição própria — os candidatos se
+inscrevem pelo sistema —, mas o processo não tem formulário com a finalidade de
+inscrição. É o formulário de inscrição que coleta as respostas do candidato, e
+sem ele não há o que preencher.
+
+O rascunho pode ficar sem o formulário enquanto a configuração é montada. A
+recusa acontece quando se tenta congelar uma versão: publicação inicial,
+retificação em ato único ou fechamento da sessão editorial.
+
+## Como resolver
+
+Cadastre no processo o formulário de finalidade inscrição, com a fase do
+cronograma em que é respondido e as seções e itens que o candidato preenche, e
+repita a operação.
+
+Em processo já publicado, a criação do formulário é uma alteração da
+configuração e é feita numa retificação.

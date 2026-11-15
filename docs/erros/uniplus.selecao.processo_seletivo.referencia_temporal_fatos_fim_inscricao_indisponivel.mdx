@@ -1,0 +1,41 @@
+---
+title: A idade é contada pelo fim da inscrição, mas nenhuma fase de inscrição tem data de fim
+sidebar_label: Fim da inscrição indisponível
+description: A referência temporal que conta a idade pelo fim da inscrição exige uma fase que colete inscrição com a data de fim definida.
+code: uniplus.selecao.processo_seletivo.referencia_temporal_fatos_fim_inscricao_indisponivel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A referência temporal dos fatos do processo conta a idade do candidato a partir
+do fim da inscrição, mas o cronograma não tem nenhuma fase que colete inscrição
+com a data de fim definida. Sem essa data o sistema não tem de onde tirar o dia
+de referência, e não assume outro.
+
+A conferência só vale quando alguma regra do processo cita a faixa etária do
+candidato. A recusa acontece ao tentar congelar uma versão (publicação inicial,
+retificação em ato único ou fechamento da sessão editorial), e nada é congelado.
+
+## Como resolver
+
+Defina o fim da janela de uma fase do cronograma que colete inscrição — ou
+inclua uma fase assim no cronograma. Alternativamente, defina de novo a
+referência temporal dos fatos com outro tipo de referência.
+
+Se nenhuma regra deveria usar a faixa etária, remover a regra que a cita também
+afasta a recusa.
+
+Em processo já publicado, a alteração é feita numa retificação. Depois, repita a
+operação recusada.

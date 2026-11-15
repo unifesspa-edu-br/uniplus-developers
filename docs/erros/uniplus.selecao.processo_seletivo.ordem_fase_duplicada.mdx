@@ -1,0 +1,41 @@
+---
+title: Duas fases do cronograma têm a mesma ordem
+sidebar_label: Ordem de fase repetida
+description: Cada fase do cronograma do processo precisa de uma ordem própria, sem repetir a de outra fase.
+code: uniplus.selecao.processo_seletivo.ordem_fase_duplicada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cronograma enviado tem duas ou mais fases com o mesmo número de ordem. A ordem
+define a sequência em que as fases acontecem, e cada fase precisa de uma posição
+só sua.
+
+Na definição do cronograma, nada é gravado e o cronograma anterior continua como
+estava. A conferência vem depois da de cronograma vazio e antes da de fase
+canônica repetida.
+
+No descarte de uma retificação, o mesmo problema aparece de outro modo: é a
+versão publicada que traz duas fases com a mesma ordem, o que não deveria
+acontecer. O descarte é recusado antes de qualquer gravação, e a sessão de
+retificação continua aberta.
+
+## Como resolver
+
+Na definição do cronograma, numere as fases com ordens diferentes entre si,
+conforme a sequência desejada, e envie de novo.
+
+No descarte, o problema não está no que você enviou: acione a equipe técnica,
+informando o código do processo, para investigar a versão publicada. A sessão de
+retificação segue aberta, sem alteração.

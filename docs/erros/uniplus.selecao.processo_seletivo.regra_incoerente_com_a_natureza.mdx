@@ -1,0 +1,50 @@
+---
+title: A regra de uma modalidade não tem a forma que a natureza dela pede
+sidebar_label: Regra de modalidade incoerente com a natureza
+description: A regra de quem concorre a uma cota da lei deve exigir a opção pelas cotas, e a de uma ação afirmativa deve recusá-la.
+code: uniplus.selecao.processo_seletivo.regra_incoerente_com_a_natureza
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra que decide quem concorre a uma modalidade ofertada precisa ter a forma
+que a natureza da modalidade pede no cadastro:
+
+- na cota da lei (reservada), toda cláusula da regra exige que o candidato tenha
+  optado pelas cotas;
+- na ação afirmativa, toda cláusula da regra exige que o candidato não tenha
+  optado pelas cotas.
+
+A cópia da modalidade que o processo guarda tem uma regra que não segue essa
+forma. Ela não veio do cadastro como ele está hoje.
+
+A recusa acontece ao tentar congelar uma versão (publicação inicial,
+retificação em ato único ou fechamento da sessão editorial), e nada é congelado.
+A mensagem da resposta indica a modalidade.
+
+No descarte de uma retificação, a recusa vem da versão congelada, que traz a
+cópia incoerente. O descarte é recusado antes de qualquer gravação, e a sessão de
+retificação continua aberta.
+
+## Como resolver
+
+Grave de novo a distribuição de vagas do processo, para copiar as modalidades e
+suas regras do cadastro como ele está hoje, e repita a operação recusada. Em
+processo já publicado, a regravação é feita numa retificação.
+
+No descarte, o problema não está no que você enviou: acione a equipe técnica,
+informando o código do processo, para investigar a versão congelada. A sessão de
+retificação segue aberta, sem alteração.

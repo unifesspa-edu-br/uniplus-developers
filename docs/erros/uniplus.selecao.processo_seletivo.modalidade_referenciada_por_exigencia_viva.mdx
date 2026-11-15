@@ -1,0 +1,42 @@
+---
+title: Uma condição do processo cita uma modalidade que deixaria de ser ofertada
+sidebar_label: Modalidade citada por condição em uso
+description: A nova distribuição de vagas não pode retirar uma modalidade que ainda é citada por condição de exigência, de regra, de grupo ou de derivação do processo.
+code: uniplus.selecao.processo_seletivo.modalidade_referenciada_por_exigencia_viva
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao substituir a distribuição de vagas do processo, a nova distribuição deixa de
+ofertar uma modalidade que ainda é citada por alguma condição da configuração.
+Entram nessa conferência as condições que decidem quando uma exigência
+documental se aplica, as regras dos itens do formulário, os grupos, as
+derivações de fatos, os critérios de desempate por fato e os termos e seções
+com exibição condicional.
+
+O conjunto de modalidades ofertadas é o que resulta da nova distribuição,
+somando as modalidades de todas as ofertas de curso. A condição que cita uma
+modalidade fora desse conjunto ficaria sem sentido, e por isso a substituição é
+recusada por inteiro: a distribuição anterior permanece como estava.
+
+A mensagem da resposta indica a modalidade citada.
+
+## Como resolver
+
+Escolha entre manter a modalidade na distribuição de vagas, em pelo menos uma
+oferta, ou ajustar as condições que a citam — removendo a condição ou trocando a
+modalidade citada — antes de substituir a distribuição.
+
+Em processo já publicado, as alterações de condições e de distribuição são feitas
+numa retificação. Depois de ajustadas, repita a definição da distribuição de
+vagas.

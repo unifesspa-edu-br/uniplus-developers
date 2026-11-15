@@ -1,0 +1,37 @@
+---
+title: Há vagas ofertadas, mas nenhuma fase do cronograma produz resultado
+sidebar_label: Vagas sem fase que produz resultado
+description: Processo com vagas ofertadas precisa ter ao menos uma fase do cronograma que produza resultado preliminar ou definitivo.
+code: uniplus.selecao.processo_seletivo.vagas_sem_fase_que_produz_resultado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A distribuição de vagas do processo tem vagas ofertadas — ao menos uma oferta de
+curso com vagas —, mas nenhuma fase do cronograma produz resultado. Sem uma fase
+que publique resultado, preliminar ou definitivo, as vagas não têm por onde ser
+preenchidas.
+
+Uma fase produz resultado quando algum de seus produtos é declarado com papel
+no ciclo recursal, preliminar ou definitivo; produto sem papel, como um aviso,
+não torna a fase produtora de resultado. A recusa acontece ao tentar congelar uma
+versão (publicação inicial, retificação em ato único ou fechamento da sessão
+editorial), e nada é congelado.
+
+## Como resolver
+
+No cronograma, declare em ao menos uma fase um produto com papel de resultado
+preliminar ou definitivo. Em processo já publicado, a alteração do cronograma é
+feita numa retificação. Depois, repita a operação recusada.

@@ -1,0 +1,57 @@
+---
+title: A regra de uma modalidade depende de um fato que o formulário de inscrição não pergunta
+sidebar_label: Regra de modalidade com fato não coletado
+description: Em processo com inscrição própria, a regra que decide quem concorre a cada modalidade ofertada só pode depender de fatos que a inscrição pergunta ou que o processo deriva deles.
+code: uniplus.selecao.processo_seletivo.regra_de_modalidade_cita_fato_nao_coletado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada modalidade ofertada no processo tem uma regra que decide quem concorre a
+ela. Em processo com inscrição própria, a modalidade é decidida na inscrição; por
+isso a regra só pode depender de fatos que o formulário de inscrição pergunta
+ou que o processo calcula a partir dessas respostas. A regra de uma modalidade
+ofertada cita um fato que a inscrição não pergunta, nem direta nem
+indiretamente, e o sistema ficaria sem saber se o candidato concorre a ela.
+
+Três pontos sobre a conferência:
+
+- um fato calculado vale se tudo de que ele depende vem da inscrição; a mensagem
+  pode citar um fato do qual a regra depende só por intermédio de outro;
+- um campo de grupo repetível não vale citado sozinho: só vale por meio de um
+  agregado calculado sobre o grupo, desde que algum grupo do formulário de
+  inscrição pergunte o campo;
+- em processo cujo resultado é importado, a modalidade vem com o candidato e a
+  regra não é avaliada, e por isso não há esta recusa.
+
+A recusa acontece ao tentar congelar uma versão (publicação inicial,
+retificação em ato único ou fechamento da sessão editorial), e nada é congelado.
+A mensagem indica a modalidade e o fato que falta.
+
+## Como resolver
+
+Escolha uma das saídas, conforme o caso:
+
+- inclua o fato apontado entre os que o formulário de inscrição pergunta;
+- crie uma derivação que calcule o fato a partir de fatos que a inscrição
+  pergunta;
+- retire da distribuição de vagas a modalidade cuja regra não pode ser avaliada
+  na inscrição;
+- se a regra da modalidade no cadastro está errada, peça a correção a quem
+  mantém o cadastro de modalidades e grave de novo a distribuição de vagas do
+  processo, para que ela copie a regra corrigida.
+
+Em processo já publicado, as alterações são feitas numa retificação. Depois,
+repita a operação recusada.

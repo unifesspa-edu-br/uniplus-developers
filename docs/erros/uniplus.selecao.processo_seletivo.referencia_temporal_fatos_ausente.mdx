@@ -1,0 +1,40 @@
+---
+title: Uma regra cita a faixa etária, mas o processo não define a referência temporal dos fatos
+sidebar_label: Faixa etária sem referência temporal
+description: Regra que usa a faixa etária do candidato exige que o processo defina de qual data a idade é contada.
+code: uniplus.selecao.processo_seletivo.referencia_temporal_fatos_ausente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Alguma regra do processo — a condição de uma exigência documental ou uma regra de
+formulário — cita a faixa etária do candidato, mas o processo não tem a
+referência temporal dos fatos definida. Sem ela o sistema não sabe em que data
+contar a idade do candidato, e não assume uma data por conta própria.
+
+A referência temporal só é exigida quando alguma regra usa a faixa etária; sem
+essa regra, ela é opcional. A recusa acontece ao tentar congelar uma versão
+(publicação inicial, retificação em ato único ou fechamento da sessão
+editorial), e nada é congelado.
+
+## Como resolver
+
+Defina a referência temporal dos fatos do processo, escolhendo de onde vem a data
+de contagem da idade: o fim da inscrição, o início ou o fim de uma fase do
+cronograma, ou uma data específica. Se nenhuma regra deveria usar a faixa
+etária, remova a regra que a cita.
+
+Em processo já publicado, a alteração é feita numa retificação. Depois, repita a
+operação recusada.
