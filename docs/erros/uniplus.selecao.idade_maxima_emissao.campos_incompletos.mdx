@@ -1,0 +1,48 @@
+---
+title: Valor, unidade e tipo da idade máxima de emissão devem vir juntos
+sidebar_label: Idade máxima de emissão incompleta
+description: 'A idade máxima de emissão do documento exigido traz só parte dos três campos obrigatórios, valor, unidade e tipo.'
+code: uniplus.selecao.idade_maxima_emissao.campos_incompletos
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0066
+rastreio:
+  - label: 'uniplus-api#893'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/893
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A idade máxima de emissão do documento exigido chegou com só parte dos campos: valor, unidade e
+tipo precisam estar todos presentes, ou todos ausentes. A regra pela metade não diz nem quanto
+tempo vale, nem a partir de quando.
+
+A idade máxima de emissão é uma regra opcional de cada documento exigido: limita há quanto tempo o
+comprovante enviado pode ter sido emitido (por exemplo, no máximo 90 dias), contado a partir de um
+marco, a âncora. Ela é dada por um valor, uma unidade (`DIAS`, `MESES` ou `ANOS`) e o tipo de
+âncora: `FIM_INSCRICAO`, `INICIO_FASE`, `FIM_FASE`, `DATA_ESPECIFICA` ou `DATA_SUBMISSAO`. Ela funciona como
+aviso e não bloqueia a presença do documento. A regra é tudo ou nada: ou os três campos estão
+ausentes (sem regra), ou os três estão presentes, com a data quando o tipo é `DATA_ESPECIFICA` e a fase
+quando é `INICIO_FASE` ou `FIM_FASE`.
+
+A conferência é feita na montagem de cada exigência, e é a primeira das três restrições do arquivo
+(idade máxima de emissão, formatos permitidos e modelo citado). Dentro da idade máxima, as causas
+são conferidas nesta ordem: [`campos_incoerentes_com_ausencia`](./uniplus.selecao.idade_maxima_emissao.campos_incoerentes_com_ausencia.mdx), [`campos_incompletos`](./uniplus.selecao.idade_maxima_emissao.campos_incompletos.mdx),
+[`valor_invalido`](./uniplus.selecao.idade_maxima_emissao.valor_invalido.mdx), [`data_incoerente_com_tipo`](./uniplus.selecao.idade_maxima_emissao.data_incoerente_com_tipo.mdx) e [`fase_incoerente_com_tipo`](./uniplus.selecao.idade_maxima_emissao.fase_incoerente_com_tipo.mdx); a primeira que falha interrompe a
+montagem.
+
+O valor menor ou igual a zero, a unidade e o tipo desconhecidos não chegam a esta conferência:
+são recusados antes, na validação do pedido.
+
+## Como resolver
+
+Preencha os três campos para ter a regra, ou deixe os três vazios para não ter limite de idade
+de emissão, e envie a definição dos documentos exigidos de novo.

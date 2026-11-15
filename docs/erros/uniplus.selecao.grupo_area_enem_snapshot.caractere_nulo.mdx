@@ -1,0 +1,84 @@
+---
+title: O grupo de área do ENEM não pode conter o caractere nulo
+sidebar_label: Grupo de área do ENEM com caractere nulo
+description: 'O código ou o rótulo do grupo de área do ENEM contém o caractere nulo (U+0000) ou outro caractere que não é texto.'
+code: uniplus.selecao.grupo_area_enem_snapshot.caractere_nulo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Simulação da distribuição de vagas do processo seletivo
+  - Definição de classificação do processo seletivo
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1600'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1600
+  - label: 'uniplus-api#1601'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1601
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código ou o rótulo do grupo de área do ENEM contém o caractere nulo (U+0000) ou outro caractere
+que não é texto, como um surrogate sem par. O texto congelado entra aparado e normalizado, e o
+caractere nulo é recusado porque o banco de dados não o aceita; deixá-lo passar faria a falha
+aparecer só depois, na gravação.
+
+Cada oferta da distribuição de vagas e cada grupo do quadro de pesos por área da classificação
+guardam uma cópia do grupo de área do ENEM do curso, com código e rótulo, congelada com o processo.
+O código é a identidade do grupo (é por ele que o processo casa a oferta com a linha de Pesos por
+Área), e o rótulo é o que o edital publicado mostra. Editar o curso depois não alcança o processo;
+quem quiser o grupo novo redefine a distribuição de vagas ou a classificação.
+
+O grupo vem do cadastro de Configuração, que só aceita os quatro grupos do Anexo I da Resolução
+nº 805/2024/Consepe (Tecnológica, Humanística I, Humanística II e Saúde e Biológicas) e põe o código e o
+rótulo de cada um. Um curso que não declara grupo não gera esta recusa: a ausência é válida.
+
+Na distribuição de vagas a recusa vem no campo `distribuicaoVagas[<índice>].grupoAreaEnem` e
+acumula, na mesma resposta, com as demais violações da distribuição. Na classificação vem no campo
+`resolucaoPesoAreaEnem`, junto das demais violações do quadro de pesos.
+
+Este mesmo código também aparece quando o sistema relê a configuração congelada da versão publicada:
+em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o
+descarte, a consulta dos formulários, as operações da inscrição, entre outras; a lista completa
+está no cabeçalho da página). Antes disso, o sistema confere a integridade dos bytes congelados:
+bytes alterados depois do congelamento são recusados por [`integridade_violada`](./uniplus.selecao.envelope_codec.integridade_violada.mdx) e não chegam a esta
+causa. Pelo caminho normal de gravação, a configuração congelada nunca traz esse defeito, porque a
+definição o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista
+`errors[]`, e se refere à versão congelada, não ao pedido enviado.
+
+Esta conferência vem depois das do código e do rótulo em branco
+([`codigo_obrigatorio`](./uniplus.selecao.grupo_area_enem_snapshot.codigo_obrigatorio.mdx) e [`rotulo_obrigatorio`](./uniplus.selecao.grupo_area_enem_snapshot.rotulo_obrigatorio.mdx)) e antes da do tamanho
+([`tamanho_invalido`](./uniplus.selecao.grupo_area_enem_snapshot.tamanho_invalido.mdx)).
+
+## Como resolver
+
+Corrija o grupo de área do ENEM no cadastro de Configuração (o do curso da oferta, ou o da linha de
+Pesos por Área da resolução declarada), para um dos quatro grupos, e envie de novo a definição da
+distribuição de vagas ou da classificação. O código e o rótulo são postos pelo cadastro: o
+grupo que chega sem eles, ou com texto fora do esperado, indica dado gravado por caminho que não
+passou por ele, e a causa é investigada pela equipe técnica do Uni+.
+
+Se a recusa apareceu em uma operação que lê a configuração congelada (qualquer uma das listadas no
+cabeçalho, exceto a definição da própria configuração e a simulação), o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e redefinir a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

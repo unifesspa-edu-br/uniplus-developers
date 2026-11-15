@@ -1,0 +1,65 @@
+---
+title: O valor da idade máxima de emissão deve ser maior que zero
+sidebar_label: Valor da idade máxima de emissão inválido
+description: 'A idade máxima de emissão congelada de um documento exigido traz valor zero ou negativo.'
+code: uniplus.selecao.idade_maxima_emissao.valor_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#893'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/893
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A idade máxima de emissão de um documento exigido, na configuração congelada da versão publicada,
+traz valor igual ou menor que zero. Um limite de zero ou de tempo negativo não faz sentido para
+a idade de um comprovante.
+
+A idade máxima de emissão é uma regra opcional de cada documento exigido: limita há quanto tempo o
+comprovante enviado pode ter sido emitido (por exemplo, no máximo 90 dias), contado a partir de um
+marco, a âncora. Ela é dada por um valor, uma unidade (`DIAS`, `MESES` ou `ANOS`) e o tipo de
+âncora: `FIM_INSCRICAO`, `INICIO_FASE`, `FIM_FASE`, `DATA_ESPECIFICA` ou `DATA_SUBMISSAO`. Ela funciona como
+aviso e não bloqueia a presença do documento. A regra é tudo ou nada: ou os três campos estão
+ausentes (sem regra), ou os três estão presentes, com a data quando o tipo é `DATA_ESPECIFICA` e a fase
+quando é `INICIO_FASE` ou `FIM_FASE`.
+
+Na definição dos documentos exigidos, o valor zero ou negativo é recusado antes, na validação do
+pedido, e não chega à montagem da exigência. Por isso esta causa só aparece quando o sistema relê
+a configuração congelada.
+
+Este mesmo código também aparece quando o sistema relê a configuração congelada da versão publicada:
+em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o
+descarte, a consulta dos formulários, as operações da inscrição, entre outras; a lista completa
+está no cabeçalho da página). Antes disso, o sistema confere a integridade dos bytes congelados:
+bytes alterados depois do congelamento são recusados por [`integridade_violada`](./uniplus.selecao.envelope_codec.integridade_violada.mdx) e não chegam a esta
+causa. Pelo caminho normal de gravação, a configuração congelada nunca traz esse defeito, porque a
+definição o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista
+`errors[]`, e se refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+O pedido enviado agora não é a causa: o sistema recusou a configuração congelada da versão
+publicada, e redefinir os documentos exigidos do processo não a corrige. A causa é investigada
+pela equipe técnica do Uni+.

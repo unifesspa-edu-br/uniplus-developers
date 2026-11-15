@@ -1,0 +1,50 @@
+---
+title: A fase âncora da idade máxima de emissão não pertence ao cronograma do processo
+sidebar_label: Fase âncora fora do cronograma
+description: 'A fase âncora da idade máxima de emissão não está no cronograma do processo, ou o processo não tem fase que colete inscrição para o tipo FIM_INSCRICAO.'
+code: uniplus.selecao.idade_maxima_emissao.fase_nao_pertence_ao_processo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0066
+rastreio:
+  - label: 'uniplus-api#893'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/893
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A idade máxima de emissão do documento exigido aponta para uma âncora que o cronograma do processo
+não tem. Há dois casos, e a mensagem diz qual ocorreu:
+
+- a fase âncora, informada para os tipos `INICIO_FASE` e `FIM_FASE`, não está no cronograma deste
+  processo; a mensagem traz o identificador da fase;
+- o tipo é `FIM_INSCRICAO`, que usa a fase que coleta inscrição do próprio cronograma, e o processo
+  não tem nenhuma.
+
+A idade máxima de emissão é uma regra opcional de cada documento exigido: limita há quanto tempo o
+comprovante enviado pode ter sido emitido (por exemplo, no máximo 90 dias), contado a partir de um
+marco, a âncora. Ela é dada por um valor, uma unidade (`DIAS`, `MESES` ou `ANOS`) e o tipo de
+âncora: `FIM_INSCRICAO`, `INICIO_FASE`, `FIM_FASE`, `DATA_ESPECIFICA` ou `DATA_SUBMISSAO`. Ela funciona como
+aviso e não bloqueia a presença do documento. A regra é tudo ou nada: ou os três campos estão
+ausentes (sem regra), ou os três estão presentes, com a data quando o tipo é `DATA_ESPECIFICA` e a fase
+quando é `INICIO_FASE` ou `FIM_FASE`.
+
+A âncora é conferida na escrita da exigência, e não na publicação, porque a regra vive na
+exigência. Para cada documento, a conferência vem depois das do vínculo do documento (a fase, o
+formulário e a etapa) e da repetição por grupo, e antes da conferência da consequência de
+reenvio. Quando a fase existe mas não tem o extremo que a âncora usa, a causa é outra
+([`fase_extremo_ausente`](./uniplus.selecao.idade_maxima_emissao.fase_extremo_ausente.mdx)).
+
+## Como resolver
+
+Informe como âncora uma fase que esteja no cronograma deste processo, ou, para `FIM_INSCRICAO`,
+inclua no cronograma uma fase que coleta inscrição. Depois, envie a definição dos documentos
+exigidos de novo.

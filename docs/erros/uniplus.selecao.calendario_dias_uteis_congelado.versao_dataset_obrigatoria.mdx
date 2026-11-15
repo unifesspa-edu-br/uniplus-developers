@@ -1,0 +1,57 @@
+---
+title: O calendário vigente chegou sem versão
+sidebar_label: Calendário vigente sem versão
+description: 'A cópia do calendário de dias úteis vigente exige a versão do calendário de origem, que a versão guarda como rastreio.'
+code: uniplus.selecao.calendario_dias_uteis_congelado.versao_dataset_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O calendário de dias úteis vigente chegou sem a versão do calendário de origem, ou com a versão em
+branco. A versão congelada guarda, ao lado da lista de dias não úteis, o identificador e a versão do
+calendário de onde ela veio, só como rastreio.
+
+O calendário de dias úteis vigente é cadastrado no módulo Configuração, e a versão do processo
+congela uma cópia dele por valor, com a lista dos dias não úteis (UNI-REQ-0080). Ao copiá-lo, o
+sistema confere de novo cada dia e o conjunto, e recusa o que o cadastro não aceitaria. A recusa
+só vale para o processo que depende do calendário, isto é, o que tem janela de recurso (ver
+[calendário vigente ausente](./uniplus.selecao.processo_seletivo.calendario_vigente_ausente.mdx)); um processo sem contagem sobre dia útil segue normalmente, porque não usa o dado.
+
+A conferência vem depois das da localidade ([`localidade_ausente`](./uniplus.selecao.processo_seletivo.localidade_ausente.mdx)) e da convenção de contagem
+([`algoritmo_contagem_prazo_nao_declarado`](./uniplus.selecao.processo_seletivo.algoritmo_contagem_prazo_nao_declarado.mdx)), e antes das demais conferências de conformidade e do cronograma. A consulta de
+conformidade do processo mostra o item "Calendário de dias úteis vigente" como pendente enquanto o
+calendário vigente estiver nessa condição. Nada é gravado.
+
+Os dias são conferidos um a um, na ordem em que o calendário os lista, e o primeiro dia com
+defeito interrompe a cópia. As conferências do calendário como um todo (identificador, versão,
+lista vazia e dia repetido) vêm depois das de todos os dias. Esta conferência vem depois da do identificador
+([`origem_obrigatoria`](./uniplus.selecao.calendario_dias_uteis_congelado.origem_obrigatoria.mdx)) e antes da do
+tamanho da versão ([`versao_dataset_tamanho`](./uniplus.selecao.calendario_dias_uteis_congelado.versao_dataset_tamanho.mdx)).
+
+## Como resolver
+
+A causa não está na configuração do processo, e nada nela corrige a recusa: o dado vem do
+calendário de dias úteis vigente, cadastrado no módulo Configuração. Como a versão publicada
+congela o calendário por valor, a correção é na origem, antes de publicar ou retificar:
+cadastre um calendário (dataset) corrigido, que o cadastro confere ao criar, coloque-o em vigência
+e repita a operação.
+
+O cadastro exige a versão ao criar o calendário ([`versao_dataset_obrigatoria`](./uniplus.configuracao.calendario_dias_uteis.versao_dataset_obrigatoria.mdx)). Um calendário
+vigente nessa condição indica dado gravado por caminho que não passou por essa conferência, e a
+causa é investigada pela equipe técnica do Uni+.
