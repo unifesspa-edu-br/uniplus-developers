@@ -51,8 +51,11 @@ dos formulários, as operações da inscrição, entre outras; a lista completa 
 página). A consulta de conformidade do processo também relê a versão, mas converte a falha em
 pendência do checklist, em vez de devolver este erro; por isso não consta no cabeçalho. Nas operações listadas a recusa sai como uma violação única (sem a lista `errors[]`) e se
 refere à versão congelada, não ao pedido enviado. Na releitura, o texto com mais de 40
-caracteres não chega a esta conferência: o envelope congelado é recusado antes, como
-malformado; aqui chega o texto com caractere que não é permitido.
+caracteres, o não-caractere (como U+FFFE) e o surrogate sem par não chegam a esta conferência: o
+envelope congelado é recusado antes, como
+[`envelope_malformado`](./uniplus.selecao.envelope_codec.envelope_malformado.mdx), porque o
+sistema reserializa os bytes pelo perfil canônico antes de ler cada campo; aqui chega o texto com
+caractere de controle (o nulo inclusive), de formatação ou de quebra de linha.
 
 ## Como resolver
 
