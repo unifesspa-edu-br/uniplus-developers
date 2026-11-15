@@ -1,0 +1,39 @@
+---
+title: A fase com data fixada no edital exige início e fim da janela
+sidebar_label: Janela obrigatória na fase de data no edital
+description: A fase cuja data é fixada no edital foi declarada sem início, sem fim ou sem os dois, e a janela dela precisa estar completa.
+code: uniplus.selecao.fase_cronograma.janela_obrigatoria_em_data_no_edital
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada fase canônica do cadastro diz quando a data da fase é fixada: no edital ou
+na execução. A fase cuja data é fixada no edital precisa trazer, no cronograma, o
+`inicio` e o `fim` da janela; a fase cuja data é definida na execução pode ficar
+sem data, e a unidade responsável a define depois. O pedido de definição do
+cronograma (`PUT .../cronograma-fases`) declarou uma fase de data no edital sem
+`inicio`, sem `fim` ou sem os dois. A mensagem traz o código da fase, e a recusa
+vem em `fases[n]`.
+
+A origem da data não é escolhida no pedido: vem da fase canônica citada em
+`faseCanonicaId`. A conferência é feita ao montar cada fase, junto com as outras
+violações da mesma fase, e só para a fase cujos atos foram montados sem recusa;
+uma violação nos atos da fase pode esconder, até ser corrigida, a janela
+incompleta.
+
+## Como resolver
+
+Informe `inicio` e `fim` da fase e repita a definição do cronograma. Se a data da
+fase não deveria ser fixada no edital, a origem da data é uma propriedade da fase
+canônica no cadastro do módulo Configuração, e a mudança é de quem o gere; não se
+corrige no cronograma do processo.

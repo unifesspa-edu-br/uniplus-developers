@@ -1,0 +1,35 @@
+---
+title: O modelo de formulário informado não existe
+sidebar_label: Modelo de formulário inexistente
+description: O pedido de aplicar um modelo de formulário apontou um identificador que não corresponde a nenhum modelo cadastrado.
+code: uniplus.selecao.aplicacao_de_modelo.modelo_inexistente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Aplicação de modelo de formulário
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido de aplicar um modelo de formulário ao processo seletivo
+(`POST .../formularios/aplicacoes-de-modelo`) informou, no campo `modeloId`, um
+identificador que não corresponde a nenhum modelo cadastrado. Nada foi alterado
+no processo.
+
+A conferência acontece depois da verificação de que o processo ainda está em
+rascunho e antes de qualquer análise do conteúdo do modelo: sem o modelo, não há
+o que comparar com o tipo do processo, com os fatos que a inscrição coleta nem
+com o cronograma.
+
+## Como resolver
+
+Confira o identificador do modelo na lista de modelos de formulário e reenvie o
+pedido com o identificador correto. Um modelo desativado continua existindo e
+sai com outro código
+([`modelo_inativo`](./uniplus.selecao.aplicacao_de_modelo.modelo_inativo.mdx)).

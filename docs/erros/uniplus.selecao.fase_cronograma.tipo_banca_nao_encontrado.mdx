@@ -1,0 +1,39 @@
+---
+title: O tipo de banca da fase não foi encontrado
+sidebar_label: Tipo de banca da fase não encontrado
+description: Uma banca declarada para a fase cita um tipo de banca que não existe no cadastro, ou que foi removido dele.
+code: uniplus.selecao.fase_cronograma.tipo_banca_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fase do cronograma declara as bancas que atuam nela (`bancasRequeridas`), e
+cada banca é de um tipo do cadastro do módulo Configuração. O pedido de definição
+do cronograma (`PUT .../cronograma-fases`) citou, em
+`fases[n].bancasRequeridas[m].tipoBancaId`, um identificador que não corresponde a
+nenhum tipo de banca, ou que corresponde a um tipo removido do cadastro. A
+mensagem traz o identificador.
+
+O tipo de banca é copiado por valor para o cronograma, e sem ele a banca não pode
+ser montada. A conferência segue pelas demais bancas da mesma fase, e as recusas
+delas se somam a esta no array `errors[]`; em seguida a **montagem do cronograma
+é interrompida** nessa fase: as fases anteriores da lista, com as violações que já
+tiveram, saem na mesma resposta, e as seguintes não chegam a ser conferidas. Nada
+é gravado.
+
+## Como resolver
+
+Confira, no cadastro de tipos de banca do módulo Configuração, o identificador do
+tipo pretendido e use-o em `tipoBancaId`. Se o tipo foi removido do cadastro e
+ainda deve existir, peça a quem o gere que o restabeleça antes de repetir a
+definição do cronograma. Corrija também as demais violações que a resposta trouxer.

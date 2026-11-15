@@ -1,0 +1,41 @@
+---
+title: O modelo exige documento em fase que o cronograma do processo não tem
+sidebar_label: Fase do documento do modelo fora do cronograma
+description: O conjunto padrão de documentos do modelo aponta uma fase que o cronograma do processo seletivo não tem, e por isso o modelo não pode ser aplicado.
+code: uniplus.selecao.aplicacao_de_modelo.fase_do_documento_inexistente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Aplicação de modelo de formulário
+requisitos:
+  - UNI-REQ-0170
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Alguns modelos de formulário trazem um conjunto padrão de documentos exigidos,
+cada um ligado a uma fase, que é copiado para o processo junto com o formulário.
+Ao copiar, a fase de cada documento é procurada pelo código no cronograma do
+processo, e o documento do modelo aponta uma fase que o cronograma não tem. É o
+caso do conjunto do atendimento especializado, que exige a fase de inscrição no
+cronograma do processo (UNI-REQ-0170). A recusa traz a posição
+`documentosExigidos[n].faseCodigo` do documento no modelo e, na mensagem, o tipo
+de documento e o código da fase.
+
+Esta é a última etapa da aplicação: ela só roda depois de o formulário, os itens,
+os termos e as derivações do modelo terem sido aceitos, e uma recusa aqui desfaz a
+aplicação inteira, sem alterar o processo. Para cada documento do modelo a fase e
+o tipo de documento são conferidos separadamente, por isso a recusa de
+[`tipo_de_documento_inexistente`](./uniplus.selecao.aplicacao_de_modelo.tipo_de_documento_inexistente.mdx)
+pode vir junto na mesma resposta.
+
+## Como resolver
+
+Defina o cronograma do processo com a fase citada na mensagem (definição do
+cronograma de fases) e reaplique o modelo. Se o processo não terá essa fase,
+escolha outro modelo, cujo conjunto de documentos não dependa dela.

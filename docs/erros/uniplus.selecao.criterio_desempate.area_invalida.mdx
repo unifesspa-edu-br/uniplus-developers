@@ -1,0 +1,52 @@
+---
+title: O código de área do ENEM na ordem de desempate é inválido
+sidebar_label: Código de área do desempate inválido
+description: Uma área da ordem de desempate pela maior nota em área do ENEM está vazia ou fora da forma de um código, que usa letras maiúsculas sem acento, algarismos e sublinhado.
+code: uniplus.selecao.criterio_desempate.area_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada área da ordem de desempate pela maior nota em área do ENEM é um código de
+área. O código precisa ter a forma de código: até 30 caracteres, hoje, só com letras
+maiúsculas sem acento, algarismos e sublinhado, e não pode ser vazio. A recusa vem
+em `criterios[n].areas[m]`, na posição da área malformada, e uma área em branco ou
+nula conta como vazia.
+
+A conferência é só de forma. A área bem formada que o quadro de pesos por área da
+classificação não tem é outra recusa
+([`desempate_area_enem_fora_do_quadro`](./uniplus.selecao.processo_seletivo.desempate_area_enem_fora_do_quadro.mdx)),
+e a área repetida no mesmo critério também
+([`area_repetida`](./uniplus.selecao.criterio_desempate.area_repetida.mdx)).
+
+Na definição dos critérios de desempate
+(`PUT .../processos-seletivos/{id}/criterios-desempate`) as recusas de todas as
+áreas e de todos os critérios se acumulam no array `errors[]`; os espaços nas
+pontas de cada área são aparados antes da conferência. Quando a classificação já
+tem o quadro de pesos por área, a primeira recusa de área traz a lista das áreas
+aceitas. Na publicação, na retificação em ato único e no fechamento da sessão
+editorial é uma pendência da configuração, conferida na ordem fixa dos portões,
+e a mensagem traz a ordem do critério. No descarte da retificação, a configuração
+congelada é lida de volta e a primeira recusa interrompe a leitura.
+
+## Como resolver
+
+Corrija o código da área na posição indicada, usando um dos códigos do quadro de
+pesos por área da classificação, ou retire a área da lista. Na publicação e no
+fechamento da retificação, regrave os critérios de desempate e repita a operação.
+No descarte da retificação, regravar não corrige a versão congelada: a causa deve
+ser investigada pela equipe técnica do Uni+.

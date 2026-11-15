@@ -1,0 +1,39 @@
+---
+title: O modelo exige um tipo de documento que o catálogo não tem
+sidebar_label: Tipo de documento do modelo inexistente
+description: O conjunto padrão de documentos do modelo cita um tipo de documento que não existe no catálogo, ou que foi removido dele.
+code: uniplus.selecao.aplicacao_de_modelo.tipo_de_documento_inexistente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Aplicação de modelo de formulário
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Alguns modelos de formulário trazem um conjunto padrão de documentos exigidos,
+que é copiado para o processo junto com o formulário. Ao copiar, o tipo de cada
+documento é procurado pelo código no catálogo de tipos de documento, e o código
+citado pelo modelo não existe nele, ou o tipo foi removido do catálogo depois da
+composição do modelo. A recusa traz a posição
+`documentosExigidos[n].tipoDocumentoCodigo` e, na mensagem, o código do tipo.
+
+Esta é a última etapa da aplicação: ela só roda depois de o formulário, os itens,
+os termos e as derivações do modelo terem sido aceitos, e uma recusa aqui desfaz a
+aplicação inteira, sem alterar o processo. Para cada documento do modelo a fase e
+o tipo são conferidos separadamente, e a recusa de
+[`fase_do_documento_inexistente`](./uniplus.selecao.aplicacao_de_modelo.fase_do_documento_inexistente.mdx)
+pode vir junto na mesma resposta.
+
+## Como resolver
+
+O tipo de documento é do catálogo, não do processo: peça a quem gere o catálogo de
+tipos de documento que o restabeleça, ou a quem gere os modelos de formulário que
+corrija o conjunto de documentos do modelo para um tipo existente, e reaplique. Se
+não for possível, escolha outro modelo.

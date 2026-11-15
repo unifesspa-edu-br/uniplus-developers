@@ -1,0 +1,41 @@
+---
+title: A fase removida é âncora de idade máxima de um documento exigido em outra fase
+sidebar_label: Fase removida usada como âncora de idade máxima
+description: A redefinição do cronograma remove uma fase cuja janela serve de referência para a idade máxima de emissão de um documento exigido em outra fase.
+code: uniplus.selecao.fase_cronograma.referenciada_por_exigencia_viva
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento exigido pode limitar a idade de emissão do comprovante contando a
+partir do início ou do fim de uma fase do cronograma, a âncora da idade máxima. A
+definição do cronograma retira uma fase que é a âncora desse limite para um
+documento exigido em **outra** fase que continua no cronograma. Sem a fase, a
+idade máxima do documento ficaria sem referência. A mensagem traz o código e a
+ordem da fase removida e o nome do documento.
+
+O documento exigido na própria fase removida não conta: ele sai junto com a fase.
+Só o documento de uma fase que continua impede a remoção. A conferência é feita
+fase por fase, na ordem em que o processo as tem, e para na primeira recusa; para
+uma fase removida, esta vem antes da recusa por etapa referenciada
+([`etapa_da_fase_referenciada`](./uniplus.selecao.fase_cronograma.etapa_da_fase_referenciada.mdx))
+e da recusa por formulário respondido na fase
+([`fase_referenciada_por_formulario`](./uniplus.selecao.processo_seletivo.fase_referenciada_por_formulario.mdx)).
+Nada é gravado.
+
+## Como resolver
+
+Mantenha a fase no cronograma. Se ela deve mesmo sair, ajuste antes a exigência
+nomeada na mensagem (definição de documentos exigidos), apontando a âncora da
+idade máxima para outra fase ou retirando o limite, e repita a definição do
+cronograma.

@@ -1,0 +1,39 @@
+---
+title: Etapa apenas eliminatória não tem peso
+sidebar_label: Peso em etapa que não pontua
+description: O peso só se aplica à etapa cujo caráter compõe a nota final, e a etapa apenas eliminatória aprova ou reprova sem pontuar.
+code: uniplus.selecao.etapa_processo.peso_sem_carater_que_pontua
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do pedido de definição de etapas
+(`PUT .../processos-seletivos/{id}/etapas`) tem caráter **eliminatório** e traz
+`peso`. O peso só entra na fórmula da nota final das etapas cujo caráter compõe a
+nota (classificatória ou ambas); na etapa apenas eliminatória, que aprova ou
+reprova sem pontuar, ele ficaria gravado sem nunca pesar em nada, e quem o
+configurou acreditaria que pesa. A recusa vem em `etapas[n].peso`.
+
+A conferência é da primeira passada, que confere a forma de todas as etapas do
+pedido antes de consultar o catálogo de tipos de etapa, e acumula as violações de
+todas as etapas no array `errors[]`
+(ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)). Um
+peso menor ou igual a zero é recusado antes, como
+[`peso_invalido`](./uniplus.selecao.etapa_processo.peso_invalido.mdx), e as duas
+recusas não aparecem juntas para a mesma etapa.
+
+## Como resolver
+
+Retire o `peso` da etapa eliminatória. Se a etapa deve compor a nota final,
+mude o caráter para classificatória ou ambas e mantenha o peso. Se a resposta
+trouxer outras violações em `errors[]`, corrija todas antes de reenviar.
