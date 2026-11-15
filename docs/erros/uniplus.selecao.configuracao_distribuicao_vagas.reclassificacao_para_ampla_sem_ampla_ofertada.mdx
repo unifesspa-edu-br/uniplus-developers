@@ -1,0 +1,58 @@
+---
+title: A modalidade reclassifica na ampla concorrência, que não está ofertada
+sidebar_label: Reclassificação para ampla sem ampla ofertada
+description: Uma modalidade que, ao ser indeferida, reclassifica o candidato na ampla concorrência foi selecionada numa oferta que não tem a ampla concorrência.
+code: uniplus.selecao.configuracao_distribuicao_vagas.reclassificacao_para_ampla_sem_ampla_ofertada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Simulação da distribuição de vagas do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade selecionada na oferta tem como ação para o candidato indeferido a
+reclassificação na ampla concorrência (`RECLASSIFICAR_AC`), mas a ampla concorrência (`AC`) não
+está entre as modalidades selecionadas da mesma oferta. A ação de reclassificar leva o
+candidato para a ampla concorrência da própria oferta; sem ela, o processo congelaria uma
+instrução de reclassificar para uma modalidade que ele não tem. A mensagem do erro traz o
+código da modalidade que reclassifica.
+
+Diferente das demais referências entre modalidades, o destino não é declarado no cadastro: está
+implícito na própria ação.
+
+A recusa vem no campo `distribuicaoVagas[i].modalidades` e acumula, no array `errors[]`, com as
+demais violações da mesma distribuição que o domínio confere em conjunto. A conferência de
+referências entre modalidades devolve só a primeira violação encontrada, na ordem das
+modalidades da oferta. O processamento para na primeira distribuição da lista que falhar. A
+simulação da distribuição devolve a mesma recusa, sem gravar nada.
+
+Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
+publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
+retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Conforme a intenção:
+
+- **A oferta tem ampla concorrência:** inclua a modalidade `AC` em `modalidadeIds` e envie a
+  distribuição de novo.
+- **A oferta não tem ampla concorrência:** retire de `modalidadeIds` a modalidade que
+  reclassifica nela, ou corrija, no cadastro de modalidades de Configuração, a ação aplicada
+  quando o candidato é indeferido.
+
+Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
+descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e regravar a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

@@ -1,0 +1,63 @@
+---
+title: O par de remanejamento cruzado não aponta de volta
+sidebar_label: Par cruzado não recíproco
+description: Duas modalidades de remanejamento cruzado têm de apontar uma para a outra; uma modalidade não pode formar par com ela mesma nem com uma que não cruza de volta.
+code: uniplus.selecao.configuracao_distribuicao_vagas.par_cruzado_nao_reciproco
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Simulação da distribuição de vagas do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma modalidade selecionada na oferta usa remanejamento cruzado (`CRUZADO`) com um par que não
+cumpre a reciprocidade. O remanejamento cruzado troca vagas entre duas modalidades da mesma
+oferta, e cada uma precisa apontar para a outra. A mensagem do erro distingue duas formas:
+
+- **Par consigo mesma:** o par da modalidade é ela própria. Isso não remaneja para lugar
+  nenhum.
+- **Par que não aponta de volta:** o par está selecionado na oferta, mas não usa remanejamento
+  cruzado, ou usa com outra modalidade como par.
+
+A reciprocidade é conferida aqui, sobre o conjunto da oferta, porque no cadastro a primeira
+modalidade de um par não teria a quem apontar quando fosse criada. O par ausente da oferta tem
+recusa própria, conferida antes
+([`remanejamento_par_nao_selecionado`](./uniplus.selecao.configuracao_distribuicao_vagas.remanejamento_par_nao_selecionado.mdx)).
+
+A recusa vem no campo `distribuicaoVagas[i].modalidades` e acumula, no array `errors[]`, com as
+demais violações da mesma distribuição que o domínio confere em conjunto. A conferência de
+referências entre modalidades devolve só a primeira violação encontrada, na ordem das
+modalidades da oferta. O processamento para na primeira distribuição da lista que falhar. A
+simulação da distribuição devolve a mesma recusa, sem gravar nada.
+
+Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
+publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
+retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+No cadastro de modalidades, em Configuração, conforme a causa:
+
+- **Par consigo mesma:** aponte o par para a outra modalidade do cruzamento.
+- **Par que não cruza de volta:** faça a modalidade par usar remanejamento cruzado e apontar para
+  esta; ou, se o remanejamento não deve ser cruzado, mude a regra de remanejamento da primeira.
+
+Depois, envie a distribuição de novo. Se a oferta não deve ter nenhuma das duas modalidades,
+retire-a de `modalidadeIds`.
+
+Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
+descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e regravar a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

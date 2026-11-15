@@ -1,0 +1,45 @@
+---
+title: Duas regras da mesma derivação têm a mesma ordem
+sidebar_label: Ordem de regra repetida
+description: Na mesma configuração de derivação, duas ou mais regras usam o mesmo número de ordem; a ordem de cada regra deve ser única.
+code: uniplus.selecao.configuracao_derivacao_fato.ordem_regra_duplicada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de regras de derivação de fatos do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na definição das regras de derivação do processo, duas ou mais regras da mesma configuração
+têm o mesmo valor de `ordem`. A ordem posiciona cada regra na configuração e precisa ser única
+dentro dela; a mesma ordem pode se repetir em configurações de fatos diferentes.
+
+A recusa vem no campo `configuracoes[i].regras` e faz parte da conferência de forma, que
+acumula no array `errors[]` todas as violações de todas as configurações e regras do pedido
+antes de consultar o catálogo de fatos. A mensagem não informa qual ordem se repete nem o
+código do fato.
+
+Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
+publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
+retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Na definição das regras, dê a cada regra da configuração um valor de `ordem` próprio, não
+negativo.
+
+Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
+descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e regravar a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

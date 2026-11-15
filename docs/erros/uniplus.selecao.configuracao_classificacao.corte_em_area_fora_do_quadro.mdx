@@ -1,0 +1,57 @@
+---
+title: A área do corte não está em todos os grupos do quadro de pesos por área
+sidebar_label: Corte em área fora do quadro de pesos
+description: Com o quadro de pesos por área congelado, o corte de eliminação só pode citar uma área que exista em todos os grupos do quadro.
+code: uniplus.selecao.configuracao_classificacao.corte_em_area_fora_do_quadro
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma eliminação por corte em área (`ELIM-CORTE-EM-AREA`) cita, em `areaCodigo`, uma área que
+não existe em todos os grupos do quadro de pesos por área da classificação. A área aceita é a
+que todo grupo do quadro tem, e o quadro é o que a resolução de Pesos por Área declarada
+trouxe do cadastro de Configuração. A mensagem do erro lista as áreas aceitas, com código e
+rótulo, ou informa que não há nenhuma quando os grupos não têm área em comum.
+
+A recusa vem no campo `regrasEliminacao[i].areaCodigo` e acumula, na mesma resposta, com as
+demais violações da classificação.
+
+A conferência só roda na classificação com cálculo local baseada em ENEM, quando o quadro de
+pesos foi congelado. Se a resolução de Pesos por Área foi recusada na mesma requisição, não há
+quadro contra o qual conferir, e esta causa só aparece depois que a resolução for corrigida.
+Um corte repetido para a mesma área é recusado só por
+[`corte_em_area_repetido`](./uniplus.selecao.configuracao_classificacao.corte_em_area_repetido.mdx).
+
+Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
+publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
+retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Na definição da classificação, conforme a causa:
+
+- **O código da área está errado:** use um dos códigos listados como aceitos na mensagem do
+  erro.
+- **A área existe só em alguns grupos do quadro:** escolha uma área comum a todos os grupos,
+  ou ajuste o cadastro de Pesos por Área (Configuração) para que todos os grupos da resolução
+  tenham a área, e envie a classificação de novo.
+- **O processo não deve eliminar por corte nessa área:** remova a eliminação da lista.
+
+Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
+descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e regravar a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

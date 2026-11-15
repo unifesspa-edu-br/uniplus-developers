@@ -1,0 +1,36 @@
+---
+title: A regra do Fator de Atenuação informada não existe no catálogo de regras
+sidebar_label: Regra do Fator de Atenuação não encontrada
+description: O código e a versão da regra informados na declaração do Fator de Atenuação das Desigualdades de Acesso não constam no catálogo de regras.
+code: uniplus.selecao.configuracao_bonus_regional.regra_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração do Fator de Atenuação das Desigualdades de Acesso do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A declaração do Fator de Atenuação das Desigualdades de Acesso (`aplica: true`) trouxe
+`regraCodigo` e `regraVersao`, mas o catálogo de regras do módulo Seleção não tem essa
+combinação de código e versão. Um código que existe, acompanhado de uma versão que o
+catálogo não tem, é recusado do mesmo jeito.
+
+A conferência vem depois da que exige a regra quando o processo declara aplicar o fator
+([`bonus_regional_aplica_sem_configuracao`](./uniplus.selecao.processo_seletivo.bonus_regional_aplica_sem_configuracao.mdx))
+e antes da que confere o tipo da regra
+([`regra_tipo_invalido`](./uniplus.selecao.configuracao_bonus_regional.regra_tipo_invalido.mdx)).
+A primeira recusa interrompe a declaração e nada é gravado.
+
+## Como resolver
+
+Informe um código e uma versão que existam no catálogo de regras e que sejam do tipo regra de
+bônus. Hoje o catálogo tem uma única regra desse tipo, `BONUS-MULTIPLICATIVO`, na versão
+`v1`. Confira se o código e a versão foram digitados exatamente como constam no catálogo e
+reenvie a declaração.

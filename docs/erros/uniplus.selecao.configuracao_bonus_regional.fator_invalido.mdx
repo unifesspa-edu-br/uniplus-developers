@@ -1,0 +1,47 @@
+---
+title: O fator do Fator de Atenuação deve ser maior que zero
+sidebar_label: Multiplicador do Fator de Atenuação inválido
+description: O multiplicador informado para a nota do Fator de Atenuação das Desigualdades de Acesso é zero ou negativo.
+code: uniplus.selecao.configuracao_bonus_regional.fator_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração do Fator de Atenuação das Desigualdades de Acesso do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `fator` informado na declaração do Fator de Atenuação das Desigualdades de Acesso é zero
+ou negativo. O fator é o multiplicador aplicado à nota final, depois dos pesos (por exemplo,
+`1,2000`); só vale um número maior que zero.
+
+A recusa vem no campo `fator` e acumula, na mesma resposta, com as demais violações dos
+valores do fator, em
+[`teto_invalido`](./uniplus.selecao.configuracao_bonus_regional.teto_invalido.mdx) e
+[`fato_elegibilidade_invalido`](./uniplus.selecao.configuracao_bonus_regional.fato_elegibilidade_invalido.mdx).
+Ela vem depois da conferência da regra e da base legal; se alguma delas falhar, os valores
+nem chegam a ser conferidos.
+
+Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
+publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
+retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Na declaração, informe um `fator` maior que zero, com o valor que o edital fixa para o
+multiplicador.
+
+Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
+descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e regravar a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

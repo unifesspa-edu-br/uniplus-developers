@@ -1,0 +1,51 @@
+---
+title: As modalidades do ajuste não comportam o excesso do quadro
+sidebar_label: Ajuste não absorve o excesso
+description: O quadro fixado pelo edital passa do total da oferta e a modalidade, ou as modalidades, que o motor de redução nomeia não têm vagas suficientes para absorver o excesso.
+code: uniplus.selecao.configuracao_distribuicao_vagas.ajuste_nao_absorve_o_excesso
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Simulação da distribuição de vagas do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Numa distribuição institucional, as quantidades que o edital fixou no quadro somam mais que o
+`voBase` da oferta, e o motor de redução declarado em `argsAjuste` não consegue retirar o
+excesso inteiro:
+
+- **`reduzirDe`:** a modalidade nomeada tem menos vagas que o excesso.
+- **`reduzirProporcionalEm`:** as modalidades nomeadas, somadas, têm menos vagas que o excesso.
+
+O sistema não reduz o que pode e devolve um quadro que continua acima do total: ou o motor
+fecha o quadro, ou a distribuição é recusada. A mensagem do erro traz o código da modalidade
+(no `reduzirDe`), a quantidade de vagas disponível e o tamanho do excesso.
+
+A conferência só roda quando há excesso e há motor declarado; sem excesso o motor não é
+aplicado. Sem motor, o excesso é recusado por
+[`quadro_excede_vo_base`](./uniplus.selecao.configuracao_distribuicao_vagas.quadro_excede_vo_base.mdx).
+Se o motor cita modalidade fora das selecionadas, a recusa é
+[`ajuste_referencia_modalidade_fora_do_quadro`](./uniplus.selecao.configuracao_distribuicao_vagas.ajuste_referencia_modalidade_fora_do_quadro.mdx),
+conferida antes.
+
+A recusa vem sem campo específico e, por ser conferida depois das demais verificações do item,
+não acumula com elas. O processamento para na primeira distribuição da lista que falhar. A
+simulação da distribuição devolve a mesma recusa, sem gravar nada.
+
+## Como resolver
+
+Conforme a intenção:
+
+- **O motor deve absorver o excesso:** aponte `argsAjuste` para modalidade (ou conjunto de
+  modalidades) com vagas suficientes, ou acrescente modalidades ao `reduzirProporcionalEm`.
+- **O quadro está com quantidades demais:** reduza as quantidades do quadro para que a soma
+  seja igual ao `voBase`.
+- **O `voBase` está baixo:** corrija o `voBase` para o total que o edital autoriza.

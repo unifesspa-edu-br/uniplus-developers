@@ -1,0 +1,37 @@
+---
+title: O quadro de pesos por área repete um grupo de área
+sidebar_label: Quadro de pesos por área com grupo repetido
+description: O quadro de pesos por área congelado na classificação traz o mesmo grupo de área mais de uma vez.
+code: uniplus.selecao.configuracao_classificacao.quadro_peso_area_enem_grupo_repetido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O quadro de pesos por área congelado na classificação baseada em ENEM com cálculo local pela
+média ponderada traz o mesmo grupo de área mais de uma vez. Cada grupo deve aparecer uma só
+vez, e a mensagem do erro traz o rótulo do grupo repetido.
+
+Na definição da classificação esta situação não é esperada: o quadro é copiado de uma única
+resolução do cadastro de Pesos por Área, que admite uma linha ativa por grupo em cada
+resolução. A conferência existe para a leitura da configuração congelada da versão publicada,
+na retificação em ato único, no fechamento da sessão editorial e no descarte de retificação.
+Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se refere à
+versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+O pedido enviado agora não é a causa: o sistema recusou a configuração congelada da versão
+publicada, e regravar a configuração do processo não a corrige. A causa é investigada pela
+equipe técnica do Uni+.

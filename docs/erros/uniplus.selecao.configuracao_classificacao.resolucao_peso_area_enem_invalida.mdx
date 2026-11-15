@@ -1,0 +1,51 @@
+---
+title: A resolução de Pesos por Área tem tamanho ou caracteres não permitidos
+sidebar_label: Resolução de Pesos por Área inválida
+description: A resolução de Pesos por Área excede o tamanho permitido ou contém caractere de controle, de formatação, de quebra de linha ou que não seja texto.
+code: uniplus.selecao.configuracao_classificacao.resolucao_peso_area_enem_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na classificação baseada em ENEM com cálculo local pela média ponderada, o texto de
+`resolucaoPesoAreaEnem` tem mais de 40 caracteres (limite de hoje, sem contar os espaços nas
+pontas) ou contém caractere de controle, de formatação, de quebra de linha ou que não seja
+texto. A resolução aparece em mensagens de recusa e em registros do sistema, e por isso a
+forma dela é conferida antes de qualquer consulta ao cadastro.
+
+A recusa vem no campo `resolucaoPesoAreaEnem` e acumula, na mesma resposta, com as demais
+violações da classificação. Com a forma inválida, o cadastro de Pesos por Área não é
+consultado: as recusas de a resolução não ter pesos
+([`resolucao_peso_area_enem_nao_encontrada`](./uniplus.selecao.configuracao_classificacao.resolucao_peso_area_enem_nao_encontrada.mdx))
+ou de tê-los incompletos
+([`resolucao_peso_area_enem_incompleta`](./uniplus.selecao.configuracao_classificacao.resolucao_peso_area_enem_incompleta.mdx))
+só aparecem depois que a forma for corrigida.
+
+Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
+publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
+retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Na definição da classificação, informe a resolução exatamente como está cadastrada em Pesos
+por Área (Configuração), com no máximo 40 caracteres, em uma só linha e sem caracteres
+invisíveis. O mais seguro é copiar o texto do cadastro.
+
+Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
+descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e regravar a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

@@ -1,0 +1,51 @@
+---
+title: A eliminação por falta em dia de prova do ENEM só pode ser declarada uma vez
+sidebar_label: Falta em dia de prova do ENEM repetida
+description: Repetir a eliminação por falta em dia de prova do ENEM não elimina ninguém a mais; cada repetição é recusada no próprio item.
+code: uniplus.selecao.configuracao_classificacao.falta_em_dia_de_prova_enem_repetida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `regrasEliminacao` da classificação traz a eliminação por falta em dia de prova do
+ENEM (`ELIM-FALTA-EM-DIA-DE-PROVA-ENEM`) mais de uma vez. Essa regra não tem parâmetros; uma
+segunda declaração repete a primeira e não elimina ninguém a mais. A primeira vale; cada
+repetição é recusada no próprio item, no campo `regrasEliminacao[i]`, e acumula no array
+`errors[]` com as demais violações da requisição.
+
+Esta causa é independente de
+[`eliminacao_enem_fora_de_processo_enem`](./uniplus.selecao.processo_seletivo.eliminacao_enem_fora_de_processo_enem.mdx):
+a classificação com a eliminação repetida e sem a marcação de baseada em ENEM reprova as duas
+juntas.
+
+A conferência só vale para classificação com cálculo local. Na classificação importada, que
+não admite regra de eliminação nenhuma, a recusa é a da lista inteira, em
+[`eliminacao_indevida`](./uniplus.selecao.configuracao_classificacao.eliminacao_indevida.mdx).
+
+Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
+publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
+retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Na definição da classificação, mantenha uma só eliminação por falta em dia de prova do ENEM e
+remova as repetições.
+
+Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
+descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e regravar a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.
