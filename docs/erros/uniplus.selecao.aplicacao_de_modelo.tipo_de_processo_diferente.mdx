@@ -1,0 +1,41 @@
+---
+title: O modelo de formulário é de outro tipo de processo
+sidebar_label: Modelo de outro tipo de processo
+description: O modelo escolhido foi cadastrado para um tipo de processo diferente do tipo do processo seletivo em que se tenta aplicá-lo.
+code: uniplus.selecao.aplicacao_de_modelo.tipo_de_processo_diferente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Aplicação de modelo de formulário
+requisitos:
+  - UNI-REQ-0144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O modelo de formulário escolhido foi cadastrado para um tipo de processo
+seletivo, e o processo em que se tenta aplicá-lo é de outro tipo. A mensagem
+traz o código do tipo do modelo e o do tipo do processo.
+
+O modelo de inscrição é por tipo de processo (UNI-REQ-0144); o modelo que não
+declara tipo serve a qualquer processo que o comporte, e por isso só o modelo com
+tipo declarado diferente do do processo é recusado. Nada foi alterado no
+processo.
+
+A conferência do modelo roda numa só passada: se o mesmo modelo também está
+desativado ou cita fato que a inscrição não coleta, as recusas saem juntas no
+array `errors[]`
+([`modelo_inativo`](./uniplus.selecao.aplicacao_de_modelo.modelo_inativo.mdx),
+[`pressuposto_ausente`](./uniplus.selecao.aplicacao_de_modelo.pressuposto_ausente.mdx)).
+
+## Como resolver
+
+Aplique um modelo cadastrado para o tipo deste processo ou um modelo sem tipo
+declarado. Se o modelo deveria servir a este tipo de processo, o ajuste é no
+cadastro do modelo, feito por quem gere os modelos de formulário; o pedido não
+muda o tipo do processo.

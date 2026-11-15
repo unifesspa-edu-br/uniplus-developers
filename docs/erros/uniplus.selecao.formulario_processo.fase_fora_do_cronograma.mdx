@@ -1,0 +1,54 @@
+---
+title: A fase do formulário não está no cronograma do processo
+sidebar_label: Fase do formulário fora do cronograma
+description: O formulário foi ligado a uma fase que o cronograma do processo seletivo não tem, e sem fase no cronograma ele não tem prazo para abrir e fechar.
+code: uniplus.selecao.formulario_processo.fase_fora_do_cronograma
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do formulário do processo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0144
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O formulário do processo é ligado a uma fase do cronograma e abre e fecha com o
+prazo dela; só é publicado ligado a uma fase que existe no cronograma
+(UNI-REQ-0144). A fase indicada no formulário não faz parte do cronograma do
+processo. Há duas ocasiões:
+
+- **Gravação do formulário** (`PUT .../formularios/{finalidade}` com `faseId`): o
+  identificador de fase informado não corresponde a nenhuma fase do cronograma
+  atual. A recusa vem em `faseId` e soma-se, no array `errors[]`, às recusas das
+  etapas do mesmo formulário. Nada é gravado.
+- **Publicação, retificação em ato único e fechamento da sessão editorial**: a
+  fase gravada no formulário não é encontrada no cronograma no momento de
+  congelar a configuração. Esses três caminhos conferem a prontidão na mesma
+  ordem e devolvem a primeira pendência; as pendências do formulário vêm depois
+  das da inscrição, dos dados básicos e da edição do ENEM.
+
+A redefinição do cronograma que retirasse uma fase em que um formulário é
+respondido é recusada, e a mensagem pede a troca da fase do formulário antes
+([`fase_referenciada_por_formulario`](./uniplus.selecao.processo_seletivo.fase_referenciada_por_formulario.mdx)).
+Por isso, a conferência da prontidão não deve encontrar a fase fora do cronograma
+quando a configuração foi gravada pelas operações normais; não foi encontrado,
+no código, caminho de edição que a produza.
+
+## Como resolver
+
+Na gravação, escolha para o formulário uma fase que consta do cronograma do
+processo; se a fase certa ainda não foi incluída, defina o cronograma antes
+(definição do cronograma de fases) e depois grave o formulário. Na publicação ou
+no fechamento da retificação, regrave o formulário com uma fase do cronograma
+atual e repita a operação. Se, mesmo assim, a recusa persistir com a
+configuração aparentemente correta, a equipe técnica do Uni+ deve investigar
+a configuração gravada.

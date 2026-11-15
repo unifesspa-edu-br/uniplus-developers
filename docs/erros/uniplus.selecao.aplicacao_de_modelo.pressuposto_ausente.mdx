@@ -1,0 +1,38 @@
+---
+title: O modelo cita um dado que a inscrição do processo não coleta
+sidebar_label: Pressuposto do modelo ausente da inscrição
+description: O modelo de formulário depende de um fato que o formulário de inscrição do processo ainda não coleta, e por isso não pode ser aplicado.
+code: uniplus.selecao.aplicacao_de_modelo.pressuposto_ausente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Aplicação de modelo de formulário
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O modelo de formulário declara pressupostos: fatos que a inscrição precisa
+coletar para que as perguntas e as regras do modelo façam sentido. Algum desses
+fatos não é coletado pelo formulário de inscrição do processo. A recusa traz uma
+entrada por pressuposto ausente, na posição dele em `modelo.pressupostos[...]`,
+com o código do fato na mensagem. Só conta o que o formulário de inscrição coleta
+hoje: fato coletado em outro formulário do processo não satisfaz o pressuposto.
+
+A conferência do modelo roda numa só passada: um modelo que também está
+desativado ou é de outro tipo de processo devolve as recusas juntas no array
+`errors[]`
+([`modelo_inativo`](./uniplus.selecao.aplicacao_de_modelo.modelo_inativo.mdx),
+[`tipo_de_processo_diferente`](./uniplus.selecao.aplicacao_de_modelo.tipo_de_processo_diferente.mdx)).
+Nada foi alterado no processo.
+
+## Como resolver
+
+Inclua no formulário de inscrição do processo os fatos citados na recusa
+(gravação dos itens do formulário de inscrição) e reaplique o modelo. Se o processo
+não deve coletar esses dados, escolha outro modelo que não dependa deles.

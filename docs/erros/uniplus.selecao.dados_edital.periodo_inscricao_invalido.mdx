@@ -1,0 +1,49 @@
+---
+title: O fim do período de inscrição não pode anteceder o início
+sidebar_label: Período de inscrição invertido
+description: O período de inscrição do edital informado na publicação termina antes de começar, e o fim precisa ser igual ou posterior ao início.
+code: uniplus.selecao.dados_edital.periodo_inscricao_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O período de inscrição do edital tem o fim anterior ao início. Um período com fim
+igual ao início é aceito; só o fim anterior é recusado. A recusa sai com **422**,
+sem indicar campo.
+
+Há duas fontes para o período, e só uma delas permite este erro na publicação.
+Quando o processo tem fase do cronograma que coleta inscrição, o período é
+projetado da janela dessa fase e não pode ser informado no pedido; como a janela
+da fase já é recusada quando termina antes de começar
+([`janela_invertida`](./uniplus.selecao.fase_cronograma.janela_invertida.mdx)), a
+inversão não chega até aqui por esse caminho. Quando o processo não tem fase que
+colete inscrição, como o de resultado importado, o início e o fim são informados
+no pedido de publicação (`PeriodoInscricaoInicio` e `PeriodoInscricaoFim`), e é
+esse par que pode vir invertido. A conferência vem depois da dos anexos do edital
+e antes da conferência de conformidade da configuração. Um extremo ausente ou
+zerado é recusado antes, com outro código
+([`periodo_inscricao_obrigatorio`](./uniplus.selecao.dados_edital.periodo_inscricao_obrigatorio.mdx)).
+
+O mesmo valor é conferido quando uma versão congelada é lida de volta, no descarte
+da retificação.
+
+## Como resolver
+
+Corrija o início e o fim do período no pedido de publicação, na retificação em
+ato único ou no fechamento da retificação (confira o dia e o fuso) e repita a
+operação. No descarte da retificação, o período vem da versão congelada, e
+regravar a configuração não o corrige: a causa deve ser investigada pela equipe
+técnica do Uni+, porque nenhum caminho de publicação grava um período invertido.

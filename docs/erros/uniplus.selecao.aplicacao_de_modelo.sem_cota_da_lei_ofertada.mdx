@@ -1,0 +1,33 @@
+---
+title: O modelo cita a opção pelas cotas da lei, e o processo não oferta cota da lei
+sidebar_label: Modelo com opção pelas cotas sem cota ofertada
+description: O modelo de formulário depende da opção do candidato pelas cotas da lei, que só existe no processo que oferta cota da lei na distribuição de vagas.
+code: uniplus.selecao.aplicacao_de_modelo.sem_cota_da_lei_ofertada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Aplicação de modelo de formulário
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O modelo de formulário cita, direta ou indiretamente, a opção do candidato pelas
+cotas da lei. Esse fato não é copiado do modelo: ele existe no processo que
+oferta modalidade de cota reservada pela lei na distribuição de vagas e é
+derivado dessa oferta. O processo em que se tenta aplicar o modelo não tem essa
+oferta, e por isso a opção não existe nele. A recusa traz a posição
+`derivacoes[<fato>]` e o código do fato na mensagem. Nada foi alterado no
+processo.
+
+## Como resolver
+
+Oferte a modalidade de cota da lei na distribuição de vagas do processo
+(definição de distribuição de vagas) e reaplique o modelo, se o processo deve
+mesmo ter cotas. Se o processo não oferta cotas da lei, escolha um modelo que não
+dependa da opção.

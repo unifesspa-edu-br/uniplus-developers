@@ -1,0 +1,39 @@
+---
+title: O tipo de banca da etapa não existe ou está inativo no cadastro
+sidebar_label: Tipo de banca da etapa não encontrado
+description: A banca requerida pela etapa cita um tipo de banca que não existe no cadastro de tipos de banca, ou que foi removido dele.
+code: uniplus.selecao.etapa_processo.tipo_banca_nao_encontrado_ou_inativo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa pode requerer bancas (`bancas`), e cada banca é de um tipo do cadastro do
+módulo Configuração. O pedido de definição de etapas
+(`PUT .../processos-seletivos/{id}/etapas`) citou, em `tipoBancaId`, um
+identificador que não corresponde a nenhum tipo de banca; a mensagem traz o
+identificador. Apesar de o texto da mensagem falar em "inativo", o cadastro de tipos
+de banca só distingue o tipo que existe do que foi removido, e a recusa vale para
+o tipo removido.
+
+O tipo de banca é copiado por valor para a etapa, e sem ele a banca não pode ser
+montada. A conferência é feita etapa por etapa, na ordem do pedido, depois da
+declaração dos atos e da janela de cada etapa; a primeira banca cujo tipo não
+é encontrado interrompe a conferência, e a resposta traz só esta recusa, sem
+indicar qual é a etapa nem a banca. Nada é gravado.
+
+## Como resolver
+
+Confira, no cadastro de tipos de banca do módulo Configuração, o identificador do
+tipo pretendido e use-o em `tipoBancaId`. Se o tipo foi removido do cadastro e
+ainda deve existir, peça a quem o gere que o restabeleça antes de repetir a
+definição das etapas.

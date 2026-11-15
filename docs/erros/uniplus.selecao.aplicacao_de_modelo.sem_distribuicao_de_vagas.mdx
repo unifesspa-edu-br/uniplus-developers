@@ -1,0 +1,32 @@
+---
+title: O modelo cita a modalidade de concorrência, e o processo não tem distribuição de vagas
+sidebar_label: Modelo com modalidade sem distribuição de vagas
+description: O modelo de formulário depende da modalidade de concorrência do candidato, que sai da distribuição de vagas, e o processo ainda não definiu essa distribuição.
+code: uniplus.selecao.aplicacao_de_modelo.sem_distribuicao_de_vagas
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Aplicação de modelo de formulário
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O modelo de formulário cita, direta ou indiretamente, um fato cujos valores são as
+modalidades de concorrência, sejam as perguntas do modelo, as condições de
+exibição ou as regras de derivação que ele traz. As modalidades disponíveis para
+o candidato vêm da distribuição de vagas do processo, e o processo em que se tenta
+aplicar o modelo ainda não tem distribuição de vagas: a cópia não teria de onde
+tirar a modalidade. A recusa traz a posição `modelo` na resposta. Nada foi
+alterado no processo.
+
+## Como resolver
+
+Defina a distribuição de vagas do processo (definição de distribuição de vagas)
+antes de aplicar o modelo. Se o processo não precisa de modalidade, escolha um
+modelo que não dependa dela.

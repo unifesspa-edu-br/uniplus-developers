@@ -1,0 +1,37 @@
+---
+title: O mesmo tipo de banca foi requerido mais de uma vez na etapa
+sidebar_label: Banca repetida na etapa
+description: Cada tipo de banca pode ser requerido uma única vez por etapa, e a etapa declarou o mesmo tipo duas ou mais vezes.
+code: uniplus.selecao.etapa_processo.banca_duplicada_na_etapa
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do pedido de definição de etapas
+(`PUT .../processos-seletivos/{id}/etapas`) declarou, em `bancas`, o mesmo tipo de
+banca mais de uma vez: o código do tipo é que identifica a banca na etapa, e a
+repetição é detectada pelo código do tipo de banca resolvido no cadastro.
+
+A recusa não é acumulada com as demais: vem depois da conferência da forma, do
+caráter e da avaliação de todas as etapas, e é conferida etapa por etapa, na ordem
+do pedido, depois da declaração dos atos e da janela de cada etapa e depois de
+todos os tipos de banca da etapa terem sido encontrados no cadastro
+([`tipo_banca_nao_encontrado_ou_inativo`](./uniplus.selecao.etapa_processo.tipo_banca_nao_encontrado_ou_inativo.mdx)).
+A primeira etapa com problema interrompe a conferência, e a resposta traz só esta
+recusa, sem indicar qual é a etapa. Nada é gravado.
+
+## Como resolver
+
+Deixe cada tipo de banca uma única vez na etapa e reenvie a definição. Se o
+pedido tem várias etapas com bancas, confira todas, porque as seguintes só são
+conferidas depois que esta for corrigida.

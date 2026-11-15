@@ -1,0 +1,40 @@
+---
+title: Etapa apenas classificatória não tem nota mínima
+sidebar_label: Nota mínima em etapa que não elimina
+description: A nota mínima só se aplica à etapa cujo caráter elimina, e a etapa apenas classificatória pontua sem reprovar.
+code: uniplus.selecao.etapa_processo.nota_minima_sem_carater_que_elimina
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma das etapas do pedido de definição de etapas
+(`PUT .../processos-seletivos/{id}/etapas`) tem caráter **classificatório** e traz
+`notaMinima`. A nota mínima é o corte que reprova o candidato, e só tem sentido na
+etapa cujo caráter elimina (eliminatória ou ambas); a etapa apenas classificatória
+pontua sem reprovar, e a nota mínima ficaria gravada sem efeito. A recusa vem em
+`etapas[n].notaMinima`.
+
+A conferência é da primeira passada, que confere a forma de todas as etapas do
+pedido antes de consultar o catálogo de tipos de etapa, e acumula as violações de
+todas as etapas no array `errors[]`
+(ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)). A
+nota mínima negativa é recusada antes, como
+[`nota_minima_invalida`](./uniplus.selecao.etapa_processo.nota_minima_invalida.mdx), e
+as duas recusas não aparecem juntas para a mesma etapa.
+
+## Como resolver
+
+Retire a `notaMinima` da etapa classificatória. Se a etapa deve eliminar
+candidatos pela nota, mude o caráter para eliminatória ou ambas e mantenha a nota
+mínima. Se a resposta trouxer outras violações em `errors[]`, corrija todas antes
+de reenviar.

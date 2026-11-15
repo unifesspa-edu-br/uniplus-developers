@@ -1,0 +1,38 @@
+---
+title: O modelo de formulário só se aplica com o processo em rascunho
+sidebar_label: Modelo de formulário só em rascunho
+description: Aplicar um modelo substitui o formulário inteiro da finalidade, e por isso é recusado enquanto há retificação em curso, que não retira o que o edital publicou.
+code: uniplus.selecao.formulario_processo.aplicacao_de_modelo_so_em_rascunho
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Aplicação de modelo de formulário
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido de aplicar um modelo de formulário
+(`POST .../formularios/aplicacoes-de-modelo`) chegou a um processo que tem uma
+retificação em curso. Aplicar um modelo substitui por inteiro o formulário da
+finalidade do modelo, e a API só admite essa operação com o processo em rascunho,
+ainda não publicado; a mensagem diz que a retificação não retira o que o edital
+publicou. A recusa é a primeira conferência da operação: sai antes de a API ler o
+modelo e antes da conferência do `If-Match`, e nada foi alterado.
+
+O processo publicado, sem retificação aberta, também não aceita o pedido, mas
+por outra razão: nenhuma mudança direta da configuração é aceita nele, e a
+recusa sai com o código de mutação bloqueada depois da publicação.
+
+## Como resolver
+
+Aplique o modelo antes de publicar o processo. Com a retificação em curso, ajuste
+o formulário pelas operações de escrita dele: o conjunto de itens
+(`PUT .../formularios/{finalidade}/itens`), os termos
+(`PUT .../formularios/{finalidade}/termos`) e o cabeçalho e as etapas
+(`PUT .../formularios/{finalidade}`), sempre dentro da retificação.
