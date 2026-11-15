@@ -1,0 +1,67 @@
+---
+title: A justificativa da divulgação contém o caractere nulo
+sidebar_label: Justificativa com caractere nulo
+description: A justificativa da divulgação pública contém o caractere nulo (U+0000), que o sistema não aceita em texto.
+code: uniplus.selecao.configuracao_divulgacao.justificativa_com_caractere_nulo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição da divulgação pública do processo seletivo
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A justificativa da divulgação pública contém o caractere nulo (U+0000). Ele é um caractere de
+controle invisível que não é tratado como espaço em branco, por isso não é removido na
+normalização do texto, e o sistema não o aceita.
+
+A conferência vale para qualquer justificativa enviada, mesmo quando o `nome` não está na lista.
+A recusa vem junto das demais violações do mesmo pedido, no array `errors[]`, e pode aparecer ao
+lado de
+[`justificativa_muito_longa`](./uniplus.selecao.configuracao_divulgacao.justificativa_muito_longa.mdx),
+de
+[`campos_publicos_vazio`](./uniplus.selecao.configuracao_divulgacao.campos_publicos_vazio.mdx), de
+[`campo_nao_permitido`](./uniplus.selecao.configuracao_divulgacao.campo_nao_permitido.mdx), de
+[`numero_inscricao_obrigatorio`](./uniplus.selecao.configuracao_divulgacao.numero_inscricao_obrigatorio.mdx)
+e de
+[`formas_de_identificacao_excludentes`](./uniplus.selecao.configuracao_divulgacao.formas_de_identificacao_excludentes.mdx).
+Não vem junto de
+[`justificativa_obrigatoria`](./uniplus.selecao.configuracao_divulgacao.justificativa_obrigatoria.mdx),
+que exige a justificativa ausente.
+
+Esta mesma conferência é refeita quando o sistema relê a configuração congelada da versão
+publicada: em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o descarte, a consulta dos formulários,
+as operações da inscrição, entre outras; a lista completa está no cabeçalho da página).
+Pelo caminho normal de gravação, a configuração congelada nunca traz esse caractere, porque a
+definição o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista
+`errors[]`, e se refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Remova o caractere nulo da justificativa, por exemplo digitando o texto de novo em vez de colá-lo,
+e reenvie. Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
+reenviar.
+
+Se a recusa apareceu em uma operação que lê a configuração congelada (qualquer uma das listadas no cabeçalho, exceto a definição da própria configuração e a simulação), o pedido enviado agora não é a causa: o sistema
+recusou a configuração congelada da versão publicada, e redefinir a divulgação do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

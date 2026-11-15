@@ -8,6 +8,7 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
+  - Aplicação de modelo de formulário
 requisitos:
   - UNI-REQ-0070
 ---
@@ -24,6 +25,17 @@ consequência numa fase do cronograma que não permite complementação. A fase 
 fase comum dos documentos que estão nele. A mensagem de detalhe nomeia a fase, mas não diz se
 a consequência é do documento ou do grupo.
 
+A permissão de complementar não é escolhida no cronograma do processo: o pedido que define o
+cronograma não tem esse campo. A fase do cronograma herda a permissão do cadastro da fase
+canônica e guarda uma cópia dela no momento em que o cronograma é definido; mudar o cadastro
+depois não altera um cronograma já definido. No cadastro, só as fases canônicas de homologação e
+de recursos aceitam a permissão
+([`complementacao_apenas_fases_permitidas`](./uniplus.configuracao.fase_canonica.complementacao_apenas_fases_permitidas.mdx)).
+
+A aplicação de um modelo de formulário também define exigências, e a consequência vem do modelo:
+um documento do modelo com `PENDENCIA_REENVIO` numa fase do processo que não permite
+complementação recebe esta mesma recusa.
+
 A conferência acontece depois das de vínculo com fase, formulário e etapa, da repetição por
 grupo e da idade máxima de emissão: é a última da definição das exigências.
 
@@ -37,9 +49,16 @@ Primeiro, descubra quem declara `PENDENCIA_REENVIO` na fase nomeada: um document
 grupo de alternativas (OU) com consequência própria. Trocar só a consequência dos documentos não
 corrige o caso em que a consequência é do grupo, e vice-versa. Escolha um dos caminhos:
 
-- permita a complementação na fase nomeada do cronograma, o que resolve os dois casos;
+- permita a complementação na fase, o que resolve os dois casos. A permissão não se configura no
+  cronograma: se a fase é a de homologação ou a de recursos, habilite a complementação no
+  cadastro da fase canônica e redefina o cronograma do processo, para que a fase do cronograma
+  receba a permissão atual do cadastro. Em qualquer outra fase o cadastro não aceita a permissão,
+  e restam os dois caminhos seguintes;
 - troque a consequência de quem a declara (o documento ou o grupo) por outra das previstas;
 - passe a exigência para uma fase que permita complementação; no caso do grupo, isso vale para
   todos os documentos dele, que precisam ficar na mesma fase.
+
+Na aplicação de um modelo de formulário, a consequência é a do modelo: resolva pelo primeiro
+caminho ou ajuste o modelo de formulário no cadastro de Configuração.
 
 Depois, envie a definição de novo.

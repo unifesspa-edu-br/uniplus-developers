@@ -1,0 +1,66 @@
+---
+title: O processo que cobra taxa de inscrição precisa de ao menos um fundamento de isenção
+sidebar_label: Fundamento de isenção ausente em processo com taxa
+description: A taxa foi declarada como cobrada, mas a definição não trouxe nenhum fundamento de isenção.
+code: uniplus.selecao.configuracao_taxa_inscricao.fundamento_obrigatorio_quando_cobra
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição da taxa de inscrição do processo seletivo
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos:
+  - UNI-REQ-0099
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A definição declarou `cobra` como verdadeiro, mas `fundamentos` está ausente ou é uma lista vazia.
+O processo que cobra taxa de inscrição declara ao menos um fundamento de isenção: é a configuração
+que registra sob quais fundamentos o processo admite isenção, e um processo que cobra sem declarar
+nenhum não admitiria nenhum.
+
+A recusa acontece depois de o sistema encontrar o processo e aceitar a precondição de edição.
+Quando a lista foi informada com itens que o sistema não conhece, a causa é
+[`fundamento_desconhecido`](./uniplus.selecao.configuracao_taxa_inscricao.fundamento_desconhecido.mdx),
+e não esta. As violações do mesmo pedido saem juntas no array `errors[]`: esta causa pode aparecer
+ao lado de
+[`valor_obrigatorio_quando_cobra`](./uniplus.selecao.configuracao_taxa_inscricao.valor_obrigatorio_quando_cobra.mdx).
+
+Esta mesma conferência é refeita quando o sistema relê a configuração congelada da versão
+publicada: em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o descarte, a consulta dos formulários,
+as operações da inscrição, entre outras; a lista completa está no cabeçalho da página).
+Pelo caminho normal de gravação, a configuração congelada nunca traz taxa cobrada sem fundamento,
+porque a definição a recusa antes. Nessas leituras a recusa sai como violação única, sem a lista
+`errors[]`, e se refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Escolha entre:
+
+- informar em `fundamentos` ao menos um dos fundamentos de isenção que o processo admite
+  (`CADASTRO_UNICO`, `DOACAO_MEDULA_OSSEA` ou `CARENCIA_SOCIOECONOMICA`), se o processo cobra; ou
+- declarar `cobra` como falso, sem valor e sem fundamentos, se o processo não cobra.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de reenviar.
+
+Se a recusa apareceu em uma operação que lê a configuração congelada (qualquer uma das listadas no cabeçalho, exceto a definição da própria configuração e a simulação), o pedido enviado agora não é a causa: o sistema
+recusou a configuração congelada da versão publicada, e redefinir a taxa do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

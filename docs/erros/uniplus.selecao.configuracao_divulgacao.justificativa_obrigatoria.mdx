@@ -1,0 +1,70 @@
+---
+title: Divulgar o nome completo exige justificativa
+sidebar_label: Justificativa obrigatória para o nome completo
+description: A lista de campos públicos inclui o nome completo, mas a justificativa está ausente ou só tem espaços.
+code: uniplus.selecao.configuracao_divulgacao.justificativa_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição da divulgação pública do processo seletivo
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos:
+  - UNI-REQ-0050
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ampliar a divulgação pública para o nome completo exige justificativa, que é congelada com a
+configuração do processo. A lista `camposPublicos` inclui `nome`, mas `justificativa` não foi
+informada ou só tem espaços em branco, que o sistema trata como ausência. O número de inscrição
+e o nome abreviado dispensam justificativa.
+
+A recusa vem junto das demais violações do mesmo pedido, no array `errors[]`. Como ela só vale com
+a justificativa ausente, não vem junto de
+[`justificativa_muito_longa`](./uniplus.selecao.configuracao_divulgacao.justificativa_muito_longa.mdx)
+nem de
+[`justificativa_com_caractere_nulo`](./uniplus.selecao.configuracao_divulgacao.justificativa_com_caractere_nulo.mdx),
+mas pode aparecer ao lado de
+[`campo_nao_permitido`](./uniplus.selecao.configuracao_divulgacao.campo_nao_permitido.mdx), de
+[`numero_inscricao_obrigatorio`](./uniplus.selecao.configuracao_divulgacao.numero_inscricao_obrigatorio.mdx)
+e de
+[`formas_de_identificacao_excludentes`](./uniplus.selecao.configuracao_divulgacao.formas_de_identificacao_excludentes.mdx).
+
+Esta mesma conferência é refeita quando o sistema relê a configuração congelada da versão
+publicada: em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o descarte, a consulta dos formulários,
+as operações da inscrição, entre outras; a lista completa está no cabeçalho da página).
+Pelo caminho normal de gravação, a configuração congelada nunca traz o nome completo sem
+justificativa, porque a definição a recusa antes. Nessas leituras a recusa sai como violação
+única, sem a lista `errors[]`, e se refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Escolha entre:
+
+- informar `justificativa` com o motivo de divulgar o nome completo; ou
+- tirar `nome` da lista, ficando com `nome_abreviado`, que dispensa justificativa, ou só com o
+  `numero_inscricao`.
+
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de reenviar.
+
+Se a recusa apareceu em uma operação que lê a configuração congelada (qualquer uma das listadas no cabeçalho, exceto a definição da própria configuração e a simulação), o pedido enviado agora não é a causa: o sistema
+recusou a configuração congelada da versão publicada, e redefinir a divulgação do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

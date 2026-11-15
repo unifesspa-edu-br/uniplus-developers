@@ -28,11 +28,15 @@ etapa entra na fórmula da nota final (`NOTA FINAL = Soma(Etapa × peso) /
 divisor`); um peso zero ou negativo não tem interpretação válida nessa
 fórmula.
 
-Esta é uma das seis checagens de forma que a definição de etapas acumula
-numa só passada, antes de resolver qualquer etapa contra o catálogo de tipos —
-ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)
-para o mecanismo completo de acumulação e a ordem em que as violações
-aparecem.
+Esta é uma das checagens de forma que a definição de etapas acumula numa só
+passada, antes de resolver qualquer etapa contra o catálogo de tipos. A lista
+completa das checagens, o mecanismo de acumulação e a ordem em que as violações
+aparecem estão em [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx).
+
+Sobre o `peso`, a passada faz duas conferências, e a segunda só vale quando a
+primeira passa: peso menor ou igual a zero (este código) e peso informado em
+etapa apenas eliminatória, que não compõe a nota
+(`uniplus.selecao.etapa_processo.peso_sem_carater_que_pontua`).
 
 O valor é persistido como `numeric(18,4)` — um peso positivo com mais de 4
 casas decimais é recusado antes desta checagem, por validação de payload

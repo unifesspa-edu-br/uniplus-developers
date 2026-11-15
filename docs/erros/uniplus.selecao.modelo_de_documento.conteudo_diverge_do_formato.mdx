@@ -1,0 +1,38 @@
+---
+title: O conteúdo do arquivo não corresponde ao formato do modelo
+sidebar_label: Conteúdo do modelo diverge do formato
+description: O arquivo enviado não é, de fato, um documento de texto do formato declarado para o modelo.
+code: uniplus.selecao.modelo_de_documento.conteudo_diverge_do_formato
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de modelo de documento
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na confirmação, o servidor confere o conteúdo do arquivo e não se contenta com o que o cliente
+declarou. A recusa vem quando o tipo de mídia com que o arquivo foi enviado à URL difere do tipo
+do formato declarado no início do envio (`DOCX` ou `ODT`), ou quando o arquivo não tem a estrutura
+de um documento de texto desse formato. Renomear a extensão de um arquivo não o converte.
+
+A conferência vem depois de o servidor encontrar o modelo e o arquivo
+([`objeto_nao_encontrado`](./uniplus.selecao.modelo_de_documento.objeto_nao_encontrado.mdx)) e de
+conferir o tamanho
+([`tamanho_excedido`](./uniplus.selecao.modelo_de_documento.tamanho_excedido.mdx)). A presença de
+macro é uma causa à parte
+([`contem_macro`](./uniplus.selecao.modelo_de_documento.contem_macro.mdx)), conferida depois do
+tipo de mídia.
+
+## Como resolver
+
+Gere o arquivo de novo no formato declarado, por exemplo salvando o documento como `DOCX` ou `ODT`
+no programa em que ele foi escrito. Inicie um novo envio e, ao enviar o arquivo à URL, use o
+`Content-Type` que o início do envio devolveu. Se o formato declarado estava errado, declare o
+formato correto no novo envio.

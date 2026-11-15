@@ -33,9 +33,10 @@ descreve a recusa como a API a aplica hoje.
 
 O pedido removeu o formulário de uma finalidade
 (`DELETE .../formularios/{finalidade}`), inteiro, com os itens e os termos,
-num processo com retificação em curso. A recusa sai com **422**, antes da
-conferência do `If-Match`, porque nenhuma remoção de formulário é aceita na
-retificação.
+num processo com retificação em curso. A recusa sai com **422**, porque
+nenhuma remoção de formulário é aceita na retificação. Cada processo tem um
+formulário por finalidade (inscrição, isenção da taxa, habilitação), e é o
+formulário dessa finalidade, inteiro, que a remoção retira.
 
 A retificação pode acrescentar o formulário de uma finalidade que o processo
 ainda não tinha (UNI-REQ-0144), mas não retira o que o edital publicou:
@@ -47,5 +48,7 @@ itens.
 
 Mantenha o formulário. Se o que precisa mudar são perguntas ou termos, regrave
 os itens (`PUT .../formularios/{finalidade}/itens`) ou os termos
-(`PUT .../formularios/{finalidade}/termos`) dentro da retificação. Se o
-processo ainda não foi publicado, a remoção é aceita fora de retificação.
+(`PUT .../formularios/{finalidade}/termos`) dentro da retificação. A remoção só
+é aceita em processo que ainda não foi publicado. Em processo já publicado, sem
+retificação em curso, a alteração direta da configuração também é recusada, com
+outro código: a configuração só muda por retificação.

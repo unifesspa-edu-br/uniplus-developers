@@ -26,11 +26,10 @@ Uma das etapas do payload informou `notaMinima` negativa. O campo é opcional
 informado controla o corte de eliminação (etapas de caráter eliminatória ou
 ambas): um valor negativo não tem interpretação válida como corte de nota.
 
-Esta é uma das seis checagens de forma que a definição de etapas acumula
-numa só passada, antes de resolver qualquer etapa contra o catálogo de tipos —
-ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)
-para o mecanismo completo de acumulação e a ordem em que as violações
-aparecem.
+Esta é uma das checagens de forma que a definição de etapas acumula numa só
+passada, antes de resolver qualquer etapa contra o catálogo de tipos. A lista
+completa das checagens, o mecanismo de acumulação e a ordem em que as violações
+aparecem estão em [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx).
 
 O valor é persistido como `numeric(18,4)` — uma nota mínima com mais de 4
 casas decimais é recusada antes desta checagem, por validação de payload

@@ -26,11 +26,10 @@ da coluna que o persiste. Sem essa checagem no domínio, um nome mais longo
 passaria pela validação de payload e só falharia dentro de `SaveChanges`, como
 erro de banco em vez de um 422 claro sobre qual campo excedeu.
 
-Esta é uma das seis checagens de forma que a definição de etapas acumula
-numa só passada, antes de resolver qualquer etapa contra o catálogo de tipos —
-ver [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx)
-para o mecanismo completo de acumulação e a ordem em que as violações
-aparecem.
+Esta é uma das checagens de forma que a definição de etapas acumula numa só
+passada, antes de resolver qualquer etapa contra o catálogo de tipos. A lista
+completa das checagens, o mecanismo de acumulação e a ordem em que as violações
+aparecem estão em [`nome_obrigatorio`](./uniplus.selecao.etapa_processo.nome_obrigatorio.mdx).
 
 ## Como resolver
 
