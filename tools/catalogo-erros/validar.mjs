@@ -487,6 +487,26 @@ function validarArquivo(caminho, requisitosExistentes) {
     }
   }
 
+  // Um item com ": " no meio, sem aspas, vira objeto YAML e o cabeçalho da
+  // página renderiza "[object Object]" ou quebra o build; a lista inteira
+  // precisa ser de cadeias não vazias.
+  const emitidoEm = pagina.data.emitido_em;
+  if (emitidoEm !== undefined) {
+    if (!Array.isArray(emitidoEm)) {
+      erros.push(
+        `emitido_em não é lista YAML (encontrado: ${JSON.stringify(emitidoEm)})`,
+      );
+    } else {
+      for (const item of emitidoEm) {
+        if (typeof item !== 'string' || item.trim() === '') {
+          erros.push(
+            `item de emitido_em que não é texto: ${JSON.stringify(item)} — item com ': ' precisa de aspas ou parênteses`,
+          );
+        }
+      }
+    }
+  }
+
   // O H1 da página é o `title`, e o Docusaurus deixa a própria página desligá-lo
   // pelo frontmatter. Sem esta checagem, uma entrada com `hide_title: true`
   // renderizaria sem H1 nenhum — e o gate de prosa, que só rejeita H1 escrito à

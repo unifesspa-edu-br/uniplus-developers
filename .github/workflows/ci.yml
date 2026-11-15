@@ -230,6 +230,13 @@ jobs:
             exit 1
           fi
 
+      - name: Prova do gate — item de emitido_em que não é texto reprova
+        run: |
+          if node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/invalida-emitido-em-item-objeto.mdx; then
+            echo "ERRO: o validador aceitou item de emitido_em que o YAML leu como objeto" >&2
+            exit 1
+          fi
+
       - name: Prova do gate — entrada publicada conforme passa
         run: node tools/catalogo-erros/validar.mjs tools/catalogo-erros/fixtures/valida-publicada.mdx
 

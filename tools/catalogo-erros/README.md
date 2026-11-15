@@ -204,6 +204,9 @@ como trava contra qualquer regressão futura no parsing:
 - `invalida-rascunho-sem-anuncio.mdx` e
   `invalida-publicado-anunciando-rascunho.mdx` — os dois sentidos da
   correspondência entre `situacao` e o `description` (regra 6).
+- `invalida-emitido-em-item-objeto.mdx` — item de `emitido_em` com `: `
+  sem aspas, que o YAML lê como objeto; prova que todo item da lista
+  precisa ser texto.
 - `valida-publicada.mdx` — entrada publicada que não anuncia rascunho;
   o caso conforme do outro lado do se-e-somente-se.
 - `invalida-sem-secao-obrigatoria.mdx` — traz a causa e omite a

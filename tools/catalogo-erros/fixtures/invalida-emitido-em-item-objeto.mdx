@@ -1,0 +1,25 @@
+---
+title: Fixture de validação — emitido_em com item que virou objeto
+sidebar_label: Fixture emitido_em objeto
+description: Fixture usada pelo validador do catálogo de erros, não é página publicada.
+code: uniplus.fixture.catalogo_erros.emitido_em_objeto
+http_status: 422
+situacao: publicado
+modulo: Fixture
+emitido_em:
+  - Notas do ENEM: importação de lote e consulta de envios
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O item de `emitido_em` traz dois-pontos seguido de espaço sem aspas, e o YAML o lê como objeto. Prova que o validador reprova o item que não é texto.
+
+## Como resolver
+
+Não se aplica — fixture de teste.
