@@ -1,0 +1,31 @@
+---
+title: O código do tipo de conceito contém um caractere inválido
+sidebar_label: Código do tipo de conceito com caractere inválido
+description: O código do tipo de conceito não pode conter o caractere nulo (U+0000) nem texto que não seja Unicode válido.
+code: uniplus.configuracao.tipo_conceito.codigo_com_caractere_nulo
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de conceito
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A criação de um tipo de conceito (`POST /api/configuracao/admin/tipos-conceito`) trouxe um `codigo` com o caractere nulo (`U+0000`) ou com texto que não é Unicode válido e, por isso, não pode ser normalizado. O banco de dados não grava o caractere nulo, e a recusa evita que o código seja truncado ou corrompido em silêncio. Os espaços nas pontas são desconsiderados antes da conferência.
+
+O código do tipo de conceito não tem formato fixo, ao contrário do código de cada valor categórico: fora o caractere inválido, a regra é só o tamanho máximo ([código do tipo de conceito muito longo](./uniplus.configuracao.tipo_conceito.codigo_tamanho.mdx)).
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `codigo`. As demais recusas do corpo vêm na mesma resposta, e nada é gravado. Só a criação recebe o código: ele é imutável e a atualização não o aceita.
+
+## Como resolver
+
+Remova o caractere inválido do código e repita o pedido.

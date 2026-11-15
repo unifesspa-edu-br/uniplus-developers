@@ -1,0 +1,31 @@
+---
+title: O tipo de conceito foi alterado por outra operação ao mesmo tempo
+sidebar_label: Tipo de conceito alterado concorrentemente
+description: Duas atualizações do mesmo tipo de conceito colidiram; a resposta traz retryable e repetir o pedido pode dar certo.
+code: uniplus.configuracao.tipo_conceito.conflito_de_concorrencia
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um tipo de conceito
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas alterações do mesmo tipo de conceito chegaram ao mesmo tempo, ou os valores categóricos do tipo foram substituídos por outra atualização durante a gravação. Só uma delas pôde ser aplicada, e esta foi recusada. Nada deste pedido foi gravado.
+
+A atualização (`PUT /api/configuracao/admin/tipos-conceito/{id}`) substitui por inteiro os valores categóricos do tipo; sem a recusa, uma das edições apagaria a outra sem que ninguém percebesse. Esta é a única operação do cadastro que responde com este código.
+
+A recusa descreve uma corrida que já passou, não um estado que permanece: a resposta traz `retryable: true`, e repetir o pedido pode dar certo. Ela vem por último, depois da leitura do corpo, da conferência do `id` do corpo contra o da rota, da validação do conteúdo (422) e da busca do tipo: com um `{id}` que não existe prevalece [tipo de conceito não encontrado](./uniplus.configuracao.tipo_conceito.nao_encontrado.mdx), e com o conteúdo do corpo inválido prevalece a recusa de validação correspondente; corpo que não desserializa e `id` do corpo diferente do da rota são recusados antes de tudo, com 400.
+
+## Como resolver
+
+Repita o pedido de atualização. Se a recusa se repetir, consulte o tipo (`GET /api/configuracao/tipos-conceito/{id}`, que traz os tipos ativos) para ver o que a outra alteração gravou e refaça o pedido sobre o conteúdo atual, porque a atualização substitui os valores categóricos por inteiro.

@@ -1,0 +1,32 @@
+---
+title: A escala mínima do tipo de conceito não é menor que a máxima
+sidebar_label: Escala do tipo de conceito invertida
+description: A escala de um tipo de conceito numérico exige que o valor mínimo seja menor que o máximo.
+code: uniplus.configuracao.tipo_conceito.escala_numerica_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de conceito
+  - Atualização de um tipo de conceito
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de conceito é de natureza `numerico`, e a escala enviada em `numerico` tem `escalaMinima` igual ou maior que `escalaMaxima`. A escala precisa ter uma faixa: o mínimo estritamente menor que o máximo. A criação (`POST /api/configuracao/admin/tipos-conceito`) e a atualização (`PUT /api/configuracao/admin/tipos-conceito/{id}`) conferem a mesma regra.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `numerico`. Ela só aparece quando a escala chegou completa; se falta alguma das três partes, a recusa é [escala numérica obrigatória](./uniplus.configuracao.tipo_conceito.escala_numerica_obrigatoria.mdx). Se as casas decimais também estão fora do limite, as duas recusas vêm na mesma resposta. Nada é gravado.
+
+Na atualização, com o corpo desserializável e o `id` do corpo igual ao da rota, a conferência do corpo vem antes da busca do tipo: com um `{id}` que não existe, a resposta é esta, e não a de [tipo de conceito não encontrado](./uniplus.configuracao.tipo_conceito.nao_encontrado.mdx). O corpo que não desserializa e o `id` do corpo diferente do da rota são recusados antes, com 400 e sem o código desta página.
+
+## Como resolver
+
+Corrija a escala para que `escalaMinima` seja menor que `escalaMaxima` e repita o pedido.

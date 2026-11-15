@@ -1,0 +1,30 @@
+---
+title: Há valor categórico repetido no tipo de conceito
+sidebar_label: Valor categórico repetido
+description: Dentro de um tipo categórico, o código e o rótulo de cada valor não se repetem.
+code: uniplus.configuracao.tipo_conceito.valor_categorico_duplicado
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de conceito
+  - Atualização de um tipo de conceito
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Dois itens de `valores`, na criação (`POST /api/configuracao/admin/tipos-conceito`) ou na atualização (`PUT /api/configuracao/admin/tipos-conceito/{id}`) de um tipo categórico, têm o mesmo `codigo` ou o mesmo `rotulo`. A comparação é exata, depois de aparados os espaços nas pontas e de normalizado o texto para a forma canônica Unicode (NFC): `Apto` e `apto` são rótulos diferentes, mas um rótulo com letra acentuada escrita em um único caractere e o mesmo rótulo com a letra e o acento separados são o mesmo texto, e por isso repetidos. Cada valor precisa ser distinguível pelo código e pelo texto que as pessoas leem.
+
+A recusa vem na lista `errors` da resposta, uma entrada por repetição, com `field` igual a `valores[i].codigo` ou `valores[i].rotulo`, em que `i` é a posição, contada a partir de 0, da segunda ocorrência: a primeira é a que vale. Item que já foi recusado por outro motivo não entra nesta conferência. Nada é gravado. Na atualização, com o corpo desserializável e o `id` do corpo igual ao da rota, a conferência do corpo vem antes da busca do tipo: com um `{id}` que não existe, a resposta é esta, e não a de [tipo de conceito não encontrado](./uniplus.configuracao.tipo_conceito.nao_encontrado.mdx). O corpo que não desserializa e o `id` do corpo diferente do da rota são recusados antes, com 400 e sem o código desta página.
+
+## Como resolver
+
+Troque o código ou o rótulo do item indicado em `field` por um que ainda não esteja na lista, ou retire o item repetido, e repita o pedido.

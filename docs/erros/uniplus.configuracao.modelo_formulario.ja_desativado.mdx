@@ -1,0 +1,31 @@
+---
+title: O modelo de formulário já está desativado
+sidebar_label: Modelo de formulário já desativado
+description: A desativação foi pedida para um modelo de formulário que já está desativado, inclusive o que acabou de ser criado e ainda não foi ativado.
+code: uniplus.configuracao.modelo_formulario.ja_desativado
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Desativação de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1791'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1791
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A desativação (`DELETE /api/configuracao/admin/modelos-formulario/{id}`) foi pedida para um modelo de formulário que já está desativado. Isso inclui o modelo recém-criado, porque o modelo nasce desativado e só entra na escolha dos processos novos quando é ativado. O modelo não é apagado: desativar apenas o tira da escolha, e os processos que já o copiaram não mudam. Ao contrário de outros cadastros do módulo, repetir a desativação não é tratado como sucesso: a operação deixa registro de auditoria, e aceitar uma desativação sem efeito gravaria uma mudança que não houve.
+
+A busca do modelo vem antes: com um `{id}` que não existe, a resposta é [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx), e só um modelo existente chega a esta conferência. Nada é gravado.
+
+## Como resolver
+
+Nenhuma providência é necessária: o modelo já está fora da escolha dos processos novos. Se a intenção era outra, confira o identificador do modelo.

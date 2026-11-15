@@ -1,0 +1,31 @@
+---
+title: O modelo de formulário foi alterado por outra operação ao mesmo tempo
+sidebar_label: Modelo de formulário alterado concorrentemente
+description: Duas operações sobre o mesmo modelo de formulário colidiram; a resposta traz retryable e repetir o pedido pode dar certo.
+code: uniplus.configuracao.modelo_formulario.conflito_de_concorrencia
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um modelo de formulário
+  - Ativação de um modelo de formulário
+  - Desativação de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas escritas sobre o mesmo modelo de formulário aconteceram ao mesmo tempo, e esta chegou depois: outra edição, ativação ou desativação já tinha sido confirmada entre a leitura do modelo e a gravação desta operação. Atinge a atualização (`PUT /api/configuracao/admin/modelos-formulario/{id}`), a ativação (`POST .../{id}/ativacao`) e a desativação (`DELETE .../{id}`). Nada é gravado pela operação recusada. A criação não responde com este código: o conflito dela é o de [código do modelo já existente](./uniplus.configuracao.modelo_formulario.codigo_ja_existe.mdx).
+
+A recusa descreve uma corrida que já passou, não um estado que permanece: a resposta traz `retryable: true`, e repetir o pedido pode dar certo. Ela vem por último: com um `{id}` que não existe prevalece [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx), e, na atualização, as validações de domínio do conteúdo, que vêm depois da busca e antes da gravação, prevalecem com a recusa correspondente. A leitura do corpo, que recusa com 400 o campo não anulável ausente ou nulo, vem antes de tudo.
+
+## Como resolver
+
+Repita o pedido. Se a recusa se repetir, consulte o modelo (`GET /api/configuracao/admin/modelos-formulario/{id}`) para ver o que a outra operação gravou e refaça o pedido sobre o estado atual. Na ativação e na desativação, se a outra operação já fez a mesma mudança, a repetição responde [modelo já ativo](./uniplus.configuracao.modelo_formulario.ja_ativo.mdx) ou [modelo já desativado](./uniplus.configuracao.modelo_formulario.ja_desativado.mdx), e nenhuma providência é necessária.

@@ -1,0 +1,30 @@
+---
+title: Um pressuposto do modelo de formulário está em branco
+sidebar_label: Pressuposto do modelo em branco
+description: Cada pressuposto do modelo de formulário nomeia um fato do catálogo.
+code: uniplus.configuracao.modelo_formulario.pressuposto_em_branco
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `pressupostos` do `conteudo` do modelo, enviada na criação (`POST /api/configuracao/admin/modelos-formulario`) ou na atualização (`PUT /api/configuracao/admin/modelos-formulario/{id}`), tem um item vazio, só com espaços ou `null`. Os pressupostos são os fatos que o modelo recebe da inscrição, sem coletá-los de novo, e cada um precisa nomear um fato.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `conteudo.pressupostos[i]`, em que `i` é a posição do item. Ela só é conferida num modelo que não é o de inscrição, porque este não tem pressupostos (ver [modelo de inscrição sem pressupostos](./uniplus.configuracao.modelo_formulario.pressuposto_na_inscricao.mdx)), e depois que o conteúdo foi lido sem recusa de leitura. Nada é gravado. Na atualização, a busca do modelo vem antes das validações de domínio do conteúdo: com um `{id}` que não existe, a resposta é [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx). Só a leitura do corpo vem antes da busca: campo não anulável ausente ou nulo (como `nome`) é recusado com 400, sem código deste catálogo, mesmo com `{id}` inexistente.
+
+## Como resolver
+
+Retire o item em branco da lista `pressupostos`, ou preencha-o com o código de um fato do catálogo coletado pela inscrição, e repita o pedido.

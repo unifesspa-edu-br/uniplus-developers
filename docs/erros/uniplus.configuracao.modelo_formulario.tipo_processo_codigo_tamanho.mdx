@@ -1,0 +1,30 @@
+---
+title: O código do tipo de processo do modelo de formulário passa do tamanho permitido
+sidebar_label: Código do tipo de processo do modelo muito longo
+description: O código do tipo de processo do modelo tem no máximo 64 caracteres, sem contar os espaços nas pontas.
+code: uniplus.configuracao.modelo_formulario.tipo_processo_codigo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `tipoProcessoCodigo` enviado na criação (`POST /api/configuracao/admin/modelos-formulario`) ou na atualização (`PUT /api/configuracao/admin/modelos-formulario/{id}`) tem mais de 64 caracteres, depois de aparados os espaços nas pontas. É o mesmo limite do código do tipo de processo no cadastro de tipos.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `tipoProcessoCodigo`. Um código desse tamanho não existe no cadastro de tipos de processo, então a resposta traz também [tipo de processo inexistente](./uniplus.configuracao.modelo_formulario.tipo_processo_inexistente.mdx), e essa recusa vem antes na lista: o `code` da raiz da resposta é o da primeira recusa, e esta fica em `errors`. As demais recusas do corpo vêm na mesma resposta, e nada é gravado. Na atualização, a busca do modelo vem antes das validações de domínio do conteúdo: com um `{id}` que não existe, a resposta é [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx). Só a leitura do corpo vem antes da busca: campo não anulável ausente ou nulo (como `nome`) é recusado com 400, sem código deste catálogo, mesmo com `{id}` inexistente.
+
+## Como resolver
+
+Use o código de um tipo de processo cadastrado, que tem até 64 caracteres. Consulte os tipos em `GET /api/configuracao/tipos-processo`.

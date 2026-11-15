@@ -1,0 +1,31 @@
+---
+title: O código do tipo de conceito já está reservado
+sidebar_label: Código do tipo de conceito já existe
+description: O código do tipo de conceito é único e imutável, inclusive entre os desativados, e nenhum tipo desativado libera o código.
+code: uniplus.configuracao.tipo_conceito.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de conceito
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A criação de um tipo de conceito (`POST /api/configuracao/admin/tipos-conceito`) usou um `codigo` que já pertence a outro tipo. O código é a chave natural do tipo e não muda depois de criado. A comparação considera todos os tipos, ativos ou desativados, e é feita com o código já aparado nas pontas e normalizado; maiúsculas e minúsculas contam.
+
+Desativar um tipo tira o tipo de uso, mas não libera o código: ele continua reservado. A resposta é a mesma quando a colisão é descoberta na conferência prévia e quando dois pedidos criam o mesmo código ao mesmo tempo e o banco recusa o segundo.
+
+A recusa vem depois das conferências do corpo: com um corpo inválido e um código já usado, a resposta é a recusa do corpo (por exemplo, [nome do tipo de conceito obrigatório](./uniplus.configuracao.tipo_conceito.nome_obrigatorio.mdx)), e só com o corpo válido vem esta. Nada é gravado.
+
+## Como resolver
+
+Use outro código. A API não troca o código de um tipo existente e não oferece operação para reativar um tipo desativado: o código dele segue ocupado.

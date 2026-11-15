@@ -1,0 +1,34 @@
+---
+title: O código de um valor categórico é inválido
+sidebar_label: Código do valor categórico inválido
+description: O código de cada valor do tipo categórico é obrigatório, tem até 50 caracteres e usa só letras maiúsculas de A a Z, dígitos e sublinhado, começando por letra.
+code: uniplus.configuracao.tipo_conceito.valor_categorico_codigo_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de conceito
+  - Atualização de um tipo de conceito
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um item de `valores`, na criação (`POST /api/configuracao/admin/tipos-conceito`) ou na atualização (`PUT /api/configuracao/admin/tipos-conceito/{id}`) de um tipo categórico, traz um `codigo` que não é aceito. Com `contaComoAprovacao` informado no item, o código é recusado quando está ausente, vazio ou só com espaços; quando passa de 50 caracteres; quando tem o caractere nulo ou texto que não é Unicode válido; e quando, depois de aparado nas pontas, não começa por letra maiúscula de A a Z ou tem qualquer caractere fora de A a Z, dígitos e sublinhado. Letra minúscula e letra acentuada são recusadas. Um item `null` na lista chega ao domínio e é recusado aqui e também em [rótulo de valor categórico inválido](./uniplus.configuracao.tipo_conceito.valor_categorico_rotulo_invalido.mdx).
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `valores[i].codigo`, em que `i` é a posição do item, contada a partir de 0. Cada item com problema gera a própria entrada, e nada é gravado. A recusa só aparece em tipo de natureza `categorico`.
+
+Todo objeto de `valores` precisa trazer `contaComoAprovacao`, que é obrigatório no JSON. O objeto que não o declara, inclusive `{}`, falha na leitura do corpo, antes de qualquer validação do domínio, e a resposta é um 400 sem o código desta página (veja [campo obrigatório ausente](./uniplus.requisicao.campo_obrigatorio_ausente.mdx) e [requisição malformada](./uniplus.requisicao.malformada.mdx)). Por isso `valores: [{}]` não produz esta recusa.
+
+Na atualização, com o corpo desserializável e o `id` do corpo igual ao da rota, a conferência do corpo vem antes da busca do tipo: com um `{id}` que não existe, a resposta é esta, e não a de [tipo de conceito não encontrado](./uniplus.configuracao.tipo_conceito.nao_encontrado.mdx). O corpo que não desserializa e o `id` do corpo diferente do da rota são recusados antes, com 400 e sem o código desta página.
+
+## Como resolver
+
+Corrija o código do item indicado em `field`, por exemplo `{ "codigo": "APTO", "rotulo": "Apto", "contaComoAprovacao": true }` ou `{ "codigo": "NIVEL_1", "rotulo": "Nível 1", "contaComoAprovacao": false }`, sempre com `contaComoAprovacao` declarado, e repita o pedido.

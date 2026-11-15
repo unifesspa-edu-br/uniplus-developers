@@ -1,0 +1,30 @@
+---
+title: Um fato aparece mais de uma vez entre os pressupostos do modelo
+sidebar_label: Pressuposto do modelo repetido
+description: Cada fato aparece uma só vez na lista de pressupostos do modelo de formulário.
+code: uniplus.configuracao.modelo_formulario.pressuposto_repetido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A lista `pressupostos` do `conteudo` do modelo, enviada na criação (`POST /api/configuracao/admin/modelos-formulario`) ou na atualização (`PUT /api/configuracao/admin/modelos-formulario/{id}`), cita o mesmo fato duas ou mais vezes. A comparação é exata, depois de aparados os espaços nas pontas e normalizado o texto.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `conteudo.pressupostos[i]`, em que `i` é a posição de cada repetição depois da primeira. A mensagem cita o código do fato. A conferência só é feita depois que o conteúdo foi lido sem recusa de leitura, e num modelo que não é o de inscrição. Nada é gravado. Na atualização, a busca do modelo vem antes das validações de domínio do conteúdo: com um `{id}` que não existe, a resposta é [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx). Só a leitura do corpo vem antes da busca: campo não anulável ausente ou nulo (como `nome`) é recusado com 400, sem código deste catálogo, mesmo com `{id}` inexistente.
+
+## Como resolver
+
+Deixe cada fato uma só vez na lista `pressupostos` e repita o pedido.

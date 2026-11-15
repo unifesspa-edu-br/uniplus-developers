@@ -1,0 +1,29 @@
+---
+title: O código do modelo de formulário passa do tamanho permitido
+sidebar_label: Código do modelo de formulário muito longo
+description: O código do modelo de formulário tem no máximo 60 caracteres, sem contar os espaços nas pontas.
+code: uniplus.configuracao.modelo_formulario.codigo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A criação de um modelo de formulário (`POST /api/configuracao/admin/modelos-formulario`) trouxe um `codigo` com mais de 60 caracteres. Os espaços nas pontas são desconsiderados e o texto é normalizado antes da conferência, de modo que o limite vale para o código como será gravado. Fora o tamanho, o código do modelo não tem formato fixo.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `codigo`. As demais recusas do corpo vêm na mesma resposta, e nada é gravado.
+
+## Como resolver
+
+Use um código de até 60 caracteres. O texto mais longo vai no nome do modelo, que aceita até 200, e na descrição.
