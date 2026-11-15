@@ -66,6 +66,12 @@ causa. Pelo caminho normal de gravação, a configuração congelada nunca traz 
 definição o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista
 `errors[]`, e se refere à versão congelada, não ao pedido enviado.
 
+Na releitura, o texto com não-caractere (como U+FFFE) ou com surrogate sem par é recusado antes, como
+[`envelope_malformado`](./uniplus.selecao.envelope_codec.envelope_malformado.mdx), porque o sistema
+reserializa os bytes pelo perfil canônico antes de ler cada campo; só o caractere nulo (U+0000) chega
+a esta causa. O código ou o rótulo em branco, ou acima do limite, também é recusado antes, pelo mesmo
+motivo.
+
 Esta conferência vem depois das do código e do rótulo em branco
 ([`codigo_obrigatorio`](./uniplus.selecao.grupo_area_enem_snapshot.codigo_obrigatorio.mdx) e [`rotulo_obrigatorio`](./uniplus.selecao.grupo_area_enem_snapshot.rotulo_obrigatorio.mdx)) e antes da do tamanho
 ([`tamanho_invalido`](./uniplus.selecao.grupo_area_enem_snapshot.tamanho_invalido.mdx)).

@@ -57,8 +57,10 @@ bytes alterados depois do congelamento são recusados por [`integridade_violada`
 causa. Pelo caminho normal de gravação, a configuração congelada nunca traz esse defeito, porque a
 definição o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista
 `errors[]`, e se refere à versão congelada, não ao pedido enviado.
-Na releitura, a base legal acima do limite já é recusada antes, como [`envelope_malformado`](./uniplus.selecao.envelope_codec.envelope_malformado.mdx); só o texto com o
-caractere nulo ou com caractere que não é texto chega a esta causa.
+Na releitura, a base legal acima do limite já é recusada antes, como [`envelope_malformado`](./uniplus.selecao.envelope_codec.envelope_malformado.mdx). O texto com não-caractere
+(como U+FFFE) ou com surrogate sem par também é recusado antes, como `envelope_malformado`, porque o
+sistema reserializa os bytes pelo perfil canônico antes de ler cada campo; só o texto com o caractere
+nulo (U+0000) chega a esta causa.
 A base legal em branco tem causa própria ([`base_legal_obrigatoria`](./uniplus.selecao.grupo_peso_area_enem_congelado.base_legal_obrigatoria.mdx)).
 
 ## Como resolver
