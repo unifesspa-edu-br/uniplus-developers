@@ -7,9 +7,20 @@ http_status: 422
 situacao: publicado
 modulo: Seleção
 emitido_em:
+  - Abertura de retificação
   - Retificação em ato único
   - Fechamento de sessão editorial
   - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
 requisitos: []
 ---
 
@@ -26,10 +37,12 @@ grupo.
 
 Na definição da classificação esta situação não é esperada: a resolução só é aceita quando o
 cadastro de Pesos por Área tem linhas para ela, e a classificação congela essas linhas. A
-conferência existe para a leitura da configuração congelada da versão publicada, na
-retificação em ato único, no fechamento da sessão editorial e no descarte de retificação.
-Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se refere à
-versão congelada, não ao pedido enviado.
+conferência existe para a leitura da configuração congelada da versão publicada, que
+acontece nas operações que propagam a falha da releitura (a retificação, o descarte, a consulta
+dos formulários, as operações da inscrição, entre outras; a lista completa está no cabeçalho da
+página). A consulta de conformidade do processo também relê a versão, mas converte a falha em
+pendência do checklist, em vez de devolver este erro; por isso não consta no cabeçalho. Nas operações listadas a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
 
 ## Como resolver
 
