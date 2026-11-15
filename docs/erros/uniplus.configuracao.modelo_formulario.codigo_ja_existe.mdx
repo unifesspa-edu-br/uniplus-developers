@@ -1,0 +1,29 @@
+---
+title: O código do modelo de formulário já está em uso
+sidebar_label: Código do modelo de formulário já existe
+description: O código do modelo de formulário é único entre todos os modelos, inclusive os desativados.
+code: uniplus.configuracao.modelo_formulario.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A criação de um modelo de formulário (`POST /api/configuracao/admin/modelos-formulario`) usou um `codigo` que já pertence a outro modelo. A comparação considera todos os modelos, ativos ou desativados, e é feita com o código aparado nas pontas e normalizado; maiúsculas e minúsculas contam. O modelo nunca é apagado, só desativado, e o código não muda depois de criado, por isso o código de um modelo desativado continua ocupado.
+
+A resposta é a mesma quando a colisão é descoberta na conferência prévia e quando dois pedidos criam o mesmo código ao mesmo tempo e o banco recusa o segundo. A recusa vem depois das conferências do corpo: com um corpo inválido e um código já usado, a resposta é a recusa do corpo, e só com o corpo válido vem esta. Nada é gravado.
+
+## Como resolver
+
+Use outro código. Para continuar o modelo que já usa esse código, localize-o na listagem (`GET /api/configuracao/admin/modelos-formulario`, que aceita o filtro `ativo=false`), edite-o (`PUT /api/configuracao/admin/modelos-formulario/{id}`) e, se estiver desativado, ative-o (`POST /api/configuracao/admin/modelos-formulario/{id}/ativacao`).

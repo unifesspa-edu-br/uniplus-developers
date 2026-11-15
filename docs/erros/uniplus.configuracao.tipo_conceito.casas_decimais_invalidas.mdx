@@ -1,0 +1,32 @@
+---
+title: As casas decimais da escala do tipo de conceito estão fora do limite
+sidebar_label: Casas decimais do tipo de conceito inválidas
+description: A escala de um tipo de conceito numérico admite de 0 a 4 casas decimais.
+code: uniplus.configuracao.tipo_conceito.casas_decimais_invalidas
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de conceito
+  - Atualização de um tipo de conceito
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de conceito é de natureza `numerico` e a escala enviada em `numerico` traz `casasDecimais` menor que 0 ou maior que 4. A criação (`POST /api/configuracao/admin/tipos-conceito`) e a atualização (`PUT /api/configuracao/admin/tipos-conceito/{id}`) conferem o mesmo limite.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `numerico.casasDecimais`. Ela só aparece quando a escala chegou completa, com mínimo, máximo e casas decimais: se alguma das três partes falta, a recusa é [escala numérica obrigatória](./uniplus.configuracao.tipo_conceito.escala_numerica_obrigatoria.mdx). Quando o mínimo também não é menor que o máximo, as duas recusas vêm na mesma resposta. Na natureza `categorico` a escala não é conferida, porque nela a escala é recusada por inteiro ([parâmetros incompatíveis com a natureza](./uniplus.configuracao.tipo_conceito.parametros_incompativeis_com_a_natureza.mdx)). Nada é gravado.
+
+Na atualização, com o corpo desserializável e o `id` do corpo igual ao da rota, a conferência do corpo vem antes da busca do tipo: com um `{id}` que não existe e uma escala assim, a resposta é esta, e não a de [tipo de conceito não encontrado](./uniplus.configuracao.tipo_conceito.nao_encontrado.mdx). O corpo que não desserializa e o `id` do corpo diferente do da rota são recusados antes, com 400 e sem o código desta página.
+
+## Como resolver
+
+Envie `casasDecimais` como um inteiro de 0 a 4 e repita o pedido.

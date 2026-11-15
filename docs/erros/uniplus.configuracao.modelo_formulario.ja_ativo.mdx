@@ -1,0 +1,31 @@
+---
+title: O modelo de formulário já está ativo
+sidebar_label: Modelo de formulário já ativo
+description: A ativação foi pedida para um modelo de formulário que já está ativo.
+code: uniplus.configuracao.modelo_formulario.ja_ativo
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Ativação de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1791'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1791
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A ativação (`POST /api/configuracao/admin/modelos-formulario/{id}/ativacao`) foi pedida para um modelo de formulário que já está ativo. O modelo nasce desativado, e a ativação o põe na escolha dos processos novos. A operação deixa registro de auditoria, e aceitar uma ativação sem efeito gravaria uma mudança que não houve; por isso a repetição é recusada.
+
+A busca do modelo vem antes: com um `{id}` que não existe, a resposta é [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx), e só um modelo existente chega a esta conferência. Nada é gravado.
+
+## Como resolver
+
+Nenhuma providência é necessária: o modelo já está ativo e disponível para processos novos. Se a intenção era outra, confira o identificador do modelo.

@@ -1,0 +1,32 @@
+---
+title: O nome do modelo de formulário não foi informado
+sidebar_label: Nome do modelo de formulário obrigatório
+description: O nome do modelo de formulário é obrigatório na criação e na atualização.
+code: uniplus.configuracao.modelo_formulario.nome_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A criação (`POST /api/configuracao/admin/modelos-formulario`) ou a atualização (`PUT /api/configuracao/admin/modelos-formulario/{id}`) de um modelo de formulário veio com o campo `nome` presente, mas vazio ou só com espaços. O nome é o que identifica o modelo para quem o escolhe ao montar um processo.
+
+Este código não cobre o `nome` ausente do JSON nem enviado como `null`. Os dois corpos declaram o nome como texto não anulável, e o ASP.NET Core recusa o campo ausente ou nulo na validação do modelo, com 400, antes de o pedido chegar às regras do Uni+ e, portanto, antes da busca do modelo. Essa recusa não tem código do catálogo de erros. Só o nome presente e em branco responde 422 com o código desta página.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `nome`. As demais recusas do corpo vêm na mesma resposta, e nada é gravado. Na atualização, a busca do modelo vem antes das validações de domínio do conteúdo: com um `{id}` que não existe, a resposta é [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx). O `nome` ausente ou nulo, recusado na leitura do corpo, vem antes da busca, mesmo com `{id}` inexistente.
+
+## Como resolver
+
+Informe o nome do modelo, com até 200 caracteres, e repita o pedido. A atualização envia o nome mesmo que ele não mude, porque substitui o descritivo e o conteúdo por inteiro.

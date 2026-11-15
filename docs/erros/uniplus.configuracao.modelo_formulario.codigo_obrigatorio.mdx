@@ -1,0 +1,31 @@
+---
+title: O código do modelo de formulário não foi informado
+sidebar_label: Código do modelo de formulário obrigatório
+description: O código do modelo de formulário é obrigatório na criação.
+code: uniplus.configuracao.modelo_formulario.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um modelo de formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A criação de um modelo de formulário (`POST /api/configuracao/admin/modelos-formulario`) veio com o campo `codigo` presente, mas vazio ou só com espaços. O código é o que identifica o modelo no cadastro e o distingue dos outros modelos do mesmo uso; ele é imutável depois da criação.
+
+Este código não cobre o `codigo` ausente do JSON nem enviado como `null`. O corpo da criação declara o código como texto não anulável, e o ASP.NET Core recusa o campo ausente ou nulo na validação do modelo, com 400, antes de o pedido chegar às regras do Uni+. Essa recusa não tem código do catálogo de erros. Só o código presente e em branco responde 422 com o código desta página.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `codigo`. Quando o conteúdo do modelo também tem recusas, as do conteúdo vêm antes na lista, e a resposta leva todas. Nada é gravado.
+
+## Como resolver
+
+Informe um código de até 60 caracteres e repita o pedido.

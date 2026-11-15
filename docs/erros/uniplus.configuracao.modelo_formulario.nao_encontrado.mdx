@@ -1,0 +1,31 @@
+---
+title: Modelo de formulário não encontrado
+sidebar_label: Modelo de formulário não encontrado
+description: O modelo de formulário identificado na rota não existe.
+code: uniplus.configuracao.modelo_formulario.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Atualização de um modelo de formulário, com identificador que não resolve
+  - Ativação de um modelo de formulário, com identificador que não resolve
+  - Desativação de um modelo de formulário, com identificador que não resolve
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `{id}` da rota não corresponde a nenhum modelo de formulário. A resposta vale para a atualização (`PUT /api/configuracao/admin/modelos-formulario/{id}`), para a ativação (`POST .../{id}/ativacao`) e para a desativação (`DELETE .../{id}`). O modelo nunca é apagado, só desativado, e a busca encontra também o modelo desativado: esta causa é exclusivamente de identificador inexistente. A leitura (`GET .../{id}`), o formulário renderizável (`GET .../{id}/renderizavel`) e a pré-visualização (`POST .../{id}/pre-visualizacao`) também respondem 404 para um modelo inexistente, mas essas respostas não usam este código.
+
+Nestas três operações a busca do modelo vem antes das validações de domínio do conteúdo: na atualização, com um `{id}` que não existe e um conteúdo inválido, a resposta é esta, e não a recusa do conteúdo. É o contrário do que ocorre em outros cadastros do módulo, em que o conteúdo do corpo é conferido primeiro. Só a leitura do corpo vem antes da busca: o campo não anulável ausente ou nulo (como o `nome`, ou o `fatoCodigo` de uma exigência por opção) é recusado com 400, sem código deste catálogo, antes de o pedido chegar às regras do Uni+.
+
+## Como resolver
+
+Confira o identificador do modelo na listagem (`GET /api/configuracao/admin/modelos-formulario`), que traz os modelos ativos e os desativados. Se o modelo nunca foi cadastrado, cadastre-o (`POST /api/configuracao/admin/modelos-formulario`).
