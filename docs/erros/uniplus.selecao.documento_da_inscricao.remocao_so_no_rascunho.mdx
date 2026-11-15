@@ -1,0 +1,33 @@
+---
+title: O arquivo de uma inscrição enviada é retido
+sidebar_label: Remoção só no rascunho
+description: A remoção do arquivo foi pedida para uma inscrição que já foi enviada, e o arquivo fica retido.
+code: uniplus.selecao.documento_da_inscricao.remocao_so_no_rascunho
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Remoção de arquivo do rascunho da inscrição
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O candidato pode remover um arquivo enquanto a inscrição é rascunho. Depois de a inscrição ser
+enviada, o arquivo fica retido e não pode ser removido por esta operação; a mensagem de
+detalhe diz isso ao candidato: "Sua inscrição já foi enviada: o arquivo fica retido e não pode
+ser removido".
+
+A conferência vem depois da busca do arquivo (ver
+[`arquivo_nao_encontrado`](./uniplus.selecao.documento_da_inscricao.arquivo_nao_encontrado.mdx)).
+Se a inscrição deixa de ser rascunho durante a própria remoção, a resposta é a de conflito (ver
+[`inscricao_alterada`](./uniplus.selecao.documento_da_inscricao.inscricao_alterada.mdx)).
+
+## Como resolver
+
+Esta operação não remove o arquivo de uma inscrição enviada. Para alterar os arquivos depois do
+envio, o caminho previsto é a correção da inscrição, enquanto as inscrições estão abertas.

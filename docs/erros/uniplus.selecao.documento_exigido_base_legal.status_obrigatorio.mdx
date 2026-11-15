@@ -1,0 +1,38 @@
+---
+title: O status da base legal do documento exigido é obrigatório
+sidebar_label: Status da base legal obrigatório
+description: Uma base legal do documento exigido veio sem status ou com um status que não é PENDENTE nem RESOLVIDO.
+code: uniplus.selecao.documento_exigido_base_legal.status_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Aplicação de modelo de formulário
+requisitos:
+  - UNI-REQ-0059
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada base legal de um documento exigido declara o status: `PENDENTE` ou `RESOLVIDO`. A base
+legal apontada veio sem status, ou com um valor que não é nenhum dos dois.
+
+É uma conferência de forma. Ela examina cada base legal do documento, e os três defeitos
+possíveis de uma mesma base (referência, abrangência e status) aparecem juntos; a conferência
+para na primeira exigência que tem defeito. O campo apontado na resposta traz a posição da
+base legal na lista.
+
+Para a base legal de um grupo de alternativas (OU), o erro correspondente é
+[`no_exigencia_base_legal.status_obrigatorio`](./uniplus.selecao.no_exigencia_base_legal.status_obrigatorio.mdx).
+
+## Como resolver
+
+Informe `PENDENTE` ou `RESOLVIDO` na base legal apontada. Lembre que a publicação exige ao
+menos uma base legal `RESOLVIDO` para toda exigência que determina resultado. Na aplicação de
+um modelo de formulário, a base legal vem do modelo: escolha outro modelo ou peça a revisão
+dele.

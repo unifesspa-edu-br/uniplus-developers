@@ -1,0 +1,49 @@
+---
+title: O fato da condição só é conhecido numa fase posterior à do documento
+sidebar_label: Fato conhecido em fase posterior
+description: A exigência depende de um fato, por condição ou por campo de grupo repetível, que só é conhecido numa fase posterior à fase em que o documento é exigido.
+code: uniplus.selecao.documento_exigido.fato_resolvido_em_fase_posterior
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Aplicação de modelo de formulário
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Nenhum documento é pedido antes de o fato de que ele depende ser conhecido. A exigência
+depende de um fato que só passa a ser conhecido numa fase com ordem posterior à da fase em que
+o documento é exigido. O fato pode vir da condição do documento ou de um campo do grupo
+repetível pelo qual a exigência se repete; no segundo caso, a condição do documento não é a
+causa. A mensagem de detalhe nomeia o fato e diz qual é a fase dele.
+
+O fato é conhecido na mais tardia entre: a fase em que o catálogo de fatos o situa, a fase do
+formulário que o coleta e, para o fato derivado por regra, as fases dos fatos de que ele
+depende. Para o campo de grupo repetível, vale a fase do formulário que coleta o grupo.
+
+A conferência acontece na definição dos documentos exigidos, na aplicação de um modelo de
+formulário e, com o catálogo de fatos, na publicação, na retificação em ato único e no
+fechamento de uma sessão editorial. Ela vem depois de
+[`ponto_resolucao_fora_do_cronograma`](./uniplus.selecao.documento_exigido.ponto_resolucao_fora_do_cronograma.mdx)
+e antes de
+[`fato_da_isencao_em_outra_finalidade`](./uniplus.selecao.documento_exigido.fato_da_isencao_em_outra_finalidade.mdx).
+
+## Como resolver
+
+Conforme a origem do fato:
+
+- se ele está numa condição do documento, passe a exigência para uma fase em que o fato já seja
+  conhecido, ou troque a condição por um fato conhecido até a fase do documento;
+- se é de campo de um grupo repetível, trocar a condição não resolve: passe a exigência para
+  uma fase em que o grupo já seja conhecido, vincule-a a um grupo coletado até a fase dela ou
+  retire a repetição por grupo.

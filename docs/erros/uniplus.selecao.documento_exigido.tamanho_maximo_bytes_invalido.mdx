@@ -1,0 +1,35 @@
+---
+title: O tamanho máximo do arquivo da exigência precisa ser maior que zero
+sidebar_label: Tamanho máximo inválido
+description: O tamanho máximo em bytes do documento exigido, quando informado, é zero ou negativo.
+code: uniplus.selecao.documento_exigido.tamanho_maximo_bytes_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento exigido pode declarar o tamanho máximo, em bytes, do arquivo que o candidato envia.
+Quando o valor é informado, ele precisa ser maior que zero. A definição trouxe um valor igual a
+zero ou negativo.
+
+É uma conferência de forma, feita antes de o sistema consultar o tipo de documento, as fases ou
+as demais configurações do processo. Ela examina as exigências na ordem recebida e para na
+primeira que tem defeito; dentro dessa exigência, os defeitos de forma aparecem juntos.
+
+## Como resolver
+
+Informe o tamanho máximo como um número de bytes maior que zero. Se a exigência não deve ter
+limite geral, omita o campo. Isso não garante o teto de 10 MB do sistema para arquivos de
+inscrição: a exigência também pode ter limite específico por formato na lista de formatos
+aceitos, e vale o menor entre o limite do formato e o geral. O teto de 10 MB só vale quando
+nenhum dos dois está definido, e nenhum arquivo passa de 20 MB, qualquer que seja a
+exigência.

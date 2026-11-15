@@ -1,0 +1,42 @@
+---
+title: Exigência condicional sem condições não é exigida de ninguém
+sidebar_label: Condicional sem condições
+description: A exigência condicional que não tem nenhuma condição e determina resultado nunca seria cobrada de ninguém, e o congelamento da configuração a recusa.
+code: uniplus.selecao.documento_exigido.condicional_vazia_determina_resultado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0057
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um documento exigido `CONDICIONAL` é cobrado só de quem satisfaz as condições dele, e o sistema
+trata a exigência condicional sem nenhuma condição como exigida de ninguém. Ao mesmo tempo, o
+documento determina resultado: é obrigatório ou tem consequência de indeferimento. Uma
+exigência que decide o resultado e nunca é cobrada é quase certamente um erro de configuração,
+e por isso a configuração não é congelada com ela.
+
+A conferência acontece quando a configuração vai ser congelada, na publicação do processo, na
+retificação em ato único ou no fechamento de uma sessão editorial. Entre as conferências das
+exigências documentais, é a primeira.
+
+## Como resolver
+
+Escolha o que o documento deve ser:
+
+- exigido de todos: troque a aplicabilidade para `GERAL`;
+- exigido de quem satisfaz certas condições: acrescente as condições;
+- não exigido de ninguém: retire a obrigatoriedade e a consequência de indeferimento do
+  documento, ou remova a exigência.
+
+Depois, repita a operação.

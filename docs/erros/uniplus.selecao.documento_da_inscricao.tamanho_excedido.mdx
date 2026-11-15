@@ -1,0 +1,33 @@
+---
+title: O arquivo excede o tamanho máximo da exigência
+sidebar_label: Tamanho excedido
+description: O tamanho declarado no envio passa do limite que vale para a exigência e o formato do arquivo.
+code: uniplus.selecao.documento_da_inscricao.tamanho_excedido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Início do envio de documento da inscrição
+requisitos:
+  - UNI-REQ-0027
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tamanho declarado para o arquivo passa do limite da exigência. O limite que vale é o menor
+entre o do formato escolhido e o geral da exigência; quando a exigência não define limite, vale
+o teto do sistema, de 10 MB. Nenhum arquivo passa de 20 MB, qualquer que seja a exigência. A
+mensagem de detalhe traz o limite em MB.
+
+A recusa de formato e a de tamanho (ver
+[`formato_nao_aceito_pela_exigencia`](./uniplus.selecao.documento_da_inscricao.formato_nao_aceito_pela_exigencia.mdx)
+e [`arquivo_vazio`](./uniplus.selecao.documento_da_inscricao.arquivo_vazio.mdx)) são
+conferidas juntas, e a resposta pode trazer as duas.
+
+## Como resolver
+
+Envie um arquivo menor, dentro do limite informado, e inicie o envio de novo.

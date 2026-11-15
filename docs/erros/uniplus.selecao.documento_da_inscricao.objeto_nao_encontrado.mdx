@@ -1,0 +1,34 @@
+---
+title: Arquivo ainda não enviado ao armazenamento ou expirado
+sidebar_label: Arquivo não enviado ou expirado
+description: A confirmação chegou depois de vencido o prazo do envio, que é de 15 minutos mais uma hora de tolerância.
+code: uniplus.selecao.documento_da_inscricao.objeto_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento da inscrição
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O início do envio devolve um endereço de envio válido por 15 minutos. A confirmação ainda é
+aceita por mais uma hora depois desse prazo. Este erro aparece quando a confirmação chega
+depois disso: o envio venceu.
+
+A confirmação confere só o prazo. Ela não consulta o armazenamento para saber se o arquivo
+chegou lá. Apesar do que o título sugere, o erro não diz que o arquivo deixou de ser enviado;
+diz que o prazo para confirmar acabou.
+
+A conferência vem depois da do ETag e da da situação do arquivo (ver
+[`etag_obrigatorio`](./uniplus.selecao.documento_da_inscricao.etag_obrigatorio.mdx) e
+[`status_invalido_para_confirmacao`](./uniplus.selecao.documento_da_inscricao.status_invalido_para_confirmacao.mdx)).
+
+## Como resolver
+
+Inicie um novo envio do arquivo, envie-o ao novo endereço dentro do prazo e só então confirme.

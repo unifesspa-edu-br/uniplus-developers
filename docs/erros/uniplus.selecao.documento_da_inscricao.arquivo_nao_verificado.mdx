@@ -1,0 +1,31 @@
+---
+title: O arquivo ainda não foi verificado
+sidebar_label: Arquivo não verificado
+description: O acesso ao arquivo foi pedido antes de a verificação de segurança concluir que ele é válido.
+code: uniplus.selecao.documento_da_inscricao.arquivo_nao_verificado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Acesso do candidato ao próprio arquivo da inscrição
+  - Acesso administrativo a documento da inscrição
+requisitos:
+  - UNI-REQ-0130
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O arquivo só fica disponível para abrir ou baixar depois de verificado. O acesso foi pedido
+para um arquivo que não está verificado (ainda pendente, em verificação, recusado ou com
+reenvio necessário) ou que ainda não tem a chave definitiva de guarda. Isso vale para o
+candidato, que acessa o próprio arquivo, e para a consulta administrativa.
+
+## Como resolver
+
+Aguarde a verificação, que em condição normal leva poucos segundos, e peça o acesso de novo.
+Se o arquivo foi recusado ou precisa de reenvio, a tela informa o motivo, e o candidato deve
+enviar outro arquivo.

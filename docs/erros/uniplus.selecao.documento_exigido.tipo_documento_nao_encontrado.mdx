@@ -1,0 +1,42 @@
+---
+title: O tipo de documento da exigência não existe no cadastro
+sidebar_label: Tipo de documento não encontrado
+description: O tipo de documento citado pela exigência não foi encontrado no cadastro de tipos de documento, ou foi removido dele depois de a exigência ser escrita.
+code: uniplus.selecao.documento_exigido.tipo_documento_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Aplicação de modelo de formulário
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Toda exigência documental aponta para um tipo do cadastro de tipos de documento. O tipo citado
+não foi encontrado, ou deixou de estar disponível no cadastro. Há duas situações:
+
+- na definição dos documentos exigidos e na aplicação de um modelo de formulário, o tipo
+  citado não existe no cadastro; o sistema o procura pelo identificador, na montagem de cada
+  exigência, depois da conferência de forma;
+- na publicação, na retificação em ato único e no fechamento de uma sessão editorial, o tipo
+  existia quando a exigência foi escrita e deixou de existir. Essa é a primeira conferência
+  de congelamento, anterior às demais.
+
+## Como resolver
+
+Troque a exigência por um tipo de documento que exista no cadastro. Se o tipo escolhido for
+novo ou tiver a proteção de dados alterada, a exigência só o aceita depois da aprovação da
+proteção de dados (ver
+[`tipo_documento_com_protecao_pendente`](./uniplus.selecao.documento_exigido.tipo_documento_com_protecao_pendente.mdx)).
+
+Na aplicação de um modelo de formulário, é o modelo que cita um tipo que não está no cadastro:
+escolha outro modelo ou peça a revisão do modelo.

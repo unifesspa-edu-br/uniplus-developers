@@ -1,0 +1,43 @@
+---
+title: A consequência do grupo é incoerente com a ação de indeferimento da modalidade
+sidebar_label: Consequência de grupo incoerente com a ação da vaga
+description: A consequência de indeferimento do grupo de alternativas (OU) difere da ação de indeferimento declarada por uma modalidade que o grupo pode alcançar.
+code: uniplus.selecao.no_exigencia.consequencia_incoerente_com_acao_da_vaga
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0070
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um grupo de alternativas (OU) pode ter consequência própria de indeferimento. Quando uma
+modalidade de vaga declara o que acontece com o candidato indeferido (a ação de indeferimento),
+a consequência do grupo tem de ser a mesma. O grupo apontado declara uma consequência
+diferente da ação de uma modalidade que ele pode alcançar.
+
+O grupo alcança as modalidades que qualquer um dos documentos dele pode alcançar pelas
+condições. Só entram na comparação as modalidades que declaram ação de indeferimento. A grafia
+diferente entre os dois vocabulários (`RECLASSIFICA_AC` na exigência e `RECLASSIFICAR_AC` na
+modalidade) é tratada como a mesma ação. A mensagem de detalhe indica o grupo e a modalidade
+em conflito.
+
+A conferência acontece quando a configuração vai ser congelada, na publicação, na retificação
+em ato único ou no fechamento de uma sessão editorial. Ela vem depois da dos documentos
+exigidos (ver
+[`documento_exigido.consequencia_incoerente_com_acao_da_vaga`](./uniplus.selecao.documento_exigido.consequencia_incoerente_com_acao_da_vaga.mdx)),
+e a primeira violação encontrada interrompe a conferência.
+
+## Como resolver
+
+Alinhe a consequência do grupo à ação de indeferimento da modalidade apontada, ou revise a
+ação dessa modalidade, se for ela que está errada. Depois, repita a operação.

@@ -1,0 +1,45 @@
+---
+title: A fase da exigência não permite complementação de documentos
+sidebar_label: Pendência de reenvio sem complementação
+description: A exigência tem a consequência PENDENCIA_REENVIO, mas a fase em que ela é exigida não permite complementação.
+code: uniplus.selecao.documento_exigido.pendencia_reenvio_exige_complementacao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0070
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A consequência `PENDENCIA_REENVIO` só faz sentido numa fase que admite complementação de
+documentos. A definição trouxe um documento exigido, ou um grupo de alternativas (OU), com essa
+consequência numa fase do cronograma que não permite complementação. A fase de um grupo é a
+fase comum dos documentos que estão nele. A mensagem de detalhe nomeia a fase, mas não diz se
+a consequência é do documento ou do grupo.
+
+A conferência acontece depois das de vínculo com fase, formulário e etapa, da repetição por
+grupo e da idade máxima de emissão: é a última da definição das exigências.
+
+Esta é a conferência "de ida", ao escrever a exigência. A "de volta" é a que impede retirar a
+complementação de uma fase que já tem exigência com essa consequência
+(`uniplus.selecao.fase_cronograma.pendencia_reenvio_exige_complementacao`).
+
+## Como resolver
+
+Primeiro, descubra quem declara `PENDENCIA_REENVIO` na fase nomeada: um documento exigido ou um
+grupo de alternativas (OU) com consequência própria. Trocar só a consequência dos documentos não
+corrige o caso em que a consequência é do grupo, e vice-versa. Escolha um dos caminhos:
+
+- permita a complementação na fase nomeada do cronograma, o que resolve os dois casos;
+- troque a consequência de quem a declara (o documento ou o grupo) por outra das previstas;
+- passe a exigência para uma fase que permita complementação; no caso do grupo, isso vale para
+  todos os documentos dele, que precisam ficar na mesma fase.
+
+Depois, envie a definição de novo.

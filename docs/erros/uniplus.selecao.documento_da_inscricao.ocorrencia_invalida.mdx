@@ -1,0 +1,35 @@
+---
+title: A ocorrência não confere com a exigência
+sidebar_label: Ocorrência inválida
+description: A ocorrência informada no envio do arquivo não combina com a exigência, que ou não se repete ou se repete por um grupo do qual a inscrição não tem essa ocorrência.
+code: uniplus.selecao.documento_da_inscricao.ocorrencia_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Início do envio de documento da inscrição
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma exigência documental pode se repetir por grupo repetível do formulário da inscrição, e
+então cada ocorrência do grupo tem o seu documento. O envio informou uma ocorrência que não
+combina com a exigência:
+
+- a exigência não se repete, e o envio informou uma ocorrência;
+- a exigência se repete por um grupo, e o envio não informou ocorrência ou informou uma que a
+  inscrição não tem nesse grupo.
+
+A conferência vem depois da de existência da exigência (ver
+[`exigencia_nao_encontrada`](./uniplus.selecao.documento_da_inscricao.exigencia_nao_encontrada.mdx))
+e antes da de apresentação.
+
+## Como resolver
+
+Para a exigência que não se repete, envie o arquivo sem ocorrência. Para a que se repete,
+informe a ocorrência do grupo à qual o documento se refere, entre as que a inscrição tem.

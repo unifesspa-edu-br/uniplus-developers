@@ -1,0 +1,46 @@
+---
+title: O documento exigido numa fase de formulário precisa dizer a que formulário pertence
+sidebar_label: Formulário do documento obrigatório
+description: A fase da exigência responde algum formulário, mas o documento não informa a que formulário pertence.
+code: uniplus.selecao.documento_exigido.finalidade_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma fase do cronograma pode responder formulários do candidato: o de inscrição, o de isenção
+de taxa ou o de habilitação. Quando a fase da exigência responde algum formulário, o documento
+exigido nela precisa informar a que formulário pertence (a finalidade), e esse formulário é um
+dos que a fase responde. O documento apontado não informa nenhum.
+
+O erro aparece em quatro momentos:
+
+- na definição dos documentos exigidos, é a segunda conferência de vínculo de cada exigência,
+  depois da fase e antes da etapa; o primeiro defeito encontrado interrompe a definição;
+- na publicação, na retificação em ato único e no fechamento de uma sessão editorial, é a
+  conferência da finalidade das exigências, que vem logo depois da conferência das exigências
+  condicionais sem condições;
+- no descarte de retificação, a configuração congelada que seria restaurada traz o documento
+  sem a finalidade que a fase exige.
+
+## Como resolver
+
+Informe o formulário a que o documento pertence, entre os que a fase da exigência responde (a
+mensagem de detalhe diz quais são).
+
+No descarte de retificação, a versão congelada não pode ser reescrita, e corrigir a
+configuração em edição não resolve a recusa. A causa é investigada pela equipe técnica do
+Uni+.

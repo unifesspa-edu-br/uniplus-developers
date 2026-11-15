@@ -1,0 +1,37 @@
+---
+title: Exigência para todos não pode ter condições
+sidebar_label: Exigência geral com condição
+description: O documento declara aplicabilidade GERAL e, ao mesmo tempo, traz condições que restringem a quem ele se aplica.
+code: uniplus.selecao.documento_exigido.geral_com_condicao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0057
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um documento `GERAL` é exigido de todos os candidatos, sem restrição. Uma condição, ao
+contrário, restringe o documento a quem satisfaz o que ela pede. As duas declarações se
+contradizem, e o sistema não escolhe por conta própria qual delas vale.
+
+É uma conferência de forma, feita antes de o sistema consultar o tipo de documento, as fases ou
+as demais configurações do processo. Ela examina as exigências na ordem recebida e para na
+primeira que tem defeito; dentro dessa exigência, os defeitos de forma aparecem juntos.
+
+## Como resolver
+
+Se o documento é exigido de todos, retire as condições dele. Se é exigido só de quem satisfaz
+as condições, troque a aplicabilidade para `CONDICIONAL`.
+
+Cuidado ao trocar para `CONDICIONAL` sem manter condição alguma: uma exigência condicional sem
+condições não é exigida de ninguém, e a publicação a recusa quando ela é obrigatória ou tem
+consequência de indeferimento (ver
+[`condicional_vazia_determina_resultado`](./uniplus.selecao.documento_exigido.condicional_vazia_determina_resultado.mdx)).
