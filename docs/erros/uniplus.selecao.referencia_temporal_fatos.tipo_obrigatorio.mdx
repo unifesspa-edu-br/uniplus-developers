@@ -1,0 +1,76 @@
+---
+title: O tipo da referência temporal dos fatos é obrigatório
+sidebar_label: Tipo da referência temporal ausente
+description: 'A referência temporal dos fatos foi enviada com o tipo em branco ou com um valor que o sistema não reconhece.'
+code: uniplus.selecao.referencia_temporal_fatos.tipo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição da referência temporal dos fatos do processo seletivo
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#892'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/892
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A referência temporal dos fatos foi enviada com o campo `tipo` presente, mas em branco. A mensagem
+lembra os tipos aceitos: `FIM_INSCRICAO`, `INICIO_FASE`, `FIM_FASE` e `DATA_ESPECIFICA`.
+
+A referência temporal dos fatos é a política, no nível do processo, que ancora a apuração da faixa
+etária do candidato: de onde vem a data em que a idade é contada. Uma única política vale para todas
+as regras do processo que citam a idade. Ela é dada por um tipo (`FIM_INSCRICAO`, `INICIO_FASE`,
+`FIM_FASE` ou `DATA_ESPECIFICA`) e, conforme o tipo, por uma data ou por uma fase do cronograma. Para
+remover a referência, o pedido omite o tipo, a data e a fase; o tipo omitido com data ou fase presentes
+é recusado antes, na validação do pedido, e não chega às conferências desta página.
+
+Na definição, o `tipo` omitido (nulo), com data e fase também omitidas, não é este erro: significa remover
+a referência. O erro
+aparece quando o campo vem preenchido só com espaços ou vazio. Um valor preenchido que não é um dos
+quatro tipos tem outra causa
+([`tipo_desconhecido`](./uniplus.selecao.referencia_temporal_fatos.tipo_desconhecido.mdx)). Quando o
+tipo falta, o sistema não confere a coerência da data e da fase, para que a causa principal não
+fique escondida. A resposta traz o erro no campo `tipo`, junto com as demais violações do pedido em
+`errors[]`.
+
+Este mesmo código também aparece quando o sistema relê a configuração congelada da versão publicada:
+em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o
+descarte, a consulta dos formulários, as operações da inscrição, entre outras; a lista completa
+está no cabeçalho da página). Antes disso, o sistema confere a integridade dos bytes congelados:
+bytes alterados depois do congelamento são recusados por [`integridade_violada`](./uniplus.selecao.envelope_codec.integridade_violada.mdx) e não chegam a esta
+causa. Pelo caminho normal de gravação, a configuração congelada nunca traz esse defeito, porque a
+definição o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista
+`errors[]`, e se refere à versão congelada, não ao pedido enviado.
+Na releitura, o tipo em branco já é recusado antes, como
+[`envelope_malformado`](./uniplus.selecao.envelope_codec.envelope_malformado.mdx); só um valor
+preenchido que o sistema não reconhece chega a esta causa.
+
+## Como resolver
+
+Informe o `tipo` com um dos quatro valores aceitos e, conforme o tipo, a data ou a fase, e envie a
+definição de novo. Para remover a referência, omita o `tipo`, a data e a fase: omitir só o tipo é recusado na validação do pedido.
+
+Se a recusa apareceu em uma operação que lê a configuração congelada (qualquer uma das listadas no
+cabeçalho, exceto a definição da própria referência), o pedido enviado agora não é a causa: o sistema
+recusou a configuração congelada da versão publicada, e redefinir a referência temporal do processo não
+a corrige. A causa é investigada pela equipe técnica do Uni+.

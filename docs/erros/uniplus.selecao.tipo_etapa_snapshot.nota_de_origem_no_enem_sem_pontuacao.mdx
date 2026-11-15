@@ -1,0 +1,62 @@
+---
+title: O tipo de etapa congelado com nota do ENEM deve admitir compor a nota final
+sidebar_label: Tipo de etapa congelado com nota do ENEM sem pontuação
+description: 'O tipo de uma etapa congelada tem a nota vinda do ENEM, mas não admite compor a nota final.'
+code: uniplus.selecao.tipo_etapa_snapshot.nota_de_origem_no_enem_sem_pontuacao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos:
+  - UNI-REQ-0247
+rastreio:
+  - label: 'uniplus-api#1614'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1614
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de uma etapa, na configuração congelada da versão publicada, declara que a nota vem do ENEM e,
+ao mesmo tempo, que não admite compor a nota final. A etapa de nota do ENEM compõe a média do
+candidato; um tipo com nota do ENEM que não pontua reporia uma etapa que não entra na média.
+
+Cada etapa do processo congela uma cópia do tipo de etapa escolhido no cadastro de Configuração:
+o que identifica o tipo (origem, código, nome, se a nota vem do ENEM) e o que ele admite como caráter da
+etapa, isto é, se as etapas do tipo podem compor a nota final e se podem eliminar candidato. A cópia
+congelada não muda quando o cadastro muda depois.
+
+O cadastro de tipos de etapa já recusa essa combinação
+([`nota_de_origem_no_enem_exige_pontuacao`](./uniplus.configuracao.tipo_etapa.nota_de_origem_no_enem_exige_pontuacao.mdx)),
+e a cópia congelada carrega a mesma garantia.
+
+Este código aparece quando o sistema relê a configuração congelada da versão publicada: em toda
+operação que lê essa configuração e devolve a violação ao chamador (a retificação, o descarte, a
+consulta dos formulários, as operações da inscrição, entre outras; a lista completa está no cabeçalho
+da página). Antes disso, o sistema confere a integridade dos bytes congelados: bytes alterados depois
+do congelamento são recusados por [`integridade_violada`](./uniplus.selecao.envelope_codec.integridade_violada.mdx) e não chegam a esta
+causa. Pelo caminho normal de gravação, a configuração congelada nunca traz esse defeito, porque o
+cadastro de tipos de etapa o recusa antes. A recusa sai como violação única, sem a lista `errors[]`, e
+se refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+O pedido enviado agora não é a causa: o sistema recusou a configuração congelada da versão publicada,
+e redefinir as etapas do processo não a corrige. A causa é investigada pela equipe técnica do Uni+.
