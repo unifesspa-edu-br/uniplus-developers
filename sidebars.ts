@@ -1329,6 +1329,12 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.tipo_etapa_snapshot.caractere_nulo',
         'erros/uniplus.selecao.tipo_etapa_snapshot.nota_de_origem_no_enem_sem_pontuacao',
         'erros/uniplus.selecao.tipo_etapa_snapshot.sem_carater_admitido',
+        'erros/uniplus.selecao.certame_publicado.envelope_inesperado',
+        'erros/uniplus.selecao.grafo_dependencia_conjunta.grafo_conjunto_com_ciclo',
+        'erros/uniplus.selecao.notas_do_enem.inscricoes_em_andamento',
+        'erros/uniplus.selecao.oferta_curso_snapshot.invalida',
+        'erros/uniplus.selecao.regra_derivacao_configurada.contribui_em_branco',
+        'erros/uniplus.selecao.regra_derivacao_configurada.ordem_invalida',
       ],
     },
     {

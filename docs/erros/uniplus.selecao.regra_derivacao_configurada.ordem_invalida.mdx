@@ -1,0 +1,63 @@
+---
+title: A ordem da regra de derivação não pode ser negativa
+sidebar_label: Ordem de regra negativa
+description: Na definição das regras de derivação, ou na releitura da versão congelada, uma regra tem ordem negativa; a ordem é um número a partir de zero.
+code: uniplus.selecao.regra_derivacao_configurada.ordem_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de regras de derivação de fatos do processo seletivo
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na definição das regras de derivação do processo
+(`PUT /api/selecao/processos-seletivos/{id}/regras-derivacao`), uma regra
+informou `ordem` menor que zero. A ordem posiciona a regra na configuração do
+fato derivado e é um número inteiro a partir de zero.
+
+A recusa vem no array `errors[]`, no campo
+`configuracoes[<i>].regras[<j>].ordem`, e faz parte da conferência de forma, que
+acumula todas as violações de todas as configurações e regras do pedido antes de
+consultar o catálogo de fatos. Ela acumula, por exemplo, com a ordem repetida
+([`ordem_regra_duplicada`](./uniplus.selecao.configuracao_derivacao_fato.ordem_regra_duplicada.mdx)).
+
+A mesma conferência roda quando o sistema relê a configuração congelada da
+versão publicada, nas demais operações da lista do cabeçalho. A consulta de
+conformidade do processo também relê a versão, mas converte a falha em pendência
+do checklist, e por isso não consta no cabeçalho. Pelo caminho normal de
+gravação, a configuração congelada nunca traz uma ordem negativa, porque a
+definição das regras a recusa antes. Nessas leituras a recusa sai como violação
+única, sem a lista `errors[]`, e se refere à versão congelada, não ao pedido
+enviado.
+
+## Como resolver
+
+Na definição das regras, dê a cada regra uma `ordem` igual ou maior que zero e
+única dentro da configuração do fato, e envie o pedido de novo.
+
+Se o erro apareceu em uma operação que lê a configuração congelada (qualquer
+uma das listadas no cabeçalho, exceto a definição das regras), o pedido enviado
+agora não é a causa: o defeito está na regra de derivação congelada na versão
+publicada do processo, e regravar as regras do processo não a corrige. A causa é
+investigada pela equipe técnica do Uni+.
