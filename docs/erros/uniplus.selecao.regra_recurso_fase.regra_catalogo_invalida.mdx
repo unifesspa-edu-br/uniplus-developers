@@ -1,0 +1,37 @@
+---
+title: A regra referenciada não é RECURSO-PRAZO-ANCORADO-EM-ATO, ou diverge do catálogo de regras
+sidebar_label: Regra de recurso inválida no catálogo
+description: A regra citada para o prazo de recurso da fase não existe no catálogo ou não é a regra de prazo ancorado em ato.
+code: uniplus.selecao.regra_recurso_fase.regra_catalogo_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Configuração do cronograma — regra de recurso da fase
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de recurso de uma fase cita, em `regraCodigo` e `regraVersao`, uma regra
+do catálogo que não serve para o prazo de recurso da fase. O prazo de recurso da
+fase é calculado pela regra `RECURSO-PRAZO-ANCORADO-EM-ATO`, do tipo regra de
+prazo de recurso, e a API recusa qualquer outra. Isso acontece quando:
+
+- a regra citada não existe no catálogo, na versão informada;
+- a regra citada existe, mas não é do tipo regra de prazo de recurso;
+- a regra citada é desse tipo, mas não é `RECURSO-PRAZO-ANCORADO-EM-ATO`.
+
+Os três casos saem com a mesma recusa, e a mensagem de detalhe traz o código e a
+versão que foram citados. O erro é apontado no campo
+`fases[n].regraRecurso.regraCodigo`, em que `n` é a posição da fase no
+cronograma. Nada foi gravado.
+
+## Como resolver
+
+Cite `RECURSO-PRAZO-ANCORADO-EM-ATO` em `regraCodigo`, com uma versão dela que
+exista no catálogo de regras.

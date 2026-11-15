@@ -1,0 +1,35 @@
+---
+title: O valor da suspensividade deve ser estritamente positivo
+sidebar_label: Suspensividade zero ou negativa
+description: O efeito suspensivo de uma instância da regra de recurso da fase foi declarado com valor zero ou negativo.
+code: uniplus.selecao.regra_recurso_fase.suspensividade_nao_positiva
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Configuração do cronograma — regra de recurso da fase
+requisitos:
+  - UNI-REQ-0080
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O valor do **efeito suspensivo** de uma das instâncias da regra de recurso da fase
+foi declarado como zero ou negativo. Um bloqueio de duração zero acaba no
+instante em que começa, e um negativo acabaria antes de começar, de modo que a
+janela já nasceria sem utilidade. O valor da suspensividade é sempre
+estritamente positivo.
+
+A mensagem de detalhe diz de qual instância se trata, a 1ª ou a 2ª, e traz o
+valor recebido. Esta é a primeira conferência feita sobre o par, antes da
+unidade e da completude: um par com valor negativo e sem unidade é recusado por
+esta causa. Nada foi gravado.
+
+## Como resolver
+
+Declare o valor com um número maior que zero. Se a intenção é que aquela
+instância não bloqueie, não use zero: deixe em branco o valor e a unidade dela.

@@ -1,0 +1,32 @@
+---
+title: As edições do ENEM só podem ser declaradas quando a classificação do processo é baseada em ENEM
+sidebar_label: Edições do ENEM sem classificação por ENEM
+description: O pedido declarou edições do ENEM aceitas, mas a classificação do processo não está configurada como baseada em ENEM.
+code: uniplus.selecao.opcao_declarada_fato.edicao_enem_fora_de_processo_enem
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração das opções de um fato do processo seletivo (`PUT /api/selecao/processos-seletivos/{id}/fatos/{fatoCodigo}/opcoes`)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido tentou declarar as edições do ENEM que o processo aceita, mas a
+classificação do processo não está configurada como baseada em ENEM. As
+edições só têm sentido quando a classificação lê as notas do ENEM do candidato,
+e a API recusa a declaração em qualquer outro caso. Nada foi gravado.
+
+A recusa também vale quando o processo ainda não tem classificação definida, já
+que, sem ela, o processo não está configurado como baseado em ENEM.
+
+## Como resolver
+
+Defina primeiro a classificação do processo como baseada em ENEM e declare as
+edições depois. Se o processo não usa o ENEM na classificação, não há edições
+a declarar.
