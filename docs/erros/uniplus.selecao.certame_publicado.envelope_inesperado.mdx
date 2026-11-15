@@ -1,0 +1,53 @@
+---
+title: A configuração publicada não pôde ser lida para a consulta pública do certame
+sidebar_label: Certame publicado ilegível
+description: A resposta pública do certame guardada na divulgação não é uma projeção íntegra do formato vigente, e a API recusa a leitura em vez de responder só com parte dela.
+code: uniplus.selecao.certame_publicado.envelope_inesperado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Consulta pública do certame publicado
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A consulta pública do certame (`GET /api/selecao/certames/{id}`, anônima, por
+Guid do processo ou pelo identificador legível) entrega a resposta que foi
+projetada da versão publicada e guardada na divulgação. Antes de entregá-la, a
+API confere se o documento guardado é uma projeção inteira do formato em vigor:
+que ele pode ser lido, que traz todos os blocos obrigatórios e que foi gravado
+no formato de projeção que a API atual conhece.
+
+Aqui a conferência falhou. O documento guardado não pôde ser lido, faltam
+blocos que o formato atual exige ou ele foi gravado num formato de projeção
+anterior. A API recusa a leitura com **422** em vez de responder só com parte do
+certame, porque uma resposta incompleta, com o selo da versão completa, ficaria
+guardada em cache como se estivesse inteira. A mensagem indica a parte que não
+pôde ser lida, sem trazer o conteúdo do documento.
+
+A publicação, a retificação em ato único e o fechamento da sessão editorial
+também montam essa projeção, a partir da versão que acabaram de congelar, e
+propagam a mesma recusa se a montagem falhar. Essa montagem lê o que o próprio
+sistema acabou de gravar, e nenhum dado do pedido a faz falhar: por isso
+nenhuma dessas operações consta no cabeçalho, e a consulta pública é o único
+ponto em que a recusa chega a quem consome a API.
+
+Esta recusa é diferente do não encontrado. Processo inexistente, em rascunho,
+sem versão vigente ou cujo ato ainda não foi registrado respondem **404**, com a
+mesma resposta para todos os casos. Já a listagem pública de certames não
+devolve este erro: ela deixa de fora o certame cujo documento não pôde ser
+lido, e os demais continuam na lista.
+
+## Como resolver
+
+Quem consulta não tem o que corrigir no pedido, e repetir a consulta não muda o
+resultado enquanto o documento guardado continuar ilegível. Como o identificador
+informado já localizou a divulgação, a causa está no documento guardado nela
+(ilegível, incompleto ou de formato anterior), e não no pedido. A causa é
+investigada pela equipe técnica do Uni+.

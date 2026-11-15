@@ -1,0 +1,55 @@
+---
+title: O grafo de dependência conjunto da coleta forma um ciclo
+sidebar_label: Ciclo no grafo de dependência conjunto
+description: As dependências de produção, pré-condição, derivação e gatilho do processo formam um ciclo, e a publicação não consegue ordenar a coleta.
+code: uniplus.selecao.grafo_dependencia_conjunta.grafo_conjunto_com_ciclo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0077
+  - UNI-REQ-0078
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A ordem de coleta do processo decorre de um grafo de dependência que reúne
+quatro tipos de ligação entre fatos, campos, etapas, termos exigidos no
+formulário e exigências (UNI-REQ-0077): a produção (o campo que produz o fato),
+a pré-condição (as regras de exibição, de obrigatoriedade e de opções), a
+derivação (os fatos de que uma regra de derivação depende) e o gatilho (o fato
+que dispara a exigência de documento). Esse grafo precisa ser acíclico, e a
+publicação recusa o ciclo (UNI-REQ-0078).
+
+As ligações configuradas do processo formam um ciclo: um dos elementos depende,
+direta ou indiretamente, dele mesmo, e não há ordem em que a coleta possa
+começar. A mensagem do erro traz o caminho do ciclo, com a etiqueta de cada nó
+(o tipo do nó e o código dele), na ordem em que um depende do seguinte. A
+recusa sai com **422**, antes de gerar a versão, e nada é congelado.
+
+A consulta de conformidade do processo aponta o mesmo problema no item de
+grafo de dependência sem ciclo, mas apenas como pendência do checklist; este
+erro é o da operação que tenta congelar a configuração.
+
+## Como resolver
+
+Rompa o ciclo em um dos pontos do caminho indicado na mensagem. Conforme a
+ligação que fecha o ciclo:
+
+- retire ou ajuste a pré-condição que faz um campo ou etapa depender de um fato
+  que só é produzido nele ou depois dele;
+- ajuste a regra de derivação para que o fato derivado não dependa, direta ou
+  indiretamente, do próprio fato;
+- se o caminho passa por um gatilho de exigência de documento, ajuste o
+  gatilho ou o fato que ele cita.
+
+Em processo já publicado, faça o ajuste numa retificação e repita a operação
+recusada.
