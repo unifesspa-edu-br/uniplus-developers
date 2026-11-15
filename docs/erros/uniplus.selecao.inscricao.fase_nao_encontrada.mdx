@@ -1,0 +1,29 @@
+---
+title: A fase pedida não está no cronograma da versão da inscrição
+sidebar_label: Fase não encontrada na inscrição
+description: A fase pedida na avaliação da inscrição não consta no cronograma da versão do formulário que a inscrição fixou.
+code: uniplus.selecao.inscricao.fase_nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Avaliação prévia das respostas da inscrição, sem gravar
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A avaliação prévia da inscrição pode ser restrita aos documentos de uma fase
+do cronograma. A fase pedida não existe no cronograma da versão do formulário
+em que a inscrição está: a versão divulgada, enquanto é rascunho, ou a que o
+primeiro envio congelou, depois dele. Por isso a fase pode constar no processo
+hoje e, ainda assim, não constar na versão da inscrição enviada.
+
+## Como resolver
+
+Peça uma fase que conste no cronograma da versão da inscrição, ou omita a fase
+para receber os documentos de todas elas.

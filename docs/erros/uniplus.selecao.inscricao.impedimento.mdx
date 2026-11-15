@@ -1,0 +1,31 @@
+---
+title: Uma resposta impede a inscrição neste processo
+sidebar_label: Resposta que impede a inscrição
+description: Uma resposta dada na inscrição ativa um impedimento configurado no formulário do processo e impede o envio.
+code: uniplus.selecao.inscricao.impedimento
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O formulário de inscrição pode declarar, num campo, uma condição que impede a
+inscrição do candidato, combinando a resposta do próprio campo
+com respostas anteriores. A resposta dada ativa esse impedimento, e o envio é
+recusado no campo indicado. O campo que não aparece, ou que ficou sem
+resposta, não impede. O impedimento é regra do processo seletivo, definida na
+configuração do formulário, e não uma falha de preenchimento.
+
+## Como resolver
+
+Confira a resposta indicada. Se ela está errada, corrija e envie de novo. Se
+está correta, o processo não admite a inscrição de quem está nessa condição:
+consulte o edital ou fale com a unidade responsável pelo processo.

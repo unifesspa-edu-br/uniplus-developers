@@ -1,0 +1,30 @@
+---
+title: O login não traz o nome completo do candidato
+sidebar_label: Nome ausente no login
+description: O nome da inscrição vem da conta; a conta precisa trazer o nome completo para a inscrição ser gravada ou enviada.
+code: uniplus.selecao.inscricao.nome_ausente_no_login
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Quando o formulário coleta o nome, o nome civil da inscrição é o da conta com
+que a pessoa entrou no Uni+, e não um texto livre. A conta chegou sem o nome
+completo, então não há nome contra o qual conferir a resposta, e a gravação e
+o envio são recusados no campo do nome, mesmo com o rascunho em branco.
+
+## Como resolver
+
+Entre de novo no Uni+ e repita a operação. Se o erro persistir, o cadastro da
+conta está sem o nome completo: acione o suporte técnico do Uni+ para corrigir
+o cadastro.

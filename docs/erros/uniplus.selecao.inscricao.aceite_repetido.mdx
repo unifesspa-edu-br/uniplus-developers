@@ -1,0 +1,31 @@
+---
+title: O mesmo termo foi aceito mais de uma vez
+sidebar_label: Aceite repetido
+description: A lista de aceites traz o mesmo termo mais de uma vez.
+code: uniplus.selecao.inscricao.aceite_repetido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0091
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A inscrição registra um único aceite para cada termo. A lista de aceites
+enviada traz o mesmo termo duas ou mais vezes, e a repetição é recusada em vez
+de ser descartada em silêncio, para que o comprovante registre exatamente o
+que a pessoa aceitou.
+
+## Como resolver
+
+Envie um único aceite para cada termo. Quem integra o formulário deve montar a
+lista de aceites sem duplicar o código do termo, por exemplo ao reenviar a
+lista depois de uma tentativa recusada.

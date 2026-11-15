@@ -1,0 +1,34 @@
+---
+title: O aceite não é da versão do termo que o formulário apresenta
+sidebar_label: Aceite de outra versão do termo
+description: O aceite enviado é de uma versão do termo diferente da que o formulário da inscrição apresenta.
+code: uniplus.selecao.inscricao.aceite_de_outra_versao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0086
+  - UNI-REQ-0091
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O aceite de um termo registra a versão e o conteúdo exato (o hash da versão)
+que a pessoa leu. O aceite enviado traz uma versão ou um hash diferente dos
+que o formulário da inscrição apresenta hoje, então não vale como aceite do
+termo exibido. Isso acontece, por exemplo, quando a página foi aberta antes de
+uma atualização do formulário e o aceite saiu da tela antiga.
+
+## Como resolver
+
+Recarregue o formulário da inscrição, leia o termo exibido e aceite-o de novo.
+Quem integra o formulário deve enviar o código, a versão e o hash do termo
+exatamente como o formulário os apresenta, sem guardar o aceite de uma tela
+anterior.

@@ -1,0 +1,36 @@
+---
+title: A alteração da inscrição exige o If-Match com o ETag atual
+sidebar_label: Precondição da inscrição requerida
+description: Salvar, enviar, cancelar e descartar a inscrição exigem o cabeçalho If-Match com o ETag atual.
+code: uniplus.selecao.inscricao.precondicao_requerida
+http_status: 428
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+  - Descarte do rascunho da inscrição do candidato
+  - Cancelamento da inscrição do candidato
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido chegou sem o cabeçalho `If-Match`. A recusa sai com **428**, antes de
+qualquer alteração. Sem o `If-Match` com o `ETag` atual, não se sabe se o
+pedido parte do estado mais recente da inscrição, e uma gravação poderia
+apagar outra feita em outra aba sem que ninguém percebesse.
+
+Esta recusa é da inscrição do candidato, e tem código próprio, diferente do da
+precondição da retificação do processo
+(`uniplus.selecao.precondicao_requerida`).
+
+## Como resolver
+
+Leia a inscrição (`GET .../inscricao`), guarde o `ETag` da resposta e repita o
+pedido com `If-Match: <ETag>`. Cada alteração aceita da inscrição muda o
+`ETag`: use o novo no pedido seguinte.

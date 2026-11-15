@@ -1,0 +1,29 @@
+---
+title: O CPF informado na inscrição não é o do titular da conta
+sidebar_label: CPF diferente do titular da conta
+description: A resposta de CPF na inscrição tem de ser a do titular da conta que a faz.
+code: uniplus.selecao.inscricao.cpf_diferente_do_dono
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A inscrição é do CPF da conta com que a pessoa entrou no Uni+, e a resposta de
+CPF do formulário precisa ser exatamente esse CPF. A resposta enviada é de
+outro CPF, ou não é um CPF válido, e por isso a gravação ou o envio é
+recusado. A inscrição não se faz com o CPF de outra pessoa.
+
+## Como resolver
+
+Informe o CPF da própria conta. Se o CPF da conta está errado, o erro está no
+cadastro dela: acione o suporte técnico do Uni+.

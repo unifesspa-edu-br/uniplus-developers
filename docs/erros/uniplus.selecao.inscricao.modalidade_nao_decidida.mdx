@@ -1,0 +1,33 @@
+---
+title: As respostas ainda não decidem em quais modalidades o candidato concorre
+sidebar_label: Modalidades ainda não decididas
+description: Faltam respostas para o sistema saber em quais modalidades de concorrência o candidato concorre.
+code: uniplus.selecao.inscricao.modalidade_nao_decidida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0076
+  - UNI-REQ-0164
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Quando o processo deriva a modalidade de concorrência das respostas, o
+candidato responde às perguntas e o sistema o enquadra em todas as modalidades
+que elas permitem (UNI-REQ-0076). O envio só sai quando se sabe em que o
+candidato concorre. As respostas dadas ainda não bastam para decidir as
+modalidades, mesmo sem nenhum campo obrigatório em falta. Com duas opções de
+curso, a modalidade é decidida por opção (UNI-REQ-0164), e a recusa pode ser
+da 1ª ou da 2ª.
+
+## Como resolver
+
+Responda os campos indicados pela recusa, que são os de que a modalidade
+depende, e envie a inscrição de novo.

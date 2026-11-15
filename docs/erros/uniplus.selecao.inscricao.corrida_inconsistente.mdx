@@ -1,0 +1,36 @@
+---
+title: Duas inscrições simultâneas colidiram e a existente não pôde ser relida
+sidebar_label: Corrida de início de inscrição inconsistente
+description: Ao iniciar a inscrição, a gravação colidiu com outra do mesmo CPF no processo, mas a inscrição existente não pôde ser relida.
+code: uniplus.selecao.inscricao.corrida_inconsistente
+http_status: 500
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Início da inscrição
+requisitos:
+  - UNI-REQ-0023
+  - UNI-REQ-0031
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Só pode haver uma inscrição ativa por CPF em cada processo seletivo.
+Duas tentativas de iniciar a inscrição do mesmo CPF chegaram
+ao mesmo tempo, e a segunda colidiu com a primeira na gravação. Em geral,
+nesse caso, a inscrição criada pela primeira tentativa é relida e devolvida.
+Aqui ela não foi encontrada na releitura, e o sistema não tem como dizer qual
+é o estado da inscrição.
+
+É um erro do sistema, e não de preenchimento: a resposta é **500**.
+
+## Como resolver
+
+Aguarde um instante e inicie a inscrição de novo: iniciar de novo devolve a
+inscrição que já existir, sem criar outra (UNI-REQ-0023). Se o erro
+persistir, acione o suporte técnico do Uni+ informando o `traceId` da
+resposta, para que a causa seja investigada.

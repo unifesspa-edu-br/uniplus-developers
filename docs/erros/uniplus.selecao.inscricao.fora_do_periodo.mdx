@@ -1,0 +1,45 @@
+---
+title: A inscrição está fora do período de inscrição
+sidebar_label: Fora do período de inscrição
+description: A operação só é aceita no período de inscrição do processo seletivo, que ainda não começou ou já se encerrou.
+code: uniplus.selecao.inscricao.fora_do_periodo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Início da inscrição
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+  - Cancelamento da inscrição do candidato
+  - Descarte do rascunho da inscrição do candidato
+  - Avaliação prévia das respostas da inscrição, sem gravar
+  - Envio, confirmação e remoção de arquivo de documento da inscrição
+requisitos:
+  - UNI-REQ-0165
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A inscrição só se inicia, se grava, se envia, se corrige, se cancela e se
+descarta dentro do período de inscrição do processo seletivo. O pedido chegou
+antes do início ou depois do fim desse período. O período é o do edital
+publicado, com a prorrogação feita por retificação, e o início e o fim ainda
+fazem parte do período. A mensagem de detalhe informa, no horário da instituição, o início e o fim do
+período quando o pedido chegou antes da abertura, e só a data de encerramento
+quando chegou depois.
+
+A consulta da inscrição e do comprovante já emitido continua disponível depois
+do encerramento. Iniciar a inscrição já existente também só a devolve, sem
+criar outra.
+
+## Como resolver
+
+Antes do início, volte quando as inscrições abrirem. Depois do encerramento,
+não há mais como iniciar uma inscrição nova, corrigir, cancelar nem descartar; a
+inscrição enviada vale como está (UNI-REQ-0165). Se você acredita que o
+período deveria estar aberto, confira o edital e as retificações, ou fale com
+a unidade responsável pelo processo.

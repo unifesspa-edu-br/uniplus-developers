@@ -1,0 +1,31 @@
+---
+title: A resposta da ocorrência é de um campo que não pertence ao grupo
+sidebar_label: Campo fora do grupo
+description: A ocorrência de um grupo traz a resposta de um campo que não é do grupo.
+code: uniplus.selecao.inscricao.fato_fora_do_grupo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0146
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Num grupo repetível, como a composição familiar, cada ocorrência responde só
+os campos do próprio grupo (UNI-REQ-0146). Uma ocorrência traz a resposta de
+um campo que não pertence ao grupo, e a recusa indica o campo, com o caminho
+da ocorrência.
+
+## Como resolver
+
+Retire da ocorrência o campo indicado. Se ele é pedido pelo formulário,
+responda-o fora do grupo, no nível das demais respostas. Quem integra deve
+conferir no formulário atual da inscrição quais campos cada grupo tem.

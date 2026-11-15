@@ -1,0 +1,32 @@
+---
+title: Um campo obrigatório está sem resposta
+sidebar_label: Campo obrigatório sem resposta
+description: O envio exige a resposta de todo campo visível e obrigatório, e de todo grupo obrigatório.
+code: uniplus.selecao.inscricao.item_obrigatorio_ausente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0023
+  - UNI-REQ-0145
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Para enviar a inscrição, todo campo que aparece para o candidato e é
+obrigatório precisa ter resposta, e todo grupo obrigatório precisa ter ao
+menos uma ocorrência (UNI-REQ-0023, UNI-REQ-0145). Se o campo é obrigatório
+depende das respostas anteriores. A recusa indica cada campo sem resposta, e
+todas vêm juntas com as demais recusas do envio. O rascunho pode ser salvo com
+campos em branco; a recusa vem no envio.
+
+## Como resolver
+
+Responda os campos indicados e envie a inscrição de novo. Campos que deixaram
+de ser visíveis por uma resposta anterior não são cobrados.

@@ -1,0 +1,33 @@
+---
+title: 'Informe o logradouro: o CEP não identifica a rua'
+sidebar_label: Logradouro obrigatório no endereço
+description: Quando o CEP não identifica a rua, o logradouro precisa ser informado no endereço.
+code: uniplus.selecao.inscricao.endereco_logradouro_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0214
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O endereço da inscrição é conferido pelo CEP no Geo, o cadastro de localidades
+do Uni+. Há CEPs que não identificam a rua, como o CEP geral de uma cidade ou
+o CEP que a pessoa confirmou sem que corresponda a uma rua cadastrada. Nesse
+caso o logradouro (rua, avenida ou similar) tem de ser informado pela própria
+pessoa, e o envio chegou com ele em branco. O rascunho pode ser salvo sem o
+logradouro; a recusa vem no envio.
+
+## Como resolver
+
+Preencha o logradouro do endereço e envie a inscrição de novo. O bairro
+costuma ser pedido junto
+(`uniplus.selecao.inscricao.endereco_bairro_obrigatorio`), e o complemento
+aceita até 300 caracteres para descrever o endereço real.
