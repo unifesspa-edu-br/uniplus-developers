@@ -1,0 +1,36 @@
+---
+title: 'Apenas a fase de solicitação de isenção abre a janela de pedido de isenção'
+sidebar_label: 'Solicitação de isenção fora da fase de isenção'
+description: 'A marca de coleta de solicitação de isenção vale somente na fase SOLICITACAO_ISENCAO e é obrigatória nela.'
+code: uniplus.configuracao.fase_canonica.solicitacao_isencao_apenas_na_fase_de_isencao
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma fase canônica (POST /api/configuracao/admin/fases-canonicas)'
+  - 'Atualização de uma fase canônica (PUT /api/configuracao/admin/fases-canonicas/{id}), depois de a fase ser encontrada'
+requisitos:
+  - UNI-REQ-0106
+rastreio:
+  - label: 'uniplus-api#1348'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1348
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fase canônica trouxe `coletaSolicitacaoIsencao` incoerente com o seu código. A regra vale nos dois sentidos:
+
+- `coletaSolicitacaoIsencao` verdadeiro só é aceito na fase com código `SOLICITACAO_ISENCAO`;
+- na fase `SOLICITACAO_ISENCAO`, o campo precisa ser verdadeiro.
+
+Quando o campo é omitido, vale falso. Por isso, ao cadastrar a fase `SOLICITACAO_ISENCAO`, é preciso informar `coletaSolicitacaoIsencao: true` de forma explícita. Nada foi gravado.
+
+Na atualização, a fase é procurada antes desta conferência: só o nome, a descrição, a base legal e a origem da data são conferidos antes da busca. Com um identificador inexistente a resposta é [fase canônica não encontrada](./uniplus.configuracao.fase_canonica.nao_encontrada.mdx), mesmo que o conteúdo enviado também tivesse este problema.
+
+## Como resolver
+
+Ajuste `coletaSolicitacaoIsencao` ao código da fase: verdadeiro apenas na fase `SOLICITACAO_ISENCAO` e falso em todas as outras. Se a intenção era abrir uma janela de pedido de isenção em outra fase, cadastre a janela na fase `SOLICITACAO_ISENCAO`.

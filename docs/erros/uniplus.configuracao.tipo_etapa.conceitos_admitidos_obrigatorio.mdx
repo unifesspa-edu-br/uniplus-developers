@@ -1,0 +1,30 @@
+---
+title: 'A declaração dos conceitos admitidos pelo tipo de etapa é obrigatória'
+sidebar_label: 'Conceitos admitidos obrigatórios'
+description: 'O tipo de etapa precisa declarar os conceitos admitidos, mesmo que seja uma lista vazia.'
+code: uniplus.configuracao.tipo_etapa.conceitos_admitidos_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de um tipo de etapa (POST /api/configuracao/admin/tipos-etapa)'
+  - 'Atualização de um tipo de etapa (PUT /api/configuracao/admin/tipos-etapa/{id}), antes de o tipo de etapa ser procurado'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de etapa chegou sem a declaração dos conceitos admitidos: o campo `conceitosAdmitidos` veio ausente ou nulo. A declaração é obrigatória para que fique explícito que a lista não foi esquecida. Uma lista **vazia** é válida e significa que o tipo de etapa não admite nenhum conceito. Na atualização o campo também precisa ser enviado, porque a lista é substituída por inteiro. Nada foi gravado.
+
+Na atualização, esta conferência vem antes de o tipo de etapa ser procurado: com o conteúdo nessa condição a resposta é esta, mesmo que o identificador não exista. O [404 de tipo de etapa não encontrado](./uniplus.configuracao.tipo_etapa.nao_encontrado.mdx) só prevalece quando os campos e os conceitos admitidos são válidos.
+
+## Como resolver
+
+Envie `conceitosAdmitidos` com os códigos dos tipos de conceito admitidos, ou com `[]` se o tipo de etapa não admite nenhum.

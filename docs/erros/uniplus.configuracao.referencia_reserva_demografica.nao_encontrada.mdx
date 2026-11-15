@@ -1,0 +1,30 @@
+---
+title: 'A referência de reserva demográfica não foi encontrada'
+sidebar_label: 'Referência de reserva demográfica não encontrada'
+description: 'Não existe referência de reserva demográfica ativa com o identificador informado.'
+code: uniplus.configuracao.referencia_reserva_demografica.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Atualização de uma referência de reserva demográfica'
+  - 'Remoção de uma referência de reserva demográfica'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#593'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/593
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Não existe referência de reserva demográfica com o identificador informado na atualização ou na remoção. O identificador pode estar errado, ou a referência já ter sido removida.
+
+Na atualização, os campos são conferidos antes de a referência ser procurada: esta resposta só aparece quando o conteúdo enviado é válido.
+
+## Como resolver
+
+Confira o identificador na listagem de referências e repita o pedido. Se a referência foi removida e ainda é necessária, cadastre-a de novo.

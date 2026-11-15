@@ -1,0 +1,28 @@
+---
+title: 'A ordem de exibição da categoria de documento é inválida'
+sidebar_label: 'Ordem da categoria inválida'
+description: 'A ordem de exibição da categoria de documento não pode ser negativa.'
+code: uniplus.configuracao.categoria_documento.ordem_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma categoria de documento'
+  - 'Atualização de uma categoria de documento'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1341'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1341
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A ordem de exibição informada é negativa. A ordem define a posição da categoria nas listas e só aceita zero ou números positivos. Quando o campo `ordem` é omitido, vale zero. Nada foi gravado.
+
+## Como resolver
+
+Informe `ordem` com zero ou um número positivo, ou omita o campo.

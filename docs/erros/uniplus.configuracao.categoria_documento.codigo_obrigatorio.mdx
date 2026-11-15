@@ -1,0 +1,28 @@
+---
+title: 'O código da categoria de documento é obrigatório'
+sidebar_label: 'Código da categoria obrigatório'
+description: 'A categoria de documento precisa de um código, que a identifica no catálogo.'
+code: uniplus.configuracao.categoria_documento.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma categoria de documento'
+  - 'Atualização de uma categoria de documento'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1341'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1341
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A categoria de documento chegou sem código: o campo `codigo` veio ausente, vazio ou só com espaços. O código é o que identifica a categoria no catálogo e é conferido contra as demais categorias. Nada foi gravado.
+
+## Como resolver
+
+Informe `codigo` em maiúsculas e sem acentos, como `RENDA`, `DOCUMENTO_PROCESSUAL` ou `RACA_ETNIA`.

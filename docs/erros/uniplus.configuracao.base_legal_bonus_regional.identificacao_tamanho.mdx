@@ -1,0 +1,28 @@
+---
+title: 'O tamanho da identificação da base legal é inválido'
+sidebar_label: 'Tamanho da identificação da base legal'
+description: 'A identificação da base legal precisa ter de 3 a 500 caracteres, contados depois de removidos os espaços das pontas.'
+code: uniplus.configuracao.base_legal_bonus_regional.identificacao_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma base legal do Fator de Atenuação das Desigualdades de Acesso'
+  - 'Atualização de uma base legal do Fator de Atenuação das Desigualdades de Acesso'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1465'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1465
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cadastro da base legal do Fator de Atenuação das Desigualdades de Acesso (cadastrada como base legal de bônus regional) trouxe uma identificação com tamanho fora do permitido. A identificação precisa ter de **3 a 500 caracteres**, contados depois de removidos os espaços do começo e do fim. Nada foi gravado.
+
+## Como resolver
+
+Reescreva `identificacao` com 3 a 500 caracteres. Se o texto for longo, deixe na identificação só o número e o ano do instrumento e use a descrição para o restante.

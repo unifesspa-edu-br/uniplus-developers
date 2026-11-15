@@ -1,0 +1,33 @@
+---
+title: 'A modalidade precisa da regra que diz quem concorre a ela'
+sidebar_label: 'Regra de aplicabilidade obrigatória'
+description: 'Toda modalidade declara a regra de aplicabilidade; a lista vazia é a regra incondicional da ampla concorrência.'
+code: uniplus.configuracao.modalidade.regra_de_aplicabilidade_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma modalidade (POST /api/configuracao/admin/modalidades)'
+  - 'Atualização de uma modalidade, inclusive as do catálogo legal fixo (PUT /api/configuracao/admin/modalidades/{id}), antes de a modalidade ser procurada'
+requisitos:
+  - UNI-REQ-0076
+rastreio:
+  - label: 'uniplus-api#1899'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1899
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A modalidade chegou sem `regraDeAplicabilidade`. Toda modalidade precisa dizer quem concorre a ela, e essa regra não tem valor padrão: o campo ausente é recusado para que a omissão não passe por uma escolha.
+
+A regra é uma lista de cláusulas, e cada cláusula é uma lista de condições. Uma lista vazia (`[]`) é válida e significa "todo candidato", que é a regra incondicional da ampla concorrência. Na atualização, a regra é substituída por inteiro: o campo precisa ser reenviado mesmo que não mude, inclusive para modalidades do catálogo legal fixo. Nada foi gravado.
+
+Na atualização, esta conferência vem antes de a modalidade ser procurada: com a regra nessa condição a resposta é esta, mesmo que o identificador não exista. O [404 de modalidade não encontrada](./uniplus.configuracao.modalidade.nao_encontrada.mdx) só prevalece quando o conteúdo passa por esta e pelas demais conferências de campo.
+
+## Como resolver
+
+Envie `regraDeAplicabilidade`. Para a ampla concorrência use `[]`; para as demais, as cláusulas que dizem quem concorre, por exemplo `[[{"fato":"OPTOU_PELAS_COTAS_DA_LEI","operador":"IGUAL","valor":true}]]` na cota da lei.

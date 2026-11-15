@@ -1,0 +1,28 @@
+---
+title: 'O percentual da referência está fora do intervalo de 0 a 100'
+sidebar_label: 'Percentual fora do intervalo'
+description: 'Cada percentual da referência de reserva demográfica precisa estar entre 0 e 100, inclusive.'
+code: uniplus.configuracao.referencia_reserva_demografica.percentual_fora_de_faixa
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma referência de reserva demográfica'
+  - 'Atualização de uma referência de reserva demográfica'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#593'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/593
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um dos percentuais informados está fora do intervalo de **0 a 100**, inclusive. Os percentuais conferidos são `ppiPercentual`, `quilombolaPercentual` e `pcdPercentual`, e a resposta indica em `errors[]` qual deles estava fora. Um percentual omitido vale 0, que é válido. Nada foi gravado.
+
+## Como resolver
+
+Corrija o percentual apontado para um valor de 0 a 100. Confira também se o valor não foi enviado como fração (0,15 em vez de 15) ou com separador de milhar.

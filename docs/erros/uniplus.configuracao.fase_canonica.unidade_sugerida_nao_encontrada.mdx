@@ -1,0 +1,35 @@
+---
+title: 'A unidade sugerida da fase canônica não foi encontrada ou não está mais viva'
+sidebar_label: 'Unidade sugerida não encontrada'
+description: 'A unidade sugerida informada para a fase canônica precisa corresponder a uma unidade da Unifesspa cadastrada e não removida.'
+code: uniplus.configuracao.fase_canonica.unidade_sugerida_nao_encontrada
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma fase canônica (POST /api/configuracao/admin/fases-canonicas), depois de as demais conferências da fase'
+  - 'Atualização de uma fase canônica (PUT /api/configuracao/admin/fases-canonicas/{id}), depois de a fase ser encontrada e quando a unidade sugerida enviada é diferente da gravada'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2143'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2143
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `unidadeSugeridaId` não corresponde a nenhuma unidade da Unifesspa **viva**: o identificador não existe, ou a unidade foi removida. A unidade sugerida é opcional e orientativa: indica qual unidade costuma responder pela fase, mas o processo seletivo define a unidade responsável na sua própria configuração. A resposta aponta o campo `unidadeSugeridaId` em `errors[]`. Nada foi gravado.
+
+**Na criação**, o campo é conferido depois das demais conferências da fase (a fase só chega a esta etapa com os outros campos válidos), e omiti-lo cria a fase sem unidade sugerida.
+
+**Na atualização**, a fase é procurada antes (com identificador inexistente a resposta é [fase canônica não encontrada](./uniplus.configuracao.fase_canonica.nao_encontrada.mdx)) e as coerências dos campos são conferidas antes da unidade. A atualização substitui a sugestão por inteiro: o valor enviado é comparado com o já gravado, e só uma troca é conferida. Reenviar o identificador que já está gravado preserva a sugestão, mesmo que a unidade tenha sido removida depois. **Omitir o campo, ou enviá-lo nulo, remove a sugestão existente.**
+
+## Como resolver
+
+Informe em `unidadeSugeridaId` o identificador de uma unidade da Unifesspa existente na listagem de unidades.
+
+- **Criação:** omita o campo se a fase não tem unidade sugerida.
+- **Atualização:** para manter a sugestão atual, reenvie o identificador já gravado; para trocá-la, envie o de uma unidade viva; para retirá-la, omita o campo ou envie nulo. Omitir o campo sem querer remove a sugestão.

@@ -1,0 +1,31 @@
+---
+title: 'A regra de aplicabilidade cita um fato que não pode ser usado em regra'
+sidebar_label: 'Fato não citável na regra'
+description: 'Só fatos de tipo comparável (número, verdadeiro ou falso, categórico com valores) podem ser citados na regra de aplicabilidade.'
+code: uniplus.configuracao.modalidade.regra_cita_fato_nao_citavel
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma modalidade (POST /api/configuracao/admin/modalidades)'
+  - 'Atualização de uma modalidade fora do catálogo legal fixo (PUT /api/configuracao/admin/modalidades/{id}), depois de a modalidade ser encontrada'
+requisitos:
+  - UNI-REQ-0143
+rastreio:
+  - label: 'uniplus-api#1899'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1899
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Alguma condição de `regraDeAplicabilidade` cita um fato que o Uni+ não admite em regra: fatos de **texto livre**, de **data**, de **endereço**, fatos de **membro de grupo** e fatos **categóricos sem valores cadastrados**. Esses fatos não têm comparação objetiva possível numa regra de aplicabilidade. Nada foi gravado.
+
+Na atualização, a modalidade é procurada antes desta conferência: com um identificador inexistente a resposta é [modalidade não encontrada](./uniplus.configuracao.modalidade.nao_encontrada.mdx), mesmo que o conteúdo enviado também tivesse este problema. Numa modalidade do catálogo legal fixo esta recusa não é emitida: se o conteúdo altera algo além da descrição e da base legal, vale [estrutura protegida não editável](./uniplus.configuracao.modalidade.estrutura_protegida_nao_editavel.mdx).
+
+## Como resolver
+
+Use um fato derivado que traduza a informação, como a UF ou o município do endereço, ou a faixa etária no lugar da data de nascimento. Se o fato é categórico, cadastre os valores admitidos antes de citá-lo.

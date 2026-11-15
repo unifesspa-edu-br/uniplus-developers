@@ -1,0 +1,31 @@
+---
+title: 'O tipo de etapa foi alterado por outra operação ao mesmo tempo'
+sidebar_label: 'Alteração concorrente do tipo de etapa'
+description: 'Duas atualizações do mesmo tipo de etapa colidiram; a resposta traz retryable e repetir o pedido pode dar certo.'
+code: uniplus.configuracao.tipo_etapa.conflito_de_concorrencia
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Atualização de um tipo de etapa (PUT /api/configuracao/admin/tipos-etapa/{id}), depois de o tipo de etapa ser encontrado e de os campos e os conceitos admitidos serem aprovados'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas alterações do mesmo tipo de etapa chegaram ao mesmo tempo, ou a lista de conceitos admitidos foi substituída por outra atualização durante a gravação. Só uma delas pôde ser aplicada, e esta foi recusada. Nada deste pedido foi gravado.
+
+A recusa descreve uma corrida que já passou, não um estado que permanece: a resposta traz `retryable: true`, e repetir o pedido pode dar certo. Por ser retentável, a recusa não prende a chave de idempotência do pedido.
+
+A recusa vem por último: com um identificador inexistente prevalece [tipo de etapa não encontrado](./uniplus.configuracao.tipo_etapa.nao_encontrado.mdx), e com campos ou conceitos inválidos prevalece a recusa de validação correspondente.
+
+## Como resolver
+
+Repita o pedido de atualização. Se a recusa se repetir, consulte o tipo de etapa para ver o que a outra alteração gravou e refaça o pedido sobre o conteúdo atual, porque a atualização substitui os conceitos admitidos por inteiro.

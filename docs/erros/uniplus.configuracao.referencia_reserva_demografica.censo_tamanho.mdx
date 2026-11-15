@@ -1,0 +1,28 @@
+---
+title: 'O tamanho do Censo de referência é inválido'
+sidebar_label: 'Tamanho do Censo de referência'
+description: 'O Censo de referência precisa ter de 1 a 20 caracteres, contados depois de removidos os espaços das pontas.'
+code: uniplus.configuracao.referencia_reserva_demografica.censo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma referência de reserva demográfica'
+  - 'Atualização de uma referência de reserva demográfica'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#593'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/593
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O Censo informado passa do tamanho permitido: a identificação precisa ter de **1 a 20 caracteres**, contados depois de removidos os espaços do começo e do fim. Na prática, a recusa acontece quando o texto passa de 20 caracteres. Nada foi gravado.
+
+## Como resolver
+
+Informe uma identificação mais curta em `censoReferencia`, com no máximo 20 caracteres.
