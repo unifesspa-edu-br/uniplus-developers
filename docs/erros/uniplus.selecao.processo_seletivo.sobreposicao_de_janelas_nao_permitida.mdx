@@ -1,0 +1,35 @@
+---
+title: As janelas de duas fases dependentes se sobrepõem
+sidebar_label: Sobreposição de janelas não permitida
+description: Quando o cadastro não permite sobreposição entre duas fases, a antecessora precisa terminar antes de a sucessora começar.
+code: uniplus.selecao.processo_seletivo.sobreposicao_de_janelas_nao_permitida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cadastro de fases diz que uma fase precede outra e que as duas não podem se
+sobrepor. No cronograma enviado, as duas têm janela, e a antecessora termina
+depois do início da sucessora.
+
+Terminar exatamente no instante em que a sucessora começa é aceito. A conferência
+só se aplica quando as duas fases têm início e fim definidos, e só às relações
+que proíbem a sobreposição; relações que a permitem não são afetadas. A
+mensagem da resposta cita as duas fases e as janelas. Nada é gravado, e o
+cronograma anterior continua como estava.
+
+## Como resolver
+
+Ajuste as janelas para que a fase antecessora termine até o instante em que a
+sucessora começa, e envie de novo o cronograma. Se a sobreposição for desejada,
+a permissão vem do cadastro de fases, mantido pela unidade responsável pelo
+catálogo, e não pode ser concedida no cronograma do processo.

@@ -1,0 +1,37 @@
+---
+title: A unidade administradora não tem cidade cadastrada
+sidebar_label: Unidade administradora sem cidade
+description: A criação de um processo seletivo exige que a unidade administradora tenha cidade no cadastro de unidades.
+code: uniplus.selecao.processo_seletivo.unidade_administradora_sem_cidade
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação do processo seletivo
+requisitos:
+  - UNI-REQ-0119
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao criar o processo seletivo, a unidade administradora escolhida não tem cidade
+cadastrada. O processo guarda uma cópia dos dados da unidade, inclusive a cidade,
+e a unidade sem cidade no cadastro é recusada. A mensagem da resposta traz o
+identificador da unidade. Nada é criado.
+
+Essa cidade é a da unidade e não se confunde com a localidade que rege a contagem
+dos prazos do processo, que é declarada na própria criação e tem recusa à parte
+([localidade ausente](./uniplus.selecao.processo_seletivo.localidade_ausente.mdx)).
+A correção desta recusa fica no cadastro da unidade, e não no formulário do
+processo.
+
+## Como resolver
+
+Peça a quem mantém o cadastro de unidades que informe a cidade da unidade
+administradora, e crie o processo depois. Como o processo guarda uma cópia da
+unidade tirada no momento da criação, a correção no cadastro vale para processos
+criados a partir dela; a cópia de um processo já criado não é alterada.

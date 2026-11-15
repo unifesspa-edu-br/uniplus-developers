@@ -1,0 +1,37 @@
+---
+title: O tipo de processo seletivo informado não existe ou não está ativo
+sidebar_label: Tipo de processo inexistente ou inativo
+description: A criação de um processo seletivo exige um tipo de processo cadastrado e ativo.
+code: uniplus.selecao.processo_seletivo.tipo_processo_nao_encontrado_ou_inativo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação do processo seletivo
+requisitos:
+  - UNI-REQ-0098
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao criar o processo seletivo, o tipo de processo informado não existe no
+cadastro ou foi desativado. Só tipo ativo pode ser vinculado a um novo processo.
+A mensagem da resposta traz o identificador do tipo informado. Nada é criado.
+
+A conferência do tipo vem depois das de permissão na unidade, de identificador
+legível, de unidade administradora e de localidade do processo, e antes da de
+identificador legível já em uso. Quando algum desses pontos anteriores também
+está errado, é ele que responde primeiro.
+
+Desativar um tipo não afeta os processos que já o usam: o tipo só deixa de
+estar disponível para novos processos.
+
+## Como resolver
+
+Confira o identificador do tipo na listagem de tipos de processo e use o de um
+tipo ativo. Se o tipo desejado foi desativado, quem mantém o cadastro de tipos
+de processo pode reativá-lo; o código do tipo continua o mesmo.

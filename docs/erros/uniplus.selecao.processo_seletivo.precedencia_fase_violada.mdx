@@ -1,0 +1,35 @@
+---
+title: A ordem das fases viola uma precedência do cadastro
+sidebar_label: Precedência entre fases violada
+description: Uma fase que precede outra no cadastro de fases precisa ter ordem menor no cronograma do processo.
+code: uniplus.selecao.processo_seletivo.precedencia_fase_violada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cadastro de fases estabelece que certas fases precedem outras. Quando as duas
+fases de uma dessas relações estão no cronograma, a que precede precisa ter ordem
+menor que a que sucede. O cronograma enviado coloca a antecessora com ordem igual
+ou maior que a da sucessora.
+
+A recusa só considera relações em que as duas fases estão no cronograma; o
+cronograma que contém só uma delas não viola nada. A mensagem da resposta cita
+as duas fases e as ordens declaradas. Nada é gravado, e o cronograma anterior
+continua como estava.
+
+## Como resolver
+
+Reordene o cronograma para que a fase antecessora venha antes da sucessora e
+envie de novo. Se você acredita que a relação de precedência do cadastro está
+errada, ela é mantida pela unidade responsável pelo catálogo de fases, e não
+pode ser contornada no cronograma do processo.

@@ -1,0 +1,40 @@
+---
+title: Um item do formulário não está numa seção válida, ou está fora da ordem das seções
+sidebar_label: Item do formulário fora de seção
+description: Todo item de formulário precisa pertencer a uma seção existente do próprio formulário e aparecer na ordem das seções.
+code: uniplus.selecao.processo_seletivo.item_do_formulario_fora_de_secao
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um formulário do processo tem item que não está numa seção válida. Duas situações
+produzem esta recusa:
+
+- o item não declara a seção a que pertence, ou declara uma seção que não
+  existe naquele formulário (um bloco do sistema não conta como seção);
+- o item aparece fora da ordem das seções, isto é, depois de itens de uma seção
+  que vem adiante.
+
+A mensagem da resposta indica o formulário e o item. O rascunho aceita a
+configuração incompleta; a publicação, a retificação em ato único e o
+fechamento da sessão editorial não.
+
+## Como resolver
+
+No formulário apontado, ligue o item a uma seção que exista nele e reordene os
+itens para que fiquem agrupados na sequência das seções. Depois, repita a
+operação recusada.
+
+Em processo já publicado, a alteração do formulário é feita numa retificação.
