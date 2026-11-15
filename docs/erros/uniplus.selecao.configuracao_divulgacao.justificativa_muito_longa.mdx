@@ -1,0 +1,41 @@
+---
+title: A justificativa da divulgação passa do limite de caracteres
+sidebar_label: Justificativa muito longa
+description: A justificativa da divulgação pública, depois de normalizada, tem mais de 1000 caracteres.
+code: uniplus.selecao.configuracao_divulgacao.justificativa_muito_longa
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição da divulgação pública do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A justificativa da divulgação pública é um texto livre de negócio, com no máximo 1000
+caracteres. O limite é conferido sobre o texto já normalizado: sem espaços nas bordas e na forma
+de composição padrão de caracteres acentuados. O texto enviado passa desse limite.
+
+A conferência vale para qualquer justificativa enviada, mesmo quando o `nome` não está na lista.
+A recusa vem junto das demais violações do mesmo pedido, no array `errors[]`, e pode aparecer ao
+lado de
+[`justificativa_com_caractere_nulo`](./uniplus.selecao.configuracao_divulgacao.justificativa_com_caractere_nulo.mdx),
+de
+[`campos_publicos_vazio`](./uniplus.selecao.configuracao_divulgacao.campos_publicos_vazio.mdx), de
+[`campo_nao_permitido`](./uniplus.selecao.configuracao_divulgacao.campo_nao_permitido.mdx), de
+[`numero_inscricao_obrigatorio`](./uniplus.selecao.configuracao_divulgacao.numero_inscricao_obrigatorio.mdx)
+e de
+[`formas_de_identificacao_excludentes`](./uniplus.selecao.configuracao_divulgacao.formas_de_identificacao_excludentes.mdx).
+Não vem junto de
+[`justificativa_obrigatoria`](./uniplus.selecao.configuracao_divulgacao.justificativa_obrigatoria.mdx),
+que exige a justificativa ausente.
+
+## Como resolver
+
+Resuma a justificativa para até 1000 caracteres e reenvie. Se a resposta trouxer mais de uma
+violação em `errors[]`, corrija todas antes de reenviar.

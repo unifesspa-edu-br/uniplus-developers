@@ -1,0 +1,32 @@
+---
+title: O modelo de documento não pode conter macro
+sidebar_label: Modelo com macro
+description: O DOCX ou ODT enviado como modelo contém macro, que não é aceita em um documento distribuído ao candidato.
+code: uniplus.selecao.modelo_de_documento.contem_macro
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de modelo de documento
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O modelo enviado em `DOCX` ou `ODT` contém macro. O modelo é distribuído ao candidato, e o sistema
+não aceita nele conteúdo executável.
+
+A conferência vem depois de o servidor encontrar o modelo e o arquivo
+([`objeto_nao_encontrado`](./uniplus.selecao.modelo_de_documento.objeto_nao_encontrado.mdx)), de
+conferir o tamanho
+([`tamanho_excedido`](./uniplus.selecao.modelo_de_documento.tamanho_excedido.mdx)) e de conferir
+que o tipo de mídia enviado é o do formato declarado
+([`conteudo_diverge_do_formato`](./uniplus.selecao.modelo_de_documento.conteudo_diverge_do_formato.mdx)).
+
+## Como resolver
+
+Salve uma cópia sem macros, em `DOCX` ou `ODT` comum. Inicie um novo envio com a cópia e confirme.

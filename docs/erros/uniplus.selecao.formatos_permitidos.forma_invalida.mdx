@@ -1,0 +1,45 @@
+---
+title: Os formatos permitidos estão numa forma que o sistema não reconhece
+sidebar_label: Forma dos formatos permitidos inválida
+description: formatosPermitidos não é o token QUALQUER nem uma lista bem formada de formatos.
+code: uniplus.selecao.formatos_permitidos.forma_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0066
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+`formatosPermitidos` aceita duas formas: o texto `QUALQUER` ou uma lista de formatos. A exigência
+enviada trouxe outra coisa. São recusados:
+
+- um valor que não é texto nem lista (por exemplo, um número ou um objeto);
+- um texto diferente de `QUALQUER`, com a grafia exata em maiúsculas;
+- um item da lista que não é texto nem objeto com `formato` e `tamanhoMaximoBytesMax`;
+- um item em forma de objeto sem `formato` em texto;
+- um `tamanhoMaximoBytesMax` presente que não é um número inteiro.
+
+Cada item da lista é um texto (por exemplo, `PDF`, sem limite próprio) ou um objeto com `formato` e,
+opcionalmente, `tamanhoMaximoBytesMax`. A mensagem de detalhe diz qual dessas formas foi recusada.
+
+A conferência acontece na montagem de cada exigência, depois das conferências do tipo de
+documento, das condições e das bases legais, e depois da idade máxima de emissão; a do modelo
+citado vem em seguida. A árvore de exigências para no primeiro nó com defeito. A ausência do campo
+é outra causa
+([`obrigatorio`](./uniplus.selecao.formatos_permitidos.obrigatorio.mdx)), e um item de texto que não
+é um formato conhecido também
+([`formato_invalido`](./uniplus.selecao.formatos_permitidos.formato_invalido.mdx)).
+
+## Como resolver
+
+Declare `formatosPermitidos` como o texto `QUALQUER` ou como uma lista em que cada item é um texto
+com o formato ou um objeto `{ "formato": "PDF", "tamanhoMaximoBytesMax": 1048576 }`. O limite
+`tamanhoMaximoBytesMax`, quando presente, é um número inteiro. Depois, envie a definição de novo.

@@ -25,7 +25,7 @@ A regra de cálculo declarada é `FORMULA-MEDIA-PONDERADA`, mas
 `casasArredondamento` está ausente ou não é maior que zero. É a metade do
 mesmo par de campos que
 [`arredondamento_obrigatorio`](./uniplus.selecao.configuracao_classificacao.arredondamento_obrigatorio.mdx)
-cobre para `regraArredondamentoCodigo` — as duas checagens são separadas
+cobre para `regraArredondamentoCodigo` — as checagens são separadas
 propositalmente, cada uma atribuída ao campo que ela reprova; um
 `regraArredondamentoCodigo` válido acompanhado de `casasArredondamento`
 inválido reprova só esta, não a outra.
@@ -42,7 +42,7 @@ nem
 
 No descarte de retificação, o codec só propaga ao chamador a primeira
 violação acumulada internamente. `casas_arredondamento_obrigatorio` é a
-última das duas checagens do ramo local — perde a prioridade para
+última checagem do ramo local — perde a prioridade para
 `arredondamento_obrigatorio` quando também se aplica, mas vence sobre `eliminacao_enem_fora_de_processo_enem`,
 conferida depois de qualquer um dos dois ramos.
 

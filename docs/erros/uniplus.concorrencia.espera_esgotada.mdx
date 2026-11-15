@@ -1,0 +1,51 @@
+---
+title: Processo ocupado por outra operação
+sidebar_label: Processo ocupado
+description: Outra operação sobre o mesmo processo seletivo não terminou dentro do tempo de espera; nada foi gravado e a requisição deve ser reenviada depois de reler o estado.
+code: uniplus.concorrencia.espera_esgotada
+http_status: 503
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Definição das configurações do processo seletivo (etapas, opções declaradas, atendimento especializado, distribuição de vagas, cronograma das fases, documentos exigidos, identificador legível, localidade, algoritmo de contagem de prazo, referência temporal dos fatos, regras de derivação, critérios de desempate, bônus regional, opções de curso, taxa de inscrição, divulgação, cascata de remanejamento e classificação)
+  - Publicação do processo seletivo
+  - Retificação em ato único, abertura, alteração do motivo, descarte e fechamento da sessão editorial de retificação
+  - Publicação de ato do processo e publicação de produto previsto
+  - Inclusão e retirada de motivo de decisão do processo
+  - Definição, remoção e aplicação de modelo dos formulários do processo
+  - Importação de lote de notas do ENEM e geração do envio ao INEP
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2456'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2456
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada processo seletivo aceita uma operação de alteração por vez. A requisição chegou enquanto outra operação sobre o mesmo processo ainda estava em andamento, esperou pelo tempo máximo previsto e não conseguiu a vez. Por isso o Uni+ a recusou, **sem gravar nada**.
+
+A recusa vale apenas para operações que alteram o processo. Consultas não esperam a outra operação e não recebem este erro.
+
+Esta resposta **não traz prazo de nova tentativa** e **não deve ser repetida automaticamente**. Enquanto esperava, a outra operação pode ter mudado o processo, e reenviar a mesma requisição sem olhar o novo estado poderia produzir um efeito diferente do que a pessoa pretendia. Por isso a orientação é sempre reler o estado antes de enviar de novo.
+
+A mensagem da resposta não informa qual operação ocupava o processo nem quem a executava.
+
+## Como resolver
+
+**Quem usa a tela:** atualize a página e confira o estado atual do processo. Se a alteração que você pretendia ainda não aparece, faça-a de novo em instantes. Nada do que você tinha enviado foi gravado.
+
+**Quem integra:**
+
+1. Não tente de novo automaticamente nem com intervalo fixo.
+2. Releia o estado do processo (consulta) e verifique se a alteração ainda é necessária.
+3. Se for, reenvie a operação:
+   - nas rotas que exigem `Idempotency-Key`, use uma **nova** chave. A recusa fica guardada na chave original: reenviar com a mesma chave devolve o mesmo 503, e a resposta traz o cabeçalho `Idempotency-Replayed`;
+   - nas rotas que não usam `Idempotency-Key` (importação de lote de notas do ENEM, envio ao INEP e remoção de formulário), basta reler o estado e reenviar.
+
+A mensagem da resposta já traz a orientação que vale para a rota chamada: com nova chave de idempotência, nas rotas que a exigem, ou sem menção à chave, nas demais.
+
+Se a recusa se repetir em tentativas feitas com alguns minutos de intervalo, avise a equipe técnica do Uni+, informando o horário e o processo seletivo envolvido.
