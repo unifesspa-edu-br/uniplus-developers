@@ -1,0 +1,36 @@
+---
+title: O documento do edital não existe ou não pertence a este processo
+sidebar_label: Documento do edital não encontrado
+description: O identificador indicado como documento do edital não é de um documento deste processo.
+code: uniplus.selecao.processo_seletivo.documento_nao_encontrado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador indicado como documento do edital não corresponde a nenhum documento a
+publicar deste processo: ou o documento não existe, ou foi enviado para outro processo
+seletivo. A resposta não distingue os dois casos. A conferência acontece antes de qualquer gravação e é a
+mesma na publicação, na retificação em ato único e no fechamento da sessão editorial.
+A recusa sai com **422**.
+
+## Como resolver
+
+Use o identificador de um documento enviado, neste processo, com a finalidade de
+documento do edital. Se o arquivo ainda não foi enviado, faça o envio, confirme-o e
+repita a operação com o identificador recebido. Um documento enviado para outro
+processo não serve: envie-o de novo neste.
+
+Se o documento existe no processo mas o envio não foi confirmado, o código é outro
+([`documento_nao_confirmado`](./uniplus.selecao.processo_seletivo.documento_nao_confirmado.mdx)).

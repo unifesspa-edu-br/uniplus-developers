@@ -1,0 +1,33 @@
+---
+title: Um fato de escolha não tem origem conhecida para as opções
+sidebar_label: Fato de seleção sem origem de valores
+description: O campo é de escolha, mas o catálogo não declara valores para o fato e as opções não são do processo nem do bônus regional.
+code: uniplus.selecao.processo_seletivo.fato_de_selecao_sem_origem_de_valores
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um campo do formulário está vinculado como escolha (única ou múltipla), mas não há de
+onde tirar as opções que a pessoa candidata poderia escolher: o catálogo de fatos do
+candidato não declara valores para o fato, e a fonte das opções do campo não é o
+processo nem o bônus regional. A mensagem de detalhe cita o código do fato. A recusa
+sai com **422**, antes de gerar a versão.
+
+## Como resolver
+
+Retire o campo do formulário ou troque-o por um fato cujas opções existam
+(`PUT /api/selecao/admin/processos-seletivos/{id}/formularios/{finalidade}/itens`). Se
+o fato deveria oferecer opções, a correção é no catálogo de fatos do candidato, da
+gestão do cadastro. Repita a operação depois do ajuste.
