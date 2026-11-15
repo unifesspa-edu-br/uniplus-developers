@@ -1,0 +1,76 @@
+---
+title: A base legal do grupo no quadro de pesos por área é inválida
+sidebar_label: Base legal do grupo do quadro de pesos inválida
+description: 'A base legal do grupo do quadro de pesos por área passa de 500 caracteres ou contém o caractere nulo ou outro caractere que não é texto.'
+code: uniplus.selecao.grupo_peso_area_enem_congelado.base_legal_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1601'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1601
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A base legal da linha de Pesos por Área de um grupo passa de 500 caracteres, contados depois de
+aparar o texto e normalizá-lo, ou contém o caractere nulo ou outro caractere que não é texto. É o
+mesmo limite da coluna do cadastro que guarda a base legal.
+
+Na classificação baseada em ENEM com cálculo local pela média ponderada, o processo declara uma
+resolução de Pesos por Área e copia, do cadastro de Pesos por Área (Configuração), o quadro de
+pesos de cada grupo de área do ENEM: o grupo, a base legal da linha e, para cada área, o peso e o
+corte (a nota mínima da área, que pode não existir). A cópia é congelada com o processo; editar o
+cadastro depois não a altera, e quem quiser os valores novos redefine a classificação.
+
+O cadastro de Pesos por Área já confere esses valores ao gravar a linha, e a definição da
+classificação os confere de novo ao copiá-los. A recusa vem no campo `resolucaoPesoAreaEnem` e
+acumula, na mesma resposta, com as demais violações da classificação e dos outros grupos do
+quadro.
+
+Este mesmo código também aparece quando o sistema relê a configuração congelada da versão publicada:
+em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o
+descarte, a consulta dos formulários, as operações da inscrição, entre outras; a lista completa
+está no cabeçalho da página). Antes disso, o sistema confere a integridade dos bytes congelados:
+bytes alterados depois do congelamento são recusados por [`integridade_violada`](./uniplus.selecao.envelope_codec.integridade_violada.mdx) e não chegam a esta
+causa. Pelo caminho normal de gravação, a configuração congelada nunca traz esse defeito, porque a
+definição o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista
+`errors[]`, e se refere à versão congelada, não ao pedido enviado.
+Na releitura, a base legal acima do limite já é recusada antes, como [`envelope_malformado`](./uniplus.selecao.envelope_codec.envelope_malformado.mdx); só o texto com o
+caractere nulo ou com caractere que não é texto chega a esta causa.
+A base legal em branco tem causa própria ([`base_legal_obrigatoria`](./uniplus.selecao.grupo_peso_area_enem_congelado.base_legal_obrigatoria.mdx)).
+
+## Como resolver
+
+Corrija a linha de Pesos por Área da resolução declarada, no cadastro de Configuração, com a base legal de até 500 caracteres e sem caractere que não seja texto, e
+envie a definição da classificação de novo. Se a resposta trouxer mais de uma violação em
+`errors[]`, corrija todas antes de reenviar. O cadastro já recusa esse defeito ao gravar a linha: se ele chegou
+até aqui, a linha foi gravada por caminho que não passou por essa conferência, e a causa é
+investigada pela equipe técnica do Uni+.
+
+
+Se a recusa apareceu em uma operação que lê a configuração congelada (qualquer uma das listadas no
+cabeçalho, exceto a definição da classificação), o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e redefinir a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

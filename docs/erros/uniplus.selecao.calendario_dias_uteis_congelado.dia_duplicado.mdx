@@ -1,0 +1,59 @@
+---
+title: O calendário vigente traz o mesmo dia não útil mais de uma vez
+sidebar_label: Dia não útil repetido no calendário
+description: 'A cópia do calendário de dias úteis vigente recusa o dia que aparece mais de uma vez com a mesma abrangência e o mesmo recorte territorial.'
+code: uniplus.selecao.calendario_dias_uteis_congelado.dia_duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos:
+  - UNI-REQ-0080
+rastreio:
+  - label: 'uniplus-api#1140'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1140
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O calendário de dias úteis vigente traz o mesmo dia não útil mais de uma vez, com a mesma
+abrangência e o mesmo recorte territorial (município e UF). A mensagem informa a data repetida.
+
+O mesmo dia pode aparecer mais de uma vez quando a abrangência ou o recorte são diferentes: um
+feriado nacional que também é municipal são dois fatos, com fundamentos distintos. O que se recusa é
+o registro igual a outro em data, abrangência, município e UF. Dois registros iguais indicam
+cadastro inconsistente, e absorvê-los na cópia esconderia o defeito dentro de uma versão
+imutável.
+
+O calendário de dias úteis vigente é cadastrado no módulo Configuração, e a versão do processo
+congela uma cópia dele por valor, com a lista dos dias não úteis (UNI-REQ-0080). Ao copiá-lo, o
+sistema confere de novo cada dia e o conjunto, e recusa o que o cadastro não aceitaria. A recusa
+só vale para o processo que depende do calendário, isto é, o que tem janela de recurso (ver
+[calendário vigente ausente](./uniplus.selecao.processo_seletivo.calendario_vigente_ausente.mdx)); um processo sem contagem sobre dia útil segue normalmente, porque não usa o dado.
+
+A conferência vem depois das da localidade ([`localidade_ausente`](./uniplus.selecao.processo_seletivo.localidade_ausente.mdx)) e da convenção de contagem
+([`algoritmo_contagem_prazo_nao_declarado`](./uniplus.selecao.processo_seletivo.algoritmo_contagem_prazo_nao_declarado.mdx)), e antes das demais conferências de conformidade e do cronograma. A consulta de
+conformidade do processo mostra o item "Calendário de dias úteis vigente" como pendente enquanto o
+calendário vigente estiver nessa condição. Nada é gravado.
+
+Esta é a última conferência da cópia, depois das do identificador e da versão do calendário, e
+de a lista não estar vazia ([`sem_dia_nao_util`](./uniplus.selecao.calendario_dias_uteis_congelado.sem_dia_nao_util.mdx)).
+
+## Como resolver
+
+A causa não está na configuração do processo, e nada nela corrige a recusa: o dado vem do
+calendário de dias úteis vigente, cadastrado no módulo Configuração. Como a versão publicada
+congela o calendário por valor, a correção é na origem, antes de publicar ou retificar:
+cadastre um calendário (dataset) corrigido, que o cadastro confere ao criar, coloque-o em vigência
+e repita a operação.
+
+O cadastro recusa a repetição ao criar o calendário ([`data_duplicada_no_dataset`](./uniplus.configuracao.calendario_dias_uteis.data_duplicada_no_dataset.mdx)).
+Um calendário vigente nessa condição indica dado gravado por caminho que não passou por essa
+conferência, e a causa é investigada pela equipe técnica do Uni+.
