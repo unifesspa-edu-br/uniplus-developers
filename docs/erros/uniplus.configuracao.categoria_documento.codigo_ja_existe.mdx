@@ -1,0 +1,30 @@
+---
+title: 'Já existe uma categoria de documento ativa com este código'
+sidebar_label: 'Código da categoria já existe'
+description: 'O código da categoria de documento é único entre as categorias ativas; uma categoria removida libera o código.'
+code: uniplus.configuracao.categoria_documento.codigo_ja_existe
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma categoria de documento'
+  - 'Atualização de uma categoria de documento'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1341'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1341
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Já existe uma categoria de documento **ativa** com o código informado. O código é único entre as categorias que não foram removidas: uma categoria removida libera o código para uma nova.
+
+Na atualização a conferência só roda quando o código muda. Se dois cadastros usam o mesmo código ao mesmo tempo, o segundo recebe esta recusa, porque o armazenamento também garante a unicidade. Nada foi gravado.
+
+## Como resolver
+
+Use um código diferente. Se a categoria existente com esse código é a que você queria, altere-a em vez de criar outra.

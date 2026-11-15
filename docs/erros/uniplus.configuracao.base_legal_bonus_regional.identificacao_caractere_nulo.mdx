@@ -1,0 +1,28 @@
+---
+title: 'A identificação da base legal contém o caractere nulo'
+sidebar_label: 'Identificação com caractere nulo'
+description: 'A identificação da base legal não pode conter o caractere nulo (U+0000), que o armazenamento não aceita.'
+code: uniplus.configuracao.base_legal_bonus_regional.identificacao_caractere_nulo
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma base legal do Fator de Atenuação das Desigualdades de Acesso'
+  - 'Atualização de uma base legal do Fator de Atenuação das Desigualdades de Acesso'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1465'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1465
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cadastro da base legal do Fator de Atenuação das Desigualdades de Acesso (cadastrada como base legal de bônus regional) trouxe, em `identificacao`, o caractere nulo (U+0000). Esse caractere não é texto digitável: costuma vir de uma cópia de documento ou de uma integração que não tratou o conteúdo. O armazenamento não o aceita, e nada foi gravado.
+
+## Como resolver
+
+Remova o caractere nulo do texto de `identificacao` e envie de novo. Se o texto foi copiado de outro documento, cole-o primeiro em um editor de texto simples para descartar os caracteres de controle.

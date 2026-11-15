@@ -1,0 +1,30 @@
+---
+title: 'A regra de aplicabilidade da modalidade traz condição nula'
+sidebar_label: 'Regra de aplicabilidade malformada'
+description: 'Cada condição da regra de aplicabilidade precisa ser preenchida; uma condição nula torna a regra malformada.'
+code: uniplus.configuracao.modalidade.regra_de_aplicabilidade_malformada
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma modalidade (POST /api/configuracao/admin/modalidades)'
+  - 'Atualização de uma modalidade, inclusive as do catálogo legal fixo (PUT /api/configuracao/admin/modalidades/{id}), antes de a modalidade ser procurada'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1899'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1899
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de aplicabilidade traz uma condição nula, como em `[[null]]`. Uma cláusula sem nenhuma condição ou nula é recusada com outro código; este aparece quando a cláusula existe mas uma das suas condições está vazia. Nada foi gravado.
+
+Na atualização, esta conferência vem antes de a modalidade ser procurada: com a regra nessa condição a resposta é esta, mesmo que o identificador não exista. O [404 de modalidade não encontrada](./uniplus.configuracao.modalidade.nao_encontrada.mdx) só prevalece quando o conteúdo passa por esta e pelas demais conferências de campo.
+
+## Como resolver
+
+Preencha cada condição com `fato`, `operador` e `valor`, ou retire a condição nula da cláusula.

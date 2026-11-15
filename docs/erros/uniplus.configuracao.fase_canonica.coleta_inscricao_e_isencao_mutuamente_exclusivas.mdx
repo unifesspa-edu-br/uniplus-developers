@@ -1,0 +1,31 @@
+---
+title: 'Uma fase não coleta inscrição e solicitação de isenção ao mesmo tempo'
+sidebar_label: 'Coleta de inscrição e de isenção na mesma fase'
+description: 'Uma fase canônica não pode marcar, ao mesmo tempo, a coleta de inscrição e a coleta de solicitação de isenção.'
+code: uniplus.configuracao.fase_canonica.coleta_inscricao_e_isencao_mutuamente_exclusivas
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma fase canônica (POST /api/configuracao/admin/fases-canonicas)'
+  - 'Atualização de uma fase canônica (PUT /api/configuracao/admin/fases-canonicas/{id}), depois de a fase ser encontrada'
+requisitos:
+  - UNI-REQ-0106
+rastreio:
+  - label: 'uniplus-api#1348'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1348
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A fase canônica veio com `coletaInscricao` e `coletaSolicitacaoIsencao` verdadeiros ao mesmo tempo. O pedido de isenção da taxa e a inscrição têm janelas distintas, cada uma na sua fase, e por isso uma fase não pode ser as duas coisas. Nada foi gravado.
+
+Na atualização, a fase é procurada antes desta conferência: só o nome, a descrição, a base legal e a origem da data são conferidos antes da busca. Com um identificador inexistente a resposta é [fase canônica não encontrada](./uniplus.configuracao.fase_canonica.nao_encontrada.mdx), mesmo que o conteúdo enviado também tivesse este problema.
+
+## Como resolver
+
+Deixe verdadeira só uma das marcas. A solicitação de isenção pertence à fase `SOLICITACAO_ISENCAO`; a coleta da inscrição pertence à fase em que a inscrição é recebida. Consulte também [apenas a fase de isenção abre o pedido](./uniplus.configuracao.fase_canonica.solicitacao_isencao_apenas_na_fase_de_isencao.mdx).

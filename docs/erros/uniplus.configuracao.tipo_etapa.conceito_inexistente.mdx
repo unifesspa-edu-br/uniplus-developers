@@ -1,0 +1,30 @@
+---
+title: 'Há conceito admitido que não existe no catálogo de tipos de conceito'
+sidebar_label: 'Conceito admitido inexistente'
+description: 'Todo código listado em conceitosAdmitidos precisa corresponder a um tipo de conceito cadastrado.'
+code: uniplus.configuracao.tipo_etapa.conceito_inexistente
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de um tipo de etapa (POST /api/configuracao/admin/tipos-etapa)'
+  - 'Atualização de um tipo de etapa (PUT /api/configuracao/admin/tipos-etapa/{id}), antes de o tipo de etapa ser procurado'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2431'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Algum código listado em `conceitosAdmitidos` não corresponde a nenhum tipo de conceito do catálogo. Os códigos são comparados depois de removidos os espaços das pontas, e um item em branco também conta como inexistente. A resposta indica só a espécie da recusa, no campo `conceitosAdmitidos`: ela **não repete** o código informado nem diz qual item da lista falhou. Nada foi gravado.
+
+Na atualização, esta conferência vem antes de o tipo de etapa ser procurado: com o conteúdo nessa condição a resposta é esta, mesmo que o identificador não exista. O [404 de tipo de etapa não encontrado](./uniplus.configuracao.tipo_etapa.nao_encontrado.mdx) só prevalece quando os campos e os conceitos admitidos são válidos.
+
+## Como resolver
+
+Compare cada código enviado em `conceitosAdmitidos` com a listagem de tipos de conceito e corrija os que não constam nela, conferindo grafia, caixa e itens em branco. Se o conceito ainda não está cadastrado, cadastre-o antes e repita o pedido.

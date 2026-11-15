@@ -1,0 +1,28 @@
+---
+title: 'A base legal da referência é obrigatória'
+sidebar_label: 'Base legal da referência obrigatória'
+description: 'A referência de reserva demográfica precisa citar a base legal dos percentuais.'
+code: uniplus.configuracao.referencia_reserva_demografica.base_legal_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'Criação de uma referência de reserva demográfica'
+  - 'Atualização de uma referência de reserva demográfica'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#593'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/593
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A referência de reserva demográfica chegou sem base legal: o campo `baseLegal` veio ausente, vazio ou só com espaços. A base legal diz em que norma se apoiam os percentuais. Nada foi gravado.
+
+## Como resolver
+
+Preencha `baseLegal` com a norma ou a fonte dos percentuais, com até 500 caracteres.
