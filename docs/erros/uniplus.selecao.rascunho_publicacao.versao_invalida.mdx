@@ -1,0 +1,42 @@
+---
+title: A versão do formato do rascunho da publicação deve ser um inteiro positivo
+sidebar_label: Versão do rascunho da publicação inválida
+description: 'O rascunho da publicação foi enviado com a versão do formato igual a zero ou negativa.'
+code: uniplus.selecao.rascunho_publicacao.versao_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da publicação do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1514'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1514
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido de gravação do rascunho da publicação trouxe `versao` igual a zero ou negativa.
+
+O rascunho da publicação guarda, para quem o escreve e em cada processo seletivo, o bloco do ato
+que a pessoa já transcreveu e ainda não publicou. O `conteudo` é um documento que o servidor guarda e
+devolve sem interpretar, e a `versao` identifica o formato desse conteúdo: quem a define e a
+interpreta é o cliente, para saber, numa tela futura, o que consegue reidratar e o que teria de
+traduzir. O servidor só exige que ela seja um inteiro positivo.
+
+Nada foi gravado, e o rascunho que já existia continua como estava. A conferência vem depois de o
+servidor encontrar o processo
+([`nao_encontrado`](./uniplus.selecao.processo_seletivo.nao_encontrado.mdx)) e antes da conferência do
+tamanho do conteúdo
+([`conteudo_muito_grande`](./uniplus.selecao.rascunho_publicacao.conteudo_muito_grande.mdx)). O
+conteúdo em si não é conferido campo a campo, porque um formulário preenchido pela metade é o caso de
+uso do rascunho; a validação do conteúdo é a da publicação.
+
+## Como resolver
+
+Envie `versao` como um inteiro positivo, o mesmo que identifica o formato do `conteudo` enviado, e
+repita a gravação.

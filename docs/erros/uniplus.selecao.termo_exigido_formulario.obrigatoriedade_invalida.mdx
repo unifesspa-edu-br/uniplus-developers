@@ -1,0 +1,44 @@
+---
+title: A obrigatoriedade do termo exigido não é coerente com o predicado
+sidebar_label: Obrigatoriedade do termo inválida
+description: 'A obrigatoriedade do termo é SEMPRE ou NUNCA, sem predicado, ou QUANDO, com predicado; a combinação enviada não é uma delas.'
+code: uniplus.selecao.termo_exigido_formulario.obrigatoriedade_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação dos termos do formulário
+requisitos:
+  - UNI-REQ-0086
+  - UNI-REQ-0145
+rastreio:
+  - label: 'uniplus-api#1695'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1695
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um termo da lista enviada para o formulário traz uma obrigatoriedade que não é coerente com o
+predicado. A obrigatoriedade diz quando o termo precisa ser aceito, e só tem três formas:
+
+- `SEMPRE`, sem predicado: o termo é obrigatório para todo candidato;
+- `NUNCA`, sem predicado: o termo é apresentado, mas facultativo;
+- `QUANDO`, com `predicadoObrigatoriedade`: o termo é obrigatório só para quem satisfaz a condição,
+  que cita respostas anteriores do candidato ou fatos derivados pelo sistema.
+
+A recusa vem quando o valor não é um dos três, quando `QUANDO` chega sem predicado ou quando `SEMPRE`
+ou `NUNCA` chegam com predicado. A resposta traz o erro no campo `termos[i].obrigatoriedade`, em
+`errors[]`, junto com as demais violações de forma dos termos. Um termo com violação de forma não é
+conferido contra o catálogo de termos
+([`versao_nao_encontrada`](./uniplus.selecao.termo_exigido_formulario.versao_nao_encontrada.mdx)), e
+nada foi alterado.
+
+## Como resolver
+
+Corrija a obrigatoriedade do termo apontado: informe `SEMPRE` ou `NUNCA` e retire o
+`predicadoObrigatoriedade`, ou informe `QUANDO` junto com o predicado. Depois, envie os termos de novo.
+Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de reenviar.

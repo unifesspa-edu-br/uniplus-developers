@@ -1,0 +1,63 @@
+---
+title: A árvore de exigências documentais está malformada
+sidebar_label: Árvore de exigências malformada
+description: 'A árvore de exigências documentais, congelada na versão publicada ou viva no processo em edição, repete uma exigência entre folhas ou aninha uma repetição por entidade dentro de outra.'
+code: uniplus.selecao.resolvedor_arvore_satisfacao.arvore_estruturalmente_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Avaliação da inscrição
+  - Salvamento do rascunho da inscrição
+  - Envio da inscrição do candidato
+  - Pré-visualização do processo seletivo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#920'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/920
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Ao avaliar os documentos exigidos, o sistema percorre a árvore de exigências documentais do processo.
+Antes de decidir qualquer coisa, ele confere se a árvore tem a forma que a definição sempre produz, e a
+árvore avaliada não tem. A mensagem diz qual dos dois casos ocorreu:
+
+- a mesma exigência aparece em mais de uma folha: cada exigência precisa de identidade única, para que
+  o documento apresentado seja correlacionado a uma folha só;
+- uma subárvore marcada como repetida por entidade (por exemplo, por membro do grupo familiar) contém
+  outra subárvore também repetida: a repetição não aninha, e avaliar assim apagaria em silêncio as
+  consequências da repetição interna.
+
+A árvore avaliada depende da operação:
+
+- Na avaliação, no salvamento do rascunho e no envio da inscrição, é a árvore congelada na versão
+  publicada do processo. A recusa se refere à configuração congelada, e não ao que a pessoa preencheu:
+  nada da inscrição enviada é gravado por este pedido, e repetir o pedido não muda o resultado. A
+  definição dos documentos exigidos monta uma exigência nova para cada folha e recusa a repetição
+  aninhada
+  ([`repeticao_de_entidade_aninhada`](./uniplus.selecao.no_exigencia.repeticao_de_entidade_aninhada.mdx)),
+  e a integridade dos bytes congelados é conferida antes
+  ([`integridade_violada`](./uniplus.selecao.envelope_codec.integridade_violada.mdx)). Por isso esta
+  causa só aparece se a configuração foi congelada com esse defeito.
+- Na pré-visualização do processo seletivo, é a árvore viva do processo, em rascunho ou em sessão de
+  retificação, e não o envelope publicado. A recusa se refere à configuração em edição, que ainda pode
+  ser alterada, e nada é gravado.
+
+Uma folha sem exigência é recusada antes, na releitura do envelope congelado, como
+[`envelope_malformado`](./uniplus.selecao.envelope_codec.envelope_malformado.mdx).
+
+## Como resolver
+
+Nas operações da inscrição, o pedido enviado agora não é a causa: o sistema recusou a configuração
+congelada da versão publicada, e a pessoa que se inscreve não consegue corrigi-la. A causa é investigada
+pela equipe técnica do Uni+.
+
+Na pré-visualização, a causa está na configuração viva do processo. Confira os documentos exigidos
+definidos nele: cada folha precisa de uma exigência própria, e nenhuma subárvore repetida por entidade
+pode conter outra. Se a árvore parecer correta, a causa é investigada pela equipe técnica do Uni+.
+Depois de corrigir, repita a pré-visualização.

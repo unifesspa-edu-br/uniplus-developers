@@ -1,0 +1,62 @@
+---
+title: O tipo de etapa congelado contém o caractere nulo
+sidebar_label: Tipo de etapa congelado com caractere nulo
+description: 'O código ou o nome do tipo de uma etapa congelada contém o caractere nulo (U+0000).'
+code: uniplus.selecao.tipo_etapa_snapshot.caractere_nulo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Abertura de retificação
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
+  - Consulta do formulário renderizável do processo
+  - Consulta do formulário da inscrição
+  - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
+  - Avaliação da inscrição
+  - Início, confirmação e remoção de envio de documento da inscrição
+  - Consulta e emissão do comprovante da inscrição
+  - Consulta administrativa da inscrição e dos documentos dela
+  - Publicação de produto do edital e listagem de produtos previstos do processo
+  - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código ou o nome do tipo de uma etapa, na configuração congelada da versão publicada, contém o
+caractere nulo (`U+0000`). O caractere nulo corrompe textos em bancos e protocolos que o tratam como
+terminador, e por isso é recusado em todo texto do tipo.
+
+Cada etapa do processo congela uma cópia do tipo de etapa escolhido no cadastro de Configuração:
+o que identifica o tipo (origem, código, nome, se a nota vem do ENEM) e o que ele admite como caráter da
+etapa, isto é, se as etapas do tipo podem compor a nota final e se podem eliminar candidato. A cópia
+congelada não muda quando o cadastro muda depois.
+
+O cadastro de tipos de etapa já recusa o caractere nulo no código
+([`codigo_com_caractere_nulo`](./uniplus.configuracao.tipo_etapa.codigo_com_caractere_nulo.mdx)) e no
+nome ([`nome_com_caractere_nulo`](./uniplus.configuracao.tipo_etapa.nome_com_caractere_nulo.mdx)).
+
+Este código aparece quando o sistema relê a configuração congelada da versão publicada: em toda
+operação que lê essa configuração e devolve a violação ao chamador (a retificação, o descarte, a
+consulta dos formulários, as operações da inscrição, entre outras; a lista completa está no cabeçalho
+da página). Antes disso, o sistema confere a integridade dos bytes congelados: bytes alterados depois
+do congelamento são recusados por [`integridade_violada`](./uniplus.selecao.envelope_codec.integridade_violada.mdx) e não chegam a esta
+causa. Pelo caminho normal de gravação, a configuração congelada nunca traz esse defeito, porque o
+cadastro de tipos de etapa o recusa antes. A recusa sai como violação única, sem a lista `errors[]`, e
+se refere à versão congelada, não ao pedido enviado.
+Na releitura, o código ou o nome em branco ou acima do limite, e o texto com caractere que não é texto,
+exceto o nulo, já são recusados antes, como
+[`envelope_malformado`](./uniplus.selecao.envelope_codec.envelope_malformado.mdx); só o texto com o
+caractere nulo chega a esta causa.
+
+## Como resolver
+
+O pedido enviado agora não é a causa: o sistema recusou a configuração congelada da versão publicada,
+e redefinir as etapas do processo não a corrige. A causa é investigada pela equipe técnica do Uni+.
