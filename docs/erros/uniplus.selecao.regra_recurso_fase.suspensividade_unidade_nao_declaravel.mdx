@@ -1,0 +1,34 @@
+---
+title: A unidade da suspensividade não é declarável
+sidebar_label: Unidade da suspensividade inválida
+description: O efeito suspensivo de uma instância da regra de recurso da fase foi declarado com uma unidade que não é horas, dias corridos nem dias úteis.
+code: uniplus.selecao.regra_recurso_fase.suspensividade_unidade_nao_declaravel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Configuração do cronograma — regra de recurso da fase
+requisitos:
+  - UNI-REQ-0080
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O par do **efeito suspensivo** de uma das instâncias da regra de recurso da fase
+veio com uma unidade que não é nenhuma das três admitidas, como `Nenhuma`, que
+é uma ausência de unidade disfarçada de resposta. Uma unidade assim não diz em
+que relógio a janela corre. A mensagem de detalhe diz de qual instância se
+trata, a 1ª ou a 2ª, e traz a unidade recebida. Nada foi gravado.
+
+A suspensividade admite três unidades: **horas**, **dias corridos** e **dias
+úteis**. Diferente do prazo de interposição, que não aceita dia corrido, aqui
+os três valem, porque são relógios distintos com regras distintas.
+
+## Como resolver
+
+Informe uma das três unidades para a instância apontada. Se aquela instância não
+deve bloquear, deixe em branco o valor e a unidade dela.

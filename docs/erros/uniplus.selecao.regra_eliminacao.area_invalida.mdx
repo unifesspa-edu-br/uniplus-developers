@@ -1,0 +1,33 @@
+---
+title: A área do corte não é um código de área do ENEM bem formado
+sidebar_label: Área do corte mal formada
+description: O código de área informado na regra de corte em área está em branco, é longo demais ou usa caracteres que o código de área não admite.
+code: uniplus.selecao.regra_eliminacao.area_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo (`PUT /api/selecao/processos-seletivos/{id}/classificacao`)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma regra de eliminação `ELIM-CORTE-EM-AREA` informou, em `areaCodigo`, um código
+de área que não tem a forma exigida. Esse código identifica a área do ENEM em que
+o candidato precisa atingir o mínimo, e deve ter até 30 caracteres, formados só
+por letras maiúsculas sem acento, algarismos e sublinhado. Um código em branco
+também é recusado.
+
+Esta conferência olha só a forma do código. Se a classificação usa o quadro de
+pesos por área, a área do corte ainda precisa existir nesse quadro, e essa
+conferência é outra, com recusa própria. A primeira regra com problema
+interrompe a conferência, sem acumular com as demais. Nada foi gravado.
+
+## Como resolver
+
+Corrija o `areaCodigo` da regra para um código de área bem formado, em letras maiúsculas, sem acento e sem espaços. Quando a classificação já tem quadro de pesos por área, escreva o código exatamente como o quadro o define.

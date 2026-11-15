@@ -1,0 +1,34 @@
+---
+title: O código da opção é obrigatório e respeita o tamanho máximo
+sidebar_label: Código da opção inválido
+description: Uma opção declarada para o fato veio sem código, só com espaços, ou com código acima do tamanho máximo.
+code: uniplus.selecao.opcao_declarada_fato.codigo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração das opções de um fato do processo seletivo (`PUT /api/selecao/processos-seletivos/{id}/fatos/{fatoCodigo}/opcoes`)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo declara as opções de um fato cuja fonte dos valores é o próprio
+processo, como as edições do ENEM aceitas. Cada opção tem um código, e o código
+de pelo menos uma das opções enviadas não pode ser usado: veio em branco, só
+com espaços, ou passou de 60 caracteres. Os espaços do início e do fim não
+contam.
+
+A conferência percorre a lista inteira antes de recusar. A resposta traz um
+erro por opção com problema, cada um indicando a posição da opção na lista
+(`opcoes[n].codigo`), e nada foi gravado, nem das opções que estavam corretas.
+
+## Como resolver
+
+Informe, em cada opção apontada, um código preenchido com no máximo 60
+caracteres, e envie a lista completa de novo. O pedido substitui todas as opções
+do fato, então a lista enviada precisa trazer também as opções que já valiam.

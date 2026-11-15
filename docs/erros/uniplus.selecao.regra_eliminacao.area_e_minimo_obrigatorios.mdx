@@ -1,0 +1,36 @@
+---
+title: AreaCodigo e Minimo são obrigatórios para a regra ELIM-CORTE-EM-AREA
+sidebar_label: Área e mínimo ausentes no corte em área
+description: A regra que elimina por corte em uma área do ENEM precisa dos dois campos juntos e não aceita os campos de outra regra.
+code: uniplus.selecao.regra_eliminacao.area_e_minimo_obrigatorios
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de classificação do processo seletivo (`PUT /api/selecao/processos-seletivos/{id}/classificacao`)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma regra de eliminação com o código `ELIM-CORTE-EM-AREA` foi enviada com os
+campos errados. Essa regra elimina o candidato cuja nota em uma área do ENEM
+fica abaixo de um mínimo, e por isso exige `areaCodigo` e `minimo`. O erro
+ocorre quando falta um dos dois, ou quando a regra traz `etapaRef` ou
+`notaMinima`, que pertencem a `ELIM-NOTA-MINIMA-ETAPA` e não se aplicam aqui.
+As condições são conferidas juntas.
+
+Esta conferência só verifica que os campos certos foram informados. Se o
+`areaCodigo` está escrito num formato inválido, ou se o `minimo` é negativo,
+a recusa vem de causas próprias, que aparecem depois desta.
+A primeira regra com problema interrompe a conferência, sem acumular com as
+demais. Nada foi gravado.
+
+## Como resolver
+
+Para toda regra `ELIM-CORTE-EM-AREA`, informe `areaCodigo` e `minimo`, e não
+informe `etapaRef` nem `notaMinima`.
