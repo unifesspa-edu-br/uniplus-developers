@@ -1,0 +1,38 @@
+---
+title: A referência da base legal do documento exigido é obrigatória
+sidebar_label: Referência da base legal obrigatória
+description: Uma base legal do documento exigido veio sem referência ou com a referência em branco.
+code: uniplus.selecao.documento_exigido_base_legal.referencia_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Aplicação de modelo de formulário
+requisitos:
+  - UNI-REQ-0059
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada documento exigido pode ter várias bases legais, e cada uma traz a referência da norma, a
+abrangência e o status. Uma base legal de documento exigido veio sem referência, ou com a
+referência em branco.
+
+É uma conferência de forma. Ela examina cada base legal do documento, e os três defeitos
+possíveis de uma mesma base (referência, abrangência e status) aparecem juntos; a conferência
+para na primeira exigência que tem defeito. O campo apontado na resposta traz a posição da
+base legal na lista.
+
+Para a base legal de um grupo de alternativas (OU), o erro correspondente é
+[`no_exigencia_base_legal.referencia_obrigatoria`](./uniplus.selecao.no_exigencia_base_legal.referencia_obrigatoria.mdx).
+
+## Como resolver
+
+Informe a referência da norma na base legal apontada, ou retire a base legal que não é
+necessária. Na aplicação de um modelo de formulário, a base legal vem do modelo: escolha outro
+modelo ou peça a revisão dele.

@@ -1,0 +1,33 @@
+---
+title: O ETag do envio é obrigatório
+sidebar_label: ETag obrigatório
+description: A confirmação do envio veio sem o ETag, ou com o ETag em branco.
+code: uniplus.selecao.documento_da_inscricao.etag_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento da inscrição
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O arquivo do candidato chega ao Uni+ em três passos: o início do envio, que devolve o endereço
+de envio; o envio do arquivo direto ao armazenamento, sem passar pela API; e a confirmação. O
+armazenamento devolve um ETag ao receber o arquivo, e a confirmação precisa dele para que a
+verificação confira a versão exata do arquivo que foi enviado. A confirmação veio sem ETag ou
+com ele em branco.
+
+A conferência do ETag vem depois de a inscrição e o arquivo serem encontrados e antes da
+conferência da situação do arquivo (ver
+[`status_invalido_para_confirmacao`](./uniplus.selecao.documento_da_inscricao.status_invalido_para_confirmacao.mdx)).
+
+## Como resolver
+
+Informe na confirmação o ETag que a resposta do armazenamento devolveu ao envio do arquivo. Se
+o ETag não foi guardado, envie o arquivo de novo, a partir de um novo início de envio.

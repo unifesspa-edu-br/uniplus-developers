@@ -1,0 +1,43 @@
+---
+title: Todos os documentos de um grupo pertencem ao mesmo formulário
+sidebar_label: Grupo com formulários diferentes
+description: Um grupo de exigências reúne documentos de formulários diferentes, mesmo quando todos são exigidos na mesma fase.
+code: uniplus.selecao.no_exigencia.grupo_com_finalidades_diferentes
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada documento exigido pertence a um formulário do candidato (a finalidade): inscrição,
+isenção de taxa ou habilitação. Os documentos de um mesmo grupo (E ou OU) precisam pertencer
+todos ao mesmo formulário. O grupo apontado mistura documentos de formulários diferentes, ou
+documentos com formulário e documentos sem formulário. A inscrição e a isenção podem dividir a
+mesma fase, e por isso a regra olha o formulário, e não só a fase.
+
+A conferência acontece na criação do grupo, depois de
+[`grupo_com_fases_diferentes`](./uniplus.selecao.no_exigencia.grupo_com_fases_diferentes.mdx)
+e antes de
+[`repeticao_de_entidade_aninhada`](./uniplus.selecao.no_exigencia.repeticao_de_entidade_aninhada.mdx).
+A primeira violação encontrada interrompe o processamento.
+
+No descarte de retificação, o grupo é reconstruído a partir da configuração congelada, e a
+configuração congelada traz um grupo com documentos de formulários diferentes.
+
+## Como resolver
+
+Na definição, separe os documentos em grupos distintos, um por formulário, ou ajuste o
+formulário de cada documento para que o grupo tenha só um.
+
+No descarte de retificação, a versão congelada não pode ser reescrita, e corrigir a
+configuração em edição não resolve a recusa. A causa é investigada pela equipe técnica do
+Uni+.

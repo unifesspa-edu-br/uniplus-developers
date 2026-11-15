@@ -1,0 +1,30 @@
+---
+title: O arquivo enviado está vazio
+sidebar_label: Arquivo vazio
+description: O tamanho declarado no início do envio é zero ou negativo.
+code: uniplus.selecao.documento_da_inscricao.arquivo_vazio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Início do envio de documento da inscrição
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O envio declarou para o arquivo um tamanho igual a zero ou negativo. O sistema confere o
+tamanho declarado no início do envio e não lê o conteúdo do arquivo nessa etapa.
+
+A recusa de tamanho e a de formato (ver
+[`formato_nao_aceito_pela_exigencia`](./uniplus.selecao.documento_da_inscricao.formato_nao_aceito_pela_exigencia.mdx))
+são conferidas juntas, e a resposta pode trazer as duas.
+
+## Como resolver
+
+Confira se o arquivo escolhido tem conteúdo, informe o tamanho real dele e inicie o envio de
+novo.

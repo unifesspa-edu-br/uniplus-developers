@@ -1,0 +1,36 @@
+---
+title: A consequência de indeferimento da exigência não é uma das quatro previstas
+sidebar_label: Consequência de indeferimento inválida
+description: A consequência de indeferimento do documento exigido deve ser ELIMINA, RECLASSIFICA_AC, REMOVE_VANTAGEM ou PENDENCIA_REENVIO.
+code: uniplus.selecao.documento_exigido.consequencia_indeferimento_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0070
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A consequência de indeferimento de um documento exigido só aceita quatro valores: `ELIMINA`,
+`RECLASSIFICA_AC`, `REMOVE_VANTAGEM` ou `PENDENCIA_REENVIO`. A definição trouxe um documento
+com uma consequência que não é nenhum deles.
+
+É uma conferência de forma, feita antes de o sistema consultar o tipo de documento, as fases ou
+as demais configurações do processo. Ela examina as exigências na ordem recebida e para na
+primeira que tem defeito; dentro dessa exigência, os defeitos de forma aparecem juntos.
+
+A consequência é opcional: o documento que não carrega consequência de indeferimento não a
+informa. Para a consequência de um grupo de alternativas (OU), o erro correspondente é
+[`no_exigencia.consequencia_invalida`](./uniplus.selecao.no_exigencia.consequencia_invalida.mdx).
+
+## Como resolver
+
+Informe uma das quatro consequências previstas ou omita o campo, se o documento não carrega
+consequência de indeferimento. Depois, envie a definição de novo.

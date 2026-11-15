@@ -1,0 +1,49 @@
+---
+title: A etapa que coleta o documento não acontece na fase em que ele é exigido
+sidebar_label: Etapa fora da fase da exigência
+description: A etapa em que o documento é coletado acontece em outra fase que não a da exigência.
+code: uniplus.selecao.documento_exigido.etapa_nao_pertence_a_fase
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Definição de etapas do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um documento exigido declara a fase em que é exigido e, opcionalmente, a etapa em que é
+coletado, e a etapa tem de acontecer na mesma fase da exigência. Isso deixou de valer em uma
+destas situações:
+
+- na definição dos documentos exigidos, a etapa indicada acontece em outra fase;
+- na definição das etapas do processo, uma etapa que já é citada por uma exigência foi movida
+  para outra fase. A mensagem de detalhe diz que a etapa coleta o documento na fase da exigência
+  e não pode passar para outra fase sem antes reconfigurar a exigência;
+- no descarte de retificação, a configuração congelada que seria restaurada traz a etapa numa
+  fase diferente da fase da exigência.
+
+Na definição dos documentos, o sistema confere o vínculo de cada exigência nesta ordem: a fase,
+o formulário a que o documento pertence, a etapa no processo (ver
+[`etapa_nao_pertence_ao_processo`](./uniplus.selecao.documento_exigido.etapa_nao_pertence_ao_processo.mdx))
+e a etapa na fase. Esta é a última, e o primeiro defeito encontrado interrompe a definição.
+
+## Como resolver
+
+Na definição dos documentos, indique uma etapa que aconteça na fase do documento, ou mude a
+fase do documento para a da etapa.
+
+Na definição das etapas, reconfigure antes a exigência que cita a etapa (outra etapa, nenhuma
+etapa ou outra fase) e só então mova a etapa de fase; ou mantenha a etapa na fase em que ela
+está.
+
+No descarte de retificação, a versão congelada não pode ser reescrita, e corrigir a
+configuração em edição não resolve a recusa. A causa é investigada pela equipe técnica do
+Uni+.

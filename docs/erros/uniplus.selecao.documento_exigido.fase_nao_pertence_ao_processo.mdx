@@ -1,0 +1,38 @@
+---
+title: A fase informada não pertence ao cronograma deste processo
+sidebar_label: Fase fora do cronograma do processo
+description: A fase em que o documento é exigido não está no cronograma do processo.
+code: uniplus.selecao.documento_exigido.fase_nao_pertence_ao_processo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Todo documento exigido é exigido numa fase do cronograma do processo. A fase informada para o
+documento não está no cronograma deste processo.
+
+Para cada exigência, o sistema confere o vínculo nesta ordem: a fase, o formulário a que o
+documento pertence, a etapa no processo e a etapa na fase. Esta é a primeira dessas
+conferências, e o primeiro defeito encontrado interrompe a definição. Na definição, ela vem
+depois das conferências de forma e da montagem de cada exigência.
+
+No descarte de retificação, a configuração congelada que seria restaurada traz uma exigência
+cuja fase não está no cronograma congelado, e o descarte é recusado.
+
+## Como resolver
+
+Na definição, informe uma fase que esteja no cronograma deste processo.
+
+No descarte de retificação, a versão congelada não pode ser reescrita, e corrigir a
+configuração em edição não resolve a recusa. A causa é investigada pela equipe técnica do
+Uni+.

@@ -1,0 +1,42 @@
+---
+title: Arquivo não encontrado na inscrição
+sidebar_label: Arquivo não encontrado
+description: O arquivo citado não foi encontrado para quem o pediu, e a resposta é a mesma para o arquivo inexistente e para o que o solicitante não pode acessar.
+code: uniplus.selecao.documento_da_inscricao.arquivo_nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Confirmação do envio de documento da inscrição
+  - Remoção de arquivo do rascunho da inscrição
+  - Acesso do candidato ao próprio arquivo da inscrição
+  - Acesso administrativo a documento da inscrição
+requisitos:
+  - UNI-REQ-0130
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O arquivo citado não foi encontrado para quem o pediu. A resposta é propositalmente a mesma
+quando o arquivo não existe e quando ele existe, mas pertence a outra inscrição ou a outro
+processo, ou o solicitante não pode acessá-lo: assim o sistema não revela a existência de
+arquivo de terceiros. A resposta não diz qual desses casos ocorreu, e esta página também não.
+
+O erro aparece na confirmação e na remoção do arquivo, no acesso do candidato ao próprio
+arquivo e na consulta administrativa a documento da inscrição. O acesso ao documento é
+restrito: o candidato vê os arquivos que enviou. A consulta administrativa só alcança arquivo
+de inscrição já enviada (o de inscrição em rascunho é recusado) e exige duas permissões
+cumulativas: a de consultar inscrições na unidade dona do processo e a que a classificação de
+proteção do arquivo, congelada com a exigência, pede.
+
+## Como resolver
+
+Confira o identificador do arquivo e a inscrição em que ele foi enviado. O candidato deve
+consultar os arquivos da própria inscrição. Quem consulta pela área administrativa deve
+conferir o identificador, se a inscrição já foi enviada, se tem a permissão de consultar
+inscrições na unidade dona do processo e se tem a permissão que a classificação de proteção do
+arquivo pede; a gestão de acessos concede as permissões que faltarem.

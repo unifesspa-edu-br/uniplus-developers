@@ -1,0 +1,34 @@
+---
+title: A exigência documental precisa declarar a quem se aplica
+sidebar_label: Aplicabilidade obrigatória
+description: O documento exigido veio sem aplicabilidade ou com um valor que não é GERAL nem CONDICIONAL.
+code: uniplus.selecao.documento_exigido.aplicabilidade_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de documentos exigidos do processo seletivo
+requisitos:
+  - UNI-REQ-0057
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Todo documento exigido declara a quem se aplica: `GERAL`, quando é exigido de todos, ou
+`CONDICIONAL`, quando é exigido só de quem satisfaz as condições configuradas. O sistema não
+deduz isso da ausência de condições. A definição trouxe um documento sem essa declaração, ou
+com um valor que não é nenhum dos dois.
+
+É uma conferência de forma, feita antes de o sistema consultar o tipo de documento, as fases ou
+as demais configurações do processo. Ela examina as exigências na ordem recebida e para na
+primeira que tem defeito; dentro dessa exigência, os defeitos de forma aparecem juntos (por
+exemplo, a aplicabilidade ausente e o tamanho máximo inválido).
+
+## Como resolver
+
+Informe `GERAL` ou `CONDICIONAL` para o documento apontado. Em `CONDICIONAL`, informe também as
+condições que decidem de quem o documento é exigido. Depois, envie a definição de novo.
