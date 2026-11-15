@@ -12,6 +12,8 @@ requisitos: []
 rastreio:
   - label: 'uniplus-api#2142'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2142
+  - label: 'uniplus-api#2437'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2437
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -20,8 +22,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Uma pessoa é identificada, nas concessões, pelo par formado pelo emissor da identidade e pelo identificador dela nesse emissor (o campo `sub`). O filtro chegou com só um dos dois, e com apenas metade do par o sistema poderia confundir pessoas diferentes. Nenhuma concessão foi listada.
+Uma pessoa é identificada, nas concessões, pelo par formado pelo emissor da identidade (`emissor`) e pelo identificador da conta dela nesse emissor (`contaId`). O filtro chegou com só um dos dois, e com apenas metade do par o sistema poderia confundir pessoas diferentes. Nenhuma concessão foi listada.
 
 ## Como resolver
 
-Informe os dois dados da pessoa ou nenhum. Para encontrar uma pessoa, abra uma concessão dela e copie o par completo, ou retire o filtro e localize a concessão pela lista.
+Informe `emissor` e `contaId` juntos, ou nenhum dos dois. Para encontrar uma pessoa, abra uma concessão dela e copie o par completo, ou retire o filtro e localize a concessão pela lista.

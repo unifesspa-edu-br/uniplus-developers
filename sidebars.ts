@@ -162,6 +162,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.processo_seletivo.janela_de_isencao_sem_prazo',
         'erros/uniplus.selecao.processo_seletivo.janela_de_isencao_nao_abre_com_a_inscricao',
         'erros/uniplus.selecao.processo_seletivo.janela_de_isencao_nao_termina_antes_da_inscricao',
+        'erros/uniplus.selecao.inscricao.conta_id_obrigatorio',
         'erros/uniplus.selecao.inscricao.endereco_cep_de_outra_cidade',
         'erros/uniplus.selecao.inscricao.endereco_cep_nao_encontrado',
         'erros/uniplus.selecao.inscricao.nome_social_ausente_na_conta',
