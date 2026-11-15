@@ -1,0 +1,33 @@
+---
+title: A data informada está fora dos limites que o campo admite
+sidebar_label: Data fora da faixa
+description: A data respondida fica antes do mínimo ou depois do máximo que o formulário admite para o campo.
+code: uniplus.selecao.inscricao.data_fora_da_faixa
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0145
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O formulário pode limitar as datas de um campo com um mínimo, um máximo ou os
+dois (UNI-REQ-0145). Cada limite é uma data fixa ou é contado a partir do dia
+do envio. A data respondida é válida, mas fica fora desses limites, e a recusa
+diz qual intervalo é aceito, em dd/mm/aaaa. Como o limite pode contar do dia
+do envio, a mesma data pode ser aceita num dia e recusada em outro.
+
+## Como resolver
+
+Informe uma data dentro do intervalo indicado na mensagem e salve ou envie de
+novo. Se a data está correta e mesmo assim é recusada, o limite do campo é uma
+regra do formulário do processo: confira o edital ou fale com a unidade
+responsável pelo processo.

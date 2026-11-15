@@ -1,0 +1,35 @@
+---
+title: Duas ocorrências do grupo têm o mesmo id, ou uma está sem id
+sidebar_label: Id repetido ou ausente na ocorrência do grupo
+description: Cada ocorrência de um grupo repetível precisa de um id próprio, não vazio e não repetido dentro do grupo.
+code: uniplus.selecao.inscricao.grupo_id_duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+  - Avaliação prévia das respostas da inscrição, sem gravar
+requisitos:
+  - UNI-REQ-0146
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada ocorrência de um grupo repetível, como cada membro da composição
+familiar, é gravada e ligada aos documentos exigidos por meio do seu id. O
+grupo enviado tem uma ocorrência sem id, com o id em branco ou com um id que
+outra ocorrência do mesmo grupo já usa, e a recusa indica a ocorrência.
+
+Com essa recusa no envio, o grupo não chega a ser avaliado: a identidade da
+ocorrência é o que a avaliação exige.
+
+## Como resolver
+
+Dê a cada ocorrência do grupo um id próprio, não vazio e que não se repita
+dentro do grupo, e repita a operação. Quem integra deve garantir que cada
+ocorrência enviada tenha o seu id.

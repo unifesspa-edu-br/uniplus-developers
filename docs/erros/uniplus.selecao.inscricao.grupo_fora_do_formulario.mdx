@@ -1,0 +1,30 @@
+---
+title: A resposta é de um grupo que o formulário não coleta
+sidebar_label: Grupo fora do formulário
+description: A inscrição traz um grupo repetível que não faz parte do formulário da versão em que ela está.
+code: uniplus.selecao.inscricao.grupo_fora_do_formulario
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0146
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Todo grupo repetível enviado tem de ser do formulário da versão em que a
+inscrição está. O corpo traz um grupo que esse formulário não tem, e a recusa
+indica o grupo. Isso acontece, por exemplo, quando a tela foi aberta antes de
+uma retificação que tirou o grupo do formulário.
+
+## Como resolver
+
+Recarregue o formulário da inscrição e responda só os grupos que ele
+apresenta. Quem integra deve remover o grupo indicado do corpo do pedido.

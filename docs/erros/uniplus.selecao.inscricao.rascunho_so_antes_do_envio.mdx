@@ -1,0 +1,33 @@
+---
+title: Depois do envio, a inscrição só muda por um novo envio
+sidebar_label: Rascunho só antes do envio
+description: A inscrição já enviada não aceita gravação de rascunho; para corrigi-la, envie-a de novo.
+code: uniplus.selecao.inscricao.rascunho_so_antes_do_envio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+requisitos:
+  - UNI-REQ-0023
+  - UNI-REQ-0165
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A inscrição já foi enviada, e só o rascunho é gravado aos poucos. A inscrição
+enviada vale como está, e só muda por um novo envio com todas as respostas,
+que emite outro comprovante (UNI-REQ-0165, UNI-REQ-0023). Por isso o pedido de
+gravar o rascunho é recusado, antes mesmo de conferir as respostas. Esta
+recusa só vem com as inscrições abertas: fora do período, o código é o do
+período (`uniplus.selecao.inscricao.fora_do_periodo`).
+
+## Como resolver
+
+Para corrigir a inscrição, envie-a de novo com as respostas corrigidas,
+enquanto as inscrições estiverem abertas. Cada envio gera um novo comprovante,
+e o de maior número é o que vale.

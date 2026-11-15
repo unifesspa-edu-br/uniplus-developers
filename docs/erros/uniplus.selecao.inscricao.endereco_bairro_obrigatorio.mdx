@@ -1,0 +1,31 @@
+---
+title: 'Informe o bairro: o CEP não o identifica'
+sidebar_label: Bairro obrigatório no endereço
+description: Quando o CEP não identifica a rua, o bairro precisa ser informado no endereço.
+code: uniplus.selecao.inscricao.endereco_bairro_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0214
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O endereço da inscrição é conferido pelo CEP no Geo, o cadastro de localidades
+do Uni+. Há CEPs que não trazem o bairro, como o CEP geral de uma cidade ou o
+CEP que o candidato confirmou sem que corresponda a uma rua cadastrada. Nesse
+caso o bairro tem de ser informado pela própria pessoa, e o envio chegou com
+ele em branco. O rascunho pode ser salvo sem o bairro; a recusa vem no envio.
+
+## Como resolver
+
+Preencha o bairro do endereço e envie a inscrição de novo. Quando o CEP também
+não identifica a rua, o logradouro é pedido junto
+(`uniplus.selecao.inscricao.endereco_logradouro_obrigatorio`).

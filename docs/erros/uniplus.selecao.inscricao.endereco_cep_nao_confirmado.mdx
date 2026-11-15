@@ -1,0 +1,35 @@
+---
+title: O CEP não corresponde a uma rua e precisa ser confirmado
+sidebar_label: CEP não confirmado
+description: O CEP informado não corresponde a uma rua cadastrada nos Correios, e o candidato precisa confirmá-lo no formulário.
+code: uniplus.selecao.inscricao.endereco_cep_nao_confirmado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0214
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O Geo, o cadastro de localidades do Uni+, resolveu o CEP informado só por
+faixa, e não por uma rua cadastrada. Um CEP assim pode ser erro de digitação,
+então o endereço só vale depois que a pessoa o confirma de forma explícita no
+formulário. O envio chegou sem a confirmação. Só ela é cobrada neste primeiro
+momento: logradouro e bairro são pedidos depois da confirmação, quando o CEP
+não os identifica.
+
+O rascunho pode ser salvo sem a confirmação; a recusa vem no envio.
+
+## Como resolver
+
+Confira o número do CEP. Se ele está certo, e o seu endereço usa o CEP geral
+da cidade ou do bairro, confirme o CEP no formulário e preencha o logradouro e
+o bairro, que passam a ser obrigatórios. Se o número está errado, corrija-o.
+Depois, envie a inscrição de novo.

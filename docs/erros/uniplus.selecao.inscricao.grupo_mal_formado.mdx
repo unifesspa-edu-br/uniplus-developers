@@ -1,0 +1,32 @@
+---
+title: O grupo veio sem a lista de ocorrências ou com uma ocorrência nula
+sidebar_label: Grupo mal formado
+description: Um grupo repetível chegou sem a lista de ocorrências, ou com uma ocorrência nula.
+code: uniplus.selecao.inscricao.grupo_mal_formado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Gravação do rascunho da inscrição
+  - Envio da inscrição do candidato
+requisitos:
+  - UNI-REQ-0146
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Num grupo repetível enviado, a lista de ocorrências é obrigatória, mesmo que
+vazia, e cada item dela precisa ter id e respostas. O corpo traz o grupo sem a
+lista, ou com uma ocorrência nula, e a recusa indica o grupo e, no caso da
+ocorrência, a posição dela. É um erro de quem montou o pedido, e não de
+preenchimento da pessoa.
+
+## Como resolver
+
+Envie a lista de ocorrências do grupo, vazia se não houver nenhuma, ou remova
+o grupo do corpo. Retire da lista a ocorrência nula, ou envie-a com id e
+respostas.
