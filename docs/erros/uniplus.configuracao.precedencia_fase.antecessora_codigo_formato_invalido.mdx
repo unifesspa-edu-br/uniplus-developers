@@ -1,0 +1,29 @@
+---
+title: O código da fase antecessora está em formato inválido
+sidebar_label: Código da fase antecessora em formato inválido
+description: O código da fase antecessora aceita só letras maiúsculas e sublinhado, sem hífen e sem dígito, com no máximo 60 caracteres.
+code: uniplus.configuracao.precedencia_fase.antecessora_codigo_formato_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de uma precedência entre fases
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `antecessoraCodigo` do cadastro de uma precedência (`POST /api/configuracao/admin/precedencias-fase`) não respeita o formato do código de fase: só letras maiúsculas e sublinhado, sem hífen e sem dígito, com no máximo 60 caracteres. Os espaços nas pontas são desconsiderados. Esta conferência é só de formato; um código bem formado ainda precisa ser um dos dezesseis do vocabulário de fases (ver [código da fase antecessora fora do conjunto canônico](./uniplus.configuracao.precedencia_fase.antecessora_fora_do_conjunto_canonico.mdx)).
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `antecessoraCodigo`. Se o outro código também tiver problema, a recusa dele vem na mesma resposta, e nada é gravado.
+
+## Como resolver
+
+Use o código no formato do vocabulário, por exemplo `INSCRICAO` ou `RESULTADO_FINAL`. Os códigos válidos vêm de `GET /api/configuracao/vocabularios/fases-canonicas`.

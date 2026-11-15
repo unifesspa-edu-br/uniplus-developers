@@ -1,0 +1,31 @@
+---
+title: O grupo de área do ENEM dos pesos por área é inválido
+sidebar_label: Grupo de área dos pesos por área inválido
+description: O grupo de área do ENEM da linha de pesos precisa ser um dos quatro grupos da Resolução nº 805/2024/Consepe, da Unifesspa.
+code: uniplus.configuracao.peso_area_enem.grupo_curso_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro dos pesos por área do ENEM
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#594'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/594
+  - label: 'uniplus-api#1613'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1613
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `grupoCurso` do cadastro de uma linha de pesos por área do ENEM veio ausente ou com um código que não é um dos quatro grupos de área da Resolução nº 805/2024/Consepe, da Unifesspa (Anexo I): `TECNOLOGICA`, `HUMANISTICA_I`, `HUMANISTICA_II` e `SAUDE_E_BIOLOGICAS`. O grupo é escolhido pelo código, sem acento e em maiúsculas, e o rótulo é sempre posto pelo sistema; o rótulo escrito por extenso não serve como código. Os espaços nas pontas são desconsiderados.
+
+O grupo só é enviado no cadastro: na atualização, a resolução e o grupo da linha não mudam. A recusa vem na lista `errors` da resposta, com `field` igual a `grupoCurso`, e a mensagem lista os códigos aceitos. As demais recusas do corpo vêm na mesma resposta, e nada é gravado. É o mesmo domínio fechado que o cadastro de curso confere (ver [grupo de área do ENEM do curso inválido](./uniplus.configuracao.curso.grupo_area_enem_invalido.mdx)).
+
+## Como resolver
+
+Envie um dos quatro códigos. Eles vêm, com o rótulo, de `GET /api/configuracao/vocabularios/grupos-area-enem`.

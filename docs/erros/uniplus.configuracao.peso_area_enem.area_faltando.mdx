@@ -1,0 +1,33 @@
+---
+title: Falta o peso de alguma das cinco áreas
+sidebar_label: Área sem peso nos pesos por área
+description: Os pesos por área do ENEM precisam trazer as cinco áreas, cada uma uma vez; alguma área não veio.
+code: uniplus.configuracao.peso_area_enem.area_faltando
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro dos pesos por área do ENEM
+  - Atualização dos pesos por área do ENEM
+requisitos:
+  - UNI-REQ-0174
+rastreio:
+  - label: 'uniplus-api#594'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/594
+  - label: 'uniplus-api#1612'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1612
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada linha de pesos por área do ENEM traz o peso das cinco áreas: Redação, Ciências da Natureza, Ciências Humanas, Linguagens e Matemática. Os pesos de cada grupo de área vêm do Anexo I da Resolução nº 805/2024/Consepe, da Unifesspa, que dá o peso de cada uma das cinco áreas. A nota da etapa do ENEM é a média das cinco áreas ponderada por esses pesos (UNI-REQ-0174), e por isso nenhuma pode faltar. A lista `areas` enviada não traz o peso de pelo menos uma delas, ou não foi enviada.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `areas`, e a mensagem cita os códigos das áreas que faltaram. As demais recusas do corpo vêm na mesma resposta, e nada é gravado. Na atualização, o corpo é conferido antes da busca da linha: um `{id}` que não existe só responde como não encontrado quando o corpo é válido.
+
+## Como resolver
+
+Envie as cinco áreas, uma vez cada, com o código e o peso de cada uma. As áreas aceitas e os rótulos oficiais vêm de `GET /api/configuracao/pesos-area-enem/areas`. O campo `peso` de cada item é obrigatório no JSON: o item sem ele é recusado ainda na leitura do corpo, com 400, antes desta conferência (`PesoAreaEnemAreaCommand.cs:19`). Na atualização, o corpo substitui a linha inteira: as cinco áreas vão sempre, e o corte, quando ausente, significa que a área fica sem corte.

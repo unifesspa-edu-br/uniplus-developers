@@ -1,0 +1,30 @@
+---
+title: A base legal dos pesos por área passa do tamanho permitido
+sidebar_label: Base legal dos pesos por área muito longa
+description: A base legal de uma linha de pesos por área do ENEM tem no máximo 500 caracteres, depois de aparada e normalizada.
+code: uniplus.configuracao.peso_area_enem.base_legal_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro dos pesos por área do ENEM
+  - Atualização dos pesos por área do ENEM
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#594'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/594
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A base legal dos pesos, que identifica a norma de onde eles saíram (por exemplo, o Anexo I da Resolução nº 805/2024/Consepe, da Unifesspa), tem mais de 500 caracteres. O limite vale para o texto depois de aparado e normalizado (forma NFC), que é a forma em que ele é gravado e depois congelado no processo seletivo; por isso um texto com acentos decompostos pode passar do limite mesmo parecendo curto.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `baseLegal`. As demais recusas do corpo vêm na mesma resposta, e nada é gravado. Na atualização, o corpo é conferido antes da busca da linha: um `{id}` que não existe só responde como não encontrado quando o corpo é válido.
+
+## Como resolver
+
+Reduza a base legal a até 500 caracteres e envie de novo.

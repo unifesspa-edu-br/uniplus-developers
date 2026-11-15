@@ -1,0 +1,32 @@
+---
+title: O rascunho do termo foi modificado concorrentemente
+sidebar_label: Rascunho do termo alterado concorrentemente
+description: Outra alteração do mesmo termo foi confirmada entre a leitura e a gravação desta operação, e a API recusa em vez de sobrescrevê-la.
+code: uniplus.configuracao.termo_consentimento.conflito_de_concorrencia
+http_status: 409
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Edição do rascunho de um termo de consentimento
+  - Marcação do rascunho de um termo de consentimento como revisado
+  - Promoção do rascunho de um termo de consentimento a versão
+requisitos:
+  - UNI-REQ-0086
+rastreio:
+  - label: 'uniplus-api#1018'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1018
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas escritas sobre o mesmo termo aconteceram ao mesmo tempo, e esta chegou depois: outra edição do rascunho, outra marcação de revisão ou outra promoção já tinha sido confirmada entre a leitura do termo e a gravação desta operação. Atinge a edição do rascunho (`PUT /api/configuracao/admin/termos-consentimento/{id}/rascunho`), a marcação de revisão (`POST .../revisar`) e a promoção (`POST .../promover`). Nada é gravado pela operação recusada.
+
+A recusa é deliberada. Editar o rascunho limpa a marca de revisão, porque a revisão vale para o texto exato que foi lido (UNI-REQ-0086). Se a API repetisse sozinha um pedido de revisão ou de promoção, ela poderia aprovar um texto novo que ninguém revisou. Por isso a resposta não indica que repetir a mesma requisição resolve, ao contrário do que ocorre com outros conflitos de concorrência do módulo.
+
+## Como resolver
+
+Consulte o termo (`GET /api/configuracao/termos-consentimento/{id}`) e confira o rascunho e a marca de revisão atuais. Só depois de ler o texto que está valendo repita a operação: edite de novo o rascunho, marque a revisão do texto que você leu ou promova a versão.

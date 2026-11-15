@@ -1,0 +1,30 @@
+---
+title: A lista de áreas tem itens demais
+sidebar_label: Lista de áreas com itens demais
+description: A lista de áreas dos pesos por área do ENEM tem mais de 20 itens e é recusada inteira, sem conferir cada item.
+code: uniplus.configuracao.peso_area_enem.areas_em_excesso
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro dos pesos por área do ENEM
+  - Atualização dos pesos por área do ENEM
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#594'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/594
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Os pesos por área têm as cinco áreas do Anexo I da Resolução nº 805/2024/Consepe, da Unifesspa, uma vez cada. A lista `areas` enviada traz mais de 20 itens, e a API a recusa inteira, sem conferir um por um: uma entrada pequena não pode gerar uma resposta desproporcional, com um erro por item.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `areas`, e a mensagem diz quantos itens vieram. Enquanto a lista passar do limite, os itens não são conferidos; as recusas da base legal, quando houver, vêm na mesma resposta. Nada é gravado. Na atualização, o corpo é conferido antes da busca da linha: um `{id}` que não existe só responde como não encontrado quando o corpo é válido.
+
+## Como resolver
+
+Envie só as cinco áreas, uma vez cada. Se a lista tinha itens a mais por engano, remova-os. Se a recusa passar a citar áreas repetidas ou fora do domínio, corrija-as conforme cada mensagem.

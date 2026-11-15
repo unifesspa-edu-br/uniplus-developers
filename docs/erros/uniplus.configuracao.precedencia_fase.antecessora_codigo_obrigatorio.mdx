@@ -1,0 +1,29 @@
+---
+title: O código da fase antecessora é obrigatório
+sidebar_label: Código da fase antecessora ausente
+description: A aresta de precedência foi cadastrada sem o código da fase antecessora, ou só com espaços.
+code: uniplus.configuracao.precedencia_fase.antecessora_codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de uma precedência entre fases
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#592'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/592
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma precedência liga duas fases do processo seletivo: a antecessora, que vem antes, e a sucessora, que vem depois. O cadastro (`POST /api/configuracao/admin/precedencias-fase`) trouxe o campo `antecessoraCodigo` ausente, vazio ou só com espaços.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `antecessoraCodigo`. Se o outro código também tiver problema, a recusa dele vem na mesma resposta, e nada é gravado. As conferências que dependem dos dois códigos, como a de uma fase precedendo a si mesma, só rodam quando ambos são válidos.
+
+## Como resolver
+
+Informe o código da fase antecessora, uma das dezesseis do vocabulário de fases (`GET /api/configuracao/vocabularios/fases-canonicas`), e envie de novo.
