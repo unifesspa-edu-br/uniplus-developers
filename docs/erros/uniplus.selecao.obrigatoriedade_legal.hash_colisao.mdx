@@ -1,0 +1,46 @@
+---
+title: Conflito de unicidade do hash de uma regra legal ativa
+sidebar_label: Hash de regra legal já em uso
+description: O banco de dados recusou a gravação por conflito de unicidade do hash do conteúdo canônico entre regras legais ativas.
+code: uniplus.selecao.obrigatoriedade_legal.hash_colisao
+http_status: 409
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#461'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/461
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A gravação violou a unicidade do hash do conteúdo canônico entre as regras legais **ativas**: o banco
+de dados já tem uma regra ativa com o mesmo hash. O hash é calculado sobre o tipo de processo, a
+categoria, o código de regra, o predicado, a base legal, a portaria interna e a vigência. Nada é
+gravado.
+
+O código de regra faz parte desse conteúdo. Por isso uma regra que repete outra ativa é, em
+condições normais, recusada antes, com
+[`regra_codigo_duplicada`](./uniplus.selecao.obrigatoriedade_legal.regra_codigo_duplicada.mdx). O
+cenário provável deste erro é a escrita concorrente de conteúdo idêntico: as duas escritas passam
+pela conferência prévia, e o banco barra a segunda. Como o conteúdo repete também o código de regra,
+o banco pode apontar qualquer uma das duas unicidades, e a resposta sai com o código
+correspondente. A resposta não indica qual escrita concorrente venceu nem se o conteúdo da regra
+existente é de fato o mesmo.
+
+A descrição da regra e o endereço do ato normativo não entram no hash: mudá-los não distingue uma
+regra da outra.
+
+## Como resolver
+
+Consulte a listagem de obrigatoriedades legais e confira o conteúdo da regra existente com o que
+você enviou antes de concluir que são equivalentes. Se for a regra que você queria, não há mais o que
+fazer. Se a sua regra deve ser outra, altere o conteúdo que a distingue, ou atualize a regra
+existente.

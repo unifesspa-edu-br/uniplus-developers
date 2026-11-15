@@ -1,0 +1,39 @@
+---
+title: Regra não encontrada no catálogo na versão pedida
+sidebar_label: Regra do catálogo não encontrada
+description: Não há, no catálogo de regras, a versão pedida do código informado.
+code: uniplus.selecao.regra_catalogo.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Consulta de uma versão de regra do catálogo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1182'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1182
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A consulta de uma regra do catálogo pelo par código e versão não encontrou entrada. A identidade da
+regra é o par: não existe a versão pedida do código informado, ou o próprio código não existe. A
+mensagem da resposta traz o código e a versão que foram pedidos.
+
+A API dá a mesma resposta para os dois casos. Distingui-los revelaria, a quem só tentou adivinhar,
+quais códigos existem no catálogo.
+
+A comparação é exata, sem aparar espaços e com diferença entre maiúsculas e minúsculas. A permissão
+para consultar o catálogo é conferida antes: quem não a tem recebe a recusa de acesso, e não este
+erro.
+
+## Como resolver
+
+Liste o catálogo de regras, filtrando pelo tipo quando for útil, e use o código e a versão
+exatamente como a listagem os devolve. As versões de uma regra coexistem de propósito: não há uma
+versão "mais recente" que substitua as demais, e qual vale em um processo seletivo é escolha de
+quem o configura.

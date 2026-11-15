@@ -1,0 +1,42 @@
+---
+title: Obrigatoriedade legal não encontrada
+sidebar_label: Obrigatoriedade legal não encontrada
+description: O identificador informado não corresponde a nenhuma obrigatoriedade legal ativa.
+code: uniplus.selecao.obrigatoriedade_legal.nao_encontrada
+http_status: 404
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Atualização de uma obrigatoriedade legal
+  - Desativação de uma obrigatoriedade legal
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#461'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/461
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O identificador da rota não corresponde a nenhuma obrigatoriedade legal ativa. A mensagem da
+resposta traz o identificador informado. Nada é alterado.
+
+Regra já desativada também não é encontrada: a desativação retira a regra das operações de
+atualização e de nova desativação. Por isso repetir a desativação de uma regra devolve este erro na
+segunda tentativa.
+
+Na atualização, a regra é buscada antes de qualquer outra conferência do conteúdo enviado, como a do
+tipo de processo
+([`tipo_processo_nao_encontrado_ou_inativo`](./uniplus.selecao.obrigatoriedade_legal.tipo_processo_nao_encontrado_ou_inativo.mdx)).
+A permissão para manter obrigatoriedades legais e, na atualização, a validação do corpo da
+requisição vêm antes.
+
+A consulta pública de uma regra por identificador não usa este código.
+
+## Como resolver
+
+Confira o identificador na listagem de obrigatoriedades legais. Se a regra foi desativada e deve
+voltar a valer, cadastre-a de novo: o código de uma regra desativada fica livre para uso.

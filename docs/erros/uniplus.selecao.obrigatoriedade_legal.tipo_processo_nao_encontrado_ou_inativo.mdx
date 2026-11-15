@@ -1,0 +1,52 @@
+---
+title: O tipo de processo citado pela regra legal não existe ou não está ativo
+sidebar_label: Tipo de processo da regra legal inexistente ou inativo
+description: A obrigatoriedade legal específica de um tipo de processo seletivo exige um tipo cadastrado e ativo; só o código universal dispensa o cadastro.
+code: uniplus.selecao.obrigatoriedade_legal.tipo_processo_nao_encontrado_ou_inativo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos:
+  - UNI-REQ-0018
+  - UNI-REQ-0098
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra legal informa o código do tipo de processo seletivo a que se aplica, e esse código não
+corresponde a nenhum tipo cadastrado e ativo no módulo Configuração. A mensagem da resposta traz o
+código informado. Nada é gravado.
+
+O único código aceito sem cadastro é `*`, que torna a regra universal, aplicável a qualquer tipo de
+processo. Qualquer outro valor precisa ser o código de um tipo ativo: a comparação é exata, com
+diferença entre maiúsculas e minúsculas, e os espaços nas pontas são ignorados.
+
+Tipo desativado também é recusado. Na atualização, a conferência vale mesmo quando o tipo da regra
+não mudou: uma regra que cita um tipo desativado depois do cadastro não pode ser alterada enquanto
+o tipo continuar inativo.
+
+A conferência do tipo vem depois da permissão para manter obrigatoriedades legais, da validação do
+corpo da requisição e, na atualização, de a regra ser encontrada
+([`nao_encontrada`](./uniplus.selecao.obrigatoriedade_legal.nao_encontrada.mdx)). Vem antes da
+conferência dos códigos que o predicado cita (por exemplo,
+[`tipo_etapa_nao_encontrado_ou_inativo`](./uniplus.selecao.obrigatoriedade_legal.tipo_etapa_nao_encontrado_ou_inativo.mdx))
+e da de código de regra já em uso
+([`regra_codigo_duplicada`](./uniplus.selecao.obrigatoriedade_legal.regra_codigo_duplicada.mdx)).
+Quando mais de um ponto está errado, responde primeiro o que vem antes nessa ordem.
+
+Há um código parecido no cadastro de processo seletivo,
+[`processo_seletivo.tipo_processo_nao_encontrado_ou_inativo`](./uniplus.selecao.processo_seletivo.tipo_processo_nao_encontrado_ou_inativo.mdx),
+com a mesma causa em outra operação; o campo `code` do corpo de erro diz qual dos dois foi emitido.
+
+## Como resolver
+
+Confira o código do tipo na listagem de tipos de processo do módulo Configuração e use o de um tipo
+ativo. Para uma regra que vale para todos os tipos, informe `*`. Se o tipo desejado foi desativado,
+quem mantém o cadastro de tipos de processo pode reativá-lo, e o código continua o mesmo.
