@@ -1,0 +1,32 @@
+---
+title: Tipo de deficiência só vale com a condição de pessoa com deficiência
+sidebar_label: Tipo de deficiência sem a condição PcD
+description: Tipos de deficiência só podem constar no atendimento especializado quando a condição de pessoa com deficiência (PcD) também consta.
+code: uniplus.selecao.atendimento_especializado.tipo_deficiencia_sem_condicao_pcd
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do atendimento especializado do processo seletivo (`PUT /api/selecao/processos-seletivos/{id}/atendimento-especializado`)
+requisitos:
+  - UNI-REQ-0012
+rastreio:
+  - label: 'uniplus-api#2446'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2446
+  - label: 'uniplus-api#2449'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2449
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido trouxe tipos de deficiência em `tipoDeficienciaIds`, mas a condição de pessoa com deficiência (a condição de código `PCD` do cadastro de condições de atendimento) não está entre as condições escolhidas em `condicaoIds`. O tipo de deficiência só faz sentido como detalhe dessa condição.
+
+A recusa sai com **422** e, como é erro de campo, o problema vem em `errors`, com o campo (`tipoDeficienciaIds`) e este código; o `code` da resposta é o da primeira violação. Nada foi gravado: o atendimento especializado anterior do processo continua como estava.
+
+## Como resolver
+
+Inclua a condição de pessoa com deficiência (`PCD`) em `condicaoIds`, ou retire os tipos de deficiência do pedido, e repita a definição do atendimento especializado.

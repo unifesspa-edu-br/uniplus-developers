@@ -1,0 +1,32 @@
+---
+title: Condição de atendimento repetida no atendimento especializado
+sidebar_label: Condição de atendimento duplicada
+description: Cada condição de atendimento só pode ser escolhida uma vez no atendimento especializado do processo seletivo.
+code: uniplus.selecao.atendimento_especializado.condicao_duplicada
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do atendimento especializado do processo seletivo (`PUT /api/selecao/processos-seletivos/{id}/atendimento-especializado`)
+requisitos:
+  - UNI-REQ-0012
+rastreio:
+  - label: 'uniplus-api#2446'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2446
+  - label: 'uniplus-api#2449'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2449
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido trouxe o mesmo identificador mais de uma vez em `condicaoIds`. Cada condição de atendimento só pode constar uma vez no atendimento especializado do processo. A repetição é conferida antes de consultar os cadastros de Configuração.
+
+A recusa sai com **422** e, como é erro de campo, o problema vem em `errors`, com o campo (`condicaoIds`) e este código; o `code` da resposta é o da primeira violação. Nada foi gravado: o atendimento especializado anterior do processo continua como estava.
+
+## Como resolver
+
+Envie cada condição de atendimento uma só vez e repita a definição do atendimento especializado.
