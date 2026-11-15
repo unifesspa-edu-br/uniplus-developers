@@ -1,0 +1,30 @@
+---
+title: A base legal dos pesos por área é obrigatória
+sidebar_label: Base legal dos pesos por área ausente
+description: A linha de pesos por área do ENEM foi enviada sem base legal, ou só com espaços.
+code: uniplus.configuracao.peso_area_enem.base_legal_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro dos pesos por área do ENEM
+  - Atualização dos pesos por área do ENEM
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#594'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/594
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Toda linha de pesos por área do ENEM registra a base legal que fundamenta os pesos, e o campo `baseLegal` veio ausente, vazio ou só com espaços. A base legal acompanha a linha quando um processo seletivo a congela no edital; para os pesos do Anexo I da Resolução nº 805/2024/Consepe, da Unifesspa, ela identifica a norma e o anexo de onde os valores saíram.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `baseLegal`. As demais recusas do corpo vêm na mesma resposta, e nada é gravado. Na atualização, o corpo é conferido antes da busca da linha: um `{id}` que não existe só responde como não encontrado quando o corpo é válido.
+
+## Como resolver
+
+Informe a base legal dos pesos, com até 500 caracteres, e envie de novo. Na atualização, o corpo substitui a linha inteira: a base legal vai sempre, mesmo quando só os pesos mudam.

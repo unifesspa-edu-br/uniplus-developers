@@ -1,0 +1,32 @@
+---
+title: O código do valor do fato é obrigatório
+sidebar_label: Código do valor do fato em branco
+description: O valor acrescentado a um fato do catálogo veio com o código vazio ou só com espaços; o código ausente do JSON é recusado antes, com 400.
+code: uniplus.configuracao.fato_valor_dominio.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Acréscimo de um valor a um fato do catálogo
+requisitos:
+  - UNI-REQ-0065
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador acrescentou um valor a um fato do catálogo (`POST /api/configuracao/admin/fatos-candidato/{id}/valores`) com o campo `codigo` presente no JSON, mas vazio ou só com espaços. O código é o que identifica o valor dentro do fato: a descrição e a orientação são o texto que o candidato lê, mas é o código que as regras, os formulários e as demais operações sobre o valor citam (UNI-REQ-0065).
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `codigo`. Se o corpo tiver outros problemas, cada um vem numa entrada própria da mesma resposta, e nada é gravado. A busca do fato vem antes da conferência do corpo: com um `{id}` que não existe, a resposta é a de fato não encontrado (`uniplus.configuracao.fato_candidato.nao_encontrado`), e não esta.
+
+Este código não cobre o `codigo` ausente do JSON nem enviado como `null`. O corpo do acréscimo declara o código como texto não anulável (`ValorDominioInput.cs:4`), e o ASP.NET Core recusa o campo ausente ou nulo na validação do modelo, com 400, antes de o pedido chegar ao tratamento do Uni+ e, portanto, antes da busca do fato. Essa recusa não tem código do catálogo de erros do Uni+. Só o código presente, mas vazio ou em branco, chega à regra do domínio e responde 422 com o código desta página. É o contrário dos corpos que declaram o campo como anulável de propósito, para a ausência chegar ao domínio (por exemplo, `CriarPrecedenciaFaseCommand.cs:13-16`).
+
+## Como resolver
+
+Envie o valor com o campo `codigo` presente e preenchido, de até 50 caracteres e que ainda não exista no fato. Depois de acrescentado, o código do valor não muda.

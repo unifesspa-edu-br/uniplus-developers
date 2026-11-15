@@ -1,0 +1,29 @@
+---
+title: O nome do termo de consentimento passa do tamanho permitido
+sidebar_label: Nome do termo muito longo
+description: O nome de um termo de consentimento tem no máximo 200 caracteres, sem contar os espaços nas pontas.
+code: uniplus.configuracao.termo_consentimento.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um termo de consentimento
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1018'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1018
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cadastro de um termo de consentimento (`POST /api/configuracao/admin/termos-consentimento`) trouxe um `nome` com mais de 200 caracteres. Os espaços nas pontas são desconsiderados antes da conferência.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `nome`. As demais recusas do corpo vêm na mesma resposta, e nada é gravado.
+
+## Como resolver
+
+Use um nome de até 200 caracteres. O conteúdo do termo vai no texto do rascunho, não no nome.

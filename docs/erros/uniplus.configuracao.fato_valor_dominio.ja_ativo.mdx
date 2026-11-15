@@ -1,0 +1,29 @@
+---
+title: O valor do fato já está ativo
+sidebar_label: Valor do fato já ativo
+description: A reativação foi pedida para um valor que já está ativo.
+code: uniplus.configuracao.fato_valor_dominio.ja_ativo
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Reativação de um valor de um fato do catálogo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador pediu a reativação de um valor de um fato do catálogo (`POST /api/configuracao/admin/fatos-candidato/{id}/valores/{codigo}/ativacao`), mas o valor já está ativo. Todo valor acrescentado nasce ativo; só a desativação o deixa inativo. A recusa evita uma alteração sem efeito no fato.
+
+As conferências seguem esta ordem: o fato (`uniplus.configuracao.fato_candidato.nao_encontrado`), a definição do fato de sistema, que é travada (`uniplus.configuracao.fato_candidato.definicao_do_fato_de_sistema_travada`), o valor (`uniplus.configuracao.fato_valor_dominio.nao_encontrado`) e, por último, o estado do valor. Só um valor existente de um fato do administrador chega a esta recusa. Nada é gravado.
+
+## Como resolver
+
+Nenhuma providência é necessária: o valor já está ativo e disponível para novos vínculos. Se a intenção era outra, confira o código do valor.
