@@ -1,0 +1,52 @@
+---
+title: O código do fato que decide quem recebe o Fator de Atenuação é inválido
+sidebar_label: Fato de elegibilidade do Fator de Atenuação inválido
+description: O código do fato de elegibilidade, quando citado na declaração do Fator de Atenuação das Desigualdades de Acesso, deve ter de 1 a 60 caracteres.
+code: uniplus.selecao.configuracao_bonus_regional.fato_elegibilidade_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração do Fator de Atenuação das Desigualdades de Acesso do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A declaração do Fator de Atenuação das Desigualdades de Acesso citou, em
+`fatoElegibilidadeCodigo`, um código de fato em branco ou com mais de 60 caracteres (limite
+de hoje; os espaços nas pontas não contam). O fato de elegibilidade é o fato do processo que
+decide quem recebe o acréscimo; a citação é opcional neste ponto, mas, quando feita, o código
+precisa ter de 1 a 60 caracteres.
+
+Esta recusa confere só a forma do código. Se o fato é do processo e se é do tipo verdadeiro ou
+falso são conferências separadas, com outros códigos de erro.
+
+A recusa vem no campo `fatoElegibilidadeCodigo` e acumula, na mesma resposta, com as demais
+violações dos valores do fator, em
+[`fator_invalido`](./uniplus.selecao.configuracao_bonus_regional.fator_invalido.mdx) e
+[`teto_invalido`](./uniplus.selecao.configuracao_bonus_regional.teto_invalido.mdx).
+Ela vem depois da conferência da regra e da base legal; se alguma delas falhar, os valores
+nem chegam a ser conferidos.
+
+Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
+publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
+retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Na declaração, informe o código exato do fato do processo que decide quem recebe o acréscimo,
+com 1 a 60 caracteres, ou omita o campo.
+
+Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
+descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e regravar a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

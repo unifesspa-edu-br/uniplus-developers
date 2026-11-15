@@ -1,0 +1,46 @@
+---
+title: A forma das regras não combina com o domínio do fato derivado
+sidebar_label: Contribuição incoerente com o domínio
+description: As regras do fato derivado booleano contribuem código, ou as do fato derivado categórico não contribuem; a forma das regras tem de seguir o domínio do fato no catálogo.
+code: uniplus.selecao.configuracao_derivacao_fato.contribuicao_incoerente_com_o_dominio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de regras de derivação de fatos do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na definição das regras de derivação do processo, as regras de uma configuração têm uma forma
+uniforme (todas contribuem código ou nenhuma contribui), mas a forma é a oposta da que o
+domínio do fato no catálogo pede:
+
+- **Fato booleano:** as regras não contribuem código (`contribui` ausente), e a regra ativa
+  torna o fato verdadeiro. Regras que contribuem código são recusadas.
+- **Fato categórico:** toda regra contribui um código do domínio do fato. Regras sem
+  `contribui` são recusadas.
+
+O domínio do fato é o do catálogo; a forma das regras não o define. Assim, um fato categórico
+cujas regras ficaram todas sem código não é tratado como booleano.
+
+A mistura de regras com e sem código dentro da mesma configuração é recusada antes, na
+conferência de forma, por
+[`regras_com_e_sem_codigo`](./uniplus.selecao.configuracao_derivacao_fato.regras_com_e_sem_codigo.mdx).
+Esta recusa vem da etapa que confere o pedido contra o catálogo e, como as demais dessa etapa,
+para na primeira configuração que falhar.
+
+## Como resolver
+
+Ajuste as regras ao domínio do fato:
+
+- **Fato booleano:** remova `contribui` de todas as regras.
+- **Fato categórico:** informe, em `contribui` de toda regra, um código do domínio do fato.
+
+Se o código informado não pertence ao domínio do fato no processo, a recusa é de outra causa,
+da conferência do código contribuído contra o domínio.

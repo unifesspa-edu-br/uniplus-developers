@@ -1,0 +1,37 @@
+---
+title: A regra informada para o Fator de Atenuação não é uma regra de bônus
+sidebar_label: Regra do Fator de Atenuação de tipo inválido
+description: O código e a versão informados existem no catálogo de regras, mas a regra cadastrada não é do tipo regra de bônus.
+code: uniplus.selecao.configuracao_bonus_regional.regra_tipo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração do Fator de Atenuação das Desigualdades de Acesso do processo seletivo
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código e a versão informados em `regraCodigo` e `regraVersao` existem no catálogo de
+regras, mas a regra cadastrada ali não é do tipo regra de bônus (`regra_bonus`). O catálogo
+reúne regras de vários tipos — por exemplo, de desempate, de eliminação e de distribuição de
+vagas —, e o código sozinho não garante que a regra serve ao Fator de Atenuação das
+Desigualdades de Acesso.
+
+A conferência vem logo depois de
+[`regra_nao_encontrada`](./uniplus.selecao.configuracao_bonus_regional.regra_nao_encontrada.mdx)
+e antes da conferência da base legal
+([`base_legal_nao_encontrada`](./uniplus.selecao.configuracao_bonus_regional.base_legal_nao_encontrada.mdx)).
+A primeira recusa interrompe a declaração e nada é gravado.
+
+## Como resolver
+
+Informe uma regra do tipo regra de bônus. Hoje o catálogo tem uma única regra desse tipo,
+`BONUS-MULTIPLICATIVO`, na versão `v1`. Se a intenção era usar outra regra, confira em qual
+campo cada referência de regra do processo deve ser informada: o catálogo não aceita uma
+regra de outro tipo no lugar da regra de bônus.

@@ -1,0 +1,57 @@
+---
+title: O fato tem mais de uma configuração de derivação no processo
+sidebar_label: Configuração de derivação repetida
+description: Um mesmo fato derivado aparece em mais de uma configuração de derivação, ou o código dele coincide com o de um grupo repetível ou de um campo de grupo do processo.
+code: uniplus.selecao.configuracao_derivacao_fato.codigo_fato_duplicado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de regras de derivação de fatos do processo seletivo
+  - Aplicação de modelo de formulário
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um mesmo fato derivado ficou com mais de uma configuração de derivação no processo, ou o
+código dele coincide com o de um grupo repetível ou de um campo de grupo do processo. A
+mensagem do erro distingue as causas, e o que conta como conflito depende de onde o erro
+apareceu.
+
+**Definição das regras de derivação.** O conjunto de configurações enviado tem um conflito de
+código, de duas formas:
+
+- **Fato com mais de uma configuração:** o mesmo `codigoFato` aparece em duas ou mais
+  configurações da lista. Cada fato derivado tem uma só configuração no processo, com todas as
+  regras dele.
+- **Código que já é de um grupo ou de um campo de grupo:** o `codigoFato` coincide com o código
+  de um grupo repetível ou de um campo de grupo coletado no processo.
+
+A conferência roda sobre o conjunto, depois de a forma e o catálogo terem sido aceitos, e
+recusa na primeira configuração que conflita. A definição substitui integralmente as regras de
+derivação do processo, de modo que a lista enviada é a única que conta: configurações de
+envios anteriores não participam do conflito.
+
+**Aplicação de modelo de formulário.** A cópia traz derivações do catálogo para o processo, e o
+conflito é com o que o processo já tem: uma derivação copiada repete o fato de outra já
+configurada no processo, ou duas derivações copiadas repetem o mesmo fato. O erro vem no campo
+`derivacoes` e acumula, no array `errors[]`, com as demais recusas da cópia. A seleção das
+derivações a copiar já mantém as que o processo configurou e copia cada fato uma só vez; por
+isso esse conflito não é esperado nessa operação, e a conferência existe como proteção.
+
+## Como resolver
+
+Conforme a origem e a causa:
+
+- **Definição, fato repetido:** reúna todas as regras do fato numa única configuração e envie
+  cada `codigoFato` uma só vez.
+- **Definição, código de grupo ou de campo de grupo:** a derivação deve ser de um fato cujo
+  código não coincida com o de grupo ou campo de grupo do processo; revise a coleta de fatos
+  para que os códigos deixem de coincidir.
+- **Aplicação de modelo de formulário:** o pedido enviado não é a causa, porque a escolha das
+  derivações a copiar é feita pelo sistema. A causa é investigada pela equipe técnica do Uni+.

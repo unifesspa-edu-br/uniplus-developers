@@ -1,0 +1,60 @@
+---
+title: O quadro de vagas passa do total da oferta
+sidebar_label: Quadro acima do total da oferta
+description: Numa distribuição institucional, as quantidades fixadas pelo edital somam mais que o total de vagas da oferta e nenhum motor de redução foi declarado.
+code: uniplus.selecao.configuracao_distribuicao_vagas.quadro_excede_vo_base
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas do processo seletivo
+  - Simulação da distribuição de vagas do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Numa distribuição institucional, em que o quadro é inteiramente fixado pelo edital, as
+quantidades de todas as modalidades selecionadas somam mais que o `voBase` da oferta, e o item
+não declarou motor de redução em `argsAjuste`. Sem motor, o sistema não tem de onde retirar o
+excesso. A mensagem do erro traz a soma do quadro e o total da oferta.
+
+Com motor declarado, o sistema retira o excesso conforme ele. Se o motor não consegue retirar
+tudo, a recusa é
+[`ajuste_nao_absorve_o_excesso`](./uniplus.selecao.configuracao_distribuicao_vagas.ajuste_nao_absorve_o_excesso.mdx),
+ou
+[`ajuste_referencia_modalidade_fora_do_quadro`](./uniplus.selecao.configuracao_distribuicao_vagas.ajuste_referencia_modalidade_fora_do_quadro.mdx)
+quando ele cita modalidade fora do quadro. Quadro abaixo do total é recusado em
+[`quadro_nao_completa_vo_base`](./uniplus.selecao.configuracao_distribuicao_vagas.quadro_nao_completa_vo_base.mdx).
+
+A distribuição pela Lei 12.711 não passa por esta conferência, porque o quadro dela é
+calculado. A recusa vem sem campo específico e, por ser conferida depois das demais
+verificações do item, não acumula com elas. O processamento para na primeira distribuição da
+lista que falhar. A simulação da distribuição devolve a mesma recusa, sem gravar nada.
+
+Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
+publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
+retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+refere à versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+Conforme a intenção:
+
+- **O quadro tem quantidades demais:** reduza as quantidades até a soma igualar o `voBase`.
+- **O excesso deve ser retirado pelo sistema:** declare, em `argsAjuste`, o motor de redução
+  (`reduzirDe`, com uma modalidade, ou `reduzirProporcionalEm`, com uma lista), com modalidades
+  selecionadas que tenham vagas suficientes.
+- **O `voBase` está baixo:** corrija o `voBase` para o total que o edital autoriza.
+
+Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
+descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+configuração congelada da versão publicada, e regravar a configuração do processo não a
+corrige. A causa é investigada pela equipe técnica do Uni+.

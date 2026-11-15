@@ -1,0 +1,38 @@
+---
+title: A resolução de Pesos por Área declarada não tem nenhum grupo de área congelado
+sidebar_label: Quadro de pesos por área vazio
+description: A classificação traz a resolução de Pesos por Área, mas o quadro de pesos congelado não tem nenhum grupo de área.
+code: uniplus.selecao.configuracao_classificacao.quadro_peso_area_enem_vazio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A classificação baseada em ENEM com cálculo local pela média ponderada traz a resolução de
+Pesos por Área, mas o quadro de pesos por área congelado não tem nenhum grupo de área. A
+classificação com resolução declarada precisa ter, congelada, a cópia dos pesos de ao menos um
+grupo.
+
+Na definição da classificação esta situação não é esperada: a resolução só é aceita quando o
+cadastro de Pesos por Área tem linhas para ela, e a classificação congela essas linhas. A
+conferência existe para a leitura da configuração congelada da versão publicada, na
+retificação em ato único, no fechamento da sessão editorial e no descarte de retificação.
+Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se refere à
+versão congelada, não ao pedido enviado.
+
+## Como resolver
+
+O pedido enviado agora não é a causa: o sistema recusou a configuração congelada da versão
+publicada, e regravar a configuração do processo não a corrige. A causa é investigada pela
+equipe técnica do Uni+.
