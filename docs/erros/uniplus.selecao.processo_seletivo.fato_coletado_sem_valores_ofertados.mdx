@@ -1,0 +1,51 @@
+---
+title: O fato coletado é de seleção, mas o processo não oferece nenhuma opção para ele
+sidebar_label: Fato coletado sem opções ofertadas
+description: Um campo de escolha do formulário ficaria sem opção alguma para a pessoa candidata responder.
+code: uniplus.selecao.processo_seletivo.fato_coletado_sem_valores_ofertados
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um campo de escolha (única ou múltipla) do formulário publicaria sem nenhuma opção a
+oferecer, obrigatório ou opcional: a pessoa candidata teria um seletor vazio. O rascunho
+aceita o vínculo incompleto; quem barra é a operação que gera versão. A mensagem de
+detalhe cita o código do fato e diz qual é a falta, que pode ser:
+
+- o campo tem as opções do próprio processo, e o processo não declara nenhuma para ele
+  (é o caso da condição de atendimento, do recurso de acessibilidade e de fatos cujas
+  opções o processo declara);
+- o campo oferece os municípios do bônus regional, e o processo não tem bônus regional;
+- o campo oferece os tipos do cadastro de tipos de deficiência, e o cadastro não tem
+  nenhum tipo ativo;
+- o conjunto de opções do campo ficou vazio quando a versão foi montada.
+
+A recusa sai com **422**, antes de gerar a versão.
+
+## Como resolver
+
+Corrija a falta que a mensagem aponta e repita a operação:
+
+- para opções do processo, declare ao menos uma
+  (`PUT /api/selecao/processos-seletivos/{id}/fatos/{fatoCodigo}/opcoes`); para a
+  condição de atendimento e o recurso de acessibilidade, as opções vêm do atendimento
+  especializado
+  (`PUT /api/selecao/processos-seletivos/{id}/atendimento-especializado`);
+- para os municípios do bônus regional, declare o bônus regional
+  (`PUT /api/selecao/processos-seletivos/{id}/bonus-regional`) ou retire o campo do
+  formulário;
+- para os tipos de deficiência, a gestão do cadastro deve ativar ao menos um tipo.
+
+Se o campo não é necessário, retire-o do formulário.

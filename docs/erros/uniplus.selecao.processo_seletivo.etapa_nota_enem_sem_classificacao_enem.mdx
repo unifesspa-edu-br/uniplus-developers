@@ -1,0 +1,48 @@
+---
+title: A etapa com nota do ENEM exige classificação baseada em ENEM pela média ponderada
+sidebar_label: Etapa do ENEM sem classificação por ENEM
+description: A etapa com nota vinda do ENEM só convive com classificação baseada em ENEM, calculada pela média ponderada.
+code: uniplus.selecao.processo_seletivo.etapa_nota_enem_sem_classificacao_enem
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+  - Definição de classificação do processo seletivo
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O processo tem uma etapa cuja nota vem do ENEM, mas a classificação declarada não é
+baseada em ENEM ou não é calculada pela média ponderada, que é a fórmula em que a nota
+do ENEM entra como componente. A mensagem de detalhe cita a etapa. A recusa sai com
+**422** e nada foi gravado.
+
+A conferência acontece nos dois sentidos: ao definir as etapas, contra a classificação
+que já está gravada, e ao definir a classificação, contra as etapas que já existem. Se
+a classificação ainda não foi gravada, a definição das etapas não é recusada por este
+motivo. Quando a recusa vem da definição da classificação, o erro aponta os campos da
+classificação que impedem o cálculo local do ENEM.
+
+No descarte de uma retificação a mesma conferência roda sobre a configuração congelada
+que seria reposta.
+
+## Como resolver
+
+Escolha o ajuste que reflete o edital:
+
+- declare a classificação baseada em ENEM, calculada pela média ponderada
+  (`PUT /api/selecao/processos-seletivos/{id}/classificacao`); ou
+- retire do processo a etapa com nota do ENEM
+  (`PUT /api/selecao/processos-seletivos/{id}/etapas`).
+
+Se o erro apareceu ao descartar uma retificação, o problema não está no que foi
+enviado agora, e sim na configuração congelada para a qual o descarte tenta voltar.
+Isso indica inconsistência na versão publicada anterior; abra uma investigação em vez
+de tentar corrigir pelo descarte.

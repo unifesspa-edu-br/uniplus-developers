@@ -1,0 +1,37 @@
+---
+title: Um fato coletado deixou de ser coletável no catálogo de fatos do candidato
+sidebar_label: Fato coletado não mais declarado
+description: O campo do formulário cita um fato que o catálogo atual não declara como coletável do próprio candidato em campo.
+code: uniplus.selecao.processo_seletivo.fato_coletado_nao_mais_declarado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um campo de formulário do processo, ou um campo de grupo repetível, coleta um fato que
+o catálogo de fatos do candidato, no estado atual, não declara mais como coletável: o fato não existe mais no catálogo, ou deixou de ser declarado como fato do candidato respondido em campo (ou, no campo de grupo repetível, como fato de membro do grupo). O vínculo foi feito quando o fato era coletável e o catálogo mudou
+depois. A mensagem de detalhe cita o código do fato. A recusa sai com **422**.
+
+O congelamento reconfere os vínculos contra o catálogo vivo antes de gerar a versão, e
+não grava um vínculo que já não é coletável. Em cada finalidade do formulário, conferem-se primeiro os campos individuais e depois os campos dos grupos repetíveis, cada conjunto em ordem, e a recusa cita o primeiro que falha.
+
+## Como resolver
+
+Retire do formulário o campo que coleta esse fato, ou substitua-o por um fato
+coletável do catálogo
+(`PUT /api/selecao/admin/processos-seletivos/{id}/formularios/{finalidade}/itens`), e
+repita a operação.
+
+Se o fato deveria continuar coletável, a correção é no catálogo de fatos do candidato,
+que é da gestão do cadastro e não do processo.

@@ -1,0 +1,45 @@
+---
+title: O desempate por área do ENEM exige classificação com quadro de pesos por área
+sidebar_label: Desempate por área sem quadro
+description: O desempate pela nota em área do ENEM só vale com classificação baseada em ENEM, pela média ponderada, com o quadro de pesos por área.
+code: uniplus.selecao.processo_seletivo.desempate_area_enem_sem_quadro
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+  - Definição de classificação do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+  - Fechamento de sessão editorial
+  - Descarte de retificação (restauração da configuração congelada)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Há critério de desempate que compara a nota por área do ENEM, mas a classificação do
+processo não calcula a nota localmente pelo ENEM: ela não é baseada em ENEM, ou a
+fórmula não é a média ponderada, ou falta o quadro de pesos por área. Sem esse quadro
+o sistema não tem as áreas nem os pesos em que o desempate se apoia. A mensagem de
+detalhe cita a ordem do critério afetado. A recusa sai com **422**.
+
+O erro aparece ao definir os critérios de desempate, ao definir a classificação (quando
+a nova classificação deixa de ter o quadro que um critério pressupõe) e, como
+defesa, na publicação, na retificação em ato único e no fechamento da sessão editorial.
+
+## Como resolver
+
+Escolha o ajuste que reflete o edital:
+
+- declare a classificação baseada em ENEM, calculada pela média ponderada, com o quadro
+  de pesos por área
+  (`PUT /api/selecao/processos-seletivos/{id}/classificacao`); ou
+- retire do desempate o critério por área do ENEM
+  (`PUT /api/selecao/processos-seletivos/{id}/criterios-desempate`).
+
+Depois repita a operação que foi recusada.
