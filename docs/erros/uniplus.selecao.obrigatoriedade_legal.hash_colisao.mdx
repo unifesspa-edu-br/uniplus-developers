@@ -32,15 +32,17 @@ condições normais, recusada antes, com
 cenário provável deste erro é a escrita concorrente de conteúdo idêntico: as duas escritas passam
 pela conferência prévia, e o banco barra a segunda. Como o conteúdo repete também o código de regra,
 o banco pode apontar qualquer uma das duas unicidades, e a resposta sai com o código
-correspondente. A resposta não indica qual escrita concorrente venceu nem se o conteúdo da regra
-existente é de fato o mesmo.
+correspondente. A resposta tem status 409, e não é erro interno do servidor. Ela não indica qual
+escrita concorrente venceu nem se o conteúdo da regra existente é de fato o mesmo.
 
 A descrição da regra e o endereço do ato normativo não entram no hash: mudá-los não distingue uma
 regra da outra.
 
 ## Como resolver
 
-Consulte a listagem de obrigatoriedades legais e confira o conteúdo da regra existente com o que
-você enviou antes de concluir que são equivalentes. Se for a regra que você queria, não há mais o que
+Consulte a listagem de obrigatoriedades legais com `vigentes=false` e confira o conteúdo da regra
+existente com o que você enviou antes de concluir que são equivalentes. Sem esse parâmetro a listagem
+traz só as regras vigentes na data de hoje, e uma regra ativa que ainda não começou a valer, ou que já
+encerrou a vigência, continua sujeita à unicidade e não apareceria. Se for a regra que você queria, não há mais o que
 fazer. Se a sua regra deve ser outra, altere o conteúdo que a distingue, ou atualize a regra
 existente.

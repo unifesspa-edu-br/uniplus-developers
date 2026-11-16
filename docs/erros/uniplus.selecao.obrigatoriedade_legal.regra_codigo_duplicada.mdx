@@ -29,12 +29,19 @@ A comparação é exata, com diferença entre maiúsculas e minúsculas, depois 
 pontas. Só regra ativa conta: o código de uma regra desativada fica livre para uso. Na atualização, a
 própria regra é desconsiderada, de modo que ela pode manter o código que já tem.
 
-A conferência vem depois da do tipo de processo
+A conferência vem depois da leitura do corpo, da conferência dos campos (entre eles, o próprio código
+de regra:
+[`regra_codigo_obrigatorio`](./uniplus.selecao.obrigatoriedade_legal.regra_codigo_obrigatorio.mdx) e
+[`regra_codigo_invalido`](./uniplus.selecao.obrigatoriedade_legal.regra_codigo_invalido.mdx)), de, na
+atualização, a regra ser encontrada
+([`nao_encontrada`](./uniplus.selecao.obrigatoriedade_legal.nao_encontrada.mdx)), e da do tipo de
+processo
 ([`tipo_processo_nao_encontrado_ou_inativo`](./uniplus.selecao.obrigatoriedade_legal.tipo_processo_nao_encontrado_ou_inativo.mdx))
 e das referências do predicado, e antes da gravação.
 
 Duas escritas simultâneas com o mesmo código podem passar juntas pela conferência. Nesse caso é o
-banco de dados que recusa a segunda, e a resposta é esta mesma. Se o conteúdo das duas for idêntico,
+banco de dados que recusa a segunda, e a resposta é esta mesma, com status 409: a corrida não resulta
+em erro interno do servidor. Se o conteúdo das duas for idêntico,
 a recusa pode vir como
 [`hash_colisao`](./uniplus.selecao.obrigatoriedade_legal.hash_colisao.mdx).
 
