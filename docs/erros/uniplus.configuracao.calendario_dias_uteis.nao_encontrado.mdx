@@ -34,6 +34,8 @@ use outro já existente.
 Na inclusão de um dia não útil avulso, o dataset é procurado antes de o dia ser
 validado: com um identificador que não resolve, esta é a resposta, mesmo que os
 campos do dia também tivessem erros de validação. Isso vale só para a validação
-feita depois da leitura da requisição: um corpo ausente, malformado ou
+feita depois da leitura da requisição: um corpo malformado ou
 incompatível com o formato esperado é recusado antes (400), sem que o dataset
-chegue a ser procurado.
+chegue a ser procurado. Corpo ausente ou `null` não é recusado nessa leitura:
+o dataset é procurado primeiro e, se existir, o item nulo recebe
+[a recusa de item nulo](./uniplus.configuracao.calendario_dias_uteis.dia_nao_util_nulo.mdx).
