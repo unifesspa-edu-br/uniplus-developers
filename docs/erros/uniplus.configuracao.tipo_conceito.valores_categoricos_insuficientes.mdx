@@ -25,10 +25,10 @@ O tipo de conceito é de natureza `categorico`, mas `valores` está ausente, nul
 
 A recusa vem na lista `errors` da resposta, com `field` igual a `valores`. As demais recusas do conteúdo, inclusive as dos itens enviados, vêm na mesma resposta, e nada é gravado.
 
-Todo objeto de `valores` precisa trazer `contaComoAprovacao`, que é obrigatório no JSON. O objeto que não o declara, inclusive `{}`, falha na leitura do corpo, antes de qualquer validação do domínio, e a resposta é um 400 sem o código desta página (veja [campo obrigatório ausente](./uniplus.requisicao.campo_obrigatorio_ausente.mdx) e [requisição malformada](./uniplus.requisicao.malformada.mdx)). Por isso `valores: [{}]` não produz esta recusa, nem as de código e rótulo dos itens: o pedido nem chega ao domínio.
+Todo item de `valores` precisa dizer se conta como aprovação: o item que omite `contaComoAprovacao` é recusado no próprio campo, com [conta como aprovação obrigatória](./uniplus.configuracao.tipo_conceito.valor_categorico_conta_como_aprovacao_obrigatoria.mdx). Um único objeto `{}` em `valores` produz as recusas de código, de rótulo e de aprovação do item, além desta, porque a lista continua com menos de dois valores.
 
 Na atualização, com o corpo desserializável e o `id` do corpo igual ao da rota, a conferência do corpo vem antes da busca do tipo: com um `{id}` que não existe, a resposta é esta, e não a de [tipo de conceito não encontrado](./uniplus.configuracao.tipo_conceito.nao_encontrado.mdx). O corpo que não desserializa e o `id` do corpo diferente do da rota são recusados antes, com 400 e sem o código desta página.
 
 ## Como resolver
 
-Envie ao menos dois valores, cada um com `codigo`, `rotulo` e `contaComoAprovacao` (este último é obrigatório no JSON, mesmo quando falso), por exemplo `[{ "codigo": "APTO", "rotulo": "Apto", "contaComoAprovacao": true }, { "codigo": "INAPTO", "rotulo": "Inapto", "contaComoAprovacao": false }]`, e repita o pedido.
+Envie ao menos dois valores, cada um com `codigo`, `rotulo` e `contaComoAprovacao` (este último é obrigatório, mesmo quando falso), por exemplo `[{ "codigo": "APTO", "rotulo": "Apto", "contaComoAprovacao": true }, { "codigo": "INAPTO", "rotulo": "Inapto", "contaComoAprovacao": false }]`, e repita o pedido.

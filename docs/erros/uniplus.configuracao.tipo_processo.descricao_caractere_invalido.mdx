@@ -1,0 +1,31 @@
+---
+title: 'A descrição do tipo de processo seletivo contém o caractere nulo, de controle ou de formatação'
+sidebar_label: 'Descrição do tipo de processo com caractere inválido'
+description: 'A descrição do tipo de processo seletivo não pode conter o caractere nulo, o de controle (fora a quebra de linha e a tabulação), o de formatação nem texto que não é Unicode válido.'
+code: uniplus.configuracao.tipo_processo.descricao_caractere_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de processo seletivo
+  - Atualização de um tipo de processo seletivo
+requisitos:
+  - UNI-REQ-0098
+rastreio:
+  - label: 'uniplus-api#1070'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1070
+  - label: 'uniplus-api#2492'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2492
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **descrição** do tipo de processo seletivo contém o caractere nulo (`U+0000`), um caractere de controle (fora a quebra de linha, o retorno de carro e a tabulação) ou de formatação, ou texto que não é Unicode válido.
+
+## Como resolver
+
+Remova o caractere inválido da descrição.

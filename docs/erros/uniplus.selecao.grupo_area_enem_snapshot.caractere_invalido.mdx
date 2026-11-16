@@ -1,8 +1,8 @@
 ---
-title: O grupo de área do ENEM não pode conter o caractere nulo
-sidebar_label: Grupo de área do ENEM com caractere nulo
-description: 'O código ou o rótulo do grupo de área do ENEM contém o caractere nulo (U+0000) ou outro caractere que não é texto.'
-code: uniplus.selecao.grupo_area_enem_snapshot.caractere_nulo
+title: 'Grupo de área do ENEM contém caractere nulo, de controle, de formatação ou que não é texto'
+sidebar_label: 'Grupo de área do ENEM com caractere inválido'
+description: 'O código ou o rótulo do grupo de área do ENEM contém caractere nulo, de controle, de formatação ou que não é texto.'
+code: uniplus.selecao.grupo_area_enem_snapshot.caractere_invalido
 http_status: 422
 situacao: publicado
 modulo: Seleção
@@ -30,6 +30,8 @@ rastreio:
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1600
   - label: 'uniplus-api#1601'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1601
+  - label: 'uniplus-api#2492'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2492
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -38,10 +40,10 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O código ou o rótulo do grupo de área do ENEM contém o caractere nulo (U+0000) ou outro caractere
-que não é texto, como um surrogate sem par. O texto congelado entra aparado e normalizado, e o
-caractere nulo é recusado porque o banco de dados não o aceita; deixá-lo passar faria a falha
-aparecer só depois, na gravação.
+O código ou o rótulo do grupo de área do ENEM contém o caractere nulo (U+0000), um caractere de controle ou
+de formatação, ou outro caractere que não é texto, como um surrogate sem par. O texto congelado entra aparado e
+normalizado, e esses caracteres são recusados porque não fazem parte de um código nem de um rótulo legíveis; deixá-los passar
+faria a falha aparecer só depois, na gravação ou na publicação.
 
 Cada oferta da distribuição de vagas e cada grupo do quadro de pesos por área da classificação
 guardam uma cópia do grupo de área do ENEM do curso, com código e rótulo, congelada com o processo.
@@ -68,8 +70,8 @@ definição o recusa antes. Nessas leituras a recusa sai como violação única,
 
 Na releitura, o texto com não-caractere (como U+FFFE) ou com surrogate sem par é recusado antes, como
 [`envelope_malformado`](./uniplus.selecao.envelope_codec.envelope_malformado.mdx), porque o sistema
-reserializa os bytes pelo perfil canônico antes de ler cada campo; só o caractere nulo (U+0000) chega
-a esta causa. O código ou o rótulo em branco, ou acima do limite, também é recusado antes, pelo mesmo
+reserializa os bytes pelo perfil canônico antes de ler cada campo; só o texto com caractere nulo,
+de controle ou de formatação chega a esta causa. O código ou o rótulo em branco, ou acima do limite, também é recusado antes, pelo mesmo
 motivo.
 
 Esta conferência vem depois das do código e do rótulo em branco

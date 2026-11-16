@@ -1,8 +1,8 @@
 ---
-title: A justificativa da divulgação contém o caractere nulo
-sidebar_label: Justificativa com caractere nulo
-description: A justificativa da divulgação pública contém o caractere nulo (U+0000), que o sistema não aceita em texto.
-code: uniplus.selecao.configuracao_divulgacao.justificativa_com_caractere_nulo
+title: 'A justificativa contém o caractere nulo, de controle ou de formatação'
+sidebar_label: 'Justificativa com caractere inválido'
+description: 'A justificativa da divulgação pública não pode conter o caractere nulo, o de controle (fora a quebra de linha e a tabulação), o de formatação nem texto que não é Unicode válido.'
+code: uniplus.selecao.configuracao_divulgacao.justificativa_caractere_invalido
 http_status: 422
 situacao: publicado
 modulo: Seleção
@@ -23,6 +23,9 @@ emitido_em:
   - Publicação de produto do edital e listagem de produtos previstos do processo
   - Notas do ENEM (importação de lote, geração do envio ao INEP e consulta de lotes e de envios)
 requisitos: []
+rastreio:
+  - label: 'uniplus-api#2492'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2492
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -31,9 +34,9 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A justificativa da divulgação pública contém o caractere nulo (U+0000). Ele é um caractere de
-controle invisível que não é tratado como espaço em branco, por isso não é removido na
-normalização do texto, e o sistema não o aceita.
+A justificativa da divulgação pública contém o caractere nulo (U+0000), um caractere de controle (fora a quebra de linha, o retorno de carro e a tabulação) ou de formatação, ou texto que não é Unicode válido. Esses caracteres são invisíveis e não são tratados
+como espaço em branco, por isso não são removidos na normalização do texto, e o sistema não os aceita. A quebra
+de linha, o retorno de carro e a tabulação são aceitos, porque a justificativa é um texto de várias linhas.
 
 A conferência vale para qualquer justificativa enviada, mesmo quando o `nome` não está na lista.
 A recusa vem junto das demais violações do mesmo pedido, no array `errors[]`, e pode aparecer ao
@@ -52,13 +55,13 @@ que exige a justificativa ausente.
 Esta mesma conferência é refeita quando o sistema relê a configuração congelada da versão
 publicada: em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o descarte, a consulta dos formulários,
 as operações da inscrição, entre outras; a lista completa está no cabeçalho da página).
-Pelo caminho normal de gravação, a configuração congelada nunca traz esse caractere, porque a
+Pelo caminho normal de gravação, a configuração congelada nunca traz esses caracteres, porque a
 definição o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista
 `errors[]`, e se refere à versão congelada, não ao pedido enviado.
 
 ## Como resolver
 
-Remova o caractere nulo da justificativa, por exemplo digitando o texto de novo em vez de colá-lo,
+Remova o caractere inválido da justificativa, por exemplo digitando o texto de novo em vez de colá-lo,
 e reenvie. Se a resposta trouxer mais de uma violação em `errors[]`, corrija todas antes de
 reenviar.
 

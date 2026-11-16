@@ -1,0 +1,36 @@
+---
+title: 'Código do tipo de etapa contém o caractere nulo ou caractere que não é texto'
+sidebar_label: 'Código do tipo de etapa com caractere inválido'
+description: 'O código do tipo de etapa não pode conter o caractere nulo, o de controle, o de formatação nem texto que não é Unicode válido.'
+code: uniplus.configuracao.tipo_etapa.codigo_caractere_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de etapa
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1071'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1071
+  - label: 'uniplus-api#2492'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2492
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **código** do tipo de etapa contém o caractere nulo (`U+0000`), um caractere de controle (como a quebra de linha ou a tabulação) ou de formatação, ou texto que não é Unicode válido.
+
+O código não segue um formato de vocabulário fechado — aceita qualquer
+composição de caracteres —, mas esses caracteres são recusados explicitamente:
+o nulo corrompe strings em C (e em bancos e protocolos que tratam `\0` como
+terminador), e os de controle e de formatação, invisíveis, deixariam dois
+códigos iguais na tela com valores diferentes. O código é conferido aparado e em forma
+normalizada (NFC).
+
+## Como resolver
+
+Remova o caractere inválido do código.

@@ -1,0 +1,30 @@
+---
+title: 'A descrição do tipo de etapa contém o caractere nulo, de controle ou de formatação'
+sidebar_label: 'Descrição do tipo de etapa com caractere inválido'
+description: 'A descrição do tipo de etapa não pode conter o caractere nulo, o de controle (fora a quebra de linha e a tabulação), o de formatação nem texto que não é Unicode válido.'
+code: uniplus.configuracao.tipo_etapa.descricao_caractere_invalido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Criação de um tipo de etapa
+  - Atualização de um tipo de etapa
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1071'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1071
+  - label: 'uniplus-api#2492'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2492
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A **descrição** do tipo de etapa contém o caractere nulo (`U+0000`), um caractere de controle (fora a quebra de linha, o retorno de carro e a tabulação) ou de formatação, ou texto que não é Unicode válido.
+
+## Como resolver
+
+Remova o caractere inválido da descrição.

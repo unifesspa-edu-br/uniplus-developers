@@ -30,4 +30,4 @@ A recusa vem na lista `errors` da resposta, com `field` igual a `areas`, e a men
 
 ## Como resolver
 
-Envie as cinco áreas, uma vez cada, com o código e o peso de cada uma. As áreas aceitas e os rótulos oficiais vêm de `GET /api/configuracao/pesos-area-enem/areas`. O campo `peso` de cada item é obrigatório no JSON: o item sem ele é recusado ainda na leitura do corpo, com 400, antes desta conferência (`PesoAreaEnemAreaCommand.cs:19`). Na atualização, o corpo substitui a linha inteira: as cinco áreas vão sempre, e o corte, quando ausente, significa que a área fica sem corte.
+Envie as cinco áreas, uma vez cada, com o código e o peso de cada uma. As áreas aceitas e os rótulos oficiais vêm de `GET /api/configuracao/pesos-area-enem/areas`. O campo `peso` de cada item é obrigatório: o item sem ele é recusado no próprio campo, com [peso da área obrigatório](./uniplus.configuracao.peso_area_enem.peso_obrigatorio.mdx), junto das demais recusas do corpo. Na atualização, o corpo substitui a linha inteira: as cinco áreas vão sempre, e o corte, quando ausente, significa que a área fica sem corte.
