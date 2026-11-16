@@ -1,10 +1,10 @@
 ---
 title: Hipótese legal de tratamento do fato fora do vocabulário fechado
 sidebar_label: Hipótese legal fora do vocabulário
-description: Rascunho — a hipótese legal de tratamento informada para o fato não é uma das aceitas.
+description: A hipótese legal de tratamento informada para o fato não é uma das aceitas.
 code: uniplus.configuracao.fato_candidato.hipotese_legal_invalida
 http_status: 422
-situacao: rascunho
+situacao: publicado
 modulo: Configuração
 emitido_em:
   - Cadastro de um fato do catálogo (declarado, derivado ou agregado)
@@ -27,7 +27,7 @@ O administrador cadastrou um fato do catálogo (declarado, derivado ou agregado)
 
 A recusa vem na lista `errors` da resposta, com `field` igual a `hipoteseLegal`. Nada é gravado.
 
-Um campo vazio ou ausente não cai aqui: ele recebe a recusa `uniplus.configuracao.fato_candidato.hipotese_legal_obrigatoria`. Espaços nas pontas são desconsiderados.
+Um campo vazio ou só com espaços não cai aqui: ele recebe [a recusa de hipótese legal obrigatória](./uniplus.configuracao.fato_candidato.hipotese_legal_obrigatoria.mdx). O campo ausente do corpo é recusado antes, como erro de requisição (400). Espaços nas pontas são desconsiderados.
 
 ## Como resolver
 
@@ -45,6 +45,4 @@ Envie de novo o cadastro ou a definição com uma destas hipóteses, escrita exa
 - `PROTECAO_DO_CREDITO`;
 - `PREVENCAO_A_FRAUDE`.
 
-Nem toda hipótese serve a toda classificação: para um fato `SENSIVEL` valem as hipóteses do art. 11 da LGPD, e para os demais valem as do art. 7º. Só o art. 7º prevê `EXECUCAO_CONTRATO`, `INTERESSE_LEGITIMO` e `PROTECAO_DO_CREDITO`; só o art. 11 prevê `PREVENCAO_A_FRAUDE`. Uma hipótese do vocabulário que não cabe na classificação recebe outra recusa, `uniplus.configuracao.fato_candidato.hipotese_legal_incompativel_com_classificacao`.
-
-Os códigos citados nesta página sem link ainda não têm página: estão no catálogo a publicar ([uniplus-developers#329](https://github.com/unifesspa-edu-br/uniplus-developers/issues/329)).
+Nem toda hipótese serve a toda classificação: para um fato `SENSIVEL` valem as hipóteses do art. 11 da LGPD, e para os demais valem as do art. 7º. Só o art. 7º prevê `EXECUCAO_CONTRATO`, `INTERESSE_LEGITIMO` e `PROTECAO_DO_CREDITO`; só o art. 11 prevê `PREVENCAO_A_FRAUDE`. Uma hipótese do vocabulário que não cabe na classificação recebe outra recusa, [a hipótese legal que não cabe na classificação](./uniplus.configuracao.fato_candidato.hipotese_legal_incompativel_com_classificacao.mdx).

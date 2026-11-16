@@ -1,0 +1,41 @@
+---
+title: Escopo do fato é obrigatório
+sidebar_label: Escopo do fato ausente ou desconhecido
+description: O escopo do fato não foi informado ou não é um dos dois aceitos.
+code: uniplus.configuracao.fato_candidato.escopo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato declarado do catálogo
+  - Cadastro de um fato derivado por regra do catálogo
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0146
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+  - label: 'uniplus-api#1694'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1694
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O escopo diz quem responde ao fato: o próprio candidato, uma única vez, ou cada membro de um grupo repetível, como a composição familiar (UNI-REQ-0146). O cadastro de um fato declarado (`POST /api/configuracao/admin/fatos-candidato`) ou derivado por regra (`POST /api/configuracao/admin/fatos-candidato/derivados`) chegou com o `escopo` vazio, só com espaços ou com um valor que não é do vocabulário, ou a alteração da definição (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) de um fato declarado ou derivado chegou sem ele. Para o escopo, as duas situações recebem este mesmo código de erro.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `escopo`. Nada é gravado. O campo ausente do corpo do cadastro é recusado antes, como erro de requisição (400). No fato de sistema, que só aceita mudar o nome, a descrição, a forma de exibição e a proteção de dados, um escopo fora do vocabulário também recebe esta recusa, antes da recusa de [definição do fato de sistema travada](./uniplus.configuracao.fato_candidato.definicao_do_fato_de_sistema_travada.mdx). O agregado não informa o escopo: quem o envia recebe [a recusa de eixo que o tipo do fato não permite alterar](./uniplus.configuracao.fato_candidato.eixo_nao_editavel_no_tipo_do_fato.mdx).
+
+## Como resolver
+
+Informe o escopo, escrito exatamente assim, em maiúsculas:
+
+- `CANDIDATO`: o próprio candidato responde, uma única vez;
+- `MEMBRO_GRUPO`: cada membro de um grupo repetível responde.

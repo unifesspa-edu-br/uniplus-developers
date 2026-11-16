@@ -1,0 +1,34 @@
+---
+title: Só fato de domínio texto declara formato
+sidebar_label: Formato só em fato de texto
+description: O fato não é de texto e, mesmo assim, veio com formato.
+code: uniplus.configuracao.fato_candidato.formato_fora_de_texto
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato declarado do catálogo
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O formato diz como o texto do fato é conferido e apresentado, como CPF, e-mail ou telefone, e só existe no fato de tipo de dado texto (UNI-REQ-0143). O cadastro de um fato declarado (`POST /api/configuracao/admin/fatos-candidato`) ou a alteração da definição (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) de um fato declarado trouxe um `formato` junto de um `dominio` que não é `TEXTO`. O formato preenchido com um valor fora do vocabulário também cai aqui.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `formato`. Ela só é dada quando o domínio é válido. Nada é gravado. O fato derivado por regra e o agregado não informam o formato: quem o envia na alteração recebe [a recusa de eixo que o tipo do fato não permite alterar](./uniplus.configuracao.fato_candidato.eixo_nao_editavel_no_tipo_do_fato.mdx).
+
+## Como resolver
+
+Retire o `formato` do corpo, ou mude o `dominio` para `TEXTO` se o fato é mesmo um texto.

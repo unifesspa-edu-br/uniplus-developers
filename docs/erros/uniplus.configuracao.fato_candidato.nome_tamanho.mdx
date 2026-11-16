@@ -1,0 +1,34 @@
+---
+title: Tamanho do nome do fato inválido
+sidebar_label: Nome do fato acima do limite
+description: O nome do fato passa de 200 caracteres.
+code: uniplus.configuracao.fato_candidato.nome_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato do catálogo (declarado, derivado ou agregado)
+  - Alteração de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0207
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+  - label: 'uniplus-api#2183'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2183
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O nome do fato tem no máximo 200 caracteres, contados depois de aparados os espaços nas pontas. O `nome` do cadastro (`POST /api/configuracao/admin/fatos-candidato`, `POST /api/configuracao/admin/fatos-candidato/derivados` ou `POST /api/configuracao/admin/fatos-candidato/agregados`) ou da alteração do fato (`PUT /api/configuracao/admin/fatos-candidato/{id}`) passa disso.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `nome`. Nada é gravado. O nome vazio recebe [a recusa de nome obrigatório](./uniplus.configuracao.fato_candidato.nome_obrigatorio.mdx).
+
+## Como resolver
+
+Encurte o nome para até 200 caracteres. O que explica o dado vai na descrição do fato (UNI-REQ-0207), não no nome.

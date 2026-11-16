@@ -1,0 +1,41 @@
+---
+title: Cardinalidade do fato fora do vocabulário fechado
+sidebar_label: Cardinalidade fora do vocabulário
+description: A cardinalidade informada para o fato não é uma das duas aceitas.
+code: uniplus.configuracao.fato_candidato.cardinalidade_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato declarado do catálogo
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador cadastrou um fato declarado (`POST /api/configuracao/admin/fatos-candidato`) ou alterou a definição de um fato (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) com uma `cardinalidade` que não pertence ao vocabulário fechado. A cardinalidade diz se o fato aceita uma resposta ou várias (UNI-REQ-0143 e UNI-REQ-0159). A comparação diferencia maiúsculas de minúsculas, e os espaços nas pontas são desconsiderados.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `cardinalidade`. Nada é gravado. Um campo vazio ou só com espaços não cai aqui: no cadastro e na alteração de um fato declarado, ele recebe [a recusa de cardinalidade obrigatória](./uniplus.configuracao.fato_candidato.cardinalidade_obrigatoria.mdx); na alteração de um fato derivado ou agregado, o vazio é tratado como não informado e não é recusado.
+
+No fato de sistema, que só aceita mudar o nome, a descrição, a forma de exibição e a proteção de dados, a cardinalidade fora do vocabulário também recebe esta recusa, antes da recusa de [definição do fato de sistema travada](./uniplus.configuracao.fato_candidato.definicao_do_fato_de_sistema_travada.mdx).
+
+## Como resolver
+
+Envie uma destas cardinalidades, escrita exatamente assim, em maiúsculas:
+
+- `ESCALAR`: o fato tem uma única resposta;
+- `MULTIVALORADO`: o fato aceita várias respostas.
+
+O fato derivado por regra e o agregado não informam a cardinalidade: ela é inferida do tipo de dado, e quem a envia recebe [a recusa de eixo que o tipo do fato não permite alterar](./uniplus.configuracao.fato_candidato.eixo_nao_editavel_no_tipo_do_fato.mdx).

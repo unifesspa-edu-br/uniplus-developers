@@ -1,0 +1,35 @@
+---
+title: Os valores do agregado são os do fato de membro
+sidebar_label: Agregado sem valores próprios
+description: 'O fato agregado categórico não guarda valores de domínio: as opções dele são as do fato de membro.'
+code: uniplus.configuracao.fato_candidato.agregado_nao_tem_valores_proprios
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Acréscimo de um valor a um fato do catálogo
+  - Correção de um valor de um fato do catálogo
+  - Reordenação dos valores de um fato do catálogo
+requisitos:
+  - UNI-REQ-0146
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1702'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1702
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador tentou acrescentar (`POST /api/configuracao/admin/fatos-candidato/{id}/valores`), corrigir (`PUT /api/configuracao/admin/fatos-candidato/{id}/valores/{codigo}`) ou reordenar (`PUT /api/configuracao/admin/fatos-candidato/{id}/ordem-dos-valores`) os valores de um fato agregado categórico. O agregado resume, para um grupo repetível como a composição familiar, o que os membros responderam em outro fato, o fato de membro (UNI-REQ-0146). As opções do agregado são as do fato de membro e são mantidas nele: a API não guarda valores próprios no agregado. A mensagem da resposta diz qual é o fato de membro.
+
+A recusa é do fato, e não de um campo: a resposta não traz a lista `errors`. As conferências seguem esta ordem: a busca do fato ([fato do candidato não encontrado](./uniplus.configuracao.fato_candidato.nao_encontrado.mdx)), a recusa de fato de sistema ([definição do fato de sistema travada](./uniplus.configuracao.fato_candidato.definicao_do_fato_de_sistema_travada.mdx)), a recusa de fato que não é categórico ([só fato categórico tem valores](./uniplus.configuracao.fato_valor_dominio.nao_permitido_fora_de_categorico.mdx)) e, por fim, esta. O agregado booleano, que responde "existe membro que…", é de outro tipo de dado e recebe a recusa de fato que não é categórico. Na desativação e na reativação de valor essas conferências não rodam: o agregado não tem o valor, e a resposta é a de [valor não encontrado](./uniplus.configuracao.fato_valor_dominio.nao_encontrado.mdx). Nada é gravado.
+
+## Como resolver
+
+Faça a operação no fato de membro, que é onde as opções vivem: acrescente, corrija ou reordene os valores nele, e o agregado passa a refleti-los. O código do fato de membro vem na mensagem da resposta.
+
+O agregado muda só o ponto de resolução e a proteção de dados (UNI-REQ-0159).

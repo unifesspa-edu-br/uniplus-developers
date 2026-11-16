@@ -1,0 +1,33 @@
+---
+title: Ponto de resolução do fato é obrigatório
+sidebar_label: Ponto de resolução ausente
+description: O fato foi cadastrado ou alterado com o ponto de resolução vazio.
+code: uniplus.configuracao.fato_candidato.ponto_resolucao_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato do catálogo (declarado, derivado ou agregado)
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Todo fato declara a fase do processo em que o valor dele fica conhecido (UNI-REQ-0143). O `pontoResolucao` do cadastro (`POST /api/configuracao/admin/fatos-candidato`, `POST /api/configuracao/admin/fatos-candidato/derivados` ou `POST /api/configuracao/admin/fatos-candidato/agregados`) ou da alteração da definição (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) chegou vazio ou só com espaços. O campo ausente do corpo é recusado antes, como erro de requisição (400). Na alteração da definição de um fato de sistema, um ponto vazio ou só com espaços é ignorado, como se não tivesse sido informado, e não gera esta recusa.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `pontoResolucao`. Nada é gravado.
+
+## Como resolver
+
+Informe o código de uma fase canônica, como na lista do vocabulário (`GET /api/configuracao/vocabularios/fases-canonicas`). Um código que não é de nenhuma fase recebe [a recusa de ponto de resolução fora do conjunto canônico](./uniplus.configuracao.fato_candidato.ponto_resolucao_invalido.mdx).

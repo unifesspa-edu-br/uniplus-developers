@@ -1,0 +1,30 @@
+---
+title: A regra cita fato que não entra em predicado
+sidebar_label: Regra cita fato que não entra em predicado
+description: A regra padrão cita um fato cujo tipo de dado não é avaliado pelas regras.
+code: uniplus.configuracao.fato_candidato.regra_cita_fato_nao_citavel
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Definição das regras padrão de um fato derivado por regra
+requisitos:
+  - UNI-REQ-0143
+rastreio:
+  - label: 'uniplus-api#1694'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1694
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador substituiu as regras padrão de um fato derivado por regra (`PUT /api/configuracao/admin/fatos-candidato/{id}/regras-padrao`), e uma regra cita um fato que o predicado não sabe avaliar. Não entram em regra o fato de texto, de data e de endereço, para que dado pessoal não vá parar no edital congelado (UNI-REQ-0143), o fato de membro de grupo repetível e o fato categórico de fonte `GLOBAL` que ainda não tem valores cadastrados.
+
+A recusa vem na lista `errors` da resposta, com `field` igual ao índice da regra, como `regras[0]`, uma entrada por fato citado. A mensagem cita o código do fato. Quando uma regra cita fato assim, a conferência dos operadores e valores do predicado dessa regra não roda. Nada é gravado.
+
+## Como resolver
+
+Cite outro fato na regra: um booleano, um número ou um categórico com valores. Uma data entra em regra por um fato derivado relativo à data de referência, como a faixa etária, e a UF e o município saem do endereço pelos fatos derivados deles. Para o fato de membro de um grupo repetível, a regra usa um agregado (`POST /api/configuracao/admin/fatos-candidato/agregados`), como "existe membro que…". Se o fato categórico ainda não tem valores, acrescente-os (`POST /api/configuracao/admin/fatos-candidato/{id}/valores`).

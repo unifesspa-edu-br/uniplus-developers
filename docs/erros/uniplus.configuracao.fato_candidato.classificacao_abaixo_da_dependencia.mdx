@@ -1,0 +1,42 @@
+---
+title: O derivado protege menos que um fato que ele cita
+sidebar_label: Derivado com proteção abaixo da dependência
+description: A classificação de proteção de dados do fato derivado é mais fraca que a de um fato que ele cita ou resume.
+code: uniplus.configuracao.fato_candidato.classificacao_abaixo_da_dependencia
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato agregado do catálogo
+  - Definição das regras padrão de um fato derivado por regra
+  - Alteração da definição de um fato do catálogo
+  - Aceite da recomendação de ajuste da proteção de dados de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1694'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1694
+  - label: 'uniplus-api#1702'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1702
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um fato derivado revela o que se sabe dos fatos de que depende: a regra padrão cita esses fatos, e o agregado resume o fato de membro. Por isso ele não pode ter classificação de proteção de dados mais fraca que a de nenhum deles. A escala vai do mais fraco ao mais forte: `PUBLICO`, `INTERNO`, `PESSOAL`, `IDENTIFICADOR`, `SENSIVEL`. A recusa vale para:
+
+- o cadastro do agregado (`POST /api/configuracao/admin/fatos-candidato/agregados`), contra o fato de membro, com `field` igual a `classificacaoProtecao`;
+- a definição das regras padrão (`PUT /api/configuracao/admin/fatos-candidato/{id}/regras-padrao`), contra cada fato citado, com `field` igual ao índice da regra, como `regras[0]`;
+- a alteração da definição do derivado ou do agregado (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) e o aceite da recomendação de ajuste (`POST /api/configuracao/admin/fatos-candidato/{id}/aceite-da-recomendacao`), contra o que o fato já cita ou resume, com `field` igual a `classificacaoProtecao`.
+
+A mensagem cita o código do fato de que o derivado depende. Na alteração, só conta a recusa que a mudança causa: a que já existia antes dela não a trava. Nada é gravado.
+
+## Como resolver
+
+Eleve a classificação do fato derivado até a do fato mais protegido que ele cita ou resume, ou tire a citação da regra. A proteção do fato de que ele depende também pode ser revista, mas isso muda o dado de origem e passa pela aprovação da proteção de dados (UNI-REQ-0205). Para elevar a classificação do derivado, altere a definição dele (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`).

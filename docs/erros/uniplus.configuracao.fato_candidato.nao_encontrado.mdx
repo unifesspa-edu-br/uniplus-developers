@@ -1,0 +1,43 @@
+---
+title: Fato do candidato não encontrado
+sidebar_label: Fato do candidato não encontrado
+description: Não existe fato do catálogo com o identificador informado.
+code: uniplus.configuracao.fato_candidato.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Alteração de um fato do catálogo
+  - Alteração da definição de um fato do catálogo
+  - Definição das regras padrão de um fato derivado por regra
+  - Desativação de um fato do catálogo
+  - Reativação de um fato do catálogo
+  - Acréscimo de um valor a um fato do catálogo
+  - Correção de um valor de um fato do catálogo
+  - Reordenação dos valores de um fato do catálogo
+  - Desativação de um valor de um fato do catálogo
+  - Reativação de um valor de um fato do catálogo
+  - Aceite da recomendação de ajuste da proteção de dados de um fato do catálogo
+  - Decisão sobre a proteção de dados de um fato do catálogo
+  - Manifestação sobre a proteção de dados de um fato do catálogo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `{id}` da rota, ou o `itemId` do corpo nas operações da proteção de dados, não corresponde a nenhum fato do catálogo. A recusa vale para as operações que alteram um fato existente: o nome, a descrição e a forma de exibição (`PUT /api/configuracao/admin/fatos-candidato/{id}`), a definição (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`), as regras padrão (`PUT /api/configuracao/admin/fatos-candidato/{id}/regras-padrao`), a desativação (`DELETE /api/configuracao/admin/fatos-candidato/{id}`) e a reativação (`POST /api/configuracao/admin/fatos-candidato/{id}/ativacao`), os valores (`POST /api/configuracao/admin/fatos-candidato/{id}/valores`, `PUT /api/configuracao/admin/fatos-candidato/{id}/valores/{codigo}`, `PUT /api/configuracao/admin/fatos-candidato/{id}/ordem-dos-valores`, `DELETE /api/configuracao/admin/fatos-candidato/{id}/valores/{codigo}` e `POST /api/configuracao/admin/fatos-candidato/{id}/valores/{codigo}/ativacao`), o aceite da recomendação de ajuste da proteção de dados (`POST /api/configuracao/admin/fatos-candidato/{id}/aceite-da-recomendacao`) e, para um item do cadastro de fatos, a decisão (`POST /api/configuracao/admin/protecao-do-catalogo`) e a manifestação (`POST /api/configuracao/admin/protecao-do-catalogo/manifestacoes`) sobre a proteção de dados. O fato desativado continua no catálogo e não gera esta resposta.
+
+A busca do fato vem antes das demais conferências, e nas operações de valor vem antes da busca do valor. A exceção é a definição das regras padrão: as regras enviadas são montadas primeiro, e qualquer falha nessa montagem, como uma regra ou condição nula ([regra padrão malformada](./uniplus.configuracao.fato_candidato.regra_padrao_malformada.mdx)), uma cláusula vazia ou um campo `contribui` em branco, é recusada antes de o fato ser procurado. A validação do corpo na borda HTTP também vem antes da busca. A resposta não traz a lista `errors`.
+
+## Como resolver
+
+Confira o identificador do fato. Para encontrar o fato certo, consulte a lista de manutenção (`GET /api/configuracao/admin/fatos-candidato`), que traz os fatos ativos e os desativados, e use o `id` de lá. Se o fato nunca foi cadastrado, cadastre-o (`POST /api/configuracao/admin/fatos-candidato`).

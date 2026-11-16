@@ -1,0 +1,30 @@
+---
+title: O fato já está desativado
+sidebar_label: Fato já desativado
+description: A desativação foi pedida para um fato que já está desativado.
+code: uniplus.configuracao.fato_candidato.ja_desativado
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Desativação de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador pediu a desativação de um fato do catálogo (`DELETE /api/configuracao/admin/fatos-candidato/{id}`), mas o fato já está desativado. O fato não é apagado: a desativação só impede vínculos novos com ele e preserva os que já existem (UNI-REQ-0143). Repetir o pedido não tem efeito, e a API o recusa em vez de aceitá-lo em silêncio.
+
+As conferências seguem esta ordem: o fato ([fato do candidato não encontrado](./uniplus.configuracao.fato_candidato.nao_encontrado.mdx)), a recusa de fato de sistema, que não é desativado ([definição do fato de sistema travada](./uniplus.configuracao.fato_candidato.definicao_do_fato_de_sistema_travada.mdx)) e, por último, o estado do fato. A resposta não traz a lista `errors`. Nada é gravado.
+
+## Como resolver
+
+Não há nada a fazer: o fato já não aceita vínculos novos. Se o fato deve voltar a ser usado, reative-o (`POST /api/configuracao/admin/fatos-candidato/{id}/ativacao`).
