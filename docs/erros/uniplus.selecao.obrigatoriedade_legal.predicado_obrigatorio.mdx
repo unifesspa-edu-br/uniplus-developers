@@ -1,0 +1,57 @@
+---
+title: A regra legal não informa o predicado
+sidebar_label: Predicado da regra legal ausente
+description: Toda obrigatoriedade legal precisa de um predicado, a exigência que será avaliada no processo seletivo.
+code: uniplus.selecao.obrigatoriedade_legal.predicado_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos:
+  - UNI-REQ-0018
+rastreio:
+  - label: 'uniplus-api#2478'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2478
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `predicado` não veio no corpo da requisição, ou veio com valor nulo. O predicado é a
+exigência em si, o que a regra cobra do processo seletivo na avaliação de conformidade: etapa
+obrigatória, modalidades mínimas, documento por modalidade, atendimento disponível, critério de
+desempate, concorrência dupla ou uma regra transitória. Sem ele não há o que avaliar. Nada é
+gravado.
+
+O erro vale só para a ausência. Um predicado que veio, mas está mal formado, é recusado por outro
+código: lista vazia de modalidades
+([`modalidades_minimas_vazia`](./uniplus.selecao.obrigatoriedade_legal.modalidades_minimas_vazia.mdx)),
+lista vazia de tipos de deficiência
+([`atendimento_disponivel_vazio`](./uniplus.selecao.obrigatoriedade_legal.atendimento_disponivel_vazio.mdx))
+e código em branco
+([`predicado_com_codigo_em_branco`](./uniplus.selecao.obrigatoriedade_legal.predicado_com_codigo_em_branco.mdx)).
+Um predicado que não traz o discriminador `$tipo` não chega a este erro: o corpo não pode ser lido e a
+recusa é de
+[requisição malformada](./uniplus.requisicao.malformada.mdx), com status 400.
+
+A ausência é uma recusa de domínio, com status 422, e não de leitura do corpo. A resposta lista todas
+as violações de campo da mesma requisição em `errors[]`, cada uma com o campo em camelCase, o código e
+a mensagem; o `code` da raiz é o da primeira violação, na ordem em que os campos são conferidos (tipo
+de processo, categoria, código da regra, predicado, descrição, base legal, ato normativo, portaria
+interna e vigência).
+
+A conferência vem depois da permissão para manter obrigatoriedades legais e da leitura do corpo, e
+antes de qualquer consulta: na atualização, antes de a regra ser buscada
+([`nao_encontrada`](./uniplus.selecao.obrigatoriedade_legal.nao_encontrada.mdx)); nas duas operações,
+antes da conferência do tipo de processo e dos códigos que o predicado cita.
+
+## Como resolver
+
+Informe o predicado no corpo, com o `$tipo` da exigência e os campos que ele pede; o contrato de cada
+tipo está na referência de API do módulo Seleção. Na atualização, a regra é substituída por inteiro:
+reenvie também os campos que não mudam, porque o que não for enviado é tratado como ausente.

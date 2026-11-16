@@ -1,0 +1,46 @@
+---
+title: O ato normativo da regra legal excede o tamanho máximo
+sidebar_label: Ato normativo da regra legal longo demais
+description: O ato normativo da obrigatoriedade legal é opcional e aceita no máximo 1000 caracteres, contados depois de aparar os espaços das pontas.
+code: uniplus.selecao.obrigatoriedade_legal.ato_normativo_url_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2478'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2478
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `atoNormativoUrl` tem mais de 1000 caracteres. O campo é opcional e traz a referência ao ato
+que institui a regra, em texto livre: endereço, DOI, URN ou outro identificador. O valor é preservado
+como foi informado, salvo os espaços das pontas, que são aparados ao gravar. Por isso o tamanho é a
+única conferência que a API faz sobre ele; não se confere se o valor é um endereço de web bem
+formado. A contagem é feita depois de aparar os espaços das pontas. Campo omitido, vazio ou só com
+espaços não é erro: vale como ausência. A mensagem da resposta diz o limite e não repete o valor
+enviado. Nada é gravado.
+
+A resposta lista todas as violações de campo da mesma requisição em `errors[]`, cada uma com o campo
+em camelCase, o código e a mensagem; o `code` da raiz é o da primeira violação, na ordem em que os
+campos são conferidos (tipo de processo, categoria, código da regra, predicado, descrição, base legal,
+ato normativo, portaria interna e vigência).
+
+A conferência vem depois da permissão para manter obrigatoriedades legais e da leitura do corpo, e
+antes de qualquer consulta: na atualização, antes de a regra ser buscada
+([`nao_encontrada`](./uniplus.selecao.obrigatoriedade_legal.nao_encontrada.mdx)); nas duas operações,
+antes da conferência do tipo de processo e dos códigos que o predicado cita.
+
+## Como resolver
+
+Informe uma referência de até 1000 caracteres, ou omita o campo, e repita o cadastro ou a atualização.
+Na atualização, a regra é substituída por inteiro: um ato normativo que não for reenviado é limpo, e a
+regra passa a não ter nenhum.

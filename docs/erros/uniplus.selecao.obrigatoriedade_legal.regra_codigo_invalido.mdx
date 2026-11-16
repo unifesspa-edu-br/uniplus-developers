@@ -1,0 +1,43 @@
+---
+title: O código da regra legal excede o tamanho máximo
+sidebar_label: Código da regra legal longo demais
+description: O código da obrigatoriedade legal aceita no máximo 128 caracteres, contados depois de aparar os espaços das pontas.
+code: uniplus.selecao.obrigatoriedade_legal.regra_codigo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2478'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2478
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `regraCodigo` tem mais de 128 caracteres. A contagem é feita depois de aparar os espaços das
+pontas, que a regra descarta ao gravar. O tamanho é a única conferência de forma deste campo: nenhum
+formato de caractere é exigido. A mensagem da resposta diz o limite e não repete o valor enviado.
+Nada é gravado.
+
+A resposta lista todas as violações de campo da mesma requisição em `errors[]`, cada uma com o campo
+em camelCase, o código e a mensagem; o `code` da raiz é o da primeira violação, na ordem em que os
+campos são conferidos (tipo de processo, categoria, código da regra, predicado, descrição, base legal,
+ato normativo, portaria interna e vigência).
+
+A conferência vem depois da permissão para manter obrigatoriedades legais e da leitura do corpo, e
+antes de qualquer consulta: na atualização, antes de a regra ser buscada
+([`nao_encontrada`](./uniplus.selecao.obrigatoriedade_legal.nao_encontrada.mdx)); nas duas operações,
+antes da conferência de código de regra já em uso
+([`regra_codigo_duplicada`](./uniplus.selecao.obrigatoriedade_legal.regra_codigo_duplicada.mdx)).
+
+## Como resolver
+
+Use um código de até 128 caracteres e repita o cadastro ou a atualização. Na atualização, a regra é
+substituída por inteiro: reenvie também os campos que não mudam.

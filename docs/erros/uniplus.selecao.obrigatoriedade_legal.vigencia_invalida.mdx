@@ -1,0 +1,48 @@
+---
+title: O fim da vigência da regra legal não é posterior ao início
+sidebar_label: Vigência da regra legal incoerente
+description: O fim da vigência da obrigatoriedade legal, quando informado, precisa ser estritamente posterior ao início.
+code: uniplus.selecao.obrigatoriedade_legal.vigencia_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2478'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2478
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `vigenciaFim` é igual ou anterior a `vigenciaInicio`. A vigência é o período em que a regra
+vale, e o fim, que é opcional, tem de cair depois do começo: um fim no mesmo dia do início também é
+recusado. A violação é apontada no campo `vigenciaFim`. Sem fim, a regra não tem prazo para acabar, e
+nada é conferido sobre ele. Nada é gravado.
+
+A relação só é verificada quando o início foi informado; sem ele a recusa é
+[`vigencia_inicio_obrigatorio`](./uniplus.selecao.obrigatoriedade_legal.vigencia_inicio_obrigatorio.mdx).
+A conferência compara as duas datas informadas, sem olhar a data de hoje: uma vigência já encerrada,
+ou que começa no futuro, é aceita se o fim for posterior ao início.
+
+A resposta lista todas as violações de campo da mesma requisição em `errors[]`, cada uma com o campo
+em camelCase, o código e a mensagem; o `code` da raiz é o da primeira violação, na ordem em que os
+campos são conferidos (tipo de processo, categoria, código da regra, predicado, descrição, base legal,
+ato normativo, portaria interna e vigência).
+
+A conferência vem depois da permissão para manter obrigatoriedades legais e da leitura do corpo, e
+antes de qualquer consulta: na atualização, antes de a regra ser buscada
+([`nao_encontrada`](./uniplus.selecao.obrigatoriedade_legal.nao_encontrada.mdx)); nas duas operações,
+antes da conferência do tipo de processo e dos códigos que o predicado cita.
+
+## Como resolver
+
+Informe um `vigenciaFim` posterior a `vigenciaInicio`, ou omita o fim para uma regra sem prazo, e
+repita o cadastro ou a atualização. Na atualização, a regra é substituída por inteiro: um fim que não
+for reenviado é limpo, e a regra passa a não ter prazo para acabar.

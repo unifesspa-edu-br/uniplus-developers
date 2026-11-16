@@ -1,0 +1,44 @@
+---
+title: A regra legal não informa a base legal
+sidebar_label: Base legal da regra legal ausente
+description: A obrigatoriedade legal precisa citar a norma que a fundamenta; base legal ausente, vazia ou só com espaços é recusada.
+code: uniplus.selecao.obrigatoriedade_legal.base_legal_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Cadastro de uma obrigatoriedade legal
+  - Atualização de uma obrigatoriedade legal
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2478'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2478
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `baseLegal` não veio no corpo da requisição, veio nulo, vazio ou só com espaços. A base legal é
+a citação da norma que fundamenta a regra; uma obrigatoriedade legal sem ela não pode ser cadastrada.
+Nada é gravado.
+
+A recusa é de domínio, com status 422, e não de leitura do corpo: campo omitido e campo vazio têm o
+mesmo resultado. A resposta lista todas as violações de campo da mesma requisição em `errors[]`, cada
+uma com o campo em camelCase, o código e a mensagem; o `code` da raiz é o da primeira violação, na
+ordem em que os campos são conferidos (tipo de processo, categoria, código da regra, predicado,
+descrição, base legal, ato normativo, portaria interna e vigência).
+
+A conferência vem depois da permissão para manter obrigatoriedades legais e da leitura do corpo, e
+antes de qualquer consulta: na atualização, antes de a regra ser buscada
+([`nao_encontrada`](./uniplus.selecao.obrigatoriedade_legal.nao_encontrada.mdx)); nas duas operações,
+antes da conferência do tipo de processo e dos códigos que o predicado cita.
+
+## Como resolver
+
+Informe a base legal da regra, com até 500 caracteres
+([`base_legal_invalida`](./uniplus.selecao.obrigatoriedade_legal.base_legal_invalida.mdx)). Na
+atualização, a regra é substituída por inteiro: reenvie também os campos que não mudam, porque o que
+não for enviado é tratado como ausente.
