@@ -1,0 +1,64 @@
+---
+title: RegraVersao, Fator e BaseLegalBonusRegionalId são obrigatórios quando RegraCodigo é informado
+sidebar_label: Fator de Atenuação com campos faltando
+description: A declaração do Fator de Atenuação das Desigualdades de Acesso informou a regra, mas não trouxe a versão da regra, o multiplicador da nota ou a base legal.
+code: uniplus.selecao.configuracao_bonus_regional.campos_obrigatorios
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Declaração do Fator de Atenuação das Desigualdades de Acesso do processo seletivo
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#1466'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1466
+  - label: 'uniplus-api#1850'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1850
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A declaração do Fator de Atenuação das Desigualdades de Acesso informou a regra do fator
+(`regraCodigo`), mas faltou ao menos um dos três campos que a acompanham: a versão da regra
+(`regraVersao`), o multiplicador da nota (`fator`) ou a base legal do fator
+(`baseLegalBonusRegionalId`). Os três são obrigatórios sempre que a regra é informada, porque
+é deles que o sistema monta o fator congelado do processo: a regra e a versão dizem como o
+acréscimo é calculado, o multiplicador diz quanto vale, e a base legal fixa os municípios
+a que ele se aplica.
+
+A mensagem de detalhe da resposta lista os três campos, sem dizer qual deles faltou; confira
+os três no corpo enviado. A recusa vem como uma violação única, sem a lista `errors[]`, e
+nada é gravado.
+
+A conferência vem depois da que recusa a declaração de que o fator não se aplica, mas traz
+campos do fator
+([`bonus_regional_nao_aplica_com_configuracao`](./uniplus.selecao.processo_seletivo.bonus_regional_nao_aplica_com_configuracao.mdx)),
+e da que exige a regra quando o processo declara aplicar o fator
+([`bonus_regional_aplica_sem_configuracao`](./uniplus.selecao.processo_seletivo.bonus_regional_aplica_sem_configuracao.mdx)).
+Ela vem antes de qualquer consulta ao catálogo de regras
+([`regra_nao_encontrada`](./uniplus.selecao.configuracao_bonus_regional.regra_nao_encontrada.mdx)),
+ao cadastro de bases legais
+([`base_legal_nao_encontrada`](./uniplus.selecao.configuracao_bonus_regional.base_legal_nao_encontrada.mdx))
+e à conferência dos valores do fator, do teto e do fato de elegibilidade. Antes de todas elas
+saem a recusa de acesso, a conferência do formato dos números (o `fator` e o `teto` aceitam
+até quatro casas decimais) e a recusa de edição de processo já publicado fora de uma
+retificação ([`mutacao_pos_publicacao_bloqueada`](./uniplus.selecao.processo_seletivo.mutacao_pos_publicacao_bloqueada.mdx)).
+
+## Como resolver
+
+Envie a declaração com `aplica: true` e os quatro campos do fator juntos:
+
+- `regraCodigo` e `regraVersao`: a regra e a versão do catálogo de regras. Hoje o catálogo
+  tem uma única regra do tipo regra de bônus, `BONUS-MULTIPLICATIVO`, na versão `v1`;
+- `fator`: o multiplicador aplicado à nota, maior que zero, com até quatro casas decimais e no máximo seis dígitos no total, contados os zeros finais;
+- `baseLegalBonusRegionalId`: o identificador da base legal do fator, do cadastro de bases
+  legais do fator no módulo Configuração.
+
+O `teto` e o código do fato que decide quem recebe o acréscimo (`fatoElegibilidadeCodigo`)
+seguem opcionais nesta conferência. Se o fator não se aplica ao processo, declare
+`aplica: false` e não envie nenhum outro campo do fator.

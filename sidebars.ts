@@ -1226,6 +1226,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.no_exigencia.grupo_com_finalidades_diferentes',
         'erros/uniplus.selecao.no_exigencia.remove_vantagem_sem_vantagem_viva',
         'erros/uniplus.selecao.configuracao_bonus_regional.base_legal_nao_encontrada',
+        'erros/uniplus.selecao.configuracao_bonus_regional.campos_obrigatorios',
         'erros/uniplus.selecao.configuracao_bonus_regional.fato_elegibilidade_invalido',
         'erros/uniplus.selecao.configuracao_bonus_regional.fator_invalido',
         'erros/uniplus.selecao.configuracao_bonus_regional.regra_nao_encontrada',
