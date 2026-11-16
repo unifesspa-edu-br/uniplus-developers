@@ -1,0 +1,36 @@
+---
+title: A hipótese legal não cabe na classificação de proteção do fato
+sidebar_label: Hipótese legal incompatível com a classificação
+description: A hipótese legal de tratamento pertence a outro artigo da LGPD que o da classificação do fato.
+code: uniplus.configuracao.fato_candidato.hipotese_legal_incompativel_com_classificacao
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato do catálogo (declarado, derivado ou agregado)
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0205
+rastreio:
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+  - label: 'uniplus-api#2181'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2181
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A hipótese legal é a base da LGPD que autoriza o tratamento do dado, e o artigo dela depende da classificação (UNI-REQ-0205). O dado sensível usa as hipóteses do art. 11 da LGPD, e os demais usam as do art. 7º. O cadastro (`POST /api/configuracao/admin/fatos-candidato`, `POST /api/configuracao/admin/fatos-candidato/derivados` ou `POST /api/configuracao/admin/fatos-candidato/agregados`) ou a alteração da definição (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`), inclusive a do fato de sistema, juntou uma hipótese legal e uma classificação que não combinam: uma hipótese só do art. 7º num fato `SENSIVEL`, ou uma hipótese só do art. 11 num fato de outra classificação.
+
+Só o art. 7º prevê `EXECUCAO_CONTRATO`, `INTERESSE_LEGITIMO` e `PROTECAO_DO_CREDITO`; só o art. 11 prevê `PREVENCAO_A_FRAUDE`. As demais hipóteses existem nos dois artigos.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `hipoteseLegal`. Ela só é dada quando a classificação e a hipótese são do vocabulário: uma delas fora do vocabulário recebe a recusa própria ([classificação fora do vocabulário](./uniplus.configuracao.fato_candidato.classificacao_protecao_invalida.mdx) ou [hipótese legal fora do vocabulário](./uniplus.configuracao.fato_candidato.hipotese_legal_invalida.mdx)). Nada é gravado.
+
+## Como resolver
+
+Escolha uma hipótese que caiba na classificação: para `SENSIVEL`, qualquer uma menos `EXECUCAO_CONTRATO`, `INTERESSE_LEGITIMO` e `PROTECAO_DO_CREDITO`; para `PUBLICO`, `INTERNO`, `PESSOAL` e `IDENTIFICADOR`, qualquer uma menos `PREVENCAO_A_FRAUDE`. Se é a classificação que está errada, corrija-a: um dado que revela origem racial ou saúde é `SENSIVEL`.

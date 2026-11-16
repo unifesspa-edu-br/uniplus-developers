@@ -1,0 +1,30 @@
+---
+title: A regra passa a citar fato desativado
+sidebar_label: Regra cita fato desativado
+description: A regra padrão enviada cita um fato desativado que a regra anterior não citava.
+code: uniplus.configuracao.fato_candidato.regra_cita_fato_desativado
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Definição das regras padrão de um fato derivado por regra
+requisitos:
+  - UNI-REQ-0143
+rastreio:
+  - label: 'uniplus-api#1694'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1694
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador substituiu as regras padrão de um fato derivado por regra (`PUT /api/configuracao/admin/fatos-candidato/{id}/regras-padrao`), e uma regra cita um fato que está desativado e que as regras gravadas do derivado ainda não citavam. O fato desativado não aceita vínculos novos e preserva os que já existem (UNI-REQ-0143): a citação que já existia continua aceita quando as regras são regravadas, e só a citação nova é recusada.
+
+A recusa vem na lista `errors` da resposta, com `field` igual ao índice da regra, como `regras[0]`, uma entrada por fato desativado citado. A mensagem cita o código do fato. Nada é gravado.
+
+## Como resolver
+
+Tire a citação ao fato desativado da regra, ou reative o fato (`POST /api/configuracao/admin/fatos-candidato/{id}/ativacao`) se ele deve voltar a ser usado, e envie as regras de novo.

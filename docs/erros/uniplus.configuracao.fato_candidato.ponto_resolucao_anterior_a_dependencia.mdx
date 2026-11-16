@@ -1,0 +1,43 @@
+---
+title: O derivado resolve antes de um fato que ele cita
+sidebar_label: Derivado resolve antes da dependência
+description: O ponto de resolução do fato derivado é anterior ao de um fato que ele cita ou resume.
+code: uniplus.configuracao.fato_candidato.ponto_resolucao_anterior_a_dependencia
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato agregado do catálogo
+  - Definição das regras padrão de um fato derivado por regra
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0075
+  - UNI-REQ-0143
+rastreio:
+  - label: 'uniplus-api#1694'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1694
+  - label: 'uniplus-api#1702'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1702
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O ponto de resolução é a fase do processo em que o valor do fato fica conhecido. Um fato derivado só resolve quando todos os fatos de que depende resolveram (UNI-REQ-0075), então ele não pode ser conhecido numa fase anterior à de uma dependência: a regra padrão cita esses fatos, e o agregado resume o fato de membro. A ordem entre as fases vem do cadastro de precedência entre fases. Fases sem precedência entre si, e a mesma fase, não geram esta recusa. A mensagem cita o código do fato de que o derivado depende e as duas fases.
+
+A recusa vale para:
+
+- o cadastro do agregado (`POST /api/configuracao/admin/fatos-candidato/agregados`), contra o fato de membro, com `field` igual a `pontoResolucao`;
+- a definição das regras padrão (`PUT /api/configuracao/admin/fatos-candidato/{id}/regras-padrao`), contra cada fato citado, com `field` igual ao índice da regra, como `regras[0]`;
+- a alteração da definição de um derivado ou de um agregado (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`), contra o que o fato já cita ou resume, com `field` igual a `pontoResolucao`.
+
+Na alteração, só conta a recusa que a mudança causa: a que já existia antes dela não a trava. Nada é gravado.
+
+## Como resolver
+
+Escolha para o derivado uma fase igual ou posterior à de todos os fatos de que ele depende, ou tire a citação da regra. Se é a dependência que precisa resolver mais cedo, altere a definição dela (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`); a alteração só é aceita se o que depende dela continuar valendo.

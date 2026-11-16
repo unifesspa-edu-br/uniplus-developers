@@ -1,0 +1,37 @@
+---
+title: Domínio do fato é obrigatório
+sidebar_label: Domínio do fato ausente
+description: O fato foi cadastrado ou alterado sem informar o tipo de dado.
+code: uniplus.configuracao.fato_candidato.dominio_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato declarado do catálogo
+  - Cadastro de um fato derivado por regra do catálogo
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+  - label: 'uniplus-api#1694'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1694
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo de dado (`dominio`) é um dos eixos do fato (UNI-REQ-0143). O cadastro de um fato declarado (`POST /api/configuracao/admin/fatos-candidato`) ou derivado por regra (`POST /api/configuracao/admin/fatos-candidato/derivados`) chegou com o `dominio` vazio ou só com espaços, ou a alteração da definição (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) de um fato declarado ou derivado chegou sem ele. Na alteração, todos os eixos do tipo do fato são enviados de novo, e o que não vem é tratado como não informado.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `dominio`. Com o domínio ausente, o que depende dele, como a fonte dos valores e o formato, não é conferido. Nada é gravado. Um domínio preenchido e desconhecido recebe [a recusa de domínio fora do vocabulário](./uniplus.configuracao.fato_candidato.dominio_invalido.mdx). O campo ausente do corpo do cadastro é recusado antes, como erro de requisição (400).
+
+## Como resolver
+
+Informe o domínio: `BOOLEANO`, `CATEGORICO`, `NUMERICO`, `TEXTO`, `DATA` ou `ENDERECO`. No fato derivado por regra, só `BOOLEANO` e `CATEGORICO`. O agregado não informa o domínio, e por isso não recebe esta recusa.

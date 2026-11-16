@@ -1,0 +1,34 @@
+---
+title: Fato categórico precisa declarar a fonte dos seus valores
+sidebar_label: Fonte dos valores do categórico ausente
+description: O fato categórico foi enviado sem fonte dos valores, ou com uma fonte que não é das aceitas.
+code: uniplus.configuracao.fato_candidato.fonte_valores_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato declarado do catálogo
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O fato categórico é escolhido numa lista, e a fonte dos valores diz de onde vêm as opções (UNI-REQ-0143). O cadastro de um fato declarado (`POST /api/configuracao/admin/fatos-candidato`) ou a alteração da definição (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) de um fato declarado trouxe o `dominio` `CATEGORICO` com a `fonteValores` ausente, vazia ou com um valor que não pertence ao vocabulário. Para a fonte, as duas situações recebem este mesmo código de erro.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `fonteValores`. Ela só é dada quando o domínio é válido. Nada é gravado. No fato de sistema, que só aceita mudar o nome, a descrição, a forma de exibição e a proteção de dados, uma fonte fora do vocabulário também recebe esta recusa, antes da recusa de [definição do fato de sistema travada](./uniplus.configuracao.fato_candidato.definicao_do_fato_de_sistema_travada.mdx).
+
+## Como resolver
+
+Informe uma destas fontes, escrita exatamente assim, em maiúsculas: `GLOBAL`, `PROCESSO`, `MODALIDADE`, `MUNICIPIOS_BONUS`, `GEO_UF`, `GEO_MUNICIPIO` ou `TIPOS_DEFICIENCIA`. Com `GLOBAL`, as opções são cadastradas no próprio fato (`POST /api/configuracao/admin/fatos-candidato/{id}/valores`); nas demais, vêm do processo ou de outro cadastro, e o fato não guarda valores. O fato derivado por regra categórico usa a fonte `GLOBAL`, inferida, e o agregado herda a do fato de membro.

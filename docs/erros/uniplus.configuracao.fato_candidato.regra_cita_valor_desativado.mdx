@@ -1,0 +1,30 @@
+---
+title: A regra passa a citar valor desativado
+sidebar_label: Regra cita valor desativado
+description: A regra padrão enviada cita ou contribui um valor desativado que a regra anterior não usava.
+code: uniplus.configuracao.fato_candidato.regra_cita_valor_desativado
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Definição das regras padrão de um fato derivado por regra
+requisitos:
+  - UNI-REQ-0143
+rastreio:
+  - label: 'uniplus-api#1694'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1694
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O administrador substituiu as regras padrão de um fato derivado por regra (`PUT /api/configuracao/admin/fatos-candidato/{id}/regras-padrao`), e uma regra cita, na condição, ou contribui, no resultado, um valor desativado que as regras gravadas do derivado ainda não usavam. O valor desativado não aceita vínculos novos e preserva os que já existem (UNI-REQ-0143): o uso que já existia continua aceito quando as regras são regravadas, e só o uso novo é recusado.
+
+A recusa vem na lista `errors` da resposta, com `field` igual ao índice da regra, como `regras[0]`, uma entrada por valor. A mensagem cita o código do valor e o do fato. Nada é gravado.
+
+## Como resolver
+
+Troque o valor desativado por um valor ativo na regra, ou reative o valor (`POST /api/configuracao/admin/fatos-candidato/{id}/valores/{codigo}/ativacao`) se ele deve voltar a ser usado, e envie as regras de novo.

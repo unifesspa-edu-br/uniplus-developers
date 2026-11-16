@@ -1,0 +1,34 @@
+---
+title: Cardinalidade do fato é obrigatória
+sidebar_label: Cardinalidade do fato ausente
+description: O fato declarado foi cadastrado ou alterado sem informar a cardinalidade.
+code: uniplus.configuracao.fato_candidato.cardinalidade_obrigatoria
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Cadastro de um fato declarado do catálogo
+  - Alteração da definição de um fato do catálogo
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0159
+rastreio:
+  - label: 'uniplus-api#1693'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1693
+  - label: 'uniplus-api#1969'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1969
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A cardinalidade, que diz se o fato aceita uma resposta ou várias, é um dos eixos do fato declarado (UNI-REQ-0143). O cadastro (`POST /api/configuracao/admin/fatos-candidato`) chegou com a `cardinalidade` vazia ou só com espaços, ou a alteração da definição (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) de um fato declarado chegou sem ela. Na alteração, todos os eixos do fato declarado são enviados de novo, e o que não vem é tratado como não informado.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `cardinalidade`. Nada é gravado. Uma cardinalidade preenchida e desconhecida recebe [a recusa de cardinalidade fora do vocabulário](./uniplus.configuracao.fato_candidato.cardinalidade_invalida.mdx). O campo ausente do corpo do cadastro é recusado antes, como erro de requisição (400).
+
+## Como resolver
+
+Informe `ESCALAR` (uma única resposta) ou `MULTIVALORADO` (várias respostas). O fato derivado por regra e o agregado não informam a cardinalidade, e por isso não recebem esta recusa.

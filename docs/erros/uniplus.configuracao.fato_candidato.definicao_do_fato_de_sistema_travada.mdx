@@ -8,7 +8,14 @@ situacao: publicado
 modulo: Configuração
 emitido_em:
   - Alteração da definição de um fato do catálogo
-  - Alteração das regras ou dos valores de um fato do catálogo
+  - Definição das regras padrão de um fato derivado por regra
+  - Desativação de um fato do catálogo
+  - Reativação de um fato do catálogo
+  - Acréscimo de um valor a um fato do catálogo
+  - Correção de um valor de um fato do catálogo
+  - Reordenação dos valores de um fato do catálogo
+  - Desativação de um valor de um fato do catálogo
+  - Reativação de um valor de um fato do catálogo
 requisitos:
   - UNI-REQ-0143
   - UNI-REQ-0205
@@ -24,7 +31,9 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Os fatos de sistema são definidos pela lei ou calculados pelo próprio Uni+. O código, o tipo de dado, se aceita um ou vários valores, a origem, a fonte e o formato dos valores, os valores do domínio, as regras padrão, o ponto em que o valor fica conhecido, o escopo e a ativação continuam travados. A alteração pedida mexe em algum deles.
+Os fatos de sistema são definidos pela lei ou calculados pelo próprio Uni+. O código, o tipo de dado, se aceita um ou vários valores, a origem, a fonte e o formato dos valores, os valores do domínio, as regras padrão, o ponto em que o valor fica conhecido, o escopo e a ativação continuam travados. A operação pedida mexe em algum deles: a alteração da definição (`PUT /api/configuracao/admin/fatos-candidato/{id}/definicao`) com um eixo diferente do que o fato já tem, a definição das regras padrão (`PUT .../{id}/regras-padrao`), a desativação (`DELETE .../{id}`) e a reativação (`POST .../{id}/ativacao`) do fato, e o acréscimo, a correção, a reordenação, a desativação e a reativação de valores (`.../{id}/valores`, `.../{id}/ordem-dos-valores`). Um eixo reenviado com o mesmo valor que o fato já tem não conta como alteração.
+
+A busca do fato vem antes ([fato do candidato não encontrado](./uniplus.configuracao.fato_candidato.nao_encontrado.mdx)). Um valor de eixo fora do vocabulário (domínio, cardinalidade, escopo, fonte dos valores ou formato) é recusado antes desta recusa, como erro do próprio campo. A resposta não traz a lista `errors`: a recusa é do fato, e não de um campo. Nada é gravado.
 
 ## Como resolver
 
