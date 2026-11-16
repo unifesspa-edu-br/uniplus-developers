@@ -1,8 +1,8 @@
 ---
-title: O código do tipo de conceito contém um caractere inválido
-sidebar_label: Código do tipo de conceito com caractere inválido
-description: O código do tipo de conceito não pode conter o caractere nulo (U+0000) nem texto que não seja Unicode válido.
-code: uniplus.configuracao.tipo_conceito.codigo_com_caractere_nulo
+title: 'Código do tipo de conceito contém o caractere nulo ou caractere que não é texto'
+sidebar_label: 'Código do tipo de conceito com caractere inválido'
+description: 'O código do tipo de conceito não pode conter o caractere nulo, o de controle, o de formatação nem texto que não é Unicode válido.'
+code: uniplus.configuracao.tipo_conceito.codigo_caractere_invalido
 http_status: 422
 situacao: publicado
 modulo: Configuração
@@ -12,6 +12,8 @@ requisitos: []
 rastreio:
   - label: 'uniplus-api#2431'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2431
+  - label: 'uniplus-api#2492'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2492
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -20,7 +22,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A criação de um tipo de conceito (`POST /api/configuracao/admin/tipos-conceito`) trouxe um `codigo` com o caractere nulo (`U+0000`) ou com texto que não é Unicode válido e, por isso, não pode ser normalizado. O banco de dados não grava o caractere nulo, e a recusa evita que o código seja truncado ou corrompido em silêncio. Os espaços nas pontas são desconsiderados antes da conferência.
+A criação de um tipo de conceito (`POST /api/configuracao/admin/tipos-conceito`) trouxe um `codigo` com o caractere nulo (`U+0000`), um caractere de controle (como a quebra de linha ou a tabulação) ou de formatação, ou com texto que não é Unicode válido e, por isso, não pode ser normalizado. A recusa evita que o código seja truncado, corrompido ou confundido com outro em silêncio. Os espaços nas pontas são desconsiderados antes da conferência.
 
 O código do tipo de conceito não tem formato fixo, ao contrário do código de cada valor categórico: fora o caractere inválido, a regra é só o tamanho máximo ([código do tipo de conceito muito longo](./uniplus.configuracao.tipo_conceito.codigo_tamanho.mdx)).
 

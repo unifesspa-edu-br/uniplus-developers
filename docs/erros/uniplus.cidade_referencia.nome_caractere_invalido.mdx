@@ -1,8 +1,8 @@
 ---
-title: O nome da cidade contém o caractere nulo
-sidebar_label: Caractere nulo no nome da cidade
-description: O nome do município não pode conter o caractere nulo (U+0000).
-code: uniplus.cidade_referencia.nome_caractere_nulo
+title: 'Nome da cidade contém o caractere nulo ou caractere que não é texto'
+sidebar_label: 'Caractere inválido no nome da cidade'
+description: 'O nome do município não pode conter o caractere nulo, o de controle, o de formatação nem texto que não é Unicode válido.'
+code: uniplus.cidade_referencia.nome_caractere_invalido
 http_status: 422
 situacao: publicado
 modulo: Transversal
@@ -16,6 +16,8 @@ rastreio:
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/661
   - label: 'uniplus-api#686'
     href: https://github.com/unifesspa-edu-br/uniplus-api/issues/686
+  - label: 'uniplus-api#2492'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2492
 ---
 
 import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
@@ -24,10 +26,10 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O **nome** da cidade contém o caractere nulo (`U+0000`).
+O **nome** da cidade contém o caractere nulo (`U+0000`), um caractere de controle (como a quebra de linha ou a tabulação) ou de formatação, ou texto que não é Unicode válido. O nome é conferido aparado e em forma normalizada (NFC).
 
-Esta é uma checagem de integridade, não de conteúdo linguístico: o caractere
-nulo não faz parte de nenhum nome de município real, e sua presença indica
+Esta é uma checagem de integridade, não de conteúdo linguístico: nenhum
+nome de município real tem esses caracteres, e a presença deles indica
 dado corrompido ou payload malformado — nunca uma variação legítima de
 grafia. A validação recusa o valor antes que ele chegue ao banco, onde o
 caractere nulo em coluna de texto é fonte de comportamento inconsistente entre
@@ -36,7 +38,7 @@ por completo).
 
 ## Como resolver
 
-Remova o caractere nulo do nome da cidade. Isso normalmente indica um
+Remova o caractere inválido do nome da cidade. Isso normalmente indica um
 problema na origem do dado — truncamento, encoding incorreto ou composição
 manual do payload — e não algo que o operador precise editar manualmente na
 interface, já que o nome normalmente vem do cadastro de localidades do Geo,
