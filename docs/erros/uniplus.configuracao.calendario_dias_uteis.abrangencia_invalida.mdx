@@ -8,6 +8,7 @@ situacao: publicado
 modulo: Configuração
 emitido_em:
   - Criação de um dataset de calendário de dias úteis
+  - Inclusão de um dia não útil avulso
 requisitos: []
 rastreio:
   - label: 'uniplus-api#1140'
@@ -20,9 +21,12 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A **abrangência** informada para um dos dias não úteis não é um dos quatro
-tokens do domínio fechado: `NACIONAL`, `ESTADUAL`, `MUNICIPAL` ou
-`INSTITUCIONAL`.
+A **abrangência** informada para um dia não útil não é um dos quatro tokens
+do domínio fechado: `NACIONAL`, `ESTADUAL`, `MUNICIPAL` ou `INSTITUCIONAL`.
+
+A mesma validação vale na criação de um dataset (um erro por item da lista,
+apontado em `diasNaoUteis[i].abrangencia`) e na inclusão de um dia não útil
+avulso num dataset existente (apontado em `item.abrangencia`).
 
 A análise é por lista de tokens explícita (case-sensitive, sem tolerância a
 variação de grafia), não por conversão genérica de enum — um valor fora
@@ -31,4 +35,4 @@ desses quatro, incluindo variação de caixa, é recusado.
 ## Como resolver
 
 Use exatamente um dos quatro tokens válidos: `NACIONAL`, `ESTADUAL`,
-`MUNICIPAL` ou `INSTITUCIONAL`.
+`MUNICIPAL` ou `INSTITUCIONAL`, e repita a operação.

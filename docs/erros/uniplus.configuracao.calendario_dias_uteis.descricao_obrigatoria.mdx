@@ -8,6 +8,7 @@ situacao: publicado
 modulo: Configuração
 emitido_em:
   - Criação de um dataset de calendário de dias úteis
+  - Inclusão de um dia não útil avulso
 requisitos: []
 rastreio:
   - label: 'uniplus-api#1140'
@@ -20,10 +21,15 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A operação foi recusada porque um dos dias não úteis não trouxe **descrição**
-— o rótulo que identifica o que aquele dia é (por exemplo, "Independência do
+A operação foi recusada porque um dia não útil não trouxe **descrição** — o
+rótulo que identifica o que aquele dia é (por exemplo, "Independência do
 Brasil" ou "Recesso institucional de fim de ano").
+
+A mesma validação vale na criação de um dataset (um erro por item da lista,
+apontado em `diasNaoUteis[i].descricao`) e na inclusão de um dia não útil
+avulso num dataset existente (apontado em `item.descricao`).
 
 ## Como resolver
 
-Informe uma descrição para cada dia não útil da lista.
+Informe uma descrição para cada dia não útil enviado — todos os itens da lista,
+na criação, ou o dia avulso, na inclusão.

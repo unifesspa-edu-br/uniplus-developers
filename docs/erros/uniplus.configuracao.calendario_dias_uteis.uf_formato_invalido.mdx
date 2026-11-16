@@ -8,6 +8,7 @@ situacao: publicado
 modulo: Configuração
 emitido_em:
   - Criação de um dataset de calendário de dias úteis
+  - Inclusão de um dia não útil avulso
 requisitos: []
 rastreio:
   - label: 'uniplus-api#1140'
@@ -22,6 +23,10 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 A **UF** de um dia não útil de abrangência estadual não é uma das 27 siglas
 de unidade federativa válidas.
+
+A mesma validação vale na criação de um dataset (um erro por item da lista,
+apontado em `diasNaoUteis[i].uf`) e na inclusão de um dia não útil avulso num
+dataset existente (apontado em `item.uf`).
 
 ## Como resolver
 

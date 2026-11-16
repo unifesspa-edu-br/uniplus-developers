@@ -1,7 +1,7 @@
 ---
 title: A origem da data da fase canônica não foi informada
 sidebar_label: Origem da data obrigatória
-description: A origem da data da fase canônica é obrigatória — decide se a janela da fase é obrigatória (PROPRIA) ou opcional (DELEGADA).
+description: A origem da data da fase canônica é obrigatória — decide se a janela da fase é obrigatória (NO_EDITAL) ou opcional (NA_EXECUCAO).
 code: uniplus.configuracao.fase_canonica.origem_data_obrigatoria
 http_status: 422
 situacao: publicado
@@ -21,13 +21,18 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A operação foi recusada porque a **origem da data** da fase canônica não foi
-preenchida.
+A operação foi recusada porque a **origem da data** (campo `origemData`) da fase
+canônica não foi preenchida.
 
-Este campo decide quem controla a data da fase: `PROPRIA` (a fase tem janela
-própria, obrigatória) ou `DELEGADA` (a janela é opcional, controlada por
-outra fase). Não tem valor padrão — omiti-lo é recusado.
+Este campo decide quando a data da fase é definida e, com isso, se a janela
+da fase é obrigatória:
+
+- `NO_EDITAL` — a data é fixada no edital, e a janela da fase é obrigatória;
+- `NA_EXECUCAO` — a unidade responsável pela fase define a data na execução,
+  e a janela é opcional.
+
+Não tem valor padrão — omiti-lo é recusado.
 
 ## Como resolver
 
-Informe a origem da data da fase: `PROPRIA` ou `DELEGADA`.
+Informe a origem da data da fase: `NO_EDITAL` ou `NA_EXECUCAO`.

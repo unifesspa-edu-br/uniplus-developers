@@ -8,6 +8,7 @@ situacao: publicado
 modulo: Configuração
 emitido_em:
   - Criação de um dataset de calendário de dias úteis
+  - Inclusão de um dia não útil avulso
 requisitos: []
 rastreio:
   - label: 'uniplus-api#1140'
@@ -20,13 +21,17 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Um dos dias não úteis trouxe código IBGE, nome ou UF de município mesmo com
+Um dia não útil trouxe código IBGE, nome ou UF de município mesmo com
 abrangência diferente de `MUNICIPAL`.
 
 O snapshot de município é o par (código IBGE, nome, UF) que ancora um feriado
 municipal a uma cidade específica. Ele só faz sentido quando a abrangência é
 `MUNICIPAL` — em `NACIONAL`, `ESTADUAL` ou `INSTITUCIONAL`, informar qualquer
 um dos três campos é recusado, mesmo que os outros dois estejam ausentes.
+
+A mesma validação vale na criação de um dataset (um erro por item da lista,
+apontado em `diasNaoUteis[i]`) e na inclusão de um dia não útil avulso num
+dataset existente (apontado em `item`).
 
 ## Como resolver
 
