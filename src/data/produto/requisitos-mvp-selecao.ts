@@ -8332,4 +8332,26 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0407',
+    titulo: 'O local de prova é qualquer município do GEO, declarado pelo processo que tem prova presencial',
+    enunciado:
+      'O processo declara por si mesmo se tem prova presencial, em três estados: por declarar, sem prova presencial, ou com prova presencial e a lista dos municípios em que ela é aplicada. O processo por declarar não pode ser publicado. A declaração não é deduzida do tipo de processo nem da existência de etapa de prova, e declarar prova presencial não exige etapa de prova. O município pode ser qualquer um, de qualquer UF, sempre vindo do GEO, o serviço de localidades do Uni+, e não só os que têm campus da Unifesspa; a lista é declarada por processo, o próximo processo pode declarar outros municípios, e nenhum município é fixo no sistema. A lista tem ao menos um município, sem repetição, e no máximo o teto técnico, que é configuração da API (padrão de 100 municípios): acima dele a declaração é recusada. O processo sem prova presencial não declara município. Cada município é identificado pelo código do IBGE, de sete dígitos e com prefixo coerente com a UF (UNI-REQ-0111). A existência do município no GEO é conferida no servidor ao salvar o rascunho, ao importar e ao analisar a configuração, e o rascunho fica gravado com o problema apontado; é conferida de novo ao publicar e ao retificar, e, com o GEO indisponível, a publicação e a retificação respondem indisponibilidade (503) e nada é gravado. O nome do município que fica congelado na versão é o que o GEO devolve nessa conferência. A lista congela na publicação e só muda por retificação, e a mudança não alcança a inscrição já enviada (UNI-REQ-0212). Ao se inscrever, o candidato escolhe um dos municípios declarados pelo processo; o processo sem prova presencial não mostra o campo e não aceita a escolha. A lista dos municípios é parte pública do edital. A escolha do candidato é dado pessoal da inscrição, sem ser sensível, tratado com a finalidade e a base legal que o catálogo de fatos atribui a ela (UNI-REQ-0143, UNI-REQ-0159) e a base legal da inscrição (Lei nº 13.709/2018, art. 7º, III): só quem tem a permissão de consultar as inscrições do processo, na unidade responsável, a lê, com a recusa antes de qualquer leitura, e nenhuma mensagem, erro, diagnóstico ou registro reproduz a escolha de uma pessoa. Declarar os municípios exige a permissão de configurar o processo na unidade responsável, conferida antes de ler a configuração. Salas, capacidade e distribuição dos candidatos continuam fora (UNI-REQ-0042). Exemplo: o "PSR 2027" declara prova presencial em Marabá, Xinguara e Canaã dos Carajás, e a candidata Helena Bianca Sueli Rezende escolhe Marabá ao se inscrever; o "Medicina 2027", sem prova presencial, não pergunta a cidade de prova. Decisão do líder técnico em 14/11/2026.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0017',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'should',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O processo por declarar não é publicado; o processo sem prova presencial é publicado sem município, e declarar município nele é recusado; o processo com prova presencial sem município é recusado, e a declaração não exige etapa de prova; município de qualquer UF, com ou sem campus, é aceito; o código com forma inválida ou incoerente com a UF e o município repetido são recusados; a lista acima do teto técnico é recusada e o teto vem da configuração da API; município que o GEO não conhece é apontado ao salvar, importar e analisar, com o rascunho gravado, e recusado ao publicar e ao retificar; com o GEO indisponível, a publicação e a retificação respondem 503 e nada é gravado; o nome congelado na versão é o devolvido pelo GEO na conferência, e o nome informado pelo documento não o substitui; a lista fica congelada na versão e só muda por retificação, que não altera a inscrição já enviada; o candidato escolhe um município declarado, e escolha fora da lista é recusada; o processo sem prova presencial não mostra o campo e recusa a escolha; quem não tem a permissão de configurar o processo na unidade é recusado antes da leitura da configuração; quem não tem a permissão de consultar as inscrições é recusado antes da leitura da escolha do candidato, e a resposta não a revela; a escolha de uma pessoa não aparece em mensagem de erro, diagnóstico nem registro.',
+    verificacao:
+      'Testes automatizados dos três estados da declaração, com município com e sem campus, do teto técnico, da conferência no GEO ao salvar, importar, analisar, publicar e retificar (inclusive o GEO indisponível), da escolha do candidato, do congelamento e da recusa antes da leitura com cenário negativo de exposição da escolha (planejado, uniplus-api#1621).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
 ];
