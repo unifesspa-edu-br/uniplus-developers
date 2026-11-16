@@ -8,6 +8,7 @@ situacao: publicado
 modulo: Configuração
 emitido_em:
   - Criação de um dataset de calendário de dias úteis
+  - Inclusão de um dia não útil avulso
 requisitos: []
 rastreio:
   - label: 'uniplus-api#1140'
@@ -20,9 +21,14 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A **descrição** de um dos dias não úteis excede o tamanho máximo aceito: 200
+A **descrição** de um dia não útil excede o tamanho máximo aceito: 200
 caracteres.
+
+A mesma validação vale na criação de um dataset (um erro por item da lista,
+apontado em `diasNaoUteis[i].descricao`) e na inclusão de um dia não útil
+avulso num dataset existente (apontado em `item.descricao`).
 
 ## Como resolver
 
-Reduza a descrição desse dia não útil para até 200 caracteres.
+Reduza a descrição desse dia não útil para até 200 caracteres e repita a
+operação.

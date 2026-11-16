@@ -22,10 +22,14 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 A operação foi recusada porque um dos itens da lista de dias não úteis veio
 **nulo** — a lista em si foi enviada, mas um de seus elementos não é um dia
-não útil válido.
+não útil válido. O erro aponta o item em `diasNaoUteis[i]`.
 
-A validação percorre a lista item a item e recusa no primeiro nulo
-encontrado; os demais itens da lista não chegam a ser conferidos.
+A validação percorre a lista inteira: cada item nulo gera o seu erro, e os
+demais itens continuam sendo conferidos.
+
+Na inclusão de um dia não útil avulso este código não é esperado pela via HTTP:
+um corpo ausente ou nulo é recusado antes, na leitura da requisição, com
+[requisição sem corpo](./uniplus.requisicao.corpo_ausente.mdx) (400).
 
 ## Como resolver
 

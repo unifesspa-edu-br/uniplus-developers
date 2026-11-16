@@ -25,10 +25,11 @@ criar um calendário de dias úteis.
 
 O calendário de dias úteis é reference data versionada por dataset inteiro,
 não por linha: uma correção nos feriados publica um dataset novo, com a lista
-completa de dias não úteis — nunca edita a lista de um dataset existente. Não
-existe operação de atualização por design. A versão é o que identifica essa remessa e a distingue das anteriores: sem ela,
-dois datasets do mesmo calendário ficariam indistinguíveis, e nenhum registro
-que aponte para um deles diria de qual remessa de feriados se trata.
+completa de dias não úteis. A única alteração de um dataset existente é a
+inclusão de um dia não útil avulso, que acrescenta o dia preservando o
+identificador, a versão e as datas já cadastradas. A versão é o que identifica a remessa e a distingue das anteriores:
+sem ela, dois datasets do mesmo calendário ficariam indistinguíveis, e nenhum
+registro que aponte para um deles diria de qual remessa de feriados se trata.
 
 ## Como resolver
 

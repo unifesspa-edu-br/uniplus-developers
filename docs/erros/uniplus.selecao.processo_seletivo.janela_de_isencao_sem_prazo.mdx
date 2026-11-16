@@ -1,7 +1,7 @@
 ---
 title: A fase de solicitação de isenção está sem prazo definido
 sidebar_label: Isenção sem prazo
-description: A fase que abre o pedido de isenção precisa de início e fim, mesmo quando a origem da data é delegada.
+description: A fase que abre o pedido de isenção precisa de início e fim, mesmo quando a origem da data é NA_EXECUCAO.
 code: uniplus.selecao.processo_seletivo.janela_de_isencao_sem_prazo
 http_status: 422
 situacao: publicado
@@ -27,9 +27,11 @@ O cronograma tem a fase de solicitação de isenção, e ela está sem início, 
 ou sem os dois.
 
 Como a inscrição, a isenção abre prazo para o candidato agir — e prazo sem data
-não é prazo. A exigência vale **mesmo quando a origem da data é delegada**: nas
-demais fases, deixar a data em aberto é legítimo, porque o setor responsável não
-congela data que não controla; nas duas que coletam ato do candidato, não.
+não é prazo. A exigência vale **mesmo quando a origem da data é
+`NA_EXECUCAO`**, em que a unidade responsável pela fase define a data na
+execução: nas demais fases com essa origem, deixar a data em aberto é
+legítimo, porque ela não é fixada no edital; nas duas que coletam ato do
+candidato, não.
 
 ## Como resolver
 

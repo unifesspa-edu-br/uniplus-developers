@@ -8,6 +8,7 @@ situacao: publicado
 modulo: Configuração
 emitido_em:
   - Criação de um dataset de calendário de dias úteis
+  - Inclusão de um dia não útil avulso
 requisitos: []
 rastreio:
   - label: 'uniplus-api#1140'
@@ -20,12 +21,15 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Um dos dias não úteis trouxe **UF** mesmo com abrangência diferente de
-`ESTADUAL`.
+Um dia não útil trouxe **UF** mesmo com abrangência diferente de `ESTADUAL`.
 
 A UF só faz sentido para ancorar um feriado a um estado — em `NACIONAL`,
 `MUNICIPAL` ou `INSTITUCIONAL`, informá-la é recusado. Em `MUNICIPAL`, a UF
 do município já vem dentro do snapshot de município, não deste campo.
+
+A mesma validação vale na criação de um dataset (um erro por item da lista,
+apontado em `diasNaoUteis[i].uf`) e na inclusão de um dia não útil avulso num
+dataset existente (apontado em `item.uf`).
 
 ## Como resolver
 
