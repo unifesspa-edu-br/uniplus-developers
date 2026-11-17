@@ -581,6 +581,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.publicacoes.ato_normativo.ato_ja_retificado',
         'erros/uniplus.publicacoes.ato_normativo.objeto_ja_tem_ato_vivo_do_tipo',
         'erros/uniplus.publicacoes.ato_normativo.vinculo_exige_registro_pelo_dominio',
+        'erros/uniplus.publicacoes.ato_normativo.nao_encontrado',
         'erros/uniplus.publicacoes.anexo_do_ato.hash_invalido',
         'erros/uniplus.publicacoes.anexo_do_ato.nome_invalido',
         'erros/uniplus.publicacoes.anexo_do_ato.nome_duplicado',

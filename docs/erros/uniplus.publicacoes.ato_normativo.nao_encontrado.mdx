@@ -1,0 +1,33 @@
+---
+title: Ato normativo não encontrado
+sidebar_label: Ato normativo não encontrado
+description: O Id informado não corresponde a nenhum ato normativo registrado.
+code: uniplus.publicacoes.ato_normativo.nao_encontrado
+http_status: 404
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Consulta de ato normativo por Id (`GET /atos/{id}`)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2454'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2454
+  - label: 'uniplus-api#2531'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/2531
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O **Id** informado na consulta (`GET /atos/{id}`) não corresponde a nenhum ato
+normativo registrado: o ato nunca existiu ou o Id foi digitado errado. A
+resposta é 404 com o corpo de erro padrão e este código.
+
+## Como resolver
+
+Confira o Id informado. Para localizar o ato correto, liste os atos
+(`GET /atos`) ou os atos de uma entidade
+(`GET /entidades/{entidadeTipo}/{entidadeId}/atos`) e use o Id devolvido.
