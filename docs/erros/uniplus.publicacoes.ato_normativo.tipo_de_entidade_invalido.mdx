@@ -1,0 +1,29 @@
+---
+title: O tipo de entidade da consulta não está na grafia canônica
+sidebar_label: Tipo de entidade inválido na consulta de atos
+description: Na consulta dos atos de uma entidade, o tipo da entidade precisa ser um rótulo em maiúsculas, com grupos separados por sublinhado.
+code: uniplus.publicacoes.ato_normativo.tipo_de_entidade_invalido
+http_status: 400
+situacao: publicado
+modulo: Publicações
+emitido_em:
+  - Consulta dos atos publicados de uma entidade (`GET /entidades/{entidadeTipo}/{entidadeId}/atos`)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2529'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2529
+  - label: 'uniplus-api#2527'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2527
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo da entidade informado na rota (`GET /entidades/{entidadeTipo}/{entidadeId}/atos`) não é um rótulo em maiúsculas, com letras e dígitos em grupos separados por sublinhado (por exemplo, `PROCESSO_SELETIVO`). O módulo confere só a forma do rótulo, nunca o seu valor: sem esta recusa, um rótulo escrito de outro jeito devolveria a mesma coleção vazia de uma entidade sem atos, e o erro de digitação passaria por resultado legítimo. Nenhum ato foi consultado.
+
+## Como resolver
+
+Escreva o tipo da entidade em maiúsculas, sem acento, hífen ou espaço, separando as palavras por sublinhado. Use o mesmo rótulo com que o ato foi vinculado à entidade.
