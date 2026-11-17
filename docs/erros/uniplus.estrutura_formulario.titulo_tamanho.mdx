@@ -1,0 +1,37 @@
+---
+title: 'O título do formulário excede o tamanho máximo'
+sidebar_label: 'Título do formulário grande demais'
+description: 'O título do formulário, opcional, tem no máximo 300 caracteres.'
+code: uniplus.estrutura_formulario.titulo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação do formulário do processo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1696'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1696
+  - label: 'uniplus-api#1722'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1722
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `titulo` do formulário tem mais de 300 caracteres depois de aparado. O título é opcional: o texto só com espaços vale como ausente. A mensagem é "O título do formulário deve ter no máximo 300 caracteres."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `titulo` (nos modelos de formulário o `field` começa por `conteudo.`). Nada é gravado. O título de cada etapa tem [código próprio](./uniplus.estrutura_formulario.etapa_titulo_invalido.mdx).
+
+Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Encurte o título para até 300 caracteres, ou retire-o: o formulário funciona sem título.

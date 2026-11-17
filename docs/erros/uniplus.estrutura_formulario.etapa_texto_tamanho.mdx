@@ -1,0 +1,35 @@
+---
+title: 'A descrição ou o aviso da etapa excede o tamanho máximo'
+sidebar_label: 'Texto da etapa grande demais'
+description: 'A descrição e o aviso da etapa do formulário têm, cada um, no máximo 2000 caracteres.'
+code: uniplus.estrutura_formulario.etapa_texto_tamanho
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação do formulário do processo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A `descricao` ou o `aviso` de uma etapa do formulário tem mais de 2000 caracteres depois de aparado. Os dois textos são opcionais: a descrição apresenta a etapa ao candidato, e o aviso destaca o que ele precisa saber antes de responder. A mensagem diz qual dos dois excedeu: "A descrição da etapa tem no máximo 2000 caracteres." ou "O aviso da etapa tem no máximo 2000 caracteres."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `etapas[i].descricao` ou `etapas[i].aviso`; nos modelos de formulário o `field` começa por `conteudo.`. Nada é gravado. Cada texto recusado tem a própria entrada, no mesmo lote das demais recusas da forma da etapa.
+
+Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Encurte o texto para até 2000 caracteres, ou retire-o: a etapa funciona sem descrição e sem aviso.

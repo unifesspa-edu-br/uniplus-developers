@@ -1,0 +1,36 @@
+---
+title: As regras dos campos formam um ciclo
+sidebar_label: 'Ciclo entre as regras'
+description: 'As regras de exibição, obrigatoriedade e restrição dos campos não podem depender umas das outras em círculo.'
+code: uniplus.grafo_formulario.grafo_com_ciclo
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0077
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1746'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1746
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+As regras dos campos citam respostas de outros campos, e essas citações formam um círculo: o campo A depende de B, e B, direta ou por outros campos, depende de A. O grafo de dependência do formulário é acíclico (UNI-REQ-0077), porque num círculo nenhum dos campos poderia ser avaliado primeiro. A mensagem traz o caminho inteiro, como "As regras dos campos formam um ciclo: A → B → A.", com os códigos dos fatos.
+
+Nos modelos de formulário a recusa vem na lista `errors` da resposta, com `field` igual a `conteudo`. Na gravação dos itens do processo, a resposta traz o código e o `detail` com a mensagem, sem lista `errors`. Nada é gravado.
+
+O grafo de coleta é conferido só depois de a forma e a estrutura do formulário passarem, e responde com uma única recusa, a primeira que encontrar. Primeiro percorre os itens e os grupos, um a um, e em cada um confere o [código de fato repetido](./uniplus.grafo_formulario.fato_duplicado.mdx) antes da [ordem repetida](./uniplus.grafo_formulario.ordem_duplicada.mdx), e a primeira repetição encerra a conferência. Depois vêm, nesta ordem, o [ciclo entre as regras](./uniplus.grafo_formulario.grafo_com_ciclo.mdx), [campo de grupo citado fora do grupo](./uniplus.grafo_formulario.cita_fato_de_membro_fora_do_grupo.mdx) e, por fim, as citações a fato [não conhecido](./uniplus.grafo_formulario.cita_fato_nao_conhecido.mdx) ou [posterior](./uniplus.grafo_formulario.cita_fato_posterior.mdx). Corrigida a primeira, a seguinte pode aparecer. Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Retire de uma das regras do caminho indicado a citação que fecha o círculo. Cada campo só pode depender de campos que o candidato responde antes dele.

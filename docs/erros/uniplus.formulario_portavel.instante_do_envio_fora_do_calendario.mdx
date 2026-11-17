@@ -1,0 +1,35 @@
+---
+title: O instante do envio simulado está ausente ou fora do calendário que os limites da faixa de data alcançam
+sidebar_label: 'Instante do envio fora do calendário'
+description: 'O dia do envio simulado precisa ficar longe o bastante das pontas do calendário para que os limites da faixa de data se contem dele.'
+code: uniplus.formulario_portavel.instante_do_envio_fora_do_calendario
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Avaliação de formulário sem cadastro
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1810'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1810
+  - label: 'uniplus-api#1816'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1816
+  - label: 'uniplus-api#1814'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1814
+  - label: 'uniplus-api#1823'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1823
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A avaliação de um formulário sem cadastro confere as regras de um formulário renderizável contra respostas simuladas, sem gravar nada nem registrar o conteúdo enviado. O envio simulado (`envio`) traz um `instante` cujo dia, no `fuso` informado, fica perto demais das pontas do calendário. Os limites da faixa de data de um campo podem ser contados do dia do envio, com deslocamento de até 150 anos ou 54.900 dias para mais ou para menos, e o dia do envio precisa comportar esse deslocamento nos dois lados: ficar a pelo menos esse intervalo de 01/01/0001 e de 31/12/9999. A mensagem é "O instante do envio falta ou fica fora do calendário que os limites da faixa de data alcançam."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `envio.instante`. Nada é gravado. A propriedade `instante` ausente é recusada antes, com 400 e sem código deste catálogo, pela leitura do corpo. O fuso é conferido antes: com o fuso recusado, a recusa é a de [fuso do envio desconhecido](./uniplus.formulario_portavel.fuso_do_envio_desconhecido.mdx).
+
+## Como resolver
+
+Informe um `instante` de uma data corrente, como a de um envio real, ou omita o `envio` inteiro.

@@ -1,0 +1,38 @@
+---
+title: O item precisa estar numa seção do formulário
+sidebar_label: 'Item fora de seção'
+description: 'Todo item ou grupo do formulário precisa apontar para uma seção que existe nas etapas, e o bloco de sistema não é seção.'
+code: uniplus.estrutura_formulario.item_fora_de_secao
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+  - Gravação do formulário do processo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1696'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1696
+  - label: 'uniplus-api#1722'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1722
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um item, ou um grupo, aponta em `etapaCodigo` para uma etapa que não existe no formulário ou que é um bloco de sistema, e só a seção recebe itens. Nos modelos de formulário a regra é mais estrita: o item sem `etapaCodigo` também é recusado, porque todo item do modelo precisa estar numa seção. Na gravação dos itens do processo, o item ainda sem seção é aceito, e só o `etapaCodigo` declarado é conferido. A mensagem é "O item '\{código\}' precisa estar numa seção do formulário.", com o código do fato do item ou do grupo.
+
+Na gravação dos itens e nos modelos, a recusa vem na lista `errors`, com `field` igual a `itens[i].etapaCodigo` (nos modelos de formulário o `field` começa por `conteudo.`), em que `i` conta primeiro os itens e depois os grupos, na ordem em que vieram. Na gravação do formulário do processo, a recusa vem quando as etapas novas deixariam sem seção os itens já gravados, e o `field` é `etapas`, com a mensagem nomeando o item. Nada é gravado.
+
+Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Aponte `etapaCodigo` para o `codigo` de uma etapa do tipo seção do formulário e, nos modelos, informe-o em todo item. Na gravação do formulário do processo, mantenha entre as etapas a seção a que os itens já gravados pertencem, ou mova antes os itens para outra seção.
