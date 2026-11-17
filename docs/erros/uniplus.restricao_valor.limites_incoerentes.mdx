@@ -1,0 +1,48 @@
+---
+title: 'Os limites da restrição de valor são incoerentes'
+sidebar_label: 'Limites da restrição incoerentes'
+description: 'Os limites de uma faixa numérica, de um tamanho de texto ou de uma faixa de data fazem sentido juntos.'
+code: uniplus.restricao_valor.limites_incoerentes
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Criação de um modelo de formulário'
+  - 'Atualização de um modelo de formulário'
+  - 'Gravação dos itens do formulário'
+requisitos:
+  - UNI-REQ-0145
+rastreio:
+  - label: 'uniplus-api#1697'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1697
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+Os limites de uma restrição de faixa ou de tamanho não fazem sentido (UNI-REQ-0145). A mensagem diz qual caso ocorreu:
+
+- faixa numérica (`FAIXA_NUMERICA`): sem mínimo e sem máximo, `A faixa numérica precisa de ao menos um limite.`; com o mínimo maior que o máximo, `O mínimo ({mínimo}) é maior que o máximo ({máximo}).`, que cita os dois limites enviados; e com mais de 4 casas decimais em algum limite, `Os limites da faixa numérica têm no máximo 4 casas decimais.`;
+- tamanho de texto (`TAMANHO_TEXTO`): sem mínimo e sem máximo, `O tamanho de texto precisa de ao menos um limite.`; com limite negativo ou mínimo maior que o máximo, `Os limites de tamanho ({mínimo}, {máximo}) são incoerentes.`, que cita os dois limites; e com limite que não é número inteiro, `Os limites de tamanho de texto são números inteiros.`;
+- faixa de data (`FAIXA_DE_DATA`): sem data mínima e sem data máxima, `A faixa de data precisa de ao menos um limite.`; e com a data mínima depois da máxima, `A data mínima fica depois da data máxima.`, conferido só quando os dois limites se comparam sem depender do dia do envio (duas datas fixas, ou dois limites contados do envio).
+
+Cada limite pode faltar, desde que o outro esteja presente. A recusa das casas decimais vem depois das demais, junto com a conferência do item.
+
+A recusa vem na lista `errors` da resposta, uma entrada por restrição recusada, junto com as demais recusas do item, na mesma resposta:
+
+- Gravação dos itens do formulário: `field` igual a `itens[i].restricoes[j]` ou, no campo de um grupo, `grupos[g].subitens[k].restricoes[j]`.
+- Criação de um modelo de formulário e Atualização de um modelo de formulário: o mesmo `field`, começando por `conteudo.`. Na atualização, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+O item com recusa de forma em alguma restrição não segue para as conferências seguintes (o catálogo de fatos e a coerência da restrição com o tipo de campo). Nada é gravado.
+
+## Como resolver
+
+Informe ao menos um limite e ponha o mínimo antes do máximo. Na faixa numérica, use no máximo 4 casas decimais; no tamanho de texto, use números inteiros não negativos. Exemplo de faixa numérica, com um fato fictício:
+
+```json
+{ "tipo": "FAIXA_NUMERICA", "minimo": 0, "maximo": 10 }
+```

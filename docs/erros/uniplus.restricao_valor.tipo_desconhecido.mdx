@@ -1,0 +1,38 @@
+---
+title: 'O tipo da restrição de valor não é reconhecido'
+sidebar_label: 'Tipo da restrição não reconhecido'
+description: 'O tipo de uma restrição de valor é um dos seis que o formulário reconhece.'
+code: uniplus.restricao_valor.tipo_desconhecido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Criação de um modelo de formulário'
+  - 'Atualização de um modelo de formulário'
+  - 'Gravação dos itens do formulário'
+requisitos:
+  - UNI-REQ-0145
+rastreio:
+  - label: 'uniplus-api#1697'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1697
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+Uma restrição de valor de um item do formulário tem um `tipo` que o Uni+ não reconhece, ou veio nula na lista `restricoes` (UNI-REQ-0145). Os tipos são `FAIXA_NUMERICA`, `TAMANHO_TEXTO`, `OPCOES_PERMITIDAS`, `OPCOES_DAS_RESPOSTAS`, `MUNICIPIOS_DA_UF` e `FAIXA_DE_DATA`, escritos em maiúsculas, e o texto vazio também é recusado. A mensagem é `O tipo da restrição é FAIXA_NUMERICA, TAMANHO_TEXTO, OPCOES_PERMITIDAS, OPCOES_DAS_RESPOSTAS, MUNICIPIOS_DA_UF ou FAIXA_DE_DATA.`, ou `A restrição de valor é nula.` para o item nulo da lista. O `tipo` ausente ou nulo é recusado antes, na leitura do corpo da requisição, sem código deste catálogo.
+
+A recusa vem na lista `errors` da resposta, uma entrada por restrição recusada, junto com as demais recusas do item, na mesma resposta:
+
+- Gravação dos itens do formulário: `field` igual a `itens[i].restricoes[j]` ou, no campo de um grupo, `grupos[g].subitens[k].restricoes[j]`.
+- Criação de um modelo de formulário e Atualização de um modelo de formulário: o mesmo `field`, começando por `conteudo.`. Na atualização, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+O item com recusa de forma em alguma restrição não segue para as conferências seguintes (o catálogo de fatos e a coerência da restrição com o tipo de campo). Nada é gravado.
+
+## Como resolver
+
+Troque o `tipo` por um dos seis valores, ou retire a restrição da lista. O formato do texto não é uma restrição do item: ele vem do fato no catálogo.

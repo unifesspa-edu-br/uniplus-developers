@@ -1,0 +1,48 @@
+---
+title: 'As opções permitidas precisam de valores'
+sidebar_label: 'Opções permitidas sem valores'
+description: 'A restrição de opções permitidas traz ao menos um grupo, e cada grupo traz valores.'
+code: uniplus.restricao_valor.opcoes_vazias
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Criação de um modelo de formulário'
+  - 'Atualização de um modelo de formulário'
+  - 'Gravação dos itens do formulário'
+requisitos:
+  - UNI-REQ-0145
+rastreio:
+  - label: 'uniplus-api#1697'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1697
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+A restrição `OPCOES_PERMITIDAS` de um item não traz opções utilizáveis (UNI-REQ-0145). Cada grupo de opções tem uma condição opcional (`quando`, sobre respostas anteriores) e a lista `valores` das opções que valem quando a condição é verdadeira. A mensagem diz qual caso ocorreu:
+
+- a lista `entradas` ausente ou vazia: `As opções permitidas precisam de ao menos um grupo de valores.`;
+- um grupo sem valores, ou com algum valor em branco: `Um grupo de opções precisa de valores não vazios.`;
+- um grupo nulo na lista: `As opções permitidas contêm um grupo nulo.`
+
+Os grupos são lidos em ordem, e a condição `quando` de um grupo que tem recusa própria (como as de [condição sem fato](./uniplus.condicao_dnf.fato_obrigatorio.mdx)) interrompe a leitura com essa recusa. A recusa dos valores só é conferida depois que todos os grupos foram lidos.
+
+A recusa vem na lista `errors` da resposta, uma entrada por restrição recusada, junto com as demais recusas do item, na mesma resposta:
+
+- Gravação dos itens do formulário: `field` igual a `itens[i].restricoes[j]` ou, no campo de um grupo, `grupos[g].subitens[k].restricoes[j]`.
+- Criação de um modelo de formulário e Atualização de um modelo de formulário: o mesmo `field`, começando por `conteudo.`. Na atualização, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+O item com recusa de forma em alguma restrição não segue para as conferências seguintes (o catálogo de fatos e a coerência da restrição com o tipo de campo). Nada é gravado.
+
+## Como resolver
+
+Informe ao menos um grupo em `entradas`, e em cada grupo ao menos um valor, que seja uma opção do fato do campo. Exemplo, com um fato fictício:
+
+```json
+{ "tipo": "OPCOES_PERMITIDAS", "entradas": [{ "valores": ["PUBLICA", "FILANTROPICA"] }] }
+```

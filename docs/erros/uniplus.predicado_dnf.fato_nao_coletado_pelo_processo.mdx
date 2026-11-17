@@ -1,0 +1,44 @@
+---
+title: 'O fato da condição não é coletado por este processo'
+sidebar_label: 'Fato não coletado pelo processo'
+description: 'A condição cita só fatos que o processo seletivo coleta, deriva ou obtém do candidato.'
+code: uniplus.predicado_dnf.fato_nao_coletado_pelo_processo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - 'Gravação dos termos do formulário'
+  - 'Definição de regras de derivação de fatos do processo seletivo'
+  - 'Definição de documentos exigidos do processo seletivo'
+  - 'Publicação inicial do processo seletivo'
+  - 'Retificação em ato único'
+  - 'Fechamento de sessão editorial'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#847'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/847
+  - label: 'uniplus-api#885'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/885
+  - label: 'uniplus-api#892'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/892
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+Uma condição cita um fato que existe no catálogo, mas que o processo seletivo não coleta, não deriva nem obtém do candidato. Uma condição assim nunca se resolveria para ninguém, e a API a recusa em vez de deixar a regra pendente para sempre. Na gravação e nas definições, a mensagem é `O fato '{fato}' não é coletado por este processo.`, com o código enviado no lugar de `{fato}`; no congelamento, é a mensagem descrita no último item da lista a seguir. O fato que não existe no catálogo recebe antes a recusa de [fato desconhecido](./uniplus.predicado_dnf.fato_desconhecido.mdx).
+
+O conjunto de fatos admitidos depende da operação:
+
+- Gravação dos termos do formulário: os fatos que os formulários do processo coletam, os derivados por regra do processo e os derivados pelo sistema cujas dependências o processo coleta. A recusa vem em `errors`, com `field` `termos[i].exibicao` ou `termos[i].predicadoObrigatoriedade`.
+- Definição de regras de derivação de fatos do processo seletivo: os fatos coletados pelo processo, os derivados definidos no mesmo pedido e os que a oferta fornece. A resposta traz o código e a mensagem, sem apontar um campo.
+- Definição de documentos exigidos do processo seletivo: os fatos que o processo resolve para a exigência e, na exigência repetida por grupo, os campos do grupo. A resposta traz o código e a mensagem, sem apontar um campo.
+- Publicação inicial, retificação em ato único e fechamento da sessão editorial: antes de congelar a configuração, a API confere de novo o fato citado pelo gatilho de cada documento exigido contra o que o processo coleta ou deriva naquele momento (e, na exigência repetida por grupo, contra os campos do grupo), porque o processo pode ter mudado depois que o documento foi definido. O fato que deixou de ser coletado ou derivado é recusado com a mensagem `O fato '{fato}', citado pelo gatilho de um documento exigido, não é mais coletado nem derivado pelo processo.` A resposta traz o código e a mensagem, sem apontar um campo, e nada é congelado.
+
+Cada predicado é conferido cláusula a cláusula e condição a condição, na ordem em que foram enviadas, e só a primeira recusa dele é devolvida. Dentro da condição a ordem é: fato conhecido, fato coletado pelo processo (onde essa conferência existe), operador contra o tipo do fato, valor contra o tipo do fato. Quando o pedido traz mais de um predicado, a gravação dos termos confere todos e devolve as recusas juntas em `errors`; a definição de regras de derivação de fatos do processo e a definição de documentos exigidos param na primeira recusa, e a seguinte só aparece depois de corrigir esta. Nada é gravado.
+
+## Como resolver
+
+Inclua no processo o campo que coleta o fato (ou a regra que o deriva) antes de citá-lo, ou cite outro fato que o processo já tenha. Se a recusa vier da publicação, da retificação ou do fechamento da sessão editorial, volte a coletar ou a derivar o fato no processo, ou ajuste o gatilho do documento exigido, e repita a operação.

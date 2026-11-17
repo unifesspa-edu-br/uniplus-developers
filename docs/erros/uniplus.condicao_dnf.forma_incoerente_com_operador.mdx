@@ -1,0 +1,63 @@
+---
+title: 'A forma do valor não é coerente com o operador da condição'
+sidebar_label: 'Valor da condição não combina com o operador'
+description: 'Os operadores EM e NAO_EM recebem uma lista, e os demais recebem um valor único.'
+code: uniplus.condicao_dnf.forma_incoerente_com_operador
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Criação de um modelo de formulário'
+  - 'Atualização de um modelo de formulário'
+  - 'Gravação dos termos do formulário'
+  - 'Gravação das etapas do formulário'
+  - 'Gravação dos itens do formulário'
+  - 'Definição de documentos exigidos do processo seletivo'
+  - 'Definição de critérios de desempate do processo seletivo'
+  - 'Criação de uma modalidade de concorrência'
+  - 'Atualização de uma modalidade de concorrência'
+  - 'Definição das regras padrão de um fato derivado por regra'
+requisitos:
+  - UNI-REQ-0064
+rastreio:
+  - label: 'uniplus-api#847'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/847
+  - label: 'uniplus-api#885'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/885
+  - label: 'uniplus-api#892'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/892
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+O `valor` de uma condição não tem a forma que o operador pede (UNI-REQ-0064). Há dois casos, e a mensagem diz qual ocorreu:
+
+- com `EM` ou `NAO_EM`, o valor precisa ser uma lista, sem texto em branco entre os itens (a lista vazia é aceita); a mensagem é `Os operadores EM e NAO_EM exigem um array JSON, sem itens de texto em branco (array vazio é aceito).`
+- com `IGUAL`, `DIFERENTE`, `MAIOR_IGUAL` ou `MENOR_IGUAL`, o valor precisa ser um valor único (texto, número ou verdadeiro/falso), sem lista nem objeto e sem texto em branco. O valor `null` passa por esta conferência; se o fato não aceita `null`, a recusa vem depois, como valor incompatível com o tipo do fato; a mensagem é `Os operadores IGUAL, DIFERENTE, MAIOR_IGUAL e MENOR_IGUAL exigem um valor JSON escalar não branco.`
+
+Esta é a terceira conferência da condição, depois de [fato](./uniplus.condicao_dnf.fato_obrigatorio.mdx) e de [operador](./uniplus.condicao_dnf.operador_invalido.mdx). Só a forma é conferida aqui: o tipo do valor contra o tipo do fato é outra recusa, de [valor incompatível com o tipo do fato](./uniplus.predicado_dnf.valor_incompativel_com_tipo.mdx).
+
+A recusa vem na lista `errors` da resposta, com `field` apontando o predicado ou, no critério de desempate, o campo do critério:
+
+- Nos modelos de formulário (criação e atualização): `etapas[i].exibicao`, `itens[i].precondicao`, `itens[i].predicadoObrigatoriedade`, `itens[i].impedimento.quando`, `itens[i].restricoes[j]` (a condição de um grupo de opções), `grupos[g].exibicao`, `grupos[g].predicadoObrigatoriedade`, `termos[i].exibicao`, `termos[i].predicadoObrigatoriedade` e `documentosExigidos[i].quando`, mais os mesmos caminhos do item sob `grupos[g].subitens[j]`.
+- Na gravação dos termos do formulário: `termos[i].exibicao` e `termos[i].predicadoObrigatoriedade`.
+- Na gravação das etapas do formulário: `etapas[i].exibicao`.
+- Na gravação dos itens do formulário: `itens[i].predicadoObrigatoriedade`, `itens[i].impedimento.quando`, `itens[i].restricoes[j]`, `grupos[g].exibicao` e `grupos[g].predicadoObrigatoriedade`, e os mesmos caminhos do item sob `grupos[g].subitens[j]` nos campos de grupo. A pré-condição do item tem recusas próprias, que não são as deste catálogo.
+- Na criação e na atualização de uma modalidade de concorrência: `regraDeAplicabilidade`.
+- Na definição das regras padrão de um fato derivado por regra: `regras[i]`.
+- Na definição dos critérios de desempate, no critério que testa um fato (regra de predicado sobre fato): `criterios[i].valor`. O valor do critério é um texto: se ele é um JSON válido (como `["A","B"]`), é lido como tal, e o texto que não é JSON vale como texto simples.
+- Na definição de documentos exigidos do processo seletivo, na condição do gatilho da exigência: a resposta traz o código e a mensagem, sem apontar um campo.
+
+Cada predicado é conferido cláusula a cláusula e condição a condição, na ordem em que foram enviadas, e só a primeira recusa dele é devolvida. Quando o pedido traz mais de um predicado, a criação e a atualização de modelo de formulário, a gravação dos termos, das etapas e dos itens do formulário, a definição das regras padrão de um fato derivado e a definição dos critérios de desempate conferem todos e devolvem as recusas juntas em `errors`; a definição de documentos exigidos para na primeira recusa, e a seguinte só aparece depois de corrigi-la. Nos modelos de formulário, o `field` começa por `conteudo.`. A parte do modelo (item, grupo, etapa, termo ou documento) com recusa de forma não segue para as conferências contra o catálogo de fatos, e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx). Nada é gravado.
+
+## Como resolver
+
+Ajuste o `valor` ao operador. Exemplos, com fatos fictícios:
+
+```json
+{ "fato": "CURSOU_SUPLETIVO", "operador": "IGUAL", "valor": true }
+{ "fato": "ONDE_CURSOU", "operador": "EM", "valor": ["PUBLICA", "FILANTROPICA"] }
+```
