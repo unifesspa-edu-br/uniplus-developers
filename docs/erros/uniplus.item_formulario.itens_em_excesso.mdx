@@ -1,0 +1,35 @@
+---
+title: O formulário excede o teto de itens
+sidebar_label: Formulário com itens em excesso
+description: O formulário admite no máximo 200 itens, contando os itens, os grupos e os campos dos grupos.
+code: uniplus.item_formulario.itens_em_excesso
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1748'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1748
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um formulário tem no máximo 200 itens. O teto conta cada item, cada grupo repetível e cada campo de grupo, e no formulário de inscrição conta também os itens dos dados básicos do candidato. Acima dele, a lista é recusada inteira, sem um erro por item. A mensagem é "O formulário admite no máximo 200 itens; vieram \{n\}.", com a quantidade contada.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens`; nos modelos de formulário, `conteudo.itens`. Nada é gravado. A forma de cada item e de cada grupo não é conferida item a item enquanto a quantidade estiver acima do teto.
+
+Na gravação dos itens do formulário, a quantidade é a primeira conferência do conteúdo, depois do estado do processo, e conta o que o pedido envia. Quando o pedido omite `grupos`, o formulário mantém os grupos que já tem, e a quantidade somada a eles é conferida por último, depois de todas as outras recusas dos itens; nesse caso a mensagem pode trazer uma quantidade maior que a dos itens enviados. Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e a conferência dos fatos contra o catálogo, que não depende da quantidade, pode sair na mesma resposta. Na atualização, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Reduza o formulário a até 200 itens, contando os grupos e os campos de grupo. Se o conteúdo é grande por natureza, divida-o entre formulários de finalidades diferentes, quando o processo comportar.

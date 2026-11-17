@@ -1,0 +1,36 @@
+---
+title: A regra do grupo cita o próprio grupo
+sidebar_label: Regra do grupo cita o próprio grupo
+description: A exibição e a obrigatoriedade de um grupo repetível se decidem antes das ocorrências e não citam o grupo nem os campos dele.
+code: uniplus.grupo_formulario.regra_autorreferente
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0146
+rastreio:
+  - label: 'uniplus-api#1701'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1701
+  - label: 'uniplus-api#1761'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1761
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A `exibicao` ou o `predicadoObrigatoriedade` de um grupo repetível cita o código do próprio grupo ou o fato de um dos campos dele. Fora de uma ocorrência, o campo do grupo não tem valor único (UNI-REQ-0146), e a exibição e a obrigatoriedade do grupo se decidem antes das ocorrências existirem. A mensagem é "Uma regra do grupo cita '\{código\}', do próprio grupo — a exibição e a obrigatoriedade do grupo se decidem antes das ocorrências.", com o código citado.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `grupos[i].exibicao` ou `grupos[i].predicadoObrigatoriedade`, uma entrada por regra, no mesmo lote das demais recusas da forma do grupo. Na criação e na atualização de um modelo de formulário o `field` começa por `conteudo.`. Nada é gravado.
+
+A regra que cita um campo de grupo a partir de fora do grupo, como a exibição de um item, é outra recusa, a de código `uniplus.grafo_formulario.cita_fato_de_membro_fora_do_grupo`. Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Troque, na regra do grupo, o fato citado por um que o formulário conheça antes da posição do grupo, ou retire a condição. Uma condição que depende dos campos do grupo pertence ao próprio campo, que pode citar os campos anteriores da mesma ocorrência.

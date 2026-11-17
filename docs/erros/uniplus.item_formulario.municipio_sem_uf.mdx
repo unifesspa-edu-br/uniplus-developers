@@ -1,0 +1,36 @@
+---
+title: O campo de município cita a UF respondida antes
+sidebar_label: Campo de município sem UF
+description: O campo de município declara a restrição de municípios da UF, que cita o campo da UF respondido antes.
+code: uniplus.item_formulario.municipio_sem_uf
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0145
+rastreio:
+  - label: 'uniplus-api#1726'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1726
+  - label: 'uniplus-api#1783'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1783
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+As opções do campo de município são filtradas pela UF respondida antes (UNI-REQ-0145), e a restrição `MUNICIPIOS_DA_UF`, que cita o fato da UF, é obrigatória no campo de tipo `MUNICIPIO`. O item enviado é de tipo `MUNICIPIO` e não traz essa restrição. A mensagem é "O campo de município cita a UF respondida antes, pelos municípios da UF."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].restricoes` ou `grupos[g].subitens[j].restricoes`; nos modelos de formulário começa por `conteudo.`. É uma entrada por item, no mesmo lote das demais recusas da forma do item, e nada é gravado.
+
+Na gravação dos itens do formulário, esta recusa só sai para o item cujo fato existe, é coletável e combina com o tipo de campo: o item com fato [desconhecido](./uniplus.item_formulario.fato_desconhecido.mdx), [não coletável](./uniplus.item_formulario.fato_nao_coletavel.mdx) ou com tipo de campo [incoerente](./uniplus.item_formulario.tipo_renderizacao_incoerente_com_dominio.mdx) é recusado por essa causa, e o resto da forma dele só é conferido depois que ela for corrigida. Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Acrescente ao item a restrição `MUNICIPIOS_DA_UF`, com o código do fato da UF em `fatos`. O fato da UF deve estar em um campo anterior do formulário, de resposta única e com as UFs do Geo; caso contrário, a recusa é a de [UF do município inválida](./uniplus.item_formulario.uf_do_municipio_invalida.mdx).

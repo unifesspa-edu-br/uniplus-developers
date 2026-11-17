@@ -1,0 +1,44 @@
+---
+title: A restrição de valor não se aplica ao tipo do campo
+sidebar_label: Restrição incoerente com o tipo de campo
+description: Cada restrição de valor só cabe em um tipo de campo, e a restrição enviada não cabe no tipo do item.
+code: uniplus.item_formulario.restricao_incoerente
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0145
+rastreio:
+  - label: 'uniplus-api#1697'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1697
+  - label: 'uniplus-api#1731'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1731
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Cada campo declara as restrições de valor e as opções que oferece (UNI-REQ-0145), e cada restrição só cabe em um tipo de campo. Uma restrição de `restricoes` do item não cabe no `tipoRenderizacao` dele:
+
+| Restrição | Tipo de campo |
+| --- | --- |
+| `FAIXA_NUMERICA` | `NUMERO` |
+| `TAMANHO_TEXTO` | `TEXTO` |
+| `OPCOES_PERMITIDAS` e `OPCOES_DAS_RESPOSTAS` | `SELECAO_UNICA` e `SELECAO_MULTIPLA` |
+| `MUNICIPIOS_DA_UF` | `MUNICIPIO` |
+| `FAIXA_DE_DATA` | `DATA` |
+
+A mensagem é "A faixa numérica só se aplica ao campo numérico, o tamanho só ao de texto, as opções só ao de seleção, os municípios da UF só ao de município e a faixa de data só ao de data." A recusa vem na lista `errors`, com `field` igual a `itens[i].restricoes[k]` ou `grupos[g].subitens[j].restricoes[k]`; nos modelos de formulário começa por `conteudo.`. Há uma entrada por restrição que não cabe, no mesmo lote das demais recusas da forma do item, e nada é gravado. A semântica de cada restrição contra o catálogo só é conferida para a que cabe no tipo do campo.
+
+Na gravação dos itens do formulário, esta recusa só sai para o item cujo fato existe, é coletável e combina com o tipo de campo: o item com fato [desconhecido](./uniplus.item_formulario.fato_desconhecido.mdx), [não coletável](./uniplus.item_formulario.fato_nao_coletavel.mdx) ou com tipo de campo [incoerente](./uniplus.item_formulario.tipo_renderizacao_incoerente_com_dominio.mdx) é recusado por essa causa, e o resto da forma dele só é conferido depois que ela for corrigida. Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Retire a restrição que não cabe, ou troque o tipo de campo do item por um que a aceite, desde que o tipo combine com o fato.

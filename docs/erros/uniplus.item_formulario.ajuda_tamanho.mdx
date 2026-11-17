@@ -1,0 +1,35 @@
+---
+title: Ajuda do campo acima do tamanho máximo
+sidebar_label: Ajuda do campo grande demais
+description: A ajuda que explica o campo ao candidato tem no máximo 1000 caracteres.
+code: uniplus.item_formulario.ajuda_tamanho
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1697'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1697
+  - label: 'uniplus-api#1730'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1730
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A `ajuda` de um item do formulário, ou de um campo de grupo, tem mais de 1000 caracteres depois de aparada. A ajuda é o texto que orienta o candidato no campo, e é opcional. A mensagem é "A ajuda do campo tem no máximo 1000 caracteres."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].ajuda` ou, no campo de um grupo, `grupos[g].subitens[j].ajuda`; nos modelos de formulário o `field` começa por `conteudo.`. Nada é gravado.
+
+Nos modelos, a forma do item é conferida sem consultar o catálogo, e a recusa sai junto com as demais recusas da forma do item. Na gravação dos itens do formulário, a recusa só sai para o item cujo fato existe, é coletável e combina com o tipo de campo: o item com fato desconhecido, [não coletável](./uniplus.item_formulario.fato_nao_coletavel.mdx) ou com tipo de campo [incoerente](./uniplus.item_formulario.tipo_renderizacao_incoerente_com_dominio.mdx) é recusado por essa causa, e a ajuda dele só é conferida depois que ela for corrigida. Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Encurte a `ajuda` para até 1000 caracteres, ou retire-a: o campo funciona sem ajuda.

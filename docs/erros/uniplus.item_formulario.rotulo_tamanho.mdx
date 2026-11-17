@@ -1,0 +1,33 @@
+---
+title: O rótulo do item excede o tamanho máximo
+sidebar_label: Rótulo do item grande demais
+description: O rótulo de um item do formulário tem no máximo 300 caracteres.
+code: uniplus.item_formulario.rotulo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `rotulo` de um item do formulário, ou de um campo de grupo, tem mais de 300 caracteres depois de aparado. A mensagem é "O rótulo do item deve ter no máximo 300 caracteres."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].rotulo` ou, no campo de um grupo, `grupos[g].subitens[j].rotulo`; nos modelos de formulário o `field` começa por `conteudo.`. Cada item recusado tem a própria entrada, no mesmo lote das demais recusas da forma do item, e o item de forma recusada não segue para a conferência contra o catálogo de fatos. Nada é gravado. Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Encurte o `rotulo` para até 300 caracteres. O texto longo que explica o campo cabe na ajuda do campo, e não no rótulo.

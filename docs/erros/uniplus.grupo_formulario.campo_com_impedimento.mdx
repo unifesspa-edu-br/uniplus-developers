@@ -1,0 +1,36 @@
+---
+title: O campo do grupo não tem impedimento
+sidebar_label: Campo de grupo com impedimento
+description: O impedimento é da inscrição do candidato, e o campo de um grupo repetível responde por cada membro, então não declara impedimento.
+code: uniplus.grupo_formulario.campo_com_impedimento
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0146
+rastreio:
+  - label: 'uniplus-api#1732'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1732
+  - label: 'uniplus-api#1786'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1786
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um campo de um grupo repetível (um item de `subitens` de um grupo em `grupos`) traz `impedimento`. O impedimento é a resposta que impede a inscrição do candidato; o campo de um grupo, como os da composição familiar, responde por um membro de cada ocorrência (UNI-REQ-0146), e o impedimento de um membro não é o da inscrição do candidato.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `grupos[i].subitens[j].impedimento`, e a mensagem traz o código do fato do campo. Na criação e na atualização de um modelo de formulário o `field` começa por `conteudo.`. Há uma entrada por campo de grupo com impedimento, no mesmo lote das demais recusas da forma do grupo. Nada é gravado.
+
+Na gravação dos itens do formulário, a recusa vem junto com as outras recusas da forma dos grupos e dos itens, antes de o catálogo de fatos ser consultado. Nos modelos, ela só é conferida quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Retire `impedimento` do campo do grupo. Se a resposta de um fato do candidato deve impedir a inscrição, declare o impedimento num item do formulário de inscrição, fora do grupo.
