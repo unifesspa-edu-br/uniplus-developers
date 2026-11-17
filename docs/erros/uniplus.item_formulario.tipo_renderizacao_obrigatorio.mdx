@@ -1,0 +1,35 @@
+---
+title: O tipo de campo do item é obrigatório
+sidebar_label: Tipo de campo do item ausente
+description: O item do formulário informa um dos oito tipos de campo, e o tipo vazio ou desconhecido é recusado.
+code: uniplus.item_formulario.tipo_renderizacao_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `tipoRenderizacao` de um item do formulário, ou de um campo de grupo, está vazio, só com espaços ou não é um dos códigos aceitos: `NUMERO`, `BOOLEANO`, `SELECAO_UNICA`, `SELECAO_MULTIPLA`, `TEXTO`, `DATA`, `ENDERECO` e `MUNICIPIO`. O código é conferido letra a letra, e `texto` em minúsculas não é `TEXTO`. A mensagem é "O tipo de campo do item é obrigatório."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].tipoRenderizacao` ou, no campo de um grupo, `grupos[g].subitens[j].tipoRenderizacao`; nos modelos de formulário o `field` começa por `conteudo.`. Cada item recusado tem a própria entrada, no mesmo lote das demais recusas da forma do item, e o item de forma recusada não segue para a conferência contra o catálogo de fatos. Nada é gravado.
+
+A propriedade `tipoRenderizacao` ausente ou nula é recusada antes, com 400 e sem código deste catálogo, pela leitura do corpo. O tipo que existe mas não combina com o fato é outra recusa, a de [tipo de campo incoerente com o domínio do fato](./uniplus.item_formulario.tipo_renderizacao_incoerente_com_dominio.mdx). Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Informe em `tipoRenderizacao` um dos oito códigos, em maiúsculas, o que combina com o domínio do fato no catálogo.

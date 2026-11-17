@@ -1,0 +1,38 @@
+---
+title: A ordem do grupo não pode ser negativa
+sidebar_label: Ordem do grupo negativa
+description: A ordem do grupo repetível no formulário é zero ou positiva.
+code: uniplus.grupo_formulario.ordem_invalida
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0146
+rastreio:
+  - label: 'uniplus-api#1701'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1701
+  - label: 'uniplus-api#1761'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1761
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A `ordem` de um grupo repetível, em `grupos`, é negativa. O grupo ocupa a posição dele na ordem de coleta do formulário, junto com os itens, e a posição não pode ser negativa. A mensagem é "A ordem do grupo não pode ser negativa."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `grupos[i].ordem`, no mesmo lote das demais recusas da forma do grupo. Na criação e na atualização de um modelo de formulário o `field` começa por `conteudo.`. Nada é gravado.
+
+No formulário de inscrição, e no modelo de finalidade inscrição, a ordem dos grupos e dos itens que não são dados básicos do candidato é deslocada para depois da seção reservada dos dados básicos antes desta conferência, de modo que a ordem negativa de um grupo desse formulário não chega a ser recusada aqui. Nos formulários de isenção de taxa e de habilitação, e nos modelos dessas finalidades, a ordem negativa do grupo é recusada.
+
+Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Informe `ordem` com 0 ou um número positivo, sem repetir a ordem de outro item ou grupo do mesmo formulário.

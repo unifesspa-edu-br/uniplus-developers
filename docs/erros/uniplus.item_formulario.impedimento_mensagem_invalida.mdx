@@ -1,0 +1,35 @@
+---
+title: A mensagem do impedimento é obrigatória e limitada
+sidebar_label: Mensagem do impedimento inválida
+description: A mensagem que explica ao candidato por que a resposta impede a inscrição é obrigatória e tem no máximo 500 caracteres.
+code: uniplus.item_formulario.impedimento_mensagem_invalida
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1732'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1732
+  - label: 'uniplus-api#1786'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1786
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O impedimento de um item declara a mensagem que o candidato lê quando a resposta dele impede a inscrição. A `mensagem` do `impedimento` está ausente, vazia, só com espaços, tem mais de 500 caracteres depois de aparada ou contém o caractere nulo. A mensagem é "A mensagem que explica o impedimento ao candidato é obrigatória e tem no máximo 500 caracteres."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].impedimento.mensagem` ou, no campo de um grupo, `grupos[g].subitens[j].impedimento.mensagem`; nos modelos de formulário começa por `conteudo.`. Nada é gravado. No campo de um grupo repetível a causa é a mesma e vem no caminho do campo; como o campo de grupo não admite impedimento, ele é recusado também como [campo de grupo com impedimento](./uniplus.grupo_formulario.campo_com_impedimento.mdx), na conferência da forma do grupo. A mensagem é mostrada ao candidato: escreva o motivo da recusa sem dados pessoais.
+
+Na gravação dos itens do formulário, esta recusa só sai para o item cujo fato existe, é coletável e combina com o tipo de campo: o item com fato [desconhecido](./uniplus.item_formulario.fato_desconhecido.mdx), [não coletável](./uniplus.item_formulario.fato_nao_coletavel.mdx) ou com tipo de campo [incoerente](./uniplus.item_formulario.tipo_renderizacao_incoerente_com_dominio.mdx) é recusado por essa causa, e o resto da forma dele só é conferido depois que ela for corrigida. Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Informe em `impedimento.mensagem` o texto que explica ao candidato por que a resposta impede a inscrição, com até 500 caracteres.

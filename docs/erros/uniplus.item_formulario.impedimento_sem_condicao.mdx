@@ -1,0 +1,35 @@
+---
+title: O impedimento do campo não tem condição
+sidebar_label: Impedimento sem condição
+description: O impedimento declara a condição, sobre a resposta do campo, em que a inscrição fica impedida, e a condição não pode faltar.
+code: uniplus.item_formulario.impedimento_sem_condicao
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1732'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1732
+  - label: 'uniplus-api#1786'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1786
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `impedimento` de um item traz `quando` ausente, nulo ou como lista vazia. A condição é a lista de cláusulas (o OU de cláusulas, cada uma o E de condições) que diz em que resposta do campo a inscrição fica impedida; sem cláusula, nenhuma resposta impediria. A mensagem é "O impedimento tem a condição sobre a resposta do campo."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].impedimento.quando` ou, no campo de um grupo, `grupos[g].subitens[j].impedimento.quando`; nos modelos de formulário começa por `conteudo.`. Ela sai na leitura do item, junto com as demais recusas de leitura: o item recusado não segue para a conferência contra o catálogo, e, no modelo de formulário, o conteúdo com recusa de leitura não chega às regras que dependem dele inteiro, como a forma dos itens, e as recusas do cadastro (código, nome, descrição, tipo de processo) saem junto. Nada é gravado. No campo de um grupo repetível a causa é a mesma e vem no caminho do campo. Na gravação dos itens do formulário, o campo de grupo com impedimento é recusado também como [campo de grupo com impedimento](./uniplus.grupo_formulario.campo_com_impedimento.mdx); nos modelos, o grupo que tem campo recusado na leitura sai do conteúdo conferido, e só esta recusa de leitura aponta o campo. Na atualização de um modelo, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+A condição com uma cláusula vazia é outra recusa, a de forma da condição, e a condição que não cita o próprio campo é a de [impedimento sem o próprio campo](./uniplus.item_formulario.impedimento_sem_o_proprio_campo.mdx).
+
+## Como resolver
+
+Informe em `impedimento.quando` ao menos uma cláusula com a condição sobre a resposta do campo, ou retire o `impedimento` do item.

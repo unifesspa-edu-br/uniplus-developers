@@ -1,0 +1,40 @@
+---
+title: O fato do item não é coletável num campo
+sidebar_label: Fato do item não coletável
+description: Só o fato declarado pelo candidato é respondido num campo do formulário, e o campo de um grupo coleta só o fato declarado de membro.
+code: uniplus.item_formulario.fato_nao_coletavel
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0143
+  - UNI-REQ-0146
+rastreio:
+  - label: 'uniplus-api#984'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/984
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O fato existe no catálogo, mas não pode ser coletado no campo em que foi posto. É coletável o fato declarado, respondido num campo de formulário, do próprio candidato: o fato derivado por regra e o calculado pelo sistema não são respondidos, mas obtidos (UNI-REQ-0143), e o fato de membro de grupo só existe dentro de um grupo repetível, onde cada ocorrência responde o seu (UNI-REQ-0146). A mensagem diz qual é a situação:
+
+- no item do formulário: "O fato '\{código\}' não é coletável num campo: só o fato declarado do próprio candidato é respondido no formulário — derivados, calculados e fatos de membro de grupo não.";
+- no campo de um grupo: "O fato '\{código\}' não é coletável num campo do grupo: só o fato declarado de membro de grupo é respondido em cada ocorrência — fatos do candidato, derivados e calculados não."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].fatoCodigo` ou `grupos[g].subitens[j].fatoCodigo`; nos modelos de formulário o `field` começa por `conteudo.`, e o pressuposto que nomeia um fato não coletável é recusado em `conteudo.pressupostos[i]`. O item cuja forma básica já foi recusada não chega a esta conferência. Nada é gravado.
+
+Na aplicação de um modelo ao processo, o item ou o grupo cujo fato deixou de ser coletável depois da composição do modelo não é recusado: sai da cópia e volta no relatório da aplicação, entre as partes descartadas. Na atualização de um modelo, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Coloque no item do formulário só um fato declarado do próprio candidato, e no campo de um grupo só um fato declarado de membro de grupo. O fato derivado ou calculado chega às regras do formulário por citação, e não por um campo.

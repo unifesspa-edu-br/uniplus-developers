@@ -21,7 +21,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Um fato da lista `pressupostos` do `conteudo` do modelo, enviado na criação (`POST /api/configuracao/admin/modelos-formulario`) ou na atualização (`PUT /api/configuracao/admin/modelos-formulario/{id}`), também é o `fatoCodigo` de um dos `itens` do mesmo modelo. Ou o formulário coleta o fato, ou o recebe da inscrição como pressuposto. A conferência olha os itens do modelo, comparando os códigos depois de aparados e normalizados.
+Um fato da lista `pressupostos` do `conteudo` do modelo, enviado na criação (`POST /api/configuracao/admin/modelos-formulario`) ou na atualização (`PUT /api/configuracao/admin/modelos-formulario/{id}`), também é o `fatoCodigo` de um dos `itens` do mesmo modelo, ou de um campo de grupo (um item de `subitens` de um dos `grupos`). Ou o formulário coleta o fato, ou o recebe da inscrição como pressuposto. A conferência olha os itens e os campos dos grupos do modelo, comparando os códigos depois de aparados e normalizados.
 
 A recusa vem na lista `errors` da resposta, com `field` igual a `conteudo.pressupostos[i]`, em que `i` é a posição do pressuposto. A mensagem cita o código do fato. A conferência só é feita depois que o conteúdo foi lido sem recusa de leitura, e num modelo que não é o de inscrição. Nada é gravado. Na atualização, a busca do modelo vem antes das validações de domínio do conteúdo: com um `{id}` que não existe, a resposta é [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx). Só a leitura do corpo vem antes da busca: campo não anulável ausente ou nulo (como `nome`) é recusado com 400, sem código deste catálogo, mesmo com `{id}` inexistente.
 

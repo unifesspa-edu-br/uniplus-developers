@@ -1,0 +1,39 @@
+---
+title: O fato do item não pertence ao catálogo de fatos do candidato
+sidebar_label: Fato do item desconhecido
+description: O fato que o item do formulário coleta, ou que o modelo recebe como pressuposto, não existe no catálogo de fatos do candidato.
+code: uniplus.item_formulario.fato_desconhecido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0143
+rastreio:
+  - label: 'uniplus-api#984'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/984
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Os dados que os formulários coletam do candidato são fatos cadastrados no módulo Configuração (UNI-REQ-0143), e o código informado não é de nenhum fato do catálogo. A mensagem é "O fato '\{código\}' não pertence ao catálogo de fatos do candidato.", com o código recusado.
+
+A recusa vem na lista `errors` da resposta, uma entrada por ocorrência:
+
+- na gravação dos itens do formulário, `field` igual a `itens[i].fatoCodigo` ou, no campo de um grupo, `grupos[g].subitens[j].fatoCodigo`;
+- nos modelos de formulário, o mesmo caminho precedido de `conteudo.`, e ainda `conteudo.pressupostos[i]`, quando o pressuposto nomeia um fato que não existe, e `conteudo.documentosExigidos[i].porOpcao.fatoCodigo`, quando a exigência de documento por opção nomeia um fato que não existe.
+
+O item cuja forma básica já foi recusada ([código do fato em branco](./uniplus.item_formulario.fato_codigo_obrigatorio.mdx), rótulo, ordem ou tipo de campo) não chega à conferência contra o catálogo e não recebe esta recusa. Na gravação dos itens, a conferência contra o catálogo vem depois da leitura da forma de todos os itens e grupos. Nos modelos, ela roda mesmo que o conteúdo tenha recusa de leitura; quando o conteúdo foi lido sem essa recusa, a mesma resposta pode trazer, junto com esta, a recusa de [formato incoerente](./uniplus.item_formulario.formato_incoerente.mdx) para o campo de texto desse fato. Nada é gravado. Na atualização de um modelo, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Escolha, no catálogo de fatos do candidato do módulo Configuração, um fato que exista, e informe o código dele exatamente como cadastrado. Se o fato deveria existir, peça o cadastro a quem administra o catálogo de fatos antes de repetir a operação.

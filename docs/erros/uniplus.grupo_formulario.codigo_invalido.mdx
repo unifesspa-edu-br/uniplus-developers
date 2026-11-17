@@ -1,0 +1,36 @@
+---
+title: O código do grupo é obrigatório e tem tamanho limitado
+sidebar_label: Código do grupo inválido
+description: O código do grupo repetível não pode ficar vazio nem ter mais de 60 caracteres.
+code: uniplus.grupo_formulario.codigo_invalido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0146
+rastreio:
+  - label: 'uniplus-api#1701'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1701
+  - label: 'uniplus-api#1761'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1761
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `codigo` de um grupo repetível, em `grupos`, está vazio, só com espaços, ou tem mais de 60 caracteres depois de aparado. A mensagem é "O código do grupo é obrigatório e tem no máximo 60 caracteres." O tamanho exato do limite é da API; o UNI-REQ-0146 define o grupo, não o tamanho do código.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `grupos[i].codigo`, uma entrada por grupo recusado, no mesmo lote das demais recusas da forma do grupo. Na criação e na atualização de um modelo de formulário o `field` começa por `conteudo.`. Nada é gravado.
+
+A recusa vale para o texto presente. A propriedade `codigo` ausente ou nula é recusada antes, com 400 e sem código deste catálogo, pela leitura do corpo. Nos modelos, a conferência da forma do grupo só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Informe um `codigo` com texto e de até 60 caracteres. O código do grupo também não pode coincidir com o código de um fato ou de um grupo de outro formulário do processo.
