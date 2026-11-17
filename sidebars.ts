@@ -598,6 +598,8 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.requisicao.malformada',
         'erros/uniplus.requisicao.corpo_ausente',
         'erros/uniplus.requisicao.valor_invalido',
+        'erros/uniplus.consulta.busca_muito_longa',
+        'erros/uniplus.contract.id_path_body_divergente',
         'erros/uniplus.auth.unauthorized',
         'erros/uniplus.auth.forbidden',
         'erros/uniplus.auth.impedido_por_inscricao_no_processo',

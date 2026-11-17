@@ -1,0 +1,33 @@
+---
+title: O Id da rota não corresponde ao Id do corpo
+sidebar_label: Id da rota diferente do corpo
+description: O Id informado na rota é diferente do Id enviado no corpo da requisição de atualização.
+code: uniplus.contract.id_path_body_divergente
+http_status: 400
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Atualização de obrigatoriedade legal (`PUT /admin/obrigatoriedades-legais/{id}`)
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#2529'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2529
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A requisição de atualização identifica o recurso duas vezes: na rota
+(`/recurso/{id}`) e no corpo (campo `id`). Os dois valores são diferentes, e o
+sistema não escolhe um deles por conta própria: a atualização é recusada antes
+de qualquer verificação do recurso, e nada é alterado.
+
+## Como resolver
+
+Envie a mesma identificação nos dois lugares. Confira se o Id do corpo é o do
+recurso que a rota nomeia, e não o de outro registro copiado de uma tela ou de
+uma resposta anterior. Se a intenção era atualizar outro recurso, corrija a
+rota.
