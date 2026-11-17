@@ -1,0 +1,52 @@
+---
+title: 'Uma cláusula do predicado deve ter ao menos uma condição'
+sidebar_label: 'Cláusula sem condição'
+description: 'Uma cláusula de um predicado tem ao menos uma condição.'
+code: uniplus.clausula_dnf.clausula_vazia
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Criação de um modelo de formulário'
+  - 'Atualização de um modelo de formulário'
+  - 'Gravação dos termos do formulário'
+  - 'Gravação das etapas do formulário'
+  - 'Gravação dos itens do formulário'
+  - 'Criação de uma modalidade de concorrência'
+  - 'Atualização de uma modalidade de concorrência'
+  - 'Definição das regras padrão de um fato derivado por regra'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#847'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/847
+  - label: 'uniplus-api#885'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/885
+  - label: 'uniplus-api#892'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/892
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+Um predicado (a regra de exibição, a obrigatoriedade condicional, a regra de aplicabilidade e as demais condições do Uni+) é uma lista de cláusulas: as cláusulas são alternativas (OU), e cada cláusula é uma lista de condições que valem juntas (E). Uma das cláusulas veio vazia, ou nula, no lugar da lista de condições, e a API a recusa porque a cláusula sem condição não diz o que testar. A mensagem é `Uma cláusula deve ter ao menos uma condição.`
+
+A lista de cláusulas vazia, `[]`, não é esta recusa. A recusa vem na lista `errors` da resposta (uma entrada por predicado recusado), com `field` apontando o predicado:
+
+- Nos modelos de formulário (criação e atualização): `etapas[i].exibicao`, `itens[i].precondicao`, `itens[i].predicadoObrigatoriedade`, `itens[i].impedimento.quando`, `itens[i].restricoes[j]` (a condição de um grupo de opções), `grupos[g].exibicao`, `grupos[g].predicadoObrigatoriedade`, `termos[i].exibicao`, `termos[i].predicadoObrigatoriedade` e `documentosExigidos[i].quando`, mais os mesmos caminhos do item sob `grupos[g].subitens[j]`.
+- Na gravação dos termos do formulário: `termos[i].exibicao` e `termos[i].predicadoObrigatoriedade`.
+- Na gravação das etapas do formulário: `etapas[i].exibicao`.
+- Na gravação dos itens do formulário: `itens[i].impedimento.quando` e `itens[i].restricoes[j]`, e os mesmos caminhos sob `grupos[g].subitens[j]` nos campos de grupo. Nos demais predicados do item e do grupo (pré-condição, obrigatoriedade condicional e exibição do grupo), a lista vazia, a cláusula vazia e a condição nula são recusadas antes, pela validação do corpo da requisição, sem código deste catálogo.
+- Na criação e na atualização de uma modalidade de concorrência: `regraDeAplicabilidade`.
+- Na definição das regras padrão de um fato derivado por regra: `regras[i]`.
+
+Cada predicado é conferido cláusula a cláusula e condição a condição, na ordem em que foram enviadas, e só a primeira recusa dele é devolvida. Quando o pedido traz mais de um predicado, a criação e a atualização de modelo de formulário, a gravação dos termos, das etapas e dos itens do formulário e a definição das regras padrão de um fato derivado conferem todos e devolvem as recusas juntas em `errors`. Nos modelos de formulário, o `field` começa por `conteudo.`. A parte do modelo (item, grupo, etapa, termo ou documento) com recusa de forma não segue para as conferências contra o catálogo de fatos, e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx). Nada é gravado.
+
+## Como resolver
+
+Retire a cláusula vazia da lista ou coloque nela ao menos uma condição, no formato de exemplo, com um fato fictício:
+
+```json
+[[{ "fato": "CURSOU_SUPLETIVO", "operador": "IGUAL", "valor": true }]]
+```

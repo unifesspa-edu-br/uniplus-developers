@@ -1,0 +1,47 @@
+---
+title: 'As opções formadas pelas respostas precisam citar fatos'
+sidebar_label: 'Restrição sem o fato de que depende'
+description: 'As opções formadas pelas respostas e os municípios da UF citam os fatos de que dependem.'
+code: uniplus.restricao_valor.fatos_vazios
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Criação de um modelo de formulário'
+  - 'Atualização de um modelo de formulário'
+  - 'Gravação dos itens do formulário'
+requisitos:
+  - UNI-REQ-0145
+rastreio:
+  - label: 'uniplus-api#1697'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1697
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+Uma restrição que depende de respostas anteriores não cita o fato de que depende (UNI-REQ-0145). A mensagem diz qual caso ocorreu:
+
+- `OPCOES_DAS_RESPOSTAS` (as opções do campo são formadas pelas respostas dadas a outros campos) com a lista `fatos` ausente, vazia ou com item em branco: `As opções formadas pelas respostas precisam citar ao menos um fato.`;
+- `MUNICIPIOS_DA_UF` (os municípios do campo são os da UF respondida antes) com a lista `fatos` ausente, vazia, com mais de um fato ou com item em branco: `Os municípios da UF citam exatamente um fato, o da UF.`
+
+Aqui só se confere que os códigos dos fatos foram informados. O fato que a restrição cita precisa existir e ter o tipo certo, e essa conferência é outra, de [opções de outro domínio](./uniplus.item_formulario.opcoes_de_outro_dominio.mdx) e de [UF do município inválida](./uniplus.item_formulario.uf_do_municipio_invalida.mdx).
+
+A recusa vem na lista `errors` da resposta, uma entrada por restrição recusada, junto com as demais recusas do item, na mesma resposta:
+
+- Gravação dos itens do formulário: `field` igual a `itens[i].restricoes[j]` ou, no campo de um grupo, `grupos[g].subitens[k].restricoes[j]`.
+- Criação de um modelo de formulário e Atualização de um modelo de formulário: o mesmo `field`, começando por `conteudo.`. Na atualização, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+O item com recusa de forma em alguma restrição não segue para as conferências seguintes (o catálogo de fatos e a coerência da restrição com o tipo de campo). Nada é gravado.
+
+## Como resolver
+
+Em `OPCOES_DAS_RESPOSTAS`, informe em `fatos` os fatos dos campos de seleção cujas respostas formam as opções. Em `MUNICIPIOS_DA_UF`, informe em `fatos` um único fato, o do campo de UF. Exemplo, com um fato fictício:
+
+```json
+{ "tipo": "MUNICIPIOS_DA_UF", "fatos": ["UF_DE_NASCIMENTO"] }
+```

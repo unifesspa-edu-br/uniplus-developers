@@ -1,0 +1,33 @@
+---
+title: 'Um fato derivado não pode depender de si mesmo'
+sidebar_label: 'Derivação que cita o próprio fato'
+description: 'Uma regra de derivação não cita, nas condições, o próprio fato que ela deriva.'
+code: uniplus.regras_derivacao_fato.derivacao_autorreferente
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Definição de regras de derivação de fatos do processo seletivo'
+  - 'Definição das regras padrão de um fato derivado por regra'
+requisitos:
+  - UNI-REQ-0077
+rastreio:
+  - label: 'uniplus-api#1694'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1694
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+Uma condição de uma regra de derivação cita o próprio fato derivado. O fato precisaria estar resolvido para ser calculado, e por isso a API recusa a regra no cadastro. A mensagem é `A derivação de '{fato}' cita o próprio fato — um derivado não pode depender de si mesmo.`, com o código do fato no lugar de `{fato}`. A dependência que passa por outros fatos derivados e volta ao primeiro é outra recusa, de [ciclo entre derivados](./uniplus.configuracao.fato_candidato.ciclo_entre_derivados.mdx).
+
+- Definição das regras padrão de um fato derivado por regra: a API confere todas as regras e devolve as recusas juntas em `errors`, cada uma com `field` igual a `regras[i]`; a mesma regra pode ter também recusas das suas condições. Dentro de cada regra, a conferência da estrutura para na primeira recusa, e no fato categórico esta só ocorre se o código que a regra contribui é valor do fato: do contrário vale antes a recusa de [valor contribuído fora dos valores do fato](./uniplus.regras_derivacao_fato.contribui_fora_do_dominio.mdx).
+- Definição de regras de derivação de fatos do processo seletivo: vale para o fato derivado categórico, depois da conferência do valor contribuído. A API para na primeira configuração ou regra que falhar, e a resposta traz o código e a mensagem, sem apontar um campo.
+
+Nada é gravado.
+
+## Como resolver
+
+Retire da condição a citação ao próprio fato derivado e use só os fatos de que ele depende, como respostas do candidato ou outros fatos derivados.

@@ -1,0 +1,60 @@
+---
+title: 'O fato da condição não pertence ao vocabulário fechado'
+sidebar_label: 'Fato da condição desconhecido'
+description: 'O fato citado numa condição pertence ao vocabulário de fatos que podem entrar em regra.'
+code: uniplus.predicado_dnf.fato_desconhecido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Criação de um modelo de formulário'
+  - 'Atualização de um modelo de formulário'
+  - 'Gravação dos termos do formulário'
+  - 'Gravação das etapas do formulário'
+  - 'Gravação dos itens do formulário'
+  - 'Definição de regras de derivação de fatos do processo seletivo'
+  - 'Definição de documentos exigidos do processo seletivo'
+  - 'Definição de critérios de desempate do processo seletivo'
+  - 'Criação de uma modalidade de concorrência'
+  - 'Atualização de uma modalidade de concorrência'
+  - 'Definição das regras padrão de um fato derivado por regra'
+  - 'Publicação inicial do processo seletivo'
+  - 'Retificação em ato único'
+  - 'Fechamento de sessão editorial'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#847'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/847
+  - label: 'uniplus-api#885'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/885
+  - label: 'uniplus-api#892'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/892
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+Uma condição cita um fato que não está no vocabulário de fatos que podem entrar em regra. A mensagem é `O fato '{fato}' não pertence ao vocabulário fechado.`, com o código enviado no lugar de `{fato}`. Isso ocorre em dois casos: o código não existe no catálogo de fatos do candidato; ou o fato existe, mas é de um tipo que não entra em regra (texto, data e endereço, além do categórico sem lista de valores). Na criação e na atualização de uma modalidade e na definição das regras padrão de um fato derivado, o fato que existe mas não pode ser citado recebe outra recusa ([fato não citável na regra da modalidade](./uniplus.configuracao.modalidade.regra_cita_fato_nao_citavel.mdx) e [fato não citável na regra padrão](./uniplus.configuracao.fato_candidato.regra_cita_fato_nao_citavel.mdx)), e só o código que não existe chega a esta.
+
+No critério de desempate, o vocabulário não tem o fato categórico cujas opções não estão no catálogo (as opções do processo, as modalidades ofertadas, os municípios do bônus e as UFs e os municípios do Geo): citá-lo também devolve esta recusa.
+
+A recusa vem na lista `errors` da resposta, com `field` apontando o predicado ou, no critério de desempate, o campo `fato` do critério:
+
+- Nos modelos de formulário (criação e atualização): `etapas[i].exibicao`, `itens[i].precondicao`, `itens[i].predicadoObrigatoriedade`, `itens[i].impedimento.quando`, `itens[i].restricoes[j].entradas[k].quando` (a condição de um grupo de opções), `grupos[g].exibicao`, `grupos[g].predicadoObrigatoriedade`, `termos[i].exibicao`, `termos[i].predicadoObrigatoriedade` e `documentosExigidos[i].quando`, mais os mesmos caminhos do item sob `grupos[g].subitens[j]`.
+- Na gravação dos termos do formulário: `termos[i].exibicao` e `termos[i].predicadoObrigatoriedade`.
+- Na gravação das etapas do formulário: `etapas[i].exibicao`.
+- Na gravação dos itens do formulário: `itens[i].precondicao`, `itens[i].predicadoObrigatoriedade`, `itens[i].impedimento.quando` e, nas opções, `itens[i].restricoes[j].entradas[k].quando`, os campos `grupos[g].exibicao` e `grupos[g].predicadoObrigatoriedade` dos grupos e os mesmos caminhos sob `grupos[g].subitens[j]` nos campos de grupo.
+- Na definição de regras de derivação de fatos do processo seletivo, na condição de uma regra: a resposta traz o código e a mensagem, sem apontar um campo.
+- Na definição de documentos exigidos do processo seletivo, na condição do gatilho da exigência: a resposta traz o código e a mensagem, sem apontar um campo.
+- Na definição dos critérios de desempate, no critério que testa um fato (regra de predicado sobre fato): `criterios[i].fato`.
+- Na criação e na atualização de uma modalidade de concorrência: `regraDeAplicabilidade`.
+- Na definição das regras padrão de um fato derivado por regra: `regras[i]`.
+- Na publicação inicial, na retificação em ato único e no fechamento da sessão editorial do processo seletivo: antes de congelar a configuração, a API confere de novo as regras dos itens e dos grupos dos formulários contra o catálogo de fatos de hoje, porque o catálogo pode ter mudado depois que o item foi gravado. O `field` é `formularios[{finalidade}].itens[i].…` ou `formularios[{finalidade}].grupos[g].…`, em que `{finalidade}` identifica o formulário, com os caminhos da gravação (`precondicao`, `predicadoObrigatoriedade`, `impedimento.quando`, `restricoes[j].entradas[k].quando` e, no grupo, `exibicao` e `predicadoObrigatoriedade`) e, nos campos de grupo, `grupos[g].subitens[c].…`. A mensagem acrescenta o item ou o grupo e a orientação para regravá-lo. O item cujo fato alguma versão publicada já coletou não tem as regras conferidas de novo. Aqui a recusa vale para o fato citado que não está no vocabulário do catálogo de hoje; no item, o fato que o catálogo não tem recebe outra recusa, mais adiante.
+
+Cada predicado é conferido cláusula a cláusula e condição a condição, na ordem em que foram enviadas, e só a primeira recusa dele é devolvida. Dentro da condição a ordem é: fato conhecido, fato coletado pelo processo (onde essa conferência existe), operador contra o tipo do fato, valor contra o tipo do fato. Quando o pedido traz mais de um predicado, a criação e a atualização de modelo de formulário, a gravação dos termos, das etapas e dos itens do formulário, a definição dos critérios de desempate, a definição das regras padrão de um fato derivado e a conferência que antecede o congelamento do processo conferem todos e devolvem as recusas juntas em `errors`. A definição de regras de derivação de fatos do processo e a definição de documentos exigidos param na primeira recusa: depois de corrigi-la, a seguinte aparece no envio seguinte. Nos modelos de formulário, o `field` começa por `conteudo.`, e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx). A parte do modelo com recusa de forma (como a de [condição nula](./uniplus.predicado_dnf.condicao_nula.mdx)) não segue para esta conferência. Nada é gravado.
+
+## Como resolver
+
+Cite um fato que exista no catálogo de fatos do candidato e que seja booleano, numérico ou categórico com lista de valores. Se o fato necessário não existe, a pessoa que administra o catálogo de fatos o cadastra antes.

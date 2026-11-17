@@ -1,0 +1,37 @@
+---
+title: 'Longitude fora do intervalo permitido'
+sidebar_label: 'Longitude fora do intervalo'
+description: 'A longitude do endereço estruturado fica entre -180 e 180.'
+code: uniplus.endereco_referencia.longitude_fora_de_faixa
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Criação de um campus'
+  - 'Atualização de um campus'
+  - 'Criação de um local de oferta'
+  - 'Atualização de um local de oferta'
+  - 'Criação da instituição'
+  - 'Atualização da instituição'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#726'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/726
+  - label: 'uniplus-api#1394'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1394
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+A `longitude` do endereço estruturado é um número menor que -180 ou maior que 180; os dois extremos são aceitos. A mensagem é `Longitude deve estar entre -180 e 180.` A longitude é opcional: sem ela, não há conferência. A conferência vem depois da de [latitude](./uniplus.endereco_referencia.latitude_fora_de_faixa.mdx): com as duas fora do intervalo, a resposta traz primeiro a da latitude.
+
+O endereço estruturado é opcional no cadastro do campus, do local de oferta e da instituição (a sede): sem o objeto `endereco` no corpo da requisição, nenhuma conferência dele ocorre. Com o objeto, a API confere os campos um de cada vez e para na primeira recusa, nesta ordem: CEP informado, CEP com 8 dígitos, cidade do endereço (as recusas da família [referência de cidade](./uniplus.cidade_referencia.codigo_ibge_obrigatorio.mdx)), tamanho dos textos (logradouro, número, complemento, bairro e distrito), latitude, longitude, nível de resolução informado, nível de resolução dentro do vocabulário, origem informada e tamanho da origem.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `endereco`, ao lado das recusas dos outros campos do mesmo cadastro, que são conferidos no mesmo pedido. O `code` da resposta é o da primeira recusa da lista, e as recusas dos campos do próprio cadastro (como `sigla`, `nome` e a cidade) vêm antes da do endereço. Nada é gravado. Na atualização, estas conferências vêm antes da busca do registro: um `{id}` que não existe, enviado com endereço recusado, recebe esta recusa, e só o corpo aceito chega à resposta de [campus não encontrado](./uniplus.configuracao.campus.nao_encontrado.mdx), de [local de oferta não encontrado](./uniplus.configuracao.local_oferta.nao_encontrado.mdx) ou de [instituição não encontrada](./uniplus.organizacao.instituicao.nao_encontrada.mdx).
+
+## Como resolver
+
+Corrija a longitude para um valor entre -180 e 180, em graus decimais, ou retire o campo.

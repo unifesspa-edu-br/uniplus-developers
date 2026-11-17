@@ -1,0 +1,49 @@
+---
+title: 'O limite da faixa de data é uma data fixa ou o envio deslocado em anos e dias'
+sidebar_label: 'Limite da faixa de data inválido'
+description: 'O limite de uma faixa de data é uma data fixa ou o dia do envio deslocado em anos e dias.'
+code: uniplus.restricao_valor.limite_de_data_invalido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'Criação de um modelo de formulário'
+  - 'Atualização de um modelo de formulário'
+  - 'Gravação dos itens do formulário'
+requisitos:
+  - UNI-REQ-0145
+rastreio:
+  - label: 'uniplus-api#1697'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1697
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+## O que aconteceu
+
+Um limite (`dataMinima` ou `dataMaxima`) de uma restrição `FAIXA_DE_DATA` não tem a forma aceita (UNI-REQ-0145). O limite tem uma `ancora`: `DATA_FIXA`, com a `data` e sem deslocamento, ou `ENVIO`, com o deslocamento em `anos` e `dias` a partir do dia em que a inscrição é enviada (valor negativo recua no tempo; o que falta vale zero) e sem `data`. A mensagem diz qual caso ocorreu:
+
+- âncora ausente ou desconhecida, `DATA_FIXA` sem `data` ou com `anos` ou `dias`, `ENVIO` com `data`: `O limite da faixa de data é DATA_FIXA, com a data, ou ENVIO, com o deslocamento em anos e dias.`;
+- `DATA_FIXA` com a data 01/01/0001, que é a forma de uma data omitida: `A data fixa do limite não pode ser 01/01/0001, a forma de uma data omitida.`;
+- deslocamento acima de 150 anos ou de 54.900 dias, para mais ou para menos: `O deslocamento do dia do envio vai até 150 anos ou 54900 dias, para mais ou para menos.`
+
+O limite que falta (`dataMinima` ou `dataMaxima` ausente) não é recusado; a faixa sem nenhum dos dois é recusada como [limites incoerentes](./uniplus.restricao_valor.limites_incoerentes.mdx).
+
+A recusa vem na lista `errors` da resposta, uma entrada por restrição recusada, junto com as demais recusas do item, na mesma resposta:
+
+- Gravação dos itens do formulário: `field` igual a `itens[i].restricoes[j]` ou, no campo de um grupo, `grupos[g].subitens[k].restricoes[j]`.
+- Criação de um modelo de formulário e Atualização de um modelo de formulário: o mesmo `field`, começando por `conteudo.`. Na atualização, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+O item com recusa de forma em alguma restrição não segue para as conferências seguintes (o catálogo de fatos e a coerência da restrição com o tipo de campo). Nada é gravado.
+
+## Como resolver
+
+Corrija o limite para uma das duas formas. Exemplos, com datas fictícias:
+
+```json
+{ "tipo": "FAIXA_DE_DATA", "dataMinima": { "ancora": "DATA_FIXA", "data": "2000-01-01" }, "dataMaxima": { "ancora": "ENVIO" } }
+{ "tipo": "FAIXA_DE_DATA", "dataMinima": { "ancora": "ENVIO", "anos": -100 }, "dataMaxima": { "ancora": "ENVIO", "anos": -16 } }
+```
