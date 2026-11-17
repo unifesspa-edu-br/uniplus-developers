@@ -1,0 +1,37 @@
+---
+title: A obrigatoriedade é SEMPRE ou NUNCA sem predicado, ou QUANDO com ele
+sidebar_label: 'Obrigatoriedade incoerente'
+description: 'A obrigatoriedade é SEMPRE ou NUNCA sem predicado, ou QUANDO com ele.'
+code: uniplus.formulario_portavel.obrigatoriedade_invalida
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Avaliação de formulário sem cadastro
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1810'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1810
+  - label: 'uniplus-api#1816'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1816
+  - label: 'uniplus-api#1814'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1814
+  - label: 'uniplus-api#1823'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1823
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A avaliação de um formulário sem cadastro confere as regras de um formulário renderizável contra respostas simuladas, sem gravar nada nem registrar o conteúdo enviado. A obrigatoriedade de um campo, de um grupo ou de um termo nas regras recebidas não é coerente: o valor não é `SEMPRE`, `NUNCA` nem `QUANDO` (inclusive o texto vazio), ou `SEMPRE` e `NUNCA` vêm com o predicado `predicadoObrigatoriedade`, ou `QUANDO` vem sem ele. A mensagem diz de quem é a obrigatoriedade: "A obrigatoriedade do campo '\{código\}' é SEMPRE ou NUNCA sem predicado, ou QUANDO com ele.", e do mesmo modo para o grupo e para o termo.
+
+A recusa vem no corpo da resposta, com o código e o `detail` que traz a mensagem, sem lista `errors`. As regras recebidas são lidas por inteiro antes da avaliação, e a leitura para na primeira recusa, nesta ordem: o elemento nulo, as etapas (com os itens e os grupos de cada uma), os termos, as derivações, os agregados e, por fim, o conjunto.
+
+As propriedades de texto que o corpo não pode omitir, como o código, a obrigatoriedade e a operação, ausentes ou nulas, são recusadas antes, com 400 e sem código deste catálogo, pela leitura do corpo.
+
+## Como resolver
+
+Use `SEMPRE` ou `NUNCA` sem `predicadoObrigatoriedade`, ou `QUANDO` com ele preenchido, e repita a avaliação.

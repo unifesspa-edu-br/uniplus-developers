@@ -1,0 +1,38 @@
+---
+title: O código aparece em mais de um termo do formulário
+sidebar_label: 'Código de termo repetido'
+description: 'Cada termo exigido pelo formulário tem um código próprio, que nenhum outro termo do formulário usa.'
+code: uniplus.termo_formulario.codigo_duplicado
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos termos do formulário
+requisitos:
+  - UNI-REQ-0086
+rastreio:
+  - label: 'uniplus-api#1695'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1695
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Dois termos exigidos pelo formulário têm o mesmo `codigo`. O código identifica a exigência do termo no formulário (UNI-REQ-0086), e por isso é único entre os termos dele. A comparação ignora os espaços das pontas e normaliza o texto antes de comparar, e diferencia maiúsculas de minúsculas. A mensagem é "O código '\{código\}' aparece em mais de um termo do formulário.", com o código aparado.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `termos[i].codigo` (nos modelos de formulário o `field` começa por `conteudo.`). A entrada aponta a segunda ocorrência e as seguintes; a primeira fica de fora. Nada é gravado. O termo sem código não entra nesta conferência, porque a recusa dele é a de [código obrigatório](./uniplus.termo_formulario.codigo_obrigatorio.mdx).
+
+Nas duas gravações a conferência da forma de cada termo (código e ordem) acumula com as demais recusas do pedido, sem interromper na primeira. Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Dê a cada termo do formulário um `codigo` distinto. Se o mesmo termo do catálogo precisa ser exigido duas vezes, cada exigência tem o próprio código.

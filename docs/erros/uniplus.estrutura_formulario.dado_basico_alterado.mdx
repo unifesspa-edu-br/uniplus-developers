@@ -1,0 +1,36 @@
+---
+title: 'O item do conjunto básico de dados do candidato não pode ser alterado'
+sidebar_label: 'Dado básico alterado'
+description: 'O item do conjunto básico enviado no formulário de inscrição difere do item do conjunto: ele pode ser repetido como está, ou omitido, mas não alterado.'
+code: uniplus.estrutura_formulario.dado_basico_alterado
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0151
+rastreio:
+  - label: 'uniplus-api#1778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1778
+  - label: 'uniplus-api#1784'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1784
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Todo formulário de inscrição coleta o conjunto básico de dados do candidato (UNI-REQ-0151) numa seção reservada, a primeira do formulário, e o conjunto é o mesmo em todo processo e em todo modelo de formulário de inscrição. Por isso, o item do conjunto que vem no pedido pode ser repetido como está, ou omitido, e o sistema o repõe; ele não pode ser alterado. A recusa sai quando o item básico enviado difere do item do conjunto em qualquer elemento que não seja a ordem e o rótulo, que são do conjunto, como a obrigatoriedade, a exibição, as restrições, a ajuda ou a seção; uma condição sem valor também o torna diferente. A mensagem é "O item '\{fato\}' é do conjunto básico de dados do candidato: pode ser repetido como está, ou omitido, mas não alterado.", com o código do fato do conjunto.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i]`, uma entrada por item alterado; nos modelos de formulário o `field` começa por `conteudo.`. Nada é gravado. A conferência vale só para o formulário e o modelo de inscrição; nos de outras finalidades o conjunto não existe.
+
+O item do conjunto que o pedido omite é reposto pelo sistema, com a ordem e o rótulo do conjunto. Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Retire do pedido o item do conjunto básico que foi alterado, ou envie-o exatamente como o formulário o tem: o sistema usa o item do conjunto, com a ordem e o rótulo dele. Se a necessidade é outra pergunta além das do conjunto, acrescente-a como item próprio, fora da seção reservada.

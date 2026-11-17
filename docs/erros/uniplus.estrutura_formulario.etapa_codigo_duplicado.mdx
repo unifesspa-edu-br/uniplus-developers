@@ -1,0 +1,39 @@
+---
+title: 'O código de etapa se repete no formulário'
+sidebar_label: 'Código de etapa repetido'
+description: 'Cada etapa do formulário tem um código próprio, que não se repete entre as etapas.'
+code: uniplus.estrutura_formulario.etapa_codigo_duplicado
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação do formulário do processo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1696'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1696
+  - label: 'uniplus-api#1722'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1722
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas etapas do formulário têm o mesmo `codigo`. O código é o que os itens e os grupos usam em `etapaCodigo` para dizer em que seção estão, e por isso é único no formulário. A comparação é exata e diferencia maiúsculas de minúsculas. A mensagem é "O código de etapa '\{código\}' se repete no formulário."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `etapas[i].codigo`; nos modelos de formulário o `field` começa por `conteudo.`. Nada é gravado. A entrada aponta a segunda ocorrência e as seguintes; a primeira fica de fora da recusa.
+
+A estrutura das etapas só é conferida quando todas as etapas têm forma válida, e as recusas da estrutura saem juntas, na mesma lista. Na gravação do formulário do processo, a forma de cada etapa é conferida primeiro e, havendo recusa, a estrutura só é conferida se todas as etapas foram formadas. No modelo, a estrutura só é conferida quando o conteúdo não tem nenhuma outra recusa de forma, e os itens são conferidos contra as etapas só depois que a estrutura das etapas passa.
+
+Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Dê a cada etapa um `codigo` distinto e, se há itens ou grupos que apontavam para a etapa repetida, confira o `etapaCodigo` deles. Depois disso, grave de novo.

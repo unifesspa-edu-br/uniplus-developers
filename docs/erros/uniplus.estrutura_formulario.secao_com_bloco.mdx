@@ -1,0 +1,39 @@
+---
+title: Uma seção não declara bloco de sistema
+sidebar_label: 'Seção com bloco de sistema'
+description: 'A etapa do tipo seção não traz bloco de sistema; o bloco é uma etapa própria, do tipo bloco.'
+code: uniplus.estrutura_formulario.secao_com_bloco
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação do formulário do processo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1696'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1696
+  - label: 'uniplus-api#1722'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1722
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma etapa do tipo `SECAO`, que reúne itens do formulário, traz `bloco` com um dos blocos de sistema (`COMPROVACAO_DOCUMENTAL`, `MODALIDADES_CALCULADAS` ou `REVISAO_E_ACEITE`). O bloco de sistema é montado pelo sistema a partir da configuração do processo e é uma etapa à parte, do tipo `BLOCO`, sem itens. A mensagem é "Uma seção não declara bloco de sistema."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `etapas[i].bloco`; nos modelos de formulário o `field` começa por `conteudo.`. Nada é gravado. O valor de `bloco` que não é nenhum dos três é tratado como ausente, e a seção com ele não cai aqui.
+
+A estrutura das etapas só é conferida quando todas as etapas têm forma válida, e as recusas da estrutura saem juntas, na mesma lista. Na gravação do formulário do processo, a forma de cada etapa é conferida primeiro e, havendo recusa, a estrutura só é conferida se todas as etapas foram formadas. No modelo, a estrutura só é conferida quando o conteúdo não tem nenhuma outra recusa de forma, e os itens são conferidos contra as etapas só depois que a estrutura das etapas passa.
+
+Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Retire o `bloco` da seção. Se a intenção era incluir o bloco de sistema, acrescente uma etapa própria, com `tipo` igual a `BLOCO` e o `bloco` desejado.

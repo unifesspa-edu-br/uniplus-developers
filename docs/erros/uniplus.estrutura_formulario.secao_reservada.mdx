@@ -1,0 +1,36 @@
+---
+title: A seção dos dados básicos do candidato é reservada
+sidebar_label: 'Seção reservada'
+description: 'Só os itens do conjunto básico de dados do candidato ficam na seção DADOS_BASICOS do formulário de inscrição.'
+code: uniplus.estrutura_formulario.secao_reservada
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos itens do formulário
+requisitos:
+  - UNI-REQ-0151
+rastreio:
+  - label: 'uniplus-api#1778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1778
+  - label: 'uniplus-api#1784'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1784
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O formulário de inscrição tem uma seção reservada, `DADOS_BASICOS`, em que o sistema coloca o conjunto básico de dados do candidato (UNI-REQ-0151). Um item ou um grupo que não é desse conjunto aponta para essa seção em `etapaCodigo`. A seção é só dos dados básicos, e as demais perguntas ficam em outras seções. A mensagem é "A seção DADOS_BASICOS é reservada aos dados básicos do candidato."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].etapaCodigo` para o item ou `grupos[i].etapaCodigo` para o grupo (nos modelos de formulário o `field` começa por `conteudo.`), em que `i` é a posição na lista enviada. Nada é gravado. A conferência vale só para o formulário e o modelo de inscrição.
+
+Na gravação dos itens, a recusa sai junto das demais recusas dos itens. Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Aponte o item ou o grupo para outra seção do formulário. Os itens do conjunto básico não precisam ser enviados: o sistema os repõe na seção reservada.

@@ -1,0 +1,39 @@
+---
+title: A ordem do termo não pode ser negativa
+sidebar_label: 'Ordem do termo negativa'
+description: 'A ordem do termo exigido pelo formulário é zero ou positiva.'
+code: uniplus.termo_formulario.ordem_invalida
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos termos do formulário
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1695'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1695
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A `ordem` de um termo exigido pelo formulário é um número negativo. Zero e os positivos são aceitos. A mensagem é "A ordem do termo não pode ser negativa."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `termos[i].ordem`, em que `i` é a posição do termo na lista enviada (nos modelos de formulário o `field` começa por `conteudo.`). Cada termo recusado tem a própria entrada. Nada é gravado.
+
+Um termo nulo dentro da lista tem recusa própria: na gravação dos termos do processo, a de [lista de termos ou termo nulo](./uniplus.selecao.termo_exigido_formulario.entrada_malformada.mdx) e, nos modelos, a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx).
+
+Nas duas gravações a conferência da forma de cada termo (código e ordem) acumula com as demais recusas do pedido, sem interromper na primeira. Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Informe em `ordem` um número inteiro de zero para cima.

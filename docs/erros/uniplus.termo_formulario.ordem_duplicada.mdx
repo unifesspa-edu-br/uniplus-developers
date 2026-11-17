@@ -1,0 +1,38 @@
+---
+title: 'Dois termos do formulário têm a mesma ordem'
+sidebar_label: 'Ordem de termo repetida'
+description: 'Cada termo exigido pelo formulário tem uma ordem própria, que nenhum outro termo do formulário usa.'
+code: uniplus.termo_formulario.ordem_duplicada
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação dos termos do formulário
+requisitos:
+  - UNI-REQ-0086
+rastreio:
+  - label: 'uniplus-api#1695'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1695
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Dois termos exigidos pelo formulário têm o mesmo valor de `ordem`. A ordem define a posição do termo no formulário (UNI-REQ-0086), e com ordem repetida a posição não ficaria definida. A mensagem é "Dois termos do formulário têm a mesma ordem."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `termos[i].ordem` (nos modelos de formulário o `field` começa por `conteudo.`). A entrada aponta a segunda ocorrência e as seguintes; a primeira fica de fora. Nada é gravado. A conferência vale também para o termo cujo código foi recusado.
+
+Nas duas gravações a conferência da forma de cada termo (código e ordem) acumula com as demais recusas do pedido, sem interromper na primeira. Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Dê a cada termo uma `ordem` distinta.

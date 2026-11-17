@@ -1,0 +1,36 @@
+---
+title: A seção dos dados básicos do candidato não pode ser alterada
+sidebar_label: 'Seção reservada alterada'
+description: 'A seção DADOS_BASICOS do formulário de inscrição é a do sistema: enviada nas etapas, tem de ser igual à de referência.'
+code: uniplus.estrutura_formulario.secao_reservada_alterada
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação do formulário do processo
+requisitos:
+  - UNI-REQ-0151
+rastreio:
+  - label: 'uniplus-api#1778'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1778
+  - label: 'uniplus-api#1784'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1784
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O formulário de inscrição tem a seção reservada `DADOS_BASICOS` (UNI-REQ-0151), e o sistema a acrescenta quando as etapas enviadas não a trazem. Se as etapas a trazem, ela precisa ser igual à de referência: mesma `ordem`, `tipo` `SECAO`, sem `bloco`, com o mesmo título, descrição e aviso, e sem `exibicao`. Qualquer diferença é recusada. A mensagem é "A seção DADOS_BASICOS é a dos dados básicos do candidato e não pode ser alterada."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `etapas[i]`, em que `i` é a posição da seção na lista enviada (nos modelos de formulário o `field` começa por `conteudo.`). Nada é gravado. A conferência vale só para o formulário e o modelo de inscrição. Nas gravações do formulário do processo, ela sai no mesmo lote das demais recusas das etapas.
+
+Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Retire a seção `DADOS_BASICOS` das etapas enviadas, para que o sistema a acrescente, ou envie-a exatamente como o formulário a tem.

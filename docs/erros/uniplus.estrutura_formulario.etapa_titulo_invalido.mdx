@@ -1,0 +1,35 @@
+---
+title: 'O título da etapa é obrigatório e tem tamanho limitado'
+sidebar_label: 'Título da etapa inválido'
+description: 'O título da etapa do formulário não pode ficar vazio nem ter mais de 300 caracteres.'
+code: uniplus.estrutura_formulario.etapa_titulo_invalido
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Criação de um modelo de formulário
+  - Atualização de um modelo de formulário
+  - Gravação do formulário do processo
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1704'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1704
+  - label: 'uniplus-api#1745'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1745
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O `titulo` de uma etapa do formulário está vazio, só com espaços, ou tem mais de 300 caracteres depois de aparado. O título é o nome com que a etapa aparece para o candidato. A mensagem é "O título da etapa é obrigatório e tem no máximo 300 caracteres."
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `etapas[i].titulo`; nos modelos de formulário o `field` começa por `conteudo.`. Nada é gravado. Cada etapa recusada tem a própria entrada, no mesmo lote das demais recusas da forma da etapa.
+
+A recusa vale para o texto presente. A propriedade `titulo` ausente ou nula é recusada antes, com 400 e sem código deste catálogo, pela leitura do corpo. Nos modelos de formulário, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+
+## Como resolver
+
+Informe em `titulo` um texto de 1 a 300 caracteres. O título do formulário inteiro é outro campo, com [código próprio](./uniplus.estrutura_formulario.titulo_tamanho.mdx).

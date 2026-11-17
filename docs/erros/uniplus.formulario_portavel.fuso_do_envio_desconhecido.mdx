@@ -1,0 +1,37 @@
+---
+title: 'A zona do envio simulado não é reconhecida'
+sidebar_label: 'Fuso do envio desconhecido'
+description: 'O fuso do envio simulado precisa ser uma zona horária que o ambiente reconhece.'
+code: uniplus.formulario_portavel.fuso_do_envio_desconhecido
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - Avaliação de formulário sem cadastro
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1810'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1810
+  - label: 'uniplus-api#1816'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1816
+  - label: 'uniplus-api#1814'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1814
+  - label: 'uniplus-api#1823'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/1823
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A avaliação de um formulário sem cadastro confere as regras de um formulário renderizável contra respostas simuladas, sem gravar nada nem registrar o conteúdo enviado. O envio simulado (`envio`) traz um `fuso` vazio, só com espaços, ou com uma zona horária que o ambiente não reconhece. O envio supõe o instante em que o candidato enviaria as respostas e o fuso em que o dia dele é contado, que é o da janela de inscrição, e é dele que se contam os limites da faixa de data. A mensagem é "A zona '\{zona\}' do envio não é reconhecida.", com a zona informada.
+
+A recusa vem na lista `errors` da resposta, com `field` igual a `envio.fuso`. Nada é gravado. A recusa vale para o texto presente: a propriedade `fuso` ausente ou nula, e a `instante` ausente, são recusadas antes, com 400 e sem código deste catálogo, pela leitura do corpo. O envio simulado é opcional: sem ele, os limites contados do envio ficam indeterminados.
+
+Esta recusa vem junto das demais do envio e das ocorrências, na mesma lista, e antes da avaliação das regras. Se o fuso é recusado, o instante não chega a ser conferido.
+
+## Como resolver
+
+Informe em `fuso` o identificador de uma zona horária que o ambiente reconheça, no mesmo formato que o formulário renderizável publica em `fusoDoEnvio`, ou omita o `envio` inteiro.
