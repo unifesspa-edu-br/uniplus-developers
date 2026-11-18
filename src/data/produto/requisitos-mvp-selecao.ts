@@ -1752,7 +1752,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0008',
     titulo: 'Unidade hierárquica com tipo',
     enunciado:
-      'O sistema deve manter Unidades hierárquicas com tipo obrigatório e escopo explícito de administração, sem herança implícita.',
+      'O sistema mantém unidades hierárquicas com tipo obrigatório. Cada unidade é ativa ou inativa, sem data de início ou fim de vigência; as ações Desativar e Reativar mudam seu estado. O escopo administrativo de pessoa é explícito, sem herança implícita, e tem vigência e justificativa próprias. Decisão do líder técnico em 18/11/2026.',
     grupo: 'dados',
     tipo: 'requisito_dados',
     nivel: 'requisito',
@@ -1764,8 +1764,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'CRUD de Unidade exige tipo e preserva hierarquia; escopo administrativo tem vigência e justificativa.',
-    verificacao: 'Validação automatizada (planejada).',
+      'Dada uma unidade, quando consultada, então seu estado é ativo ou inativo, sem datas de início ou fim de vigência; dada uma unidade ativa, quando Desativar é acionado, então ela fica inativa; dada uma unidade inativa, quando Reativar é acionado, então ela fica ativa; dado o cadastro de unidade, quando mantido, então exige tipo e preserva a hierarquia; dado um escopo administrativo de pessoa, quando mantido, então tem vigência e justificativa próprias, sem herança implícita.',
+    verificacao: 'Testes automatizados do cadastro, da hierarquia, dos estados e das ações Desativar e Reativar, da ausência de vigência na unidade e da vigência e justificativa do escopo administrativo de pessoa (planejados).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
@@ -5968,9 +5968,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0243',
-    titulo: 'A unidade guarda o histórico dos seus identificadores, com o motivo de cada mudança',
+    titulo: 'A alteração de identificador da unidade substitui o valor anterior',
     enunciado:
-      'Quando a sigla, o código, o slug ou o alias de uma unidade organizacional muda, o sistema encerra a vigência do valor anterior e abre a do novo, de modo que se saiba qual identificador a unidade tinha em cada data. Quem altera a unidade pode informar o motivo da mudança; o motivo é opcional e tem no máximo 500 caracteres, descontados os espaços nas bordas. O histórico só cresce: a entrada encerrada não é apagada. O motivo acima do limite é recusado junto com as demais faltas do mesmo pedido, e nenhuma alteração da unidade é gravada.',
+      'Quando a sigla, o código, o slug ou o alias de uma unidade organizacional muda, o novo valor substitui o anterior. A unidade não guarda histórico dessas mudanças nem motivo para elas. Decisão do líder técnico em 18/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -5982,9 +5982,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Mudar a sigla, o código, o slug ou o alias da unidade encerra a vigência do valor anterior e abre a do novo, com o motivo quando informado; a atualização sem motivo é aceita; o motivo de 500 caracteres é aceito e o de 501 é recusado com o erro uniplus.organizacao.unidade.motivo_mudanca_tamanho (422), sem gravar alteração nenhuma da unidade.',
+      'Dada uma unidade com sigla, código, slug ou alias cadastrado, quando um desses identificadores é alterado, então o novo valor substitui o anterior; dada a alteração de qualquer desses identificadores, quando a unidade é consultada, então apresenta o valor novo, sem histórico do valor anterior e sem motivo da mudança.',
     verificacao:
-      'Testes automatizados de domínio e de API do limite do motivo, da atualização sem motivo e do encerramento da vigência anterior (planejados).',
+      'Testes automatizados de domínio e de API para a substituição de cada identificador, a consulta do valor novo e a ausência de histórico e motivo (planejados).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
   },
