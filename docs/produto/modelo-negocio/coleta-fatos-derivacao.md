@@ -53,6 +53,8 @@ Nem toda pergunta aparece para todo candidato. Cada campo pode ter **pré-condi�
 
 A mesma dependência vale para as outras regras do campo (`UNI-REQ-0145`): uma pergunta pode ser **obrigatória** só para quem deu determinada resposta antes, e as **opções** de uma pergunta podem vir de respostas anteriores — os municípios da UF escolhida, ou a opção de lista de espera escolhida entre as opções de curso que o próprio candidato marcou. A regra pertence ao formulário, não ao dado: o mesmo dado pode ter regras diferentes em outro modelo de formulário ou em outro processo.
 
+Quando o dado aceita **vários valores** e as opções vêm do processo, as opções aceitas e as quantidades mínima e máxima de escolhas são configuradas **por processo e por dado** (`UNI-REQ-0438`), não por formulário: o formulário só as recebe para orientar o preenchimento. O rascunho pode ficar incompleto, mas a publicação exige opções e limites completos, e a inscrição é conferida pela versão publicada que ela fixou no primeiro envio. Para as edições do ENEM, só o máximo é configurável e o mínimo é sempre 1, porque um mínimo maior excluiria quem fez o exame uma vez (`UNI-REQ-0439`); é assim que o processo define se a pessoa informa só uma edição ou até um máximo delas.
+
 As pré-condições são **configuradas**, não programadas, e ficam congeladas na publicação. Uma regra importante de integridade: uma pergunta só pode depender de respostas **anteriores** ou de fatos que o sistema já conhece antes daquela fase, como o grupo da convocação — o formulário tem uma ordem, e nenhuma pergunta depende de algo que ainda virá (seção 6).
 
 ## 4. "Não se aplica" é diferente de "pendente"
@@ -120,5 +122,7 @@ Cada comportamento acima corresponde a um requisito com código estável na [tab
 | `UNI-REQ-0145` | Regras do campo condicionadas às respostas anteriores | Exibição, obrigatoriedade e opções de cada campo; opcional não informado (seções 3 e 4). |
 | `UNI-REQ-0147` | Documentos da habilitação seguem o grupo de vagas da convocação | Cobrança de documento na habilitação (seção 6). |
 | `UNI-REQ-0148` | Origem escolar em duas perguntas | Egresso de escola pública calculado (seções 1 e 2). |
+| `UNI-REQ-0438` | Opções e quantidades de escolhas de um dado de vários valores são configuradas por processo e por dado | Opções e limites por processo e dado, rascunho incompleto e conferência pela versão publicada (seção 3). |
+| `UNI-REQ-0439` | A inscrição própria baseada no ENEM pede as edições do ENEM a todos os candidatos | Uma ou várias edições do ENEM na inscrição, conforme a configuração (seção 3). |
 
-> Os requisitos desta tabela são filhos da configuração de documentos exigidos por gatilho e fase (`UNI-REQ-0016`), exceto o `UNI-REQ-0071` e o `UNI-REQ-0078`, filhos da publicação com cópia congelada (`UNI-REQ-0019`), e o `UNI-REQ-0143`, o `UNI-REQ-0145` e o `UNI-REQ-0148`, filhos do formulário configurável (`UNI-REQ-0017`).
+> Os requisitos desta tabela são filhos da configuração de documentos exigidos por gatilho e fase (`UNI-REQ-0016`), exceto o `UNI-REQ-0071` e o `UNI-REQ-0078`, filhos da publicação com cópia congelada (`UNI-REQ-0019`), e o `UNI-REQ-0143`, o `UNI-REQ-0145`, o `UNI-REQ-0148` e o `UNI-REQ-0438`, filhos do formulário configurável (`UNI-REQ-0017`); o `UNI-REQ-0439` é filho da entrada das notas do ENEM (`UNI-REQ-0174`).
