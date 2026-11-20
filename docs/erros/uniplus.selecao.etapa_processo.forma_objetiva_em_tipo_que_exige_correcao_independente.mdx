@@ -1,0 +1,27 @@
+---
+title: O tipo da etapa exige correção independente, que só existe na avaliação humana
+sidebar_label: Forma objetiva em tipo que exige correção independente
+description: A etapa de um tipo que exige correção independente não pode declarar a forma de avaliação objetiva, em que ninguém corrige.
+code: uniplus.selecao.etapa_processo.forma_objetiva_em_tipo_que_exige_correcao_independente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+- Definição de etapas (`PUT /api/selecao/processos-seletivos/{id}/etapas`)
+- Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+- Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)
+requisitos:
+  - UNI-REQ-0393
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa declara avaliação objetiva, mas seu tipo exige correção independente, que depende de avaliação humana.
+
+## Como resolver
+
+Declare avaliação humana adequada à etapa ou escolha um tipo de etapa que não exija correção independente. Se a recusa ocorrer ao publicar dados já gravados, procure o suporte do Uni+.

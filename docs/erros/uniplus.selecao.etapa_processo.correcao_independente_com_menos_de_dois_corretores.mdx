@@ -1,0 +1,26 @@
+---
+title: O tipo da etapa exige correção independente, e a regra de consolidação congelada tem menos de dois corretores distintos
+sidebar_label: Correção independente com menos de dois corretores
+description: A etapa de um tipo que exige correção independente só é congelada com uma regra de consolidação de ao menos dois corretores distintos.
+code: uniplus.selecao.etapa_processo.correcao_independente_com_menos_de_dois_corretores
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+- Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+- Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)
+requisitos:
+  - UNI-REQ-0393
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A etapa é de um tipo que exige correção independente, mas a regra de consolidação confirmada no catálogo prevê menos de dois corretores distintos.
+
+## Como resolver
+
+Em rascunho, escolha uma regra com pelo menos dois corretores distintos ou um tipo de etapa que não exija correção independente. Se o processo já estiver publicado, procure o suporte do Uni+.
