@@ -8640,4 +8640,26 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0408',
+    titulo: 'A fase ou etapa removida do rascunho leva os motivos de decisão escolhidos nela',
+    enunciado:
+      'No rascunho do processo, quando a substituição das etapas ou do cronograma de fases é aceita, os motivos de decisão escolhidos nas fases e etapas removidas também são removidos (UNI-REQ-0285). Os motivos escolhidos nas fases e etapas que permanecem são mantidos. Exemplo: no rascunho do "PSR 2027", a etapa de heteroidentificação tem um motivo escolhido; ao substituí-la por uma lista que não a inclui, o motivo também é removido, enquanto os motivos da etapa de análise documental que permanece são mantidos.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0120',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Task',
+    criterios_aceite:
+      'Na substituição aceita das etapas ou do cronograma de fases do rascunho, os motivos escolhidos nas fases e etapas removidas são removidos; os motivos das fases e etapas que permanecem são mantidos.',
+    verificacao:
+      'Testes automatizados da substituição das etapas e do cronograma de fases, com motivos escolhidos nas fases ou etapas removidas e mantidas (uniplus-api#2338).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];
