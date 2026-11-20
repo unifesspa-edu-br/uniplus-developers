@@ -1,0 +1,28 @@
+---
+title: 'Código do termo de consentimento passa do tamanho máximo'
+sidebar_label: 'Código do termo muito longo'
+description: 'O código formado pelo nome do termo tem no máximo 100 caracteres.'
+code: uniplus.configuracao.termo_consentimento.codigo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'POST /api/configuracao/admin/termos-consentimento'
+requisitos:
+  - UNI-REQ-0086
+rastreio:
+  - label: 'uniplus-api#1018'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1018
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código formado a partir do nome do termo ultrapassa 100 caracteres.
+
+## Como resolver
+
+Abrevie o nome do termo.

@@ -1,0 +1,28 @@
+---
+title: 'O código da oferta de curso é obrigatório'
+sidebar_label: 'Código da oferta obrigatório'
+description: 'Toda oferta de curso precisa de um código, que o edital e a configuração usam para citá-la.'
+code: uniplus.configuracao.oferta_curso.codigo_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'POST /api/configuracao/admin/ofertas-curso'
+  - 'PUT /api/configuracao/admin/ofertas-curso/{id}'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#749'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/749
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O campo `codigo` da oferta de curso está ausente ou em branco.
+
+## Como resolver
+
+Informe um código com 2 a 50 caracteres, iniciado por letra maiúscula e composto por letras maiúsculas, dígitos ou sublinhado.

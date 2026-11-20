@@ -1,0 +1,29 @@
+---
+title: Parâmetros de remanejamento incompatíveis com a regra declarada
+sidebar_label: Parâmetros de remanejamento incompatíveis
+description: Cada regra de remanejamento exige e proíbe parâmetros específicos — DESTINO_UNICO exige destino (e proíbe par/fallback); CRUZADO exige par, admite fallback opcional e proíbe destino; sem regra ou SEGUE_CASCATA não admite nenhum.
+code: uniplus.configuracao.modalidade.parametros_remanejamento_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'POST /api/configuracao/admin/modalidades'
+  - 'PUT /api/configuracao/admin/modalidades/{id}'
+requisitos:
+  - UNI-REQ-0141
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Os parâmetros de remanejamento não correspondem à regra: `DESTINO_UNICO` exige destino e não admite par ou fallback; `CRUZADO` exige par, admite fallback e não admite destino; `SEGUE_CASCATA` ou ausência de regra não admite esses parâmetros.
+
+## Como resolver
+
+Ajuste destino, par e fallback conforme a regra informada.
