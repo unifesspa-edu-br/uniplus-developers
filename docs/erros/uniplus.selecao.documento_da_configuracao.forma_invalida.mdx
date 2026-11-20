@@ -1,0 +1,27 @@
+---
+title: O documento não respeita o formato da configuração do processo seletivo
+sidebar_label: Formato do documento inválido
+description: O documento não respeita o formato da configuração do processo seletivo.
+code: uniplus.selecao.documento_da_configuracao.forma_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação de rascunho (`POST /api/selecao/rascunhos-de-processos-seletivos`)
+  - Substituição do rascunho (`PUT /api/selecao/rascunhos-de-processos-seletivos/{id}`)
+requisitos:
+  - UNI-REQ-0423
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O documento não é um JSON válido ou apresenta problemas de forma. Quando há causas específicas, elas aparecem em `errors` com seus códigos e, quando disponível, o caminho no documento.
+
+## Como resolver
+
+Corrija a sintaxe JSON e as causas indicadas em `errors` antes de enviar novamente.

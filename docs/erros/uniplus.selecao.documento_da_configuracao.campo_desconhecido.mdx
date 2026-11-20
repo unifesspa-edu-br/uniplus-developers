@@ -1,0 +1,29 @@
+---
+title: O documento tem um campo que o formato não define
+sidebar_label: Campo desconhecido
+description: O documento tem um campo que o formato não define.
+code: uniplus.selecao.documento_da_configuracao.campo_desconhecido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação de rascunho (`POST /api/selecao/rascunhos-de-processos-seletivos`)
+  - Substituição do rascunho (`PUT /api/selecao/rascunhos-de-processos-seletivos/{id}`)
+requisitos:
+  - UNI-REQ-0423
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um campo não pertence ao formato do documento. A causa aponta o caminho do campo.
+
+Na resposta HTTP, essa causa acompanha o código principal `uniplus.selecao.documento_da_configuracao.forma_invalida`.
+
+## Como resolver
+
+Remova o campo ou consulte o formato suportado para usar o nome correto.

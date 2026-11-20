@@ -1,0 +1,30 @@
+---
+title: Duas partes do mesmo tipo têm a mesma chave
+sidebar_label: Chave repetida
+description: Duas partes do mesmo tipo têm a mesma chave.
+code: uniplus.selecao.documento_da_configuracao.chave_repetida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação de rascunho (`POST /api/selecao/rascunhos-de-processos-seletivos`)
+  - Substituição do rascunho (`PUT /api/selecao/rascunhos-de-processos-seletivos/{id}`)
+requisitos:
+  - UNI-REQ-0422
+  - UNI-REQ-0423
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Duas partes do mesmo tipo e escopo usam a mesma chave local. A causa aponta a chave repetida.
+
+Na resposta HTTP, essa causa acompanha o código principal `uniplus.selecao.documento_da_configuracao.forma_invalida`.
+
+## Como resolver
+
+Atribua uma chave própria a cada parte e ajuste as referências afetadas.
