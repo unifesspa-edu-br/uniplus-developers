@@ -1,0 +1,25 @@
+---
+title: O fato que decide quem recebe o acréscimo é campo de membro de grupo, e o acréscimo é decidido por um fato do candidato
+sidebar_label: Fato do acréscimo é campo de grupo
+description: O fato citado para decidir quem recebe o Fator de Atenuação das Desigualdades de Acesso é campo de um grupo repetível do formulário de inscrição, e o acréscimo é decidido por um fato do candidato.
+code: uniplus.selecao.processo_seletivo.fato_elegibilidade_de_membro_de_grupo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+  - Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O fato indicado para decidir o acréscimo existe apenas como campo de membro de um grupo do formulário, e não como fato da pessoa candidata nem como fato derivado. A conferência ocorre na publicação e na retificação, e a causa pode aparecer junto de outras na lista de erros.
+
+## Como resolver
+
+Escolha um fato booleano da pessoa candidata, fora de grupo repetível, ou um fato derivado pelo processo. Depois, repita a operação.

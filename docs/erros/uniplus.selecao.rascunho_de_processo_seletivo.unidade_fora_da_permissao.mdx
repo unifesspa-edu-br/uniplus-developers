@@ -1,0 +1,27 @@
+---
+title: Sem permissão para configurar processos na unidade informada
+sidebar_label: Unidade fora da permissão
+description: Sem permissão para configurar processos na unidade informada.
+code: uniplus.selecao.rascunho_de_processo_seletivo.unidade_fora_da_permissao
+http_status: 403
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação (`POST /api/selecao/rascunhos-de-processos-seletivos`)
+  - Substituição (`PUT /api/selecao/rascunhos-de-processos-seletivos/{id}`)
+requisitos:
+  - UNI-REQ-0419
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A unidade administradora informada no documento não pôde ser usada. A resposta é a mesma quando o código não corresponde a uma unidade e quando a pessoa não tem permissão para configurar processos nela. Na substituição, a permissão na unidade nova é verificada quando a unidade muda.
+
+## Como resolver
+
+Confira o código em `identificacao.unidadeAdministradoraCodigo` e, se necessário, solicite à administração responsável a permissão para configurar processos na unidade pretendida.
