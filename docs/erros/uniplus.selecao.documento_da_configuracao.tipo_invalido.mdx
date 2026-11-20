@@ -1,0 +1,29 @@
+---
+title: O valor de um campo do documento tem o tipo errado
+sidebar_label: Tipo inválido
+description: O valor de um campo do documento tem o tipo errado.
+code: uniplus.selecao.documento_da_configuracao.tipo_invalido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Criação de rascunho (`POST /api/selecao/rascunhos-de-processos-seletivos`)
+  - Substituição do rascunho (`PUT /api/selecao/rascunhos-de-processos-seletivos/{id}`)
+requisitos:
+  - UNI-REQ-0423
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um campo tem tipo diferente do esperado, ou a raiz do documento não é um objeto JSON. A causa indica o tipo esperado e o caminho quando disponível.
+
+Na resposta HTTP, essa causa acompanha o código principal `uniplus.selecao.documento_da_configuracao.forma_invalida`.
+
+## Como resolver
+
+Ajuste o campo ao tipo indicado e envie o documento novamente.

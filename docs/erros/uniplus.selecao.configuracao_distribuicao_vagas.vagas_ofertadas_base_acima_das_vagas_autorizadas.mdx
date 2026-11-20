@@ -1,0 +1,26 @@
+---
+title: 'Vagas ofertadas base acima das vagas anuais autorizadas da oferta'
+sidebar_label: 'Vagas ofertadas base acima das autorizadas'
+description: 'As vagas ofertadas base de uma distribuição passam do teto de vagas anuais autorizadas que o cadastro da oferta de curso declara.'
+code: uniplus.selecao.configuracao_distribuicao_vagas.vagas_ofertadas_base_acima_das_vagas_autorizadas
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de distribuição de vagas (`PUT /api/selecao/processos-seletivos/{id}/distribuicao-vagas`)
+  - Simulação da distribuição de vagas (`POST /api/selecao/processos-seletivos/{id}/distribuicao-vagas/simulacao`)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+As `vagasOfertadasBase` superam as vagas anuais autorizadas para a oferta de curso.
+
+
+## Como resolver
+
+Corrija as vagas ofertadas base ou confira o total anual autorizado da oferta.
