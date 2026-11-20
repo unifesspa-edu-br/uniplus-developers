@@ -1,0 +1,25 @@
+---
+title: O fato que decide quem recebe o acréscimo não é coletado na inscrição nem derivado pelo processo
+sidebar_label: Fato do acréscimo fora do processo
+description: O fato que o bônus regional cita para decidir quem recebe o acréscimo precisa ser um campo do formulário de inscrição ou um fato derivado pelo processo.
+code: uniplus.selecao.processo_seletivo.fato_elegibilidade_fora_do_processo
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+  - Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O fato indicado para decidir o acréscimo não é coletado no formulário de inscrição nem derivado pelo processo. A conferência ocorre na publicação e na retificação, e a causa pode aparecer junto de outras na lista de erros.
+
+## Como resolver
+
+Corrija o fato indicado ou configure sua coleta no formulário de inscrição ou sua derivação no processo. Depois, repita a operação.

@@ -1,0 +1,29 @@
+---
+title: A homologação da importação externa não tem preliminar, período de recurso e definitivo
+sidebar_label: Ciclo de recurso da importação externa incompleto
+description: Na importação externa, a fase que homologa as inscrições precisa publicar os resultados preliminar e definitivo do resultado apontado pela regra, com período de recurso vinculado ao preliminar.
+code: uniplus.selecao.processo_seletivo.importacao_externa_sem_janela_de_recurso
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+  - Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)
+requisitos:
+  - UNI-REQ-0342
+rastreio:
+  - label: 'uniplus-api#2322'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2322
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na importação externa, a fase que homologa as inscrições precisa publicar os resultados preliminar e definitivo do resultado apontado pela regra, com período de recurso vinculado ao preliminar.
+
+## Como resolver
+
+Configure os resultados preliminar e definitivo e vincule o período de recurso ao preliminar. Depois, envie novamente a operação.

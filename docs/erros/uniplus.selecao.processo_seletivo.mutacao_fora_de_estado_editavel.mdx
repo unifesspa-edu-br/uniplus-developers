@@ -1,0 +1,51 @@
+---
+title: O processo não está em um estado que aceite mutação da configuração
+sidebar_label: Processo fora de estado editável
+description: O processo não está em um estado que aceite mutação da configuração.
+code: uniplus.selecao.processo_seletivo.mutacao_fora_de_estado_editavel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - 'PUT /api/selecao/processos-seletivos/{id}/etapas'
+  - 'PUT /api/selecao/processos-seletivos/{id}/fatos/{fatoCodigo}/opcoes'
+  - 'PUT /api/selecao/processos-seletivos/{id}/atendimento-especializado'
+  - 'PUT /api/selecao/processos-seletivos/{id}/distribuicao-vagas'
+  - 'PUT /api/selecao/processos-seletivos/{id}/criterios-desempate'
+  - 'PUT /api/selecao/processos-seletivos/{id}/bonus-regional'
+  - 'PUT /api/selecao/processos-seletivos/{id}/opcoes-de-curso'
+  - 'PUT /api/selecao/processos-seletivos/{id}/taxa-inscricao'
+  - 'PUT /api/selecao/processos-seletivos/{id}/divulgacao'
+  - 'PUT /api/selecao/processos-seletivos/{id}/cascata-remanejamento'
+  - 'PUT /api/selecao/processos-seletivos/{id}/classificacao'
+  - 'PUT /api/selecao/processos-seletivos/{id}/cronograma-fases'
+  - 'PUT /api/selecao/processos-seletivos/{id}/documentos-exigidos'
+  - 'PUT /api/selecao/processos-seletivos/{id}/identificador-legivel'
+  - 'PUT /api/selecao/processos-seletivos/{id}/localidade'
+  - 'PUT /api/selecao/processos-seletivos/{id}/algoritmo-contagem-prazo'
+  - 'PUT /api/selecao/processos-seletivos/{id}/referencia-temporal-fatos'
+  - 'PUT /api/selecao/processos-seletivos/{id}/regras-derivacao'
+  - 'PUT /api/selecao/admin/processos-seletivos/{id}/formularios/{finalidade}'
+  - 'PUT /api/selecao/admin/processos-seletivos/{id}/formularios/{finalidade}/itens'
+  - 'PUT /api/selecao/admin/processos-seletivos/{id}/formularios/{finalidade}/termos'
+  - 'POST /api/selecao/admin/processos-seletivos/{id}/formularios/aplicacoes-de-modelo'
+  - 'PUT /api/selecao/processos-seletivos/{id}/fases/{faseCanonicaOrigemId}/motivos-de-decisao/{motivoDeDecisaoId}'
+  - 'PUT /api/selecao/processos-seletivos/{id}/etapas/{etapaId}/motivos-de-decisao/{motivoDeDecisaoId}'
+  - 'DELETE /api/selecao/admin/processos-seletivos/{id}/formularios/{finalidade}'
+  - 'DELETE /api/selecao/processos-seletivos/{id}/fases/{faseCanonicaOrigemId}/motivos-de-decisao/{motivoDeDecisaoId}'
+  - 'DELETE /api/selecao/processos-seletivos/{id}/etapas/{etapaId}/motivos-de-decisao/{motivoDeDecisaoId}'
+requisitos: []
+rastreio: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma alteração direta da configuração foi solicitada para um processo que não está em rascunho nem publicado, como um processo encerrado ou cancelado. A edição direta por dimensão é aceita somente em rascunho. Para processo publicado, a recusa tem [outro código](./uniplus.selecao.processo_seletivo.mutacao_pos_publicacao_bloqueada).
+
+## Como resolver
+
+Confira o processo selecionado e seu estado antes de solicitar a alteração. Para configurar outro processo, selecione um que esteja em rascunho.
