@@ -1,0 +1,26 @@
+---
+title: A regra declarada não é um procedimento de recurso do catálogo
+sidebar_label: Regra do procedimento desconhecida da fase
+description: A regra escolhida para o procedimento de recurso da fase não é uma das regras de procedimento do catálogo.
+code: uniplus.selecao.regra_recurso_fase.procedimento_de_recurso_desconhecido
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+- Definição do cronograma (`PUT /api/selecao/processos-seletivos/{id}/cronograma-fases`)
+- Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+requisitos:
+  - UNI-REQ-0383
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra indicada não é um procedimento de recurso disponível no catálogo.
+
+## Como resolver
+
+Escolha uma regra de procedimento de recurso disponível no catálogo e informe seu código e versão.

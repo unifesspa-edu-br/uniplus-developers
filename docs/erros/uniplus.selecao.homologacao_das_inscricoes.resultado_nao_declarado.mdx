@@ -1,0 +1,30 @@
+---
+title: A regra de homologação das inscrições não aponta um resultado da fase
+sidebar_label: Resultado da homologação não declarado
+description: A regra de homologação das inscrições não aponta um resultado da fase.
+code: uniplus.selecao.homologacao_das_inscricoes.resultado_nao_declarado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+- Definição do cronograma (`PUT /api/selecao/processos-seletivos/{id}/cronograma-fases`)
+- Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+- Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)
+requisitos:
+  - UNI-REQ-0265
+rastreio:
+- label: uniplus-api#2322
+  href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2322
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de homologação não aponta um resultado da fase ou aponta um resultado que não é produto da fase com papel declarado.
+
+## Como resolver
+
+Informe na regra um resultado que seja produto da própria fase, com seu papel.

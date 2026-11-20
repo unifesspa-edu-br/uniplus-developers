@@ -1,0 +1,30 @@
+---
+title: A condição de homologação ainda não é apurada pelo sistema
+sidebar_label: Condição de homologação indisponível
+description: A condição de homologação ainda não é apurada pelo sistema.
+code: uniplus.selecao.homologacao_das_inscricoes.condicao_nao_disponivel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+- Definição do cronograma (`PUT /api/selecao/processos-seletivos/{id}/cronograma-fases`)
+- Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+- Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)
+requisitos:
+  - UNI-REQ-0265
+rastreio:
+- label: uniplus-api#2322
+  href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2322
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O tipo da condição de homologação não foi informado ou não está disponível para apuração pelo sistema.
+
+## Como resolver
+
+Informe um tipo disponível. Atualmente, o sistema apura `RESULTADO_NO_RETORNO_DO_INEP`.

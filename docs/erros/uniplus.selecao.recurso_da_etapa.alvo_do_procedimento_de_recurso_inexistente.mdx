@@ -1,0 +1,83 @@
+---
+title: O alvo do procedimento de recurso não existe na fase ou etapa
+sidebar_label: Alvo do procedimento inexistente da etapa
+description: O alvo de um procedimento de recurso da etapa é um item de avaliação da própria etapa ou, em processo que importa a nota do ENEM, uma área do ENEM.
+code: uniplus.selecao.recurso_da_etapa.alvo_do_procedimento_de_recurso_inexistente
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+- Definição de etapas (`PUT /api/selecao/processos-seletivos/{id}/etapas`)
+requisitos:
+  - UNI-REQ-0383
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Quando uma etapa tem período de recurso, o edital declara, para cada tipo de decisão que a etapa produz, um **procedimento de recurso**: a forma como esse recurso será revisado, escolhida entre as regras do cadastro (por exemplo, recorreção ou recálculo). Cada procedimento informa o tipo de decisão recorrida, a regra escolhida (código e versão) e, se quiser, um **alvo**.
+
+O alvo é a parte da decisão que o procedimento cobre. Se for omitido, o procedimento vale para o tipo de decisão inteiro. Se for informado, o procedimento vale só para aquela parte, e o tipo de decisão passa a pedir um procedimento por alvo (ver [procedimento conflitante](./uniplus.selecao.recurso_da_etapa.procedimento_de_recurso_conflitante.mdx) e [procedimento duplicado](./uniplus.selecao.recurso_da_etapa.procedimento_de_recurso_duplicado.mdx)).
+
+Na etapa, o alvo pode ser de dois tipos, e só um por procedimento:
+
+- um **item de avaliação** da própria etapa, identificado por `itemDeAvaliacaoId`;
+- uma **área do ENEM**: `REDACAO`, `CIENCIAS_DA_NATUREZA`, `CIENCIAS_HUMANAS`, `LINGUAGENS` ou `MATEMATICA`, só quando o processo importa a nota do ENEM, isto é, quando alguma etapa do mesmo pedido é de um tipo cuja nota vem do ENEM.
+
+O alvo é recusado nestas situações:
+
+- O item de avaliação não existe na etapa: o identificador é de item de outra etapa, é inventado, ou é de item que ainda não foi gravado. Item novo recebe o identificador ao ser gravado; só se aponta, como alvo, um item que a etapa já tem e que o mesmo pedido mantém em `itensDeAvaliacao`.
+- A área do ENEM não é uma das cinco acima (o código é conferido letra a letra, em maiúsculas e com sublinhado), ou o processo não tem etapa que importe a nota do ENEM.
+- O alvo traz o item de avaliação e a área do ENEM ao mesmo tempo, ou não traz nenhum dos dois (por exemplo, `"alvo": {}`). A mensagem, nesse caso, pede o item ou a área, e só um dos dois.
+
+A recusa sai com 422 e nada é gravado.
+
+## Onde fica o alvo no pedido
+
+O corpo de `PUT /api/selecao/processos-seletivos/{id}/etapas` é uma lista de etapas. O alvo fica em cada procedimento de cada período de recurso da etapa:
+
+- Caminho em `errors[].field`: `etapas[i].recursos[k].procedimentos[j].alvo`, em que `i` é a posição da etapa, `k`, a da período de recurso e `j`, a do procedimento no pedido enviado.
+
+Trecho correto de uma etapa (os demais campos da etapa e da período de recurso foram omitidos). A etapa declara o tipo de decisão `NOTA_DA_ETAPA`, mantém o item de avaliação com o mesmo identificador e o procedimento cobre só esse item:
+
+```json
+[
+  {
+    "tiposDeDecisao": ["NOTA_DA_ETAPA"],
+    "itensDeAvaliacao": [
+      {
+        "id": "3f2a9c1e-7b4d-4e58-9a1c-0d6e5b8f2a41",
+        "rotulo": "Critério 1",
+        "pontuacaoMaxima": 10
+      }
+    ],
+    "recursos": [
+      {
+        "procedimentos": [
+          {
+            "tipoDeDecisao": "NOTA_DA_ETAPA",
+            "alvo": {
+              "itemDeAvaliacaoId": "3f2a9c1e-7b4d-4e58-9a1c-0d6e5b8f2a41",
+              "areaDoEnem": null
+            },
+            "regraCodigo": "PROCEDIMENTO-RECURSO-RECORRECAO",
+            "regraVersao": "v1"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+Para cobrir o tipo de decisão inteiro, envie `"alvo": null`. O contrato lista as duas chaves do alvo (`itemDeAvaliacaoId` e `areaDoEnem`) como anuláveis; informe só uma delas e deixe a outra nula.
+
+## Como resolver
+
+- **Item que não existe na etapa:** leia a etapa e copie o `id` de um item dela para `alvo.itemDeAvaliacaoId`, mantendo esse item, com o mesmo `id`, na lista `itensDeAvaliacao` do mesmo pedido. Um item de outra etapa não serve. Se o item é novo, grave a etapa com ele primeiro, leia o identificador que ele recebeu e só então declare o procedimento sobre ele.
+- **Área do ENEM com grafia errada:** troque pelo código exato de uma das cinco áreas listadas acima.
+- **Área do ENEM em processo sem nota do ENEM:** inclua no mesmo pedido uma etapa de tipo cuja nota vem do ENEM, ou retire o alvo (`"alvo": null`) para cobrir o tipo de decisão inteiro.
+- **Item e área juntos, ou nenhum dos dois:** informe só um dos dois dentro de `alvo`, ou envie `"alvo": null`.

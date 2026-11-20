@@ -1,0 +1,27 @@
+---
+title: A regra de consolidação de uma etapa não pôde ser confirmada no catálogo
+sidebar_label: Regra de consolidação não confirmada no catálogo
+description: A regra de consolidação declarada por uma etapa não foi confirmada pelo catálogo de regras, e o número de corretores dela não é conhecido.
+code: uniplus.selecao.etapa_processo.regra_de_consolidacao_nao_resolvida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+- Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+- Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)
+requisitos:
+  - UNI-REQ-0387
+  - UNI-REQ-0393
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A regra de consolidação da etapa não pôde ser confirmada no catálogo. Por isso, a quantidade de corretores necessária para a conferência não é conhecida.
+
+## Como resolver
+
+Confira a regra e sua versão na definição da etapa. Se a recusa persistir, ou se o processo já estiver publicado, procure o suporte do Uni+.

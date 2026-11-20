@@ -1,0 +1,30 @@
+---
+title: A edição do exame da condição é inválida (de 1998 a 2100)
+sidebar_label: Edição do exame inválida
+description: A edição do exame da condição é inválida (de 1998 a 2100).
+code: uniplus.selecao.homologacao_das_inscricoes.edicao_do_exame_invalida
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+- Definição do cronograma (`PUT /api/selecao/processos-seletivos/{id}/cronograma-fases`)
+- Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)
+- Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)
+requisitos:
+  - UNI-REQ-0265
+rastreio:
+- label: uniplus-api#2322
+  href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2322
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A condição não informa uma edição do exame entre 1998 e 2100, inclusive.
+
+## Como resolver
+
+Informe uma edição do exame entre 1998 e 2100, inclusive.
