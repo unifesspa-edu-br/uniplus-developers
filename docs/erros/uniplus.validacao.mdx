@@ -1,0 +1,42 @@
+---
+title: Erro de validação
+sidebar_label: Erro de validação
+description: O pedido tem um ou mais campos que não passam nas regras de validação da operação; a resposta lista cada violação em errors[], com o campo, o código e a mensagem.
+code: uniplus.validacao
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Qualquer operação cujo pedido passa por regras de validação antes de ser processado
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido foi entendido, mas um ou mais campos não passam nas regras de validação da operação. Nada foi alterado. A resposta traz o código `uniplus.validacao` no corpo e uma lista `errors[]` com uma entrada para cada violação encontrada, de uma só vez, e não apenas a primeira.
+
+Cada entrada de `errors[]` tem:
+
+- `field`: o campo com problema, escrito com o caminho que a API usa para ele, com cada nome começando em minúscula (por exemplo, `quadro[0].quantidade`). Na maioria das operações esse caminho é igual ao do corpo do pedido. Quando o corpo é uma lista na raiz, como na definição do cronograma de fases (`PUT /api/selecao/processos-seletivos/{id}/cronograma-fases`), o caminho começa pelo nome que a API dá a essa lista, como em `fases[0].ordem`, embora o corpo enviado não tenha uma propriedade `fases`;
+- `code`: o motivo da violação, em um dos códigos abaixo;
+- `message`: o texto que explica o que precisa ser corrigido.
+
+A mensagem nunca repete o valor enviado.
+
+| Código da violação | Quando aparece |
+| --- | --- |
+| [`uniplus.validacao.obrigatorio`](./uniplus.validacao.obrigatorio.mdx) | Campo obrigatório que não foi informado ou veio vazio. |
+| [`uniplus.validacao.tamanho`](./uniplus.validacao.tamanho.mdx) | Texto com tamanho abaixo do mínimo ou acima do máximo. |
+| [`uniplus.validacao.formato`](./uniplus.validacao.formato.mdx) | Valor fora do formato esperado, como e-mail, padrão de texto ou quantidade de dígitos e casas decimais. |
+| [`uniplus.validacao.faixa`](./uniplus.validacao.faixa.mdx) | Número abaixo ou acima do intervalo que a operação aceita. |
+| [`uniplus.validacao.regra`](./uniplus.validacao.regra.mdx) | Qualquer outra regra que o campo, ou a combinação de campos, não atende. |
+
+Uma operação pode, em casos específicos, devolver em `errors[]` um código próprio no lugar de um desses cinco; nesse caso, a página do código explica a causa.
+
+## Como resolver
+
+Leia `errors[]`, corrija cada campo indicado conforme a `message` e envie o pedido novamente. Repetir o pedido sem corrigir os campos devolve o mesmo resultado.

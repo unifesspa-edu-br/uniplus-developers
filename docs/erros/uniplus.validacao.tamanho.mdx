@@ -1,0 +1,25 @@
+---
+title: Campo fora do tamanho permitido
+sidebar_label: Campo fora do tamanho
+description: Um texto enviado é mais curto ou mais longo do que a operação aceita; a violação aparece em errors[] da resposta de validação.
+code: uniplus.validacao.tamanho
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - POST /api/selecao/processos-seletivos
+  - Outras operações com validação da mesma categoria
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Na validação do pedido, um texto não atende ao tamanho permitido. Este código aparece em uma entrada de `errors[]` da resposta de [validação](./uniplus.validacao.mdx). O campo `field` identifica o campo e `message` descreve a correção necessária.
+
+## Como resolver
+
+Consulte a mensagem da entrada, corrija os dados indicados e envie o pedido novamente.

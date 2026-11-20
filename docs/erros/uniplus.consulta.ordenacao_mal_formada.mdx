@@ -1,0 +1,44 @@
+---
+title: Expressão de ordenação inválida
+sidebar_label: Ordenação mal formada
+description: O parâmetro sort de uma listagem tem um campo vazio ou repete um campo; a consulta é recusada antes de ser executada.
+code: uniplus.consulta.ordenacao_mal_formada
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - GET /api/configuracao/cursos
+  - GET /api/configuracao/ofertas-curso
+  - GET /api/selecao/certames
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O parâmetro `sort`, que define a ordem da listagem, não tem a forma esperada.
+A expressão é uma lista de campos separados por vírgula, na ordem de
+prioridade, cada um opcionalmente precedido de `-` para ordem decrescente — por
+exemplo `sort=nome,-criadoEm`. Duas formas são recusadas aqui:
+
+- **campo vazio**, como em `sort=nome,,grau` ou `sort=-`; a mensagem é
+  `O parâmetro 'sort' tem um campo vazio. Informe os campos separados por vírgula, cada um opcionalmente prefixado por '-' para ordem decrescente.`
+- **campo repetido**, como em `sort=nome,-nome`; a comparação ignora maiúsculas
+  e minúsculas, e a mensagem é
+  `O parâmetro 'sort' repete um campo. Cada campo pode aparecer uma vez só.`
+
+A recusa é só de **forma**: ela acontece antes de a consulta rodar e antes de
+se saber se o campo existe. Se a forma estiver certa e o campo não for
+ordenável naquela listagem, a recusa é outra
+([`uniplus.consulta.campo_de_ordenacao_invalido`](./uniplus.consulta.campo_de_ordenacao_invalido.mdx)).
+
+Expressão ausente ou em branco não é erro: vale a ordem padrão da listagem.
+
+## Como resolver
+
+Informe cada campo uma única vez, sem vírgulas sobrando, separados por vírgula,
+com `-` na frente dos que devem ir em ordem decrescente. Para a ordem padrão,
+omita o parâmetro.
