@@ -1,0 +1,28 @@
+---
+title: "A modalidade com composição 'retira de' exige a modalidade de origem"
+sidebar_label: 'Origem obrigatória na retirada de outra modalidade'
+description: 'Quando a composição de vagas é RETIRADA_DE_OUTRA_MODALIDADE, o código da modalidade de origem é obrigatório.'
+code: uniplus.configuracao.modalidade.origem_obrigatoria_para_retirada_de_outra_modalidade
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'POST /api/configuracao/admin/modalidades'
+  - 'PUT /api/configuracao/admin/modalidades/{id}'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A composição de vagas é `RETIRADA_DE_OUTRA_MODALIDADE`, mas `composicaoOrigem` não foi informado.
+
+## Como resolver
+
+Informe o código da modalidade de origem ou escolha uma composição que não exija origem.

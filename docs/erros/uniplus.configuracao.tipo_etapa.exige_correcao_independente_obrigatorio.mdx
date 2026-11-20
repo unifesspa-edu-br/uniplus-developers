@@ -1,0 +1,26 @@
+---
+title: 'Declaração de que o tipo de etapa exige correção independente é obrigatória'
+sidebar_label: 'Tipo de etapa sem declarar se exige correção independente'
+description: 'O tipo de etapa precisa declarar se exige correção independente; a declaração ausente é recusada, e não vale como "não exige".'
+code: uniplus.configuracao.tipo_etapa.exige_correcao_independente_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'POST /api/configuracao/admin/tipos-etapa'
+  - 'PUT /api/configuracao/admin/tipos-etapa/{id}'
+requisitos:
+  - UNI-REQ-0393
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido não declarou se o tipo de etapa exige correção independente.
+
+## Como resolver
+
+Informe `exigeCorrecaoIndependente` como verdadeiro ou falso.

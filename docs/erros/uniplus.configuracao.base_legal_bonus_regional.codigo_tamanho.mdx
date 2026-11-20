@@ -1,0 +1,27 @@
+---
+title: 'Código da base legal de bônus regional passa do tamanho máximo'
+sidebar_label: 'Código da base legal muito longo'
+description: 'O código formado pelo tipo do instrumento e pela identificação tem no máximo 100 caracteres.'
+code: uniplus.configuracao.base_legal_bonus_regional.codigo_tamanho
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'POST /api/configuracao/admin/base-legal-bonus-regional'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#1465'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1465
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O código formado pelo tipo do instrumento e pela identificação ultrapassa 100 caracteres.
+
+## Como resolver
+
+Abrevie a identificação do instrumento.

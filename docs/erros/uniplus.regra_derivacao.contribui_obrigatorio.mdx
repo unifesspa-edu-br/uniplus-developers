@@ -1,0 +1,26 @@
+---
+title: Uma regra de derivação precisa contribuir um código
+sidebar_label: Regra de derivação sem código contribuído
+description: Uma regra de derivação não booleana traz o código contribuído vazio ou só com espaços, na definição das regras padrão de um fato ou na avaliação de formulário sem cadastro.
+code: uniplus.regra_derivacao.contribui_obrigatorio
+http_status: 422
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - 'PUT /api/configuracao/admin/fatos-candidato/{id}/regras-padrao'
+  - 'POST /api/configuracao/admin/avaliacoes-de-formulario'
+requisitos:
+  - UNI-REQ-0075
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Uma regra de derivação não booleana não informa um código em `contribui`. Na definição das regras padrão, a ausência de `contribui` identifica uma regra booleana; na avaliação de formulário, a natureza booleana é declarada separadamente.
+
+## Como resolver
+
+Para uma regra não booleana, informe em `contribui` o código de valor do fato. Para uma regra booleana, use a forma própria da operação.

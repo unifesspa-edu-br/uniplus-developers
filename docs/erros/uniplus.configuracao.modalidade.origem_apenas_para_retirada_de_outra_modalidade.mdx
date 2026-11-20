@@ -1,0 +1,28 @@
+---
+title: "Somente a composição 'retira de' admite modalidade de origem"
+sidebar_label: 'Origem só na retirada de outra modalidade'
+description: 'O código da modalidade de origem só se aplica quando a composição de vagas é RETIRADA_DE_OUTRA_MODALIDADE.'
+code: uniplus.configuracao.modalidade.origem_apenas_para_retirada_de_outra_modalidade
+http_status: 422
+situacao: publicado
+modulo: Configuração
+emitido_em:
+  - 'POST /api/configuracao/admin/modalidades'
+  - 'PUT /api/configuracao/admin/modalidades/{id}'
+requisitos: []
+rastreio:
+  - label: 'uniplus-api#589'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/589
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O pedido informa `composicaoOrigem`, mas a composição de vagas não é `RETIRADA_DE_OUTRA_MODALIDADE`.
+
+## Como resolver
+
+Retire `composicaoOrigem` ou informe a composição de retirada de outra modalidade, conforme a configuração desejada.
