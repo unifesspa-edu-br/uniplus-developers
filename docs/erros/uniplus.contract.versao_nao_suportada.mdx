@@ -1,0 +1,24 @@
+---
+title: Versão de mídia não suportada
+sidebar_label: Versão de mídia não suportada
+description: O cabeçalho Accept da requisição só aceita versões de mídia que o recurso não oferece, ou vem malformado; a resposta lista as versões disponíveis.
+code: uniplus.contract.versao_nao_suportada
+http_status: 406
+situacao: publicado
+modulo: Transversal
+emitido_em:
+  - Operações que declaram versão de mídia, como GET /api/configuracao/cursos e GET /api/selecao/certames
+requisitos: []
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cabeçalho `Accept` não selecionou uma versão de resposta oferecida pela operação, ou não pôde ser interpretado. A resposta informa as versões disponíveis em `available_versions`.
+
+## Como resolver
+
+Ajuste o `Accept` para uma versão oferecida pela operação. Consulte o contrato da operação para conhecer os tipos de mídia aceitos.
