@@ -33,7 +33,7 @@ Quando o campo `termos` é omitido do corpo, o pedido nem chega a esta conferên
 recusada na leitura do corpo, antes do comando.
 
 A lista nula é recusada logo depois das verificações de que a edição está liberada (processo em
-rascunho ou retificação aberta, e `If-Match` correto), como violação única, antes de qualquer consulta
+rascunho), como violação única, antes de qualquer consulta
 ao catálogo de termos. O termo nulo é recusado junto com as demais violações de forma dos outros
 termos, em `errors[]`; o termo nulo não entra nas conferências seguintes, e nada foi alterado.
 

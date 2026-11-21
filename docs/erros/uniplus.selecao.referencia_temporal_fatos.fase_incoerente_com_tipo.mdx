@@ -8,9 +8,7 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição da referência temporal dos fatos do processo seletivo
-  - Abertura de retificação
   - Retificação em ato único
-  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
   - Consulta do formulário renderizável do processo
   - Consulta do formulário da inscrição
   - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
@@ -55,8 +53,7 @@ cronograma é outra conferência, que só vem depois
 ([`fase_nao_pertence_ao_processo`](./uniplus.selecao.referencia_temporal_fatos.fase_nao_pertence_ao_processo.mdx)).
 
 Este mesmo código também aparece quando o sistema relê a configuração congelada da versão publicada:
-em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o
-descarte, a consulta dos formulários, as operações da inscrição, entre outras; a lista completa
+em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, a consulta dos formulários, as operações da inscrição, entre outras; a lista completa
 está no cabeçalho da página). Antes disso, o sistema confere a integridade dos bytes congelados:
 bytes alterados depois do congelamento são recusados por [`integridade_violada`](./uniplus.selecao.envelope_codec.integridade_violada.mdx) e não chegam a esta
 causa. Pelo caminho normal de gravação, a configuração congelada nunca traz esse defeito, porque a

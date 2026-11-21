@@ -55,13 +55,13 @@ vazia ou não:
   [`campos_obrigatorios`](./uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios.mdx)
   para o detalhe dessa composição alternativa.
 
-Alcançável nos dois caminhos, mas de forma mais restrita no descarte de
-retificação: o envelope lê `fallbackCodigo` sem exigência de não-vazio e
+Alcançável nos dois caminhos, mas de forma mais restrita na releitura
+da configuração congelada: o envelope lê `fallbackCodigo` sem exigência de não-vazio e
 sem reconferir o vocabulário `^[A-Z0-9_]+$`, mas o tamanho já é limitado
 pelo próprio schema do envelope (o mesmo limite de 60 caracteres da
 entidade) — um valor acima disso, ou a chave ausente, é recusado ainda na
 leitura, como `envelope_codec.envelope_malformado`, antes de chegar a esta
-causa. No descarte, portanto, só é alcançável por um valor vazio ou fora
+causa. Nessa releitura, portanto, só é alcançável por um valor vazio ou fora
 do vocabulário, nunca por excesso de tamanho. A reconstrução não acumula:
 para na primeira violação.
 

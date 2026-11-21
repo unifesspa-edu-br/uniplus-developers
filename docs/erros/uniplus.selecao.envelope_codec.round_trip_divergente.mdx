@@ -7,7 +7,7 @@ http_status: 422
 situacao: publicado
 modulo: Seleção
 emitido_em:
-  - Descarte de uma retificação do processo seletivo, na verificação final da reconstrução da configuração congelada da versão anterior
+  - Retificação em ato único, na verificação final da reconstrução da configuração congelada de uma versão publicada
 requisitos:
   - UNI-REQ-0019
 rastreio:
@@ -21,9 +21,9 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Ao restaurar uma versão, o sistema reconstrói a configuração e a confere: gera os bytes a partir do resultado e os compara com o envelope congelado. Esta recusa indica que a comparação falhou, isto é, algum dado se perdeu na reconstrução.
+Ao reler uma versão publicada, o sistema reconstrói a configuração e a confere: gera os bytes a partir do resultado e os compara com o envelope congelado. Esta recusa indica que a comparação falhou, isto é, algum dado se perdeu na reconstrução.
 
-A restauração é recusada porque repor uma configuração empobrecida faria o certame publicado divergir do documento que o publicou, sem que nada acusasse.
+A operação é recusada porque seguir com uma configuração empobrecida faria o certame publicado divergir do documento que o publicou, sem que nada acusasse.
 
 ## Como resolver
 

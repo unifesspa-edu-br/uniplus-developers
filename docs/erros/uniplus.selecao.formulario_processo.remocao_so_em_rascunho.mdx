@@ -1,7 +1,7 @@
 ---
-title: A retificação acrescenta formulário, mas não remove
+title: O formulário só é removido com o processo em rascunho
 sidebar_label: Remoção de formulário só em rascunho
-description: Com retificação em curso, o formulário de uma finalidade que o edital publicou não pode ser removido; a remoção só vale para processo em rascunho.
+description: O formulário de uma finalidade que o edital publicou não pode ser removido; a remoção só vale para processo em rascunho.
 code: uniplus.selecao.formulario_processo.remocao_so_em_rascunho
 http_status: 422
 situacao: publicado
@@ -33,22 +33,22 @@ descreve a recusa como a API a aplica hoje.
 
 O pedido removeu o formulário de uma finalidade
 (`DELETE .../formularios/{finalidade}`), inteiro, com os itens e os termos,
-num processo com retificação em curso. A recusa sai com **422**, porque
-nenhuma remoção de formulário é aceita na retificação. Cada processo tem um
+num processo que não está em rascunho. A recusa sai com **422**, porque
+a remoção de formulário só é aceita em rascunho. Cada processo tem um
 formulário por finalidade (inscrição, isenção da taxa, habilitação), e é o
 formulário dessa finalidade, inteiro, que a remoção retira.
 
-A retificação pode acrescentar o formulário de uma finalidade que o processo
-ainda não tinha (UNI-REQ-0144), mas não retira o que o edital publicou:
-candidatos podem ter preenchido esse formulário numa versão publicada.
-Retirar **perguntas** de um formulário é outra operação, feita ao regravar os
-itens.
+O que o edital publicou não se retira: candidatos podem ter preenchido esse
+formulário numa versão publicada. Retirar **perguntas** de um formulário é outra
+operação, feita ao regravar os itens, também só em rascunho.
+
+A API atual não emite mais este código: o processo publicado recusa o pedido com
+o código de [mutação bloqueada depois da publicação](./uniplus.selecao.processo_seletivo.mutacao_pos_publicacao_bloqueada.mdx),
+e o processo encerrado ou cancelado, com o de
+[mutação fora de estado editável](./uniplus.selecao.processo_seletivo.mutacao_fora_de_estado_editavel.mdx).
 
 ## Como resolver
 
-Mantenha o formulário. Se o que precisa mudar são perguntas ou termos, regrave
-os itens (`PUT .../formularios/{finalidade}/itens`) ou os termos
-(`PUT .../formularios/{finalidade}/termos`) dentro da retificação. A remoção só
-é aceita em processo que ainda não foi publicado. Em processo já publicado, sem
-retificação em curso, a alteração direta da configuração também é recusada, com
-outro código: a configuração só muda por retificação.
+Mantenha o formulário. A remoção só é aceita em processo que ainda não foi
+publicado. Em processo já publicado, nenhuma alteração direta da configuração é
+aceita: ela só muda pela retificação em ato único.

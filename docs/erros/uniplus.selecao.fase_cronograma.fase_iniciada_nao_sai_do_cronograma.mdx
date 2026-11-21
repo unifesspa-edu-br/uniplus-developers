@@ -7,8 +7,7 @@ http_status: 422
 situacao: rascunho
 modulo: Seleção
 emitido_em:
-  - Definição do cronograma de fases durante a retificação do processo seletivo
-  - Fechamento da retificação do processo seletivo
+  - Retificação em ato único
 requisitos:
   - UNI-REQ-0364
   - UNI-REQ-0333
@@ -26,10 +25,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 A retificação remove do cronograma uma fase que já está iniciada. A fase está
 iniciada desde o início da janela publicada ou desde o primeiro ato ou registro
 dela, o que vier primeiro, mesmo quando tem janela. A fase encerrada também conta
-como iniciada. A remoção é conferida ao editar o cronograma e de novo ao fechar a
-retificação, porque a fase pode ter começado entre uma e outra, e a comparação é
-feita com a versão publicada vigente, não com o que a retificação aberta já
-gravou.
+como iniciada. A remoção é conferida na retificação, e a comparação é feita com a versão
+publicada vigente.
 
 ## Como resolver
 

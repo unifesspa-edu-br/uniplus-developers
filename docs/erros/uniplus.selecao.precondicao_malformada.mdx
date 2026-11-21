@@ -7,7 +7,8 @@ http_status: 400
 situacao: publicado
 modulo: Seleção
 emitido_em:
-  - Alterações do processo seletivo que aceitam If-Match
+  - Alteração e exclusão do rascunho de processo seletivo
+  - Operações da inscrição que aceitam If-Match
 requisitos:
   - UNI-REQ-0021
 rastreio:
@@ -30,11 +31,14 @@ A recusa sai com **400** em três casos:
 - uma entity-tag veio sem as aspas duplas, como `If-Match: 0193...:3` em vez de
   `If-Match: "0193...:3"`.
 
-Cabeçalho ausente não é este caso: com retificação em curso, ele é recusado com
-[`precondicao_requerida`](./uniplus.selecao.precondicao_requerida.mdx).
+Cabeçalho ausente não é este caso: no rascunho do processo ele é recusado com
+[`precondicao_requerida`](./uniplus.selecao.precondicao_requerida.mdx) e, na
+inscrição, com
+[`inscricao.precondicao_requerida`](./uniplus.selecao.inscricao.precondicao_requerida.mdx).
 
 ## Como resolver
 
 Envie o `ETag` exatamente como a resposta o devolveu, com as aspas, por
 exemplo `If-Match: "0193...:3"`, e repita o pedido. Para ler o `ETag` atual,
-consulte a retificação em curso (`GET .../retificacao-em-curso`).
+consulte o rascunho (`GET /api/selecao/rascunhos-de-processos-seletivos/{id}`)
+ou a inscrição (`GET /api/selecao/processos-seletivos/{id}/inscricao`).

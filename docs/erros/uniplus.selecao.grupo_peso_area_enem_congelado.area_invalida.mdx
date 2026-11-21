@@ -8,9 +8,7 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de classificação do processo seletivo
-  - Abertura de retificação
   - Retificação em ato único
-  - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
   - Consulta do formulário renderizável do processo
   - Consulta do formulário da inscrição
   - Início, salvamento, submissão, cancelamento e descarte do rascunho da inscrição
@@ -50,8 +48,7 @@ acumula, na mesma resposta, com as demais violações da classificação e dos o
 quadro.
 
 Este mesmo código também aparece quando o sistema relê a configuração congelada da versão publicada:
-em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, o
-descarte, a consulta dos formulários, as operações da inscrição, entre outras; a lista completa
+em toda operação que lê essa configuração e devolve a violação ao chamador (a retificação, a consulta dos formulários, as operações da inscrição, entre outras; a lista completa
 está no cabeçalho da página). Antes disso, o sistema confere a integridade dos bytes congelados:
 bytes alterados depois do congelamento são recusados por [`integridade_violada`](./uniplus.selecao.envelope_codec.integridade_violada.mdx) e não chegam a esta
 causa. Pelo caminho normal de gravação, a configuração congelada nunca traz esse defeito, porque a
@@ -67,7 +64,6 @@ envie a definição da classificação de novo. Se a resposta trouxer mais de um
 `errors[]`, corrija todas antes de reenviar. O cadastro já recusa esse defeito ao gravar a linha: se ele chegou
 até aqui, a linha foi gravada por caminho que não passou por essa conferência, e a causa é
 investigada pela equipe técnica do Uni+.
-
 
 Se a recusa apareceu em uma operação que lê a configuração congelada (qualquer uma das listadas no
 cabeçalho, exceto a definição da classificação), o pedido enviado agora não é a causa: o sistema recusou a

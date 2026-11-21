@@ -1,7 +1,7 @@
 ---
 title: Há etapa pontuada sem fase declarada, e nenhuma fase agrupa etapas
 sidebar_label: Etapa sem fase de avaliação
-description: Na configuração congelada que seria reposta há etapa sem fase declarada e nenhuma fase do cronograma que agrupe etapas.
+description: Na configuração congelada de uma versão publicada há etapa sem fase declarada e nenhuma fase do cronograma que agrupe etapas.
 code: uniplus.selecao.processo_seletivo.etapa_sem_fase_de_avaliacao
 http_status: 422
 situacao: publicado
@@ -17,18 +17,16 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Ao descartar uma retificação, o sistema confere a configuração congelada que seria
-reposta antes de aplicá-la. Nessa configuração há uma etapa pontuada que não declara a
+Na configuração congelada de uma versão publicada há uma etapa pontuada que não declara a
 fase em que acontece, e nenhuma fase do cronograma agrupa etapas. A recusa sai com
-**422**; a sessão editorial continua aberta e nada foi reposto.
+**422**.
 
-A situação não nasce do que se envia no descarte. Uma versão publicada já exige que toda
+A situação não nasce do que se envia. Uma versão publicada já exige que toda
 etapa declare a fase em que acontece
 ([`etapa_sem_fase_declarada`](./uniplus.selecao.processo_seletivo.etapa_sem_fase_declarada.mdx)),
-então este código indica inconsistência na versão publicada à qual o descarte tenta
-voltar.
+então este código indica inconsistência na versão publicada.
 
 ## Como resolver
 
-Não há correção pelo pedido de descarte. Abra uma investigação sobre a versão
-publicada anterior, em vez de tentar corrigir pelo descarte.
+Não há correção pelo pedido enviado. Abra uma investigação sobre a versão
+publicada, em vez de tentar corrigir pelo pedido.

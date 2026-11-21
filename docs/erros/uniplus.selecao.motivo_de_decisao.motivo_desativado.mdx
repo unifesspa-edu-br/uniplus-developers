@@ -9,7 +9,6 @@ modulo: Seleção
 emitido_em:
   - Publicação do edital
   - Retificação em ato único
-  - Fechamento da sessão de retificação
 requisitos:
   - UNI-REQ-0122
 rastreio:
@@ -23,10 +22,10 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O processo escolheu um motivo que, ainda não publicado, foi desativado no cadastro depois da escolha. Motivo desativado não entra em nova publicação (UNI-REQ-0122), então a publicação, a retificação em ato único e o fechamento da sessão de retificação são recusados com **422**. O erro aparece no campo `motivosDeDecisao`, uma entrada por motivo, com o código no `detail`.
+O processo escolheu um motivo que, ainda não publicado, foi desativado no cadastro depois da escolha. Motivo desativado não entra em nova publicação (UNI-REQ-0122), então a publicação e a retificação em ato único são recusadas com **422**. O erro aparece no campo `motivosDeDecisao`, uma entrada por motivo, com o código no `detail`.
 
 Os motivos já publicados não passam por esta verificação: eles continuam valendo mesmo desativados.
 
 ## Como resolver
 
-Retire o motivo desativado com `DELETE /api/selecao/processos-seletivos/{id}/motivos-de-decisao/{motivoId}` e escolha um motivo ativo do mesmo tipo e sentido. Depois, publique ou feche a sessão de novo.
+Troque o motivo desativado por um motivo ativo do mesmo tipo e sentido. Na publicação, retire o desativado com `DELETE /api/selecao/processos-seletivos/{id}/fases/{faseCanonicaOrigemId}/motivos-de-decisao/{motivoId}` (ou `/etapas/{etapaId}/motivos-de-decisao/{motivoId}`, para o motivo de uma etapa) e escolha o novo; na retificação em ato único, troque-o no documento de configuração enviado. Depois, repita a publicação ou a retificação.

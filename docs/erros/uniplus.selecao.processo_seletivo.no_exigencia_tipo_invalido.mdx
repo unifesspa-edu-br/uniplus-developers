@@ -1,6 +1,6 @@
 ---
-title: Um nó da árvore de satisfação restaurada tem um tipo desconhecido
-sidebar_label: Tipo de nó desconhecido na restauração
+title: Um nó da árvore de satisfação congelada tem um tipo desconhecido
+sidebar_label: Tipo de nó desconhecido na releitura
 description: Rascunho — defesa em profundidade contra um nó reconstruído com um tipo fora de folha, grupo E ou grupo OU; hoje nenhum envelope real chega a produzir esse estado.
 code: uniplus.selecao.processo_seletivo.no_exigencia_tipo_invalido
 http_status: 422
@@ -21,7 +21,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Ao reconstruir recursivamente cada raiz da árvore restaurada pelas
+Ao reconstruir recursivamente cada raiz da árvore lida do envelope pelas
 mesmas factories da escrita
 (`NoExigencia.CriarFolha`/`NoExigencia.CriarGrupo`), o nó tem um `Tipo`
 que não é nem folha nem um dos dois grupos — um ramo defensivo que
@@ -35,7 +35,7 @@ ainda ali, como `uniplus.selecao.envelope_codec.envelope_malformado` —
 um código de catálogo diferente deste, próprio do codec —, antes mesmo
 de a entidade ser reidratada. Por construção, todo `NoExigencia` que
 chega a existir em memória — seja pela escrita normal, seja pela
-reidratação do descarte — tem sempre um `Tipo` dentre os três valores
+reidratação do envelope congelado — tem sempre um `Tipo` dentre os três valores
 válidos; não há caminho, hoje, para produzir um `NoExigencia` com tipo
 desconhecido e alimentar esta checagem.
 

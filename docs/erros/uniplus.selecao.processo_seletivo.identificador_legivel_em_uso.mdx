@@ -9,7 +9,7 @@ modulo: Seleção
 emitido_em:
   - Criação do processo seletivo
   - Alteração do identificador legível do processo seletivo
-  - Publicação, retificação e fechamento da retificação do processo seletivo
+  - Publicação e retificação em ato único do processo seletivo
 requisitos: []
 rastreio:
   - label: 'uniplus-api#1479'
@@ -24,7 +24,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Outro processo seletivo já usa o identificador informado. A unicidade é global, e não por unidade administradora ou ano, porque o identificador forma o endereço público do certame e a chave do documento no acervo. A conferência é refeita na hora de publicar o processo, de retificá-lo e de fechar a retificação: se outro processo passou a usar o identificador depois que o rascunho foi salvo, a publicação é recusada com este código, **nada fica gravado** (nenhuma versão, ato ou divulgação) e o rascunho é preservado.
+Outro processo seletivo já usa o identificador informado. A unicidade é global, e não por unidade administradora ou ano, porque o identificador forma o endereço público do certame e a chave do documento no acervo. A conferência é refeita na hora de publicar o processo e de retificá-lo: se outro processo passou a usar o identificador depois que o rascunho foi salvo, a publicação é recusada com este código, **nada fica gravado** (nenhuma versão, ato ou divulgação) e o rascunho é preservado.
 
 ## Como resolver
 

@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição da classificação do processo seletivo
-  - Abertura de retificação
   - Retificação em ato único
   - Definição de etapas e do cronograma das fases de processo publicado, quando declaram atos
   - Consulta do formulário renderizável do processo
@@ -37,10 +36,10 @@ A nota da etapa do ENEM é a média ponderada pelos pesos das áreas de cada gru
 
 **Definição da classificação.** O processo seletivo copia do cadastro de Pesos por Área o quadro de pesos de cada grupo de área do ENEM, e um dos grupos chegou com todos os pesos zerados. Hoje o cadastro já recusa esse caso; o erro aparece com um quadro gravado antes dessa regra. Nada foi gravado.
 
-**Releitura da versão congelada.** Quando o sistema relê o quadro de pesos por área congelado numa versão já publicada do processo, ele reconstrói cada grupo com a mesma regra, e um grupo congelado com todos os pesos iguais a zero faz a operação não prosseguir. Isso vale para as operações que propagam a falha da releitura (a lista completa está no cabeçalho da página). A consulta de conformidade do processo também relê a versão, mas converte a falha em pendência do checklist, em vez de devolver este erro; por isso não consta no cabeçalho. Na abertura de retificação, o sistema relê todas as versões publicadas do processo, e um grupo nessa condição em qualquer uma delas recusa a abertura. Pelo caminho normal de gravação, o quadro congelado nunca traz um grupo assim, porque a definição da classificação o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista `errors[]`, e se refere à versão congelada, não ao pedido enviado.
+**Releitura da versão congelada.** Quando o sistema relê o quadro de pesos por área congelado numa versão já publicada do processo, ele reconstrói cada grupo com a mesma regra, e um grupo congelado com todos os pesos iguais a zero faz a operação não prosseguir. Isso vale para as operações que propagam a falha da releitura (a lista completa está no cabeçalho da página). A consulta de conformidade do processo também relê a versão, mas converte a falha em pendência do checklist, em vez de devolver este erro; por isso não consta no cabeçalho. Na retificação, o sistema relê todas as versões publicadas do processo, e um grupo nessa condição em qualquer uma delas recusa a retificação. Pelo caminho normal de gravação, o quadro congelado nunca traz um grupo assim, porque a definição da classificação o recusa antes. Nessas leituras a recusa sai como violação única, sem a lista `errors[]`, e se refere à versão congelada, não ao pedido enviado.
 
 ## Como resolver
 
 Na definição da classificação, corrija o grupo no cadastro de Pesos por Área, com ao menos um peso maior que zero, e defina a classificação do processo de novo.
 
-Se o erro apareceu em uma operação que lê a configuração congelada (qualquer uma das listadas no cabeçalho, exceto a definição da classificação), o pedido enviado agora não é a causa: o defeito está no quadro de pesos por área congelado na versão publicada do processo. Corrigir o cadastro de Pesos por Área não altera o que já foi congelado, e o processo publicado não aceita redefinir a classificação diretamente nem abrir retificação sobre essa versão, porque a abertura relê a configuração congelada e recebe o mesmo erro. A causa é investigada pela equipe técnica do Uni+.
+Se o erro apareceu em uma operação que lê a configuração congelada (qualquer uma das listadas no cabeçalho, exceto a definição da classificação), o pedido enviado agora não é a causa: o defeito está no quadro de pesos por área congelado na versão publicada do processo. Corrigir o cadastro de Pesos por Área não altera o que já foi congelado, e o processo publicado não aceita redefinir a classificação diretamente nem retificar a partir dessa versão, porque a retificação relê a configuração congelada e recebe o mesmo erro. A causa é investigada pela equipe técnica do Uni+.
