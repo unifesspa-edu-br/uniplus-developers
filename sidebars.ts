@@ -1331,7 +1331,6 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.processo_seletivo.regra_de_modalidade_cita_fato_nao_coletado',
         'erros/uniplus.selecao.processo_seletivo.regra_incoerente_com_a_natureza',
         'erros/uniplus.selecao.processo_seletivo.remanejamento_incoerente_com_a_natureza',
-        'erros/uniplus.selecao.processo_seletivo.reserva_pcd_sem_cota_pcd_da_lei',
         'erros/uniplus.selecao.processo_seletivo.sobreposicao_de_janelas_nao_permitida',
         'erros/uniplus.selecao.processo_seletivo.termo_exigido_sem_forma_de_aceite',
         'erros/uniplus.selecao.processo_seletivo.tipo_processo_nao_encontrado_ou_inativo',
