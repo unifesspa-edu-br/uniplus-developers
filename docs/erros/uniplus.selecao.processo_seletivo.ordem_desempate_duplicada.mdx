@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de critérios de desempate do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0015
 rastreio:
@@ -37,22 +36,16 @@ esta checagem; um código de regra inexistente em qualquer item da lista
 interrompe antes, com a causa própria dessa resolução — nunca chega a esta.
 Só depois de todos resolvidos é que esta causa (e, na sequência,
 [`etapa_ref_desempate_inexistente`](./uniplus.selecao.processo_seletivo.etapa_ref_desempate_inexistente.mdx))
-entra em jogo. No **descarte de retificação**, mesma posição relativa,
-dentro da reconstrução completa da configuração congelada — mas ali cada
-critério é construído a partir do envelope congelado, sem reconsultar o
-`rol_de_regras` (a regra é lida por valor, código e versão já resolvidos na
-publicação original). Nos dois caminhos é sequencial — não acumula com
-nenhuma outra causa desta série; a primeira falha interrompe o
-processamento.
+entra em jogo. É sequencial — não acumula com
+nenhuma outra causa desta série; a primeira falha interrompe o processamento.
 
 Distinta de
 [`ordem_invalida`](./uniplus.selecao.criterio_desempate.ordem_invalida.mdx),
 que confere se cada `ordem` individual é maior que zero. Na definição, essa
 checagem roda numa primeira passada sobre todos os critérios do payload —
 antes até de o `rol_de_regras` ser consultado — e acumula todas as
-violações de ordem de uma vez (ADR-0125); no descarte de retificação, ela é
-levantada dentro da recriação de cada critério a partir do envelope. Nos
-dois caminhos precede esta causa, que só compara as ordens **entre si**,
+violações de ordem de uma vez (ADR-0125) e
+precede esta causa, que só compara as ordens **entre si**,
 depois que cada uma já é sabidamente válida isoladamente.
 
 ## Como resolver

@@ -9,7 +9,6 @@ modulo: Seleção
 emitido_em:
   - Definição de etapas do processo seletivo
   - Definição de classificação do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 ---
 
@@ -30,9 +29,6 @@ a classificação ainda não foi gravada, a definição das etapas não é recus
 motivo. Quando a recusa vem da definição da classificação, o erro aponta os campos da
 classificação que impedem o cálculo local do ENEM.
 
-No descarte de uma retificação a mesma conferência roda sobre a configuração congelada
-que seria reposta.
-
 ## Como resolver
 
 Escolha o ajuste que reflete o edital:
@@ -41,8 +37,3 @@ Escolha o ajuste que reflete o edital:
   (`PUT /api/selecao/processos-seletivos/{id}/classificacao`); ou
 - retire do processo a etapa com nota do ENEM
   (`PUT /api/selecao/processos-seletivos/{id}/etapas`).
-
-Se o erro apareceu ao descartar uma retificação, o problema não está no que foi
-enviado agora, e sim na configuração congelada para a qual o descarte tenta voltar.
-Isso indica inconsistência na versão publicada anterior; abra uma investigação em vez
-de tentar corrigir pelo descarte.

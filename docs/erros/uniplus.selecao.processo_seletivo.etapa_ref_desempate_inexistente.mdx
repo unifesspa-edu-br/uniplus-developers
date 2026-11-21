@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de critérios de desempate do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0015
 rastreio:
@@ -32,23 +31,10 @@ lá, a etapa some primeiro e o desempate fica órfão; aqui, o desempate chega
 primeiro já apontando para uma etapa que nunca existiu (ou já foi removida
 antes).
 
-Esta é uma das três causas desta série levantadas em **dois pontos**
-distintos do código — as outras são
+Na **definição de critérios de desempate**, roda depois de
 [`ordem_desempate_duplicada`](./uniplus.selecao.processo_seletivo.ordem_desempate_duplicada.mdx)
-e
-[`etapa_ref_eliminacao_inexistente`](./uniplus.selecao.processo_seletivo.etapa_ref_eliminacao_inexistente.mdx)
-—, e o comportamento muda entre os dois pontos:
-
-- Na **definição de critérios de desempate**, roda depois de
-  [`ordem_desempate_duplicada`](./uniplus.selecao.processo_seletivo.ordem_desempate_duplicada.mdx)
-  — sequencial, a primeira falha interrompe. Confere `etapaRef` contra as
-  etapas do agregado corrente.
-- No **descarte de retificação**, roda dentro da reconstrução completa da
-  configuração congelada, na mesma posição relativa (depois da checagem de
-  ordem única de desempate) — mas confere `etapaRef` contra as etapas do
-  próprio grafo restaurado, não contra o agregado corrente. Um cliente HTTP
-  nunca recebe mais de uma causa por vez nesse caminho: a reconstrução para
-  na primeira violação que encontrar.
+— sequencial, a primeira falha interrompe. Confere `etapaRef` contra as etapas do
+agregado corrente.
 
 ## Como resolver
 

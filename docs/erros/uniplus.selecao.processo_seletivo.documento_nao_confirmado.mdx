@@ -1,7 +1,7 @@
 ---
 title: O documento do edital ainda não foi confirmado
 sidebar_label: Documento do edital não confirmado
-description: Só um documento com envio confirmado pode ser indicado como documento do edital na publicação, na retificação ou no fechamento da sessão editorial.
+description: Só um documento com envio confirmado pode ser indicado como documento do edital na publicação ou na retificação.
 code: uniplus.selecao.processo_seletivo.documento_nao_confirmado
 http_status: 422
 situacao: publicado
@@ -9,7 +9,6 @@ modulo: Seleção
 emitido_em:
   - Publicação inicial do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
 requisitos: []
 ---
 
@@ -21,8 +20,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 O documento indicado como documento do edital existe e é do processo, mas o envio dele
 ainda não foi confirmado. A conferência acontece antes de qualquer gravação e é a mesma
-na publicação, na retificação em ato único e no fechamento da sessão editorial; a
-mensagem de detalhe diz em qual dos três o documento foi referenciado. A recusa sai
+na publicação e na retificação em ato único; a mensagem de detalhe diz em qual dos dois o documento foi referenciado. A recusa sai
 com **422**.
 
 ## Como resolver

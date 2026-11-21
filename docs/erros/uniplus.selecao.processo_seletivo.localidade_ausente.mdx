@@ -1,16 +1,16 @@
 ---
 title: A localidade que rege a contagem de prazos não foi declarada
 sidebar_label: Localidade ausente
-description: Criar, publicar, retificar ou fechar sessão editorial exige a localidade declarada na configuração.
+description: Criar, publicar ou retificar exige a localidade declarada na configuração.
 code: uniplus.selecao.processo_seletivo.localidade_ausente
 http_status: 422
 situacao: publicado
 modulo: Seleção
 emitido_em:
   - Criação do processo seletivo
+  - Definição da localidade do processo seletivo
   - Publicação inicial do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
 requisitos:
   - UNI-REQ-0111
 rastreio:
@@ -27,9 +27,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 ## O que aconteceu
 
 A operação foi recusada porque a **localidade** não foi declarada — o município
-cujo calendário rege a contagem dos prazos do certame. A recusa acontece na
-criação do processo e em cada transição que gera versão publicada; o campo
-`detail` da resposta diz qual delas foi recusada.
+cujo calendário rege a contagem dos prazos do certame. A recusa acontece na criação do processo, na definição da localidade e em cada transição que gera versão publicada; o campo `detail` da resposta diz qual delas foi recusada.
 
 A localidade determina quais feriados estaduais e municipais incidem sobre as
 janelas de recurso. Ela varia de um certame para outro: a instituição pode
@@ -47,8 +45,7 @@ a exigência começa na criação, e não na véspera de publicar. Como a versã
 publicada é imutável, a informação precisa estar lá desde o começo: não há como
 completá-la depois.
 
-Depois da criação, a recusa vale nas três transições que geram versão, e não só
-na tela de publicação — validar num caminho só deixaria os outros dois abertos.
+Depois da criação, a recusa vale nas duas transições que geram versão, e não só na tela de publicação — validar num caminho só deixaria o outro aberto.
 Como a localidade é exigida desde a criação e não pode ser removida, chegar a
 uma dessas transições sem ela não é estado alcançável pelo fluxo normal: a
 recusa está ali para defender a invariante de qualquer caminho de escrita que
@@ -72,6 +69,5 @@ Se a interface apresentar o campo já preenchido com a cidade da unidade
 administradora, confirme-a ou troque pelo município que o edital declara — o
 valor sugerido só vale como declaração depois de submetido.
 
-O campo continua editável enquanto o processo está em rascunho e, depois de
-publicado, dentro de sessão editorial aberta. Declarada a localidade, repita a
+O campo continua editável enquanto o processo está em rascunho. Declarada a localidade, repita a
 operação.

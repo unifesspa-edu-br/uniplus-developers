@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 ---
 
@@ -28,16 +27,8 @@ antes, pela conferência geral de conformidade
 ([`conformidade_insuficiente`](./uniplus.selecao.processo_seletivo.conformidade_insuficiente.mdx)),
 e não por este código.
 
-No descarte de uma retificação a conferência é repetida sobre a configuração congelada
-que seria reposta.
-
 ## Como resolver
 
 Envie o cronograma com ao menos uma fase
 (`PUT /api/selecao/processos-seletivos/{id}/cronograma-fases`). Para retirar fases,
 reenvie o cronograma completo apenas com as que devem ficar.
-
-Se o erro apareceu ao descartar uma retificação, o problema não está no que foi
-enviado agora, e sim na configuração congelada para a qual o descarte tenta voltar.
-Isso indica inconsistência na versão publicada anterior; abra uma investigação em vez
-de tentar corrigir pelo descarte.

@@ -33,16 +33,7 @@ já passou (oferta existe, modalidades resolvidas — ver
 só nesse momento a coleção inteira de distribuições é substituída no
 processo, e é aí que a duplicidade de oferta entre elas é conferida.
 
-Este código só é alcançável pela **definição de distribuição de vagas**. O
-descarte de retificação também prova que o envelope congelado não tem oferta
-duplicada — mas mais cedo, ainda na decodificação do envelope: o bloco
-`distribuicao` é conferido contra repetição de oferta antes mesmo de os
-objetos `ConfiguracaoDistribuicaoVagas` serem reconstruídos, e a incoerência
-aí encontrada sai como `uniplus.selecao.envelope_codec.blocos_derivados_incoerentes`
-(causa própria, ainda não documentada neste catálogo), não como este código. `ProcessoSeletivo.OfertaCursoDuplicada` também está
-verificado dentro de `ValidarGrafo`, do lado da restauração — mas essa
-checagem nunca é alcançada com uma oferta de fato duplicada, porque a
-decodificação já teria recusado antes de chegar lá.
+Este código só é alcançável pela **definição de distribuição de vagas**.
 
 ## Como resolver
 
