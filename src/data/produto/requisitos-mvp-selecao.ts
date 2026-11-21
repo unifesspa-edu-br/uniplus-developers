@@ -8910,7 +8910,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A suspensão não termina com a decisão do recurso enquanto o definitivo do item não estiver publicado; publicado o definitivo, termina a suspensão daquele item, e o comando que inicia a fase posterior só é aceito depois de conferidas as demais condições de início, sem outra suspensão ativa sobre a mesma fase; em período com 2ª instância, a suspensão dura até o definitivo, que espera a 2ª instância.',
+      'A suspensão não termina com a decisão do recurso enquanto o definitivo do item não estiver publicado; publicado o definitivo, termina a suspensão daquele item, e o comando que inicia a fase posterior só é aceito depois de conferidas as demais condições de início, sem outra suspensão ativa sobre a mesma fase; em período com 2ª instância há dois casos: com a 1ª instância sem efeito suspensivo e o prazo para recorrer à Câmara encerrado sem recurso, a suspensão desse prazo termina com ele, mesmo com o resultado definitivo pendente; quando há recurso à Câmara, a suspensão dura até o definitivo, que espera a 2ª instância.',
     verificacao:
       'Testes automatizados do fim da suspensão nos dois momentos, com e sem 2ª instância, e com duas suspensões sobre a mesma fase, em que o definitivo de um item não libera a fase enquanto a do outro continua ativa (planejado).',
     pagina_developers: '/produto/regras-negocio/',
