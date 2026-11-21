@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de classificação do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 rastreio:
   - label: 'uniplus-api#781'
@@ -53,14 +52,6 @@ esvazia a lista de regras que esta checagem também percorre),
 e
 [`casas_arredondamento_obrigatorio`](./uniplus.selecao.configuracao_classificacao.casas_arredondamento_obrigatorio.mdx)
 (acumula, ADR-0125).
-
-No descarte de retificação, essa acumulação não é observável — o codec só
-propaga ao chamador a primeira violação que a reconstrução acumular
-internamente, e esta checagem é sempre a **última** conferida dentro de
-`Criar`. Por isso, no descarte, esta causa só aparece sozinha: se o mesmo
-envelope corrompido também violasse qualquer causa do
-bloco de arredondamento/eliminação, é sempre a outra causa que o descarte
-devolve — nunca esta.
 
 ## Como resolver
 

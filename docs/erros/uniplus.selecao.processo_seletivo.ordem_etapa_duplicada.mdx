@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de etapas do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0015
 rastreio:
@@ -34,11 +33,8 @@ isso, a ordem de apresentação ficaria ambígua para quem lê o processo depois
 Uma etapa sem `ordem` informada não entra nesta checagem — o campo é opcional,
 e só os valores efetivamente informados precisam ser distintos entre si.
 
-Este código dispara em dois momentos diferentes: ao **definir etapas**
-(`PUT .../etapas`, substituição integral da coleção) e, separadamente, ao
-**descartar uma retificação** — a restauração da configuração congelada prova
-o grafo inteiro antes de aplicá-lo, e valida a mesma invariante contra as
-etapas do envelope que está sendo restaurado.
+Este código dispara ao **definir etapas**
+(`PUT .../etapas`, substituição integral da coleção).
 
 ## Como resolver
 
@@ -46,9 +42,3 @@ Revise o array de etapas enviado e garanta que cada `ordem` informada seja
 única no payload. Se a intenção é não controlar a posição de apresentação de
 uma etapa específica, omita o campo em vez de repetir um valor já usado por
 outra.
-
-Se o erro apareceu ao descartar uma retificação, o problema não está no
-payload que você enviou agora — está na configuração congelada para a qual o
-descarte está tentando voltar. Isso indica uma inconsistência na versão
-publicada anterior; abra uma investigação em vez de tentar corrigir pelo
-descarte.

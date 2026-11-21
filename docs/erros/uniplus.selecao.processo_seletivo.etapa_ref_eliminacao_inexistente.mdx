@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de classificação do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 rastreio:
   - label: 'uniplus-api#781'
@@ -40,29 +39,10 @@ exemplo,
 [`arredondamento_indevido`](./uniplus.selecao.configuracao_classificacao.arredondamento_indevido.mdx)
 e as demais causas irmãs dela.
 
-Esta é uma das três causas desta série levantadas em **dois pontos**
-distintos do código, e o comportamento muda entre eles:
-
-- Na **definição de classificação**, roda por último — depois de a
-  configuração de classificação já ter sido validada internamente e
-  resolvida contra o `rol_de_regras` — sequencial, sem acumular com
-  nenhuma outra causa. Confere `etapaRef` contra as etapas do agregado
-  corrente.
-- No **descarte de retificação**, roda dentro da reconstrução completa da
-  configuração congelada — última das três causas desta série ali (depois
-  de
-  [`ordem_desempate_duplicada`](./uniplus.selecao.processo_seletivo.ordem_desempate_duplicada.mdx)
-  e
-  [`etapa_ref_desempate_inexistente`](./uniplus.selecao.processo_seletivo.etapa_ref_desempate_inexistente.mdx)),
-  mas não a última checagem da reconstrução como um todo — outras
-  invariantes do grafo (cronograma de fases, árvore de exigências) ainda
-  são conferidas depois. A checagem de eliminação por ENEM **não** se
-  repete nesse caminho: o grafo
-  chega com a classificação já construída por
-  `ConfiguracaoClassificacao.Criar`, então, se o envelope violasse essa
-  invariante, a decodificação já teria falhado antes de a restauração
-  chegar até aqui. Um cliente HTTP nunca recebe mais de uma causa por vez
-  nesse caminho: a reconstrução para na primeira violação que encontrar.
+Na **definição de classificação**, roda por último — depois de a configuração de
+classificação já ter sido validada internamente e resolvida contra o `rol_de_regras` —
+sequencial, sem acumular com nenhuma outra causa. Confere `etapaRef` contra as etapas
+do agregado corrente.
 
 ## Como resolver
 
