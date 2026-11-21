@@ -1,7 +1,7 @@
 ---
 title: Uma etapa iniciada não sai do cronograma
 sidebar_label: Etapa iniciada não sai
-description: Rascunho — a retificação tenta remover do cronograma uma etapa que já começou.
+description: Rascunho — a conferência recusa remover do cronograma uma etapa que já começou, mas nenhuma operação a aplica hoje.
 code: uniplus.selecao.fase_cronograma.etapa_iniciada_nao_sai_do_cronograma
 http_status: 422
 situacao: rascunho
@@ -20,17 +20,26 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
 
+:::warning Recusa ainda não emitida
+
+Nenhuma operação do Uni+ aplica hoje esta conferência. O pedido de retificação
+em ato único não traz o cronograma nem as etapas, e a conferência das fases e etapas
+iniciadas não é chamada por nenhum caminho de produção. Esta página descreve a
+regra que a conferência aplica.
+
+:::
+
 ## O que aconteceu
 
-A retificação remove uma etapa que já está iniciada, mesmo que a fase dela
-continue no cronograma. A etapa está iniciada quando a janela dela já abriu,
-quando tem ato ou registro próprio, como a avaliação lançada, ou quando já
+A conferência recusa a retirada de uma etapa que já está iniciada, mesmo que a
+fase dela continue no cronograma. A etapa está iniciada quando a janela dela já
+abriu, quando tem ato ou registro próprio, como a avaliação lançada, ou quando já
 terminou. A abertura de uma etapa não inicia as outras etapas da mesma fase. A
-remoção é conferida na retificação, e a comparação é feita com a versão
-publicada vigente.
+comparação é feita com a versão publicada vigente.
 
 ## Como resolver
 
-Mantenha a etapa no cronograma da retificação. A etapa que ainda não começou, sem janela aberta
-e sem ato ou registro, continua podendo sair, sujeita às demais regras de
-publicação e retificação.
+Hoje não há o que corrigir, porque nenhuma operação chega a esta recusa: o pedido
+de retificação em ato único não traz as etapas. Pela regra, a etapa iniciada
+permanece. A etapa que ainda não começou, sem janela aberta e sem ato ou
+registro, não é alcançada por esta recusa.

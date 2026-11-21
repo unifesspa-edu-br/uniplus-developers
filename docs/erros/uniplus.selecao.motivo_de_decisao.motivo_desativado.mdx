@@ -28,4 +28,6 @@ Os motivos já publicados não passam por esta verificação: eles continuam val
 
 ## Como resolver
 
-Troque o motivo desativado por um motivo ativo do mesmo tipo e sentido. Na publicação, retire o desativado com `DELETE /api/selecao/processos-seletivos/{id}/fases/{faseCanonicaOrigemId}/motivos-de-decisao/{motivoId}` (ou `/etapas/{etapaId}/motivos-de-decisao/{motivoId}`, para o motivo de uma etapa) e escolha o novo; na retificação em ato único, troque-o no documento de configuração enviado. Depois, repita a publicação ou a retificação.
+Na publicação, troque o motivo desativado por um motivo ativo do mesmo tipo e sentido: retire o desativado com `DELETE /api/selecao/processos-seletivos/{id}/fases/{faseCanonicaOrigemId}/motivos-de-decisao/{motivoId}` (ou `/etapas/{etapaId}/motivos-de-decisao/{motivoId}`, para o motivo de uma etapa), escolha o novo e repita a publicação.
+
+Na retificação em ato único, o pedido não traz motivos de decisão, e os motivos já publicados não passam por esta verificação. Se a recusa aparecer ali, a causa não está no pedido enviado, e a equipe técnica do Uni+ deve investigar.

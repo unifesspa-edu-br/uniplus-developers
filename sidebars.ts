@@ -399,6 +399,7 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.criterio_desempate.regra_tipo_invalido',
         'erros/uniplus.selecao.criterio_desempate.etapa_ref_obrigatorio',
         'erros/uniplus.selecao.criterio_desempate.idade_minima_obrigatoria',
+        'erros/uniplus.selecao.criterio_desempate.parametros_incompativeis_com_regra',
         'erros/uniplus.selecao.criterio_desempate.predicado_fato_incompleto',
         'erros/uniplus.selecao.regra_eliminacao.nota_minima_invalida',
         'erros/uniplus.selecao.regra_eliminacao.minimo_invalido',
