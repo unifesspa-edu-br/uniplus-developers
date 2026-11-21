@@ -1,7 +1,7 @@
 ---
-title: A ação quando indeferido é inválida
-sidebar_label: Ação no indeferimento inválida
-description: A ação quando indeferido, quando informada, precisa ser um dos dois tokens do domínio fechado — RECLASSIFICAR_AC ou RECLASSIFICAR_REGRA_EDITAL.
+title: Ação no indeferimento não é um dos códigos aceitos
+sidebar_label: Ação no indeferimento não é um dos códigos aceitos
+description: A ação quando indeferido, quando informada, precisa ser um dos dois códigos aceitos — RECLASSIFICAR_AC ou RECLASSIFICAR_REGRA_EDITAL.
 code: uniplus.configuracao.modalidade.acao_indeferimento_invalida
 http_status: 422
 situacao: publicado
@@ -21,14 +21,13 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A **ação quando indeferido** informada não é um dos dois tokens do domínio
-fechado: `RECLASSIFICAR_AC` ou `RECLASSIFICAR_REGRA_EDITAL`.
+A **ação quando indeferido** informada não é um dos dois códigos aceitos: `RECLASSIFICAR_AC` ou `RECLASSIFICAR_REGRA_EDITAL`.
 
 Esta ação é opcional (a modalidade pode não declarar nenhuma). Este erro só
-dispara quando um token é informado e não é um dos dois válidos.
+dispara quando um código é informado e não é um dos dois válidos.
 
 ## Como resolver
 
-Informe um dos dois tokens válidos — `RECLASSIFICAR_AC` ou
+Informe um dos dois códigos válidos — `RECLASSIFICAR_AC` ou
 `RECLASSIFICAR_REGRA_EDITAL` — ou omita o campo se a modalidade não declara
 ação para o candidato indeferido.

@@ -1,7 +1,7 @@
 ---
-title: A natureza legal da modalidade é inválida
-sidebar_label: Natureza legal inválida
-description: A natureza legal, quando informada, precisa ser um dos três tokens do domínio fechado — AMPLA, COTA_RESERVADA ou ACAO_AFIRMATIVA.
+title: Natureza legal da modalidade não é um dos códigos aceitos
+sidebar_label: Natureza legal da modalidade não é um dos códigos aceitos
+description: A natureza legal, quando informada, precisa ser um dos três códigos aceitos — AMPLA, COTA_RESERVADA ou ACAO_AFIRMATIVA.
 code: uniplus.configuracao.modalidade.natureza_invalida
 http_status: 422
 situacao: publicado
@@ -23,18 +23,17 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A **natureza legal** informada não é um dos três tokens do domínio
-fechado: `AMPLA` (ampla concorrência), `COTA_RESERVADA` (cota da Lei
-12.711/2012) ou `ACAO_AFIRMATIVA` (ação afirmativa institucional). Os tokens
+A **natureza legal** informada não é um dos três códigos aceitos: `AMPLA` (ampla concorrência), `COTA_RESERVADA` (cota da Lei
+12.711/2012) ou `ACAO_AFIRMATIVA` (ação afirmativa institucional). Os códigos
 `SUPLEMENTAR` e `OUTRA_MODALIDADE` deixaram de existir e também são recusados.
 
 A natureza legal tem valor padrão: se omitida, a modalidade assume `AMPLA`
-silenciosamente. Este erro só dispara quando um token é informado e não é um
+silenciosamente. Este erro só dispara quando um código é informado e não é um
 dos três válidos.
 
 ## Como resolver
 
-Informe um dos três tokens válidos — `AMPLA`, `COTA_RESERVADA` ou
+Informe um dos três códigos válidos — `AMPLA`, `COTA_RESERVADA` ou
 `ACAO_AFIRMATIVA` — ou omita o campo para aceitar o padrão `AMPLA`. Uma
 modalidade institucional que antes seria `SUPLEMENTAR` ou `OUTRA_MODALIDADE`,
 como a reserva para pessoa com deficiência ou as vagas por acréscimo do

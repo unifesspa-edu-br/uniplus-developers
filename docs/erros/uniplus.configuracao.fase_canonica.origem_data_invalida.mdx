@@ -1,7 +1,7 @@
 ---
-title: A origem da data da fase canônica é inválida
-sidebar_label: Origem da data inválida
-description: A origem da data da fase canônica precisa ser um dos dois tokens do domínio fechado — NO_EDITAL ou NA_EXECUCAO.
+title: Origem da data da fase canônica não é um dos códigos aceitos
+sidebar_label: Origem da data da fase canônica não é um dos códigos aceitos
+description: A origem da data da fase canônica precisa ser um dos dois códigos aceitos — NO_EDITAL ou NA_EXECUCAO.
 code: uniplus.configuracao.fase_canonica.origem_data_invalida
 http_status: 422
 situacao: publicado
@@ -21,15 +21,14 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A **origem da data** (campo `origemData`) informada não é um dos dois tokens do
-domínio fechado: `NO_EDITAL` ou `NA_EXECUCAO`.
+A **origem da data** (campo `origemData`) informada não é um dos dois códigos aceitos: `NO_EDITAL` ou `NA_EXECUCAO`.
 
 Espaços nas pontas do valor são removidos antes da comparação, que diferencia
-maiúsculas de minúsculas e só aceita exatamente os dois tokens: qualquer outro
+maiúsculas de minúsculas e só aceita exatamente os dois códigos: qualquer outro
 valor é recusado.
 
 ## Como resolver
 
-Informe um dos dois tokens válidos: `NO_EDITAL` (a data é fixada no edital e a
+Informe um dos dois códigos válidos: `NO_EDITAL` (a data é fixada no edital e a
 janela da fase é obrigatória) ou `NA_EXECUCAO` (a unidade responsável pela
 fase define a data na execução e a janela é opcional).
