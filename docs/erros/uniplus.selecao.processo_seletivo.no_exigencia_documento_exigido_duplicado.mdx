@@ -21,10 +21,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Duas folhas distintas da árvore restaurada referenciam o mesmo
-`DocumentoExigidoId`. É o reverso de
-[`no_exigencia_folha_sem_documento_exigido`](./uniplus.selecao.processo_seletivo.no_exigencia_folha_sem_documento_exigido.mdx):
-lá a referência não resolve para nenhum documento; aqui ela resolve,
+Duas folhas distintas da árvore congelada referenciam o mesmo
+`DocumentoExigidoId`. Aqui a referência resolve,
 mas para um documento que já pertence a outra folha — a relação entre
 folha e documento exigido é exatamente 1:1, nunca "a menos" (referência
 que não existe) nem "a mais" (duas folhas para o mesmo documento).

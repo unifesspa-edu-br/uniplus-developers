@@ -23,9 +23,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 O envelope congelado que o sistema está relendo contém duas
 raízes da árvore de exigências (nós sem `noPaiId`) com a mesma `ordem`.
-Roda depois de
-[`id_no_exigencia_duplicado`](./uniplus.selecao.processo_seletivo.id_no_exigencia_duplicado.mdx),
-antes de qualquer nó ser reconstruído.
+Roda antes de qualquer nó ser reconstruído.
 
 Na escrita normal (definição de documentos exigidos), a ordem de cada
 raiz é sempre derivada da posição no array `raizes` do payload — nunca
