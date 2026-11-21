@@ -6433,7 +6433,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0269',
     titulo: 'Recurso se abre pela publicação de um ato ou resultado',
     enunciado:
-      'O recurso pode ser previsto no edital para uma fase ou para uma etapa do processo seletivo, e a sua janela se abre sempre pela publicação de um ato ou resultado da fase ou da etapa, como o resultado preliminar da homologação das inscrições, o gabarito preliminar, as notas ou a análise de uma banca. Todos os casos levantados com o PO têm publicação; a única decisão comunicada só ao candidato é o indeferimento da 1ª instância em configuração do recurso que admite instância superior, publicado a ele no Uni+, e dessa publicação corre o prazo da 2ª instância (UNI-REQ-0451). A contagem pela ciência individual (a pessoa ter lido) continua sem uso no recurso (UNI-REQ-0115). Confirmado pelo PO em 10/11/2026.',
+      'O recurso pode ser previsto no edital para uma fase ou para uma etapa do processo seletivo, e o seu período para apresentar recurso se abre sempre pela publicação de um ato ou resultado da fase ou da etapa, como o resultado preliminar da homologação das inscrições, o gabarito preliminar, as notas ou a análise de uma banca. Todos os casos levantados com o PO têm publicação; a única decisão comunicada só ao candidato é o indeferimento da 1ª instância em configuração do recurso que admite instância superior, publicado a ele no Uni+, e dessa publicação corre o prazo da 2ª instância (UNI-REQ-0451). A contagem pela ciência individual (a pessoa ter lido) continua sem uso no recurso (UNI-REQ-0115). Confirmado pelo PO em 10/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -6447,7 +6447,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     criterios_aceite:
       'O edital configura o recurso numa fase ou numa etapa, ancorado num ato ou resultado publicado dela; o prazo começa pela publicação desse ato (UNI-REQ-0111 a UNI-REQ-0116); antes da publicação, não há recurso.',
     verificacao:
-      'Teste automatizado da abertura da janela pela publicação e da recusa antes dela (planejado).',
+      'Teste automatizado da abertura do período para apresentar recurso pela publicação e da recusa antes dela (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
