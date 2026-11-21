@@ -1,7 +1,7 @@
 ---
 title: O código da fase antecessora não pertence ao conjunto canônico
 sidebar_label: Fase antecessora fora do conjunto canônico
-description: O código da fase antecessora está bem formado, mas não é um dos dezesseis códigos do vocabulário fechado de fases.
+description: O código da fase antecessora está bem formado, mas não é um dos catorze códigos do vocabulário fechado de fases.
 code: uniplus.configuracao.precedencia_fase.antecessora_fora_do_conjunto_canonico
 http_status: 422
 situacao: publicado
@@ -21,10 +21,10 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O campo `antecessoraCodigo` do cadastro de uma precedência (`POST /api/configuracao/admin/precedencias-fase`) respeita o formato do código de fase, mas não é um dos dezesseis códigos do vocabulário fechado de fases do processo seletivo (UNI-REQ-0139). A precedência só liga fases desse vocabulário. A lista completa está em [código fora do conjunto canônico das dezesseis fases](./uniplus.configuracao.fase_canonica.codigo_fora_do_conjunto_canonico.mdx).
+O campo `antecessoraCodigo` do cadastro de uma precedência (`POST /api/configuracao/admin/precedencias-fase`) respeita o formato do código de fase, mas não é um dos catorze códigos do vocabulário fechado de fases do processo seletivo (UNI-REQ-0139). A precedência só liga fases desse vocabulário. A lista completa está em [código fora do conjunto canônico das catorze fases](./uniplus.configuracao.fase_canonica.codigo_fora_do_conjunto_canonico.mdx).
 
 A recusa vem na lista `errors` da resposta, com `field` igual a `antecessoraCodigo`; a mensagem não repete o código recusado. Se o outro código também tiver problema, a recusa dele vem na mesma resposta, e nada é gravado.
 
 ## Como resolver
 
-Use um dos dezesseis códigos, que vêm de `GET /api/configuracao/vocabularios/fases-canonicas`, e envie de novo.
+Use um dos catorze códigos, que vêm de `GET /api/configuracao/vocabularios/fases-canonicas`, e envie de novo.
