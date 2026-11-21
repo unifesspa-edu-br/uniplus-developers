@@ -8895,6 +8895,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     owner: 'Equipe backend; Equipe frontend',
   },
   {
+    requisito_id: 'UNI-REQ-0446',
+    titulo: 'A suspensão termina quando o recurso está decidido e o resultado definitivo do item está publicado',
+    enunciado:
+      'A suspensão de um recurso termina quando ele está decidido e o resultado definitivo do item contestado está publicado (UNI-REQ-0161). No período que admite 2ª instância, o definitivo espera o prazo e a decisão da 2ª instância (UNI-REQ-0455), e por isso a suspensão do recurso de 1ª instância cobre também esse tempo; a suspensão própria da 2ª instância termina conforme o UNI-REQ-0463. O definitivo de um item encerra a suspensão daquele item, e não a de outro item: terminada a suspensão do item, o comando que inicia a fase posterior só é aceito depois de conferidas as demais condições de início (UNI-REQ-0449), e outra suspensão ativa sobre a mesma fase continua impedindo o início (UNI-REQ-0444). A concessão dada na opção (c) segue a mesma regra. Exemplo: o recurso de Helena é decidido em 1ª instância, mas o prazo para recorrer em 2ª instância ainda corre; a suspensão continua até o definitivo ser publicado. Se a fase posterior também está suspensa pelo recurso de Leandro, o definitivo do item de Helena não a libera: ela só pode começar depois de encerrada a suspensão do item de Leandro e conferidas as demais condições.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0048',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A suspensão não termina com a decisão do recurso enquanto o definitivo do item não estiver publicado; publicado o definitivo, termina a suspensão daquele item, e o comando que inicia a fase posterior só é aceito depois de conferidas as demais condições de início, sem outra suspensão ativa sobre a mesma fase; em período com 2ª instância, a suspensão dura até o definitivo, que espera a 2ª instância.',
+    verificacao:
+      'Testes automatizados do fim da suspensão nos dois momentos, com e sem 2ª instância, e com duas suspensões sobre a mesma fase, em que o definitivo de um item não libera a fase enquanto a do outro continua ativa (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
     requisito_id: 'UNI-REQ-0451',
     titulo: 'A configuração que admite instância superior declara o prazo para recorrer em 2ª instância',
     enunciado:
