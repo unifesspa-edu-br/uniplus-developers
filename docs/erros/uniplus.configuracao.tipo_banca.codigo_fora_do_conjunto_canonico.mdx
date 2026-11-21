@@ -1,7 +1,7 @@
 ---
-title: O código não pertence ao conjunto canônico das seis bancas
+title: O código não pertence ao conjunto canônico dos tipos de banca
 sidebar_label: Código fora do conjunto canônico
-description: Além do formato, o código do tipo de banca precisa ser um dos seis códigos do vocabulário fechado das bancas da seleção.
+description: Além do formato, o código do tipo de banca precisa ser um dos dez códigos do vocabulário fechado das bancas da seleção.
 code: uniplus.configuracao.tipo_banca.codigo_fora_do_conjunto_canonico
 http_status: 422
 situacao: publicado
@@ -24,16 +24,22 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 ## O que aconteceu
 
 O código informado respeita o formato (`^[A-Z_]+$`), mas não é um dos
-seis códigos do conjunto canônico: `BANCA_ANALISE_DOCUMENTAL`,
+dez códigos do conjunto canônico: `BANCA_ANALISE_DOCUMENTAL`,
 `BANCA_ENTREVISTA`, `BANCA_CORRECAO_REDACOES`, `BANCA_ANALISE_RECURSOS`,
-`BANCA_HETEROIDENTIFICACAO` ou `BANCA_BIOPSICOSSOCIAL`.
+`BANCA_HETEROIDENTIFICACAO`, `BANCA_BIOPSICOSSOCIAL`,
+`BANCA_ANALISE_RECURSOS_SEGUNDA_INSTANCIA` e os tipos da banca de
+homologação das inscrições, da banca de importação das notas do INEP e da
+banca de importação de candidatos, cujos códigos o cadastro de tipos de banca
+publica.
 
-Este cadastro entrega apenas o **tipo** da banca (análise documental,
-entrevista, correção de redações, análise de recursos, heteroidentificação
-étnico-racial ou avaliação biopsicossocial) — a composição da banca
-(membros, atas, deliberações) é matéria de incremento futuro e não é
+Este cadastro entrega o **tipo** da banca (análise documental, entrevista,
+correção de redações, análise de recursos, análise de recursos em 2ª instância,
+heteroidentificação étnico-racial, avaliação biopsicossocial, homologação das
+inscrições e as duas importações), com o papel dele (avalia o mérito, julga a
+1ª instância, julga a 2ª instância ou importa dados) e as duas marcas
+administráveis. A composição da banca (membros, atas, deliberações) não é
 modelada aqui.
 
 ## Como resolver
 
-Use um dos seis códigos do conjunto canônico listados acima.
+Consulte a lista completa dos códigos aceitos em `GET /api/configuracao/vocabularios/tipos-banca` e use um deles.

@@ -1,7 +1,7 @@
 ---
-title: O código não pertence ao conjunto canônico das dezesseis fases
+title: O código não pertence ao conjunto canônico das catorze fases
 sidebar_label: Código fora do conjunto canônico
-description: Além do formato, o código da fase precisa ser um dos dezesseis códigos do vocabulário fechado do ciclo de vida do processo seletivo.
+description: Além do formato, o código da fase precisa ser um dos catorze códigos do vocabulário fechado do ciclo de vida do processo seletivo.
 code: uniplus.configuracao.fase_canonica.codigo_fora_do_conjunto_canonico
 http_status: 422
 situacao: publicado
@@ -26,19 +26,21 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 ## O que aconteceu
 
 O código informado respeita o formato (`^[A-Z_]+$`), mas não é um dos
-dezesseis códigos do conjunto canônico:
+catorze códigos do conjunto canônico:
 
-`INSCRICAO`, `SOLICITACAO_ISENCAO`, `HOMOLOGACAO`, `ENSALAMENTO`,
-`AVALIACAO`, `CLASSIFICACAO`, `RESULTADO_PRELIMINAR`, `RECURSOS`,
-`RESULTADO_FINAL`, `HETEROIDENTIFICACAO`, `AVALIACAO_BIOPSICOSSOCIAL`,
-`HABILITACAO`, `MATRICULA`, `HOMOLOGACAO_RESULTADO_FINAL`, `LISTA_ESPERA`,
-`CHAMADA`.
+`INSCRICAO`, `SOLICITACAO_ISENCAO`, `HOMOLOGACAO_INSCRICOES`, `ENSALAMENTO`,
+`AVALIACAO`, `CLASSIFICACAO`, `RESULTADO_FINAL`, `HETEROIDENTIFICACAO`,
+`AVALIACAO_BIOPSICOSSOCIAL`, `HABILITACAO`, `MATRICULA`,
+`HOMOLOGACAO_RESULTADO_FINAL`, `LISTA_ESPERA`, `CHAMADA`.
 
-As dezesseis fases estruturais nascem por migration (seed institucional); os
-demais atributos administráveis de cada uma — listados em `UNI-REQ-0139` —
-seguem por CRUD. O próprio conjunto de códigos aceitos é fixo em código, não
+Não há código para o resultado preliminar nem para o recurso: toda fase que publica um
+resultado preliminar publica nela mesma o definitivo do mesmo tipo de ato, e o
+recurso é configuração da fase ou da etapa.
+
+Os catorze tipos de fase já vêm cadastrados. Os atributos de cada tipo que
+podem ser alterados estão no `UNI-REQ-0139`. O próprio conjunto de códigos aceitos é fixo em código, não
 configurável.
 
 ## Como resolver
 
-Use um dos dezesseis códigos do conjunto canônico listados acima.
+Use um dos catorze códigos do conjunto canônico listados acima.

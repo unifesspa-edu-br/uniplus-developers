@@ -20,7 +20,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O campo `sucessoraCodigo` do cadastro de uma precedência (`POST /api/configuracao/admin/precedencias-fase`) não respeita o formato do código de fase: só letras maiúsculas e sublinhado, sem hífen e sem dígito, com no máximo 60 caracteres. Os espaços nas pontas são desconsiderados. Esta conferência é só de formato; um código bem formado ainda precisa ser um dos dezesseis do vocabulário de fases (ver [código da fase sucessora fora do conjunto canônico](./uniplus.configuracao.precedencia_fase.sucessora_fora_do_conjunto_canonico.mdx)).
+O campo `sucessoraCodigo` do cadastro de uma precedência (`POST /api/configuracao/admin/precedencias-fase`) não respeita o formato do código de fase: só letras maiúsculas e sublinhado, sem hífen e sem dígito, com no máximo 60 caracteres. Os espaços nas pontas são desconsiderados. Esta conferência é só de formato; um código bem formado ainda precisa ser um dos catorze do vocabulário de fases (ver [código da fase sucessora fora do conjunto canônico](./uniplus.configuracao.precedencia_fase.sucessora_fora_do_conjunto_canonico.mdx)).
 
 A recusa vem na lista `errors` da resposta, com `field` igual a `sucessoraCodigo`. Se o outro código também tiver problema, a recusa dele vem na mesma resposta, e nada é gravado.
 
