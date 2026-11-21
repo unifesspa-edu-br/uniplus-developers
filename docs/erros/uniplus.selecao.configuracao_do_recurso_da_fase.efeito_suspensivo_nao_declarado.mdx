@@ -1,0 +1,34 @@
+---
+title: O período de recurso precisa declarar um efeito suspensivo aceito
+sidebar_label: Efeito suspensivo não declarado
+description: O efeito suspensivo da 1ª instância é obrigatório e precisa ser uma das opções aceitas.
+code: uniplus.selecao.configuracao_do_recurso_da_fase.efeito_suspensivo_nao_declarado
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Leitura do documento de configuração do processo seletivo
+requisitos:
+  - UNI-REQ-0440
+rastreio:
+  - label: 'uniplus-api#2662'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2662
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A configuração do recurso de uma fase não declara o **efeito suspensivo** do recurso na 1ª instância, ou declara um que não é uma das opções aceitas. A declaração é obrigatória e não tem valor padrão (UNI-REQ-0440). A recusa sai com **422**, nada é gravado, e o campo recusado é `fases[i].regraRecurso.efeitoSuspensivo`, em que `i` é a posição da fase.
+
+A mensagem da resposta tem duas formas, e nenhuma repete o valor enviado:
+
+- campo ausente: "Declare o efeito suspensivo do recurso na 1ª instância. Opção aceita: sem efeito suspensivo.";
+- valor recusado: "O efeito suspensivo declarado não é uma das opções aceitas. Opção aceita: sem efeito suspensivo."
+
+## Como resolver
+
+Informe, em `efeitoSuspensivo`, o código `semEfeitoSuspensivo`: o recurso não suspende o processo, e as fases seguintes começam nas datas do cronograma, mesmo com recurso em análise. É a única opção aceita.

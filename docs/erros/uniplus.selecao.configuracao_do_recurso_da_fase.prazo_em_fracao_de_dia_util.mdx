@@ -1,0 +1,31 @@
+---
+title: O prazo do recurso em dias úteis exige número inteiro
+sidebar_label: Prazo em fração de dia útil
+description: O prazo do recurso em dias úteis precisa ser um número inteiro; prazo menor que um dia se declara em horas.
+code: uniplus.selecao.configuracao_do_recurso_da_fase.prazo_em_fracao_de_dia_util
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Leitura do documento de configuração do processo seletivo
+requisitos:
+  - UNI-REQ-0113
+rastreio:
+  - label: 'uniplus-api#2662'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2662
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O prazo declarado pela configuração do recurso de uma fase está em **dias úteis**, mas com valor fracionado, como 1,5. Isso vale para os dois prazos da configuração: o de **interposição**, na 1ª instância, e o da **2ª instância**. A recusa sai com **422**, nada é gravado, e o campo recusado é `fases[i].regraRecurso.prazoValor` (interposição) ou `fases[i].regraRecurso.prazoSegundaInstanciaValor` (2ª instância), em que `i` é a posição da fase.
+
+A mensagem da resposta diz qual dos prazos foi recusado: "O prazo de interposição em dias úteis exige número inteiro. Para prazo menor que um dia, informe em horas." ou a mesma frase com "prazo da 2ª instância". O dia útil é contado inteiro: cada dia não útil é pulado, e uma parte de dia útil não tem como ser contada (UNI-REQ-0113).
+
+## Como resolver
+
+Declare o prazo em dias úteis com valor inteiro, ou declare em horas o prazo que o edital prevê. Só avançam o relógio as horas situadas em dia útil.

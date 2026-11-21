@@ -1,0 +1,33 @@
+---
+title: O prazo do recurso não aceita dias corridos
+sidebar_label: Prazo em dias corridos
+description: O prazo do recurso corre em dias úteis ou em horas; dias corridos não são aceitos.
+code: uniplus.selecao.configuracao_do_recurso_da_fase.prazo_em_dias_corridos
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Leitura do documento de configuração do processo seletivo
+requisitos:
+  - UNI-REQ-0113
+rastreio:
+  - label: 'uniplus-api#2662'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2662
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O prazo declarado pela configuração do recurso de uma fase está em **dias corridos**. Isso vale para os dois prazos da configuração: o de **interposição**, na 1ª instância, e o da **2ª instância**. A recusa sai com **422**, nada é gravado, e o campo recusado é `fases[i].regraRecurso.prazoUnidade` (interposição) ou `fases[i].regraRecurso.prazoSegundaInstanciaUnidade` (2ª instância), em que `i` é a posição da fase.
+
+A mensagem da resposta diz qual dos prazos foi recusado: "O prazo de interposição deve ser informado em dias úteis ou em horas; dias corridos não são aceitos." ou a mesma frase com "prazo da 2ª instância".
+
+O prazo do recurso corre só em dia útil. É o prazo em que o candidato pode recorrer, e o tempo em que ele não tem como agir não pode consumi-lo. Declarar dia corrido faria o prazo encolher sempre que caísse em feriado ou fim de semana (UNI-REQ-0113).
+
+## Como resolver
+
+Reescreva o prazo na unidade que o edital usa: dias úteis (`diasUteis`), em valor inteiro, ou horas (`horas`). Se o edital diz "dois dias úteis", declare dois dias úteis, sem aproximar para dias corridos. Se o prazo é menor que um dia, declare-o em horas: fração de dia útil também é recusada, com [causa própria](./uniplus.selecao.configuracao_do_recurso_da_fase.prazo_em_fracao_de_dia_util.mdx).

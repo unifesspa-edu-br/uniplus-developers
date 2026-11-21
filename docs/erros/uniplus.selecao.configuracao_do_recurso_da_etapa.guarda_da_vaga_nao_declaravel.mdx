@@ -1,0 +1,31 @@
+---
+title: A guarda da vaga declarada não é uma das opções aceitas
+sidebar_label: Guarda da vaga não declarável da etapa
+description: A guarda da vaga declarada precisa ser uma das opções aceitas.
+code: uniplus.selecao.configuracao_do_recurso_da_etapa.guarda_da_vaga_nao_declaravel
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de etapas do processo seletivo
+  - Leitura do documento de configuração do processo seletivo
+requisitos:
+  - UNI-REQ-0348
+rastreio:
+  - label: 'uniplus-api#2662'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/2662
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+A configuração do recurso de uma etapa declara uma **guarda da vaga** que não é uma das opções aceitas (UNI-REQ-0348). A guarda da vaga diz se a vaga em disputa fica guardada até o resultado definitivo enquanto o recurso é julgado. A recusa sai com **422**, nada é gravado, e o campo recusado é `etapas[i].recursos[j].guardaDaVaga`, em que `i` é a posição da etapa e `j`, a do recurso na etapa.
+
+A mensagem da resposta diz: "A guarda da vaga não é uma das opções aceitas: guardar a vaga até o resultado definitivo ou não guardar a vaga. Sem a guarda informada, vale guardar até o resultado definitivo." Ela não repete o valor enviado.
+
+## Como resolver
+
+Informe, em `guardaDaVaga`, um destes códigos: `ateOResultadoDefinitivo` (a vaga fica guardada até o resultado definitivo) ou `naoGuarda` (a vaga não fica guardada durante o recurso). Se o campo ficar em branco, vale `ateOResultadoDefinitivo`. Com instância superior, só `ateOResultadoDefinitivo` é aceito; veja [guarda com instância superior](./uniplus.selecao.configuracao_do_recurso_da_etapa.nao_guarda_com_instancia_superior.mdx).
