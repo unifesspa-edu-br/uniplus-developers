@@ -9224,4 +9224,26 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0491',
+    titulo: 'A banca de 2ª instância sem recurso que ela julgue é gravada no rascunho e recusada na publicação e na retificação',
+    enunciado:
+      'A banca de análise de recursos de 2ª instância (UNI-REQ-0454) pode ser gravada no rascunho do processo mesmo sem recurso que ela julgue: o rascunho é montado aos poucos e a gravação não recusa. A publicação do processo e a retificação do processo já publicado, que gera nova versão, recusam com erro nomeado a banca de 2ª instância que não tem recurso para julgar. Na etapa, a banca de 2ª instância julga só os recursos da própria etapa, e é recusada quando nenhum deles admite instância superior. Na fase, a banca de 2ª instância julga o recurso da própria fase e os recursos das etapas dela que não têm banca de 2ª instância própria (a da etapa julga o recurso da etapa, e a da fase julga os das etapas que não têm a sua), e é recusada quando o recurso da fase não admite instância superior e nenhuma etapa dela, sem banca de 2ª instância própria, tem recurso que a admita; se todas as etapas com recurso que admite instância superior já têm a sua banca, a da fase sobra e é recusada. Fase e etapa têm cada uma o seu erro, com descrição pública no catálogo de erros do portal (/erros/uniplus.selecao.banca.fase_com_banca_da_segunda_instancia_sem_recurso_para_julgar e /erros/uniplus.selecao.banca.etapa_com_banca_da_segunda_instancia_sem_recurso_para_julgar). A mensagem de erro cita só o código da fase, "a etapa na posição {n}" e o rótulo fixo do tipo com a posição da banca, e nunca o nome da etapa, texto digitado nem dado de pessoa. A regra complementa o UNI-REQ-0454, que exige a banca onde o recurso admite instância superior e admite uma única por fase ou etapa; aqui se recusa a banca que sobra. Decisões do líder técnico de 21/11/2026. A regra não trata dado pessoal. Exemplo: o "PSR 2027" grava, no rascunho, a banca de 2ª instância na etapa da posição 2, cujo recurso ainda não admite instância superior, e a gravação é aceita; ao publicar, o processo é recusado até que o recurso dessa etapa passe a admitir instância superior ou a banca seja retirada. Já a fase de avaliação do "PSR 2027" com banca de 2ª instância, em que a etapa "Entrevista" admite instância superior e tem banca de 2ª instância própria, e nem o recurso da fase nem o de outra etapa admitem, é recusada: a banca da fase não teria recurso para julgar.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0139',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'o rascunho com banca de 2ª instância sem recurso que ela julgue é gravado sem recusa; a publicação com a banca de 2ª instância numa etapa sem recurso da etapa que admita instância superior é recusada com o erro nomeado da etapa; a publicação com a banca de 2ª instância numa fase em que o recurso da fase não admite instância superior e nenhuma etapa dela sem banca de 2ª instância própria tem recurso que a admita é recusada com o erro nomeado da fase, inclusive quando todas as etapas com esse recurso já têm a sua banca; a retificação que deixa a banca de 2ª instância nessa situação é recusada com o mesmo erro, e a versão publicada não muda; com recurso que ela julgue, a publicação é aceita (na etapa, o da etapa; na fase, o da fase ou o de uma etapa dela sem banca de 2ª instância própria); a banca de 2ª instância na fase e outra na etapa são aceitas quando cada uma tem recurso que julgue; a mensagem de cada erro cita só o código da fase, a posição da etapa e o rótulo do tipo com a posição da banca, sem nome de etapa, texto digitado nem dado de pessoa.',
+    verificacao:
+      'testes automatizados da gravação do rascunho, da publicação e da retificação, na fase e na etapa, com a banca de 2ª instância com e sem recurso que ela julgue, da banca da fase atendendo o recurso da fase, o de uma etapa sem banca própria e nenhum (quando todas as etapas com instância superior têm a sua), da banca na fase e na etapa, e do conteúdo das mensagens, sem nome de etapa nem texto digitado (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
 ];
