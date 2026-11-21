@@ -18,7 +18,7 @@ O texto descreve o comportamento de negócio em linguagem corrente. Cada assunto
 
 - **Quantas cotas o candidato ocupa ao mesmo tempo.** Uma fonte limita a inscrição a uma reserva; outra, mais recente, define um conjunto de várias reservas simultâneas (por exemplo, cor/raça e renda juntas). Este documento adota o conjunto múltiplo, alinhado à Lei 14.723/2023 — a confirmar na especificação.
 - **Limite de renda na fronteira exata.** A autodeclaração implementada no sistema pergunta "renda per capita **igual ou inferior** a 1 salário mínimo", aderente à Lei 12.711/2012 (art. 1º, parágrafo único). O registro de requisitos (`UNI-REQ-0076`) ainda descreve "inferior a" — divergência a reconciliar; o PO confirma o texto final e o tratamento de quem tem renda exatamente igual a 1 salário mínimo.
-- **Cor/raça de quem não é de escola pública.** Decidido pelo PO em 06/10/2026: a autodeclaração de cor/raça faz parte do conjunto básico (`UNI-REQ-0151`) e é coletada de todos os candidatos; só o opt-in de concorrer às vagas de pretos, pardos e indígenas segue o gate de escola pública.
+- **Cor/raça de quem não é de escola pública.** Decidido pelo PO em 06/10/2026: a autodeclaração de cor/raça faz parte do conjunto básico (`UNI-REQ-0151`) e é coletada de todos os candidatos; só o opt-in de concorrer às vagas de pretos, pardos e indígenas segue a verificação de escola pública.
 
 ---
 
@@ -49,7 +49,7 @@ Nem toda pergunta aparece para todo candidato. Cada campo pode ter **pré-condi�
 
 - abrir a pergunta "concorrer à cota X?" só para quem é elegível a X — pelo "sim" na autodeclaração ou, no caso da escola pública, pelo cálculo a partir da origem escolar;
 - ocultar o bloco quilombola para quem se declara indígena (exclusão mútua);
-- só perguntar o opt-in de cor/raça e as perguntas de quilombola e renda para quem optou pelas cotas da lei, isto é, é de escola pública e deseja concorrer às vagas de escola pública (gate de escola pública). A pergunta de deficiência fica fora do gate: quem não optou pelas cotas pode concorrer à ação afirmativa `AC_PCD` (`UNI-REQ-0142`).
+- só perguntar o opt-in de cor/raça e as perguntas de quilombola e renda para quem optou pelas cotas da lei, isto é, é de escola pública e deseja concorrer às vagas de escola pública (verificação de escola pública). A pergunta de deficiência fica fora dessa verificação: a pessoa com deficiência pode concorrer à ação afirmativa `AC_PCD` tenha ou não optado pelas cotas da lei (`UNI-REQ-0142`, `UNI-REQ-0266`).
 
 A mesma dependência vale para as outras regras do campo (`UNI-REQ-0145`): uma pergunta pode ser **obrigatória** só para quem deu determinada resposta antes, e as **opções** de uma pergunta podem vir de respostas anteriores — os municípios da UF escolhida, ou a opção de lista de espera escolhida entre as opções de curso que o próprio candidato marcou. A regra pertence ao formulário, não ao dado: o mesmo dado pode ter regras diferentes em outro modelo de formulário ou em outro processo.
 
@@ -76,7 +76,7 @@ Uma consequência importante da transição para **não se aplica**: quando uma 
 
 A **modalidade é um fato derivado**: o sistema a calcula a partir das autodeclarações e opt-ins, aplicando a composição da Lei de Cotas expressa como **configuração** (`UNI-REQ-0075`, `UNI-REQ-0076`).
 
-A regra de derivação é uma **lista de regrinhas** do tipo "**quando** tais condições valem, **contribui** com tal modalidade". A avaliação **soma** (une) as modalidades de todas as regrinhas cujas condições são verdadeiras; regra falsa ou não-aplicável não contribui. A composição da Lei de Cotas — o par autodeclaração+concorrer, a concorrência dupla (Lei 14.723/2023), a relação entre cotas de renda e independentes de renda, as exclusões mútuas, o gate de escola pública, a exclusividade entre cota da lei e ação afirmativa, que tem a `AC_PCD` como exceção (`UNI-REQ-0142`) — é toda expressa nessas regrinhas, não em código que ramifica por tipo de processo.
+A regra de derivação é uma **lista de regrinhas** do tipo "**quando** tais condições valem, **contribui** com tal modalidade". A avaliação **soma** (une) as modalidades de todas as regrinhas cujas condições são verdadeiras; regra falsa ou não-aplicável não contribui. A composição da Lei de Cotas — o par autodeclaração+concorrer, a concorrência dupla (Lei 14.723/2023), a relação entre cotas de renda e independentes de renda, as exclusões mútuas, a verificação de escola pública, a exclusividade entre cota da lei e ação afirmativa, que tem a `AC_PCD` como exceção (`UNI-REQ-0142`) — é toda expressa nessas regrinhas, não em código que ramifica por tipo de processo.
 
 Dois pontos de negócio importantes:
 
@@ -112,7 +112,7 @@ Cada comportamento acima corresponde a um requisito com código estável na [tab
 | `UNI-REQ-0070` | Consequência por nó e fronteira ativa de emissão | Consequência de documento por nó e fronteira ativa de emissão (seção 6). |
 | `UNI-REQ-0071` | Snapshot conjunto autossuficiente de documentos exigidos | Conjunto congelado autossuficiente na publicação. |
 | `UNI-REQ-0072` | Fatos declarados por par elegibilidade + opt-in | Autodeclaração e escolha de concorrer (seção 2). |
-| `UNI-REQ-0073` | Grafo de pré-condições da coleta e gate de escola pública | Formulário condicional e exclusões (seção 3). |
+| `UNI-REQ-0073` | Grafo de pré-condições da coleta e verificação de escola pública | Formulário condicional e exclusões (seção 3). |
 | `UNI-REQ-0074` | Estado tipado não-aplicável versus indeterminado | "Não se aplica" versus "pendente" (seção 4). |
 | `UNI-REQ-0075` | Fato derivado com regra de derivação congelada | Regra "quando/contribui" (seção 5). |
 | `UNI-REQ-0076` | Derivação de modalidade por configuração (Lei de Cotas) | Cálculo da modalidade, oferta do processo e restrição por curso (seção 5). |
