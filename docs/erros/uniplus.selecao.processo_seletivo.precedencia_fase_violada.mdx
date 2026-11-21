@@ -29,10 +29,11 @@ cronograma que contém só uma delas não viola nada. A mensagem da resposta cit
 as duas fases e as ordens declaradas. Nada é gravado, e o cronograma anterior
 continua como estava.
 
-A recusa vale também na publicação e na retificação em ato único. Nelas, o campo é
-`/cronograma/fases/{i}`, em que `i` é a posição da fase no documento, e a resposta
-traz o código da fase em `identificadores`, no formato
-`[{"lista": "fases", "identificador": "<código da fase>"}]`.
+O campo da recusa é a `ordem` da fase sucessora, em que a posição `i` é a dela:
+ao definir o cronograma (`PUT`), `fases[i].ordem`, sem identificadores; na
+publicação e na retificação em ato único, `/cronograma/fases/{i}/ordem`, com o
+código da fase sucessora em `identificadores`, no formato
+`[{"lista": "fases", "identificador": "<código da fase sucessora>"}]`.
 
 Se a ordem está invertida e o edital marcou uma das fases com "no mesmo momento
 da anterior", de modo que a marca junta as duas, a recusa é a de

@@ -34,11 +34,17 @@ A recusa vale ao definir o cronograma e também na publicação e na retificaç�
 ato único, porque o cadastro de precedência pode mudar depois de o cronograma ser
 gravado. O campo da recusa depende da operação:
 
-- ao definir o cronograma (`PUT`), é o `inicio` da fase da sucessora, em `fases[i]`
-  (campo exato a conferir com a API);
+- ao definir o cronograma (`PUT`), é `fases[i].inicio`, em que `i` é a posição, no
+  corpo enviado, da fase sucessora do par de precedência (a que vem depois); a
+  resposta não traz identificadores;
 - na publicação e na retificação, é `/cronograma/fases/{i}/inicio`, em que `i` é a
-  posição da fase no documento, e a resposta traz o código da fase em
-  `identificadores`, no formato `[{"lista": "fases", "identificador": "<código da fase>"}]`.
+  posição da fase sucessora no documento, e a resposta traz o código da fase
+  sucessora em `identificadores`, no formato
+  `[{"lista": "fases", "identificador": "<código da fase sucessora>"}]`.
+
+A recusa só acontece quando a ordem não está invertida e o cadastro não permite a
+sobreposição; com a ordem invertida, a recusa é a de
+[precedência violada](./uniplus.selecao.processo_seletivo.precedencia_fase_violada.mdx).
 
 ## Como resolver
 
