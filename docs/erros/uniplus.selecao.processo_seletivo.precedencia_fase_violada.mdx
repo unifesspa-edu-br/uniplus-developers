@@ -1,5 +1,5 @@
 ---
-title: A ordem das fases viola uma precedência do cadastro
+title: A ordem declarada viola a precedência entre fases do cadastro
 sidebar_label: Precedência entre fases violada
 description: Uma fase que precede outra no cadastro de fases precisa ter ordem menor no cronograma do processo.
 code: uniplus.selecao.processo_seletivo.precedencia_fase_violada
@@ -8,6 +8,8 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
 requisitos: []
 ---
 
@@ -26,6 +28,11 @@ A recusa só considera relações em que as duas fases estão no cronograma; o
 cronograma que contém só uma delas não viola nada. A mensagem da resposta cita
 as duas fases e as ordens declaradas. Nada é gravado, e o cronograma anterior
 continua como estava.
+
+A recusa vale também na publicação e na retificação em ato único. Nelas, o campo é
+`/cronograma/fases/{i}`, em que `i` é a posição da fase no documento, e a resposta
+traz o código da fase em `identificadores`, no formato
+`[{"lista": "fases", "identificador": "<código da fase>"}]`.
 
 Se a ordem está invertida e o edital marcou uma das fases com "no mesmo momento
 da anterior", de modo que a marca junta as duas, a recusa é a de
