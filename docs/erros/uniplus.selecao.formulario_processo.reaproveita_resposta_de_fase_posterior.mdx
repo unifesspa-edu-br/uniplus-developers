@@ -38,10 +38,16 @@ candidato já enviou, da mesma fase ou de fase anterior na ordem do cronograma
 posterior ainda não existe. A recusa sai com **422**, e o `detail` diz o fato, o
 formulário que o coleta e a fase de cada um.
 
-A janela de isenção conta como contemporânea da fase de inscrição com que abre
-(UNI-REQ-0106): o pedido de isenção, mesmo ligado a uma fase própria ordenada
-antes da inscrição, reaproveita sem recusa a resposta do formulário obrigatório
-da inscrição que o candidato já enviou.
+O pedido de isenção, mesmo ligado a uma fase própria ordenada antes da inscrição,
+só abre depois de o candidato enviar o formulário obrigatório da inscrição
+(UNI-REQ-0149). Por isso ele reaproveita, sem recusa, a resposta desse formulário
+já enviado, e isso não depende da ordem das fases nem da escolha "começa no mesmo
+momento da anterior" (UNI-REQ-0144).
+
+A exigência de documento do pedido de isenção é diferente: ela segue a ordem do
+cronograma. Se a inscrição vem depois da isenção e o edital não marcou a
+inscrição com "começa no mesmo momento da anterior", a recusa é
+[`fato_resolvido_em_fase_posterior`](./uniplus.selecao.documento_exigido.fato_resolvido_em_fase_posterior.mdx).
 
 ## Como resolver
 
