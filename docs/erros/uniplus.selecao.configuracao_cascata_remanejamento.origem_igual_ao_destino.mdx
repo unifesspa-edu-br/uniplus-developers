@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de cascata de remanejamento do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0056
 rastreio:
@@ -36,13 +35,6 @@ coexistir com
 [`ordem_invalida`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_invalida.mdx)
 do mesmo item (checagens independentes, ADR-0125) e com os mesmos erros de
 outros itens da lista `destinos`.
-
-Alcançável tanto na definição quanto no descarte de retificação: nos dois
-caminhos os códigos de origem e destino de cada posição são lidos sem que
-a leitura compare um com o outro — a entidade é quem confere a igualdade,
-depois que os dois já chegaram até ela. No descarte, diferente da
-definição, a reconstrução não acumula: para na primeira violação que
-encontrar.
 
 ## Como resolver
 

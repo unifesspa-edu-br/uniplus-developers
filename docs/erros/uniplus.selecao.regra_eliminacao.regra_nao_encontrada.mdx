@@ -32,10 +32,10 @@ falhar interrompe a passada — as regras seguintes do mesmo payload não
 chegam a ser conferidas, e a resposta traz só esta violação, sem acumular
 com nenhuma outra.
 
-Diferente da maioria dos códigos desta série, este **não** aparece no
-descarte de retificação — o envelope congelado guarda a regra por valor
+Diferente da maioria dos códigos desta série, este **não** aparece na
+leitura das versões já publicadas (na retificação em ato único) — o envelope congelado guarda a regra por valor
 (código, versão e hash já resolvidos no momento da definição), sem
-reconsultar o `rol_de_regras` na restauração.
+reconsultar o `rol_de_regras` na leitura.
 
 ## Como resolver
 

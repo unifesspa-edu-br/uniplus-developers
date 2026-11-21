@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0068
 rastreio:
@@ -41,11 +40,6 @@ obrigatória); ausente, cai em distinção pura (bastam N apresentações
 diferentes, sem exigir quais). Sequencial: a primeira violação
 encontrada na criação do nó interrompe o processamento; nunca acumula
 com nenhuma outra causa desta série.
-
-Alcançável tanto na definição quanto no descarte de retificação: o
-envelope congelado lê `ocorrenciasEsperadas` como array cru, sem cruzar
-com a `chaveDistincao` do mesmo nó — essa coerência só é conferida
-quando o nó é reconstruído para validar invariantes.
 
 ## Como resolver
 

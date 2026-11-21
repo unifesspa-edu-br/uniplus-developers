@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0070
 rastreio:
@@ -34,10 +33,6 @@ esteja fundamentando ali.
 [`consequencia_invalida`](./uniplus.selecao.no_exigencia.consequencia_invalida.mdx)
 já ter passado (ou de `consequencia` estar ausente). Sequencial: nunca
 acumula com nenhuma outra causa desta série.
-
-No descarte de retificação, é alcançável: o envelope congelado lê
-`basesLegais` e `consequencia` de todo nó separadamente, sem cruzar os
-dois valores entre si.
 
 > **Lacuna conhecida.** Na definição, um payload com `consequencia`
 > ausente (ou em branco) e `basesLegais` não vazia é interceptado antes

@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de classificação do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 rastreio:
   - label: 'uniplus-api#781'
@@ -46,17 +45,6 @@ de definição também acumula
 [`eliminacao_enem_fora_de_processo_enem`](./uniplus.selecao.processo_seletivo.eliminacao_enem_fora_de_processo_enem.mdx)
 — as duas causas são conferidas de forma independente, e nenhuma interrompe
 a passada da outra.
-
-No descarte de retificação, essa acumulação não é observável — o codec só
-propaga ao chamador a primeira violação que a reconstrução acumular
-internamente. `eliminacao_indevida` é a última checagem do ramo
-importado (depois de `arredondamento_indevido` e
-`casas_arredondamento_indevido`, que vencem a prioridade quando também se
-aplicam), mas vem **antes** de `eliminacao_enem_fora_de_processo_enem` — que
-só é checada depois de qualquer um dos dois ramos. Então, se um mesmo
-envelope corrompido violasse as duas ao mesmo tempo (regras de eliminação
-incoerentes com a importação **e** sem amparo em `baseadoEmEnem`), é sempre
-`eliminacao_indevida` que o descarte devolve, nunca a causa do ENEM.
 
 ## Como resolver
 

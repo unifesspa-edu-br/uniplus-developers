@@ -10,7 +10,6 @@ emitido_em:
   - Gravação do formulário do processo
   - Publicação inicial do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
 requisitos:
   - UNI-REQ-0144
 ---
@@ -38,8 +37,8 @@ A recusa sai em duas ocasiões. Na gravação do formulário
 array `errors[]`, às recusas das etapas do mesmo formulário (a fase que não
 consta do cronograma sai com
 [`fase_fora_do_cronograma`](./uniplus.selecao.formulario_processo.fase_fora_do_cronograma.mdx)).
-Na publicação, na retificação em ato único e no fechamento da sessão editorial, é
-uma pendência da configuração, conferida na mesma ordem dos três caminhos: se a
+Na publicação e na retificação em ato único, é
+uma pendência da configuração, conferida na mesma ordem dos dois caminhos: se a
 fase de algum formulário não atende a finalidade, a primeira pendência decide o
 código devolvido. Isso pode acontecer também depois da gravação, se a fase do
 cronograma deixa de coletar a inscrição ou o pedido de isenção.
@@ -50,5 +49,5 @@ Ligue o formulário à fase do cronograma que atende a finalidade dele, regravan
 o formulário com o `faseId` dessa fase. Se o cronograma não tem a fase certa
 (a que coleta a inscrição, a que abre o pedido de isenção ou a de habilitação),
 inclua-a pela definição do cronograma de fases e depois grave o formulário. Na
-publicação e no fechamento da retificação, regrave o formulário e repita a
+publicação e na retificação em ato único, regrave o formulário e repita a
 operação.

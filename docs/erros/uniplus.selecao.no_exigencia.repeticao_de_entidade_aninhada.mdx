@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0069
 rastreio:
@@ -42,9 +41,8 @@ Diferente da maioria das causas de grupo desta série, esta **não** é
 sombreada por uma regra de validação de payload equivalente — o
 aninhamento é invariante de árvore inteira, que uma regra local por
 campo não consegue conferir; o validator de payload delibera
-explicitamente deixar essa checagem com o domínio. Alcançável tanto na
-definição quanto no descarte de retificação: nos dois caminhos, cada nó
-é reconstruído bottom-up chamando a mesma checagem.
+explicitamente deixar essa checagem com o domínio. Alcançável na
+definição: cada nó é reconstruído bottom-up chamando a mesma checagem.
 
 ## Como resolver
 

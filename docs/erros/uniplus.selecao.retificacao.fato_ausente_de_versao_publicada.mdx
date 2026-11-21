@@ -7,9 +7,7 @@ http_status: 422
 situacao: publicado
 modulo: Seleção
 emitido_em:
-  - Definição dos itens, das seções ou dos termos de um formulário do processo, com retificação em curso
-  - Definição dos documentos exigidos, com retificação em curso
-  - Fechamento de sessão editorial
+  - Retificação em ato único
 requisitos:
   - UNI-REQ-0144
 rastreio:
@@ -27,7 +25,7 @@ Cada processo tem um formulário por finalidade (inscrição, isenção da taxa,
 
 Na retificação, a versão nova cita, num formulário, num termo ou numa condição de documento exigido, um fato coletado pelo formulário de **outra finalidade**, e esse formulário não coletou o fato em **todas** as versões já publicadas do edital: basta faltar em uma delas. A conferência é por finalidade: o formulário que cita os próprios fatos segue a versão dele mesmo e não é recusado por esta causa. Também vale para o fato derivado: se ele depende de um fato coletado nessas condições, a recusa é a mesma. A finalidade que ainda não tinha formulário em nenhuma versão publicada não é recusada, porque ninguém o preencheu antes.
 
-A recusa sai com **422**, e o `detail` diz o fato, quem o cita e a finalidade do formulário que deveria tê-lo coletado. Quando a citação é a um fato derivado, o `detail` diz também de qual fato coletado ele depende. A conferência só existe com retificação em curso: fora dela nenhum candidato preencheu versão anterior, e a recusa não ocorre. Ela é feita na gravação dos itens, das seções e dos termos do formulário e na definição dos documentos exigidos, e de novo no fechamento da sessão editorial, que alcança também a regra de derivação alterada na retificação.
+A recusa sai com **422**, e o `detail` diz o fato, quem o cita e a finalidade do formulário que deveria tê-lo coletado. Quando a citação é a um fato derivado, o `detail` diz também de qual fato coletado ele depende. A conferência só existe na retificação: sem versão publicada nenhum candidato preencheu versão anterior, e a recusa não ocorre. Ela é feita no congelamento da versão nova e alcança também a regra de derivação alterada na retificação.
 
 O motivo é de negócio: o candidato pode ter preenchido o formulário de origem em qualquer versão publicada (UNI-REQ-0144). Exemplo: o formulário de inscrição passa a perguntar a "Escola de conclusão do ensino médio" só depois da retificação, e o formulário de habilitação passa a citar essa resposta. Quem se inscreveu antes da retificação nunca a informou, e a habilitação dele não teria o dado.
 
@@ -41,4 +39,4 @@ Escolha uma saída, conforme o que a versão nova precisa:
 - **cite um fato que todas as versões coletam.** Use, do formulário de outra finalidade, só fatos que ele coleta desde a primeira publicação;
 - **pergunte no formulário que cita o fato.** O fato tem um só formulário produtor no processo, então o campo precisa sair do formulário de origem e entrar no que o cita, nunca ficar nos dois. Isso só vale para um fato que a API aceita retirar do formulário de origem: um fato já coletado pela inscrição publicada não pode ser retirado, mesmo sem citações, e nesse caso resta retirar a citação ou citar outro fato. Quando a retirada é aceita, retire a citação, mova o campo e volte a citá-lo, tudo na mesma retificação.
 
-Depois de qualquer das saídas, regrave o que foi recusado e feche a retificação.
+Depois de qualquer das saídas, envie a retificação de novo.

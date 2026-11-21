@@ -10,8 +10,6 @@ emitido_em:
   - Definição de distribuição de vagas do processo seletivo
   - Simulação da distribuição de vagas do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 ---
 
@@ -40,8 +38,7 @@ verificações do item, não acumula com elas. O processamento para na primeira 
 lista que falhar. A simulação da distribuição devolve a mesma recusa, sem gravar nada.
 
 Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
-publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
-retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+publicada, na retificação em ato único. Nesse caso a recusa sai como uma violação única (sem a lista `errors[]`) e se
 refere à versão congelada, não ao pedido enviado.
 
 ## Como resolver
@@ -54,7 +51,6 @@ Conforme a intenção:
   selecionadas que tenham vagas suficientes.
 - **O `voBase` está baixo:** corrija o `voBase` para o total que o edital autoriza.
 
-Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
-descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+Se o erro apareceu na retificação em ato único, o pedido enviado agora não é a causa: o sistema recusou a
 configuração congelada da versão publicada, e regravar a configuração do processo não a
 corrige. A causa é investigada pela equipe técnica do Uni+.

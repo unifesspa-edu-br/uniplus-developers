@@ -45,7 +45,7 @@ código através de `ChaveDistincaoCodigo.FromCodigo`, que mapeia qualquer
 valor não reconhecido para o sentinela `Nenhuma` — um membro **definido**
 do enum — então o guard de domínio (`!Enum.IsDefined`) nunca encontra um
 valor indefinido para recusar; a folha simplesmente é criada como "sem
-qualificação". Pelo descarte de retificação também não: o envelope
+qualificação". Pela leitura de uma versão já publicada também não: o envelope
 congelado lê `chaveDistincao` contra o mesmo catálogo fechado, e um
 código não reconhecido ali é recusado ainda na leitura, como
 `envelope_codec.envelope_malformado`, antes de a entidade ser

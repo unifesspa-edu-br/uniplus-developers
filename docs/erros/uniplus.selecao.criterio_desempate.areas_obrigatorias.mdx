@@ -10,8 +10,6 @@ emitido_em:
   - Definição de critérios de desempate do processo seletivo
   - Publicação inicial do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 ---
 
@@ -29,16 +27,12 @@ comparar. A recusa vem em `criterios[n].areas`.
 Na definição dos critérios de desempate
 (`PUT .../processos-seletivos/{id}/criterios-desempate`) a recusa acumula com as
 dos demais critérios no array `errors[]`; quando a lista de áreas é vazia ela é a
-única recusa de área daquele critério. Na publicação, na retificação em ato único
-e no fechamento da sessão editorial é uma pendência da configuração: a conferência
-roda na ordem fixa dos portões e devolve a primeira pendência, e a mensagem traz a
-ordem do critério. No descarte da retificação, a configuração congelada é lida de
-volta e a primeira recusa interrompe a leitura.
+única recusa de área daquele critério. Na publicação e na retificação em ato único
+é uma pendência da configuração: a conferência roda na ordem fixa dos portões e
+devolve a primeira pendência, e a mensagem traz a ordem do critério.
 
 ## Como resolver
 
 Na definição, informe ao menos uma área no critério, ou retire o critério da
-ordem de desempate. Na publicação e no fechamento da retificação, regrave os
+ordem de desempate. Na publicação e na retificação em ato único, corrija os
 critérios de desempate com a lista de áreas preenchida e repita a operação.
-No descarte da retificação, regravar não corrige a versão congelada: a causa deve
-ser investigada pela equipe técnica do Uni+.

@@ -8,8 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Retificação em ato único
-  - Fechamento de sessão editorial
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 ---
 
@@ -26,8 +24,8 @@ vez, e a mensagem do erro traz o rótulo do grupo repetido.
 Na definição da classificação esta situação não é esperada: o quadro é copiado de uma única
 resolução do cadastro de Pesos por Área, que admite uma linha ativa por grupo em cada
 resolução. A conferência existe para a leitura da configuração congelada da versão publicada,
-na retificação em ato único, no fechamento da sessão editorial e no descarte de retificação.
-Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se refere à
+na retificação em ato único.
+Nesse caso a recusa sai como uma violação única (sem a lista `errors[]`) e se refere à
 versão congelada, não ao pedido enviado.
 
 ## Como resolver

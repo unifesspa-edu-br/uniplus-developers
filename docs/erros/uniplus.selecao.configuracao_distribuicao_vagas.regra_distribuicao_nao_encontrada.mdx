@@ -36,12 +36,6 @@ payload cuja regra não resolve interrompe a passada — as distribuições
 seguintes do mesmo payload não chegam a ser conferidas, e a resposta traz
 só esta violação, sem acumular com nenhuma outra.
 
-Diferente da maioria dos códigos desta série, este **não** aparece no
-descarte de retificação: o envelope congelado guarda a regra por valor
-(código, versão e hash já resolvidos no momento da definição), e a
-reconstrução do grafo recompõe essa referência direto do envelope, sem
-reconsultar o `rol_de_regras`.
-
 ## Como resolver
 
 Confirme, no catálogo de regras (`rol_de_regras`), que o código e a versão

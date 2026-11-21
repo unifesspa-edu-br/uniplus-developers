@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0068
 rastreio:
@@ -37,13 +36,6 @@ ramo `OCORRENCIA`, só quando o campo foi de fato informado (`null`
 segue para o modo de distinção pura sem passar por aqui). Sequencial: a
 primeira violação encontrada na criação do nó interrompe o
 processamento; nunca acumula com nenhuma outra causa desta série.
-
-Alcançável tanto na definição quanto no descarte de retificação: no
-envelope congelado a chave `ocorrenciasEsperadas` é sempre exigida (a
-ausência da chave em si é recusada como envelope malformado), mas o
-valor distingue ausência (`null`) de uma lista vazia (`[]`) — as duas
-formas atravessam a leitura sem diferença de tratamento, e só a criação
-do nó recusa a segunda.
 
 ## Como resolver
 
