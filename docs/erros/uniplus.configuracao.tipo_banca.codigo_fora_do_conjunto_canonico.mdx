@@ -1,7 +1,7 @@
 ---
 title: O código não pertence ao conjunto canônico dos tipos de banca
 sidebar_label: Código fora do conjunto canônico
-description: Além do formato, o código do tipo de banca precisa ser um dos dez códigos do vocabulário fechado das bancas da seleção.
+description: Além do formato, o código do tipo de banca precisa ser um dos tipos de banca do catálogo da seleção.
 code: uniplus.configuracao.tipo_banca.codigo_fora_do_conjunto_canonico
 http_status: 422
 situacao: publicado
@@ -23,23 +23,13 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O código informado respeita o formato (`^[A-Z_]+$`), mas não é um dos
-dez códigos do conjunto canônico: `BANCA_ANALISE_DOCUMENTAL`,
-`BANCA_ENTREVISTA`, `BANCA_CORRECAO_REDACOES`, `BANCA_ANALISE_RECURSOS`,
-`BANCA_HETEROIDENTIFICACAO`, `BANCA_BIOPSICOSSOCIAL`,
-`BANCA_ANALISE_RECURSOS_SEGUNDA_INSTANCIA` e os tipos da banca de
-homologação das inscrições, da banca de importação das notas do INEP e da
-banca de importação de candidatos, cujos códigos o cadastro de tipos de banca
-publica.
+O código informado respeita o formato (`^[A-Z_]+$`), mas não é o de nenhum
+tipo de banca do catálogo da seleção, que é fechado: o cadastro aceita só os
+códigos dos tipos que o catálogo traz.
 
-Este cadastro entrega o **tipo** da banca (análise documental, entrevista,
-correção de redações, análise de recursos, análise de recursos em 2ª instância,
-heteroidentificação étnico-racial, avaliação biopsicossocial, homologação das
-inscrições e as duas importações), com o papel dele (avalia o mérito, julga a
-1ª instância, julga a 2ª instância ou importa dados) e as duas marcas
-administráveis. A composição da banca (membros, atas, deliberações) não é
-modelada aqui.
+Este cadastro entrega o **tipo** da banca. A composição da banca (membros,
+atas, deliberações) não é modelada aqui.
 
 ## Como resolver
 
-Consulte a lista completa dos códigos aceitos em `GET /api/configuracao/vocabularios/tipos-banca` e use um deles.
+Use o código de um tipo de banca do catálogo, que a consulta `GET /api/configuracao/tipos-banca` lista.
