@@ -1,0 +1,62 @@
+---
+title: Fases ligadas por precedência não podem estar no mesmo momento
+sidebar_label: Precedência entre fases no mesmo momento
+description: Duas fases que o cadastro de precedência põe uma antes da outra estão marcadas para acontecer no mesmo momento.
+code: uniplus.selecao.processo_seletivo.fases_com_precedencia_no_mesmo_momento
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+requisitos:
+  - UNI-REQ-0485
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O cadastro de fases diz que certas fases vêm antes de outras: por exemplo,
+`RESULTADO_FINAL` antes de `HABILITACAO`. Quando o edital marca uma fase com "no
+mesmo momento da anterior" (UNI-REQ-0485), ela passa a acontecer no mesmo momento
+da fase que vem antes na lista. Se as duas fases ficam no mesmo momento e o
+cadastro de precedência põe uma antes da outra, a ordem do cadastro deixa de
+valer, e a recusa sai com **422**.
+
+Os códigos das duas fases vêm do cadastro de precedência, e não do que a pessoa
+digitou. A mensagem da resposta diz: "A fase '*códigoAntecessora*' vem antes da fase
+'*códigoSucessora*' no cadastro de precedência, e as duas estão marcadas para
+acontecer no mesmo momento. Retire a marca "no mesmo momento da anterior" que junta
+as duas ou separe-as na ordem do cronograma." A recusa fica na fase de maior
+ordem. Vale também para a primeira e a terceira fase de um grupo no mesmo momento,
+mesmo sem serem vizinhas.
+
+Se a ordem do cronograma está invertida em relação ao cadastro **e** a marca junta
+as duas fases, vale esta recusa, e não a de
+[`precedencia_fase_violada`](./uniplus.selecao.processo_seletivo.precedencia_fase_violada.mdx).
+Quando a ordem está invertida e as duas fases não estão juntas pela marca, a
+recusa continua sendo a de precedência violada.
+
+O campo da recusa depende da operação:
+
+- ao definir o cronograma (`PUT`), é `fases[i].noMesmoMomentoDaAnterior`, sem
+  identificadores;
+- na publicação e na retificação em ato único, é
+  `/cronograma/fases/{i}/noMesmoMomentoDaAnterior`, com o código da fase em
+  `identificadores`, no formato `[{"lista": "fases", "identificador": "<código da fase>"}]`.
+
+A relação de precedência pode ser cadastrada depois de o cronograma ser gravado;
+por isso a conferência é feita de novo na publicação. Nada é gravado, e o
+cronograma anterior continua como estava.
+
+## Como resolver
+
+Escolha uma das saídas e envie de novo:
+
+- retire a marca "no mesmo momento da anterior" que junta as duas fases;
+- ou separe as duas fases na ordem do cronograma, deixando antes a que vem antes
+  no cadastro.

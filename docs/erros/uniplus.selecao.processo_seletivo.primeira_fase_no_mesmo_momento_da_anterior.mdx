@@ -1,0 +1,49 @@
+---
+title: A primeira fase do cronograma não pode estar no mesmo momento da anterior
+sidebar_label: Primeira fase no mesmo momento da anterior
+description: A primeira fase do cronograma está marcada para acontecer no mesmo momento da anterior, mas não há fase antes dela.
+code: uniplus.selecao.processo_seletivo.primeira_fase_no_mesmo_momento_da_anterior
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição do cronograma de fases do processo seletivo
+  - Publicação inicial do processo seletivo
+  - Retificação em ato único
+requisitos:
+  - UNI-REQ-0485
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+O edital pode marcar uma fase, a partir da segunda, com "no mesmo momento da
+anterior" (UNI-REQ-0485). Com essa marca, a fase continua na posição dela na lista
+e passa a acontecer no mesmo momento da fase que vem antes. A primeira fase do
+cronograma não tem fase antes dela, então não pode receber a marca.
+
+A recusa só acontece quando a menor ordem do cronograma é de uma fase só e essa
+fase está marcada. A recusa sai com **422**, nada é gravado e o cronograma
+anterior continua como estava. A mensagem da resposta diz: "A primeira fase do
+cronograma está marcada para acontecer no mesmo momento da anterior, mas não há
+fase antes dela. Retire a marca dessa fase ou coloque antes dela a fase com que
+ela deve acontecer."
+
+O campo da recusa depende da operação:
+
+- ao definir o cronograma (`PUT`), é `fases[i].noMesmoMomentoDaAnterior`, em que
+  `i` é a posição da fase no corpo enviado; a resposta não traz identificadores;
+- na publicação e na retificação em ato único, é
+  `/cronograma/fases/{i}/noMesmoMomentoDaAnterior`, em que `i` é a posição da
+  fase no documento, e a resposta traz o código da fase em `identificadores`, no
+  formato `[{"lista": "fases", "identificador": "<código da fase>"}]`.
+
+## Como resolver
+
+Escolha uma das saídas e envie de novo:
+
+- retire a marca "no mesmo momento da anterior" da primeira fase;
+- ou coloque antes dessa fase aquela com que ela deve acontecer no mesmo momento.

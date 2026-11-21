@@ -1298,6 +1298,8 @@ const sidebars: SidebarsConfig = {
         'erros/uniplus.selecao.processo_seletivo.nao_encontrado',
         'erros/uniplus.selecao.processo_seletivo.ocorrencia_simulada_invalida',
         'erros/uniplus.selecao.processo_seletivo.ordem_fase_duplicada',
+        'erros/uniplus.selecao.processo_seletivo.fases_com_precedencia_no_mesmo_momento',
+        'erros/uniplus.selecao.processo_seletivo.primeira_fase_no_mesmo_momento_da_anterior',
         'erros/uniplus.selecao.processo_seletivo.precedencia_fase_violada',
         'erros/uniplus.selecao.processo_seletivo.pressuposto_sem_cadastro',
         'erros/uniplus.selecao.processo_seletivo.recurso_acessibilidade_referenciado_por_condicao_viva',
