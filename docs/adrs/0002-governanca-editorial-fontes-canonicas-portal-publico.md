@@ -104,7 +104,7 @@ A regra de fonte canônica por família de conteúdo fica definida assim:
 | Matriz de rastreabilidade | Dados estruturados promovidos para `uniplus-developers` com IDs `UNI-REQ-NNNN` | Página `/produto/rastreabilidade/` com requisito, issue, ADR, PR, código, teste e documentação |
 | Cenários BDD públicos | Arquivos Gherkin ou dados estruturados curados no `uniplus-developers` | Páginas de produto vinculadas aos requisitos correspondentes |
 | OpenAPI | `uniplus-api/contracts/openapi.<modulo>.json` | Cópia sincronizada para `static/openapi/` e renderizada por `<RedocSpec>` |
-| `ProblemDetails` e catálogo de erros | Mapeamentos e contratos da `uniplus-api` | Páginas `/erros/{code}` com descrição pública, mitigação e links para contrato |
+| `ProblemDetails` e catálogo de erros | Códigos e textos públicos em `uniplus-api/contracts/` | Páginas `/erros/{code}` geradas dos arquivos de um commit de `main` da API |
 | Media types e versionamento de recursos | ADRs e implementação da `uniplus-api` | Páginas `/media-types/{resource}/{version}` |
 | Eventos Kafka e schemas Avro | Schemas `.avsc`, roteamento e registro de subjects no módulo dono da `uniplus-api` | Catálogo público em `/referencia-api/eventos/` com tópico, subject, compatibilidade, campos do schema, produtor, consumidores conhecidos e links para o schema canônico |
 | Clientes, exemplos Angular e padrões de consumo | `uniplus-web` e contratos da API | Guias com exemplos mínimos, revisados contra implementação real |
@@ -119,6 +119,9 @@ repositório dono. A página publicada não deve depender de arquivos ignorados 
 Git ou de histórico local de ambiente de trabalho.
 
 ## Consequências
+
+A emenda de 21/11/2026 faz o catálogo acompanhar o commit sincronizado da
+`main` da API. A versão em produção pode estar em outro commit.
 
 ### Positivas
 

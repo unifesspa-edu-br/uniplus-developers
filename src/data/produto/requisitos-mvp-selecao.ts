@@ -9162,7 +9162,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0489',
     titulo: 'Código de enum desconhecido num pedido é recusado com 422 pelo erro do próprio campo, junto com as demais recusas',
     enunciado:
-      'Quando um campo de enum de um pedido traz um código que o enum não declara, o sistema recusa com 422 e o código de erro do próprio campo, acumulada com as demais recusas do mesmo pedido (ADR-0125), e não responde 400 antes do domínio. O pedido carrega o código como texto, e é o domínio que o confere. A mensagem lista os códigos aceitos e não repete o valor recebido (ADR-0023). Todo código de erro novo ganha a página correspondente em docs/erros do portal no mesmo trabalho que o introduz. Exemplo: no pedido de um cadastro de teste, a modalidade "XPTO" é desconhecida e outro campo também é inválido; a resposta é 422 com uma recusa para cada campo, e a mensagem da primeira lista os códigos aceitos sem citar "XPTO". Decisão do líder técnico em 20/11/2026 (ADR-0176, ADR-0125, ADR-0023 e uniplus-api#2672).',
+      'Quando um campo de enum de um pedido traz um código que o enum não declara, o sistema recusa com 422 e o código de erro do próprio campo, acumulada com as demais recusas do mesmo pedido (ADR-0125), e não responde 400 antes do domínio. O pedido carrega o código como texto, e é o domínio que o confere. A mensagem lista os códigos aceitos e não repete o valor recebido (ADR-0023). Todo código de erro novo ganha a sua descrição pública na API, no mesmo trabalho que o introduz, e a página /erros/{código} do portal é gerada a partir dela. Exemplo: no pedido de um cadastro de teste, a modalidade "XPTO" é desconhecida e outro campo também é inválido; a resposta é 422 com uma recusa para cada campo, e a mensagem da primeira lista os códigos aceitos sem citar "XPTO". Decisão do líder técnico em 20/11/2026 (ADR-0176, ADR-0125, ADR-0023 e uniplus-api#2672).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -9174,7 +9174,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O código desconhecido num campo de enum do pedido devolve 422 com o código de erro do próprio campo; a recusa se junta às demais do pedido; a mensagem lista os códigos aceitos e não repete o valor recebido; cada código de erro novo tem página em docs/erros.',
+      'O código desconhecido num campo de enum do pedido devolve 422 com o código de erro do próprio campo; a recusa se junta às demais do pedido; a mensagem lista os códigos aceitos e não repete o valor recebido; cada código de erro novo tem descrição pública na API e página em /erros/{código}.',
     verificacao:
       'Testes automatizados de endpoint com código desconhecido, sozinho e com outro campo inválido, conferindo status, códigos de erro, acúmulo e ausência do valor enviado na mensagem (planejado, uniplus-api#2677 e uniplus-api#2672).',
     pagina_developers: '/produto/regras-negocio/',
@@ -9184,7 +9184,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0490',
     titulo: 'Filtro de consulta com código de enum desconhecido responde 400 com erro próprio, e filtro ausente significa sem filtro',
     enunciado:
-      'Quando o filtro de uma consulta por enum recebe um código que o enum não declara, o sistema responde 400 com o código de erro próprio do filtro, e a mensagem lista os códigos aceitos sem repetir o valor recebido (ADR-0023). Filtro ausente significa sem filtro: a consulta devolve os resultados de todos os códigos. Não existe valor como "todas" para dizer "sem filtro"; ele é recusado como qualquer outro código desconhecido. O filtro é parâmetro de consulta e não é campo de pedido, por isso a recusa é 400 e não é acumulada com outras (UNI-REQ-0489). Todo código de erro novo ganha a página correspondente em docs/erros no mesmo trabalho que o introduz. Exemplo: a lista de pedidos filtrada por situação "XPTO" responde 400 com o erro do filtro; sem o parâmetro, a lista traz pedidos de todas as situações; com "todas", responde 400. Decisão do líder técnico em 20/11/2026 (ADR-0176, ADR-0023 e uniplus-api#2672).',
+      'Quando o filtro de uma consulta por enum recebe um código que o enum não declara, o sistema responde 400 com o código de erro próprio do filtro, e a mensagem lista os códigos aceitos sem repetir o valor recebido (ADR-0023). Filtro ausente significa sem filtro: a consulta devolve os resultados de todos os códigos. Não existe valor como "todas" para dizer "sem filtro"; ele é recusado como qualquer outro código desconhecido. O filtro é parâmetro de consulta e não é campo de pedido, por isso a recusa é 400 e não é acumulada com outras (UNI-REQ-0489). Todo código de erro novo ganha a sua descrição pública na API, no mesmo trabalho que o introduz, e a página /erros/{código} do portal é gerada a partir dela. Exemplo: a lista de pedidos filtrada por situação "XPTO" responde 400 com o erro do filtro; sem o parâmetro, a lista traz pedidos de todas as situações; com "todas", responde 400. Decisão do líder técnico em 20/11/2026 (ADR-0176, ADR-0023 e uniplus-api#2672).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -9196,7 +9196,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O filtro com código desconhecido responde 400 com o código de erro próprio do filtro e mensagem que lista os códigos aceitos sem repetir o valor; o parâmetro ausente devolve todos os códigos; o valor "todas" é recusado; cada código de erro novo tem página em docs/erros.',
+      'O filtro com código desconhecido responde 400 com o código de erro próprio do filtro e mensagem que lista os códigos aceitos sem repetir o valor; o parâmetro ausente devolve todos os códigos; o valor "todas" é recusado; cada código de erro novo tem descrição pública na API e página em /erros/{código}.',
     verificacao:
       'Testes automatizados de endpoint com filtro desconhecido, ausente e com o valor "todas", conferindo status, código de erro e mensagem (planejado, uniplus-api#2677 e uniplus-api#2672).',
     pagina_developers: '/produto/regras-negocio/',

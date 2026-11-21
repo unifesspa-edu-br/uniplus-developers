@@ -57,10 +57,12 @@ const config: Config = {
     ],
   ],
 
+  plugins: ['./src/plugins/catalogo-erros/index.mjs'],
+
   themes: [
     [
       // Busca local full-text (client-side) — funciona em GitHub Pages estático.
-      '@easyops-cn/docusaurus-search-local',
+      './src/plugins/busca-local.mjs',
       {
         hashed: true,
         language: ['pt', 'en'],

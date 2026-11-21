@@ -76,6 +76,10 @@
  */
 a:focus-visible,
 button:focus-visible,
+.navbar {
+  --ifm-navbar-search-input-placeholder-color: var(--ifm-font-color-base);
+}
+
 .navbar__link:focus-visible,
 .menu__link:focus-visible {
   outline: 2px dashed var(--color-govbr-gold);

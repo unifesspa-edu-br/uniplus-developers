@@ -19,9 +19,8 @@ import {
 export type StatusMediaType = 'current' | 'deprecated' | 'sunset';
 
 /**
- * As propriedades espelham o frontmatter da página, em snake_case, no mesmo
- * padrão do `<ErrorCatalogEntry>` — a entrada é escrita uma vez e aplicada
- * com `{...frontMatter}`.
+ * As propriedades espelham o frontmatter da página. A entrada é escrita
+ * uma vez e aplicada com `{...frontMatter}`.
  */
 export interface MediaTypeCardProps {
   /** Recurso versionado (ex.: `edital`). */

@@ -1,13 +1,4 @@
-name: Sincronizar specs OpenAPI
-
-# Puxa contracts/openapi.<modulo>.json da uniplus-api (branch main) para
-# static/openapi/<modulo>.json e abre PR quando há diff — previsto na
-# ADR-0001 (§ Sincronização dos specs OpenAPI). A ação usada só cria/atualiza
-# PR quando o working tree tem mudança; sem diff, o job termina sem efeito.
-#
-# `repository_dispatch` escuta o merge para main da uniplus-api — o disparo
-# do lado de lá (repository_dispatch para este repo) é trabalho próprio,
-# fora deste workflow.
+name: Sincronizar contratos da API
 
 on:
   schedule:
@@ -22,47 +13,96 @@ concurrency:
 
 jobs:
   sync:
-    name: Sincronizar specs
+    name: Sincronizar OpenAPI e catálogo de erros
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
+    env:
+      REPOSITORIO_API: unifesspa-edu-br/uniplus-api
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
-      - name: Baixar specs da uniplus-api (main)
+      - name: Copiar os contratos de um único commit
+        id: copiar
         run: |
           set -euo pipefail
-          mkdir -p static/openapi
-          for modulo in selecao ingresso configuracao organizacao publicacoes; do
-            curl -fsSL \
-              "https://raw.githubusercontent.com/unifesspa-edu-br/uniplus-api/main/contracts/openapi.${modulo}.json" \
-              -o "static/openapi/${modulo}.json"
-          done
-
-      - name: Validar JSON baixado
-        run: |
-          set -euo pipefail
-          for modulo in selecao ingresso configuracao organizacao publicacoes; do
-            arquivo="static/openapi/${modulo}.json"
-            if ! python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$arquivo"; then
-              echo "ERRO: $arquivo não é JSON válido — abortando sem abrir PR" >&2
+          commit="$(git ls-remote "https://github.com/$REPOSITORIO_API.git" refs/heads/main | cut -f1)"
+          [[ "$commit" =~ ^[a-f0-9]{40}$ ]]
+          origem="https://raw.githubusercontent.com/$REPOSITORIO_API/$commit/contracts"
+          mkdir -p static/openapi src/data/erros
+          for modulo in autorizacao configuracao ingresso organizacao portal publicacoes selecao; do
+            curl --fail --silent --show-error --location --retry 3 \
+              "$origem/openapi.$modulo.json" -o "static/openapi/$modulo.json"
+            if ! python3 -m json.tool "static/openapi/$modulo.json" >/dev/null 2>&1; then
+              printf 'static/openapi/%s.json: JSON inválido.\n' "$modulo" >&2
               exit 1
             fi
           done
+          for arquivo in codigos-de-erro.json descricoes-de-erros.json; do
+            curl --fail --silent --show-error --location --retry 3 \
+              "$origem/$arquivo" -o "src/data/erros/$arquivo"
+          done
+          if [[ -z "$(git status --porcelain -- static/openapi src/data/erros)" ]]; then
+            printf 'alteracao=false\n' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          printf '{\n  "repositorio": "%s",\n  "commit": "%s"\n}\n' "$REPOSITORIO_API" "$commit" > src/data/erros/origem.json
+          printf 'alteracao=true\ncommit=%s\n' "$commit" >> "$GITHUB_OUTPUT"
 
-      - name: Abrir PR com o diff, se houver
+      - name: Preparar Node.js
+        if: steps.copiar.outputs.alteracao == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Validar os contratos, requisitos e rotas do catálogo
+        if: steps.copiar.outputs.alteracao == 'true'
+        run: |
+          npm ci
+          npm run build
+
+      - name: Obter token do aplicativo de sincronização
+        id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.UNIPLUS_SYNC_APP_ID }}
+          private-key: ${{ secrets.UNIPLUS_SYNC_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Abrir PR dos contratos validados
+        if: steps.copiar.outputs.alteracao == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: 'chore(openapi): sincroniza specs da uniplus-api'
-          title: 'chore(openapi): sincroniza specs da uniplus-api'
+          token: ${{ steps.app.outputs.token }}
+          commit-message: 'chore(contratos): sincroniza contratos da API'
+          title: 'chore(contratos): sincroniza contratos da API'
           body: |
-            Specs OpenAPI atualizados a partir de `unifesspa-edu-br/uniplus-api@main` (`contracts/openapi.*.json`).
+            Contratos copiados de `unifesspa-edu-br/uniplus-api@${{ steps.copiar.outputs.commit }}`.
 
-            Revisar o diff contratual antes de mergear — mudança de schema aqui pode exigir nova entrada de changelog (`docs/changelog/`) ou nova versão de media type (`docs/media-types/`).
-          branch: chore/sync-openapi-specs
+            O build conferiu os pares de códigos e descrições, os requisitos e os links internos. Revise o diff do OpenAPI para identificar alterações que precisam entrar no changelog.
+          branch: chore/sync-api-contracts
           delete-branch: true
           labels: documentation
+          add-paths: |
+            static/openapi/
+            src/data/erros/
+
+      - name: Encerrar sincronização sem diferenças
+        if: steps.copiar.outputs.alteracao == 'false'
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+        run: |
+          set -euo pipefail
+          pr="$(gh pr list --state open --base main --head chore/sync-api-contracts \
+            --json number,isCrossRepository,headRepositoryOwner,headRefName \
+            --jq "[.[] | select(.isCrossRepository == false and .headRepositoryOwner.login == \"${GITHUB_REPOSITORY_OWNER}\" and .headRefName == \"chore/sync-api-contracts\")][0].number // empty")"
+          if [[ -n "$pr" ]]; then
+            gh pr close "$pr" --delete-branch
+          fi

@@ -6,28 +6,10 @@ Os três compartilham o cabeçalho de identidade (`<article><header><dl>...`) e 
 
 ## `<ErrorCatalogEntry>`
 
-Renderiza uma entrada de `docs/erros/{code}.mdx` — a página que o campo `type` de um `ProblemDetails` resolve (ADR-0023 da `uniplus-api`).
-
-```mdx
----
-title: A localidade que rege a contagem de prazos não foi declarada
-code: uniplus.selecao.processo_seletivo.localidade_ausente
-http_status: 422
-situacao: publicado
-modulo: Seleção
-emitido_em:
-  - Criação do processo seletivo
-  - Publicação inicial do processo seletivo
-requisitos:
-  - UNI-REQ-0111
-rastreio:
-  - label: 'uniplus-api#1136'
-    href: https://github.com/unifesspa-edu-br/uniplus-api/issues/1136
----
-
-import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
-
-<ErrorCatalogEntry {...frontMatter} />
+Renderiza o título, os metadados e a descrição pública de um código em
+`/erros/{code}/`. O plugin do catálogo fornece a entrada a partir dos dois
+contratos sincronizados da API. Para editar o texto, use o arquivo
+`contracts/descricoes-de-erros.json` da API, apontado pelo link da própria página.
 
 ## O que aconteceu
 
