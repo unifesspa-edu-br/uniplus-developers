@@ -1,7 +1,7 @@
 ---
 title: Processo publicado não aceita mutação direta da configuração
 sidebar_label: Mutação pós-publicação bloqueada
-description: A configuração de um processo publicado é imutável — qualquer alteração precisa passar por retificação, nunca por Definir* direto.
+description: A configuração de um processo publicado é imutável — nenhum pedido Definir* a altera diretamente; o processo publicado só muda pela retificação em ato único.
 code: uniplus.selecao.processo_seletivo.mutacao_pos_publicacao_bloqueada
 http_status: 422
 situacao: publicado
@@ -23,7 +23,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 Um comando de configuração (`Definir*` — etapas, cotas, cronograma,
 documentos exigidos, e todos os demais) foi enviado contra um processo que já
-está **publicado e sem retificação em curso**. A configuração congelada na
+está **publicado**. A configuração congelada na
 publicação (UNI-REQ-0019) é imutável por construção: nenhum comando de configuração
 grava sobre ela diretamente.
 
@@ -34,13 +34,12 @@ o handler lembrar de checar antes.
 
 ## Como resolver
 
-Para alterar a configuração de um processo já publicado, abra uma
-**retificação** (`POST .../retificacao-em-curso`) antes de enviar os
-comandos `Definir*` — durante uma retificação em curso, os mesmos comandos
-passam a alterar a configuração do processo diretamente (não há rascunho em
-staging: a versão já congelada permanece intocada até o fechamento). Feche a
-retificação para congelar a nova versão; descarte a retificação para
-restaurar a configuração publicada, se as alterações não devem valer.
+O processo publicado não aceita os comandos `Definir*` em nenhuma
+circunstância: não há retificação aberta que os libere. O que a API oferece
+para ele é a **retificação em ato único** (`POST .../retificacoes`), que
+registra um novo ato com o motivo e congela uma versão nova, mantendo a
+anterior intacta. Ela não substitui os comandos `Definir*`: o pedido de
+retificação não carrega a configuração do processo.
 
 Se o processo ainda não foi publicado, o comando deveria ter funcionado —
 confirme o `id` enviado; um `id` de outro processo, já publicado, produz este

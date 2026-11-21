@@ -1,13 +1,12 @@
 ---
 title: Já existe uma retificação em curso neste processo
 sidebar_label: Retificação já aberta
-description: O processo já tem uma retificação em curso; feche-a ou descarte-a antes de abrir outra ou de usar a retificação em ato único.
+description: Código que a API deixou de emitir — o processo não tem mais retificação em curso, e a retificação é feita em ato único.
 code: uniplus.selecao.retificacao_ja_aberta
 http_status: 409
 situacao: publicado
 modulo: Seleção
 emitido_em:
-  - Abertura de retificação
   - Retificação em ato único
 requisitos:
   - UNI-REQ-0021
@@ -23,30 +22,28 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
 
+:::note Código que a API não emite mais
+
+O processo seletivo deixou de ter retificação em curso: a retificação é feita em
+um ato só (`POST .../retificacoes`), sem abrir, alterar o motivo, fechar nem
+descartar. Esta página continua no ar para que respostas antigas que citam o
+código ainda encontrem a explicação. O texto abaixo descreve a recusa como era.
+
+:::
+
 ## O que aconteceu
 
-O processo seletivo já tem uma retificação em curso, aberta por alguém da
-unidade responsável, e um processo tem no máximo uma por vez. A recusa sai com
-**409** em dois casos:
+Quando o processo seletivo tinha uma retificação em curso, aberta por alguém da
+unidade responsável, o pedido de abrir outra, ou de usar a retificação em ato
+único (`POST .../retificacoes`), era recusado com **409**, porque um processo
+tinha no máximo uma por vez.
 
-- ao abrir uma retificação (`POST .../retificacao-em-curso`) com outra ainda
-  aberta, inclusive quando duas aberturas chegam ao mesmo tempo e só uma vence;
-- ao usar a retificação em ato único (`POST .../retificacoes`) com uma
-  retificação em curso, porque ela congelaria a configuração que a outra está
-  editando.
-
-A regra existe porque a cadeia de atos é linear (UNI-REQ-0156): cada
+A regra existia porque a cadeia de atos é linear (UNI-REQ-0156): cada
 retificação emenda o ato mais recente, e duas retificações paralelas
 emendariam o mesmo ato.
 
 ## Como resolver
 
-Consulte a retificação em curso (`GET .../retificacao-em-curso`) para saber o
-motivo e quando ela foi aberta. Depois, escolha um caminho:
-
-- se as mudanças que você quer cabem nela, faça-as nessa mesma retificação e
-  feche-a com o edital de retificação;
-- se ela não deve valer, descarte-a (`DELETE .../retificacao-em-curso`), e a
-  configuração volta a ser a publicada; então abra a sua.
-
-Ao final, o processo fica com uma única retificação aberta ou com nenhuma.
+Não há o que fazer: a retificação em ato único não depende mais de retificação
+em curso. Se ela for recusada por conflito com outra publicação ou retificação
+feita ao mesmo tempo, releia o processo e envie o pedido de novo.

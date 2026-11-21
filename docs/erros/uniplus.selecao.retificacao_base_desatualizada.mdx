@@ -1,14 +1,13 @@
 ---
-title: A versão sobre a qual a retificação foi aberta não é mais o topo da cadeia
+title: A versão em que a retificação se baseia não é mais o topo da cadeia
 sidebar_label: Base da retificação desatualizada
-description: A versão publicada que a retificação tomou como base deixou de ser a mais recente, e a retificação não pode ser fechada nem descartada com segurança.
+description: A versão publicada que a retificação tomou como base deixou de ser a mais recente, e a retificação não pode ser gravada com segurança.
 code: uniplus.selecao.retificacao_base_desatualizada
 http_status: 409
 situacao: publicado
 modulo: Seleção
 emitido_em:
-  - Descarte de retificação
-  - Fechamento de retificação
+  - Retificação em ato único
 requisitos:
   - UNI-REQ-0021
   - UNI-REQ-0156
@@ -25,21 +24,19 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A retificação foi aberta sobre uma versão publicada da configuração, que era a
-mais recente. No fechamento ou no descarte, essa versão já não é a mais
-recente. A recusa sai com **409**.
+A retificação toma como base uma versão publicada da configuração, que era a
+mais recente. Na hora de gravar, essa versão já não é a mais recente. A recusa
+sai com **409**.
 
-Pelas regras atuais, isso não deveria acontecer: com a retificação em curso, a
-retificação em ato único é recusada, e o fechamento encerra a retificação no
-mesmo passo em que publica a versão nova. A conferência existe para que um
-caminho novo que quebre essa garantia não feche a retificação sobre o ato
-errado (UNI-REQ-0156) nem reponha, no descarte, a configuração de uma versão
-que não é a publicada.
+Pelas regras atuais, isso não deveria acontecer: a retificação em ato único
+grava a versão nova no mesmo passo em que a confere. A conferência existe para
+que um caminho novo que quebre essa garantia não retifique o ato errado
+(UNI-REQ-0156).
 
 ## Como resolver
 
 Não repita o pedido: o resultado será o mesmo. Recarregue o processo e confira
-a versão publicada mais recente e a retificação em curso. Registre o caso ao
+a versão publicada mais recente. Registre o caso ao
 suporte do Uni+ com o `instance` e o `traceId` da resposta, porque ele indica
 defeito no sistema, e não na operação. Até a correção, a versão publicada
 continua valendo para os candidatos.

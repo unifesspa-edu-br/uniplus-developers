@@ -7,8 +7,7 @@ http_status: 422
 situacao: publicado
 modulo: Seleção
 emitido_em:
-  - Abertura de retificação
-  - Alteração do motivo da retificação
+  - Retificação em ato único
 requisitos:
   - UNI-REQ-0021
 rastreio:
@@ -23,8 +22,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 ## O que aconteceu
 
 Este código é a guarda do próprio domínio contra motivo com mais de
-**1.000 caracteres**, contados depois de retirar os espaços das pontas, na
-abertura da retificação e na alteração do motivo.
+**1.000 caracteres**, contados depois de retirar os espaços das pontas, no
+motivo da retificação.
 
 Pelas rotas da API, o motivo longo demais não chega ao domínio: a validação do
 pedido o recusa antes, com **422**, o código
@@ -36,5 +35,5 @@ passar por essa validação.
 
 Trate a recusa pelo campo `motivo` da resposta de validação: resuma o motivo em
 até 1.000 caracteres e repita o pedido. O motivo identifica a retificação; a
-descrição completa das mudanças fica no edital de retificação, publicado no
-fechamento.
+descrição completa das mudanças fica no edital de retificação, publicado com a
+retificação.

@@ -9,7 +9,6 @@ modulo: Seleção
 emitido_em:
   - Publicação do processo seletivo
   - Retificação do processo seletivo
-  - Fechamento de retificação
 requisitos:
   - UNI-REQ-0019
   - UNI-REQ-0175
@@ -24,13 +23,13 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O processo tentou congelar uma nova versão de configuração — publicar,
-retificar pelo atalho atômico, ou fechar uma sessão de retificação —, mas ao
+O processo tentou congelar uma nova versão de configuração — publicar
+ou retificar em ato único —, mas ao
 menos um item do checklist estrutural de conformidade reprovou. Esta é a
 causa **agregadora**: a mensagem lista, por nome, cada item reprovado, para
 que a resposta sozinha já diga o que falta, sem obrigar o cliente a
 inspecionar a configuração inteira em busca do problema. O mesmo checklist
-vale para as três transições, não só para a publicação.
+vale para as duas transições, não só para a publicação.
 
 O checklist estrutural reúne os itens abaixo. Cada um tem um **código** estável,
 que identifica o que reprovou, e uma **dimensão**, que diz em qual seção da

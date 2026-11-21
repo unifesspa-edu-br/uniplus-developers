@@ -8,8 +8,7 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Publicação do processo seletivo
-  - Abertura de retificação
-  - Retificação do processo seletivo (atalho atômico)
+  - Retificação em ato único
 requisitos:
   - UNI-REQ-0019
   - UNI-REQ-0021
@@ -31,8 +30,8 @@ tem agora. A mesma causa cobre as duas transições do ciclo de vida:
 
 - **Publicar** só é permitido com o processo em **rascunho**. Um processo já
   publicado, encerrado ou cancelado recusa uma nova publicação.
-- **Abrir retificação** ou **retificar** só é permitido com o processo
-  **publicado**. Um processo ainda em rascunho não tem o que retificar.
+- **Retificar** só é permitido com o processo **publicado**. Um processo ainda
+  em rascunho não tem o que retificar.
 
 O título emitido no corpo de erro ("Só é possível publicar um processo em
 rascunho") é fixo por `code` e não muda conforme a transição — mesmo numa
@@ -46,10 +45,6 @@ Confirme o status atual do processo (`GET /api/selecao/processos-seletivos/{id}`
 antes de tentar a transição:
 
 - Para publicar, o processo precisa estar em rascunho — sem publicação
-  anterior, e sem retificação aberta.
+  anterior.
 - Para retificar, o processo precisa já estar publicado — a retificação altera
   uma configuração que já existe, não substitui um rascunho.
-
-Um processo publicado que já tem uma retificação em curso responde a uma nova
-tentativa de retificar com outra causa — `uniplus.selecao.retificacao_ja_aberta`
-(HTTP 409, não 422) —, não com esta.

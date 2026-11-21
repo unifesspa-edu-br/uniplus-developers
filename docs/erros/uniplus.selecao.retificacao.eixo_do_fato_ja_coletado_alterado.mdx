@@ -7,9 +7,7 @@ http_status: 422
 situacao: rascunho
 modulo: Seleção
 emitido_em:
-  - Definição dos itens de um formulário do processo
   - Retificação em ato único
-  - Fechamento de retificação
 requisitos:
   - UNI-REQ-0159
   - UNI-REQ-0144
@@ -45,12 +43,11 @@ recusada com **422**. A mensagem vem no campo `detail` da resposta (não em
 `errors`) e cita o fato (ou o resumo de grupo), o eixo que mudou e os dois
 valores, o publicado e o novo.
 
-A recusa sai em operações diferentes, conforme o eixo:
+A recusa sai ao congelar a versão nova, e os eixos são de dois tipos:
 
-- **eixos do campo que coleta o fato**: são conferidos ao gravar os itens de
-  qualquer formulário do processo (`PUT .../formularios/{finalidade}/itens`, para
-  inscrição, isenção ou habilitação) na sessão de retificação e, de novo, no
-  fechamento da sessão. São quatro: o **tipo de renderização** (como o campo é
+- **eixos do campo que coleta o fato**: são conferidos nos itens de
+  qualquer formulário do processo (inscrição, isenção ou habilitação) que a
+  versão nova congelaria. São quatro: o **tipo de renderização** (como o campo é
   desenhado), a **origem dos valores** (de onde vêm as opções), o **formato** (do
   texto) e a **classificação de proteção** (o nível de proteção do dado);
 - **eixos do fato citado em condição de documento exigido**: vêm do catálogo
@@ -61,9 +58,9 @@ A recusa sai em operações diferentes, conforme o eixo:
   resumo faz sobre os campos do grupo): também vem do catálogo na hora de
   congelar.
 
-Os eixos do catálogo são conferidos na retificação em ato único e no fechamento
-da sessão. Por isso a recusa sai mesmo sem regravar nenhum campo, se o catálogo
-mudou depois da publicação.
+Os eixos do catálogo são conferidos no congelamento da retificação em ato único.
+Por isso a recusa sai mesmo sem alterar nenhum campo, se o catálogo mudou depois
+da publicação.
 
 A recusa da operação vale para qualquer resumo de grupo cuja operação alguma
 versão publicada tenha congelado; a API não exige que o campo de membro tenha
@@ -90,8 +87,8 @@ quando forem publicados, e para os processos novos (UNI-REQ-0159).
 
 **Eixo do campo.** Se o que mudou foi o tipo de renderização escolhido para o
 campo, volte a enviá-lo como estava na versão publicada. A origem dos valores, o
-formato e a classificação de proteção não vêm do pedido: ao gravar os itens, o
-campo é montado a partir do catálogo atual. Se eles mudaram no catálogo, a saída
+formato e a classificação de proteção não vêm do pedido: o campo é montado a
+partir do catálogo atual. Se eles mudaram no catálogo, a saída
 é a mesma do caso abaixo — desfazer a correção daquele fato no catálogo enquanto
 o processo precisar ser retificado. O fato que o formulário de inscrição já
 coleta não pode ser retirado dele, então lá trocá-lo por outro fato não resolve.

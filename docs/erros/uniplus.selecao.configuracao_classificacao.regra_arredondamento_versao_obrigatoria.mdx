@@ -39,12 +39,10 @@ No `PUT` de definição de classificação, um payload com
 é interceptado antes do handler por uma regra de validação de payload
 equivalente (`RuleFor(x => x.RegraArredondamentoVersao).NotEmpty().When(...)`)
 — a resposta real é `uniplus.validacao` (a mesma mensagem, mas outro
-`code`), e o guard de domínio nunca chega a rodar. Pelo descarte de
-retificação também não: esse caminho reconstrói a configuração chamando
-`Criar` diretamente, sem passar pelo handler onde este guard vive — e, no
-envelope congelado, código e versão de cada regra são sempre lidos como um
-bloco atômico, então o estado "código presente, versão ausente" nem chega a
-ser representável ali.
+`code`), e o guard de domínio nunca chega a rodar. Tampouco pelo envelope
+congelado: código e versão de cada regra são sempre lidos como um bloco
+atômico, então o estado "código presente, versão ausente" nem chega a ser
+representável ali.
 
 Esta entrada existe para que o código de domínio, já registrado no
 catálogo, tenha uma página assim que o caminho até ele for destravado —
