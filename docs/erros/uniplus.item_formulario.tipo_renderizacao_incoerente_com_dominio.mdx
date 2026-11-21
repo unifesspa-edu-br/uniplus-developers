@@ -13,7 +13,6 @@ emitido_em:
   - Aplicação de modelo de formulário
   - Publicação inicial do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
 requisitos:
   - UNI-REQ-0143
   - UNI-REQ-0159
@@ -48,7 +47,7 @@ A recusa vem na lista `errors` da resposta:
 - na gravação dos itens do formulário, `field` igual a `itens[i].tipoRenderizacao` ou `grupos[g].subitens[j].tipoRenderizacao`, depois da conferência de que o fato existe e é coletável;
 - nos modelos de formulário, o mesmo caminho precedido de `conteudo.`;
 - na aplicação de modelo, `field` igual a `modelo.itens[i].tipoRenderizacao`, com a posição do item no modelo;
-- na publicação inicial, na retificação em ato único e no fechamento da sessão editorial, em que cada item e campo de grupo gravados é reconferido contra o catálogo de hoje, porque a definição do fato pode ter sido corrigida depois de o campo ser gravado (UNI-REQ-0159). O `field` começa por `formularios[FINALIDADE]`, como em `formularios[INSCRICAO].itens[0].tipoRenderizacao`, e a mensagem ganha o final "Item '\{rótulo\}' (fato '\{código\}'). Regrave o item no formulário do processo.". Para o fato que alguma versão publicada já coletou, em vez da orientação de regravar, a mensagem pede desfazer a correção no catálogo enquanto o processo precisar ser retificado, porque o campo dele não pode mudar.
+- na publicação inicial e na retificação em ato único, em que cada item e campo de grupo gravados é reconferido contra o catálogo de hoje, porque a definição do fato pode ter sido corrigida depois de o campo ser gravado (UNI-REQ-0159). O `field` começa por `formularios[FINALIDADE]`, como em `formularios[INSCRICAO].itens[0].tipoRenderizacao`, e a mensagem ganha o final "Item '\{rótulo\}' (fato '\{código\}'). Regrave o item no formulário do processo.". Para o fato que alguma versão publicada já coletou, em vez da orientação de regravar, a mensagem pede desfazer a correção no catálogo enquanto o processo precisar ser retificado, porque o campo dele não pode mudar.
 
 Todas as recusas dos itens saem no mesmo lote, e nada é gravado. Na atualização de um modelo, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
 

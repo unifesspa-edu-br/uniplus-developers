@@ -11,7 +11,6 @@ emitido_em:
   - Atualização de um modelo de formulário
   - Publicação inicial do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
 requisitos:
   - UNI-REQ-0074
 rastreio:
@@ -32,7 +31,7 @@ O campo opcional deixado em branco, com a etapa concluída, resolve sem valor, e
 - do campo: "O campo '\{fato\}' alimenta uma derivação, um agregado, uma condição de negação ou um impedimento e precisa ser obrigatório sempre que exibido.";
 - do grupo: "O grupo '\{código\}' tem campo que alimenta um agregado e precisa ser obrigatório sempre que exibido."
 
-A recusa é única, a do primeiro campo ou grupo que contraria a regra, na ordem do formulário, e vem sem `field` no processo e com `field` igual a `conteudo` no modelo de formulário. No modelo, ela só sai quando a forma de todo o conteúdo, a estrutura das seções e o grafo de coleta não têm recusa, e vem depois delas. No processo, a publicação inicial, a retificação em ato único e o fechamento da sessão editorial conferem a configuração inteira, porque a regra que faz o campo alimentar uma derivação ou uma negação pode ser acrescentada depois de o campo ser gravado; o caso do grupo é conferido mais adiante, com os fatos citados pelos gatilhos dos documentos exigidos. A gravação dos itens do formulário não faz esta conferência. Nada é gravado. Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
+A recusa é única, a do primeiro campo ou grupo que contraria a regra, na ordem do formulário, e vem sem `field` no processo e com `field` igual a `conteudo` no modelo de formulário. No modelo, ela só sai quando a forma de todo o conteúdo, a estrutura das seções e o grafo de coleta não têm recusa, e vem depois delas. No processo, a publicação inicial e a retificação em ato único conferem a configuração inteira, porque a regra que faz o campo alimentar uma derivação ou uma negação pode ser acrescentada depois de o campo ser gravado; o caso do grupo é conferido mais adiante, com os fatos citados pelos gatilhos dos documentos exigidos. A gravação dos itens do formulário não faz esta conferência. Nada é gravado. Nos modelos, a conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
 
 ## Como resolver
 

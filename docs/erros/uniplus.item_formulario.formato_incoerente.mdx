@@ -11,7 +11,6 @@ emitido_em:
   - Atualização de um modelo de formulário
   - Publicação inicial do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
 requisitos:
   - UNI-REQ-0159
 rastreio:
@@ -37,10 +36,10 @@ O item do formulário não informa o formato: ele é copiado do fato no catálog
 
 O `field` é `conteudo.itens[i].formato` ou, no campo de um grupo, `conteudo.grupos[g].subitens[j].formato`. A conferência só ocorre quando o conteúdo foi lido sem recusa de leitura (como a de [conteúdo malformado](./uniplus.configuracao.modelo_formulario.entrada_malformada.mdx)), e na atualização um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx). O limite de 30 caracteres não é alcançado, porque os formatos do catálogo são um vocabulário fechado de códigos curtos.
 
-**Publicação inicial, retificação em ato único e fechamento de sessão editorial.** Cada item e campo de grupo gravados é reconferido contra o catálogo de hoje (UNI-REQ-0159), e a recusa sai quando a definição do fato mudou depois de o campo ser gravado, de modo que o campo de texto deixou de ter formato ou o campo de outro tipo passou a ter. O `field` é `formularios[FINALIDADE].itens[i].formato`, como em `formularios[INSCRICAO].itens[0].formato`, ou `formularios[FINALIDADE].grupos[g].subitens[j].formato`, e a mensagem ganha o final "Item '\{rótulo\}' (fato '\{código\}'). Regrave o item no formulário do processo.". A reconferência do formato vale só para o fato que nenhuma versão publicada coletou. Para o fato que alguma versão já coletou, o formato não é reconferido, e só a recusa de tipo de campo incoerente, que essa reconferência mantém, pede desfazer a correção no catálogo.
+**Publicação inicial e retificação em ato único.** Cada item e campo de grupo gravados é reconferido contra o catálogo de hoje (UNI-REQ-0159), e a recusa sai quando a definição do fato mudou depois de o campo ser gravado, de modo que o campo de texto deixou de ter formato ou o campo de outro tipo passou a ter. O `field` é `formularios[FINALIDADE].itens[i].formato`, como em `formularios[INSCRICAO].itens[0].formato`, ou `formularios[FINALIDADE].grupos[g].subitens[j].formato`, e a mensagem ganha o final "Item '\{rótulo\}' (fato '\{código\}'). Regrave o item no formulário do processo.". A reconferência do formato vale só para o fato que nenhuma versão publicada coletou. Para o fato que alguma versão já coletou, o formato não é reconferido, e só a recusa de tipo de campo incoerente, que essa reconferência mantém, pede desfazer a correção no catálogo.
 
 **Gravação dos itens do formulário e aplicação de modelo.** Estas operações não emitem esta recusa. O formato vem do fato no catálogo, e o item com fato desconhecido, não coletável ou com tipo de campo incoerente é recusado antes por essas causas; o item com tipo de campo coerente tem formato coerente.
 
 ## Como resolver
 
-No modelo, escolha o tipo de campo que combina com o fato ou escolha outro fato que exista no catálogo. Na publicação, na retificação ou no fechamento da sessão, regrave o item do formulário do processo com o tipo de campo que combina com o fato de hoje, ou peça a quem administra o catálogo de fatos que corrija a definição do fato. Depois, repita a operação.
+No modelo, escolha o tipo de campo que combina com o fato ou escolha outro fato que exista no catálogo. Na publicação ou na retificação, regrave o item do formulário do processo com o tipo de campo que combina com o fato de hoje, ou peça a quem administra o catálogo de fatos que corrija a definição do fato. Depois, repita a operação.

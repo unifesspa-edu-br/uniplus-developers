@@ -13,7 +13,6 @@ emitido_em:
   - Aplicação de modelo de formulário
   - Publicação inicial do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
 requisitos:
   - UNI-REQ-0145
 rastreio:
@@ -31,7 +30,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 A restrição `MUNICIPIOS_DA_UF` de um campo de município, em `restricoes`, filtra os municípios pela UF respondida antes (UNI-REQ-0145). O fato citado em `fatos` não serve de UF: não existe no catálogo, não tem como fonte de valores as UFs do Geo, ou é de resposta múltipla. A mensagem é "Os municípios da UF citam um campo de UF de resposta única, com as UFs do Geo.", e a recusa leva o código do fato citado. A restrição só é conferida quando cabe no tipo do campo.
 
-A recusa vem na lista `errors` da resposta, com `field` igual a `restricoes[k].fatos`, precedido de `itens[i].` ou de `grupos[g].subitens[j].`; nos modelos de formulário começa por `conteudo.`, e na aplicação de modelo por `modelo.`, com a posição do item no modelo. Na publicação inicial, na retificação em ato único e no fechamento da sessão editorial, os itens gravados são reconferidos contra o catálogo de hoje, e o `field` começa por `formularios[FINALIDADE]`, como em `formularios[INSCRICAO].itens[0].restricoes[0].fatos`; a mensagem ganha o final "Item '\{rótulo\}' (fato '\{código\}'). Regrave o item no formulário do processo.". O fato que uma versão publicada já coletou não é reconferido. Nada é gravado.
+A recusa vem na lista `errors` da resposta, com `field` igual a `restricoes[k].fatos`, precedido de `itens[i].` ou de `grupos[g].subitens[j].`; nos modelos de formulário começa por `conteudo.`, e na aplicação de modelo por `modelo.`, com a posição do item no modelo. Na publicação inicial e na retificação em ato único, os itens gravados são reconferidos contra o catálogo de hoje, e o `field` começa por `formularios[FINALIDADE]`, como em `formularios[INSCRICAO].itens[0].restricoes[0].fatos`; a mensagem ganha o final "Item '\{rótulo\}' (fato '\{código\}'). Regrave o item no formulário do processo.". O fato que uma versão publicada já coletou não é reconferido. Nada é gravado.
 
 Na atualização de um modelo, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](./uniplus.configuracao.modelo_formulario.nao_encontrado.mdx).
 

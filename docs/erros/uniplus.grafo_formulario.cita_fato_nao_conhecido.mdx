@@ -16,7 +16,6 @@ emitido_em:
   - Aplicação de modelo de formulário
   - Publicação inicial do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
 requisitos:
   - UNI-REQ-0145
   - UNI-REQ-0086
@@ -37,7 +36,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 Uma regra do formulário cita um fato que ele não coleta, não deriva e não conhece antes dele (UNI-REQ-0145). Os fatos que uma regra pode citar são os campos anteriores na ordem do formulário, os coletados pela inscrição quando o formulário é de outra finalidade, nos modelos os pressupostos que o modelo declara, e os derivados cujas dependências estão entre esses. A mensagem varia com quem cita: "Uma regra do fato '\{X\}' cita '\{Y\}', que o formulário não coleta nem deriva, nem é conhecido antes dele."; para a exibição de uma seção, "A exibição da seção '\{S\}' cita '\{Y\}', que o formulário não coleta nem deriva antes dela."; para o termo, "A condição do termo '\{T\}' cita '\{Y\}', que o formulário não coleta nem deriva, nem é conhecido antes dele."; e, nos modelos, a condição de um documento exigido tem mensagem própria, com o `documentosExigidos[i]` que a cita.
 
-A recusa também sai quando uma mudança deixaria sem o fato uma regra que já existia. Ao trocar os itens do formulário de inscrição, ou removê-lo, ou aplicar nele um modelo, a recusa é a da citação que a mudança invalidaria em outro formulário do processo: "O fato '\{Y\}', citado por \{quem cita\} do formulário de \{finalidade\}, deixaria de ser conhecido por ele." Na publicação inicial, na retificação em ato único e no fechamento da sessão editorial, as regras dos itens, as exibições das seções e as condições dos termos são conferidas de novo, porque os itens e as derivações podem ter mudado depois que a regra foi gravada.
+A recusa também sai quando uma mudança deixaria sem o fato uma regra que já existia. Ao trocar os itens do formulário de inscrição, ou removê-lo, ou aplicar nele um modelo, a recusa é a da citação que a mudança invalidaria em outro formulário do processo: "O fato '\{Y\}', citado por \{quem cita\} do formulário de \{finalidade\}, deixaria de ser conhecido por ele." Na publicação inicial e na retificação em ato único, as regras dos itens, as exibições das seções e as condições dos termos são conferidas de novo, porque os itens e as derivações podem ter mudado depois que a regra foi gravada.
 
 Nos modelos de formulário, a recusa vem na lista `errors`, com `field` igual a `conteudo`. Na gravação dos itens do processo, na remoção do formulário, na aplicação do modelo e na publicação, a resposta traz o código e a mensagem da recusa. Na gravação do formulário do processo, a recusa é da exibição de uma seção, com `field` igual a `etapas[i].exibicao`; na gravação dos termos, o `field` é `termos[i]`. Nada é gravado.
 
