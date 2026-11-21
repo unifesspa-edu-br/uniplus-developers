@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0067
 rastreio:
@@ -42,10 +41,6 @@ e
 e
 [`base_legal_proibida_em_grupo_e`](./uniplus.selecao.no_exigencia.base_legal_proibida_em_grupo_e.mdx).
 Sequencial: nunca acumula com nenhuma outra causa desta série.
-
-No descarte de retificação, é alcançável: o envelope congelado lê
-`quantidadeMinima` como número cru para todo nó, sem cruzar com o
-`tipo` do próprio nó.
 
 > **Lacuna conhecida.** Na definição, um payload com `tipo: "E"` e
 > `quantidadeMinima` presente é interceptado antes do handler por uma

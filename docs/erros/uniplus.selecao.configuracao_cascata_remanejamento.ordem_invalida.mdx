@@ -35,17 +35,6 @@ falha, com as causas de fallback e de limites de origens/destinos que não
 dependem de os itens serem válidos — ver
 [`campos_obrigatorios`](./uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios.mdx).
 
-**Não** aparece no descarte de retificação — e é a única, dentre as
-causas de item desta série, com essa propriedade. No envelope congelado a
-`ordem` de cada destino não é lida como valor cru: é derivada da própria
-posição do item dentro da entrada de `ordens` a que ele pertence (o
-primeiro elemento é sempre ordem 1, o segundo ordem 2, e assim por
-diante, sempre a partir de 1) — o estado "ordem menor que 1" não é
-representável ali, em nenhuma circunstância. Já
-[`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx)
-**é** alcançável pelo descarte, por um caminho indireto que não se aplica
-aqui (a mesma origem espalhada por mais de uma entrada do envelope).
-
 ## Como resolver
 
 Corrija `ordem` para um número inteiro maior ou igual a 1. Se a intenção

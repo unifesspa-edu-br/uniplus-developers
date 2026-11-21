@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0068
 rastreio:
@@ -42,12 +41,6 @@ percorrer um calendário absurdamente longo.
 roda antes de qualquer checagem sobre `chaveDistincao`. Sequencial: a
 primeira violação encontrada na criação do nó interrompe o processamento
 daquele nó; nunca acumula com nenhuma outra causa desta série.
-
-No descarte de retificação, é alcançável pelas duas metades: o envelope
-congelado lê `quantidadeMinima` como número cru, sem reconferir nenhum
-dos dois limites — só quando o nó é reconstruído para validar
-invariantes é que um valor fora do intervalo é recusado. A reconstrução
-não acumula: para na primeira violação que encontrar.
 
 > **Lacuna conhecida.** Na definição, só a metade "maior que 366" chega
 > a esta causa. A metade "menor que 1" é interceptada antes do handler

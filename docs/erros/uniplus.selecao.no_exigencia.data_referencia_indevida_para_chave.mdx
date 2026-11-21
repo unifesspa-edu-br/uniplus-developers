@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0068
 rastreio:
@@ -42,11 +41,6 @@ Só as chaves de calendário (`COMPETENCIA_MENSAL`/`EXERCICIO_ANUAL`) usam
 a checagem inversa. Sequencial: a primeira violação encontrada na
 criação do nó interrompe o processamento; nunca acumula com nenhuma
 outra causa desta série.
-
-Alcançável tanto na definição quanto no descarte de retificação: o
-envelope congelado lê `dataReferencia` como valor cru, sem cruzar com a
-`chaveDistincao` do mesmo nó — essa coerência só é conferida quando o nó
-é reconstruído para validar invariantes.
 
 ## Como resolver
 

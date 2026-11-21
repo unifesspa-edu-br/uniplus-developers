@@ -7,7 +7,8 @@ http_status: 422
 situacao: publicado
 modulo: Seleção
 emitido_em:
-  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de distribuição de vagas do processo seletivo
+  - Simulação da distribuição de vagas do processo seletivo
 requisitos: []
 rastreio:
   - label: 'uniplus-api#890'
@@ -40,9 +41,7 @@ deixar isso acontecer.
 > nenhuma delas pode assumir `RETIRA_DE`/`SUPLEMENTAR_AO_TOTAL`. Uma
 > modalidade **repetida** com o mesmo código de uma federal cai antes em
 > [`modalidade_duplicada`](./uniplus.selecao.configuracao_distribuicao_vagas.modalidade_duplicada.mdx),
-> não aqui. A checagem é uma guarda de conservação de baixo nível, só
-> alcançável pelo **descarte de retificação**, sob envelope congelado
-> corrompido ou adulterado.
+> não aqui. A checagem é uma guarda de conservação de baixo nível.
 
 Não acumula com nenhuma outra violação — é a primeira colisão encontrada
 que interrompe a reconstrução da configuração.
@@ -51,7 +50,4 @@ que interrompe a reconstrução da configuração.
 
 Este código, na prática, não deveria ocorrer com o comportamento atual do
 sistema — o cadastro de Configuração impede a única combinação que o
-dispararia. Se ele aparecer ao descartar uma retificação, o problema não
-está no payload enviado agora — está na configuração congelada para a qual
-o descarte está tentando voltar. Reporte como incidente para investigação
-do envelope congelado, em vez de tentar contornar pelo descarte.
+dispararia. Se ele aparecer, reporte como incidente para investigação.

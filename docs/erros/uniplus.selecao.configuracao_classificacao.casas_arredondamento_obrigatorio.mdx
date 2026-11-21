@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de classificação do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 rastreio:
   - label: 'uniplus-api#781'
@@ -39,12 +38,6 @@ na mesma resposta (acumula, ADR-0125). Nunca coexiste com
 nem
 [`eliminacao_indevida`](./uniplus.selecao.configuracao_classificacao.eliminacao_indevida.mdx)
 — pertencem ao ramo oposto (classificação importada).
-
-No descarte de retificação, o codec só propaga ao chamador a primeira
-violação acumulada internamente. `casas_arredondamento_obrigatorio` é a
-última checagem do ramo local — perde a prioridade para
-`arredondamento_obrigatorio` quando também se aplica, mas vence sobre `eliminacao_enem_fora_de_processo_enem`,
-conferida depois de qualquer um dos dois ramos.
 
 ## Como resolver
 

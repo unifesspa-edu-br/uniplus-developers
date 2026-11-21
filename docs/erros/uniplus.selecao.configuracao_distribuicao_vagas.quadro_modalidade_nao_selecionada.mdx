@@ -32,12 +32,6 @@ modalidades, logo depois de resolver a regra de ajuste (quando informada).
 Não acumula com nenhuma outra violação — é a primeira entrada órfã que
 interrompe o processamento da distribuição.
 
-Diferente da maioria dos códigos desta série, este **não** aparece no
-descarte de retificação: é uma checagem sobre a forma do payload de
-comando (Ids crus antes da resolução), e o caminho de descarte não passa
-por este comando — ele reconstrói a configuração diretamente do envelope
-já congelado e consistente.
-
 ## Como resolver
 
 Remova do `quadro` qualquer entrada cujo `ModalidadeId` não esteja em

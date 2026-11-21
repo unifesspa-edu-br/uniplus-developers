@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0068
 rastreio:
@@ -39,10 +38,6 @@ e de
 [`quantidade_minima_excede_janela_representavel`](./uniplus.selecao.no_exigencia.quantidade_minima_excede_janela_representavel.mdx).
 Sequencial: a primeira violação encontrada na criação do nó interrompe o
 processamento; nunca acumula com nenhuma outra causa desta série.
-
-Alcançável tanto na definição quanto no descarte de retificação: o
-envelope congelado lê `dataReferencia` como valor opcional cru, sem
-cruzar com a `chaveDistincao` do mesmo nó.
 
 ## Como resolver
 

@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de cascata de remanejamento do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0056
 rastreio:
@@ -50,11 +49,6 @@ e
 Nunca coexiste com
 [`sem_destinos`](./uniplus.selecao.configuracao_cascata_remanejamento.sem_destinos.mdx)
 — exceder um limite exige destinos declarados.
-
-Alcançável nos dois caminhos: na definição, e no descarte de retificação
-(o envelope não limita quantas origens distintas o array `ordens`
-declara). No descarte, a reconstrução não acumula: para na primeira
-violação que encontrar.
 
 ## Como resolver
 

@@ -9,8 +9,6 @@ modulo: Seleção
 emitido_em:
   - Definição de classificação do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 ---
 
@@ -39,8 +37,7 @@ pesos
 não roda sobre ele.
 
 Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
-publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
-retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+publicada, na retificação em ato único. Nesse caso a recusa sai como uma violação única (sem a lista `errors[]`) e se
 refere à versão congelada, não ao pedido enviado.
 
 ## Como resolver
@@ -48,7 +45,6 @@ refere à versão congelada, não ao pedido enviado.
 Na definição da classificação, mantenha um só corte para cada área, com o mínimo que o edital
 fixa, e remova as repetições.
 
-Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
-descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+Se o erro apareceu na retificação em ato único, o pedido enviado agora não é a causa: o sistema recusou a
 configuração congelada da versão publicada, e regravar a configuração do processo não a
 corrige. A causa é investigada pela equipe técnica do Uni+.

@@ -7,7 +7,7 @@ http_status: 422
 situacao: publicado
 modulo: Seleção
 emitido_em:
-  - Descarte de retificação (restauração da configuração congelada)
+  - Definição de documentos exigidos do processo seletivo
 requisitos:
   - UNI-REQ-0067
 rastreio:
@@ -31,18 +31,17 @@ construção de um grupo — compartilhada pelos dois tipos de nó, antes de
 qualquer checagem específica de folha ou de grupo. Sequencial: nunca
 acumula com nenhuma outra causa desta série.
 
-> **Só alcançável no descarte de retificação.** Na definição de
+> **Sem operação que a alcance hoje.** Na definição de
 > documentos exigidos, o handler nunca lê `ordem` do payload — a deriva
 > da própria posição do nó no array (`Filhos`/`Raizes`), incrementando um
 > contador a partir de zero. Não existe payload que faça o handler passar
 > um valor negativo para `CriarFolha`/`CriarGrupo`: a checagem é
 > estruturalmente inalcançável por ali, não por sombreamento de validação.
-> No descarte, o envelope congelado lê `ordem` como um inteiro cru — sem
-> reconferir o sinal — e é aí que esta causa se torna alcançável.
+> O envelope congelado lê `ordem` como um inteiro cru e reidrata o nó sem
+> reconferir o sinal, então a leitura de uma versão já publicada também não a
+> alcança.
 
 ## Como resolver
 
 Este código não é acionado por um `PUT` malformado — a ordem de cada nó
-é sempre derivada da posição no array pelo próprio handler. Se ele
-aparecer numa restauração, o problema está na integridade do envelope
-congelado, não no payload do cliente.
+é sempre derivada da posição no array pelo próprio handler.

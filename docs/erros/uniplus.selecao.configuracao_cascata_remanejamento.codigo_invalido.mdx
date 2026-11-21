@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de cascata de remanejamento do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0056
 rastreio:
@@ -45,20 +44,6 @@ não dependem de os itens serem válidos (fallback, limites de
 origens/destinos) — ver
 [`campos_obrigatorios`](./uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios.mdx)
 para o detalhe dessa composição.
-
-No descarte de retificação, o envelope congelado lê o código de origem e
-cada código de destino sem reconferir o vocabulário `^[A-Z0-9_]+$` — mas
-não os dois do mesmo jeito. Cada código de destino é lido com exigência de
-não ser vazio e de já vir sem espaço nas pontas — um valor que viole isso
-é recusado ainda na leitura, como `envelope_codec.envelope_malformado`,
-antes de chegar a esta causa; o vocabulário e o tamanho máximo, porém, não
-são reconferidos ali, e é por aí que um destino fora do vocabulário (ou
-acima de 60 caracteres) sobrevive à leitura. Já o código de origem é lido
-como texto cru, sem exigência de não-vazio — só o tamanho é limitado pelo
-próprio schema do envelope — então uma origem vazia, com espaço nas
-pontas ou fora do vocabulário também sobrevive à leitura, e só é recusada
-quando a entidade é reconstruída. Diferente da definição, o descarte não
-acumula: a reconstrução para na primeira violação que encontrar.
 
 ## Como resolver
 

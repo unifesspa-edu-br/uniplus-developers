@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de classificação do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 rastreio:
   - label: 'uniplus-api#781'
@@ -51,15 +50,7 @@ que reprove
 `arredondamento_obrigatorio`/`casas_arredondamento_obrigatorio`.
 
 **Essa acumulação só é observável no caminho de definição** — é lá que a
-resposta de fato pode trazer mais de um destes códigos juntos (ADR-0125). No
-descarte de retificação, a mesma reconstrução continua acumulando essas
-violações internamente, mas o codec só propaga ao chamador a **primeira** da
-lista. Dentro da checagem do ramo importado, `arredondamento_indevido` é
-conferida antes de `casas_arredondamento_indevido` e de
-`eliminacao_indevida` — então, se o mesmo envelope corrompido violasse mais
-de uma delas, é sempre `arredondamento_indevido` que o descarte devolve,
-nunca as outras duas junto.
-
+resposta de fato pode trazer mais de um destes códigos juntos (ADR-0125).
 ## Como resolver
 
 Remova `regraArredondamentoCodigo` (e `regraArredondamentoVersao`) da

@@ -10,8 +10,6 @@ emitido_em:
   - Definição de distribuição de vagas do processo seletivo
   - Simulação da distribuição de vagas do processo seletivo
   - Retificação em ato único
-  - Fechamento de sessão editorial
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos: []
 ---
 
@@ -42,8 +40,7 @@ modalidades da oferta. O processamento para na primeira distribuição da lista 
 simulação da distribuição devolve a mesma recusa, sem gravar nada.
 
 Esta mesma conferência também roda quando o sistema relê a configuração congelada da versão
-publicada: na retificação em ato único, no fechamento da sessão editorial e no descarte de
-retificação. Nesses casos a recusa sai como uma violação única (sem a lista `errors[]`) e se
+publicada, na retificação em ato único. Nesse caso a recusa sai como uma violação única (sem a lista `errors[]`) e se
 refere à versão congelada, não ao pedido enviado.
 
 ## Como resolver
@@ -57,7 +54,6 @@ No cadastro de modalidades, em Configuração, conforme a causa:
 Depois, envie a distribuição de novo. Se a oferta não deve ter nenhuma das duas modalidades,
 retire-a de `modalidadeIds`.
 
-Se o erro apareceu na retificação em ato único, no fechamento da sessão editorial ou no
-descarte de retificação, o pedido enviado agora não é a causa: o sistema recusou a
+Se o erro apareceu na retificação em ato único, o pedido enviado agora não é a causa: o sistema recusou a
 configuração congelada da versão publicada, e regravar a configuração do processo não a
 corrige. A causa é investigada pela equipe técnica do Uni+.

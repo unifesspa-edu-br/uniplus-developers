@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de critérios de desempate do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0015
 rastreio:
@@ -35,11 +34,12 @@ critérios de ordem inválida devolve as duas violações juntas no array
 `errors[]` do corpo de erro, cada item com seu `field`
 (`criterios[<índice>].ordem`).
 
-Este código também aparece no **descarte de retificação**: reconstruir o
-grafo a partir do envelope congelado recria cada critério de desempate a
-partir dos mesmos campos — a mesma checagem roda de novo. Diferente da
-passada de forma do comando, no descarte a primeira violação encontrada
-interrompe a reconstrução inteira, sem acumular com outras.
+Este código também aparece na **retificação em ato único**: antes de
+congelar a versão nova, o sistema lê as versões já publicadas do processo,
+e essa leitura recria cada critério de desempate a partir do que foi
+congelado — a mesma checagem roda de novo. Diferente da passada de forma
+do comando, nessa leitura a primeira violação encontrada interrompe a
+leitura inteira, sem acumular com outras.
 
 ## Como resolver
 
@@ -47,8 +47,7 @@ Informe uma `ordem` positiva para cada critério de desempate do payload. Se
 a resposta trouxer mais de uma violação no array `errors[]`, corrija todas
 antes de reenviar.
 
-Se o erro apareceu ao descartar uma retificação, o problema não está no
-payload enviado agora — está na configuração congelada para a qual o
-descarte está tentando voltar. Isso indica uma inconsistência na versão
-publicada anterior; abra uma investigação em vez de tentar corrigir pelo
-descarte.
+Se o erro apareceu na retificação em ato único, o problema não está no que
+foi enviado agora — está em uma versão já publicada. Isso indica uma
+inconsistência nessa versão; abra uma investigação em vez de tentar
+corrigir pelo envio.

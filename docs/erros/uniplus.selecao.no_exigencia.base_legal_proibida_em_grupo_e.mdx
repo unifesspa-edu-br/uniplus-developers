@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de documentos exigidos do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0070
 rastreio:
@@ -35,11 +34,6 @@ não há o que uma base legal ali ampararia.
 [`quantidade_minima_proibida_em_grupo_e`](./uniplus.selecao.no_exigencia.quantidade_minima_proibida_em_grupo_e.mdx)
 e de `consequencia_proibida_em_grupo_e`. Sequencial: nunca acumula com
 nenhuma outra causa desta série.
-
-No descarte de retificação, é alcançável: o envelope congelado lê a
-lista `basesLegais` de todo nó, sem cruzar com o `tipo` do próprio nó —
-cada item é individualmente construído pela mesma checagem que valida
-uma base legal de grupo `OU`/N-de.
 
 > **Lacuna conhecida.** Na definição, um payload com `tipo: "E"` e
 > `basesLegais` não vazia é interceptado antes do handler por uma regra

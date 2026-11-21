@@ -8,7 +8,6 @@ situacao: publicado
 modulo: Seleção
 emitido_em:
   - Definição de cascata de remanejamento do processo seletivo
-  - Descarte de retificação (restauração da configuração congelada)
 requisitos:
   - UNI-REQ-0056
 rastreio:
@@ -36,23 +35,6 @@ depois de todos os itens de `destinos` já terem sido construídos com
 sucesso — a mesma condição de alcançabilidade e o mesmo padrão de
 acumulação (ADR-0125) das duas causas irmãs se aplicam aqui, inclusive a
 possibilidade de as três coexistirem para a mesma origem.
-
-É alcançável no descarte de retificação, e da forma mais direta das três
-causas por origem: o envelope congelado lê a lista de destinos de cada
-origem um a um, sem exigir unicidade entre eles — a leitura confere que
-cada código não é vazio e já vem sem espaço nas pontas, mas não confere se
-o mesmo código aparece mais de uma vez; só a entidade, ao reconstruir,
-recusa a repetição. Diferente de
-[`ordem_duplicada_na_origem`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_duplicada_na_origem.mdx),
-que só é alcançável ali por um caminho indireto (a mesma origem espalhada
-por mais de uma entrada do array `ordens`), esta dispara com uma única
-entrada — bastam dois códigos de destino iguais na mesma lista — e não
-arrasta `ordem_duplicada_na_origem` nem
-[`ordem_nao_contigua`](./uniplus.selecao.configuracao_cascata_remanejamento.ordem_nao_contigua.mdx)
-junto, já que a `ordem` de cada destino continua derivada da posição
-dentro da entrada, sempre única e contígua nesse cenário. No descarte,
-diferente da definição, a reconstrução não acumula: para na primeira
-violação que encontrar.
 
 ## Como resolver
 
