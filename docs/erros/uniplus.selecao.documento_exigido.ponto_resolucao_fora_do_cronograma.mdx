@@ -18,8 +18,6 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
 
-{/* A conferir: o detail desta recusa ainda pode mudar na api#2685; copiar o Errors/*.cs final. */}
-
 ## O que aconteceu
 
 O catálogo de fatos situa cada fato numa fase em que ele passa a ser conhecido (o ponto de
@@ -43,7 +41,8 @@ e
 
 ## Como resolver
 
-A mensagem de detalhe nomeia o fato e a fase em que o catálogo o situa. Em qualquer caso, incluir
+A mensagem de detalhe diz: "O fato '*código do fato*' resolve na fase '*código da fase*', que não
+pertence ao cronograma deste processo." Ela nomeia o fato e a fase em que o catálogo o situa. Em qualquer caso, incluir
 essa fase no cronograma do processo resolve. A outra saída depende da causa:
 
 - fato citado na condição de um documento exigido: troque a condição por um fato conhecido numa
