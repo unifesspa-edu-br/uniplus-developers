@@ -23,8 +23,8 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 Já existe um tipo de banca **vivo** com o código informado.
 
 A unicidade é sobre bancas vivas — um código de uma banca removida (soft
-delete) pode ser reutilizado. Como o conjunto canônico tem só dez
-códigos possíveis, este erro tende a aparecer ao tentar recriar um tipo que
+delete) pode ser reutilizado. Como o catálogo de tipos de banca é fechado e cada código só
+pode ter um tipo vivo, este erro tende a aparecer ao tentar recriar um tipo que
 já está cadastrado e ativo.
 
 ## Como resolver
