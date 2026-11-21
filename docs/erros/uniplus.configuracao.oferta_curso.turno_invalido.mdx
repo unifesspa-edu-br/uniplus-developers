@@ -1,7 +1,7 @@
 ---
-title: O turno da oferta é inválido
-sidebar_label: Turno inválido
-description: Cada turno da oferta precisa ser um dos três tokens do domínio fechado — MATUTINO, VESPERTINO ou NOTURNO.
+title: Turno não é um dos códigos aceitos
+sidebar_label: Turno não é um dos códigos aceitos
+description: Cada turno da oferta precisa ser um dos três códigos aceitos — MATUTINO, VESPERTINO ou NOTURNO.
 code: uniplus.configuracao.oferta_curso.turno_invalido
 http_status: 422
 situacao: publicado
@@ -24,8 +24,7 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-Um dos turnos informados em `turnos` não é um dos três tokens do domínio
-fechado: `MATUTINO`, `VESPERTINO` ou `NOTURNO`.
+Um dos turnos informados em `turnos` não é um dos três códigos aceitos: `MATUTINO`, `VESPERTINO` ou `NOTURNO`.
 
 `INTEGRAL` **não é turno**. Uma oferta que funciona em dois períodos declara
 `regimeDeTurno: "INTEGRAL"` e nomeia os dois em `turnos` — o rótulo sozinho
@@ -38,7 +37,7 @@ não este.
 
 ## Como resolver
 
-Informe apenas tokens válidos em `turnos`:
+Informe apenas códigos válidos em `turnos`:
 
 ```json
 {

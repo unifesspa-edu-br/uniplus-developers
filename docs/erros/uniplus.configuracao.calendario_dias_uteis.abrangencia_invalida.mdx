@@ -1,7 +1,7 @@
 ---
-title: A abrangência do dia não útil é inválida
-sidebar_label: Abrangência do dia inválida
-description: A abrangência de um dia não útil precisa ser um dos quatro tokens do domínio fechado — NACIONAL, ESTADUAL, MUNICIPAL ou INSTITUCIONAL.
+title: Abrangência do dia não útil não é um dos códigos aceitos
+sidebar_label: Abrangência do dia não útil não é um dos códigos aceitos
+description: A abrangência de um dia não útil precisa ser um dos quatro códigos aceitos — NACIONAL, ESTADUAL, MUNICIPAL ou INSTITUCIONAL.
 code: uniplus.configuracao.calendario_dias_uteis.abrangencia_invalida
 http_status: 422
 situacao: publicado
@@ -21,18 +21,17 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-A **abrangência** informada para um dia não útil não é um dos quatro tokens
-do domínio fechado: `NACIONAL`, `ESTADUAL`, `MUNICIPAL` ou `INSTITUCIONAL`.
+A **abrangência** informada para um dia não útil não é um dos quatro códigos aceitos: `NACIONAL`, `ESTADUAL`, `MUNICIPAL` ou `INSTITUCIONAL`.
 
 A mesma validação vale na criação de um dataset (um erro por item da lista,
 apontado em `diasNaoUteis[i].abrangencia`) e na inclusão de um dia não útil
 avulso num dataset existente (apontado em `item.abrangencia`).
 
-A análise é por lista de tokens explícita (case-sensitive, sem tolerância a
+A análise é por lista de códigos explícita (case-sensitive, sem tolerância a
 variação de grafia), não por conversão genérica de enum — um valor fora
 desses quatro, incluindo variação de caixa, é recusado.
 
 ## Como resolver
 
-Use exatamente um dos quatro tokens válidos: `NACIONAL`, `ESTADUAL`,
+Use exatamente um dos quatro códigos válidos: `NACIONAL`, `ESTADUAL`,
 `MUNICIPAL` ou `INSTITUCIONAL`, e repita a operação.

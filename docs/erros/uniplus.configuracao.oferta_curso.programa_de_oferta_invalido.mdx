@@ -1,7 +1,7 @@
 ---
-title: O programa de oferta é inválido
-sidebar_label: Programa de oferta inválido
-description: O programa de oferta precisa ser um dos sete tokens do domínio fechado — REGULAR, FORMA_PARA, PARFOR, PRONERA, PEPETI, CONVENIO_OUTRO ou OUTRO.
+title: Programa de oferta não é um dos códigos aceitos
+sidebar_label: Programa de oferta não é um dos códigos aceitos
+description: O programa de oferta precisa ser um dos sete códigos aceitos — REGULAR, FORMA_PARA, PARFOR, PRONERA, PEPETI, CONVENIO_OUTRO ou OUTRO.
 code: uniplus.configuracao.oferta_curso.programa_de_oferta_invalido
 http_status: 422
 situacao: publicado
@@ -21,14 +21,13 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 ## O que aconteceu
 
-O **programa de oferta** informado não é um dos sete tokens do domínio
-fechado: `REGULAR`, `FORMA_PARA`, `PARFOR`, `PRONERA`, `PEPETI`,
+O **programa de oferta** informado não é um dos sete códigos aceitos: `REGULAR`, `FORMA_PARA`, `PARFOR`, `PRONERA`, `PEPETI`,
 `CONVENIO_OUTRO` ou `OUTRO`.
 
 Programa de oferta é obrigatório e não tem valor padrão — omiti-lo é
-recusado do mesmo jeito que informar um token fora do domínio.
+recusado do mesmo jeito que informar um código que não está entre os aceitos.
 
 ## Como resolver
 
-Informe um dos sete tokens válidos: `REGULAR`, `FORMA_PARA`, `PARFOR`,
+Informe um dos sete códigos válidos: `REGULAR`, `FORMA_PARA`, `PARFOR`,
 `PRONERA`, `PEPETI`, `CONVENIO_OUTRO` ou `OUTRO`.
