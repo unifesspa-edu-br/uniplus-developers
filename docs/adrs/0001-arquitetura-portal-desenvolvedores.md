@@ -47,9 +47,11 @@ uniplus-developers/
 ├── src/
 │   ├── components/
 │   │   ├── RedocSpec.tsx          # Wrapper do <RedocStandalone> com theming Gov.br
-│   │   ├── ErrorCatalogEntry.tsx  # Renderiza /erros/{code} a partir do frontmatter
+│   │   ├── ErrorCatalogEntry.tsx  # Renderiza o contrato de erro sincronizado
 │   │   ├── MediaTypeCard.tsx      # Renderiza /media-types/{resource}/{version}
 │   │   └── ChangelogEntry.tsx     # Renderiza entradas de changelog com banners
+│   ├── data/erros/                # Contratos da API e commit de origem
+│   ├── plugins/catalogo-erros/    # Rotas geradas por módulo e código
 │   ├── css/
 │   │   ├── govbr-tokens.css       # Fonte única dos tokens Gov.br DS
 │   │   ├── custom.css             # Theming do shell Docusaurus (Infima)
@@ -58,7 +60,7 @@ uniplus-developers/
 ├── docs/
 │   ├── intro.md                   # "Início rápido por persona"
 │   ├── modules/<modulo>/<recurso>/v<N>.mdx
-│   ├── erros/{code}.mdx           # Frontmatter + <ErrorCatalogEntry/>
+│   ├── erros/index.mdx            # Índice do catálogo
 │   ├── media-types/<resource>/<version>.mdx
 │   ├── changelog/v<X.Y.Z>.mdx
 │   └── guides/                    # Jornadas
@@ -67,7 +69,7 @@ uniplus-developers/
 │   └── img/
 └── .github/workflows/
     ├── deploy.yml                 # Build + push para gh-pages no merge para main
-    └── sync-specs.yml             # Pull dos specs de uniplus-api/contracts/
+    └── sync-specs.yml             # Sincronização de OpenAPI e catálogo da API
 ```
 
 ### Componente-chave: `<RedocSpec>`
@@ -115,12 +117,17 @@ A fonte canônica de tokens vem de `uniplus-web/apps/poc-primeng/src/styles.css`
 
 - **GitHub Pages** com CNAME apontando para `developers.uniplus.unifesspa.edu.br`. CNAME configurado pelo time de redes da Unifesspa, apontando para `unifesspa-edu-br.github.io`. Arquivo `CNAME` no root do repo declara o custom domain.
 - **Deploy via GitHub Actions** (`peaceiris/actions-gh-pages@v3`): on push para main → `npm run build` → push do `build/` para branch `gh-pages`.
-- **Bridge pré-CNAME.** Enquanto o CNAME está em provisão, `type` URIs de `ProblemDetails` resolvem temporariamente para `unifesspa-edu-br.github.io/uniplus-developers/erros/{code}`. Quando o CNAME entrar no ar, redirect 301 é configurado no proxy reverso institucional.
+- **Endereço do erro.** A API emite o `type` com a base do portal publicado no GitHub Pages, conforme a emenda de 17/11/2026 da ADR-0023 da API. O plugin gera a página `/erros/{code}/` para cada código e a hospedagem resolve a rota com ou sem a barra final. Uma mudança de domínio exige atualizar a API e o portal juntos.
 - **Fallback institucional.** Se a revisão de segurança da Unifesspa não permitir CNAME para GitHub Pages, fallback é Kubernetes nginx ingress no cluster institucional ([ADR-0017 do `uniplus-api`](https://github.com/unifesspa-edu-br/uniplus-api/blob/main/docs/adrs/0017-kubernetes-com-helm-para-orquestracao.md)). Build artifact é o mesmo `build/` estático; só muda destino. **Validação de DNS é blocking task da Milestone C.**
 
-### Sincronização dos specs OpenAPI
+### Sincronização dos contratos da API
 
-Workflow `.github/workflows/sync-specs.yml` puxa `contracts/openapi.<modulo>.json` da `uniplus-api` (tag de release ou main) para `static/openapi/`. Trigger: schedule diário + workflow_dispatch + repository_dispatch (disparado pela `uniplus-api` no merge para main). Diff em PR permite revisar mudanças contratuais antes de publicá-las no portal.
+A emenda de 21/11/2026 adota um único commit de `main` da API por sincronização.
+O workflow `sync-specs.yml` copia os OpenAPI para `static/openapi/` e os arquivos
+`codigos-de-erro.json` e `descricoes-de-erros.json` para `src/data/erros/`.
+Depois de validar os contratos, os requisitos e os links, o aplicativo do
+GitHub abre o PR com o commit de origem. O catálogo acompanha a `main` da API.
+A implantação da API pode estar em outro commit.
 
 ### Busca
 
@@ -146,7 +153,7 @@ Essa separação permite reuso liberal do código por outras instituições fede
 
 ### Esta ADR não decide
 
-- Detalhes do conteúdo do catálogo de erros — cada slice da `uniplus-api` adiciona suas entradas conforme implementa endpoints. Esta ADR só estabelece o template `<ErrorCatalogEntry>` e o frontmatter mínimo.
+- O conteúdo do catálogo de erros pertence à `uniplus-api`. Esta ADR define as páginas geradas, a navegação e a sincronização dos contratos.
 - Política de versionamento de release do próprio portal (semver vs date-based) — decisão na primeira release real, fora do escopo da arquitetura.
 - Estratégia de monitoramento/analytics (GA, Plausible, Matomo, none) — pode ser adicionada depois sem alterar a arquitetura.
 - Interactive playground (try-it-out com auth real) — fora do V1; quando justificado, entra como ADR superseding parte desta.

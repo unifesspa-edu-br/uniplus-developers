@@ -1,124 +1,16 @@
 ---
 title: Catálogo de erros
-sidebar_label: Visão geral
-description: Cada causa de recusa da API tem página própria, endereçada pelo código que o corpo de erro carrega.
+description: Consulte os códigos de erro da API Uni+ e saiba como resolver cada recusa.
 ---
 
-import DocCardList from '@theme/DocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/plugin-content-docs/client';
+import IndiceDeErros from '@site/src/components/catalogo/IndiceDeErros';
 
-# Catálogo de erros
+O campo `type` de uma resposta de erro da API aponta para a página do código.
+Cada página mostra o status HTTP, explica a recusa e indica como resolver.
 
-Toda resposta de erro da API do Uni+ segue a
-[RFC 9457](https://www.rfc-editor.org/rfc/rfc9457.html) — `application/problem+json`.
-Além dos campos da norma, o corpo carrega a extensão `code`, que identifica a
-**causa** da recusa de forma estável, e é a chave deste catálogo.
+O catálogo acompanha o commit sincronizado da branch `main` da API. A versão
+implantada pode estar em outro commit.
 
-Cada `code` tem página própria aqui. É para ela que o campo `type` do corpo de
-erro aponta: a referência existe para levar quem recebeu a recusa até a
-explicação da causa e do que fazer diante dela.
+## Módulos
 
-## Como ler um corpo de erro
-
-```json
-{
-  "type": "https://developers.uniplus.unifesspa.edu.br/erros/uniplus.selecao.processo_seletivo.localidade_ausente",
-  "title": "A localidade do processo não foi declarada",
-  "status": 422,
-  "detail": "Declare a localidade antes de publicar.",
-  "instance": "01JBQ2X8YQ0000000000000000",
-  "code": "uniplus.selecao.processo_seletivo.localidade_ausente",
-  "traceId": "4bf92f3577b34da6a3ce929d0e0e4736"
-}
-```
-
-- **`code`** — a causa. Estável, e o que se deve tratar em código. Segue a
-  taxonomia `uniplus.<módulo>.<agregado>.<razão>`, sempre em minúsculas.
-- **`title`** — frase curta, a mesma para todas as instâncias do mesmo `code`.
-- **`detail`** — descreve a instância específica. Nunca ecoa o valor recusado.
-- **`instance`** — identificador opaco da requisição, para acionar o suporte.
-- **`traceId`** — correlaciona a recusa com o rastro distribuído da operação.
-- **`retryable`** — só aparece em conflito, e só quando vale `true`. Diz que a
-  mesma requisição, repetida sem alteração, pode agora ter outro desfecho,
-  porque o conflito descrevia uma corrida que já passou. **Ausência não é
-  `false`**: o campo simplesmente não viaja no caso comum.
-
-Trate sempre pelo `code`, nunca pelo texto de `title` ou `detail`: esses são
-redigidos em português e podem ser reescritos sem que a causa mude.
-
-## Quando vale repetir
-
-Nenhuma recusa (`4xx`) fica guardada na `Idempotency-Key`: depois de corrigir a
-causa — a permissão concedida, a precondição atendida —, a repetição com a
-mesma chave alcança o servidor e é decidida de novo. Só a resposta de sucesso
-fica guardada e é devolvida em replay. O campo `retryable: true` indica que a
-mesma requisição, sem mudança nenhuma, pode dar certo se repetida (um conflito
-de concorrência, por exemplo).
-
-O campo é declarado no schema `ProblemDetails` dos contratos da API, como
-booleano **opcional** — opcional porque só viaja quando é `true`, e um cliente
-que o exigisse presente leria o caso comum como violação de contrato. Os
-arquivos OpenAPI exibidos neste portal são cópias sincronizadas da API por
-rotina própria, então podem levar um ciclo até refletir a declaração.
-
-O critério que separa os dois casos é o que evita generalizar errado:
-
-> É seguro repetir a operação cujo alvo a requisição **nomeia**.
-> Não é seguro repetir aquela cujo alvo sai do **estado corrente** — porque é
-> justamente esse estado que a corrida mudou.
-
-Marcar vigente um dataset, reativar um motivo, gravar um rascunho: todos nomeiam o
-que tocam, e repetir faz a mesma coisa. Já "aprovo o texto que está lá" e
-"retifico a versão que está valendo" não nomeiam nada — o que elas tocam pode ter
-mudado por causa da mesma corrida que as recusou, e repetir aplicaria o efeito a
-outro alvo.
-
-Por isso a declaração é do código **no contexto das operações que o emitem**, e
-não do código sozinho: um mesmo código usado por várias operações só é declarado
-retentável se a repetição preservar o efeito pedido em todas elas. O padrão é
-não declarar.
-
-A ausência do campo, portanto, diz que aquele conflito não foi declarado
-retentável — não que repetir esteja descartado. Quando a resposta não o traz,
-vale o que o `detail` dela orienta.
-
-O campo não promete nada sobre **quantas vezes** repetir nem **em quanto tempo**.
-Não há `Retry-After`.
-
-## Endereço das páginas
-
-O endereço canônico de uma entrada é
-`https://developers.uniplus.unifesspa.edu.br/erros/{code}`.
-
-Enquanto o domínio institucional não é provisionado, o portal responde em
-`https://unifesspa-edu-br.github.io/uniplus-developers/erros/{code}` — é o
-endereço em que estas páginas estão publicadas agora, e o campo `type` de cada
-entrada mostra o valor vigente. Quando o domínio entrar no ar, o endereço
-canônico passa a valer e o anterior redireciona para ele.
-
-A API emite hoje o `type` sob outra base, que não resolve para estas páginas.
-A correção tem trabalho próprio em
-[`uniplus-api#1138`](https://github.com/unifesspa-edu-br/uniplus-api/issues/1138);
-até ela entrar, monte o endereço a partir do `code`, que já é o valor definitivo.
-
-## Entradas em rascunho
-
-Uma entrada marcada como **rascunho** descreve uma causa cujo código já está
-fixado, mas que a API ainda não emite. Ela existe antes da implementação por
-exigência do contrato de erro: um código novo não entra em produção sem a
-explicação pública correspondente, e um mesmo Pull Request não atravessa os dois
-repositórios.
-
-Enquanto estiver em rascunho, uma entrada não descreve comportamento em vigor, e
-os valores ainda podem mudar. Não vale programar contra ela.
-
-## Cobertura
-
-O catálogo cobre as causas publicadas abaixo. Ele **não** cobre, ainda, todos os
-códigos que a API já emite — o preenchimento retroativo é trabalho próprio, em
-curso. Uma recusa cujo `code` não tem página aqui continua sendo tratável pelo
-próprio `code`.
-
-## Entradas
-
-<DocCardList items={useCurrentSidebarCategory().items} />
+<IndiceDeErros />

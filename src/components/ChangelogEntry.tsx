@@ -17,9 +17,8 @@ import {
 export type TipoMudancaChangelog = 'versao_nova' | 'deprecation' | 'sunset';
 
 /**
- * As propriedades espelham o frontmatter da página, em snake_case, no mesmo
- * padrão do `<ErrorCatalogEntry>` — a entrada é escrita uma vez e aplicada
- * com `{...frontMatter}`.
+ * As propriedades espelham o frontmatter da página. A entrada é escrita
+ * uma vez e aplicada com `{...frontMatter}`.
  */
 export interface ChangelogEntryProps {
   /** Versão semântica do portal/contrato (ex.: `1.0.0`). */
