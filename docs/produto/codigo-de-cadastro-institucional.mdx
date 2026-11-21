@@ -125,7 +125,7 @@ conhecidas e valem enquanto não forem unificadas:
 | Tipo de deficiência | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
 | Categoria de documento | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
 | Tipo de documento | `^[A-Z][A-Z0-9_]{1,49}$` | 2 a 50 | canônico |
-| Tipo de banca | `^[A-Z_]+$` | até 60 | sem dígito, e **conjunto fechado de códigos** |
+| Tipo de banca | — | — | **conjunto fechado de códigos**, lido exatamente como enviado, sem formato próprio |
 | Fase canônica | `^[A-Z_]+$` | até 60 | sem dígito, e **conjunto fechado de códigos** |
 | Modalidade | `^[A-Z0-9_]+$` | até 60 | **aceita dígito como primeiro caractere** |
 | Tipo de processo | — | até 64 | **texto livre**, sem formato fechado |
@@ -134,18 +134,19 @@ conhecidas e valem enquanto não forem unificadas:
 
 Três leituras importantes desta tabela:
 
-- Nos três formatos legados, **a expressão não expressa o limite de tamanho** —
+- Nos formatos legados, **a expressão não expressa o limite de tamanho** —
   ele existe à parte, em 60 caracteres. Um código de 61 caracteres que casa com
   `^[A-Z_]+$` ainda assim é recusado.
-- Em tipo de banca e fase canônica, **o formato não é o único filtro**: esses dois
-  aceitam apenas os códigos de um conjunto fechado, definido pelo vocabulário do
-  domínio. `MINHA_BANCA` respeita a expressão e mesmo assim é recusado. Os
-  conjuntos estão nas páginas `codigo_fora_do_conjunto_canonico` de cada um.
+- Em tipo de banca e fase canônica, **o código não é livre**: esses dois aceitam
+  apenas os códigos de um conjunto fechado, definido pelo vocabulário do domínio.
+  O tipo de banca não tem formato próprio: qualquer código fora do conjunto, como
+  `MINHA_BANCA`, é recusado, e a fase canônica confere o conjunto além do formato.
+  Os conjuntos estão nas páginas `codigo_fora_do_conjunto_canonico` de cada um.
 - Os três últimos cadastros **não têm formato fechado**: aceitam minúscula,
   acento e espaço. Não é permissão, é dívida — são anteriores à convenção.
 
 Ao cadastrar em tipo de banca ou fase canônica, portanto, `LEI_12711` seria
-recusado: nesses dois o código é puramente alfabético. Já a modalidade aceita um
+recusado: nenhum dos dois conjuntos a contém. Já a modalidade aceita um
 código começando por dígito, o que o formato canônico não permite.
 
 Quem estiver implementando um cadastro **novo** deve adotar o formato canônico.
@@ -158,7 +159,7 @@ escrita com código de erro próprio — `uniplus.configuracao.<cadastro>.codigo
 —, distinguível do erro de código ausente e do de código já existente.
 
 Têm página publicada no [catálogo de erros](/erros/) os de condição de
-atendimento, fase canônica, modalidade, tipo de banca, tipo de deficiência e
+atendimento, fase canônica, modalidade, tipo de deficiência e
 tipo de documento.
 
 Os cadastros de texto livre não emitem esse erro, mas nem por isso aceitam
