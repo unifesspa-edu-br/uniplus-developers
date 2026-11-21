@@ -6445,7 +6445,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O edital configura o recurso numa fase ou numa etapa, ancorado num ato ou resultado publicado dela; o prazo começa pela publicação desse ato (UNI-REQ-0111 a UNI-REQ-0116); antes da publicação, não há recurso.',
+      'O edital configura o recurso numa fase ou numa etapa; a publicação do ato ou resultado dela inicia o prazo da 1ª instância (UNI-REQ-0111 a UNI-REQ-0116); antes da publicação, não há recurso.',
     verificacao:
       'Teste automatizado da abertura do período para apresentar recurso pela publicação e da recusa antes dela (planejado).',
     pagina_developers: '/produto/regras-negocio/',
