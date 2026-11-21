@@ -1,7 +1,7 @@
 ---
 title: Uma fase iniciada não sai do cronograma
 sidebar_label: Fase iniciada não sai
-description: Rascunho — a retificação tenta remover do cronograma uma fase que já começou.
+description: Rascunho — a conferência recusa remover do cronograma uma fase que já começou, mas nenhuma operação a aplica hoje.
 code: uniplus.selecao.fase_cronograma.fase_iniciada_nao_sai_do_cronograma
 http_status: 422
 situacao: rascunho
@@ -20,17 +20,27 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
 
+:::warning Recusa ainda não emitida
+
+Nenhuma operação do Uni+ aplica hoje esta conferência. O pedido de retificação
+em ato único não traz o cronograma nem as etapas, e a conferência das fases e etapas
+iniciadas não é chamada por nenhum caminho de produção. Esta página descreve a
+regra que a conferência aplica.
+
+:::
+
 ## O que aconteceu
 
-A retificação remove do cronograma uma fase que já está iniciada. A fase está
-iniciada desde o início da janela publicada ou desde o primeiro ato ou registro
-dela, o que vier primeiro, mesmo quando tem janela. A fase encerrada também conta
-como iniciada. A remoção é conferida na retificação, e a comparação é feita com a versão
+A conferência recusa a retirada, do cronograma, de uma fase que já está
+iniciada. A fase está iniciada desde o início da janela publicada ou desde o
+primeiro ato ou registro dela, o que vier primeiro, mesmo quando tem janela. A
+fase encerrada também conta como iniciada. A comparação é feita com a versão
 publicada vigente.
 
 ## Como resolver
 
-Mantenha a fase no cronograma da retificação, com a unidade que ela tem na versão
-publicada. A fase que ainda não começou, sem janela aberta e sem ato ou registro,
-continua podendo sair do cronograma, sujeita às demais regras de publicação e
-retificação.
+Hoje não há o que corrigir, porque nenhuma operação chega a esta recusa: o pedido
+de retificação em ato único não traz o cronograma. Pela regra, a fase iniciada
+permanece no cronograma, com a unidade que ela tem na versão publicada. A fase
+que ainda não começou, sem janela aberta e sem ato ou registro, não é alcançada
+por esta recusa.

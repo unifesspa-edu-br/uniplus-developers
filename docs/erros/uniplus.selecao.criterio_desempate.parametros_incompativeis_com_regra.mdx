@@ -1,0 +1,43 @@
+---
+title: Os parâmetros informados não correspondem à regra referenciada
+sidebar_label: Parâmetros incompatíveis com a regra de desempate
+description: Cada regra de desempate exige o seu próprio conjunto de parâmetros — conferência de segurança, já que o sistema sempre monta os parâmetros a partir do código da regra.
+code: uniplus.selecao.criterio_desempate.parametros_incompativeis_com_regra
+http_status: 422
+situacao: publicado
+modulo: Seleção
+emitido_em:
+  - Definição de critérios de desempate do processo seletivo
+  - Retificação em ato único
+requisitos:
+  - UNI-REQ-0015
+rastreio:
+  - label: 'uniplus-api#779'
+    href: https://github.com/unifesspa-edu-br/uniplus-api/pull/779
+---
+
+import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
+
+<ErrorCatalogEntry {...frontMatter} />
+
+## O que aconteceu
+
+Um critério de desempate foi criado com um conjunto de parâmetros que não
+corresponde à regra referenciada. Por exemplo, parâmetros de
+`DESEMPATE-IDOSO` ligados à regra `DESEMPATE-MAIOR-NOTA-ETAPA`. O erro aponta o
+campo `regraCodigo`.
+
+Esta conferência é de segurança. Tanto a definição dos critérios de desempate
+quanto a leitura das versões já publicadas, feita na retificação em ato único,
+montam os parâmetros a partir do código da própria regra. Por isso, com o
+comportamento atual, a combinação errada não chega a acontecer em nenhum dos dois
+caminhos. A conferência existe para que a criação do critério não dependa de
+essa correspondência já ter sido garantida em outro lugar.
+
+## Como resolver
+
+Este erro não deveria ocorrer com o comportamento atual do sistema. Se
+aparecer, indica uma inconsistência interna: um critério chegou à criação com
+parâmetros que não foram montados a partir da própria regra. Informe a equipe
+técnica do Uni+ para investigação; o envio de outros dados no pedido não corrige
+o problema.

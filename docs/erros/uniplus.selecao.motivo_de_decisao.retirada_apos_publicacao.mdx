@@ -1,10 +1,10 @@
 ---
 title: Motivo publicado não é retirado do processo
 sidebar_label: Retirada de motivo publicado
-description: A retificação não traz um motivo que já consta do edital publicado, e o conjunto de motivos publicados só cresce.
+description: Rascunho — a conferência recusa a retirada de um motivo que já consta do edital publicado, mas nenhuma operação a aplica hoje.
 code: uniplus.selecao.motivo_de_decisao.retirada_apos_publicacao
 http_status: 422
-situacao: publicado
+situacao: rascunho
 modulo: Seleção
 emitido_em:
   - Retificação em ato único
@@ -19,12 +19,29 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 <ErrorCatalogEntry {...frontMatter} />
 
+:::warning Recusa ainda não emitida
+
+Nenhuma operação do Uni+ aplica hoje esta conferência. O pedido de retificação
+em ato único não traz motivos de decisão, e a conferência dos motivos da
+retificação não é chamada por nenhum caminho de produção. Esta página descreve a
+regra que a conferência aplica.
+
+:::
+
 ## O que aconteceu
 
-Em processo publicado, o conjunto de motivos só cresce (UNI-REQ-0124). O pedido de retificação deixou de trazer, em `motivos`, um motivo que já consta do edital publicado. A recusa sai com **422**, e a mensagem diz o código do motivo.
+Em processo publicado, o conjunto de motivos só cresce (UNI-REQ-0124). A
+conferência recusa o documento novo que deixa de trazer, em `motivos`, um motivo
+que já consta do edital publicado. A recusa sai com **422**, e a mensagem diz o
+código do motivo.
 
-A retificação só inclui motivos, e a inclusão exige justificativa. A retirada de motivo, pelas rotas de retirada do processo, só vale enquanto o processo está em rascunho.
+A regra que a conferência aplica: em processo publicado o conjunto de motivos só
+cresce, e cada inclusão exige justificativa. A retirada de motivo, pelas rotas de
+retirada do processo, só vale enquanto o processo está em rascunho.
 
 ## Como resolver
 
-Mantenha o motivo no documento da retificação. Se ele não deve mais ser usado em processos novos, peça a desativação no cadastro: o processo publicado continua com ele (UNI-REQ-0122).
+Hoje não há o que corrigir, porque nenhuma operação chega a esta recusa. Pela
+regra, o motivo publicado permanece no processo. Se ele não deve mais ser usado
+em processos novos, peça a desativação no cadastro: o processo publicado
+continua com ele (UNI-REQ-0122).

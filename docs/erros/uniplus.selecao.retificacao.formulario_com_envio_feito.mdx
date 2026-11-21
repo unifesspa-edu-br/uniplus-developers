@@ -1,14 +1,13 @@
 ---
-title: A retificação não retira formulário que já recebeu envio
+title: O formulário que já recebeu envio não é retirado do processo publicado
 sidebar_label: Formulário com envio feito
-description: Rascunho — recusa prevista pelo UNI-REQ-0212, ainda não emitida pela API; a retificação não retira um formulário do processo se alguém já fez envio por ele, como pedido de isenção enviado ou envio da habilitação.
+description: Rascunho — recusa prevista pelo UNI-REQ-0212, ainda não emitida pela API; o processo publicado não retira um formulário se alguém já fez envio por ele, como pedido de isenção enviado ou envio da habilitação.
 code: uniplus.selecao.retificacao.formulario_com_envio_feito
 http_status: 422
 situacao: rascunho
 modulo: Seleção
 emitido_em:
   - Remoção de formulário do processo
-  - Fechamento de retificação
 requisitos:
   - UNI-REQ-0212
   - UNI-REQ-0144
@@ -22,20 +21,22 @@ import ErrorCatalogEntry from '@site/src/components/ErrorCatalogEntry';
 
 A decisão do líder técnico de 02/11/2026, registrada no UNI-REQ-0212 e a
 confirmar pelo PO, prevê esta recusa. Até a API aplicar a regra, a retirada de
-formulário na retificação é recusada com outro código
-(`uniplus.selecao.processo_seletivo.mutacao_pos_publicacao_bloqueada`), em qualquer caso.
+formulário de processo publicado é recusada com outro código
+(`uniplus.selecao.processo_seletivo.mutacao_pos_publicacao_bloqueada`), em
+qualquer caso. O pedido de retificação em ato único também não traz formulário.
 
 :::
 
 ## O que aconteceu
 
-A retificação retirou um formulário inteiro do processo, e alguém já fez envio
-por ele: há pedido de isenção enviado, no caso do formulário de pedido de
-isenção, o envio da habilitação, no caso do formulário de habilitação, ou a
-inscrição enviada, no caso do formulário obrigatório da inscrição. A recusa sai
-com **422**, e o `detail` diz qual envio impede a retirada.
+Pela regra prevista, a retirada de um formulário inteiro do processo publicado é
+recusada quando alguém já fez envio por ele: há pedido de isenção enviado, no
+caso do formulário de pedido de isenção, o envio da habilitação, no caso do
+formulário de habilitação, ou a inscrição enviada, no caso do formulário
+obrigatório da inscrição. A recusa sairia com **422**, e o `detail` diria qual
+envio impede a retirada.
 
-O formulário pode ser retirado enquanto nenhum envio foi feito por ele, desde
+O formulário poderia ser retirado enquanto nenhum envio foi feito por ele, desde
 que a configuração resultante continue publicável: o único formulário
 obrigatório da fase de inscrição, por exemplo, não sai de processo com inscrição
 pelo sistema, mesmo sem inscrição enviada (nesse caso a recusa é
@@ -46,11 +47,9 @@ formulário com aviso para o candidato refazer.
 
 ## Como resolver
 
-Mantenha o formulário na versão nova e feche a retificação. No caso do
+Hoje não há o que corrigir: a retirada de formulário de processo publicado não é
+aceita, e o pedido de retificação em ato único não traz formulário. Pela regra
+prevista, o formulário com envio feito permanece no processo. No caso do
 formulário de isenção, manter o formulário exige manter a cobrança da taxa,
 porque o formulário de isenção só existe em processo que cobra taxa: com pedido
-de isenção enviado, o processo não passa a ser gratuito nesta retificação. Se o
-que precisa mudar é o conteúdo, regrave os itens
-(`PUT .../formularios/{codigo}/itens`) dentro da retificação, termos
-inclusive, porque o termo de aceite é um campo do formulário; a retirada de
-pergunta é aceita nas condições do UNI-REQ-0212.
+de isenção enviado, o processo não passa a ser gratuito.
