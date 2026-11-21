@@ -29,9 +29,9 @@ não há o que distribuir.
 Esta checagem conta os **Ids brutos** informados no payload, antes de
 resolver qualquer um deles contra o catálogo de modalidades — por isso roda
 na mesma primeira passada de
-[`vo_base_invalido`](./uniplus.selecao.configuracao_distribuicao_vagas.vo_base_invalido.mdx)
+[`vagas_ofertadas_base_invalido`](./uniplus.selecao.configuracao_distribuicao_vagas.vagas_ofertadas_base_invalido.mdx)
 e
-[`pr_fora_do_limite`](./uniplus.selecao.configuracao_distribuicao_vagas.pr_fora_do_limite.mdx),
+[`percentual_da_reserva_legal_fora_do_limite`](./uniplus.selecao.configuracao_distribuicao_vagas.percentual_da_reserva_legal_fora_do_limite.mdx),
 acumulando com as duas — ver aquela página para o mecanismo completo. Sem
 essa contagem bruta nesta primeira passada, um payload com `modalidadeIds`
 vazio **e** uma oferta de curso inexistente devolveria o erro de catálogo em
