@@ -38,7 +38,7 @@ A plataforma foi concebida para crescer além dos processos seletivos. Módulos 
 
 > Vocabulário: "processo seletivo" é o certame configurável; "edital" é o ato/documento que a publicação emite. Ver [Edital versus processo seletivo](../dominio/index.mdx#edital-versus-processo-seletivo).
 
-- Cadastro e configuração do processo seletivo — parâmetros, etapas, pesos, cotas, locais de prova, datas, formulários, modalidades e regras do Fator de Atenuação das Desigualdades de Acesso.
+- Cadastro e configuração do processo seletivo — parâmetros, etapas, pesos, cotas, cidades de prova, datas, formulários, modalidades e regras do Fator de Atenuação das Desigualdades de Acesso.
 - Publicação do processo seletivo — registra o edital como ato/documento normativo e produz a versão de configuração congelada.
 - Inscrição de candidatos — cadastro online e envio de documentos.
 - Homologação — análise administrativa dos documentos apresentados.

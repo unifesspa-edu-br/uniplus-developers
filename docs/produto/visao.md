@@ -18,7 +18,7 @@ A plataforma foi projetada para expandir além do CEPS — módulos futuros
 
 ## Ciclo de vida do processo
 
-1. **Cadastro do edital** — parâmetros, etapas, pesos, cotas e locais de prova.
+1. **Cadastro do edital** — parâmetros, etapas, pesos, cotas e cidades de prova.
 2. **Configuração do processo** — datas, formulários, modalidades e regras do Fator de Atenuação das Desigualdades de Acesso.
 3. **Inscrição de candidatos** — cadastro online + upload de documentos.
 4. **Homologação** — análise administrativa dos documentos (deferido/indeferido).
