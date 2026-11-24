@@ -2713,9 +2713,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0066',
-    titulo: 'Formatos permitidos por exigência como lista e exceção de idade por condição de aplicação',
+    titulo: 'Formatos e prazo de emissão por exigência documental',
     enunciado:
-      'Cada exigência documental declara os formatos aceitos como lista de formatos permitidos (formatosPermitidos), em que o limite de tamanho por formato é opcional, além de um limite global opcional da exigência; alternativamente, um token de qualquer formato com teto default opcional, mutuamente exclusivo dos formatos específicos. Nenhum desses limites passa de 20 MB, o teto do arquivo enviado pelo candidato (UNI-REQ-0027). A lista, os limites e a escolha são congelados na exigência. A regra de idade de emissão do documento é tudo-nulo (sem regra) ou completa (Valor, Unidade, ReferenciaTipo e a fase quando aplicável), com a fase como referência, e funciona como aviso, não bloqueia a presença. A exceção do laudo de deficiência permanente decorre de condição de aplicação sobre o tipo de deficiência, sem campo booleano especial: modela-se por duas exigências do mesmo documento, uma com regra de idade aplicável a tipos não permanentes e outra sem idade aplicável a tipos permanentes, com a classificação permanente vinda do catálogo de tipos de deficiência e os códigos concretos congelados na condição de aplicação.',
+      'Cada exigência documental declara os formatos aceitos como lista de formatos permitidos (formatosPermitidos), em que o limite de tamanho por formato é opcional, além de um limite global opcional da exigência; alternativamente, um token de qualquer formato com teto default opcional, mutuamente exclusivo dos formatos específicos. Nenhum desses limites passa de 20 MB, o teto do arquivo enviado pelo candidato (UNI-REQ-0027). A lista, os limites e a escolha são congelados na exigência. Cada exigência declara explicitamente se há prazo de emissão. Com prazo, informa valor positivo, unidade em dias, meses ou anos, referência e efeito: recusar o documento ou aceitar com aviso a quem analisa. A referência usa a mesma representação da validade do documento, com escolha independente: fim das inscrições, início ou fim de fase, data específica ou apresentação. A escolha ainda não feita é admitida no rascunho e impede a publicação e a conclusão da retificação. A data específica exige data na gravação; a fase deve pertencer ao processo. A ausência de data necessária no cronograma impede a publicação. A escolha, os formatos e os limites integram a versão publicada. A exceção do laudo de deficiência permanente é representada por duas exigências do mesmo documento, uma com prazo para tipos não permanentes e outra sem prazo para tipos permanentes, conforme a classificação do catálogo e os códigos registrados na condição de aplicação.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2727,9 +2727,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'formatosPermitidos como lista com limite por formato opcional e limite global opcional, ou token de qualquer formato com teto default opcional, mutuamente exclusivos, congelados na exigência; limite acima de 20 MB é recusado no cadastro da exigência; regra de idade tudo-nula ou completa (Valor, Unidade, ReferenciaTipo, fase), com a fase como referência e tratada como aviso (não bloqueia presença); a exceção do laudo permanente é modelada por duas exigências do mesmo documento (uma com idade por tipos não permanentes, outra sem idade por tipos permanentes), com permanente vindo do catálogo de tipos e códigos congelados na condição de aplicação; tipo ausente mantém as exigências pendentes.',
+      'formatosPermitidos como lista com limite por formato opcional e limite global opcional, ou token de qualquer formato com teto default opcional, mutuamente exclusivos, congelados na exigência; limite acima de 20 MB é recusado no cadastro da exigência. Prazo sem escolha gera pendência; sem prazo não admite detalhes; com prazo exige valor, unidade, referência e efeito. A data específica sem data é recusada na gravação; data necessária do cronograma ausente impede publicação e conclusão de retificação. O documento emitido na data mínima atende, e, na contagem em meses, dia inexistente corresponde ao último dia do mês. Com mais de uma fase que coleta inscrição, o fim das inscrições é o maior término entre elas. Duas exigências distinguem laudo permanente e não permanente; tipo ausente mantém as exigências pendentes.',
     verificacao:
-      'Teste automatizado (formatos config-time com limites opcional/global/default; regra de idade completa/tudo-nula como aviso; duas exigências por condição de aplicação de tipo permanente/não permanente) (planejado).',
+      'Testes automatizados de formatos, escolhas de prazo, referências, efeitos, publicação e condições de aplicação (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -7671,11 +7671,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0353',
     titulo: 'Documento já enviado é reaproveitado nas etapas e chamadas seguintes',
     enunciado:
-      'O documento que o candidato já enviou numa etapa anterior é reaproveitado em qualquer etapa seguinte que o exija, inclusive na habilitação, e o sistema não cobra o reenvio. O candidato pode enviá-lo de novo se quiser, por exemplo por ter uma nova via. Se o documento tem prazo de validade e está vencido, o sistema exige obrigatoriamente o envio de um documento novo. A habilitação homologada vale nas chamadas seguintes do mesmo processo: o documento já analisado e considerado válido não é pedido de novo nem analisado outra vez, conforme a Lei nº 13.726/2018 e o Decreto nº 9.094/2017, o que o diretor do Centro de Processos Seletivos (CEPS) confirmou em 18/11/2026. Só se pede o que a administração ainda não tem: o documento exigido ou alterado por uma retificação do edital (UNI-REQ-0345) e o documento com prazo de validade vencido. Apenas esse documento é enviado e analisado, e o restante da habilitação continua valendo. ' +
-      'Exemplo 1: Fernanda enviou o histórico escolar na inscrição, e a habilitação exige esse documento: ela não precisa reenviar, e o documento segue para a análise da habilitação. Exemplo 2: ela prefere enviar uma nova via: a nova via é a considerada. ' +
-      'Exemplo 3: o comprovante de residência dela tem validade de 90 dias e venceu entre a inscrição e a habilitação: o sistema exige um novo comprovante, e ela não conclui a entrega sem ele. ' +
-      'Exemplo 4: Leandro foi convocado para a reserva da 2ª chamada, homologado como habilitado, e não assumiu vaga; o edital desse processo mantém a pessoa da reserva aguardando (UNI-REQ-0432). Convocado para a vaga na 3ª chamada, ele não reenvia nem tem reanalisados os documentos já analisados e ainda válidos, desde que nenhuma exigência nova ou alterada por retificação os alcance: vale a habilitação homologada nesses documentos. ' +
-      'Exemplo 5: entre a 2ª e a 3ª chamada, uma retificação exige uma autodeclaração que Leandro nunca entregou. Na 3ª chamada, ele envia só a autodeclaração, que é a única coisa analisada; o histórico e os comprovantes já homologados continuam valendo.',
+      'O documento já enviado pelo candidato é reaproveitado em etapa seguinte que o exija, inclusive na habilitação, e o candidato pode apresentar nova via. A nova exigência determina o prazo de emissão, a validade própria, suas referências e os efeitos. Quando o documento está fora do prazo de emissão ou vencido para a nova exigência, o efeito aplicável é recusar o documento, exigindo nova via, ou aceitar com aviso a quem analisa. A conferência das datas na análise está planejada (uniplus-api#2741). Documento recusado pelo antivírus não é reaproveitado. A habilitação homologada vale nas chamadas seguintes do mesmo processo: documentos já analisados e aceitos não são pedidos nem analisados outra vez, ressalvadas exigências novas ou alteradas por retificação e as consequências do prazo e da validade da nova exigência. Somente o documento alcançado pela mudança ou que precise de nova via é solicitado e analisado; o restante da habilitação continua valendo, conforme a Lei nº 13.726/2018 e o Decreto nº 9.094/2017. ' +
+      'Exemplo: Fernanda enviou o histórico escolar na inscrição; ele é aproveitado na habilitação, e ela pode apresentar nova via. Se um comprovante está fora do prazo definido na nova exigência, com efeito de aviso, ele é aproveitado com aviso; com efeito de recusa, Fernanda apresenta nova via. Se um documento está vencido na referência da nova exigência, aplica-se do mesmo modo o efeito de vencimento escolhido. ' +
+      'Leandro foi homologado como habilitado e convocado em chamada seguinte: os documentos aceitos continuam valendo, observadas as exigências novas ou alteradas. Se uma retificação exige uma autodeclaração ainda não entregue, ele apresenta somente esse documento.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7687,8 +7685,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Na etapa seguinte, o documento já enviado aparece como já enviado, sem cobrança de reenvio, e segue para a análise que a etapa prevê; o candidato pode enviar nova via; documento com prazo de validade vencido não é reaproveitado e o envio de um novo é obrigatório; arquivo recusado pela verificação de antivírus não é reaproveitado; a pessoa homologada como habilitada e convocada em chamada seguinte do mesmo processo não tem documento cobrado nem reanalisado; quando uma retificação exige ou altera um documento, só esse documento é cobrado e analisado, e o restante da homologação continua valendo; o documento com prazo de validade vencido é cobrado mesmo com a homologação anterior.',
-    verificacao: 'Testes automatizados de reaproveitamento, de nova via e de documento vencido (planejado).',
+      'Documento já enviado aparece na etapa seguinte e pode ser substituído por nova via. Prazo de emissão e validade são avaliados segundo a nova exigência: com recusa, solicita-se nova via; com aviso, o documento é aproveitado e segue com aviso para análise. Arquivo recusado pelo antivírus não é aproveitado. Em chamada seguinte, a homologação permanece para os documentos não alcançados por nova exigência, alteração ou necessidade de nova via; só os documentos pertinentes são solicitados e analisados.',
+    verificacao: 'Testes automatizados de reaproveitamento, nova via, prazo de emissão e validade com cada efeito, e de chamadas e retificação (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -9265,6 +9263,27 @@ export const requisitosMvpSelecao: Requisito[] = [
       'A leitura do dado para montar condição devolve os operadores admitidos pelo domínio e pela cardinalidade, na ordem do catálogo, com o rótulo de cada um; o primeiro é o padrão da condição nova; dado booleano de valor único devolve só "é igual a" e "é diferente de"; dado categórico de valor único devolve esses dois mais "é um de" e "não é nenhum de"; dado numérico de valor único devolve os seis, incluindo "maior ou igual a" e "menor ou igual a"; dado categórico de vários valores devolve "inclui", "não inclui", "inclui algum de" e "não inclui nenhum de", e nunca devolve maior ou menor igual; a lista é calculada na leitura e não é gravada, de modo que a mudança de domínio ou de cardinalidade do dado aparece na leitura seguinte; a interface exibe o rótulo recebido da API sem escrevê-lo nem escolhê-lo; a resposta não traz dado pessoal.',
     verificacao:
       'Testes automatizados de endpoint por combinação de domínio e cardinalidade (booleano, categórico e numérico de valor único; categórico de vários valores), conferindo operadores, ordem, rótulo e padrão, a recalculagem após mudar o dado e a ausência de dado pessoal na resposta; teste da interface de que o rótulo exibido é o devolvido pela API (planejado, uniplus-api#2675).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0493',
+    titulo: 'Exigência documental declara a validade do documento',
+    enunciado:
+      'Cada exigência documental declara explicitamente se exige documento válido. Se exigir, define a data de referência e o efeito do vencimento: recusar o documento ou aceitar com aviso a quem analisa. A referência compartilha a representação do prazo de emissão, com escolha independente: fim das inscrições, início ou fim de fase, data específica ou apresentação do documento. A data específica exige data na gravação; a fase deve pertencer ao processo. A escolha ainda não feita pode ser salva no rascunho, mas impede a publicação e a conclusão da retificação, assim como a ausência de data necessária no cronograma. Documento que vence na data de referência atende. A conferência da validade na análise está planejada (uniplus-api#2741). O candidato consulta a exigência e sua referência; quando depende da apresentação, recebe essa informação.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0016',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Sem escolha, o rascunho apresenta pendência e a publicação e conclusão da retificação são recusadas. A opção de não exigir validade não aceita referência ou efeito; a opção de exigir validade requer ambos. Data específica sem data é recusada na gravação. Data de fase ou fim das inscrições indefinidos impedem publicação e conclusão de retificação. Com mais de uma fase que coleta inscrição, o fim das inscrições é o maior término entre elas. Vencimento na data de referência atende. A consulta do candidato informa a referência ou sua dependência da apresentação. O efeito escolhido orienta a análise e o reaproveitamento conforme UNI-REQ-0353.',
+    verificacao: 'Testes automatizados de escolha, referência, efeito, publicação, consulta e conferência da validade na análise (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
