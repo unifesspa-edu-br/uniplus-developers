@@ -3542,7 +3542,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/FatoCandidatoView"
+                    "$ref": "#/components/schemas/FatoDoCatalogoDto"
                   }
                 }
               }
@@ -3582,7 +3582,7 @@
             "content": {
               "application/vnd.uniplus.fato-candidato.v1\u002Bjson": {
                 "schema": {
-                  "$ref": "#/components/schemas/FatoCandidatoView"
+                  "$ref": "#/components/schemas/FatoDoCatalogoDto"
                 }
               }
             }
@@ -3684,7 +3684,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/FatoCandidatoDto"
+                    "$ref": "#/components/schemas/FatoDeManutencaoDto"
                   }
                 }
               }
@@ -3911,7 +3911,7 @@
             "content": {
               "application/vnd.uniplus.fato-candidato.v1\u002Bjson": {
                 "schema": {
-                  "$ref": "#/components/schemas/FatoCandidatoDto"
+                  "$ref": "#/components/schemas/FatoDeManutencaoDto"
                 }
               }
             }
@@ -4695,6 +4695,110 @@
         "x-uniplus-idempotent": true
       }
     },
+    "/api/configuracao/admin/fatos-candidato/{id}/ativacao": {
+      "post": {
+        "tags": [
+          "FatosCandidato"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Chave opaca (1-255 ASCII printable, sem \u0027,\u0027 ou \u0027;\u0027) para retry seguro do comando. Replay com mesma key \u002B mesmo body retorna response cacheada (ADR-0027).",
+            "required": true,
+            "schema": {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[\\x21-\\x2B\\x2D-\\x3A\\x3C-\\x7E]\u002B$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Idempotency-Key ausente ou malformada (uniplus.idempotency.key_ausente, uniplus.idempotency.key_malformada), ou corpo JSON inv\u00E1lido."
+          },
+          "413": {
+            "description": "Corpo acima do limite dos endpoints idempotentes (uniplus.idempotency.body_muito_grande). O limite \u00E9 do filtro, n\u00E3o do servidor.",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-uniplus-idempotent": true
+      }
+    },
     "/api/configuracao/admin/fatos-candidato/{id}/aceite-da-recomendacao": {
       "post": {
         "tags": [
@@ -4973,110 +5077,6 @@
             "bearerAuth": []
           }
         ]
-      }
-    },
-    "/api/configuracao/admin/fatos-candidato/{id}/ativacao": {
-      "post": {
-        "tags": [
-          "FatosCandidato"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "description": "Chave opaca (1-255 ASCII printable, sem \u0027,\u0027 ou \u0027;\u0027) para retry seguro do comando. Replay com mesma key \u002B mesmo body retorna response cacheada (ADR-0027).",
-            "required": true,
-            "schema": {
-              "maxLength": 255,
-              "minLength": 1,
-              "pattern": "^[\\x21-\\x2B\\x2D-\\x3A\\x3C-\\x7E]\u002B$",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/problem\u002Bjson": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/problem\u002Bjson": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem\u002Bjson": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/problem\u002Bjson": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/problem\u002Bjson": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Idempotency-Key ausente ou malformada (uniplus.idempotency.key_ausente, uniplus.idempotency.key_malformada), ou corpo JSON inv\u00E1lido."
-          },
-          "413": {
-            "description": "Corpo acima do limite dos endpoints idempotentes (uniplus.idempotency.body_muito_grande). O limite \u00E9 do filtro, n\u00E3o do servidor.",
-            "content": {
-              "application/problem\u002Bjson": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "x-uniplus-idempotent": true
       }
     },
     "/api/configuracao/admin/fatos-candidato/{id}/valores": {
@@ -6671,7 +6671,7 @@
             "name": "finalidade",
             "in": "query",
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/FinalidadeFormularioCodigo"
             }
           },
           {
@@ -6735,7 +6735,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ModeloFormularioView"
+                    "$ref": "#/components/schemas/ModeloFormularioDto"
                   }
                 }
               }
@@ -6962,7 +6962,7 @@
             "content": {
               "application/vnd.uniplus.modelo-formulario.v1\u002Bjson": {
                 "schema": {
-                  "$ref": "#/components/schemas/ModeloFormularioView"
+                  "$ref": "#/components/schemas/ModeloFormularioDto"
                 }
               }
             }
@@ -15152,6 +15152,70 @@
         "x-uniplus-idempotent": true
       }
     },
+    "/api/configuracao/vocabularios/ternarios": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-ternario.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ternario"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/estados-de-fato": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-estado-de-fato.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EstadoFato"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/configuracao/vocabularios/tipos-banca": {
       "get": {
         "tags": [
@@ -15165,7 +15229,103 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TipoBancaVocabularioDto"
+                    "$ref": "#/components/schemas/TipoDeBanca"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/papeis-de-banca": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-papel-de-banca.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PapelDaBanca"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/tipos-de-decisao": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-tipo-de-decisao.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoMotivoDeDecisao"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/tipos-instrumento-normativo": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-tipo-instrumento-normativo.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoInstrumentoNormativoComDescricao"
                   }
                 }
               }
@@ -15216,7 +15376,7 @@
         }
       }
     },
-    "/api/configuracao/vocabularios/tipos-instrumento-normativo": {
+    "/api/configuracao/vocabularios/origens-data-fase": {
       "get": {
         "tags": [
           "Vocabularios"
@@ -15225,11 +15385,331 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/vnd.uniplus.codigo-tipo-instrumento-normativo.v1\u002Bjson": {
+              "application/vnd.uniplus.codigo-origem-data-fase.v1\u002Bjson": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TipoInstrumentoNormativoVocabularioDto"
+                    "$ref": "#/components/schemas/OrigemDataFase"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/naturezas-legais": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-natureza-legal.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NaturezaLegal"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/acoes-quando-indeferido": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-acao-quando-indeferido.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AcaoQuandoIndeferido"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/composicoes-vagas": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-composicao-vagas.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ComposicaoVagas"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/regras-remanejamento": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-regra-remanejamento.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RegraRemanejamento"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/programas-oferta": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-programa-de-oferta.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProgramaDeOferta"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/formatos-pedagogicos": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-formato-pedagogico.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FormatoPedagogico"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/regimes-funcionamento": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-regime-de-funcionamento.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RegimeDeFuncionamento"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/regimes-turno": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-regime-de-turno.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RegimeDeTurno"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/turnos-oferta": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-turno-oferta.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TurnoOferta"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/abrangencias-dia-nao-util": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-abrangencia-dia-nao-util.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Abrangencia"
                   }
                 }
               }
@@ -15279,10 +15759,218 @@
           }
         }
       }
+    },
+    "/api/configuracao/vocabularios/tipos-do-dado": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.tipo-do-dado.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoDoDado"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/quantidades-de-valores": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.quantidade-de-valores.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QuantidadeDeValores"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/tipos-local-oferta": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-tipo-local-oferta.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoLocalOferta"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/formas-aceite": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-forma-aceite.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FormaAceite"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuracao/vocabularios/naturezas-conceito": {
+      "get": {
+        "tags": [
+          "Vocabularios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.uniplus.codigo-natureza-conceito.v1\u002Bjson": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FormaDoConceito"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/problem\u002Bjson": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Abrangencia": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/AbrangenciaCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "AbrangenciaCodigo": {
+        "enum": [
+          "NACIONAL",
+          "ESTADUAL",
+          "MUNICIPAL",
+          "INSTITUCIONAL"
+        ],
+        "type": "string",
+        "description": "- \u0060NACIONAL\u0060: Nacional\n- \u0060ESTADUAL\u0060: Estadual\n- \u0060MUNICIPAL\u0060: Municipal\n- \u0060INSTITUCIONAL\u0060: Institucional"
+      },
+      "AcaoQuandoIndeferido": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/AcaoQuandoIndeferidoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "AcaoQuandoIndeferidoCodigo": {
+        "enum": [
+          "RECLASSIFICA_AC",
+          "RECLASSIFICA_CONFORME_EDITAL"
+        ],
+        "type": "string",
+        "description": "- \u0060RECLASSIFICA_AC\u0060: Ampla concorr\u00EAncia \u2014 Passa a pessoa para a ampla concorr\u00EAncia.\n- \u0060RECLASSIFICA_CONFORME_EDITAL\u0060: Conforme o edital \u2014 Reclassifica a pessoa conforme as regras do edital."
+      },
       "AgregadoPortavel": {
         "required": [
           "codigo",
@@ -15302,7 +15990,121 @@
             "type": "string"
           },
           "operacao": {
+            "$ref": "#/components/schemas/OperacaoAgregadoCodigo"
+          }
+        }
+      },
+      "ApresentacaoDaEtapaDto": {
+        "required": [
+          "titulo",
+          "descricao",
+          "aviso"
+        ],
+        "type": "object",
+        "properties": {
+          "titulo": {
             "type": "string"
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "aviso": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ApresentacaoDaEtapaInput": {
+        "required": [
+          "titulo",
+          "descricao",
+          "aviso"
+        ],
+        "type": "object",
+        "properties": {
+          "titulo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "aviso": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ApresentacaoDoCampoDto": {
+        "required": [
+          "rotulo",
+          "tipoRenderizacao",
+          "ajuda",
+          "pedirConfirmacao"
+        ],
+        "type": "object",
+        "properties": {
+          "rotulo": {
+            "type": "string"
+          },
+          "tipoRenderizacao": {
+            "$ref": "#/components/schemas/TipoRenderizacaoCodigo"
+          },
+          "ajuda": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "pedirConfirmacao": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ApresentacaoDoCampoInput": {
+        "required": [
+          "rotulo",
+          "tipoRenderizacao"
+        ],
+        "type": "object",
+        "properties": {
+          "rotulo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tipoRenderizacao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoRenderizacaoCodigo"
+              }
+            ]
+          },
+          "ajuda": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "pedirConfirmacao": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -15465,9 +16267,13 @@
             "format": "uuid"
           },
           "tipoInstrumento": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoInstrumentoNormativoCodigo"
+              }
             ]
           },
           "identificacao": {
@@ -15720,9 +16526,13 @@
             "default": false
           },
           "origemData": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/OrigemDataFaseCodigo"
+              }
             ]
           },
           "unidadeSugeridaId": {
@@ -15752,7 +16562,14 @@
             "format": "uuid"
           },
           "tipo": {
-            "$ref": "#/components/schemas/TipoLocalOferta"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoLocalOfertaCodigo"
+              }
+            ]
           },
           "campusResponsavelId": {
             "type": [
@@ -15814,15 +16631,23 @@
             ]
           },
           "naturezaLegal": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/NaturezaLegalCodigo"
+              }
             ]
           },
           "composicaoVagas": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ComposicaoVagasCodigo"
+              }
             ]
           },
           "composicaoOrigem": {
@@ -15831,28 +16656,14 @@
               "string"
             ]
           },
-          "regraRemanejamento": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "remanejamentoDestino": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "remanejamentoPar": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "remanejamentoFallback": {
-            "type": [
-              "null",
-              "string"
+          "remanejamento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RemanejamentoDasVagasInformado"
+              }
             ]
           },
           "regraDeAplicabilidade": {
@@ -15868,9 +16679,13 @@
             }
           },
           "acaoQuandoIndeferido": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AcaoQuandoIndeferidoCodigo"
+              }
             ]
           },
           "baseLegal": {
@@ -15903,21 +16718,33 @@
             ]
           },
           "programaDeOferta": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ProgramaDeOfertaCodigo"
+              }
             ]
           },
           "regimeDeFuncionamento": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RegimeDeFuncionamentoCodigo"
+              }
             ]
           },
           "regimeDeTurno": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RegimeDeTurnoCodigo"
+              }
             ]
           },
           "turnos": {
@@ -15926,13 +16753,17 @@
               "array"
             ],
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/TurnoOfertaCodigo"
             }
           },
           "formatoPedagogico": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/FormatoPedagogicoCodigo"
+              }
             ]
           },
           "eMecCodigo": {
@@ -16113,17 +16944,40 @@
               "null",
               "string"
             ]
+          },
+          "papel": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PapelDaBancaCodigo"
+              }
+            ]
+          },
+          "exigeDuasOuMaisBancas": {
+            "type": "boolean",
+            "default": false
+          },
+          "encerraRecursoNaPrimeiraInstancia": {
+            "type": "boolean",
+            "default": false
+          },
+          "tiposDeDecisaoJulgados": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/TipoMotivoDeDecisaoCodigo"
+            }
           }
         }
       },
       "AtualizarTipoConceitoCommand": {
         "required": [
           "id",
-          "nome",
-          "descricao",
-          "natureza",
-          "numerico",
-          "valores"
+          "definicao"
         ],
         "type": "object",
         "properties": {
@@ -16131,42 +16985,15 @@
             "type": "string",
             "format": "uuid"
           },
-          "nome": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "descricao": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "natureza": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "numerico": {
+          "definicao": {
             "oneOf": [
               {
                 "type": "null"
               },
               {
-                "$ref": "#/components/schemas/EscalaNumericaCommand"
+                "$ref": "#/components/schemas/DefinicaoDoTipoConceitoInput"
               }
             ]
-          },
-          "valores": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "$ref": "#/components/schemas/ValorCategoricoCommand"
-            }
           }
         }
       },
@@ -16289,10 +17116,7 @@
         "required": [
           "id",
           "nome",
-          "admitePontuacao",
-          "admiteEliminacao",
-          "exigeCorrecaoIndependente",
-          "conceitosAdmitidos"
+          "avaliacao"
         ],
         "type": "object",
         "properties": {
@@ -16306,32 +17130,15 @@
               "string"
             ]
           },
-          "admitePontuacao": {
-            "type": [
-              "null",
-              "boolean"
+          "avaliacao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AvaliacaoDasEtapasInput"
+              }
             ]
-          },
-          "admiteEliminacao": {
-            "type": [
-              "null",
-              "boolean"
-            ]
-          },
-          "exigeCorrecaoIndependente": {
-            "type": [
-              "null",
-              "boolean"
-            ]
-          },
-          "conceitosAdmitidos": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "string"
-            }
           },
           "descricao": {
             "type": [
@@ -16363,6 +17170,74 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "AvaliacaoDasEtapasDto": {
+        "required": [
+          "admitePontuacao",
+          "admiteEliminacao",
+          "notaDeOrigemNoEnem",
+          "exigeCorrecaoIndependente",
+          "conceitosAdmitidos"
+        ],
+        "type": "object",
+        "properties": {
+          "admitePontuacao": {
+            "type": "boolean"
+          },
+          "admiteEliminacao": {
+            "type": "boolean"
+          },
+          "notaDeOrigemNoEnem": {
+            "type": "boolean"
+          },
+          "exigeCorrecaoIndependente": {
+            "type": "boolean"
+          },
+          "conceitosAdmitidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConceitoAdmitidoDto"
+            }
+          }
+        }
+      },
+      "AvaliacaoDasEtapasInput": {
+        "required": [
+          "admitePontuacao",
+          "admiteEliminacao",
+          "exigeCorrecaoIndependente",
+          "conceitosAdmitidos"
+        ],
+        "type": "object",
+        "properties": {
+          "admitePontuacao": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "admiteEliminacao": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "exigeCorrecaoIndependente": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "conceitosAdmitidos": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -16479,7 +17354,7 @@
             "type": "string"
           },
           "tipoInstrumento": {
-            "type": "string"
+            "$ref": "#/components/schemas/TipoInstrumentoNormativo"
           },
           "identificacao": {
             "type": "string"
@@ -16527,11 +17402,11 @@
           }
         }
       },
-      "BaseLegalDoModeloInput": {
+      "BaseLegalDoModeloDto": {
         "required": [
           "referencia",
           "abrangencia",
-          "status",
+          "situacao",
           "observacao"
         ],
         "type": "object",
@@ -16542,7 +17417,7 @@
           "abrangencia": {
             "type": "string"
           },
-          "status": {
+          "situacao": {
             "type": "string"
           },
           "observacao": {
@@ -16552,6 +17427,41 @@
             ]
           }
         }
+      },
+      "BaseLegalDoModeloInput": {
+        "required": [
+          "referencia",
+          "abrangencia",
+          "situacao",
+          "observacao"
+        ],
+        "type": "object",
+        "properties": {
+          "referencia": {
+            "type": "string"
+          },
+          "abrangencia": {
+            "type": "string"
+          },
+          "situacao": {
+            "type": "string"
+          },
+          "observacao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "BlocoSistemaCodigo": {
+        "enum": [
+          "COMPROVACAO_DOCUMENTAL",
+          "MODALIDADES_CALCULADAS",
+          "REVISAO_E_ACEITE"
+        ],
+        "type": "string",
+        "description": "Os blocos que o sistema monta no formul\u00E1rio a partir da configura\u00E7\u00E3o do processo seletivo.\n\n- \u0060COMPROVACAO_DOCUMENTAL\u0060: Comprova\u00E7\u00E3o documental \u2014 Os documentos que o candidato envia, conforme a exig\u00EAncia de cada situa\u00E7\u00E3o dele.\n- \u0060MODALIDADES_CALCULADAS\u0060: Modalidades calculadas \u2014 As modalidades de concorr\u00EAncia em que o candidato se enquadra, calculadas pelas respostas dele.\n- \u0060REVISAO_E_ACEITE\u0060: Revis\u00E3o e aceite \u2014 A confer\u00EAncia das respostas e o aceite dos termos, sempre a \u00FAltima etapa do formul\u00E1rio."
       },
       "CalendarioDiasUteisDto": {
         "required": [
@@ -16633,10 +17543,7 @@
           "fatoCodigo",
           "etapaCodigo",
           "estado",
-          "visivel",
-          "obrigatorio",
-          "restricoesVioladas",
-          "impedido",
+          "regras",
           "opcoes"
         ],
         "type": "object",
@@ -16648,22 +17555,10 @@
             "type": "string"
           },
           "estado": {
-            "type": "string"
+            "$ref": "#/components/schemas/EstadoFatoCodigo"
           },
-          "visivel": {
-            "type": "string"
-          },
-          "obrigatorio": {
-            "type": "string"
-          },
-          "restricoesVioladas": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "impedido": {
-            "type": "string"
+          "regras": {
+            "$ref": "#/components/schemas/RegrasDoCampoAvaliadas"
           },
           "opcoes": {
             "oneOf": [
@@ -16681,13 +17576,10 @@
         "required": [
           "fatoCodigo",
           "ordem",
-          "rotulo",
-          "tipoRenderizacao",
-          "valoresSelecionaveis",
           "etapaCodigo",
+          "apresentacao",
           "formato",
-          "ajuda",
-          "pedirConfirmacao"
+          "valoresSelecionaveis"
         ],
         "type": "object",
         "properties": {
@@ -16698,11 +17590,20 @@
             "type": "integer",
             "format": "int32"
           },
-          "rotulo": {
-            "type": "string"
+          "etapaCodigo": {
+            "type": [
+              "null",
+              "string"
+            ]
           },
-          "tipoRenderizacao": {
-            "type": "string"
+          "apresentacao": {
+            "$ref": "#/components/schemas/ApresentacaoDoCampoDto"
+          },
+          "formato": {
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "valoresSelecionaveis": {
             "minItems": 1,
@@ -16713,27 +17614,6 @@
             "items": {
               "$ref": "#/components/schemas/ValorSelecionavel"
             }
-          },
-          "etapaCodigo": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "formato": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "ajuda": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "pedirConfirmacao": {
-            "type": "boolean"
           }
         }
       },
@@ -16899,6 +17779,52 @@
           }
         }
       },
+      "ColetaRenderizavel": {
+        "required": [
+          "itens",
+          "grupos"
+        ],
+        "type": "object",
+        "properties": {
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CampoRenderizavel"
+            }
+          },
+          "grupos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GrupoRenderizavel"
+            }
+          }
+        }
+      },
+      "ComposicaoVagas": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/ComposicaoVagasCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "ComposicaoVagasCodigo": {
+        "enum": [
+          "RESTANTE_DAS_VAGAS_OFERTADAS",
+          "DENTRO_DA_RESERVA_LEGAL",
+          "RETIRADA_DE_OUTRA_MODALIDADE",
+          "SUPLEMENTAR_AO_TOTAL"
+        ],
+        "type": "string",
+        "description": "- \u0060RESTANTE_DAS_VAGAS_OFERTADAS\u0060: Restante das vagas ofertadas\n- \u0060DENTRO_DA_RESERVA_LEGAL\u0060: Dentro da reserva legal\n- \u0060RETIRADA_DE_OUTRA_MODALIDADE\u0060: Retirada de outra modalidade\n- \u0060SUPLEMENTAR_AO_TOTAL\u0060: Suplementar ao total"
+      },
       "ConceitoAdmitidoDto": {
         "required": [
           "codigo",
@@ -16914,7 +17840,7 @@
             "type": "string"
           },
           "natureza": {
-            "type": "string"
+            "$ref": "#/components/schemas/FormaDoConceito"
           }
         }
       },
@@ -16971,7 +17897,7 @@
             "type": "string"
           },
           "operador": {
-            "type": "string"
+            "$ref": "#/components/schemas/OperadorCodigo"
           },
           "valor": {
             "$ref": "#/components/schemas/JsonElement"
@@ -16990,7 +17916,33 @@
             "type": "string"
           },
           "operador": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/OperadorCodigo"
+              }
+            ]
+          },
+          "valor": {
+            "$ref": "#/components/schemas/JsonElement"
+          }
+        }
+      },
+      "CondicaoPrecondicaoDto": {
+        "required": [
+          "fato",
+          "operador",
+          "valor"
+        ],
+        "type": "object",
+        "properties": {
+          "fato": {
             "type": "string"
+          },
+          "operador": {
+            "$ref": "#/components/schemas/OperadorCodigo"
           },
           "valor": {
             "$ref": "#/components/schemas/JsonElement"
@@ -17009,10 +17961,118 @@
             "type": "string"
           },
           "operador": {
-            "type": "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/OperadorCodigo"
+              }
+            ]
           },
           "valor": {
             "$ref": "#/components/schemas/JsonElement"
+          }
+        }
+      },
+      "ConjuntoDeDocumentosDoModeloDto": {
+        "required": [
+          "documentosExigidos",
+          "gruposDeDocumentos"
+        ],
+        "type": "object",
+        "properties": {
+          "documentosExigidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoExigidoDoModeloDto"
+            }
+          },
+          "gruposDeDocumentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GrupoDeDocumentosDoModeloDto"
+            }
+          }
+        }
+      },
+      "ConjuntoDeDocumentosDoModeloInput": {
+        "required": [
+          "documentosExigidos",
+          "gruposDeDocumentos"
+        ],
+        "type": "object",
+        "properties": {
+          "documentosExigidos": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/DocumentoExigidoDoModeloInput"
+            }
+          },
+          "gruposDeDocumentos": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/GrupoDeDocumentosDoModeloInput"
+            }
+          }
+        }
+      },
+      "ConteudoDoModeloDto": {
+        "required": [
+          "titulo",
+          "etapas",
+          "itens",
+          "termos",
+          "pressupostos",
+          "grupos",
+          "conjuntoDeDocumentos"
+        ],
+        "type": "object",
+        "properties": {
+          "titulo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "etapas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EtapaFormularioDto"
+            }
+          },
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemDoModeloDto"
+            }
+          },
+          "termos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TermoDoModeloDto"
+            }
+          },
+          "pressupostos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "grupos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GrupoDoModeloDto"
+            }
+          },
+          "conjuntoDeDocumentos": {
+            "$ref": "#/components/schemas/ConjuntoDeDocumentosDoModeloDto"
           }
         }
       },
@@ -17077,14 +18137,42 @@
               "$ref": "#/components/schemas/GrupoColetadoInput"
             }
           },
-          "documentosExigidos": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "$ref": "#/components/schemas/DocumentoExigidoDoModeloInput"
-            }
+          "conjuntoDeDocumentos": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ConjuntoDeDocumentosDoModeloInput"
+              }
+            ]
+          }
+        }
+      },
+      "ConteudoDoTermoDto": {
+        "required": [
+          "nome",
+          "texto",
+          "baseLegal",
+          "formaAceite",
+          "hashVersao"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "texto": {
+            "type": "string"
+          },
+          "baseLegal": {
+            "type": "string"
+          },
+          "formaAceite": {
+            "$ref": "#/components/schemas/FormaAceite"
+          },
+          "hashVersao": {
+            "type": "string"
           }
         }
       },
@@ -17119,9 +18207,13 @@
         "type": "object",
         "properties": {
           "tipoInstrumento": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoInstrumentoNormativoCodigo"
+              }
             ]
           },
           "identificacao": {
@@ -17408,9 +18500,13 @@
             "default": false
           },
           "origemData": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/OrigemDataFaseCodigo"
+              }
             ]
           },
           "unidadeSugeridaId": {
@@ -17500,15 +18596,19 @@
             ]
           },
           "dominio": {
-            "type": "string"
+            "$ref": "#/components/schemas/TipoDoDadoCodigo"
           },
           "cardinalidade": {
-            "type": "string"
+            "$ref": "#/components/schemas/QuantidadeDeValoresCodigo"
           },
           "fonteValores": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/FonteValoresFatoCodigo"
+              }
             ]
           },
           "formato": {
@@ -17567,7 +18667,7 @@
             ]
           },
           "dominio": {
-            "type": "string"
+            "$ref": "#/components/schemas/TipoDoDadoCodigo"
           },
           "pontoResolucao": {
             "type": "string"
@@ -17605,7 +18705,14 @@
         "type": "object",
         "properties": {
           "tipo": {
-            "$ref": "#/components/schemas/TipoLocalOferta"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoLocalOfertaCodigo"
+              }
+            ]
           },
           "campusResponsavelId": {
             "type": [
@@ -17669,15 +18776,23 @@
             ]
           },
           "naturezaLegal": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/NaturezaLegalCodigo"
+              }
             ]
           },
           "composicaoVagas": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ComposicaoVagasCodigo"
+              }
             ]
           },
           "composicaoOrigem": {
@@ -17686,28 +18801,14 @@
               "string"
             ]
           },
-          "regraRemanejamento": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "remanejamentoDestino": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "remanejamentoPar": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "remanejamentoFallback": {
-            "type": [
-              "null",
-              "string"
+          "remanejamento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RemanejamentoDasVagasInformado"
+              }
             ]
           },
           "regraDeAplicabilidade": {
@@ -17723,9 +18824,13 @@
             }
           },
           "acaoQuandoIndeferido": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AcaoQuandoIndeferidoCodigo"
+              }
             ]
           },
           "baseLegal": {
@@ -17739,10 +18844,8 @@
       "CriarModeloFormularioCommand": {
         "required": [
           "codigo",
-          "nome",
-          "descricao",
           "finalidade",
-          "tipoProcessoCodigo",
+          "descritivo",
           "conteudo"
         ],
         "type": "object",
@@ -17750,22 +18853,17 @@
           "codigo": {
             "type": "string"
           },
-          "nome": {
-            "type": "string"
-          },
-          "descricao": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
           "finalidade": {
-            "type": "string"
+            "$ref": "#/components/schemas/FinalidadeFormularioCodigo"
           },
-          "tipoProcessoCodigo": {
-            "type": [
-              "null",
-              "string"
+          "descritivo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DescritivoDoModeloInput"
+              }
             ]
           },
           "conteudo": {
@@ -17812,21 +18910,33 @@
             ]
           },
           "programaDeOferta": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ProgramaDeOfertaCodigo"
+              }
             ]
           },
           "regimeDeFuncionamento": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RegimeDeFuncionamentoCodigo"
+              }
             ]
           },
           "regimeDeTurno": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RegimeDeTurnoCodigo"
+              }
             ]
           },
           "turnos": {
@@ -17835,13 +18945,17 @@
               "array"
             ],
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/TurnoOfertaCodigo"
             }
           },
           "formatoPedagogico": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/FormatoPedagogicoCodigo"
+              }
             ]
           },
           "eMecCodigo": {
@@ -18031,9 +19145,13 @@
             ]
           },
           "formaAceiteRascunho": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/FormaAceiteCodigo"
+              }
             ]
           }
         }
@@ -18045,9 +19163,13 @@
         "type": "object",
         "properties": {
           "codigo": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoDeBancaCodigo"
+              }
             ]
           },
           "nome": {
@@ -18067,17 +19189,40 @@
               "null",
               "string"
             ]
+          },
+          "papel": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PapelDaBancaCodigo"
+              }
+            ]
+          },
+          "exigeDuasOuMaisBancas": {
+            "type": "boolean",
+            "default": false
+          },
+          "encerraRecursoNaPrimeiraInstancia": {
+            "type": "boolean",
+            "default": false
+          },
+          "tiposDeDecisaoJulgados": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/TipoMotivoDeDecisaoCodigo"
+            }
           }
         }
       },
       "CriarTipoConceitoCommand": {
         "required": [
           "codigo",
-          "nome",
-          "descricao",
-          "natureza",
-          "numerico",
-          "valores"
+          "definicao"
         ],
         "type": "object",
         "properties": {
@@ -18087,42 +19232,15 @@
               "string"
             ]
           },
-          "nome": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "descricao": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "natureza": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "numerico": {
+          "definicao": {
             "oneOf": [
               {
                 "type": "null"
               },
               {
-                "$ref": "#/components/schemas/EscalaNumericaCommand"
+                "$ref": "#/components/schemas/DefinicaoDoTipoConceitoInput"
               }
             ]
-          },
-          "valores": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "$ref": "#/components/schemas/ValorCategoricoCommand"
-            }
           }
         }
       },
@@ -18235,10 +19353,7 @@
         "required": [
           "codigo",
           "nome",
-          "admitePontuacao",
-          "admiteEliminacao",
-          "exigeCorrecaoIndependente",
-          "conceitosAdmitidos"
+          "avaliacao"
         ],
         "type": "object",
         "properties": {
@@ -18254,32 +19369,15 @@
               "string"
             ]
           },
-          "admitePontuacao": {
-            "type": [
-              "null",
-              "boolean"
+          "avaliacao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AvaliacaoDasEtapasInput"
+              }
             ]
-          },
-          "admiteEliminacao": {
-            "type": [
-              "null",
-              "boolean"
-            ]
-          },
-          "exigeCorrecaoIndependente": {
-            "type": [
-              "null",
-              "boolean"
-            ]
-          },
-          "conceitosAdmitidos": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "string"
-            }
           },
           "descricao": {
             "type": [
@@ -18366,6 +19464,65 @@
             "additionalProperties": {
               "type": "string"
             }
+          }
+        }
+      },
+      "DataDeReferenciaDoDocumentoDoModeloDto": {
+        "required": [
+          "tipo",
+          "faseCodigo",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "$ref": "#/components/schemas/TipoDaDataDeReferencia"
+          },
+          "faseCodigo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          }
+        }
+      },
+      "DataDeReferenciaDoDocumentoDoModeloInput": {
+        "required": [
+          "tipo",
+          "data",
+          "faseCodigo"
+        ],
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoDaDataDeReferenciaCodigo"
+              }
+            ]
+          },
+          "data": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          },
+          "faseCodigo": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -18528,6 +19685,44 @@
           }
         }
       },
+      "DefinicaoDoFatoDto": {
+        "required": [
+          "dominio",
+          "cardinalidade",
+          "escopo",
+          "formato",
+          "valores",
+          "resolucao",
+          "protecao"
+        ],
+        "type": "object",
+        "properties": {
+          "dominio": {
+            "$ref": "#/components/schemas/TipoDoDado"
+          },
+          "cardinalidade": {
+            "$ref": "#/components/schemas/QuantidadeDeValores"
+          },
+          "escopo": {
+            "type": "string"
+          },
+          "formato": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "valores": {
+            "$ref": "#/components/schemas/ValoresDoFatoDto"
+          },
+          "resolucao": {
+            "$ref": "#/components/schemas/ResolucaoDoFatoDto"
+          },
+          "protecao": {
+            "$ref": "#/components/schemas/ProtecaoDoFatoDto"
+          }
+        }
+      },
       "DefinicaoDoFatoInput": {
         "required": [
           "pontoResolucao",
@@ -18550,21 +19745,33 @@
             "type": "string"
           },
           "dominio": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoDoDadoCodigo"
+              }
             ]
           },
           "cardinalidade": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/QuantidadeDeValoresCodigo"
+              }
             ]
           },
           "fonteValores": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/FonteValoresFatoCodigo"
+              }
             ]
           },
           "formato": {
@@ -18578,6 +19785,102 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "DefinicaoDoTipoConceitoDto": {
+        "required": [
+          "nome",
+          "descricao",
+          "natureza",
+          "numerico",
+          "valores"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "natureza": {
+            "$ref": "#/components/schemas/FormaDoConceito"
+          },
+          "numerico": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EscalaNumericaDto"
+              }
+            ]
+          },
+          "valores": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ValorCategoricoDto"
+            }
+          }
+        }
+      },
+      "DefinicaoDoTipoConceitoInput": {
+        "required": [
+          "nome",
+          "descricao",
+          "natureza",
+          "numerico",
+          "valores"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "natureza": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/FormaDoConceitoCodigo"
+              }
+            ]
+          },
+          "numerico": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EscalaNumericaCommand"
+              }
+            ]
+          },
+          "valores": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ValorCategoricoCommand"
+            }
           }
         }
       },
@@ -18603,6 +19906,28 @@
           }
         }
       },
+      "DescritivoDoFatoDto": {
+        "required": [
+          "nome",
+          "descricao",
+          "componenteExibicao"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "componenteExibicao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "DescritivoDoFatoInput": {
         "required": [
           "nome",
@@ -18620,6 +19945,59 @@
             ]
           },
           "componenteExibicao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "DescritivoDoModeloDto": {
+        "required": [
+          "nome",
+          "descricao",
+          "tipoProcessoCodigo"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tipoProcessoCodigo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "DescritivoDoModeloInput": {
+        "required": [
+          "nome",
+          "descricao",
+          "tipoProcessoCodigo"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "descricao": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tipoProcessoCodigo": {
             "type": [
               "null",
               "string"
@@ -18721,10 +20099,10 @@
         "type": "object",
         "properties": {
           "dominio": {
-            "type": "string"
+            "$ref": "#/components/schemas/TipoDoDado"
           },
           "cardinalidade": {
-            "type": "string"
+            "$ref": "#/components/schemas/QuantidadeDeValores"
           },
           "semeadoPeloSistema": {
             "type": "boolean"
@@ -18806,9 +20184,13 @@
         "type": "object",
         "properties": {
           "abrangencia": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AbrangenciaCodigo"
+              }
             ]
           },
           "municipioIbge": {
@@ -18865,7 +20247,7 @@
             "format": "uuid"
           },
           "abrangencia": {
-            "type": "string"
+            "$ref": "#/components/schemas/Abrangencia"
           },
           "municipioIbge": {
             "type": [
@@ -18900,14 +20282,14 @@
           }
         }
       },
-      "DocumentoExigidoDoModeloInput": {
+      "DocumentoExigidoDoModeloDto": {
         "required": [
           "faseCodigo",
           "tipoDocumentoCodigo",
-          "obrigatorio",
           "quando",
-          "consequenciaIndeferimento",
-          "basesLegais"
+          "indeferimento",
+          "requisitos",
+          "porOpcao"
         ],
         "type": "object",
         "properties": {
@@ -18917,8 +20299,50 @@
           "tipoDocumentoCodigo": {
             "type": "string"
           },
-          "obrigatorio": {
-            "type": "boolean"
+          "quando": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoDto"
+              }
+            }
+          },
+          "indeferimento": {
+            "$ref": "#/components/schemas/IndeferimentoDoDocumentoDoModeloDto"
+          },
+          "requisitos": {
+            "$ref": "#/components/schemas/RequisitosDoDocumentoDoModeloDto"
+          },
+          "porOpcao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ExigenciaPorOpcaoDto"
+              }
+            ]
+          }
+        }
+      },
+      "DocumentoExigidoDoModeloInput": {
+        "required": [
+          "faseCodigo",
+          "tipoDocumentoCodigo",
+          "quando",
+          "indeferimento"
+        ],
+        "type": "object",
+        "properties": {
+          "faseCodigo": {
+            "type": "string"
+          },
+          "tipoDocumentoCodigo": {
+            "type": "string"
           },
           "quando": {
             "type": [
@@ -18932,17 +20356,25 @@
               }
             }
           },
-          "consequenciaIndeferimento": {
-            "type": "string"
+          "indeferimento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IndeferimentoDoDocumentoDoModeloInput"
+              }
+            ]
           },
-          "basesLegais": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "$ref": "#/components/schemas/BaseLegalDoModeloInput"
-            }
+          "requisitos": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RequisitosDoDocumentoDoModeloInput"
+              }
+            ]
           },
           "porOpcao": {
             "oneOf": [
@@ -18958,26 +20390,19 @@
       },
       "EdicaoDoModeloInput": {
         "required": [
-          "nome",
-          "descricao",
-          "tipoProcessoCodigo",
+          "descritivo",
           "conteudo"
         ],
         "type": "object",
         "properties": {
-          "nome": {
-            "type": "string"
-          },
-          "descricao": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "tipoProcessoCodigo": {
-            "type": [
-              "null",
-              "string"
+          "descritivo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DescritivoDoModeloInput"
+              }
             ]
           },
           "conteudo": {
@@ -19018,12 +20443,39 @@
             ]
           },
           "formaAceiteRascunho": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/FormaAceiteCodigo"
+              }
             ]
           }
         }
+      },
+      "EfeitoNaAnaliseDoDocumento": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/EfeitoNaAnaliseDoDocumentoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "EfeitoNaAnaliseDoDocumentoCodigo": {
+        "enum": [
+          "RECUSAR_DOCUMENTO",
+          "ACEITAR_COM_AVISO"
+        ],
+        "type": "string",
+        "description": "Efeito na an\u00E1lise de um documento fora do prazo ou vencido.\n\n- \u0060RECUSAR_DOCUMENTO\u0060: Recusar documento\n- \u0060ACEITAR_COM_AVISO\u0060: Aceitar com aviso"
       },
       "EnderecoGeoDto": {
         "required": [
@@ -19266,6 +20718,77 @@
           }
         }
       },
+      "EscolhaDaValidade": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/EscolhaDaValidadeCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "EscolhaDaValidadeCodigo": {
+        "enum": [
+          "NAO_EXIGE_DOCUMENTO_VALIDO",
+          "EXIGE_DOCUMENTO_VALIDO"
+        ],
+        "type": "string",
+        "description": "Escolha sobre a validade do documento.\n\n- \u0060NAO_EXIGE_DOCUMENTO_VALIDO\u0060: N\u00E3o exige documento v\u00E1lido\n- \u0060EXIGE_DOCUMENTO_VALIDO\u0060: Exige documento v\u00E1lido"
+      },
+      "EscolhaDoPrazoDeEmissao": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/EscolhaDoPrazoDeEmissaoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "EscolhaDoPrazoDeEmissaoCodigo": {
+        "enum": [
+          "SEM_PRAZO",
+          "COM_PRAZO"
+        ],
+        "type": "string",
+        "description": "Escolha sobre o prazo de emiss\u00E3o do documento.\n\n- \u0060SEM_PRAZO\u0060: Sem prazo\n- \u0060COM_PRAZO\u0060: Com prazo"
+      },
+      "EstadoFato": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/EstadoFatoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "EstadoFatoCodigo": {
+        "enum": [
+          "INDETERMINADO",
+          "NAO_APLICAVEL",
+          "RESOLVIDO",
+          "NAO_INFORMADO"
+        ],
+        "type": "string",
+        "description": "Estado de resolu\u00E7\u00E3o de um fato do candidato: distingue o que n\u00E3o se aplica, o que ainda n\u00E3o se sabe, o que tem valor e o que foi deixado em branco.\n\n- \u0060INDETERMINADO\u0060: Indeterminado\n- \u0060NAO_APLICAVEL\u0060: N\u00E3o se aplica\n- \u0060RESOLVIDO\u0060: Resolvido\n- \u0060NAO_INFORMADO\u0060: N\u00E3o informado"
+      },
       "EtapaAvaliada": {
         "required": [
           "codigo",
@@ -19277,19 +20800,18 @@
             "type": "string"
           },
           "visivel": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           }
         }
       },
-      "EtapaFormularioInput": {
+      "EtapaFormularioDto": {
         "required": [
           "codigo",
           "ordem",
           "tipo",
           "bloco",
-          "titulo",
-          "descricao",
-          "aviso"
+          "apresentacao",
+          "exibicao"
         ],
         "type": "object",
         "properties": {
@@ -19301,27 +20823,73 @@
             "format": "int32"
           },
           "tipo": {
-            "type": "string"
+            "$ref": "#/components/schemas/TipoEtapaFormularioCodigo"
           },
           "bloco": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/BlocoSistemaCodigo"
+              }
             ]
           },
-          "titulo": {
+          "apresentacao": {
+            "$ref": "#/components/schemas/ApresentacaoDaEtapaDto"
+          },
+          "exibicao": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoDto"
+              }
+            }
+          }
+        }
+      },
+      "EtapaFormularioInput": {
+        "required": [
+          "codigo",
+          "ordem",
+          "tipo",
+          "bloco",
+          "apresentacao"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
             "type": "string"
           },
-          "descricao": {
-            "type": [
-              "null",
-              "string"
+          "ordem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoEtapaFormularioCodigo"
+          },
+          "bloco": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/BlocoSistemaCodigo"
+              }
             ]
           },
-          "aviso": {
-            "type": [
-              "null",
-              "string"
+          "apresentacao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ApresentacaoDaEtapaInput"
+              }
             ]
           },
           "exibicao": {
@@ -19358,7 +20926,7 @@
             "items": {
               "type": "array",
               "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
+                "$ref": "#/components/schemas/CondicaoPrecondicaoDto"
               }
             }
           },
@@ -19372,6 +20940,94 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GrupoPortavel"
+            }
+          }
+        }
+      },
+      "ExibicaoEObrigatoriedadeAvaliadas": {
+        "required": [
+          "visivel",
+          "obrigatorio"
+        ],
+        "type": "object",
+        "properties": {
+          "visivel": {
+            "$ref": "#/components/schemas/TernarioCodigo"
+          },
+          "obrigatorio": {
+            "$ref": "#/components/schemas/TernarioCodigo"
+          }
+        }
+      },
+      "ExibicaoEObrigatoriedadeDto": {
+        "required": [
+          "exibicao",
+          "obrigatoriedade"
+        ],
+        "type": "object",
+        "properties": {
+          "exibicao": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoDto"
+              }
+            }
+          },
+          "obrigatoriedade": {
+            "$ref": "#/components/schemas/ObrigatoriedadeDto"
+          }
+        }
+      },
+      "ExibicaoEObrigatoriedadeInput": {
+        "required": [
+          "exibicao",
+          "obrigatoriedade"
+        ],
+        "type": "object",
+        "properties": {
+          "exibicao": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
+              }
+            }
+          },
+          "obrigatoriedade": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ObrigatoriedadeInput"
+              }
+            ]
+          }
+        }
+      },
+      "ExigenciaPorOpcaoDto": {
+        "required": [
+          "fatoCodigo",
+          "exceto"
+        ],
+        "type": "object",
+        "properties": {
+          "fatoCodigo": {
+            "type": "string"
+          },
+          "exceto": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         }
@@ -19457,7 +21113,7 @@
             "type": "boolean"
           },
           "origemData": {
-            "type": "string"
+            "$ref": "#/components/schemas/OrigemDataFase"
           },
           "unidadeSugerida": {
             "oneOf": [
@@ -19503,25 +21159,11 @@
         "required": [
           "id",
           "codigo",
-          "nome",
-          "descricao",
-          "componenteExibicao",
-          "dominio",
-          "origem",
-          "cardinalidade",
-          "fonteValores",
-          "formato",
-          "pontoResolucao",
-          "binding",
-          "escopo",
-          "classificacaoProtecao",
-          "finalidadeTratamento",
-          "hipoteseLegal",
-          "semeadoPeloSistema",
-          "ativo",
-          "valores",
+          "descritivo",
+          "definicao",
           "regrasPadrao",
-          "aprovacao"
+          "semeadoPeloSistema",
+          "ativo"
         ],
         "type": "object",
         "properties": {
@@ -19532,68 +21174,11 @@
           "codigo": {
             "type": "string"
           },
-          "nome": {
-            "type": "string"
+          "descritivo": {
+            "$ref": "#/components/schemas/DescritivoDoFatoDto"
           },
-          "descricao": {
-            "type": "string"
-          },
-          "componenteExibicao": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "dominio": {
-            "type": "string"
-          },
-          "origem": {
-            "type": "string"
-          },
-          "cardinalidade": {
-            "type": "string"
-          },
-          "fonteValores": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "formato": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "pontoResolucao": {
-            "type": "string"
-          },
-          "binding": {
-            "type": "string"
-          },
-          "escopo": {
-            "type": "string"
-          },
-          "classificacaoProtecao": {
-            "type": "string"
-          },
-          "finalidadeTratamento": {
-            "type": "string"
-          },
-          "hipoteseLegal": {
-            "type": "string"
-          },
-          "semeadoPeloSistema": {
-            "type": "boolean"
-          },
-          "ativo": {
-            "type": "boolean"
-          },
-          "valores": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FatoValorDominioDto"
-            }
+          "definicao": {
+            "$ref": "#/components/schemas/DefinicaoDoFatoDto"
           },
           "regrasPadrao": {
             "type": "array",
@@ -19601,8 +21186,11 @@
               "$ref": "#/components/schemas/RegraPadraoDto"
             }
           },
-          "aprovacao": {
-            "$ref": "#/components/schemas/AprovacaoDaProtecaoDto"
+          "semeadoPeloSistema": {
+            "type": "boolean"
+          },
+          "ativo": {
+            "type": "boolean"
           }
         }
       },
@@ -19642,13 +21230,13 @@
             "type": "string"
           },
           "dominio": {
-            "type": "string"
+            "$ref": "#/components/schemas/TipoDoDado"
           },
           "origem": {
-            "type": "string"
+            "$ref": "#/components/schemas/OrigemFato"
           },
           "cardinalidade": {
-            "type": "string"
+            "$ref": "#/components/schemas/QuantidadeDeValores"
           },
           "valoresDominio": {
             "type": [
@@ -19675,9 +21263,13 @@
             }
           },
           "fonteValores": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/FonteValoresFato"
+              }
             ]
           },
           "ativo": {
@@ -19717,10 +21309,8 @@
         "required": [
           "fatoCodigo",
           "ordem",
-          "rotulo",
-          "tipoRenderizacao",
-          "obrigatoriedade",
-          "precondicao"
+          "apresentacao",
+          "regras"
         ],
         "type": "object",
         "properties": {
@@ -19731,76 +21321,67 @@
             "type": "integer",
             "format": "int32"
           },
-          "rotulo": {
-            "type": "string"
-          },
-          "tipoRenderizacao": {
-            "type": "string"
-          },
-          "obrigatoriedade": {
-            "type": [
-              "null",
-              "string"
+          "apresentacao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ApresentacaoDoCampoInput"
+              }
             ]
           },
-          "precondicao": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
+          "regras": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RegrasDoCampoInput"
               }
-            }
+            ]
           },
           "etapaCodigo": {
             "type": [
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "FatoDeManutencaoDto": {
+        "required": [
+          "fato",
+          "operadoresAdmitidos"
+        ],
+        "type": "object",
+        "properties": {
+          "fato": {
+            "$ref": "#/components/schemas/FatoCandidatoDto"
           },
-          "predicadoObrigatoriedade": {
-            "type": [
-              "null",
-              "array"
-            ],
+          "operadoresAdmitidos": {
+            "type": "array",
             "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
+              "$ref": "#/components/schemas/Operador"
             }
+          }
+        }
+      },
+      "FatoDoCatalogoDto": {
+        "required": [
+          "fato",
+          "operadoresAdmitidos"
+        ],
+        "type": "object",
+        "properties": {
+          "fato": {
+            "$ref": "#/components/schemas/FatoCandidatoView"
           },
-          "ajuda": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "pedirConfirmacao": {
-            "type": "boolean",
-            "default": false
-          },
-          "restricoes": {
-            "type": [
-              "null",
-              "array"
-            ],
+          "operadoresAdmitidos": {
+            "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RestricaoValorInput"
+              "$ref": "#/components/schemas/Operador"
             }
-          },
-          "impedimento": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/components/schemas/ImpedimentoInput"
-              }
-            ]
           }
         }
       },
@@ -19871,6 +21452,130 @@
           }
         }
       },
+      "FinalidadeFormulario": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/FinalidadeFormularioCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "FinalidadeFormularioCodigo": {
+        "enum": [
+          "INSCRICAO",
+          "ISENCAO_TAXA",
+          "HABILITACAO"
+        ],
+        "type": "string",
+        "description": "Para que o formul\u00E1rio coleta respostas: cada processo tem no m\u00E1ximo um formul\u00E1rio por finalidade.\n\n- \u0060INSCRICAO\u0060: Inscri\u00E7\u00E3o \u2014 Formul\u00E1rio em que o candidato se inscreve no processo seletivo.\n- \u0060ISENCAO_TAXA\u0060: Isen\u00E7\u00E3o da taxa \u2014 Formul\u00E1rio em que o candidato pede a isen\u00E7\u00E3o da taxa de inscri\u00E7\u00E3o.\n- \u0060HABILITACAO\u0060: Habilita\u00E7\u00E3o \u2014 Formul\u00E1rio em que o candidato comprova os requisitos para ser habilitado."
+      },
+      "FonteValoresFato": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/FonteValoresFatoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "FonteValoresFatoCodigo": {
+        "enum": [
+          "CATALOGO",
+          "OPCOES_DO_PROCESSO",
+          "MODALIDADE",
+          "MUNICIPIOS_DO_FADA",
+          "UNIDADES_FEDERATIVAS",
+          "MUNICIPIOS",
+          "TIPOS_DE_DEFICIENCIA",
+          "MUNICIPIOS_PROVA_PRESENCIAL"
+        ],
+        "type": "string",
+        "description": "De onde v\u00EAm os valores de um dado de op\u00E7\u00E3o do cat\u00E1logo.\n\n- \u0060CATALOGO\u0060: Cat\u00E1logo \u2014 Os valores vivem no pr\u00F3prio cat\u00E1logo, como a cor ou ra\u00E7a, o sexo e a nacionalidade.\n- \u0060OPCOES_DO_PROCESSO\u0060: Op\u00E7\u00F5es do processo \u2014 Os valores s\u00E3o as op\u00E7\u00F5es que cada processo declara, congeladas no edital.\n- \u0060MODALIDADE\u0060: Modalidades do processo \u2014 Os valores s\u00E3o as modalidades de concorr\u00EAncia ofertadas pelo processo.\n- \u0060MUNICIPIOS_DO_FADA\u0060: Munic\u00EDpios do Fator de Atenua\u00E7\u00E3o das Desigualdades de Acesso (FADA) \u2014 Os valores s\u00E3o os munic\u00EDpios da \u00E1rea do Fator de Atenua\u00E7\u00E3o das Desigualdades de Acesso (FADA) que o processo configurou, pelo c\u00F3digo do IBGE.\n- \u0060UNIDADES_FEDERATIVAS\u0060: Unidades federativas \u2014 Os valores s\u00E3o as 27 unidades federativas, pela sigla: as do dado calculado de resid\u00EAncia e as que o candidato declara.\n- \u0060MUNICIPIOS\u0060: Munic\u00EDpios \u2014 Os valores s\u00E3o os munic\u00EDpios do m\u00F3dulo de geografia, pelo c\u00F3digo do IBGE, entre os da unidade federativa respondida antes.\n- \u0060TIPOS_DE_DEFICIENCIA\u0060: Tipos de defici\u00EAncia \u2014 Os valores s\u00E3o os tipos do cadastro de tipos de defici\u00EAncia, todos os vivos, em qualquer processo.\n- \u0060MUNICIPIOS_PROVA_PRESENCIAL\u0060: Munic\u00EDpios da prova presencial \u2014 Os valores s\u00E3o os munic\u00EDpios declarados para a prova presencial, pelo c\u00F3digo do IBGE."
+      },
+      "FormaAceite": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/FormaAceiteCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "FormaAceiteCodigo": {
+        "enum": [
+          "A_DEFINIR",
+          "REGISTRO_SEM_ENDERECO_IP",
+          "REGISTRO_COM_ENDERECO_IP"
+        ],
+        "type": "string",
+        "description": "Como o candidato registra o aceite de um termo de consentimento ou declara\u00E7\u00E3o.\n\n- \u0060A_DEFINIR\u0060: A definir \u2014 Forma ainda n\u00E3o definida; a publica\u00E7\u00E3o de um processo recusa termo exigido nesta forma.\n- \u0060REGISTRO_SEM_ENDERECO_IP\u0060: Registro digital sem o endere\u00E7o IP \u2014 O aceite \u00E9 registrado no sistema sem guardar o endere\u00E7o IP do candidato.\n- \u0060REGISTRO_COM_ENDERECO_IP\u0060: Registro digital com o endere\u00E7o IP \u2014 O aceite \u00E9 registrado no sistema guardando o endere\u00E7o IP do candidato."
+      },
+      "FormaDoConceito": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/FormaDoConceitoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "FormaDoConceitoCodigo": {
+        "enum": [
+          "NUMERICO",
+          "POR_OPCOES"
+        ],
+        "type": "string",
+        "description": "Como o conceito que avalia uma etapa se expressa: numa escala num\u00E9rica ou entre op\u00E7\u00F5es de uma lista.\n\n- \u0060NUMERICO\u0060: Num\u00E9rico \u2014 Conceito medido numa escala de m\u00EDnimo, m\u00E1ximo e casas decimais.\n- \u0060POR_OPCOES\u0060: Por op\u00E7\u00F5es \u2014 Conceito escolhido entre as op\u00E7\u00F5es ordenadas de uma lista, cada uma contando ou n\u00E3o como aprova\u00E7\u00E3o."
+      },
+      "FormatoPedagogico": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/FormatoPedagogicoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "FormatoPedagogicoCodigo": {
+        "enum": [
+          "PRESENCIAL",
+          "SEMIPRESENCIAL",
+          "EAD"
+        ],
+        "type": "string",
+        "description": "- \u0060PRESENCIAL\u0060: Presencial\n- \u0060SEMIPRESENCIAL\u0060: Semipresencial\n- \u0060EAD\u0060: A dist\u00E2ncia"
+      },
       "FormularioPortavel": {
         "required": [
           "etapas",
@@ -19912,12 +21617,9 @@
           "titulo",
           "etapas",
           "termos",
-          "fatosColetados",
-          "grupos",
+          "coleta",
           "regras",
-          "pressupostos",
-          "dataReferenciaFatos",
-          "fusoDoEnvio"
+          "pressupostos"
         ],
         "type": "object",
         "properties": {
@@ -19942,39 +21644,14 @@
               "$ref": "#/components/schemas/TermoRenderizavel"
             }
           },
-          "fatosColetados": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CampoRenderizavel"
-            }
-          },
-          "grupos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GrupoRenderizavel"
-            }
+          "coleta": {
+            "$ref": "#/components/schemas/ColetaRenderizavel"
           },
           "regras": {
             "$ref": "#/components/schemas/FormularioPortavel"
           },
           "pressupostos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PressupostoRenderizavel"
-            }
-          },
-          "dataReferenciaFatos": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date"
-          },
-          "fusoDoEnvio": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "$ref": "#/components/schemas/PressupostosDoFormulario"
           }
         }
       },
@@ -19997,11 +21674,8 @@
         "required": [
           "codigo",
           "etapaCodigo",
-          "visivel",
-          "obrigatorio",
           "estado",
-          "contagemValida",
-          "ocorrenciaDoCandidatoValida",
+          "regras",
           "ocorrencias"
         ],
         "type": "object",
@@ -20012,26 +21686,14 @@
           "etapaCodigo": {
             "type": "string"
           },
-          "visivel": {
-            "type": "string"
-          },
-          "obrigatorio": {
-            "type": "string"
-          },
           "estado": {
-            "type": "string"
+            "$ref": "#/components/schemas/EstadoFatoCodigo"
           },
-          "contagemValida": {
-            "type": "boolean"
-          },
-          "ocorrenciaDoCandidatoValida": {
-            "type": "boolean"
+          "regras": {
+            "$ref": "#/components/schemas/ExibicaoEObrigatoriedadeAvaliadas"
           },
           "ocorrencias": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OcorrenciaAvaliada"
-            }
+            "$ref": "#/components/schemas/OcorrenciasAvaliadas"
           }
         }
       },
@@ -20040,12 +21702,8 @@
           "codigo",
           "ordem",
           "rotulo",
-          "etapaCodigo",
-          "minimo",
-          "maximo",
-          "exibicao",
-          "obrigatoriedade",
-          "predicadoObrigatoriedade",
+          "ocorrencias",
+          "regras",
           "subitens"
         ],
         "type": "object",
@@ -20060,52 +21718,25 @@
           "rotulo": {
             "type": "string"
           },
-          "etapaCodigo": {
-            "type": [
-              "null",
-              "string"
+          "ocorrencias": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/OcorrenciasDoGrupoInput"
+              }
             ]
           },
-          "minimo": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "maximo": {
-            "type": [
-              "null",
-              "integer"
-            ],
-            "format": "int32"
-          },
-          "exibicao": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
+          "regras": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ExibicaoEObrigatoriedadeInput"
               }
-            }
-          },
-          "obrigatoriedade": {
-            "type": [
-              "null",
-              "string"
             ]
-          },
-          "predicadoObrigatoriedade": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
-            }
           },
           "subitens": {
             "type": "array",
@@ -20113,21 +21744,91 @@
               "$ref": "#/components/schemas/FatoColetadoInput"
             }
           },
-          "incluiCandidato": {
-            "type": "boolean",
-            "default": false
+          "etapaCodigo": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
-      "GrupoPortavel": {
+      "GrupoDeDocumentosDoModeloDto": {
+        "required": [
+          "quantidadeMinima",
+          "indeferimento",
+          "documentos"
+        ],
+        "type": "object",
+        "properties": {
+          "quantidadeMinima": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "indeferimento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IndeferimentoDoGrupoDeDocumentosDoModeloDto"
+              }
+            ]
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoExigidoDoModeloDto"
+            }
+          }
+        }
+      },
+      "GrupoDeDocumentosDoModeloInput": {
+        "required": [
+          "quantidadeMinima",
+          "indeferimento",
+          "documentos"
+        ],
+        "type": "object",
+        "properties": {
+          "quantidadeMinima": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "indeferimento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IndeferimentoDoGrupoDeDocumentosDoModeloInput"
+              }
+            ]
+          },
+          "documentos": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/DocumentoExigidoDoModeloInput"
+            }
+          }
+        }
+      },
+      "GrupoDoModeloDto": {
         "required": [
           "codigo",
-          "exibicao",
-          "obrigatoriedade",
-          "predicadoObrigatoriedade",
-          "minimo",
-          "maximo",
-          "incluiCandidato",
+          "ordem",
+          "etapaCodigo",
+          "rotulo",
+          "ocorrencias",
+          "regras",
           "subitens"
         ],
         "type": "object",
@@ -20135,46 +21836,50 @@
           "codigo": {
             "type": "string"
           },
-          "exibicao": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
-            }
-          },
-          "obrigatoriedade": {
-            "type": "string"
-          },
-          "predicadoObrigatoriedade": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
-            }
-          },
-          "minimo": {
+          "ordem": {
             "type": "integer",
             "format": "int32"
           },
-          "maximo": {
+          "etapaCodigo": {
             "type": [
               "null",
-              "integer"
-            ],
-            "format": "int32"
+              "string"
+            ]
           },
-          "incluiCandidato": {
-            "type": "boolean"
+          "rotulo": {
+            "type": "string"
+          },
+          "ocorrencias": {
+            "$ref": "#/components/schemas/OcorrenciasDoGrupoDto"
+          },
+          "regras": {
+            "$ref": "#/components/schemas/ExibicaoEObrigatoriedadeDto"
+          },
+          "subitens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemDoModeloDto"
+            }
+          }
+        }
+      },
+      "GrupoPortavel": {
+        "required": [
+          "codigo",
+          "ocorrencias",
+          "regras",
+          "subitens"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "ocorrencias": {
+            "$ref": "#/components/schemas/OcorrenciasDoGrupoDto"
+          },
+          "regras": {
+            "$ref": "#/components/schemas/ExibicaoEObrigatoriedadeDto"
           },
           "subitens": {
             "type": "array",
@@ -20203,10 +21908,10 @@
             "type": "string"
           },
           "visivel": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           },
           "obrigatorio": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           },
           "contagemValida": {
             "type": "boolean"
@@ -20228,9 +21933,7 @@
           "ordem",
           "etapaCodigo",
           "rotulo",
-          "minimo",
-          "maximo",
-          "incluiCandidato",
+          "ocorrencias",
           "subitens"
         ],
         "type": "object",
@@ -20251,25 +21954,35 @@
           "rotulo": {
             "type": "string"
           },
-          "minimo": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "maximo": {
-            "type": [
-              "null",
-              "integer"
-            ],
-            "format": "int32"
-          },
-          "incluiCandidato": {
-            "type": "boolean"
+          "ocorrencias": {
+            "$ref": "#/components/schemas/OcorrenciasDoGrupoDto"
           },
           "subitens": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CampoRenderizavel"
             }
+          }
+        }
+      },
+      "ImpedimentoDto": {
+        "required": [
+          "quando",
+          "mensagem"
+        ],
+        "type": "object",
+        "properties": {
+          "quando": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoDto"
+              }
+            }
+          },
+          "mensagem": {
+            "type": "string"
           }
         }
       },
@@ -20297,6 +22010,92 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "IndeferimentoDoDocumentoDoModeloDto": {
+        "required": [
+          "obrigatorio",
+          "consequencia",
+          "basesLegais"
+        ],
+        "type": "object",
+        "properties": {
+          "obrigatorio": {
+            "type": "boolean"
+          },
+          "consequencia": {
+            "type": "string"
+          },
+          "basesLegais": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BaseLegalDoModeloDto"
+            }
+          }
+        }
+      },
+      "IndeferimentoDoDocumentoDoModeloInput": {
+        "required": [
+          "obrigatorio",
+          "consequencia",
+          "basesLegais"
+        ],
+        "type": "object",
+        "properties": {
+          "obrigatorio": {
+            "type": "boolean"
+          },
+          "consequencia": {
+            "type": "string"
+          },
+          "basesLegais": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/BaseLegalDoModeloInput"
+            }
+          }
+        }
+      },
+      "IndeferimentoDoGrupoDeDocumentosDoModeloDto": {
+        "required": [
+          "consequencia",
+          "basesLegais"
+        ],
+        "type": "object",
+        "properties": {
+          "consequencia": {
+            "type": "string"
+          },
+          "basesLegais": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BaseLegalDoModeloDto"
+            }
+          }
+        }
+      },
+      "IndeferimentoDoGrupoDeDocumentosDoModeloInput": {
+        "required": [
+          "consequencia",
+          "basesLegais"
+        ],
+        "type": "object",
+        "properties": {
+          "consequencia": {
+            "type": "string"
+          },
+          "basesLegais": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/BaseLegalDoModeloInput"
+            }
           }
         }
       },
@@ -20340,6 +22139,37 @@
           }
         }
       },
+      "ItemDoModeloDto": {
+        "required": [
+          "fatoCodigo",
+          "ordem",
+          "etapaCodigo",
+          "apresentacao",
+          "regras"
+        ],
+        "type": "object",
+        "properties": {
+          "fatoCodigo": {
+            "type": "string"
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "etapaCodigo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "apresentacao": {
+            "$ref": "#/components/schemas/ApresentacaoDoCampoDto"
+          },
+          "regras": {
+            "$ref": "#/components/schemas/RegrasDoCampoDto"
+          }
+        }
+      },
       "ItemParaSolicitarRequest": {
         "required": [
           "cadastro",
@@ -20366,60 +22196,17 @@
       "ItemPortavel": {
         "required": [
           "fatoCodigo",
-          "exibicao",
-          "obrigatoriedade",
-          "predicadoObrigatoriedade",
-          "restricoes",
-          "impedimento",
-          "oferta"
+          "regras",
+          "oferta",
+          "formato"
         ],
         "type": "object",
         "properties": {
           "fatoCodigo": {
             "type": "string"
           },
-          "exibicao": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
-            }
-          },
-          "obrigatoriedade": {
-            "type": "string"
-          },
-          "predicadoObrigatoriedade": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
-            }
-          },
-          "restricoes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RestricaoValorInput"
-            }
-          },
-          "impedimento": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/components/schemas/ImpedimentoInput"
-              }
-            ]
+          "regras": {
+            "$ref": "#/components/schemas/RegrasDoCampoDto"
           },
           "oferta": {
             "type": [
@@ -20458,10 +22245,10 @@
             "type": "string"
           },
           "visivel": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           },
           "obrigatorio": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           },
           "restricoesVioladas": {
             "type": "array",
@@ -20470,7 +22257,7 @@
             }
           },
           "impedido": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           },
           "mensagemDoImpedimento": {
             "type": [
@@ -20491,6 +22278,41 @@
         }
       },
       "JsonElement": {},
+      "LimiteDeDataDto": {
+        "required": [
+          "ancora",
+          "data",
+          "anos",
+          "dias"
+        ],
+        "type": "object",
+        "properties": {
+          "ancora": {
+            "type": "string"
+          },
+          "data": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          },
+          "anos": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "dias": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          }
+        }
+      },
       "LimiteDeDataInput": {
         "required": [
           "ancora"
@@ -20644,10 +22466,7 @@
           "naturezaLegal",
           "composicaoVagas",
           "composicaoOrigem",
-          "regraRemanejamento",
-          "remanejamentoDestino",
-          "remanejamentoPar",
-          "remanejamentoFallback",
+          "remanejamento",
           "regraDeAplicabilidade",
           "acaoQuandoIndeferido",
           "baseLegal",
@@ -20672,10 +22491,10 @@
             ]
           },
           "naturezaLegal": {
-            "type": "string"
+            "$ref": "#/components/schemas/NaturezaLegal"
           },
           "composicaoVagas": {
-            "type": "string"
+            "$ref": "#/components/schemas/ComposicaoVagas"
           },
           "composicaoOrigem": {
             "type": [
@@ -20683,28 +22502,14 @@
               "string"
             ]
           },
-          "regraRemanejamento": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "remanejamentoDestino": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "remanejamentoPar": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "remanejamentoFallback": {
-            "type": [
-              "null",
-              "string"
+          "remanejamento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RemanejamentoDasVagasDto"
+              }
             ]
           },
           "regraDeAplicabilidade": {
@@ -20717,9 +22522,13 @@
             }
           },
           "acaoQuandoIndeferido": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AcaoQuandoIndeferido"
+              }
             ]
           },
           "baseLegal": {
@@ -20743,15 +22552,13 @@
           }
         }
       },
-      "ModeloFormularioView": {
+      "ModeloFormularioDto": {
         "required": [
           "id",
           "codigo",
-          "nome",
-          "descricao",
           "finalidade",
-          "tipoProcessoCodigo",
           "ativo",
+          "descritivo",
           "conteudo"
         ],
         "type": "object",
@@ -20763,29 +22570,95 @@
           "codigo": {
             "type": "string"
           },
-          "nome": {
-            "type": "string"
-          },
-          "descricao": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
           "finalidade": {
-            "type": "string"
-          },
-          "tipoProcessoCodigo": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "$ref": "#/components/schemas/FinalidadeFormulario"
           },
           "ativo": {
             "type": "boolean"
           },
+          "descritivo": {
+            "$ref": "#/components/schemas/DescritivoDoModeloDto"
+          },
           "conteudo": {
-            "$ref": "#/components/schemas/ConteudoDoModeloInput"
+            "$ref": "#/components/schemas/ConteudoDoModeloDto"
+          }
+        }
+      },
+      "NaturezaLegal": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/NaturezaLegalCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "NaturezaLegalCodigo": {
+        "enum": [
+          "COTA_RESERVADA",
+          "AMPLA",
+          "ACAO_AFIRMATIVA"
+        ],
+        "type": "string",
+        "description": "- \u0060COTA_RESERVADA\u0060: Cota reservada\n- \u0060AMPLA\u0060: Ampla concorr\u00EAncia\n- \u0060ACAO_AFIRMATIVA\u0060: A\u00E7\u00E3o afirmativa"
+      },
+      "ObrigatoriedadeDto": {
+        "required": [
+          "tipo",
+          "predicado"
+        ],
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "$ref": "#/components/schemas/TipoObrigatoriedadeCodigo"
+          },
+          "predicado": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoDto"
+              }
+            }
+          }
+        }
+      },
+      "ObrigatoriedadeInput": {
+        "required": [
+          "tipo"
+        ],
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoObrigatoriedadeCodigo"
+              }
+            ]
+          },
+          "predicado": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
+              }
+            }
           }
         }
       },
@@ -20801,7 +22674,7 @@
             "type": "string"
           },
           "estado": {
-            "type": "string"
+            "$ref": "#/components/schemas/EstadoFatoCodigo"
           },
           "campos": {
             "type": "array",
@@ -20850,6 +22723,81 @@
           }
         }
       },
+      "OcorrenciasAvaliadas": {
+        "required": [
+          "contagemValida",
+          "ocorrenciaDoCandidatoValida",
+          "lista"
+        ],
+        "type": "object",
+        "properties": {
+          "contagemValida": {
+            "type": "boolean"
+          },
+          "ocorrenciaDoCandidatoValida": {
+            "type": "boolean"
+          },
+          "lista": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OcorrenciaAvaliada"
+            }
+          }
+        }
+      },
+      "OcorrenciasDoGrupoDto": {
+        "required": [
+          "minimo",
+          "maximo",
+          "incluiCandidato"
+        ],
+        "type": "object",
+        "properties": {
+          "minimo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maximo": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "incluiCandidato": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OcorrenciasDoGrupoInput": {
+        "required": [
+          "minimo",
+          "incluiCandidato"
+        ],
+        "type": "object",
+        "properties": {
+          "minimo": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "incluiCandidato": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "maximo": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          }
+        }
+      },
       "OfertaCursoDto": {
         "required": [
           "id",
@@ -20890,21 +22838,21 @@
             "$ref": "#/components/schemas/UnidadeOfertanteDto"
           },
           "programaDeOferta": {
-            "type": "string"
+            "$ref": "#/components/schemas/ProgramaDeOferta"
           },
           "formatoPedagogico": {
-            "type": "string"
+            "$ref": "#/components/schemas/FormatoPedagogico"
           },
           "regimeDeFuncionamento": {
-            "type": "string"
+            "$ref": "#/components/schemas/RegimeDeFuncionamento"
           },
           "regimeDeTurno": {
-            "type": "string"
+            "$ref": "#/components/schemas/RegimeDeTurno"
           },
           "turnos": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/TurnoOferta"
             }
           },
           "eMecCodigo": {
@@ -20948,6 +22896,33 @@
               "object"
             ],
             "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OpcoesCondicionadasDto": {
+        "required": [
+          "quando",
+          "valores"
+        ],
+        "type": "object",
+        "properties": {
+          "quando": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoDto"
+              }
+            }
+          },
+          "valores": {
+            "type": "array",
+            "items": {
               "type": "string"
             }
           }
@@ -21018,6 +22993,41 @@
           }
         }
       },
+      "OperacaoAgregadoCodigo": {
+        "enum": [
+          "EXISTE",
+          "VALORES_PRESENTES"
+        ],
+        "type": "string",
+        "description": "O que o fato agregado calcula a partir das ocorr\u00EAncias de um grupo repet\u00EDvel.\n\n- \u0060EXISTE\u0060: Existe alguma ocorr\u00EAncia \u2014 Verdadeiro quando ao menos uma ocorr\u00EAncia do grupo respondeu sim.\n- \u0060VALORES_PRESENTES\u0060: Valores presentes nas ocorr\u00EAncias \u2014 Os valores diferentes que as ocorr\u00EAncias do grupo responderam."
+      },
+      "Operador": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/OperadorCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "OperadorCodigo": {
+        "enum": [
+          "IGUAL",
+          "ALGUM_DE",
+          "MAIOR_IGUAL",
+          "MENOR_IGUAL",
+          "DIFERENTE",
+          "NENHUM_DE"
+        ],
+        "type": "string",
+        "description": "Operador que compara o dado do candidato com o valor da condi\u00E7\u00E3o. Sobre dado com v\u00E1rios valores, igual a significa pertencer ao conjunto do candidato (ADR-0111, Emenda 1.2).\n\n- \u0060IGUAL\u0060: \u00E9 igual a\n- \u0060ALGUM_DE\u0060: \u00E9 um de\n- \u0060MAIOR_IGUAL\u0060: maior ou igual a\n- \u0060MENOR_IGUAL\u0060: menor ou igual a\n- \u0060DIFERENTE\u0060: \u00E9 diferente de\n- \u0060NENHUM_DE\u0060: n\u00E3o \u00E9 nenhum de"
+      },
       "OrdemDosValoresInput": {
         "required": [
           "codigos"
@@ -21031,6 +23041,79 @@
             }
           }
         }
+      },
+      "OrigemDataFase": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/OrigemDataFaseCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "OrigemDataFaseCodigo": {
+        "enum": [
+          "NO_EDITAL",
+          "NA_EXECUCAO"
+        ],
+        "type": "string",
+        "description": "- \u0060NO_EDITAL\u0060: No edital \u2014 A data \u00E9 fixada no edital: o per\u00EDodo \u00E9 obrigat\u00F3rio.\n- \u0060NA_EXECUCAO\u0060: Na execu\u00E7\u00E3o do processo \u2014 A data n\u00E3o \u00E9 fixada no edital: a unidade respons\u00E1vel pela fase a define na execu\u00E7\u00E3o, e o per\u00EDodo \u00E9 opcional."
+      },
+      "OrigemFato": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/OrigemFatoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "OrigemFatoCodigo": {
+        "enum": [
+          "CALCULADO",
+          "DECLARADO",
+          "INTEGRACAO"
+        ],
+        "type": "string",
+        "description": "Como o valor de um dado do cat\u00E1logo chega ao sistema: calculado, declarado pelo candidato ou recebido de integra\u00E7\u00E3o.\n\n- \u0060CALCULADO\u0060: Calculado \u2014 O valor \u00E9 calculado pelo sistema ou por uma regra; n\u00E3o \u00E9 coletado, \u00E9 resultado.\n- \u0060DECLARADO\u0060: Declarado \u2014 O valor \u00E9 a resposta ou a escolha direta do candidato no formul\u00E1rio.\n- \u0060INTEGRACAO\u0060: Integra\u00E7\u00E3o \u2014 O valor \u00E9 recebido de uma integra\u00E7\u00E3o com outro sistema."
+      },
+      "PapelDaBanca": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/PapelDaBancaCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "PapelDaBancaCodigo": {
+        "enum": [
+          "AVALIA_O_MERITO",
+          "JULGA_A_PRIMEIRA_INSTANCIA",
+          "IMPORTA_AS_NOTAS_DO_INEP",
+          "IMPORTA_CANDIDATOS",
+          "JULGA_A_SEGUNDA_INSTANCIA"
+        ],
+        "type": "string",
+        "description": "O que as bancas de um tipo fazem no processo seletivo. Cada tipo de banca cadastrado tem exatamente um papel; as regras da sele\u00E7\u00E3o decidem pelo papel, e n\u00E3o pelo c\u00F3digo do tipo.\n\n- \u0060AVALIA_O_MERITO\u0060: Avalia o m\u00E9rito\n- \u0060JULGA_A_PRIMEIRA_INSTANCIA\u0060: Julga o recurso em 1\u00AA inst\u00E2ncia\n- \u0060IMPORTA_AS_NOTAS_DO_INEP\u0060: Importa as notas do INEP\n- \u0060IMPORTA_CANDIDATOS\u0060: Importa candidatos\n- \u0060JULGA_A_SEGUNDA_INSTANCIA\u0060: Julga o recurso em 2\u00AA inst\u00E2ncia"
       },
       "PerfilConcedidoResponse": {
         "required": [
@@ -21189,6 +23272,117 @@
           }
         }
       },
+      "PrazoDeEmissaoDoModeloDto": {
+        "required": [
+          "escolha",
+          "valor",
+          "unidade",
+          "referencia",
+          "efeitoForaDoPrazo"
+        ],
+        "type": "object",
+        "properties": {
+          "escolha": {
+            "$ref": "#/components/schemas/EscolhaDoPrazoDeEmissao"
+          },
+          "valor": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "unidade": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UnidadeDoPrazoDeEmissao"
+              }
+            ]
+          },
+          "referencia": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DataDeReferenciaDoDocumentoDoModeloDto"
+              }
+            ]
+          },
+          "efeitoForaDoPrazo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EfeitoNaAnaliseDoDocumento"
+              }
+            ]
+          }
+        }
+      },
+      "PrazoDeEmissaoDoModeloInput": {
+        "required": [
+          "escolha",
+          "valor",
+          "unidade",
+          "referencia",
+          "efeitoForaDoPrazo"
+        ],
+        "type": "object",
+        "properties": {
+          "escolha": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EscolhaDoPrazoDeEmissaoCodigo"
+              }
+            ]
+          },
+          "valor": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "unidade": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UnidadeDoPrazoDeEmissaoCodigo"
+              }
+            ]
+          },
+          "referencia": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DataDeReferenciaDoDocumentoDoModeloInput"
+              }
+            ]
+          },
+          "efeitoForaDoPrazo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EfeitoNaAnaliseDoDocumentoCodigo"
+              }
+            ]
+          }
+        }
+      },
       "PrecedenciaFaseDto": {
         "required": [
           "id",
@@ -21248,9 +23442,13 @@
             ]
           },
           "tipoRenderizacao": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoRenderizacaoCodigo"
+              }
             ]
           },
           "formato": {
@@ -21277,6 +23475,35 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "PressupostosDoFormulario": {
+        "required": [
+          "fatos",
+          "dataReferenciaFatos",
+          "fusoDoEnvio"
+        ],
+        "type": "object",
+        "properties": {
+          "fatos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PressupostoRenderizavel"
+            }
+          },
+          "dataReferenciaFatos": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
+          },
+          "fusoDoEnvio": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -21444,6 +23671,80 @@
           }
         }
       },
+      "ProgramaDeOferta": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/ProgramaDeOfertaCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "ProgramaDeOfertaCodigo": {
+        "enum": [
+          "REGULAR",
+          "FORMA_PARA",
+          "PARFOR",
+          "PRONERA",
+          "PEPETI",
+          "CONVENIO_OUTRO",
+          "OUTRO"
+        ],
+        "type": "string",
+        "description": "- \u0060REGULAR\u0060: Regular\n- \u0060FORMA_PARA\u0060: Forma Par\u00E1\n- \u0060PARFOR\u0060: Parfor\n- \u0060PRONERA\u0060: Pronera\n- \u0060PEPETI\u0060: PEPETI\n- \u0060CONVENIO_OUTRO\u0060: Outro conv\u00EAnio\n- \u0060OUTRO\u0060: Outro programa"
+      },
+      "ProtecaoDoFatoDto": {
+        "required": [
+          "classificacao",
+          "finalidade",
+          "hipoteseLegal",
+          "aprovacao"
+        ],
+        "type": "object",
+        "properties": {
+          "classificacao": {
+            "type": "string"
+          },
+          "finalidade": {
+            "type": "string"
+          },
+          "hipoteseLegal": {
+            "type": "string"
+          },
+          "aprovacao": {
+            "$ref": "#/components/schemas/AprovacaoDaProtecaoDto"
+          }
+        }
+      },
+      "QuantidadeDeValores": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/QuantidadeDeValoresCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "QuantidadeDeValoresCodigo": {
+        "enum": [
+          "VALOR_UNICO",
+          "VARIOS_VALORES"
+        ],
+        "type": "string",
+        "description": "Quantos valores um dado assume para um mesmo candidato: um s\u00F3 ou v\u00E1rios.\n\n- \u0060VALOR_UNICO\u0060: Um valor \u2014 O candidato tem um \u00FAnico valor para o dado.\n- \u0060VARIOS_VALORES\u0060: V\u00E1rios valores \u2014 O candidato pode ter mais de um valor para o dado."
+      },
       "RecursoAcessibilidadeDto": {
         "required": [
           "id",
@@ -21534,6 +23835,53 @@
           }
         }
       },
+      "RegimeDeFuncionamento": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/RegimeDeFuncionamentoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "RegimeDeFuncionamentoCodigo": {
+        "enum": [
+          "INTENSIVO",
+          "EXTENSIVO",
+          "ALTERNANCIA_PEDAGOGICA"
+        ],
+        "type": "string",
+        "description": "- \u0060INTENSIVO\u0060: Intensivo\n- \u0060EXTENSIVO\u0060: Extensivo\n- \u0060ALTERNANCIA_PEDAGOGICA\u0060: Altern\u00E2ncia pedag\u00F3gica"
+      },
+      "RegimeDeTurno": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/RegimeDeTurnoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "RegimeDeTurnoCodigo": {
+        "enum": [
+          "REGULAR",
+          "INTEGRAL"
+        ],
+        "type": "string",
+        "description": "- \u0060REGULAR\u0060: Regular\n- \u0060INTEGRAL\u0060: Integral"
+      },
       "RegistrarManifestacaoDaProtecaoRequest": {
         "required": [
           "cadastro",
@@ -21595,7 +23943,7 @@
             "items": {
               "type": "array",
               "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
+                "$ref": "#/components/schemas/CondicaoPrecondicaoDto"
               }
             }
           },
@@ -21658,6 +24006,148 @@
           }
         }
       },
+      "RegraRemanejamento": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/RegraRemanejamentoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "RegraRemanejamentoCodigo": {
+        "enum": [
+          "SEGUE_ORDEM_DE_REMANEJAMENTO",
+          "DESTINO_UNICO",
+          "CRUZADO"
+        ],
+        "type": "string",
+        "description": "- \u0060SEGUE_ORDEM_DE_REMANEJAMENTO\u0060: Segue a ordem de remanejamento\n- \u0060DESTINO_UNICO\u0060: Destino \u00FAnico\n- \u0060CRUZADO\u0060: Cruzado"
+      },
+      "RegrasDoCampoAvaliadas": {
+        "required": [
+          "visivel",
+          "obrigatorio",
+          "restricoesVioladas",
+          "impedido"
+        ],
+        "type": "object",
+        "properties": {
+          "visivel": {
+            "$ref": "#/components/schemas/TernarioCodigo"
+          },
+          "obrigatorio": {
+            "$ref": "#/components/schemas/TernarioCodigo"
+          },
+          "restricoesVioladas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "impedido": {
+            "$ref": "#/components/schemas/TernarioCodigo"
+          }
+        }
+      },
+      "RegrasDoCampoDto": {
+        "required": [
+          "exibicao",
+          "obrigatoriedade",
+          "restricoes",
+          "impedimento"
+        ],
+        "type": "object",
+        "properties": {
+          "exibicao": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoDto"
+              }
+            }
+          },
+          "obrigatoriedade": {
+            "$ref": "#/components/schemas/ObrigatoriedadeDto"
+          },
+          "restricoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RestricaoValorDto"
+            }
+          },
+          "impedimento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ImpedimentoDto"
+              }
+            ]
+          }
+        }
+      },
+      "RegrasDoCampoInput": {
+        "required": [
+          "exibicao",
+          "obrigatoriedade"
+        ],
+        "type": "object",
+        "properties": {
+          "exibicao": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
+              }
+            }
+          },
+          "obrigatoriedade": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ObrigatoriedadeInput"
+              }
+            ]
+          },
+          "restricoes": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/RestricaoValorInput"
+            }
+          },
+          "impedimento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ImpedimentoInput"
+              }
+            ]
+          }
+        }
+      },
       "RegrasPadraoInput": {
         "required": [
           "regras"
@@ -21669,6 +24159,220 @@
             "items": {
               "$ref": "#/components/schemas/RegraPadraoInput"
             }
+          }
+        }
+      },
+      "RemanejamentoDasVagasDto": {
+        "required": [
+          "regra",
+          "destino",
+          "par",
+          "fallback"
+        ],
+        "type": "object",
+        "properties": {
+          "regra": {
+            "$ref": "#/components/schemas/RegraRemanejamento"
+          },
+          "destino": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "par": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fallback": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "RemanejamentoDasVagasInformado": {
+        "required": [
+          "regra"
+        ],
+        "type": "object",
+        "properties": {
+          "regra": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RegraRemanejamentoCodigo"
+              }
+            ]
+          },
+          "destino": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "par": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fallback": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "RequisitosDoDocumentoDoModeloDto": {
+        "required": [
+          "prazoDeEmissao",
+          "validade"
+        ],
+        "type": "object",
+        "properties": {
+          "prazoDeEmissao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PrazoDeEmissaoDoModeloDto"
+              }
+            ]
+          },
+          "validade": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ValidadeDoDocumentoDoModeloDto"
+              }
+            ]
+          }
+        }
+      },
+      "RequisitosDoDocumentoDoModeloInput": {
+        "required": [
+          "prazoDeEmissao",
+          "validade"
+        ],
+        "type": "object",
+        "properties": {
+          "prazoDeEmissao": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PrazoDeEmissaoDoModeloInput"
+              }
+            ]
+          },
+          "validade": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ValidadeDoDocumentoDoModeloInput"
+              }
+            ]
+          }
+        }
+      },
+      "ResolucaoDoFatoDto": {
+        "required": [
+          "origem",
+          "pontoResolucao",
+          "binding"
+        ],
+        "type": "object",
+        "properties": {
+          "origem": {
+            "$ref": "#/components/schemas/OrigemFato"
+          },
+          "pontoResolucao": {
+            "type": "string"
+          },
+          "binding": {
+            "type": "string"
+          }
+        }
+      },
+      "RestricaoValorDto": {
+        "required": [
+          "tipo",
+          "minimo",
+          "maximo",
+          "entradas",
+          "fatos",
+          "dataMinima",
+          "dataMaxima"
+        ],
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "type": "string"
+          },
+          "minimo": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "maximo": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "entradas": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/OpcoesCondicionadasDto"
+            }
+          },
+          "fatos": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "dataMinima": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/LimiteDeDataDto"
+              }
+            ]
+          },
+          "dataMaxima": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/LimiteDeDataDto"
+              }
+            ]
           }
         }
       },
@@ -21746,7 +24450,7 @@
             "type": "string"
           },
           "visivel": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           }
         }
       },
@@ -21757,9 +24461,7 @@
           "ordem",
           "tipo",
           "bloco",
-          "titulo",
-          "descricao",
-          "aviso"
+          "apresentacao"
         ],
         "type": "object",
         "properties": {
@@ -21777,28 +24479,20 @@
             "format": "int32"
           },
           "tipo": {
-            "type": "string"
+            "$ref": "#/components/schemas/TipoEtapaFormularioCodigo"
           },
           "bloco": {
-            "type": [
-              "null",
-              "string"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/BlocoSistemaCodigo"
+              }
             ]
           },
-          "titulo": {
-            "type": "string"
-          },
-          "descricao": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "aviso": {
-            "type": [
-              "null",
-              "string"
-            ]
+          "apresentacao": {
+            "$ref": "#/components/schemas/ApresentacaoDaEtapaDto"
           }
         }
       },
@@ -21848,10 +24542,10 @@
             "type": "string"
           },
           "visivel": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           },
           "obrigatorio": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           }
         }
       },
@@ -21893,7 +24587,7 @@
             ]
           },
           "formaAceiteRascunho": {
-            "type": "string"
+            "$ref": "#/components/schemas/FormaAceite"
           },
           "revisado": {
             "type": "boolean"
@@ -21948,7 +24642,7 @@
             "type": "string"
           },
           "formaAceiteRascunho": {
-            "type": "string"
+            "$ref": "#/components/schemas/FormaAceite"
           },
           "revisado": {
             "type": "boolean"
@@ -21995,7 +24689,7 @@
             "type": "string"
           },
           "formaAceite": {
-            "type": "string"
+            "$ref": "#/components/schemas/FormaAceite"
           },
           "hash": {
             "type": "string"
@@ -22006,15 +24700,12 @@
           }
         }
       },
-      "TermoExigidoInput": {
+      "TermoDoModeloDto": {
         "required": [
           "codigo",
           "ordem",
-          "termoId",
-          "versaoId",
-          "exibicao",
-          "obrigatoriedade",
-          "predicadoObrigatoriedade"
+          "termo",
+          "regras"
         ],
         "type": "object",
         "properties": {
@@ -22025,81 +24716,64 @@
             "type": "integer",
             "format": "int32"
           },
-          "termoId": {
-            "type": "string",
-            "format": "uuid"
+          "termo": {
+            "$ref": "#/components/schemas/VersaoDoTermoDoModeloDto"
           },
-          "versaoId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "exibicao": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
-            }
-          },
-          "obrigatoriedade": {
-            "type": "string"
-          },
-          "predicadoObrigatoriedade": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
-            }
+          "regras": {
+            "$ref": "#/components/schemas/ExibicaoEObrigatoriedadeDto"
           }
         }
       },
-      "TermoPortavel": {
+      "TermoExigidoInput": {
         "required": [
           "codigo",
-          "exibicao",
-          "obrigatoriedade",
-          "predicadoObrigatoriedade"
+          "ordem",
+          "termo",
+          "regras"
         ],
         "type": "object",
         "properties": {
           "codigo": {
             "type": "string"
           },
-          "exibicao": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
-            }
+          "ordem": {
+            "type": "integer",
+            "format": "int32"
           },
-          "obrigatoriedade": {
+          "termo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/VersaoDoTermoInput"
+              }
+            ]
+          },
+          "regras": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ExibicaoEObrigatoriedadeInput"
+              }
+            ]
+          }
+        }
+      },
+      "TermoPortavel": {
+        "required": [
+          "codigo",
+          "regras"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
             "type": "string"
           },
-          "predicadoObrigatoriedade": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CondicaoPrecondicaoInput"
-              }
-            }
+          "regras": {
+            "$ref": "#/components/schemas/ExibicaoEObrigatoriedadeDto"
           }
         }
       },
@@ -22115,10 +24789,10 @@
             "type": "string"
           },
           "visivel": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           },
           "obrigatorio": {
-            "type": "string"
+            "$ref": "#/components/schemas/TernarioCodigo"
           }
         }
       },
@@ -22129,11 +24803,7 @@
           "ordem",
           "termoId",
           "versaoId",
-          "nome",
-          "texto",
-          "baseLegal",
-          "formaAceite",
-          "hashVersao"
+          "conteudo"
         ],
         "type": "object",
         "properties": {
@@ -22155,22 +24825,34 @@
             "type": "string",
             "format": "uuid"
           },
-          "nome": {
-            "type": "string"
+          "conteudo": {
+            "$ref": "#/components/schemas/ConteudoDoTermoDto"
+          }
+        }
+      },
+      "Ternario": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/TernarioCodigo"
           },
-          "texto": {
-            "type": "string"
-          },
-          "baseLegal": {
-            "type": "string"
-          },
-          "formaAceite": {
-            "type": "string"
-          },
-          "hashVersao": {
+          "rotulo": {
             "type": "string"
           }
         }
+      },
+      "TernarioCodigo": {
+        "enum": [
+          "INDETERMINADO",
+          "VERDADEIRO",
+          "FALSO"
+        ],
+        "type": "string",
+        "description": "Resultado da avalia\u00E7\u00E3o de uma condi\u00E7\u00E3o: verdadeiro, falso ou indeterminado, que \u00E9 estado pr\u00F3prio e n\u00E3o equivale a falso nem a aus\u00EAncia.\n\n- \u0060INDETERMINADO\u0060: Indeterminado \u2014 N\u00E3o h\u00E1 como decidir ainda: nunca \u00E9 lido como verdadeiro nem como falso.\n- \u0060VERDADEIRO\u0060: Verdadeiro\n- \u0060FALSO\u0060: Falso"
       },
       "TipoBancaDto": {
         "required": [
@@ -22179,6 +24861,10 @@
           "nome",
           "faseTipica",
           "descricao",
+          "papel",
+          "exigeDuasOuMaisBancas",
+          "encerraRecursoNaPrimeiraInstancia",
+          "tiposDeDecisaoJulgados",
           "criadoEm"
         ],
         "type": "object",
@@ -22188,7 +24874,7 @@
             "format": "uuid"
           },
           "codigo": {
-            "type": "string"
+            "$ref": "#/components/schemas/TipoDeBanca"
           },
           "nome": {
             "type": "string"
@@ -22205,6 +24891,21 @@
               "string"
             ]
           },
+          "papel": {
+            "$ref": "#/components/schemas/PapelDaBanca"
+          },
+          "exigeDuasOuMaisBancas": {
+            "type": "boolean"
+          },
+          "encerraRecursoNaPrimeiraInstancia": {
+            "type": "boolean"
+          },
+          "tiposDeDecisaoJulgados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TipoMotivoDeDecisao"
+            }
+          },
           "criadoEm": {
             "type": "string",
             "format": "date-time"
@@ -22220,31 +24921,12 @@
           }
         }
       },
-      "TipoBancaVocabularioDto": {
-        "required": [
-          "codigo",
-          "nome"
-        ],
-        "type": "object",
-        "properties": {
-          "codigo": {
-            "type": "string"
-          },
-          "nome": {
-            "type": "string"
-          }
-        }
-      },
       "TipoConceitoDto": {
         "required": [
           "id",
           "codigo",
-          "nome",
-          "descricao",
-          "natureza",
           "ativo",
-          "numerico",
-          "valores"
+          "definicao"
         ],
         "type": "object",
         "properties": {
@@ -22255,39 +24937,11 @@
           "codigo": {
             "type": "string"
           },
-          "nome": {
-            "type": "string"
-          },
-          "descricao": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "natureza": {
-            "type": "string"
-          },
           "ativo": {
             "type": "boolean"
           },
-          "numerico": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/components/schemas/EscalaNumericaDto"
-              }
-            ]
-          },
-          "valores": {
-            "type": [
-              "null",
-              "array"
-            ],
-            "items": {
-              "$ref": "#/components/schemas/ValorCategoricoDto"
-            }
+          "definicao": {
+            "$ref": "#/components/schemas/DefinicaoDoTipoConceitoDto"
           },
           "_links": {
             "type": [
@@ -22299,6 +24953,63 @@
             }
           }
         }
+      },
+      "TipoDaDataDeReferencia": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/TipoDaDataDeReferenciaCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "TipoDaDataDeReferenciaCodigo": {
+        "enum": [
+          "FIM_DAS_INSCRICOES",
+          "INICIO_DA_FASE",
+          "FIM_DA_FASE",
+          "DATA_ESPECIFICA",
+          "DATA_DA_APRESENTACAO"
+        ],
+        "type": "string",
+        "description": "Data usada como refer\u00EAncia para o documento.\n\n- \u0060FIM_DAS_INSCRICOES\u0060: Fim das inscri\u00E7\u00F5es\n- \u0060INICIO_DA_FASE\u0060: In\u00EDcio da fase\n- \u0060FIM_DA_FASE\u0060: Fim da fase\n- \u0060DATA_ESPECIFICA\u0060: Data espec\u00EDfica\n- \u0060DATA_DA_APRESENTACAO\u0060: Data da apresenta\u00E7\u00E3o"
+      },
+      "TipoDeBanca": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/TipoDeBancaCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "TipoDeBancaCodigo": {
+        "enum": [
+          "BANCA_ANALISE_DOCUMENTAL",
+          "BANCA_ENTREVISTA",
+          "BANCA_CORRECAO_REDACOES",
+          "BANCA_ANALISE_RECURSOS",
+          "BANCA_HETEROIDENTIFICACAO",
+          "BANCA_BIOPSICOSSOCIAL",
+          "BANCA_HOMOLOGACAO_INSCRICOES",
+          "BANCA_IMPORTACAO_NOTAS_INEP",
+          "BANCA_IMPORTACAO_CANDIDATOS",
+          "BANCA_ANALISE_RECURSOS_SEGUNDA_INSTANCIA"
+        ],
+        "type": "string",
+        "description": "O tipo de banca que a sele\u00E7\u00E3o pode prever em uma fase ou em uma etapa. O c\u00F3digo e o r\u00F3tulo do tipo s\u00E3o fixos; o nome do cadastro de tipos de banca pode ser editado.\n\n- \u0060BANCA_ANALISE_DOCUMENTAL\u0060: Banca de an\u00E1lise documental\n- \u0060BANCA_ENTREVISTA\u0060: Banca de entrevista\n- \u0060BANCA_CORRECAO_REDACOES\u0060: Banca de corre\u00E7\u00E3o de reda\u00E7\u00F5es\n- \u0060BANCA_ANALISE_RECURSOS\u0060: Banca de an\u00E1lise de recursos\n- \u0060BANCA_HETEROIDENTIFICACAO\u0060: Banca de heteroidentifica\u00E7\u00E3o\n- \u0060BANCA_BIOPSICOSSOCIAL\u0060: Banca de avalia\u00E7\u00E3o biopsicossocial\n- \u0060BANCA_HOMOLOGACAO_INSCRICOES\u0060: Banca de homologa\u00E7\u00E3o das inscri\u00E7\u00F5es\n- \u0060BANCA_IMPORTACAO_NOTAS_INEP\u0060: Banca de importa\u00E7\u00E3o das notas do INEP\n- \u0060BANCA_IMPORTACAO_CANDIDATOS\u0060: Banca de importa\u00E7\u00E3o de candidatos\n- \u0060BANCA_ANALISE_RECURSOS_SEGUNDA_INSTANCIA\u0060: Banca de an\u00E1lise de recursos de 2\u00AA inst\u00E2ncia"
       },
       "TipoDeficienciaDto": {
         "required": [
@@ -22428,6 +25139,33 @@
           }
         }
       },
+      "TipoDoDado": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/TipoDoDadoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "TipoDoDadoCodigo": {
+        "enum": [
+          "SIM_OU_NAO",
+          "OPCAO",
+          "NUMERICO",
+          "TEXTO",
+          "DATA",
+          "ENDERECO"
+        ],
+        "type": "string",
+        "description": "O tipo de um dado do candidato: decide o campo que a pessoa preenche, as compara\u00E7\u00F5es que uma regra pode fazer com ele e a forma do valor.\n\n- \u0060SIM_OU_NAO\u0060: Sim ou n\u00E3o \u2014 Resposta que s\u00F3 pode ser sim ou n\u00E3o.\n- \u0060OPCAO\u0060: Op\u00E7\u00E3o \u2014 Resposta escolhida entre as op\u00E7\u00F5es de uma lista fechada.\n- \u0060NUMERICO\u0060: N\u00FAmero \u2014 N\u00FAmero inteiro.\n- \u0060TEXTO\u0060: Texto \u2014 Texto livre ou num formato conhecido, como CPF, e-mail ou telefone.\n- \u0060DATA\u0060: Data \u2014 Data do calend\u00E1rio.\n- \u0060ENDERECO\u0060: Endere\u00E7o \u2014 Endere\u00E7o com CEP e cidade."
+      },
       "TipoEtapaDto": {
         "required": [
           "id",
@@ -22435,11 +25173,7 @@
           "nome",
           "descricao",
           "ativo",
-          "admitePontuacao",
-          "admiteEliminacao",
-          "notaDeOrigemNoEnem",
-          "exigeCorrecaoIndependente",
-          "conceitosAdmitidos",
+          "avaliacao",
           "criadoEm"
         ],
         "type": "object",
@@ -22463,23 +25197,8 @@
           "ativo": {
             "type": "boolean"
           },
-          "admitePontuacao": {
-            "type": "boolean"
-          },
-          "admiteEliminacao": {
-            "type": "boolean"
-          },
-          "notaDeOrigemNoEnem": {
-            "type": "boolean"
-          },
-          "exigeCorrecaoIndependente": {
-            "type": "boolean"
-          },
-          "conceitosAdmitidos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ConceitoAdmitidoDto"
-            }
+          "avaliacao": {
+            "$ref": "#/components/schemas/AvaliacaoDasEtapasDto"
           },
           "criadoEm": {
             "type": "string",
@@ -22496,18 +25215,54 @@
           }
         }
       },
-      "TipoInstrumentoNormativoVocabularioDto": {
+      "TipoEtapaFormularioCodigo": {
+        "enum": [
+          "SECAO",
+          "BLOCO"
+        ],
+        "type": "string",
+        "description": "O que a etapa do formul\u00E1rio \u00E9: uma se\u00E7\u00E3o com itens de resposta ou um bloco que o sistema monta.\n\n- \u0060SECAO\u0060: Se\u00E7\u00E3o \u2014 Etapa com os itens que o candidato responde.\n- \u0060BLOCO\u0060: Bloco do sistema \u2014 Etapa que o sistema monta a partir da configura\u00E7\u00E3o do processo; o bloco diz qual."
+      },
+      "TipoInstrumentoNormativo": {
         "required": [
           "codigo",
-          "nome",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/TipoInstrumentoNormativoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "TipoInstrumentoNormativoCodigo": {
+        "enum": [
+          "LEI",
+          "DECRETO",
+          "PORTARIA",
+          "RESOLUCAO",
+          "INSTRUCAO_NORMATIVA",
+          "PARECER",
+          "EDITAL"
+        ],
+        "type": "string",
+        "description": "Tipo do ato normativo que institui ou modifica o b\u00F4nus regional de um processo seletivo.\n\n- \u0060LEI\u0060: Lei \u2014 Ato normativo de maior hierarquia no ordenamento infraconstitucional, emanado do Poder Legislativo.\n- \u0060DECRETO\u0060: Decreto \u2014 Ato normativo do Poder Executivo que regulamenta leis ou disp\u00F5e sobre mat\u00E9ria de sua compet\u00EAncia.\n- \u0060PORTARIA\u0060: Portaria \u2014 Ato administrativo de autoridade p\u00FAblica que disciplina procedimentos internos ou mat\u00E9ria de compet\u00EAncia espec\u00EDfica.\n- \u0060RESOLUCAO\u0060: Resolu\u00E7\u00E3o \u2014 Ato normativo de \u00F3rg\u00E3o colegiado (conselho, c\u00E2mara, comit\u00EA) com efeitos internos ou externos conforme a norma instituidora.\n- \u0060INSTRUCAO_NORMATIVA\u0060: Instru\u00E7\u00E3o Normativa \u2014 Ato administrativo de car\u00E1ter t\u00E9cnico-operacional que detalha a execu\u00E7\u00E3o de normas superiores.\n- \u0060PARECER\u0060: Parecer \u2014 Manifesta\u00E7\u00E3o t\u00E9cnica ou jur\u00EDdica de \u00F3rg\u00E3o competente que orienta a aplica\u00E7\u00E3o de normas \u2014 vinculante quando aprovado pela autoridade competente.\n- \u0060EDITAL\u0060: Edital \u2014 Ato de convoca\u00E7\u00E3o do processo seletivo que fixa as regras do certame, inclusive o b\u00F4nus que ele institui."
+      },
+      "TipoInstrumentoNormativoComDescricao": {
+        "required": [
+          "codigo",
+          "rotulo",
           "descricao"
         ],
         "type": "object",
         "properties": {
           "codigo": {
-            "type": "string"
+            "$ref": "#/components/schemas/TipoInstrumentoNormativoCodigo"
           },
-          "nome": {
+          "rotulo": {
             "type": "string"
           },
           "descricao": {
@@ -22516,16 +25271,69 @@
         }
       },
       "TipoLocalOferta": {
-        "enum": [
-          "nenhum",
-          "campusSede",
-          "campusForaDeSede",
-          "cursoForaDeSede",
-          "poloEad",
-          "convenioInteriorizacao",
-          "outro"
+        "required": [
+          "codigo",
+          "rotulo"
         ],
-        "type": "string"
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/TipoLocalOfertaCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "TipoLocalOfertaCodigo": {
+        "enum": [
+          "CAMPUS_SEDE",
+          "CAMPUS_FORA_DE_SEDE",
+          "CURSO_FORA_DE_SEDE",
+          "POLO_DE_EDUCACAO_A_DISTANCIA",
+          "CONVENIO_DE_INTERIORIZACAO",
+          "OUTRO"
+        ],
+        "type": "string",
+        "description": "- \u0060CAMPUS_SEDE\u0060: Campus sede\n- \u0060CAMPUS_FORA_DE_SEDE\u0060: Campus fora de sede\n- \u0060CURSO_FORA_DE_SEDE\u0060: Curso fora de sede\n- \u0060POLO_DE_EDUCACAO_A_DISTANCIA\u0060: Polo de educa\u00E7\u00E3o a dist\u00E2ncia\n- \u0060CONVENIO_DE_INTERIORIZACAO\u0060: Conv\u00EAnio de interioriza\u00E7\u00E3o\n- \u0060OUTRO\u0060: Outro"
+      },
+      "TipoMotivoDeDecisao": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/TipoMotivoDeDecisaoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "TipoMotivoDeDecisaoCodigo": {
+        "enum": [
+          "ISENCAO_DA_TAXA",
+          "HOMOLOGACAO_DAS_INSCRICOES",
+          "ANALISE_DOCUMENTAL",
+          "HETEROIDENTIFICACAO",
+          "AVALIACAO_BIOPSICOSSOCIAL",
+          "CLASSIFICACAO",
+          "GABARITO_DA_PROVA",
+          "NOTA_DA_ETAPA"
+        ],
+        "type": "string",
+        "description": "A decis\u00E3o individual a que um motivo serve. O tipo separa as listas do cadastro de motivos, e o c\u00F3digo do motivo s\u00F3 \u00E9 \u00FAnico dentro dele. O recurso n\u00E3o \u00E9 tipo pr\u00F3prio: o motivo do recurso \u00E9 o da decis\u00E3o recorrida.\n\n- \u0060ISENCAO_DA_TAXA\u0060: Isen\u00E7\u00E3o da taxa\n- \u0060HOMOLOGACAO_DAS_INSCRICOES\u0060: Homologa\u00E7\u00E3o das inscri\u00E7\u00F5es\n- \u0060ANALISE_DOCUMENTAL\u0060: An\u00E1lise documental\n- \u0060HETEROIDENTIFICACAO\u0060: Heteroidentifica\u00E7\u00E3o\n- \u0060AVALIACAO_BIOPSICOSSOCIAL\u0060: Avalia\u00E7\u00E3o biopsicossocial\n- \u0060CLASSIFICACAO\u0060: Classifica\u00E7\u00E3o\n- \u0060GABARITO_DA_PROVA\u0060: Gabarito da prova\n- \u0060NOTA_DA_ETAPA\u0060: Nota da etapa"
+      },
+      "TipoObrigatoriedadeCodigo": {
+        "enum": [
+          "SEMPRE",
+          "NUNCA",
+          "QUANDO"
+        ],
+        "type": "string",
+        "description": "Quando o item ou o termo do formul\u00E1rio \u00E9 de resposta obrigat\u00F3ria.\n\n- \u0060SEMPRE\u0060: Sempre obrigat\u00F3rio \u2014 O candidato sempre precisa responder. N\u00E3o tem condi\u00E7\u00E3o.\n- \u0060NUNCA\u0060: Nunca obrigat\u00F3rio \u2014 A resposta \u00E9 sempre opcional. N\u00E3o tem condi\u00E7\u00E3o.\n- \u0060QUANDO\u0060: Obrigat\u00F3rio quando a condi\u00E7\u00E3o \u00E9 verdadeira \u2014 O candidato precisa responder quando a condi\u00E7\u00E3o sobre as respostas anteriores \u00E9 verdadeira. Tem sempre uma condi\u00E7\u00E3o."
       },
       "TipoProcessoDto": {
         "required": [
@@ -22571,6 +25379,68 @@
             }
           }
         }
+      },
+      "TipoRenderizacaoCodigo": {
+        "enum": [
+          "NUMERO",
+          "SIM_OU_NAO",
+          "ESCOLHA_UNICA",
+          "ESCOLHA_MULTIPLA",
+          "TEXTO",
+          "DATA",
+          "ENDERECO",
+          "MUNICIPIO"
+        ],
+        "type": "string",
+        "description": "Como o campo do formul\u00E1rio \u00E9 apresentado e respondido pelo candidato.\n\n- \u0060NUMERO\u0060: N\u00FAmero \u2014 Campo em que o candidato digita um n\u00FAmero inteiro.\n- \u0060SIM_OU_NAO\u0060: Sim ou n\u00E3o \u2014 Campo em que o candidato responde sim ou n\u00E3o.\n- \u0060ESCOLHA_UNICA\u0060: Escolha de um valor \u2014 Campo em que o candidato escolhe uma op\u00E7\u00E3o entre as oferecidas.\n- \u0060ESCOLHA_MULTIPLA\u0060: Escolha de v\u00E1rios valores \u2014 Campo em que o candidato escolhe uma ou mais op\u00E7\u00F5es entre as oferecidas.\n- \u0060TEXTO\u0060: Texto \u2014 Campo em que o candidato digita um texto, conferido pelo formato do dado.\n- \u0060DATA\u0060: Data \u2014 Campo em que o candidato informa uma data do calend\u00E1rio.\n- \u0060ENDERECO\u0060: Endere\u00E7o \u2014 Campo de endere\u00E7o completo, preenchido a partir da busca do CEP.\n- \u0060MUNICIPIO\u0060: Munic\u00EDpio \u2014 Campo em que o candidato escolhe o munic\u00EDpio entre os da unidade federativa j\u00E1 respondida."
+      },
+      "TurnoOferta": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/TurnoOfertaCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "TurnoOfertaCodigo": {
+        "enum": [
+          "MATUTINO",
+          "VESPERTINO",
+          "NOTURNO"
+        ],
+        "type": "string",
+        "description": "- \u0060MATUTINO\u0060: Matutino\n- \u0060VESPERTINO\u0060: Vespertino\n- \u0060NOTURNO\u0060: Noturno"
+      },
+      "UnidadeDoPrazoDeEmissao": {
+        "required": [
+          "codigo",
+          "rotulo"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "$ref": "#/components/schemas/UnidadeDoPrazoDeEmissaoCodigo"
+          },
+          "rotulo": {
+            "type": "string"
+          }
+        }
+      },
+      "UnidadeDoPrazoDeEmissaoCodigo": {
+        "enum": [
+          "DIAS",
+          "MESES",
+          "ANOS"
+        ],
+        "type": "string",
+        "description": "Unidade de contagem do prazo de emiss\u00E3o.\n\n- \u0060DIAS\u0060: Dias\n- \u0060MESES\u0060: Meses\n- \u0060ANOS\u0060: Anos"
       },
       "UnidadeOfertanteDto": {
         "required": [
@@ -22672,6 +25542,79 @@
           }
         }
       },
+      "ValidadeDoDocumentoDoModeloDto": {
+        "required": [
+          "escolha",
+          "referencia",
+          "efeitoDoVencimento"
+        ],
+        "type": "object",
+        "properties": {
+          "escolha": {
+            "$ref": "#/components/schemas/EscolhaDaValidade"
+          },
+          "referencia": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DataDeReferenciaDoDocumentoDoModeloDto"
+              }
+            ]
+          },
+          "efeitoDoVencimento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EfeitoNaAnaliseDoDocumento"
+              }
+            ]
+          }
+        }
+      },
+      "ValidadeDoDocumentoDoModeloInput": {
+        "required": [
+          "escolha",
+          "referencia",
+          "efeitoDoVencimento"
+        ],
+        "type": "object",
+        "properties": {
+          "escolha": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EscolhaDaValidadeCodigo"
+              }
+            ]
+          },
+          "referencia": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DataDeReferenciaDoDocumentoDoModeloInput"
+              }
+            ]
+          },
+          "efeitoDoVencimento": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EfeitoNaAnaliseDoDocumentoCodigo"
+              }
+            ]
+          }
+        }
+      },
       "ValorCategoricoCommand": {
         "required": [
           "codigo",
@@ -22748,6 +25691,31 @@
           }
         }
       },
+      "ValoresDoFatoDto": {
+        "required": [
+          "fonte",
+          "declarados"
+        ],
+        "type": "object",
+        "properties": {
+          "fonte": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/FonteValoresFato"
+              }
+            ]
+          },
+          "declarados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FatoValorDominioDto"
+            }
+          }
+        }
+      },
       "ValorSelecionavel": {
         "required": [
           "codigo",
@@ -22774,6 +25742,40 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "VersaoDoTermoDoModeloDto": {
+        "required": [
+          "termoId",
+          "versaoId"
+        ],
+        "type": "object",
+        "properties": {
+          "termoId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "versaoId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "VersaoDoTermoInput": {
+        "required": [
+          "termoId",
+          "versaoId"
+        ],
+        "type": "object",
+        "properties": {
+          "termoId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "versaoId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       }
