@@ -6138,9 +6138,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Pedir o comprovante de inscrição cancelada é recusado como regra de negócio, sem expor dado nenhum; "Minhas inscrições" traz, na cancelada, a data e o motivo do cancelamento e nenhum comprovante; os comprovantes guardados não são alterados nem apagados pelo cancelamento; quem não é o dono da inscrição cancelada recebe a resposta de inscrição inexistente.',
+      'Pedir o comprovante de inscrição cancelada é recusado como regra de negócio, sem expor dado nenhum; "Minhas inscrições" traz, na cancelada, a data e o motivo do cancelamento e nenhum comprovante; os comprovantes guardados não são alterados nem apagados pelo cancelamento; quem não é o titular da inscrição cancelada recebe a resposta de inscrição inexistente.',
     verificacao:
-      'Teste automatizado (recusa da cancelada sem carregar a versão; lista sem comprovantes na cancelada; cancelada de outro dono responde inexistente) (planejado).',
+      'Teste automatizado (recusa da cancelada sem carregar a versão; lista sem comprovantes na cancelada; cancelada de outro titular responde inexistente) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
