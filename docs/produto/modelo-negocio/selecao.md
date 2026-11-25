@@ -616,7 +616,7 @@ O detalhamento por norma vive na página de [conformidade legal](../conformidade
 | Norma | O que exige e como o sistema atende |
 |---|---|
 | LGPD (Lei 13.709/2018) | Proteção e minimização de dados pessoais e sensíveis; auditoria de acesso; ocultação de dados nos registros; divulgação minimizada por padrão. |
-| Lei de Cotas (12.711/2012, atualizada pela 14.723/2023) | Reserva de vagas por modalidade, concorrência dupla e remanejamento por configuração congelável; o motor genérico avalia a matriz normativa R0–R9 da Lei de Cotas, sem ramificação por tipo de processo. |
+| Lei de Cotas (12.711/2012, atualizada pela 14.723/2023) | Reserva de vagas por modalidade, concorrência dupla e remanejamento por configuração congelável; o sistema aplica as regras R0–R9 configuradas para a Lei de Cotas da mesma forma em todos os tipos de processo. |
 | LBI (Lei 13.146/2015) | Inclusão da pessoa com deficiência e atendimento especializado configurável e solicitável na inscrição. |
 | Decretos nº 9.508/2018 e nº 3.298/1999 | Referência, tomada dos concursos públicos, para a comprovação da condição: o edital exige, na inscrição, o laudo médico de cada condição declarada por quem solicita atendimento especializado. |
 | Lei nº 13.872/2019 | Referência, tomada dos concursos públicos, para o direito da lactante de amamentar durante a prova: o edital exige a certidão de nascimento da criança na inscrição, para o CEPS preparar a sala. |
