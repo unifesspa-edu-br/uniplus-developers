@@ -9287,4 +9287,26 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0495',
+    titulo: 'Candidato vê o nome completo do Fator de Atenuação das Desigualdades de Acesso',
+    enunciado:
+      'Em tudo o que o candidato vê, o Fator de Atenuação das Desigualdades de Acesso aparece sempre com esse nome completo. A sigla FADA pode acompanhar o nome completo, mas não substituí-lo; o nome também não pode ser abreviado para Fator de Atenuação. A regra vale nas telas de inscrição e de conferência da inscrição, no comprovante e nas mensagens ao candidato, inclusive nos rótulos dos dados e nos textos que o formulário recebe da API. As telas internas da gestão e os nomes técnicos não precisam seguir essa regra. Decisão do líder técnico em 25/11/2026.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0150',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Dado um processo que oferece o Fator de Atenuação das Desigualdades de Acesso, Quando o candidato abre a inscrição, a conferência da inscrição, o comprovante ou uma mensagem sobre o fator, Então cada referência mostra \'Fator de Atenuação das Desigualdades de Acesso\', com ou sem a sigla \'FADA\', inclusive nos rótulos e nos textos recebidos pelo formulário.',
+    verificacao:
+      'Teste das telas, do comprovante, das mensagens, dos rótulos e dos textos recebidos pelo formulário (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe frontend; Equipe backend',
+  },
 ];
