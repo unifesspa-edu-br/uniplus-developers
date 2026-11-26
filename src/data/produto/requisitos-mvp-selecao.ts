@@ -2235,7 +2235,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'As regras de chamadas e habilitação (UNI-REQ-0344 a UNI-REQ-0356 e UNI-REQ-0432 a UNI-REQ-0437) estão registradas como requisitos filhos e implementáveis no MVP.',
+      'As regras de chamadas e habilitação (UNI-REQ-0344 a UNI-REQ-0356, UNI-REQ-0432 a UNI-REQ-0437 e UNI-REQ-0506) estão registradas como requisitos filhos e implementáveis no MVP.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -9531,5 +9531,31 @@ export const requisitosMvpSelecao: Requisito[] = [
     verificacao: 'Testes automatizados das duas opções por chamada, da documentação deferida sem homologação nem vaga, da classificação seguinte com nota recalculada e do aproveitamento documental (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0506',
+    titulo: 'A Seleção, a convocação e a matrícula guardam a cópia da oferta de curso',
+    enunciado:
+      'Ao definir a distribuição de vagas, a Seleção pode guardar, para cada oferta de curso, uma cópia por valor de cinco campos: código da oferta, nome do curso, grau, nome da unidade ofertante e turnos. O nome do curso tem até 200 caracteres, o grau até 60, o nome da unidade ofertante até 250 e cada turno até 30; deve haver ao menos um turno. A cópia é opcional na distribuição de vagas e, quando existe, fica congelada com o processo seletivo. Renomear depois o curso ou a unidade não altera a cópia. ' +
+      'No Ingresso, a convocação e a matrícula são por oferta de curso: um mesmo curso pode ter ofertas diferentes. Cada convocação e cada matrícula devem guardar a mesma cópia da oferta congelada na versão do processo seletivo que a chamada segue (UNI-REQ-0345); a matrícula guarda a cópia da convocação que a originou. A cópia permite mostrar o curso na lista, no edital de convocação e no comprovante sem ler o cadastro de outro módulo (ADR-0061). Mudar depois a oferta no cadastro não altera a cópia já guardada. ' +
+      'O código da oferta serve para exibir; toda decisão que dependa da oferta, como saber se duas pessoas disputam vagas da mesma oferta (UNI-REQ-0348), usa o identificador que a oferta tem no cadastro, e nunca o código nem o nome. O Ingresso passa a guardar esse identificador quando a primeira decisão que dependa da oferta existir. ' +
+      'O código da oferta começa por letra maiúscula e segue com letras maiúsculas, algarismos e sublinhado entre palavras, sem acento, espaço nem hífen, com até 50 caracteres (ADR-0176, emenda 5). É conferido como chegou, sem retirar espaços nem alterar letras. O código fora do formato é recusado com o erro `uniplus.copia_da_oferta_de_curso.codigo_formato_invalido`; a cópia com qualquer outro campo fora do formato é recusada com o erro `uniplus.copia_da_oferta_de_curso.invalida`. A recusa informa todos os campos inválidos de uma vez, sem repetir o valor informado nem citar dados da pessoa convocada. ' +
+      'Exemplo fictício: ao definir as vagas, Marina registra a oferta ENGENHARIA_CIVIL, do curso de Engenharia Civil, grau bacharelado, da Faculdade de Engenharia, no turno integral. A cópia acompanha o processo, a convocação e a matrícula; se a faculdade mudar de nome depois, a cópia mantém o nome anterior. Se o código estiver em minúsculas e o grau estiver em branco, a recusa informa os dois campos sem repetir os valores.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0049',
+    modulo: 'Ingresso',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Na distribuição de vagas, a cópia é opcional; quando informada, guarda por valor os cinco campos de cada oferta e fica congelada com o processo; renomear o curso ou a unidade depois não altera a cópia; a convocação e a matrícula exigem a cópia e guardam os mesmos valores da oferta congelada, e a matrícula guarda a cópia da convocação; nome do curso, grau e nome da unidade aceitam até 200, 60 e 250 caracteres, respectivamente; há ao menos um turno e cada turno tem até 30 caracteres; valores acima desses limites ou campos obrigatórios vazios são recusados; o código válido tem até 50 caracteres e segue o formato informado, inclusive com 50 caracteres; código inválido recebe o erro `uniplus.copia_da_oferta_de_curso.codigo_formato_invalido` e outros campos inválidos recebem `uniplus.copia_da_oferta_de_curso.invalida`; a recusa informa todos os campos inválidos de uma vez, sem repetir os valores informados; a lista, o edital de convocação e o comprovante mostram o curso a partir da cópia, sem ler o cadastro de ofertas; a decisão que depende da oferta usa seu identificador no cadastro; linha já gravada com código fora do formato é defeito de leitura, sem valor substituto.',
+    verificacao:
+      'Testes automatizados da cópia opcional na distribuição de vagas e obrigatória na convocação e na matrícula, dos limites de cada campo e da presença de turno, dos formatos do código, de vários campos inválidos ao mesmo tempo, da preservação da cópia após renomear curso ou unidade, da exibição sem ler o cadastro, da leitura de linha fora do formato e das mensagens sem os valores informados (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
   },
 ];
