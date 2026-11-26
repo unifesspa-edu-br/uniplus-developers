@@ -104,12 +104,12 @@ caso. Essa distinção segue o refinamento do LT de **06/11/2026** na
 O [segundo comentário do LT no PR #407](https://github.com/unifesspa-edu-br/uniplus-developers/pull/407#issuecomment-6456245881)
 propôs reduzir os contadores. O PO aprovou os três indicadores em **28/10/2026**,
 substituindo a definição anterior e resolvendo as pendências de universo dos
-totais no UNI-REQ-0179. Não há contador adicional de Canceladas ou Submetidas.
+totais no UNI-REQ-0179. Não há contador adicional de Canceladas ou Enviadas.
 
 | Indicador | Universo confirmado | Leitura |
 | --- | --- | --- |
-| Inscrições | Inscrições submetidas e não canceladas. | Cada inscrição conta uma vez, sem multiplicação por reenvio, opções ou modalidades. |
-| Inscritos | Pessoas distintas por CPF no mesmo conjunto de inscrições submetidas e não canceladas. | A identidade é o CPF, não a conta de acesso; o indicador não revela o CPF dos candidatos. |
+| Inscrições | Inscrições enviadas e não canceladas. | Cada inscrição conta uma vez, sem multiplicação por reenvio, opções ou modalidades. |
+| Inscritos | Pessoas distintas por CPF no mesmo conjunto de inscrições enviadas e não canceladas. | A identidade é o CPF, não a conta de acesso; o indicador não revela o CPF dos candidatos. |
 | Rascunhos | Inscrições não enviadas e não descartadas. | Descrição contextual conforme a janela de inscrição. Correção pendente de enviada não é novo rascunho. |
 
 Canceladas e descartadas ficam fora dos três indicadores. Por exemplo, uma pessoa
@@ -137,7 +137,7 @@ Uma consulta válida sem inscrições apresenta os três valores zero.
 
 ### Distribuições e próximos prazos em entregas próprias
 
-As distribuições usam **somente inscrições submetidas e não canceladas**, pela
+As distribuições usam **somente inscrições enviadas e não canceladas**, pela
 **última versão enviada válida**, sem incorporar correções pendentes. Por
 curso/oferta, primeira e segunda opção ficam separadas; as modalidades são
 apuradas por oferta e opção. Uma inscrição pode aparecer nos grupos das duas
@@ -166,7 +166,7 @@ UNI-REQ-0176 e separado dos relatórios do UNI-REQ-0180. A aprovação dos três
 indicadores não aprova automaticamente esta consulta nominal.
 
 A proposta permite ao administrador autorizado consultar inscrições com filtros
-por **situação (Submetida, Rascunho e Cancelada), curso e oferta de curso**.
+por **situação (Enviada, Rascunho e Cancelada), curso e oferta de curso**.
 O filtro de curso/oferta alcança primeira e segunda opção, e a relação identifica
 a opção correspondente. A consulta exige **permissão própria no servidor** e
 respeita o [UNI-REQ-0208 da main](https://github.com/unifesspa-edu-br/uniplus-developers/blob/main/src/data/produto/requisitos-mvp-selecao.ts):
@@ -269,7 +269,7 @@ Ainda precisam ser especificados:
 - A apresentação entre o fim do cronograma e a conclusão pela CGA, a fonte do rótulo Encerrado e sua relação com o estado cadastral, sem presumir situação intermediária.
 - A precedência da identificação Cancelado diante de situações simultâneas, intervalos ou encerramento conforme o critério a validar com a CGA.
 - O contrato e a apresentação dos agrupamentos por oferta/modalidade/opção, com universo já definido, e os detalhes dos próximos prazos.
-- A data da submissão mais recente, proposta inicial ainda sem regra final sobre reenvios e inscrições canceladas.
+- A data do envio mais recente, proposta inicial ainda sem regra final sobre reenvios e inscrições canceladas.
 
 “Aguardando início”, “Entre etapas” e “Cancelado” foram confirmados como
 identificações; a forma exata de incorporá-los às opções do filtro será
