@@ -11,8 +11,8 @@ const MODULOS = new Map([
 
 const TRANSVERSAIS = new Set([
   'auth', 'cidade_referencia', 'clausula_dnf', 'concorrencia', 'condicao_dnf',
-  'consulta', 'contract', 'cpf', 'cursor', 'email', 'endereco_referencia',
-  'erro_nao_mapeado', 'estrutura_formulario', 'formulario_portavel', 'grafo_formulario',
+  'consulta', 'contract', 'copia_da_oferta_de_curso', 'cpf', 'cursor', 'email',
+  'endereco_referencia', 'erro_nao_mapeado', 'estrutura_formulario', 'formulario_portavel', 'grafo_formulario',
   'grupo_formulario', 'idempotency', 'internal', 'item_formulario',
   'nome_social', 'nota_final', 'paginacao', 'percentual', 'predicado_dnf',
   'regra_derivacao', 'regras_derivacao_fato', 'requisicao', 'restricao_valor',
