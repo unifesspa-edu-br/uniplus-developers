@@ -7541,7 +7541,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     enunciado:
       'A vaga liberada por recusa, não comparecimento ou indeferimento, quando não é assumida pela reserva da própria chamada (UNI-REQ-0354), vai para a chamada seguinte. A vaga que termina uma chamada sem ocupante só pode ser ocupada na chamada seguinte, e, dentro da chamada, só quem foi convocado nela para a reserva pode assumi-la. ' +
       'Exemplo 1, sem cadastro de reserva: Fernanda é convocada na 1ª chamada e recusa a vaga. Ninguém assume na 1ª chamada, e a vaga vai para a 2ª. ' +
-      'Exemplo 2, com cadastro de reserva: na 2ª chamada, Fernanda é convocada para a vaga, e Leandro e Marlene para a reserva. Os três passam pela habilitação. Fernanda é indeferida, e o prazo de recurso dela termina e, se ela recorrer, sai o resultado definitivo que mantém o indeferimento. Só então Leandro, homologado como habilitado, ocupa a vaga ainda na 2ª chamada, porque foi convocado nela, e não é preciso outra chamada. ' +
+      'Exemplo 2, com cadastro de reserva e a opção de assumir na mesma chamada (UNI-REQ-0505): na 2ª chamada, Fernanda é convocada para a vaga, e Leandro e Marlene para a reserva. Os três passam pela habilitação. Fernanda é indeferida, e o prazo de recurso dela termina e, se ela recorrer, sai o resultado definitivo que mantém o indeferimento. Só então Leandro, homologado como habilitado, ocupa a vaga ainda na 2ª chamada, porque foi convocado nela, e não é preciso outra chamada. ' +
       'Exemplo 3: no mesmo caso, nenhum dos três é homologado como habilitado. A vaga termina a 2ª chamada sem ocupante e só pode ser ocupada na 3ª.' +
       ' A publicação da chamada seguinte observa o efeito suspensivo configurado para o recurso da habilitação: todos, nenhum ou decisão da unidade (UNI-REQ-0440 e UNI-REQ-0441). Sem suspensão, observadas as condições do cronograma, ela pode ser publicada com as vagas livres; a vaga em disputa é tratada conforme a guarda configurada no UNI-REQ-0348. Decisão do líder técnico em 25/11/2026.',
     grupo: 'negocio',
@@ -7555,7 +7555,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Sem cadastro de reserva, recusa, não comparecimento e indeferimento, quando nenhum recurso guardar a vaga (UNI-REQ-0348), deixam a vaga para a chamada seguinte; com cadastro de reserva, a vaga é ocupada na própria chamada por quem foi convocado para a reserva e homologado como habilitado, e, no caso de indeferimento, só depois do fim do prazo de recurso e quando nenhum recurso guardar a vaga (UNI-REQ-0348), e só vai à chamada seguinte se ninguém a ocupar; quem não foi convocado na chamada não assume a vaga nela; a vaga nunca é ocupada por duas pessoas.',
+      'Sem cadastro de reserva, recusa, não comparecimento e indeferimento, quando nenhum recurso guardar a vaga (UNI-REQ-0348), deixam a vaga para a chamada seguinte; com cadastro de reserva e a opção de assumir na mesma chamada (UNI-REQ-0505), a vaga é ocupada na própria chamada por quem foi convocado para a reserva e homologado como habilitado, e, no caso de indeferimento, só depois do fim do prazo de recurso e quando nenhum recurso guardar a vaga (UNI-REQ-0348), e só vai à chamada seguinte se ninguém a ocupar; com a opção de antecipar a habilitação, a vaga disponível segue para a chamada seguinte (UNI-REQ-0505); quem não foi convocado na chamada não assume a vaga nela; a vaga nunca é ocupada por duas pessoas.',
     verificacao: 'Testes automatizados de cada motivo de liberação, com e sem cadastro de reserva, da reserva que não assume a vaga durante o prazo de recurso e da vaga que termina a chamada sem ocupante (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
@@ -7680,7 +7680,7 @@ export const requisitosMvpSelecao: Requisito[] = [
       'O documento já enviado pelo candidato é reaproveitado em etapa seguinte que o exija, inclusive na habilitação, e o candidato pode apresentar nova via. A nova exigência determina o prazo de emissão, a validade própria, suas referências e os efeitos. Quando o documento está fora do prazo de emissão ou vencido para a nova exigência, o efeito aplicável é recusar o documento, exigindo nova via, ou aceitar com aviso a quem analisa. A conferência das datas na análise está planejada (uniplus-api#2741). Documento recusado pelo antivírus não é reaproveitado. A habilitação homologada vale nas chamadas seguintes do mesmo processo: documentos já analisados e aceitos não são pedidos nem analisados outra vez, ressalvadas exigências novas ou alteradas por retificação e as consequências do prazo e da validade da nova exigência. Somente o documento alcançado pela mudança ou que precise de nova via é solicitado e analisado; o restante da habilitação continua valendo, conforme a Lei nº 13.726/2018 e o Decreto nº 9.094/2017. ' +
       'Exemplo: Fernanda enviou o histórico escolar na inscrição; ele é aproveitado na habilitação, e ela pode apresentar nova via. Se um comprovante está fora do prazo definido na nova exigência, com efeito de aviso, ele é aproveitado com aviso; com efeito de recusa, Fernanda apresenta nova via. Se um documento está vencido na referência da nova exigência, aplica-se do mesmo modo o efeito de vencimento escolhido. ' +
       'Leandro foi homologado como habilitado e convocado em chamada seguinte: os documentos aceitos continuam valendo, observadas as exigências novas ou alteradas. Se uma retificação exige uma autodeclaração ainda não entregue, ele apresenta somente esse documento.' +
-      ' A habilitação homologada não tem prazo de validade e permanece nas chamadas seguintes, inclusive para a pessoa da reserva que continua aguardando sem assumir vaga, respeitada a opção do edital (UNI-REQ-0434). A manifestação de interesse segue UNI-REQ-0503.',
+      ' A habilitação homologada não tem prazo de validade e permanece nas chamadas seguintes, inclusive para a pessoa da reserva que continua aguardando sem assumir vaga, respeitada a opção do edital (UNI-REQ-0434). Na opção em que a reserva só antecipa a habilitação, a documentação deferida é aproveitada na chamada seguinte, mesmo sem homologação como apta à matrícula na chamada anterior (UNI-REQ-0505), observadas as mesmas exigências. A manifestação de interesse segue UNI-REQ-0503.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7692,7 +7692,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Documento já enviado aparece na etapa seguinte e pode ser substituído por nova via. Prazo de emissão e validade são avaliados segundo a nova exigência: com recusa, solicita-se nova via; com aviso, o documento é aproveitado e segue com aviso para análise. Arquivo recusado pelo antivírus não é aproveitado. Em chamada seguinte, a homologação permanece para os documentos não alcançados por nova exigência, alteração ou necessidade de nova via; só os documentos pertinentes são solicitados e analisados.',
+      'Documento já enviado aparece na etapa seguinte e pode ser substituído por nova via. Prazo de emissão e validade são avaliados segundo a nova exigência: com recusa, solicita-se nova via; com aviso, o documento é aproveitado e segue com aviso para análise. Arquivo recusado pelo antivírus não é aproveitado. Em chamada seguinte, a homologação permanece para os documentos não alcançados por nova exigência, alteração ou necessidade de nova via; só os documentos pertinentes são solicitados e analisados; a documentação deferida da reserva que só antecipou a habilitação também é aproveitada, nas mesmas condições (UNI-REQ-0505).',
     verificacao: 'Testes automatizados de reaproveitamento, nova via, prazo de emissão e validade com cada efeito, e de chamadas e retificação (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -7701,12 +7701,12 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0354',
     titulo: 'Cadastro de reserva dentro da chamada',
     enunciado:
-      'Quando o edital prevê, a chamada convoca, além de quem ocupa a vaga, pessoas para o cadastro de reserva dessa mesma chamada; a chamada em que o edital não prevê reserva convoca só quem ocupa a vaga. As pessoas da reserva também entregam os documentos no período da chamada e, na ordem definida pelo edital, ocupam a vaga, desde que homologadas como habilitadas (UNI-REQ-0356), em caso de falta, desistência ou indeferimento de quem estava à frente, sem nova chamada. O diretor do Centro de Processos Seletivos (CEPS) confirmou esse funcionamento em 18/11/2026. A quantidade de pessoas da reserva por vaga vem da configuração do processo (UNI-REQ-0355) e nunca é fixada no sistema. ' +
-      'Falta e desistência não esperam prazo de recurso. Em caso de indeferimento, a reserva não assume a vaga durante o prazo de recurso de quem foi indeferido (UNI-REQ-0348); só depois do fim do prazo, e quando nenhum recurso guardar a vaga (UNI-REQ-0348), a próxima pessoa da reserva homologada como habilitada ocupa a vaga. Enquanto um recurso guardar a vaga, ela não é ocupada; mantido o indeferimento no resultado definitivo, a vaga é ocupada pela reserva. Ao fim da chamada, o que acontece com a pessoa da reserva homologada como habilitada que não assumiu vaga é definido pelo edital (UNI-REQ-0434), entre continuar aguardando (UNI-REQ-0432) e encerrar a participação nas chamadas (UNI-REQ-0433). ' +
+      'Quando o edital prevê, a chamada convoca, além de quem ocupa a vaga, pessoas para o cadastro de reserva dessa mesma chamada; a chamada em que o edital não prevê reserva convoca só quem ocupa a vaga. As pessoas da reserva também entregam os documentos e passam pelas bancas exigidas no período da chamada. Quando a opção da chamada é "a reserva assume na mesma chamada" (UNI-REQ-0505), elas, na ordem definida pelo edital, ocupam a vaga, desde que homologadas como habilitadas (UNI-REQ-0356), em caso de falta, desistência ou indeferimento de quem estava à frente, sem nova chamada. O diretor do Centro de Processos Seletivos (CEPS) confirmou esse funcionamento em 18/11/2026. A quantidade de pessoas da reserva por vaga vem da configuração do processo (UNI-REQ-0355) e nunca é fixada no sistema. ' +
+      'Na opção de assumir na mesma chamada, falta e desistência não esperam prazo de recurso. Em caso de indeferimento, a reserva não assume a vaga durante o prazo de recurso de quem foi indeferido (UNI-REQ-0348); só depois do fim do prazo, e quando nenhum recurso guardar a vaga (UNI-REQ-0348), a próxima pessoa da reserva homologada como habilitada ocupa a vaga. Enquanto um recurso guardar a vaga, ela não é ocupada; mantido o indeferimento no resultado definitivo, a vaga é ocupada pela reserva. Ao fim da chamada, o que acontece com a pessoa da reserva homologada como habilitada que não assumiu vaga é definido pelo edital (UNI-REQ-0434), entre continuar aguardando (UNI-REQ-0432) e encerrar a participação nas chamadas (UNI-REQ-0433). ' +
       'Exemplo 1: o edital prevê que a 2ª chamada convoca, por vaga não preenchida, uma pessoa para a vaga e duas para a reserva. Com duas vagas, são seis convocados: dois para as vagas e quatro para a reserva. ' +
-      'Exemplo 2: Fernanda é convocada para a vaga, e Leandro e Marlene, para a reserva, todos na 2ª chamada. Todos passam pela habilitação. Se os três forem homologados como habilitados, Fernanda ocupa a vaga, e Leandro e Marlene ficam na reserva. Se Fernanda desistir, Leandro ocupa a vaga. Se, além disso, Leandro for indeferido, Marlene ocupa a vaga, desde que homologada. Se Fernanda for indeferida, Leandro só ocupa a vaga depois do fim do prazo de recurso dela; se Fernanda recorrer, só depois do resultado definitivo que mantenha o indeferimento. ' +
+      'Exemplo 2, com a opção de assumir na mesma chamada: Fernanda é convocada para a vaga, e Leandro e Marlene, para a reserva, todos na 2ª chamada. Todos passam pela habilitação. Se os três forem homologados como habilitados, Fernanda ocupa a vaga, e Leandro e Marlene ficam na reserva. Se Fernanda desistir, Leandro ocupa a vaga. Se, além disso, Leandro for indeferido, Marlene ocupa a vaga, desde que homologada. Se Fernanda for indeferida, Leandro só ocupa a vaga depois do fim do prazo de recurso dela; se Fernanda recorrer, só depois do resultado definitivo que mantenha o indeferimento. ' +
       'Exemplo 3: com menos pessoas elegíveis do que o previsto, são convocadas só as que existem, e a vaga que terminar a chamada sem ocupante segue para a chamada seguinte (UNI-REQ-0347).' +
-      ' A quantidade de reserva é definida por número de chamada, inclusive a primeira, e zero desliga a reserva (UNI-REQ-0355). A convocação segue a ordem de classificação do grupo de vagas; quem está em análise na ordem não é ultrapassado. O indeferimento da pessoa da reserva segue a consequência configurada para a condição ou ação, como para quem disputa a vaga (UNI-REQ-0501). Esgotadas as pessoas elegíveis do grupo, aplica-se o remanejamento do edital; se ainda faltarem pessoas, convocam-se somente as existentes. A pessoa habilitada que não assume vaga segue a opção do edital (UNI-REQ-0434), com a habilitação preservada se continuar aguardando (UNI-REQ-0353). Decisão do líder técnico em 25/11/2026.',
+      ' A quantidade de reserva é definida por número de chamada, inclusive a primeira, e zero desliga a reserva (UNI-REQ-0355). A convocação segue a ordem de classificação do grupo de vagas; quem está em análise na ordem não é ultrapassado. O indeferimento da pessoa da reserva segue a consequência configurada para a condição ou ação, como para quem disputa a vaga (UNI-REQ-0501). Esgotadas as pessoas elegíveis do grupo, aplica-se o remanejamento do edital; se ainda faltarem pessoas, convocam-se somente as existentes. A pessoa habilitada que não assume vaga segue a opção do edital (UNI-REQ-0434), com a habilitação preservada se continuar aguardando (UNI-REQ-0353). Na opção de apenas antecipar a habilitação, a reserva não é homologada como apta à matrícula nem assume vaga nessa chamada, e a vaga disponível segue à próxima (UNI-REQ-0505). Decisão do líder técnico em 25/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7718,7 +7718,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A chamada para a qual o processo configura reserva identifica quem foi convocado para a vaga e quem foi para a reserva, na ordem definida; a chamada sem reserva configurada não convoca reserva; a pessoa da reserva entrega documentos no mesmo período; ao faltar ou desistir quem está à frente, a próxima pessoa homologada como habilitada ocupa a vaga, com registro, sem esperar prazo de recurso; ao ser indeferido quem está à frente, ela só ocupa a vaga depois do fim do prazo de recurso e quando nenhum recurso guardar a vaga (UNI-REQ-0348), com registro, e durante esse prazo a reserva não assume a vaga; enquanto um recurso guardar a vaga, ela não é ocupada; duas pessoas nunca ocupam a mesma vaga; ao fim da chamada, a pessoa da reserva homologada como habilitada que não assumiu vaga segue o que o edital define (UNI-REQ-0434); a lista insuficiente não impede a publicação; a convocação respeita a ordem de classificação e aguarda a decisão de quem ainda está em análise nessa ordem; o indeferimento da pessoa da reserva aplica a consequência configurada para a condição ou ação; a reserva pode ser configurada desde a 1ª chamada, inclusive com zero para desativá-la.',
+      'A chamada para a qual o processo configura reserva identifica quem foi convocado para a vaga e quem foi para a reserva, na ordem definida; a chamada sem reserva configurada não convoca reserva; a pessoa da reserva entrega documentos no mesmo período; com a opção de assumir na mesma chamada, ao faltar ou desistir quem está à frente, a próxima pessoa homologada como habilitada ocupa a vaga, com registro, sem esperar prazo de recurso; ao ser indeferido quem está à frente, ela só ocupa a vaga depois do fim do prazo de recurso e quando nenhum recurso guardar a vaga (UNI-REQ-0348), com registro, e durante esse prazo a reserva não assume a vaga; enquanto um recurso guardar a vaga, ela não é ocupada; duas pessoas nunca ocupam a mesma vaga; ao fim da chamada, a pessoa da reserva homologada como habilitada que não assumiu vaga segue o que o edital define (UNI-REQ-0434); a lista insuficiente não impede a publicação; a convocação respeita a ordem de classificação e aguarda a decisão de quem ainda está em análise nessa ordem; o indeferimento da pessoa da reserva aplica a consequência configurada para a condição ou ação; a reserva pode ser configurada desde a 1ª chamada, inclusive com zero para desativá-la; a opção de antecipar a habilitação segue UNI-REQ-0505.',
     verificacao: 'Testes automatizados com editais com e sem reserva, sucessão de duas pessoas na mesma vaga, reserva que tenta assumir durante o prazo de recurso do indeferido, falta e desistência sem espera, recurso pendente até o resultado definitivo, lista insuficiente e operações simultâneas (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -7727,7 +7727,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0355',
     titulo: 'Configuração do cadastro de reserva por chamada',
     enunciado:
-      'Quem configura o processo declara, para cada chamada que tem cadastro de reserva, quantas pessoas da reserva são convocadas por vaga, conforme o edital. A chamada sem essa declaração ou com quantidade zero não tem reserva e convoca só quem ocupa a vaga. A declaração é facultativa, porque a reserva existe só quando o edital a prevê, e fica congelada na publicação do processo, como as demais regras do edital; só muda por retificação. Sem ela, o sistema não teria como saber quantas pessoas convocar (UNI-REQ-0354). ' +
+      'Quem configura o processo declara, para cada chamada que tem cadastro de reserva, quantas pessoas da reserva são convocadas por vaga, conforme o edital. A chamada sem essa declaração ou com quantidade zero não tem reserva e convoca só quem ocupa a vaga. A declaração é facultativa, porque a reserva existe só quando o edital a prevê, e fica congelada na publicação do processo, como as demais regras do edital; só muda por retificação. Sem ela, o sistema não teria como saber quantas pessoas convocar (UNI-REQ-0354). Para cada chamada com reserva, o edital também escolhe como ela participa da chamada, conforme UNI-REQ-0505. ' +
       'O número conta só as pessoas da reserva, sem incluir quem é convocado para a vaga. Zero desliga a reserva para a chamada. O edital pode configurar reserva também na 1ª chamada, sem restrição pelo número da chamada. Decisão do líder técnico em 25/11/2026. ' +
       'Exemplo 1: o edital diz que a 2ª chamada convoca três pessoas por vaga, uma para a vaga e duas para a reserva. Quem configura declara 2ª chamada, duas pessoas da reserva por vaga. Com duas vagas, são seis convocados. ' +
       'Exemplo 2: o edital não prevê reserva na 1ª chamada. Nada é declarado para ela, e cada vaga convoca uma pessoa. ' +
@@ -7744,7 +7744,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A configuração aceita, por número de chamada, uma quantidade inteira não negativa de pessoas da reserva por vaga; zero desliga a reserva, inclusive na 1ª chamada; a quantidade negativa, o número de chamada inválido e a mesma chamada declarada duas vezes são recusados; o processo pode ser publicado sem nenhuma declaração; a configuração fica congelada na publicação e aparece na leitura do processo; mudar depois da publicação exige retificação; a revisão da configuração mostra por chamada a quantidade declarada ou a ausência de reserva; a chamada convoca até a quantidade declarada para o número dela, conforme as pessoas elegíveis existentes.',
+      'A configuração aceita, por número de chamada, uma quantidade inteira não negativa de pessoas da reserva por vaga; zero desliga a reserva, inclusive na 1ª chamada; a quantidade negativa, o número de chamada inválido e a mesma chamada declarada duas vezes são recusados; o processo pode ser publicado sem nenhuma declaração; a configuração fica congelada na publicação e aparece na leitura do processo; mudar depois da publicação exige retificação; a revisão da configuração mostra por chamada a quantidade declarada ou a ausência de reserva; a escolha entre antecipar a habilitação e assumir na mesma chamada segue UNI-REQ-0505; a chamada convoca até a quantidade declarada para o número dela, conforme as pessoas elegíveis existentes.',
     verificacao: 'Testes automatizados da configuração, das recusas, do congelamento na publicação e da retificação, e teste de interface do preenchimento e da revisão (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -7753,10 +7753,10 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0356',
     titulo: 'Convocação não é habilitação nem ocupação da vaga',
     enunciado:
-      'Ser convocado é ser chamado para passar pela habilitação. Ser homologado como habilitado é o resultado da análise dessa habilitação. Só quem é homologado como habilitado pode ocupar a vaga. A convocação não garante a homologação, e a homologação de quem está na reserva não garante a vaga. ' +
+      'Ser convocado é ser chamado para passar pela habilitação. Ser homologado como habilitado é o resultado da análise dessa habilitação. Só quem é homologado como habilitado pode ocupar a vaga. A convocação não garante a homologação, e a homologação de quem está na reserva não garante a vaga. A homologação da reserva na própria chamada ocorre na opção de assumir na mesma chamada; na opção de apenas antecipar a habilitação, a documentação pode ser deferida sem homologação como apta à matrícula nessa chamada (UNI-REQ-0505). ' +
       'Exemplo 1: Fernanda foi convocada e entregou os documentos. Enquanto a análise não termina, ela não está habilitada nem ocupa a vaga. ' +
       'Exemplo 2: Fernanda é convocada e indeferida. Ela não ocupa a vaga, mesmo tendo sido a primeira na ordem. ' +
-      'Exemplo 3: Fernanda e Leandro, da reserva, são homologados como habilitados. Fernanda, à frente na ordem, ocupa a vaga, e Leandro continua sem vaga.',
+      'Exemplo 3, na opção de assumir na mesma chamada: Fernanda e Leandro, da reserva, são homologados como habilitados. Fernanda, à frente na ordem, ocupa a vaga, e Leandro continua sem vaga.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -7768,7 +7768,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Convocado, homologado como habilitado e ocupante da vaga são situações distintas e consultáveis de cada pessoa; publicar a chamada não marca ninguém como habilitado nem como ocupante da vaga; só a homologação marca a pessoa como habilitada; somente pessoa homologada como habilitada pode ocupar a vaga ou ser enviada ao SIGAA.',
+      'Convocado, homologado como habilitado e ocupante da vaga são situações distintas e consultáveis de cada pessoa; publicar a chamada não marca ninguém como habilitado nem como ocupante da vaga; só a homologação marca a pessoa como habilitada; somente pessoa homologada como habilitada pode ocupar a vaga ou ser enviada ao SIGAA; a reserva que apenas antecipa a habilitação não é homologada como apta à matrícula nessa chamada (UNI-REQ-0505).',
     verificacao: 'Testes automatizados das passagens entre as situações e das recusas (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -7777,6 +7777,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0432',
     titulo: 'A pessoa da reserva que não assumiu vaga pode continuar aguardando as chamadas seguintes',
     enunciado:
+      'Esta regra trata da opção em que a reserva assume na mesma chamada (UNI-REQ-0505); na opção de apenas antecipar a habilitação, a reserva volta a concorrer na chamada seguinte conforme UNI-REQ-0505. ' +
       'Quando o edital define que a pessoa da reserva continua aguardando, a pessoa convocada para a reserva e homologada como habilitada (UNI-REQ-0356) que não assumiu vaga ao fim da chamada mantém a posição de classificação original e pode ser convocada de novo em chamada seguinte do mesmo processo, na ordem de classificação e segundo a quantidade de cada chamada (UNI-REQ-0355). A habilitação já homologada vale nas chamadas seguintes: os documentos já analisados e considerados válidos não são pedidos de novo nem analisados outra vez, e o documento vencido e a exigência nova ou alterada por retificação seguem o UNI-REQ-0353. A classificação, a habilitação homologada e a vaga ocupada por outra pessoa não mudam. Esta opção vale para a pessoa da reserva homologada como habilitada que não assumiu vaga. A falta ou o indeferimento da pessoa da reserva seguem a consequência configurada para a ação ou condição (UNI-REQ-0501 e UNI-REQ-0502). ' +
       'Origem: o diretor do Centro de Processos Seletivos (CEPS) respondeu em 18/11/2026 que a pessoa da reserva que não assumiu vaga continua aguardando, na posição de classificação original, e pode ser convocada em chamada seguinte, aproveitando a habilitação. ' +
       'Exemplo: na 2ª chamada, Fernanda é convocada para a vaga, e Leandro e Marlene para a reserva. Os três são homologados como habilitados, e Fernanda ocupa a vaga. Ao fim da chamada, Leandro e Marlene continuam aguardando, cada um na sua posição de classificação. Na 3ª chamada, Leandro é convocado, e a habilitação homologada vale: ele não reenvia os documentos já analisados e válidos.',
@@ -7800,6 +7801,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0433',
     titulo: 'A pessoa da reserva que não assumiu vaga pode encerrar a participação nas chamadas',
     enunciado:
+      'Esta regra trata da opção em que a reserva assume na mesma chamada (UNI-REQ-0505); na opção de apenas antecipar a habilitação, a reserva volta a concorrer na chamada seguinte conforme UNI-REQ-0505. ' +
       'Quando o edital define que a pessoa da reserva encerra a participação nas chamadas, a pessoa convocada para a reserva e homologada como habilitada (UNI-REQ-0356) que não assumiu vaga ao fim da chamada continua classificada no resultado, mas não é convocada de novo. A classificação, a habilitação homologada e a vaga ocupada por outra pessoa não mudam. Esta opção vale para a pessoa da reserva homologada como habilitada que não assumiu vaga. A falta ou o indeferimento da pessoa da reserva seguem a consequência configurada para a ação ou condição (UNI-REQ-0501 e UNI-REQ-0502). ' +
       'Esta é a outra opção que o líder técnico manteve na configuração do processo (UNI-REQ-0434); o diretor do Centro de Processos Seletivos (CEPS) respondeu em 18/11/2026 pela opção de continuar aguardando (UNI-REQ-0432). ' +
       'Exemplo: no mesmo caso de UNI-REQ-0432, com o edital definindo que a pessoa da reserva encerra a participação, Leandro e Marlene continuam classificados no resultado, mas nenhuma chamada seguinte os convoca.',
@@ -7823,6 +7825,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0434',
     titulo: 'O edital define, na configuração do processo, o que acontece com a pessoa da reserva que não assumiu vaga',
     enunciado:
+      'Esta regra trata da opção em que a reserva assume na mesma chamada (UNI-REQ-0505); na opção de apenas antecipar a habilitação, a reserva volta a concorrer na chamada seguinte conforme UNI-REQ-0505. ' +
       'Cada edital que prevê cadastro de reserva define, na configuração do processo seletivo, qual das duas opções vale para a pessoa da reserva que não assumiu vaga: continuar aguardando (UNI-REQ-0432) ou encerrar a participação nas chamadas (UNI-REQ-0433). O edital define a opção, e cada chamada segue a do edital vigente na publicação dela (UNI-REQ-0437). A opção não depende do tipo de processo. Decisão do líder técnico, enviada ao diretor do Centro de Processos Seletivos (CEPS) junto com a pergunta. ' +
       'Exemplo 1: um edital define que a pessoa da reserva continua aguardando. Exemplo 2: outro edital, do mesmo tipo de processo, define que a pessoa da reserva encerra a participação nas chamadas. Nenhum dos dois comportamentos é fixado por tipo de processo.',
     grupo: 'negocio',
@@ -9343,7 +9346,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0497',
     titulo: 'Recurso deferido mantém o acréscimo',
     enunciado:
-      'Quando o recurso contra o indeferimento por falta de comprovação do Fator de Atenuação das Desigualdades de Acesso é deferido, a pessoa mantém o acréscimo e a nota com ele e é homologada como habilitada na própria chamada se as demais exigências estiverem atendidas e houver vaga disponível. A guarda da vaga segue UNI-REQ-0348. Decisão do líder técnico em 25/11/2026.',
+      'Quando o recurso contra o indeferimento por falta de comprovação do Fator de Atenuação das Desigualdades de Acesso é deferido, a pessoa mantém o acréscimo e a nota com ele e é homologada como habilitada na própria chamada se as demais exigências estiverem atendidas e houver vaga disponível. Para a pessoa da reserva, a homologação na própria chamada depende da opção configurada (UNI-REQ-0505). A guarda da vaga segue UNI-REQ-0348. Decisão do líder técnico em 25/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -9355,7 +9358,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O recurso deferido mantém o acréscimo e a nota; com as demais exigências atendidas e vaga disponível, a habilitação é homologada na própria chamada.',
+      'O recurso deferido mantém o acréscimo e a nota; com as demais exigências atendidas e vaga disponível, a habilitação é homologada na própria chamada, observada para a reserva a opção do UNI-REQ-0505.',
     verificacao: 'Testes automatizados dos critérios de aceite (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -9364,7 +9367,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0498',
     titulo: 'Reclassificação vale a partir da chamada seguinte',
     enunciado:
-      'A perda do acréscimo do Fator de Atenuação das Desigualdades de Acesso não altera a ordem da chamada em andamento. A reclassificação vale a partir da chamada seguinte; a vaga liberada segue as regras da reserva da própria chamada (UNI-REQ-0354). Decisão do líder técnico em 25/11/2026.',
+      'A perda do acréscimo do Fator de Atenuação das Desigualdades de Acesso não altera a ordem da chamada em andamento. A reclassificação vale a partir da chamada seguinte; a vaga liberada segue a opção configurada para a reserva da chamada (UNI-REQ-0354 e UNI-REQ-0505). Decisão do líder técnico em 25/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -9376,7 +9379,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A ordem da chamada em andamento permanece; a nota recalculada é usada a partir da chamada seguinte e a vaga liberada segue a reserva da chamada.',
+      'A ordem da chamada em andamento permanece; a nota recalculada é usada a partir da chamada seguinte e a vaga liberada segue a opção configurada para a reserva da chamada (UNI-REQ-0505).',
     verificacao: 'Testes automatizados dos critérios de aceite (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -9504,6 +9507,28 @@ export const requisitosMvpSelecao: Requisito[] = [
     criterios_aceite:
       'A precisão, o método de corte e o fator são os declarados no edital; o corte ocorre uma única vez na nota final; os exemplos por truncamento têm os resultados indicados e notas iguais seguem o desempate do edital.',
     verificacao: 'Testes automatizados dos critérios de aceite (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0505',
+    titulo: 'Participação da reserva configurada por chamada',
+    enunciado:
+      'O edital escolhe, para cada chamada com reserva, entre "a reserva só antecipa a habilitação" e "a reserva assume na mesma chamada". Na primeira opção, a pessoa convocada para a reserva entrega os documentos e passa pelas bancas exigidas; se atender às exigências, termina com a documentação deferida, mas não é homologada como apta à matrícula nem assume vaga nessa chamada. A vaga que sobrar segue para a chamada seguinte, que classifica novamente todas as pessoas que concorrem, inclusive a pessoa da reserva com documentação deferida e quem perdeu somente o acréscimo do Fator de Atenuação das Desigualdades de Acesso, com a nota recalculada (UNI-REQ-0496 a UNI-REQ-0499). A documentação deferida é aproveitada conforme UNI-REQ-0353. Na segunda opção, a reserva pode ser homologada e assumir vaga na mesma chamada, conforme UNI-REQ-0354. Decisão do líder técnico em 25/11/2026. ' +
+      'Pergunta ao PO/CEPS: qual das duas opções o edital de Medicina 2027 adotará? A resposta do Centro de Processos Seletivos (CEPS) de 18/11 e o item 7.7 da minuta descrevem a opção de assumir na mesma chamada; a escolha para Medicina cabe ao edital e aguarda definição do CEPS.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0049',
+    modulo: 'Ingresso',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A configuração permite escolher uma das duas opções por chamada com reserva e a chamada aplica a opção escolhida; na antecipação, a pessoa da reserva entrega os documentos e passa pelas bancas exigidas, tem a documentação deferida se atender às exigências, não é homologada como apta à matrícula nem ocupa vaga nessa chamada; a vaga disponível segue à chamada seguinte, que classifica novamente todas as pessoas que concorrem e aproveita a documentação deferida conforme UNI-REQ-0353; na outra opção, aplica-se UNI-REQ-0354. Exemplo: Fernanda disputa a vaga e Leandro é convocado para a reserva na opção de antecipação. A habilitação de Fernanda é indeferida por não comprovar o direito ao acréscimo do Fator de Atenuação das Desigualdades de Acesso; Leandro cumpre as exigências e tem a documentação deferida, sem homologação como apto à matrícula nem vaga nessa chamada. Na chamada seguinte, ambos concorrem com as demais pessoas elegíveis, Fernanda com a nota recalculada e Leandro com a documentação deferida aproveitada; a classificação determina quem é convocado.',
+    verificacao: 'Testes automatizados das duas opções por chamada, da documentação deferida sem homologação nem vaga, da classificação seguinte com nota recalculada e do aproveitamento documental (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
