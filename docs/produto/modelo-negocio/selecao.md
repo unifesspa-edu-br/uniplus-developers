@@ -413,18 +413,26 @@ Cada item de documento tem, a qualquer momento, uma situação clara (satisfeito
 
 ### 9.3 Consequência de não comprovar
 
-Cada exigência define o que acontece se o candidato não comprovar o que declarou. As consequências possíveis são:
+Na habilitação, cada condição ou ação exigida tem a consequência configurada pelo administrador. O sistema aplica o que foi definido para ela, inclusive para a pessoa da reserva (UNI-REQ-0501 e UNI-REQ-0502). As consequências possíveis incluem:
 
 | Consequência | Efeito |
 |---|---|
 | Elimina | O candidato é eliminado do processo. |
 | Reclassifica para ampla concorrência | O candidato perde a vaga na cota, mas segue concorrendo em ampla concorrência. |
-| Remove vantagem | O candidato perde uma vantagem específica (por exemplo, o Fator de Atenuação das Desigualdades de Acesso), mas não é eliminado. |
+| Remove vantagem | A pessoa perde somente o acréscimo do Fator de Atenuação das Desigualdades de Acesso, permanece na modalidade e não é eliminada por essa perda. A habilitação é indeferida na chamada e a nota sem acréscimo vale a partir da chamada seguinte (UNI-REQ-0496 e UNI-REQ-0498). |
 | Pendência para reenvio | Abre-se prazo para o candidato complementar/reenviar o documento numa fase que permita complementação. |
 
 > A qual nó a consequência se prende. A consequência é configurada **por nó** da árvore de exigências, não por documento solto: cada folha (documento único) e cada grupo de alternativas (`OU` / `pelo menos N de`) — a unidade opaca — pode carregar a sua consequência e a sua **própria base legal**; um grupo `E` (todos exigidos) não carrega consequência própria, cada filho carrega a sua. Num grupo de alternativas, portanto, deixar de apresentar uma alternativa **não** aciona a penalidade se outra satisfaz o grupo — a consequência é do grupo, avaliada pelo resultado dele, nunca somada a partir dos filhos.
 
 A consequência precisa ser coerente com a natureza da vaga e com o que o processo oferece — por exemplo, remover o Fator de Atenuação só é válido se o processo de fato oferecer o Fator de Atenuação. O sistema verifica essa coerência na publicação.
+
+### Habilitação e chamadas
+
+O edital define a quantidade de pessoas da reserva por vaga em cada chamada; zero desliga a reserva e a primeira chamada também pode ter reserva (UNI-REQ-0354 e UNI-REQ-0355). A convocação respeita a ordem de classificação. A pessoa da reserva habilitada que não assume vaga segue a opção do edital; se continuar aguardando, mantém a habilitação, observadas as exigências de documentos (UNI-REQ-0353 e UNI-REQ-0434).
+
+O recurso da habilitação segue o efeito suspensivo configurado: todos os recursos, nenhum ou decisão da unidade. Sem suspensão ativa, a chamada seguinte pode ser publicada, respeitado o cronograma; a vaga em disputa segue a guarda configurada (UNI-REQ-0348, UNI-REQ-0440 e UNI-REQ-0441). A pessoa que perde somente o acréscimo volta a concorrer na ordem da nota recalculada na chamada seguinte; quem ainda não foi convocado mantém o acréscimo provisoriamente. O recurso deferido mantém o acréscimo e permite habilitação na própria chamada, atendidas as demais exigências e havendo vaga (UNI-REQ-0496 a UNI-REQ-0500).
+
+Quando o edital exige manifestação de interesse, ela ocorre depois da primeira chamada e vale para as seguintes. Quem volta a aguardar não manifesta novamente, salvo quando a configuração exigir confirmação a cada chamada, opção desligada por padrão (UNI-REQ-0503).
 
 ### 9.4 Base legal
 
