@@ -92,7 +92,7 @@ O sistema garante uma **ordem lógica** entre campos, fatos e documentos (`UNI-R
 
 Internamente, as dependências entre campos (o que produz um fato), pré-condições (o que decide se um campo aparece), regras de derivação (de que fatos a modalidade depende) e gatilhos de documento (que fato exige um documento) formam um **encadeamento sem ciclos** — não pode haver dependência circular (A depende de B que depende de A). Essa consistência é verificada na configuração; um encadeamento circular impede a publicação.
 
-Há ainda uma proteção adicional: enquanto o fato que dispararia um documento ainda não pode ser resolvido, aquele documento fica com a emissão **bloqueada** — não é cobrado prematuramente (`UNI-REQ-0077`, que compõe com a fronteira ativa de emissão do `UNI-REQ-0070`).
+Há ainda uma proteção adicional: enquanto o fato que dispararia um documento ainda não pode ser resolvido, aquele documento fica com a emissão **bloqueada** — não é cobrado prematuramente (`UNI-REQ-0077`, que compõe com a regra do `UNI-REQ-0070` sobre quando a exigência produz consequência).
 
 > Exemplo. Na inscrição, uma exigência de comprovante de renda é cobrada de quem concorre à cota de renda (na habilitação, a cobrança segue o grupo da convocação, `UNI-REQ-0147`). Mas a pergunta "concorrer à cota de renda?" só aparece depois de o candidato optar pelas cotas da lei — ser egresso de escola pública, o que o sistema calcula a partir de onde e como ele cursou o ensino médio, e responder que deseja concorrer às vagas de escola pública. Enquanto ele ainda não respondeu a essas perguntas, não se sabe se a cota de renda se aplica ao seu caso — então a exigência de renda fica **bloqueada**: não é listada como documento faltante (não se cobra prematuramente) nem é dispensada em silêncio. Quando o candidato opta pelas cotas da lei, a pergunta de renda passa a valer, e só então o comprovante de renda passa a ser exigido. A fronteira do fato também avança por **supressão**: se as respostas mostram que o candidato não é egresso de escola pública, ou ele responde que não deseja concorrer às vagas de escola pública, a pergunta de renda deixa de se aplicar e a exigência de renda é dispensada — sem ficar à espera de uma resposta que nunca virá. E, uma vez que uma exigência aplicável fique pendente, ela é **mostrada como pendente**, nunca escondida. O mesmo vale entre fases: um documento preso a um fato que só se resolve na habilitação nunca é cobrado já na inscrição.
 
@@ -109,7 +109,7 @@ Cada comportamento acima corresponde a um requisito com código estável na [tab
 | Requisito | Título (acervo) | Assunto de negócio |
 |---|---|---|
 | `UNI-REQ-0065` | Vocabulário de fatos multi-fonte com domínio descritível | O que são os fatos e seus valores descritíveis (seção 1). |
-| `UNI-REQ-0070` | Consequência por nó e fronteira ativa de emissão | Consequência de documento por nó e fronteira ativa de emissão (seção 6). |
+| `UNI-REQ-0070` | Quando a exigência ou o grupo produz a consequência declarada | Situações em que a exigência produz consequência e exceção da exigência bloqueada (seção 6). |
 | `UNI-REQ-0071` | Snapshot conjunto autossuficiente de documentos exigidos | Conjunto congelado autossuficiente na publicação. |
 | `UNI-REQ-0072` | Fatos declarados por par elegibilidade + opt-in | Autodeclaração e escolha de concorrer (seção 2). |
 | `UNI-REQ-0073` | Grafo de pré-condições da coleta e verificação de escola pública | Formulário condicional e exclusões (seção 3). |

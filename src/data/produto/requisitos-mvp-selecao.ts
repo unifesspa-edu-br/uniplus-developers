@@ -868,7 +868,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0171',
     titulo: 'Texto das consequências e conteúdo dos documentos no comprovante',
     enunciado:
-      'O texto da consequência de não atender um documento, no comprovante da inscrição (UNI-REQ-0029), depende do que o edital declara para ele: eliminação, "Sem o documento X, você será eliminado do processo seletivo."; perda da vaga reservada, "Sem o documento X, você perderá a vaga reservada e passará a concorrer na ampla concorrência."; perda da vantagem pleiteada, "Sem o documento X, a vantagem que você pleiteia não será concedida."; e pendência de reenvio, "Sem o documento X, você será notificado para reenviá-lo no prazo da fase." Documento sem consequência declarada não recebe texto de consequência: o comprovante não inventa uma. Fora de um grupo "um ou outro", vale a consequência da própria exigência. Dentro de um grupo "um ou outro", que o UNI-REQ-0070 define como unidade opaca que emite a própria consequência e cujas alternativas só orientam o que falta, o comprovante mostra a consequência do grupo mais externo, escrita sobre os documentos do grupo ("Sem os documentos exigidos (A, B), ..."), ou nenhum texto se o grupo não declarar; a consequência própria de uma alternativa não vale ali. O grupo "E" não carrega consequência. A alternativa de um grupo "um ou outro" que o candidato não precisou enviar, porque o grupo já está atendido, aparece como dispensada e sem consequência, para que o comprovante não contradiga a inscrição aceita: quem enviou a CNH não aparece como eliminado por não ter enviado o RG. Entram só as exigências da inscrição que se aplicam ao candidato; as de outra fase, como a habilitação, ficam de fora. Arquivo confirmado depois que o comprovante foi composto não consta dele: fica para o comprovante do envio seguinte. A lista de documentos faz parte do que o código de integridade do comprovante protege, e o comprovante de uma inscrição sem documentos exigidos não traz a seção de documentos. Decisão do LT em 21/10/2026, a confirmar pelo PO.',
+      'O texto da consequência de não atender um documento, no comprovante da inscrição (UNI-REQ-0029), depende do que o edital declara para ele: eliminação, "Sem o documento X, você será eliminado do processo seletivo."; retirada da modalidade, "Sem o documento X, você perderá a modalidade em questão e continuará na ampla concorrência."; perda somente do acréscimo, "Sem o documento X, você perderá o acréscimo." A possibilidade de reenvio é informada em frase própria, sem relação com a consequência, quando a exigência ou o grupo a configura: "Você será notificado para reenviar o documento X no prazo da fase." Sem a opção configurada, o comprovante não traz essa frase. Documento sem consequência declarada não recebe texto de consequência: o comprovante não inventa uma. Fora de um grupo "um ou outro", vale a consequência da própria exigência. Dentro de um grupo "um ou outro", cuja própria consequência vale para o grupo e cujas alternativas indicam o que falta, o comprovante mostra a consequência do grupo mais externo, escrita sobre os documentos do grupo ("Sem os documentos exigidos (A, B), ..."), ou nenhum texto se o grupo não declarar; a consequência própria de uma alternativa não vale ali. O grupo "E" não carrega consequência. A alternativa de um grupo "um ou outro" que o candidato não precisou enviar, porque o grupo já está atendido, aparece como dispensada e sem consequência, para que o comprovante não contradiga a inscrição aceita: quem enviou a CNH não aparece como eliminado por não ter enviado o RG. Entram só as exigências da inscrição que se aplicam ao candidato; as de outra fase, como a habilitação, ficam de fora. Arquivo confirmado depois que o comprovante foi composto não consta dele: fica para o comprovante do envio seguinte. A lista de documentos faz parte do que o código de integridade do comprovante protege, e o comprovante de uma inscrição sem documentos exigidos não traz a seção de documentos. Decisão do LT em 21/10/2026, a confirmar pelo PO.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -880,9 +880,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Cada exigência da inscrição aparece com a consequência por escrito quando o edital a declara, no texto próprio de eliminação, perda da vaga reservada, perda da vantagem ou reenvio, e sem texto de consequência quando não declara; dentro de um grupo "um ou outro" vale a consequência do grupo mais externo, ou nenhuma se ele não declara, e nunca a da alternativa; fora dele, a da própria exigência; a alternativa dispensada por grupo já atendido aparece como dispensada, sem consequência; exigências de outra fase não aparecem; arquivo confirmado após a composição fica para o envio seguinte; alterar a lista de documentos altera o código de integridade; sem documentos exigidos, o comprovante não traz a seção.',
+      'Cada exigência da inscrição aparece com a consequência por escrito quando o edital a declara, no texto próprio de eliminação, retirada da modalidade ou do acréscimo, e sem texto de consequência quando não declara; a possibilidade de reenvio é informada em frase própria quando a exigência ou o grupo a configura, e não aparece quando não configura, com ou sem consequência declarada; dentro de um grupo "um ou outro" vale a consequência do grupo mais externo, ou nenhuma se ele não declara, e nunca a da alternativa; fora dele, a da própria exigência; a alternativa dispensada por grupo já atendido aparece como dispensada, sem consequência; exigências de outra fase não aparecem; arquivo confirmado após a composição fica para o envio seguinte; alterar a lista de documentos altera o código de integridade; sem documentos exigidos, o comprovante não traz a seção.',
     verificacao:
-      'Teste automatizado (texto por consequência, ausência de texto sem consequência declarada, grupo atendido, integridade cobrindo a lista de documentos) (planejado).',
+      'Teste automatizado (texto por consequência, ausência de texto sem consequência declarada, frase de reenvio com a opção configurada e não configurada, grupo atendido, integridade cobrindo a lista de documentos) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2803,10 +2803,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0070',
-    titulo: 'Consequência por regra e fronteira ativa de emissão',
+    titulo: 'Quando a exigência ou o grupo produz a consequência declarada',
     enunciado:
-      'A consequência da exigência é configurada por regra — em cada regra de documento e em cada grupo OU/N-de, que é a unidade opaca de alternativas; o grupo E é transparente e não carrega consequência própria. O vocabulário é o da base (ELIMINA, RECLASSIFICA_AC, REMOVE_VANTAGEM, PENDENCIA_REENVIO) e as mesmas conferências se aplicam: coerência com a ação da vaga, REMOVE_VANTAGEM exige vantagem viva, PENDENCIA_REENVIO exige fase com complementação (inclusive a conferência inversa ao retirar a complementação) e a publicação exige ao menos uma base legal RESOLVIDO. Um grupo OU/N-de com consequência é exigência de primeira classe, com base legal própria, não derivada dos itens. A consequência efetiva é emitida por fronteira ativa, da regra principal para baixo: uma regra satisfeita ou não aplicável suprime o conjunto subordinado de regras; uma regra de documento em estado ativo — pendente, indeterminado ou impossível — emite a sua consequência (a regra de documento impossível a emite como inevitável); o OU/N-de opaco em estado ativo emite a própria, com os itens apenas como orientação de pendência, não como consequência vigente; o E transparente não emite e desce para os itens em estado ativo, isto é, não satisfeitos e não não aplicáveis (pendente, indeterminado ou impossível). A ordem de severidade serve só para priorizar exibição, nunca para derivar ou agregar consequência.' +
-      ' Na habilitação, a consequência da condição ou ação segue UNI-REQ-0501; a perda somente do acréscimo segue UNI-REQ-0496.',
+      'A exigência documental e o grupo de alternativas que declararam uma consequência (UNI-REQ-0501) a produzem conforme a situação em que estão. Quando a exigência está satisfeita ou não se aplica, ela e as partes subordinadas a ela não produzem consequência. Quando está pendente, indeterminada ou impossível de cumprir, vale a consequência declarada para ela; se é impossível, a consequência é inevitável. A exigência indeterminada por estar bloqueada não apresenta consequência (UNI-REQ-0077). O grupo que exige todos os itens não tem consequência própria: valem as consequências declaradas para os itens pendentes, indeterminados ou impossíveis, sem repetir nenhuma. O grupo de alternativas ("um ou outro" ou "pelo menos N de") é uma unidade: sua consequência é avaliada pelo resultado do grupo, e as alternativas só indicam o que falta, sem produzir outra consequência. A ordem de gravidade serve apenas para apresentar as consequências, nunca para decidir ou somar. A aplicação da consequência segue o UNI-REQ-0501. Exemplo fictício: em um grupo que aceita laudo ou atestado, Ana envia o laudo; a falta do atestado não produz consequência.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2818,9 +2817,141 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Consequência por regra em regra de documento e em OU/N-de, com E transparente; vocabulário fechado da base; conferências de ação da vaga, vantagem viva, complementação e conferência inversa, e base legal RESOLVIDO para publicar; grupo OU/N-de opaco é exigência de primeira classe com base legal própria; emissão por fronteira ativa (regra satisfeita/não aplicável suprime o conjunto subordinado de regras; regra de documento em estado ativo — pendente, indeterminado ou impossível — emite, impossível como inevitável; E desce só para itens em estado ativo, excluindo satisfeito e não aplicável; sem dupla emissão; itens de OU/N-de opaco são só orientação); ordem de severidade apenas para exibição, nunca para derivar consequência.',
+      'Exigência satisfeita ou não aplicável, e as partes subordinadas a ela, não produzem consequência; exigência pendente, indeterminada ou impossível produz a consequência declarada, e a impossível a produz como inevitável; exigência indeterminada bloqueada não apresenta consequência; grupo que exige todos os itens considera só as consequências dos itens pendentes, indeterminados ou impossíveis, sem duplicação; grupo de alternativas tem a consequência avaliada pelo resultado do grupo, e a falta de uma alternativa não produz consequência quando outra atende ao grupo; as alternativas não produzem consequência própria; a ordem de gravidade só ordena a apresentação.',
     verificacao:
-      'Teste automatizado (emissão por fronteira; supressão; conferências diretas e inversa; base legal própria do grupo; severidade só de exibição) (planejado).',
+      'Testes automatizados da produção da consequência por situação da exigência (satisfeita, não aplicável, pendente, indeterminada, impossível), da exigência indeterminada bloqueada, do grupo que exige todos os itens sem duplicação, do grupo de alternativas atendido por uma das alternativas e da gravidade usada só para ordenar (planejados).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0518',
+    titulo: 'Publicação recusa a retirada da modalidade que não pode se cumprir',
+    enunciado:
+      'A publicação recusa a configuração que declara a retirada da modalidade, onde a declaração é permitida (UNI-REQ-0501, UNI-REQ-0070 e UNI-REQ-0522), quando ela não pode se cumprir. O UNI-REQ-0501 trata do que acontece com a pessoa e define a modalidade em questão; este requisito trata de quando a publicação recusa a configuração. A recusa vale em três casos: a condição da exigência, do grupo de alternativas, da banca ou do formulário não alcança nenhuma modalidade ofertada; essa condição alcança todas as modalidades ofertadas (nos dois casos não há modalidade em questão); ou a oferta alcançada não inclui ampla concorrência, para onde a pessoa seguiria. A recusa por falta de ampla concorrência usa o erro `uniplus.selecao.consequencias_do_descumprimento.retira_a_modalidade_sem_ampla_concorrencia`, com status 422. Em toda recusa deste requisito e do UNI-REQ-0519, a consequência não é retirada nem ajustada em silêncio. Exemplo fictício: no curso de Ana, uma exigência declara a retirada da modalidade, mas a oferta não tem ampla concorrência; a publicação é recusada, pois Ana precisaria continuar concorrendo na ampla concorrência ao perder a modalidade.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0016',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Retirada da modalidade com condição que não alcança nenhuma modalidade ofertada é recusada na publicação; retirada da modalidade com condição que alcança todas as modalidades ofertadas também é recusada; retirada da modalidade em oferta sem ampla concorrência é recusada com o erro próprio e status 422; em toda recusa deste requisito e do UNI-REQ-0519, a consequência não é retirada nem ajustada em silêncio; oferta com ampla concorrência e condição que alcança parte das modalidades é aceita.',
+    verificacao:
+      'Testes automatizados, separados, da recusa quando a condição não alcança nenhuma modalidade ofertada e da recusa quando a condição alcança todas elas, da recusa sem ampla concorrência com o erro próprio e da aceitação quando há modalidade em questão e ampla concorrência (planejados).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0519',
+    titulo: 'Publicação recusa a retirada do acréscimo quando o processo não o oferece',
+    enunciado:
+      'A publicação recusa a configuração que declara a retirada do acréscimo do Fator de Atenuação das Desigualdades de Acesso quando o processo não oferece esse acréscimo. A retirada do acréscimo pode ser declarada onde o UNI-REQ-0501 permite declarar consequência, respeitadas as restrições do UNI-REQ-0070 (o grupo que exige todos os itens não tem consequência própria) e do UNI-REQ-0522 (bancas), desde que o processo ofereça o acréscimo. O efeito da perda do acréscimo sobre a pessoa é o do UNI-REQ-0496; este requisito trata de quando a publicação recusa a configuração, e a garantia de não retirar nem ajustar a consequência em silêncio é a do UNI-REQ-0518. Exemplo fictício: o processo de Caio não aplica o acréscimo, e uma exigência dele declara a retirada do acréscimo; a publicação é recusada.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0016',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Retirada do acréscimo declarada onde o UNI-REQ-0501 permite, respeitadas as restrições do UNI-REQ-0070 e do UNI-REQ-0522, é aceita quando o processo oferece o acréscimo e recusada na publicação quando não oferece.',
+    verificacao:
+      'Testes automatizados da aceitação com o acréscimo oferecido e da recusa sem o acréscimo no processo (planejados).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0520',
+    titulo: 'Prazo para reenvio declarado à parte da consequência',
+    enunciado:
+      'Cada exigência documental e cada grupo de alternativas podem declarar, à parte da consequência, se abrem prazo para reenvio do documento. O reenvio não é uma consequência: pode ser declarado com ou sem consequência. A declaração exige que a fase da exigência permita complementação de documentos. A configuração recusa a declaração em fase que não permite complementação e recusa também retirar a complementação da fase enquanto uma exigência ou grupo dela abre prazo para reenvio. A opção declarada é congelada na publicação (UNI-REQ-0071). A informação no comprovante da inscrição segue o UNI-REQ-0171, que traz só as exigências da inscrição aplicáveis à pessoa e deixa de fora as de outra fase.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0016',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Reenvio é declarado por exigência ou grupo, independente da consequência; exigência sem a opção não abre prazo; declarar reenvio em fase sem complementação é recusado; retirar a complementação de fase com exigência ou grupo que abre prazo para reenvio é recusado.',
+    verificacao:
+      'Testes automatizados do reenvio com e sem consequência, da recusa em fase sem complementação e da recusa ao retirar a complementação da fase (planejados).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0521',
+    titulo: 'Base legal própria do grupo de alternativas',
+    enunciado:
+      'O grupo de alternativas com consequência tem base legal própria, não derivada dos seus itens. A base legal de um grupo exige que ele declare consequência. O grupo que exige todos os itens não tem base legal própria: valem as bases legais dos itens. A regra geral da base legal resolvida para toda exigência que determina resultado é a do UNI-REQ-0059.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0016',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Grupo de alternativas com consequência tem base legal própria; grupo de alternativas com base legal e sem consequência é recusado; grupo que exige todos os itens com base legal própria é recusado.',
+    verificacao:
+      'Testes automatizados da base legal própria do grupo de alternativas e das recusas do grupo com base legal sem consequência e do grupo que exige todos os itens com base legal própria (planejados).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0522',
+    titulo: 'Consequência da ausência só em banca que avalia o mérito',
+    enunciado:
+      'A consequência da ausência só pode ser declarada em banca da fase ou da etapa que avalia o mérito e em que a pessoa candidata comparece, como heteroidentificação, prova de títulos ou entrevista. O papel vem do tipo de banca registrado no processo (UNI-REQ-0139, UNI-REQ-0476 e UNI-REQ-0478). A publicação recusa a declaração em banca cujo papel é julgar a 1ª instância, julgar a 2ª instância ou importar dados, como notas do INEP ou candidatos, pois a pessoa candidata não comparece a essas bancas. A declaração da consequência segue o UNI-REQ-0501. Exemplo fictício: no processo de Lia, a consequência da ausência pode ser declarada na banca de entrevista; se for declarada na banca que julga a 1ª instância do recurso, a publicação é recusada.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0016',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Consequência da ausência é aceita em banca que avalia o mérito e em que a pessoa candidata comparece; é recusada na publicação em banca cujo papel, registrado a partir do tipo, é julgar a 1ª instância, julgar a 2ª instância ou importar dados.',
+    verificacao:
+      'Testes automatizados da declaração aceita nos papéis que avaliam o mérito e da recusa nos papéis de 1ª instância, 2ª instância e importação de dados (planejados).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0523',
+    titulo: 'Consequência da exigência igual ao que a modalidade declara para o indeferimento',
+    enunciado:
+      'Quando uma modalidade de vaga declara o que acontece com a pessoa indeferida (a ação de indeferimento), a consequência declarada para o descumprimento de uma exigência documental ou de um grupo de alternativas que alcança essa modalidade precisa ser a mesma. A comparação considera as modalidades ofertadas que a exigência alcança pelas condições dela e, para o grupo de alternativas, as que qualquer dos documentos dele alcança. Só entram as modalidades que declaram ação de indeferimento. A retirada do acréscimo não entra na comparação: ela retira só o acréscimo, não decide o destino da modalidade e pode ser declarada em qualquer exigência ou grupo. A conferência acontece quando a configuração vai ser congelada, na publicação ou na retificação em ato único: confere primeiro as exigências documentais e depois os grupos de alternativas com consequência própria, e reúne todas as violações encontradas, sem parar na primeira. Exemplo fictício: a modalidade de reserva do curso de Ana declara a retirada da modalidade para a pessoa indeferida, e uma exigência dessa modalidade declara a eliminação do processo; a publicação é recusada.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'requisito',
+    parent_id: 'UNI-REQ-0016',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Exigência documental cuja consequência difere da ação de indeferimento de uma modalidade ofertada que ela alcança é recusada; grupo de alternativas cuja consequência difere da ação de indeferimento de uma modalidade que qualquer dos seus documentos alcança é recusado; exigência ou grupo com a mesma ação da modalidade é aceito; modalidade que não declara ação de indeferimento não entra na comparação; a retirada do acréscimo não entra na comparação (a condição de o processo oferecer o acréscimo é a do UNI-REQ-0519); a conferência ocorre na publicação e na retificação em ato único, confere as exigências antes dos grupos e reúne todas as violações.',
+    verificacao:
+      'Testes automatizados, separados para exigência documental e para grupo de alternativas, da recusa por ação diferente, da aceitação por ação igual, da modalidade sem ação declarada, da retirada do acréscimo fora da comparação, da conferência na publicação e na retificação em ato único e da reunião de todas as violações (planejados).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2828,7 +2959,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0071',
     titulo: 'Versão congelada conjunta autossuficiente de documentos exigidos',
     enunciado:
-      'A publicação congela uma versão congelada conjunta e autossuficiente de tudo que determina o resultado documental, de modo que o runtime nunca releia a configuração viva. A versão congelada reúne, por exigência, a versão congelada de dados, bindings, domínios, descrições, cardinalidade, origem, ponto de resolução e formatos (cobertura), e reúne o conjunto de regras de comprovação com conectores, cardinalidade por regra, chave de distinção e período, ocorrências esperadas, repetição por entidade e schemas de atributos, a consequência de cada regra, a base legal própria de cada regra que a carrega e a ordem de severidade (composição). A quantidade de instâncias e de apresentações permanece em runtime, fora da versão congelada. O conteúdo é único e versionado, com hash estável, e é a fonte de verdade que o contrato de runtime (UNI-REQ-0063) confere; alterar o catálogo vivo não afeta editais publicados.',
+      'A publicação congela uma versão congelada conjunta e autossuficiente de tudo que determina o resultado documental, de modo que o runtime nunca releia a configuração viva. A versão congelada reúne, por exigência, a versão congelada de dados, bindings, domínios, descrições, cardinalidade, origem, ponto de resolução e formatos (cobertura), e reúne o conjunto de regras de comprovação com conectores, cardinalidade por regra, chave de distinção e período, ocorrências esperadas, repetição por entidade e schemas de atributos, a consequência e a opção de abrir prazo para reenvio de cada exigência ou grupo, a base legal própria de cada regra que a carrega e a ordem de severidade (composição). A quantidade de instâncias e de apresentações permanece em runtime, fora da versão congelada. O conteúdo é único e versionado, com hash estável, e é a fonte de verdade que o contrato de runtime (UNI-REQ-0063) confere; alterar o catálogo vivo não afeta editais publicados.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2840,9 +2971,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Versão congelada conjunta autossuficiente com a regra de documento por exigência (dados, bindings, domínios, descrições, cardinalidade, origem, ponto de resolução, formatos) e o conjunto de regras (conectores, cardinalidade por regra, chave de distinção e período, ocorrências esperadas, repetição por entidade e schemas, consequência por regra, base legal própria por regra, ordem de severidade); quantidades de instâncias/apresentações ficam em runtime; conteúdo único, versionado e com hash estável; alterar catálogo vivo (incluindo consequência, ocorrências esperadas ou ordem de severidade) não altera edital publicado; é a fonte única que UNI-REQ-0063 confere em runtime.',
+      'Versão congelada conjunta autossuficiente com a regra de documento por exigência (dados, bindings, domínios, descrições, cardinalidade, origem, ponto de resolução, formatos) e o conjunto de regras (conectores, cardinalidade por regra, chave de distinção e período, ocorrências esperadas, repetição por entidade e schemas, consequência por regra, opção de abrir prazo para reenvio por exigência ou grupo, base legal própria por regra, ordem de severidade); quantidades de instâncias/apresentações ficam em runtime; conteúdo único, versionado e com hash estável; alterar catálogo vivo (incluindo consequência, opção de reenvio, ocorrências esperadas ou ordem de severidade) não altera edital publicado; é a fonte única que UNI-REQ-0063 confere em runtime.',
     verificacao:
-      'Teste automatizado (autossuficiência e completude da versão congelada conjunta; hash estável; imutabilidade a mudanças de catálogo) (planejado).',
+      'Teste automatizado (autossuficiência e completude da versão congelada conjunta, com a opção de reenvio configurada e não configurada; hash estável; imutabilidade a mudanças de catálogo, inclusive da opção de reenvio) (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -2960,7 +3091,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0077',
     titulo: 'Ordem de coleta, grafo conjunto de dependência e máscara de emissão bloqueada',
     enunciado:
-      'A ordem de coleta decorre de um grafo de dependência executável cujas partes são dados, etapas, campos, termos exigidos no formulário e exigências, com quatro classes de aresta: produção (o campo produtor do dado DECLARADO), pré-condição (as regras de exibição, obrigatoriedade e opções do campo ou da etapa, e a condição de termo, UNI-REQ-0145 e UNI-REQ-0086), cálculo do dado (dependências da regra) e referência da condição de aplicação. O grafo conjunto é acíclico. A garantia de que nenhum documento é solicitado antes do dado que o dispara vale em dois níveis: fase (o ponto de resolução do dado não é posterior à fase da exigência) e intra-fase (a aresta de produção/cálculo do dado precede o consumo). A fronteira do dado é alcançada somente quando o produtor foi executado ou suprimido/ultrapassado E a conferência de fase foi satisfeito. Antes disso, o consumidor BLOQUEADO projeta-se em INDETERMINADO para agregação, não é solicitado como faltante e tem a emissão de consequência suprimida — governada por um conjunto de condições recursivo emissionBlocked (regra de documento BLOQUEADO não emite; grupo é bloqueado quando possui ao menos um item decisivo e todos os itens que ainda podem mudar seu resultado são recursivamente bloqueados; estado já decidido tem precedência e o IMPOSSIVEL continua emitindo o inevitável). O emissionBlocked compõe com a fronteira ativa de emissão de UNI-REQ-0070 e é a fonte única de supressão, sem regra concorrente por ancestral. BLOQUEADO não é um estado novo do conjunto de regras de comprovação, que permanece exaustiva em cinco estados; ao desbloquear, reavalia sem retenção. Atualizado por definição do PO, 29/09/2026 (UNI-REQ-0143 a UNI-REQ-0148 e UNI-REQ-0150). A exigência de documento segue a ordem derivada do cronograma: a garantia de que nenhum documento é pedido antes do dado considera a ordem das fases em que o dado é resolvido, e não o envio já feito, que decide só o reaproveitamento de resposta (UNI-REQ-0144 e UNI-REQ-0149). A exigência de documento do pedido de isenção só cita dado resolvido na inscrição quando a inscrição está antes ou no mesmo momento do período de isenção, na ordem derivada da lista e das marcas do cronograma, por exemplo quando a inscrição, e cada fase que fica entre ela e a isenção, têm a marca "no mesmo momento da anterior" (UNI-REQ-0485). A marca mantém a posição na lista e faz as duas fases ocuparem o mesmo momento; as datas dos períodos continuam como no UNI-REQ-0106. A escolha de fundamentos de um formulário do pedido de isenção é uma regra conhecido na fase do próprio formulário, imediatamente depois do bloco que a coleta, e pode condicionar uma exigência de documento desse mesmo formulário (UNI-REQ-0144; decisão do líder técnico em 02/11/2026, a confirmar pelo PO).',
+      'A ordem de coleta decorre de um grafo de dependência executável cujas partes são dados, etapas, campos, termos exigidos no formulário e exigências, com quatro classes de aresta: produção (o campo produtor do dado DECLARADO), pré-condição (as regras de exibição, obrigatoriedade e opções do campo ou da etapa, e a condição de termo, UNI-REQ-0145 e UNI-REQ-0086), cálculo do dado (dependências da regra) e referência da condição de aplicação. O grafo conjunto é acíclico. A garantia de que nenhum documento é solicitado antes do dado que o dispara vale em dois níveis: fase (o ponto de resolução do dado não é posterior à fase da exigência) e intra-fase (a aresta de produção/cálculo do dado precede o consumo). A fronteira do dado é alcançada somente quando o produtor foi executado ou suprimido/ultrapassado E a conferência de fase foi satisfeito. Antes disso, o consumidor BLOQUEADO projeta-se em INDETERMINADO para agregação, não é solicitado como faltante e tem a emissão de consequência suprimida — governada por um conjunto de condições recursivo emissionBlocked (regra de documento BLOQUEADO não emite; grupo é bloqueado quando possui ao menos um item decisivo e todos os itens que ainda podem mudar seu resultado são recursivamente bloqueados; estado já decidido tem precedência e o IMPOSSIVEL continua emitindo o inevitável). O emissionBlocked compõe com a regra de UNI-REQ-0070 sobre quando a exigência produz consequência e é a fonte única de supressão, sem regra concorrente por ancestral. BLOQUEADO não é um estado novo do conjunto de regras de comprovação, que permanece exaustiva em cinco estados; ao desbloquear, reavalia sem retenção. Atualizado por definição do PO, 29/09/2026 (UNI-REQ-0143 a UNI-REQ-0148 e UNI-REQ-0150). A exigência de documento segue a ordem derivada do cronograma: a garantia de que nenhum documento é pedido antes do dado considera a ordem das fases em que o dado é resolvido, e não o envio já feito, que decide só o reaproveitamento de resposta (UNI-REQ-0144 e UNI-REQ-0149). A exigência de documento do pedido de isenção só cita dado resolvido na inscrição quando a inscrição está antes ou no mesmo momento do período de isenção, na ordem derivada da lista e das marcas do cronograma, por exemplo quando a inscrição, e cada fase que fica entre ela e a isenção, têm a marca "no mesmo momento da anterior" (UNI-REQ-0485). A marca mantém a posição na lista e faz as duas fases ocuparem o mesmo momento; as datas dos períodos continuam como no UNI-REQ-0106. A escolha de fundamentos de um formulário do pedido de isenção é uma regra conhecido na fase do próprio formulário, imediatamente depois do bloco que a coleta, e pode condicionar uma exigência de documento desse mesmo formulário (UNI-REQ-0144; decisão do líder técnico em 02/11/2026, a confirmar pelo PO).',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -2972,7 +3103,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Grafo conjunto de quatro arestas (produção campo-dado, pré-condição, cálculo do dado, condição de aplicação) acíclico, com as etapas e os termos exigidos no formulário entre as partes da configuração; etapa cuja exibição depende de dado produzido nela ou depois dela é recusada; aresta de produção põe o campo antes do dado; fronteira do dado = produtor executado/suprimido/ultrapassado E conferência da fase satisfeita; ordem garante documento nunca antes do dado (fase mais intra-fase); parte BLOQUEADO projeta INDETERMINADO, não é solicitado como faltante e não emite/propaga consequência; conjunto de condições emissionBlocked recursivo (regra de documento bloqueada não emite; grupo bloqueado quando tem ao menos um item decisivo e todos os decisivos são recursivamente bloqueados; IMPOSSIVEL decidido emite; fronteira decisiva não vazia) compondo com a fronteira ativa de UNI-REQ-0070 como fonte única, sem regra concorrente por ancestral; desbloqueio reavalia sem retenção; o conjunto de regras de comprovação permanece em cinco estados.',
+      'Grafo conjunto de quatro arestas (produção campo-dado, pré-condição, cálculo do dado, condição de aplicação) acíclico, com as etapas e os termos exigidos no formulário entre as partes da configuração; etapa cuja exibição depende de dado produzido nela ou depois dela é recusada; aresta de produção põe o campo antes do dado; fronteira do dado = produtor executado/suprimido/ultrapassado E conferência da fase satisfeita; ordem garante documento nunca antes do dado (fase mais intra-fase); parte BLOQUEADO projeta INDETERMINADO, não é solicitado como faltante e não emite/propaga consequência; conjunto de condições emissionBlocked recursivo (regra de documento bloqueada não emite; grupo bloqueado quando tem ao menos um item decisivo e todos os decisivos são recursivamente bloqueados; IMPOSSIVEL decidido emite; fronteira decisiva não vazia) compondo com a regra de UNI-REQ-0070 sobre quando a exigência produz consequência como fonte única, sem regra concorrente por ancestral; desbloqueio reavalia sem retenção; o conjunto de regras de comprovação permanece em cinco estados.',
     verificacao:
       'Teste automatizado (aresta de produção; recusa de etapa condicionada a dado produzido nela ou depois; documento não pedido antes do dado; regra de documento bloqueada não emite e outro item emite; grupo com todos decisivos bloqueados suprime versus razão alcançada emite; impossível emite; desbloqueio reavalia) (planejado).',
     pagina_developers: '/produto/requisitos/',
@@ -9325,7 +9456,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0496',
     titulo: 'Perda do acréscimo na habilitação',
     enunciado:
-      'Quem não comprova o direito ao acréscimo do Fator de Atenuação das Desigualdades de Acesso tem a habilitação indeferida naquela chamada. Para essa condição, a consequência configurada é retirar somente o acréscimo: a pessoa não é eliminada nem perde modalidade por esse motivo. Após o resultado definitivo e os recursos cabíveis, sua nota é recalculada sem o acréscimo e ela volta a concorrer nas chamadas seguintes, se houver, nas modalidades a que tem direito e pelas quais optou. Decisão do líder técnico em 25/11/2026.',
+      'Quando a consequência configurada para o descumprimento é `RETIRA_O_ACRESCIMO`, a pessoa perde somente o acréscimo do Fator de Atenuação das Desigualdades de Acesso: não é eliminada nem perde modalidade por esse motivo. A recusa da declaração quando o processo não oferece o acréscimo é do UNI-REQ-0519. Na habilitação, o indeferimento vale para aquela chamada; após o resultado definitivo e os recursos cabíveis, a nota é recalculada sem o acréscimo e a pessoa volta a concorrer nas chamadas seguintes, se houver, nas modalidades a que tem direito e pelas quais optou. Decisão do líder técnico em 25/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -9337,7 +9468,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O indeferimento definitivo retira somente o acréscimo; a pessoa permanece nas modalidades e não é eliminada; na chamada seguinte concorre com a nota recalculada, atendidas as demais condições.',
+      'O indeferimento definitivo com a consequência `RETIRA_O_ACRESCIMO` retira somente o acréscimo; a pessoa permanece nas modalidades e não é eliminada; na chamada seguinte concorre com a nota recalculada, atendidas as demais condições.',
     verificacao: 'Testes automatizados dos critérios de aceite (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -9430,7 +9561,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0501',
     titulo: 'Consequência configurada por condição ou ação na habilitação',
     enunciado:
-      'O administrador configura a consequência de cada condição ou ação exigida na habilitação. Conforme a configuração, a consequência pode eliminar do processo, retirar a modalidade ou retirar somente o acréscimo; o sistema aplica a consequência definida para a condição ou ação, inclusive à pessoa da reserva. A perda do acréscimo segue UNI-REQ-0496. Decisão do líder técnico em 25/11/2026.',
+      'O administrador pode declarar a consequência de cada exigência documental ou grupo, da ausência em banca de fase ou etapa e da falta de envio de formulário. As opções são `ELIMINA_DO_PROCESSO`, `RETIRA_A_MODALIDADE` e `RETIRA_O_ACRESCIMO`, e o conjunto é fechado: outro valor é recusado. Sem declaração, a falta não tem consequência própria. Não há declaração geral para envio de documentos nem lista geral de ações. O sistema aplica qualquer uma das três consequências declaradas somente após o resultado definitivo dos recursos cabíveis, inclusive à pessoa da reserva. A modalidade em questão é a modalidade de vaga que exige a condição não comprovada e em que a pessoa concorre; ao perdê-la, ela continua na ampla concorrência. A perda do acréscimo segue UNI-REQ-0496. Decisão do líder técnico em 25/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -9442,7 +9573,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Condições e ações com consequências diferentes produzem os efeitos configurados; a mesma regra se aplica a quem disputa a vaga e a quem está na reserva; retirar somente o acréscimo não elimina nem retira a modalidade.',
+      'Cada exigência documental ou grupo, banca de fase ou etapa e formulário pode declarar sua consequência, somente entre as três opções, e outro valor é recusado; sem declaração, a falta não tem consequência própria; consequências diferentes produzem os efeitos configurados para quem disputa a vaga e para quem está na reserva somente após o resultado definitivo dos recursos cabíveis; não há declaração geral para envio de documentos nem lista geral de ações; retirar a modalidade alcança a modalidade em questão e mantém a ampla concorrência; o efeito de retirar o acréscimo é o do UNI-REQ-0496.',
     verificacao: 'Testes automatizados dos critérios de aceite (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -9451,7 +9582,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0502',
     titulo: 'Ações exigidas e falta à convocação',
     enunciado:
-      'O administrador informa na configuração quais ações exigidas na chamada eliminam quem não as cumpre no prazo. A lista vem da configuração e pode incluir envio de documentos, preenchimento de formulário ou comparecimento a banca, conforme o edital. Nem todo processo tem banca. A consequência de cada ação segue UNI-REQ-0501 e cabe recurso conforme o edital. Decisão do líder técnico em 25/11/2026.',
+      'A falta na chamada tem a consequência declarada conforme o UNI-REQ-0501, inclusive quanto ao momento em que é aplicada. Quando a consequência é a eliminação, os procedimentos seguem o edital. Nem todo processo tem banca. Decisão do líder técnico em 25/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -9463,7 +9594,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A falta a uma ação configurada com eliminação elimina após os procedimentos e recursos cabíveis; uma ação não declarada não é presumida; processo sem banca não exige comparecimento a banca.',
+      'A falta a exigência, banca ou formulário com `ELIMINA_DO_PROCESSO` elimina conforme os procedimentos do edital; processo sem banca não exige comparecimento a banca.',
     verificacao: 'Testes automatizados dos critérios de aceite (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
