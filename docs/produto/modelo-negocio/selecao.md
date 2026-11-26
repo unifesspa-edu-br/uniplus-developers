@@ -68,7 +68,7 @@ Termos usados ao longo do documento, com o sentido que têm no Uni+.
 | Versão congelada (cópia oficial) | Quando o processo seletivo é publicado, o sistema tira uma fotografia imutável de toda a configuração. A partir daí, é essa cópia — e não a configuração viva — que governa inscrições, análises e resultados. Ver seção 5. |
 | Retificação | A forma oficial de alterar a configuração de um processo seletivo já publicado: emite-se um novo ato que aponta o ato retificado e registra o motivo, com nova versão congelada; o ato retificado continua publicado. A configuração publicada não é editada diretamente. |
 | Administrador da Unidade | Servidor que configura e publica processos dentro da unidade que administra (por exemplo, a CGA). |
-| Candidato | Pessoa que preenche e submete a inscrição no portal público. |
+| Candidato | Pessoa que preenche e envia a inscrição no portal público. |
 
 ## 3. Como o sistema funciona (visão geral)
 
@@ -78,14 +78,14 @@ Enquanto o processo está em rascunho, o administrador monta livremente toda a c
 
 Ao publicar o processo seletivo, o sistema valida a configuração e, estando tudo conforme, oficializa e congela os parâmetros, emitindo o edital que torna a publicação pública. Desse instante em diante, a configuração viva não muda mais o que já foi publicado; qualquer alteração exige retificação (novo ato que aponta o retificado, com nova versão congelada).
 
-Durante a inscrição, o candidato responde ao formulário do processo, indica opções de curso e responde às perguntas de cota, envia documentos e submete a inscrição. O sistema decide o que se aplica a ele sempre com base na cópia oficial congelada do processo seletivo, garantindo que a inscrição seja tratada pelas regras da versão em que foi enviada pela primeira vez, mesmo que a configuração seja alterada depois. Enquanto é rascunho, a inscrição acompanha a versão vigente; depois de uma retificação, quem já enviou continua na versão do seu envio, salvo se cancelar e se inscrever de novo (seção 6.2).
+Durante a inscrição, o candidato responde ao formulário do processo, indica opções de curso e responde às perguntas de cota, envia documentos e envia a inscrição. O sistema decide o que se aplica a ele sempre com base na cópia oficial congelada do processo seletivo, garantindo que a inscrição seja tratada pelas regras da versão em que foi enviada pela primeira vez, mesmo que a configuração seja alterada depois. Enquanto é rascunho, a inscrição acompanha a versão vigente; depois de uma retificação, quem já enviou continua na versão do seu envio, salvo se cancelar e se inscrever de novo (seção 6.2).
 
 ### Papéis (quem faz o quê)
 
 | Papel | Responsabilidade no escopo atual |
 |---|---|
 | Administrador da Unidade | Configura o processo, define cotas, vagas, documentos e formulário, e publica o processo seletivo. Só atua dentro da unidade que administra. |
-| Candidato | Preenche o formulário, escolhe opções de curso e responde às perguntas de cota, envia documentos e submete a inscrição no portal público. Não escolhe a modalidade diretamente — o sistema a deriva das respostas (seção 7). |
+| Candidato | Preenche o formulário, escolhe opções de curso e responde às perguntas de cota, envia documentos e envia a inscrição no portal público. Não escolhe a modalidade diretamente — o sistema a deriva das respostas (seção 7). |
 
 O acesso administrativo é restrito por unidade, e a unidade que vale depende da operação: quem configura, publica e retifica o processo age na unidade responsável pelo processo, e quem conduz o trabalho de uma fase (publicar os documentos dela, designar as bancas, julgar os recursos, conduzir chamada, habilitação e matrícula) age na unidade responsável por ela, sem herança entre as duas (UNI-REQ-0329 e UNI-REQ-0330). A identificação de usuários (login) é feita por um provedor de identidade institucional, com integração ao Gov.br prevista para o ambiente de produção.
 
@@ -126,8 +126,8 @@ Quando for implementada, a inscrição será possível quando existir um process
 - Escolhe opções de curso e responde às perguntas de cota. Indica até duas opções de curso, sendo a segunda opcional (ver seção 6.1). O candidato não escolhe a modalidade diretamente: ele concorre sempre em ampla concorrência e, para cada reserva, somente quando é elegível e opta por concorrer; então, o sistema calcula o conjunto de modalidades — que pode conter mais de uma reserva ao mesmo tempo. Ver concorrência dupla e cálculo de modalidades na seção 7. A futura inscrição terá, no máximo, um papel reservado de registro; essa cardinalidade não limita o conjunto derivado. A relação entre esse papel e o conjunto será definida pela decisão proposta na seção Questões em refinamento.
 - Solicita atendimento especializado, se necessário e se o processo tem prova. Entre as opções que o processo oferece, o candidato pode solicitar condições, recursos ou informar tipo de deficiência. Quem declara "outra condição específica" informa qual é, em até 120 caracteres.
 - Envia os documentos exigidos. Anexa os documentos que se aplicam ao seu caso. Cada arquivo passa por uma verificação de segurança (antivírus), que em condição normal leva poucos segundos, e só é aceito se passar; enquanto isso aparece como "em verificação". O arquivo recusado não é guardado e conta como não enviado (seção 6.3).
-- Submete a inscrição. O sistema confere se todos os documentos obrigatórios aplicáveis ao caso do candidato estão presentes. Faltando algum, a submissão é bloqueada com a indicação do que falta.
-- Recebe o comprovante. Com tudo presente, a inscrição passa a submetida e o sistema emite um comprovante imutável, com o relatório dos documentos, pendências e implicações por escrito.
+- Envia a inscrição. O sistema confere se todos os documentos obrigatórios aplicáveis ao caso do candidato estão presentes. Faltando algum, o envio é bloqueado com a indicação do que falta.
+- Recebe o comprovante. Com tudo presente, a inscrição passa a enviada e o sistema emite um comprovante imutável, com o relatório dos documentos, pendências e implicações por escrito.
 
 ### Regras observadas na inscrição
 
@@ -135,10 +135,10 @@ Quando for implementada, a inscrição será possível quando existir um process
 |---|---|---|
 | `UNI-REQ-0031` | Uma inscrição por CPF | Um mesmo CPF só pode ter uma inscrição ativa — rascunho ou enviada — por processo e nível de ensino. O registro canônico ainda contém a redação anterior que permite inscrições em níveis distintos; a confirmação posterior do PO e a reconciliação pendente estão descritas abaixo. A inscrição cancelada não conta e não impede uma nova inscrição. |
 | `UNI-REQ-0032` | Nome social | Sempre que o nome for exibido — em listas, telas ou documentos —, o nome social tem prioridade absoluta sobre o nome civil. |
-| `UNI-REQ-0028` | Documentos obrigatórios | A inscrição não pode ser submetida sem os documentos obrigatórios exigidos para o caso do candidato. |
+| `UNI-REQ-0028` | Documentos obrigatórios | A inscrição não pode ser enviada sem os documentos obrigatórios exigidos para o caso do candidato. |
 | `UNI-REQ-0033` | Cancelar e refazer | O candidato pode cancelar a inscrição enviada enquanto as inscrições estiverem abertas, sabendo que, para voltar a participar, terá de fazer uma inscrição nova, do zero (seção 6.2). O cancelamento registra quem cancelou, a data e o motivo, que é opcional para o candidato. |
 | `UNI-REQ-0164` | Modalidades por opção de curso | As modalidades em que o candidato concorre são calculadas e registradas por opção de curso (seção 6.1); a segunda opção é opcional (`UNI-REQ-0024`). |
-| `UNI-REQ-0165` | Correção da inscrição submetida | Com as inscrições abertas, o candidato corrige a mesma inscrição, que gera novo comprovante a cada correção (seção 6.1). |
+| `UNI-REQ-0165` | Correção da inscrição enviada | Com as inscrições abertas, o candidato corrige a mesma inscrição, que gera novo comprovante a cada correção (seção 6.1). |
 | `UNI-REQ-0047` | Lista de espera | O candidato entra em lista de espera conforme a opção indicada no ato da inscrição. Etapa futura — capacidade planejada, ainda sem escopo na entrega atual. |
 
 **Definição posterior sobre nível de ensino.** O UNI-REQ-0031 ainda conserva a
@@ -149,7 +149,7 @@ de ensino. A confirmação está preservada no UNI-REQ-0179 e precisa ser
 reconciliada com o UNI-REQ-0031 em refinamento separado. Este ajuste documental
 não altera o registro canônico do UNI-REQ-0031.
 
-> Comprovante e pendências. Mesmo após submeter, um documento não obrigatório que não foi enviado, por exemplo, gera uma pendência que fica registrada e visível na consulta da inscrição e no comprovante — sem impedir a submissão. A inscrição permanece válida; a pendência apenas sinaliza algo a acompanhar. O comprovante nunca é alterado: uma reemissão gera um novo comprovante, preservando o anterior.
+> Comprovante e pendências. Mesmo após enviar, um documento não obrigatório que não foi enviado, por exemplo, gera uma pendência que fica registrada e visível na consulta da inscrição e no comprovante — sem impedir o envio. A inscrição permanece válida; a pendência apenas sinaliza algo a acompanhar. O comprovante nunca é alterado: uma reemissão gera um novo comprovante, preservando o anterior.
 
 ### 6.1 Duas opções de curso na inscrição
 
@@ -160,7 +160,7 @@ Quando o processo seletivo permite duas opções de curso, valem as regras abaix
 3. **O candidato informa tudo uma única vez.** Renda, escola pública, cor/raça, deficiência e as demais informações, bem como os documentos, valem para as duas opções. O formulário e os documentos exigidos consideram os dois cursos escolhidos.
 4. **As modalidades são calculadas por opção.** A elegibilidade do candidato é uma só e considera todas as modalidades que as regras de distribuição das ofertas do processo admitem, inclusive as institucionais (no PSIQ, a ação afirmativa indígena ou quilombola; [`UNI-REQ-0096`](../requisitos/index.mdx)), mas cada oferta tem a sua própria distribuição de vagas (modalidades oferecidas e quadro de vagas). Por isso o sistema calcula e registra separadamente, para cada opção, em quais modalidades o candidato concorre: as que o direito dele permite e que a distribuição da oferta daquela opção contempla. Para decidir o que o formulário e os documentos pedem, vale a união das modalidades das opções escolhidas; ofertas que o candidato não escolheu não contam. Assim, só se pede documento de cota que vale em ao menos uma das opções escolhidas. Antes de escolher o curso, vale o conjunto do processo.
 5. **O comprovante mostra as duas opções.** Traz a primeira e a segunda opção (ou "não declarada") e as modalidades em que o candidato concorre em cada uma.
-6. **A segunda opção pode ser trocada ou retirada** enquanto as inscrições estiverem abertas, corrigindo a inscrição já submetida ([`UNI-REQ-0165`](../requisitos/index.mdx)). É a mesma inscrição, com o mesmo número, que continua submetida: não há cancelamento nem nova inscrição. A correção pode alterar as respostas como num novo envio e passa pelas mesmas conferências do envio (campos, termos e documentos obrigatórios, regras da segunda opção); se não passar, é recusada por inteiro e a inscrição e o comprovante anteriores continuam valendo. O que uma regra fixa depois do envio, como o nome social ([`UNI-REQ-0153`](../requisitos/index.mdx)), continua fixo. Cada correção emite um novo comprovante, os anteriores são preservados e vale o último. Encerradas as inscrições, não há mais correção.
+6. **A segunda opção pode ser trocada ou retirada** enquanto as inscrições estiverem abertas, corrigindo a inscrição já enviada ([`UNI-REQ-0165`](../requisitos/index.mdx)). É a mesma inscrição, com o mesmo número, que continua enviada: não há cancelamento nem nova inscrição. A correção pode alterar as respostas como num novo envio e passa pelas mesmas conferências do envio (campos, termos e documentos obrigatórios, regras da segunda opção); se não passar, é recusada por inteiro e a inscrição e o comprovante anteriores continuam valendo. O que uma regra fixa depois do envio, como o nome social ([`UNI-REQ-0153`](../requisitos/index.mdx)), continua fixo. Cada correção emite um novo comprovante, os anteriores são preservados e vale o último. Encerradas as inscrições, não há mais correção.
 7. **A inscrição segue as regras do edital vigentes quando foi enviada pela primeira vez** ([`UNI-REQ-0084`](../requisitos/index.mdx)). Uma retificação posterior que mude o número de opções de curso não altera inscrições já enviadas. O rascunho, que ainda não foi enviado, acompanha a retificação (seção 6.2).
 8. **Correção das opções de curso após o envio (decisão do PO em 22/10/2026).** A alteração da primeira ou da segunda opção de curso durante a correção de uma inscrição enviada fica pendente até a conclusão de um novo envio válido ([`UNI-REQ-0165`](../requisitos/index.mdx)). Enquanto a correção não for enviada, permanecem válidas as opções e as modalidades registradas no último comprovante. O novo envio passa pelas mesmas validações da inscrição, considerando as opções escolhidas, as modalidades correspondentes e os documentos exigidos. Se a correção for descartada ou não for enviada até o encerramento das inscrições, a inscrição e o comprovante anteriores permanecem válidos, sem incorporar as alterações.
 
@@ -203,7 +203,7 @@ Regras definidas na reunião de alinhamento de 20/10/2026 (CEPS, PO e líder té
 | Enviada, com correção não enviada e as inscrições abertas | Continuar a correção, descartar a correção, cancelar e ver o comprovante. |
 | Enviada, com as inscrições encerradas | Só ver o comprovante. |
 
-**Correção pendente de inscrição enviada (decisões do PO em 22/10/2026).** A correção de uma inscrição já enviada é mantida separadamente da última versão submetida. Alterações em respostas e arquivos somente passam a valer após a conclusão de um novo envio válido, que gera outro comprovante. Até esse momento, a inscrição anteriormente enviada e seu comprovante permanecem inalterados. A homologação e a análise documental consideram exclusivamente as informações e os documentos do último envio válido ([`UNI-REQ-0165`](../requisitos/index.mdx) e [`UNI-REQ-0029`](../requisitos/index.mdx)).
+**Correção pendente de inscrição enviada (decisões do PO em 22/10/2026).** A correção de uma inscrição já enviada é mantida separadamente da última versão enviada. Alterações em respostas e arquivos somente passam a valer após a conclusão de um novo envio válido, que gera outro comprovante. Até esse momento, a inscrição anteriormente enviada e seu comprovante permanecem inalterados. A homologação e a análise documental consideram exclusivamente as informações e os documentos do último envio válido ([`UNI-REQ-0165`](../requisitos/index.mdx) e [`UNI-REQ-0029`](../requisitos/index.mdx)).
 
 **Avisos ao candidato.** Enquanto houver correção pendente, o formulário apresenta aviso visível de que as alterações ainda não são válidas e distingue os arquivos que já integram a inscrição enviada daqueles que dependem de novo envio. Ao tentar sair da página com alterações não enviadas, o sistema solicita confirmação. Em "Minhas inscrições", a existência da pendência é indicada como "Correção não enviada", sem modificar a situação válida da inscrição.
 
@@ -507,7 +507,7 @@ Para rastreabilidade, cada regra acima e cada comportamento descrito neste docum
 | `REQ-17` | Formulário configurável | Formulários do processo ligados às fases do cronograma (inscrição, pedido de isenção, habilitação e outros), a partir de modelos, com campos condicionais. |
 | `REQ-19` | Publicação com cópia congelada | Publicar o processo seletivo, criando a cópia oficial imutável da configuração e emitindo o edital. |
 | `REQ-21 / 22` | Retificação e bloqueio de edição | Alterar processo seletivo publicado só por retificação (novo ato que aponta o retificado, nova versão congelada); edição direta bloqueada. |
-| `REQ-23` a 33 | Ciclo da inscrição previsto | Rascunho, submissão, opções de curso, concorrência dupla, atendimento, documentos, comprovante, unicidade, nome social, cancelamento. |
+| `REQ-23` a 33 | Ciclo da inscrição previsto | Rascunho, envio, opções de curso, concorrência dupla, atendimento, documentos, comprovante, unicidade, nome social, cancelamento. |
 | `REQ-56` | Cascata de remanejamento | Congelada no snapshot de publicação: por modalidade de origem, sequência ordenada de destinos mais a cota de fallback. A ordem de migração é semântica e distinta da precedência das opções de curso. |
 | `REQ-57` a 71 | Documentos exigidos (detalhe) | Aplicabilidade geral/condicional, condições, base legal, formatos e idade, documentos alternativos, consequências, repetição por entidade e congelamento do conjunto. |
 | `REQ-72` a 78 | Coleta e cálculo de cotas | Autodeclaração mais opção de concorrer, campos condicionais, não se aplica versus pendente, cálculo de modalidade pela Lei de Cotas e ordem de coleta. |
@@ -570,9 +570,9 @@ cronograma e a conclusão pela CGA, sem presumir situação intermediária. A
 consulta não efetiva encerramento.
 
 O PO aprovou em 28/10/2026 três indicadores (UNI-REQ-0179): **Inscrições**
-(submetidas e não canceladas), **Inscritos** (pessoas distintas por CPF nesse conjunto) e
+(enviadas e não canceladas), **Inscritos** (pessoas distintas por CPF nesse conjunto) e
 **Rascunhos** (não enviados e não descartados). Não há contador adicional de
-canceladas ou submetidas. Reenvios, opções e modalidades não multiplicam os
+canceladas ou enviadas. Reenvios, opções e modalidades não multiplicam os
 totais globais; correção pendente não conta como novo rascunho. O PO confirmou
 que processos nunca misturam níveis de ensino; o exemplo de inscrições em níveis
 diferentes no mesmo processo não integra o aceite. Sob a unicidade vigente por
@@ -590,13 +590,13 @@ encerramento formal do processo.
 Distribuições, situações, próximos prazos, agregados dos cartões e encerramento
 permanecem em entregas próprias, independentes dos três quantitativos. As
 distribuições
-usam a última versão enviada válida das inscrições submetidas e não canceladas,
+usam a última versão enviada válida das inscrições enviadas e não canceladas,
 separando primeira e segunda opção e modalidades por oferta. Descartados ficam
 fora de consultas e contagens mesmo quando ainda existem por exclusão lógica,
 sem exigir exclusão física imediata (UNI-REQ-0169).
 
 A relação nominal (UNI-REQ-0328), filha do UNI-REQ-0176, permanece proposta a
-validar, separada dos relatórios: filtros por situação (Submetida, Rascunho e
+validar, separada dos relatórios: filtros por situação (Enviada, Rascunho e
 Cancelada), curso/oferta em ambas as opções, identificação da opção, CPF
 mascarado como `***.999.999-**` apenas com a permissão específica, e autorização
 própria no servidor. Aplica-se o
