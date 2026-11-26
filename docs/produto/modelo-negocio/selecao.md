@@ -413,18 +413,19 @@ Cada item de documento tem, a qualquer momento, uma situação clara (satisfeito
 
 ### 9.3 Consequência de não comprovar
 
-Na habilitação, cada condição ou ação exigida tem a consequência configurada pelo administrador. O sistema aplica o que foi definido para ela, inclusive para a pessoa da reserva (UNI-REQ-0501 e UNI-REQ-0502). As consequências possíveis incluem:
+O administrador pode declarar uma consequência para cada exigência documental ou grupo de alternativas, para a ausência em banca da fase ou da etapa e para a falta de envio de formulário (UNI-REQ-0501 e UNI-REQ-0502). A consequência da ausência só pode ser declarada em banca que avalia o mérito e em que a pessoa candidata comparece, como heteroidentificação, prova de títulos ou entrevista. O papel vem do tipo de banca registrado no processo (UNI-REQ-0139 e UNI-REQ-0522). A publicação recusa a declaração em banca cujo papel é julgar a 1ª instância, julgar a 2ª instância ou importar dados, como notas do INEP ou candidatos, pois a pessoa candidata não comparece a essas bancas. Sem declaração, a falta não tem consequência própria. Não há declaração geral para envio de documentos nem lista geral de ações. O sistema aplica qualquer uma das três consequências somente após o resultado definitivo dos recursos cabíveis, também à pessoa da reserva (UNI-REQ-0501 e UNI-REQ-0502).
 
 | Consequência | Efeito |
 |---|---|
-| Elimina | O candidato é eliminado do processo. |
-| Reclassifica para ampla concorrência | O candidato perde a vaga na cota, mas segue concorrendo em ampla concorrência. |
-| Remove vantagem | A pessoa perde somente o acréscimo do Fator de Atenuação das Desigualdades de Acesso, permanece na modalidade e não é eliminada por essa perda. A habilitação é indeferida na chamada e a nota sem acréscimo vale a partir da chamada seguinte (UNI-REQ-0496 e UNI-REQ-0498). |
-| Pendência para reenvio | Abre-se prazo para o candidato complementar/reenviar o documento numa fase que permita complementação. |
+| Eliminação do processo | A pessoa é eliminada após os procedimentos e o resultado definitivo dos recursos cabíveis. |
+| Retirada da modalidade | A pessoa perde a modalidade em questão e continua na ampla concorrência. A modalidade em questão é a modalidade de vaga que exige a condição não comprovada e em que a pessoa concorre. |
+| Retirada do acréscimo | A pessoa perde somente o acréscimo do Fator de Atenuação das Desigualdades de Acesso, permanece nas modalidades e não é eliminada por essa perda. Na habilitação, a habilitação é indeferida naquela chamada e a nota sem acréscimo vale a partir da chamada seguinte (UNI-REQ-0496 e UNI-REQ-0498). |
 
-> A qual nó a consequência se prende. A consequência é configurada **por nó** da árvore de exigências, não por documento solto: cada folha (documento único) e cada grupo de alternativas (`OU` / `pelo menos N de`) — a unidade opaca — pode carregar a sua consequência e a sua **própria base legal**; um grupo `E` (todos exigidos) não carrega consequência própria, cada filho carrega a sua. Num grupo de alternativas, portanto, deixar de apresentar uma alternativa **não** aciona a penalidade se outra satisfaz o grupo — a consequência é do grupo, avaliada pelo resultado dele, nunca somada a partir dos filhos.
+Cada exigência documental e grupo podem declarar, separadamente, se abre prazo para reenvio numa fase que permita complementação. O reenvio não é uma consequência (UNI-REQ-0520).
 
-A consequência precisa ser coerente com a natureza da vaga e com o que o processo oferece — por exemplo, remover o Fator de Atenuação só é válido se o processo de fato oferecer o Fator de Atenuação. O sistema verifica essa coerência na publicação.
+Um grupo de alternativas tem sua própria consequência e sua própria base legal (UNI-REQ-0070 e UNI-REQ-0521). Se o grupo aceita um documento ou outro e uma alternativa o atende, a falta da outra não produz consequência. Em um grupo que exige todos os itens, valem as consequências declaradas para os itens não atendidos. Enquanto o dado que dispara uma exigência ainda não pode ser resolvido, ela fica bloqueada e não apresenta consequência (UNI-REQ-0070 e UNI-REQ-0077).
+
+A consequência deve ser coerente com a oferta do processo. Retirar a modalidade exige que haja modalidade em questão e que a oferta tenha ampla concorrência, pois quem perde a modalidade segue na ampla concorrência (UNI-REQ-0518). Retirar o acréscimo pode ser declarado para qualquer exigência, desde que o processo ofereça esse acréscimo (UNI-REQ-0519). Exceto a retirada do acréscimo, a consequência de uma exigência ou de um grupo também precisa ser a mesma que a modalidade de vaga alcançada declara para a pessoa indeferida, quando ela declara (UNI-REQ-0523). A publicação recusa a configuração incoerente com a oferta ou com a modalidade; nas recusas por incoerência com a oferta, a consequência não é retirada nem ajustada em silêncio (UNI-REQ-0518).
 
 ### Habilitação e chamadas
 
@@ -436,7 +437,7 @@ Quando o edital exige manifestação de interesse, ela ocorre depois da primeira
 
 ### 9.4 Base legal
 
-Cada exigência pode ter uma ou várias bases legais (federal, estadual, municipal, norma interna ou o próprio edital), cada uma com situação pendente ou resolvida. A publicação exige pelo menos uma base legal resolvida para todo documento que pode determinar o resultado (obrigatório ou com consequência). Assim, nenhuma exigência que afeta o candidato entra em vigor sem embasamento registrado e rastreável.
+Cada exigência pode ter uma ou várias bases legais (federal, estadual, municipal, norma interna ou o próprio edital), cada uma com situação pendente ou resolvida. A publicação exige pelo menos uma base legal resolvida para todo documento que pode determinar o resultado (obrigatório ou com consequência), conforme UNI-REQ-0059. Assim, nenhuma exigência que afeta o candidato entra em vigor sem embasamento registrado e rastreável.
 
 ### 9.5 Formato, tamanho e validade
 
