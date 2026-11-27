@@ -11050,7 +11050,7 @@
           {
             "name": "q",
             "in": "query",
-            "description": "Termo de busca livre (caixa-insens\u00EDvel) sobre o Nome do termo de consentimento; ausente/vazio = sem filtro. At\u00E9 200 caracteres, sem contar os espa\u00E7os das pontas. Mantenha fixo ao navegar prev/next (o cursor n\u00E3o vincula o filtro).",
+            "description": "Termo de busca livre (caixa-insens\u00EDvel) sobre o Nome do termo de consentimento; ausente/vazio = sem filtro. At\u00E9 200 caracteres, sem contar os espa\u00E7os das pontas. O cursor s\u00F3 continua com a mesma busca: outro termo \u00E9 recusado com 400. Mantenha fixo ao navegar prev/next.",
             "schema": {
               "type": "string"
             }
@@ -22532,12 +22532,16 @@
         "required": [
           "obrigatorio",
           "consequenciaDoDescumprimento",
-          "basesLegais"
+          "basesLegais",
+          "abrePrazoParaReenvio"
         ],
         "type": "object",
         "properties": {
           "obrigatorio": {
-            "type": "boolean"
+            "type": [
+              "null",
+              "boolean"
+            ]
           },
           "consequenciaDoDescumprimento": {
             "oneOf": [
@@ -22559,8 +22563,10 @@
             }
           },
           "abrePrazoParaReenvio": {
-            "type": "boolean",
-            "default": false
+            "type": [
+              "null",
+              "boolean"
+            ]
           }
         }
       },
@@ -22592,7 +22598,8 @@
       "IndeferimentoDoGrupoDeDocumentosDoModeloInput": {
         "required": [
           "consequenciaDoDescumprimento",
-          "basesLegais"
+          "basesLegais",
+          "abrePrazoParaReenvio"
         ],
         "type": "object",
         "properties": {
@@ -22616,8 +22623,10 @@
             }
           },
           "abrePrazoParaReenvio": {
-            "type": "boolean",
-            "default": false
+            "type": [
+              "null",
+              "boolean"
+            ]
           }
         }
       },
@@ -26378,7 +26387,10 @@
             ]
           },
           "ordem": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "format": "int32"
           },
           "orientacao": {
