@@ -10349,4 +10349,26 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0546',
+    titulo: 'A definição da fase e da etapa recusa o tipo de ato novo que não tem versão vigente no catálogo de Publicações',
+    enunciado:
+      'A fase e a etapa não descrevem por texto livre o documento que publicam: cada produto declarado cita um tipo de ato do catálogo de Publicações, que fixa o modelo, os campos e a classificação daquela publicação (UNI-REQ-0157). Ao definir as fases ou as etapas do processo seletivo, o tipo citado por cada produto que passa pela conferência do catálogo, descrita adiante, precisa existir nele e ter versão vigente no dia civil da definição, no fuso da instituição, tomado no início da operação. Sem isso, a definição é recusada: a fase ou a etapa ficaria apontando para um modelo que ninguém consegue emitir, e um erro de digitação no código só apareceria depois de o edital publicado. A regra é a mesma para a fase e para a etapa, e muda apenas o código de erro de cada uma. Todos os produtos da mesma definição são conferidos contra o mesmo dia, e a recusa de um produto não impede a conferência dos demais: a definição com vários produtos nessa situação devolve uma recusa para cada um, apontando o produto, e nada é gravado. Se a definição é interrompida antes da conferência, por falha na leitura da versão publicada do processo ou por cadastro que a definição cita e não existe (fase canônica, unidade responsável, tipo de banca, categoria de documento), os produtos ainda não conferidos não geram recusa, e a resposta traz o erro que interrompeu junto com as recusas já acumuladas. O tipo que a versão publicada do processo já declara não volta ao catálogo e vale pela classificação congelada nela (UNI-REQ-0157), e, na etapa, o produto que ela já tinha, com o mesmo tipo e o mesmo papel, também não volta ao catálogo: aposentar o tipo no catálogo depois disso não impede a gestão de regravar a fase ou a etapa. O tipo declarado pela primeira vez continua conferido pelo catálogo, mesmo que o processo já tenha versão publicada. O valor do papel é validado primeiro, e papel desconhecido é recusado sem consultar o catálogo. Depois, a existência do tipo é conferida antes da compatibilidade com o papel: só o tipo que existe é verificado quanto a ser resultado e a admitir papel preliminar ou definitivo. Exemplo fictício: ao definir a etapa de prova, Marina cita no segundo produto o tipo "RESULTADO_PRELMINAR", com erro de digitação; a definição é recusada, a recusa aponta o segundo produto da etapa, e Marina corrige o código antes de repetir a definição.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0157',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A etapa e a fase que citam tipo de ato com versão vigente no catálogo na data da definição são aceitas quanto a esse ponto; o produto consultado no catálogo que cita código que ele não tem, ou tipo sem nenhuma versão vigente na data, é recusado com 422 e com o código de erro da fase ou o da etapa, conforme quem declarou o produto, no dia civil da definição, no fuso da instituição; a recusa aponta o produto, pela posição dele na fase ou na etapa, e nada é gravado; vários produtos nessa situação devolvem uma recusa para cada um, salvo interrupção da definição por falha na leitura da versão publicada ou por cadastro citado que não existe (fase canônica, unidade responsável, tipo de banca, categoria de documento), que devolve o erro da interrupção junto com as recusas já acumuladas e deixa sem conferência os produtos restantes; o tipo que a versão publicada já declara vale pela classificação congelada nela, e o tipo que o catálogo aposentou depois da publicação não impede regravar a fase ou a etapa que já o declarava; o tipo declarado pela primeira vez continua conferido pelo catálogo, mesmo com versão publicada; o produto que a etapa já tinha, com o mesmo tipo e o mesmo papel, não é conferido de novo no catálogo; o tipo sem versão vigente é recusado por inexistência, e não pelo papel, e o que existe passa a ser conferido quanto ao papel (UNI-REQ-0157).',
+    verificacao:
+      'Testes automatizados da definição das etapas e do cronograma de fases (produto com tipo fora do catálogo recusado, na etapa e na fase; dois produtos recusados com uma recusa em cada, no campo do produto; tipo já declarado na versão publicada aceito pela classificação congelada; tipo novo conferido pelo catálogo mesmo com versão publicada; tipo aposentado no catálogo que a etapa já declarava não impede regravá-la), no nível da aplicação e da rota HTTP.',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];
