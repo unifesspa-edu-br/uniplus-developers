@@ -66,6 +66,7 @@ jobs:
           pasta_api=src/data/erros/uniplus-api
           pasta_geo=src/data/erros/unifesspa-geo-api
           resumo=''
+          alvo=()
 
           mkdir -p static/openapi
           for modulo in autorizacao configuracao ingresso organizacao portal publicacoes selecao; do
@@ -80,12 +81,14 @@ jobs:
           if mudou static/openapi "$pasta_api"; then
             gravar_origem "$REPOSITORIO_API" "$commit_api" "$pasta_api"
             resumo+="Contratos copiados de \`$REPOSITORIO_API@$commit_api\`."$'\n'
+            alvo+=('da API')
           fi
 
           copiar_erros "$REPOSITORIO_GEO" "$commit_geo" "$pasta_geo"
           if mudou "$pasta_geo"; then
             gravar_origem "$REPOSITORIO_GEO" "$commit_geo" "$pasta_geo"
             resumo+="Contratos copiados de \`$REPOSITORIO_GEO@$commit_geo\`."$'\n'
+            alvo+=('do Geo')
           fi
 
           if [[ -z "$resumo" ]]; then
@@ -94,6 +97,7 @@ jobs:
           fi
           {
             printf 'alteracao=true\n'
+            printf 'alvo=%s\n' "${alvo[0]}${alvo[1]:+ e ${alvo[1]}}"
             printf 'resumo<<FIM_DO_RESUMO\n%sFIM_DO_RESUMO\n' "$resumo"
           } >> "$GITHUB_OUTPUT"
 
@@ -124,8 +128,8 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.app.outputs.token }}
-          commit-message: 'chore(contratos): sincroniza contratos da API e do Geo'
-          title: 'chore(contratos): sincroniza contratos da API e do Geo'
+          commit-message: 'chore(contratos): sincroniza contratos ${{ steps.copiar.outputs.alvo }}'
+          title: 'chore(contratos): sincroniza contratos ${{ steps.copiar.outputs.alvo }}'
           body: |
             ${{ steps.copiar.outputs.resumo }}
             O build conferiu os pares de códigos e descrições, os requisitos e os links internos. Revise o diff do OpenAPI para identificar alterações que precisam entrar no changelog.
