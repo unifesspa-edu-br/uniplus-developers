@@ -10085,4 +10085,26 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
+  {
+    requisito_id: 'UNI-REQ-0534',
+    titulo: 'O envio recusado porque o serviço do Geo está desligando deixa a execução com falha e a base publicada inalterada',
+    enunciado:
+      'Quando, depois de a execução da carga ter sido registrada, o Geo tenta colocar a carga na fila e a encontra fechada porque o serviço está sendo desligado, a carga não entra na fila e o envio do pacote é recusado com o erro `uniplus.geo.importacao.nao_enfileirada` (503), título "Não foi possível enfileirar a importação (serviço em desligamento)" e mensagem "Não foi possível enfileirar a importação (serviço em desligamento).". A execução registrada fica com falha, com a mensagem "Serviço em desligamento; carga não enfileirada."; nenhuma carga roda e a base publicada continua na versão anterior. A versão do pacote não conta como aplicada (UNI-REQ-0528), e a execução com falha não bloqueia um novo envio: ele não recebe, por causa dela, o 409 do UNI-REQ-0530. O arquivo do pacote também é apagado neste caso; o apagamento nas demais recusas e falhas é do UNI-REQ-0531. A resposta traz código, título, detalhe e identificador de rastreio da resposta, mas não traz o identificador da execução nem o endereço de acompanhamento dela. Defeito conhecido (unifesspa-geo-api#67, ainda aberta): se a gravação da falha também falhar por erro do banco de dados, o Geo só registra o erro no log e responde o mesmo 503; a execução permanece em andamento, e o envio seguinte é recusado com o 409 do UNI-REQ-0530 quando o Geo consegue consultar o estado das execuções. Outros tipos de erro na gravação não são tratados aqui. Este requisito não afirma outro comportamento antes da correção desse defeito. Exemplo fictício: Marina envia o pacote da versão 202611 enquanto o serviço do Geo está sendo atualizado; o pacote é recebido e conferido, mas a carga não entra na fila, e ela recebe 503, a execução fica com falha, o arquivo é apagado e a base continua na versão anterior.',
+    grupo: 'funcional',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0009',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'proposto',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Quando a fila de carga está fechada na tentativa de enfileirar, depois do registro da execução, o envio recebe 503 com o erro `uniplus.geo.importacao.nao_enfileirada`, o título e a mensagem do enunciado; a execução fica com falha e a mensagem "Serviço em desligamento; carga não enfileirada.", salvo a gravação da falha também falhar (defeito conhecido, geo#67); nenhuma carga roda e a base publicada não muda; a versão do pacote não conta como aplicada; um novo envio não é recusado com 409 por causa dessa execução com falha, e é recusado com o 409 do UNI-REQ-0530 se a gravação da falha tiver falhado por erro do banco e a execução permanecer em andamento, quando o estado das execuções puder ser consultado; a resposta traz o identificador de rastreio da resposta e não traz o identificador da execução nem o endereço de acompanhamento; o arquivo do pacote é apagado; a resposta e a mensagem da execução não trazem nome nem conteúdo do arquivo enviado.',
+    verificacao:
+      'Testes automatizados do 503 com título e mensagem, da execução com falha e da mensagem, da base publicada preservada, da versão que não conta como aplicada, do novo envio sem 409 por causa da execução com falha, do 409 quando a gravação da falha falha por erro do banco e a execução permanece em andamento, com o estado das execuções consultável, da resposta com identificador de rastreio e sem identificador da execução e do arquivo apagado (planejados); o defeito conhecido da unifesspa-geo-api#67 não tem teste de comportamento corrigido enquanto estiver aberto.',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend',
+  },
 ];
