@@ -3494,12 +3494,12 @@
     {
       "codigo": "uniplus.item_formulario.fato_desconhecido",
       "status": 422,
-      "titulo": "O fato do item não pertence ao catálogo de fatos do candidato"
+      "titulo": "O dado do candidato do item não existe no catálogo"
     },
     {
       "codigo": "uniplus.item_formulario.fato_nao_coletavel",
       "status": 422,
-      "titulo": "O fato do item não é coletável num campo"
+      "titulo": "O dado do candidato do item não é coletável num campo"
     },
     {
       "codigo": "uniplus.item_formulario.formato_incoerente",
@@ -5584,7 +5584,7 @@
     {
       "codigo": "uniplus.selecao.documento_exigido.tipo_documento_com_protecao_pendente",
       "status": 422,
-      "titulo": "O tipo de documento aguarda a aprovação da proteção de dados e não aceita vínculo novo"
+      "titulo": "O tipo de documento aguarda a aprovação do Representante do controlador e não aceita vínculo novo"
     },
     {
       "codigo": "uniplus.selecao.documento_exigido.tipo_documento_nao_encontrado",
@@ -6105,6 +6105,11 @@
       "codigo": "uniplus.selecao.homologacao_das_inscricoes.edicao_do_exame_invalida",
       "status": 422,
       "titulo": "A edição do exame da condição é inválida (de 1998 a 2100)"
+    },
+    {
+      "codigo": "uniplus.selecao.homologacao_das_inscricoes.edicao_do_exame_nao_declarada",
+      "status": 422,
+      "titulo": "A edição do exame da condição não está entre as edições do ENEM que o processo declara"
     },
     {
       "codigo": "uniplus.selecao.homologacao_das_inscricoes.resultado_nao_declarado",
@@ -7304,7 +7309,7 @@
     {
       "codigo": "uniplus.selecao.processo_seletivo.fato_com_protecao_pendente",
       "status": 422,
-      "titulo": "Fato do processo aguarda a aprovação da proteção de dados"
+      "titulo": "O dado do candidato usado pelo processo aguarda a aprovação do Representante do controlador"
     },
     {
       "codigo": "uniplus.selecao.processo_seletivo.fato_congelado_nao_encontrado",
@@ -7669,7 +7674,7 @@
     {
       "codigo": "uniplus.selecao.processo_seletivo.tipo_documento_com_protecao_pendente",
       "status": 422,
-      "titulo": "Tipo de documento do processo aguarda a aprovação da proteção de dados"
+      "titulo": "O tipo de documento exigido pelo processo aguarda a aprovação do Representante do controlador"
     },
     {
       "codigo": "uniplus.selecao.processo_seletivo.tipo_etapa_nao_encontrado_ou_inativo",
@@ -8374,17 +8379,17 @@
     {
       "codigo": "uniplus.vinculo_catalogo.fato_com_protecao_pendente",
       "status": 422,
-      "titulo": "O fato aguarda a aprovação da proteção de dados e não aceita vínculo novo"
+      "titulo": "O dado do candidato aguarda a aprovação do Representante do controlador e não aceita vínculo novo"
     },
     {
       "codigo": "uniplus.vinculo_catalogo.fato_desativado",
       "status": 422,
-      "titulo": "O fato está desativado no catálogo e não aceita vínculo novo"
+      "titulo": "O dado do candidato está desativado no catálogo e não aceita vínculo novo"
     },
     {
       "codigo": "uniplus.vinculo_catalogo.valor_desativado",
       "status": 422,
-      "titulo": "O valor está desativado no catálogo e não aceita vínculo novo"
+      "titulo": "O valor de um dado do candidato está desativado no catálogo e não aceita vínculo novo"
     }
   ]
 }
