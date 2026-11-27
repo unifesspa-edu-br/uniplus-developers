@@ -1,4 +1,4 @@
-name: Sincronizar contratos da API
+name: Sincronizar contratos da API e do Geo
 
 on:
   schedule:
@@ -13,13 +13,14 @@ concurrency:
 
 jobs:
   sync:
-    name: Sincronizar OpenAPI e catálogo de erros
+    name: Sincronizar OpenAPI e catálogos de erros
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: read
     env:
       REPOSITORIO_API: unifesspa-edu-br/uniplus-api
+      REPOSITORIO_GEO: unifesspa-edu-br/unifesspa-geo-api
 
     steps:
       - name: Checkout
@@ -27,32 +28,74 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Copiar os contratos de um único commit
+      - name: Copiar os contratos de um único commit de cada repositório
         id: copiar
         run: |
           set -euo pipefail
-          commit="$(git ls-remote "https://github.com/$REPOSITORIO_API.git" refs/heads/main | cut -f1)"
-          [[ "$commit" =~ ^[a-f0-9]{40}$ ]]
-          origem="https://raw.githubusercontent.com/$REPOSITORIO_API/$commit/contracts"
-          mkdir -p static/openapi src/data/erros
+
+          ultimo_commit() {
+            local remoto commit
+            remoto="$(git ls-remote "https://github.com/$1.git" refs/heads/main)" || return 1
+            commit="${remoto%%$'\t'*}"
+            [[ "$commit" =~ ^[a-f0-9]{40}$ ]] || { printf '%s: commit de main inválido.\n' "$1" >&2; return 1; }
+            printf '%s' "$commit"
+          }
+
+          baixar() {
+            curl --fail --silent --show-error --location --retry 3 "$1" -o "$2"
+          }
+
+          copiar_erros() {
+            local repositorio="$1" commit="$2" pasta="$3" arquivo
+            mkdir -p "$pasta"
+            for arquivo in codigos-de-erro.json descricoes-de-erros.json; do
+              baixar "https://raw.githubusercontent.com/$repositorio/$commit/contracts/$arquivo" "$pasta/$arquivo"
+            done
+          }
+
+          gravar_origem() {
+            printf '{\n  "repositorio": "%s",\n  "commit": "%s"\n}\n' "$1" "$2" > "$3/origem.json"
+          }
+
+          mudou() {
+            [[ -n "$(git status --porcelain -- "$@")" ]]
+          }
+
+          commit_api="$(ultimo_commit "$REPOSITORIO_API")" || exit 1
+          commit_geo="$(ultimo_commit "$REPOSITORIO_GEO")" || exit 1
+          pasta_api=src/data/erros/uniplus-api
+          pasta_geo=src/data/erros/unifesspa-geo-api
+          resumo=''
+
+          mkdir -p static/openapi
           for modulo in autorizacao configuracao ingresso organizacao portal publicacoes selecao; do
-            curl --fail --silent --show-error --location --retry 3 \
-              "$origem/openapi.$modulo.json" -o "static/openapi/$modulo.json"
+            baixar "https://raw.githubusercontent.com/$REPOSITORIO_API/$commit_api/contracts/openapi.$modulo.json" \
+              "static/openapi/$modulo.json"
             if ! python3 -m json.tool "static/openapi/$modulo.json" >/dev/null 2>&1; then
               printf 'static/openapi/%s.json: JSON inválido.\n' "$modulo" >&2
               exit 1
             fi
           done
-          for arquivo in codigos-de-erro.json descricoes-de-erros.json; do
-            curl --fail --silent --show-error --location --retry 3 \
-              "$origem/$arquivo" -o "src/data/erros/$arquivo"
-          done
-          if [[ -z "$(git status --porcelain -- static/openapi src/data/erros)" ]]; then
+          copiar_erros "$REPOSITORIO_API" "$commit_api" "$pasta_api"
+          if mudou static/openapi "$pasta_api"; then
+            gravar_origem "$REPOSITORIO_API" "$commit_api" "$pasta_api"
+            resumo+="Contratos copiados de \`$REPOSITORIO_API@$commit_api\`."$'\n'
+          fi
+
+          copiar_erros "$REPOSITORIO_GEO" "$commit_geo" "$pasta_geo"
+          if mudou "$pasta_geo"; then
+            gravar_origem "$REPOSITORIO_GEO" "$commit_geo" "$pasta_geo"
+            resumo+="Contratos copiados de \`$REPOSITORIO_GEO@$commit_geo\`."$'\n'
+          fi
+
+          if [[ -z "$resumo" ]]; then
             printf 'alteracao=false\n' >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          printf '{\n  "repositorio": "%s",\n  "commit": "%s"\n}\n' "$REPOSITORIO_API" "$commit" > src/data/erros/origem.json
-          printf 'alteracao=true\ncommit=%s\n' "$commit" >> "$GITHUB_OUTPUT"
+          {
+            printf 'alteracao=true\n'
+            printf 'resumo<<FIM_DO_RESUMO\n%sFIM_DO_RESUMO\n' "$resumo"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Preparar Node.js
         if: steps.copiar.outputs.alteracao == 'true'
@@ -81,11 +124,10 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.app.outputs.token }}
-          commit-message: 'chore(contratos): sincroniza contratos da API'
-          title: 'chore(contratos): sincroniza contratos da API'
+          commit-message: 'chore(contratos): sincroniza contratos da API e do Geo'
+          title: 'chore(contratos): sincroniza contratos da API e do Geo'
           body: |
-            Contratos copiados de `unifesspa-edu-br/uniplus-api@${{ steps.copiar.outputs.commit }}`.
-
+            ${{ steps.copiar.outputs.resumo }}
             O build conferiu os pares de códigos e descrições, os requisitos e os links internos. Revise o diff do OpenAPI para identificar alterações que precisam entrar no changelog.
           branch: chore/sync-api-contracts
           delete-branch: true

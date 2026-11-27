@@ -7,13 +7,89 @@ import {conferirBloco} from './markdown.mjs';
 const ARQUIVOS = ['codigos-de-erro.json', 'descricoes-de-erros.json'];
 const CODIGO = /^uniplus(?:\.[a-z0-9_]+)+$/;
 const REQUISITO = /^UNI-REQ-[0-9]{4}$/;
+const COMMIT = /^[a-f0-9]{40}$/;
 const SECOES = ['oQueAconteceu', 'comoResolver', 'ondeAparece'];
+const PREFIXO_DO_GEO = 'uniplus.geo.';
+const PASTA_DE_ERROS = 'src/data/erros';
+
+export const REPOSITORIOS = {
+  api: {pasta: 'uniplus-api', nome: 'unifesspa-edu-br/uniplus-api'},
+  geo: {pasta: 'unifesspa-geo-api', nome: 'unifesspa-edu-br/unifesspa-geo-api'},
+};
 
 export function carregarCatalogo(siteDir) {
-  const pasta = join(siteDir, 'src/data/erros');
-  const [publicados, textos] = ARQUIVOS.map((arquivo) => lerContrato(pasta, arquivo));
+  const api = lerRepositorio(siteDir, REPOSITORIOS.api);
+  const geo = lerRepositorio(siteDir, REPOSITORIOS.geo);
+  conferirDescricaoRepetida(api, geo);
+  conferirEscopoDoGeo(api, geo);
+  conferirCodigosComuns(api, geo);
   const requisitos = carregarRequisitos(siteDir);
-  return reunirContratos(publicados, textos, requisitos);
+  const publicados = new Map([...geo.codigos, ...api.codigos]);
+  const textos = new Map([...geo.descricoes, ...api.descricoes]);
+  const origens = new Map([
+    ...Array.from(geo.descricoes.keys(), (codigo) => [codigo, geo.origem]),
+    ...Array.from(api.descricoes.keys(), (codigo) => [codigo, api.origem]),
+  ]);
+  return Array.from(publicados, ([codigo, registro]) => {
+    const descricao = textos.get(codigo);
+    conferirRegistro(registro);
+    conferirRequisitos(codigo, descricao.requisitos, requisitos);
+    const linksInternos = SECOES.flatMap((secao) => linksDaSecao(codigo, descricao[secao], secao));
+    for (const link of linksInternos) conferirLinkDeErro(codigo, link, publicados);
+    return {registro, descricao, modulo: classificar(codigo), linksInternos, origem: origens.get(codigo)};
+  });
+}
+
+function lerRepositorio(siteDir, repositorio) {
+  const pasta = join(siteDir, PASTA_DE_ERROS, repositorio.pasta);
+  const origem = lerOrigem(pasta, repositorio);
+  const [publicados, textos] = ARQUIVOS.map((arquivo) => lerContrato(pasta, arquivo));
+  const codigos = porCodigo(publicados.codigos, `${repositorio.pasta}/${ARQUIVOS[0]}`);
+  const descricoes = porCodigo(textos.descricoes, `${repositorio.pasta}/${ARQUIVOS[1]}`);
+  return {repositorio, origem, codigos, descricoes};
+}
+
+function lerOrigem(pasta, repositorio) {
+  const origem = lerJson(pasta, 'origem.json');
+  const aceitos = Object.values(REPOSITORIOS).map(({nome}) => nome);
+  if (!aceitos.includes(origem?.repositorio) || origem.repositorio !== repositorio.nome
+    || typeof origem.commit !== 'string' || !COMMIT.test(origem.commit)) {
+    throw new Error(`${repositorio.pasta}/origem.json: origem inválida; esperado o repositório ${repositorio.nome} e um commit.`);
+  }
+  return {repositorio: origem.repositorio, commit: origem.commit};
+}
+
+function conferirDescricaoRepetida(api, geo) {
+  for (const codigo of geo.descricoes.keys()) {
+    if (api.descricoes.has(codigo)) {
+      throw new Error(`${codigo}: descrito nos dois repositórios, ${geo.repositorio.nome} e ${api.repositorio.nome}; a descrição de código comum é de ${api.repositorio.nome}.`);
+    }
+  }
+}
+
+function conferirEscopoDoGeo(api, geo) {
+  for (const codigo of api.codigos.keys()) {
+    if (codigo.startsWith(PREFIXO_DO_GEO)) {
+      throw new Error(`${codigo}: código do Geo publicado por ${api.repositorio.nome}.`);
+    }
+  }
+  for (const codigo of geo.descricoes.keys()) {
+    if (codigo.startsWith(PREFIXO_DO_GEO)) continue;
+    throw new Error(`${codigo}: descrito por ${geo.repositorio.nome}, que descreve só ${PREFIXO_DO_GEO}*; a descrição é de ${api.repositorio.nome}.`);
+  }
+  conferirPares(geo.codigos, geo.descricoes, PREFIXO_DO_GEO);
+  conferirPares(api.codigos, api.descricoes);
+}
+
+function conferirCodigosComuns(api, geo) {
+  for (const [codigo, registro] of geo.codigos) {
+    if (codigo.startsWith(PREFIXO_DO_GEO)) continue;
+    const daApi = api.codigos.get(codigo);
+    if (!daApi) throw new Error(`${codigo}: código do ${geo.repositorio.nome} ausente em ${api.repositorio.nome}.`);
+    if (daApi.status !== registro.status || daApi.titulo !== registro.titulo) {
+      throw new Error(`${codigo}: status ou título diferente entre ${geo.repositorio.nome} e ${api.repositorio.nome}.`);
+    }
+  }
 }
 
 function lerContrato(pasta, arquivo) {
@@ -49,22 +125,9 @@ function porCodigo(entradas, arquivo) {
   return mapa;
 }
 
-function reunirContratos(publicados, textos, requisitos) {
-  const codigos = porCodigo(publicados.codigos, ARQUIVOS[0]);
-  const descricoes = porCodigo(textos.descricoes, ARQUIVOS[1]);
-  conferirPares(codigos, descricoes);
-  return Array.from(codigos, ([codigo, registro]) => {
-    const descricao = descricoes.get(codigo);
-    conferirRegistro(registro);
-    conferirRequisitos(codigo, descricao.requisitos, requisitos);
-    const linksInternos = SECOES.flatMap((secao) => linksDaSecao(codigo, descricao[secao], secao));
-    for (const link of linksInternos) conferirLinkDeErro(codigo, link, codigos);
-    return {registro, descricao, modulo: classificar(codigo), linksInternos};
-  });
-}
-
-function conferirPares(codigos, descricoes) {
-  const faltam = Array.from(codigos.keys()).filter((codigo) => !descricoes.has(codigo));
+function conferirPares(codigos, descricoes, prefixo = '') {
+  const faltam = Array.from(codigos.keys())
+    .filter((codigo) => codigo.startsWith(prefixo) && !descricoes.has(codigo));
   const sobram = Array.from(descricoes.keys()).filter((codigo) => !codigos.has(codigo));
   if (faltam.length || sobram.length) {
     throw new Error([

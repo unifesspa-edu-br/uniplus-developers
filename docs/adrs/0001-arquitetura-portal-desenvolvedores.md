@@ -50,7 +50,7 @@ uniplus-developers/
 │   │   ├── ErrorCatalogEntry.tsx  # Renderiza o contrato de erro sincronizado
 │   │   ├── MediaTypeCard.tsx      # Renderiza /media-types/{resource}/{version}
 │   │   └── ChangelogEntry.tsx     # Renderiza entradas de changelog com banners
-│   ├── data/erros/                # Contratos da API e commit de origem
+│   ├── data/erros/                # Contratos da API e do Geo, uma pasta por repositório
 │   ├── plugins/catalogo-erros/    # Rotas geradas por módulo e código
 │   ├── css/
 │   │   ├── govbr-tokens.css       # Fonte única dos tokens Gov.br DS
@@ -69,7 +69,7 @@ uniplus-developers/
 │   └── img/
 └── .github/workflows/
     ├── deploy.yml                 # Build + push para gh-pages no merge para main
-    └── sync-specs.yml             # Sincronização de OpenAPI e catálogo da API
+    └── sync-specs.yml             # Sincronização de OpenAPI e catálogos de erros
 ```
 
 ### Componente-chave: `<RedocSpec>`
@@ -128,6 +128,13 @@ O workflow `sync-specs.yml` copia os OpenAPI para `static/openapi/` e os arquivo
 Depois de validar os contratos, os requisitos e os links, o aplicativo do
 GitHub abre o PR com o commit de origem. O catálogo acompanha a `main` da API.
 A implantação da API pode estar em outro commit.
+
+A emenda de 27/11/2026 estende o catálogo ao Geo. Cada repositório tem a sua pasta
+(`src/data/erros/uniplus-api/` e `src/data/erros/unifesspa-geo-api/`), com os dois arquivos e o
+seu `origem.json`, e a cópia de um repositório não altera a pasta do outro. O build aceita
+somente esses dois repositórios e exige que a origem seja a da pasta. O Geo descreve só os códigos
+`uniplus.geo.*`; os códigos comuns são descritos pela API, e o build confere que o código comum
+do Geo existe na API com o mesmo status e título. O catálogo mostrado junta as duas pastas.
 
 ### Busca
 
