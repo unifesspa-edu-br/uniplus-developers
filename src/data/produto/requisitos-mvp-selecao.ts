@@ -5277,7 +5277,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'A decisão sobre a reclassificação superada é recusada por conflito; a liberação da mais recente devolve a permissão; a consulta de reclassificação inexistente é recusada como não encontrada.',
+      'A decisão sobre a reclassificação superada é recusada por conflito; a liberação da mais recente devolve a permissão.',
     verificacao: 'Testes automatizados de API da decisão sobre reclassificações sucessivas (planejado, uniplus-api#2281).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -10111,7 +10111,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0535',
     titulo: 'O CEP consultado tem 8 dígitos, com ou sem separador',
     enunciado:
-      'A consulta de endereço pelo CEP (`GET /api/cep/{cep}`) aceita o CEP com exatamente 8 dígitos de 0 a 9, escritos juntos, como em 01001000, ou com um hífen ou um espaço entre o quinto e o sexto dígito, como em 01001-000; espaços no início e no fim do CEP são ignorados. Qualquer outro formato (quantidade diferente de 8 dígitos, letras, dígitos de outro alfabeto, separador em outra posição, mais de um separador, ou só espaços) é recusado com o erro `uniplus.geo.cep.formato_invalido` (400), título "CEP fora do formato" e detalhe "O CEP deve ter exatamente 8 dígitos (ex.: 01001000 ou 01001-000).", que é fixo e não traz o CEP informado. A conferência do formato vem antes da busca: CEP malformado nunca recebe 404 (o 404 do CEP bem formado sem cadastro é do UNI-REQ-0538). Exemplo fictício: o formulário de Marina consulta o CEP 01001-000 e a consulta é aceita; ao consultar 0100100, com 7 dígitos, recebe 400; o CEP " 01001-000 ", com espaços nas pontas, também é aceito.',
+      'A consulta de endereço pelo CEP (`GET /api/cep/{cep}`) aceita o CEP com exatamente 8 dígitos de 0 a 9, escritos juntos, como em 01001000, ou com um hífen ou um espaço entre o quinto e o sexto dígito, como em 01001-000; espaços no início e no fim do CEP são ignorados. Qualquer outro formato (quantidade diferente de 8 dígitos, letras, dígitos de outro alfabeto, separador em outra posição, mais de um separador, ou só espaços) é recusado com o erro `uniplus.geo.cep.formato_invalido` (400), título "CEP fora do formato" e detalhe "O CEP deve ter exatamente 8 dígitos (ex.: 01001000 ou 01001-000).", que é fixo e não traz o CEP informado. A conferência do formato vem antes da busca. Exemplo fictício: o formulário de Marina consulta o CEP 01001-000 e a consulta é aceita; ao consultar 0100100, com 7 dígitos, recebe 400; o CEP " 01001-000 ", com espaços nas pontas, também é aceito.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -10123,7 +10123,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O CEP com 8 dígitos, com hífen ou com espaço entre o quinto e o sexto dígito é aceito, com ou sem espaços no início e no fim; o CEP com outra quantidade de dígitos, com letras, com dígitos de outro alfabeto, com separador fora da posição ou com mais de um separador, só com espaços recebe 400 com o erro, o título e o detalhe do enunciado, sem o CEP informado no detalhe; o CEP malformado nunca recebe 404.',
+      'O CEP com 8 dígitos, com hífen ou com espaço entre o quinto e o sexto dígito é aceito, com ou sem espaços no início e no fim; o CEP com outra quantidade de dígitos, com letras, com dígitos de outro alfabeto, com separador fora da posição ou com mais de um separador, só com espaços recebe 400 com o erro, o título e o detalhe do enunciado, sem o CEP informado no detalhe; o formato é conferido antes da busca.',
     verificacao:
       'Testes automatizados dos formatos aceitos (juntos, com hífen, com espaço e com espaços nas pontas), dos recusados (quantidade errada de dígitos, letras, separador fora da posição, só espaços) e do detalhe sem o CEP informado; o caso de dígitos de outro alfabeto é planejado.',
     pagina_developers: '/produto/regras-negocio/',
@@ -10133,7 +10133,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0536',
     titulo: 'O código IBGE do município tem 7 dígitos',
     enunciado:
-      'O código IBGE do município tem exatamente 7 dígitos de 0 a 9. A regra vale na consulta da cidade (`GET /api/cidades/{codigoIbge}`) e nas listagens de distritos, bairros e logradouros da cidade (`/api/cidades/{codigoIbge}/distritos`, `/bairros` e `/logradouros`). Outro formato é recusado com o erro `uniplus.geo.cidade.codigo_ibge_invalido` (400), título "Código IBGE fora do formato" e detalhe "O código IBGE deve ter exatamente 7 dígitos.", que é fixo e não traz o código informado. O formato é conferido antes da busca: código malformado nunca recebe 404 (o 404 da cidade inexistente é do UNI-REQ-0538). Exemplo fictício: a consulta do código 1504208 é aceita; a do código 150420, com 6 dígitos, recebe 400.',
+      'O código IBGE do município tem exatamente 7 dígitos de 0 a 9. A regra vale na consulta da cidade (`GET /api/cidades/{codigoIbge}`) e nas listagens de distritos, bairros e logradouros da cidade (`/api/cidades/{codigoIbge}/distritos`, `/bairros` e `/logradouros`). Outro formato é recusado com o erro `uniplus.geo.cidade.codigo_ibge_invalido` (400), título "Código IBGE fora do formato" e detalhe "O código IBGE deve ter exatamente 7 dígitos.", que é fixo e não traz o código informado. O formato é conferido antes da busca. Exemplo fictício: a consulta do código 1504208 é aceita; a do código 150420, com 6 dígitos, recebe 400.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -10145,7 +10145,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O código com 7 dígitos é aceito; o código com outra quantidade de dígitos, com letras ou com dígitos de outro alfabeto recebe 400 com o erro, o título e o detalhe do enunciado, sem o código informado no detalhe, na consulta da cidade e nas três listagens; o código malformado nunca recebe 404.',
+      'O código com 7 dígitos é aceito; o código com outra quantidade de dígitos, com letras ou com dígitos de outro alfabeto recebe 400 com o erro, o título e o detalhe do enunciado, sem o código informado no detalhe, na consulta da cidade e nas três listagens; o formato é conferido antes da busca.',
     verificacao:
       'Testes automatizados do código malformado, com resposta 400, na consulta da cidade e em cada uma das três listagens; os casos de código só com dígitos e tamanho errado e de dígitos de outro alfabeto são planejados.',
     pagina_developers: '/produto/regras-negocio/',
@@ -10155,7 +10155,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0537',
     titulo: 'A UF consultada tem 2 letras',
     enunciado:
-      'A UF da consulta de estado (`GET /api/estados/{uf}`) tem exatamente 2 letras de A a Z, sem acento. Outro formato é recusado com o erro `uniplus.geo.estado.uf_invalida` (400), título "UF fora do formato" e detalhe "A UF deve ter exatamente 2 letras (ex.: PA).", que é fixo e não traz a UF informada. O formato é conferido antes da busca: UF malformada nunca recebe 404 (o 404 do estado inexistente é do UNI-REQ-0538). Exemplo fictício: a consulta da UF PA é aceita; a da UF P1 recebe 400.',
+      'A UF da consulta de estado (`GET /api/estados/{uf}`) tem exatamente 2 letras de A a Z, sem acento. Outro formato é recusado com o erro `uniplus.geo.estado.uf_invalida` (400), título "UF fora do formato" e detalhe "A UF deve ter exatamente 2 letras (ex.: PA).", que é fixo e não traz a UF informada. O formato é conferido antes da busca. Exemplo fictício: a consulta da UF PA é aceita; a da UF P1 recebe 400.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -10167,7 +10167,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A UF com 2 letras é aceita; a UF com outra quantidade de caracteres, com número ou com acento recebe 400 com o erro, o título e o detalhe do enunciado, sem a UF informada no detalhe; a UF malformada nunca recebe 404.',
+      'A UF com 2 letras é aceita; a UF com outra quantidade de caracteres, com número ou com acento recebe 400 com o erro, o título e o detalhe do enunciado, sem a UF informada no detalhe; o formato é conferido antes da busca.',
     verificacao:
       'Testes automatizados da UF com 3 letras, recusada com 400, e da UF com 2 letras, aceita no formato; os casos de número e de acento são planejados.',
     pagina_developers: '/produto/regras-negocio/',
@@ -10175,9 +10175,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0538',
-    titulo: 'A consulta por chave bem formada que não existe devolve 404',
+    titulo: 'A consulta da importação de dados do Geo é restrita ao perfil plataforma-admin',
     enunciado:
-      'A consulta de um registro por chave bem formada que não tem cadastro devolve 404, com um erro por recurso e detalhe fixo. CEP: `uniplus.geo.cep.nao_encontrado`, título "CEP não encontrado", detalhe "Não há endereço cadastrado para o CEP informado.". Cidade: `uniplus.geo.cidade.nao_encontrada`, título "Cidade não encontrada", detalhe "Não há cidade cadastrada para o código IBGE informado."; o mesmo erro vale nas listagens de distritos, bairros e logradouros de uma cidade que não existe. Estado: `uniplus.geo.estado.nao_encontrado`, título "Estado não encontrado", detalhe "Não há estado cadastrado para a UF informada.". Importação: `uniplus.geo.importacao.nao_encontrada`, título "Importação não encontrada", detalhe "Não há importação cadastrada para o identificador informado."; a consulta da importação (`GET /api/admin/geo/importacoes/{id}`) é restrita ao perfil `plataforma-admin`. A chave mal formada é recusada antes, com os erros de formato dos UNI-REQ-0535, 0536 e 0537. Exemplo fictício: o CEP 99999-999, bem formado e sem endereço cadastrado, recebe 404.',
+      'A consulta da importação de dados do Geo (`GET /api/admin/geo/importacoes/{id}`) é restrita ao perfil `plataforma-admin`: quem não tem o perfil é recusado antes da busca, sem saber se a importação existe. Exemplo fictício: a pessoa Marina, sem o perfil, consulta uma importação e é recusada; a pessoa com o perfil consulta a importação normalmente.',
     grupo: 'funcional',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -10189,9 +10189,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A chave bem formada sem cadastro recebe 404 com o erro, o título e o detalhe do recurso, para CEP, cidade, estado e importação; a cidade inexistente recebe o mesmo 404 nas listagens de distritos, bairros e logradouros; a consulta da importação por quem não tem o perfil `plataforma-admin` é recusada antes da busca.',
+      'A consulta da importação por quem não tem o perfil `plataforma-admin` é recusada antes da busca; quem tem o perfil a consulta.',
     verificacao:
-      'Testes automatizados do 404 do CEP, da cidade, do estado e da importação e da cidade inexistente em cada listagem, com o detalhe sem o valor informado; a recusa da consulta da importação por quem não tem o perfil é planejada.',
+      'Testes automatizados da recusa da consulta da importação por quem não tem o perfil e do acesso de quem o tem são planejados.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
