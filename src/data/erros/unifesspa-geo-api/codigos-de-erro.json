@@ -137,6 +137,16 @@
       "titulo": "Erro interno do servidor"
     },
     {
+      "codigo": "uniplus.requisicao.caminho_inexistente",
+      "status": 404,
+      "titulo": "A requisição pede um caminho que a API não oferece"
+    },
+    {
+      "codigo": "uniplus.requisicao.metodo_nao_aceito",
+      "status": 405,
+      "titulo": "A requisição usa um método que o caminho não aceita"
+    },
+    {
       "codigo": "uniplus.requisicao.valor_invalido",
       "status": 400,
       "titulo": "A requisição traz valor que não corresponde ao tipo declarado"
