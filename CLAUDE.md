@@ -43,7 +43,7 @@ Não há lint/test sobre `src/` além de `typecheck` e os E2E; o "teste" do port
 
 A ordem de carregamento importa: `govbr-tokens.css` é listado antes de `custom.css` no `customCss` do preset.
 
-**Catálogo público de erros** — o plugin `src/plugins/catalogo-erros/` lê os contratos sincronizados em `src/data/erros/` e gera `/erros/{code}/`. O índice em `docs/erros/index.mdx` lista os módulos. O build confere os pares de códigos, o formato, os requisitos e os links internos. As descrições são alteradas na `uniplus-api`; cada página aponta para o contrato no commit copiado.
+**Catálogo público de erros** — o plugin `src/plugins/catalogo-erros/` lê os contratos sincronizados em `src/data/erros/uniplus-api/` e `src/data/erros/unifesspa-geo-api/` (uma pasta por repositório, cada uma com os dois arquivos e o seu `origem.json`) e gera `/erros/{code}/`. O índice em `docs/erros/index.mdx` lista os módulos. O build confere os pares de códigos, o formato, os requisitos e os links internos, e cruza os dois repositórios: o Geo descreve só `uniplus.geo.*`, o código comum do Geo existe na API com o mesmo status e título, e a API não publica `uniplus.geo.*`. As descrições são alteradas no repositório dono do código (`uniplus-api` ou `unifesspa-geo-api`); cada página aponta para o contrato no commit copiado da pasta dela.
 
 O ponto no nome do arquivo tem consequência de infraestrutura: `docusaurus serve` trata o segmento como arquivo com extensão e responde 404, enquanto o GitHub Pages resolve o diretório. Por isso o `webServer` dos E2E é `tools/e2e-server.mjs`, servidor de arquivo cru fiel a produção — trocá-lo por `docusaurus serve` faz o portal parecer funcionar (a SPA monta a rota no cliente) com 404 no protocolo.
 

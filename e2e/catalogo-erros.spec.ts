@@ -2,11 +2,22 @@ import {existsSync, readdirSync} from 'node:fs';
 import {join} from 'node:path';
 import AxeBuilder from '@axe-core/playwright';
 import {expect, test, type Page} from '@playwright/test';
-import codigos from '../src/data/erros/codigos-de-erro.json';
-import textos from '../src/data/erros/descricoes-de-erros.json';
-import origem from '../src/data/erros/origem.json';
+import codigosApi from '../src/data/erros/uniplus-api/codigos-de-erro.json';
+import textosApi from '../src/data/erros/uniplus-api/descricoes-de-erros.json';
+import origemApi from '../src/data/erros/uniplus-api/origem.json';
+import codigosGeo from '../src/data/erros/unifesspa-geo-api/codigos-de-erro.json';
+import textosGeo from '../src/data/erros/unifesspa-geo-api/descricoes-de-erros.json';
+import origemGeo from '../src/data/erros/unifesspa-geo-api/origem.json';
 import {classificar} from '../src/plugins/catalogo-erros/modulos.mjs';
 
+const codigoDaApi = new Set(codigosApi.codigos.map(({codigo}) => codigo));
+const codigos = {
+  codigos: [...codigosApi.codigos, ...codigosGeo.codigos.filter(({codigo}) => !codigoDaApi.has(codigo))],
+};
+const descricoes = [
+  ...textosApi.descricoes.map((descricao) => ({descricao, origem: origemApi})),
+  ...textosGeo.descricoes.map((descricao) => ({descricao, origem: origemGeo})),
+];
 const amostras = new Map<string, (typeof codigos.codigos)[number]>();
 for (const codigo of codigos.codigos) {
   const modulo = classificar(codigo.codigo);
@@ -56,7 +67,7 @@ for (const [id, entrada] of amostras) {
     expect(resposta?.status()).toBe(200);
     const main = page.locator('main');
     const modulo = classificar(entrada.codigo);
-    const descricao = textos.descricoes.find(({codigo}) => codigo === entrada.codigo);
+    const {descricao, origem} = descricoes.find((item) => item.descricao.codigo === entrada.codigo)!;
     const contrato = `https://github.com/${origem.repositorio}/blob/${origem.commit}/contracts/descricoes-de-erros.json`;
 
     await expect(main.getByRole('heading', {name: entrada.titulo, level: 1})).toBeVisible();
@@ -65,7 +76,7 @@ for (const [id, entrada] of amostras) {
     await expect(main.getByRole('heading', {name: 'O que aconteceu', level: 2})).toBeVisible();
     await expect(main.getByRole('heading', {name: 'Como resolver', level: 2})).toBeVisible();
     await expect(main.getByRole('heading', {name: 'Onde aparece', level: 2}))
-      .toHaveCount(descricao?.ondeAparece ? 1 : 0);
+      .toHaveCount(descricao.ondeAparece ? 1 : 0);
     await expect(main.getByRole('link', {name: 'Editar'})).toHaveAttribute('href', contrato);
     await expect(main.getByRole('link', {name: origem.commit})).toHaveAttribute('href', contrato);
 

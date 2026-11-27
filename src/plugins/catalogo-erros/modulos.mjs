@@ -2,6 +2,7 @@ const MODULOS = new Map([
   ['autorizacao', 'Autorização'],
   ['configuracao', 'Configuração'],
   ['discentes', 'Discentes'],
+  ['geo', 'Geo'],
   ['ingresso', 'Ingresso'],
   ['organizacao', 'Organização institucional'],
   ['portal', 'Portal'],

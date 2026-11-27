@@ -1,5 +1,5 @@
 import {join} from 'node:path';
-import {carregarCatalogo, lerJson} from './contratos.mjs';
+import {carregarCatalogo} from './contratos.mjs';
 
 export const NOME = 'catalogo-erros';
 
@@ -8,21 +8,16 @@ export default function catalogoErros({siteDir, baseUrl}) {
     name: NOME,
     async loadContent() {
       const entradas = carregarCatalogo(siteDir);
-      const origem = lerJson(join(siteDir, 'src/data/erros'), 'origem.json');
-      if (origem?.repositorio !== 'unifesspa-edu-br/uniplus-api'
-        || typeof origem.commit !== 'string' || !/^[a-f0-9]{40}$/.test(origem.commit)) {
-        throw new Error('origem.json: repositório ou commit inválido.');
-      }
-      return {entradas, origem};
+      return {entradas};
     },
     getPathsToWatch() {
-      return [join(siteDir, 'src/data/erros/*.json'), join(siteDir, 'src/data/produto/requisitos-mvp-selecao.ts')];
+      return [join(siteDir, 'src/data/erros/*/*.json'), join(siteDir, 'src/data/produto/requisitos-mvp-selecao.ts')];
     },
-    async contentLoaded({content: {entradas, origem}, actions}) {
+    async contentLoaded({content: {entradas}, actions}) {
       const modulos = agruparPorModulo(entradas);
       actions.setGlobalData({modulos: modulos.map(({id, nome}) => ({id, nome}))});
       await Promise.all(modulos.map((modulo) => adicionarModulo(actions, baseUrl, modulo)));
-      await Promise.all(entradas.map((entrada) => adicionarErro(actions, baseUrl, entrada, origem)));
+      await Promise.all(entradas.map((entrada) => adicionarErro(actions, baseUrl, entrada)));
     },
     postBuild({content, routesPaths}) {
       const rotas = new Set(routesPaths.map(semBarraFinal));
@@ -63,7 +58,7 @@ async function adicionarModulo({createData, addRoute}, baseUrl, modulo) {
   });
 }
 
-async function adicionarErro({createData, addRoute}, baseUrl, {registro, descricao, modulo}, origem) {
+async function adicionarErro({createData, addRoute}, baseUrl, {registro, descricao, modulo, origem}) {
   const dados = await createData(`${registro.codigo}.json`, JSON.stringify({registro, descricao, modulo, origem}));
   addRoute({
     path: `${baseUrl}erros/${registro.codigo}/`,

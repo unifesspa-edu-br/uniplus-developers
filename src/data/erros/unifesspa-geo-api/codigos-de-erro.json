@@ -1,0 +1,150 @@
+{
+  "versaoDoFormato": 1,
+  "codigos": [
+    {
+      "codigo": "uniplus.auth.forbidden",
+      "status": 403,
+      "titulo": "Acesso negado"
+    },
+    {
+      "codigo": "uniplus.auth.unauthorized",
+      "status": 401,
+      "titulo": "Não autenticado"
+    },
+    {
+      "codigo": "uniplus.contract.versao_nao_suportada",
+      "status": 406,
+      "titulo": "Versão de mídia não suportada"
+    },
+    {
+      "codigo": "uniplus.cursor.direcao_invalida",
+      "status": 422,
+      "titulo": "Direção de paginação inválida"
+    },
+    {
+      "codigo": "uniplus.cursor.expirado",
+      "status": 410,
+      "titulo": "Cursor de paginação expirado"
+    },
+    {
+      "codigo": "uniplus.cursor.invalido",
+      "status": 400,
+      "titulo": "Cursor de paginação inválido"
+    },
+    {
+      "codigo": "uniplus.cursor.limit_invalido",
+      "status": 422,
+      "titulo": "Tamanho de página inválido"
+    },
+    {
+      "codigo": "uniplus.geo.busca.termo_muito_longo",
+      "status": 400,
+      "titulo": "Termo de busca longo demais"
+    },
+    {
+      "codigo": "uniplus.geo.cep.formato_invalido",
+      "status": 400,
+      "titulo": "CEP fora do formato"
+    },
+    {
+      "codigo": "uniplus.geo.cep.nao_encontrado",
+      "status": 404,
+      "titulo": "CEP não encontrado"
+    },
+    {
+      "codigo": "uniplus.geo.cidade.codigo_ibge_invalido",
+      "status": 400,
+      "titulo": "Código IBGE fora do formato"
+    },
+    {
+      "codigo": "uniplus.geo.cidade.nao_encontrada",
+      "status": 404,
+      "titulo": "Cidade não encontrada"
+    },
+    {
+      "codigo": "uniplus.geo.estado.nao_encontrado",
+      "status": 404,
+      "titulo": "Estado não encontrado"
+    },
+    {
+      "codigo": "uniplus.geo.estado.uf_invalida",
+      "status": 400,
+      "titulo": "UF fora do formato"
+    },
+    {
+      "codigo": "uniplus.geo.importacao.em_andamento",
+      "status": 409,
+      "titulo": "Já existe uma importação do Geo em andamento"
+    },
+    {
+      "codigo": "uniplus.geo.importacao.nao_encontrada",
+      "status": 404,
+      "titulo": "Importação não encontrada"
+    },
+    {
+      "codigo": "uniplus.geo.importacao.nao_enfileirada",
+      "status": 503,
+      "titulo": "Não foi possível colocar a carga na fila porque o serviço está sendo encerrado"
+    },
+    {
+      "codigo": "uniplus.geo.importacao.pacote_acima_do_limite",
+      "status": 413,
+      "titulo": "O pacote enviado é maior que o limite permitido"
+    },
+    {
+      "codigo": "uniplus.geo.importacao.pacote_invalido",
+      "status": 422,
+      "titulo": "O pacote enviado não é válido"
+    },
+    {
+      "codigo": "uniplus.geo.importacao.tipo_de_conteudo_nao_suportado",
+      "status": 415,
+      "titulo": "O envio deve ser um arquivo zip (application/zip)"
+    },
+    {
+      "codigo": "uniplus.geo.importacao.versao_nao_progressiva",
+      "status": 409,
+      "titulo": "A versão do pacote é anterior à última versão aplicada"
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.latitude_invalida",
+      "status": 400,
+      "titulo": "Latitude fora da faixa"
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.limite_invalido",
+      "status": 400,
+      "titulo": "Limite de resultados inválido"
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.longitude_invalida",
+      "status": 400,
+      "titulo": "Longitude fora da faixa"
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.parametros_ausentes",
+      "status": 400,
+      "titulo": "Parâmetros da consulta por proximidade ausentes"
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.raio_invalido",
+      "status": 400,
+      "titulo": "Raio fora da faixa"
+    },
+    {
+      "codigo": "uniplus.internal.unexpected",
+      "status": 500,
+      "titulo": "Erro interno do servidor"
+    },
+    {
+      "codigo": "uniplus.requisicao.valor_invalido",
+      "status": 400,
+      "titulo": "A requisição traz valor que não corresponde ao tipo declarado"
+    },
+    {
+      "codigo": "uniplus.validacao",
+      "status": 422,
+      "titulo": "Erro de validação"
+    }
+  ]
+}

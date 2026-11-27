@@ -1,0 +1,317 @@
+{
+  "versaoDoFormato": 1,
+  "descricoes": [
+    {
+      "codigo": "uniplus.geo.busca.termo_muito_longo",
+      "requisitos": [
+        "UNI-REQ-0539"
+      ],
+      "oQueAconteceu": [
+        "O termo de busca informado no parâmetro `q` passa de 256 unidades de texto (letras comuns e números contam uma cada; símbolos como emojis contam duas), e a listagem foi recusada com **400**. O limite protege o Geo de buscas desproporcionais. A mensagem do erro cita o limite, que ela chama de 256 caracteres, e não repete o termo enviado."
+      ],
+      "comoResolver": [
+        "Reduza o termo de busca a até 256 unidades de texto, lembrando que um emoji conta como duas. Para encontrar um nome, poucas palavras bastam."
+      ],
+      "ondeAparece": [
+        "Listagens de cidades (`GET /api/cidades`), de bairros e de logradouros de uma cidade, quando o parâmetro `q` passa de 256 unidades de texto"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.cep.formato_invalido",
+      "requisitos": [
+        "UNI-REQ-0535"
+      ],
+      "oQueAconteceu": [
+        "O CEP informado na consulta não está no formato aceito, e a consulta foi recusada com **400** antes de qualquer busca. O CEP tem exatamente 8 dígitos, escritos juntos (`01001000`) ou com um hífen ou um espaço entre o quinto e o sexto dígito (`01001-000`). Espaços no início e no fim do CEP são ignorados. Quantidade diferente de dígitos, letras, dígitos de outro alfabeto, separador em outra posição, texto vazio ou só espaços não são aceitos.",
+        "A mensagem do erro é fixa e não repete o CEP enviado. Um CEP no formato correto, mas sem endereço cadastrado, recebe outro erro: [`uniplus.geo.cep.nao_encontrado`](/erros/uniplus.geo.cep.nao_encontrado)."
+      ],
+      "comoResolver": [
+        "Corrija o CEP para 8 dígitos, com ou sem hífen, e repita a consulta. Se o CEP vem de um campo digitado por quem usa o sistema, retire letras e símbolos antes de consultar."
+      ],
+      "ondeAparece": [
+        "Consulta de endereço pelo CEP (`GET /api/cep/{cep}`), quando o CEP não tem 8 dígitos no formato aceito"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.cep.nao_encontrado",
+      "requisitos": [
+        "UNI-REQ-0538"
+      ],
+      "oQueAconteceu": [
+        "O CEP está no formato correto, mas o Geo não tem endereço cadastrado para ele, e a consulta foi recusada com **404**. Isso acontece quando o CEP não tem cobertura na base dos Correios carregada no Geo, como um CEP de grande usuário ou de uma faixa sem logradouro cadastrado."
+      ],
+      "comoResolver": [
+        "Confira se o CEP está correto. Se estiver, o endereço não existe na base carregada no Geo, que é atualizada pelo envio do pacote dos Correios; avise a equipe de suporte do Uni+ para conferir a versão carregada.",
+        "Um CEP fora do formato recebe outro erro: [`uniplus.geo.cep.formato_invalido`](/erros/uniplus.geo.cep.formato_invalido)."
+      ],
+      "ondeAparece": [
+        "Consulta de endereço pelo CEP (`GET /api/cep/{cep}`), quando o CEP está no formato correto e não tem endereço cadastrado"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.cidade.codigo_ibge_invalido",
+      "requisitos": [
+        "UNI-REQ-0536"
+      ],
+      "oQueAconteceu": [
+        "O código IBGE informado não tem o formato aceito, e a consulta foi recusada com **400** antes de qualquer busca. O código IBGE do município tem exatamente 7 dígitos. Quantidade diferente de dígitos, letras e dígitos de outro alfabeto não são aceitos.",
+        "A regra vale na consulta da cidade e nas listagens de distritos, bairros e logradouros dela. A mensagem do erro é fixa e não repete o código enviado."
+      ],
+      "comoResolver": [
+        "Informe o código IBGE do município com 7 dígitos, como 1504208, e repita a consulta. Um código com 7 dígitos que não existe recebe outro erro: [`uniplus.geo.cidade.nao_encontrada`](/erros/uniplus.geo.cidade.nao_encontrada)."
+      ],
+      "ondeAparece": [
+        "Consulta da cidade (`GET /api/cidades/{codigoIbge}`) e listagens de distritos, bairros e logradouros da cidade, quando o código IBGE não tem 7 dígitos"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.cidade.nao_encontrada",
+      "requisitos": [
+        "UNI-REQ-0538"
+      ],
+      "oQueAconteceu": [
+        "O código IBGE está no formato correto, mas o Geo não tem cidade cadastrada para ele, e a consulta foi recusada com **404**. O mesmo erro aparece nas listagens de distritos, bairros e logradouros quando a cidade não existe."
+      ],
+      "comoResolver": [
+        "Confira o código IBGE do município. A listagem de cidades (`GET /api/cidades`) mostra os códigos cadastrados. Um código fora do formato recebe outro erro: [`uniplus.geo.cidade.codigo_ibge_invalido`](/erros/uniplus.geo.cidade.codigo_ibge_invalido)."
+      ],
+      "ondeAparece": [
+        "Consulta da cidade (`GET /api/cidades/{codigoIbge}`) e listagens de distritos, bairros e logradouros da cidade, quando o código IBGE está no formato correto e não tem cidade cadastrada"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.estado.nao_encontrado",
+      "requisitos": [
+        "UNI-REQ-0538"
+      ],
+      "oQueAconteceu": [
+        "A UF está no formato correto, mas o Geo não tem estado cadastrado para ela, e a consulta foi recusada com **404**."
+      ],
+      "comoResolver": [
+        "Confira a sigla da UF. A listagem de estados (`GET /api/estados`) mostra os estados cadastrados. Uma UF fora do formato recebe outro erro: [`uniplus.geo.estado.uf_invalida`](/erros/uniplus.geo.estado.uf_invalida)."
+      ],
+      "ondeAparece": [
+        "Consulta de estado pela UF (`GET /api/estados/{uf}`), quando a UF está no formato correto e não tem estado cadastrado"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.estado.uf_invalida",
+      "requisitos": [
+        "UNI-REQ-0537"
+      ],
+      "oQueAconteceu": [
+        "A UF informada não tem o formato aceito, e a consulta foi recusada com **400** antes de qualquer busca. A UF tem exatamente 2 letras, de A a Z, sem acento. A mensagem do erro é fixa e não repete a UF enviada."
+      ],
+      "comoResolver": [
+        "Informe a sigla da UF com 2 letras, como PA, e repita a consulta. Uma UF com 2 letras que não existe recebe outro erro: [`uniplus.geo.estado.nao_encontrado`](/erros/uniplus.geo.estado.nao_encontrado)."
+      ],
+      "ondeAparece": [
+        "Consulta de estado pela UF (`GET /api/estados/{uf}`), quando a UF não tem 2 letras"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.importacao.em_andamento",
+      "requisitos": [
+        "UNI-REQ-0530"
+      ],
+      "oQueAconteceu": [
+        "O Geo faz uma carga da base dos Correios por vez, e já existe uma em andamento. O envio do pacote foi recusado com **409**, nenhuma execução foi registrada por causa dele e o arquivo enviado, se chegou a ser recebido, foi apagado.",
+        "A recusa acontece em três situações. A primeira é haver outro envio em curso na mesma instância do Geo, até o fim da resposta dele. A segunda é já existir uma execução registrada como em andamento. A terceira é dois envios chegarem juntos: os dois leem o arquivo, só um consegue reservar a carga no banco de dados, e o outro é recusado depois da leitura."
+      ],
+      "comoResolver": [
+        "Acompanhe a execução em andamento pelo endereço que a resposta do envio dela devolveu e espere que termine, concluída ou com falha. Depois, envie o pacote de novo. Repetir o envio enquanto a outra carga não termina dá o mesmo resultado.",
+        "Se a execução em andamento não terminar e não houver outro envio em curso, avise a equipe de suporte do Uni+."
+      ],
+      "ondeAparece": [
+        "Envio do pacote (`POST /api/admin/geo/importacoes`), quando já há outro envio em curso ou uma carga em andamento"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.importacao.nao_encontrada",
+      "requisitos": [
+        "UNI-REQ-0524",
+        "UNI-REQ-0538"
+      ],
+      "oQueAconteceu": [
+        "Não existe importação cadastrada para o identificador informado no acompanhamento, e a consulta foi recusada com **404**. A consulta é restrita a quem tem o perfil de administração da plataforma."
+      ],
+      "comoResolver": [
+        "Use o endereço de acompanhamento devolvido na resposta de aceite do envio do pacote, copiado por inteiro, e confira se o identificador é o da execução que se quer acompanhar."
+      ],
+      "ondeAparece": [
+        "Acompanhamento de uma importação (`GET /api/admin/geo/importacoes/{id}`), quando o identificador não corresponde a nenhuma importação"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.importacao.nao_enfileirada",
+      "requisitos": [
+        "UNI-REQ-0534"
+      ],
+      "oQueAconteceu": [
+        "O pacote foi recebido e conferido, e a execução da carga chegou a ser registrada, mas ela não pôde entrar na fila de carga porque o serviço do Geo está sendo desligado. O Geo respondeu **503** com a mensagem \"Não foi possível colocar a carga na fila porque o serviço está sendo encerrado.\".",
+        "No caso normal, a carga não começou: a execução registrada fica com falha (\"Serviço em desligamento; carga não enfileirada.\"), a base publicada continua na versão anterior, a versão não conta como aplicada e o arquivo recebido é apagado. A resposta não traz o identificador da execução nem o endereço de acompanhamento dela.",
+        "Defeito conhecido (unifesspa-geo-api#67): se a gravação da falha também falhar por erro do banco de dados, a execução pode permanecer em andamento, e o envio seguinte ser recusado com o erro [`uniplus.geo.importacao.em_andamento`](/erros/uniplus.geo.importacao.em_andamento) (**409**)."
+      ],
+      "comoResolver": [
+        "Envie o pacote de novo. Não há nada a retomar da primeira tentativa, e a execução com falha não impede um novo envio.",
+        "Se o novo envio for recusado com [`uniplus.geo.importacao.em_andamento`](/erros/uniplus.geo.importacao.em_andamento) e nenhuma carga estiver de fato rodando, a execução anterior pode ter ficado em andamento pelo defeito conhecido; avise a equipe de suporte do Uni+. Se o erro continuar com o serviço no ar, avise também a equipe de suporte."
+      ],
+      "ondeAparece": [
+        "Envio do pacote (`POST /api/admin/geo/importacoes`), quando o serviço está sendo desligado depois de o pacote ser aceito para a carga"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.importacao.pacote_acima_do_limite",
+      "requisitos": [
+        "UNI-REQ-0526"
+      ],
+      "oQueAconteceu": [
+        "O pacote enviado é maior que o tamanho máximo permitido para o envio. O limite é configurado no Geo (o padrão é 128 MiB) e vem escrito na mensagem do erro, em MiB, em KiB ou em bytes, conforme o valor configurado.",
+        "A recusa vale pelo tamanho que o envio declara, antes de o arquivo ser lido, e também durante o recebimento, quando o envio não declara o tamanho. O erro é **413**, nenhuma carga é iniciada e o arquivo recebido até ali é apagado."
+      ],
+      "comoResolver": [
+        "Confira se o arquivo é o pacote dos Correios em zip, sem outros arquivos grandes junto. Enviar de novo o mesmo arquivo dá o mesmo resultado.",
+        "Se o pacote correto é maior que o limite, peça à equipe de suporte do Uni+ para rever o limite configurado."
+      ],
+      "ondeAparece": [
+        "Envio do pacote (`POST /api/admin/geo/importacoes`), quando o pacote passa do tamanho máximo"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.importacao.pacote_invalido",
+      "requisitos": [
+        "UNI-REQ-0525",
+        "UNI-REQ-0533"
+      ],
+      "oQueAconteceu": [
+        "O arquivo enviado não é um pacote válido da base dos Correios. O Geo confere a lista de arquivos do zip no ato do envio, sem descompactar, e responde **422**. A mensagem é sempre de texto fixo: nunca traz nome nem conteúdo do arquivo enviado, só contagens, os nomes das 15 tabelas e versões de seis dígitos.",
+        "A conferência tem duas etapas. Na primeira, a primeira falta encontrada interrompe a conferência e é a única respondida: arquivo que não é um zip válido; formato zip64, que não é aceito; mais entradas que o limite configurado (o padrão é 32); diretório do zip acima de 64 KiB; diretório do zip inconsistente com o tamanho do arquivo.",
+        "Passando a primeira etapa, todas as faltas do conteúdo voltam juntas, na mesma resposta: tabela ausente ou repetida; arquivo `.sql` que não é uma das 15 tabelas; nome de entrada inválido (mais de 128 caracteres, fora do padrão pasta/arquivo, ou entrada de pasta repetida ou com conteúdo); entradas em pastas diferentes; entrada cifrada; arquivo que acompanha o pacote, como uma imagem, acima de 5 MiB; entrada acima de 768 MiB ou conjunto acima de 1 GiB; tabelas de versões diferentes; versão com mês fora de 01 a 12, que só é conferida quando todas as tabelas têm a mesma versão.",
+        "O pacote vale quando tem exatamente as 15 tabelas, cada uma uma vez, todas no topo do zip ou todas na mesma pasta, e uma única versão AAAAMM válida, lida do nome dos arquivos de tabela e não do nome do zip. Os arquivos que acompanham o pacote são aceitos e ignorados."
+      ],
+      "comoResolver": [
+        "Leia a mensagem do erro: ela diz o que não confere. Gere o pacote de novo a partir da base dos Correios, com as 15 tabelas, cada uma uma vez, todas de uma só versão, e envie outra vez. Reenviar o mesmo arquivo dá o mesmo resultado.",
+        "Esta conferência não olha o conteúdo dos arquivos de tabela. Um defeito nele só aparece depois da resposta de aceite (202), na carga em segundo plano: a execução termina com falha, indicando a tabela e a linha, e a base publicada continua na versão anterior. Acompanhe a execução pelo endereço que a resposta de aceite devolveu."
+      ],
+      "ondeAparece": [
+        "Envio do pacote (`POST /api/admin/geo/importacoes`), quando o arquivo não é um zip válido ou o conteúdo do zip não confere com o pacote esperado"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.importacao.tipo_de_conteudo_nao_suportado",
+      "requisitos": [
+        "UNI-REQ-0527"
+      ],
+      "oQueAconteceu": [
+        "O envio do pacote só aceita o tipo de conteúdo `application/zip`. O pedido chegou com outro tipo, ou sem tipo, e foi recusado com **415** antes de o corpo ser lido. Nada foi gravado e nenhuma carga foi iniciada."
+      ],
+      "comoResolver": [
+        "Envie o arquivo zip direto no corpo da requisição, com o cabeçalho `Content-Type: application/zip`. Enviar o arquivo como formulário (`multipart/form-data`) ou como JSON não é aceito."
+      ],
+      "ondeAparece": [
+        "Envio do pacote (`POST /api/admin/geo/importacoes`), quando o tipo de conteúdo não é `application/zip`"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.importacao.versao_nao_progressiva",
+      "requisitos": [
+        "UNI-REQ-0528"
+      ],
+      "oQueAconteceu": [
+        "A versão do pacote, lida do nome das tabelas, é anterior à última versão aplicada na base do Geo. Para a base dos Correios não voltar a dados mais antigos, o envio foi recusado com **409** e nada foi carregado. A mensagem traz as duas versões, no formato AAAAMM. Exemplo fictício: com 202610 como última versão aplicada, o envio do pacote 202609 é recusado.",
+        "Pacote de versão igual ou mais nova é aceito, e um pacote diferente da mesma versão, como uma correção, inicia uma nova carga. Uma carga que falhou não conta como versão aplicada."
+      ],
+      "comoResolver": [
+        "Confira se o pacote é o mais recente publicado pelos Correios. Se o arquivo certo é mesmo de uma versão anterior à aplicada, ele não pode ser carregado: a base só avança de versão."
+      ],
+      "ondeAparece": [
+        "Envio do pacote (`POST /api/admin/geo/importacoes`), quando a versão das tabelas é anterior à última versão aplicada"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.latitude_invalida",
+      "requisitos": [
+        "UNI-REQ-0541",
+        "UNI-REQ-0544"
+      ],
+      "oQueAconteceu": [
+        "A latitude informada em `lat` está fora da faixa de -90 a 90 graus ou não é um número finito, e a consulta foi recusada com **400**. Os extremos -90 e 90 são aceitos.",
+        "Só a primeira recusa é respondida; a latitude é conferida depois dos parâmetros ausentes e antes da longitude. A mensagem do erro é fixa e não repete o valor enviado."
+      ],
+      "comoResolver": [
+        "Informe a latitude em graus decimais, entre -90 e 90, com ponto como separador decimal."
+      ],
+      "ondeAparece": [
+        "Consultas de cidades próximas (`GET /api/cidades/proximas`) e de logradouros próximos (`GET /api/logradouros/proximos`), quando `lat` está fora da faixa"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.limite_invalido",
+      "requisitos": [
+        "UNI-REQ-0543",
+        "UNI-REQ-0544"
+      ],
+      "oQueAconteceu": [
+        "O limite de resultados informado em `limit` é 0 ou negativo, e a consulta foi recusada com **400**. O parâmetro é opcional: sem ele, a consulta devolve o limite padrão configurado no Geo (o padrão é 50). Um `limit` acima do teto configurado (o padrão é 200) não é erro: a consulta devolve o teto.",
+        "Só a primeira recusa é respondida; o limite é conferido por último."
+      ],
+      "comoResolver": [
+        "Informe um limite maior que 0 ou retire o parâmetro `limit` para receber o limite padrão."
+      ],
+      "ondeAparece": [
+        "Consultas de cidades próximas (`GET /api/cidades/proximas`) e de logradouros próximos (`GET /api/logradouros/proximos`), quando `limit` é 0 ou negativo"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.longitude_invalida",
+      "requisitos": [
+        "UNI-REQ-0541",
+        "UNI-REQ-0544"
+      ],
+      "oQueAconteceu": [
+        "A longitude informada em `long` está fora da faixa de -180 a 180 graus ou não é um número finito, e a consulta foi recusada com **400**. Os extremos -180 e 180 são aceitos.",
+        "Só a primeira recusa é respondida; a longitude é conferida depois da latitude e antes do raio. A mensagem do erro é fixa e não repete o valor enviado."
+      ],
+      "comoResolver": [
+        "Informe a longitude em graus decimais, entre -180 e 180, com ponto como separador decimal."
+      ],
+      "ondeAparece": [
+        "Consultas de cidades próximas (`GET /api/cidades/proximas`) e de logradouros próximos (`GET /api/logradouros/proximos`), quando `long` está fora da faixa"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.parametros_ausentes",
+      "requisitos": [
+        "UNI-REQ-0540",
+        "UNI-REQ-0544"
+      ],
+      "oQueAconteceu": [
+        "A consulta por proximidade exige os parâmetros `lat`, `long` e `raioKm`, e pelo menos um deles não foi enviado. A consulta foi recusada com **400**.",
+        "Só a primeira recusa é respondida, nesta ordem: parâmetros ausentes, latitude, longitude, raio e limite. Depois de enviar os três parâmetros, outra recusa pode aparecer. Essa ordem vale para valores que são números: um valor que não vira número, como `lat=abc`, recebe antes o erro comum `uniplus.requisicao.valor_invalido` (**400**), que cita só o nome dos parâmetros e é descrito pela API do Uni+."
+      ],
+      "comoResolver": [
+        "Envie `lat`, `long` e `raioKm` na consulta. O parâmetro `limit` é opcional."
+      ],
+      "ondeAparece": [
+        "Consultas de cidades próximas (`GET /api/cidades/proximas`) e de logradouros próximos (`GET /api/logradouros/proximos`), quando falta `lat`, `long` ou `raioKm`"
+      ]
+    },
+    {
+      "codigo": "uniplus.geo.proximidade.raio_invalido",
+      "requisitos": [
+        "UNI-REQ-0542",
+        "UNI-REQ-0544"
+      ],
+      "oQueAconteceu": [
+        "O raio informado em `raioKm` não é maior que 0, passa do máximo configurado no Geo (o padrão é 500 km) ou não é um número finito, e a consulta foi recusada com **400**. O próprio máximo é aceito. A mensagem do erro cita o máximo em vigor e não repete o valor enviado.",
+        "Só a primeira recusa é respondida; o raio é conferido depois da longitude e antes do limite."
+      ],
+      "comoResolver": [
+        "Informe um raio maior que 0 e até o máximo citado na mensagem do erro, em quilômetros. Se for preciso um raio maior, peça à equipe de suporte do Uni+ para rever o máximo configurado."
+      ],
+      "ondeAparece": [
+        "Consultas de cidades próximas (`GET /api/cidades/proximas`) e de logradouros próximos (`GET /api/logradouros/proximos`), quando `raioKm` está fora da faixa"
+      ]
+    }
+  ]
+}
