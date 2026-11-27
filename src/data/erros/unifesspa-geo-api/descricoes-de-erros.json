@@ -116,7 +116,7 @@
       ],
       "oQueAconteceu": [
         "O Geo faz uma carga da base dos Correios por vez, e já existe uma em andamento. O envio do pacote foi recusado com **409**, nenhuma execução foi registrada por causa dele e o arquivo enviado, se chegou a ser recebido, foi apagado.",
-        "A recusa acontece em três situações. A primeira é haver outro envio em curso na mesma instância do Geo, até o fim da resposta dele. A segunda é já existir uma execução registrada como em andamento. A terceira é dois envios chegarem juntos: os dois leem o arquivo, só um consegue reservar a carga no banco de dados, e o outro é recusado depois da leitura."
+        "A recusa acontece em três situações. A primeira é haver outro envio em curso na mesma instância do Geo, até o fim da resposta dele. A segunda é existir uma carga sendo executada por alguma instância do Geo. Uma execução registrada como em andamento cujo processo já terminou é encerrada como falha no envio seguinte, e esse envio não é recusado por causa dela. A terceira é dois envios chegarem juntos: os dois leem o arquivo, só um consegue reservar a carga no banco de dados, e o outro é recusado depois da leitura."
       ],
       "comoResolver": [
         "Acompanhe a execução em andamento pelo endereço que a resposta do envio dela devolveu e espere que termine, concluída ou com falha. Depois, envie o pacote de novo. Repetir o envio enquanto a outra carga não termina dá o mesmo resultado.",
@@ -149,12 +149,12 @@
       ],
       "oQueAconteceu": [
         "O pacote foi recebido e conferido, e a execução da carga chegou a ser registrada, mas ela não pôde entrar na fila de carga porque o serviço do Geo está sendo desligado. O Geo respondeu **503** com a mensagem \"Não foi possível colocar a carga na fila porque o serviço está sendo encerrado.\".",
-        "No caso normal, a carga não começou: a execução registrada fica com falha (\"Serviço em desligamento; carga não enfileirada.\"), a base publicada continua na versão anterior, a versão não conta como aplicada e o arquivo recebido é apagado. A resposta não traz o identificador da execução nem o endereço de acompanhamento dela.",
-        "Defeito conhecido (unifesspa-geo-api#67): se a gravação da falha também falhar por erro do banco de dados, a execução pode permanecer em andamento, e o envio seguinte ser recusado com o erro [`uniplus.geo.importacao.em_andamento`](/erros/uniplus.geo.importacao.em_andamento) (**409**)."
+        "A carga não começou: a execução registrada fica com falha (\"Serviço em desligamento; carga não enfileirada.\"), a base publicada continua na versão anterior, a versão não conta como aplicada e o arquivo recebido é apagado. A resposta não traz o identificador da execução nem o endereço de acompanhamento dela.",
+        "Se a gravação da falha também não puder ser feita (por exemplo, banco de dados indisponível naquele instante), a execução é encerrada como falha no envio seguinte, que não é recusado por causa dela."
       ],
       "comoResolver": [
         "Envie o pacote de novo. Não há nada a retomar da primeira tentativa, e a execução com falha não impede um novo envio.",
-        "Se o novo envio for recusado com [`uniplus.geo.importacao.em_andamento`](/erros/uniplus.geo.importacao.em_andamento) e nenhuma carga estiver de fato rodando, a execução anterior pode ter ficado em andamento pelo defeito conhecido; avise a equipe de suporte do Uni+. Se o erro continuar com o serviço no ar, avise também a equipe de suporte."
+        "Se o erro continuar com o serviço no ar, avise a equipe de suporte do Uni+."
       ],
       "ondeAparece": [
         "Envio do pacote (`POST /api/admin/geo/importacoes`), quando o serviço está sendo desligado depois de o pacote ser aceito para a carga"
