@@ -14559,7 +14559,7 @@
     {
       "codigo": "uniplus.selecao.base_legal_da_comprovacao.abrangencia_obrigatoria",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0059"
       ],
       "oQueAconteceu": [
         "A base legal não informa uma abrangência reconhecida."
@@ -14575,7 +14575,7 @@
     {
       "codigo": "uniplus.selecao.base_legal_da_comprovacao.referencia_obrigatoria",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0059"
       ],
       "oQueAconteceu": [
         "A base legal não informa a referência da norma."
@@ -14590,7 +14590,7 @@
     {
       "codigo": "uniplus.selecao.base_legal_da_comprovacao.situacao_obrigatoria",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0059"
       ],
       "oQueAconteceu": [
         "A base legal não informa uma situação reconhecida."
@@ -14920,19 +14920,22 @@
     {
       "codigo": "uniplus.selecao.conferencia_endereco_geo.geo_indisponivel",
       "requisitos": [
-        "UNI-REQ-0214"
+        "UNI-REQ-0214",
+        "UNI-REQ-0407"
       ],
       "oQueAconteceu": [
-        "No envio da inscrição, o sistema confere no Geo, o cadastro de localidades\ndo Uni+, o endereço pelo CEP e os municípios informados. O Geo não\nrespondeu, e o sistema não aceita um município ou um endereço sem essa\nconferência. Por isso o envio foi recusado por inteiro.",
-        "Este aviso é temporário e não aponta erro nos dados do candidato. Ele só\né dado quando não há nenhuma outra recusa que o candidato possa corrigir:\nse houvesse, o envio seria recusado com 422 e a lista dessas recusas.",
-        "Nada desta tentativa foi gravado. O que vale depende do caso:",
-        "- **Primeiro envio:** a inscrição não foi enviada, e o que fica é a última\n  versão salva do rascunho. Se você alterou respostas depois do último\n  salvamento e as mandou junto com o pedido de envio, essas alterações não\n  foram gravadas.\n- **Correção de inscrição já enviada:** a correção não foi gravada, e a\n  inscrição e o comprovante do envio anterior continuam valendo."
+        "O sistema confere no Geo, o cadastro de localidades do Uni+, os\nmunicípios e os endereços informados, e não aceita um município ou um\nendereço sem essa conferência. O Geo não respondeu. Este aviso é\ntemporário e não aponta erro nos dados informados.",
+        "O que vale depende de onde a conferência foi pedida:",
+        "- **Envio da inscrição:** o envio foi recusado por inteiro e nada desta\n  tentativa foi gravado. No primeiro envio, a inscrição não foi enviada, e o\n  que fica é a última versão salva do rascunho; se você alterou respostas\n  depois do último salvamento e as mandou junto com o pedido de envio,\n  essas alterações não foram gravadas. Na correção de inscrição já\n  enviada, a correção não foi gravada, e a inscrição e o comprovante do\n  envio anterior continuam valendo. Este aviso só é dado quando não há\n  nenhuma outra recusa que o candidato possa corrigir: se houvesse, o\n  envio seria recusado com 422 e a lista dessas recusas.\n- **Publicação e retificação do processo seletivo:** a conferência dos\n  municípios de prova não foi feita, e nada foi gravado.\n- **Salvamento e importação do rascunho da configuração do processo:** o\n  rascunho é salvo. O aviso vem uma só vez, no campo dos municípios de\n  prova (`/provaPresencial/municipios`), no lugar de um aviso por\n  município, e nenhum município fica aprovado por falta de conferência.\n  No painel de conformidade, o item da prova presencial fica pendente."
       ],
       "comoResolver": [
-        "Aguarde alguns minutos. Se for o primeiro envio, abra o rascunho e confira\nas respostas que você alterou desde o último salvamento, refazendo as que\nfaltarem. Se for a correção de uma inscrição já enviada, refaça a correção\na partir da inscrição como ela está. Em seguida, envie outra vez. Se o\nprazo de inscrição estiver perto do fim, tente de novo o quanto antes. Se o\naviso persistir por muito tempo, procure o canal de suporte do processo\nseletivo."
+        "Aguarde alguns minutos e tente de novo. Se for o primeiro envio de\ninscrição, abra o rascunho e confira as respostas que você alterou desde o\núltimo salvamento, refazendo as que faltarem. Se for a correção de uma\ninscrição já enviada, refaça a correção a partir da inscrição como ela\nestá. Em seguida, envie outra vez. Se o prazo de inscrição estiver perto\ndo fim, tente de novo o quanto antes.",
+        "Na configuração do processo seletivo, salve o rascunho outra vez ou\ntente publicar de novo quando o Geo voltar: a conferência dos municípios\nde prova se repete a cada salvamento e na publicação. Se o aviso\npersistir por muito tempo, procure o canal de suporte do processo\nseletivo."
       ],
       "ondeAparece": [
-        "Envio da inscrição do candidato"
+        "Envio da inscrição do candidato",
+        "Publicação e retificação do processo seletivo",
+        "Salvamento e importação do rascunho da configuração do processo"
       ]
     },
     {
@@ -17078,7 +17081,7 @@
     {
       "codigo": "uniplus.selecao.consequencias_do_descumprimento.acrescimo_nao_oferecido",
       "requisitos": [
-        "UNI-REQ-0502"
+        "UNI-REQ-0519"
       ],
       "oQueAconteceu": [
         "Uma exigência, um grupo de comprovação, uma banca ou um formulário determina retirar o acréscimo do Fator de Atenuação das Desigualdades de Acesso, mas o processo não oferece esse acréscimo. A banca declara a consequência da ausência; o formulário, a consequência da falta de envio. A mensagem e o campo da resposta indicam qual deles declarou a retirada."
@@ -17094,7 +17097,7 @@
     {
       "codigo": "uniplus.selecao.consequencias_do_descumprimento.retira_a_modalidade_sem_ampla_concorrencia",
       "requisitos": [
-        "UNI-REQ-0501"
+        "UNI-REQ-0518"
       ],
       "oQueAconteceu": [
         "Uma exigência, um grupo de comprovação, uma banca, um formulário ou uma modalidade determina a retirada da modalidade, mas a oferta que ela alcança não inclui ampla concorrência. A banca declara a consequência da ausência; o formulário, a consequência da falta de envio; a modalidade, a ação quando o indeferimento ocorre. A mensagem e o campo da resposta indicam qual deles declarou a retirada. Uma oferta sem ampla concorrência é apontada uma única vez, mesmo quando mais de uma modalidade dela declara a retirada."
@@ -17110,7 +17113,7 @@
     {
       "codigo": "uniplus.selecao.consequencias_do_descumprimento.sem_modalidade_em_questao",
       "requisitos": [
-        "UNI-REQ-0501"
+        "UNI-REQ-0518"
       ],
       "oQueAconteceu": [
         "Uma exigência, um grupo de comprovação, uma banca ou um formulário determina retirar a modalidade, mas a condição dele não alcança nenhuma modalidade ofertada ou alcança todas elas. A banca declara a consequência da ausência; o formulário, a consequência da falta de envio. A mensagem e o campo da resposta indicam qual deles declarou a retirada."
@@ -18188,7 +18191,7 @@
     {
       "codigo": "uniplus.selecao.documento_exigido.consequencia_do_descumprimento_invalida",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0501"
       ],
       "oQueAconteceu": [
         "A consequência do documento não é reconhecida. Os valores aceitos são `ELIMINA_DO_PROCESSO`, `RETIRA_A_MODALIDADE` e `RETIRA_O_ACRESCIMO`. A declaração é opcional."
@@ -18203,7 +18206,7 @@
     {
       "codigo": "uniplus.selecao.documento_exigido.consequencia_incoerente_com_acao_da_vaga",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0523"
       ],
       "oQueAconteceu": [
         "Quando uma modalidade de vaga declara o que acontece com o candidato indeferido (a ação de\nindeferimento), a consequência de indeferimento do documento exigido tem de ser a mesma. O\ndocumento apontado declara uma consequência diferente da ação de uma modalidade que ele pode\nalcançar.",
@@ -18389,7 +18392,7 @@
     {
       "codigo": "uniplus.selecao.documento_exigido.pendencia_reenvio_exige_complementacao",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0520"
       ],
       "oQueAconteceu": [
         "Uma exigência ou grupo abre prazo para reenvio, mas a fase correspondente não permite complementação de documentos."
@@ -19317,7 +19320,7 @@
     {
       "codigo": "uniplus.selecao.fase_cronograma.pendencia_reenvio_exige_complementacao",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0520"
       ],
       "oQueAconteceu": [
         "A fase deixaria de permitir complementação, mas uma exigência ou grupo nela ainda abre prazo para reenvio."
@@ -26339,7 +26342,7 @@
     {
       "codigo": "uniplus.selecao.regra_de_comprovacao.base_legal_proibida_quando_exige_todos",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0521"
       ],
       "oQueAconteceu": [
         "O grupo exige todos os itens, mas informa base legal própria. Na definição dos documentos exigidos, o campo da resposta indica a posição do item."
@@ -26354,7 +26357,7 @@
     {
       "codigo": "uniplus.selecao.regra_de_comprovacao.base_legal_sem_consequencia",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0521"
       ],
       "oQueAconteceu": [
         "O grupo tem base legal, mas não tem consequência. Na definição dos documentos exigidos, o campo da resposta indica a posição do item."
@@ -26369,7 +26372,7 @@
     {
       "codigo": "uniplus.selecao.regra_de_comprovacao.consequencia_incoerente_com_acao_da_vaga",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0523"
       ],
       "oQueAconteceu": [
         "Um grupo com quantidade mínima de itens pode ter consequência própria de indeferimento. Quando uma\nmodalidade de vaga declara o que acontece com o candidato indeferido (a ação de indeferimento),\na consequência do grupo tem de ser a mesma. O grupo apontado declara uma consequência\ndiferente da ação de uma modalidade que ele pode alcançar.",
@@ -26387,7 +26390,7 @@
     {
       "codigo": "uniplus.selecao.regra_de_comprovacao.consequencia_invalida",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0501"
       ],
       "oQueAconteceu": [
         "A consequência informada para o grupo não é reconhecida. Na definição dos documentos exigidos, o campo da resposta indica a posição do item."
@@ -26716,7 +26719,7 @@
     {
       "codigo": "uniplus.selecao.regra_de_comprovacao.reenvio_proibido_em_regra_de_documento",
       "requisitos": [
-        "UNI-REQ-0070"
+        "UNI-REQ-0520"
       ],
       "oQueAconteceu": [
         "Uma regra de documento declarou `indeferimento.abrePrazoParaReenvio` como verdadeiro. A regra de documento não tem indeferimento próprio: o reenvio pertence à exigência do documento, em `documento.indeferimento.abrePrazoParaReenvio`, e o grupo de comprovação declara o reenvio no `indeferimento` dele. Sem a recusa, a declaração seria descartada e a leitura seguinte não a traria de volta.",
