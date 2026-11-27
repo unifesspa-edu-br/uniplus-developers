@@ -847,67 +847,67 @@
       "titulo": "O operador da condição não é reconhecido"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.codigo_formato_invalido",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.codigo_formato_invalido",
       "status": 422,
-      "titulo": "Código da base legal de bônus regional fora do formato"
+      "titulo": "Código da base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) fora do formato"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.codigo_ja_existe",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.codigo_ja_existe",
       "status": 409,
-      "titulo": "Já existe uma base legal de bônus regional com este código"
+      "titulo": "Já existe uma base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) com este código"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.codigo_tamanho",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.codigo_tamanho",
       "status": 422,
-      "titulo": "Código da base legal de bônus regional passa do tamanho máximo"
+      "titulo": "Código da base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) passa do tamanho máximo"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.descricao_caractere_invalido",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.descricao_caractere_invalido",
       "status": 422,
-      "titulo": "A descrição da base legal de bônus regional contém o caractere nulo, de controle ou de formatação"
+      "titulo": "A descrição da base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) contém o caractere nulo, de controle ou de formatação"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.descricao_obrigatoria",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.descricao_obrigatoria",
       "status": 422,
-      "titulo": "Descrição da base legal de bônus regional é obrigatória"
+      "titulo": "Descrição da base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) é obrigatória"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.descricao_tamanho",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.descricao_tamanho",
       "status": 422,
-      "titulo": "Tamanho da descrição da base legal de bônus regional inválido"
+      "titulo": "Tamanho da descrição da base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) inválido"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.identificacao_caractere_invalido",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.identificacao_caractere_invalido",
       "status": 422,
-      "titulo": "A identificação da base legal de bônus regional contém o caractere nulo ou caractere que não é texto"
+      "titulo": "A identificação da base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) contém o caractere nulo ou caractere que não é texto"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.identificacao_obrigatoria",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.identificacao_obrigatoria",
       "status": 422,
-      "titulo": "Identificação da base legal de bônus regional é obrigatória"
+      "titulo": "Identificação da base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) é obrigatória"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.identificacao_tamanho",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.identificacao_tamanho",
       "status": 422,
-      "titulo": "Tamanho da identificação da base legal de bônus regional inválido"
+      "titulo": "Tamanho da identificação da base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) inválido"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.municipio_invalido",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.municipio_invalido",
       "status": 422,
       "titulo": "Município informado é inválido"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.nao_encontrado",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.nao_encontrado",
       "status": 404,
-      "titulo": "Base legal de bônus regional não encontrada"
+      "titulo": "Base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) não encontrada"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.sem_municipios",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.sem_municipios",
       "status": 422,
-      "titulo": "A base legal de bônus regional deve abranger pelo menos um município"
+      "titulo": "A base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) deve abranger pelo menos um município"
     },
     {
-      "codigo": "uniplus.configuracao.base_legal_bonus_regional.tipo_instrumento_invalido",
+      "codigo": "uniplus.configuracao.base_legal_do_fada.tipo_instrumento_invalido",
       "status": 422,
       "titulo": "Tipo de instrumento normativo inválido ou não informado"
     },
@@ -919,7 +919,7 @@
     {
       "codigo": "uniplus.configuracao.calendario_dias_uteis.conflito_de_concorrencia",
       "status": 409,
-      "titulo": "Outra alteração concorrente modificou o mesmo dataset ou o dataset vigente"
+      "titulo": "Outra alteração concorrente modificou o mesmo calendário ou o calendário vigente"
     },
     {
       "codigo": "uniplus.configuracao.calendario_dias_uteis.data_ausente",
@@ -927,9 +927,9 @@
       "titulo": "A data do dia não útil não pode ser o valor default"
     },
     {
-      "codigo": "uniplus.configuracao.calendario_dias_uteis.data_duplicada_no_dataset",
+      "codigo": "uniplus.configuracao.calendario_dias_uteis.data_duplicada_no_calendario",
       "status": 422,
-      "titulo": "Data duplicada no dataset (mesma abrangência e município)"
+      "titulo": "Data duplicada no calendário (mesma abrangência, município e UF)"
     },
     {
       "codigo": "uniplus.configuracao.calendario_dias_uteis.descricao_obrigatoria",
@@ -949,7 +949,7 @@
     {
       "codigo": "uniplus.configuracao.calendario_dias_uteis.ja_vigente",
       "status": 409,
-      "titulo": "Este dataset já é o vigente"
+      "titulo": "Este calendário já é o vigente"
     },
     {
       "codigo": "uniplus.configuracao.calendario_dias_uteis.nao_encontrado",
@@ -959,12 +959,12 @@
     {
       "codigo": "uniplus.configuracao.calendario_dias_uteis.nao_remove_vigente",
       "status": 409,
-      "titulo": "O dataset vigente não pode ser removido"
+      "titulo": "O calendário vigente não pode ser removido"
     },
     {
       "codigo": "uniplus.configuracao.calendario_dias_uteis.sem_dia_nao_util",
       "status": 422,
-      "titulo": "O dataset precisa de ao menos um dia não útil"
+      "titulo": "O calendário precisa de ao menos um dia não útil"
     },
     {
       "codigo": "uniplus.configuracao.calendario_dias_uteis.snapshot_municipal_apenas_para_municipal",
@@ -987,14 +987,14 @@
       "titulo": "UF é obrigatória para abrangência estadual"
     },
     {
-      "codigo": "uniplus.configuracao.calendario_dias_uteis.versao_dataset_obrigatoria",
+      "codigo": "uniplus.configuracao.calendario_dias_uteis.versao_do_calendario_obrigatoria",
       "status": 422,
-      "titulo": "Versão do dataset é obrigatória"
+      "titulo": "Versão do calendário é obrigatória"
     },
     {
-      "codigo": "uniplus.configuracao.calendario_dias_uteis.versao_dataset_tamanho",
+      "codigo": "uniplus.configuracao.calendario_dias_uteis.versao_do_calendario_tamanho",
       "status": 422,
-      "titulo": "Tamanho da versão do dataset inválido"
+      "titulo": "Tamanho da versão do calendário inválido"
     },
     {
       "codigo": "uniplus.configuracao.campus.codigo_emec_tamanho",
@@ -1127,6 +1127,11 @@
       "titulo": "A condição reservada não pode ser removida"
     },
     {
+      "codigo": "uniplus.configuracao.curso.codigo_formato_invalido",
+      "status": 422,
+      "titulo": "Código do curso fora do formato"
+    },
+    {
       "codigo": "uniplus.configuracao.curso.codigo_ja_existe",
       "status": 409,
       "titulo": "Já existe um curso ativo com este código"
@@ -1135,11 +1140,6 @@
       "codigo": "uniplus.configuracao.curso.codigo_obrigatorio",
       "status": 422,
       "titulo": "Código do curso é obrigatório"
-    },
-    {
-      "codigo": "uniplus.configuracao.curso.codigo_tamanho",
-      "status": 422,
-      "titulo": "Tamanho do código do curso inválido"
     },
     {
       "codigo": "uniplus.configuracao.curso.grau_obrigatorio",
@@ -1577,14 +1577,14 @@
       "titulo": "Já existe um valor de domínio com este código neste fato"
     },
     {
+      "codigo": "uniplus.configuracao.fato_valor_dominio.codigo_formato_invalido",
+      "status": 422,
+      "titulo": "Código do valor do dado fora do formato"
+    },
+    {
       "codigo": "uniplus.configuracao.fato_valor_dominio.codigo_obrigatorio",
       "status": 422,
       "titulo": "Código do valor de domínio é obrigatório"
-    },
-    {
-      "codigo": "uniplus.configuracao.fato_valor_dominio.codigo_tamanho",
-      "status": 422,
-      "titulo": "Tamanho do código do valor de domínio inválido"
     },
     {
       "codigo": "uniplus.configuracao.fato_valor_dominio.descricao_obrigatoria",
@@ -1674,7 +1674,7 @@
     {
       "codigo": "uniplus.configuracao.modalidade.acao_afirmativa_com_opcao_pelas_cotas_da_lei",
       "status": 422,
-      "titulo": "A ação afirmativa exige não ter optado pelas cotas da lei em toda cláusula, salvo a reserva de vagas para pessoa com deficiência, que não cita a opção"
+      "titulo": "A regra da ação afirmativa é incompatível com a opção pelas cotas da lei"
     },
     {
       "codigo": "uniplus.configuracao.modalidade.acao_indeferimento_invalida",
@@ -1719,7 +1719,7 @@
     {
       "codigo": "uniplus.configuracao.modalidade.cota_sem_opcao_pelas_cotas_da_lei",
       "status": 422,
-      "titulo": "A cota da lei exige a opção pelas cotas da lei em toda cláusula"
+      "titulo": "A cota da lei exige a opção pelas cotas em toda alternativa da regra"
     },
     {
       "codigo": "uniplus.configuracao.modalidade.criacao_bloqueada_codigo_protegido",
@@ -1837,6 +1837,21 @@
       "titulo": "Não é possível remover uma modalidade referenciada por outra modalidade ativa"
     },
     {
+      "codigo": "uniplus.configuracao.modelo_formulario.abrangencia_desconhecida",
+      "status": 422,
+      "titulo": "Abrangência da base legal desconhecida"
+    },
+    {
+      "codigo": "uniplus.configuracao.modelo_formulario.codigo_do_conteudo_formato_invalido",
+      "status": 422,
+      "titulo": "Código do conteúdo fora do formato"
+    },
+    {
+      "codigo": "uniplus.configuracao.modelo_formulario.codigo_formato_invalido",
+      "status": 422,
+      "titulo": "Código do modelo de formulário fora do formato"
+    },
+    {
       "codigo": "uniplus.configuracao.modelo_formulario.codigo_ja_existe",
       "status": 409,
       "titulo": "Já existe modelo de formulário com este código"
@@ -1847,14 +1862,19 @@
       "titulo": "Código do modelo de formulário é obrigatório"
     },
     {
-      "codigo": "uniplus.configuracao.modelo_formulario.codigo_tamanho",
-      "status": 422,
-      "titulo": "Código do modelo de formulário excede o tamanho máximo"
-    },
-    {
       "codigo": "uniplus.configuracao.modelo_formulario.conflito_de_concorrencia",
       "status": 409,
       "titulo": "Modelo de formulário alterado concorrentemente"
+    },
+    {
+      "codigo": "uniplus.configuracao.modelo_formulario.consequencia_do_descumprimento_desconhecida",
+      "status": 422,
+      "titulo": "Consequência do descumprimento do modelo de formulário desconhecida"
+    },
+    {
+      "codigo": "uniplus.configuracao.modelo_formulario.declaracao_incompleta",
+      "status": 422,
+      "titulo": "A declaração do modelo de formulário está ausente ou incompleta"
     },
     {
       "codigo": "uniplus.configuracao.modelo_formulario.descricao_tamanho",
@@ -1914,7 +1934,7 @@
     {
       "codigo": "uniplus.configuracao.modelo_formulario.pressuposto_na_inscricao",
       "status": 422,
-      "titulo": "O modelo de inscrição não tem pressupostos"
+      "titulo": "O modelo que serve à fase de inscrição não tem pressupostos"
     },
     {
       "codigo": "uniplus.configuracao.modelo_formulario.pressuposto_repetido",
@@ -1925,6 +1945,11 @@
       "codigo": "uniplus.configuracao.modelo_formulario.pressuposto_tambem_item",
       "status": 422,
       "titulo": "O fato é item e pressuposto do mesmo modelo"
+    },
+    {
+      "codigo": "uniplus.configuracao.modelo_formulario.situacao_da_base_legal_desconhecida",
+      "status": 422,
+      "titulo": "Situação da base legal desconhecida"
     },
     {
       "codigo": "uniplus.configuracao.modelo_formulario.termo_versao_nao_encontrada",
@@ -1942,9 +1967,9 @@
       "titulo": "O código do tipo de processo do modelo veio em branco"
     },
     {
-      "codigo": "uniplus.configuracao.modelo_formulario.tipo_processo_codigo_tamanho",
+      "codigo": "uniplus.configuracao.modelo_formulario.tipo_processo_codigo_formato_invalido",
       "status": 422,
-      "titulo": "Código do tipo de processo excede o tamanho máximo"
+      "titulo": "Código do tipo de processo fora do formato"
     },
     {
       "codigo": "uniplus.configuracao.modelo_formulario.tipo_processo_inexistente",
@@ -1972,6 +1997,11 @@
       "titulo": "Quantidade de turnos incompatível com o regime declarado"
     },
     {
+      "codigo": "uniplus.configuracao.oferta_curso.codigo_emec_tamanho",
+      "status": 422,
+      "titulo": "Tamanho do código do e-MEC inválido"
+    },
+    {
       "codigo": "uniplus.configuracao.oferta_curso.codigo_formato_invalido",
       "status": 422,
       "titulo": "O código da oferta de curso está fora do formato"
@@ -1982,24 +2012,19 @@
       "titulo": "Já existe uma oferta de curso ativa com este código"
     },
     {
+      "codigo": "uniplus.configuracao.oferta_curso.codigo_no_sistema_academico_tamanho",
+      "status": 422,
+      "titulo": "Tamanho do código no sistema acadêmico inválido"
+    },
+    {
       "codigo": "uniplus.configuracao.oferta_curso.codigo_obrigatorio",
       "status": 422,
       "titulo": "O código da oferta de curso é obrigatório"
     },
     {
-      "codigo": "uniplus.configuracao.oferta_curso.codigo_sga_tamanho",
-      "status": 422,
-      "titulo": "Tamanho do código SGA inválido"
-    },
-    {
       "codigo": "uniplus.configuracao.oferta_curso.curso_inexistente_ou_removido",
       "status": 422,
       "titulo": "Curso informado não existe ou foi removido"
-    },
-    {
-      "codigo": "uniplus.configuracao.oferta_curso.e_mec_codigo_tamanho",
-      "status": 422,
-      "titulo": "Tamanho do código e-MEC inválido"
     },
     {
       "codigo": "uniplus.configuracao.oferta_curso.formato_pedagogico_invalido",
@@ -2252,9 +2277,9 @@
       "titulo": "Código da fase sucessora fora do conjunto canônico"
     },
     {
-      "codigo": "uniplus.configuracao.protecao_do_catalogo.aceite_de_item_reprovado",
+      "codigo": "uniplus.configuracao.protecao_do_catalogo.aceite_de_item_devolvido",
       "status": 422,
-      "titulo": "O item reprovado não tem recomendação a aceitar"
+      "titulo": "O item devolvido não tem recomendação a aceitar"
     },
     {
       "codigo": "uniplus.configuracao.protecao_do_catalogo.ato_invalido",
@@ -2324,7 +2349,7 @@
     {
       "codigo": "uniplus.configuracao.protecao_do_catalogo.justificativa_obrigatoria",
       "status": 422,
-      "titulo": "A reprovação exige a justificativa"
+      "titulo": "A devolução exige a justificativa"
     },
     {
       "codigo": "uniplus.configuracao.protecao_do_catalogo.manifestacao_nao_lida",
@@ -2409,7 +2434,7 @@
     {
       "codigo": "uniplus.configuracao.protecao_do_catalogo.texto_da_manifestacao_obrigatorio",
       "status": 422,
-      "titulo": "Os pareceres recomenda ajuste e inadequada exigem o texto"
+      "titulo": "Os pareceres recomenda ajuste e recomenda não uso exigem o texto"
     },
     {
       "codigo": "uniplus.configuracao.recurso_acessibilidade.codigo_formato_invalido",
@@ -2627,9 +2652,9 @@
       "titulo": "Casas decimais do tipo de conceito inválidas"
     },
     {
-      "codigo": "uniplus.configuracao.tipo_conceito.codigo_caractere_invalido",
+      "codigo": "uniplus.configuracao.tipo_conceito.codigo_formato_invalido",
       "status": 422,
-      "titulo": "Código do tipo de conceito contém o caractere nulo ou caractere que não é texto"
+      "titulo": "Código do tipo de conceito fora do formato"
     },
     {
       "codigo": "uniplus.configuracao.tipo_conceito.codigo_ja_existe",
@@ -2640,11 +2665,6 @@
       "codigo": "uniplus.configuracao.tipo_conceito.codigo_obrigatorio",
       "status": 422,
       "titulo": "Código do tipo de conceito é obrigatório"
-    },
-    {
-      "codigo": "uniplus.configuracao.tipo_conceito.codigo_tamanho",
-      "status": 422,
-      "titulo": "Tamanho do código do tipo de conceito inválido"
     },
     {
       "codigo": "uniplus.configuracao.tipo_conceito.conflito_de_concorrencia",
@@ -2882,9 +2902,9 @@
       "titulo": "Declaração de que o tipo de etapa compõe a nota final é obrigatória"
     },
     {
-      "codigo": "uniplus.configuracao.tipo_etapa.codigo_caractere_invalido",
+      "codigo": "uniplus.configuracao.tipo_etapa.codigo_formato_invalido",
       "status": 422,
-      "titulo": "Código do tipo de etapa contém o caractere nulo ou caractere que não é texto"
+      "titulo": "Código do tipo de etapa fora do formato"
     },
     {
       "codigo": "uniplus.configuracao.tipo_etapa.codigo_ja_existe",
@@ -2895,11 +2915,6 @@
       "codigo": "uniplus.configuracao.tipo_etapa.codigo_obrigatorio",
       "status": 422,
       "titulo": "Código do tipo de etapa é obrigatório"
-    },
-    {
-      "codigo": "uniplus.configuracao.tipo_etapa.codigo_tamanho",
-      "status": 422,
-      "titulo": "Tamanho do código do tipo de etapa inválido"
     },
     {
       "codigo": "uniplus.configuracao.tipo_etapa.conceito_duplicado",
@@ -2992,9 +3007,9 @@
       "titulo": "Tipo de etapa não admite nenhum caráter de etapa"
     },
     {
-      "codigo": "uniplus.configuracao.tipo_processo.codigo_caractere_invalido",
+      "codigo": "uniplus.configuracao.tipo_processo.codigo_formato_invalido",
       "status": 422,
-      "titulo": "Código do tipo de processo seletivo contém o caractere nulo ou caractere que não é texto"
+      "titulo": "Código do tipo de processo seletivo fora do formato"
     },
     {
       "codigo": "uniplus.configuracao.tipo_processo.codigo_ja_existe",
@@ -3009,12 +3024,7 @@
     {
       "codigo": "uniplus.configuracao.tipo_processo.codigo_reservado",
       "status": 422,
-      "titulo": "Código reservado para obrigatoriedade legal universal"
-    },
-    {
-      "codigo": "uniplus.configuracao.tipo_processo.codigo_tamanho",
-      "status": 422,
-      "titulo": "Tamanho do código do tipo de processo seletivo inválido"
+      "titulo": "Código reservado para obrigatoriedade legal que vale para todos os tipos"
     },
     {
       "codigo": "uniplus.configuracao.tipo_processo.conflito_de_concorrencia",
@@ -3219,12 +3229,12 @@
     {
       "codigo": "uniplus.estrutura_formulario.bloco_exigido_ausente",
       "status": 422,
-      "titulo": "Falta um bloco que a finalidade exige"
+      "titulo": "Falta um bloco que a declaração do formulário exige"
     },
     {
       "codigo": "uniplus.estrutura_formulario.bloco_nao_admitido",
       "status": 422,
-      "titulo": "O bloco não é admitido pela finalidade do formulário"
+      "titulo": "O bloco não é admitido pela declaração do formulário"
     },
     {
       "codigo": "uniplus.estrutura_formulario.bloco_repetido",
@@ -3237,44 +3247,9 @@
       "titulo": "O item do conjunto básico de dados do candidato não pode ser alterado"
     },
     {
-      "codigo": "uniplus.estrutura_formulario.etapa_codigo_duplicado",
-      "status": 422,
-      "titulo": "O código de etapa se repete no formulário"
-    },
-    {
-      "codigo": "uniplus.estrutura_formulario.etapa_codigo_invalido",
-      "status": 422,
-      "titulo": "O código da etapa é obrigatório e tem tamanho limitado"
-    },
-    {
-      "codigo": "uniplus.estrutura_formulario.etapa_ordem_duplicada",
-      "status": 422,
-      "titulo": "Duas etapas do formulário têm a mesma ordem"
-    },
-    {
-      "codigo": "uniplus.estrutura_formulario.etapa_ordem_invalida",
-      "status": 422,
-      "titulo": "A ordem da etapa não pode ser negativa"
-    },
-    {
-      "codigo": "uniplus.estrutura_formulario.etapa_texto_tamanho",
-      "status": 422,
-      "titulo": "A descrição ou o aviso da etapa excede o tamanho máximo"
-    },
-    {
-      "codigo": "uniplus.estrutura_formulario.etapa_titulo_invalido",
-      "status": 422,
-      "titulo": "O título da etapa é obrigatório e tem tamanho limitado"
-    },
-    {
       "codigo": "uniplus.estrutura_formulario.exibicao_fora_de_secao",
       "status": 422,
       "titulo": "Só a seção do formulário tem exibição condicional"
-    },
-    {
-      "codigo": "uniplus.estrutura_formulario.finalidade_invalida",
-      "status": 422,
-      "titulo": "A finalidade do formulário é inscrição, isenção de taxa ou habilitação"
     },
     {
       "codigo": "uniplus.estrutura_formulario.item_fora_da_ordem_das_secoes",
@@ -3287,9 +3262,39 @@
       "titulo": "O item precisa estar numa seção do formulário"
     },
     {
+      "codigo": "uniplus.estrutura_formulario.pagina_codigo_duplicado",
+      "status": 422,
+      "titulo": "O código de página se repete no formulário"
+    },
+    {
+      "codigo": "uniplus.estrutura_formulario.pagina_codigo_invalido",
+      "status": 422,
+      "titulo": "O código da página é obrigatório e tem tamanho limitado"
+    },
+    {
+      "codigo": "uniplus.estrutura_formulario.pagina_ordem_duplicada",
+      "status": 422,
+      "titulo": "Duas páginas do formulário têm a mesma ordem"
+    },
+    {
+      "codigo": "uniplus.estrutura_formulario.pagina_ordem_invalida",
+      "status": 422,
+      "titulo": "A ordem da página não pode ser negativa"
+    },
+    {
+      "codigo": "uniplus.estrutura_formulario.pagina_texto_tamanho",
+      "status": 422,
+      "titulo": "A descrição ou o aviso da página excede o tamanho máximo"
+    },
+    {
+      "codigo": "uniplus.estrutura_formulario.pagina_titulo_invalido",
+      "status": 422,
+      "titulo": "O título da página é obrigatório e tem tamanho limitado"
+    },
+    {
       "codigo": "uniplus.estrutura_formulario.revisao_e_aceite_fora_do_fim",
       "status": 422,
-      "titulo": "A revisão e aceite é sempre a última etapa"
+      "titulo": "A revisão e aceite é sempre a última página"
     },
     {
       "codigo": "uniplus.estrutura_formulario.secao_com_bloco",
@@ -3307,9 +3312,9 @@
       "titulo": "A seção dos dados básicos do candidato não pode ser alterada"
     },
     {
-      "codigo": "uniplus.estrutura_formulario.tipo_de_etapa_obrigatorio",
+      "codigo": "uniplus.estrutura_formulario.tipo_de_pagina_obrigatorio",
       "status": 422,
-      "titulo": "A etapa é uma seção ou um bloco de sistema"
+      "titulo": "A página é uma seção ou um bloco de sistema"
     },
     {
       "codigo": "uniplus.estrutura_formulario.titulo_tamanho",
@@ -3572,17 +3577,17 @@
       "titulo": "O rótulo do item excede o tamanho máximo"
     },
     {
-      "codigo": "uniplus.item_formulario.tipo_renderizacao_incoerente_com_dominio",
+      "codigo": "uniplus.item_formulario.tipo_de_campo_incoerente_com_dominio",
       "status": 422,
-      "titulo": "O tipo de campo não é coerente com o domínio do fato"
+      "titulo": "O tipo de campo não é coerente com o domínio do dado"
     },
     {
-      "codigo": "uniplus.item_formulario.tipo_renderizacao_invalido",
+      "codigo": "uniplus.item_formulario.tipo_de_campo_invalido",
       "status": 422,
       "titulo": "O tipo de campo do item não é reconhecido"
     },
     {
-      "codigo": "uniplus.item_formulario.tipo_renderizacao_obrigatorio",
+      "codigo": "uniplus.item_formulario.tipo_de_campo_obrigatorio",
       "status": 422,
       "titulo": "O tipo de campo do item é obrigatório"
     },
@@ -3940,11 +3945,6 @@
       "codigo": "uniplus.publicacoes.tipo_ato.codigo_obrigatorio",
       "status": 422,
       "titulo": "Código do tipo de ato é obrigatório"
-    },
-    {
-      "codigo": "uniplus.publicacoes.tipo_ato.codigo_tamanho",
-      "status": 422,
-      "titulo": "Tamanho do código do tipo de ato inválido"
     },
     {
       "codigo": "uniplus.publicacoes.tipo_ato.nao_encontrado",
@@ -4317,6 +4317,16 @@
       "titulo": "A banca que julga recurso não define candidatos atendidos"
     },
     {
+      "codigo": "uniplus.selecao.banca.consequencia_da_ausencia_invalida",
+      "status": 422,
+      "titulo": "A consequência da ausência não é uma opção conhecida"
+    },
+    {
+      "codigo": "uniplus.selecao.banca.consequencia_da_ausencia_so_em_banca_que_avalia_o_merito",
+      "status": 422,
+      "titulo": "A consequência da ausência só pode ser declarada em banca que avalia o mérito"
+    },
+    {
       "codigo": "uniplus.selecao.banca.criterio_obrigatorio",
       "status": 422,
       "titulo": "A deliberação colegiada declara o critério de votação"
@@ -4457,6 +4467,36 @@
       "titulo": "A situação da base legal é obrigatória"
     },
     {
+      "codigo": "uniplus.selecao.cadastro_de_reserva.chamada_repetida",
+      "status": 422,
+      "titulo": "Chamada repetida no cadastro de reserva"
+    },
+    {
+      "codigo": "uniplus.selecao.cadastro_de_reserva.numero_da_chamada_invalido",
+      "status": 422,
+      "titulo": "Número da chamada inválido no cadastro de reserva"
+    },
+    {
+      "codigo": "uniplus.selecao.cadastro_de_reserva.participacao_ausente",
+      "status": 422,
+      "titulo": "A participação da reserva é obrigatória na chamada com reserva"
+    },
+    {
+      "codigo": "uniplus.selecao.cadastro_de_reserva.participacao_com_quantidade_zero",
+      "status": 422,
+      "titulo": "A chamada sem reserva não tem participação da reserva"
+    },
+    {
+      "codigo": "uniplus.selecao.cadastro_de_reserva.participacao_desconhecida",
+      "status": 422,
+      "titulo": "Participação da reserva desconhecida"
+    },
+    {
+      "codigo": "uniplus.selecao.cadastro_de_reserva.pessoas_da_reserva_por_vaga_invalida",
+      "status": 422,
+      "titulo": "Quantidade de pessoas da reserva por vaga inválida"
+    },
+    {
       "codigo": "uniplus.selecao.calendario_dias_uteis_congelado.dia_duplicado",
       "status": 422,
       "titulo": "O calendário congelado traz o mesmo dia não útil mais de uma vez"
@@ -4477,14 +4517,14 @@
       "titulo": "O calendário congelado precisa ter ao menos um dia não útil"
     },
     {
-      "codigo": "uniplus.selecao.calendario_dias_uteis_congelado.versao_dataset_obrigatoria",
+      "codigo": "uniplus.selecao.calendario_dias_uteis_congelado.versao_do_calendario_obrigatoria",
       "status": 422,
-      "titulo": "Versão do dataset do calendário é obrigatória"
+      "titulo": "Versão do calendário é obrigatória"
     },
     {
-      "codigo": "uniplus.selecao.calendario_dias_uteis_congelado.versao_dataset_tamanho",
+      "codigo": "uniplus.selecao.calendario_dias_uteis_congelado.versao_do_calendario_tamanho",
       "status": 422,
-      "titulo": "Versão do dataset do calendário excede o tamanho permitido"
+      "titulo": "Versão do calendário excede o tamanho permitido"
     },
     {
       "codigo": "uniplus.selecao.calendario_vigente.forma_territorial_invalida",
@@ -4542,51 +4582,6 @@
       "titulo": "O município informado não existe no Geo"
     },
     {
-      "codigo": "uniplus.selecao.configuracao_bonus_regional.base_legal_nao_encontrada",
-      "status": 422,
-      "titulo": "Base legal de bônus regional não encontrada ou desativada"
-    },
-    {
-      "codigo": "uniplus.selecao.configuracao_bonus_regional.campos_obrigatorios",
-      "status": 422,
-      "titulo": "RegraVersao, Fator e BaseLegalBonusRegionalId são obrigatórios quando RegraCodigo é informado"
-    },
-    {
-      "codigo": "uniplus.selecao.configuracao_bonus_regional.fato_elegibilidade_invalido",
-      "status": 422,
-      "titulo": "O código do fato de elegibilidade do acréscimo é inválido"
-    },
-    {
-      "codigo": "uniplus.selecao.configuracao_bonus_regional.fator_invalido",
-      "status": 422,
-      "titulo": "O fator do bônus deve ser maior que zero"
-    },
-    {
-      "codigo": "uniplus.selecao.configuracao_bonus_regional.regra_invalida",
-      "status": 422,
-      "titulo": "A regra referenciada não é do código FADA_MULTIPLICATIVO"
-    },
-    {
-      "codigo": "uniplus.selecao.configuracao_bonus_regional.regra_nao_encontrada",
-      "status": 422,
-      "titulo": "Regra de bônus não encontrada no catálogo de regras"
-    },
-    {
-      "codigo": "uniplus.selecao.configuracao_bonus_regional.regra_tipo_invalido",
-      "status": 422,
-      "titulo": "A regra referenciada não é do tipo regra_fada"
-    },
-    {
-      "codigo": "uniplus.selecao.configuracao_bonus_regional.sem_municipios",
-      "status": 422,
-      "titulo": "A base legal do bônus regional deve abranger pelo menos um município"
-    },
-    {
-      "codigo": "uniplus.selecao.configuracao_bonus_regional.teto_invalido",
-      "status": 422,
-      "titulo": "O teto do bônus, quando informado, deve ser maior que zero"
-    },
-    {
       "codigo": "uniplus.selecao.configuracao_cascata_remanejamento.campos_obrigatorios",
       "status": 422,
       "titulo": "RegraCodigo, RegraVersao, FallbackCodigo e Destinos precisam estar todos presentes ou todos ausentes"
@@ -4594,7 +4589,7 @@
     {
       "codigo": "uniplus.selecao.configuracao_cascata_remanejamento.codigo_invalido",
       "status": 422,
-      "titulo": "Código de modalidade fora do vocabulário ^[A-Z0-9_]+$ ou acima de 60 caracteres"
+      "titulo": "Código de modalidade fora do formato aceito ou acima de 60 caracteres"
     },
     {
       "codigo": "uniplus.selecao.configuracao_cascata_remanejamento.destino_duplicado",
@@ -4847,11 +4842,6 @@
       "titulo": "A oferta deve ter ao menos uma modalidade selecionada"
     },
     {
-      "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.motor_de_ajuste_vedado_na_lei_de_cotas",
-      "status": 422,
-      "titulo": "Motor de redução não se aplica à distribuição pela Lei 12.711"
-    },
-    {
       "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.oferta_curso_nao_encontrada",
       "status": 422,
       "titulo": "Oferta de curso não encontrada ou não está mais viva"
@@ -4907,11 +4897,6 @@
       "titulo": "A quantidade de vagas de uma modalidade não pode ser negativa"
     },
     {
-      "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.reclassificacao_para_ampla_sem_ampla_ofertada",
-      "status": 422,
-      "titulo": "Modalidade reclassifica na ampla concorrência, que não está ofertada"
-    },
-    {
       "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.referencia_demografica_indevida",
       "status": 422,
       "titulo": "A referência de reserva demográfica só se aplica à distribuição pela Lei 12.711"
@@ -4940,6 +4925,11 @@
       "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.regra_ajuste_tipo_invalido",
       "status": 422,
       "titulo": "A regra referenciada não é do tipo regra_ajuste_distribuicao_vagas"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.regra_de_ajuste_vedada_na_lei_de_cotas",
+      "status": 422,
+      "titulo": "A regra de ajuste do quadro não se aplica à distribuição pela Lei 12.711"
     },
     {
       "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.regra_distribuicao_nao_encontrada",
@@ -5015,6 +5005,51 @@
       "codigo": "uniplus.selecao.configuracao_divulgacao.numero_inscricao_obrigatorio",
       "status": 422,
       "titulo": "O número de inscrição é o piso da divulgação pública e não pode ser removido"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_do_fada.base_legal_nao_encontrada",
+      "status": 422,
+      "titulo": "Base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) não encontrada ou desativada"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_do_fada.campos_obrigatorios",
+      "status": 422,
+      "titulo": "regra.versao, fator e baseLegal.id são obrigatórios quando regra.codigo é informado"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_do_fada.fato_elegibilidade_invalido",
+      "status": 422,
+      "titulo": "O código do fato de elegibilidade do acréscimo é inválido"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_do_fada.fator_invalido",
+      "status": 422,
+      "titulo": "O multiplicador do Fator de Atenuação das Desigualdades de Acesso (FADA) deve ser maior que zero"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_do_fada.regra_invalida",
+      "status": 422,
+      "titulo": "A regra referenciada não é do código FADA_MULTIPLICATIVO"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_do_fada.regra_nao_encontrada",
+      "status": 422,
+      "titulo": "Regra do Fator de Atenuação das Desigualdades de Acesso (FADA) não encontrada no catálogo de regras"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_do_fada.regra_tipo_invalido",
+      "status": 422,
+      "titulo": "A regra referenciada não é do tipo `REGRA_FADA`"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_do_fada.sem_municipios",
+      "status": 422,
+      "titulo": "A base legal do Fator de Atenuação das Desigualdades de Acesso (FADA) deve abranger pelo menos um município"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_do_fada.teto_invalido",
+      "status": 422,
+      "titulo": "O teto do Fator de Atenuação das Desigualdades de Acesso (FADA), quando informado, deve ser maior que zero"
     },
     {
       "codigo": "uniplus.selecao.configuracao_do_recurso_da_etapa.efeito_suspensivo_nao_declarado",
@@ -5130,6 +5165,21 @@
       "codigo": "uniplus.selecao.configuracao_taxa_inscricao.valor_obrigatorio_quando_cobra",
       "status": 422,
       "titulo": "Processo que cobra taxa exige valor positivo"
+    },
+    {
+      "codigo": "uniplus.selecao.consequencias_do_descumprimento.acrescimo_nao_oferecido",
+      "status": 422,
+      "titulo": "O processo não oferece o Fator de Atenuação das Desigualdades de Acesso"
+    },
+    {
+      "codigo": "uniplus.selecao.consequencias_do_descumprimento.retira_a_modalidade_sem_ampla_concorrencia",
+      "status": 422,
+      "titulo": "A retirada da modalidade exige ampla concorrência na oferta"
+    },
+    {
+      "codigo": "uniplus.selecao.consequencias_do_descumprimento.sem_modalidade_em_questao",
+      "status": 422,
+      "titulo": "A retirada exige uma condição que alcance algumas modalidades ofertadas"
     },
     {
       "codigo": "uniplus.selecao.criterio_desempate.area_invalida",
@@ -5457,14 +5507,14 @@
       "titulo": "Exigência CONDICIONAL sem condição viva que determina resultado nunca seria cobrada de ninguém"
     },
     {
-      "codigo": "uniplus.selecao.documento_exigido.consequencia_incoerente_com_acao_da_vaga",
+      "codigo": "uniplus.selecao.documento_exigido.consequencia_do_descumprimento_invalida",
       "status": 422,
-      "titulo": "A consequência de indeferimento da exigência é incoerente com a ação de indeferimento da modalidade que ela alcança"
+      "titulo": "Consequência do descumprimento da exigência inválida"
     },
     {
-      "codigo": "uniplus.selecao.documento_exigido.consequencia_indeferimento_invalida",
+      "codigo": "uniplus.selecao.documento_exigido.consequencia_incoerente_com_acao_da_vaga",
       "status": 422,
-      "titulo": "Consequência de indeferimento fora do domínio conhecido"
+      "titulo": "A consequência do descumprimento da exigência é incoerente com a ação declarada na modalidade que ela alcança"
     },
     {
       "codigo": "uniplus.selecao.documento_exigido.etapa_nao_pertence_a_fase",
@@ -5477,11 +5527,6 @@
       "titulo": "A etapa que coleta o documento não é uma etapa deste processo"
     },
     {
-      "codigo": "uniplus.selecao.documento_exigido.fase_incoerente_com_finalidade",
-      "status": 422,
-      "titulo": "A fase do documento não é a fase em que se responde o formulário a que ele pertence"
-    },
-    {
       "codigo": "uniplus.selecao.documento_exigido.fase_nao_pertence_ao_processo",
       "status": 422,
       "titulo": "A fase informada não pertence ao cronograma deste processo"
@@ -5492,9 +5537,14 @@
       "titulo": "A exigência comprova um fato que o processo não coleta e que não é derivado do catálogo"
     },
     {
-      "codigo": "uniplus.selecao.documento_exigido.fato_da_isencao_em_outra_finalidade",
+      "codigo": "uniplus.selecao.documento_exigido.fato_de_formulario_nao_alcancado",
       "status": 422,
-      "titulo": "Fato do formulário de isenção citado por documento de outro formulário"
+      "titulo": "O fato citado na condição de aplicação da exigência não é conhecido no formulário que a entrega"
+    },
+    {
+      "codigo": "uniplus.selecao.documento_exigido.fato_de_membro_fora_da_repeticao",
+      "status": 422,
+      "titulo": "O campo de grupo repetível só é citado pela exigência que repete por esse grupo"
     },
     {
       "codigo": "uniplus.selecao.documento_exigido.fato_resolvido_em_fase_posterior",
@@ -5505,11 +5555,6 @@
       "codigo": "uniplus.selecao.documento_exigido.fatos_comprovados_invalidos",
       "status": 422,
       "titulo": "Os fatos comprovados pela exigência devem ser códigos de fato não repetidos"
-    },
-    {
-      "codigo": "uniplus.selecao.documento_exigido.finalidade_obrigatoria",
-      "status": 422,
-      "titulo": "Documento exigido em fase de formulário sem o formulário a que pertence"
     },
     {
       "codigo": "uniplus.selecao.documento_exigido.geral_com_condicao",
@@ -5524,17 +5569,12 @@
     {
       "codigo": "uniplus.selecao.documento_exigido.pendencia_reenvio_exige_complementacao",
       "status": 422,
-      "titulo": "A fase não permite complementação — consequência ABRE_PRAZO_PARA_REENVIO exige PermiteComplementacao"
+      "titulo": "A fase não permite complementação — a abertura de prazo para reenvio exige complementação"
     },
     {
       "codigo": "uniplus.selecao.documento_exigido.ponto_resolucao_fora_do_cronograma",
       "status": 422,
       "titulo": "A fase em que o fato citado na condição de aplicação é conhecido não pertence ao cronograma deste processo"
-    },
-    {
-      "codigo": "uniplus.selecao.documento_exigido.remove_vantagem_sem_vantagem_viva",
-      "status": 422,
-      "titulo": "A exigência declara REMOVE_VANTAGEM, mas o processo não tem nenhuma vantagem viva para remover"
     },
     {
       "codigo": "uniplus.selecao.documento_exigido.tamanho_maximo_bytes_invalido",
@@ -5809,7 +5849,7 @@
     {
       "codigo": "uniplus.selecao.fase_cronograma.pendencia_reenvio_exige_complementacao",
       "status": 422,
-      "titulo": "A fase não pode perder PermiteComplementacao — é referenciada por documento exigido com consequência ABRE_PRAZO_PARA_REENVIO"
+      "titulo": "A fase não pode perder PermiteComplementacao — é referenciada por documento exigido que abre prazo para reenvio"
     },
     {
       "codigo": "uniplus.selecao.fase_cronograma.permutacao_de_ordem_nao_suportada",
@@ -5892,24 +5932,94 @@
       "titulo": "O tamanho máximo em bytes por formato, quando presente, deve ser maior que zero"
     },
     {
+      "codigo": "uniplus.selecao.formulario_processo.codigo_duplicado",
+      "status": 422,
+      "titulo": "O código do formulário já identifica outro formulário do processo"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.codigo_formato_invalido",
+      "status": 422,
+      "titulo": "O código do formulário não tem o formato permitido"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.codigo_obrigatorio",
+      "status": 422,
+      "titulo": "O código do formulário é obrigatório"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.consequencia_da_falta_de_envio_invalida",
+      "status": 422,
+      "titulo": "A consequência da falta de envio do formulário não é uma opção conhecida"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.consequencia_em_formulario_da_inscricao",
+      "status": 422,
+      "titulo": "O formulário que coleta a inscrição não declara consequência para a falta de envio"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.consequencia_em_formulario_facultativo",
+      "status": 422,
+      "titulo": "O formulário facultativo não declara consequência para a falta de envio"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.exigencia_em_formulario_de_outra_fase",
+      "status": 422,
+      "titulo": "O formulário citado é de outra fase que a da exigência de documento"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.exigencia_em_formulario_inexistente",
+      "status": 422,
+      "titulo": "O processo não tem o formulário citado pela exigência de documento"
+    },
+    {
       "codigo": "uniplus.selecao.formulario_processo.fase_fora_do_cronograma",
       "status": 422,
       "titulo": "A fase do formulário não está no cronograma do processo"
     },
     {
-      "codigo": "uniplus.selecao.formulario_processo.fase_incoerente_com_finalidade",
+      "codigo": "uniplus.selecao.formulario_processo.formulario_da_isencao_obrigatorio",
       "status": 422,
-      "titulo": "A fase do formulário não é a que a finalidade pede"
+      "titulo": "Formulário obrigatório na fase de solicitação de isenção que não coleta inscrição"
     },
     {
       "codigo": "uniplus.selecao.formulario_processo.formulario_inexistente",
       "status": 422,
-      "titulo": "O processo não tem formulário dessa finalidade"
+      "titulo": "O processo não tem formulário com esse código"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.inscricao_em_resultado_importado",
+      "status": 422,
+      "titulo": "O processo de resultado importado tem formulário na fase que coleta inscrição"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.inscricao_sem_formulario_obrigatorio",
+      "status": 422,
+      "titulo": "O processo com inscrição pelo sistema não tem formulário obrigatório na fase que coleta inscrição"
     },
     {
       "codigo": "uniplus.selecao.formulario_processo.isencao_sem_taxa",
       "status": 422,
-      "titulo": "Formulário de isenção de taxa em processo que não cobra taxa"
+      "titulo": "O processo que não cobra taxa tem formulário na fase de solicitação de isenção"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.nao_encontrado",
+      "status": 404,
+      "titulo": "Formulário do processo não encontrado"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.pos_importacao_sem_formulario_obrigatorio",
+      "status": 422,
+      "titulo": "A primeira fase depois da importação não tem formulário obrigatório"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.remocao_de_formulario_com_exigencia",
+      "status": 422,
+      "titulo": "O formulário entrega exigência de documento e não pode ser removido"
+    },
+    {
+      "codigo": "uniplus.selecao.formulario_processo.taxa_sem_formulario_de_isencao",
+      "status": 422,
+      "titulo": "O processo que cobra taxa não tem formulário facultativo na fase de solicitação de isenção"
     },
     {
       "codigo": "uniplus.selecao.grafo_dependencia_conjunta.grafo_conjunto_com_ciclo",
@@ -6327,6 +6437,16 @@
       "titulo": "O rótulo do item de avaliação é obrigatório e tem tamanho máximo"
     },
     {
+      "codigo": "uniplus.selecao.leiaute_do_inep.filtro_de_tipo_invalido",
+      "status": 400,
+      "titulo": "Tipo do filtro de leiautes do INEP inválido"
+    },
+    {
+      "codigo": "uniplus.selecao.manifestacao_de_interesse.codigo_desconhecido",
+      "status": 422,
+      "titulo": "Manifestação de interesse desconhecida"
+    },
+    {
       "codigo": "uniplus.selecao.modalidade_selecionada.base_legal_obrigatoria",
       "status": 422,
       "titulo": "Base legal da modalidade é obrigatória"
@@ -6475,6 +6595,16 @@
       "codigo": "uniplus.selecao.motivo_de_decisao.fase_ou_etapa_nao_encontrada",
       "status": 404,
       "titulo": "Fase ou etapa não encontrada no processo"
+    },
+    {
+      "codigo": "uniplus.selecao.motivo_de_decisao.filtro_de_subclassificacao_invalida",
+      "status": 400,
+      "titulo": "Subclassificação do filtro de motivos inválida"
+    },
+    {
+      "codigo": "uniplus.selecao.motivo_de_decisao.filtro_de_tipo_invalido",
+      "status": 400,
+      "titulo": "Tipo do filtro de motivos inválido"
     },
     {
       "codigo": "uniplus.selecao.motivo_de_decisao.ja_ativo",
@@ -6784,7 +6914,7 @@
     {
       "codigo": "uniplus.selecao.obrigatoriedade_legal.tipo_processo_codigo_invalido",
       "status": 422,
-      "titulo": "TipoProcessoCodigo inválido"
+      "titulo": "Código do tipo de processo fora do formato"
     },
     {
       "codigo": "uniplus.selecao.obrigatoriedade_legal.tipo_processo_codigo_obrigatorio",
@@ -6915,16 +7045,6 @@
       "codigo": "uniplus.selecao.processo_seletivo.avaliacao_sem_etapa",
       "status": 422,
       "titulo": "Fase que agrupa etapas sem nenhuma etapa que aconteça nela"
-    },
-    {
-      "codigo": "uniplus.selecao.processo_seletivo.bonus_regional_aplica_sem_configuracao",
-      "status": 422,
-      "titulo": "O processo que aplica o bônus regional precisa da configuração do bônus"
-    },
-    {
-      "codigo": "uniplus.selecao.processo_seletivo.bonus_regional_nao_aplica_com_configuracao",
-      "status": 422,
-      "titulo": "O processo que não aplica o bônus regional não pode ter a configuração do bônus"
     },
     {
       "codigo": "uniplus.selecao.processo_seletivo.calendario_vigente_ausente",
@@ -7127,6 +7247,16 @@
       "titulo": "O tipo de documento da exigência é menos protegido que um fato que ela comprova"
     },
     {
+      "codigo": "uniplus.selecao.processo_seletivo.fada_aplica_sem_configuracao",
+      "status": 422,
+      "titulo": "O processo que aplica o Fator de Atenuação das Desigualdades de Acesso (FADA) precisa da configuração do FADA"
+    },
+    {
+      "codigo": "uniplus.selecao.processo_seletivo.fada_nao_aplica_com_configuracao",
+      "status": 422,
+      "titulo": "O processo que não aplica o Fator de Atenuação das Desigualdades de Acesso (FADA) não pode ter a configuração do FADA"
+    },
+    {
       "codigo": "uniplus.selecao.processo_seletivo.fase_canonica_duplicada",
       "status": 422,
       "titulo": "A mesma fase canônica não pode aparecer duas vezes no cronograma"
@@ -7304,17 +7434,12 @@
     {
       "codigo": "uniplus.selecao.processo_seletivo.inscricao_sem_conjunto_basico",
       "status": 422,
-      "titulo": "O formulário de inscrição não coleta o conjunto básico de dados do candidato"
+      "titulo": "O conjunto básico de dados do candidato não está todo em formulário obrigatório da fase que coleta inscrição"
     },
     {
       "codigo": "uniplus.selecao.processo_seletivo.inscricao_sem_edicao_do_enem",
       "status": 422,
       "titulo": "A classificação usa as notas do ENEM, e o formulário de inscrição não pede a edição a todo candidato"
-    },
-    {
-      "codigo": "uniplus.selecao.processo_seletivo.inscricao_sem_formulario",
-      "status": 422,
-      "titulo": "Processo com inscrição própria sem formulário de inscrição"
     },
     {
       "codigo": "uniplus.selecao.processo_seletivo.item_do_formulario_fora_de_secao",
@@ -7357,9 +7482,9 @@
       "titulo": "O motivo da retificação é obrigatório"
     },
     {
-      "codigo": "uniplus.selecao.processo_seletivo.municipio_do_bonus_referenciado_por_condicao_viva",
+      "codigo": "uniplus.selecao.processo_seletivo.municipio_do_fada_referenciado_por_condicao_viva",
       "status": 422,
-      "titulo": "Existe condição citando um município que deixaria a área do bônus regional"
+      "titulo": "Existe condição citando um município que deixaria a área do Fator de Atenuação das Desigualdades de Acesso (FADA)"
     },
     {
       "codigo": "uniplus.selecao.processo_seletivo.mutacao_fora_de_estado_editavel",
@@ -7782,6 +7907,11 @@
       "titulo": "O tipo de referência temporal é obrigatório"
     },
     {
+      "codigo": "uniplus.selecao.regra_catalogo.filtro_de_tipo_invalido",
+      "status": 400,
+      "titulo": "Tipo do filtro de regras inválido"
+    },
+    {
       "codigo": "uniplus.selecao.regra_catalogo.nao_encontrada",
       "status": 404,
       "titulo": "Regra não encontrada no catálogo na versão pedida"
@@ -7912,14 +8042,14 @@
       "titulo": "O grupo que exige todos os itens não declara quantidade mínima"
     },
     {
+      "codigo": "uniplus.selecao.regra_de_comprovacao.reenvio_proibido_em_regra_de_documento",
+      "status": 422,
+      "titulo": "A regra de documento não declara reenvio próprio; o reenvio é declarado na exigência"
+    },
+    {
       "codigo": "uniplus.selecao.regra_de_comprovacao.regra_contem_a_si_mesma",
       "status": 422,
       "titulo": "Uma regra não pode conter a si mesma, diretamente ou dentro de outro grupo"
-    },
-    {
-      "codigo": "uniplus.selecao.regra_de_comprovacao.remove_vantagem_sem_vantagem_configurada",
-      "status": 422,
-      "titulo": "O grupo determina retirar vantagem, mas nenhuma está configurada"
     },
     {
       "codigo": "uniplus.selecao.regra_de_comprovacao.repeticao_dentro_de_repeticao",
@@ -8054,7 +8184,7 @@
     {
       "codigo": "uniplus.selecao.retificacao.fato_ausente_de_versao_publicada",
       "status": 422,
-      "titulo": "Fato de outra finalidade não coletado em todas as versões publicadas"
+      "titulo": "Fato de outro formulário não coletado em todas as versões publicadas"
     },
     {
       "codigo": "uniplus.selecao.retificacao.fato_ja_coletado_removido",
@@ -8185,6 +8315,11 @@
       "codigo": "uniplus.termo_formulario.codigo_duplicado",
       "status": 422,
       "titulo": "O código aparece em mais de um termo do formulário"
+    },
+    {
+      "codigo": "uniplus.termo_formulario.codigo_formato_invalido",
+      "status": 422,
+      "titulo": "O código do termo exigido está fora do formato"
     },
     {
       "codigo": "uniplus.termo_formulario.codigo_obrigatorio",

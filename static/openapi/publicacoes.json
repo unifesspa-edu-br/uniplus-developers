@@ -32,7 +32,7 @@
         ],
         "summary": "Retorna o perfil do usu\u00E1rio autenticado",
         "description": "Retorna a identidade do access token (nome, e-mail, CPF, NomeSocial) e os perfis de acesso que a pessoa tem por concess\u00E3o vigente, cada um com o escopo (unidade ou institui\u00E7\u00E3o) e o prazo. O token identifica a pessoa e n\u00E3o concede acesso. Requer autentica\u00E7\u00E3o.",
-        "operationId": "GetAuthenticatedUserProfile",
+        "operationId": "ConsultarUsuarioAutenticado",
         "responses": {
           "200": {
             "description": "OK",
@@ -67,6 +67,7 @@
         "tags": [
           "AtosNormativos"
         ],
+        "operationId": "ListarAtosNormativos",
         "parameters": [
           {
             "name": "cursor",
@@ -177,6 +178,7 @@
         "tags": [
           "AtosNormativos"
         ],
+        "operationId": "ListarAtosNormativosDaEntidade",
         "parameters": [
           {
             "name": "entidadeTipo",
@@ -304,6 +306,7 @@
         "tags": [
           "AtosNormativos"
         ],
+        "operationId": "ObterAtoNormativo",
         "parameters": [
           {
             "name": "id",
@@ -354,6 +357,7 @@
         "tags": [
           "AtosNormativos"
         ],
+        "operationId": "RegistrarAtoNormativo",
         "parameters": [
           {
             "name": "Idempotency-Key",
@@ -483,6 +487,7 @@
         "tags": [
           "TiposAto"
         ],
+        "operationId": "ListarTiposDeAto",
         "parameters": [
           {
             "name": "vigentes",
@@ -601,6 +606,7 @@
         "tags": [
           "TiposAto"
         ],
+        "operationId": "ObterTipoDeAto",
         "parameters": [
           {
             "name": "id",
@@ -651,6 +657,7 @@
         "tags": [
           "TiposAto"
         ],
+        "operationId": "ObterTipoDeAtoVigente",
         "parameters": [
           {
             "name": "codigo",
@@ -659,7 +666,7 @@
             "schema": {
               "maxLength": 60,
               "minLength": 1,
-              "pattern": "^[A-Z]\u002B(_[A-Z]\u002B)*$",
+              "pattern": "^[A-Z][A-Z0-9]*(_[A-Z0-9]\u002B)*$",
               "type": "string"
             }
           },
@@ -721,6 +728,7 @@
         "tags": [
           "TiposAto"
         ],
+        "operationId": "CadastrarTipoDeAto",
         "parameters": [
           {
             "name": "Idempotency-Key",
@@ -853,6 +861,7 @@
         "tags": [
           "TiposAto"
         ],
+        "operationId": "AlterarTipoDeAto",
         "parameters": [
           {
             "name": "id",
@@ -959,6 +968,7 @@
         "tags": [
           "TiposAto"
         ],
+        "operationId": "ExcluirTipoDeAto",
         "parameters": [
           {
             "name": "id",
