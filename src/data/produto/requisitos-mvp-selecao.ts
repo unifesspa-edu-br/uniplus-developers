@@ -9712,4 +9712,26 @@ export const requisitosMvpSelecao: Requisito[] = [
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
+  {
+    requisito_id: 'UNI-REQ-0516',
+    titulo: 'Os tokens de acesso e de renovação ficam só em memória, nunca no armazenamento local nem no da sessão do navegador',
+    enunciado:
+      'O token de acesso e o de renovação ficam só na memória da aplicação no navegador e nunca são gravados no armazenamento local nem no da sessão do navegador (ADR-0009 do uniplus-web). Exemplo fictício: Helena usa o sistema por uma hora e o acesso dela é renovado várias vezes; se alguém examina o armazenamento local e o da sessão do navegador dela, não encontra o token de acesso nem o de renovação.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0005',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Depois do login e depois de cada renovação do acesso, o armazenamento local e o da sessão do navegador não têm o token de acesso nem o de renovação.',
+    verificacao:
+      'Teste automatizado que examina o armazenamento local e o da sessão do navegador depois do login e de uma renovação do acesso (planejado).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
 ];
