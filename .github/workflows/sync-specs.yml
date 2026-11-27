@@ -91,6 +91,10 @@ jobs:
             alvo+=('do Geo')
           fi
 
+          if mudou static/openapi; then
+            resumo+='Revise o diff do OpenAPI para identificar alterações que precisam entrar no changelog.'$'\n'
+          fi
+
           if [[ -z "$resumo" ]]; then
             printf 'alteracao=false\n' >> "$GITHUB_OUTPUT"
             exit 0
@@ -132,7 +136,7 @@ jobs:
           title: 'chore(contratos): sincroniza contratos ${{ steps.copiar.outputs.alvo }}'
           body: |
             ${{ steps.copiar.outputs.resumo }}
-            O build conferiu os pares de códigos e descrições, os requisitos e os links internos. Revise o diff do OpenAPI para identificar alterações que precisam entrar no changelog.
+            O build conferiu os pares de códigos e descrições, os requisitos e os links internos.
           branch: chore/sync-api-contracts
           delete-branch: true
           labels: documentation
