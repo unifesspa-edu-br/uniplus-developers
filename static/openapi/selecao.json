@@ -15360,7 +15360,10 @@
         "type": "object",
         "properties": {
           "clausula": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "format": "int32"
           },
           "fato": {
@@ -19740,7 +19743,9 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "chave"
+          "chave",
+          "obrigatorio",
+          "abrePrazoParaReenvio"
         ],
         "properties": {
           "id": {
@@ -19847,12 +19852,12 @@
           },
           "obrigatorio": {
             "title": "Obrigat\u00F3rio",
-            "description": "Se a entrega do documento \u00E9 obrigat\u00F3ria.",
+            "description": "Se a entrega do documento \u00E9 obrigat\u00F3ria. \u00C9 obrigat\u00F3rio informar: ausente, o documento \u00E9 recusado, e n\u00E3o vale falso.",
             "type": "boolean"
           },
           "abrePrazoParaReenvio": {
             "title": "Prazo para reenvio",
-            "description": "Indica se ser\u00E1 aberto prazo para reenvio.",
+            "description": "Indica se ser\u00E1 aberto prazo para reenvio. \u00C9 obrigat\u00F3rio informar: ausente, o documento \u00E9 recusado, e n\u00E3o vale falso.",
             "type": "boolean"
           },
           "consequenciaDoDescumprimento": {
@@ -21050,7 +21055,7 @@
           },
           "destinos": {
             "title": "Destinos",
-            "description": "Os destinos de cada modalidade de origem, at\u00E9 56 no total e at\u00E9 8 origens distintas.",
+            "description": "Os destinos de cada modalidade de origem, at\u00E9 56 no total e at\u00E9 8 origens distintas. A ordem de um destino \u00E9 a posi\u00E7\u00E3o dele na lista entre os da mesma modalidade de origem, a partir de 1, e decide quem recebe primeiro.",
             "type": "array",
             "maxItems": 56,
             "items": {
@@ -21058,7 +21063,6 @@
               "additionalProperties": false,
               "required": [
                 "modalidadeOrigemCodigo",
-                "ordem",
                 "modalidadeDestinoCodigo"
               ],
               "properties": {
@@ -21067,12 +21071,6 @@
                   "description": "C\u00F3digo da modalidade que cede as vagas.",
                   "$ref": "#/components/schemas/DocumentoDaConfiguracaoComunsCodigoDeCadastro",
                   "maxLength": 60
-                },
-                "ordem": {
-                  "title": "Ordem",
-                  "description": "Posi\u00E7\u00E3o do destino na ordem da origem, a partir de 1. A ordem \u00E9 sem\u00E2ntica: decide quem recebe primeiro.",
-                  "type": "integer",
-                  "minimum": 1
                 },
                 "modalidadeDestinoCodigo": {
                   "title": "Modalidade de destino",
@@ -21260,7 +21258,7 @@
           },
           "abrePrazoParaReenvio": {
             "title": "Prazo para reenvio",
-            "description": "Indica se ser\u00E1 aberto prazo para reenvio.",
+            "description": "Indica se o indeferimento abre prazo para reenvio dos documentos. O grupo de itens declara a escolha; a regra de documento a deixa ausente, pois o reenvio \u00E9 da exig\u00EAncia do documento.",
             "type": "boolean"
           },
           "consequenciaDoDescumprimento": {
@@ -24200,12 +24198,16 @@
         "required": [
           "obrigatorio",
           "consequenciaDoDescumprimento",
-          "basesLegais"
+          "basesLegais",
+          "abrePrazoParaReenvio"
         ],
         "type": "object",
         "properties": {
           "obrigatorio": {
-            "type": "boolean"
+            "type": [
+              "null",
+              "boolean"
+            ]
           },
           "consequenciaDoDescumprimento": {
             "oneOf": [
@@ -24227,8 +24229,10 @@
             }
           },
           "abrePrazoParaReenvio": {
-            "type": "boolean",
-            "default": false
+            "type": [
+              "null",
+              "boolean"
+            ]
           }
         }
       },
@@ -24284,8 +24288,10 @@
             }
           },
           "abrePrazoParaReenvio": {
-            "type": "boolean",
-            "default": false
+            "type": [
+              "null",
+              "boolean"
+            ]
           }
         }
       },
@@ -25970,16 +25976,14 @@
             "format": "uuid"
           },
           "formularioCodigo": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string"
           }
         }
       },
       "MomentoDaExigenciaInput": {
         "required": [
-          "faseId"
+          "faseId",
+          "formularioCodigo"
         ],
         "type": "object",
         "properties": {
@@ -25995,10 +25999,7 @@
             "format": "uuid"
           },
           "formularioCodigo": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string"
           }
         }
       },
@@ -26266,7 +26267,10 @@
             "type": "string"
           },
           "fracao": {
-            "type": "number",
+            "type": [
+              "null",
+              "number"
+            ],
             "format": "double"
           },
           "chave": {
@@ -29050,7 +29054,10 @@
             "format": "uuid"
           },
           "quantidade": {
-            "type": "integer",
+            "type": [
+              "null",
+              "integer"
+            ],
             "format": "int32"
           }
         }
