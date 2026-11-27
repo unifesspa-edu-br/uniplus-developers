@@ -32,7 +32,7 @@
         ],
         "summary": "Retorna o perfil do usu\u00E1rio autenticado",
         "description": "Retorna a identidade do access token (nome, e-mail, CPF, NomeSocial) e os perfis de acesso que a pessoa tem por concess\u00E3o vigente, cada um com o escopo (unidade ou institui\u00E7\u00E3o) e o prazo. O token identifica a pessoa e n\u00E3o concede acesso. Requer autentica\u00E7\u00E3o.",
-        "operationId": "GetAuthenticatedUserProfile",
+        "operationId": "ConsultarUsuarioAutenticado",
         "responses": {
           "200": {
             "description": "OK",
@@ -67,6 +67,7 @@
         "tags": [
           "Instituicao"
         ],
+        "operationId": "ObterInstituicao",
         "responses": {
           "200": {
             "description": "OK",
@@ -106,6 +107,7 @@
         "tags": [
           "Instituicao"
         ],
+        "operationId": "CadastrarInstituicao",
         "parameters": [
           {
             "name": "Idempotency-Key",
@@ -238,6 +240,7 @@
         "tags": [
           "Instituicao"
         ],
+        "operationId": "AlterarInstituicao",
         "parameters": [
           {
             "name": "id",
@@ -367,6 +370,7 @@
         "tags": [
           "Instituicao"
         ],
+        "operationId": "ExcluirInstituicao",
         "parameters": [
           {
             "name": "id",
@@ -425,10 +429,12 @@
         "tags": [
           "Unidades"
         ],
+        "operationId": "ListarUnidadesInstitucionais",
         "parameters": [
           {
             "name": "q",
             "in": "query",
+            "description": "At\u00E9 200 caracteres, sem contar os espa\u00E7os das pontas.",
             "schema": {
               "type": "string"
             }
@@ -535,7 +541,7 @@
             }
           },
           "422": {
-            "description": "O texto pesquisado excede 200 caracteres (uniplus.consulta.busca_muito_longa).",
+            "description": "Texto pesquisado com mais de 200 caracteres, sem contar os espa\u00E7os das pontas (uniplus.consulta.busca_muito_longa), ou outro par\u00E2metro de consulta inv\u00E1lido.",
             "content": {
               "application/problem\u002Bjson": {
                 "schema": {
@@ -553,6 +559,7 @@
         "tags": [
           "Unidades"
         ],
+        "operationId": "ObterUnidadeInstitucional",
         "parameters": [
           {
             "name": "id",
@@ -603,6 +610,7 @@
         "tags": [
           "Unidades"
         ],
+        "operationId": "CadastrarUnidadeInstitucional",
         "parameters": [
           {
             "name": "Idempotency-Key",
@@ -735,6 +743,7 @@
         "tags": [
           "Unidades"
         ],
+        "operationId": "AlterarUnidadeInstitucional",
         "parameters": [
           {
             "name": "id",
@@ -864,6 +873,7 @@
         "tags": [
           "Unidades"
         ],
+        "operationId": "ExcluirUnidadeInstitucional",
         "parameters": [
           {
             "name": "id",
@@ -1137,7 +1147,14 @@
             "format": "uuid"
           },
           "tipo": {
-            "$ref": "#/components/schemas/TipoUnidade"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoUnidadeCodigo"
+              }
+            ]
           },
           "unidadeAcademica": {
             "type": "boolean"
@@ -1433,7 +1450,14 @@
             "format": "uuid"
           },
           "tipo": {
-            "$ref": "#/components/schemas/TipoUnidade"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoUnidadeCodigo"
+              }
+            ]
           },
           "unidadeAcademica": {
             "type": "boolean"
@@ -1921,22 +1945,22 @@
           }
         }
       },
-      "TipoUnidade": {
+      "TipoUnidadeCodigo": {
         "enum": [
-          "nenhum",
-          "reitoria",
-          "proReitoria",
-          "centro",
-          "instituto",
-          "faculdade",
-          "departamento",
-          "coordenacao",
-          "diretoria",
-          "divisao",
-          "nucleo",
-          "outro"
+          "REITORIA",
+          "PRO_REITORIA",
+          "CENTRO",
+          "INSTITUTO",
+          "FACULDADE",
+          "DEPARTAMENTO",
+          "COORDENACAO",
+          "DIRETORIA",
+          "DIVISAO",
+          "NUCLEO",
+          "OUTRO"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "O tipo de uma unidade da universidade, que a classifica na estrutura organizacional: da reitoria aos n\u00FAcleos.\n\n- \u0060REITORIA\u0060: Reitoria \u2014 A unidade m\u00E1xima de administra\u00E7\u00E3o da universidade.\n- \u0060PRO_REITORIA\u0060: Pr\u00F3-reitoria \u2014 Unidade de administra\u00E7\u00E3o superior ligada \u00E0 reitoria e respons\u00E1vel por uma \u00E1rea, como ensino ou pesquisa.\n- \u0060CENTRO\u0060: Centro \u2014 Unidade que re\u00FAne cursos e \u00E1reas de conhecimento afins.\n- \u0060INSTITUTO\u0060: Instituto \u2014 Unidade acad\u00EAmica que re\u00FAne cursos e pesquisa de uma \u00E1rea do conhecimento.\n- \u0060FACULDADE\u0060: Faculdade \u2014 Unidade acad\u00EAmica respons\u00E1vel por cursos de uma \u00E1rea espec\u00EDfica.\n- \u0060DEPARTAMENTO\u0060: Departamento \u2014 Subdivis\u00E3o de uma unidade acad\u00EAmica que re\u00FAne disciplinas afins.\n- \u0060COORDENACAO\u0060: Coordena\u00E7\u00E3o \u2014 Unidade que coordena um curso, um programa ou uma atividade.\n- \u0060DIRETORIA\u0060: Diretoria \u2014 Unidade de dire\u00E7\u00E3o de um conjunto de atividades administrativas ou acad\u00EAmicas.\n- \u0060DIVISAO\u0060: Divis\u00E3o \u2014 Subdivis\u00E3o de uma diretoria ou de outra unidade administrativa.\n- \u0060NUCLEO\u0060: N\u00FAcleo \u2014 Unidade que re\u00FAne pessoas em torno de um tema ou de uma atividade espec\u00EDfica.\n- \u0060OUTRO\u0060: Outro \u2014 Unidade que n\u00E3o se enquadra nos demais tipos."
       },
       "UnidadeDto": {
         "required": [
