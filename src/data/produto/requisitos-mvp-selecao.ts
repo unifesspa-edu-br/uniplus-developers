@@ -9603,7 +9603,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0503',
     titulo: 'Manifestação de interesse nas chamadas seguintes',
     enunciado:
-      'Quando prevista no edital, a manifestação de interesse ocorre uma vez depois da 1ª chamada, no prazo configurado, e vale para as chamadas seguintes. Quem volta a aguardar, inclusive pessoa da reserva que não assumiu vaga ou pessoa que perdeu o acréscimo, não manifesta novamente. O edital pode configurar confirmação a cada chamada; essa opção vem desligada por padrão. Quando exigida a manifestação inicial, quem não manifesta no prazo perde o direito de concorrer às vagas remanescentes, conforme o edital; o recurso segue as regras declaradas no edital. Decisão do líder técnico em 25/11/2026.',
+      'Quando prevista no edital, há uma manifestação inicial de interesse depois da 1ª chamada, no prazo definido na publicação de cada chamada, e ela vale para as chamadas seguintes. Quem volta a aguardar, inclusive pessoa da reserva que não assumiu vaga ou pessoa que perdeu o acréscimo, não manifesta novamente, salvo quando o edital exigir confirmação a cada chamada: nesse caso, a pessoa confirma o interesse também em cada chamada seguinte. O edital declara, na configuração do processo, se prevê a manifestação e se exige confirmação a cada chamada (UNI-REQ-0507); sem declaração, a manifestação não é prevista e a confirmação a cada chamada fica desligada. Quando a manifestação está prevista (`UMA_VEZ` ou `CONFIRMA_A_CADA_CHAMADA`), quem não manifesta no prazo perde o direito de concorrer às vagas remanescentes, conforme o edital; o recurso segue as regras declaradas no edital. Decisão do líder técnico em 25/11/2026; o registro da manifestação, o prazo e a perda do direito são regra decidida ainda não implementada na API (uniplus-api#3026).',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -9615,7 +9615,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Com a opção padrão, uma manifestação vale para as chamadas seguintes e quem volta a aguardar não manifesta de novo; com confirmação a cada chamada ligada, aplica-se a exigência configurada; quando a manifestação inicial é exigida e a pessoa não a apresenta no prazo, aplica-se a perda do direito às vagas remanescentes conforme o edital.',
+      'Com a declaração `UMA_VEZ`, uma manifestação vale para as chamadas seguintes e quem volta a aguardar não manifesta de novo; com `CONFIRMA_A_CADA_CHAMADA`, quem volta a aguardar precisa confirmar o interesse a cada chamada no prazo definido na publicação dela; quando a manifestação está prevista e a pessoa não a apresenta no prazo, aplica-se a perda do direito às vagas remanescentes conforme o edital.',
     verificacao: 'Testes automatizados dos critérios de aceite (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -9645,7 +9645,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0505',
     titulo: 'Participação da reserva configurada por chamada',
     enunciado:
-      'Para cada chamada que convoca reserva, o edital deve escolher entre "a reserva só antecipa a habilitação" e "a reserva assume na mesma chamada", sem valor padrão. A chamada sem reserva não precisa dessa escolha. O rascunho pode ser salvo sem a escolha, mas a publicação do processo é recusada se alguma chamada convocar reserva sem a opção definida. Na primeira opção, a pessoa convocada para a reserva entrega os documentos e passa pelas bancas exigidas; se atender às exigências, termina com a documentação deferida, mas não é homologada como apta à matrícula nem assume vaga nessa chamada. A vaga que sobrar segue para a chamada seguinte, que classifica novamente todas as pessoas que continuam concorrendo, inclusive quem perdeu somente o acréscimo do Fator de Atenuação das Desigualdades de Acesso, com a nota recalculada (UNI-REQ-0496 a UNI-REQ-0499). A documentação deferida é aproveitada conforme UNI-REQ-0353. Na segunda opção, a reserva pode ser homologada e assumir vaga na mesma chamada, conforme UNI-REQ-0354. Em ambas as opções, a pessoa da reserva que não assumiu vaga continua aguardando ou encerra a participação nas chamadas, conforme a opção do edital no UNI-REQ-0434. Decisão do líder técnico em 25/11/2026. ' +
+      'Para cada chamada que convoca reserva, o edital deve escolher entre "a reserva só antecipa a habilitação" e "a reserva assume na mesma chamada", sem valor padrão. A chamada sem reserva não precisa dessa escolha e não pode trazê-la (UNI-REQ-0508). A configuração que declara reserva para uma chamada sem trazer a escolha é recusada ao ser gravada; somente o documento do rascunho aceita a falta, como aviso, e a publicação do processo é recusada se alguma chamada convocar reserva sem a opção definida. Na primeira opção, a pessoa convocada para a reserva entrega os documentos e passa pelas bancas exigidas; se atender às exigências, termina com a documentação deferida, mas não é homologada como apta à matrícula nem assume vaga nessa chamada. A vaga que sobrar segue para a chamada seguinte, que classifica novamente todas as pessoas que continuam concorrendo, inclusive quem perdeu somente o acréscimo do Fator de Atenuação das Desigualdades de Acesso, com a nota recalculada (UNI-REQ-0496 a UNI-REQ-0499). A documentação deferida é aproveitada conforme UNI-REQ-0353. Na segunda opção, a reserva pode ser homologada e assumir vaga na mesma chamada, conforme UNI-REQ-0354. Em ambas as opções, a pessoa da reserva que não assumiu vaga continua aguardando ou encerra a participação nas chamadas, conforme a opção do edital no UNI-REQ-0434. Decisão do líder técnico em 25/11/2026; a aplicação das duas opções na execução das chamadas é regra decidida ainda não implementada na API (uniplus-api#2955). ' +
       'Pergunta ao PO/CEPS: qual das duas opções o edital de Medicina 2027 adotará? A resposta do Centro de Processos Seletivos (CEPS) de 18/11 e o item 7.7 da minuta descrevem a opção de assumir na mesma chamada; a escolha para Medicina cabe ao edital e aguarda definição do CEPS.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
@@ -9658,8 +9658,8 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'A escolha de uma das duas opções é obrigatória por chamada que convoca reserva, sem valor padrão; chamada sem reserva não precisa da escolha; o rascunho é salvo sem ela, mas a publicação do processo é recusada se alguma chamada com reserva estiver sem a opção; a chamada aplica a opção escolhida; na antecipação, a pessoa da reserva entrega os documentos e passa pelas bancas exigidas, tem a documentação deferida se atender às exigências, não é homologada como apta à matrícula nem ocupa vaga nessa chamada; a vaga disponível segue à chamada seguinte, que classifica novamente as pessoas que continuam concorrendo e aproveita a documentação deferida conforme UNI-REQ-0353; na outra opção, aplica-se UNI-REQ-0354; em ambas, a pessoa da reserva que não assumiu vaga continua aguardando ou encerra a participação conforme a opção do edital no UNI-REQ-0434. Exemplo: Fernanda disputa a vaga e Leandro é convocado para a reserva na opção de antecipação. A habilitação de Fernanda é indeferida por não comprovar o direito ao acréscimo do Fator de Atenuação das Desigualdades de Acesso; Leandro cumpre as exigências e tem a documentação deferida, sem homologação como apto à matrícula nem vaga nessa chamada. Se o edital define que a reserva continua aguardando, na chamada seguinte ambos concorrem com as demais pessoas elegíveis, Fernanda com a nota recalculada e Leandro com a documentação deferida aproveitada; a classificação determina quem é convocado. Se define que a reserva encerra a participação, Leandro não é convocado nas chamadas seguintes. Exemplo de configuração: uma chamada convoca reserva sem a opção escolhida; o rascunho é salvo, mas o processo só é publicado depois da escolha. Uma chamada sem reserva não precisa dela.',
-    verificacao: 'Testes automatizados das duas opções por chamada, do salvamento do rascunho e da publicação com e sem a escolha, inclusive em chamada sem reserva, da aplicação das duas opções do UNI-REQ-0434, da documentação deferida sem homologação nem vaga, da classificação seguinte com nota recalculada e do aproveitamento documental (planejado).',
+      'A escolha de uma das duas opções é obrigatória por chamada que convoca reserva, sem valor padrão; chamada sem reserva não precisa da escolha; a configuração com reserva declarada sem a escolha é recusada ao ser gravada, e somente o documento do rascunho aceita a falta, como aviso; a publicação do processo é recusada se alguma chamada com reserva estiver sem a opção; a chamada aplica a opção escolhida; na antecipação, a pessoa da reserva entrega os documentos e passa pelas bancas exigidas, tem a documentação deferida se atender às exigências, não é homologada como apta à matrícula nem ocupa vaga nessa chamada; a vaga disponível segue à chamada seguinte, que classifica novamente as pessoas que continuam concorrendo e aproveita a documentação deferida conforme UNI-REQ-0353; na outra opção, aplica-se UNI-REQ-0354; em ambas, a pessoa da reserva que não assumiu vaga continua aguardando ou encerra a participação conforme a opção do edital no UNI-REQ-0434. Exemplo: Fernanda disputa a vaga e Leandro é convocado para a reserva na opção de antecipação. A habilitação de Fernanda é indeferida por não comprovar o direito ao acréscimo do Fator de Atenuação das Desigualdades de Acesso; Leandro cumpre as exigências e tem a documentação deferida, sem homologação como apto à matrícula nem vaga nessa chamada. Se o edital define que a reserva continua aguardando, na chamada seguinte ambos concorrem com as demais pessoas elegíveis, Fernanda com a nota recalculada e Leandro com a documentação deferida aproveitada; a classificação determina quem é convocado. Se define que a reserva encerra a participação, Leandro não é convocado nas chamadas seguintes. Exemplo de configuração: uma chamada convoca reserva sem a opção escolhida; a gravação da chamada é recusada, o documento do rascunho a aceita como aviso, e o processo só é publicado depois da escolha. Uma chamada sem reserva não precisa dela.',
+    verificacao: 'Testes automatizados das duas opções por chamada, da gravação da configuração com e sem a escolha, do documento do rascunho sem a escolha (aviso) e da publicação com e sem a escolha, inclusive em chamada sem reserva, da aplicação das duas opções do UNI-REQ-0434, da documentação deferida sem homologação nem vaga, da classificação seguinte com nota recalculada e do aproveitamento documental (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -10436,5 +10436,51 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Testes automatizados do aviso com o período máximo como limite e com o pedido não estendido, de "Entrar de novo agora" com o encerramento da sessão, a sessão nova e a volta à mesma tela, do caso em que outra página já recomeçou a sessão, do texto do aviso sobre as outras páginas e de "Agora não" (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0507',
+    titulo: 'Declaração da manifestação de interesse na configuração do processo',
+    enunciado:
+      'Quem configura o processo declara se o edital prevê a manifestação de interesse e, quando prevê, se ela ocorre uma única vez depois da 1ª chamada ou se precisa ser confirmada a cada chamada. A declaração tem três situações: sem valor, que significa manifestação não prevista; `UMA_VEZ`; e `CONFIRMA_A_CADA_CHAMADA`. Ela é opcional, não é exigida para publicar o processo e fica congelada na publicação, como as demais regras do edital; só muda por retificação. Valor fora dessas situações é recusado. A declaração é única: não existe declaração separada de manifestação prevista e de manifestação exigida, e a confirmação a cada chamada só existe quando a manifestação está prevista. O prazo da manifestação não faz parte da configuração do processo: é definido na publicação de cada chamada (UNI-REQ-0503), regra decidida ainda não implementada na API (uniplus-api#3026). Decisão do líder técnico em 26/11/2026. ' +
+      'Exemplo 1: o edital não menciona manifestação de interesse. Nada é declarado e a manifestação não é prevista. ' +
+      'Exemplo 2: o edital prevê uma manifestação depois da 1ª chamada, válida para as seguintes. Quem configura declara `UMA_VEZ`. ' +
+      'Exemplo 3: o edital pede que a pessoa confirme o interesse a cada chamada. Quem configura declara `CONFIRMA_A_CADA_CHAMADA`.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0049',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A configuração aceita a declaração ausente, `UMA_VEZ` ou `CONFIRMA_A_CADA_CHAMADA`; a ausência significa manifestação não prevista; o processo pode ser publicado sem a declaração; valor fora das três situações é recusado ao salvar, sem repetir o valor informado; a declaração fica congelada na publicação e aparece na leitura e na revisão do processo; mudar depois da publicação exige retificação; o prazo da manifestação não é declarado na configuração do processo.',
+    verificacao: 'Testes automatizados da configuração com cada situação, do valor fora das situações recusado, do congelamento na publicação e da retificação, e teste de interface do preenchimento e da revisão (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0508',
+    titulo: 'A participação da reserva só existe em chamada com reserva',
+    enunciado:
+      'A escolha entre "a reserva só antecipa a habilitação" e "a reserva assume na mesma chamada" (UNI-REQ-0505) só existe na chamada cuja quantidade de pessoas da reserva por vaga é maior que zero (UNI-REQ-0355); a obrigatoriedade dela é regra do UNI-REQ-0505. A chamada que não consta do cadastro de reserva, ou que consta com quantidade zero, não tem reserva e não pode trazer a escolha: a configuração que informa a escolha numa chamada com quantidade zero é recusada ao salvar, e a mensagem não repete o valor informado. O item do cadastro de reserva declarado sem quantidade é recusado, com ou sem a escolha. Decisão do líder técnico em 26/11/2026. ' +
+      'Exemplo: a 2ª chamada declara duas pessoas da reserva por vaga e a opção de assumir na mesma chamada; a configuração é aceita quanto a esse ponto, desde que as demais verificações do cadastro de reserva também passem. A 3ª chamada declara quantidade zero e traz a opção de antecipar a habilitação; a configuração é recusada até a opção ser retirada ou a quantidade ser maior que zero.',
+    grupo: 'negocio',
+    tipo: 'regra_negocio',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0049',
+    modulo: 'Seleção',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'A chamada fora do cadastro de reserva ou com quantidade zero não exige a escolha; a escolha informada em chamada com quantidade zero é recusada ao salvar, e o item declarado sem quantidade também é recusado, sem repetir o valor informado; a obrigatoriedade da escolha na chamada com reserva é a do UNI-REQ-0505.',
+    verificacao: 'Testes automatizados da chamada sem reserva sem a escolha e da recusa da escolha com quantidade zero ou ausente (planejado).',
+    pagina_developers: '/produto/regras-negocio/',
+    owner: 'Equipe backend; Equipe frontend',
   },
 ];
