@@ -9691,9 +9691,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0509',
-    titulo: 'O sistema renova o acesso da pessoa antes de vencer, enquanto ela usa',
+    titulo: 'O prazo de inatividade da sessão só se renova por ação da pessoa',
     enunciado:
-      'Enquanto a pessoa usa o sistema, o acesso dela é renovado por conta própria antes de vencer, sem ação da pessoa e sem esperar que ela faça um pedido, de modo que a sessão continua ativa até o período máximo da sessão (UNI-REQ-0513). A antecedência da renovação é configuração. Exemplo fictício: Diogo preenche por quase uma hora o cadastro do processo "PSR 2027" sem gravar; o acesso dele é renovado várias vezes sem que ele perceba, e a tela segue funcionando.',
+      'O prazo de inatividade da sessão é de 30 minutos, definido no servidor de identidade. Ele só recomeça quando o sistema renova o acesso da pessoa, e o sistema só renova o acesso depois de uma ação dela: apertar uma tecla, clicar, rolar a página ou voltar à aba. Carregar a página, os pedidos automáticos (as consultas que uma tela faz sozinha ao servidor) e os temporizadores não contam como ação. Uma aba parada deixa a sessão vencer, sem que a pessoa precise voltar a ela. Antes de vencer, a pessoa é avisada (UNI-REQ-0547). Exemplo fictício: enquanto Diogo preenche o cadastro do processo "PSR 2027", suas teclas e cliques mantêm o acesso renovado e a sessão segue; se ele sai da mesa e deixa a aba parada, a sessão vence cerca de 30 minutos depois da última ação, podendo passar alguns minutos porque o acesso é renovado pouco antes de vencer.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'regra',
@@ -9705,9 +9705,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'Com a pessoa usando o sistema, o acesso é renovado antes de vencer, sem ação dela e sem depender de um pedido; a sessão continua ativa até o período máximo; a antecedência da renovação é valor de configuração e não está fixa no código.',
+      'Tecla, clique, rolagem e volta à aba levam o sistema a renovar o acesso, o que recomeça o prazo de inatividade de 30 minutos; carregamento da página, pedido automático e temporizador não levam; nenhuma ação ausente adia a sessão: o que a pessoa não faz não renova o acesso; com a aba parada, a sessão vence ao fim do prazo, sem a pessoa voltar, porque a tentativa de renovação feita nesse momento é recusada pelo servidor de identidade.',
     verificacao:
-      'Testes automatizados da renovação antes do vencimento com a pessoa em uso e sem pedido pendente, e da antecedência lida da configuração (planejado).',
+      'Testes automatizados de cada ação que leva à renovação do acesso, de cada evento que não leva e da sessão que vence com a aba parada; verificação do prazo de 30 minutos na configuração do servidor de identidade em cada ambiente (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -9715,7 +9715,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0510',
     titulo: 'Quando a sessão acaba, o sistema avisa a pessoa em português claro',
     enunciado:
-      'Quando a sessão acaba e o acesso não pode mais ser renovado, o sistema avisa a pessoa, em português claro, de que a sessão acabou e do que fazer, sem mostrar o texto técnico do servidor de identidade. O aviso diz que o que ela tinha preenchido e não gravou se perdeu (UNI-REQ-0512). Exemplo fictício: a sessão de Helena termina enquanto ela preenche uma tela; a tela avisa que a sessão acabou e que o que não foi gravado se perdeu.',
+      'Quando a sessão acaba, o sistema avisa a pessoa, em português claro, de que a sessão acabou e do que fazer, sem mostrar o texto técnico do servidor de identidade. O aviso diz que o que ela tinha preenchido e não gravou se perdeu (UNI-REQ-0512). O aviso leva ao login só a pedido da pessoa: ele não abre o login sozinho. Exemplo fictício: a sessão de Helena termina enquanto ela preenche uma tela; a tela avisa que a sessão acabou e que o que não foi gravado se perdeu, e só abre o login quando Helena pede para entrar.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'regra',
@@ -9727,9 +9727,9 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O aviso aparece quando a renovação do acesso é recusada por sessão encerrada; diz que a sessão acabou, o que fazer e que o que não foi gravado se perdeu; não mostra o texto do servidor de identidade; é anunciado por leitor de tela, funciona só pelo teclado, tem foco visível e não depende só de cor.',
+      'O aviso aparece quando a sessão acaba; diz que a sessão acabou, o que fazer e que o que não foi gravado se perdeu; não mostra o texto do servidor de identidade; o aviso não abre o login sozinho, e o login só abre quando a pessoa pede para entrar nele; é anunciado por leitor de tela, funciona só pelo teclado, tem foco visível e não depende só de cor.',
     verificacao:
-      'Testes automatizados da recusa da renovação por sessão encerrada e do conteúdo do aviso, e teste de acessibilidade do aviso (planejado).',
+      'Testes automatizados do aparecimento do aviso quando a sessão acaba, do conteúdo do aviso e de que o aviso não abre o login sozinho, e teste de acessibilidade do aviso (planejado).',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend; Equipe frontend',
   },
@@ -9737,7 +9737,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0511',
     titulo: 'Depois de entrar de novo, a pessoa volta à mesma tela em que estava',
     enunciado:
-      'Quando a sessão acaba e a pessoa entra de novo, o sistema a leva de volta à mesma tela em que ela estava, e não à página inicial. A tela volta com os dados que já estavam gravados no servidor; o que a pessoa digitou e não gravou não volta (UNI-REQ-0512). Exemplo fictício: Helena entra de novo depois do aviso de sessão encerrada e volta à tela em que estava, com o que já tinha gravado.',
+      'Quando a pessoa entra de novo, seja depois de a sessão acabar, pelo aviso de sessão encerrada (UNI-REQ-0510), ou antes de ela acabar, por "Entrar de novo agora" (UNI-REQ-0549), o sistema a leva de volta à mesma tela em que ela estava, e não à página inicial. A tela volta com os dados que já estavam gravados no servidor; o que a pessoa digitou e não gravou não volta (UNI-REQ-0512). Exemplo fictício: Helena entra de novo depois do aviso de sessão encerrada e volta à tela em que estava, com o que já tinha gravado.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'regra',
@@ -9781,7 +9781,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0513',
     titulo: 'A sessão tem período máximo de 10 horas',
     enunciado:
-      'A sessão de quem usa o sistema vale no máximo 10 horas desde a entrada. Passado esse período, mesmo com uso contínuo e com o acesso sendo renovado (UNI-REQ-0509), a pessoa entra de novo e recebe o aviso do UNI-REQ-0510. Exemplo fictício: Kevin entra às 8 horas e usa o sistema sem parar; às 18 horas a sessão termina e ele entra de novo.',
+      'A sessão de quem usa o sistema vale no máximo 10 horas desde a entrada. Esse período não se estende: nem o uso contínuo nem o pedido de mais tempo (UNI-REQ-0548) o prolongam. Passado o período, a pessoa entra de novo e recebe o aviso do UNI-REQ-0510. Exemplo fictício: Kevin entra às 8 horas e usa o sistema sem parar; às 18 horas a sessão termina e ele entra de novo.',
     grupo: 'seguranca',
     tipo: 'requisito_seguranca',
     nivel: 'regra',
@@ -9793,7 +9793,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
-      'O servidor de identidade encerra a sessão 10 horas depois da entrada, mesmo com uso contínuo.',
+      'O servidor de identidade encerra a sessão 10 horas depois da entrada, mesmo com uso contínuo e depois de qualquer pedido de mais tempo.',
     verificacao:
       'Verificação da configuração do servidor de identidade em cada ambiente e teste de que a sessão termina no período máximo (planejado).',
     pagina_developers: '/produto/requisitos/',
@@ -10370,5 +10370,71 @@ export const requisitosMvpSelecao: Requisito[] = [
       'Testes automatizados da definição das etapas e do cronograma de fases (produto com tipo fora do catálogo recusado, na etapa e na fase; dois produtos recusados com uma recusa em cada, no campo do produto; tipo já declarado na versão publicada aceito pela classificação congelada; tipo novo conferido pelo catálogo mesmo com versão publicada; tipo aposentado no catálogo que a etapa já declarava não impede regravá-la), no nível da aplicação e da rota HTTP.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0547',
+    titulo: 'A pessoa é avisada 2 minutos antes de a sessão acabar',
+    enunciado:
+      'A partir de 2 minutos antes do fim da sessão, no prazo que o sistema conhece, seja por inatividade (UNI-REQ-0509) ou pelo período máximo (UNI-REQ-0513), o sistema avisa a pessoa, em português claro, com o tempo que resta. O aviso é anunciado por leitor de tela, pode ser operado só pelo teclado e não depende só de cor para ser entendido. Isso responde ao critério 2.2.1 (tempo ajustável) das diretrizes de acessibilidade para conteúdo web, dentro do WCAG 2.1 AA e do e-MAG 3.1; a limitação do período máximo a esse critério continua registrada no UNI-REQ-0514. Exemplo fictício: faltando 2 minutos, Helena vê o aviso "Sua sessão está perto de acabar", com a frase "A sessão acaba em 2 minutos"; o leitor de tela que ela usa o anuncia e ela responde sem tirar as mãos do teclado.',
+    grupo: 'seguranca',
+    tipo: 'requisito_seguranca',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0005',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'O aviso aparece a partir de 2 minutos antes do limite que vencer primeiro, quando o sistema consegue avaliar esse prazo, inatividade ou período máximo; está em português claro e mostra o tempo restante em minutos; é anunciado por leitor de tela; todas as opções funcionam só pelo teclado, com foco visível; não depende só de cor; não traz dado pessoal.',
+    verificacao:
+      'Testes automatizados do momento do aviso para cada limite, do texto com o tempo restante e do anúncio por leitor de tela, e teste de acessibilidade do aviso (planejado).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0548',
+    titulo: 'No aviso de inatividade, a pessoa pode pedir mais tempo ou deixar a sessão acabar',
+    enunciado:
+      'Quando o limite que vai acabar é o prazo de inatividade (UNI-REQ-0509), o aviso do UNI-REQ-0547 oferece "Continuar" e "Agora não". "Continuar" pede mais tempo ao servidor de identidade e, se ele estende, o prazo de inatividade recomeça. "Agora não" fecha o aviso sem pedir mais tempo; o clique ou a tecla usados para isso contam como ação da pessoa, como qualquer outra (UNI-REQ-0509), e isso é intencional: o prazo de inatividade protege a sessão abandonada, e quem usa o aviso está presente. Exemplo fictício: Diogo deixou o cadastro aberto, vê o aviso e escolhe "Continuar"; a sessão dele segue e o prazo de 30 minutos recomeça.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0005',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Com o prazo de inatividade como limite, o aviso oferece "Continuar" e "Agora não"; "Continuar" faz o pedido de mais tempo ao servidor de identidade e, quando ele estende o prazo para além dos 2 minutos do aviso, o prazo recomeça e o aviso fecha; se o pedido falha por problema temporário, o aviso continua oferecendo "Continuar" para tentar de novo; "Agora não" fecha o aviso sem pedir mais tempo; se o servidor responde sem estender, vale o UNI-REQ-0549; as duas opções funcionam só pelo teclado.',
+    verificacao:
+      'Testes automatizados de "Continuar" com pedido estendido, de "Agora não" e do pedido não estendido (planejado).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe frontend',
+  },
+  {
+    requisito_id: 'UNI-REQ-0549',
+    titulo: 'Quando não é possível estender a sessão, o aviso orienta a gravar e oferece entrar de novo',
+    enunciado:
+      'Quando o limite que vai acabar é o período máximo da sessão (UNI-REQ-0513), ou quando o pedido de mais tempo do UNI-REQ-0548 não estendeu a sessão, o aviso do UNI-REQ-0547 diz que não é possível estender, orienta a pessoa a gravar o que preencheu e oferece "Entrar de novo agora" e "Agora não". "Entrar de novo agora" leva ao login e, depois dele, de volta à mesma tela (UNI-REQ-0511). "Agora não" fecha o aviso. O sistema reconhece o período máximo quando o servidor concede um prazo menor que o anterior ou responde sem estender; reconhecê-lo desde o primeiro aviso, inclusive depois de recarregar a página perto do limite, é regra decidida ainda não implementada (uniplus-web#1751). Exemplo fictício: Kevin está há quase 10 horas no sistema; o aviso diz que não é possível estender e que ele grave o que preencheu, e ele escolhe "Entrar de novo agora" e volta à mesma tela.',
+    grupo: 'funcional',
+    tipo: 'requisito_funcional',
+    nivel: 'regra',
+    parent_id: 'UNI-REQ-0005',
+    modulo: 'Compartilhado',
+    recorte: 'mvp',
+    status: 'aprovado',
+    prioridade: 'must',
+    politica_backlog: 'implementavel',
+    tipo_issue_recomendado: 'Story',
+    criterios_aceite:
+      'Com o período máximo reconhecido como limite, ou depois de um pedido de mais tempo que o servidor respondeu sem estender, o aviso diz que não é possível estender e orienta a gravar o que foi preenchido; oferece "Entrar de novo agora" e "Agora não"; "Entrar de novo agora" leva ao login e, depois dele, de volta à mesma tela; "Agora não" fecha o aviso sem abrir o login; o aviso não oferece "Continuar"; as duas opções funcionam só pelo teclado.',
+    verificacao:
+      'Testes automatizados do aviso com o período máximo como limite e com o pedido não estendido, de "Entrar de novo agora" com a volta à mesma tela e de "Agora não" (planejado).',
+    pagina_developers: '/produto/requisitos/',
+    owner: 'Equipe frontend',
   },
 ];
