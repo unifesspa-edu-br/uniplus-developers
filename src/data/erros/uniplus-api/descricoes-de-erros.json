@@ -4078,7 +4078,7 @@
       ],
       "oQueAconteceu": [
         "O administrador cadastrou um fato que resume respostas de grupo (`POST /api/configuracao/admin/fatos-candidato/agregados`) sobre um fato de membro cujo tipo de dado é número, texto, data ou endereço. Há dois tipos de resumo do grupo repetível (UNI-REQ-0146): \"existe membro que…\", sobre um fato booleano, e \"valores presentes\", sobre um fato categórico. Os outros tipos de dado não têm resumo.",
-        "A recusa vem na lista `errors` da resposta, com `field` igual a `fatoDeMembro`. Ela só é dada quando o fato de membro existe e é declarado de membro de grupo: com um código que não existe a recusa é [a do fato de membro fora do catálogo](/erros/uniplus.configuracao.fato_candidato.agregado_sem_fato_de_membro), e com um fato que não é de membro de grupo, [a do fato que não é de membro de grupo](/erros/uniplus.configuracao.fato_candidato.agregado_sobre_fato_que_nao_eh_campo_de_grupo). Se o fato de membro também estiver desativado, a lista traz ainda a recusa de fato desativado (`uniplus.vinculo_catalogo.fato_desativado`). Nada é gravado."
+        "A recusa vem na lista `errors` da resposta, com `field` igual a `fatoDeMembro`. Ela só é dada quando o fato de membro existe e é declarado de membro de grupo: com um código que não existe a recusa é [a do fato de membro fora do catálogo](/erros/uniplus.configuracao.fato_candidato.agregado_sem_fato_de_membro), e com um fato que não é de membro de grupo, [a do fato que não é de membro de grupo](/erros/uniplus.configuracao.fato_candidato.agregado_sobre_fato_que_nao_eh_campo_de_grupo). Se o fato de membro também estiver desativado, a lista traz ainda a recusa de dado do candidato desativado (`uniplus.vinculo_catalogo.fato_desativado`), com a mensagem que nomeia o dado de membro. Nada é gravado."
       ],
       "comoResolver": [
         "Escolha como fato de membro um fato booleano ou categórico do grupo. Se o dado que se quer resumir é de outro tipo, cadastre um fato de membro booleano ou categórico que o represente, e use esse fato no resumo de grupo."
@@ -11252,13 +11252,13 @@
         "UNI-REQ-0143"
       ],
       "oQueAconteceu": [
-        "Os dados que os formulários coletam do candidato são fatos cadastrados no módulo Configuração (UNI-REQ-0143), e o código informado não é de nenhum fato do catálogo. A mensagem é \"O fato '`{código\\}`' não pertence ao catálogo de fatos do candidato.\", com o código recusado.",
+        "Os dados que os formulários coletam do candidato são cadastrados no módulo Configuração (UNI-REQ-0143), e o código informado não é de nenhum dado do catálogo. A mensagem é \"O dado do candidato informado não existe no catálogo.\" e não repete o código recusado, que a recusa aponta pelo `field`.",
         "A recusa vem na lista `errors` da resposta, uma entrada por ocorrência:",
         "- na gravação dos itens do formulário, `field` igual a `itens[i].fatoCodigo` ou, no campo de um grupo, `grupos[g].subitens[j].fatoCodigo`;\n- nos modelos de formulário, o mesmo caminho precedido de `conteudo.`, e ainda `conteudo.pressupostos[i]`, quando o pressuposto nomeia um fato que não existe, e `conteudo.documentosExigidos[i].porOpcao.fatoCodigo`, quando a exigência de documento por opção nomeia um fato que não existe.",
         "O item cuja forma básica já foi recusada ([código do fato em branco](/erros/uniplus.item_formulario.fato_codigo_obrigatorio), rótulo, ordem ou tipo de campo) não chega à conferência contra o catálogo e não recebe esta recusa. Na gravação dos itens, a conferência contra o catálogo vem depois da leitura da forma de todos os itens e grupos. Nos modelos, ela roda mesmo que o conteúdo tenha recusa de leitura; quando o conteúdo foi lido sem essa recusa, a mesma resposta pode trazer, junto com esta, a recusa de [formato incoerente](/erros/uniplus.item_formulario.formato_incoerente) para o campo de texto desse fato. Nada é gravado. Na atualização de um modelo, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](/erros/uniplus.configuracao.modelo_formulario.nao_encontrado)."
       ],
       "comoResolver": [
-        "Escolha, no catálogo de fatos do candidato do módulo Configuração, um fato que exista, e informe o código dele exatamente como cadastrado. Se o fato deveria existir, peça o cadastro a quem administra o catálogo de fatos antes de repetir a operação."
+        "Escolha, no catálogo de dados do candidato do módulo Configuração, um dado que exista, e informe o código dele exatamente como cadastrado. Se o dado deveria existir, peça o cadastro a quem administra o catálogo antes de repetir a operação."
       ],
       "ondeAparece": [
         "Criação de um modelo de formulário",
@@ -11273,13 +11273,13 @@
         "UNI-REQ-0146"
       ],
       "oQueAconteceu": [
-        "O fato existe no catálogo, mas não pode ser coletado no campo em que foi posto. É coletável o fato declarado, respondido num campo de formulário, do próprio candidato: o fato derivado por regra e o calculado pelo sistema não são respondidos, mas obtidos (UNI-REQ-0143), e o fato de membro de grupo só existe dentro de um grupo repetível, onde cada ocorrência responde o seu (UNI-REQ-0146). A mensagem diz qual é a situação:",
-        "- no item do formulário: \"O fato '`{código\\}`' não é coletável num campo: só o fato declarado do próprio candidato é respondido no formulário — derivados, calculados e fatos de membro de grupo não.\";\n- no campo de um grupo: \"O fato '`{código\\}`' não é coletável num campo do grupo: só o fato declarado de membro de grupo é respondido em cada ocorrência — fatos do candidato, derivados e calculados não.\"",
-        "A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].fatoCodigo` ou `grupos[g].subitens[j].fatoCodigo`; nos modelos de formulário o `field` começa por `conteudo.`, e o pressuposto que nomeia um fato não coletável é recusado em `conteudo.pressupostos[i]`. O item cuja forma básica já foi recusada não chega a esta conferência. Nada é gravado.",
-        "Na aplicação de um modelo ao processo, o item ou o grupo cujo fato deixou de ser coletável depois da composição do modelo não é recusado: sai da cópia e volta no relatório da aplicação, entre as partes descartadas. Na atualização de um modelo, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](/erros/uniplus.configuracao.modelo_formulario.nao_encontrado)."
+        "O dado do candidato existe no catálogo, mas não pode ser coletado no campo em que foi posto. Só o dado que o próprio candidato responde, declarado no formulário, vai num campo comum. O dado derivado (obtido de outros dados por uma regra) e o dado calculado (obtido pelo sistema) não são respondidos pelo candidato (UNI-REQ-0143). O dado de membro de grupo é respondido por cada membro, e por isso só existe dentro de um grupo repetível, onde cada ocorrência responde o seu (UNI-REQ-0146). A mensagem nomeia o dado como aparece no catálogo (`{nome\\}`), sem repetir o código, e diz qual é a situação:",
+        "- no item do formulário: \"O dado do candidato '`{nome\\}`' não é coletável num campo: só o dado declarado do próprio candidato é respondido no formulário — dados derivados, calculados e de membro de grupo não.\";\n- no campo de um grupo: \"O dado do candidato '`{nome\\}`' não é coletável num campo do grupo: só o dado declarado de membro de grupo é respondido em cada ocorrência — dados do próprio candidato, derivados e calculados não.\"",
+        "A recusa vem na lista `errors` da resposta, com `field` igual a `itens[i].fatoCodigo` ou `grupos[g].subitens[j].fatoCodigo`; nos modelos de formulário o `field` começa por `conteudo.`, e o pressuposto que nomeia um dado não coletável é recusado em `conteudo.pressupostos[i]`. O item cuja forma básica já foi recusada não chega a esta conferência. Nada é gravado.",
+        "Na aplicação de um modelo ao processo, o item ou o grupo cujo dado deixou de ser coletável depois da composição do modelo não é recusado: sai da cópia e volta no relatório da aplicação, entre as partes descartadas. Na atualização de um modelo, um `{id}` que não existe é recusado antes, como [modelo de formulário não encontrado](/erros/uniplus.configuracao.modelo_formulario.nao_encontrado)."
       ],
       "comoResolver": [
-        "Coloque no item do formulário só um fato declarado do próprio candidato, e no campo de um grupo só um fato declarado de membro de grupo. O fato derivado ou calculado chega às regras do formulário por citação, e não por um campo."
+        "Coloque no campo comum do formulário só um dado que o próprio candidato responde, e no campo de um grupo só um dado de membro de grupo. O dado derivado ou calculado chega às regras do formulário por citação, e não por um campo."
       ],
       "ondeAparece": [
         "Criação de um modelo de formulário",
@@ -18446,10 +18446,11 @@
         "UNI-REQ-0205"
       ],
       "oQueAconteceu": [
-        "Um tipo de documento só pode ser exigido depois de o Representante do controlador aprovar a classificação, a finalidade e a base legal dele. O tipo é novo ou teve a proteção alterada e está pendente."
+        "Um tipo de documento só pode ser exigido depois de o Representante do controlador aprovar a classificação, a finalidade e a base legal dele. O tipo é novo ou teve a proteção alterada e está pendente. O Gestor de proteção de dados pode se manifestar sobre a proteção, mas não decide a aprovação.",
+        "A mensagem da resposta nomeia o tipo de documento pendente, como aparece no cadastro."
       ],
       "comoResolver": [
-        "Peça ao administrador do catálogo que envie a solicitação de aprovação, ou escolha um tipo já aprovado."
+        "Escolha outro tipo de documento ou retire a exigência, ou peça ao administrador do catálogo que envie a solicitação de aprovação ao Representante do controlador, se ainda não a enviou."
       ],
       "ondeAparece": [
         "Cadastro ou alteração de exigência documental do processo seletivo"
@@ -18463,7 +18464,7 @@
         "- na definição dos documentos exigidos e na aplicação de um modelo de formulário, o tipo\n  citado não existe no cadastro; o sistema o procura pelo identificador, na montagem de cada\n  exigência, depois da conferência de forma;\n- na publicação e na retificação em ato único, o tipo\n  existia quando a exigência foi escrita e deixou de existir. Essa é a primeira conferência\n  de congelamento, anterior às demais."
       ],
       "comoResolver": [
-        "Troque a exigência por um tipo de documento que exista no cadastro. Se o tipo escolhido for\nnovo ou tiver a proteção de dados alterada, a exigência só o aceita depois da aprovação da\nproteção de dados (ver\n[`tipo_documento_com_protecao_pendente`](/erros/uniplus.selecao.documento_exigido.tipo_documento_com_protecao_pendente)).",
+        "Troque a exigência por um tipo de documento que exista no cadastro. Se o tipo escolhido for\nnovo ou tiver a proteção de dados alterada, a exigência só o aceita depois da aprovação do\nRepresentante do controlador (ver\n[`tipo_documento_com_protecao_pendente`](/erros/uniplus.selecao.documento_exigido.tipo_documento_com_protecao_pendente)).",
         "Na aplicação de um modelo de formulário, é o modelo que cita um tipo que não está no cadastro:\nescolha outro modelo ou peça a revisão do modelo."
       ],
       "ondeAparece": [
@@ -20312,6 +20313,23 @@
       ]
     },
     {
+      "codigo": "uniplus.selecao.homologacao_das_inscricoes.edicao_do_exame_nao_declarada",
+      "requisitos": [
+        "UNI-REQ-0265",
+        "UNI-REQ-0439"
+      ],
+      "oQueAconteceu": [
+        "A confirmação do INEP de uma regra de homologação consulta uma edição do exame que não está entre as edições do ENEM que o processo declara. Nenhum candidato pode informar essa edição na inscrição, e a condição nunca seria cumprida."
+      ],
+      "comoResolver": [
+        "Na condição indicada no campo do erro, informe uma das edições do ENEM que o processo declara, com o ano de quatro algarismos, ou inclua a edição entre as edições declaradas do processo. Depois envie novamente a operação."
+      ],
+      "ondeAparece": [
+        "Publicação inicial (`POST /api/selecao/processos-seletivos/{id}/publicacao`)",
+        "Retificação (`POST /api/selecao/processos-seletivos/{id}/retificacoes`)"
+      ]
+    },
+    {
       "codigo": "uniplus.selecao.homologacao_das_inscricoes.resultado_nao_declarado",
       "requisitos": [
         "UNI-REQ-0265"
@@ -21275,7 +21293,7 @@
         "UNI-REQ-0091"
       ],
       "oQueAconteceu": [
-        "O formulário da inscrição pode exigir o aceite de termos de consentimento ou\nde declaração (UNI-REQ-0086). Para enviar, todo termo obrigatório e visível\nprecisa ter aceite na versão e no hash que o formulário apresenta. Falta o\naceite de um termo, ou o aceite é de outra versão. A recusa indica o termo. O\nrascunho pode ficar com a lista de aceites incompleta; a recusa vem no envio\n(UNI-REQ-0091)."
+        "O formulário da inscrição pode exigir o aceite de termos de consentimento ou\nde declaração (UNI-REQ-0086). Para enviar, todo termo obrigatório e visível\nprecisa ter aceite. Falta o aceite de um termo. O aceite de outra versão tem\nrecusa própria (aceite_de_outra_versao) e não repete esta. A recusa indica o\ntermo. O rascunho pode ficar com a lista de aceites incompleta; a recusa vem\nno envio (UNI-REQ-0091)."
       ],
       "comoResolver": [
         "Leia o termo indicado, aceite-o no formulário e envie a inscrição de novo.\nQuem integra deve enviar o aceite com o código, a versão e o hash do termo que\no formulário apresenta."
@@ -24237,10 +24255,11 @@
         "UNI-REQ-0205"
       ],
       "oQueAconteceu": [
-        "A publicação e a retificação conferem que todo fato que o processo coleta, e todo fato derivado do catálogo, que o processo congela, têm a proteção aprovada. Um deles é novo ou teve a proteção alterada e está pendente. A resposta aponta o fato."
+        "A publicação e a retificação conferem que todo dado do candidato que o processo coleta, e todo dado derivado do catálogo, que o processo congela, têm a proteção aprovada pelo Representante do controlador. Um deles é novo ou teve a proteção alterada e está pendente. O Gestor de proteção de dados pode se manifestar sobre a proteção, mas não decide a aprovação.",
+        "A mensagem da resposta nomeia o dado do candidato pendente, como aparece no catálogo. Quando mais de um item está pendente, a resposta traz uma causa por item em `errors[]`, sem `field`."
       ],
       "comoResolver": [
-        "Falta a aprovação da proteção de dados, ou o aceite da recomendação dela. Depois disso, publique ou feche a retificação de novo."
+        "Peça ao administrador do catálogo que envie a solicitação de aprovação ao Representante do controlador ou, se houver ajuste recomendado, que aceite a recomendação. Também é possível retirar o dado do formulário, da regra, da condição ou da exigência de documento que o usa. Depois disso, publique ou feche a retificação de novo."
       ],
       "ondeAparece": [
         "Publicação de processo seletivo",
@@ -25511,10 +25530,11 @@
         "UNI-REQ-0205"
       ],
       "oQueAconteceu": [
-        "A publicação e a retificação conferem que todo tipo de documento exigido pelo processo tem a proteção aprovada. Um deles é novo ou teve a proteção alterada depois de vinculado e voltou a pendente. A resposta aponta o tipo."
+        "A publicação e a retificação conferem que todo tipo de documento exigido pelo processo tem a proteção aprovada pelo Representante do controlador. Um deles é novo ou teve a proteção alterada depois de vinculado e voltou a pendente. O Gestor de proteção de dados pode se manifestar sobre a proteção, mas não decide a aprovação.",
+        "A mensagem da resposta nomeia o tipo de documento pendente, como aparece no cadastro. Quando mais de um item está pendente, a resposta traz uma causa por item em `errors[]`, sem `field`."
       ],
       "comoResolver": [
-        "Falta a aprovação da proteção de dados, ou o aceite da recomendação dela. Depois disso, publique ou feche a retificação de novo."
+        "Peça ao administrador do catálogo que envie a solicitação de aprovação ao Representante do controlador ou, se houver ajuste recomendado, que aceite a recomendação. Também é possível trocar o tipo de documento da exigência. Depois disso, publique ou feche a retificação de novo."
       ],
       "ondeAparece": [
         "Publicação de processo seletivo",
@@ -27837,13 +27857,15 @@
         "UNI-REQ-0205"
       ],
       "oQueAconteceu": [
-        "Um fato só pode ser usado na configuração de processo seletivo depois de o Representante do controlador aprovar a classificação, a finalidade e a base legal dele. O fato é novo ou teve a proteção alterada e está pendente."
+        "Um dado do candidato só pode ser incluído num formulário, numa regra, numa condição ou numa exigência de documento depois de o Representante do controlador aprovar a classificação, a finalidade e a base legal dele. O dado é novo ou teve a proteção alterada e está pendente. O Gestor de proteção de dados pode se manifestar sobre a proteção, mas não decide a aprovação.",
+        "A mensagem da resposta nomeia o dado do candidato pendente, como aparece no catálogo. Quando mais de um dado está pendente, a resposta traz uma causa por dado em `errors[]`, sem `field`, na ordem ordinal dos códigos do catálogo."
       ],
       "comoResolver": [
-        "Peça ao administrador do catálogo que envie a solicitação de aprovação, ou use um fato já aprovado."
+        "Retire o dado do formulário, da regra, da condição ou da exigência de documento em que ele foi incluído, ou peça ao administrador do catálogo que envie a solicitação de aprovação ao Representante do controlador, se ainda não a enviou."
       ],
       "ondeAparece": [
-        "Configuração do formulário, das regras e das exigências do processo seletivo"
+        "Configuração do formulário, das regras e das exigências do processo seletivo",
+        "Criação e alteração de modelo de formulário"
       ]
     },
     {
@@ -27852,10 +27874,11 @@
         "UNI-REQ-0143"
       ],
       "oQueAconteceu": [
-        "O pedido tenta criar um vínculo com um fato desativado no catálogo. Um vínculo já existente pode ser mantido."
+        "O pedido tenta criar um vínculo com um dado do candidato desativado no catálogo. Um vínculo já existente pode ser mantido.",
+        "A mensagem da resposta nomeia o dado como aparece no catálogo, sem repetir o código. Nas recusas de vínculo, quando mais de um dado está desativado, a resposta traz uma causa por dado em `errors[]`, sem `field`, na ordem ordinal dos códigos do catálogo. Na criação de um dado que resume o que os membros de um grupo responderam (`POST /api/configuracao/admin/fatos-candidato/agregados`), a recusa do dado de membro desativado traz `field` igual a `fatoDeMembro`."
       ],
       "comoResolver": [
-        "Use um fato ativo ou solicite a reativação do fato no catálogo."
+        "Use um dado do candidato ativo ou peça ao administrador do catálogo que reative o dado."
       ],
       "ondeAparece": [
         "PUT /api/selecao/admin/processos-seletivos/`{id}`/formularios/`{finalidade}`",
@@ -27876,10 +27899,11 @@
         "UNI-REQ-0143"
       ],
       "oQueAconteceu": [
-        "O pedido tenta criar um vínculo com um valor desativado no catálogo. Um vínculo já existente pode ser mantido."
+        "O pedido tenta criar um vínculo com um valor desativado no catálogo. Um vínculo já existente pode ser mantido.",
+        "A mensagem da resposta nomeia o dado do candidato a que o valor pertence, como aparece no catálogo, sem repetir o código. Quando mais de um valor está desativado, a resposta traz uma causa por valor em `errors[]`, sem `field`, na ordem ordinal dos códigos do catálogo."
       ],
       "comoResolver": [
-        "Use um valor ativo ou solicite a reativação do valor no catálogo."
+        "Use um valor ativo ou peça ao administrador do catálogo que reative o valor."
       ],
       "ondeAparece": [
         "PUT /api/selecao/admin/processos-seletivos/`{id}`/formularios/`{finalidade}`",
