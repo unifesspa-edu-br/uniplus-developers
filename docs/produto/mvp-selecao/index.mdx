@@ -1,16 +1,16 @@
 ---
 sidebar_position: 6
-description: Recorte público do MVP do módulo Seleção, com escopo, fundações e incrementos planejados.
+description: Recorte público do módulo Seleção, com escopo, fundações e incrementos planejados.
 fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
-estado_publicacao: "primeira fonte pública curada do MVP Seleção"
+estado_publicacao: "primeira fonte pública curada do módulo Seleção"
 ---
 
 import RecorteResumo from '@site/src/components/produto/RecorteResumo';
 import {requisitosMvpSelecao} from '@site/src/data/produto/requisitos-mvp-selecao';
 
-# MVP Seleção
+# Escopo do módulo Seleção
 
-Esta página descreve o recorte do MVP do módulo Seleção: a primeira fatia
+Esta página descreve o recorte do módulo Seleção: a parte
 verificável do produto, sem afirmar que requisitos ou fluxos ainda não
 implementados estejam concluídos.
 
@@ -33,9 +33,9 @@ principalmente os campos `recorte`, `status`, `politica_backlog`,
 
 <RecorteResumo requisitos={requisitosMvpSelecao} />
 
-## Fluxos de produto do MVP
+## Fluxos de produto do módulo
 
-O fluxo primário do MVP acompanha o ciclo do processo seletivo:
+O fluxo primário acompanha o ciclo do processo seletivo:
 
 - **Edital e configuração do processo:** parâmetros, etapas, pesos, modalidades,
   documentos exigidos, formulário e cascata de remanejamento, congelados na
@@ -49,7 +49,7 @@ Homologação, avaliação, classificação e recursos ficam registrados como
 incrementos planejados, consumindo a configuração congelada quando forem
 modelados.
 
-## Critérios para publicar itens do MVP
+## Critérios para publicar itens do módulo
 
 - O item possui requisito `UNI-REQ-NNNN` publicado.
 - O status distingue item aprovado, proposto, dependente ou planejado.

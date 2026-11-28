@@ -1,7 +1,7 @@
 import type {Requisito} from './taxonomia';
 
 /**
- * Seleção pública dos requisitos do MVP do módulo Seleção.
+ * Seleção pública dos requisitos do módulo Seleção.
  *
  * É uma seleção coerente do fluxo primário — módulo, configuração do processo,
  * publicação do edital e inscrição do candidato — acrescida das fundações de
@@ -18,7 +18,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0001',
     titulo: 'Módulo Seleção',
     enunciado:
-      'O primeiro módulo do Uni+ deve gerenciar o ciclo de vida dos processos seletivos, da configuração à publicação de resultados, com o MVP limitado ao fluxo primário aprovado.',
+      'O primeiro módulo do Uni+ deve gerenciar o ciclo de vida dos processos seletivos, da configuração à publicação de resultados, com o módulo limitado ao fluxo primário aprovado.',
     grupo: 'negocio',
     tipo: 'requisito_negocio',
     nivel: 'modulo',
@@ -30,16 +30,16 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'agregador',
     tipo_issue_recomendado: 'Epic',
     criterios_aceite:
-      'O módulo possui fronteira de MVP explícita e requisitos filhos rastreáveis para as capacidades aprovadas.',
+      'O módulo possui fronteira de entrega explícita e requisitos filhos rastreáveis para as capacidades aprovadas.',
     verificacao: 'Revisão documental da organização dos requisitos.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
   },
   {
     requisito_id: 'UNI-REQ-0002',
-    titulo: 'Fluxo primário do MVP de Seleção',
+    titulo: 'Fluxo primário da Seleção',
     enunciado:
-      'O MVP deve entregar o fluxo primário de Seleção por meio de requisitos filhos rastreáveis para configuração do Processo Seletivo, publicação do Edital e inscrição do candidato.',
+      'O módulo deve entregar o fluxo primário de Seleção por meio de requisitos filhos rastreáveis para configuração do Processo Seletivo, publicação do Edital e inscrição do candidato.',
     grupo: 'negocio',
     tipo: 'requisito_negocio',
     nivel: 'capacidade',
@@ -73,7 +73,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Incrementos permanecem identificados como fora do backlog do MVP até nova etapa de modelagem.',
+      'Incrementos permanecem identificados como sem backlog detalhado até nova etapa de modelagem.',
     verificacao: 'Revisão documental.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -82,7 +82,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0006',
     titulo: 'Cadastros base do processo seletivo',
     enunciado:
-      'O MVP deve prover cadastros base necessários à configuração do Processo Seletivo, decompostos em requisitos filhos para cada conceito estrutural.',
+      'O módulo deve prover cadastros base necessários à configuração do Processo Seletivo, decompostos em requisitos filhos para cada conceito estrutural.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'requisito',
@@ -94,7 +94,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'agregador',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'Cada cadastro estrutural necessário ao MVP possui requisito filho com validação e responsável definidos.',
+      'Cada cadastro estrutural necessário ao módulo possui requisito filho com validação e responsável definidos.',
     verificacao:
       'Revisão da decomposição; testes de API nos requisitos filhos implementáveis.',
     pagina_developers: '/produto/requisitos/',
@@ -490,7 +490,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     tipo_issue_recomendado: 'Story',
     criterios_aceite:
       'Os comprovantes dos dados básicos são cobrados de todo convocado, inclusive o da ampla concorrência; a coleta complementar do conjunto básico, cor/raça inclusive, vale para todo candidato que não trouxe o dado, de qualquer modalidade, e o convocado na ampla concorrência sem cor/raça importada responde a cor/raça sem enviar comprovante; a exigência do Fator de Atenuação é configurável sem condição sobre o grupo da convocação; a condição de indígena e a de renda só geram cobrança, na habilitação, junto de condição sobre o grupo da convocação; Convocado na ampla concorrência não recebe exigência de documento de cota; convocado em cota recebe só as exigências do grupo da convocação; regra da habilitação — de exigência, de campo ou de termo — que cita o conjunto de modalidades derivado ou uma opção de concorrer a cota, diretamente ou por meio de um derivado que dependa deles, é recusada — exceto o grupo da convocação, que é citável; os dados de elegibilidade e os derivados deles, como o egresso de escola pública, continuam citáveis; na habilitação, em cada alternativa de condições de uma regra de exigência, de campo ou de termo, um dado de elegibilidade ou um derivado dele só aparece junto de uma condição sobre o grupo da convocação, e o derivado "veio na importação" dos dados básicos, com a condição que o sistema põe no campo complementar (cor/raça inclusive), fica fora dessa exigência, de modo que o processo com cor/raça complementar publica.',
-    verificacao: 'Na configuração (MVP): teste automatizado da recusa de regra da habilitação que cita o conjunto de modalidades ou uma opção de concorrer, e da recusa de alternativa de condições que cita dado de elegibilidade ou derivado dele sem condição sobre o grupo da convocação, com a aceitação quando os dois aparecem juntos. Nos convocados: teste com perfis convocados em ampla concorrência e em cota, quando a classificação e a habilitação existirem (UNI-REQ-0044, UNI-REQ-0049) (planejado).',
+    verificacao: 'Na configuração: teste automatizado da recusa de regra da habilitação que cita o conjunto de modalidades ou uma opção de concorrer, e da recusa de alternativa de condições que cita dado de elegibilidade ou derivado dele sem condição sobre o grupo da convocação, com a aceitação quando os dois aparecem juntos. Nos convocados: teste com perfis convocados em ampla concorrência e em cota, quando a classificação e a habilitação existirem (UNI-REQ-0044, UNI-REQ-0049) (planejado).',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend',
   },
@@ -1597,7 +1597,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'O plano cita a capacidade como incremento, sem backlog detalhado no MVP.',
+      'O plano cita a capacidade como incremento, ainda sem backlog detalhado.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -1640,7 +1640,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'O MVP congela a configuração usada no processamento; o processamento fica fora do alcance inicial.',
+      'O módulo congela a configuração usada no processamento; o processamento fica fora do alcance inicial.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -1662,7 +1662,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'A configuração do Fator de Atenuação é MVP; o cálculo e a reclassificação são posteriores, vinculados à configuração congelada.',
+      'A configuração do Fator de Atenuação é configurada no módulo Seleção; o cálculo e a reclassificação são posteriores, vinculados à configuração congelada.',
     verificacao: 'Revisão futura.',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Tech Lead',
@@ -2013,7 +2013,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0030',
     titulo: 'Pendência derivada pós-submit',
     enunciado:
-      'O sistema deve calcular pendência viva após envio sem mudar a situação da inscrição. As causas são exemplificativas e não exaustivas: ausência de documento não obrigatório (a de documento obrigatório já impede o envio, UNI-REQ-0028) e, conforme a composição da exigência, exigência ainda pendente, que não pôde ser conferida, que não pode mais ser cumprida ou que pede mais de um documento e ainda não os tem todos. A consulta e o comprovante distinguem esses estados. Documento não obrigatório cujo arquivo ainda está em verificação no envio conta como não apresentado e aparece como pendente, salvo a alternativa dispensada de um grupo "um ou outro" já atendido (UNI-REQ-0029). O arquivo verificado depois só conta quando um novo envio da inscrição o inclui, isto é, a correção enquanto as inscrições estão abertas (UNI-REQ-0165), e então consta do comprovante desse envio (UNI-REQ-0171). Encerradas as inscrições, a pendência permanece: o prazo vale para o envio (UNI-REQ-0028). Nesta primeira entrega a pendência aparece na consulta da inscrição e no comprovante; a página "Documentos" do portal para acompanhá-la depois do envio fica para depois. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO; arquivo em verificação: proposta do líder técnico confirmada pelo PO em 23/10/2026.',
+      'O sistema deve calcular pendência viva após envio sem mudar a situação da inscrição. As causas são exemplificativas e não exaustivas: ausência de documento não obrigatório (a de documento obrigatório já impede o envio, UNI-REQ-0028) e, conforme a composição da exigência, exigência ainda pendente, que não pôde ser conferida, que não pode mais ser cumprida ou que pede mais de um documento e ainda não os tem todos. A consulta e o comprovante distinguem esses estados. Documento não obrigatório cujo arquivo ainda está em verificação no envio conta como não apresentado e aparece como pendente, salvo a alternativa dispensada de um grupo "um ou outro" já atendido (UNI-REQ-0029). O arquivo verificado depois só conta quando um novo envio da inscrição o inclui, isto é, a correção enquanto as inscrições estão abertas (UNI-REQ-0165), e então consta do comprovante desse envio (UNI-REQ-0171). Encerradas as inscrições, a pendência permanece: o prazo vale para o envio (UNI-REQ-0028). A pendência aparece na consulta da inscrição e no comprovante; a página "Documentos" do portal para acompanhá-la depois do envio fica para depois. Decisão do líder técnico em 20/10/2026, a confirmar pelo PO; arquivo em verificação: proposta do líder técnico confirmada pelo PO em 23/10/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',
@@ -2151,7 +2151,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Plano cita como incremento, sem backlog detalhado no MVP.',
+      'Plano cita como incremento, ainda sem backlog detalhado.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -2193,7 +2193,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Regra aparece como processamento futuro, sem backlog no MVP.',
+      'Regra aparece como processamento futuro, ainda sem backlog.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/regras-negocio/',
     owner: 'Equipe backend; Equipe frontend',
@@ -2214,7 +2214,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'incremento_futuro',
     tipo_issue_recomendado: 'None',
     criterios_aceite:
-      'Plano cita como incremento transversal, sem backlog detalhado no MVP.',
+      'Plano cita como incremento transversal, ainda sem backlog detalhado.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -2223,7 +2223,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0049',
     titulo: 'Habilitação e chamadas de vagas',
     enunciado:
-      'Habilitação e chamadas de vagas pertencem à fronteira do módulo Ingresso, conduzidas pela unidade responsável pela fase do cronograma (UNI-REQ-0330), e fazem parte do MVP: o processo seletivo segue do resultado à convocação, à habilitação e ao envio dos novos alunos ao SIGAA, como no Edital de Medicina 2027.',
+      'Habilitação e chamadas de vagas pertencem à fronteira do módulo Ingresso, conduzidas pela unidade responsável pela fase do cronograma (UNI-REQ-0330), e fazem parte do fluxo do processo seletivo: o processo seletivo segue do resultado à convocação, à habilitação e ao envio dos novos alunos ao SIGAA, como no Edital de Medicina 2027.',
     grupo: 'negocio',
     tipo: 'requisito_funcional',
     nivel: 'capacidade',
@@ -2235,7 +2235,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Feature',
     criterios_aceite:
-      'As regras de chamadas e habilitação (UNI-REQ-0344 a UNI-REQ-0356, UNI-REQ-0432 a UNI-REQ-0437 e UNI-REQ-0506) estão registradas como requisitos filhos e implementáveis no MVP.',
+      'As regras de chamadas e habilitação (UNI-REQ-0344 a UNI-REQ-0356, UNI-REQ-0432 a UNI-REQ-0437 e UNI-REQ-0506) estão registradas como requisitos filhos e implementáveis.',
     verificacao: 'revisão futura',
     pagina_developers: '/produto/mvp-selecao/',
     owner: 'Tech Lead',
@@ -2263,9 +2263,9 @@ export const requisitosMvpSelecao: Requisito[] = [
   },
   {
     requisito_id: 'UNI-REQ-0052',
-    titulo: 'Seed sintético mínimo no MVP',
+    titulo: 'Seed sintético mínimo',
     enunciado:
-      'O MVP deve nascer com seed sintético mínimo para desenvolvimento e teste, sem carga real ampla de cursos, ofertas ou unidades.',
+      'O sistema deve nascer com seed sintético mínimo para desenvolvimento e teste, sem carga real ampla de cursos, ofertas ou unidades.',
     grupo: 'governanca',
     tipo: 'decisao',
     nivel: 'decisao',
@@ -7076,7 +7076,7 @@ export const requisitosMvpSelecao: Requisito[] = [
   {
     requisito_id: 'UNI-REQ-0176',
     titulo: 'Acompanhamento administrativo dos processos seletivos',
-    enunciado: 'O acompanhamento administrativo deve começar por um painel de processos seletivos, a partir do qual o usuário abre a página do processo escolhido, mantendo sua identificação durante a navegação. A primeira entrega da página apresenta somente a aba Acompanhamento, sem abas futuras em construção. Listagem detalhada de candidaturas, decisões de homologação, relatórios e consulta de notas são detalhados em incrementos próprios. O PO confirmou o fluxo e a aba única; o primeiro incremento de implementação entrega seleção do processo e estrutura da página, antes dos indicadores. As distribuições são uma entrega própria, separada dos três quantitativos do UNI-REQ-0179: usam somente inscrições enviadas e não canceladas, pela última versão enviada válida, sem incorporar correções pendentes; separam primeira e segunda opção por curso/oferta e modalidades por oferta e opção. Uma inscrição pode pertencer aos grupos das duas opções e a várias modalidades, cuja soma pode superar o total de Inscrições sem multiplicar os totais globais. Próximos prazos permanecem previstos em entrega própria, com eventos, ordenação e apresentação a detalhar; homologações pendentes ficam para o refinamento da homologação. Distribuições, situações (UNI-REQ-0178), prazos e encerramento não são condições para entregar os três quantitativos. A necessidade de apresentar quantitativos nos cartões do painel é preservada: o histórico do UNI-REQ-0179 registra Inscrições, Inscritos e Rascunhos para o painel e a aba Acompanhamento, com universos confirmados pelo PO em 28/10/2026. O contrato dos três quantitativos do processo selecionado pertence à API #2105; a consulta de indicadores ou agregados dos cartões pertence a outra parte do trabalho e não amplia esse contrato. A composição final dos quantitativos de cada cartão e sua apresentação permanecem em refinamento, sem cancelar a necessidade registrada nem presumir que o contrato do processo selecionado já entregue o painel.',
+    enunciado: 'O acompanhamento administrativo deve começar por um painel de processos seletivos, a partir do qual o usuário abre a página do processo escolhido, mantendo sua identificação durante a navegação. A página apresenta somente a aba Acompanhamento, sem abas futuras em construção. Listagem detalhada de candidaturas, decisões de homologação, relatórios e consulta de notas são detalhados em incrementos próprios. O PO confirmou o fluxo e a aba única; o primeiro incremento de implementação entrega seleção do processo e estrutura da página, antes dos indicadores. As distribuições são uma entrega própria, separada dos três quantitativos do UNI-REQ-0179: usam somente inscrições enviadas e não canceladas, pela última versão enviada válida, sem incorporar correções pendentes; separam primeira e segunda opção por curso/oferta e modalidades por oferta e opção. Uma inscrição pode pertencer aos grupos das duas opções e a várias modalidades, cuja soma pode superar o total de Inscrições sem multiplicar os totais globais. Próximos prazos permanecem previstos em entrega própria, com eventos, ordenação e apresentação a detalhar; homologações pendentes ficam para o refinamento da homologação. Distribuições, situações (UNI-REQ-0178), prazos e encerramento não são condições para entregar os três quantitativos. A necessidade de apresentar quantitativos nos cartões do painel é preservada: o histórico do UNI-REQ-0179 registra Inscrições, Inscritos e Rascunhos para o painel e a aba Acompanhamento, com universos confirmados pelo PO em 28/10/2026. O contrato dos três quantitativos do processo selecionado pertence à API #2105; a consulta de indicadores ou agregados dos cartões pertence a outra parte do trabalho e não amplia esse contrato. A composição final dos quantitativos de cada cartão e sua apresentação permanecem em refinamento, sem cancelar a necessidade registrada nem presumir que o contrato do processo selecionado já entregue o painel.',
     grupo: 'funcional',
     tipo: 'requisito_funcional',
     nivel: 'capacidade',
@@ -7581,7 +7581,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0343',
     titulo: 'Recurso de quem não tem inscrição no processo (desejável)',
     enunciado:
-      'Requisito desejável, fora do MVP: permitir, dentro do sistema, o recurso de quem não tem inscrição no processo, como a pessoa aprovada no SISU que não foi importada. Até lá, o pedido da pessoa, feito por protocolo ou por e-mail, não é recurso no sistema e fica fora do UNI-REQ-0274; a banca de homologação das inscrições o analisa como crítica da importação (UNI-REQ-0339), e a decisão entra no resultado definitivo como a de um recurso deferido. Exemplo: Lúcia foi aprovada no SISU e não consta da importação do "SISU 2027"; ela escreve à Unifesspa, e a banca de homologação das inscrições analisa o pedido como crítica da importação, registra a decisão e a inclui no resultado definitivo, como a de um recurso deferido. Aprovado pelo PO em 11/11/2026.',
+      'Requisito desejável, ainda não implementado: permitir, dentro do sistema, o recurso de quem não tem inscrição no processo, como a pessoa aprovada no SISU que não foi importada. Até lá, o pedido da pessoa, feito por protocolo ou por e-mail, não é recurso no sistema e fica fora do UNI-REQ-0274; a banca de homologação das inscrições o analisa como crítica da importação (UNI-REQ-0339), e a decisão entra no resultado definitivo como a de um recurso deferido. Exemplo: Lúcia foi aprovada no SISU e não consta da importação do "SISU 2027"; ela escreve à Unifesspa, e a banca de homologação das inscrições analisa o pedido como crítica da importação, registra a decisão e a inclui no resultado definitivo, como a de um recurso deferido. Aprovado pelo PO em 11/11/2026.',
     grupo: 'negocio',
     tipo: 'regra_negocio',
     nivel: 'regra',

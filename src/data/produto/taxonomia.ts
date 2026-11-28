@@ -133,7 +133,7 @@ export const NIVEL_LABEL: Record<Nivel, string> = {
 };
 
 export const RECORTE_LABEL: Record<Recorte, string> = {
-  mvp: 'MVP',
+  mvp: 'Fluxo principal',
   fundacao: 'Fundação',
   incremento_obrigatorio: 'Incremento obrigatório',
   fora_escopo: 'Fora de escopo',

@@ -28,7 +28,7 @@ A plataforma foi projetada para expandir além do CEPS — módulos futuros
 :::info[Estrutura de produto]
 As páginas-base de [requisitos](./requisitos/),
 [regras de negócio](./regras-negocio/),
-[rastreabilidade](./rastreabilidade/) e [MVP Seleção](./mvp-selecao/) já
+[rastreabilidade](./rastreabilidade/) e [Escopo do módulo Seleção](./mvp-selecao/) já
 definem a estrutura editorial da trilha de Produto. Os exemplos públicos devem
 usar as [personas fictícias](../personas/cadastros.mdx).
 :::

@@ -27,7 +27,7 @@ test.describe('Portal — navegação e conteúdo', () => {
     {url: 'produto/requisitos/', heading: 'Requisitos'},
     {url: 'produto/regras-negocio/', heading: 'Regras de negócio'},
     {url: 'produto/rastreabilidade/', heading: 'Rastreabilidade'},
-    {url: 'produto/mvp-selecao/', heading: 'MVP Seleção'},
+    {url: 'produto/mvp-selecao/', heading: 'Escopo do módulo Seleção'},
     {
       url: 'produto/acompanhamento-administrativo/',
       heading: 'Acompanhamento administrativo dos processos seletivos',
@@ -89,7 +89,7 @@ test.describe('Requisitos (fonte pública curada)', () => {
     const totalLinhas = await page.locator('tbody tr').count();
     expect(totalLinhas).toBeGreaterThan(5);
 
-    // Filtrar por recorte de fundação reduz a lista (e some o item de MVP).
+    // Filtrar por recorte de fundação reduz a lista (e some o item do fluxo principal).
     await page
       .getByRole('combobox', {name: 'Recorte'})
       .selectOption({label: 'Fundação'});
