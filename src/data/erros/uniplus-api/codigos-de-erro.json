@@ -3442,11 +3442,6 @@
       "titulo": "Mesma Idempotency-Key reusada com body diferente"
     },
     {
-      "codigo": "uniplus.idempotency.body_muito_grande",
-      "status": 413,
-      "titulo": "Request body excede o limite aceito por endpoints idempotentes"
-    },
-    {
       "codigo": "uniplus.idempotency.key_ausente",
       "status": 400,
       "titulo": "Header Idempotency-Key obrigatório neste endpoint"
@@ -3877,6 +3872,11 @@
       "titulo": "O tipo de mídia do anexo deve ter a forma tipo/subtipo"
     },
     {
+      "codigo": "uniplus.publicacoes.ato_normativo.ano_invalido",
+      "status": 422,
+      "titulo": "O ano do ato deve ser maior que zero"
+    },
+    {
       "codigo": "uniplus.publicacoes.ato_normativo.ato_ja_retificado",
       "status": 409,
       "titulo": "O ato que se tentou retificar já foi retificado por outro (a cadeia é linear)"
@@ -3892,6 +3892,11 @@
       "titulo": "A classe de congelamento do ato que retifica deve coincidir com a do ato retificado"
     },
     {
+      "codigo": "uniplus.publicacoes.ato_normativo.hash_do_documento_invalido",
+      "status": 422,
+      "titulo": "O hash do documento deve ser um SHA-256 em hexadecimal minúsculo"
+    },
+    {
       "codigo": "uniplus.publicacoes.ato_normativo.nao_encontrado",
       "status": 404,
       "titulo": "Ato normativo não encontrado"
@@ -3900,6 +3905,16 @@
       "codigo": "uniplus.publicacoes.ato_normativo.objeto_ja_tem_ato_vivo_do_tipo",
       "status": 409,
       "titulo": "O tipo admite um único ato vivo por objeto, e a entidade vinculada já é tratada por outra linhagem"
+    },
+    {
+      "codigo": "uniplus.publicacoes.ato_normativo.retificacao_incompleta",
+      "status": 422,
+      "titulo": "A retificação deve trazer o ato retificado e o motivo, ou nenhum dos dois"
+    },
+    {
+      "codigo": "uniplus.publicacoes.ato_normativo.texto_invalido",
+      "status": 422,
+      "titulo": "Um texto do ato está vazio ou acima do tamanho máximo"
     },
     {
       "codigo": "uniplus.publicacoes.ato_normativo.tipo_de_entidade_invalido",
@@ -3920,6 +3935,26 @@
       "codigo": "uniplus.publicacoes.ato_normativo.vinculo_exige_registro_pelo_dominio",
       "status": 422,
       "titulo": "Ato vinculado a esta entidade só pode ser registrado pelo módulo dono do objeto"
+    },
+    {
+      "codigo": "uniplus.publicacoes.ato_normativo.vinculo_nulo",
+      "status": 422,
+      "titulo": "A lista de vínculos não admite elemento nulo"
+    },
+    {
+      "codigo": "uniplus.publicacoes.ato_normativo.vinculo_repetido",
+      "status": 422,
+      "titulo": "A mesma entidade foi vinculada mais de uma vez ao ato"
+    },
+    {
+      "codigo": "uniplus.publicacoes.ato_normativo.vinculo_sem_identificador_da_entidade",
+      "status": 422,
+      "titulo": "A entidade vinculada deve ter identificador"
+    },
+    {
+      "codigo": "uniplus.publicacoes.ato_normativo.vinculo_tipo_de_entidade_invalido",
+      "status": 422,
+      "titulo": "O tipo da entidade vinculada está vazio ou fora da forma canônica"
     },
     {
       "codigo": "uniplus.publicacoes.tipo_ato.base_legal_tamanho",
@@ -3995,6 +4030,11 @@
       "codigo": "uniplus.requisicao.campo_obrigatorio_ausente",
       "status": 400,
       "titulo": "A requisição não declara campo obrigatório do contrato"
+    },
+    {
+      "codigo": "uniplus.requisicao.corpo_acima_do_limite",
+      "status": 413,
+      "titulo": "O corpo da requisição passa do tamanho aceito"
     },
     {
       "codigo": "uniplus.requisicao.corpo_ausente",
@@ -4865,6 +4905,11 @@
       "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.quadro_ampla_concorrencia_negativa",
       "status": 422,
       "titulo": "A ampla concorrência resultaria negativa — ajuste as vagas ofertadas base, o percentual da reserva legal ou as retiradas"
+    },
+    {
+      "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.quadro_chave_colide",
+      "status": 422,
+      "titulo": "Uma retirada ou um suplemento não pode ter o código de uma reserva federal nem da ampla concorrência"
     },
     {
       "codigo": "uniplus.selecao.configuracao_distribuicao_vagas.quadro_excede_as_vagas_ofertadas_base",
@@ -5937,6 +5982,11 @@
       "titulo": "O tamanho máximo em bytes por formato, quando presente, deve ser maior que zero"
     },
     {
+      "codigo": "uniplus.selecao.formulario_processo.chamadas_sem_formulario_obrigatorio",
+      "status": 422,
+      "titulo": "A fase organizada em chamadas não tem formulário obrigatório"
+    },
+    {
       "codigo": "uniplus.selecao.formulario_processo.codigo_duplicado",
       "status": 422,
       "titulo": "O código do formulário já identifica outro formulário do processo"
@@ -6054,7 +6104,7 @@
     {
       "codigo": "uniplus.selecao.grupo_peso_area_enem_congelado.area_invalida",
       "status": 422,
-      "titulo": "Área do quadro de pesos por área sem código ou rótulo válido"
+      "titulo": "Código da área do quadro de pesos por área ausente ou inválido"
     },
     {
       "codigo": "uniplus.selecao.grupo_peso_area_enem_congelado.area_repetida",
@@ -6085,6 +6135,11 @@
       "codigo": "uniplus.selecao.grupo_peso_area_enem_congelado.pesos_somam_zero",
       "status": 422,
       "titulo": "Os pesos das áreas do grupo do quadro de pesos por área não podem somar zero"
+    },
+    {
+      "codigo": "uniplus.selecao.grupo_peso_area_enem_congelado.rotulo_da_area_invalido",
+      "status": 422,
+      "titulo": "Rótulo da área do quadro de pesos por área ausente ou inválido"
     },
     {
       "codigo": "uniplus.selecao.grupo_peso_area_enem_congelado.sem_areas",
@@ -8185,6 +8240,16 @@
       "codigo": "uniplus.selecao.regras_de_nome_abreviado.nome_em_branco",
       "status": 422,
       "titulo": "O nome a abreviar não pode ser vazio ou só espaços"
+    },
+    {
+      "codigo": "uniplus.selecao.retificacao.ciclo_novo_de_item_sem_preliminar_aberto",
+      "status": 422,
+      "titulo": "O ciclo novo declarado não tem resultado preliminar publicado com o ciclo aberto"
+    },
+    {
+      "codigo": "uniplus.selecao.retificacao.ciclo_novo_nao_declarado",
+      "status": 422,
+      "titulo": "A retificação exige declarar o novo ciclo do resultado preliminar já publicado"
     },
     {
       "codigo": "uniplus.selecao.retificacao.eixo_do_fato_ja_coletado_alterado",
