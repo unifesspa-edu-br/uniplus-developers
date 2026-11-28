@@ -32,7 +32,7 @@ export const ETIQUETA: React.CSSProperties = {
   border: '1px solid var(--color-govbr-gray-20, #ccc)',
 };
 
-// Aviso emitido pelo próprio componente (rascunho, deprecation): a entrada é
+// Aviso emitido pelo próprio componente (descontinuação): a entrada é
 // endereçável direto pela URI que descreve, então quem chega aqui pode nunca
 // passar pelo índice. Deixá-lo a cargo de quem escreve a página abriria
 // espaço para faltar em uma.

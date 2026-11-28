@@ -1,26 +1,24 @@
 # Componentes do catálogo de referência de API
 
-Três componentes React renderizam as três famílias de entrada previstas na [ADR-0001](../../docs/adrs/0001-arquitetura-portal-desenvolvedores.md): erros, media types e changelog. Cada um recebe o frontmatter da página MDX diretamente — `<Componente {...frontMatter} />` — para que uma nova entrada seja só texto + frontmatter, sem JSX repetitivo, e um ajuste visual valha para todas as entradas de uma vez.
+Três componentes React renderizam as três famílias de entrada previstas na [ADR-0001](../../docs/adrs/0001-arquitetura-portal-desenvolvedores.md): erros, media types e changelog. O de erros recebe a entrada pronta, montada pelo plugin do catálogo. Os de media types e de changelog recebem o frontmatter da página MDX diretamente — `<Componente {...frontMatter} />` — para que uma nova entrada seja só texto + frontmatter, sem JSX repetitivo, e um ajuste visual valha para todas as entradas de uma família.
 
 Os três compartilham o cabeçalho de identidade (`<article><header><dl>...`) e os tokens Gov.br DS definidos em [`catalogo/estiloCatalogo.tsx`](./catalogo/estiloCatalogo.tsx).
 
 ## `<ErrorCatalogEntry>`
 
 Renderiza o título, os metadados e a descrição pública de um código em
-`/erros/{code}/`. O plugin do catálogo fornece a entrada a partir dos dois
-contratos sincronizados da API. Para editar o texto, use o arquivo
-`contracts/descricoes-de-erros.json` da API, apontado pelo link da própria página.
+`/erros/{code}/`. Não existe página escrita à mão nem frontmatter: o plugin
+`src/plugins/catalogo-erros/` gera uma página por código ao construir o site
+(`npm run build`), a partir das cópias dos contratos da API em
+`src/data/erros/uniplus-api/` (`codigos-de-erro.json`, `descricoes-de-erros.json`
+e `origem.json`, que registra o commit de origem). O componente recebe essa
+entrada pelo atributo `dados`.
 
-## O que aconteceu
-
-...
-
-## Como resolver
-
-...
-```
-
-Frontmatter mínimo: `code`, `title`, `situacao` (`rascunho` | `publicado`), `modulo`, `emitido_em`. `http_status`, `requisitos` e `rastreio` são opcionais. `situacao: rascunho` é a exigência da ADR-0024 da `uniplus-api` — o código é fixado no portal antes do PR que o implementa; o componente emite o aviso correspondente sozinho.
+As cópias chegam pelo fluxo `.github/workflows/sync-specs.yml`, nunca por edição
+manual. O texto de cada código é escrito na API, em `contracts/descricoes-de-erros.json`
+(ADR-0178 da `uniplus-api`); para alterá-lo, altere-se a API e sincronize de novo. O
+link "Editar" da própria página aponta para esse arquivo. Código de erro novo só
+aparece no portal depois do merge da API que o cria.
 
 ## `<MediaTypeCard>`
 
@@ -66,7 +64,7 @@ Frontmatter mínimo: `versao`, `data`, `tipo_mudanca` (`versao_nova` | `deprecat
 ## Testes
 
 ```bash
-npm run test        # Vitest — rendering dos três componentes com frontmatter mínimo + opcional
+npm run test        # Vitest — renderização dos três componentes
 npm run typecheck   # tsc sem emit
 npm run test:e2e    # smoke + acessibilidade (axe-core) sobre o portal servido
 ```
