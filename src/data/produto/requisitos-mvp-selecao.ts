@@ -1949,7 +1949,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     requisito_id: 'UNI-REQ-0018',
     titulo: 'Validação de obrigatoriedades na configuração',
     enunciado:
-      'O sistema deve validar a configuração legal de obrigatoriedades antes da publicação usando regras definidas por dados. Uma obrigatoriedade específica usa o código canônico de um tipo de processo seletivo ativo; "*" permanece o único código universal.',
+      'O sistema deve validar a configuração legal de obrigatoriedades antes da publicação usando regras definidas por dados. Uma obrigatoriedade específica usa o código canônico de um tipo de processo seletivo ativo; TODOS_OS_TIPOS é o único código universal, aceito sem cadastro de tipo de processo.',
     grupo: 'qualidade',
     tipo: 'requisito_qualidade',
     nivel: 'requisito',
@@ -1961,7 +1961,7 @@ export const requisitosMvpSelecao: Requisito[] = [
     politica_backlog: 'implementavel',
     tipo_issue_recomendado: 'Task',
     criterios_aceite:
-      'Configuração incoerente é bloqueada antes da publicação com erro de domínio compreensível; obrigatoriedade específica para código inexistente ou inativo é recusada, enquanto "*" continua válida como regra universal.',
+      'Configuração incoerente é bloqueada antes da publicação com erro de domínio compreensível; obrigatoriedade específica para código inexistente ou inativo é recusada, enquanto TODOS_OS_TIPOS continua válido como código universal.',
     verificacao: 'testes de domínio planejados',
     pagina_developers: '/produto/requisitos/',
     owner: 'Equipe backend',
