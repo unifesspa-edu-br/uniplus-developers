@@ -17,7 +17,7 @@ Assinado por quem é designado gestor de acessos, Representante do controlador (
 
 > **TERMO DE COMPROMISSO**
 >
-> Eu, [NOME], SIAPE [SIAPE], lotado em [UNIDADE], designado pela Portaria nº [Nº DA PORTARIA] para a função de [gestor de acessos | Representante do controlador, na condição de titular | Representante do controlador, na condição de substituto | Encarregado de dados] na governança de acessos do sistema Uni+, declaro que:
+> Eu, [NOME], SIAPE [SIAPE], lotado em [UNIDADE], designado pela Portaria nº [Nº DA PORTARIA] para a função de [gestor de acessos | Representante do controlador, na condição de titular | Representante do controlador, na condição de substituto | Gestor de proteção de dados] na governança de acessos do sistema Uni+, declaro que:
 >
 > 1. conheço a Portaria Normativa nº [Nº DA PORTARIA NORMATIVA] e as atribuições da função;
 > 2. exercerei a função nos limites dela, sem decidir pedido, etapa ou revisão da qual eu seja beneficiário;
