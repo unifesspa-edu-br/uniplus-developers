@@ -6,7 +6,7 @@ import {prismTemaClaro, prismTemaEscuro} from './src/css/prism-themes';
 
 const config: Config = {
   title: 'Uni+ Developers',
-  tagline: 'Documentação do Sistema Unificado Unifesspa (S2U)',
+  tagline: 'Documentação do Sistema Unificado Unifesspa – Uni+',
   favicon: 'img/favicon.ico',
 
   future: {
