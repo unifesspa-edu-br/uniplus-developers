@@ -130,7 +130,7 @@ vazios quando o requisito ainda não foi implementado. Eles devem ser preenchido
 
 ## Recorte de entrega
 
-`recorte` separa o que entra no MVP, o que é fundação, o que é incremento
+`recorte` separa o que é entrega principal, o que é fundação, o que é incremento
 obrigatório e o que fica registrado fora do escopo imediato.
 
 | Valor | Uso |
@@ -202,7 +202,7 @@ As páginas derivadas desta taxonomia devem usar as seguintes rotas:
 | `/produto/requisitos/` | Registro filtrável de requisitos. |
 | `/produto/regras-negocio/` | Regras de negócio publicáveis por módulo e fluxo. |
 | `/produto/rastreabilidade/` | Matriz requisito, issue, ADR, PR, código, teste e documentação. |
-| `/produto/mvp-selecao/` | Recorte do MVP do módulo Seleção. |
+| `/produto/mvp-selecao/` | Escopo do módulo Seleção. |
 
 Antes da publicação, o conteúdo deve ser revisado para remover dados reais,
 corrigir vocabulário divergente e garantir que links externos apontem para os

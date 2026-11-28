@@ -17,7 +17,7 @@ const ORDEM_RECORTE: Recorte[] = [
 ];
 
 /**
- * Resumo do recorte do MVP por fronteira de entrega. Agrupa os requisitos
+ * Resumo do recorte do módulo por fronteira de entrega. Agrupa os requisitos
  * curados por `recorte`, mostrando contagem e a lista honesta de itens com seu
  * status — separando o fluxo primário das fundações e dos incrementos.
  */

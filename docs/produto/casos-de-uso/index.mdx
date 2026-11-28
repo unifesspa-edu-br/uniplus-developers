@@ -1,20 +1,20 @@
 ---
 sidebar_position: 7
-description: Casos de uso públicos do MVP do módulo Seleção — configurar processo, publicar edital, inscrever candidato e acompanhar administrativamente — vinculados aos requisitos.
+description: Casos de uso públicos do módulo Seleção — configurar processo, publicar edital, inscrever candidato e acompanhar administrativamente — vinculados aos requisitos.
 fonte_canonica: "dados estruturados versionados em uniplus-developers conforme ADR-0002"
-estado_publicacao: "primeira fonte pública curada dos casos de uso do MVP Seleção"
+estado_publicacao: "primeira fonte pública curada dos casos de uso do módulo Seleção"
 ---
 
 # Casos de uso
 
-Esta página descreve os **casos de uso do MVP do módulo Seleção** em linguagem de
+Esta página descreve os **casos de uso do módulo Seleção** em linguagem de
 produto — quem usa, o que precede, como o fluxo acontece e o que fica garantido ao
 final. Cada caso aponta os requisitos publicados que o sustentam, sem duplicar
 editais, normas internas ou dados sensíveis.
 
 :::info[Estado da publicação]
 Primeira fonte pública curada dos casos de uso. Os fluxos derivam do mesmo
-recorte do [MVP Seleção](../mvp-selecao/index.mdx) e dos
+recorte do [Escopo do módulo Seleção](../mvp-selecao/index.mdx) e dos
 [requisitos](../requisitos/index.mdx); os exemplos usam dados fictícios. As fases
 posteriores (homologação das inscrições, avaliação e classificação), com o
 recurso de cada uma, que é configuração da fase ou da etapa e não uma fase,
@@ -27,7 +27,7 @@ tarefas próprias.
 
 Os casos de uso seguem a
 [taxonomia de rastreabilidade](../taxonomia-rastreabilidade-requisitos.md) e
-vinculam-se aos [requisitos do MVP Seleção](../requisitos/index.mdx) por
+vinculam-se aos [requisitos do módulo Seleção](../requisitos/index.mdx) por
 `UNI-REQ`. Quando um passo depende de regra de negócio nomeada, o portal aponta
 para a página de [regras de negócio](../regras-negocio/index.mdx).
 
@@ -182,7 +182,7 @@ substituem concessões; impedimentos de atuação continuam aplicáveis.
 5. O usuário consulta as informações disponíveis e pode retornar ao painel ou
    acessar edição/publicações, se autorizado às funções existentes.
 
-Na primeira entrega, só a aba Acompanhamento é exibida. Indicadores ainda não
+Só a aba Acompanhamento é exibida. Indicadores ainda não
 implementados não aparecem como zero, e abas futuras não aparecem em construção.
 Carregamento, lista vazia, processo não encontrado, erro de consulta e acesso
 negado têm tratamentos distintos. Acesso direto e recarregamento preservam a
@@ -243,5 +243,5 @@ Ver [decisões, pendências e incrementos](../acompanhamento-administrativo.mdx)
 
 Os casos de uso de **homologação documental**, **avaliação e lançamento de
 notas**, **classificação e resultado** e **recursos** ficam fora do recorte
-primário do MVP e serão publicados quando modelados, consumindo a configuração
+primário e serão publicados quando modelados, consumindo a configuração
 congelada do edital.
