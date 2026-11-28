@@ -1,7 +1,6 @@
 # uniplus-developers
 
-Portal de documentação de desenvolvedores do **Uni+** (Sistema Unificado
-Unifesspa — S2U), construído com [Docusaurus 3](https://docusaurus.io/).
+Portal de documentação de desenvolvedores do **Uni+**, construído com [Docusaurus 3](https://docusaurus.io/).
 
 Consolida, em um só portal público:
 

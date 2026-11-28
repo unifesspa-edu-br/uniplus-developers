@@ -7,7 +7,7 @@ description: Portal de documentação do Uni+ — requisitos, regras de negócio
 
 # Portal de desenvolvedores do Uni+
 
-Bem-vindo à documentação do **Uni+** (Sistema Unificado Unifesspa — S2U), a
+Bem-vindo à documentação do **Uni+**, a
 plataforma unificada de processos institucionais da Universidade Federal do Sul
 e Sudeste do Pará.
 
